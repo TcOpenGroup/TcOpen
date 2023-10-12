@@ -31,40 +31,61 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services
         public IEnumerable<MongoDbLogItem> CachedData { get; set; }
         public IEnumerable<MongoDbLogItem> CachedDataEntriesToUpdate { get; set; }
 
-        private async Task<IEnumerable<MongoDbLogItem>> GetDataAsync()
+
+        public async Task<IEnumerable<MongoDbLogItem>> GetDataAsync(int itemsPerPage, eMessageCategory? category, int currentPage)
         {
             var collection = _database.GetCollection<MongoDbLogItem>(_collectionName);
-            return await collection.Find(new BsonDocument()).ToListAsync();
+
+            var filterBuilder = Builders<MongoDbLogItem>.Filter;
+            var filter = filterBuilder.Empty;
+
+            if (category.HasValue)
+            {
+                int categoryValue = (int)category.Value;
+                var correspondingLevel = MessageCategoryMapper.MapMessageCategoryToLevel((eMessageCategory)categoryValue);
+                var correspondingCategory = MessageCategoryMapper.MapLevelToMessageCategory(correspondingLevel);
+                var levelsToInclude = MessageCategoryMapper.GetAllLevelsGreaterThanOrEqualTo(correspondingCategory);
+                filter &= filterBuilder.In(item => item.Level, levelsToInclude);
+            }
+
+            return await collection.Find(filter)
+                                   .Skip((currentPage - 1) * itemsPerPage)
+                                   .Limit(itemsPerPage)
+                                   .ToListAsync();
         }
 
-        public async Task RefreshDataAsync()
-        {
-            CachedData = await GetDataAsync();
-        }
+
+        public async Task RefreshDataAsync( int itemsPerPage, eMessageCategory? category, int currentPage)
+            => CachedData = (await GetDataAsync( itemsPerPage, category, currentPage)).ToList();
 
         public async Task UpdateAllMessagesInDb(List<PlainTcoMessage> msg)
         {
             DateTime timeStampAcknowledged = DateTime.UtcNow;
 
-            var collection = _database.GetCollection<MongoDbLogItem>(_collectionName);
+            var _collection = _database.GetCollection<MongoDbLogItem>(_collectionName);
 
-            var update = Builders<MongoDbLogItem>.Update.Set(item => item.TimeStampAcknowledged, timeStampAcknowledged);
+            var _update = Builders<MongoDbLogItem>.Update.Set(item => item.TimeStampAcknowledged, timeStampAcknowledged);
 
-            var bulkOps = new List<WriteModel<MongoDbLogItem>>();
+            var _bulkops = new List<WriteModel<MongoDbLogItem>>();
 
-            foreach (var item in CategorizedMessages.NonActiveMessages)
+            foreach (var _item in msg)
             {
-                var filter = Builders<MongoDbLogItem>.Filter.Eq(i => i.Id, item.Id);
-                var updateOne = new UpdateOneModel<MongoDbLogItem>(filter, update);
-                bulkOps.Add(updateOne);
+                var _filter = Builders<MongoDbLogItem>.Filter.And(
+                 Builders<MongoDbLogItem>.Filter.Eq("Properties.ExtractedIdentity", _item.Identity),
+                 Builders<MongoDbLogItem>.Filter.Eq("Properties.sender.Payload.MessageDigest", _item.MessageDigest)
+             );
+
+                var _updateOne = new UpdateOneModel<MongoDbLogItem>(_filter, _update);
+                _bulkops.Add(_updateOne);
             }
 
-            if (bulkOps.Any())  
+            if (_bulkops.Any())
             {
-                await collection.BulkWriteAsync(bulkOps);
+                await _collection.BulkWriteAsync(_bulkops);
             }
         }
-        public async Task TryAcknowledgeAllMessages(IEnumerable<PlainTcoMessage> messageDisplay)
+
+        public async Task AcknowledgeAllMessages(IEnumerable<PlainTcoMessage> messageDisplay)
         {
             if (CategorizedMessages == null)
             {
@@ -73,27 +94,12 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services
 
             List<PlainTcoMessage> messagesToUpdate = new List<PlainTcoMessage>();
 
-            foreach (var messageToAcknowledge in CategorizedMessages.ActiveMessagesPinned)
+            foreach (var _messageToAcknowledge in CategorizedMessages.ActiveMessagesPinned)
             {
-                // Check the messageDisplay for the same identity
-                var activeMessage = messageDisplay.FirstOrDefault(m => m.Identity == messageToAcknowledge.Properties?.ExtractedIdentity);
-                bool isActive = false;
-
-                if (activeMessage != null)
+                var _resultMessage = await TryAcknowledgeMessageInternal(_messageToAcknowledge, messageDisplay);
+                if (_resultMessage != null)
                 {
-                    activeMessage.OnlinerMessage.Pinned.Cyclic = false;
-                    await PurgeNewerSimilarMessages();
-                    await Task.Delay(1);  // Replacing Thread.Sleep with Task.Delay for async methods
-                    isActive = activeMessage.OnlinerMessage.IsActive;
-                }
-
-                if (!isActive)
-                {
-                    messagesToUpdate.Add(activeMessage);
-                }
-                else
-                {
-                    Console.WriteLine($"Message Still Active {activeMessage}");
+                    messagesToUpdate.Add(_resultMessage);
                 }
             }
 
@@ -103,9 +109,55 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services
             }
         }
 
+        public async Task AcknowledgeSingleMessage(ulong? identity, int messageDigest, IEnumerable<PlainTcoMessage> messageDisplay)
+        {
+            if (CategorizedMessages == null)
+            {
+                CategorizeMessages(messageDisplay.ToList());
+            }
+
+            List<PlainTcoMessage> messagesToUpdate = new List<PlainTcoMessage>();
+
+            foreach (var messageToAcknowledge in CategorizedMessages.ActiveMessagesPinned.Where(m =>
+                                         m.Properties?.ExtractedIdentity == identity &&
+                                         m.Properties?.sender?.Payload?.MessageDigest == messageDigest))
+            {
+                var _resultMessage = await TryAcknowledgeMessageInternal(messageToAcknowledge, messageDisplay);
+                if (_resultMessage != null)
+                {
+                    messagesToUpdate.Add(_resultMessage);
+                }
+
+                if (messagesToUpdate.Any())
+                {
+                    await UpdateAllMessagesInDb(messagesToUpdate);
+                }
+            }
+        }
+
+        private async Task<PlainTcoMessage> TryAcknowledgeMessageInternal(MongoDbLogItem messageToAcknowledge, IEnumerable<PlainTcoMessage> messageDisplay)
+        {
+            var _activeMessage = messageDisplay.FirstOrDefault(m => m.Identity == messageToAcknowledge.Properties?.ExtractedIdentity);
+            if (_activeMessage != null)
+            {
+                _activeMessage.OnlinerMessage.Pinned.Cyclic = false;
+                await PurgeNewerSimilarMessages();
+                await Task.Delay(2); 
+                if (!_activeMessage.OnlinerMessage.IsActive)
+                {
+                    return _activeMessage;
+                }
+                else
+                {
+                    Console.WriteLine($"Message Still Active {_activeMessage}");
+                }
+            }
+            return null;
+        }
+
         public async Task UpdateMessageInDb(ulong? identity, int messageDigest)
         {
-            FilterDataEntriesToUpdate();
+            await FilterDataEntriesToUpdate();
 
             var entriesToUpdate = CachedDataEntriesToUpdate
                 .Where(item => item.Properties.ExtractedIdentity == identity
@@ -150,27 +202,39 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services
 
         public async Task PurgeNewerSimilarMessages()
         {
+            if (_database == null || string.IsNullOrEmpty(_collectionName))
+            {
+                Console.WriteLine("Database or collection name is not initialized.");
+                return;
+            }
+
+            if (CachedDataEntriesToUpdate == null)
+            {
+                Console.WriteLine("CachedDataEntriesToUpdate is not initialized.");
+                return;
+            }
+
             var collection = _database.GetCollection<MongoDbLogItem>(_collectionName);
 
             foreach (var unacknowledgedMessage in CachedDataEntriesToUpdate)
             {
                 // 2. For each of these messages, find newer similar messages based on identity and digest in the cache
                 var newerIdenticalMessages = CachedDataEntriesToUpdate.Where(m =>
-                    m.Properties.ExtractedIdentity == unacknowledgedMessage.Properties.ExtractedIdentity &&
-                    m.Properties.sender.Payload.MessageDigest == unacknowledgedMessage.Properties.sender.Payload.MessageDigest &&
-                    m.UtcTimeStamp > unacknowledgedMessage.UtcTimeStamp).ToList();
+                    m?.Properties?.ExtractedIdentity == unacknowledgedMessage?.Properties?.ExtractedIdentity &&
+                    m?.Properties?.sender?.Payload?.MessageDigest == unacknowledgedMessage?.Properties?.sender?.Payload?.MessageDigest &&
+                    m?.UtcTimeStamp > unacknowledgedMessage?.UtcTimeStamp).ToList();
 
                 if (newerIdenticalMessages.Any())
                 {
                     // 3. Delete these newer similar messages from the database
                     var filter = Builders<MongoDbLogItem>.Filter.In(m => m.Id, newerIdenticalMessages.Select(x => x.Id));
                     await collection.DeleteManyAsync(filter);
-                    Console.WriteLine($"Purged {newerIdenticalMessages.Count} duplicates for {unacknowledgedMessage.MessageTemplate.Text}");
+                    //Console.WriteLine($"Purged {newerIdenticalMessages.Count} duplicates for {unacknowledgedMessage?.MessageTemplate?.Text}");
                 }
             }
         }
 
-        public async void FilterDataEntriesToUpdate()
+        public async Task FilterDataEntriesToUpdate()
         {
             CachedDataEntriesToUpdate = CachedData
                            .Where(item => item.TimeStampAcknowledged == null)
@@ -189,7 +253,7 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services
                     var identityString = match.Groups[1].Value;
                     if (ulong.TryParse(identityString, out ulong identity))
                     {
-                        item.Properties.ExtractedIdentity = (ulong)identity;  // Cast to long if necessary
+                        item.Properties.ExtractedIdentity = identity;
                     }
                     else
                     {
@@ -202,7 +266,6 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services
         public class MessageResult
         {
             public IEnumerable<MongoDbLogItem> NonActiveMessages { get; set; }
-            //public IEnumerable<MongDbLogItem> NonActiveMessagesPinned { get; set; }
             public IEnumerable<MongoDbLogItem> ActiveMessages { get; set; }
             public IEnumerable<MongoDbLogItem> ActiveMessagesPinned { get; set; }
         }
@@ -247,12 +310,27 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services
             };
         }
 
-
-        public int GetCachedDataCount()
+        public async Task<int> GetTotalPagesAsync(int itemsPerPage, eMessageCategory? category)
         {
-            return CachedData?.Count() ?? 0;
+            var collection = _database.GetCollection<MongoDbLogItem>(_collectionName);
+
+            var filterBuilder = Builders<MongoDbLogItem>.Filter;
+            var filter = filterBuilder.Empty;
+
+            if (category.HasValue)
+            {
+                int categoryValue = (int)category.Value;
+                var correspondingLevel = MessageCategoryMapper.MapMessageCategoryToLevel((eMessageCategory)categoryValue);
+                var correspondingCategory = MessageCategoryMapper.MapLevelToMessageCategory(correspondingLevel);
+                var levelsToInclude = MessageCategoryMapper.GetAllLevelsGreaterThanOrEqualTo(correspondingCategory);
+                filter &= filterBuilder.In(item => item.Level, levelsToInclude);
+            }
+
+            var totalCount = await collection.CountDocumentsAsync(filter);
+            var totalPages = (int)Math.Ceiling((double)totalCount / itemsPerPage);
+
+            return totalPages;
         }
 
     }
-
 }

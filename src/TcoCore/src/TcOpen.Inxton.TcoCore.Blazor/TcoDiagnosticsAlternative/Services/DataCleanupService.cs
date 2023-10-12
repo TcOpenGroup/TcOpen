@@ -17,7 +17,7 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services
         private readonly Timer _timer;
 
         private int cycleToDeleteInHour { get; set; } = 1;
-        private int maxNumber { get; set; } = 5000;
+        private int maxNumber { get; set; } = 10_000;
 
         private readonly IMongoDatabase _database;
         private readonly string _collectionName;
@@ -44,7 +44,7 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services
                 {
                     var oldestLogs = await _collection.Find(new BsonDocument())
                         .Sort(Builders<BsonDocument>.Sort.Ascending("timestamp"))  // Assuming your documents have a "timestamp" field
-                        .Limit((int)(count - maxNumber))  // Keep the newest 10000 documents
+                        .Limit((int)(count - maxNumber)) 
                         .ToListAsync();
 
                     var deleteFilter = Builders<BsonDocument>.Filter.In("_id", oldestLogs.Select(log => log["_id"]));

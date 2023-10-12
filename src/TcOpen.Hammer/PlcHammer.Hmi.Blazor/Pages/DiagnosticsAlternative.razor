@@ -7,9 +7,9 @@
 
     protected override void OnInitialized()
     {
-@*        TcoDiagnosticsViewModel.SetDefaultCategory(eMessageCategory.Trace);
-        TcoDiagnosticsView.SetDefaultDepth(7);
-        TcoDiagnosticsView.SetDiagnosticsUpdateInterval(2500);*@
+        TcoDiagnosticsAlternativeView.SetDefaultCategoryFilter(eMessageCategory.Info);
+        TcoDiagnosticsAlternativeView.SetDiagnosticsUpdateInterval(500);  
+        TcoDiagnosticsAlternativeView.SetDefaultDepth(11);
         base.OnInitialized();
     }
 }

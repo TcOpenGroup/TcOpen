@@ -1,13 +1,60 @@
-﻿@*@inherits RenderableViewModelComponentBase<TcoDiagnosticsAlternativeViewModel>*@
-@inherits RenderableViewModelComponentBase<TcoObjectDiagnosticsAlternativeViewModel>
+﻿@inherits RenderableViewModelComponentBase<TcoObjectDiagnosticsAlternativeViewModel>
 
-@using Blazm.Components
+@using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.MessagesTabs
 @using Vortex.Presentation.Controls.Blazor.RenderableContent
+@using Blazm.Components
 @namespace TcoCore
 
+@using BlazorStrap.V5
 
-@ViewModel._tcoObject.MessageHandler.ActiveMessagesCount
-<p>The current time is: @timetest.ToString(("MM/dd/yyyy HH:mm:ss"))</p>
+<BSNav IsTabs="true">
+    <BSNavItem>
+        <TabLabel>Active Messages</TabLabel>
+        <TabContent>
+         <ActiveMessages 
+            MongoDbLogItemsFiltered="_mongoDbLogItemFiltered" 
+            MaxDiagnosticsDepth="_maxDiagnosticsDepth" 
+            MinMessageCategoryFilter="MinMessageCategoryFilter" 
+            EMessageCategories="eMessageCategories" 
+            DiagnosticsMessage="DiagnosticsMessage" 
+            DepthValue="DepthValue" 
+            AcknowledgeMessageCallback="AcknowledgeMessage" 
+            AcknowledgeAllMessages="AcknowledgeAllMessages"
+            ActiveMessagesCount="ActiveMessagesCount"
+            GetMessageStatusPinned="GetMessageStatusPinned"
+        />
+
+        </TabContent>
+    </BSNavItem>
+    <BSNavItem>
+        <TabLabel>Archived Messages</TabLabel>
+        <TabContent>
+            <ArchivedMessages 
+            MongoDbLogItemsFiltered="_mongoDbLogItemFiltered" 
+            CurrentPage="_currentPage" 
+            TotalPages="_totalPages" 
+            IsFirstDisabled="IsFirstDisabled" 
+            IsLastDisabled="IsLastDisabled" 
+            FirstPage="FirstPage" 
+            PreviousPage="PreviousPage" 
+            NextPage="NextPage" 
+            LastPage="LastPage" 
+            AcknowledgeMessageCallback="AcknowledgeMessage" 
+            AcknowledgeAllMessages="AcknowledgeAllMessages"
+            ActiveMessagesCount="ActiveMessagesCount"
+            MaxDiagnosticsDepth="_maxDiagnosticsDepth" 
+            EMessageCategories="eMessageCategories"
+            MinMessageCategoryFilter="MinMessageCategoryFilter"
+            DiagnosticsMessage="DiagnosticsMessage" 
+            DepthValue="DepthValue" 
+            />
+        </TabContent>
+    </BSNavItem>
+</BSNav>
+
+
+
+
 
 @*<BlazmGrid Data="ViewModel.MessageDisplay" PageSize="10" Sortable="true" UseVirtualize="false">
     <NullGridTemplate>
@@ -52,7 +99,7 @@
     </GridColumns>
 
 </BlazmGrid>*@
-
+@*
 <div class="d-flex justify-content-center align-items-center">
     @*<div class="col-2 m-3">
         <select class="w-100 form-select custom-dropdown" @bind="@MinMessageCategoryFilter">
@@ -62,14 +109,14 @@
             }
         </select>
     </div>*@
-    <div class="col-2">
+   @* <div class="col-2">
         <button class="form-control" @onclick="() => AcknowledgeAllMessages()">Acknowledge All Messages</button>
-    </div>
+    </div>*@
    @* <div class="col-6 m-3">
         <input type="range" class="form-range tooltip-slider w-75" min="1" max="@MaxDiagnosticsDepth" @bind="DepthValue">
         <span class="mx-3">@DiagnosticsMessage()</span>
-    </div>*@
-</div>
+@*    </div>*@
+@*</div>
 
 <table class="table">
     <thead>
@@ -79,23 +126,21 @@
             <th>Fehler Category</th>
             <th>Rendered Message</th>
             <th>PLC Logger</th>
-           @* <th>Message Digest (Unique Hash)</th>
-            <th>Identity</th>*@
+        
             <th>Action</th>
         </tr>
     </thead>
    <tbody>
-    @foreach (var message in MongdoDbLogItemFiltered.Skip((currentPage -1)* itemsPerPage).Take(itemsPerPage).Take(itemsPerPage))
+    @foreach (var message in _mongoDbLogItemFiltered.Skip((_currentPage -1)* _itemsPerPage).Take(_itemsPerPage).Take(_itemsPerPage))
     {
         <tr>
-            @*1h behind date in summertime, 12.51 displayed, time shows on PC 13.51, utcnow 11.51*@
+            @*1h behind date in summertime, 12.51 displayed, time shows on PC 13.51, utcnow 11.51
             <td>@message.Properties.sender.Payload.PlcTimeStamp.ToString("MM/dd/yyyy HH:mm:ss")</td>
             <td>@(message.TimeStampAcknowledged.HasValue ? message.TimeStampAcknowledged.Value.ToString(("MM/dd/yyyy HH:mm:ss")) : "")</td>
             <td>@message.Level</td>
             <td>@message.Properties.sender.Payload.Raw</td>
             <td>@message.Properties.sender.Payload.ParentSymbol</td>
-            @*<td>@message.Properties.sender.Payload.MessageDigest</td>
-            <td>@message.Properties.ExtractedIdentity</td>*@
+           
              <td>
                  <button class="@(message.TimeStampAcknowledged.HasValue ? "disabled-button" : "")" @onclick="() => AcknowledgeMessage(message.Properties.ExtractedIdentity, message.Properties.sender.Payload.MessageDigest)">
                      Acknowledge
@@ -109,11 +154,11 @@
 <div class="d-flex justify-content-center my-3">
         <button @onclick="FirstPage" class="m-2 @(IsFirstDisabled ? "disabled-button" : "")">First</button>
         <button @onclick="PreviousPage" class="m-2 @(IsFirstDisabled ? "disabled-button" : "")">Previous</button>
-        <span class="mx-3">Page @currentPage of @totalPages</span>
+        <span class="mx-3">Page @_currentPage of @TotalPages</span>
         <button @onclick="NextPage" class="m-2 @(IsLastDisabled ? "disabled-button" : "")">Next</button>
         <button @onclick="LastPage" class="m-2 @(IsLastDisabled ? "disabled-button" : "")">Last</button>
     </div>
-
+*@
 
 
 
@@ -190,3 +235,17 @@ else
     <p>No database messages found.</p>
 }
 *@
+
+
+
+
+
+
+@code {
+    private string _activeTab = "activeMessages"; // Default active tab
+
+    private void SwitchTab(string tabName)
+    {
+        _activeTab = tabName;
+    }
+}

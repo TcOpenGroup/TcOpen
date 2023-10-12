@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson.Serialization.Options;
 using MongoDB.Bson.Serialization.Serializers;
 
 using System;
@@ -10,6 +11,22 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping
 {
     public class MongoDbLogItem
     {
+
+        static MongoDbLogItem()
+        {
+            try
+            {
+                BsonSerializer.RegisterSerializer(typeof(UInt64), new UInt64Serializer(BsonType.Int64, new RepresentationConverter(true, false)));
+                BsonSerializer.RegisterSerializer(typeof(UInt32), new UInt32Serializer(BsonType.Int64, new RepresentationConverter(true, false)));
+                BsonSerializer.RegisterSerializer(DateTimeSerializer.LocalInstance);
+                //BsonSerializer.RegisterSerializer(typeof(float), new FloatTruncationSerializer());
+            }
+            catch (BsonSerializationException)
+            {
+                // Handle or log the exception as needed
+            }
+        }
+
         [BsonId]
         public ObjectId Id { get; set; }
 
@@ -102,7 +119,7 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping
         public string ParentSymbol { get; set; }
 
         public string ParentName { get; set; }
-
+        
         public int Cycle { get; set; }
 
         [BsonElement("PlcTimeStamp")]
@@ -112,7 +129,8 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping
 
         public int Pcc { get; set; }
 
-        public long Identity { get; set; }  // Adding Identity property
+        public ulong Identity { get; set; }
+
 
         public int MessageDigest { get; set; }  // Adding MessageDigest property
     }
@@ -145,3 +163,5 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping
         }
     }
 }
+
+

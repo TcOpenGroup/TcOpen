@@ -1,0 +1,86 @@
+﻿@using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping
+@using global::TcoCore
+<h3>ArchivedMessages</h3>
+
+
+
+<div class="d-flex justify-content-center align-items-center">
+    <span class="mx-3">@ActiveMessagesCount  </span>
+    <div class="col-2 m-3">
+       <select class="w-100 form-select custom-dropdown" @bind-Value="MinMessageCategoryFilter" @bind-Value:event="onchange">
+         @foreach (var item in EMessageCategories)
+         {
+             <option class="form-control" value="@item">@item.ToString()</option>
+         }
+    </select>
+    </div>
+    <div class="col-2">
+        <button class="form-control" @onclick="AcknowledgeAllMessages">Acknowledge All Messages</button>
+    </div>
+    <div class="col-6 m-3">
+        <input type="range" class="form-range tooltip-slider w-75" min="1" max="@MaxDiagnosticsDepth" @bind="DepthValue">
+        <span class="mx-3">@DiagnosticsMessage</span>
+    </div>
+</div>
+
+<h5 class="text-center font-weight-bold" style="font-size: 34px;">Archive</h5>
+<table class="table">
+    <thead>
+        <tr>
+            <th>PLC Timestamp</th>
+            <th>Timestamp Acknowledged</th>
+            <th>Fehler Category</th>
+            <th>Rendered Message</th>
+            <th>PLC Logger</th>
+        </tr>
+    </thead>
+  <tbody>
+  @foreach (var message in MongoDbLogItemsFiltered.Where(m => m.TimeStampAcknowledged.HasValue))
+    {
+         <tr>
+            <td>@message.Properties.sender.Payload.PlcTimeStamp.ToString("MM/dd/yyyy HH:mm:ss")</td>
+            <td>@(message.TimeStampAcknowledged.HasValue ? message.TimeStampAcknowledged.Value.ToString(("MM/dd/yyyy HH:mm:ss")) : "")</td>
+            <td class=" icon-container">@((MarkupString)MessageCategoryMapper.GetIconForLevel(message.Level))</td>
+            <td>@message.Properties.sender.Payload.Raw</td>
+            <td>@message.Properties.sender.Payload.ParentSymbol</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<div class="d-flex justify-content-center my-3">
+        <button @onclick="FirstPage" class="m-2 @(IsFirstDisabled ? "disabled-button" : "")">First</button>
+        <button @onclick="PreviousPage" class="m-2 @(IsFirstDisabled ? "disabled-button" : "")">Previous</button>
+        <span class="mx-3">Page @CurrentPage of @TotalPages</span>
+        <button @onclick="NextPage" class="m-2 @(IsLastDisabled ? "disabled-button" : "")">Next</button>
+        <button @onclick="LastPage" class="m-2 @(IsLastDisabled ? "disabled-button" : "")">Last</button>
+ </div>
+
+
+@code {
+    [Parameter] public IEnumerable<MongoDbLogItem> MongoDbLogItemsFiltered { get; set; }
+    [Parameter] public int CurrentPage { get; set; }
+    [Parameter] public int TotalPages { get; set; }
+    [Parameter] public bool IsFirstDisabled { get; set; }
+    [Parameter] public bool IsLastDisabled { get; set; }
+    [Parameter] public Func<Task> FirstPage { get; set; }
+    [Parameter] public Func<Task> PreviousPage { get; set; }
+    [Parameter] public Func<Task> NextPage { get; set; }
+    [Parameter] public Func<Task> LastPage { get; set; }
+    [Parameter] public Func<ulong?, int, Task> AcknowledgeMessageCallback { get; set; }
+    [Parameter] public Func<Task> AcknowledgeAllMessages { get; set; }
+    [Parameter] public string ActiveMessagesCount { get; set; }
+    [Parameter] public int MaxDiagnosticsDepth { get; set; }
+    [Parameter] public IEnumerable<eMessageCategory> EMessageCategories { get; set; }
+    [Parameter] public eMessageCategory MinMessageCategoryFilter { get; set; }
+    [Parameter] public string DiagnosticsMessage { get; set; }
+    [Parameter] public int DepthValue { get; set; }
+    [Parameter] public EventCallback<eMessageCategory> MinMessageCategoryFilterChanged { get; set; }
+
+        private async Task OnMinMessageCategoryFilterChanged(eMessageCategory newValue)
+        {
+            MinMessageCategoryFilter = newValue;
+            await MinMessageCategoryFilterChanged.InvokeAsync(newValue);
+        }
+
+}

@@ -1,0 +1,79 @@
+﻿@using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping
+@using global::TcoCore
+
+<h3>ActiveMessages</h3>
+
+<div class="d-flex justify-content-center align-items-center">
+    <span class="mx-3">@ActiveMessagesCount  </span>
+    <div class="col-2 m-3">
+    <select class="w-100 form-select custom-dropdown" @bind-Value="MinMessageCategoryFilter" @bind-Value:event="onchange">
+         @foreach (var item in EMessageCategories)
+         {
+             <option class="form-control" value="@item">@item.ToString()</option>
+         }
+    </select>
+    </div>
+    <div class="col-2">
+        <button class="form-control" @onclick="AcknowledgeAllMessages">Acknowledge All Messages</button>
+    </div>
+    <div class="col-6 m-3">
+        <input type="range" class="form-range tooltip-slider w-75" min="1" max="@MaxDiagnosticsDepth" @bind="DepthValue">
+        <span class="mx-3">@DiagnosticsMessage</span>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>PLC Timestamp</th>
+            <th>Timestamp Acknowledged</th>
+            <th>Fehler Category</th>
+            <th>Rendered Message</th>
+            <th>PLC Logger</th>
+            <th>Fixiert</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var message in MongoDbLogItemsFiltered.Where(m => !m.TimeStampAcknowledged.HasValue))
+        {
+            string rowColorClass = MessageCategoryMapper.GetBackgroundColorForCategory(message?.Level ?? default);
+            <tr class="@rowColorClass">
+                <td>@message.Properties.sender.Payload.PlcTimeStamp.ToString("MM/dd/yyyy HH:mm:ss")</td>
+                <td>@(message.TimeStampAcknowledged.HasValue ? message.TimeStampAcknowledged.Value.ToString("MM/dd/yyyy HH:mm:ss") : "")</td>
+                <td class="icon-container">@((MarkupString)MessageCategoryMapper.GetIconForLevel(message.Level))</td>
+                <td>@message.Properties.sender.Payload.Raw</td>
+                <td>@message.Properties.sender.Payload.ParentSymbol</td>
+                <td>@GetMessageStatusPinned(message)</td>
+                <td>
+                    <button class="@(message.TimeStampAcknowledged.HasValue || !GetMessageStatusPinned(message) ? "disabled-button" : "")" 
+                            @onclick="() => AcknowledgeMessageCallback.Invoke(message.Properties.ExtractedIdentity, message.Properties.sender.Payload.MessageDigest)">
+                        Acknowledge
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    [Parameter] public IEnumerable<MongoDbLogItem> MongoDbLogItemsFiltered { get; set; }
+    [Parameter] public int MaxDiagnosticsDepth { get; set; }
+    [Parameter] public IEnumerable<eMessageCategory> EMessageCategories { get; set; }
+    [Parameter] public string DiagnosticsMessage { get; set; }
+    [Parameter] public int DepthValue { get; set; }
+    [Parameter] public Func<ulong?, int, Task> AcknowledgeMessageCallback { get; set; }
+    [Parameter] public Func<Task> AcknowledgeAllMessages { get; set; }
+    [Parameter] public string ActiveMessagesCount { get; set; }
+    [Parameter] public Func<MongoDbLogItem, bool> GetMessageStatusPinned { get; set; }
+
+    [Parameter] public eMessageCategory MinMessageCategoryFilter { get; set; }
+    [Parameter] public EventCallback<eMessageCategory> MinMessageCategoryFilterChanged { get; set; }
+
+        private async Task OnMinMessageCategoryFilterChanged(eMessageCategory newValue)
+        {
+            MinMessageCategoryFilter = newValue;
+            await MinMessageCategoryFilterChanged.InvokeAsync(newValue);
+        }
+
+}

@@ -1,18 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
-using MongoDB.Driver;
-
-using TcOpen.Inxton.Input;
-using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services;
 using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping;
 
-using PlcDocu.TcoCore;
-using Vortex.Connector;
 using Vortex.Presentation;
-using Microsoft.AspNetCore.Components;
 
 namespace TcoCore
 {
@@ -25,250 +17,67 @@ namespace TcoCore
             //Console.WriteLine("Default constructor called");
         }
 
-        private volatile object updatemutex = new object();
+        private object updatemutex = new object();
         internal IsTcoObject _tcoObject { get; set; }
         public override object Model { get => this._tcoObject; set => this._tcoObject = value as IsTcoObject; }
 
-        //public event Action<PlainTcoMessage> NewMessageReceived;
-
-        //public IVortexObject AffectedObject { get; set; }
-
-        public object Categories
-        {
-            get
-            {
-                return Enum.GetValues(typeof(eMessageCategory)).Cast<eMessageCategory>().Skip(1);
-            }
-        }
-
-        /// <summary>
-        /// Gets list of messages to be displayed in message list of the view.
-        /// </summary>
         public IEnumerable<PlainTcoMessage> MessageDisplay
         {
             get => messageDisplay;
-
             private set
             {
                 if (messageDisplay == value)
                 {
                     return;
                 }
-
                 SetProperty(ref messageDisplay, value);
             }
-
         }
 
-        /// <summary>
-        /// Updates messages of diagnostics view.
-        /// </summary>
-        internal void UpdateMessages()
+        internal async Task UpdateMessagesAsync()
         {
             if (DiagnosticsRunning)
             {
                 return;
             }
 
-            lock (updatemutex)
-            {
-                DiagnosticsRunning = true;
+            DiagnosticsRunning = true;
 
-                Task.Run(() =>
+            await Task.Run(() =>
+            {
+                MessageDisplay = _tcoObject?.MessageHandler?.GetActiveMessages();
+                if (MessageDisplay == null)
                 {
-                    if (_tcoObject != null && _tcoObject.MessageHandler != null)
-                    {
-                        MessageDisplay = _tcoObject.MessageHandler.GetActiveMessages();
-                    }
-                    else
-                    {
-                        // Log an error or throw an exception indicating that _tcoObject or MessageHandler is null
-                    }
-                }).Wait();
-
-                DiagnosticsRunning = false;
-            }
-        }
-
-        public void RogerMessage(PlainTcoMessage msg)
-        {
-            if (msg != null)
-            {
-                msg.OnlinerMessage.Pinned.Cyclic = false;
-            }
-        }
-
-        public void RogerAllMessages()
-        {
-            lock (updatemutex)
-            {
-                {
-
-                    foreach (var item in MessageDisplay.Where(p => p.Pinned))
-                    {
-                        item.OnlinerMessage.Pinned.Cyclic = false;
-                    }
-
+                    throw new InvalidOperationException("The _tcoObject or MessageHandler is null.");
                 }
-                
-            }
+            });
+
+            DiagnosticsRunning = false;
         }
-        //public void AcknowledgeMessages()
-        //{ }
-        //{
-        //    try
-        //    {
-        //        lock (updatemutex)
-        //        {
-        //            TcoAppDomain.Current.Logger.Information("All message acknowledged {@payload}", new { rootObject = _tcoObject.HumanReadable, rootSymbol = _tcoObject.Symbol });
 
-        //            foreach (var item in DbMessageDisplay.Where(p => p.TimeStampAcknowledged == null))
-
-        //                {
-        //                    DateTime currentDateTime = DateTime.UtcNow;
-        //                // Check the MessageDisplay for the same identity
-        //                var activeMessage = MessageDisplay.FirstOrDefault(m => m.Identity == item.Identity);
-        //                bool isActive = false;
-
-        //                if (activeMessage != null)
-        //                {
-        //                    activeMessage.OnlinerMessage.Pinned.Cyclic = false;
-        //                    Thread.Sleep(100);
-        //                    isActive = activeMessage.OnlinerMessage.IsActive;
-        //                }
-
-        //                if (!isActive)
-        //                {
-        //                    _logger.UpdateMessages(item.Identity, item.TimeStamp, currentDateTime, false);
-        //                }
-        //                else
-        //                {
-        //                    TcoAppDomain.Current.Logger.Information("Fehler scheint noch aktiv {@payload}", new { rootObject = _tcoObject.HumanReadable, rootSymbol = _tcoObject.Symbol });
-        //                }
-
-        //                TcoAppDomain.Current.Logger.Information("Message acknowledged {@message}", new { Text = item.Text, Category = item.CategoryAsEnum });
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Log the exception here
-        //        TcoAppDomain.Current.Logger.Error("An error occurred while acknowledging messages: {@error}", ex);
-        //    }
-        //}
-
-        //public void AcknowledgeMessage(ulong? identity, int messageDigest)
-        //{
-        //    //_dataService.UpdateMessage(identity, messageDigest);
-        //}
-        //{
-        //    try
-        //    {
-        //        lock (updatemutex)
-        //        {
-        //            // Find all messages with the given identity and where TimeStampAcknowledged is null
-        //            var messagesToAcknowledge = DbMessageDisplay.Where(m => m.Identity == identity && m.TimeStampAcknowledged == null).ToList();
-
-        //            if (messagesToAcknowledge.Any())
-        //            {
-        //                DateTime currentDateTime = DateTime.UtcNow;
-
-        //                foreach (var messageToAcknowledge in messagesToAcknowledge)
-        //                {
-        //                    // Check the MessageDisplay for the same identity
-        //                    var activeMessage = MessageDisplay.FirstOrDefault(m => m.Identity == messageToAcknowledge.Identity);
-        //                    bool isActive = false;
-
-        //                    if (activeMessage != null)
-        //                    {
-        //                        activeMessage.OnlinerMessage.Pinned.Cyclic = false;
-        //                        Thread.Sleep(100);
-        //                        isActive = activeMessage.OnlinerMessage.IsActive;
-        //                    }
-
-        //                    if (!isActive)
-        //                    {
-        //                        _logger.UpdateMessages(messageToAcknowledge.Identity, messageToAcknowledge.TimeStamp, currentDateTime, false);
-        //                        TcoAppDomain.Current.Logger.Information("Message with identity {@identity} acknowledged", identity);
-        //                    }
-        //                    else
-        //                    {
-        //                        TcoAppDomain.Current.Logger.Information("Fehler scheint noch aktiv {@payload}", new { rootObject = _tcoObject.HumanReadable, rootSymbol = _tcoObject.Symbol });
-        //                    }
-        //                }
-        //            }
-        //            else
-        //            {
-        //                TcoAppDomain.Current.Logger.Warning("No message found with identity: {@identity} that has a null TimeStampAcknowledged", identity);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine(ex.ToString());
-        //    }
-        //}
-
-        //public void RefreshMessageDisplay()
-        //{
-        //    //AcknowledgeMessages();
-        //    Console.WriteLine($"Refresh");
-        //    MessageDisplay = _logger.ReadMessages();
-        //}
-
-        //public List<PlainTcoMessage> Messages { get; private set; } = new List<PlainTcoMessage>();
-
-        //IEnumerable<PlainTcoMessage> messageDisplay = new List<PlainTcoMessage>();
-
-        //public IEnumerable<PlainTcoMessage> MessageDisplay
-        //{
-        //    get => messageDisplay;
-
-        //    private set
-        //    {
-        //        if (messageDisplay == value)
-        //        {
-        //            return;
-        //        }
-
-        //        SetProperty(ref messageDisplay, value);
-        //    }
-        //}
-
-        //IEnumerable<PlainTcoMessageExtended> dbMessageDisplay = new List<PlainTcoMessageExtended>();
-        //public IEnumerable<PlainTcoMessageExtended> DbMessageDisplay
-        //{
-        //    get => dbMessageDisplay;
-
-        //    private set
-        //    {
-        //        if (dbMessageDisplay == value)
-        //        {
-        //            return;
-        //        }
-
-        //        SetProperty(ref dbMessageDisplay, value);
-        //    }
-        //}
-
-
-        bool diagnosticsRunning;
-
-        /// <summary>
-        /// Gets or sets whether the diagnostic loop in running.
-        /// </summary>
+        bool _diagnosticsRunning;
         public bool DiagnosticsRunning
         {
-            get => diagnosticsRunning;
+            get => _diagnosticsRunning;
             internal set
             {
-                if (diagnosticsRunning == value)
+                if (_diagnosticsRunning == value)
                 {
                     return;
                 }
-                SetProperty(ref diagnosticsRunning, value);
+                SetProperty(ref _diagnosticsRunning, value);
             }
         }
 
+        public int CalculateDepth(MongoDbLogItem msg)
+        {
+            if (string.IsNullOrEmpty(msg.Properties.sender.Payload.ParentSymbol))
+            {
+                return 1; 
+            }
+
+            int depth = msg.Properties.sender.Payload.ParentSymbol.Split('.').Length;
+            return depth;
+        }
     }
 }

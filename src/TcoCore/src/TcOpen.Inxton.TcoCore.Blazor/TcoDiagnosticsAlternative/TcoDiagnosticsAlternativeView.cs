@@ -5,23 +5,17 @@ using System.Threading.Tasks;
 using System.Timers;
 
 using Microsoft.AspNetCore.Components;
-using Vortex.Presentation;
+
 using MongoDB.Bson.Serialization;
 
 using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping;
 using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services;
 
-using PlcDocu.TcoCore;
-
-
-using TcOpen.Inxton;
-using TcOpen.Inxton.Input;
-
 
 
 namespace TcoCore
 {
-    public partial class TcoDiagnosticsAlternativeView
+    public partial class TcoDiagnosticsAlternativeView : IDisposable
     {
         /// <summary>
         /// DataService connects to the Mongo Database, given from the Blazor Context Manager
@@ -36,6 +30,45 @@ namespace TcoCore
         [Inject]
         public DataCleanupService DataCleanupService { get; set; }
 
+        private IEnumerable<eMessageCategory> eMessageCategories => Enum.GetValues(typeof(eMessageCategory)).Cast<eMessageCategory>().Skip(1);
+        public string DiagnosticsStatus { get; set; } = "Diagnostics is not running";
+
+        private int _totalPages;
+        public int TotalPages => _totalPages;
+        private static int _itemsPerPage = 20;
+        private int _currentPage = 1;
+        public bool IsFirstDisabled => _currentPage == 1;
+        public bool IsLastDisabled => _currentPage == TotalPages;
+
+        //Data and Lists, Logs from db, Messages from Plc
+        private IEnumerable<MongoDbLogItem> _mongoDbLogItemFiltered = new List<MongoDbLogItem>();
+        private List<PlainTcoMessage> _messagesPlc = new List<PlainTcoMessage>();
+        public int CachedDataCount { get; private set; }
+
+        private string ActiveMessagesCount() => "Aktive Messages : " + ViewModel._tcoObject.MessageHandler.ActiveMessagesCount;
+        private string DiagnosticsMessage() => "Diag depth : " + DepthValue;
+        private int _maxDiagnosticsDepth = 20;
+        private static int _depthValue;
+        public static int SetDefaultDepth(int item) => _depthValue = item;
+
+        public eMessageCategory MinMessageCategoryFilter { get; set; } = DefaultCategory;
+        public static eMessageCategory DefaultCategory { get; set; } = eMessageCategory.Info;
+
+        public bool GetMessageStatusPinned(MongoDbLogItem message)
+        {
+            var matchingMessage = ViewModel.MessageDisplay.FirstOrDefault(
+                m => m.Identity == message.Properties?.ExtractedIdentity &&
+                m.MessageDigest == message.Properties?.sender?.Payload.MessageDigest);
+            return matchingMessage?.Pinned ?? false;
+        }
+
+        /// <summary>
+        /// SetsUpdate Intervall via Consuming App
+        /// </summary>
+        public static int SetDiagnosticsUpdateInterval(int value) => _diagnosticsUpdateInterval = value;
+        private static int _diagnosticsUpdateInterval = 200;
+        private Timer _messageUpdateTimer;
+
         protected override async Task OnInitializedAsync()
         {
             //Necessary for the Deserialization of the BSON Log Entries,
@@ -49,59 +82,26 @@ namespace TcoCore
                 });
             }
 
+            _totalPages = await DataService.GetTotalPagesAsync(_itemsPerPage, MinMessageCategoryFilter);
+
             UpdateValuesOnChange(ViewModel._tcoObject);
 
-            DiagnosticsUpdateTimer();
+            InitializeDiagnosticsUpdateTimer();
         }
 
-        public DateTime timetest { get; set; } = DateTime.Now;
-
-        /// <summary>
-        /// SetsUpdate Intervall via Consuming App
-        /// </summary>
-        public static int SetDiagnosticsUpdateInterval(int value) => _diagnosticsUpdateInterval = value;
-        private static int _diagnosticsUpdateInterval { get; set; } = 300;
-        private Timer messageUpdateTimer;
-
-        //private IEnumerable<eMessageCategory> eMessageCategories => Enum.GetValues(typeof(eMessageCategory)).Cast<eMessageCategory>().Skip(1);
-        public string DiagnosticsStatus { get; set; } = "Diagnostics is not running";
-
-        //Paging and Navigation
-        private static int itemsPerPage { get; set; } = 20;
-        private int currentPage = 1;
-        private int totalPages => (CachedDataCount + itemsPerPage - 1) / itemsPerPage;
-        public bool IsFirstDisabled => currentPage == 1;
-        public bool IsLastDisabled => currentPage == totalPages;
-
-        //Data and Lists, Logs from db, Messages from Plc
-        private IEnumerable<MongoDbLogItem> MongdoDbLogItemFiltered { get; set; } = new List<MongoDbLogItem>();
-        private List<PlainTcoMessage> messages = new List<PlainTcoMessage>();
-        public int CachedDataCount { get; private set; }
-
-        //public string DiagnosticsMessage() => "Diag depth : " + DepthValue;
-        //public int MaxDiagnosticsDepth { get; set; } = 20;
-        //public static int _depthValue;
-        //public static int SetDefaultDepth(int item) => _depthValue = item;
-
-        private async void MessageUpdateTimer_Elapsed(object sender, ElapsedEventArgs e)
+        public void InitializeDiagnosticsUpdateTimer()
         {
-            await InvokeAsync(async () =>
+            if (_messageUpdateTimer == null)
             {
-                //DB Action
-                await DataService.RefreshDataAsync();
-                //Update plc Data
-                ViewModel.UpdateMessages();
-
-                CachedDataCount = DataService.GetCachedDataCount();
-                MongdoDbLogItemFiltered = OrderMongoDbLogItems(DataService.CachedData);
-                DataService.ExtractIdentity();
-                DataService.FilterDataEntriesToUpdate();
-                DataService.CategorizeMessages(ViewModel.MessageDisplay.ToList());
-                await DataService.PurgeNewerSimilarMessages();
-                await DataService.AutoAckNonPinnedMessages(ViewModel.MessageDisplay);
-
-                StateHasChanged();
-            });
+                _messageUpdateTimer = new Timer(_diagnosticsUpdateInterval);
+                _messageUpdateTimer.Elapsed += MessageUpdateTimer_Elapsed;
+                _messageUpdateTimer.AutoReset = true;
+                _messageUpdateTimer.Enabled = true;
+            }
+            else
+            {
+                Console.WriteLine("Timer already initialized.");
+            }
         }
 
         //there is a big problem, which leads to alot of complicated stuff that
@@ -117,11 +117,7 @@ namespace TcoCore
         {
             try
             {
-                await DataService.TryAcknowledgeAllMessages(ViewModel.MessageDisplay);
-                //foreach (var item in DataService.CachedDataEntriesToUpdate)
-                //{
-                //TcoAppDomain.Current.Logger.Information("All message acknowledged {@payload}", new { rootObject = ViewModel._tcoObject.HumanReadable, rootSymbol = ViewModel._tcoObject.Symbol });
-                //}
+                await DataService.AcknowledgeAllMessages(ViewModel.MessageDisplay);
             }
             catch (System.Exception ex)
             {
@@ -133,7 +129,7 @@ namespace TcoCore
         {
             try
             {
-                await DataService.UpdateMessageInDb(identity, messageDigest);
+                await DataService.AcknowledgeSingleMessage(identity, messageDigest, ViewModel.MessageDisplay);
             }
             catch (System.Exception ex)
             {
@@ -141,42 +137,70 @@ namespace TcoCore
             }
         }
 
+        public static void SetDefaultCategoryFilter(eMessageCategory category)
+        {
+            DefaultCategory = category;
+        }
+
         public static void SetItemsPerPage(int value)
         {
-            itemsPerPage = value;
+            _itemsPerPage = value;
         }
 
-        private void PreviousPage()
+        public void Dispose()
         {
-            if (currentPage > 1)
+            _messageUpdateTimer?.Dispose();
+        }
+        private async void MessageUpdateTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            await InvokeAsync(async () =>
             {
-                currentPage--;
+                //DB Action
+                await DataService.RefreshDataAsync( _itemsPerPage, MinMessageCategoryFilter, _currentPage);
+                //Update plc Data
+                await ViewModel.UpdateMessagesAsync();
+
+                _mongoDbLogItemFiltered = OrderMongoDbLogItems(DataService.CachedData)
+                         .Where(x => ViewModel.CalculateDepth(x) <= DepthValue);
+                DataService.ExtractIdentity();
+                await DataService.FilterDataEntriesToUpdate();
+                DataService.CategorizeMessages(ViewModel.MessageDisplay.ToList());
+
+                await DataService.PurgeNewerSimilarMessages();
+                //await DataService.AutoAckNonPinnedMessages(ViewModel.MessageDisplay);
+
+                StateHasChanged();
+            });
+        }
+
+        private async Task PreviousPage()
+        {
+            if (_currentPage > 1)
+            {
+                _currentPage--;
+                _mongoDbLogItemFiltered = await DataService.GetDataAsync(_itemsPerPage, MinMessageCategoryFilter, _currentPage);
             }
         }
 
-        private void NextPage()
+        private async Task NextPage()
         {
-            if (currentPage < totalPages)
+            if (_currentPage < TotalPages)
             {
-                currentPage++;
+                _currentPage++;
+                _mongoDbLogItemFiltered = await DataService.GetDataAsync(_itemsPerPage, MinMessageCategoryFilter, _currentPage);
             }
         }
 
-        public void FirstPage()
+        public async Task FirstPage()
         {
-            currentPage = 1;
+            _currentPage = 1;
+            _mongoDbLogItemFiltered = await DataService.GetDataAsync(_itemsPerPage, MinMessageCategoryFilter, _currentPage);
         }
 
-        public void LastPage()
+        public async Task LastPage()
         {
-            currentPage = totalPages;
-        }
-
-        private void OnNewMessageReceived(PlainTcoMessage newMessage)
-        {
-            // Add the new message to the list and re-render the component
-            messages.Add(newMessage);
-            StateHasChanged();
+            _currentPage = TotalPages;
+            _mongoDbLogItemFiltered = await DataService.GetDataAsync(_itemsPerPage, MinMessageCategoryFilter, _currentPage);
         }
 
         private IEnumerable<MongoDbLogItem> OrderMongoDbLogItems(IEnumerable<MongoDbLogItem> items)
@@ -188,60 +212,18 @@ namespace TcoCore
                 .ThenByDescending(m => m.TimeStampAcknowledged);
         }
 
-
-        //Unsubscribe from the event when the component is disposed of
-        //public void Dispose()
-        //{
-        //    ViewModel.NewMessageReceived -= OnNewMessageReceived;
-        //}
-
-        //public int DepthValue
-        //{
-        //    get
-        //    {
-        //        if (_depthValue == 0)
-        //            _depthValue = ViewModel._tcoObject.MessageHandler.DiagnosticsDepth;
-        //        return _depthValue;
-        //    }
-        //    set
-        //    {
-        //        _depthValue = value;
-        //        ViewModel._tcoObject.MessageHandler.DiagnosticsDepth = value;
-        //    }
-        //}
-
-        //public eMessageCategory MinMessageCategoryFilter
-        //{
-        //    get
-        //    {
-        //        return _minMessageCategoryFilter;
-        //    }
-        //    set
-        //    {
-        //        _minMessageCategoryFilter = value;
-        //        ViewModel.MinMessageCategoryFilter = value;  // Update the ViewModel's property
-        //    }
-        //}
-        //private eMessageCategory _minMessageCategoryFilter = DefaultCategory;
-
-
-        //public static eMessageCategory SetDefaultCategory(eMessageCategory item) => DefaultCategory = item;
-        //public static eMessageCategory DefaultCategory { get; set; } = eMessageCategory.All;
-
-   
-        private void DiagnosticsUpdateTimer()
+        public int DepthValue
         {
-            if (messageUpdateTimer == null)
+            get
             {
-                //Console.WriteLine("Initializing timer.");
-                messageUpdateTimer = new Timer(_diagnosticsUpdateInterval);
-                messageUpdateTimer.Elapsed += MessageUpdateTimer_Elapsed;
-                messageUpdateTimer.AutoReset = true;
-                messageUpdateTimer.Enabled = true;
+                if (_depthValue == 0)
+                    _depthValue = ViewModel._tcoObject.MessageHandler.DiagnosticsDepth;
+                return _depthValue;
             }
-            else
+            set
             {
-                Console.WriteLine("Timer already initialized.");
+                _depthValue = value;
+                ViewModel._tcoObject.MessageHandler.DiagnosticsDepth = value;
             }
         }
 
