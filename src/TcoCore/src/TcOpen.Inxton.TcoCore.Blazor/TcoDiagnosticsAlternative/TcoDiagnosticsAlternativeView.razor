@@ -11,17 +11,12 @@
     <BSNavItem>
         <TabLabel>Active Messages</TabLabel>
         <TabContent>
-         <ActiveMessages 
-            MongoDbLogItemsFiltered="_mongoDbLogItemFiltered" 
+        <ActiveMessages 
+            DataService="DataService"
             MaxDiagnosticsDepth="_maxDiagnosticsDepth" 
-            MinMessageCategoryFilter="MinMessageCategoryFilter" 
-            EMessageCategories="eMessageCategories" 
-            DiagnosticsMessage="DiagnosticsMessage" 
             DepthValue="DepthValue" 
-            AcknowledgeMessageCallback="AcknowledgeMessage" 
-            AcknowledgeAllMessages="AcknowledgeAllMessages"
-            ActiveMessagesCount="ActiveMessagesCount"
             GetMessageStatusPinned="GetMessageStatusPinned"
+            InitialCategory="@_minMessageCategoryFilter"
         />
 
         </TabContent>
@@ -29,217 +24,19 @@
     <BSNavItem>
         <TabLabel>Archived Messages</TabLabel>
         <TabContent>
-            <ArchivedMessages 
-            MongoDbLogItemsFiltered="_mongoDbLogItemFiltered" 
-            CurrentPage="_currentPage" 
-            TotalPages="_totalPages" 
-            IsFirstDisabled="IsFirstDisabled" 
-            IsLastDisabled="IsLastDisabled" 
-            FirstPage="FirstPage" 
-            PreviousPage="PreviousPage" 
-            NextPage="NextPage" 
-            LastPage="LastPage" 
+            @*<ArchivedMessages 
             AcknowledgeMessageCallback="AcknowledgeMessage" 
             AcknowledgeAllMessages="AcknowledgeAllMessages"
             ActiveMessagesCount="ActiveMessagesCount"
             MaxDiagnosticsDepth="_maxDiagnosticsDepth" 
             EMessageCategories="eMessageCategories"
-            MinMessageCategoryFilter="MinMessageCategoryFilter"
+            MinMessageCategoryFilter="@MinMessageCategoryFilter"
             DiagnosticsMessage="DiagnosticsMessage" 
             DepthValue="DepthValue" 
-            />
+            />*@
         </TabContent>
     </BSNavItem>
 </BSNav>
-
-
-
-
-
-@*<BlazmGrid Data="ViewModel.MessageDisplay" PageSize="10" Sortable="true" UseVirtualize="false">
-    <NullGridTemplate>
-        No messages found.
-    </NullGridTemplate>
-    <EmptyGridTemplate>
-        No messages found.
-    </EmptyGridTemplate>
-    <GridColumns>
-
-        <GridColumn Field="@nameof(PlainTcoMessage.TimeStamp)" />
-
-        <GridColumn Field="@nameof(PlainTcoMessage.Text)" Title="Message" />
-        <GridColumn Field="@nameof(PlainTcoMessage.Location)" />
-        <GridColumn Field="@nameof(PlainTcoMessage.PerCycleCount)" />
-        <GridColumn Field="@nameof(PlainTcoMessage.ParentsObjectSymbol)" Title="Symbol" />
-        <GridColumn Title="Action">
-            <Template>
-
-                @{
-                    var message = context as PlainTcoMessage;
-                }
-                @if (message != null)
-                {
-                    <div style="white-space: nowrap">
-                        
-                        <button class="btn btn-secondary" @onclick="() => ViewModel.RogerMessage(message)">
-                            @if (message.OnlinerMessage.Pinned.Cyclic)
-                            {
-                                <span>Acknowledge</span>
-                            }
-                            else
-                            {
-                                <span>Acknowledged</span>
-                            }
-                        </button>
-                    </div>
-                }
-            </Template>
-        </GridColumn>
-
-    </GridColumns>
-
-</BlazmGrid>*@
-@*
-<div class="d-flex justify-content-center align-items-center">
-    @*<div class="col-2 m-3">
-        <select class="w-100 form-select custom-dropdown" @bind="@MinMessageCategoryFilter">
-            @foreach (var item in eMessageCategories)
-            {
-                <option class="form-control" value="@item">@item.ToString()</option>
-            }
-        </select>
-    </div>*@
-   @* <div class="col-2">
-        <button class="form-control" @onclick="() => AcknowledgeAllMessages()">Acknowledge All Messages</button>
-    </div>*@
-   @* <div class="col-6 m-3">
-        <input type="range" class="form-range tooltip-slider w-75" min="1" max="@MaxDiagnosticsDepth" @bind="DepthValue">
-        <span class="mx-3">@DiagnosticsMessage()</span>
-@*    </div>*@
-@*</div>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>PLC Timestamp</th>
-            <th>Timestamp Acknowledged</th>
-            <th>Fehler Category</th>
-            <th>Rendered Message</th>
-            <th>PLC Logger</th>
-        
-            <th>Action</th>
-        </tr>
-    </thead>
-   <tbody>
-    @foreach (var message in _mongoDbLogItemFiltered.Skip((_currentPage -1)* _itemsPerPage).Take(_itemsPerPage).Take(_itemsPerPage))
-    {
-        <tr>
-            @*1h behind date in summertime, 12.51 displayed, time shows on PC 13.51, utcnow 11.51
-            <td>@message.Properties.sender.Payload.PlcTimeStamp.ToString("MM/dd/yyyy HH:mm:ss")</td>
-            <td>@(message.TimeStampAcknowledged.HasValue ? message.TimeStampAcknowledged.Value.ToString(("MM/dd/yyyy HH:mm:ss")) : "")</td>
-            <td>@message.Level</td>
-            <td>@message.Properties.sender.Payload.Raw</td>
-            <td>@message.Properties.sender.Payload.ParentSymbol</td>
-           
-             <td>
-                 <button class="@(message.TimeStampAcknowledged.HasValue ? "disabled-button" : "")" @onclick="() => AcknowledgeMessage(message.Properties.ExtractedIdentity, message.Properties.sender.Payload.MessageDigest)">
-                     Acknowledge
-                 </button>
-             </td>
-        </tr>
-    }
-    </tbody>
-</table>
-
-<div class="d-flex justify-content-center my-3">
-        <button @onclick="FirstPage" class="m-2 @(IsFirstDisabled ? "disabled-button" : "")">First</button>
-        <button @onclick="PreviousPage" class="m-2 @(IsFirstDisabled ? "disabled-button" : "")">Previous</button>
-        <span class="mx-3">Page @_currentPage of @TotalPages</span>
-        <button @onclick="NextPage" class="m-2 @(IsLastDisabled ? "disabled-button" : "")">Next</button>
-        <button @onclick="LastPage" class="m-2 @(IsLastDisabled ? "disabled-button" : "")">Last</button>
-    </div>
-*@
-
-
-
-
-@*<div class="d-flex justify-center">
-    <p>Count of Unique Messages: @UniqueMessagesCount</p>
-    <p>Count of DbMessageDisplay: @DbMessageDisplayCount</p>
-</div>
-
-<div class="d-flex justify-content-center align-items-center">
-    <div class="col-2 m-3">
-        <select class="w-100 form-select custom-dropdown" @bind="@MinMessageCategoryFilter">
-            @foreach (var item in eMessageCategories)
-            {
-                <option class="form-control" value="@item">@item.ToString()</option>
-            }
-        </select>
-    </div>
-    <div class="col-2">
-        <button class="form-control" @onclick="() => ViewModel.AcknowledgeMessages()">Acknowledge All Messages</button>
-    </div>
-    <div class="col-6 m-3">
-        <input type="range" class="form-range tooltip-slider w-75" min="1" max="@MaxDiagnosticsDepth" @bind="DepthValue">
-        <span class="mx-3">@DiagnosticsMessage()</span>
-    </div>
-</div>
-
-@if (ViewModel.DbMessageDisplay != null && ViewModel.DbMessageDisplay.Any())
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Timestamp</th>
-                <th>Timestamp Acknowledged</th>
-                <th>Text</th>
-                <th>Category</th>
-                <th>Pfad</th>
-                <th>Pinned</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var message in uniqueMessages.Skip((currentPage - 1) * itemsPerPage).Take(itemsPerPage))
-            {
-                <tr>
-                    <td>@message.TimeStamp.ToString("yyyy-MM-dd HH:mm:ss")</td>
-                    <td>@(message.TimeStampAcknowledged.HasValue ? message.TimeStampAcknowledged.Value.ToString("yyyy-MM-dd HH:mm:ss") : "")</td>
-                    <td>@message.Text</td>
-                    <td>@message.CategoryAsEnum</td>
-                    <td>@message.ParentsObjectSymbol</td>
-                    <td>@message.Pinned</td>
-                    <td>
-                        <button class="@(message.TimeStampAcknowledged.HasValue ? "disabled-button" : "")" @onclick="() => ViewModel.AcknowledgeMessage(message.Identity)">
-                            Acknowledge
-                        </button>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-
-    <div class="d-flex justify-content-center my-3">
-        <button @onclick="FirstPage" class="m-2 @(IsFirstDisabled ? "disabled-button" : "")">First</button>
-        <button @onclick="PreviousPage" class="m-2 @(IsFirstDisabled ? "disabled-button" : "")">Previous</button>
-        <span class="mx-3">Page @currentPage of @totalPages</span>
-        <button @onclick="NextPage" class="m-2 @(IsLastDisabled ? "disabled-button" : "")">Next</button>
-        <button @onclick="LastPage" class="m-2 @(IsLastDisabled ? "disabled-button" : "")">Last</button>
-    </div>
-
-
-}
-else
-{
-    <p>No database messages found.</p>
-}
-*@
-
-
-
-
-
 
 @code {
     private string _activeTab = "activeMessages"; // Default active tab

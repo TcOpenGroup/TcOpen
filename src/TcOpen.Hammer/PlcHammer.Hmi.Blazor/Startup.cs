@@ -110,7 +110,7 @@ namespace PlcHammer.Hmi.Blazor
                 .SetEditValueChangeLogging(Entry.PlcHammer.Connector);
 
             services.Configure<MongoDbSettings>(Configuration.GetSection("MongoDbSettings"));
-            services.AddTransient<DataService>();
+            services.AddTransient<IDataService, DataService>();
             services.AddSingleton<DataCleanupService>();
             services.AddBlazorStrap();
         }

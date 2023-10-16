@@ -22,7 +22,7 @@ namespace TcoCore
         /// It is responsible for Fetching, Updating, Filtering and so on
         /// </summary>
         [Inject]
-        public DataService DataService { get; set; }
+        public IDataService DataService { get; set; }
 
         /// <summary>
         /// DataCleanupService is responsible for limiting the entries to 5000 logs
@@ -33,15 +33,8 @@ namespace TcoCore
         private IEnumerable<eMessageCategory> eMessageCategories => Enum.GetValues(typeof(eMessageCategory)).Cast<eMessageCategory>().Skip(1);
         public string DiagnosticsStatus { get; set; } = "Diagnostics is not running";
 
-        private int _totalPages;
-        public int TotalPages => _totalPages;
-        private static int _itemsPerPage = 20;
-        private int _currentPage = 1;
-        public bool IsFirstDisabled => _currentPage == 1;
-        public bool IsLastDisabled => _currentPage == TotalPages;
-
-        //Data and Lists, Logs from db, Messages from Plc
-        private IEnumerable<MongoDbLogItem> _mongoDbLogItemFiltered = new List<MongoDbLogItem>();
+        ////Data and Lists, Logs from db, Messages from Plc
+        //private IEnumerable<MongoDbLogItem> _mongoDbLogItemFiltered = new List<MongoDbLogItem>();
         private List<PlainTcoMessage> _messagesPlc = new List<PlainTcoMessage>();
         public int CachedDataCount { get; private set; }
 
@@ -51,8 +44,22 @@ namespace TcoCore
         private static int _depthValue;
         public static int SetDefaultDepth(int item) => _depthValue = item;
 
-        public eMessageCategory MinMessageCategoryFilter { get; set; } = DefaultCategory;
-        public static eMessageCategory DefaultCategory { get; set; } = eMessageCategory.Info;
+        private static eMessageCategory _minMessageCategoryFilter;
+
+        //public static eMessageCategory MinMessageCategoryFilter
+        //{
+        //    get => _minMessageCategoryFilter;
+        //    set => _minMessageCategoryFilter = value;
+        //}
+        public static eMessageCategory MinMessageCategoryFilter { get; set; }
+
+        public static void SetMinMessageCategoryFilter(eMessageCategory category)
+        {
+                MinMessageCategoryFilter = category;
+        }
+
+
+
 
         public bool GetMessageStatusPinned(MongoDbLogItem message)
         {
@@ -80,9 +87,8 @@ namespace TcoCore
                     cm.AutoMap();
                     cm.SetIgnoreExtraElements(true);
                 });
-            }
 
-            _totalPages = await DataService.GetTotalPagesAsync(_itemsPerPage, MinMessageCategoryFilter);
+            }
 
             UpdateValuesOnChange(ViewModel._tcoObject);
 
@@ -117,7 +123,7 @@ namespace TcoCore
         {
             try
             {
-                await DataService.AcknowledgeAllMessages(ViewModel.MessageDisplay);
+                //await DataService.AcknowledgeAllMessages(ViewModel.MessageDisplay);
             }
             catch (System.Exception ex)
             {
@@ -129,7 +135,7 @@ namespace TcoCore
         {
             try
             {
-                await DataService.AcknowledgeSingleMessage(identity, messageDigest, ViewModel.MessageDisplay);
+                //await DataService.AcknowledgeSingleMessage(identity, messageDigest, ViewModel.MessageDisplay);
             }
             catch (System.Exception ex)
             {
@@ -137,80 +143,71 @@ namespace TcoCore
             }
         }
 
-        public static void SetDefaultCategoryFilter(eMessageCategory category)
-        {
-            DefaultCategory = category;
-        }
-
-        public static void SetItemsPerPage(int value)
-        {
-            _itemsPerPage = value;
-        }
-
         public void Dispose()
         {
             _messageUpdateTimer?.Dispose();
         }
+
         private async void MessageUpdateTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             await InvokeAsync(async () =>
             {
                 //DB Action
-                await DataService.RefreshDataAsync( _itemsPerPage, MinMessageCategoryFilter, _currentPage);
+                //await DataService.RefreshDataForDisplayAsync( _itemsPerPage, MinMessageCategoryFilter, _currentPage);
                 //Update plc Data
-                await ViewModel.UpdateMessagesAsync();
+                //await ViewModel.UpdateMessagesAsync();
 
-                _mongoDbLogItemFiltered = OrderMongoDbLogItems(DataService.CachedData)
-                         .Where(x => ViewModel.CalculateDepth(x) <= DepthValue);
-                DataService.ExtractIdentity();
-                await DataService.FilterDataEntriesToUpdate();
-                DataService.CategorizeMessages(ViewModel.MessageDisplay.ToList());
+                //_mongoDbLogItemFiltered = OrderMongoDbLogItems(DataService.CachedData)
+                //         .Where(x => ViewModel.CalculateDepth(x) <= DepthValue);
+                //DataService.ExtractIdentity();
+                //await DataService.FilterDataEntriesToUpdate();
+                //DataService.CategorizeMessages(ViewModel.MessageDisplay.ToList());
 
-                await DataService.PurgeNewerSimilarMessages();
-                //await DataService.AutoAckNonPinnedMessages(ViewModel.MessageDisplay);
+                //await DataService.PurgeNewerSimilarMessages();
+                ////await DataService.AutoAckNonPinnedMessages(ViewModel.MessageDisplay);
 
                 StateHasChanged();
             });
         }
 
-        private async Task PreviousPage()
-        {
-            if (_currentPage > 1)
-            {
-                _currentPage--;
-                _mongoDbLogItemFiltered = await DataService.GetDataAsync(_itemsPerPage, MinMessageCategoryFilter, _currentPage);
-            }
-        }
+        //private async Task PreviousPage()
+        //{
+        //    if (_currentPage > 1)
+        //    {
+        //        _currentPage--;
+        //        _mongoDbLogItemFiltered = await DataService.GetDataAsync(_itemsPerPage, MinMessageCategoryFilter, _currentPage);
+        //    }
+        //}
 
-        private async Task NextPage()
-        {
-            if (_currentPage < TotalPages)
-            {
-                _currentPage++;
-                _mongoDbLogItemFiltered = await DataService.GetDataAsync(_itemsPerPage, MinMessageCategoryFilter, _currentPage);
-            }
-        }
+        //private async Task NextPage()
+        //{
+        //    if (_currentPage < TotalPages)
+        //    {
+        //        _currentPage++;
+        //        _mongoDbLogItemFiltered = await DataService.GetDataAsync(_itemsPerPage, MinMessageCategoryFilter, _currentPage);
+        //    }
+        //}
 
-        public async Task FirstPage()
-        {
-            _currentPage = 1;
-            _mongoDbLogItemFiltered = await DataService.GetDataAsync(_itemsPerPage, MinMessageCategoryFilter, _currentPage);
-        }
+        //public async Task FirstPage()
+        //{
+        //    _currentPage = 1;
+        //    _mongoDbLogItemFiltered = await DataService.GetDataAsync(_itemsPerPage, MinMessageCategoryFilter, _currentPage);
+        //}
 
-        public async Task LastPage()
-        {
-            _currentPage = TotalPages;
-            _mongoDbLogItemFiltered = await DataService.GetDataAsync(_itemsPerPage, MinMessageCategoryFilter, _currentPage);
-        }
+        //public async Task LastPage()
+        //{
+        //    _currentPage = TotalPages;
+        //    _mongoDbLogItemFiltered = await DataService.GetDataAsync(_itemsPerPage, MinMessageCategoryFilter, _currentPage);
+        //}
 
-        private IEnumerable<MongoDbLogItem> OrderMongoDbLogItems(IEnumerable<MongoDbLogItem> items)
-        {
-            return items
-                .Where(m => m.Properties?.sender?.Payload != null)
-                .OrderByDescending(m => m.TimeStampAcknowledged.HasValue ? 0 : 1)
-                .ThenByDescending(m => m.UtcTimeStamp)
-                .ThenByDescending(m => m.TimeStampAcknowledged);
-        }
+        //private IEnumerable<MongoDbLogItem> OrderMongoDbLogItems(IEnumerable<MongoDbLogItem> items)
+        //{
+        //    return items
+        //        .Where(m => m.Properties?.sender?.Payload != null)
+        //        .OrderByDescending(m => m.TimeStampAcknowledged.HasValue ? 0 : 1)
+        //        .ThenByDescending(m => m.UtcTimeStamp)
+        //        .ThenByDescending(m => m.TimeStampAcknowledged);
+        //}
 
         public int DepthValue
         {
