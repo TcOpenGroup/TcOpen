@@ -7,12 +7,20 @@
 
 
 <BSContainer>
-   <BSInput InputType="InputType.Select" @bind-Value="@_dropdownSelectedCategory">
-    @foreach (var category in Enum.GetValues(typeof(eMessageCategory)))
-    {
-        <option value="@category">@category</option>
-    }
-    </BSInput>
+  <BSRow class="d-flex align-items-center">
+        <BSCol md="6">
+            <BSInput InputType="InputType.Select" @bind-Value="@DropDownSelectedCategory">
+                @foreach (var category in Enum.GetValues(typeof(eMessageCategory)))
+                {
+                    <option value="@category">@category</option>
+                }
+            </BSInput>
+        </BSCol>
+        <BSCol md="6">
+            <BSLabel>Depth Value: @DepthValue</BSLabel>
+            <BSInput InputType="InputType.Range" @bind-Value="DepthValue" min="1" max="@MaxDiagnosticsDepth" />
+        </BSCol>
+    </BSRow>
 
 
 
@@ -25,7 +33,7 @@
                 <th>Level</th>
                 <th>Message Template Text</th>
                 <th>Sender Parent Symbol</th>
-                
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -40,6 +48,9 @@
                         <td>@message.Level</td>
                         <td>@message.MessageTemplate?.Text</td>
                         <td>@message.Properties?.sender?.Payload?.ParentSymbol</td>
+                        <button class="@(message.TimeStampAcknowledged.HasValue ? "disabled-button" : "")" @onclick="() => AcknowledgeMessage(message.Properties.ExtractedIdentity, message.Properties.sender.Payload.MessageDigest)">
+                            Acknowledge
+                        </button>
                     </tr>
                 }
             }

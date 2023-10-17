@@ -40,26 +40,19 @@ namespace TcoCore
 
         private string ActiveMessagesCount() => "Aktive Messages : " + ViewModel._tcoObject.MessageHandler.ActiveMessagesCount;
         private string DiagnosticsMessage() => "Diag depth : " + DepthValue;
+
         private int _maxDiagnosticsDepth = 20;
         private static int _depthValue;
-        public static int SetDefaultDepth(int item) => _depthValue = item;
+        //public static int SetDefaultDepth(int item) => _depthValue = item;
 
-        private static eMessageCategory _minMessageCategoryFilter;
+        //private static eMessageCategory _minMessageCategoryFilter;
 
-        //public static eMessageCategory MinMessageCategoryFilter
-        //{
-        //    get => _minMessageCategoryFilter;
-        //    set => _minMessageCategoryFilter = value;
-        //}
-        public static eMessageCategory MinMessageCategoryFilter { get; set; }
+        public static eMessageCategory MinMessageCategoryFilter{ get; set; }
 
         public static void SetMinMessageCategoryFilter(eMessageCategory category)
         {
                 MinMessageCategoryFilter = category;
         }
-
-
-
 
         public bool GetMessageStatusPinned(MongoDbLogItem message)
         {
@@ -91,7 +84,7 @@ namespace TcoCore
             }
 
             UpdateValuesOnChange(ViewModel._tcoObject);
-
+            DataService.ActiveMessage = ViewModel.MessageDisplay;
             InitializeDiagnosticsUpdateTimer();
         }
 
@@ -155,8 +148,8 @@ namespace TcoCore
                 //DB Action
                 //await DataService.RefreshDataForDisplayAsync( _itemsPerPage, MinMessageCategoryFilter, _currentPage);
                 //Update plc Data
-                //await ViewModel.UpdateMessagesAsync();
-
+                await ViewModel.UpdateMessagesAsync();
+                DataService.ActiveMessage = ViewModel.MessageDisplay;
                 //_mongoDbLogItemFiltered = OrderMongoDbLogItems(DataService.CachedData)
                 //         .Where(x => ViewModel.CalculateDepth(x) <= DepthValue);
                 //DataService.ExtractIdentity();
@@ -169,45 +162,6 @@ namespace TcoCore
                 StateHasChanged();
             });
         }
-
-        //private async Task PreviousPage()
-        //{
-        //    if (_currentPage > 1)
-        //    {
-        //        _currentPage--;
-        //        _mongoDbLogItemFiltered = await DataService.GetDataAsync(_itemsPerPage, MinMessageCategoryFilter, _currentPage);
-        //    }
-        //}
-
-        //private async Task NextPage()
-        //{
-        //    if (_currentPage < TotalPages)
-        //    {
-        //        _currentPage++;
-        //        _mongoDbLogItemFiltered = await DataService.GetDataAsync(_itemsPerPage, MinMessageCategoryFilter, _currentPage);
-        //    }
-        //}
-
-        //public async Task FirstPage()
-        //{
-        //    _currentPage = 1;
-        //    _mongoDbLogItemFiltered = await DataService.GetDataAsync(_itemsPerPage, MinMessageCategoryFilter, _currentPage);
-        //}
-
-        //public async Task LastPage()
-        //{
-        //    _currentPage = TotalPages;
-        //    _mongoDbLogItemFiltered = await DataService.GetDataAsync(_itemsPerPage, MinMessageCategoryFilter, _currentPage);
-        //}
-
-        //private IEnumerable<MongoDbLogItem> OrderMongoDbLogItems(IEnumerable<MongoDbLogItem> items)
-        //{
-        //    return items
-        //        .Where(m => m.Properties?.sender?.Payload != null)
-        //        .OrderByDescending(m => m.TimeStampAcknowledged.HasValue ? 0 : 1)
-        //        .ThenByDescending(m => m.UtcTimeStamp)
-        //        .ThenByDescending(m => m.TimeStampAcknowledged);
-        //}
 
         public int DepthValue
         {

@@ -2,7 +2,6 @@
 
 @using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.MessagesTabs
 @using Vortex.Presentation.Controls.Blazor.RenderableContent
-@using Blazm.Components
 @namespace TcoCore
 
 @using BlazorStrap.V5
@@ -14,9 +13,9 @@
         <ActiveMessages 
             DataService="DataService"
             MaxDiagnosticsDepth="_maxDiagnosticsDepth" 
-            DepthValue="DepthValue" 
             GetMessageStatusPinned="GetMessageStatusPinned"
-            InitialCategory="@_minMessageCategoryFilter"
+            DepthValue="@DepthValue"
+            InitialCategory="@MinMessageCategoryFilter"
         />
 
         </TabContent>
@@ -24,16 +23,13 @@
     <BSNavItem>
         <TabLabel>Archived Messages</TabLabel>
         <TabContent>
-            @*<ArchivedMessages 
-            AcknowledgeMessageCallback="AcknowledgeMessage" 
-            AcknowledgeAllMessages="AcknowledgeAllMessages"
-            ActiveMessagesCount="ActiveMessagesCount"
+        <ArchivedMessages 
+            DataService="DataService"
             MaxDiagnosticsDepth="_maxDiagnosticsDepth" 
-            EMessageCategories="eMessageCategories"
-            MinMessageCategoryFilter="@MinMessageCategoryFilter"
-            DiagnosticsMessage="DiagnosticsMessage" 
-            DepthValue="DepthValue" 
-            />*@
+            GetMessageStatusPinned="GetMessageStatusPinned"
+            DepthValue="@DepthValue"
+            InitialCategory="@MinMessageCategoryFilter"
+        />
         </TabContent>
     </BSNavItem>
 </BSNav>

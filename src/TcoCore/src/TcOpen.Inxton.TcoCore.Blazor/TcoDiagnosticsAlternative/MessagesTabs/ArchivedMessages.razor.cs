@@ -8,14 +8,14 @@ using global::TcoCore;
 using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services;
 namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.MessagesTabs
 {
-    public partial class ActiveMessages
+    public partial class ArchivedMessages
     {
         [Parameter]
         public IDataService DataService { get; set; }
 
         [Parameter]
         public int MaxDiagnosticsDepth { get; set; }
-
+     
         [Parameter]
         public int InitalDepthValue { get; set; }
 
@@ -44,24 +44,23 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.MessagesTabs
         private int _itemsPerPage = 6;
         int _currentPage = 1;
         int _totalPages = 10;
-        private IEnumerable<MongoDbLogItem> _messagesToDisplay = new List<MongoDbLogItem>();
+        private IEnumerable<MongoDbLogItem> _messagesToDisplayArchive = new List<MongoDbLogItem>();
 
         protected override async Task OnInitializedAsync()
         {
-
+           
             DropDownSelectedCategory = InitialCategory;
             DepthValue = InitalDepthValue;
 
-            await GetDataFilteredAsync();
+            await GetDataFilteredAsyncForArchive();
         }
 
         protected override async Task OnParametersSetAsync()
         {
-            await GetDataFilteredAsync();
-            await AutoAcknowledgeMessages(_messagesToDisplay);
+            await GetDataFilteredAsyncForArchive();
         }
 
-        public async Task GetDataFilteredAsync()
+        public async Task GetDataFilteredAsyncForArchive()
         {
 
             DateTime? startDate = DateTime.Now.AddDays(-7); // Example: 7 days ago
@@ -70,34 +69,13 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.MessagesTabs
             eMessageCategory category = DropDownSelectedCategory; // Example category
             int _depthValue = DepthValue;
 
-            var result = await DataService.GetDataAsycForActive(_itemsPerPage, _currentPage, category, _depthValue, startDate, endDate, keyword);
+            var result = await DataService.GetDataAsyncForArchive(_itemsPerPage, _currentPage, category, _depthValue, startDate, endDate, keyword);
 
             List<MongoDbLogItem> filteredItems = result.messages;
             long totalCount = result.count;
             _totalPages = (int)Math.Ceiling((double)totalCount / _itemsPerPage);
-            _messagesToDisplay = result.messages;
+            _messagesToDisplayArchive = result.messages;
         }
 
-        private async Task AutoAcknowledgeMessages(IEnumerable<MongoDbLogItem> messages)
-        {
-            await DataService.TryAutoAcknowledgeMessages(messages);
-        }
-
-        private async Task AcknowledgeMessages(IEnumerable<MongoDbLogItem> messages)
-        {
-            await DataService.AcknowledgeAllMessages(messages);
-        }
-
-        public async Task AcknowledgeMessage(ulong? identity, int messageDigest)
-        {
-            try
-            {
-                //await DataService.AcknowledgeSingleMessage(identity, messageDigest, ViewModel.MessageDisplay);
-            }
-            catch (System.Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-        }
     }
 }

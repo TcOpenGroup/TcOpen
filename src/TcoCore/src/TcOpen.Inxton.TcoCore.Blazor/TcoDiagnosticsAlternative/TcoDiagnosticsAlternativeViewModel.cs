@@ -69,15 +69,6 @@ namespace TcoCore
             }
         }
 
-        public int CalculateDepth(MongoDbLogItem msg)
-        {
-            if (string.IsNullOrEmpty(msg.Properties.sender.Payload.ParentSymbol))
-            {
-                return 1; 
-            }
-
-            int depth = msg.Properties.sender.Payload.ParentSymbol.Split('.').Length;
-            return depth;
-        }
+   
     }
 }
