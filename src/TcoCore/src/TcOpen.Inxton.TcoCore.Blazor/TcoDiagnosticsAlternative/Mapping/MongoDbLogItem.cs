@@ -131,8 +131,7 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping
 
         public ulong Identity { get; set; }
 
-
-        public int MessageDigest { get; set; }  // Adding MessageDigest property
+        public int MessageDigest { get; set; }  
     }
 
     public class Exception

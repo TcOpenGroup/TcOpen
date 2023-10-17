@@ -24,14 +24,6 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.MessagesTabs
 
         [Parameter]
         public int DepthValueThreshold { get; set; }
-        //[Parameter]
-        //public Func<ulong?, int, Task> AcknowledgeMessageCallback { get; set; }
-
-        //[Parameter]
-        //public Func<Task> AcknowledgeAllMessages { get; set; }
-
-        //[Parameter]
-        //public string ActiveMessagesCount { get; set; }
 
         [Parameter]
         public Func<MongoDbLogItem, bool> GetMessageStatusPinned { get; set; }
@@ -41,12 +33,12 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.MessagesTabs
 
         private eMessageCategory DropDownSelectedCategory { get; set; }
 
-        private int _itemsPerPage = 6;
+        private int _itemsPerPage = 5;
         int _currentPage = 1;
         int _totalPages = 10;
         private IEnumerable<MongoDbLogItem> _messagesToDisplay = new List<MongoDbLogItem>();
 
-        protected override async Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
         {
 
             DropDownSelectedCategory = InitialCategory;
@@ -63,7 +55,6 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.MessagesTabs
 
         public async Task GetDataFilteredAsync()
         {
-
             DateTime? startDate = DateTime.Now.AddDays(-7); // Example: 7 days ago
             DateTime? endDate = DateTime.Now;
             string keyword = "";
@@ -75,17 +66,21 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.MessagesTabs
             List<MongoDbLogItem> filteredItems = result.messages;
             long totalCount = result.count;
             _totalPages = (int)Math.Ceiling((double)totalCount / _itemsPerPage);
+            if (_totalPages < 1)
+            {
+                _totalPages = 1;
+            }
             _messagesToDisplay = result.messages;
         }
 
         private async Task AutoAcknowledgeMessages(IEnumerable<MongoDbLogItem> messages)
         {
-            await DataService.TryAutoAcknowledgeMessages(messages);
+            await DataService.AutoAcknowledgeMessages(messages);
         }
 
-        private async Task AcknowledgeMessages(IEnumerable<MongoDbLogItem> messages)
+        private async Task AcknowledgeMessages()
         {
-            await DataService.AcknowledgeAllMessages(messages);
+            await DataService.AcknowledgeAllMessages();
         }
 
         public async Task AcknowledgeMessage(ulong? identity, int messageDigest)

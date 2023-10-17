@@ -26,27 +26,27 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services
             _collectionName = settings.Value.CollectionName;
         }
 
-        //set this by the Plc via the View.cs
-        public IEnumerable<PlainTcoMessage> ActiveMessage { get; set; }
-        //Query from Db, used for AutoAcknow
-        private List<MongoDbLogItem> MessagesReadyToAck { get; set; }
-        private List<MongoDbLogItem> MessagesUnAckedInDb { get; set; }
+        //set viwa the view.cs, gets it from ViewModel.cs via Plc
+        public IEnumerable<PlainTcoMessage> MessageDisplay { get; set; }
+        private List<PlainTcoMessage> StillActiveMessagesAfterPinnedTest { get; set; }
 
         public async Task<(List<MongoDbLogItem> messages, long count)> GetDataAsycForActive(
-                                    int itemsPerPage,
-                                    int currentPage,
-                                    eMessageCategory category,
-                                    int? depthValue,
-                                    DateTime? startDate = null,
-                                    DateTime? endDate = null,
-                                    string? keyword = null)
+                                        int itemsPerPage,
+                                        int currentPage,
+                                        eMessageCategory category,
+                                        int? depthValue,
+                                        DateTime? startDate = null,
+                                        DateTime? endDate = null,
+                                        string? keyword = null)
         {
             var collection = _database.GetCollection<MongoDbLogItem>(_collectionName);
 
-            var combinedFilter = BuildDateFilter(startDate, endDate)
-                                    & BuildKeywordFilter(keyword)
-                                    & BuildCategoryFilter(category)
-                                    & BuildTimeStampAcknowledgedFilter();
+            await CheckForDuplication(collection);
+
+            var combinedFilter = FilterHelper.BuildDateFilter(startDate, endDate)
+                                        & FilterHelper.BuildKeywordFilter(keyword)
+                                        & FilterHelper.BuildCategoryFilter(category)
+                                        & FilterHelper.BuildTimeStampAcknowledgedFilter();
 
             var messages = await collection.Find(combinedFilter)
                 .Skip((currentPage - 1) * itemsPerPage)
@@ -54,26 +54,73 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services
                 .SortByDescending(item => item.UtcTimeStamp)
                 .ToListAsync();
             var count = await collection.CountDocumentsAsync(combinedFilter);
-            MessagesUnAckedInDb = messages;
 
+            
             return (messages, count);
         }
 
+        private async Task CheckForDuplication(IMongoCollection<MongoDbLogItem> collection)
+        {
+            Console.WriteLine("Starting CheckForDuplication...");
+
+            var filter = FilterHelper.BuildTimeStampAcknowledgedFilter();
+            var messages = await collection.Find(filter).ToListAsync();
+
+            Console.WriteLine($"Total messages fetched: {messages.Count}");
+
+            var distinctCombinations = messages
+                .Where(m => ExtractIdentityFromRenderedMessage(m.RenderedMessage).HasValue && m.Properties.sender.Payload.MessageDigest != 0)
+                .Select(m => new
+                {
+                    Identity = ExtractIdentityFromRenderedMessage(m.RenderedMessage),
+                    Digest = m.Properties.sender.Payload.MessageDigest
+                })
+                .Distinct();
+
+            Console.WriteLine($"Distinct combinations found: {distinctCombinations.Count()}");
+
+            foreach (var combo in distinctCombinations)
+            {
+                var similarMessages = messages.Where(m =>
+                    ExtractIdentityFromRenderedMessage(m.RenderedMessage) == combo.Identity &&
+                    m.Properties.sender.Payload.MessageDigest == combo.Digest )
+                    .ToList();
+
+                Console.WriteLine($"For combo (Identity: {combo.Identity}, Digest: {combo.Digest}), found {similarMessages.Count} similar messages.");
+
+                if (similarMessages.Count > 1)
+                {
+                    Console.WriteLine($"Purging {similarMessages.Count - 1} duplicate messages for combo (Identity: {combo.Identity}, Digest: {combo.Digest})");
+                    await PurgeMultipleEntriesAsync(collection, similarMessages);
+                }
+            }
+        }
+
+        private async Task PurgeMultipleEntriesAsync(IMongoCollection<MongoDbLogItem> collection, List<MongoDbLogItem> messagesToPurge)
+        {
+            var idsToDelete = messagesToPurge.Select(m => m.Id).ToList();
+            var deleteFilter = Builders<MongoDbLogItem>.Filter.In("_id", idsToDelete);
+            await collection.DeleteManyAsync(deleteFilter);
+        }
+
+
+
         public async Task<(List<MongoDbLogItem> messages, long count)> GetDataAsyncForArchive(
-                                     int itemsPerPage,   
-                                     int currentPage, 
-                                     eMessageCategory category,  
+                                     int itemsPerPage,
+                                     int currentPage,
+                                     eMessageCategory category,
                                      int? depthValue,
-                                     DateTime? startDate = null, 
-                                     DateTime? endDate = null, 
+                                     DateTime? startDate = null,
+                                     DateTime? endDate = null,
                                      string? keyword = null)
         {
             var collection = _database.GetCollection<MongoDbLogItem>(_collectionName);
 
-            var combinedFilter = BuildDateFilter(startDate, endDate)
-                                    & BuildKeywordFilter(keyword)
-                                    & BuildCategoryFilter(category)
-                                    & BuildTimeStampAcknowledgedForArchiveFilter();
+            var combinedFilter = FilterHelper.BuildDateFilter(startDate, endDate)
+                                & FilterHelper.BuildKeywordFilter(keyword)
+                                & FilterHelper.BuildCategoryFilter(category)
+                                & FilterHelper.BuildTimeStampAcknowledgedForArchiveFilter();
+
 
             var messages = await collection.Find(combinedFilter)
                 .Skip((currentPage - 1) * itemsPerPage)
@@ -85,61 +132,90 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services
             return (messages, count);
         }
 
-        public Task AcknowledgeAllMessages() => throw new NotImplementedException();
         public Task AcknowledgeMessage(ulong identity, int messageDigest) => throw new NotImplementedException();
 
-       
-        //private FilterDefinition<MongoDbLogItem> BuildDepthValueFilter(int? depthValue, int? depthValueThreshold)
+
+
+        //public async Task AutoAcknowledgeMessages(IEnumerable<MongoDbLogItem> msg)
         //{
-        //    var filterBuilder = Builders<MongoDbLogItem>.Filter;
+        //    var messagesInDb = await QueryDb();
+        //    var messagesFromPlc = MessageDisplay.ToList();
 
-        //    if (depthValue.HasValue)
+        //    var messageToAck = new List<MongoDbLogItem>();
+
+        //    if (messagesInDb != null)
         //    {
-        //        return filterBuilder.Gte(depthValueThreshold.Value, depthValue.Value);
+        //        messageToAck = messagesInDb;
+        //        foreach (var message in messagesInDb)
+        //        {
+        //            var identity = ExtractIdentityFromRenderedMessage(message.RenderedMessage);
+        //            if (!identity.HasValue) continue;
+
+        //            bool isActive = messagesFromPlc.Any(x =>
+        //                x.Identity == (ulong)identity.Value &&
+        //                x.MessageDigest == message.Properties.sender.Payload.MessageDigest
+        //            );
+
+        //            if (!isActive && message != null)
+        //            {
+        //                messageToAck.Remove(message);
+        //            }
+        //        }
+
+        //    await BulkUpdateTimestampAcknowledgedAsync(messageToAck);
         //    }
+        //}
 
-        //    return filterBuilder.Empty;
-        //}
-        //}
-        public async Task TryAutoAcknowledgeMessages(IEnumerable<MongoDbLogItem> msg)
+        public async Task AutoAcknowledgeMessages(IEnumerable<MongoDbLogItem> msg)
         {
-            var unAcknowledgedMessages = await QueryDb();
-                // Step 2: Filter these entries based on the ActiveMessage list
-                var filteredActiveMessages = ActiveMessage.ToList();
-            //.Where(x => !x.Pinned);
+            var messagesInDbNoTimeStampAck = await QueryDb();
+            var messagesFromPlc = MessageDisplay.ToList();
+            var messageToAck = new List<MongoDbLogItem>();
 
-            // Step 3: Compare each unacknowledged message with the PlainTcoMessage list
-            var messagesToAck = new List<MongoDbLogItem>(unAcknowledgedMessages);  // Start with all unacknowledged messages
-
-            foreach (var message in unAcknowledgedMessages)
+            if (messagesInDbNoTimeStampAck != null)
             {
-                var identity = ExtractIdentityFromRenderedMessage(message.RenderedMessage);
-                if (!identity.HasValue) continue;  // If identity is null, skip to the next iteration
-
-                bool isMessageAcknowledged = filteredActiveMessages.Any(x =>
-                    x.Identity == (ulong)identity.Value &&
-                    x.MessageDigest == message.Properties.sender.Payload.MessageDigest
-                );
-
-                if (isMessageAcknowledged)
+                foreach (var message in messagesInDbNoTimeStampAck)
                 {
-                    messagesToAck.Remove(message);
+                    var identity = ExtractIdentityFromRenderedMessage(message.RenderedMessage);
+
+                    bool isInActive;
+
+                    if (identity.HasValue)
+                    {
+                        isInActive = !messagesFromPlc.Any(x =>
+                            x.Identity == (ulong)identity.Value &&
+                            x.MessageDigest == message.Properties.sender.Payload.MessageDigest
+                        );
+                    }
+                    else
+                    {
+                        isInActive = true;
+                    }
+
+                    if (isInActive && message != null)
+                    {
+                        messageToAck.Add(message);
+                    }
                 }
+                await BulkUpdateTimestampAcknowledgedAsync(messageToAck); // Update the timestamps for messages to acknowledge.
             }
-            await BulkUpdateTimestampAcknowledgedAsync(messagesToAck);
         }
 
-
-        public async Task BulkUpdateTimestampAcknowledgedAsync(List<MongoDbLogItem> messagesToUpdate)
+        public async Task BulkUpdateTimestampAcknowledgedAsync(IEnumerable<MongoDbLogItem> messageToAck)
         {
             var _collection = _database.GetCollection<MongoDbLogItem>(_collectionName);
 
             var timeStampAcknowledged = DateTime.UtcNow;
             var bulkOps = new List<WriteModel<MongoDbLogItem>>();
 
-            foreach (var message in messagesToUpdate)
+                if (messageToAck == null || !messageToAck.Any())
+                {
+                    return;
+                }
+
+            foreach (var message in messageToAck)
             {
-                var filter = Builders<MongoDbLogItem>.Filter.Eq(item => item.Id, message.Id);  
+                var filter = Builders<MongoDbLogItem>.Filter.Eq(item => item.Id, message.Id);
                 var update = Builders<MongoDbLogItem>.Update.Set(item => item.TimeStampAcknowledged, timeStampAcknowledged);
 
                 var upsertOne = new UpdateOneModel<MongoDbLogItem>(filter, update);
@@ -152,43 +228,44 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services
             }
         }
 
-        //private FilterDefinition<MongoDbLogItem> BuildDepthValueFilter(int? depthValue, int? depthValueThreshold)
-        //{
-        //    var filterBuilder = Builders<MongoDbLogItem>.Filter;
-
-        //    if (depthValue.HasValue)
-        //    {
-        //        return filterBuilder.Gte(depthValueThreshold.Value, depthValue.Value);
-        //    }
-
-        //    return filterBuilder.Empty;
-
-        public async Task AcknowledgeAllMessages(IEnumerable<MongoDbLogItem> msg)
+        public async Task AcknowledgeAllMessages()
         {
+            //List<PlainTcoMessage> messagesToUpdate = new List<PlainTcoMessage>();
 
-            //    List<PlainTcoMessage> messagesToUpdate = new List<PlainTcoMessage>();
-
-            //    foreach (var _messageToAcknowledge in CategorizedMessages.ActiveMessagesPinned)
+            //foreach (var message in MessageDisplay.Where(m => m.Pinned))
+            //{
+            //    if (message != null)
             //    {
-            //        var _resultMessage = await TryAcknowledgeMessageInternal(_messageToAcknowledge, messageDisplay);
-            //        if (_resultMessage != null)
-            //        {
-            //            messagesToUpdate.Add(_resultMessage);
-            //        }
+            //        await GetListofStillActiveMessages(message);
             //    }
+            //}
 
-            //    if (messagesToUpdate.Any())
+            //var filteredActiveMessages = StillActiveMessagesAfterPinnedTest;
+
+            //foreach (var message in MessagesInDbFiltered)
+            //{
+            //    var identity = ExtractIdentityFromRenderedMessage(message.RenderedMessage);
+            //    if (!identity.HasValue) continue;
+
+            //    bool isMessageAcknowledged = filteredActiveMessages.Any(x =>
+            //        x.Identity == (ulong)identity.Value &&
+            //        x.MessageDigest == message.Properties.sender.Payload.MessageDigest
+            //    );
+
+            //    if (isMessageAcknowledged && MessagesReadyToAck != null)
             //    {
-            //        await UpdateAllMessagesInDb(messagesToUpdate);
+            //        MessagesReadyToAck.Remove(message);
             //    }
-            }
+            //}
+            //await BulkUpdateTimestampAcknowledgedAsync();
+        }
 
-            public async Task<List<MongoDbLogItem>> QueryDb()
+        public async Task<List<MongoDbLogItem>> QueryDb()
         {
             var _collection = _database.GetCollection<MongoDbLogItem>(_collectionName);
 
             // Step 1: Query for entries with TimestampAcknowledged == null
-            var filter = BuildTimeStampAcknowledgedFilter();
+            var filter = FilterHelper.BuildTimeStampAcknowledgedFilter();
             var projection = Builders<MongoDbLogItem>.Projection
                 .Include(item => item.TimeStampAcknowledged)
                 .Include(item => item.Properties.sender.Payload.MessageDigest)
@@ -196,6 +273,10 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services
 
             var unAcknowledgedMessages = await _collection.Find(filter).Project<MongoDbLogItem>(projection).ToListAsync();
 
+            if (!unAcknowledgedMessages.Any())
+            {
+                return new List<MongoDbLogItem>();
+            }
             return unAcknowledgedMessages;
         }
 
@@ -226,28 +307,23 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services
         //    }
         //}
 
-        //private async Task<PlainTcoMessage> TryAcknowledgeMessageInternal(MongoDbLogItem messageToAcknowledge, IEnumerable<PlainTcoMessage> messageDisplay)
-        //{
-        //    var _activeMessage = messageDisplay.FirstOrDefault(m => m.Identity == messageToAcknowledge.Properties?.ExtractedIdentity);
-        //    if (_activeMessage != null)
-        //    {
-        //        _activeMessage.OnlinerMessage.Pinned.Cyclic = false;
-        //        await PurgeNewerSimilarMessages();
-        //        await Task.Delay(2); 
-        //        if (!_activeMessage.OnlinerMessage.IsActive)
-        //        {
-        //            return _activeMessage;
-        //        }
-        //        else
-        //        {
-        //            Console.WriteLine($"Message Still Active {_activeMessage}");
-        //        }
-        //    }
-        //    return null;
-        //}
+        private async Task GetListofStillActiveMessages(PlainTcoMessage message)
+        {
+            if (message == null)
+            {
+                return;
+            }
 
+                message.OnlinerMessage.Pinned.Cyclic = false;
 
+                //await PurgeNewerSimilarMessages();
 
+                await Task.Delay(2);
+                if (message.OnlinerMessage.IsActive)
+                {
+                    StillActiveMessagesAfterPinnedTest.Add(message);  
+                }
+        }
 
         //public async Task PurgeNewerSimilarMessages()
         //{
@@ -284,44 +360,15 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services
         //}
 
 
-
-        private FilterDefinition<MongoDbLogItem> BuildDateFilter(DateTime? startDate, DateTime? endDate)
+        public int CalculateDepth(MongoDbLogItem msg)
         {
-            var filterBuilder = Builders<MongoDbLogItem>.Filter;
-            var filter = filterBuilder.Empty;
-
-            if (startDate.HasValue)
+            if (string.IsNullOrEmpty(msg.Properties.sender.Payload.ParentSymbol))
             {
-                filter &= filterBuilder.Gte(item => item.UtcTimeStamp, startDate.Value);
-            }
-            if (endDate.HasValue)
-            {
-                filter &= filterBuilder.Lte(item => item.UtcTimeStamp, endDate.Value);
+                return 1;
             }
 
-            return filter;
-        }
-
-        private FilterDefinition<MongoDbLogItem> BuildKeywordFilter(string keyword)
-        {
-            var filterBuilder = Builders<MongoDbLogItem>.Filter;
-
-            return !string.IsNullOrEmpty(keyword)
-                ? filterBuilder.Regex(item => item.RenderedMessage, new BsonRegularExpression(keyword, "i"))
-                : filterBuilder.Empty;
-        }
-
-        private FilterDefinition<MongoDbLogItem> BuildCategoryFilter(eMessageCategory? category)
-        {
-            var filterBuilder = Builders<MongoDbLogItem>.Filter;
-
-            if (category.HasValue)
-            {
-                var levelsToInclude = MessageCategoryMapper.GetAllLevelsGreaterThanOrEqualTo(category.Value);
-                return filterBuilder.In(item => item.Level, levelsToInclude);
-            }
-
-            return filterBuilder.Empty;
+            int depth = msg.Properties.sender.Payload.ParentSymbol.Split('.').Length;
+            return depth;
         }
 
         public ulong? ExtractIdentityFromRenderedMessage(string renderedMessage)
@@ -343,39 +390,6 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services
             }
             return null;
         }
-
-        //private FilterDefinition<MongoDbLogItem> BuildIdentityFilter(List<long> identities)
-        //{
-        //    return Builders<MongoDbLogItem>.Filter.In(item => ExtractIdentityFromRenderedMessage(item.RenderedMessage).Value, identities); 
-        //}
-
-        private FilterDefinition<MongoDbLogItem> BuildMessageDigestFilter(List<int> messageDigests)
-        {
-            return Builders<MongoDbLogItem>.Filter.In(item => item.Properties.sender.Payload.MessageDigest, messageDigests);
-        }
-
-        private FilterDefinition<MongoDbLogItem> BuildTimeStampAcknowledgedFilter()
-        {
-            return Builders<MongoDbLogItem>.Filter.Eq(item => item.TimeStampAcknowledged, null);
-        }
-
-        private FilterDefinition<MongoDbLogItem> BuildTimeStampAcknowledgedForArchiveFilter()
-        {
-            var filterBuilder = Builders<MongoDbLogItem>.Filter;
-            return filterBuilder.Ne(item => item.TimeStampAcknowledged, null);
-        }
-
-        public int CalculateDepth(MongoDbLogItem msg)
-        {
-            if (string.IsNullOrEmpty(msg.Properties.sender.Payload.ParentSymbol))
-            {
-                return 1;
-            }
-
-            int depth = msg.Properties.sender.Payload.ParentSymbol.Split('.').Length;
-            return depth;
-        }
-
     }
 
 }

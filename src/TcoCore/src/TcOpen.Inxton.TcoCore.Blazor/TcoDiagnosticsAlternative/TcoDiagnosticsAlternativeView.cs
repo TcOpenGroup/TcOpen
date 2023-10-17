@@ -11,8 +11,6 @@ using MongoDB.Bson.Serialization;
 using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping;
 using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services;
 
-
-
 namespace TcoCore
 {
     public partial class TcoDiagnosticsAlternativeView : IDisposable
@@ -32,11 +30,6 @@ namespace TcoCore
 
         private IEnumerable<eMessageCategory> eMessageCategories => Enum.GetValues(typeof(eMessageCategory)).Cast<eMessageCategory>().Skip(1);
         public string DiagnosticsStatus { get; set; } = "Diagnostics is not running";
-
-        ////Data and Lists, Logs from db, Messages from Plc
-        //private IEnumerable<MongoDbLogItem> _mongoDbLogItemFiltered = new List<MongoDbLogItem>();
-        private List<PlainTcoMessage> _messagesPlc = new List<PlainTcoMessage>();
-        public int CachedDataCount { get; private set; }
 
         private string ActiveMessagesCount() => "Aktive Messages : " + ViewModel._tcoObject.MessageHandler.ActiveMessagesCount;
         private string DiagnosticsMessage() => "Diag depth : " + DepthValue;
@@ -84,7 +77,7 @@ namespace TcoCore
             }
 
             UpdateValuesOnChange(ViewModel._tcoObject);
-            DataService.ActiveMessage = ViewModel.MessageDisplay;
+            DataService.MessageDisplay = ViewModel.MessageDisplay;
             InitializeDiagnosticsUpdateTimer();
         }
 
@@ -112,52 +105,13 @@ namespace TcoCore
         // Problem now, when i set pinned to false, and check which Messages still occur, the Logger creates new Logs.
         // => my Solution is, to have a Purge Method(), which purges from my DB newer Messages, when the Origin Error Message is not Acknowledged
 
-        public async Task AcknowledgeAllMessages()
-        {
-            try
-            {
-                //await DataService.AcknowledgeAllMessages(ViewModel.MessageDisplay);
-            }
-            catch (System.Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-        }
-
-        public async Task AcknowledgeMessage(ulong? identity, int messageDigest)
-        {
-            try
-            {
-                //await DataService.AcknowledgeSingleMessage(identity, messageDigest, ViewModel.MessageDisplay);
-            }
-            catch (System.Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-        }
-
-        public void Dispose()
-        {
-            _messageUpdateTimer?.Dispose();
-        }
-
         private async void MessageUpdateTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             await InvokeAsync(async () =>
             {
-                //DB Action
-                //await DataService.RefreshDataForDisplayAsync( _itemsPerPage, MinMessageCategoryFilter, _currentPage);
-                //Update plc Data
+                
                 await ViewModel.UpdateMessagesAsync();
-                DataService.ActiveMessage = ViewModel.MessageDisplay;
-                //_mongoDbLogItemFiltered = OrderMongoDbLogItems(DataService.CachedData)
-                //         .Where(x => ViewModel.CalculateDepth(x) <= DepthValue);
-                //DataService.ExtractIdentity();
-                //await DataService.FilterDataEntriesToUpdate();
-                //DataService.CategorizeMessages(ViewModel.MessageDisplay.ToList());
-
-                //await DataService.PurgeNewerSimilarMessages();
-                ////await DataService.AutoAckNonPinnedMessages(ViewModel.MessageDisplay);
+                DataService.MessageDisplay = ViewModel.MessageDisplay;
 
                 StateHasChanged();
             });
@@ -176,6 +130,11 @@ namespace TcoCore
                 _depthValue = value;
                 ViewModel._tcoObject.MessageHandler.DiagnosticsDepth = value;
             }
+        }
+
+        public void Dispose()
+        {
+            _messageUpdateTimer?.Dispose();
         }
 
     }

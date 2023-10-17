@@ -74,6 +74,10 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.MessagesTabs
             List<MongoDbLogItem> filteredItems = result.messages;
             long totalCount = result.count;
             _totalPages = (int)Math.Ceiling((double)totalCount / _itemsPerPage);
+            if (_totalPages < 1)
+            {
+                _totalPages = 1;
+            }
             _messagesToDisplayArchive = result.messages;
         }
 
