@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+      <TargetFrameworks>net48;net5.0-windows</TargetFrameworks>
+    <UseWPF>true</UseWPF>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	<IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="4.6.1" />
+  </ItemGroup>
+  
+  <ItemGroup>
+   
+    <ProjectReference Include="..\..\src\TcoTixonFeeding.Wpf\TcOpen.Inxton.TcoTixonFeeding.Wpf.csproj" />
+    <ProjectReference Include="..\TcoTixonFeedingTestsConnector\TcoTixonFeedingTestsConnector.csproj" />
+
+  </ItemGroup>
+
+</Project>

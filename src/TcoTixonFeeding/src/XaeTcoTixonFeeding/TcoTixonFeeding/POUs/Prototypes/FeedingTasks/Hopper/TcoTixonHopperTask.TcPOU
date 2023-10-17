@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="TcoTixonHopperTask" Id="{595f2ebb-c9b3-0c8c-26ff-0d975a185a1b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoTixonHopperTask EXTENDS TcoTixonFeedingTask
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+
+IF Execute() THEN
+
+
+  	IF _progress = 0 THEN
+		IF NOT __ISVALIDREF(inoControl) THEN
+			_varInfo :=__VARINFO(inoControl);
+			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+		ELSIF NOT __ISVALIDREF(inoConfig) THEN                                                  
+			_varInfo :=__VARINFO(inoConfig);                                                    
+			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+		ELSIF NOT __ISVALIDREF(inoStatus) THEN                                                  
+			_varInfo :=__VARINFO(inoStatus);                                                    
+			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+		ELSIF NOT inoStatus.State.ControllerInAuto THEN                                                  
+			_varInfo :=__VARINFO(inoStatus.State.ControllerInAuto);                                                                                                  
+			Messenger.Warning(_sb.Clear().Append('<#Tixon control system not in auto #>').Append(_varInfo.Symbol).ToString());
+		ELSE
+
+			_progress := _progress + 1;
+
+		END_IF
+
+	END_IF
+	IF _progress = 1 THEN
+		inoControl.Hooper:=FALSE;
+		
+		_progress := _progress + 1;
+		_timer(In:=FALSE);
+
+	END_IF;
+	
+	
+	IF _progress = 2 THEN	
+		Messenger.Debug('<#Waiting for feeder empty#>');
+		_timer(IN:=NOT inoStatus.State.NotEmptyFeeder,Pt:=inoConfig.TimeToHopperStart);
+		IF _timer.Q THEN
+			_progress := _progress + 1;
+			_timer(In:=FALSE);;
+		END_IF
+	END_IF;
+	
+	IF _progress = 3 THEN	
+		inoControl.Hooper:=TRUE;
+		Messenger.Debug('<#Hopper is running#>');
+		_timer(IN:=inoStatus.State.NotEmptyFeeder,Pt:=inoConfig.TimeToHopperRun);
+		IF _timer.Q THEN
+			_progress := _progress+1;
+			_timer(In:=FALSE);
+		END_IF
+	END_IF;
+	
+	IF _progress = 4 THEN	
+		THIS^.DoneWhen(TRUE);
+	END_IF;		
+	
+	
+	
+	
+   
+    CallTimers(TRUE);
+	
+	THIS^.ThrowWhen(_errorTimer.Q );
+	
+END_IF
+
+IF  THIS^.Error AND NOT _errorMessage.Pinned THEN
+	THIS^.Restore();
+END_IF]]></ST>
+    </Implementation>
+    <Method Name="OnAbort" Id="{2ce42d0c-7f68-08cd-1dfa-a0e740342dbf}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task is aborted.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnAbort
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Hopper task  was aborted.#>'; END_IF;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnDone" Id="{3697987d-1e15-058d-099f-afe8e5e60ad8}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task reaches the ```Done``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnDone
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Hopper task  finished successfully.#>'; END_IF;
+_progress:=0;
+IF AutoRestore THEN
+	Restore();
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnError" Id="{6ab14f9f-b1a9-0035-1b9a-9220815d53ab}">
+      <Declaration><![CDATA[METHOD PROTECTED OnError
+VAR
+	description: STRING;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[description := '<#Hopper task finished with error.#>'; 
+
+IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := description; END_IF;
+THIS^._errorMessage.Error(_sb.Clear().Append(description).Append(' To restore acknowledge this alarm.').ToString()).Pin();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStart" Id="{4f0aa92f-5b1b-0b77-01ee-6e34179a0fe7}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStart 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN  THIS^.inoStatus.ActionDescription := '<#Hopper task started.#>'; END_IF; 
+CallTimers(FALSE);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{b18486b5-08da-026b-19fd-7246c414157c}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+			<para>
+				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD Restore : ITcoRestorable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.Restore();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

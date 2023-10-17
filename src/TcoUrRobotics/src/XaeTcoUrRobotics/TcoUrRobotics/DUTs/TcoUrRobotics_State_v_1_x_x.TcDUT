@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="TcoUrRobotics_State_v_1_x_x" Id="{63d91a0d-d92d-05f1-2020-555a4196bb80}">
+    <Declaration><![CDATA[TYPE TcoUrRobotics_State_v_1_x_x : 
+STRUCT
+
+	
+	{attribute addProperty Name "<#AutoOn#>"}
+	AutoOn : BOOL;
+
+	{attribute addProperty Name "<#CycleOn#>"}
+	CycleOn : BOOL;
+
+	{attribute addProperty Name "<#Emergency stop#>"}
+	EmgStop : BOOL;
+
+	{attribute addProperty Name "<#Error#>"}
+	Error : BOOL;
+
+	{attribute addProperty Name "<#Event ID#>"}
+	EventId : UDINT;
+	
+	{attribute addProperty Name "<#Move active#>"}
+	MoveActive : BOOL;
+
+	{attribute addProperty Name "<#Move inactive#>"}
+	MoveInactive : BOOL;
+
+	{attribute addProperty Name "<#Motor off#>"}
+	MotorOff : BOOL;
+
+	{attribute addProperty Name "<#Motor on#>"}
+	MotorOn : BOOL;	
+
+	{attribute addProperty Name "<#Motor off state#>"}
+	MotorOffState : BOOL;
+
+	{attribute addProperty Name "<#Motor on state#>"}
+	MotorOnState : BOOL;
+
+	{attribute addProperty Name "<#Program execution error#>"}
+	ProgExecError : BOOL;
+
+	{attribute addProperty Name "<#Safety OK#>"}
+	SafetyOk : BOOL;
+	
+	{attribute addProperty Name "<#System input busy#>"}
+	SystemInputBusy : BOOL;
+		
+	{attribute addProperty Name "<#Program pointer moved#>"}
+	PpMoved : BOOL;
+	
+	{attribute addProperty Name "<#Motion supervision#>"}
+	MotionSupervision : BOOL;
+
+	{attribute addProperty Name "<#Battery Low#>"}
+	BatteryLow : BOOL;
+
+
+
+	
+
+	
+	{attribute addProperty Name "<#In area 1#>"}
+	InArea_1 : BOOL;
+
+	{attribute addProperty Name "<#In area 2#>"}
+	InArea_2 : BOOL;
+
+	{attribute addProperty Name "<#In area 3#>"}
+	InArea_3 : BOOL;
+
+	{attribute addProperty Name "<#In area 4#>"}
+	InArea_4 : BOOL;
+
+
+	{attribute addProperty Name "<#In position 1#>"}
+	InPosition_1 : BOOL;
+
+	{attribute addProperty Name "<#In position 2#>"}
+	InPosition_2 : BOOL;
+
+	{attribute addProperty Name "<#In position 3#>"}
+	InPosition_3 : BOOL;
+
+	{attribute addProperty Name "<#In position 4#>"}
+	InPosition_4 : BOOL;
+
+
+	
+	{attribute addProperty Name "<#Zones#>"}
+	Zone : BYTE;
+
+	{attribute addProperty Name "<#In position#>"}
+	InPosition : BYTE;
+
+
+	
+	{attribute addProperty Name "<#Tool 1 retract#>"}
+	Tool_1_Retract : BOOL;
+
+	{attribute addProperty Name "<#Tool 1 extend#>"}
+	Tool_1_Extend : BOOL;
+
+	{attribute addProperty Name "<#Tool 2 retract#>"}
+	Tool_2_Retract : BOOL;
+
+	{attribute addProperty Name "<#Tool 2 extend#>"}
+	Tool_2_Extend : BOOL;
+
+	{attribute addProperty Name "<#Tool 3 retract#>"}
+	Tool_3_Retract : BOOL;
+
+	{attribute addProperty Name "<#Tool 3 extend#>"}
+	Tool_3_Extend : BOOL;
+
+	{attribute addProperty Name "<#Tool 4 retract#>"}
+	Tool_4_Retract : BOOL;
+
+	{attribute addProperty Name "<#Tool 4 extend#>"}
+	Tool_4_Extend : BOOL;
+
+
+	
+	{attribute addProperty Name "<#Auto stop 1#>"}
+	AutoStop_1 : BOOL;
+
+	{attribute addProperty Name "<#Auto stop 2#>"}
+	AutoStop_2 : BOOL;
+
+	{attribute addProperty Name "<#Emergency stop 1#>"}
+	EmergencyStop_1 : BOOL;
+
+	{attribute addProperty Name "<#Emergency stop 2#>"}
+	EmergencyStop_2 : BOOL;
+
+	{attribute addProperty Name "<#General stop 1#>"}
+	GeneralStop_1 : BOOL;
+
+	{attribute addProperty Name "<#General stop 2#>"}
+	GeneralStop_2 : BOOL;
+
+	{attribute addProperty Name "<#Enable 1#>"}
+	Enable_1 : BOOL;
+
+	{attribute addProperty Name "<#Enable 2#>"}
+	Enable_2 : BOOL;
+
+
+	{attribute addProperty Name "<#Action number#>"}
+	ActionNo : BYTE;
+
+	{attribute addProperty Name "<#Global speed#>"}
+	GlobalSpeed : BYTE;
+
+	{attribute addProperty Name "<#Tool number#>"}
+	ToolNo : BYTE; 
+
+	{attribute addProperty Name "<#Workobject number#>"}
+	WorkobjectNo : BYTE;
+
+	{attribute addProperty Name "<#PointNumber#>"}
+	PointNo : BYTE;
+
+	{attribute addProperty Name "<#User specific speed 1#>"}
+	UserSpecSpeed1 : DINT;
+
+	{attribute addProperty Name "<#User specific speed 2#>"}
+	UserSpecSpeed2 : DINT;
+	
+	{attribute  addProperty Name "<#Coordinates#>"}     
+	Coordinates : TcoAbstractions.TcoRoboticsCoordinates; 		
+	
+//	{attribute addProperty Name "<#Actual coordinates world#>"}     	
+//	CoordinatesWorld :TcoAbstractions.TcoRoboticsCoordinates; 		
+//
+//	{attribute addProperty Name "<#Actual coordinates workobject tool#>"}     	
+//	CoordinatesWobjTool : TcoAbstractions.TcoRoboticsCoordinates; 		
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

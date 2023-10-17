@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="TcoTixonStepTask" Id="{cae169d9-299e-0f86-2a1b-ccda0cc8bcc1}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoTixonStepTask EXTENDS TcoTixonFeedingTask
+
+VAR
+	_timerIsFull: TON;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+
+IF Execute() THEN
+	_timerIsFull(IN:=inoStatus.State.FillingSensor,PT:=inoConfig.BufferFullTime);
+
+  	IF _progress = 0 THEN
+		IF NOT __ISVALIDREF(inoControl) THEN
+			_varInfo :=__VARINFO(inoControl);
+			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+		ELSIF NOT __ISVALIDREF(inoConfig) THEN                                                  
+			_varInfo :=__VARINFO(inoConfig);                                                    
+			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+		ELSIF NOT __ISVALIDREF(inoStatus) THEN                                                  
+			_varInfo :=__VARINFO(inoStatus);                                                    
+			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+		ELSIF NOT inoStatus.State.ControllerInAuto THEN                                                  
+			_varInfo :=__VARINFO(inoStatus.State.ControllerInAuto);                                                                                                 
+			Messenger.Warning(_sb.Clear().Append('<#Tixon control system not in auto #>').Append(_varInfo.Symbol).ToString());
+		ELSE
+
+			_progress := _progress + 1;
+
+		END_IF
+
+	END_IF
+	IF _progress = 1 THEN
+	
+		_progress := _progress + 1;
+		_timer(In:=FALSE);
+
+	END_IF;
+	
+	
+	IF _progress = 2 THEN	
+		Messenger.Debug('<#Waiting for buffer empty#>');
+		_timer(IN:=not inoStatus.State.FillingSensor,Pt:=inoConfig.BufferEmptyTime);
+		IF _timer.Q  AND inoControl.FeedingA THEN
+			_progress := _progress + 1;
+			_timer(In:=FALSE);
+		END_IF
+	END_IF;
+	IF _progress = 3 THEN	
+		inoControl.StepperValve:=FALSE;
+		Messenger.Debug('<#Stepper to home#>');
+		_timer(IN:=inoStatus.State.StepperHomePos,Pt:=inoConfig.SteperInHomeTime);
+		IF  _timer.Q THEN
+			_progress := _progress+1;
+			_timer(In:=FALSE);
+		END_IF
+	END_IF;
+	
+	IF _progress = 4 THEN	
+		inoControl.StepperValve:=TRUE;
+		Messenger.Debug('<#Stepper to work#>');
+		_timer(IN:=inoStatus.State.StepperWorkPos,Pt:=inoConfig.SteperInWorkTime);
+		IF  _timer.Q THEN
+			_progress := _progress+1;
+			_timer(In:=FALSE);
+		END_IF
+	END_IF;
+	
+	IF _progress = 5 THEN	
+		Messenger.Debug('<#Waiting for buffer empty#>');
+		_timer(IN:=inoStatus.State.FillingSensor,Pt:=inoConfig.BufferEmptyTime);
+		IF _timerIsFull.Q THEN
+			_progress := _progress + 1;
+			_timer(In:=FALSE);
+		ELSE
+			_progress := 3;
+			_timer(In:=FALSE);
+		END_IF
+	END_IF;
+	
+	IF _progress = 6 THEN	
+		THIS^.DoneWhen(TRUE);
+	END_IF;		
+	
+	
+	
+	
+   
+    CallTimers(TRUE);
+	
+	THIS^.ThrowWhen(_errorTimer.Q );
+	
+END_IF
+
+IF  THIS^.Error AND NOT _errorMessage.Pinned THEN
+	THIS^.Restore();
+END_IF]]></ST>
+    </Implementation>
+    <Method Name="OnAbort" Id="{5634698e-50b9-085e-0cb9-6c9ed136f91c}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task is aborted.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnAbort
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Stepper task  was aborted.#>'; END_IF;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnDone" Id="{d63fa053-666e-0237-2e40-bc42f66cac76}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task reaches the ```Done``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnDone
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Stepper task  finished successfully.#>'; END_IF;
+_progress:=0;
+IF AutoRestore THEN
+	Restore();
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnError" Id="{48e54480-fb2b-0a47-2048-2c03e7e5e931}">
+      <Declaration><![CDATA[METHOD PROTECTED OnError
+VAR
+	description: STRING;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[description := '<#Stepper task finished with error.#>'; 
+
+IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := description; END_IF;
+THIS^._errorMessage.Error(_sb.Clear().Append(description).Append(' To restore acknowledge this alarm.').ToString()).Pin();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStart" Id="{8de71d0d-dfc4-0578-0fd2-73c2edc27292}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStart 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN  THIS^.inoStatus.ActionDescription := '<#Stepper task started.#>'; END_IF; 
+CallTimers(FALSE);
+_timerIsFull(In:=FALSE);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{816649e7-4c39-0c99-3a81-0cf45a38318e}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+			<para>
+				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD Restore : ITcoRestorable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.Restore();
+_timerIsFull(In:=FALSE);
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

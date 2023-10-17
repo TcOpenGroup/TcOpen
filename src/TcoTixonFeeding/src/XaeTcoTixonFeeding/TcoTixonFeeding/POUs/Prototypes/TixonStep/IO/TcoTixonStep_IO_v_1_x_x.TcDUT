@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="TcoTixonStep_IO_v_1_x_x" Id="{b8816c42-aa0f-02c1-3264-ae7069194c54}">
+    <Declaration><![CDATA[TYPE TcoTixonStep_IO_v_1_x_x :
+STRUCT
+	{attribute addProperty Name "<#IN#>"}
+	In : TcoTixonStep_Inputs_v_1_x_x;
+	{attribute addProperty Name "<#OUT#>"}
+	Out : TcoTixonStep_Outputs_v_1_x_x;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

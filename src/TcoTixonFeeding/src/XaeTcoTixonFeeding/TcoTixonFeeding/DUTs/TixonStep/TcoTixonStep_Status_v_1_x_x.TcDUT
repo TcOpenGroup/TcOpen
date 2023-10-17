@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="TcoTixonStep_Status_v_1_x_x" Id="{439720c2-6454-0cc7-0c25-8a0c90d18909}">
+    <Declaration><![CDATA[TYPE TcoTixonStep_Status_v_1_x_x :
+STRUCT
+	ActionDescription : STRING(100);	
+	State:TcoTixonStep_State_v_1_x_x;
+
+
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

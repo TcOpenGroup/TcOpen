@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="TcoTixonStep_State_v_1_x_x" Id="{86d8d220-a8b9-0280-075d-9759425f2e76}">
+    <Declaration><![CDATA[TYPE
+    TcoTixonStep_State_v_1_x_x :
+    STRUCT
+
+        {attribute addProperty Name "<#Feeder has component#> -i1"}
+        NotEmptyFeeder : BOOL;
+        {attribute addProperty Name "<#Separator in home position#> -i2"}
+        SeparatorHomePos : BOOL;
+        {attribute addProperty Name "<#Filing sensor#> -i3"}
+        FillingSensor : BOOL;
+        {attribute addProperty Name "<#Separator present#> -i4"}
+        SeparatorPresent : BOOL;
+        {attribute addProperty Name "<#Component out of box#> -i5"}
+        ComponentOutOfBox : BOOL;
+        {attribute addProperty Name "<#Stepper in home position#> -i6"}
+        StepperHomePos : BOOL;
+        {attribute addProperty Name "<#Stepper in work position#> -i7"}
+        StepperWorkPos : BOOL;
+		{attribute addProperty Name "<#Tixon controller in auto#> -i8"}
+        ControllerInAuto : BOOL;
+        {attribute addProperty Name "<#Componet is ready#>"}
+        ComponentReady : BOOL;
+
+    END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

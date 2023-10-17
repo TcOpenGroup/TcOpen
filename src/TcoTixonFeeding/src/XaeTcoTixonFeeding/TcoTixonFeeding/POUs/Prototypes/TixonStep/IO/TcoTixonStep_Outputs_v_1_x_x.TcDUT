@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="TcoTixonStep_Outputs_v_1_x_x" Id="{c4fcb3a9-d8d7-0b3b-002a-d7a43b6eb480}">
+    <Declaration><![CDATA[TYPE TcoTixonStep_Outputs_v_1_x_x :
+STRUCT
+	FeedingA AT %Q* : BOOL;
+	RedLed AT %Q* : BOOL;	
+	GreenLed AT %Q* : BOOL;
+	SepareComponent AT %Q* : BOOL;
+	ShotComponent AT %Q* : BOOL;
+	BlowValve AT %Q* : BOOL;
+	StepperValve AT %Q* : BOOL;
+	Hopper AT %Q* : BOOL;
+
+	
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
