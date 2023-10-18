@@ -5,6 +5,7 @@ using MongoDB.Driver;
 
 using TcoCore;
 
+using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Helper;
 using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping;
 
 public class FilterHelper
@@ -49,13 +50,33 @@ public class FilterHelper
     }
 
     public static FilterDefinition<MongoDbLogItem> BuildTimeStampAcknowledgedFilter()
-    {
-        return Builders<MongoDbLogItem>.Filter.Eq(item => item.TimeStampAcknowledged, null);
-    }
+        {
+            return Builders<MongoDbLogItem>.Filter.Eq(item => item.TimeStampAcknowledged, null);
+        }
 
-    public static FilterDefinition<MongoDbLogItem> BuildTimeStampAcknowledgedForArchiveFilter()
+    public static FilterDefinition<MongoDbLogItem> BuildTimeStampAcknowledgeNullFilter()
+        {
+            var filterBuilder = Builders<MongoDbLogItem>.Filter;
+            return filterBuilder.Ne(item => item.TimeStampAcknowledged, null);
+        }
+
+    public static FilterDefinition<MongoDbLogItem> BuildPlainTcoMessageFilter(PlainTcoMessage plainTcoMessage, ulong extractedIdentity)
     {
         var filterBuilder = Builders<MongoDbLogItem>.Filter;
-        return filterBuilder.Ne(item => item.TimeStampAcknowledged, null);
+
+        var filter = filterBuilder.Eq("Properties.sender.Payload.MessageDigest", plainTcoMessage.MessageDigest) &
+                     filterBuilder.Eq("Properties.sender.Payload.Identity", extractedIdentity) &
+                     filterBuilder.Eq("TimeStampAcknowledged", BsonNull.Value);
+
+        return filter;
     }
+
+    public static ProjectionDefinition<MongoDbLogItem> BuildMinimalProjection()
+    {
+        return Builders<MongoDbLogItem>.Projection
+            .Include(item => item.Id)
+            .Include(item => item.RenderedMessage)
+            .Include(item => item.Properties.sender.Payload.MessageDigest);
+    }
+
 }

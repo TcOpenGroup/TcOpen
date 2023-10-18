@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Components;
 using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping;
 using global::TcoCore;
 using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services;
+using MongoDB.Bson;
+
 namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.MessagesTabs
 {
     public partial class ActiveMessages
@@ -83,16 +85,9 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.MessagesTabs
             await DataService.AcknowledgeAllMessages();
         }
 
-        public async Task AcknowledgeMessage(ulong? identity, int messageDigest)
+        public async Task AcknowledgeMessage(ObjectId id)
         {
-            try
-            {
-                //await DataService.AcknowledgeSingleMessage(identity, messageDigest, ViewModel.MessageDisplay);
-            }
-            catch (System.Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
+            await DataService.AcknowledgeSingleMessage(id);
         }
     }
 }

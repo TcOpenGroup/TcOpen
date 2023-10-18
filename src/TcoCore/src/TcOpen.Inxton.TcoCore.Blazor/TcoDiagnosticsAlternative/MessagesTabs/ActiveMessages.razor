@@ -48,9 +48,11 @@
                         <td>@message.Level</td>
                         <td>@message.MessageTemplate?.Text</td>
                         <td>@message.Properties?.sender?.Payload?.ParentSymbol</td>
-                        <button class="@(message.TimeStampAcknowledged.HasValue ? "disabled-button" : "")" @onclick="() => AcknowledgeMessage(message.Properties.ExtractedIdentity, message.Properties.sender.Payload.MessageDigest)">
-                            Acknowledge
-                        </button>
+                        <td>
+                            <button class="@(message.TimeStampAcknowledged.HasValue ? "disabled-button" : "")" @onclick="() => AcknowledgeMessage(message.Id)">
+                                Acknowledge
+                            </button>
+                        </td>
                     </tr>
                 }
             }

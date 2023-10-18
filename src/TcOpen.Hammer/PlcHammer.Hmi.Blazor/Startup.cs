@@ -100,18 +100,18 @@ namespace PlcHammer.Hmi.Blazor
                                                                   // .WriteTo.MQTT(new MQTTnet.Client.Options.MqttClientOptionsBuilder().WithTcpServer("broker.emqx.io").Build(), "fun_with_TcOpen_Hammer") 
                                         .WriteTo.MongoDBBson(
                                                         databaseUrl: $"{MongoUri}/{DatabaseName}",
-                                                        collectionName: $"{CollectionName}"
-                                                    ).Enrich.WithProperty("user", SecurityManager.Manager.Principal.Identity.Name)
-                                        .Enrich.With(new Serilog.Enrichers.EnvironmentNameEnricher())
-                                        .Enrich.With(new Serilog.Enrichers.EnvironmentUserNameEnricher())
-                                        .Enrich.With(new Serilog.Enrichers.MachineNameEnricher())
-                                        .MinimumLevel.Verbose())) // Sets the logger configuration (default reports only to console).
+                                                        collectionName: $"{CollectionName}")
+                                        //            ).Enrich.WithProperty("user", SecurityManager.Manager.Principal.Identity.Name)
+                                        //.Enrich.With(new Serilog.Enrichers.EnvironmentNameEnricher())
+                                        //.Enrich.With(new Serilog.Enrichers.EnvironmentUserNameEnricher())
+                                        //.Enrich.With(new Serilog.Enrichers.MachineNameEnricher())
+                                        .MinimumLevel.Debug())) // Sets the logger configuration (default reports only to console).
                 .SetSecurity(SecurityManager.Manager.Service)
                 .SetEditValueChangeLogging(Entry.PlcHammer.Connector);
 
             services.Configure<MongoDbSettings>(Configuration.GetSection("MongoDbSettings"));
             services.AddTransient<IDataService, DataService>();
-            services.AddSingleton<DataCleanupService>();
+            services.AddSingleton<DataBaseMaxEntryCleanupService>();
             services.AddBlazorStrap();
         }
 

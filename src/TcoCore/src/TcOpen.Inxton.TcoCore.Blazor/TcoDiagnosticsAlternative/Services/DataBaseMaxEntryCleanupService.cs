@@ -11,7 +11,7 @@ using MongoDB.Driver;
 
 namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services
 {
-    public class DataCleanupService : IDisposable
+    public class DataBaseMaxEntryCleanupService : IDisposable
     {
         private readonly IMongoCollection<BsonDocument> _collection;
         private readonly Timer _timer;
@@ -22,7 +22,7 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services
         private readonly IMongoDatabase _database;
         private readonly string _collectionName;
 
-        public DataCleanupService(IOptions<Configure.MongoDbSettings> settings)
+        public DataBaseMaxEntryCleanupService(IOptions<Configure.MongoDbSettings> settings)
         {
             var client = new MongoClient(settings.Value.MongoUri);
             _database = client.GetDatabase(settings.Value.DatabaseName);

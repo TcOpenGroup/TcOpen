@@ -26,7 +26,7 @@ namespace TcoCore
         /// DataCleanupService is responsible for limiting the entries to 5000 logs
         /// </summary>
         [Inject]
-        public DataCleanupService DataCleanupService { get; set; }
+        public DataBaseMaxEntryCleanupService DataBaseMaxEntryCleanupSerice { get; set; }
 
         private IEnumerable<eMessageCategory> eMessageCategories => Enum.GetValues(typeof(eMessageCategory)).Cast<eMessageCategory>().Skip(1);
         public string DiagnosticsStatus { get; set; } = "Diagnostics is not running";

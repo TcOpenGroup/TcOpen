@@ -24,14 +24,6 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.MessagesTabs
 
         [Parameter]
         public int DepthValueThreshold { get; set; }
-        //[Parameter]
-        //public Func<ulong?, int, Task> AcknowledgeMessageCallback { get; set; }
-
-        //[Parameter]
-        //public Func<Task> AcknowledgeAllMessages { get; set; }
-
-        //[Parameter]
-        //public string ActiveMessagesCount { get; set; }
 
         [Parameter]
         public Func<MongoDbLogItem, bool> GetMessageStatusPinned { get; set; }
@@ -71,7 +63,6 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.MessagesTabs
 
             var result = await DataService.GetDataAsyncForArchive(_itemsPerPage, _currentPage, category, _depthValue, startDate, endDate, keyword);
 
-            List<MongoDbLogItem> filteredItems = result.messages;
             long totalCount = result.count;
             _totalPages = (int)Math.Ceiling((double)totalCount / _itemsPerPage);
             if (_totalPages < 1)
