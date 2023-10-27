@@ -70,11 +70,38 @@ namespace TcoTixonFeedingConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Blow  active .
+        ///   Looks up a localized string similar to Blow.
         /// </summary>
-        public static string ___Blow__active___ {
+        public static string ___Blow__ {
             get {
-                return ResourceManager.GetString("___Blow__active___", resourceCulture);
+                return ResourceManager.GetString("___Blow__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blow B.
+        /// </summary>
+        public static string ___Blow_B__ {
+            get {
+                return ResourceManager.GetString("___Blow_B__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Buffer blow  active .
+        /// </summary>
+        public static string ___Buffer_blow__active___ {
+            get {
+                return ResourceManager.GetString("___Buffer_blow__active___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Buffer blow on start.
+        /// </summary>
+        public static string ___Buffer_blow_on_start__ {
+            get {
+                return ResourceManager.GetString("___Buffer_blow_on_start__", resourceCulture);
             }
         }
         
@@ -151,20 +178,29 @@ namespace TcoTixonFeedingConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Buffer time to idle.
+        /// </summary>
+        public static string ___Buffer_time_to_idle__ {
+            get {
+                return ResourceManager.GetString("___Buffer_time_to_idle__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Component is ready.
+        /// </summary>
+        public static string ___Component_is_ready__ {
+            get {
+                return ResourceManager.GetString("___Component_is_ready__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Component out of box.
         /// </summary>
         public static string ___Component_out_of_box__ {
             get {
                 return ResourceManager.GetString("___Component_out_of_box__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Componet is ready.
-        /// </summary>
-        public static string ___Componet_is_ready__ {
-            get {
-                return ResourceManager.GetString("___Componet_is_ready__", resourceCulture);
             }
         }
         
@@ -196,11 +232,65 @@ namespace TcoTixonFeedingConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error time buffer .
+        /// </summary>
+        public static string ___Error_time_buffer___ {
+            get {
+                return ResourceManager.GetString("___Error_time_buffer___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error time Hopper .
+        /// </summary>
+        public static string ___Error_time_Hopper___ {
+            get {
+                return ResourceManager.GetString("___Error_time_Hopper___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error time separator .
+        /// </summary>
+        public static string ___Error_time_separator___ {
+            get {
+                return ResourceManager.GetString("___Error_time_separator___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error time Stepper .
+        /// </summary>
+        public static string ___Error_time_Stepper___ {
+            get {
+                return ResourceManager.GetString("___Error_time_Stepper___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Feeder blow  active .
+        /// </summary>
+        public static string ___Feeder_blow__active___ {
+            get {
+                return ResourceManager.GetString("___Feeder_blow__active___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Feeder empty time to report.
         /// </summary>
         public static string ___Feeder_empty_time_to_report__ {
             get {
                 return ResourceManager.GetString("___Feeder_empty_time_to_report__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Feeder full blow time after.
+        /// </summary>
+        public static string ___Feeder_full_blow_time_after__ {
+            get {
+                return ResourceManager.GetString("___Feeder_full_blow_time_after__", resourceCulture);
             }
         }
         
@@ -214,11 +304,20 @@ namespace TcoTixonFeedingConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Feeding A.
+        ///   Looks up a localized string similar to Feeding A .
         /// </summary>
-        public static string ___Feeding_A__ {
+        public static string ___Feeding_A___ {
             get {
-                return ResourceManager.GetString("___Feeding_A__", resourceCulture);
+                return ResourceManager.GetString("___Feeding_A___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Feeding B.
+        /// </summary>
+        public static string ___Feeding_B__ {
+            get {
+                return ResourceManager.GetString("___Feeding_B__", resourceCulture);
             }
         }
         
@@ -237,6 +336,15 @@ namespace TcoTixonFeedingConnector.Properties {
         public static string ___Green_led__ {
             get {
                 return ResourceManager.GetString("___Green_led__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hooper.
+        /// </summary>
+        public static string ___Hooper__ {
+            get {
+                return ResourceManager.GetString("___Hooper__", resourceCulture);
             }
         }
         
@@ -304,29 +412,11 @@ namespace TcoTixonFeedingConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to IN.
-        /// </summary>
-        public static string ___IN__ {
-            get {
-                return ResourceManager.GetString("___IN__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Invalid reference: .
         /// </summary>
         public static string ___Invalid_reference____ {
             get {
                 return ResourceManager.GetString("___Invalid_reference____", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to OUT.
-        /// </summary>
-        public static string ___OUT__ {
-            get {
-                return ResourceManager.GetString("___OUT__", resourceCulture);
             }
         }
         
@@ -354,6 +444,15 @@ namespace TcoTixonFeedingConnector.Properties {
         public static string ___Separator_in_home_position__ {
             get {
                 return ResourceManager.GetString("___Separator_in_home_position__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Separator in work position.
+        /// </summary>
+        public static string ___Separator_in_work_position__ {
+            get {
+                return ResourceManager.GetString("___Separator_in_work_position__", resourceCulture);
             }
         }
         
@@ -412,15 +511,6 @@ namespace TcoTixonFeedingConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Separe.
-        /// </summary>
-        public static string ___Separe__ {
-            get {
-                return ResourceManager.GetString("___Separe__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Separe component.
         /// </summary>
         public static string ___Separe_component__ {
@@ -430,14 +520,20 @@ namespace TcoTixonFeedingConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shot component&gt; - q5&quot;}
-        ///	ShotComponent : BOOL;
-        ///	{attribute addProperty Name &quot;Blow.
+        ///   Looks up a localized string similar to Shot component.
         /// </summary>
-        public static string ___Shot_component____q5____ShotComponent___BOOL____attribute_addProperty_Name____Blow__ {
+        public static string ___Shot_component__ {
             get {
-                return ResourceManager.GetString("___Shot_component____q5____ShotComponent___BOOL____attribute_addProperty_Name____" +
-                        "Blow__", resourceCulture);
+                return ResourceManager.GetString("___Shot_component__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start  vibratorating and blowing.
+        /// </summary>
+        public static string ___Start__vibratorating_and_blowing__ {
+            get {
+                return ResourceManager.GetString("___Start__vibratorating_and_blowing__", resourceCulture);
             }
         }
         
@@ -532,6 +628,15 @@ namespace TcoTixonFeedingConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Stepper valve.
+        /// </summary>
+        public static string ___Stepper_valve__ {
+            get {
+                return ResourceManager.GetString("___Stepper_valve__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Time to hopper run .
         /// </summary>
         public static string ___Time_to_hopper_run___ {
@@ -604,11 +709,65 @@ namespace TcoTixonFeedingConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vib. bin task  finished successfully..
+        /// </summary>
+        public static string ___Vib__bin_task__finished_successfully___ {
+            get {
+                return ResourceManager.GetString("___Vib__bin_task__finished_successfully___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vib. bin task  was aborted..
+        /// </summary>
+        public static string ___Vib__bin_task__was_aborted___ {
+            get {
+                return ResourceManager.GetString("___Vib__bin_task__was_aborted___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vib. bin task finished with error..
+        /// </summary>
+        public static string ___Vib__bin_task_finished_with_error___ {
+            get {
+                return ResourceManager.GetString("___Vib__bin_task_finished_with_error___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vib. bin task started..
+        /// </summary>
+        public static string ___Vib__bin_task_started___ {
+            get {
+                return ResourceManager.GetString("___Vib__bin_task_started___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vibrating bin task.
+        /// </summary>
+        public static string ___Vibrating_bin_task__ {
+            get {
+                return ResourceManager.GetString("___Vibrating_bin_task__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Waiting for .
         /// </summary>
         public static string ___Waiting_for___ {
             get {
                 return ResourceManager.GetString("___Waiting_for___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting for blow on .
+        /// </summary>
+        public static string ___Waiting_for_blow_on___ {
+            get {
+                return ResourceManager.GetString("___Waiting_for_blow_on___", resourceCulture);
             }
         }
         
@@ -622,6 +781,15 @@ namespace TcoTixonFeedingConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Waiting for buffer full.
+        /// </summary>
+        public static string ___Waiting_for_buffer_full__ {
+            get {
+                return ResourceManager.GetString("___Waiting_for_buffer_full__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Waiting for buffer is Empty .
         /// </summary>
         public static string ___Waiting_for_buffer_is_Empty___ {
@@ -631,20 +799,29 @@ namespace TcoTixonFeedingConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Waiting for buffer is full.
-        /// </summary>
-        public static string ___Waiting_for_buffer_is_full__ {
-            get {
-                return ResourceManager.GetString("___Waiting_for_buffer_is_full__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Waiting for buffer is full adn blow ending.
         /// </summary>
         public static string ___Waiting_for_buffer_is_full_adn_blow_ending__ {
             get {
                 return ResourceManager.GetString("___Waiting_for_buffer_is_full_adn_blow_ending__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting for buffer is full and blow ending.
+        /// </summary>
+        public static string ___Waiting_for_buffer_is_full_and_blow_ending__ {
+            get {
+                return ResourceManager.GetString("___Waiting_for_buffer_is_full_and_blow_ending__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting for buffer is full and go idle.
+        /// </summary>
+        public static string ___Waiting_for_buffer_is_full_and_go_idle__ {
+            get {
+                return ResourceManager.GetString("___Waiting_for_buffer_is_full_and_go_idle__", resourceCulture);
             }
         }
         

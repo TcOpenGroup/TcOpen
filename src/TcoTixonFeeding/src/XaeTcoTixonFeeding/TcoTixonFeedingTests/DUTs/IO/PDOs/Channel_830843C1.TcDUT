@@ -1,0 +1,16 @@
+<TcPlcObject>
+	<DUT Name="Channel_830843C1">
+		<Declaration><![CDATA[{attribute 'GeneratedUsingTerminal: EL1008-0000-0018'}
+{attribute addProperty BoxType "EL1008-0000-0018"}
+{attribute addProperty Id "InputAT %I*BOOL1"}
+{attribute addProperty CRC "2198356929"}
+{attribute addProperty Size "1"}
+TYPE Channel_830843C1 EXTENDS TcoIo.InputBase_8311D824 :
+STRUCT
+	{attribute addProperty Name "Input"}
+	Input AT %I* : BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+	</DUT>
+</TcPlcObject>

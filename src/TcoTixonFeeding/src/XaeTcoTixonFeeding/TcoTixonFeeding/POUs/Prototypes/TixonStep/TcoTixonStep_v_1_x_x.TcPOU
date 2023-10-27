@@ -2,9 +2,26 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="TcoTixonStep_v_1_x_x" Id="{aff4f8a7-9f6d-0a6c-116c-43f06261788c}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoTixonStep_v_1_x_x EXTENDS TcoCore.TcoComponent  
-
-VAR_IN_OUT
-    inoData : TcoTixonStep_IO_v_1_x_x;
+VAR_INPUT
+	inControllerInAuto  : BOOL;
+	inNotEmptyFeeder  : BOOL;	
+	inSeparatorHomePos  : BOOL;
+	inFillingSensor  : BOOL; 
+	inSeparatorPresent  : BOOL;
+	inComponentOutOfBox  : BOOL;
+	inStepperHomePos  : BOOL;
+	inStepperWorkPos  : BOOL;
+	
+END_VAR
+VAR_OUTPUT
+	outFeedingA : BOOL;
+	outSepareComponent : BOOL;
+	outBlowValveA : BOOL;
+	outRedLed : BOOL;	
+	outGreenLed : BOOL;
+	outHopper : BOOL;
+	outShotComponent : BOOL;
+	outStepperValve : BOOL;
 END_VAR
 VAR
     
@@ -29,7 +46,7 @@ END_VAR
 VAR
 
 	{attribute addProperty Name "<#Separator task#>"}
-    _separatorTask : TcoTixonSeparatorTask(THIS^);	
+    _separatorTask : TcoTixonStepSeparatorTask(THIS^);	
 	{attribute addProperty Name "<#Buffer task#>"}
     _bufferTask : TcoTixonBufferTask(THIS^);
 	{attribute addProperty Name "<#Step task#>"}
@@ -53,21 +70,22 @@ VAR
 	_sb : TcoCore.StringBuilder;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF NOT __ISVALIDREF(inoData) THEN
-    Messenger.Post('Invalid reference', TcoCore.eMessageCategory.ProgrammingError);
-    RETURN;
-END_IF
-
-
+      <ST><![CDATA[
 _blink(inOnTime:=_config.BlinkTime,inOffTime:=_config.BlinkTime);		
 UpdateStatus();
 
+
+
 _separatorTask.Enabled:=TRUE;
+_separatorTask.ErrorTime:=_config.ErrorTimeSeparator;
 _separatorTask(inoConfig:=_config,inoControl:=_control,inoStatus:=_status);
 _bufferTask.Enabled:=TRUE;
+_bufferTask.ErrorTime:=_config.ErrorTimeBuffer;
 _bufferTask(inoConfig:=_config,inoControl:=_control,inoStatus:=_status);
 _stepperTask.Enabled:=TRUE;
+_stepperTask.ErrorTime:=_config.ErrorTimeStepper ;
 _stepperTask(inoConfig:=_config,inoControl:=_control,inoStatus:=_status);
+_hopperTask.ErrorTime:=_config.ErrorTimeHopper;
 _hopperTask.Enabled := _config.HopperActive;
 _hopperTask(inoConfig:=_config,inoControl:=_control,inoStatus:=_status);
 
@@ -110,7 +128,7 @@ _bufferTask.AutoRestore:=false;]]></ST>
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Gets the configuration of the IRC 5. 					
+			Gets the configuration of the Tixon Step. 					
 		</summary>			
 	</docu>	
 ~*)
@@ -170,12 +188,15 @@ END_VAR
 _hasError:=_separatorTask.Error OR _stepperTask.Error OR _bufferTask.Error;
 _control.GreenLed:=FALSE;
 _control.RedLed:=FALSE;
-IF _blink.IsOn AND NOT _status.State.ControllerInAuto  THEN
+IF  NOT _status.ControllerInAuto  THEN
 	_control.GreenLed:=TRUE;
 	_control.RedLed:=TRUE;
-ELSIF _status.State.ControllerInAuto AND  _status.State.NotEmptyFeeder THEN
+ELSIF _hasError AND _blink.IsOn  AND _status.ControllerInAuto  THEN
+	_control.RedLed:=TRUE;
+ELSIF _status.ControllerInAuto AND NOT _hasError AND _status.NotEmptyFeeder THEN
 	_control.GreenLed:=TRUE;
-ELSIF _blink.IsOn AND _status.State.ControllerInAuto AND NOT _status.State.NotEmptyFeeder THEN
+ELSIF _blink.IsOn AND _status.ControllerInAuto AND NOT _status.NotEmptyFeeder THEN
+	_control.GreenLed:=TRUE;
 	_control.RedLed:=TRUE;
 END_IF
 
@@ -211,7 +232,7 @@ END_VAR
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[RestoreTasks();
-_control.BlowValve:=FALSE;
+_control.BlowAValve:=FALSE;
 _control.FeedingA:=FALSE;
 _control.GreenLed:=FALSE;
 _control.RedLed:=FALSE;
@@ -226,8 +247,7 @@ _control.Hooper:=FALSE;
       <Declaration><![CDATA[METHOD INTERNAL RestoreTasks 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[//_resetTask.Restore();
-
+        <ST><![CDATA[
 _separatorTask.Restore();
 _bufferTask.Restore();
 _stepperTask.Restore();
@@ -266,7 +286,7 @@ METHOD PROTECTED ServiceMode]]></Declaration>
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Gets the status of the IRC5. 					
+			Gets the status of the Tixon Step. 					
 		</summary>			
 	</docu>	
 ~*)
@@ -298,15 +318,14 @@ VAR
 	index: INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[inoData.Out.BlowValve:= _control.BlowValve;
-inoData.Out.FeedingA:=_control.FeedingA;
-inoData.Out.GreenLed:=_control.GreenLed;
-inoData.Out.RedLed:=_control.RedLed;
-inoData.Out.SepareComponent:=_control.SepareComponent;
-inoData.Out.StepperValve:=_control.StepperValve;
-inoData.Out.ShotComponent:=_control.ShotComponent;
-inoData.Out.Hopper:=_control.Hooper;
-]]></ST>
+        <ST><![CDATA[outBlowValveA:= _control.BlowAValve;
+outFeedingA:=_control.FeedingA;
+outGreenLed:=_control.GreenLed;
+outRedLed:=_control.RedLed;
+outSepareComponent:=_control.SepareComponent;
+outStepperValve:=_control.StepperValve;
+outShotComponent:=_control.ShotComponent;
+outHopper:=_control.Hooper;]]></ST>
       </Implementation>
     </Method>
     <Method Name="UpdateStatus" Id="{6384fb65-17fe-03b4-2f2f-0966c52a4ceb}">
@@ -315,14 +334,14 @@ VAR
     
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_status.State.ComponentOutOfBox:=inoData.In.ComponentOutOfBox;
-_status.State.NotEmptyFeeder:=inoData.In.NotEmptyFeeder;
-_status.State.FillingSensor:=inoData.In.FillingSensor;
-_status.State.SeparatorHomePos:=inoData.In.SeparatorHomePos;
-_status.State.SeparatorPresent:=inoData.In.SeparatorPresent;
-_status.State.StepperHomePos:=inoData.In.StepperHomePos;
-_status.State.StepperWorkPos:=inoData.In.StepperWorkPos;
-_status.State.ControllerInAuto:=inoData.In.ControllerInAuto;
+        <ST><![CDATA[_status.ComponentOutOfBox:=inComponentOutOfBox;
+_status.NotEmptyFeeder:=inNotEmptyFeeder;
+_status.FillingSensor:=inFillingSensor;
+_status.SeparatorHomePos:=inSeparatorHomePos;
+_status.SeparatorPresent:=inSeparatorPresent;
+_status.StepperHomePos:=inStepperHomePos;
+_status.StepperWorkPos:=inStepperWorkPos;
+_status.ControllerInAuto:=inControllerInAuto;
 
 ]]></ST>
       </Implementation>

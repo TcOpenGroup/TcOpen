@@ -2,37 +2,22 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoTixonStep_Config_v_1_x_x" Id="{ba956026-ef4f-08fe-397f-e203910d64f9}">
     <Declaration><![CDATA[TYPE
-    TcoTixonStep_Config_v_1_x_x :
+    TcoTixonStep_Config_v_1_x_x EXTENDS TcoTixonGenericConfig :
     STRUCT
-        InfoTime : TIME := T#2S;
-        ErrorTime : TIME := T#0S;
-		{attribute addProperty Name "<#Blink period#> - T_BLINK"}
-		BlinkTime : TIME := T#500MS;
-		{attribute addProperty Name "<#Feeder empty time to report#> - T_SIG_EMPTY"}
-		FeederEmptyTime : TIME := T#5S;
-		{attribute addProperty Name "<#Buffer empty time to report#> - T_BUF_EMPTY"}
-		BufferEmptyTime : TIME := T#1S;
-		{attribute addProperty Name "<#Buffer full time to report#> - T_BUF_FULL"}
-		BufferFullTime : TIME := T#1S;
-		{attribute addProperty Name "<#Buffer full blow time after#> - T_BUF_BLOW_FULL"}
-		BufferBlowFullTime : TIME := T#1S;
+       
 		{attribute addProperty Name "<#Time when stepper in work #> - T_STEP_WORK"}
 		SteperInWorkTime : TIME := T#1S;
 		{attribute addProperty Name "<#Time when stepper in home #> - T_STEP_HOME"}
 		SteperInHomeTime : TIME := T#1S;
-		{attribute addProperty Name "<#Time when component in separator #> - T_BUFSEP_ON"}
-		TimeToComponentInSeparator : TIME := T#300MS;
-		{attribute addProperty Name "<#Time when component is out of separator #> - T_FLY_OFF"}
-		TimeToComponentOutSeparator : TIME := T#1S;
-		{attribute addProperty Name "<#Hooper is active#>"}
-		HopperActive : BOOL := FALSE;
-		{attribute addProperty Name "<#Time to hopper start #> - T_HOOP_ON"}
-		TimeToHopperStart : TIME := T#5S;
-		{attribute addProperty Name "<#Time to hopper run #> - T_HOOP_RUN"}
-		TimeToHopperRun : TIME := T#30S;
-		{attribute addProperty Name "<#Blow  active #>"}
-		BlowActive : BOOL := FALSE;
-	
+			
+		{attribute addProperty Name "<#Error time separator #> - T_SEP_ERROR"}
+		ErrorTimeSeparator : TIME := T#0S;
+		{attribute addProperty Name "<#Error time buffer #> - T_BUFF_ERROR"}
+		ErrorTimeBuffer : TIME := T#0S;
+		{attribute addProperty Name "<#Error time Stepper #> - T_STEP_ERROR"}
+		ErrorTimeStepper : TIME := T#0S;
+		{attribute addProperty Name "<#Error time Hopper #> - T_HOP_ERROR"}
+		ErrorTimeHopper : TIME := T#0S;
 		
     END_STRUCT
 END_TYPE

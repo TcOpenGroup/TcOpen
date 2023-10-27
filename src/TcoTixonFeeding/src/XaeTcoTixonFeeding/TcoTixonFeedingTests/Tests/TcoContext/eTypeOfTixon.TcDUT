@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="eTypeOfTixon" Id="{e72684ba-faa0-0269-3bf4-3a138c1c69a0}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eTypeOfTixon :
+(
+	TixonStep := 0,
+	TixonVibro:=1,
+	TixonPick:=2
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

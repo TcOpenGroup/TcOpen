@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="TcoTixonPickStep_Status_v_1_x_x" Id="{ce460223-3db9-06a5-06d7-0965329c0aa3}">
+    <Declaration><![CDATA[TYPE TcoTixonPickStep_Status_v_1_x_x EXTENDS TcoTixonGenericStatus:
+STRUCT
+
+		{attribute addProperty Name "<#Separator in work position#> - i6"}
+        SeparatorWorkPos : BOOL;
+	    {attribute addProperty Name "<#Stepper in home position#> - i7 "}
+        StepperHomePos : BOOL;
+        {attribute addProperty Name "<#Stepper in work position#> - i8"}
+        StepperWorkPos : BOOL;
+	
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

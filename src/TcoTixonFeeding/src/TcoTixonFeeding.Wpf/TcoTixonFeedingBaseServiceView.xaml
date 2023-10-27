@@ -30,11 +30,11 @@
    
                 </WrapPanel.Resources>
 
-                <WrapPanel  DataContext="{Binding _status.State.ComponentReady }"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
+                <WrapPanel  DataContext="{Binding _status.ComponentReady }"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
                     <materialdesign:PackIcon Kind="NotificationsActive"  Foreground="{StaticResource Notification}"  VerticalAlignment="Center"/>
                     <TextBlock   Text="{x:Static p:strings.ComponentReady}"  Foreground="{StaticResource Notification}"/>
                 </WrapPanel>
-                <WrapPanel  DataContext="{Binding _status.State.ControllerInAuto }"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}" Margin=" 5,0">
+                <WrapPanel  DataContext="{Binding _status.ControllerInAuto }"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}" Margin=" 5,0">
                     <materialdesign:PackIcon Kind="Warning"  Foreground="{StaticResource Warning}"  VerticalAlignment="Center"/>
                     <TextBlock   Text="{x:Static p:strings.NotInAuto}"  Foreground="{StaticResource Warning}"/>
                 </WrapPanel>

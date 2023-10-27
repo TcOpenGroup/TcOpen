@@ -36,16 +36,52 @@
     </SelectedLibraryCategories>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DUTs\TcoTixonGenericConfig.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\TcoTixonGenericPickConfig.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\TcoTixonGenericControl.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\TcoTixonGenericStatus.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\TixonPickStep\TcoTixonPickStep_Config_v_1_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\TixonPickStep\TcoTixonPickStep_Control_v_1_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\TixonPickStep\TcoTixonPickStep_Status_v_1_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\TixonStep\TcoTixonStep_Config_v_1_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\TixonStep\TcoTixonStep_Control_v_1_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\TixonStep\TcoTixonStep_State_v_1_x_x.TcDUT">
+    <Compile Include="DUTs\TixonStep\TcoTixonStep_Status_v_1_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\TixonStep\TcoTixonStep_Status_v_1_x_x.TcDUT">
+    <Compile Include="DUTs\TixonVibro\TcoTixonVibro_Config_v_1_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\TixonVibro\TcoTixonVibro_Control_v_1_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\TixonVibro\TcoTixonVibro_Status_v_1_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\TixonPickVibro\TcoTixonPickVibro_Config_v_1_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\TixonPickVibro\TcoTixonPickVibro_Control_v_1_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\TixonPickVibro\TcoTixonPickVibro_Status_v_1_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PlcTask.TcTTO">
@@ -54,47 +90,74 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\FeedingTasks\Hopper\TcoTixonHopperTask.TcPOU">
+    <Compile Include="POUs\Prototypes\GenericTasks\Base\TcoTixonFeedingTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\FeedingTasks\Buffer\TcoTixonBufferTask.TcPOU">
+    <Compile Include="POUs\Prototypes\GenericTasks\Buffer\TcoTixonBufferTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\FeedingTasks\StepFeed\TcoTixonStepTask.TcPOU">
+    <Compile Include="POUs\Prototypes\GenericTasks\Hopper\TcoTixonHopperTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\TixonStep\IO\TcoTixonStep_Inputs_v_1_x_x.TcDUT">
+    <Compile Include="POUs\Prototypes\TiconPickStep\Taks\Step\TcoTixonPickStepTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\TixonStep\IO\TcoTixonStep_IO_v_1_x_x.TcDUT">
+    <Compile Include="POUs\Prototypes\TiconPickStep\Taks\TcoTixonPickStepSeparatorTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\TixonStep\IO\TcoTixonStep_Outputs_v_1_x_x.TcDUT">
+    <Compile Include="POUs\Prototypes\TiconPickStep\TcoTixonPickStep_v_1_x_x.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TiconPickVibro\Taks\TcoTixonPickVibroFeederTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TiconPickVibro\Taks\TcoTixonPickVibroSeparatorTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TiconPickVibro\TcoTixonPickVibro_v_1_x_x.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TixonStep\Tasks\Separe\TcoTixonStepSeparatorTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TixonStep\Tasks\Step\TcoTixonStepTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TixonStep\TcoTixonStep_v_1_x_x.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\FeedingTasks\Separe\TcoTixonSeparatorTask.TcPOU">
+    <Compile Include="POUs\Prototypes\TixonVibro\Tasks\Separe\TcoTixonVibroSeparatorTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\FeedingTasks\TcoTixonFeedingTask.TcPOU">
+    <Compile Include="POUs\Prototypes\TixonVibro\TcoTixonVibro_v_1_x_x.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
+    <Folder Include="DUTs\TixonPickStep" />
+    <Folder Include="DUTs\TixonVibro" />
     <Folder Include="DUTs\TixonStep" />
+    <Folder Include="DUTs\TixonPickVibro" />
     <Folder Include="GVLs" />
     <Folder Include="POUs\Conversions" />
-    <Folder Include="POUs\Prototypes\FeedingTasks\Hopper" />
-    <Folder Include="POUs\Prototypes\FeedingTasks\StepFeed" />
-    <Folder Include="POUs\Prototypes\TixonStep\IO" />
+    <Folder Include="POUs\Prototypes\GenericTasks\Base" />
+    <Folder Include="POUs\Prototypes\GenericTasks\Buffer" />
+    <Folder Include="POUs\Prototypes\GenericTasks\Hopper" />
+    <Folder Include="POUs\Prototypes\TiconPickStep" />
+    <Folder Include="POUs\Prototypes\TiconPickStep\Taks" />
     <Folder Include="POUs\Prototypes" />
+    <Folder Include="POUs\Prototypes\TiconPickStep\Taks\Step" />
+    <Folder Include="POUs\Prototypes\TiconPickVibro" />
+    <Folder Include="POUs\Prototypes\TiconPickVibro\Taks" />
     <Folder Include="POUs\Prototypes\TixonStep" />
-    <Folder Include="POUs\Prototypes\FeedingTasks" />
-    <Folder Include="POUs\Prototypes\FeedingTasks\Separe" />
-    <Folder Include="POUs\Prototypes\FeedingTasks\Buffer" />
+    <Folder Include="POUs\Prototypes\GenericTasks" />
+    <Folder Include="POUs\Prototypes\TixonStep\Tasks" />
+    <Folder Include="POUs\Prototypes\TixonStep\Tasks\Separe" />
+    <Folder Include="POUs\Prototypes\TixonStep\Tasks\Step" />
+    <Folder Include="POUs\Prototypes\TixonVibro" />
+    <Folder Include="POUs\Prototypes\TixonVibro\Tasks" />
+    <Folder Include="POUs\Prototypes\TixonVibro\Tasks\Separe" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>

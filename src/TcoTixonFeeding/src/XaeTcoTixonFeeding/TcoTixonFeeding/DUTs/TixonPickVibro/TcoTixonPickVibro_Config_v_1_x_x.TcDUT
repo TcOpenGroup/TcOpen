@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="TcoTixonPickVibro_Config_v_1_x_x" Id="{58401dc2-9300-00c2-1af3-6ff07550ac74}">
+    <Declaration><![CDATA[TYPE
+    TcoTixonPickVibro_Config_v_1_x_x EXTENDS TcoTixonGenericPickConfig :
+    STRUCT
+      
+		{attribute addProperty Name "<#Feeder full blow time after#> - T_FEEDER_BLOW_FULL"}
+		FeederBlowFullTime : TIME := T#1S;
+		{attribute addProperty Name "<#Feeder blow  active #>"}
+		FeederBlowActive : BOOL := FALSE;
+		
+		{attribute addProperty Name "<#Error time separator #> - T_SEP_ERROR"}
+		ErrorTimeSeparator : TIME := T#0S;
+		{attribute addProperty Name "<#Error time buffer #> - T_BUFF_ERROR"}
+		ErrorTimeBuffer : TIME := T#0S;
+		{attribute addProperty Name "<#Error time Hopper #> - T_HOP_ERROR"}
+		ErrorTimeHopper : TIME := T#0S;
+		
+    END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
