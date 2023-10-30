@@ -4,7 +4,7 @@
     <Declaration><![CDATA[FUNCTION_BLOCK WpfContext EXTENDS TcoCore.TcoContext
 VAR
     _serviceModeActive : BOOL;
-    {attribute addProperty Name "<#Abb IRC 5#>"}
+    {attribute addProperty Name "<#Mitsubichi Cr800#>"}
     _robot1 : TcoMitsubishiRobotics.TcoCr800_v_1_x_x(THIS^);
 	
 	
@@ -42,7 +42,8 @@ METHOD PROTECTED Main]]></Declaration>
 
 
 END_IF
-_robot1(
+_robot1(inPnIoBoxDiag:=GVL.Robot1.PnIoBoxDiag,
+	inPnIoBoxState:=gvl.Robot1.PnIoBoxState,
     inoData := GVL.Robot1);
 
 
@@ -206,19 +207,6 @@ IF (seq.Step(inStepID := 16,
 	
 //--------------------------------------------------------			
 END_IF;
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //

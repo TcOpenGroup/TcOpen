@@ -4,55 +4,31 @@
     <Declaration><![CDATA[TYPE TcoMitsubishiRobotics_Control_v_1_x_x : 
 STRUCT	
 	
+	{attribute addProperty Name "<#Operation enablre (rights)#>"}
+	OperationEnable:BOOL;
+	{attribute addProperty Name "<#Automatic operation enabled#>"}
+	AutoEnable:BOOL;
+	{attribute addProperty Name "<#Start#>"}
+	Start:BOOL;	
+	{attribute addProperty Name "<#Stop#>"}
+	Stop:BOOL;
+	{attribute addProperty Name "<#Program reset#>"}
+	ProgramReset:BOOL;
+	{attribute addProperty Name "<#Error Reset#>"}
+	ErrorReset:BOOL;
+	{attribute addProperty Name "<#Cycle Stop#>"}
+	CycleStop:BOOL;	
+	{attribute addProperty Name "<#Servo Off#>"}
+	ServoOff:BOOL;
+	{attribute addProperty Name "<#Servo On#>"}
+	ServoOn:BOOL;	
 
+	{attribute addProperty Name "<#General Purpose reset#>"}
+	GeneralPurposeReset:BOOL;	
 	
-	{attribute addProperty Name "<#Interuption actually running instruction#>"}
-	Interupt : BOOL;
-
-	{attribute addProperty Name "<#Load program#>"}
-	LoadProg : BOOL;	
-
-	{attribute addProperty Name "<#Load and run program#>"}
-	LoadAndStartProg : BOOL;
-
-	{attribute addProperty Name "<#Switch off the motors#>"}
-	MotorOff : BOOL;	
-
-	{attribute addProperty Name "<#Switch on the motors#>"}
-	MotorOn : BOOL;	
-
-	{attribute addProperty Name "<#Switch on the motors and start program#>"}
-	MotorOnAndStart : BOOL; 
-
-	{attribute addProperty Name "<#Emergency stop acknowledge#>"}
-	ResetEmgStop : BOOL;
-
-	{attribute addProperty Name "<#Error acknowledge#>"}
-	ResetError : BOOL; 
-
-	{attribute addProperty Name "<#Program start#>"}
-	StartProgram : BOOL;	
-
-	{attribute addProperty Name "<#Program start at main#>"}
-	StartAtMain : BOOL; 	
-
-	{attribute addProperty Name "<#Program stop#>"}
-	StopProgram : BOOL;	
-
-	{attribute addProperty Name "<#Stop movement-quick#>"}
-	QuickStop : BOOL; 
-
-	{attribute addProperty Name "<#Stop movement-soft#>"}
-	SoftStop : BOOL;	
-
-	{attribute addProperty Name "<#Stop program at the end of the cycle#>"}
-	StopCycle : BOOL; 	
-
-	{attribute addProperty Name "<#Stop program at the end of the instruction#>"}
-	StopInstruction : BOOL;
-
-	{attribute addProperty Name "<#Speed limitation#>"}
-	LimitSpeed : BOOL;
+	
+	{attribute addProperty Name "<#Overide specification#>"}
+	OverideSpecifications:BOOL;	
 	
 	{attribute addProperty Name "<#Master mode#>"}
 	MasterMode : BYTE;

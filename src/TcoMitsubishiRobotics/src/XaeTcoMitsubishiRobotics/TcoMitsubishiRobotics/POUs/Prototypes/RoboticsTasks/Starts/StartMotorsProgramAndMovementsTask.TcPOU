@@ -23,7 +23,7 @@ END_IF
 _startMotorsAndProgramTask REF= refStartMotorsAndProgramTask;
 
 IF Execute() THEN
-	IF _progress = 0 THEN
+	(*IF _progress = 0 THEN
 		IF NOT __ISVALIDREF(inoControl) THEN
 			_varInfo :=__VARINFO(inoControl);
 			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
@@ -98,7 +98,7 @@ IF Execute() THEN
 		END_IF
 	END_IF;		
 
-   CallTimers(TRUE);
+   CallTimers(TRUE);*)
 	
 	THIS^.ThrowWhen(_errorTimer.Q );
 END_IF
@@ -139,8 +139,8 @@ InvokeWithParams := THIS^.Invoke();]]></ST>
 METHOD PROTECTED OnAbort]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Start motors, program and movements was aborted, while not yet completed!#>';END_IF; 
-inoControl.SoftStop := TRUE;
-inoControl.QuickStop := FALSE;]]></ST>
+//inoControl.SoftStop := TRUE;
+//inoControl.QuickStop := FALSE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnDone" Id="{1fc3c1ce-ebc6-01b3-37ca-9b703872b2e9}">
@@ -182,8 +182,8 @@ THIS^._errorMessage.Error(_sb.Clear().Append(description).Append(' To restore ac
       <Implementation>
         <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Start motors, program and movements stared.#>'; END_IF;
 CallTimers(FALSE);
-inoControl.QuickStop:=FALSE;
-inoControl.SoftStop:=FALSE;]]></ST>
+//inoControl.QuickStop:=FALSE;
+//inoControl.SoftStop:=FALSE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{a23b56e9-dc77-075a-05c1-2ed4d7f607dd}">

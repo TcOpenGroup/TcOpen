@@ -57,7 +57,7 @@ VAR
     _stopMovementsAndProgramTask : StopMovementsAndProgramTask(THIS^);
 	
 	{attribute addProperty Name "<#Stop program#>"}
-    _stopProgramTask : StopMovementsAndProgramTask(THIS^);
+    _stopProgramTask : StopProgramTask(THIS^);
 	
 	{attribute addProperty Name "<#Stop motors#>"}
     _stopMotorsTask : StopMotorsTask(THIS^);
@@ -149,19 +149,22 @@ _someTaskIsActive := _startAtMainTask.Busy
 //do not publish diagnostic message when component is not used
 IF _someTaskIsActive THEN
 
-	IF(_status.State.EmgStop) THEN
+	IF(_status.State.EmergencyError) THEN
 		Messenger.Error('<#Emergency stop active#>');
 	END_IF;
-	IF(NOT _status.State.SafetyOk) THEN
-		Messenger.Warning('<#Safety Error #>');
+	IF( _status.State.HighLevelError) THEN
+		Messenger.Error('<#High level errror occured #>');
 	END_IF;
-	IF(_status.State.ProgExecError) THEN
-		Messenger.Error('<#Program execution error see robot panel for details#>');
+	IF( _status.State.LowLevelError) THEN
+		Messenger.Error('<#Low level errror occured #>');
+	END_IF;
+	IF(_status.State.CautionLevelError) THEN
+		Messenger.Warning('<#Warning level error occured #>');
 	END_IF;
   
 END_IF;
 
-IF(_status.State.Error) THEN Messenger.Error(_sb.Clear().Append('<#Drive error no #>').Append(UDINT_TO_STRING(_status.State.EventId)).Append(' |[[0]AdvancedDiagnosticMessage]|').Append('.').Append('For details see the service mode').ToString()); END_IF;
+//IF(_status.State.Error) THEN Messenger.Error(_sb.Clear().Append('<#Drive error no #>').Append(UDINT_TO_STRING(_status.State.EventId)).Append(' |[[0]AdvancedDiagnosticMessage]|').Append('.').Append('For details see the service mode').ToString()); END_IF;
 
 
 UpdateControl();]]></ST>
@@ -210,23 +213,18 @@ METHOD Restore : ITcoRestorable]]></Declaration>
         <ST><![CDATA[RestoreTasks();
 _control.ActionNo:=255;
 _control.GlobalSpeed:=0;
-_control.Interupt:=FALSE;
-_control.LoadAndStartProg:=FALSE;
-_control.LoadProg:=FALSE;
-_control.MotorOff:=FALSE;
-_control.MotorOn:=FALSE;
-_control.MotorOnAndStart:=FALSE;
+_control.ErrorReset:=FALSE;
+_control.CycleStop:=FALSE;
+//_control.AutoEnable:=FALSE;
+_control.ServoOff:=FALSE;
+_control.ServoOn:=FALSE;
+_control.GeneralPurposeReset:=FALSE;
 _control.PointNo:=0;
-_control.QuickStop:=FALSE;
-_control.ResetEmgStop:=FALSE;
-_control.ResetError:=FALSE;
-_control.SoftStop:=FALSE;
-_control.StartAtMain:=FALSE;
-_control.StartProgram:=FALSE;
-_control.StopCycle:=FALSE;
-_control.StopInstruction:=FALSE;
-_control.StopProgram:=FALSE;
-_control.LimitSpeed := FALSE;
+//_control.OperationEnable:=FALSE;
+_control.OverideSpecifications:=FALSE;
+_control.ProgramReset:=FALSE;
+_control.Start:=FALSE;
+_control.Stop:=FALSE;
 _control.ToolNo:=0;
 _control.WorkobjectNo:=0;
 _control.PointNo:=0;
@@ -472,24 +470,20 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[//SYSTEM OUTPUTS
 index:=0;
-inoData.Out.Outputs[index].0	:=		_control.Interupt;    
-inoData.Out.Outputs[index].1	:=		_control.LoadProg;    
-inoData.Out.Outputs[index].2 	:= 		_control.LoadAndStartProg; 
-inoData.Out.Outputs[index].3 	:= 		_control.MotorOff;
-inoData.Out.Outputs[index].4 	:= 		_control.MotorOn;   
-inoData.Out.Outputs[index].5 	:= 		_control.MotorOnAndStart; 
-inoData.Out.Outputs[index].6 	:= 		_control.ResetEmgStop;    
-inoData.Out.Outputs[index].7 	:= 		_control.ResetError; 
+inoData.Out.Outputs[index].0	:=		_control.OperationEnable;    
+inoData.Out.Outputs[index].1	:=		_control.AutoEnable;    
+inoData.Out.Outputs[index].2 	:= 		_control.Start; 
+inoData.Out.Outputs[index].3 	:= 		_control.Stop;
+inoData.Out.Outputs[index].4 	:= 		_control.ProgramReset;   
+inoData.Out.Outputs[index].5 	:= 		_control.ErrorReset; 
+inoData.Out.Outputs[index].6 	:= 		_control.CycleStop;    
+inoData.Out.Outputs[index].7 	:= 		_control.ServoOff; 
 
 index:=1;
-inoData.Out.Outputs[index].0 	:= 		_control.StartProgram;    
-inoData.Out.Outputs[index].1 	:= 		_control.StartAtMain;    
-inoData.Out.Outputs[index].2 	:= 		_control.StopProgram;    
-inoData.Out.Outputs[index].3 	:= 		_control.QuickStop;    
-inoData.Out.Outputs[index].4 	:= 		_control.SoftStop;    
-inoData.Out.Outputs[index].5 	:= 		_control.StopCycle;    
-inoData.Out.Outputs[index].6 	:= 		_control.StopInstruction;    
-inoData.Out.Outputs[index].7 	:= 		_control.LimitSpeed;    
+inoData.Out.Outputs[index].0 	:= 		_control.ServoOn;    
+inoData.Out.Outputs[index].1 	:= 		_control.GeneralPurposeReset;    
+inoData.Out.Outputs[index].2 	:= 		_control.OverideSpecifications;    
+ 
 
 
 	
@@ -598,24 +592,23 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[//SYSTEM INPUTS
 index:=0;
-_status.State.AutoOn := inoData.In.Inputs[index].0;
-_status.State.CycleOn := inoData.In.Inputs[index].1;
-_status.State.EmgStop := inoData.In.Inputs[index].2;
-_status.State.Error := inoData.In.Inputs[index].3;
-_status.State.MoveActive := inoData.In.Inputs[index].4;
-_status.State.MoveInactive := inoData.In.Inputs[index].5;
-_status.State.MotorOff := inoData.In.Inputs[index].6;
-_status.State.MotorOn := inoData.In.Inputs[index].7;
+_status.State.OperationEnable := inoData.In.Inputs[index].0;
+_status.State.AutoEnable := inoData.In.Inputs[index].1;
+_status.State.Start := inoData.In.Inputs[index].2;
+_status.State.Stop := inoData.In.Inputs[index].3;
+_status.State.ProgramReset := inoData.In.Inputs[index].4;
+_status.State.ErrorReset := inoData.In.Inputs[index].5;
+_status.State.CycleStop := inoData.In.Inputs[index].6;
+_status.State.ServoOff := inoData.In.Inputs[index].7;
 
 index:=1;
-_status.State.MotorOffState := inoData.In.Inputs[index].0;
-_status.State.MotorOnState := inoData.In.Inputs[index].1;
-_status.State.ProgExecError := inoData.In.Inputs[index].2;
-_status.State.SafetyOk := inoData.In.Inputs[index].3;
-_status.State.SystemInputBusy := inoData.In.Inputs[index].4;
-_status.State.PpMoved := inoData.In.Inputs[index].5;
-_status.State.MotionSupervision := inoData.In.Inputs[index].6;
-_status.State.BatteryLow := inoData.In.Inputs[index].7;
+_status.State.ServoOn := inoData.In.Inputs[index].0;
+_status.State.HighLevelError := inoData.In.Inputs[index].1;
+_status.State.LowLevelError := inoData.In.Inputs[index].2;
+_status.State.CautionLevelError := inoData.In.Inputs[index].3;
+_status.State.EmergencyError := inoData.In.Inputs[index].4;
+_status.State.RcReady := inoData.In.Inputs[index].5;
+_status.State.BatteryLow := inoData.In.Inputs[index].6;
 
 
 //Area/positions flags this  should be obsolete because Zones and InPosition is used as byte below
@@ -642,14 +635,14 @@ _status.State.Tool_4_Extend := inoData.In.Inputs[index].7;
 
 //Safety signals
 index:=4;
-_status.State.AutoStop_1 := inoData.In.Inputs[index].0;
-_status.State.AutoStop_2 := inoData.In.Inputs[index].1;
-_status.State.EmergencyStop_1 := inoData.In.Inputs[index].2;
-_status.State.EmergencyStop_2 := inoData.In.Inputs[index].3;
-_status.State.GeneralStop_1 := inoData.In.Inputs[index].4;
-_status.State.GeneralStop_2 := inoData.In.Inputs[index].5;
-_status.State.Enable_1 := inoData.In.Inputs[index].6;
-_status.State.Enable_2 := inoData.In.Inputs[index].7;
+//_status.State.AutoStop_1 := inoData.In.Inputs[index].0;
+//_status.State.AutoStop_2 := inoData.In.Inputs[index].1;
+//_status.State.EmergencyStop_1 := inoData.In.Inputs[index].2;
+//_status.State.EmergencyStop_2 := inoData.In.Inputs[index].3;
+//_status.State.GeneralStop_1 := inoData.In.Inputs[index].4;
+//_status.State.GeneralStop_2 := inoData.In.Inputs[index].5;
+//_status.State.Enable_1 := inoData.In.Inputs[index].6;
+//_status.State.Enable_2 := inoData.In.Inputs[index].7;
 
 index:=5;
 _status.State.Zone:= inoData.In.Inputs[index];
@@ -734,13 +727,13 @@ _bytes:=TcoUtilities.TcoBytesToDint (inFormat:=TcoUtilities.eTcoDataFormat.Littl
 
 _status.State.Coordinates.Rz:=(DINT_TO_REAL(_bytes)/10000.0)-360.0;
 
-index:=44;
-_status.State.EventId:=TcoUtilities.TcoBytesToUDint (inFormat:=TcoUtilities.eTcoDataFormat.LittleEndian,
-															inByte0:= inoData.In.Inputs[index],
-															inByte1:= inoData.In.Inputs[index+1],
-															inByte2:= inoData.In.Inputs[index+2],
-															inByte3:= inoData.In.Inputs[index+3]);
-
+//index:=44;
+//_status.State.EventId:=TcoUtilities.TcoBytesToUDint (inFormat:=TcoUtilities.eTcoDataFormat.LittleEndian,
+//															inByte0:= inoData.In.Inputs[index],
+//															inByte1:= inoData.In.Inputs[index+1],
+//															inByte2:= inoData.In.Inputs[index+2],
+//															inByte3:= inoData.In.Inputs[index+3]);
+//
 ]]></ST>
       </Implementation>
     </Method>

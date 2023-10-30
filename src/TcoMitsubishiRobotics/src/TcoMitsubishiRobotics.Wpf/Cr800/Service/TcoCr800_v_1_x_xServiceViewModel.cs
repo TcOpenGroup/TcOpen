@@ -12,10 +12,10 @@ using Vortex.Presentation.Wpf;
 
 namespace TcoMitsubishiRobotics
 {
-    public class TcoIrc5_v_1_x_xServiceViewModel : TcoMitsubishiRoboticsBaseServiceViewModel<TcoCr800_v_1_x_x>
+    public class TcoCr800_v_1_x_xServiceViewModel : TcoMitsubishiRoboticsBaseServiceViewModel<TcoCr800_v_1_x_x>
     {
 
-        public TcoIrc5_v_1_x_xServiceViewModel():base()
+        public TcoCr800_v_1_x_xServiceViewModel():base()
         {
            
 

@@ -26,7 +26,7 @@ namespace TcoMitsubishiRobotics
         {
             if (DesignerProperties.GetIsInDesignMode(this))
             {
-                this.DataContext = new TcoIrc5_v_1_x_xServiceViewModel();
+                this.DataContext = new TcoCr800_v_1_x_xServiceViewModel();
             }
 
             InitializeComponent();

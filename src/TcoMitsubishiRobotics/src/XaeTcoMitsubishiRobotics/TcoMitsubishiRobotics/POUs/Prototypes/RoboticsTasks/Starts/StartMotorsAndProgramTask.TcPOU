@@ -29,58 +29,84 @@ IF Execute() THEN
 		END_IF
 
 	END_IF
+	
+	
 	IF _progress = 1 THEN
 	
-		_varInfo :=__VARINFO( inoStatus.State.AutoOn);                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.AutoOn).Warning(_sb.Clear().Append('<#Waiting for Auto signal! #>').Append(_varInfo.Symbol).ToString());
-		Messenger.Warning('<#Robot is not in Auto#>');
-		IF  inoStatus.State.AutoOn THEN
+		inoControl.AutoEnable:=TRUE;
+		_varInfo :=__VARINFO( inoStatus.State.AutoEnable);                                                
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.AutoEnable).Warning(_sb.Clear().Append('<#Waiting for Auto signal! #>').Append(_varInfo.Symbol).ToString());
+		IF  inoStatus.State.AutoEnable THEN
+			_progress := _progress + 1;
+		END_IF;
+	END_IF;
+	
+	IF _progress = 2 THEN
+		inoControl.OperationEnable:=TRUE;
+		_varInfo :=__VARINFO( inoStatus.State.OperationEnable);                                                
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.OperationEnable).Warning(_sb.Clear().Append('<#Waiting for Operation enable signal! #>').Append(_varInfo.Symbol).ToString());
+		IF  inoStatus.State.OperationEnable THEN
 			_progress := _progress + 1;
 		END_IF;
 	END_IF;
 	
 	
-	IF _progress = 2 THEN	
+	
+	IF _progress =3 THEN	
 		Messenger.Debug('<#Robot Error Reset#>');
-		inoControl.ResetError := inoStatus.State.Error AND _blink.outQ;
-		IF NOT inoStatus.State.Error THEN
-			inoControl.ResetError:=FALSE;
+		inoControl.ErrorReset := inoStatus.State.ErrorReset AND _blink.outQ;
+		IF NOT inoStatus.State.ErrorReset THEN
+			inoControl.ErrorReset:=FALSE;
 			_progress := _progress + 1;
 		END_IF
 	END_IF;
+
 	
-	IF _progress = 3 THEN	
+	
+	IF _progress = 4 THEN	
 		Messenger.Debug('<#Robot Emergency Stop Reset#>');
-		inoControl.ResetEmgStop := inoStatus.State.EmgStop AND _blink.outQ;
-		IF NOT inoStatus.State.EmgStop THEN
-			inoControl.ResetEmgStop:=FALSE;
+		inoControl.ErrorReset := inoStatus.State.EmergencyError AND _blink.outQ;
+		IF NOT inoStatus.State.EmergencyError THEN
+			inoControl.ErrorReset:=FALSE;
 			_progress := _progress + 1;
 		END_IF
 	END_IF;
 		
 	
-	IF _progress = 4 THEN	
-		IF inoStatus.State.Error THEN 
+	IF _progress = 5 THEN	
+		IF inoStatus.State.HighLevelError OR inoStatus.State.LowLevelError OR inoStatus.State.CautionLevelError OR  inoStatus.State.EmergencyError THEN 
 			_progress := 1;
 		END_IF
-		_varInfo :=__VARINFO( inoStatus.State.MotorOnState);                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.MotorOnState).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
-		_varInfo :=__VARINFO( inoStatus.State.CycleOn);                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.CycleOn).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
-		_varInfo :=__VARINFO( inoStatus.State.Error);                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Error).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
+		_varInfo :=__VARINFO( inoStatus.State.ServoOn);                                                
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.ServoOn).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
+		_varInfo :=__VARINFO( inoStatus.State.ErrorReset);                                                
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.ErrorReset).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
 	
-		inoControl.MotorOnAndStart:=_blink.outQ;	
-		IF inoStatus.State.MotorOnState AND inoStatus.State.CycleOn AND NOT inoStatus.State.Error THEN
-			 inoControl.MotorOnAndStart:=FALSE;
+		inoControl.ServoOn:=_blink.outQ;	
+		IF inoStatus.State.ServoOn AND NOT inoStatus.State.ErrorReset THEN
+			 inoControl.ServoOn:=FALSE;
 			_progress := _progress + 1;
+		END_IF
+	END_IF;		
+	IF _progress = 6 THEN	
+				IF inoStatus.State.HighLevelError OR inoStatus.State.LowLevelError OR inoStatus.State.CautionLevelError OR  inoStatus.State.EmergencyError THEN 
+			_progress := 1;
+		END_IF
+		inoControl.Start:=_blink.outQ;
+		_varInfo :=__VARINFO( inoStatus.State.Start);                                                
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Start).Warning(_sb.Clear().Append('<#Waiting for program running signal! #>').Append(_varInfo.Symbol).ToString());
+		
+				
+		IF  inoStatus.State.Start AND NOT inoStatus.State.ErrorReset THEN
+				inoControl.Start:=FALSE;
 		END_IF
 	END_IF;		
 	
 	
 	
 	
-    DoneWhen(inoStatus.State.CycleOn AND inoStatus.State.MotorOnState AND NOT inoStatus.State.Error);
+	
+    DoneWhen(inoStatus.State.ServoOn AND inoStatus.State.Start AND NOT inoStatus.State.ErrorReset);
     CallTimers(TRUE);
 	
 	THIS^.ThrowWhen(_errorTimer.Q );

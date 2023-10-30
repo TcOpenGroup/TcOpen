@@ -57,7 +57,7 @@ VAR
     _stopMovementsAndProgramTask : StopMovementsAndProgramTask(THIS^);
 	
 	{attribute addProperty Name "<#Stop program#>"}
-    _stopProgramTask : StopMovementsAndProgramTask(THIS^);
+    _stopProgramTask : StopProgramTask(THIS^);
 	
 	{attribute addProperty Name "<#Stop motors#>"}
     _stopMotorsTask : StopMotorsTask(THIS^);
