@@ -69,34 +69,33 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services
 
         public async Task AcknowledgeAllMessages()
         {
-            //List<PlainTcoMessage> messagesToUpdate = new List<PlainTcoMessage>();
+            var messageDisplay = MessageDisplay.ToList();
+            // Get the list of messages that are still pinned after setting them to false.
+            var stillPinnedMessages = await _messageProcessingHelper.GetStillPinnedMsgsAfterSettingItFalse(MessageDisplay.ToList());
 
-            //foreach (var message in MessageDisplay.Where(m => m.Pinned)) 
-            //    if (message != null)
-            //    {
-            //        await GetListofStillActiveMessages(message);
-            //    }
-            //}
+            // Determine which messages from MessageDisplay are not in the stillPinnedMessages list.
+            var messagesToAcknowledge = messageDisplay
+                                            .Where(x => !stillPinnedMessages.Any(m => m.Identity == x.Identity && m.MessageDigest == x.MessageDigest));
 
-            //var filteredActiveMessages = StillActiveMessagesAfterPinnedTest;
+            // Convert PlainTcoMessage to MongoDbLogItem for the bulk update method.
+            var mongoDbMessagesToAcknowledge = new List<MongoDbLogItem>(); 
+            foreach (var message in messagesToAcknowledge)
+            {
+                var mongoDbLogItemId = await _mongoDbHelper.GetMongoDbLogItemIdFromPlainTcoMessage(message);
+                if (mongoDbLogItemId.HasValue)
+                {
+                    var mongoDbMessage = new MongoDbLogItem
+                    {
+                        Id = mongoDbLogItemId.Value,
+                    };
+                    mongoDbMessagesToAcknowledge.Add(mongoDbMessage);
+                }
+            }
 
-            //foreach (var message in MessagesInDbFiltered)
-            //{
-            //    var identity = ExtractIdentityFromRenderedMessage(message.RenderedMessage);
-            //    if (!identity.HasValue) continue;
-
-            //    bool isMessageAcknowledged = filteredActiveMessages.Any(x =>
-            //        x.Identity == (ulong)identity.Value &&
-            //        x.MessageDigest == message.Properties.sender.Payload.MessageDigest
-            //    );
-
-            //    if (isMessageAcknowledged && MessagesReadyToAck != null)
-            //    {
-            //        MessagesReadyToAck.Remove(message);
-            //    }
-            //}
-            //await BulkUpdateTimestampAcknowledgedAsync();
+            // Bulk update the timestamp for all messages that are ready to be acknowledged.
+            await _mongoDbHelper.BulkUpdateTimestampAcknowledgedAsync(mongoDbMessagesToAcknowledge);
         }
+
 
         public async Task AcknowledgeSingleMessage(ObjectId id)
         {
@@ -104,12 +103,13 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services
 
             var messageFromId = await _mongoDbHelper.GetPlainTcoMessageFromId(id, MessageDisplay);
             var  messageStillPinned = await _messageProcessingHelper.GetStillPinnedSingleMsgAfterSettingItFalse(messageFromId);
-
-            if (messageStillPinned != null )
+            if (messageStillPinned != null)
             {
-                Console.WriteLine($"Still Active Message: {id}.");
-                return;
-
+                var messageStillPinned2 = await _messageProcessingHelper.GetStillPinnedSingleMsgAfterSettingItFalse(messageFromId);
+                if (messageStillPinned2 != null)
+                {
+                    return;
+                }
             }
             var result = await _mongoDbHelper.UpdateTimeStampAcknowledgeAsync(id, update);
         }
@@ -145,7 +145,7 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services
                         messageToAck.Add(message);
                     }
                 }
-                //await _mongoDbHelper.BulkUpdateTimestampAcknowledgedAsync(messageToAck);
+                await _mongoDbHelper.BulkUpdateTimestampAcknowledgedAsync(messageToAck);
             }
         }
     }

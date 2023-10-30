@@ -7,6 +7,7 @@ using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping;
 using global::TcoCore;
 using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services;
 using MongoDB.Bson;
+using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Helper;
 
 namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.MessagesTabs
 {
@@ -35,10 +36,11 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.MessagesTabs
 
         private eMessageCategory DropDownSelectedCategory { get; set; }
 
-        private int _itemsPerPage = 5;
+        private int _itemsPerPage = 15;
         int _currentPage = 1;
         int _totalPages = 10;
         private IEnumerable<MongoDbLogItem> _messagesToDisplay = new List<MongoDbLogItem>();
+        private long TotalCount { get; set; }
 
     protected override async Task OnInitializedAsync()
         {
@@ -61,18 +63,20 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.MessagesTabs
             DateTime? endDate = DateTime.Now;
             string keyword = "";
             eMessageCategory category = DropDownSelectedCategory; // Example category
-            int _depthValue = DepthValue;
+            int depthValue = DepthValue;
 
-            var result = await DataService.GetDataAsycForActive(_itemsPerPage, _currentPage, category, _depthValue, startDate, endDate, keyword);
+            var result = await DataService.GetDataAsycForActive(_itemsPerPage, _currentPage, category, depthValue, startDate, endDate, keyword);
 
-            List<MongoDbLogItem> filteredItems = result.messages;
-            long totalCount = result.count;
-            _totalPages = (int)Math.Ceiling((double)totalCount / _itemsPerPage);
+            TotalCount = result.count;
+            _totalPages = (int)Math.Ceiling((double)TotalCount / _itemsPerPage);
             if (_totalPages < 1)
             {
                 _totalPages = 1;
             }
-            _messagesToDisplay = result.messages;
+
+            var _messagesWithDepthValue = result.messages.Where(x => x.DepthValue <= depthValue).ToList();
+
+            _messagesToDisplay = ExtractMessageFromTemplateText.ExtractMessageWithoutBraces(_messagesWithDepthValue);
         }
 
         private async Task AutoAcknowledgeMessages(IEnumerable<MongoDbLogItem> messages)

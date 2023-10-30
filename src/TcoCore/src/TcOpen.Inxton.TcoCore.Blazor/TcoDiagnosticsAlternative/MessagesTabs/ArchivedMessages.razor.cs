@@ -33,9 +33,11 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.MessagesTabs
 
         private eMessageCategory DropDownSelectedCategory { get; set; }
 
-        private int _itemsPerPage = 6;
+        private string Keyword { get; set; } = "";
+        private int _itemsPerPage = 15;
         int _currentPage = 1;
         int _totalPages = 10;
+        public long TotalCount { get; set; }
         private IEnumerable<MongoDbLogItem> _messagesToDisplayArchive = new List<MongoDbLogItem>();
 
         protected override async Task OnInitializedAsync()
@@ -57,19 +59,20 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.MessagesTabs
 
             DateTime? startDate = DateTime.Now.AddDays(-7); // Example: 7 days ago
             DateTime? endDate = DateTime.Now;
-            string keyword = "";
+            string keyword = Keyword;
             eMessageCategory category = DropDownSelectedCategory; // Example category
             int _depthValue = DepthValue;
 
             var result = await DataService.GetDataAsyncForArchive(_itemsPerPage, _currentPage, category, _depthValue, startDate, endDate, keyword);
 
-            long totalCount = result.count;
-            _totalPages = (int)Math.Ceiling((double)totalCount / _itemsPerPage);
+            TotalCount = result.count;
+            _totalPages = (int)Math.Ceiling((double)TotalCount / _itemsPerPage);
             if (_totalPages < 1)
             {
                 _totalPages = 1;
             }
-            _messagesToDisplayArchive = result.messages;
+
+            _messagesToDisplayArchive = result.messages.Where(x => x.DepthValue <= _depthValue).ToList();
         }
 
     }

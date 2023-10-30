@@ -68,7 +68,5 @@ namespace TcoCore
                 SetProperty(ref _diagnosticsRunning, value);
             }
         }
-
-   
     }
 }

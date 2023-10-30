@@ -32,10 +32,10 @@ namespace TcoCore
         public string DiagnosticsStatus { get; set; } = "Diagnostics is not running";
 
         private string ActiveMessagesCount() => "Aktive Messages : " + ViewModel._tcoObject.MessageHandler.ActiveMessagesCount;
-        private string DiagnosticsMessage() => "Diag depth : " + DepthValue;
+        private string DiagnosticsMessage() => "Diag depth : " + InitialDepthValue;
 
         private int _maxDiagnosticsDepth = 20;
-        private static int _depthValue;
+        public static int InitialDepthValue { get; set; }
         //public static int SetDefaultDepth(int item) => _depthValue = item;
 
         //private static eMessageCategory _minMessageCategoryFilter;
@@ -45,6 +45,11 @@ namespace TcoCore
         public static void SetMinMessageCategoryFilter(eMessageCategory category)
         {
                 MinMessageCategoryFilter = category;
+        }
+
+        public static void SetDefaultDepthValue(int depthValue)
+        {
+            InitialDepthValue = depthValue;
         }
 
         public bool GetMessageStatusPinned(MongoDbLogItem message)
@@ -59,7 +64,7 @@ namespace TcoCore
         /// SetsUpdate Intervall via Consuming App
         /// </summary>
         public static int SetDiagnosticsUpdateInterval(int value) => _diagnosticsUpdateInterval = value;
-        private static int _diagnosticsUpdateInterval = 200;
+        private static int _diagnosticsUpdateInterval =500;
         private Timer _messageUpdateTimer;
 
         protected override async Task OnInitializedAsync()
@@ -117,25 +122,16 @@ namespace TcoCore
             });
         }
 
-        public int DepthValue
-        {
-            get
-            {
-                if (_depthValue == 0)
-                    _depthValue = ViewModel._tcoObject.MessageHandler.DiagnosticsDepth;
-                return _depthValue;
-            }
-            set
-            {
-                _depthValue = value;
-                ViewModel._tcoObject.MessageHandler.DiagnosticsDepth = value;
-            }
-        }
-
         public void Dispose()
         {
             _messageUpdateTimer?.Dispose();
         }
 
+        private string _activeTab = "activeMessages"; // Default active tab
+
+        private void SwitchTab(string tabName)
+        {
+            _activeTab = tabName;
+        }
     }
 }

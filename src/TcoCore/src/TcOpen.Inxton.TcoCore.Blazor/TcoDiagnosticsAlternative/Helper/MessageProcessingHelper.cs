@@ -16,8 +16,8 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Helper
 {
     class MessageProcessingHelper 
     {
-
-        static int delayForSettingPinnedFalse = 20;
+        // not sure, why this has to be so high, otherwise the Message get not Acknowledged first Button Push
+        static int delayForSettingPinnedFalse = 500;
 
         public MessageProcessingHelper()
         {

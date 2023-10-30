@@ -42,18 +42,18 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping
 
         private static readonly Dictionary<eMessageCategory, string> ColorMapping = new Dictionary<eMessageCategory, string>
     {
-        { eMessageCategory.Trace, "bg-trace" },
-        { eMessageCategory.Debug, "bg-debug" },
-        { eMessageCategory.Info, "bg-info" },
-        { eMessageCategory.TimedOut, "bg-timedout" },
-        { eMessageCategory.Notification, "bg-notification" },
-        { eMessageCategory.Warning, "bg-warning" },
-        { eMessageCategory.Error, "bg-error" },
-        { eMessageCategory.ProgrammingError, "bg-programmingerror" },
-        { eMessageCategory.Critical, "bg-critical" },
-        { eMessageCategory.Fatal, "bg-fatal" },
-        { eMessageCategory.Catastrophic, "bg-catastrophic" }
+        { eMessageCategory.Trace, "icon-bg-primary" },
+        { eMessageCategory.Debug, "icon-bg-secondary" },
+        { eMessageCategory.Info, "icon-bg-info" },
+        { eMessageCategory.Warning, "icon-bg-warning" },
+        { eMessageCategory.Error, "icon-bg-danger" },
+        { eMessageCategory.ProgrammingError, "icon-bg-danger" },
+        { eMessageCategory.Critical, "icon-bg-danger" },
+        { eMessageCategory.Fatal, "icon-bg-fatal" },
+        { eMessageCategory.Catastrophic, "icon-bg-fatal" }
     };
+    
+
 
         public static string GetBackgroundColorForCategory(string level)
         {

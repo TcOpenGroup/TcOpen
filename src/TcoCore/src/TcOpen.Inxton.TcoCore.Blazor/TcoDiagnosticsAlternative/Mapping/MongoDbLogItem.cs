@@ -7,10 +7,15 @@ using MongoDB.Bson.Serialization.Serializers;
 using System;
 using System.Collections.Generic;
 
+using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Helper;
+
 namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping
 {
     public class MongoDbLogItem
     {
+
+            [BsonIgnore] // This ensures MongoDB doesn't try to serialize this property
+            public int DepthValue => DepthValueExtractor.ExtractFromParentSymbol(Properties?.sender?.Payload?.ParentSymbol);
 
         static MongoDbLogItem()
         {
@@ -26,6 +31,7 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping
                 // Handle or log the exception as needed
             }
         }
+
 
         [BsonId]
         public ObjectId Id { get; set; }
@@ -161,6 +167,7 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping
             }
         }
     }
+
 }
 
 

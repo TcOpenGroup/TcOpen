@@ -1,62 +1,58 @@
 ﻿
-@using MongoDB.Bson
+@using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Helper
 @using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping
 @using global::TcoCore
 @using BlazorStrap
 
-<h3>ArchiveMessages</h3>
+  <BSRow class="d-flex m-3" Justify="Justify.Center" Align="Align.Center">
+    <BSCol Column="1">Messages: @TotalCount </BSCol>
+    <BSCol Column="2">
+        <BSInput InputType="InputType.Select" @bind-Value="@DropDownSelectedCategory" class="w-100">
+            @foreach (var category in Enum.GetValues(typeof(eMessageCategory)))
+            {
+                <option value="@category">@category</option>
+            }
+        </BSInput>
+    </BSCol>
+    <BSCol Column="3">
+        <BSInput InputType="InputType.Text" @bind-Value="@Keyword" @oninput="GetDataFilteredAsyncForArchive" placeholder="Enter keyword to filter..." class="w-100"/>
+    </BSCol>
+    <BSCol ColumnSmall="1">
+        <BSLabel>Depth Value: @DepthValue</BSLabel>
+    </BSCol>
+    <BSCol Column="4">
+        <BSInput InputType="InputType.Range" @bind-Value="DepthValue" min="1" max="@MaxDiagnosticsDepth" class="w-100"/>
+    </BSCol>
+</BSRow>
 
-
-<BSContainer>
-  <BSRow class="d-flex align-items-center">
-        <BSCol md="6">
-            <BSInput InputType="InputType.Select" @bind-Value="@DropDownSelectedCategory">
-                @foreach (var category in Enum.GetValues(typeof(eMessageCategory)))
-                {
-                    <option value="@category">@category</option>
-                }
-            </BSInput>
-        </BSCol>
-        <BSCol md="6">
-            <BSLabel>Depth Value: @DepthValue</BSLabel>
-            <BSInput InputType="InputType.Range" @bind-Value="DepthValue" min="1" max="@MaxDiagnosticsDepth" />
-        </BSCol>
-    </BSRow>
-
-
-
-    <BSTable Striped Bordered Hover>
+    <BSTable  IsBordered="true" IsStriped="true" table-layout >
         <thead>
             <tr>
-                <th>UTC Timestamp</th>
+                <th>Timestamp</th>
                 <th>Timestamp Acknowledged</th>
-                <th>Rendered Message</th>
+                <th >Icon</th>
                 <th>Level</th>
-                <th>Message Template Text</th>
-                <th>Sender Parent Symbol</th>
+                <th>Message</th>
+                <th>Message Source</th>
             </tr>
         </thead>
         <tbody>
             @if (_messagesToDisplayArchive != null)
             {
-                @foreach (var message in _messagesToDisplayArchive)
+                foreach (var message in _messagesToDisplayArchive)
                 {
-                    <tr>
-                        <td>@message.UtcTimeStamp</td>
-                        <td>@(message.TimeStampAcknowledged.HasValue ? message.TimeStampAcknowledged.Value.ToString("MM/dd/yyyy HH:mm:ss") : " ")</td>
-                        <td>@message.RenderedMessage</td>
-                        <td>@message.Level</td>
-                        <td>@message.MessageTemplate?.Text</td>
-                        <td>@message.Properties?.sender?.Payload?.ParentSymbol</td>
-                    </tr>
+                    var bgColorClass = MessageCategoryMapper.GetBackgroundColorForCategory(message.Level);
+                     var icon = MessageCategoryMapper.GetIconForLevel(message.Level);
+                   <tr>
+                    <td>@message.UtcTimeStamp</td>
+                    <td>@(message.TimeStampAcknowledged.HasValue ? message.TimeStampAcknowledged.Value.ToString("MM/dd/yyyy HH:mm:ss") : " ")</td>
+                    <td class="icon-container @bgColorClass">@((MarkupString)icon)</td>
+                    <td>@message.Level</td>
+                    <td>@ExtractMessageFromTemplateText.ExtractMessageWithoutBraces(message.MessageTemplate?.Text)</td>
+                    <td>@message.Properties?.sender?.Payload?.ParentSymbol</td>
+                </tr>
                 }
             }
         </tbody>
     </BSTable>
-    <BSPagination  Align="Align.Center" Pages="@_totalPages" @bind-Value="_currentPage" />
-</BSContainer>
-
-
-
-
-
+    <BSPagination Align="Align.Center" Pages="@_totalPages" @bind-Value="_currentPage" />

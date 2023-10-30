@@ -6,7 +6,8 @@
 
 @using BlazorStrap.V5
 
-<BSNav IsTabs="true">
+
+<BSNav Justify="Justify.Center" IsTabs="true" >
     <BSNavItem>
         <TabLabel>Active Messages</TabLabel>
         <TabContent>
@@ -14,7 +15,7 @@
             DataService="DataService"
             MaxDiagnosticsDepth="_maxDiagnosticsDepth" 
             GetMessageStatusPinned="GetMessageStatusPinned"
-            DepthValue="@DepthValue"
+            InitalDepthValue="@InitialDepthValue"
             InitialCategory="@MinMessageCategoryFilter"
         />
 
@@ -27,18 +28,9 @@
             DataService="DataService"
             MaxDiagnosticsDepth="_maxDiagnosticsDepth" 
             GetMessageStatusPinned="GetMessageStatusPinned"
-            DepthValue="@DepthValue"
+            InitalDepthValue="@InitialDepthValue"
             InitialCategory="@MinMessageCategoryFilter"
         />
         </TabContent>
     </BSNavItem>
 </BSNav>
-
-@code {
-    private string _activeTab = "activeMessages"; // Default active tab
-
-    private void SwitchTab(string tabName)
-    {
-        _activeTab = tabName;
-    }
-}
