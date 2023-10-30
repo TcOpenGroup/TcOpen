@@ -26,14 +26,14 @@
             <BSInput InputType="InputType.Range" @bind-Value="DepthValue" min="1" max="@MaxDiagnosticsDepth" />
         </BSCol>
     </BSRow>
-<BSTable IsBordered="true">
+<BSTable IsBordered="true" IsStriped="true">
     <thead>
         <tr>
             <th>Timestamp</th>
             <th>Acknowledged Timestamp</th>
             <th>Icon</th>
-            <th>Severity Level</th>
-            <th>Message Content</th>
+            <th>Level</th>
+            <th>Message</th>
             <th>Message Source</th>
             <th>Cycle </th>
             <th>Actions</th>

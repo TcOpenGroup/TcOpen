@@ -32,6 +32,31 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping
             }
         }
 
+        public void AdjustForDaylightSavingTime()
+        {
+            TimeZoneInfo localZone = TimeZoneInfo.Local;
+
+            if (localZone.IsDaylightSavingTime(UtcTimeStamp))
+            {
+                // Summertime
+                UtcTimeStamp = UtcTimeStamp.AddHours(2);
+                if (TimeStampAcknowledged.HasValue)
+                {
+                    TimeStampAcknowledged = TimeStampAcknowledged.Value.AddHours(2);
+                }
+            }
+            else
+            {
+                // Wintertime
+                UtcTimeStamp = UtcTimeStamp.AddHours(1);
+                if (TimeStampAcknowledged.HasValue)
+                {
+                    TimeStampAcknowledged = TimeStampAcknowledged.Value.AddHours(1);
+                }
+            }
+        }
+
+
 
         [BsonId]
         public ObjectId Id { get; set; }
@@ -167,6 +192,7 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Mapping
             }
         }
     }
+
 
 }
 

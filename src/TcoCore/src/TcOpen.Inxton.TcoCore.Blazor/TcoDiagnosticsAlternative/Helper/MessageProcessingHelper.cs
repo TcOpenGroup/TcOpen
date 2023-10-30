@@ -76,5 +76,20 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Helper
 
             return null;
         }
+
+        public static DateTime AdjustForDaylightSavingTime(DateTime date)
+        {
+            TimeZoneInfo localZone = TimeZoneInfo.Local;
+            if (localZone.IsDaylightSavingTime(date))
+            {
+                // Summertime
+                return date.AddHours(2);
+            }
+            else
+            {
+                // Wintertime
+                return date.AddHours(1);
+            }
+        }
     }
 }

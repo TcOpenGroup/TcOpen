@@ -33,6 +33,11 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.MessagesTabs
 
         private eMessageCategory DropDownSelectedCategory { get; set; }
 
+        private DateTime DateLower { get; set; } = new DateTime(2022, 01, 01, 12, 0, 0);
+        private DateTime DateUpper { get; set; }
+        public bool IsDisabled { get; set; }
+        public bool UseNative { get; set; }
+
         private string Keyword { get; set; } = "";
         private int _itemsPerPage = 15;
         int _currentPage = 1;
@@ -45,6 +50,7 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.MessagesTabs
            
             DropDownSelectedCategory = InitialCategory;
             DepthValue = InitalDepthValue;
+            DateUpper = DateTime.Now;
 
             await GetDataFilteredAsyncForArchive();
         }
@@ -57,10 +63,10 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.MessagesTabs
         public async Task GetDataFilteredAsyncForArchive()
         {
 
-            DateTime? startDate = DateTime.Now.AddDays(-7); // Example: 7 days ago
-            DateTime? endDate = DateTime.Now;
+            DateTime? startDate = DateLower;
+            DateTime? endDate = DateUpper;
             string keyword = Keyword;
-            eMessageCategory category = DropDownSelectedCategory; // Example category
+            eMessageCategory category = DropDownSelectedCategory;
             int _depthValue = DepthValue;
 
             var result = await DataService.GetDataAsyncForArchive(_itemsPerPage, _currentPage, category, _depthValue, startDate, endDate, keyword);
@@ -71,6 +77,8 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.MessagesTabs
             {
                 _totalPages = 1;
             }
+
+           
 
             _messagesToDisplayArchive = result.messages.Where(x => x.DepthValue <= _depthValue).ToList();
         }

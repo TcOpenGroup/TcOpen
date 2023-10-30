@@ -1,7 +1,8 @@
 ﻿
 .icon-container {
-    font-size: 1.4rem;
+    font-size: 1.8rem;
     display: flex;
+    height: 100%;
     align-items: center;
     justify-content: center;
 }
@@ -20,7 +21,7 @@ th:nth-child(3) { /* Message Content column */
 }
 
 th:nth-child(4), td:nth-child(4) { /* Message Content column */
-    width: 8%; /* Adjust as needed */
+    width: 6%; /* Adjust as needed */
 }
 
 .icon-bg-primary {
@@ -52,3 +53,4 @@ th:nth-child(4), td:nth-child(4) { /* Message Content column */
     background-color: rgba(220, 53, 69, 0.9); /* danger color at 70% opacity */
     color: #ffffff; /* white text color for contrast */
 }
+

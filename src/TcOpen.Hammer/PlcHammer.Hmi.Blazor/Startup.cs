@@ -105,7 +105,7 @@ namespace PlcHammer.Hmi.Blazor
                                         //.Enrich.With(new Serilog.Enrichers.EnvironmentNameEnricher())
                                         //.Enrich.With(new Serilog.Enrichers.EnvironmentUserNameEnricher())
                                         //.Enrich.With(new Serilog.Enrichers.MachineNameEnricher())
-                                        .MinimumLevel.Debug())) // Sets the logger configuration (default reports only to console).
+                                        .MinimumLevel.Verbose())) // Sets the logger configuration (default reports only to console).
                 .SetSecurity(SecurityManager.Manager.Service)
                 .SetEditValueChangeLogging(Entry.PlcHammer.Connector);
 
@@ -148,7 +148,7 @@ namespace PlcHammer.Hmi.Blazor
             });
 
             Entry.PlcHammer.Connector.BuildAndStart();
-            Entry.PlcHammer.TECH_MAIN._app._logger.StartLoggingMessages(TcoCore.eMessageCategory.All);
+            Entry.PlcHammer.TECH_MAIN._app._logger.StartLoggingMessages(TcoCore.eMessageCategory.Debug);
         }
 
         private static void SetUpRepositories(IRepository<PlainStation001_ProductionData> processRecipiesRepository,

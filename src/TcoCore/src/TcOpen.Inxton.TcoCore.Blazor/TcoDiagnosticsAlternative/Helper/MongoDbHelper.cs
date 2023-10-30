@@ -139,6 +139,10 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Helper
 
             var count = await collection.CountDocumentsAsync(filter);
 
+            foreach (var message in messages) {
+                message.AdjustForDaylightSavingTime();
+            }
+
             return (messages, count);
         }
 

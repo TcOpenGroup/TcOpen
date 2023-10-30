@@ -5,7 +5,6 @@
 @using BlazorStrap
 
   <BSRow class="d-flex m-3" Justify="Justify.Center" Align="Align.Center">
-    <BSCol Column="1">Messages: @TotalCount </BSCol>
     <BSCol Column="2">
         <BSInput InputType="InputType.Select" @bind-Value="@DropDownSelectedCategory" class="w-100">
             @foreach (var category in Enum.GetValues(typeof(eMessageCategory)))
@@ -17,6 +16,21 @@
     <BSCol Column="3">
         <BSInput InputType="InputType.Text" @bind-Value="@Keyword" @oninput="GetDataFilteredAsyncForArchive" placeholder="Enter keyword to filter..." class="w-100"/>
     </BSCol>
+    <BSCol ColumnSmall="2"> 
+        <TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Helper.DateTimePicker.DateTimePickerComponent 
+        @bind-DateAndTime="DateLower"
+        UseNative="UseNative"
+        IsDisabled="IsDisabled"/>
+    </BSCol>
+      <BSCol ColumnSmall="2"> 
+        <TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Helper.DateTimePicker.DateTimePickerComponent 
+        @bind-DateAndTime="DateUpper"
+        UseNative="UseNative"
+        IsDisabled="IsDisabled"/>
+    </BSCol>
+</BSRow>
+<BSRow  class="d-flex m-3" Justify="Justify.Center" Align="Align.Center">
+    <BSCol Column="1">Messages: @TotalCount </BSCol>
     <BSCol ColumnSmall="1">
         <BSLabel>Depth Value: @DepthValue</BSLabel>
     </BSCol>
@@ -25,7 +39,7 @@
     </BSCol>
 </BSRow>
 
-    <BSTable  IsBordered="true" IsStriped="true" table-layout >
+    <BSTable  IsBordered="true" IsStriped="true">
         <thead>
             <tr>
                 <th>Timestamp</th>
@@ -34,6 +48,7 @@
                 <th>Level</th>
                 <th>Message</th>
                 <th>Message Source</th>
+                <th>Cycle</th>
             </tr>
         </thead>
         <tbody>
@@ -50,6 +65,7 @@
                     <td>@message.Level</td>
                     <td>@ExtractMessageFromTemplateText.ExtractMessageWithoutBraces(message.MessageTemplate?.Text)</td>
                     <td>@message.Properties?.sender?.Payload?.ParentSymbol</td>
+                    <td>@message.Properties?.sender?.Payload?.Cycle</td>
                 </tr>
                 }
             }
