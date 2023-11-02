@@ -170,15 +170,18 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[// led signalisation
-_hasError:=_separatorTask.Error OR _stepperTask.Error OR _bufferTask.Error;
+_hasError:=_separatorTask.Error OR _stepperTask.Error OR _bufferTask.Error OR _hopperTask.Error;
 _control.GreenLed:=FALSE;
 _control.RedLed:=FALSE;
-IF _blink.IsOn AND NOT _status.ControllerInAuto  THEN
+IF  NOT _status.ControllerInAuto  THEN
 	_control.GreenLed:=TRUE;
 	_control.RedLed:=TRUE;
-ELSIF _status.ControllerInAuto AND  _status.NotEmptyFeeder THEN
+ELSIF _hasError AND _blink.IsOn  AND _status.ControllerInAuto  THEN
+	_control.RedLed:=TRUE;
+ELSIF _status.ControllerInAuto AND NOT _hasError AND _status.NotEmptyFeeder THEN
 	_control.GreenLed:=TRUE;
 ELSIF _blink.IsOn AND _status.ControllerInAuto AND NOT _status.NotEmptyFeeder THEN
+	_control.GreenLed:=TRUE;
 	_control.RedLed:=TRUE;
 END_IF
 

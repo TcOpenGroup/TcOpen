@@ -12,10 +12,10 @@ using Vortex.Presentation.Wpf;
 
 namespace TcoTixonFeeding
 {
-    public class TcoTixonPick_v_1_x_xServiceViewModel : TcoTixonFeedingBaseServiceViewModel<TcoTixonPick_v_1_x_x>
+    public class TcoTixonPickStep_v_1_x_xServiceViewModel : TcoTixonFeedingBaseServiceViewModel<TcoTixonPickStep_v_1_x_x>
     {
 
-        public TcoTixonPick_v_1_x_xServiceViewModel():base()
+        public TcoTixonPickStep_v_1_x_xServiceViewModel():base()
         {
            
 

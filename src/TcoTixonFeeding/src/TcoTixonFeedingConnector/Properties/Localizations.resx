@@ -168,23 +168,26 @@
   <data name="___Waiting_for_buffer_empty__" xml:space="preserve">
     <value>Waiting for buffer empty</value>
   </data>
-  <data name="___Start__vibratorating_and_blowing__" xml:space="preserve">
-    <value>Start  vibratorating and blowing</value>
+  <data name="___Stepper_to_home__" xml:space="preserve">
+    <value>Stepper to home</value>
   </data>
-  <data name="___Waiting_for_buffer_is_full_adn_blow_ending__" xml:space="preserve">
-    <value>Waiting for buffer is full adn blow ending</value>
+  <data name="___Stepper_to_work__" xml:space="preserve">
+    <value>Stepper to work</value>
   </data>
-  <data name="___Vib__bin_task__was_aborted___" xml:space="preserve">
-    <value>Vib. bin task  was aborted.</value>
+  <data name="___Waiting_for_buffer_full__" xml:space="preserve">
+    <value>Waiting for buffer full</value>
   </data>
-  <data name="___Vib__bin_task__finished_successfully___" xml:space="preserve">
-    <value>Vib. bin task  finished successfully.</value>
+  <data name="___Stepper_task__was_aborted___" xml:space="preserve">
+    <value>Stepper task  was aborted.</value>
   </data>
-  <data name="___Vib__bin_task_finished_with_error___" xml:space="preserve">
-    <value>Vib. bin task finished with error.</value>
+  <data name="___Stepper_task__finished_successfully___" xml:space="preserve">
+    <value>Stepper task  finished successfully.</value>
   </data>
-  <data name="___Vib__bin_task_started___" xml:space="preserve">
-    <value>Vib. bin task started.</value>
+  <data name="___Stepper_task_finished_with_error___" xml:space="preserve">
+    <value>Stepper task finished with error.</value>
+  </data>
+  <data name="___Stepper_task_started___" xml:space="preserve">
+    <value>Stepper task started.</value>
   </data>
   <data name="___Waiting_for___" xml:space="preserve">
     <value>Waiting for </value>
@@ -225,8 +228,8 @@
   <data name="___Buffer_task__" xml:space="preserve">
     <value>Buffer task</value>
   </data>
-  <data name="___Vibrating_bin_task__" xml:space="preserve">
-    <value>Vibrating bin task</value>
+  <data name="___Step_task__" xml:space="preserve">
+    <value>Step task</value>
   </data>
   <data name="___Hopper_task__" xml:space="preserve">
     <value>Hopper task</value>
@@ -234,29 +237,26 @@
   <data name="___Restore__" xml:space="preserve">
     <value>Restore</value>
   </data>
-  <data name="___Stepper_to_home__" xml:space="preserve">
-    <value>Stepper to home</value>
+  <data name="___Start__vibratorating_and_blowing__" xml:space="preserve">
+    <value>Start  vibratorating and blowing</value>
   </data>
-  <data name="___Stepper_to_work__" xml:space="preserve">
-    <value>Stepper to work</value>
+  <data name="___Waiting_for_buffer_is_full_adn_blow_ending__" xml:space="preserve">
+    <value>Waiting for buffer is full adn blow ending</value>
   </data>
-  <data name="___Waiting_for_buffer_full__" xml:space="preserve">
-    <value>Waiting for buffer full</value>
+  <data name="___Vib__bin_task__was_aborted___" xml:space="preserve">
+    <value>Vib. bin task  was aborted.</value>
   </data>
-  <data name="___Stepper_task__was_aborted___" xml:space="preserve">
-    <value>Stepper task  was aborted.</value>
+  <data name="___Vib__bin_task__finished_successfully___" xml:space="preserve">
+    <value>Vib. bin task  finished successfully.</value>
   </data>
-  <data name="___Stepper_task__finished_successfully___" xml:space="preserve">
-    <value>Stepper task  finished successfully.</value>
+  <data name="___Vib__bin_task_finished_with_error___" xml:space="preserve">
+    <value>Vib. bin task finished with error.</value>
   </data>
-  <data name="___Stepper_task_finished_with_error___" xml:space="preserve">
-    <value>Stepper task finished with error.</value>
+  <data name="___Vib__bin_task_started___" xml:space="preserve">
+    <value>Vib. bin task started.</value>
   </data>
-  <data name="___Stepper_task_started___" xml:space="preserve">
-    <value>Stepper task started.</value>
-  </data>
-  <data name="___Step_task__" xml:space="preserve">
-    <value>Step task</value>
+  <data name="___Vibrating_bin_task__" xml:space="preserve">
+    <value>Vibrating bin task</value>
   </data>
   <data name="___Blink_period__" xml:space="preserve">
     <value>Blink period</value>
@@ -297,14 +297,17 @@
   <data name="___Time_to_hopper_run___" xml:space="preserve">
     <value>Time to hopper run </value>
   </data>
+  <data name="___Separator__active___" xml:space="preserve">
+    <value>Separator  active </value>
+  </data>
   <data name="___Feeding_A___" xml:space="preserve">
     <value>Feeding A </value>
   </data>
   <data name="___Separe_component__" xml:space="preserve">
     <value>Separe component</value>
   </data>
-  <data name="___Blow__" xml:space="preserve">
-    <value>Blow</value>
+  <data name="___Blow_A__" xml:space="preserve">
+    <value>Blow A</value>
   </data>
   <data name="___Red_led__" xml:space="preserve">
     <value>Red led</value>
@@ -318,8 +321,11 @@
   <data name="___Component_is_ready__" xml:space="preserve">
     <value>Component is ready</value>
   </data>
-  <data name="___Feeder_has_component__" xml:space="preserve">
-    <value>Feeder has component</value>
+  <data name="___Tixon_controller_in_auto__" xml:space="preserve">
+    <value>Tixon controller in auto</value>
+  </data>
+  <data name="___Feeder_has_components__" xml:space="preserve">
+    <value>Feeder has components</value>
   </data>
   <data name="___Separator_in_home_position__" xml:space="preserve">
     <value>Separator in home position</value>
@@ -329,9 +335,6 @@
   </data>
   <data name="___Separator_present__" xml:space="preserve">
     <value>Separator present</value>
-  </data>
-  <data name="___Tixon_controller_in_auto__" xml:space="preserve">
-    <value>Tixon controller in auto</value>
   </data>
   <data name="___Time_when_stepper_in_work___" xml:space="preserve">
     <value>Time when stepper in work </value>
@@ -351,20 +354,23 @@
   <data name="___Error_time_Hopper___" xml:space="preserve">
     <value>Error time Hopper </value>
   </data>
-  <data name="___Shot_component__" xml:space="preserve">
-    <value>Shot component</value>
-  </data>
   <data name="___Stepper_valve__" xml:space="preserve">
     <value>Stepper valve</value>
   </data>
-  <data name="___Component_out_of_box__" xml:space="preserve">
-    <value>Component out of box</value>
+  <data name="___Separator_in_work_position__" xml:space="preserve">
+    <value>Separator in work position</value>
   </data>
   <data name="___Stepper_in_home_position__" xml:space="preserve">
     <value>Stepper in home position</value>
   </data>
   <data name="___Stepper_in_work_position__" xml:space="preserve">
     <value>Stepper in work position</value>
+  </data>
+  <data name="___Shot_component__" xml:space="preserve">
+    <value>Shot component</value>
+  </data>
+  <data name="___Component_out_of_box__" xml:space="preserve">
+    <value>Component out of box</value>
   </data>
   <data name="___Feeder_full_blow_time_after__" xml:space="preserve">
     <value>Feeder full blow time after</value>
@@ -377,8 +383,5 @@
   </data>
   <data name="___Blow_B__" xml:space="preserve">
     <value>Blow B</value>
-  </data>
-  <data name="___Separator_in_work_position__" xml:space="preserve">
-    <value>Separator in work position</value>
   </data>
 </root>

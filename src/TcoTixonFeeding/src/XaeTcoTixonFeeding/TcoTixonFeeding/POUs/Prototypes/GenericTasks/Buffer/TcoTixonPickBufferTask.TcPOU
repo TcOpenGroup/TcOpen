@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
-  <POU Name="TcoTixonBufferTask" Id="{69195fb9-0897-0eaa-2196-479e953ed90b}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcoTixonBufferTask EXTENDS TcoTixonFeedingTask
+  <POU Name="TcoTixonPickBufferTask" Id="{1f3423fb-e9bd-0f42-0fbc-88fd40aefa3b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoTixonPickBufferTask EXTENDS TcoTixonFeedingTask
 VAR_IN_OUT
-	inoConfig 	: TcoTixonGenericConfig;
+	inoConfig 	: TcoTixonGenericPickConfig;
    	inoControl 	: TcoTixonGenericControl;
 	inoStatus 	: TcoTixonGenericStatus;	
 END_VAR
@@ -37,7 +37,7 @@ IF Execute() THEN
     END_IF
   	IF _progress = 1 THEN
         Messenger.Debug('<#Waiting for buffer is Empty #>');
-        _timer(IN := NOT inoStatus.FillingSensor OR (inoStatus.SeparatorHomePos AND NOT inoStatus.SeparatorPresent),
+        _timer(IN := NOT inoStatus.FillingSensor OR (NOT inoStatus.SeparatorPresent),
             Pt := inoConfig.BufferEmptyTime);
 			
         IF _timer.Q THEN
@@ -98,7 +98,7 @@ IF THIS^.Error AND NOT _errorMessage.Pinned THEN
     THIS^.Restore();
 END_IF]]></ST>
     </Implementation>
-    <Method Name="OnAbort" Id="{6a0aa103-225a-0ff0-1024-f705a6d94be6}">
+    <Method Name="OnAbort" Id="{89775d83-6f6b-0477-2d8b-7a053e2ed6c0}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -113,7 +113,7 @@ METHOD PROTECTED OnAbort
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="OnDone" Id="{241df0b7-81f4-02a7-1f5b-9ab4f64f9c40}">
+    <Method Name="OnDone" Id="{a22fec2b-2ca5-0a5e-1f11-ed7b2a2bd701}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -131,7 +131,7 @@ IF AutoRestore THEN
 END_IF]]></ST>
       </Implementation>
     </Method>
-    <Method Name="OnError" Id="{7865d813-1fc4-0e6c-15be-224cad6b43cd}">
+    <Method Name="OnError" Id="{d3aa2a65-f7c7-0576-0c1d-387aea462eaa}">
       <Declaration><![CDATA[METHOD PROTECTED OnError
 VAR
 	description: STRING;
@@ -144,7 +144,7 @@ IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := descript
 THIS^._errorMessage.Error(_sb.Clear().Append(description).Append(' To restore acknowledge this alarm.').ToString()).Pin();]]></ST>
       </Implementation>
     </Method>
-    <Method Name="OnStart" Id="{1eebfa18-4075-0668-0834-5bb75b3bb329}">
+    <Method Name="OnStart" Id="{bf8ca941-d77c-0d42-08a1-3d1b38461945}">
       <Declaration><![CDATA[METHOD PROTECTED OnStart 
 ]]></Declaration>
       <Implementation>
@@ -153,7 +153,7 @@ THIS^._errorMessage.Error(_sb.Clear().Append(description).Append(' To restore ac
 CallTimers(FALSE);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Restore" Id="{1f561e44-1a7f-010c-22e6-694cb34d2ae8}">
+    <Method Name="Restore" Id="{35aac45d-e26b-04f6-3815-6c2f7757386c}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>

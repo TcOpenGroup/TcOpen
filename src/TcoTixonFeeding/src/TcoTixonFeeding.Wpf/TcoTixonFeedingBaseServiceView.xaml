@@ -31,7 +31,7 @@
                 </WrapPanel.Resources>
 
                 <WrapPanel  DataContext="{Binding _status.ComponentReady }"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
-                    <materialdesign:PackIcon Kind="NotificationsActive"  Foreground="{StaticResource Notification}"  VerticalAlignment="Center"/>
+                    <materialdesign:PackIcon Kind="Check"  Foreground="{StaticResource Notification}"  VerticalAlignment="Center"/>
                     <TextBlock   Text="{x:Static p:strings.ComponentReady}"  Foreground="{StaticResource Notification}"/>
                 </WrapPanel>
                 <WrapPanel  DataContext="{Binding _status.ControllerInAuto }"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}" Margin=" 5,0">
@@ -83,8 +83,8 @@
                         <GroupBox Padding="10" Header="{Binding _control.AttributeName}">
                             <vortex:RenderableContentControl  DataContext="{Binding _control}" PresentationType="ControlSlim" />
                         </GroupBox>
-                        
-                        <GroupBox Padding="10" Header="TASKS">
+
+                        <GroupBox Padding="10" Header="{x:Static p:strings.Tasks}" >
                             <WrapPanel Orientation="Vertical">
 
                                 <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _separatorTask}" />

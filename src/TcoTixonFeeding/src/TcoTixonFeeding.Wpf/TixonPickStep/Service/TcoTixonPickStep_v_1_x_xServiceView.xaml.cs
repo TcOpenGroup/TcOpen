@@ -20,13 +20,13 @@ using TcOpen.Inxton.Wpf;
 namespace TcoTixonFeeding
 {
 
-    public partial class TcoTixonPick_v_1_x_xServiceView : UserControl
+    public partial class TcoTixonPickStep_v_1_x_xServiceView : UserControl
     {
-        public TcoTixonPick_v_1_x_xServiceView()
+        public TcoTixonPickStep_v_1_x_xServiceView()
         {
             if (DesignerProperties.GetIsInDesignMode(this))
             {
-                this.DataContext = new TcoTixonPick_v_1_x_xServiceViewModel();
+                this.DataContext = new TcoTixonPickStep_v_1_x_xServiceViewModel();
             }
 
             InitializeComponent();
