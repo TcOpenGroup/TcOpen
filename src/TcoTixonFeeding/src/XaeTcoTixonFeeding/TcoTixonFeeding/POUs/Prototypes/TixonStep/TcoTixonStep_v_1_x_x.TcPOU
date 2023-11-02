@@ -11,6 +11,7 @@ VAR_INPUT
 	inComponentOutOfBox  : BOOL;
 	inStepperHomePos  : BOOL;
 	inStepperWorkPos  : BOOL;
+	inPickZone  : BOOL;
 	
 END_VAR
 VAR_OUTPUT
@@ -104,10 +105,6 @@ IF _restoreTask.Execute() THEN
 	_restoreTask.DoneWhen(TRUE);
 END_IF
 //****************************************
-
-
-
-//IF(_status.State.Error) THEN Messenger.Error(_sb.Clear().Append('<#Drive error no #>').Append(UDINT_TO_STRING(_status.State.EventId)).Append(' |[[0]AdvancedDiagnosticMessage]|').Append('.').Append('For details see the service mode').ToString()); END_IF;
 
 
 UpdateControl();]]></ST>

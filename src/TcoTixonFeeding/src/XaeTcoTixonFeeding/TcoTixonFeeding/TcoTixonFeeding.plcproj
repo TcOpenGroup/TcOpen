@@ -36,6 +36,9 @@
     </SelectedLibraryCategories>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DUTs\GVLs\Class Diagram.TcCD">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\TcoTixonGenericConfig.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -138,6 +141,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
+    <Folder Include="DUTs\GVLs" />
     <Folder Include="DUTs\TixonPickStep" />
     <Folder Include="DUTs\TixonVibro" />
     <Folder Include="DUTs\TixonStep" />

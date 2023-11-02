@@ -10,6 +10,10 @@ STRUCT
         StepperHomePos : BOOL;
         {attribute addProperty Name "<#Stepper in work position#> - i8"}
         StepperWorkPos : BOOL;
+		
+		{attribute addProperty Name "<#In Pick Zone#>"}
+        InPickZone: BOOL;	
+		
 	
 END_STRUCT
 END_TYPE

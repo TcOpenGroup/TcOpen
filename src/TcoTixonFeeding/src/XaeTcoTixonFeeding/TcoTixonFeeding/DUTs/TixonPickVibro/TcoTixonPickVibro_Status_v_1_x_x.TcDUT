@@ -6,6 +6,10 @@ STRUCT
 
 		{attribute addProperty Name "<#Separator in work position#> - i6"}
         SeparatorWorkPos : BOOL;
+		
+      	{attribute addProperty Name "<#In Pick Zone#>"}
+        InPickZone: BOOL;	
+		
 END_STRUCT
 END_TYPE
 ]]></Declaration>

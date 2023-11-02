@@ -10,7 +10,7 @@ VAR_INPUT
 	inFillingSensor  : BOOL; 
 	inSeparatorPresent  : BOOL;
 	inSeparatorWorkPos  : BOOL;
-    
+	inPickZone  : BOOL;
 END_VAR
 VAR_OUTPUT
 	outFeedingA : BOOL;
@@ -303,6 +303,7 @@ _status.SeparatorHomePos:=inSeparatorHomePos;
 _status.SeparatorPresent:=inSeparatorPresent;
 _status.SeparatorWorkPos:=inSeparatorWorkPos;
 _status.ControllerInAuto:=inControllerInAuto;
+_status.InPickZone:=inPickZone;
 
 ]]></ST>
       </Implementation>

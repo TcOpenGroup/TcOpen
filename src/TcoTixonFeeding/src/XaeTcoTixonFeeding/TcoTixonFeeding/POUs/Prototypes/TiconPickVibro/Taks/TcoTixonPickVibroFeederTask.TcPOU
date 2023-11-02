@@ -15,74 +15,80 @@ VAR
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[
-
 IF Execute() THEN
-	_timerIsFull(IN:=inoStatus.FillingSensor,PT:=inoConfig.BufferFullTime);
-	
-  	IF _progress = 0 THEN
-		IF NOT __ISVALIDREF(inoControl) THEN
-			_varInfo :=__VARINFO(inoControl);
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSIF NOT __ISVALIDREF(inoConfig) THEN                                                  
-			_varInfo :=__VARINFO(inoConfig);                                                    
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSIF NOT __ISVALIDREF(inoStatus) THEN                                                  
-			_varInfo :=__VARINFO(inoStatus);                                                    
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSIF NOT inoStatus.ControllerInAuto THEN                                                  
-			_varInfo :=__VARINFO(inoStatus.ControllerInAuto);                                                                                                 
-			Messenger.Warning(_sb.Clear().Append('<#Tixon control system not in auto #>').Append(_varInfo.Symbol).ToString());
-		ELSE
+    _timerIsFull(IN := inoStatus.FillingSensor, PT := inoConfig.BufferFullTime);
 
-			_progress := _progress + 1;
+    IF _progress = 0 THEN
+        IF NOT __ISVALIDREF(inoControl) THEN
+            _varInfo := __VARINFO(inoControl);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSIF NOT __ISVALIDREF(inoConfig) THEN
+            _varInfo := __VARINFO(inoConfig);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSIF NOT __ISVALIDREF(inoStatus) THEN
+            _varInfo := __VARINFO(inoStatus);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSIF NOT inoStatus.ControllerInAuto THEN
+            _varInfo := __VARINFO(inoStatus.ControllerInAuto);
+            Messenger.Warning(_sb.Clear().Append('<#Tixon control system not in auto #>').Append(_varInfo.Symbol).ToString());
+        ELSE
 
-		END_IF
+            _progress := _progress + 1;
 
-	END_IF
-	IF _progress = 1 THEN
-	
-		_progress := _progress + 1;
-		_timer(In:=FALSE);
+        END_IF
 
-	END_IF;
-	
-	
-	IF _progress = 2 THEN	
-		Messenger.Debug('<#Waiting for buffer empty#>');
-		_timer(IN:=NOT inoStatus.FillingSensor,Pt:=inoConfig.BufferEmptyTime);
-		IF _timer.Q  AND inoControl.FeedingA THEN
-			_progress := _progress + 1;
-			_timer(In:=FALSE);
-		END_IF
-	END_IF;
-	IF _progress = 3 THEN	
-		inoControl.FeedingB:=TRUE;
-		inoControl.FeedingB:=TRUE;
-		Messenger.Debug('<#Start  vibratorating and blowing#>');
-		
-		
-		_progress := _progress+1;
-		_timer(In:=FALSE);
-		
-	END_IF;
+    END_IF
 
-	
-	IF _progress = 4 THEN	
-		Messenger.Debug('<#Waiting for buffer empty#>');
-		IF _timerIsFull.Q THEN
-			_progress := _progress + 1;
-			
-			_timer(In:=FALSE);
-		ELSE
-			_progress := 3;
-			_timer(In:=FALSE);
-		END_IF
-	END_IF;
-	
-	IF _progress = 5 THEN
-        inoControl.FeedingB:=FALSE;
+    IF _progress = 1 THEN
+
+        _progress := _progress + 1;
+        _timer(In := FALSE);
+
+    END_IF;
+
+    IF _progress = 2 THEN
+        Messenger.Debug('<#Waiting for buffer empty#>');
+        _timer(IN := NOT inoStatus.FillingSensor, Pt := inoConfig.BufferEmptyTime);
+
+        IF _timer.Q AND inoControl.FeedingA THEN
+            _progress := _progress + 1;
+            _timer(In := FALSE);
+        END_IF
+    END_IF;
+
+
+    IF _progress = 3 THEN
+        Messenger.Debug('<#Waiting for blow B on #>');
+        _timer(IN :=TRUE,
+            Pt := inoConfig.FeederBlowBStartTime);
+		  inoControl.BlowAValve := inoConfig.BufferBlowActive;	
+        IF _timer.Q THEN  
+		     inoControl.FeedingB := inoConfig.FeederBlowBActive;
+	        Messenger.Debug('<#Start  vibratorating and blowing#>');
+            _progress := _progress + 1;
+            _timer(In := FALSE);
+        END_IF;
+
+
+    END_IF;
+
+    IF _progress = 4 THEN
+        Messenger.Debug('<#Waiting for buffer empty#>');
+
+        IF _timerIsFull.Q THEN
+            _progress := _progress + 1;
+
+            _timer(In := FALSE);
+        ELSE
+            _progress := 3;
+            _timer(In := FALSE);
+        END_IF
+    END_IF;
+
+    IF _progress = 5 THEN
+        inoControl.FeedingB := FALSE;
         Messenger.Debug('<#Waiting for buffer is full adn blow ending#>');
-        _timer(IN := inoStatus.FillingSensor, Pt := inoConfig.FeederBlowFullTime);
+        _timer(IN := inoStatus.FillingSensor, Pt := inoConfig.FeederBlowBFullTime);
         IF _timer.Q THEN
             inoControl.BlowValveB := FALSE;
             _progress := _progress + 1;
@@ -90,23 +96,19 @@ IF Execute() THEN
         END_IF;
 
     END_IF;
-	
-	IF _progress = 6 THEN	
-		THIS^.DoneWhen(TRUE);
-	END_IF;		
-	
-	
-	
-	
-   
+
+    IF _progress = 6 THEN
+        THIS^.DoneWhen(TRUE);
+    END_IF;
+
     CallTimers(TRUE);
-	
-	THIS^.ThrowWhen(_errorTimer.Q );
-	
+
+    THIS^.ThrowWhen(_errorTimer.Q);
+
 END_IF
 
-IF  THIS^.Error AND NOT _errorMessage.Pinned THEN
-	THIS^.Restore();
+IF THIS^.Error AND NOT _errorMessage.Pinned THEN
+    THIS^.Restore();
 END_IF]]></ST>
     </Implementation>
     <Method Name="OnAbort" Id="{4b4818bc-b3d7-099b-32f3-fa2148cdc504}">

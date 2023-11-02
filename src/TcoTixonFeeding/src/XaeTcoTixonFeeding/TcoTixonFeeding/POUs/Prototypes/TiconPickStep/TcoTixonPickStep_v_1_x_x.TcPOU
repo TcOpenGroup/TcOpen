@@ -12,6 +12,7 @@ VAR_INPUT
 	inStepperHomePos  : BOOL;
 	inStepperWorkPos  : BOOL;
 	inSeparatorWorkPos  : BOOL;
+	inPickZone  : BOOL;
 END_VAR
 VAR_OUTPUT
 	outFeedingA : BOOL;
@@ -89,9 +90,6 @@ IF _restoreTask.Execute() THEN
 END_IF
 //****************************************
 
-
-
-//IF(_status.State.Error) THEN Messenger.Error(_sb.Clear().Append('<#Drive error no #>').Append(UDINT_TO_STRING(_status.State.EventId)).Append(' |[[0]AdvancedDiagnosticMessage]|').Append('.').Append('For details see the service mode').ToString()); END_IF;
 
 
 UpdateControl();]]></ST>
@@ -316,7 +314,7 @@ _status.SeparatorHomePos:=inSeparatorHomePos;
 _status.SeparatorPresent:=inSeparatorPresent;
 _status.SeparatorWorkPos:=inSeparatorWorkPos;
 _status.ControllerInAuto:=inControllerInAuto;
-
+_status.InPickZone:=inPickZone;
 ]]></ST>
       </Implementation>
     </Method>

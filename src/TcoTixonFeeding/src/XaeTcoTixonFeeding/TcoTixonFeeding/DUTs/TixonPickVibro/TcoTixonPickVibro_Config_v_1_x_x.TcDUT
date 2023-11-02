@@ -4,11 +4,12 @@
     <Declaration><![CDATA[TYPE
     TcoTixonPickVibro_Config_v_1_x_x EXTENDS TcoTixonGenericPickConfig :
     STRUCT
-      
-		{attribute addProperty Name "<#Feeder full blow time after#> - T_FEEDER_BLOW_FULL"}
-		FeederBlowFullTime : TIME := T#1S;
-		{attribute addProperty Name "<#Feeder blow  active #>"}
-		FeederBlowActive : BOOL := FALSE;
+      	{attribute addProperty Name "<#Feeder blow B on start#> - T_FEEDER_BLOWB_ON"}
+		FeederBlowBStartTime : TIME := T#300MS;
+		{attribute addProperty Name "<#Feeder full blow B time after#> - T_FEEDER_BLOWB_FULL"}
+		FeederBlowBFullTime : TIME := T#1S;
+		{attribute addProperty Name "<#Feeder blow B  active #>"}
+		FeederBlowBActive : BOOL := FALSE;
 		
 		{attribute addProperty Name "<#Error time separator #> - T_SEP_ERROR"}
 		ErrorTimeSeparator : TIME := T#0S;

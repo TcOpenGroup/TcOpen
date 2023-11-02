@@ -292,19 +292,27 @@ END_IF;
 
 IF (seq.Step(inStepID := 13,
     inEnabled := TRUE,
-    inStepDescription := 'WAIT FOR PICK')) THEN
+    inStepDescription := 'WAIT FOR PICK - INTERUPT PICK ZONE')) THEN
 //--------------------------------------------------------   
-	//_timer(IN:=TRUE,PT:= T#100MS);
-//	 _tixonPickFeeder.Push(TRUE);
-//    IF _timer.Q   THEN
-//		seq.CompleteStep();
-//		_tixonStepFeeder.Push(FALSE);
-//	END_IF;
+	
+	IF _tixonPickStepFeeder.Status.InPickZone  THEN
+		seq.CompleteStep();
+	END_IF
 		
 //--------------------------------------------------------			
 END_IF;
 
-
+IF (seq.Step(inStepID := 14,
+    inEnabled := TRUE,
+    inStepDescription := 'WAIT FOR PICK - RELEASE PICK')) THEN
+//--------------------------------------------------------   
+	
+	IF NOT _tixonPickStepFeeder.Status.InPickZone AND NOT _tixonPickStepFeeder.Status.SeparatorPresent  THEN
+		seq.CompleteStep();
+	END_IF
+		
+//--------------------------------------------------------			
+END_IF;
 
 IF (seq.Step(inStepID := 16,
     inEnabled := TRUE,
@@ -450,20 +458,30 @@ IF (seq.Step(inStepID := 12,
 //--------------------------------------------------------			
 END_IF;
 
+
 IF (seq.Step(inStepID := 13,
     inEnabled := TRUE,
-    inStepDescription := 'WAIT FOR PICK')) THEN
+    inStepDescription := 'WAIT FOR PICK - INTERUPT PICK ZONE')) THEN
 //--------------------------------------------------------   
-	//_timer(IN:=TRUE,PT:= T#100MS);
-//	 _tixonPickFeeder.Push(TRUE);
-//    IF _timer.Q   THEN
-//		seq.CompleteStep();
-//		_tixonStepFeeder.Push(FALSE);
-//	END_IF;
+	
+	IF _tixonPickStepFeeder.Status.InPickZone  THEN
+		seq.CompleteStep();
+	END_IF
 		
 //--------------------------------------------------------			
 END_IF;
 
+IF (seq.Step(inStepID := 14,
+    inEnabled := TRUE,
+    inStepDescription := 'WAIT FOR PICK - RELEASE PICK')) THEN
+//--------------------------------------------------------   
+	
+	IF NOT _tixonPickStepFeeder.Status.InPickZone AND NOT _tixonPickStepFeeder.Status.SeparatorPresent  THEN
+		seq.CompleteStep();
+	END_IF
+		
+//--------------------------------------------------------			
+END_IF;
 
 
 IF (seq.Step(inStepID := 16,

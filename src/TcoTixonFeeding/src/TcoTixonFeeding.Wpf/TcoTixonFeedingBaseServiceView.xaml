@@ -30,7 +30,7 @@
    
                 </WrapPanel.Resources>
 
-                <WrapPanel  DataContext="{Binding _status.ComponentReady }"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
+                <WrapPanel   DataContext="{Binding _status.ComponentReady }"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
                     <materialdesign:PackIcon Kind="Check"  Foreground="{StaticResource Notification}"  VerticalAlignment="Center"/>
                     <TextBlock   Text="{x:Static p:strings.ComponentReady}"  Foreground="{StaticResource Notification}"/>
                 </WrapPanel>
