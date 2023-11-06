@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="TcoTixonPickVibroFeederTask" Id="{29722243-16da-027c-137f-3c4eb291de06}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoTixonPickVibroFeederTask EXTENDS TcoTixonFeedingTask
+VAR_IN_OUT
+	inoConfig 	: TcoTixonPickVibro_Config_v_1_x_x;
+   	inoControl 	: TcoTixonPickVibro_Control_v_1_x_x;
+	inoStatus 	: TcoTixonPickVibro_Status_v_1_x_x;
+END_VAR
+
+
+VAR
+    _timerIsFull : TON;
+	
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+IF Execute() THEN
+    _timerIsFull(IN := inoStatus.FillingSensor, PT := inoConfig.BufferFullTime);
+
+    IF _progress = 0 THEN
+        IF NOT __ISVALIDREF(inoControl) THEN
+            _varInfo := __VARINFO(inoControl);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSIF NOT __ISVALIDREF(inoConfig) THEN
+            _varInfo := __VARINFO(inoConfig);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSIF NOT __ISVALIDREF(inoStatus) THEN
+            _varInfo := __VARINFO(inoStatus);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSIF NOT inoStatus.ControllerInAuto THEN
+            _varInfo := __VARINFO(inoStatus.ControllerInAuto);
+            Messenger.Warning(_sb.Clear().Append('<#Tixon control system not in auto #>').Append(_varInfo.Symbol).ToString());
+        ELSE
+
+            _progress := _progress + 1;
+
+        END_IF
+
+    END_IF
+
+    IF _progress = 1 THEN
+
+        _progress := _progress + 1;
+        _timer(In := FALSE);
+
+    END_IF;
+
+    IF _progress = 2 THEN
+        Messenger.Debug('<#Waiting for buffer empty#>');
+        _timer(IN := NOT inoStatus.FillingSensor, Pt := inoConfig.BufferEmptyTime);
+
+        IF _timer.Q AND inoControl.FeedingA THEN
+            _progress := _progress + 1;
+            _timer(In := FALSE);
+        END_IF
+    END_IF;
+
+
+    IF _progress = 3 THEN
+        Messenger.Debug('<#Waiting for blow B on #>');
+        _timer(IN :=TRUE,
+            Pt := inoConfig.FeederBlowBStartTime);
+		  inoControl.BlowAValve := inoConfig.BufferBlowActive;	
+        IF _timer.Q THEN  
+		     inoControl.FeedingB := inoConfig.FeederBlowBActive;
+	        Messenger.Debug('<#Start  vibratorating and blowing#>');
+            _progress := _progress + 1;
+            _timer(In := FALSE);
+        END_IF;
+
+
+    END_IF;
+
+    IF _progress = 4 THEN
+        Messenger.Debug('<#Waiting for buffer empty#>');
+
+        IF _timerIsFull.Q THEN
+            _progress := _progress + 1;
+
+            _timer(In := FALSE);
+        ELSE
+            _progress := 3;
+            _timer(In := FALSE);
+        END_IF
+    END_IF;
+
+    IF _progress = 5 THEN
+        inoControl.FeedingB := FALSE;
+        Messenger.Debug('<#Waiting for buffer is full adn blow ending#>');
+        _timer(IN := inoStatus.FillingSensor, Pt := inoConfig.FeederBlowBFullTime);
+        IF _timer.Q THEN
+            inoControl.BlowValveB := FALSE;
+            _progress := _progress + 1;
+            _timer(In := FALSE);
+        END_IF;
+
+    END_IF;
+
+    IF _progress = 6 THEN
+        THIS^.DoneWhen(TRUE);
+    END_IF;
+
+    CallTimers(TRUE);
+
+    THIS^.ThrowWhen(_errorTimer.Q);
+
+END_IF
+
+IF THIS^.Error AND NOT _errorMessage.Pinned THEN
+    THIS^.Restore();
+END_IF]]></ST>
+    </Implementation>
+    <Method Name="OnAbort" Id="{4b4818bc-b3d7-099b-32f3-fa2148cdc504}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task is aborted.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnAbort
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Vib. bin task  was aborted.#>'; END_IF;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnDone" Id="{60dbea42-dec7-0513-2e79-51b42b0aa27f}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task reaches the ```Done``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnDone
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Vib. bin task  finished successfully.#>'; END_IF;
+_progress:=0;
+IF AutoRestore THEN
+	Restore();
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnError" Id="{5f322e78-300d-0505-30cc-ade56e65ca81}">
+      <Declaration><![CDATA[METHOD PROTECTED OnError
+VAR
+	description: STRING;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[description := '<#Vib. bin task finished with error.#>'; 
+
+IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := description; END_IF;
+THIS^._errorMessage.Error(_sb.Clear().Append(description).Append(' To restore acknowledge this alarm.').ToString()).Pin();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStart" Id="{6a78ec50-283a-0734-34da-5ab19e062e56}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStart 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN  THIS^.inoStatus.ActionDescription := '<#Vib. bin task started.#>'; END_IF; 
+CallTimers(FALSE);
+_timerIsFull(In:=FALSE);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{ebc625d8-1d32-0bc0-1f01-b3a1dffa1007}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+			<para>
+				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD Restore : ITcoRestorable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.Restore();
+_timerIsFull(In:=FALSE);
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

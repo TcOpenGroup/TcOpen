@@ -1,0 +1,2299 @@
+<?xml version="1.0"?>
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.44">
+	<DataTypes>
+		<DataType>
+			<Name GUID="{132E66EA-9D48-518D-E919-C407F4B9DB22}" Namespace="TcoIo" AutoDeleteType="true">TcoAmsNetId</Name>
+			<BitSize>48</BitSize>
+			<SubItem>
+				<Name>netId</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>6</Elements>
+				</ArrayInfo>
+				<BitSize>48</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-002000000001}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..0] OF BIT</Name>
+			<BitSize>1</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>1</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-002000000006}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..5] OF BIT</Name>
+			<BitSize>6</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>6</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-002000000008}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..0] OF BYTE</Name>
+			<BitSize>8</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>1</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-002000000004}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..3] OF BIT</Name>
+			<BitSize>4</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>4</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-00200000000D}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..12] OF BIT</Name>
+			<BitSize>13</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>13</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-002000000009}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..8] OF BIT</Name>
+			<BitSize>9</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>9</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-002000000003}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..2] OF BIT</Name>
+			<BitSize>3</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>3</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-002000000005}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..4] OF BIT</Name>
+			<BitSize>5</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>5</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-002000000040}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..7] OF BYTE</Name>
+			<BitSize>64</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>8</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-002000000020}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..3] OF BYTE</Name>
+			<BitSize>32</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>4</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-002000000002}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..1] OF BIT</Name>
+			<BitSize>2</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>2</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-00200000000C}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..11] OF BIT</Name>
+			<BitSize>12</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>12</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-00200000000E}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..13] OF BIT</Name>
+			<BitSize>14</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>14</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-002000000050}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..9] OF BYTE</Name>
+			<BitSize>80</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>10</Elements>
+			</ArrayInfo>
+			<Hides>
+				<Hide GUID="{0D9E782F-3778-A474-E51F-4F5C8E7FF3F2}"/>
+			</Hides>
+		</DataType>
+	</DataTypes>
+	<ImageDatas>
+		<ImageData Id="1000">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
+		<ImageData Id="1001">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000120b0000120b00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
+		<ImageData Id="1002">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
+		<ImageData Id="1003">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
+		<ImageData Id="1004">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ff808080808080808080808080808080808080808080808080808080808080808080808080ff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0000000c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffc0c0c0c0c0c0000000000000000000000000000000000000000000c0c0c0c0c0c0808080007fff007fff007fff007fffc0c0c0c0c0c00000000000000000000000000000000000000000000000ffc0c0c0808080007fff007fff007fff007fffc0c0c0c0c0c0000000000000000000000000000000000000000000c0c0c0c0c0c0808080007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0c0c0c0000000c0c0c0c0c0c0000000c0c0c0c0c0c0808080007fff007fff007fff007fffc0c0c0c0c0c0000000000000000000000000c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0808080007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0808080007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0808080007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0808080</ImageData>
+		<ImageData Id="1005">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff</ImageData>
+		<ImageData Id="1006">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffff00ffff00ff808080808080808080808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
+	</ImageDatas>
+	<Project ProjectGUID="{9BFBEFCD-1854-47BE-9BE2-2F97411A783B}" TargetNetId="192.168.4.1.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
+		<System>
+			<Settings MaxCpus="16"/>
+			<Tasks>
+				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
+					<Name>PlcTask</Name>
+				</Task>
+				<Task Id="6" Priority="1" CycleTime="100000" AmsPort="351" AdtTasks="true">
+					<Name>PlcTask1</Name>
+				</Task>
+				<Task Id="7" Priority="2" CycleTime="80000" AmsPort="301">
+					<Name>PN</Name>
+					<Vars VarGrpType="1" InsertType="1">
+						<Name>Inputs</Name>
+					</Vars>
+					<Vars VarGrpType="2" InsertType="1">
+						<Name>Outputs</Name>
+					</Vars>
+					<Image Id="9" AddrType="1" ImageType="1">
+						<Name>PN-Image</Name>
+					</Image>
+				</Task>
+			</Tasks>
+		</System>
+		<Plc>
+			<Project GUID="{9FD700DA-555B-4364-9F1C-E2D36865EA0A}" Name="TcoTixonFeeding" PrjFilePath="TcoTixonFeeding\TcoTixonFeeding.plcproj" TmcFilePath="TcoTixonFeeding\TcoTixonFeeding.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoTixonFeeding\TcoTixonFeeding.tmc" TmcHash="{9266D7AE-1AB3-000E-68B8-4D39E6419511}">
+					<Name>TcoTixonFeeding Instance</Name>
+					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Contexts>
+						<Context>
+							<Id NeedCalleeCall="true">0</Id>
+							<Name>PlcTask</Name>
+							<ManualConfig>
+								<OTCID>#x02010030</OTCID>
+							</ManualConfig>
+							<Priority>20</Priority>
+							<CycleTime>10000000</CycleTime>
+						</Context>
+					</Contexts>
+					<TaskPouOids>
+						<TaskPouOid Prio="20" OTCID="#x08502001"/>
+					</TaskPouOids>
+				</Instance>
+			</Project>
+			<Project GUID="{9D2862F2-C23F-4552-990A-1C65C2E25567}" Name="TcoTixonFeedingTests" PrjFilePath="TcoTixonFeedingTests\TcoTixonFeedingTests.plcproj" TmcFilePath="TcoTixonFeedingTests\TcoTixonFeedingTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoTixonFeedingTests\TcoTixonFeedingTests.tmc" TmcHash="{1AF4BAB4-2060-1AB8-1AFF-5A50A2DA6EB4}">
+					<Name>TcoTixonFeedingTests Instance</Name>
+					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Vars VarGrpType="1">
+						<Name>PlcTask1 Inputs</Name>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_1.Input</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_2.Input</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_3.Input</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_4.Input</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_5.Input</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_6.Input</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_7.Input</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_8.Input</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.EK1200.IA1.WcState.WcState</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.EK1200.IA1.WcState.InputToggle</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.EK1200.IA1.InfoData.State</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.EK1200.QA1.WcState.WcState</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.EK1200.QA1.InfoData.State</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.SyncUnits._default.unreferenced.WcState.WcState</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.SyncUnits._default.unreferenced.InfoData.ObjectId</Name>
+							<Type>DWORD</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.SyncUnits._default.unreferenced.InfoData.State</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.SyncUnits._default.unreferenced.InfoData.SlaveCount</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.SyncUnits._default.PlcTask1.WcState.WcState</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.SyncUnits._default.PlcTask1.InfoData.ObjectId</Name>
+							<Type>DWORD</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.SyncUnits._default.PlcTask1.InfoData.State</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.SyncUnits._default.PlcTask1.InfoData.SlaveCount</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.Inputs.SlaveCount</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.Inputs.DevState</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.Inputs.Frm0State</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.Inputs.Frm0WcState</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.Inputs.Frm0InputToggle</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.InfoData.ChangeCount</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.InfoData.DevId</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.InfoData.AmsNetId</Name>
+							<Type GUID="{132E66EA-9D48-518D-E919-C407F4B9DB22}" Namespace="TcoIo">TcoAmsNetId</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.InfoData.CfgSlaveCount</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.InfoData.DcToTcTimeOffset</Name>
+							<Type>LINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.InfoData.DcToExtTimeOffset</Name>
+							<Type>LINT</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2" AreaNo="1">
+						<Name>PlcTask1 Outputs</Name>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.EK1200.QA1.Channel_1.Output</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.EK1200.QA1.Channel_2.Output</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.EK1200.QA1.Channel_3.Output</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.EK1200.QA1.Channel_4.Output</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.EK1200.QA1.Channel_5.Output</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.EK1200.QA1.Channel_6.Output</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.EK1200.QA1.Channel_7.Output</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.EK1200.QA1.Channel_8.Output</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.Outputs.DevCtrl</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.Outputs.Frm0Ctrl</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_iXlinker.ECAT_x.Outputs.Frm0WcCtrl</Name>
+							<Type>UINT</Type>
+						</Var>
+					</Vars>
+					<UnrestoredVarLinks ImportTime="2023-10-11T12:26:29">
+						<OwnerA Name="InputDst" Prefix="TIPC^TcoTixonFeedingTests^TcoTixonFeedingTests Instance" Type="1">
+							<OwnerB Name="TIID^Device 3 (EL6631)^robot1">
+								<Link VarA="GVL.Robot1.In.Inputs[0]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 0" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[10]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 10" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[11]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 11" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[12]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 12" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[13]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 13" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[14]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 14" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[15]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 15" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[16]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 16" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[17]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 17" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[18]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 18" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[19]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 19" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[1]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 1" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[20]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 20" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[21]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 21" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[22]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 22" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[23]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 23" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[24]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 24" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[25]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 25" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[26]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 26" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[27]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 27" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[28]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 28" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[29]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 29" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[2]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 2" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[30]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 30" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[31]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 31" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[32]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 32" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[33]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 33" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[34]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 34" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[35]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 35" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[36]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 36" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[37]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 37" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[38]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 38" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[39]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 39" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[3]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 3" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[40]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 40" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[41]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 41" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[42]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 42" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[43]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 43" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[44]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 44" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[45]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 45" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[46]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 46" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[47]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 47" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[48]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 48" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[49]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 49" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[4]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 4" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[50]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 50" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[51]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 51" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[52]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 52" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[53]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 53" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[54]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 54" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[55]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 55" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[56]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 56" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[57]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 57" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[58]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 58" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[59]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 59" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[5]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 5" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[60]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 60" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[61]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 61" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[62]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 62" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[63]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 63" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[6]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 6" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[7]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 7" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[8]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 8" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.In.Inputs[9]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 2 (DI 64 bytes)^Subterm 4 (DI 64 bytes)^Inputs^Input 9" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.PnIoBoxDiag" TypeA="UINT" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000005}" VarB="Inputs^PnIoBoxDiag" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.PnIoBoxState" TypeA="UINT" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000005}" VarB="Inputs^PnIoBoxState" RestoreInfo="ANotFound"/>
+							</OwnerB>
+							<OwnerB Name="TIID^Device 3 (EL6631)^robot2">
+								<Link VarA="GVL.Robot2.In.Inputs[0]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 0" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[10]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 10" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[11]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 11" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[12]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 12" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[13]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 13" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[14]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 14" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[15]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 15" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[16]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 16" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[17]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 17" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[18]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 18" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[19]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 19" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[1]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 1" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[20]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 20" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[21]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 21" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[22]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 22" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[23]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 23" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[24]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 24" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[25]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 25" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[26]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 26" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[27]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 27" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[28]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 28" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[29]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 29" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[2]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 2" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[30]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 30" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[31]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 31" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[32]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 32" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[33]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 33" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[34]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 34" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[35]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 35" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[36]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 36" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[37]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 37" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[38]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 38" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[39]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 39" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[3]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 3" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[40]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 40" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[41]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 41" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[42]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 42" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[43]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 43" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[44]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 44" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[45]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 45" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[46]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 46" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[47]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 47" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[48]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 48" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[49]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 49" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[4]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 4" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[50]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 50" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[51]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 51" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[52]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 52" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[53]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 53" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[54]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 54" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[55]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 55" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[56]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 56" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[57]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 57" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[58]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 58" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[59]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 59" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[5]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 5" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[60]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 60" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[61]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 61" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[62]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 62" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[63]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 63" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[6]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 6" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[7]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 7" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[8]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 8" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.In.Inputs[9]" TypeA="BYTE" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 8 (DI 64 bytes)^Subterm 14 (DI 64 bytes)^Inputs^Input 9" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.PnIoBoxDiag" TypeA="UINT" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000005}" VarB="Inputs^PnIoBoxDiag" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.PnIoBoxState" TypeA="UINT" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000005}" VarB="Inputs^PnIoBoxState" RestoreInfo="ANotFound"/>
+							</OwnerB>
+						</OwnerA>
+						<OwnerA Name="OutputSrc" Prefix="TIPC^TcoTixonFeedingTests^TcoTixonFeedingTests Instance" Type="2">
+							<OwnerB Name="TIID^Device 3 (EL6631)^robot1">
+								<Link VarA="GVL.Robot1.Out.Outputs[0]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 0" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[10]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 10" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[11]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 11" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[12]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 12" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[13]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 13" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[14]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 14" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[15]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 15" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[16]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 16" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[17]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 17" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[18]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 18" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[19]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 19" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[1]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 1" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[20]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 20" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[21]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 21" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[22]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 22" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[23]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 23" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[24]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 24" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[25]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 25" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[26]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 26" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[27]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 27" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[28]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 28" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[29]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 29" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[2]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 2" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[30]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 30" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[31]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 31" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[32]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 32" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[33]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 33" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[34]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 34" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[35]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 35" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[36]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 36" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[37]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 37" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[38]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 38" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[39]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 39" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[3]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 3" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[40]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 40" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[41]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 41" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[42]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 42" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[43]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 43" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[44]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 44" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[45]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 45" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[46]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 46" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[47]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 47" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[48]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 48" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[49]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 49" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[4]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 4" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[50]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 50" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[51]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 51" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[52]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 52" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[53]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 53" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[54]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 54" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[55]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 55" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[56]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 56" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[57]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 57" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[58]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 58" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[59]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 59" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[5]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 5" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[60]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 60" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[61]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 61" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[62]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 62" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[63]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 63" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[6]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 6" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[7]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 7" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[8]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 8" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot1.Out.Outputs[9]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 3 (DO 64 bytes)^Subterm 5 (DO 64 bytes)^Outputs^Output 9" RestoreInfo="ANotFound"/>
+							</OwnerB>
+							<OwnerB Name="TIID^Device 3 (EL6631)^robot2">
+								<Link VarA="GVL.Robot2.Out.Outputs[0]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 0" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[10]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 10" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[11]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 11" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[12]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 12" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[13]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 13" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[14]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 14" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[15]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 15" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[16]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 16" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[17]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 17" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[18]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 18" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[19]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 19" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[1]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 1" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[20]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 20" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[21]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 21" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[22]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 22" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[23]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 23" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[24]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 24" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[25]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 25" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[26]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 26" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[27]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 27" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[28]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 28" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[29]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 29" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[2]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 2" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[30]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 30" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[31]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 31" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[32]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 32" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[33]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 33" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[34]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 34" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[35]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 35" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[36]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 36" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[37]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 37" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[38]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 38" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[39]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 39" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[3]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 3" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[40]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 40" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[41]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 41" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[42]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 42" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[43]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 43" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[44]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 44" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[45]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 45" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[46]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 46" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[47]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 47" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[48]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 48" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[49]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 49" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[4]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 4" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[50]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 50" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[51]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 51" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[52]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 52" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[53]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 53" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[54]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 54" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[55]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 55" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[56]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 56" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[57]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 57" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[58]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 58" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[59]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 59" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[5]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 5" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[60]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 60" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[61]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 61" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[62]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 62" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[63]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 63" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[6]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 6" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[7]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 7" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[8]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 8" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.Robot2.Out.Outputs[9]" TypeA="BYTE" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000001}" VarB="API^Term 9 (DO 64 bytes)^Subterm 15 (DO 64 bytes)^Outputs^Output 9" RestoreInfo="ANotFound"/>
+							</OwnerB>
+						</OwnerA>
+					</UnrestoredVarLinks>
+					<UnrestoredVarLinks ImportTime="2023-08-07T09:39:45">
+						<OwnerA Name="InputDst" Prefix="TIPC^TcoAbbRoboticsTests^TcoAbbRoboticsTests Instance" Type="1">
+							<OwnerB Name="TIID^Device 2 (EtherCAT)^Term 1 (EK1200)^Term 12 (EL1809)">
+								<Link VarA="GVL._calibrationCam" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="Channel 1^Input" Size="1" RestoreInfo="ANotFound"/>
+							</OwnerB>
+							<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Axis 1">
+								<Link VarA="GVL.Axis1.NcToPlc" TypeA="MC.NCTOPLC_AXIS_REF" InOutA="0" GuidA="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" VarB="Outputs^ToPlc" RestoreInfo="ANotFound"/>
+							</OwnerB>
+							<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Axis 2">
+								<Link VarA="GVL.Axis2.NcToPlc" TypeA="MC.NCTOPLC_AXIS_REF" InOutA="0" GuidA="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" VarB="Outputs^ToPlc" RestoreInfo="ANotFound"/>
+							</OwnerB>
+							<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Axis 3">
+								<Link VarA="GVL.Axis3.NcToPlc" TypeA="MC.NCTOPLC_AXIS_REF" InOutA="0" GuidA="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" VarB="Outputs^ToPlc" RestoreInfo="ANotFound"/>
+							</OwnerB>
+							<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Axis 4">
+								<Link VarA="GVL.Axis4.NcToPlc" TypeA="MC.NCTOPLC_AXIS_REF" InOutA="0" GuidA="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" VarB="Outputs^ToPlc" RestoreInfo="ANotFound"/>
+							</OwnerB>
+						</OwnerA>
+						<OwnerA Name="OutputSrc" Prefix="TIPC^TcoAbbRoboticsTests^TcoAbbRoboticsTests Instance" Type="2">
+							<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Axis 1">
+								<Link VarA="GVL.Axis1.PlcToNc" TypeA="MC.PLCTONC_AXIS_REF" InOutA="1" GuidA="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" VarB="Inputs^FromPlc" RestoreInfo="ANotFound"/>
+							</OwnerB>
+							<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Axis 2">
+								<Link VarA="GVL.Axis2.PlcToNc" TypeA="MC.PLCTONC_AXIS_REF" InOutA="1" GuidA="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" VarB="Inputs^FromPlc" RestoreInfo="ANotFound"/>
+							</OwnerB>
+							<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Axis 3">
+								<Link VarA="GVL.Axis3.PlcToNc" TypeA="MC.PLCTONC_AXIS_REF" InOutA="1" GuidA="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" VarB="Inputs^FromPlc" RestoreInfo="ANotFound"/>
+							</OwnerB>
+							<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Axis 4">
+								<Link VarA="GVL.Axis4.PlcToNc" TypeA="MC.PLCTONC_AXIS_REF" InOutA="1" GuidA="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" VarB="Inputs^FromPlc" RestoreInfo="ANotFound"/>
+							</OwnerB>
+						</OwnerA>
+					</UnrestoredVarLinks>
+					<UnrestoredVarLinks ImportTime="2023-10-11T13:58:36">
+						<OwnerA Name="InputDst" Prefix="TIPC^TcoTixonFeedingTests^TcoTixonFeedingTests Instance" Type="1">
+							<OwnerB Name="TIID^Device 2 (EtherCAT)^Term 1 (EK1200)^Term 12 (EL1809)">
+								<Link VarA="GVL.TixonStep.In.EmptyFeeder" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="Channel 1^Input" Size="1" RestoreInfo="ANotFound"/>
+							</OwnerB>
+						</OwnerA>
+					</UnrestoredVarLinks>
+					<Contexts>
+						<Context>
+							<Id NeedCalleeCall="true">0</Id>
+							<Name>PlcTask1</Name>
+							<ManualConfig>
+								<OTCID>#x02010060</OTCID>
+							</ManualConfig>
+							<Priority>1</Priority>
+							<CycleTime>10000000</CycleTime>
+						</Context>
+					</Contexts>
+					<TaskPouOids>
+						<TaskPouOid Prio="1" OTCID="#x08502041"/>
+					</TaskPouOids>
+				</Instance>
+			</Project>
+		</Plc>
+		<Io>
+			<Device Id="4" Disabled="true" DevType="111" DevFlags="#x0003" AmsPort="28676" AmsNetId="172.20.10.104.5.1" RemoteName="Device 4 (EtherCAT)" InfoImageId="2">
+				<Name>Device 4 (EtherCAT)</Name>
+				<AddressInfo>
+					<Pnp>
+						<DeviceDesc>Ethernet (TwinCAT-Intel PCI Ethernet Adapter (Gigab</DeviceDesc>
+						<DeviceName>\DEVICE\{11CA0869-9F97-492C-B6D9-C07CC0650E06}</DeviceName>
+						<DeviceData>000105390b10</DeviceData>
+					</Pnp>
+				</AddressInfo>
+				<Image Id="4" AddrType="9" ImageType="3">
+					<Name>Image</Name>
+				</Image>
+				<Box Id="1" BoxType="9099">
+					<Name>Term 1 (EK1100)</Name>
+					<ImageId>1000</ImageId>
+					<EtherCAT SlaveType="1" PdiType="#x0d00" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x044c2c52" RevisionNo="#x00120000" PortPhys="305" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EK1100 EtherCAT Coupler (2A E-Bus)" Desc="EK1100" PortABoxInfo="#x00ffffff"/>
+					<Box Id="2" BoxType="9099">
+						<Name>Term 2 (EL1008)</Name>
+						<ImageId>7</ImageId>
+						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x03f03052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1008 8Ch. Dig. Input 24V, 3ms" Desc="EL1008" PortABoxInfo="#x01000001">
+							<SyncMan>001001000000010004000000000000000100001000010000</SyncMan>
+							<Fmmu>0000000000000000001000010100000002000000000000000000000000000000</Fmmu>
+							<Pdo Name="Channel 1" Index="#x1a00" Flags="#x0011" SyncMan="0">
+								<Entry Name="Input" Index="#x6000" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 2" Index="#x1a01" Flags="#x0011" SyncMan="0">
+								<Entry Name="Input" Index="#x6010" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 3" Index="#x1a02" Flags="#x0011" SyncMan="0">
+								<Entry Name="Input" Index="#x6020" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 4" Index="#x1a03" Flags="#x0011" SyncMan="0">
+								<Entry Name="Input" Index="#x6030" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 5" Index="#x1a04" Flags="#x0011" SyncMan="0">
+								<Entry Name="Input" Index="#x6040" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 6" Index="#x1a05" Flags="#x0011" SyncMan="0">
+								<Entry Name="Input" Index="#x6050" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 7" Index="#x1a06" Flags="#x0011" SyncMan="0">
+								<Entry Name="Input" Index="#x6060" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 8" Index="#x1a07" Flags="#x0011" SyncMan="0">
+								<Entry Name="Input" Index="#x6070" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+						</EtherCAT>
+					</Box>
+					<Box Id="3" BoxType="9099">
+						<Name>Term 3 (EL2008)</Name>
+						<ImageId>1001</ImageId>
+						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x07d83052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL2008 8Ch. Dig. Output 24V, 0.5A" Desc="EL2008" PortABoxInfo="#x01000002">
+							<SyncMan>000f01004400010003000000000000000000000f44090000</SyncMan>
+							<Fmmu>0000000000000000000f00020100000001000000000000000000000000000000</Fmmu>
+							<Pdo Name="Channel 1" Index="#x1600" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x7000" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 2" Index="#x1601" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x7010" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 3" Index="#x1602" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x7020" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 4" Index="#x1603" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x7030" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 5" Index="#x1604" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x7040" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 6" Index="#x1605" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x7050" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 7" Index="#x1606" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x7060" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 8" Index="#x1607" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x7070" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+						</EtherCAT>
+					</Box>
+					<Box Id="4" BoxType="9099" BoxFlags="#x00000020">
+						<Name>Term 4 (EL3052)</Name>
+						<ImageId>1002</ImageId>
+						<EtherCAT SlaveType="2" PdiType="#x0005" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="7" FoeType="1" VendorId="#x00000002" ProductCode="#x0bec3052" RevisionNo="#x00140000" InfoDataAddr="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL3052 2Ch. Ana. Input 4-20mA" Desc="EL3052" PortABoxInfo="#x01000003">
+							<SyncMan>001080002600010001000000800080008000001026010000</SyncMan>
+							<SyncMan>801080002200010002000000800080008000801022010000</SyncMan>
+							<SyncMan>001100000400000003000000000000000000001104000000</SyncMan>
+							<SyncMan>801108002000010004000000000000000800801120010000</SyncMan>
+							<Fmmu>0000000000000000801100010100000002000000000000000000000000000000</Fmmu>
+							<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
+							<BootStrapData>0010f400f410f400</BootStrapData>
+							<Pdo Name="AI Standard Channel 1" Index="#x1a00" Flags="#x0010" SyncMan="3">
+								<ExcludePdo>#x1a01</ExcludePdo>
+								<Entry Name="Status__Underrange" Index="#x6000" Sub="#x01">
+									<Type>BIT</Type>
+									<Comment><![CDATA[Underrange event active]]></Comment>
+								</Entry>
+								<Entry Name="Status__Overrange" Index="#x6000" Sub="#x02">
+									<Type>BIT</Type>
+									<Comment><![CDATA[Overrange event active]]></Comment>
+								</Entry>
+								<Entry Name="Status__Limit 1" Index="#x6000" Sub="#x03">
+									<Type>BIT2</Type>
+									<Comment><![CDATA[Bit0: Value smaller/equal Limit1
+Bit1: Value bigger/equal Limit1]]></Comment>
+								</Entry>
+								<Entry Name="Status__Limit 2" Index="#x6000" Sub="#x05">
+									<Type>BIT2</Type>
+									<Comment><![CDATA[Bit0: Value smaller/equal Limit2
+Bit1: Value bigger/equal Limit2]]></Comment>
+								</Entry>
+								<Entry Name="Status__Error" Index="#x6000" Sub="#x07">
+									<Type>BIT</Type>
+									<Comment><![CDATA[Bit set when Over- or Underrange]]></Comment>
+								</Entry>
+								<Entry Name="Status__">
+									<Type GUID="{18071995-0000-0000-0000-002000000001}">ARRAY [0..0] OF BIT</Type>
+								</Entry>
+								<Entry Name="Status__">
+									<Type GUID="{18071995-0000-0000-0000-002000000006}">ARRAY [0..5] OF BIT</Type>
+								</Entry>
+								<Entry Name="Status__TxPDO State" Index="#x6000" Sub="#x0f">
+									<Type>BIT</Type>
+									<Comment><![CDATA[TRUE when this TxPDO is not valid]]></Comment>
+								</Entry>
+								<Entry Name="Status__TxPDO Toggle" Index="#x6000" Sub="#x10">
+									<Type>BIT</Type>
+									<Comment><![CDATA[Bit toggles everytime when new value available]]></Comment>
+								</Entry>
+								<Entry Name="Value" Index="#x6000" Sub="#x11" Flags="#x00040000">
+									<Type>INT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="AI Compact Channel 1" Index="#x1a01" Flags="#x0010">
+								<ExcludePdo>#x1a00</ExcludePdo>
+								<Entry Name="Value" Index="#x6000" Sub="#x11" Flags="#x00040000">
+									<Type>INT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="AI Standard Channel 2" Index="#x1a02" Flags="#x0010" SyncMan="3">
+								<ExcludePdo>#x1a03</ExcludePdo>
+								<Entry Name="Status__Underrange" Index="#x6010" Sub="#x01">
+									<Type>BIT</Type>
+									<Comment><![CDATA[Underrange event active]]></Comment>
+								</Entry>
+								<Entry Name="Status__Overrange" Index="#x6010" Sub="#x02">
+									<Type>BIT</Type>
+									<Comment><![CDATA[Overrange event active]]></Comment>
+								</Entry>
+								<Entry Name="Status__Limit 1" Index="#x6010" Sub="#x03">
+									<Type>BIT2</Type>
+									<Comment><![CDATA[Bit0: Value smaller/equal Limit1
+Bit1: Value bigger/equal Limit1]]></Comment>
+								</Entry>
+								<Entry Name="Status__Limit 2" Index="#x6010" Sub="#x05">
+									<Type>BIT2</Type>
+									<Comment><![CDATA[Bit0: Value smaller/equal Limit2
+Bit1: Value bigger/equal Limit2]]></Comment>
+								</Entry>
+								<Entry Name="Status__Error" Index="#x6010" Sub="#x07">
+									<Type>BIT</Type>
+									<Comment><![CDATA[Bit set when Over- or Underrange]]></Comment>
+								</Entry>
+								<Entry Name="Status__">
+									<Type GUID="{18071995-0000-0000-0000-002000000001}">ARRAY [0..0] OF BIT</Type>
+								</Entry>
+								<Entry Name="Status__">
+									<Type GUID="{18071995-0000-0000-0000-002000000006}">ARRAY [0..5] OF BIT</Type>
+								</Entry>
+								<Entry Name="Status__TxPDO State" Index="#x6010" Sub="#x0f">
+									<Type>BIT</Type>
+									<Comment><![CDATA[TRUE when this TxPDO is not valid]]></Comment>
+								</Entry>
+								<Entry Name="Status__TxPDO Toggle" Index="#x6010" Sub="#x10">
+									<Type>BIT</Type>
+									<Comment><![CDATA[Bit toggles everytime when new value available]]></Comment>
+								</Entry>
+								<Entry Name="Value" Index="#x6010" Sub="#x11" Flags="#x00040000">
+									<Type>INT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="AI Compact Channel 2" Index="#x1a03" Flags="#x0010">
+								<ExcludePdo>#x1a02</ExcludePdo>
+								<Entry Name="Value" Index="#x6010" Sub="#x11" Flags="#x00040000">
+									<Type>INT</Type>
+								</Entry>
+							</Pdo>
+							<CoeProfile ProfileNo="19665801"/>
+							<CoeProfile ProfileNo="19665801"/>
+						</EtherCAT>
+					</Box>
+					<Box Id="5" BoxType="9099" BoxFlags="#x00000020">
+						<Name>Term 5 (EL9576)</Name>
+						<ImageId>1003</ImageId>
+						<EtherCAT SlaveType="2" PdiType="#x0005" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="7" FoeType="1" VendorId="#x00000002" ProductCode="#x25683052" RevisionNo="#x00150000" InfoDataAddr="true" RepeatSupport="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL9576 Brake chopper terminal" Desc="EL9576" PortABoxInfo="#x01000004">
+							<SyncMan>001080002600010001000000800080008000001026010000</SyncMan>
+							<SyncMan>801080002200010002000000800080008000801022010000</SyncMan>
+							<SyncMan>001100000400000003000000000000000000001104000000</SyncMan>
+							<SyncMan>80110b002000010004000000000000000b00801120010000</SyncMan>
+							<Fmmu>0000000000000000801100010100000002000000000000000000000000000000</Fmmu>
+							<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
+							<BootStrapData>0010f400f410f400</BootStrapData>
+							<MBoxUserCmdData>004003000c0000000000000003000000000000000000000000000000000000002081f001040000000000150000</MBoxUserCmdData>
+							<Pdo Name="BCT Inputs" Index="#x1a00" Flags="#x0010" SyncMan="3">
+								<Entry Name="Terminal Overtemperature" Index="#x6000" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="I2T error" Index="#x6000" Sub="#x02">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="I2T warning" Index="#x6000" Sub="#x03">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Overvoltage" Index="#x6000" Sub="#x04">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Undervoltage" Index="#x6000" Sub="#x05">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Chopper on" Index="#x6000" Sub="#x06">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry>
+									<Type GUID="{18071995-0000-0000-0000-002000000008}">ARRAY [0..0] OF BYTE</Type>
+								</Entry>
+								<Entry Name="Input cycle counter" Index="#x6000" Sub="#x0f">
+									<Type>BIT2</Type>
+								</Entry>
+								<Entry Name="DC link voltage" Index="#x6000" Sub="#x11">
+									<Type>UDINT</Type>
+								</Entry>
+								<Entry Name="Resistor Current" Index="#x6000" Sub="#x13">
+									<Type>DINT</Type>
+								</Entry>
+								<Entry Name="Duty Cycle" Index="#x6000" Sub="#x14">
+									<Type>USINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="BCT Load" Index="#x1a01" Flags="#x0010">
+								<Entry Name="I2T load factor" Index="#x6001" Sub="#x01">
+									<Type>USINT</Type>
+								</Entry>
+							</Pdo>
+							<CoeProfile ProfileNo="58987401"/>
+						</EtherCAT>
+					</Box>
+					<Box Id="6" BoxType="9099" BoxFlags="#x00000020">
+						<Name>Term 6 (EL7211-0010)</Name>
+						<ImageId>1004</ImageId>
+						<EtherCAT SlaveType="2" PdiType="#x0405" MboxDataLinkLayer="true" StateMBoxPolling="true" CfgModeSafeOp="true" CycleMBoxPollingTime="0" CoeType="39" FoeType="1" VendorId="#x00000002" ProductCode="#x1c2b3052" RevisionNo="#x001f000a" InfoDataAddr="true" InfoDataSoeDS401="true" InfoDataDcTimes="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL7211-0010 1Ch. MDP742 Servo motor output stage with OCT (50V, 4.5A RMS)" Desc="EL7211-0010" PortABoxInfo="#x01000005">
+							<SyncMan>001080002600010001000000500080008000001026010000</SyncMan>
+							<SyncMan>801080002200010002000000500080008000801022010000</SyncMan>
+							<SyncMan>001106002400010003000000000000000600001124010000</SyncMan>
+							<SyncMan>80110c002000010004000000000000000a00801120010000</SyncMan>
+							<Fmmu>0000000000000000001100020100000001000000000000000000000000000000</Fmmu>
+							<Fmmu>0000000000000000801100010100000002000000000000000000000000000000</Fmmu>
+							<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
+							<BootStrapData>0010f400f410f400</BootStrapData>
+							<DcData>000700000000000030750000e80300000100ffff000000000000000000000000</DcData>
+							<DcMode>4443000000000000000000000000000044432d53796e6368726f6e0000000000000000000000000000000000000000000000000030750000e8030000ffff00070100000000000000000000000000000000000000000000000000000000000000</DcMode>
+							<DcMode>44430000000000000000000000000000534d2d53796e6368726f6e0000000000000000000000000000000000000000000000000030750000e8030000ffff01000100000000000000000000000000000000000000000000000000000000000000</DcMode>
+							<MBoxUserCmdData>004003000c0000000000000000000000000000000000000000000000000000002081f001040000000a001f0000</MBoxUserCmdData>
+							<MBoxUserCmdData>004003000a00000000000000000000000000000000000000000000000000000020f3100502000000010000</MBoxUserCmdData>
+							<MBoxUserCmdData>02000300090000001000000000000000000000000000000000000000000000002011801301000000034d6f746f7220706f6c6520706169727300</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000c0000000d00000000000000000000000000000000000000000000002011801204000000a00f000052617465642063757272656e7400</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000c0000000b00000000000000000000000000000000000000000000002011801104000000805700004d61782063757272656e7400</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000c0000000f00000000000000000000000000000000000000000000002011801604000000c8000000546f7271756520636f6e7374616e7400</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000a0000001200000000000000000000000000000000000000000000002011801902000000210057696e64696e6720696e64756374616e636500</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000c000000170000000000000000000000000000000000000000000000201180180400000002010000526f746f72206d6f6d656e74206f6620696e657274696100</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000a0000001b00000000000000000000000000000000000000000000002011802d02000000f2034d6f746f7220746865726d616c2074696d6520636f6e7374616e7400</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000a00000012000000000000000000000000000000000000000000000020118015020000000e01436f6d6d75746174696f6e206f666673657400</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000c0000001600000000000000000000000000000000000000000000002011801b04000000e90800004d6f746f72207370656564206c696d69746174696f6e00</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000a0000001e00000000000000000000000000000000000000000000002010801302000000870143757272656e74206c6f6f702070726f706f7274696f6e616c206761696e00</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000a0000001a00000000000000000000000000000000000000000000002010801202000000050043757272656e74206c6f6f7020696e74656772616c2074696d6500</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000c0000001f000000000000000000000000000000000000000000000020108015040000007200000056656c6f63697479206c6f6f702070726f706f7274696f6e616c206761696e00</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000c0000001b000000000000000000000000000000000000000000000020108014040000009600000056656c6f63697479206c6f6f7020696e74656772616c2074696d6500</MBoxUserCmdData>
+							<Pdo Name="FB Position" Index="#x1a00" Flags="#x0010" SyncMan="3">
+								<Entry Name="Position" Index="#x6000" Sub="#x11">
+									<Type>UDINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="DRV Statusword" Index="#x1a01" Flags="#x0010" SyncMan="3">
+								<Entry Name="Statusword" Index="#x6010" Sub="#x01">
+									<Type>UINT</Type>
+									<Comment><![CDATA[Bit 0 : Ready to switch on
+Bit 1 : Switched on
+Bit 2 : Operation enabled
+Bit 3 : Fault
+Bit 4 : reserved
+Bit 5 : reserved
+Bit 6 : Switch on disabled
+Bit 7 : Warning
+Bit 8 + 9 : reserved
+Bit 10 : TxPDOToggle
+Bit 11 : Internal limit active
+Bit 12 : Drive follows the command value
+Bit 13 : Input cycle counter
+Bit 14 - 15 : reserved]]></Comment>
+								</Entry>
+							</Pdo>
+							<Pdo Name="DRV Velocity actual value" Index="#x1a02" Flags="#x0010">
+								<Entry Name="Velocity actual value" Index="#x6010" Sub="#x07">
+									<Type>DINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="DRV Torque actual value" Index="#x1a03" Flags="#x0010" SyncMan="3">
+								<Entry Name="Torque actual value" Index="#x6010" Sub="#x08">
+									<Type>INT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="DRV Info data 1" Index="#x1a04" Flags="#x0010">
+								<Entry Name="Info data 1" Index="#x6010" Sub="#x12">
+									<Type>UINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="DRV Info data 2" Index="#x1a05" Flags="#x0010">
+								<Entry Name="Info data 2" Index="#x6010" Sub="#x13">
+									<Type>UINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="DRV Following error actual value" Index="#x1a06" Flags="#x0010" SyncMan="3">
+								<Entry Name="Following error actual value" Index="#x6010" Sub="#x06">
+									<Type>DINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="FB Touch probe status" Index="#x1a07" Flags="#x0010">
+								<Entry Name="Touch probe status__TP1 Enable" Index="#x6001" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Touch probe status__TP1 Pos value stored" Index="#x6001" Sub="#x02">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Touch probe status__TP1 Neg value stored" Index="#x6001" Sub="#x03">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Touch probe status__">
+									<Type GUID="{18071995-0000-0000-0000-002000000004}">ARRAY [0..3] OF BIT</Type>
+								</Entry>
+								<Entry Name="Touch probe status__TP1 Input" Index="#x6001" Sub="#x08">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Touch probe status__TP2 Enable" Index="#x6001" Sub="#x09">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Touch probe status__TP2 Pos value stored" Index="#x6001" Sub="#x0a">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Touch probe status__TP2 Neg value stored" Index="#x6001" Sub="#x0b">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Touch probe status__">
+									<Type GUID="{18071995-0000-0000-0000-002000000004}">ARRAY [0..3] OF BIT</Type>
+								</Entry>
+								<Entry Name="Touch probe status__TP2 Input" Index="#x6001" Sub="#x10">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="FB Touch probe 1 pos position" Index="#x1a08" Flags="#x0010">
+								<Entry Name="TP1 Pos position" Index="#x6001" Sub="#x11">
+									<Type>UDINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="FB Touch probe 1 neg position" Index="#x1a09" Flags="#x0010">
+								<Entry Name="TP1 Neg position" Index="#x6001" Sub="#x12">
+									<Type>UDINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="FB Touch probe 2 pos position" Index="#x1a0a" Flags="#x0010">
+								<Entry Name="TP2 Pos position" Index="#x6001" Sub="#x13">
+									<Type>UDINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="FB Touch probe 2 neg position" Index="#x1a0b" Flags="#x0010">
+								<Entry Name="TP2 Neg position" Index="#x6001" Sub="#x14">
+									<Type>UDINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="FB Status" Index="#x1a0c" Flags="#x0010">
+								<Entry Name="Status__">
+									<Type GUID="{18071995-0000-0000-0000-00200000000D}">ARRAY [0..12] OF BIT</Type>
+								</Entry>
+								<Entry Name="Status__TxPDO State" Index="#x6000" Sub="#x0e">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status__Input Cycle Counter" Index="#x6000" Sub="#x0f">
+									<Type>BIT2</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="DRV Modes of operation display" Index="#x1a0e" Flags="#x0010">
+								<Entry Name="Modes of operation display" Index="#x6010" Sub="#x03">
+									<Type>USINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="DMC Inputs" Index="#x1a30" Flags="#x0010">
+								<ExcludePdo>#x1a00</ExcludePdo>
+								<ExcludePdo>#x1a01</ExcludePdo>
+								<ExcludePdo>#x1a02</ExcludePdo>
+								<ExcludePdo>#x1a03</ExcludePdo>
+								<ExcludePdo>#x1a04</ExcludePdo>
+								<ExcludePdo>#x1a05</ExcludePdo>
+								<ExcludePdo>#x1a06</ExcludePdo>
+								<ExcludePdo>#x1a07</ExcludePdo>
+								<ExcludePdo>#x1a08</ExcludePdo>
+								<ExcludePdo>#x1a09</ExcludePdo>
+								<ExcludePdo>#x1a0a</ExcludePdo>
+								<ExcludePdo>#x1a0b</ExcludePdo>
+								<ExcludePdo>#x1a0c</ExcludePdo>
+								<ExcludePdo>#x1a0e</ExcludePdo>
+								<ExcludePdo>#x1a31</ExcludePdo>
+								<Entry Name="DMC__FeedbackStatus__">
+									<Type GUID="{18071995-0000-0000-0000-002000000001}">ARRAY [0..0] OF BIT</Type>
+								</Entry>
+								<Entry Name="DMC__FeedbackStatus__Latch extern valid" Index="#x6030" Sub="#x02">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__FeedbackStatus__Set counter done" Index="#x6030" Sub="#x03">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__FeedbackStatus__">
+									<Type GUID="{18071995-0000-0000-0000-002000000009}">ARRAY [0..8] OF BIT</Type>
+								</Entry>
+								<Entry Name="DMC__FeedbackStatus__Status of extern latch" Index="#x6030" Sub="#x0d">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__FeedbackStatus__">
+									<Type GUID="{18071995-0000-0000-0000-002000000003}">ARRAY [0..2] OF BIT</Type>
+								</Entry>
+								<Entry Name="DMC__DriveStatus__Ready to enable" Index="#x6030" Sub="#x11">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__DriveStatus__Ready" Index="#x6030" Sub="#x12">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__DriveStatus__Warning" Index="#x6030" Sub="#x13">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__DriveStatus__Error" Index="#x6030" Sub="#x14">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__DriveStatus__Moving positive" Index="#x6030" Sub="#x15">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__DriveStatus__Moving negative" Index="#x6030" Sub="#x16">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__DriveStatus__">
+									<Type GUID="{18071995-0000-0000-0000-002000000005}">ARRAY [0..4] OF BIT</Type>
+								</Entry>
+								<Entry Name="DMC__DriveStatus__Digital input 1" Index="#x6030" Sub="#x1c">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__DriveStatus__Digital input 2" Index="#x6030" Sub="#x1d">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__DriveStatus__">
+									<Type GUID="{18071995-0000-0000-0000-002000000003}">ARRAY [0..2] OF BIT</Type>
+								</Entry>
+								<Entry Name="DMC__PositioningStatus__Busy" Index="#x6030" Sub="#x21">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__PositioningStatus__In-Target" Index="#x6030" Sub="#x22">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__PositioningStatus__Warning" Index="#x6030" Sub="#x23">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__PositioningStatus__Error" Index="#x6030" Sub="#x24">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__PositioningStatus__Calibrated" Index="#x6030" Sub="#x25">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__PositioningStatus__Accelerate" Index="#x6030" Sub="#x26">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__PositioningStatus__Decelerate" Index="#x6030" Sub="#x27">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__PositioningStatus__Ready to execute" Index="#x6030" Sub="#x28">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__PositioningStatus__">
+									<Type GUID="{18071995-0000-0000-0000-002000000008}">ARRAY [0..0] OF BYTE</Type>
+								</Entry>
+								<Entry Name="DMC__Set position" Index="#x6030" Sub="#x31">
+									<Type>LINT</Type>
+								</Entry>
+								<Entry Name="DMC__Set velocity" Index="#x6030" Sub="#x32">
+									<Type>INT</Type>
+								</Entry>
+								<Entry Name="DMC__Actual drive time" Index="#x6030" Sub="#x33">
+									<Type>UDINT</Type>
+								</Entry>
+								<Entry Name="DMC__Actual position lag" Index="#x6030" Sub="#x34">
+									<Type>LINT</Type>
+								</Entry>
+								<Entry Name="DMC__Actual velocity" Index="#x6030" Sub="#x35">
+									<Type>INT</Type>
+								</Entry>
+								<Entry Name="DMC__Actual position" Index="#x6030" Sub="#x36">
+									<Type>LINT</Type>
+								</Entry>
+								<Entry Name="DMC__Error id" Index="#x6030" Sub="#x37">
+									<Type>UDINT</Type>
+								</Entry>
+								<Entry Name="DMC__Input cycle counter" Index="#x6030" Sub="#x38">
+									<Type>USINT</Type>
+								</Entry>
+								<Entry Name="DMC__">
+									<Type GUID="{18071995-0000-0000-0000-002000000008}">ARRAY [0..0] OF BYTE</Type>
+								</Entry>
+								<Entry Name="DMC__Latch value" Index="#x6030" Sub="#x3a">
+									<Type>LINT</Type>
+								</Entry>
+								<Entry Name="DMC__Cyclic info data 1" Index="#x6030" Sub="#x3b">
+									<Type>INT</Type>
+								</Entry>
+								<Entry Name="DMC__Cyclic info data 2" Index="#x6030" Sub="#x3c">
+									<Type>INT</Type>
+								</Entry>
+								<Entry Name="DMC__">
+									<Type GUID="{18071995-0000-0000-0000-002000000040}">ARRAY [0..7] OF BYTE</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="DMC Inputs 32 Bit" Index="#x1a31" Flags="#x0010">
+								<ExcludePdo>#x1a00</ExcludePdo>
+								<ExcludePdo>#x1a01</ExcludePdo>
+								<ExcludePdo>#x1a02</ExcludePdo>
+								<ExcludePdo>#x1a03</ExcludePdo>
+								<ExcludePdo>#x1a04</ExcludePdo>
+								<ExcludePdo>#x1a05</ExcludePdo>
+								<ExcludePdo>#x1a06</ExcludePdo>
+								<ExcludePdo>#x1a07</ExcludePdo>
+								<ExcludePdo>#x1a08</ExcludePdo>
+								<ExcludePdo>#x1a09</ExcludePdo>
+								<ExcludePdo>#x1a0a</ExcludePdo>
+								<ExcludePdo>#x1a0b</ExcludePdo>
+								<ExcludePdo>#x1a0c</ExcludePdo>
+								<ExcludePdo>#x1a0e</ExcludePdo>
+								<ExcludePdo>#x1a30</ExcludePdo>
+								<Entry Name="DMC__FeedbackStatus__">
+									<Type GUID="{18071995-0000-0000-0000-002000000001}">ARRAY [0..0] OF BIT</Type>
+								</Entry>
+								<Entry Name="DMC__FeedbackStatus__Latch extern valid" Index="#x6030" Sub="#x02">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__FeedbackStatus__Set counter done" Index="#x6030" Sub="#x03">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__FeedbackStatus__">
+									<Type GUID="{18071995-0000-0000-0000-002000000009}">ARRAY [0..8] OF BIT</Type>
+								</Entry>
+								<Entry Name="DMC__FeedbackStatus__Status of extern latch" Index="#x6030" Sub="#x0d">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__FeedbackStatus__">
+									<Type GUID="{18071995-0000-0000-0000-002000000003}">ARRAY [0..2] OF BIT</Type>
+								</Entry>
+								<Entry Name="DMC__DriveStatus__Ready to enable" Index="#x6030" Sub="#x11">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__DriveStatus__Ready" Index="#x6030" Sub="#x12">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__DriveStatus__Warning" Index="#x6030" Sub="#x13">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__DriveStatus__Error" Index="#x6030" Sub="#x14">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__DriveStatus__Moving positive" Index="#x6030" Sub="#x15">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__DriveStatus__Moving negative" Index="#x6030" Sub="#x16">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__DriveStatus__">
+									<Type GUID="{18071995-0000-0000-0000-002000000005}">ARRAY [0..4] OF BIT</Type>
+								</Entry>
+								<Entry Name="DMC__DriveStatus__Digital input 1" Index="#x6030" Sub="#x1c">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__DriveStatus__Digital input 2" Index="#x6030" Sub="#x1d">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__DriveStatus__">
+									<Type GUID="{18071995-0000-0000-0000-002000000003}">ARRAY [0..2] OF BIT</Type>
+								</Entry>
+								<Entry Name="DMC__PositioningStatus__Busy" Index="#x6030" Sub="#x21">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__PositioningStatus__In-Target" Index="#x6030" Sub="#x22">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__PositioningStatus__Warning" Index="#x6030" Sub="#x23">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__PositioningStatus__Error" Index="#x6030" Sub="#x24">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__PositioningStatus__Calibrated" Index="#x6030" Sub="#x25">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__PositioningStatus__Accelerate" Index="#x6030" Sub="#x26">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__PositioningStatus__Decelerate" Index="#x6030" Sub="#x27">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__PositioningStatus__Ready to execute" Index="#x6030" Sub="#x28">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__PositioningStatus__">
+									<Type GUID="{18071995-0000-0000-0000-002000000008}">ARRAY [0..0] OF BYTE</Type>
+								</Entry>
+								<Entry Name="DMC__Set position" Index="#x6030" Sub="#x31">
+									<Type>DINT</Type>
+								</Entry>
+								<Entry Name="DMC__">
+									<Type GUID="{18071995-0000-0000-0000-002000000020}">ARRAY [0..3] OF BYTE</Type>
+								</Entry>
+								<Entry Name="DMC__Set velocity" Index="#x6030" Sub="#x32">
+									<Type>INT</Type>
+								</Entry>
+								<Entry Name="DMC__Actual drive time" Index="#x6030" Sub="#x33">
+									<Type>UDINT</Type>
+								</Entry>
+								<Entry Name="DMC__Actual position lag" Index="#x6030" Sub="#x34">
+									<Type>DINT</Type>
+								</Entry>
+								<Entry Name="DMC__">
+									<Type GUID="{18071995-0000-0000-0000-002000000020}">ARRAY [0..3] OF BYTE</Type>
+								</Entry>
+								<Entry Name="DMC__Actual velocity" Index="#x6030" Sub="#x35">
+									<Type>INT</Type>
+								</Entry>
+								<Entry Name="DMC__Actual position" Index="#x6030" Sub="#x36">
+									<Type>DINT</Type>
+								</Entry>
+								<Entry Name="DMC__">
+									<Type GUID="{18071995-0000-0000-0000-002000000020}">ARRAY [0..3] OF BYTE</Type>
+								</Entry>
+								<Entry Name="DMC__Error id" Index="#x6030" Sub="#x37">
+									<Type>UDINT</Type>
+								</Entry>
+								<Entry Name="DMC__Input cycle counter" Index="#x6030" Sub="#x38">
+									<Type>USINT</Type>
+								</Entry>
+								<Entry Name="DMC__">
+									<Type GUID="{18071995-0000-0000-0000-002000000008}">ARRAY [0..0] OF BYTE</Type>
+								</Entry>
+								<Entry Name="DMC__Latch value" Index="#x6030" Sub="#x3a">
+									<Type>DINT</Type>
+								</Entry>
+								<Entry Name="DMC__">
+									<Type GUID="{18071995-0000-0000-0000-002000000020}">ARRAY [0..3] OF BYTE</Type>
+								</Entry>
+								<Entry Name="DMC__Cyclic info data 1" Index="#x6030" Sub="#x3b">
+									<Type>INT</Type>
+								</Entry>
+								<Entry Name="DMC__Cyclic info data 2" Index="#x6030" Sub="#x3c">
+									<Type>INT</Type>
+								</Entry>
+								<Entry Name="DMC__">
+									<Type GUID="{18071995-0000-0000-0000-002000000040}">ARRAY [0..7] OF BYTE</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="DRV Controlword" Index="#x1600" InOut="1" Flags="#x0010" SyncMan="2">
+								<Entry Name="Controlword" Index="#x7010" Sub="#x01">
+									<Type>UINT</Type>
+									<Comment><![CDATA[Bit 0 : Switch on
+Bit 1 : Enable voltage
+Bit 2 : reserved
+Bit 3 : Enable operation
+Bit 4 - 6 : reserved
+Bit 7 : Fault reset
+Bit 8 - 15 : reserved]]></Comment>
+								</Entry>
+							</Pdo>
+							<Pdo Name="DRV Target velocity" Index="#x1601" InOut="1" Flags="#x0010">
+								<Entry Name="Target velocity" Index="#x7010" Sub="#x06">
+									<Type>DINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="DRV Target torque" Index="#x1602" InOut="1" Flags="#x0010">
+								<Entry Name="Target torque" Index="#x7010" Sub="#x09">
+									<Type>INT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="DRV Commutation angle" Index="#x1603" InOut="1" Flags="#x0010">
+								<Entry Name="Commutation angle" Index="#x7010" Sub="#x0e">
+									<Type>UINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="DRV Torque limitation" Index="#x1604" InOut="1" Flags="#x0010">
+								<Entry Name="Torque limitation" Index="#x7010" Sub="#x0b">
+									<Type>UINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="DRV Torque offset" Index="#x1605" InOut="1" Flags="#x0010">
+								<Entry Name="Torque offset" Index="#x7010" Sub="#x0a">
+									<Type>INT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="DRV Target position" Index="#x1606" InOut="1" Flags="#x0010" SyncMan="2">
+								<Entry Name="Target position" Index="#x7010" Sub="#x05">
+									<Type>UDINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="FB Touch probe control" Index="#x1607" InOut="1" Flags="#x0010">
+								<Entry Name="Touch probe function__TP1 Enable" Index="#x7001" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Touch probe function__TP1 Continous" Index="#x7001" Sub="#x02">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Touch probe function__TP1 Trigger mode" Index="#x7001" Sub="#x03">
+									<Type>BIT2</Type>
+								</Entry>
+								<Entry Name="Touch probe function__TP1 Enable pos edge" Index="#x7001" Sub="#x05">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Touch probe function__TP1 Enable neg edge" Index="#x7001" Sub="#x06">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Touch probe function__">
+									<Type GUID="{18071995-0000-0000-0000-002000000002}">ARRAY [0..1] OF BIT</Type>
+								</Entry>
+								<Entry Name="Touch probe function__TP2 Enable" Index="#x7001" Sub="#x09">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Touch probe function__TP2 Continous" Index="#x7001" Sub="#x0a">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Touch probe function__TP2 Trigger mode" Index="#x7001" Sub="#x0b">
+									<Type>BIT2</Type>
+								</Entry>
+								<Entry Name="Touch probe function__TP2 Enable pos edge" Index="#x7001" Sub="#x0d">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Touch probe function__TP2 Enable neg edge" Index="#x7001" Sub="#x0e">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Touch probe function__">
+									<Type GUID="{18071995-0000-0000-0000-002000000002}">ARRAY [0..1] OF BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="DRV Modes of operation" Index="#x1608" InOut="1" Flags="#x0010">
+								<Entry Name="Modes of operation" Index="#x7010" Sub="#x03">
+									<Type>USINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="DMC Outputs" Index="#x1630" InOut="1" Flags="#x0010">
+								<ExcludePdo>#x1600</ExcludePdo>
+								<ExcludePdo>#x1601</ExcludePdo>
+								<ExcludePdo>#x1602</ExcludePdo>
+								<ExcludePdo>#x1603</ExcludePdo>
+								<ExcludePdo>#x1604</ExcludePdo>
+								<ExcludePdo>#x1605</ExcludePdo>
+								<ExcludePdo>#x1606</ExcludePdo>
+								<ExcludePdo>#x1607</ExcludePdo>
+								<ExcludePdo>#x1608</ExcludePdo>
+								<ExcludePdo>#x1631</ExcludePdo>
+								<Entry Name="DMC__FeedbackControl__">
+									<Type GUID="{18071995-0000-0000-0000-002000000001}">ARRAY [0..0] OF BIT</Type>
+								</Entry>
+								<Entry Name="DMC__FeedbackControl__Enable latch extern on positive edge" Index="#x7030" Sub="#x02">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__FeedbackControl__Set counter" Index="#x7030" Sub="#x03">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__FeedbackControl__Enable latch extern on negative edge" Index="#x7030" Sub="#x04">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__FeedbackControl__">
+									<Type GUID="{18071995-0000-0000-0000-00200000000C}">ARRAY [0..11] OF BIT</Type>
+								</Entry>
+								<Entry Name="DMC__DriveControl__Enable" Index="#x7030" Sub="#x11">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__DriveControl__Reset" Index="#x7030" Sub="#x12">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__DriveControl__">
+									<Type GUID="{18071995-0000-0000-0000-00200000000E}">ARRAY [0..13] OF BIT</Type>
+								</Entry>
+								<Entry Name="DMC__PositioningControl__Execute" Index="#x7030" Sub="#x21">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__PositioningControl__Emergency stop" Index="#x7030" Sub="#x22">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__PositioningControl__">
+									<Type GUID="{18071995-0000-0000-0000-00200000000E}">ARRAY [0..13] OF BIT</Type>
+								</Entry>
+								<Entry Name="DMC__Set counter value" Index="#x7030" Sub="#x31">
+									<Type>LINT</Type>
+								</Entry>
+								<Entry Name="DMC__Target position" Index="#x7030" Sub="#x32">
+									<Type>LINT</Type>
+								</Entry>
+								<Entry Name="DMC__Target velocity" Index="#x7030" Sub="#x33">
+									<Type>INT</Type>
+								</Entry>
+								<Entry Name="DMC__Start type" Index="#x7030" Sub="#x34">
+									<Type>UINT</Type>
+								</Entry>
+								<Entry Name="DMC__Target acceleration" Index="#x7030" Sub="#x35">
+									<Type>UINT</Type>
+								</Entry>
+								<Entry Name="DMC__Target deceleration" Index="#x7030" Sub="#x36">
+									<Type>UINT</Type>
+								</Entry>
+								<Entry Name="DMC__">
+									<Type GUID="{18071995-0000-0000-0000-002000000050}">ARRAY [0..9] OF BYTE</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="DMC Outputs 32 Bit" Index="#x1631" InOut="1" Flags="#x0010">
+								<ExcludePdo>#x1600</ExcludePdo>
+								<ExcludePdo>#x1601</ExcludePdo>
+								<ExcludePdo>#x1602</ExcludePdo>
+								<ExcludePdo>#x1603</ExcludePdo>
+								<ExcludePdo>#x1604</ExcludePdo>
+								<ExcludePdo>#x1605</ExcludePdo>
+								<ExcludePdo>#x1606</ExcludePdo>
+								<ExcludePdo>#x1607</ExcludePdo>
+								<ExcludePdo>#x1608</ExcludePdo>
+								<ExcludePdo>#x1630</ExcludePdo>
+								<Entry Name="DMC__FeedbackControl__">
+									<Type GUID="{18071995-0000-0000-0000-002000000001}">ARRAY [0..0] OF BIT</Type>
+								</Entry>
+								<Entry Name="DMC__FeedbackControl__Enable latch extern on positive edge" Index="#x7030" Sub="#x02">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__FeedbackControl__Set counter" Index="#x7030" Sub="#x03">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__FeedbackControl__Enable latch extern on negative edge" Index="#x7030" Sub="#x04">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__FeedbackControl__">
+									<Type GUID="{18071995-0000-0000-0000-00200000000C}">ARRAY [0..11] OF BIT</Type>
+								</Entry>
+								<Entry Name="DMC__DriveControl__Enable" Index="#x7030" Sub="#x11">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__DriveControl__Reset" Index="#x7030" Sub="#x12">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__DriveControl__">
+									<Type GUID="{18071995-0000-0000-0000-00200000000E}">ARRAY [0..13] OF BIT</Type>
+								</Entry>
+								<Entry Name="DMC__PositioningControl__Execute" Index="#x7030" Sub="#x21">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__PositioningControl__Emergency stop" Index="#x7030" Sub="#x22">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="DMC__PositioningControl__">
+									<Type GUID="{18071995-0000-0000-0000-00200000000E}">ARRAY [0..13] OF BIT</Type>
+								</Entry>
+								<Entry Name="DMC__Set counter value" Index="#x7030" Sub="#x31">
+									<Type>DINT</Type>
+								</Entry>
+								<Entry Name="DMC__">
+									<Type GUID="{18071995-0000-0000-0000-002000000020}">ARRAY [0..3] OF BYTE</Type>
+								</Entry>
+								<Entry Name="DMC__Target position" Index="#x7030" Sub="#x32">
+									<Type>DINT</Type>
+								</Entry>
+								<Entry Name="DMC__">
+									<Type GUID="{18071995-0000-0000-0000-002000000020}">ARRAY [0..3] OF BYTE</Type>
+								</Entry>
+								<Entry Name="DMC__Target velocity" Index="#x7030" Sub="#x33">
+									<Type>INT</Type>
+								</Entry>
+								<Entry Name="DMC__Start type" Index="#x7030" Sub="#x34">
+									<Type>UINT</Type>
+								</Entry>
+								<Entry Name="DMC__Target acceleration" Index="#x7030" Sub="#x35">
+									<Type>UINT</Type>
+								</Entry>
+								<Entry Name="DMC__Target deceleration" Index="#x7030" Sub="#x36">
+									<Type>UINT</Type>
+								</Entry>
+								<Entry Name="DMC__">
+									<Type GUID="{18071995-0000-0000-0000-002000000050}">ARRAY [0..9] OF BYTE</Type>
+								</Entry>
+							</Pdo>
+							<CoeProfile ProfileNo="33624969" DisplayName="Servo interface"/>
+							<CoeProfile ProfileNo="48632713" DisplayName="Servo interface"/>
+							<CoeProfile ProfileNo="49157001"/>
+						</EtherCAT>
+					</Box>
+					<Box Id="14" BoxType="9099" BoxFlags="#x00000020">
+						<Name>Term 14 (EL7047)</Name>
+						<ImageId>1004</ImageId>
+						<EtherCAT SlaveType="2" PdiType="#x0405" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="39" FoeType="1" VendorId="#x00000002" ProductCode="#x1b873052" RevisionNo="#x00150000" InfoDataAddr="true" InfoDataSoeDS401="true" RepeatSupport="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL7047 1Ch. Stepper motor output stage (50V, 5A)" Desc="EL7047" PortABoxInfo="#x01000006">
+							<SyncMan>001080002600010001000000400080008000001026010000</SyncMan>
+							<SyncMan>801080002200010002000000400080008000801022010000</SyncMan>
+							<SyncMan>00110c002400010003000000000000000800001124010000</SyncMan>
+							<SyncMan>80110c002000010004000000000000000800801120010000</SyncMan>
+							<Fmmu>0000000000000000001100020100000001000000000000000000000000000000</Fmmu>
+							<Fmmu>0000000000000000801100010100000002000000000000000000000000000000</Fmmu>
+							<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
+							<BootStrapData>0010f400f410f400</BootStrapData>
+							<DcMode>53796e6368726f6e00000000000000004672656552756e2f534d2d53796e6368726f6e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</DcMode>
+							<DcMode>4443000000000000000000000000000044432d53796e6368726f6e000000000000000000000000000000000000000000000000000000000000000000000000030100000000000000000000000000000000000000000000000000000000000000</DcMode>
+							<MBoxUserCmdData>004003000c0000000000000003000000000000000000000000000000000000002081f001040000000000150000</MBoxUserCmdData>
+							<MBoxUserCmdData>004003000a00000000000000030010000000000000000000000000000000000020f3100502000000010000</MBoxUserCmdData>
+							<Pdo Name="ENC Status compact" Index="#x1a00" Flags="#x0010">
+								<Entry Name="Latch C valid" Index="#x6000" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Latch extern valid" Index="#x6000" Sub="#x02">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Set counter done" Index="#x6000" Sub="#x03">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Counter underflow" Index="#x6000" Sub="#x04">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Counter overflow" Index="#x6000" Sub="#x05">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry>
+									<Type GUID="{18071995-0000-0000-0000-002000000002}">ARRAY [0..1] OF BIT</Type>
+								</Entry>
+								<Entry Name="Extrapolation stall" Index="#x6000" Sub="#x08">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status of input A" Index="#x6000" Sub="#x09">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status of input B" Index="#x6000" Sub="#x0a">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status of input C" Index="#x6000" Sub="#x0b">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry>
+									<Type GUID="{18071995-0000-0000-0000-002000000001}">ARRAY [0..0] OF BIT</Type>
+								</Entry>
+								<Entry Name="Status of extern latch" Index="#x6000" Sub="#x0d">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Sync error" Index="#x6000" Sub="#x0e">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry>
+									<Type GUID="{18071995-0000-0000-0000-002000000001}">ARRAY [0..0] OF BIT</Type>
+								</Entry>
+								<Entry Name="TxPDO Toggle" Index="#x6000" Sub="#x10">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Counter value" Index="#x6000" Sub="#x11">
+									<Type>UINT</Type>
+								</Entry>
+								<Entry Name="Latch value" Index="#x6000" Sub="#x12">
+									<Type>UINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="ENC Status" Index="#x1a01" Flags="#x0010" SyncMan="3">
+								<Entry Name="Latch C valid" Index="#x6000" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Latch extern valid" Index="#x6000" Sub="#x02">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Set counter done" Index="#x6000" Sub="#x03">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Counter underflow" Index="#x6000" Sub="#x04">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Counter overflow" Index="#x6000" Sub="#x05">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry>
+									<Type GUID="{18071995-0000-0000-0000-002000000002}">ARRAY [0..1] OF BIT</Type>
+								</Entry>
+								<Entry Name="Extrapolation stall" Index="#x6000" Sub="#x08">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status of input A" Index="#x6000" Sub="#x09">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status of input B" Index="#x6000" Sub="#x0a">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status of input C" Index="#x6000" Sub="#x0b">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry>
+									<Type GUID="{18071995-0000-0000-0000-002000000001}">ARRAY [0..0] OF BIT</Type>
+								</Entry>
+								<Entry Name="Status of extern latch" Index="#x6000" Sub="#x0d">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Sync error" Index="#x6000" Sub="#x0e">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry>
+									<Type GUID="{18071995-0000-0000-0000-002000000001}">ARRAY [0..0] OF BIT</Type>
+								</Entry>
+								<Entry Name="TxPDO Toggle" Index="#x6000" Sub="#x10">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Counter value" Index="#x6000" Sub="#x11">
+									<Type>UDINT</Type>
+								</Entry>
+								<Entry Name="Latch value" Index="#x6000" Sub="#x12">
+									<Type>UDINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="ENC Timest. compact" Index="#x1a02" Flags="#x0010">
+								<Entry Name="Timestamp" Index="#x6000" Sub="#x16">
+									<Type>UDINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="STM Status" Index="#x1a03" Flags="#x0010" SyncMan="3">
+								<Entry Name="Ready to enable" Index="#x6010" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Ready" Index="#x6010" Sub="#x02">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Warning" Index="#x6010" Sub="#x03">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Error" Index="#x6010" Sub="#x04">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Moving positive" Index="#x6010" Sub="#x05">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Moving negative" Index="#x6010" Sub="#x06">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Torque reduced" Index="#x6010" Sub="#x07">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Motor stall" Index="#x6010" Sub="#x08">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry>
+									<Type GUID="{18071995-0000-0000-0000-002000000003}">ARRAY [0..2] OF BIT</Type>
+								</Entry>
+								<Entry Name="Digital input 1" Index="#x6010" Sub="#x0c">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Digital input 2" Index="#x6010" Sub="#x0d">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Sync error" Index="#x6010" Sub="#x0e">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry>
+									<Type GUID="{18071995-0000-0000-0000-002000000001}">ARRAY [0..0] OF BIT</Type>
+								</Entry>
+								<Entry Name="TxPDO Toggle" Index="#x6010" Sub="#x10">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="STM Synchron info data" Index="#x1a04" Flags="#x0010">
+								<Entry Name="Info data 1" Index="#x6010" Sub="#x11">
+									<Type>UINT</Type>
+								</Entry>
+								<Entry Name="Info data 2" Index="#x6010" Sub="#x12">
+									<Type>UINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="STM Motor load" Index="#x1a05" Flags="#x0010">
+								<Entry Name="Motor load" Index="#x6010" Sub="#x13">
+									<Type>INT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="POS Status compact" Index="#x1a06" Flags="#x0010">
+								<Entry Name="Busy" Index="#x6020" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="In-Target" Index="#x6020" Sub="#x02">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Warning" Index="#x6020" Sub="#x03">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Error" Index="#x6020" Sub="#x04">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Calibrated" Index="#x6020" Sub="#x05">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Accelerate" Index="#x6020" Sub="#x06">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Decelerate" Index="#x6020" Sub="#x07">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Ready to execute" Index="#x6020" Sub="#x08">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry>
+									<Type GUID="{18071995-0000-0000-0000-002000000008}">ARRAY [0..0] OF BYTE</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="POS Status" Index="#x1a07" Flags="#x0010">
+								<Entry Name="Busy" Index="#x6020" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="In-Target" Index="#x6020" Sub="#x02">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Warning" Index="#x6020" Sub="#x03">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Error" Index="#x6020" Sub="#x04">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Calibrated" Index="#x6020" Sub="#x05">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Accelerate" Index="#x6020" Sub="#x06">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Decelerate" Index="#x6020" Sub="#x07">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Ready to execute" Index="#x6020" Sub="#x08">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry>
+									<Type GUID="{18071995-0000-0000-0000-002000000008}">ARRAY [0..0] OF BYTE</Type>
+								</Entry>
+								<Entry Name="Actual position" Index="#x6020" Sub="#x11">
+									<Type>UDINT</Type>
+								</Entry>
+								<Entry Name="Actual velocity" Index="#x6020" Sub="#x21">
+									<Type>INT</Type>
+								</Entry>
+								<Entry Name="Actual drive time" Index="#x6020" Sub="#x22">
+									<Type>UDINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="STM Internal position" Index="#x1a08" Flags="#x0010">
+								<Entry Name="Internal position" Index="#x6010" Sub="#x14">
+									<Type>UDINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="STM External position" Index="#x1a09" Flags="#x0010">
+								<Entry Name="External position" Index="#x6010" Sub="#x15">
+									<Type>UDINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="POS Actual position lag" Index="#x1a0a" Flags="#x0010">
+								<Entry Name="Actual position lag" Index="#x6020" Sub="#x23">
+									<Type>DINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="ENC Control compact" Index="#x1600" InOut="1" Flags="#x0010">
+								<Entry Name="Enable latch C" Index="#x7000" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Enable latch extern on positive edge" Index="#x7000" Sub="#x02">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Set counter" Index="#x7000" Sub="#x03">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Enable latch extern on negative edge" Index="#x7000" Sub="#x04">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry>
+									<Type GUID="{18071995-0000-0000-0000-00200000000C}">ARRAY [0..11] OF BIT</Type>
+								</Entry>
+								<Entry Name="Set counter value" Index="#x7000" Sub="#x11">
+									<Type>UINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="ENC Control" Index="#x1601" InOut="1" Flags="#x0010" SyncMan="2">
+								<Entry Name="Enable latch C" Index="#x7000" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Enable latch extern on positive edge" Index="#x7000" Sub="#x02">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Set counter" Index="#x7000" Sub="#x03">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Enable latch extern on negative edge" Index="#x7000" Sub="#x04">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry>
+									<Type GUID="{18071995-0000-0000-0000-00200000000C}">ARRAY [0..11] OF BIT</Type>
+								</Entry>
+								<Entry Name="Set counter value" Index="#x7000" Sub="#x11">
+									<Type>UDINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="STM Control" Index="#x1602" InOut="1" Flags="#x0010" SyncMan="2">
+								<Entry Name="Enable" Index="#x7010" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Reset" Index="#x7010" Sub="#x02">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Reduce torque" Index="#x7010" Sub="#x03">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry>
+									<Type GUID="{18071995-0000-0000-0000-002000000008}">ARRAY [0..0] OF BYTE</Type>
+								</Entry>
+								<Entry Name="Digital output 1" Index="#x7010" Sub="#x0c">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry>
+									<Type GUID="{18071995-0000-0000-0000-002000000004}">ARRAY [0..3] OF BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="STM Position" Index="#x1603" InOut="1" Flags="#x0010" SyncMan="2">
+								<Entry Name="Position" Index="#x7010" Sub="#x11">
+									<Type>UDINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="STM Velocity" Index="#x1604" InOut="1" Flags="#x0010">
+								<Entry Name="Velocity" Index="#x7010" Sub="#x21">
+									<Type>INT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="POS Control compact" Index="#x1605" InOut="1" Flags="#x0010">
+								<Entry Name="Execute" Index="#x7020" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Emergency stop" Index="#x7020" Sub="#x02">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry>
+									<Type GUID="{18071995-0000-0000-0000-00200000000E}">ARRAY [0..13] OF BIT</Type>
+								</Entry>
+								<Entry Name="Target position" Index="#x7020" Sub="#x11">
+									<Type>UDINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="POS Control" Index="#x1606" InOut="1" Flags="#x0010">
+								<Entry Name="Execute" Index="#x7020" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Emergency stop" Index="#x7020" Sub="#x02">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry>
+									<Type GUID="{18071995-0000-0000-0000-00200000000E}">ARRAY [0..13] OF BIT</Type>
+								</Entry>
+								<Entry Name="Target position" Index="#x7020" Sub="#x11">
+									<Type>UDINT</Type>
+								</Entry>
+								<Entry Name="Velocity" Index="#x7020" Sub="#x21">
+									<Type>INT</Type>
+								</Entry>
+								<Entry Name="Start type" Index="#x7020" Sub="#x22">
+									<Type>UINT</Type>
+								</Entry>
+								<Entry Name="Acceleration" Index="#x7020" Sub="#x23">
+									<Type>UINT</Type>
+								</Entry>
+								<Entry Name="Deceleration" Index="#x7020" Sub="#x24">
+									<Type>UINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="POS Control 2" Index="#x1607" InOut="1" Flags="#x0010">
+								<Entry>
+									<Type GUID="{18071995-0000-0000-0000-002000000002}">ARRAY [0..1] OF BIT</Type>
+								</Entry>
+								<Entry Name="Enable auto start" Index="#x7021" Sub="#x03">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry>
+									<Type GUID="{18071995-0000-0000-0000-00200000000D}">ARRAY [0..12] OF BIT</Type>
+								</Entry>
+								<Entry Name="Target position" Index="#x7021" Sub="#x11">
+									<Type>UDINT</Type>
+								</Entry>
+								<Entry Name="Velocity" Index="#x7021" Sub="#x21">
+									<Type>INT</Type>
+								</Entry>
+								<Entry Name="Start type" Index="#x7021" Sub="#x22">
+									<Type>UINT</Type>
+								</Entry>
+								<Entry Name="Acceleration" Index="#x7021" Sub="#x23">
+									<Type>UINT</Type>
+								</Entry>
+								<Entry Name="Deceleration" Index="#x7021" Sub="#x24">
+									<Type>UINT</Type>
+								</Entry>
+							</Pdo>
+							<CoeProfile ProfileNo="33493897" DisplayName="Stepper interface"/>
+							<CoeProfile ProfileNo="46076809" DisplayName="Stepper interface"/>
+							<CoeProfile ProfileNo="46142345" DisplayName="Positioning interfa"/>
+						</EtherCAT>
+					</Box>
+					<Box Id="8" BoxType="9099">
+						<Name>Term 8 (EL9011)</Name>
+						<ImageId>1005</ImageId>
+						<EtherCAT CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x23333050" InfoDataState="false" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL9011 End Terminal" Desc="EL9011" PortABoxInfo="#x0100000e"/>
+					</Box>
+				</Box>
+				<EtherCAT DcSyncMode="3"/>
+			</Device>
+			<Device Id="1" Disabled="true" DevType="111" DevFlags="#x0003" AmsPort="28673" AmsNetId="192.168.4.1.2.1" RemoteName="Device 1 (EtherCAT)" InfoImageId="5">
+				<Name>Device 1 (EtherCAT)</Name>
+				<AddressInfo>
+					<Pnp>
+						<DeviceDesc>ECAT (TwinCAT-Intel PCI Ethernet Adapter (Gigabit))</DeviceDesc>
+						<DeviceName>\DEVICE\{6845A9BB-0529-4BB9-A3DB-550135C11E83}</DeviceName>
+						<DeviceData>0001056fc1bc</DeviceData>
+					</Pnp>
+				</AddressInfo>
+				<Image Id="3" AddrType="9" ImageType="3">
+					<Name>Image</Name>
+				</Image>
+				<Box Id="7" BoxType="9099" BoxFlags="#x00000020">
+					<Name>Drive 7 (IndraDrive MPB20)</Name>
+					<ImageId>38</ImageId>
+					<EtherCAT SlaveType="2" PdiType="#x0006" MboxDataLinkLayer="true" StateMBoxPolling="true" CfgModeSafeOp="true" DownloadPdoCfg="true" CycleMBoxPollingTime="0" EoeType="3" FoeType="1" SoeChannels="1" VendorId="#x00000024" ProductCode="#x00242804" RevisionNo="#x00000003" InfoDataAddr="true" InfoDataSoeDS401="true" InfoDataDcTimes="true" EnableWdDivider0400="true" EnableWdTime0420="true" TimeoutStateChange1="5000" TimeoutStateChange2="25000" TimeoutStateChange4="500" PortPhys="17" IdentificationAdo="18" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="IndraDrive MPB20" Desc="IndraDrive MPB20" PortABoxInfo="#x00ffffff">
+						<SyncMan>0018ea002600010001000000ea00ea00ea00001826010000</SyncMan>
+						<SyncMan>001aea002200010002000000ea00ea00ea00001a22010000</SyncMan>
+						<SyncMan>001006006400010003000000000000000000001064010000</SyncMan>
+						<SyncMan>001106006200010004000000000000000000001162010000</SyncMan>
+						<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
+						<Fmmu>0000000000000000001000020100000001000000000000000000000000000000</Fmmu>
+						<Fmmu>0000000000000000001100010100000002000000000000000000000000000000</Fmmu>
+						<SwitchPortData>01000000e903fea90000ffff7a5bfea90000000044726976655f375f5f496e647261440000000000000000000000000000000000000000000000000000000000</SwitchPortData>
+						<BootStrapData>0018ea00001aea00</BootStrapData>
+						<DcData>000500000000000020a107000000000001000000000000000000000000000000</DcData>
+						<DcMode>446353796e633530307573000000000044432d53796e6368726f6e202853796e633053686966742035303075732900000000000020a1070000000000000000050100000000000000000000000000000000000000000000000000000000000000</DcMode>
+						<DcMode>446353796e633235307573000000000044432d53796e6368726f6e202853796e633053686966742032353075732900000000000090d0030000000000000000050100000000000000000000000000000000000000000000000000000000000000</DcMode>
+						<DcMode>446353796e633130303075730000000044432d53796e6368726f6e202853796e633053686966742031303030757329000000000040420f0000000000000000050100000000000000000000000000000000000000000000000000000000000000</DcMode>
+						<DcMode>4672656552756e000000000000000000467265652052756e20286e6f2073796e6368726f6e697a6174696f6e29000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000</DcMode>
+						<MBoxUserCmdData>020005000a0000000d00000003000000000000000000000000000000000000000340010000000000d0074e43206379636c652074696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>020005000a0000000e000000030000000000000000000000000000000000000003402000000000000b004f7065726174696f6e206d6f646500</MBoxUserCmdData>
+						<Pdo Name="AT" Index="#x0010" Flags="#x0001" SyncMan="3">
+							<Entry Name="Drive status word" Index="#x0087" Flags="#x00000800">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="Position feedback value 1" Index="#x0033">
+								<Type>DINT</Type>
+							</Entry>
+						</Pdo>
+						<Pdo Name="MDT" Index="#x0018" InOut="1" Flags="#x0001" SyncMan="2">
+							<Entry Name="Master control word" Index="#x0086" Flags="#x00000800">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="Position command value" Index="#x002f">
+								<Type>DINT</Type>
+							</Entry>
+						</Pdo>
+					</EtherCAT>
+				</Box>
+				<EtherCAT DcSyncMode="3" EnableVirtualSwitch="true" MaxSwitchPorts="2" MaxSwitchFrames="120" MaxSwitchMACs="100"/>
+			</Device>
+			<Device Id="2" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="192.168.4.1.3.1" RemoteName="ECAT" InfoImageId="7">
+				<Name>ECAT</Name>
+				<AddressInfo>
+					<Ccat>
+						<Address>-268435456</Address>
+						<Offset>131072</Offset>
+						<Size>8192</Size>
+						<BaseAddr>0</BaseAddr>
+						<BusNo>4</BusNo>
+						<SlotNo>0</SlotNo>
+						<VendorId>5612</VendorId>
+						<DeviceId>20480</DeviceId>
+						<Dma>
+							<Address>0</Address>
+							<Offset>4096</Offset>
+							<Size>12288</Size>
+							<BaseAddr>2</BaseAddr>
+							<RxChn>0</RxChn>
+							<TxChn>1</TxChn>
+						</Dma>
+						<Identification>
+							<Value>1795167326</Value>
+							<Version>1</Version>
+							<Size>256</Size>
+						</Identification>
+					</Ccat>
+				</AddressInfo>
+				<Image Id="6" AddrType="9" ImageType="3">
+					<Name>Image</Name>
+				</Image>
+				<Box Id="9" BoxType="9099">
+					<Name>EK1200</Name>
+					<ImageId>1006</ImageId>
+					<EtherCAT PdiType="#x0100" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x04b02c52" RevisionNo="#x00001388" InfoDataState="false" PortPhys="49" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EK1200-5000 EtherCAT Power supply (2A E-Bus)" Desc="EK1200" PortABoxInfo="#x00ffffff"/>
+					<Box Id="10" BoxType="9099">
+						<Name>IA1</Name>
+						<ImageId>7</ImageId>
+						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x03f03052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1008 8Ch. Dig. Input 24V, 3ms" Desc="EL1008" PortABoxInfo="#x01000009">
+							<SyncMan>001001000000010004000000000000000100001000010000</SyncMan>
+							<Fmmu>0000000000000000001000010100000002000000000000000000000000000000</Fmmu>
+							<Pdo Name="Channel 1" Index="#x1a00" Flags="#x0011" SyncMan="0">
+								<Entry Name="Input" Index="#x6000" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 2" Index="#x1a01" Flags="#x0011" SyncMan="0">
+								<Entry Name="Input" Index="#x6010" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 3" Index="#x1a02" Flags="#x0011" SyncMan="0">
+								<Entry Name="Input" Index="#x6020" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 4" Index="#x1a03" Flags="#x0011" SyncMan="0">
+								<Entry Name="Input" Index="#x6030" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 5" Index="#x1a04" Flags="#x0011" SyncMan="0">
+								<Entry Name="Input" Index="#x6040" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 6" Index="#x1a05" Flags="#x0011" SyncMan="0">
+								<Entry Name="Input" Index="#x6050" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 7" Index="#x1a06" Flags="#x0011" SyncMan="0">
+								<Entry Name="Input" Index="#x6060" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 8" Index="#x1a07" Flags="#x0011" SyncMan="0">
+								<Entry Name="Input" Index="#x6070" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+						</EtherCAT>
+					</Box>
+					<Box Id="11" BoxType="9099">
+						<Name>QA1</Name>
+						<ImageId>1001</ImageId>
+						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x07d83052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL2008 8Ch. Dig. Output 24V, 0.5A" Desc="EL2008" PortABoxInfo="#x0100000a">
+							<SyncMan>000f01004400010003000000000000000000000f44090000</SyncMan>
+							<Fmmu>0000000000000000000f00020100000001000000000000000000000000000000</Fmmu>
+							<Pdo Name="Channel 1" Index="#x1600" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x7000" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 2" Index="#x1601" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x7010" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 3" Index="#x1602" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x7020" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 4" Index="#x1603" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x7030" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 5" Index="#x1604" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x7040" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 6" Index="#x1605" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x7050" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 7" Index="#x1606" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x7060" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 8" Index="#x1607" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x7070" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+						</EtherCAT>
+					</Box>
+					<Box Id="12" BoxType="9099">
+						<Name>Term 4 (EL9011)</Name>
+						<ImageId>1005</ImageId>
+						<EtherCAT CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x23333050" InfoDataState="false" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL9011 End Terminal" Desc="EL9011" PortABoxInfo="#x0100000b"/>
+					</Box>
+				</Box>
+				<EtherCAT/>
+			</Device>
+		</Io>
+	</Project>
+	<Mappings>
+		<MappingInfo Identifier="{00000000-2041-0850-4020-500860000403}" Id="#x02030010"/>
+		<MappingInfo Identifier="{00000000-2041-0850-4020-500871000403}" Id="#x02030020"/>
+		<OwnerA Name="TIPC^TcoTixonFeedingTests^TcoTixonFeedingTests Instance">
+			<OwnerB Name="TIID^ECAT">
+				<Link VarA="PlcTask1 Inputs^GVL_iXlinker.ECAT_x.InfoData.AmsNetId" VarB="InfoData^AmsNetId"/>
+				<Link VarA="PlcTask1 Inputs^GVL_iXlinker.ECAT_x.InfoData.CfgSlaveCount" VarB="InfoData^CfgSlaveCount"/>
+				<Link VarA="PlcTask1 Inputs^GVL_iXlinker.ECAT_x.InfoData.ChangeCount" VarB="InfoData^ChangeCount"/>
+				<Link VarA="PlcTask1 Inputs^GVL_iXlinker.ECAT_x.InfoData.DevId" VarB="InfoData^DevId"/>
+				<Link VarA="PlcTask1 Inputs^GVL_iXlinker.ECAT_x.Inputs.DevState" VarB="Inputs^DevState"/>
+				<Link VarA="PlcTask1 Inputs^GVL_iXlinker.ECAT_x.Inputs.Frm0InputToggle" VarB="Inputs^Frm0InputToggle"/>
+				<Link VarA="PlcTask1 Inputs^GVL_iXlinker.ECAT_x.Inputs.Frm0State" VarB="Inputs^Frm0State"/>
+				<Link VarA="PlcTask1 Inputs^GVL_iXlinker.ECAT_x.Inputs.Frm0WcState" VarB="Inputs^Frm0WcState"/>
+				<Link VarA="PlcTask1 Inputs^GVL_iXlinker.ECAT_x.Inputs.SlaveCount" VarB="Inputs^SlaveCount"/>
+				<Link VarA="PlcTask1 Inputs^GVL_iXlinker.ECAT_x.SyncUnits._default.PlcTask1.InfoData.ObjectId" VarB="SyncUnits^&lt;default&gt;^PlcTask1^InfoData^ObjectId"/>
+				<Link VarA="PlcTask1 Inputs^GVL_iXlinker.ECAT_x.SyncUnits._default.PlcTask1.InfoData.SlaveCount" VarB="SyncUnits^&lt;default&gt;^PlcTask1^InfoData^SlaveCount"/>
+				<Link VarA="PlcTask1 Inputs^GVL_iXlinker.ECAT_x.SyncUnits._default.PlcTask1.InfoData.State" VarB="SyncUnits^&lt;default&gt;^PlcTask1^InfoData^State"/>
+				<Link VarA="PlcTask1 Inputs^GVL_iXlinker.ECAT_x.SyncUnits._default.PlcTask1.WcState.WcState" VarB="SyncUnits^&lt;default&gt;^PlcTask1^WcState^WcState"/>
+				<Link VarA="PlcTask1 Outputs^GVL_iXlinker.ECAT_x.Outputs.DevCtrl" VarB="Outputs^DevCtrl"/>
+				<Link VarA="PlcTask1 Outputs^GVL_iXlinker.ECAT_x.Outputs.Frm0Ctrl" VarB="Outputs^Frm0Ctrl"/>
+				<Link VarA="PlcTask1 Outputs^GVL_iXlinker.ECAT_x.Outputs.Frm0WcCtrl" VarB="Outputs^Frm0WcCtrl"/>
+			</OwnerB>
+			<OwnerB Name="TIID^ECAT^EK1200^IA1">
+				<Link VarA="PlcTask1 Inputs^GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_1.Input" VarB="Channel 1^Input"/>
+				<Link VarA="PlcTask1 Inputs^GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_2.Input" VarB="Channel 2^Input"/>
+				<Link VarA="PlcTask1 Inputs^GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_3.Input" VarB="Channel 3^Input"/>
+				<Link VarA="PlcTask1 Inputs^GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_4.Input" VarB="Channel 4^Input"/>
+				<Link VarA="PlcTask1 Inputs^GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_5.Input" VarB="Channel 5^Input"/>
+				<Link VarA="PlcTask1 Inputs^GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_6.Input" VarB="Channel 6^Input"/>
+				<Link VarA="PlcTask1 Inputs^GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_7.Input" VarB="Channel 7^Input"/>
+				<Link VarA="PlcTask1 Inputs^GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_8.Input" VarB="Channel 8^Input"/>
+				<Link VarA="PlcTask1 Inputs^GVL_iXlinker.ECAT_x.EK1200.IA1.InfoData.State" VarB="InfoData^State"/>
+				<Link VarA="PlcTask1 Inputs^GVL_iXlinker.ECAT_x.EK1200.IA1.WcState.InputToggle" VarB="WcState^InputToggle"/>
+				<Link VarA="PlcTask1 Inputs^GVL_iXlinker.ECAT_x.EK1200.IA1.WcState.WcState" VarB="WcState^WcState"/>
+			</OwnerB>
+			<OwnerB Name="TIID^ECAT^EK1200^QA1">
+				<Link VarA="PlcTask1 Inputs^GVL_iXlinker.ECAT_x.EK1200.QA1.InfoData.State" VarB="InfoData^State"/>
+				<Link VarA="PlcTask1 Inputs^GVL_iXlinker.ECAT_x.EK1200.QA1.WcState.WcState" VarB="WcState^WcState"/>
+				<Link VarA="PlcTask1 Outputs^GVL_iXlinker.ECAT_x.EK1200.QA1.Channel_1.Output" VarB="Channel 1^Output"/>
+				<Link VarA="PlcTask1 Outputs^GVL_iXlinker.ECAT_x.EK1200.QA1.Channel_2.Output" VarB="Channel 2^Output"/>
+				<Link VarA="PlcTask1 Outputs^GVL_iXlinker.ECAT_x.EK1200.QA1.Channel_3.Output" VarB="Channel 3^Output"/>
+				<Link VarA="PlcTask1 Outputs^GVL_iXlinker.ECAT_x.EK1200.QA1.Channel_4.Output" VarB="Channel 4^Output"/>
+				<Link VarA="PlcTask1 Outputs^GVL_iXlinker.ECAT_x.EK1200.QA1.Channel_5.Output" VarB="Channel 5^Output"/>
+				<Link VarA="PlcTask1 Outputs^GVL_iXlinker.ECAT_x.EK1200.QA1.Channel_6.Output" VarB="Channel 6^Output"/>
+				<Link VarA="PlcTask1 Outputs^GVL_iXlinker.ECAT_x.EK1200.QA1.Channel_7.Output" VarB="Channel 7^Output"/>
+				<Link VarA="PlcTask1 Outputs^GVL_iXlinker.ECAT_x.EK1200.QA1.Channel_8.Output" VarB="Channel 8^Output"/>
+			</OwnerB>
+		</OwnerA>
+	</Mappings>
+</TcSmProject>

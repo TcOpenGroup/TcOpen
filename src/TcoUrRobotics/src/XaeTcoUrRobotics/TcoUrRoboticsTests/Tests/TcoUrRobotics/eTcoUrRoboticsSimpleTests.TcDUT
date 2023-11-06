@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="eTcoUrRoboticsSimpleTests" Id="{c1207581-4710-0499-1215-86964475da8b}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eTcoUrRoboticsSimpleTests :
+(
+    Restore := 1,
+    CleanUp,
+    Message,
+    PowerDisable,
+    PowerEnable,
+    Reset,
+ 
+	
+    Last
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="TcoTixonGenericConfig" Id="{0af0be9b-2260-0ba2-24e4-cd4df2fb3f48}">
+    <Declaration><![CDATA[TYPE TcoTixonGenericConfig :
+STRUCT
+	  
+		
+		{attribute addProperty Name "<#Blink period#> - T_BLINK"}
+		BlinkTime : TIME := T#500MS;
+		
+		{attribute addProperty Name "<#Feeder empty time to report#> - T_SIG_EMPTY"}
+		FeederEmptyTime : TIME := T#5S;
+		{attribute addProperty Name "<#Buffer empty time to report#> - T_BUF_EMPTY"}
+		BufferEmptyTime : TIME := T#1S;
+		{attribute addProperty Name "<#Buffer full time to report#> - T_BUF_FULL"}
+		BufferFullTime : TIME := T#1S;
+		{attribute addProperty Name "<#Buffer blow on start#> - T_BUF_BLOW_ON"}
+		BufferBlowStartTime : TIME := T#300MS;
+		{attribute addProperty Name "<#Buffer time to idle#> - T_BUF_IDLE"}
+		BufferIdleTime : TIME := T#5S;
+		{attribute addProperty Name "<#Buffer full blow time after#> - T_BUF_BLOW_FULL"}
+		BufferBlowFullTime : TIME := T#1S;
+		{attribute addProperty Name "<#Buffer blow  active #>"}
+		BufferBlowActive : BOOL := TRUE;
+		
+		{attribute addProperty Name "<#Time when component in separator #> - T_BUFSEP_ON"}
+		TimeToComponentInSeparator : TIME := T#300MS;
+		{attribute addProperty Name "<#Time when component is out of separator #> - T_FLY_OFF"}
+		TimeToComponentOutSeparator : TIME := T#1S;
+		
+		{attribute addProperty Name "<#Hooper is active#>"}
+		HopperActive : BOOL := FALSE;
+		{attribute addProperty Name "<#Time to hopper start #> - T_HOOP_ON"}
+		TimeToHopperStart : TIME := T#5S;
+		{attribute addProperty Name "<#Time to hopper run #> - T_HOOP_RUN"}
+		TimeToHopperRun : TIME := T#30S;
+	
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

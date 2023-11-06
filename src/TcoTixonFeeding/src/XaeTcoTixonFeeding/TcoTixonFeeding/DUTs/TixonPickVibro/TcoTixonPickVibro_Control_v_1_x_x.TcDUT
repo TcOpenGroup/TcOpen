@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="TcoTixonPickVibro_Control_v_1_x_x" Id="{45dfe19c-52c3-0360-0ff1-463c04feda5a}">
+    <Declaration><![CDATA[TYPE
+    TcoTixonPickVibro_Control_v_1_x_x EXTENDS TcoTixonGenericControl :
+    STRUCT
+
+        {attribute addProperty Name "<#Feeding B#> - q7 "}
+        FeedingB : BOOL;
+        {attribute addProperty Name "<#Blow B#> - q8"}
+        BlowValveB : BOOL;
+     
+    END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

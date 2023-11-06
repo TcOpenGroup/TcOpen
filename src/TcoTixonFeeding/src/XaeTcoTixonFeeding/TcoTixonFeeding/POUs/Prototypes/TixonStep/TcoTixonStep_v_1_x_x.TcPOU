@@ -1,0 +1,348 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="TcoTixonStep_v_1_x_x" Id="{aff4f8a7-9f6d-0a6c-116c-43f06261788c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoTixonStep_v_1_x_x EXTENDS TcoCore.TcoComponent  
+VAR_INPUT
+	inControllerInAuto  : BOOL;
+	inNotEmptyFeeder  : BOOL;	
+	inSeparatorHomePos  : BOOL;
+	inFillingSensor  : BOOL; 
+	inSeparatorPresent  : BOOL;
+	inComponentOutOfBox  : BOOL;
+	inStepperHomePos  : BOOL;
+	inStepperWorkPos  : BOOL;
+	inPickZone  : BOOL;
+	
+END_VAR
+VAR_OUTPUT
+	outFeedingA : BOOL;
+	outSepareComponent : BOOL;
+	outBlowValveA : BOOL;
+	outRedLed : BOOL;	
+	outGreenLed : BOOL;
+	outHopper : BOOL;
+	outShotComponent : BOOL;
+	outStepperValve : BOOL;
+
+END_VAR
+VAR
+    
+
+	{attribute addProperty Name "<#Status#>"}
+    {attribute clr [ReadOnly()]}
+    _status : TcoTixonStep_Status_v_1_x_x;
+	{attribute addProperty Name "<#Control#>"}
+	_control 	: TcoTixonStep_Control_v_1_x_x;
+	{attribute addProperty Name "<#Config#>"}
+    _config : TcoTixonStep_Config_v_1_x_x;
+	
+
+
+	_someTaskIsActive: BOOL;
+
+	{attribute 'hide'}
+	_blink:TcoUtilities.TcoBlinker(THIS^);
+	_runAutomatic: BOOL;
+	_hasError: BOOL;
+END_VAR
+VAR
+
+	{attribute addProperty Name "<#Separator task#>"}
+    _separatorTask : TcoTixonStepSeparatorTask(THIS^);	
+	{attribute addProperty Name "<#Buffer task#>"}
+    _bufferTask : TcoTixonBufferTask(THIS^);
+	{attribute addProperty Name "<#Step task#>"}
+    _stepperTask : TcoTixonStepTask(THIS^);
+	{attribute addProperty Name "<#Hopper task#>"}
+    _hopperTask : TcoTixonHopperTask(THIS^);
+  	
+    {attribute addProperty Name "<#Restore#>"}
+    _restoreTask : TcoCore.TcoTask(THIS^);
+	
+
+  
+   
+
+  
+
+END_VAR
+
+VAR
+	{attribute 'hide'}
+	_sb : TcoCore.StringBuilder;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+_blink(inOnTime:=_config.BlinkTime,inOffTime:=_config.BlinkTime);		
+UpdateStatus();
+
+
+
+_separatorTask.Enabled:=TRUE;
+_separatorTask.ErrorTime:=_config.ErrorTimeSeparator;
+_separatorTask(inoConfig:=_config,inoControl:=_control,inoStatus:=_status);
+_bufferTask.Enabled:=TRUE;
+_bufferTask.ErrorTime:=_config.ErrorTimeBuffer;
+_bufferTask(inoConfig:=_config,inoControl:=_control,inoStatus:=_status);
+_stepperTask.Enabled:=TRUE;
+_stepperTask.ErrorTime:=_config.ErrorTimeStepper ;
+_stepperTask(inoConfig:=_config,inoControl:=_control,inoStatus:=_status);
+_hopperTask.ErrorTime:=_config.ErrorTimeHopper;
+_hopperTask.Enabled := _config.HopperActive;
+_hopperTask(inoConfig:=_config,inoControl:=_control,inoStatus:=_status);
+
+
+
+
+
+
+
+//*************RESTORE********************
+
+_restoreTask.Enabled := TRUE;
+IF _restoreTask.Execute() THEN
+	Restore();
+	_restoreTask.DoneWhen(TRUE);
+END_IF
+//****************************************
+
+
+UpdateControl();]]></ST>
+    </Implementation>
+    <Folder Name="Operations" Id="{344c28c1-4b4b-03a0-3621-a053d88a08f3}">
+      <Folder Name="Loop" Id="{39c7f585-4c08-0309-3172-2baebde10dbf}" />
+      <Folder Name="Single" Id="{2b51c8e6-2959-0c8a-0a10-fd4e65e482da}" />
+    </Folder>
+    <Folder Name="Task" Id="{0e98542e-51d7-09b0-1840-485c8575deb3}" />
+    <Method Name="BufferFeed" Id="{ba1b061b-890d-016b-29e5-4cdc9fb306ce}" FolderPath="Operations\Single\">
+      <Declaration><![CDATA[METHOD PUBLIC BufferFeed : TcoCore.ITcoTaskStatus
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[BufferFeed:=_bufferTask.Invoke();
+_bufferTask.AutoRestore:=false;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Config" Id="{2a5db503-6cb9-011e-187d-515726bdff0a}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the configuration of the Tixon Step. 					
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Config : REFERENCE TO TcoTixonStep_Config_v_1_x_x]]></Declaration>
+      <Get Name="Get" Id="{01c24380-0021-0455-2096-8cf38d786ece}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Config REF= _config;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="CyclicBufferFeed" Id="{42645910-26e9-0e87-0083-e847f67aeb7c}" FolderPath="Operations\Loop\">
+      <Declaration><![CDATA[METHOD PUBLIC CyclicBufferFeed : TcoCore.ITcoTaskStatus
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CyclicBufferFeed:=_bufferTask.Invoke();
+_bufferTask.AutoRestore:=true;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="CyclicHopperFeed" Id="{3a75ff27-69cf-097e-23ce-181511414344}" FolderPath="Operations\Loop\">
+      <Declaration><![CDATA[METHOD PUBLIC CyclicHopperFeed : TcoCore.ITcoTaskStatus
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CyclicHopperFeed:=_hopperTask.Invoke();
+_hopperTask.AutoRestore:=TRUE;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="CyclicSepare" Id="{33376c98-eee0-0559-1c99-d317e2cf77f4}" FolderPath="Operations\Loop\">
+      <Declaration><![CDATA[METHOD PUBLIC CyclicSepare : TcoCore.ITcoTaskStatus
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CyclicSepare:=_separatorTask.Invoke();
+_separatorTask.AutoRestore:=true;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="CyclicStepperFeed" Id="{ea8c0068-e324-0338-0621-2250f376192f}" FolderPath="Operations\Loop\">
+      <Declaration><![CDATA[METHOD PUBLIC CyclicStepperFeed : TcoCore.ITcoTaskStatus
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CyclicStepperFeed:=_stepperTask.Invoke();
+_stepperTask.AutoRestore:=true;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="DefaultSignalisation" Id="{b10cf6cc-e4c1-0ec8-2387-e6f232bd5998}" FolderPath="Operations\">
+      <Declaration><![CDATA[METHOD PUBLIC DefaultSignalisation
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// led signalisation
+_hasError:=_separatorTask.Error OR _stepperTask.Error OR _bufferTask.Error OR _hopperTask.Error;
+_control.GreenLed:=FALSE;
+_control.RedLed:=FALSE;
+IF  NOT _status.ControllerInAuto  THEN
+	_control.GreenLed:=TRUE;
+	_control.RedLed:=TRUE;
+ELSIF _hasError AND _blink.IsOn  AND _status.ControllerInAuto  THEN
+	_control.RedLed:=TRUE;
+ELSIF _status.ControllerInAuto AND NOT _hasError AND _status.NotEmptyFeeder THEN
+	_control.GreenLed:=TRUE;
+ELSIF _blink.IsOn AND _status.ControllerInAuto AND NOT _status.NotEmptyFeeder THEN
+	_control.GreenLed:=TRUE;
+	_control.RedLed:=TRUE;
+END_IF
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="HopperFeed" Id="{1361a3de-1aee-007f-0b41-5f38bf7fdadc}" FolderPath="Operations\Single\">
+      <Declaration><![CDATA[METHOD PUBLIC HopperFeed : TcoCore.ITcoTaskStatus]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[HopperFeed:=_hopperTask.Invoke();
+_hopperTask.AutoRestore:=false;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Push" Id="{f237f914-e2ca-0fec-352a-3323a39530ec}" FolderPath="Operations\">
+      <Declaration><![CDATA[METHOD PUBLIC Push
+VAR_INPUT
+	inReqOn:BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_control.ShotComponent:=inReqOn;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{3c6f4ddf-8f38-0284-013d-21a2462eff4b}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.	
+		</summary>			
+	</docu>	
+~*)
+METHOD Restore : ITcoRestorable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[RestoreTasks();
+_control.BlowAValve:=FALSE;
+_control.FeedingA:=FALSE;
+_control.GreenLed:=FALSE;
+_control.RedLed:=FALSE;
+_control.SepareComponent:=FALSE;
+_control.StepperValve:=FALSE;
+_control.ShotComponent:=FALSE;
+_control.Hooper:=FALSE;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RestoreTasks" Id="{e76e68e0-3bc0-003a-321c-044a0f7c0894}">
+      <Declaration><![CDATA[METHOD INTERNAL RestoreTasks 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+_separatorTask.Restore();
+_bufferTask.Restore();
+_stepperTask.Restore();
+_hopperTask.Restore();
+
+
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Separe" Id="{a117f382-bd6a-02b1-30c0-c0024cffdf15}" FolderPath="Operations\Single\">
+      <Declaration><![CDATA[METHOD PUBLIC Separe : TcoCore.ITcoTaskStatus
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Separe:=_separatorTask.Invoke();
+_separatorTask.AutoRestore:=false;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ServiceMode" Id="{18464d42-9cc1-0d47-1797-54eda9b85651}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+		    Custom service (manual, maintenance) logic.
+			This method must be implemented in derived class.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED ServiceMode]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Status" Id="{6acebfe5-bf35-0ed0-17d0-20d315f156d4}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the status of the Tixon Step. 					
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Status : REFERENCE TO TcoTixonStep_Status_v_1_x_x]]></Declaration>
+      <Get Name="Get" Id="{c0869f1d-56cc-0528-2fb5-3b0b11f3aca9}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Status REF= _status;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="StepperFeed" Id="{dd9adebe-2af8-0f7e-0677-bb04efd936e6}" FolderPath="Operations\Single\">
+      <Declaration><![CDATA[METHOD PUBLIC StepperFeed : TcoCore.ITcoTaskStatus
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[StepperFeed:=_stepperTask.Invoke();
+_stepperTask.AutoRestore:=FALSE;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="UpdateControl" Id="{a87e3bb2-dc5e-0dd9-3c82-5c60569a4ab2}">
+      <Declaration><![CDATA[METHOD INTERNAL UpdateControl
+VAR_INPUT
+END_VAR
+
+VAR
+	index: INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[outBlowValveA:= _control.BlowAValve;
+outFeedingA:=_control.FeedingA;
+outGreenLed:=_control.GreenLed;
+outRedLed:=_control.RedLed;
+outSepareComponent:=_control.SepareComponent;
+outStepperValve:=_control.StepperValve;
+outShotComponent:=_control.ShotComponent;
+outHopper:=_control.Hooper;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="UpdateStatus" Id="{6384fb65-17fe-03b4-2f2f-0966c52a4ceb}">
+      <Declaration><![CDATA[METHOD INTERNAL UpdateStatus
+VAR
+    
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_status.ComponentOutOfBox:=inComponentOutOfBox;
+_status.NotEmptyFeeder:=inNotEmptyFeeder;
+_status.FillingSensor:=inFillingSensor;
+_status.SeparatorHomePos:=inSeparatorHomePos;
+_status.SeparatorPresent:=inSeparatorPresent;
+_status.StepperHomePos:=inStepperHomePos;
+_status.StepperWorkPos:=inStepperWorkPos;
+_status.ControllerInAuto:=inControllerInAuto;
+
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
