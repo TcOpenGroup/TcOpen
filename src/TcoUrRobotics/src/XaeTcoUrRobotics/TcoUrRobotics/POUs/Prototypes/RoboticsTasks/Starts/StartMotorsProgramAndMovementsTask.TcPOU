@@ -139,8 +139,8 @@ InvokeWithParams := THIS^.Invoke();]]></ST>
 METHOD PROTECTED OnAbort]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Start motors, program and movements was aborted, while not yet completed!#>';END_IF; 
-inoControl.SoftStop := TRUE;
-inoControl.QuickStop := FALSE;]]></ST>
+inoControl.Pause := TRUE;
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnDone" Id="{961d2822-a37e-05e0-017a-d5a83801feac}">
@@ -182,8 +182,7 @@ THIS^._errorMessage.Error(_sb.Clear().Append(description).Append(' To restore ac
       <Implementation>
         <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Start motors, program and movements stared.#>'; END_IF;
 CallTimers(FALSE);
-inoControl.QuickStop:=FALSE;
-inoControl.SoftStop:=FALSE;]]></ST>
+inoControl.Pause := TRUE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{4dd95404-c425-0926-274e-50245de5593a}">

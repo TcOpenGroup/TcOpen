@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace TcoUrRobotics
 {
-    public partial class TcoUr20_v_1_x_x
+    public partial class TcoUrEseries_v_1_x_x
     {
         private const string blank = " ";
         private string onlineMsg = string.Empty; string additionalInfo = " ";

@@ -36,6 +36,48 @@
     </SelectedLibraryCategories>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DUTs\Input\TcoUrRoboticsT2OBitRegs.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Input\TcoUrRoboticsT2OFloatRegs.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Input\TcoUrRoboticsT2ORobot.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Input\TcoUrRoboticsT2OIntRegs.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Input\TcoUrRoboticsT2OIo.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Input\TcoUrRoboticsT2OJoints.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Input\TcoUrRoboticsT2OSafety.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Input\TcoUrRoboticsT2OTcp.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Input\TcoUrRoboticsT2OTool.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Out\TcoUrRobotics_O2TIo.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Out\TcoUrRobotics_O2TReg.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Out\TcoUrRobotics_O2TRobot.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\TcoUrRoboticsInputData.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\TcoUrRoboticsOutputData.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\TcoUrRobotics_Config_v_1_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -54,16 +96,58 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\Ur20\IO\TcoUr20_Inputs_v_1_x_x.TcDUT">
+    <Compile Include="POUs\Prototypes\Cb3\IO\TcoUrCb3_Inputs_v_3_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\Ur20\IO\TcoUr20_IO_v_1_x_x.TcDUT">
+    <Compile Include="POUs\Prototypes\Cb3\IO\TcoUrCb3_IO_v_3_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\Ur20\IO\TcoUr20_Outputs_v_1_x_x.TcDUT">
+    <Compile Include="POUs\Prototypes\Cb3\IO\TcoUrCb3_Outputs_v_3_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\Ur20\TcoUr20_v_1_x_x.TcPOU">
+    <Compile Include="POUs\Prototypes\Cb3\TcoUrCb3_v_3_x_x.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\Eseries\IO\TcoUrEseries_Inputs_v_1_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\Eseries\IO\TcoUrEseries_IO_v_1_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\Eseries\IO\TcoUrEseries_Outputs_v_1_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\Eseries\TcoUrEseries_v_1_x_x.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\Generic\Inputs\TcoUrRobotics_T2O_State_IO.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\Generic\Inputs\TcoUrRobotics_T2O_IO_IO.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\Generic\Inputs\TcoUrRobotics_T2O_Joints_IO.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\Generic\Inputs\TcoUrRobotics_T2O_TCP_IO.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\Generic\Inputs\TcoUrRobotics_T2O_BitRegs_IO.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\Generic\Inputs\TcoUrRobotics_T2O_IntRegs_IO.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\Generic\Inputs\TcoUrRobotics_T2O_FloatRegs_IO.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\Generic\Outputs\TcoUrRobotics_O2T_Reg1_IO.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\Generic\Outputs\TcoUrRobotics_O2T_Reg2_IO.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\Generic\Outputs\TcoUrRobotics_O2T_Robot_IO.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\RoboticsTasks\Starts\StartAtMainTask.TcPOU">
@@ -102,11 +186,18 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
+    <Folder Include="DUTs\Input" />
+    <Folder Include="DUTs\Out" />
     <Folder Include="GVLs" />
     <Folder Include="POUs\Conversions" />
-    <Folder Include="POUs\Prototypes\Ur20\IO" />
     <Folder Include="POUs\Prototypes" />
-    <Folder Include="POUs\Prototypes\Ur20" />
+    <Folder Include="POUs\Prototypes\Cb3" />
+    <Folder Include="POUs\Prototypes\Cb3\IO" />
+    <Folder Include="POUs\Prototypes\Eseries" />
+    <Folder Include="POUs\Prototypes\Eseries\IO" />
+    <Folder Include="POUs\Prototypes\Generic" />
+    <Folder Include="POUs\Prototypes\Generic\Inputs" />
+    <Folder Include="POUs\Prototypes\Generic\Outputs" />
     <Folder Include="POUs\Prototypes\RoboticsTasks" />
     <Folder Include="POUs\Prototypes\RoboticsTasks\Starts" />
     <Folder Include="POUs\Prototypes\RoboticsTasks\Stops" />
@@ -121,6 +212,10 @@
     <PlaceholderReference Include="Tc2_System">
       <DefaultResolution>Tc2_System, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_System</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_Utilities">
+      <DefaultResolution>Tc2_Utilities, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_Utilities</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc3_Module">
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>

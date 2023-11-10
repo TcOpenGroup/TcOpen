@@ -29,16 +29,16 @@ IF Execute() THEN
 	
 	IF _progress = 1 THEN
 		
-		_varInfo :=__VARINFO( inoStatus.State.CycleOn);                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.CycleOn).Warning(_sb.Clear().Append('<#Waiting for program running signal! #>').Append(_varInfo.Symbol).ToString());
+		//_varInfo :=__VARINFO( inoStatus.State.Inputs.Robot.PR_IsProgramRunning);                                                
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Robot.PR_IsProgramRunning).Warning(_sb.Clear().Append('<#Waiting for program running signal! #>').Append(_varInfo.Symbol).ToString());
 		
-		_varInfo :=__VARINFO( inoStatus.State.MotorOnState);                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.MotorOnState).Warning(_sb.Clear().Append('<#Waiting for motors are On! #>').Append(_varInfo.Symbol).ToString());	
+		_varInfo :=__VARINFO( inoStatus.State.Inputs.Robot.PW_IsPowerOn);                                                
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Robot.PW_IsPowerOn).Warning(_sb.Clear().Append('<#Waiting for motors are On! #>').Append(_varInfo.Symbol).ToString());	
 		
-		_varInfo :=__VARINFO( inoStatus.State.Error);                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND inoStatus.State.Error).Warning(_sb.Clear().Append('<#Waiting for system is without errors! #>').Append(_varInfo.Symbol).ToString());
+		_varInfo :=__VARINFO( inoStatus.State.Inputs.Safety.FT_IsFault);                                                
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND inoStatus.State.Inputs.Safety.FT_IsFault).Warning(_sb.Clear().Append('<#Waiting for system is without errors! #>').Append(_varInfo.Symbol).ToString());
 		
-		IF inoStatus.State.CycleOn AND inoStatus.State.MotorOnState AND NOT inoStatus.State.Error THEN 
+		IF inoStatus.State.Inputs.Robot.PR_IsProgramRunning AND inoStatus.State.Inputs.Robot.PW_IsPowerOn AND NOT inoStatus.State.Inputs.Safety.FT_IsFault THEN 
 			_progress := _progress + 1;
 		END_IF
 
@@ -99,7 +99,7 @@ IF Execute() THEN
 
    CallTimers(TRUE);
 	
-	THIS^.ThrowWhen(_errorTimer.Q OR inoStatus.State.Error);
+	THIS^.ThrowWhen(_errorTimer.Q OR inoStatus.State.Inputs.Safety.FT_IsFault);
 END_IF
 
 IF  THIS^.Error AND NOT _errorMessage.Pinned THEN
@@ -138,8 +138,7 @@ InvokeWithParams := THIS^.Invoke();]]></ST>
 METHOD PROTECTED OnAbort]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Start movements was aborted, while not yet completed!#>';END_IF; 
-inoControl.SoftStop := TRUE;
-inoControl.QuickStop := FALSE;]]></ST>
+inoControl.Pause := TRUE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnDone" Id="{d2712b6b-582d-0754-3a02-34ae7f90f561}">
@@ -183,8 +182,7 @@ THIS^._errorMessage.Error(_sb.Clear().Append(description).Append(' To restore ac
       <Implementation>
         <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Start movements stared.#>'; END_IF;
 CallTimers(FALSE);
-inoControl.QuickStop:=FALSE;
-inoControl.SoftStop:=FALSE;]]></ST>
+inoControl.Pause := TRUE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{1a0ee7a6-1773-0e8f-1a18-17662b2115fa}">

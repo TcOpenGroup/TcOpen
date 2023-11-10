@@ -12,10 +12,10 @@ using Vortex.Presentation.Wpf;
 
 namespace TcoUrRobotics
 {
-    public class TcoUr20_v_1_x_xServiceViewModel : TcoUrRoboticsBaseServiceViewModel<TcoUr20_v_1_x_x>
+    public class TcoUrEseries_V_1_x_xServiceViewModel : TcoUrRoboticsBaseServiceViewModel<TcoUrEseries_v_1_x_x>
     {
 
-        public TcoUr20_v_1_x_xServiceViewModel():base()
+        public TcoUrEseries_V_1_x_xServiceViewModel():base()
         {
            
 

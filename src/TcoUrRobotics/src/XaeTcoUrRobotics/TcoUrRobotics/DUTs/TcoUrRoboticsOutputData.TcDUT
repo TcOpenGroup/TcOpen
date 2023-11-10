@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="TcoUrRoboticsOutputData" Id="{0f2afbca-1c3f-0669-1377-25c97b69294d}">
+    <Declaration><![CDATA[TYPE TcoUrRoboticsOutputData :
+STRUCT
+	{attribute addProperty Name "<#Speed#>"}
+	Speed : TcoUrRobotics_O2TRobot;
+	{attribute addProperty Name "<#IO#>"}
+	IO : TcoUrRobotics_O2TIo;
+	{attribute addProperty Name "<#Reg 1#>"}
+	Reg1 : TcoUrRobotics_O2TReg;
+	{attribute addProperty Name "<#Reg 2#>"}
+	Reg2 : TcoUrRobotics_O2TReg;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="TcoUrRoboticsInputData" Id="{622cb0fc-d86d-0d2e-1908-f7e4214b0b5b}">
+    <Declaration><![CDATA[TYPE TcoUrRoboticsInputData :
+STRUCT
+	{attribute addProperty Name "<#Robot#>"}
+	Robot : TcoUrRoboticsT2ORobot;
+	{attribute addProperty Name "<#State#>"}
+	Safety : TcoUrRoboticsT2OSafety;
+	{attribute addProperty Name "<#IO state#>"}
+	IO : TcoUrRoboticsT2OIo;
+	{attribute addProperty Name "<#Tool state#>"}
+	Tool : TcoUrRoboticsT2OTool;
+	{attribute addProperty Name "<#Joints#>"}
+	Joints : TcoUrRoboticsT2OJoints;
+	{attribute addProperty Name "<#TCP#>"}
+	TCP : TcoUrRoboticsT2OTcp;
+	{attribute addProperty Name "<#Bits#>"}
+	Bits : TcoUrRoboticsT2OBitRegs;
+	{attribute addProperty Name "<#Ints#>"}
+	Ints : TcoUrRoboticsT2OIntRegs;
+	{attribute addProperty Name "<#Floats#>"}
+	Floats : TcoUrRoboticsT2OFloatRegs;	
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

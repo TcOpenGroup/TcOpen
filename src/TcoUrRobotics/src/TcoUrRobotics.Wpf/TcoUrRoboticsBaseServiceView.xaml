@@ -12,7 +12,7 @@
 
     mc:Ignorable="d">
     <d:UserControl.DataContext>
-        <local:TcoUr20_v_1_x_xServiceViewModel />
+        <local:TcoUrCb3_v_1_x_xServiceViewModel />
     </d:UserControl.DataContext>
 
     <UserControl.Resources>
@@ -30,7 +30,7 @@
    
                 </WrapPanel.Resources>
 
-                <WrapPanel  DataContext="{Binding _status.State.MotorOffState}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
+                <WrapPanel  DataContext="{Binding _status.State.}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
                     <materialdesign:PackIcon Kind="WarningBox"  Foreground="{StaticResource Warning}"  VerticalAlignment="Center"/>
                     <TextBlock   Text="{x:Static p:strings.MotorsOff}"  Foreground="{StaticResource Warning}"/>
                 </WrapPanel>

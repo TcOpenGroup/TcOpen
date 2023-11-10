@@ -28,24 +28,19 @@ IF Execute() THEN
 
 	END_IF
 	IF _progress = 1 THEN
-		inoControl.SoftStop := TRUE ;
-		inoControl.QuickStop := FALSE;
+		inoControl.Pause := TRUE ;
 	
-		IF _stopType = TcoAbstractions.eTcoRoboticsStopType.Quick THEN
-			inoControl.SoftStop := FALSE;
-			inoControl.QuickStop := TRUE;
-		END_IF
-		IF inoStatus.State.MoveInactive THEN
-			inoControl.SoftStop := FALSE ;
-			inoControl.QuickStop := FALSE;
+		
+		IF inoStatus.State.Inputs.Robot.PR_IsProgramRunning THEN
+			inoControl.Pause := FALSE ;
 		END_IF
 	END_IF;
 			
-	_varInfo :=__VARINFO( inoStatus.State.MoveInactive);                                                
+	_varInfo :=__VARINFO( NOT inoStatus.State.Inputs.Robot.PR_IsProgramRunning);                                                
 	THIS^.Messenger.OnCondition(_infoTimer.Q).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
 	
 
-    DoneWhen(inoStatus.State.MoveInactive);
+    DoneWhen(NOT inoStatus.State.Inputs.Robot.PR_IsProgramRunning);
     CallTimers(TRUE);
 	
 	THIS^.ThrowWhen(_errorTimer.Q);
@@ -89,8 +84,7 @@ METHOD PROTECTED OnAbort
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Stopping movements was aborted, while not yet completed!#>';END_IF; 
-inoControl.SoftStop := FALSE;
-inoControl.QuickStop := FALSE;]]></ST>
+inoControl.Pause := TRUE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnDone" Id="{6e9f7186-0548-0fec-37aa-7e8915af45c4}">
@@ -148,8 +142,7 @@ CallTimers(FALSE);]]></ST>
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.Restore();
-inoControl.SoftStop := FALSE;
-inoControl.QuickStop := FALSE;
+inoControl.Pause := TRUE;
 ]]></ST>
       </Implementation>
     </Method>

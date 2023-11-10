@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="TcoUrRoboticsT2ORobot" Id="{b7ffce62-ee3d-0be3-0435-7d7944d5c925}">
+    <Declaration><![CDATA[TYPE TcoUrRoboticsT2ORobot :
+STRUCT
+	{attribute addProperty Name "<#Controller major version#>"}
+	ControllerMajorVersion : USINT;
+	{attribute addProperty Name "<#Controller minor version#>"}    
+	ControllerMinorVersion : USINT;
+	{attribute addProperty Name "<#Reserved#>"}
+	Reserved : UINT;
+	{attribute addProperty Name "<#Robot mode#>"}
+	RobotMode : USINT;
+	{attribute addProperty Name "<#Real time machine seconds#>"}
+	RealtimeMachineSeconds : USINT;
+	{attribute addProperty Name "<#Real time machine milliseconds#>"}
+	RealtimeMachineMilliseconds : UINT;
+	{attribute addProperty Name "<#Real time machine minutes#>"}
+	RealtimeMachineMinutes : USINT;
+	{attribute addProperty Name "<#Real time machine hours#>"}
+	RealtimeMachineHours : USINT;
+	{attribute addProperty Name "<#Real time machine days#>"}
+	RealtimeMachineDays : UINT;
+	{attribute addProperty Name "<#Robot current [A]#>"}
+	RobotCurrent : REAL;
+	{attribute addProperty Name "<#PW: Is power on#>"}
+	PW_IsPowerOn : BOOL;
+	{attribute addProperty Name "<#PR: Is program running#>"}
+	PR_IsProgramRunning : BOOL;
+	{attribute addProperty Name "<#TB: Is teach button pressed#>"}
+	TB_IsTeachButtonPressed : BOOL;
+	{attribute addProperty Name "<#PB: Is power button pressed#>"}
+	PB_IsPowerButtonPressed : BOOL;
+	{attribute addProperty Name "<#Speed slider fraction#>"}
+	SpeedSliderFraction : REAL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -61,11 +61,11 @@ namespace TcoUrRoboticsTestsConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Abb IRC 5.
+        ///   Looks up a localized string similar to UR CB3.
         /// </summary>
-        public static string ___Abb_IRC_5__ {
+        public static string ___UR_CB3__ {
             get {
-                return ResourceManager.GetString("___Abb_IRC_5__", resourceCulture);
+                return ResourceManager.GetString("___UR_CB3__", resourceCulture);
             }
         }
     }

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="TcoUrRoboticsTest" Id="{3c7a463b-64d6-0aa6-14bf-e8aa4da5975e}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcoUrRoboticsTest EXTENDS TcoUrRobotics.TcoUr20_v_1_x_x
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoUrRoboticsTest EXTENDS TcoUrRobotics.TcoUrCb3_v_3_x_x
 VAR
     _serviceModeCount : ULINT;
     _serviceModeOverride : LREAL;

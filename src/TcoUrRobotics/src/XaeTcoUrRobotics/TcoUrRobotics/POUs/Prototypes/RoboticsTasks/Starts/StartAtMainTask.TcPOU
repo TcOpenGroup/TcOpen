@@ -23,19 +23,17 @@
 	END_IF
 	IF _progress = 1 THEN
 	
-		inoControl.StartAtMain :=   _blink.outQ;
-		_varInfo :=__VARINFO( inoStatus.State.PpMoved);                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.PpMoved).Warning(_sb.Clear().Append('<#Waiting program pointer changed! #>').Append(_varInfo.Symbol).ToString());
-				
-	//	_varInfo :=__VARINFO( inoStatus.State.SystemInputBusy);                                                
-//		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.SystemInputBusy).Warning(_sb.Clear().Append('<#Waiting for system ready signal! #>').Append(_varInfo.Symbol).ToString());
-//		
-		IF inoStatus.State.PpMoved  THEN
-			inoControl.StartAtMain :=FALSE;
+		inoControl.Start :=   _blink.outQ;
+		//_varInfo :=__VARINFO( inoStatus.State.Inputs.Robot.PR_IsProgramRunning );                                                
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Robot.PR_IsProgramRunning).Warning(_sb.Clear().Append('<#Waiting for program running signal! #>').Append(_varInfo.Symbol).ToString());
+		
+		IF inoStatus.State.Inputs.Robot.PR_IsProgramRunning THEN
+			inoControl.Start :=FALSE;
 			_progress:=0;
 		END_IF
 	END_IF
-    DoneWhen(inoStatus.State.PpMoved );
+    DoneWhen(inoStatus.State.Inputs.Robot.PR_IsProgramRunning );
+
     CallTimers(TRUE);
 	
 	THIS^.ThrowWhen(_errorTimer.Q );

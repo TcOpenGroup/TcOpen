@@ -123,9 +123,6 @@
   <data name="___Safety_Error___" xml:space="preserve">
     <value>Safety Error </value>
   </data>
-  <data name="___Program_execution_error_see_robot_panel_for_details__" xml:space="preserve">
-    <value>Program execution error see robot panel for details</value>
-  </data>
   <data name="___Drive_error_no___" xml:space="preserve">
     <value>Drive error no </value>
   </data>
@@ -177,11 +174,8 @@
   <data name="___Invalid_reference____" xml:space="preserve">
     <value>Invalid reference: </value>
   </data>
-  <data name="___Waiting_program_pointer_changed____" xml:space="preserve">
-    <value>Waiting program pointer changed! </value>
-  </data>
-  <data name="___Waiting_for_system_ready_signal____" xml:space="preserve">
-    <value>Waiting for system ready signal! </value>
+  <data name="___Waiting_for_program_running_signal____" xml:space="preserve">
+    <value>Waiting for program running signal! </value>
   </data>
   <data name="___Start_at_Main_was_aborted__while_not_yet_completed___" xml:space="preserve">
     <value>Start at Main was aborted, while not yet completed!</value>
@@ -195,20 +189,17 @@
   <data name="___Start_at_Main_started___" xml:space="preserve">
     <value>Start at Main started.</value>
   </data>
-  <data name="___Waiting_for_Auto_signal____" xml:space="preserve">
-    <value>Waiting for Auto signal! </value>
-  </data>
-  <data name="___Robot_is_not_in_Auto__" xml:space="preserve">
-    <value>Robot is not in Auto</value>
-  </data>
-  <data name="___Robot_Error_Reset__" xml:space="preserve">
-    <value>Robot Error Reset</value>
+  <data name="___Robot_has_error_Reset__" xml:space="preserve">
+    <value>Robot has error Reset</value>
   </data>
   <data name="___Robot_Emergency_Stop_Reset__" xml:space="preserve">
     <value>Robot Emergency Stop Reset</value>
   </data>
   <data name="____Waiting_for_signal____" xml:space="preserve">
     <value> Waiting for signal: </value>
+  </data>
+  <data name="___Robot_Power_on__" xml:space="preserve">
+    <value>Robot Power on</value>
   </data>
   <data name="___Start_motors_and_program_was_aborted___" xml:space="preserve">
     <value>Start motors and program was aborted.</value>
@@ -252,9 +243,6 @@
   <data name="___Start_motors_started___" xml:space="preserve">
     <value>Start motors started.</value>
   </data>
-  <data name="___Waiting_for_program_running_signal____" xml:space="preserve">
-    <value>Waiting for program running signal! </value>
-  </data>
   <data name="___Waiting_for_motors_are_On____" xml:space="preserve">
     <value>Waiting for motors are On! </value>
   </data>
@@ -285,6 +273,9 @@
   <data name="___Stopping_program_started___" xml:space="preserve">
     <value>Stopping program started.</value>
   </data>
+  <data name="____is_OFF___" xml:space="preserve">
+    <value> is OFF </value>
+  </data>
   <data name="___Stop_motors_was_completed_successfully___" xml:space="preserve">
     <value>Stop motors was completed successfully.</value>
   </data>
@@ -293,9 +284,6 @@
   </data>
   <data name="___Stop_motors_started___" xml:space="preserve">
     <value>Stop motors started.</value>
-  </data>
-  <data name="____is_OFF___" xml:space="preserve">
-    <value> is OFF </value>
   </data>
   <data name="___Stop_movements_and_program_was_aborted__while_not_yet_completed___" xml:space="preserve">
     <value>Stop movements and program was aborted, while not yet completed!</value>
@@ -321,53 +309,254 @@
   <data name="___Stopping_movements_started___" xml:space="preserve">
     <value>Stopping movements started.</value>
   </data>
-  <data name="___Interuption_actually_running_instruction__" xml:space="preserve">
-    <value>Interuption actually running instruction</value>
+  <data name="___Bit_registers__" xml:space="preserve">
+    <value>Bit registers</value>
   </data>
-  <data name="___Load_program__" xml:space="preserve">
-    <value>Load program</value>
+  <data name="___Float_registers__" xml:space="preserve">
+    <value>Float registers</value>
   </data>
-  <data name="___Load_and_run_program__" xml:space="preserve">
-    <value>Load and run program</value>
+  <data name="___Controller_major_version__" xml:space="preserve">
+    <value>Controller major version</value>
   </data>
-  <data name="___Switch_off_the_motors__" xml:space="preserve">
-    <value>Switch off the motors</value>
+  <data name="___Controller_minor_version__" xml:space="preserve">
+    <value>Controller minor version</value>
   </data>
-  <data name="___Switch_on_the_motors__" xml:space="preserve">
-    <value>Switch on the motors</value>
+  <data name="___Reserved__" xml:space="preserve">
+    <value>Reserved</value>
   </data>
-  <data name="___Switch_on_the_motors_and_start_program__" xml:space="preserve">
-    <value>Switch on the motors and start program</value>
+  <data name="___Robot_mode__" xml:space="preserve">
+    <value>Robot mode</value>
   </data>
-  <data name="___Emergency_stop_acknowledge__" xml:space="preserve">
-    <value>Emergency stop acknowledge</value>
+  <data name="___Real_time_machine_seconds__" xml:space="preserve">
+    <value>Real time machine seconds</value>
   </data>
-  <data name="___Error_acknowledge__" xml:space="preserve">
-    <value>Error acknowledge</value>
+  <data name="___Real_time_machine_milliseconds__" xml:space="preserve">
+    <value>Real time machine milliseconds</value>
   </data>
-  <data name="___Program_start__" xml:space="preserve">
-    <value>Program start</value>
+  <data name="___Real_time_machine_minutes__" xml:space="preserve">
+    <value>Real time machine minutes</value>
   </data>
-  <data name="___Program_start_at_main__" xml:space="preserve">
-    <value>Program start at main</value>
+  <data name="___Real_time_machine_hours__" xml:space="preserve">
+    <value>Real time machine hours</value>
   </data>
-  <data name="___Program_stop__" xml:space="preserve">
-    <value>Program stop</value>
+  <data name="___Real_time_machine_days__" xml:space="preserve">
+    <value>Real time machine days</value>
   </data>
-  <data name="___Stop_movement_quick__" xml:space="preserve">
-    <value>Stop movement-quick</value>
+  <data name="___Robot_current__A___" xml:space="preserve">
+    <value>Robot current [A]</value>
   </data>
-  <data name="___Stop_movement_soft__" xml:space="preserve">
-    <value>Stop movement-soft</value>
+  <data name="___PW__Is_power_on__" xml:space="preserve">
+    <value>PW: Is power on</value>
   </data>
-  <data name="___Stop_program_at_the_end_of_the_cycle__" xml:space="preserve">
-    <value>Stop program at the end of the cycle</value>
+  <data name="___PR__Is_program_running__" xml:space="preserve">
+    <value>PR: Is program running</value>
   </data>
-  <data name="___Stop_program_at_the_end_of_the_instruction__" xml:space="preserve">
-    <value>Stop program at the end of the instruction</value>
+  <data name="___TB__Is_teach_button_pressed__" xml:space="preserve">
+    <value>TB: Is teach button pressed</value>
   </data>
-  <data name="___Speed_limitation__" xml:space="preserve">
-    <value>Speed limitation</value>
+  <data name="___PB__Is_power_button_pressed__" xml:space="preserve">
+    <value>PB: Is power button pressed</value>
+  </data>
+  <data name="___Speed_slider_fraction__" xml:space="preserve">
+    <value>Speed slider fraction</value>
+  </data>
+  <data name="___Int_registers__" xml:space="preserve">
+    <value>Int registers</value>
+  </data>
+  <data name="___Standard_digital_inputs__" xml:space="preserve">
+    <value>Standard digital inputs</value>
+  </data>
+  <data name="___Configurable_digital_inputs__" xml:space="preserve">
+    <value>Configurable digital inputs</value>
+  </data>
+  <data name="___Standard_digital_outputs__" xml:space="preserve">
+    <value>Standard digital outputs</value>
+  </data>
+  <data name="___Configurable_digital_outputs__" xml:space="preserve">
+    <value>Configurable digital outputs</value>
+  </data>
+  <data name="___Analog_I_O_types__" xml:space="preserve">
+    <value>Analog I/O types</value>
+  </data>
+  <data name="___Standard_analog_input__A_or_V___" xml:space="preserve">
+    <value>Standard analog input [A or V]</value>
+  </data>
+  <data name="___Standard_analog_output__A_or_V___" xml:space="preserve">
+    <value>Standard analog output [A or V]</value>
+  </data>
+  <data name="___I_O_current__A___" xml:space="preserve">
+    <value>I/O current [A]</value>
+  </data>
+  <data name="___Euromap67_input_bits__" xml:space="preserve">
+    <value>Euromap67 input bits</value>
+  </data>
+  <data name="___Euromap67_output_bits__" xml:space="preserve">
+    <value>Euromap67 output bits</value>
+  </data>
+  <data name="___Euromap67_24V_voltage__" xml:space="preserve">
+    <value>Euromap67 24V voltage</value>
+  </data>
+  <data name="___Euromap67_24V_current__" xml:space="preserve">
+    <value>Euromap67 24V current</value>
+  </data>
+  <data name="___Joint_position__rad___" xml:space="preserve">
+    <value>Joint position [rad]</value>
+  </data>
+  <data name="___Joint_velocity__rad_s___" xml:space="preserve">
+    <value>Joint velocity [rad/s]</value>
+  </data>
+  <data name="___Joint_current__A___" xml:space="preserve">
+    <value>Joint current [A]</value>
+  </data>
+  <data name="___Joint_temperature___C___" xml:space="preserve">
+    <value>Joint temperature [°C]</value>
+  </data>
+  <data name="___Joint_mode__" xml:space="preserve">
+    <value>Joint mode</value>
+  </data>
+  <data name="___Safety_mode__" xml:space="preserve">
+    <value>Safety mode</value>
+  </data>
+  <data name="___NO__Is_normal_mode__" xml:space="preserve">
+    <value>NO: Is normal mode</value>
+  </data>
+  <data name="___RD__Is_reduced_mode__" xml:space="preserve">
+    <value>RD: Is reduced mode</value>
+  </data>
+  <data name="___PS__Is_protective_stopped__" xml:space="preserve">
+    <value>PS: Is protective stopped</value>
+  </data>
+  <data name="___RC__Is_recovery_mode__" xml:space="preserve">
+    <value>RC: Is recovery mode</value>
+  </data>
+  <data name="___SS__Is_safeguard_stopped__" xml:space="preserve">
+    <value>SS: Is safeguard stopped</value>
+  </data>
+  <data name="___SES__Is_system_emergency_stopped__" xml:space="preserve">
+    <value>SES: Is system emergency stopped</value>
+  </data>
+  <data name="___RES__Is_robot_emergency_stopped__" xml:space="preserve">
+    <value>RES: Is robot emergency stopped</value>
+  </data>
+  <data name="___ES__Is_emergency_stopped__" xml:space="preserve">
+    <value>ES: Is emergency stopped</value>
+  </data>
+  <data name="___VL__Is_violation__" xml:space="preserve">
+    <value>VL: Is violation</value>
+  </data>
+  <data name="___FT__Is_fault__" xml:space="preserve">
+    <value>FT: Is fault</value>
+  </data>
+  <data name="___ST__Is_stopped_due_TO_safety__" xml:space="preserve">
+    <value>ST: Is stopped due TO safety</value>
+  </data>
+  <data name="___Actual_TCP_Position__" xml:space="preserve">
+    <value>Actual TCP Position</value>
+  </data>
+  <data name="___Actual_TCP_Velocity__" xml:space="preserve">
+    <value>Actual TCP Velocity</value>
+  </data>
+  <data name="___Actual_TCP_Force__" xml:space="preserve">
+    <value>Actual TCP Force</value>
+  </data>
+  <data name="___Actual_TCP_Torque__" xml:space="preserve">
+    <value>Actual TCP Torque</value>
+  </data>
+  <data name="___TCP_force_scalar__N___" xml:space="preserve">
+    <value>TCP force scalar [N]</value>
+  </data>
+  <data name="___en_US_Tool_mode__" xml:space="preserve">
+    <value>en-US@Tool mode</value>
+  </data>
+  <data name="___en_US_TDI__Tool_Digital_Inputs__" xml:space="preserve">
+    <value>en-US@TDI: Tool Digital Inputs</value>
+  </data>
+  <data name="___en_US_TDO__Tool_Digital_Outputs__" xml:space="preserve">
+    <value>en-US@TDO: Tool Digital Outputs</value>
+  </data>
+  <data name="___en_US__TAIT__Tool_Analog_Input_Types__" xml:space="preserve">
+    <value>en-US@ TAIT: Tool Analog Input Types</value>
+  </data>
+  <data name="___en_US_Tool_analog_input__A_OR_V___" xml:space="preserve">
+    <value>en-US@Tool analog input [A OR V]</value>
+  </data>
+  <data name="___en_US_Tool_output_voltage__V___" xml:space="preserve">
+    <value>en-US@Tool output voltage [V]</value>
+  </data>
+  <data name="___en_US_Tool_current__A___" xml:space="preserve">
+    <value>en-US@Tool current [A]</value>
+  </data>
+  <data name="___Standard_digital_output_mask__" xml:space="preserve">
+    <value>Standard digital output mask</value>
+  </data>
+  <data name="___Configurable_digital_output_mask__" xml:space="preserve">
+    <value>Configurable digital output mask</value>
+  </data>
+  <data name="___AOM__Analog_output_mask__" xml:space="preserve">
+    <value>AOM: Analog output mask</value>
+  </data>
+  <data name="___AOT__Analog_output_types__" xml:space="preserve">
+    <value>AOT: Analog output types</value>
+  </data>
+  <data name="___TDOM__Tool_digital_output_mask__" xml:space="preserve">
+    <value>TDOM: Tool digital output mask</value>
+  </data>
+  <data name="___TDO__Tool_digital_output__" xml:space="preserve">
+    <value>TDO: Tool digital output</value>
+  </data>
+  <data name="___Standard_analog_output__" xml:space="preserve">
+    <value>Standard analog output</value>
+  </data>
+  <data name="___SSM__Speed_slider_fraction_mask__" xml:space="preserve">
+    <value>SSM: Speed slider fraction mask</value>
+  </data>
+  <data name="___Robot__" xml:space="preserve">
+    <value>Robot</value>
+  </data>
+  <data name="___State__" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="___IO_state__" xml:space="preserve">
+    <value>IO state</value>
+  </data>
+  <data name="___Tool_state__" xml:space="preserve">
+    <value>Tool state</value>
+  </data>
+  <data name="___Joints__" xml:space="preserve">
+    <value>Joints</value>
+  </data>
+  <data name="___TCP__" xml:space="preserve">
+    <value>TCP</value>
+  </data>
+  <data name="___Bits__" xml:space="preserve">
+    <value>Bits</value>
+  </data>
+  <data name="___Ints__" xml:space="preserve">
+    <value>Ints</value>
+  </data>
+  <data name="___Floats__" xml:space="preserve">
+    <value>Floats</value>
+  </data>
+  <data name="___Speed__" xml:space="preserve">
+    <value>Speed</value>
+  </data>
+  <data name="___IO__" xml:space="preserve">
+    <value>IO</value>
+  </data>
+  <data name="___Reg_1__" xml:space="preserve">
+    <value>Reg 1</value>
+  </data>
+  <data name="___Reg_2__" xml:space="preserve">
+    <value>Reg 2</value>
+  </data>
+  <data name="___Pause_program__" xml:space="preserve">
+    <value>Pause program</value>
+  </data>
+  <data name="___Set_motor_on__" xml:space="preserve">
+    <value>Set motor on</value>
+  </data>
+  <data name="___Run_action__" xml:space="preserve">
+    <value>Run action</value>
   </data>
   <data name="___Master_mode__" xml:space="preserve">
     <value>Master mode</value>
@@ -426,57 +615,6 @@
   <data name="___Coordinates__" xml:space="preserve">
     <value>Coordinates</value>
   </data>
-  <data name="___AutoOn__" xml:space="preserve">
-    <value>AutoOn</value>
-  </data>
-  <data name="___CycleOn__" xml:space="preserve">
-    <value>CycleOn</value>
-  </data>
-  <data name="___Emergency_stop__" xml:space="preserve">
-    <value>Emergency stop</value>
-  </data>
-  <data name="___Error__" xml:space="preserve">
-    <value>Error</value>
-  </data>
-  <data name="___Event_ID__" xml:space="preserve">
-    <value>Event ID</value>
-  </data>
-  <data name="___Move_active__" xml:space="preserve">
-    <value>Move active</value>
-  </data>
-  <data name="___Move_inactive__" xml:space="preserve">
-    <value>Move inactive</value>
-  </data>
-  <data name="___Motor_off__" xml:space="preserve">
-    <value>Motor off</value>
-  </data>
-  <data name="___Motor_on__" xml:space="preserve">
-    <value>Motor on</value>
-  </data>
-  <data name="___Motor_off_state__" xml:space="preserve">
-    <value>Motor off state</value>
-  </data>
-  <data name="___Motor_on_state__" xml:space="preserve">
-    <value>Motor on state</value>
-  </data>
-  <data name="___Program_execution_error__" xml:space="preserve">
-    <value>Program execution error</value>
-  </data>
-  <data name="___Safety_OK__" xml:space="preserve">
-    <value>Safety OK</value>
-  </data>
-  <data name="___System_input_busy__" xml:space="preserve">
-    <value>System input busy</value>
-  </data>
-  <data name="___Program_pointer_moved__" xml:space="preserve">
-    <value>Program pointer moved</value>
-  </data>
-  <data name="___Motion_supervision__" xml:space="preserve">
-    <value>Motion supervision</value>
-  </data>
-  <data name="___Battery_Low__" xml:space="preserve">
-    <value>Battery Low</value>
-  </data>
   <data name="___In_area_1__" xml:space="preserve">
     <value>In area 1</value>
   </data>
@@ -501,46 +639,25 @@
   <data name="___In_position_4__" xml:space="preserve">
     <value>In position 4</value>
   </data>
-  <data name="___Auto_stop_1__" xml:space="preserve">
-    <value>Auto stop 1</value>
-  </data>
-  <data name="___Auto_stop_2__" xml:space="preserve">
-    <value>Auto stop 2</value>
-  </data>
-  <data name="___Emergency_stop_1__" xml:space="preserve">
-    <value>Emergency stop 1</value>
-  </data>
-  <data name="___Emergency_stop_2__" xml:space="preserve">
-    <value>Emergency stop 2</value>
-  </data>
-  <data name="___General_stop_1__" xml:space="preserve">
-    <value>General stop 1</value>
-  </data>
-  <data name="___General_stop_2__" xml:space="preserve">
-    <value>General stop 2</value>
-  </data>
-  <data name="___Enable_1__" xml:space="preserve">
-    <value>Enable 1</value>
-  </data>
-  <data name="___Enable_2__" xml:space="preserve">
-    <value>Enable 2</value>
-  </data>
   <data name="___Global_speed__" xml:space="preserve">
     <value>Global speed</value>
   </data>
   <data name="___PointNumber__" xml:space="preserve">
     <value>PointNumber</value>
   </data>
-  <data name="___Actual_coordinates_world__" xml:space="preserve">
-    <value>Actual coordinates world</value>
-  </data>
-  <data name="___Actual_coordinates_workobject_tool__" xml:space="preserve">
-    <value>Actual coordinates workobject tool</value>
+  <data name="___UR_Specific__" xml:space="preserve">
+    <value>UR Specific</value>
   </data>
   <data name="___IN__" xml:space="preserve">
     <value>IN</value>
   </data>
   <data name="___OUT__" xml:space="preserve">
     <value>OUT</value>
+  </data>
+  <data name="___RobotIO__" xml:space="preserve">
+    <value>RobotIO</value>
+  </data>
+  <data name="___Reg2__" xml:space="preserve">
+    <value>Reg2</value>
   </data>
 </root>

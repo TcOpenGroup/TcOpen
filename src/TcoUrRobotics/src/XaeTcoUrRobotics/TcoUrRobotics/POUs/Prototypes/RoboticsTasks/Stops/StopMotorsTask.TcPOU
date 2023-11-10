@@ -23,18 +23,18 @@
 	IF _progress = 1 THEN
 	
 		
-		inoControl.MotorOff := TRUE ;
+		inoControl.MotorOn := FALSE ;
 		
-		IF inoStatus.State.MotorOffState AND NOT inoStatus.State.SystemInputBusy THEN
-			inoControl.MotorOff :=FALSE;
+		IF NOT inoStatus.State.Inputs.Robot.PW_IsPowerOn  THEN
+			inoControl.MotorOn :=FALSE;
 			_progress:=0;
 		END_IF
 	END_IF
 				
-	_varInfo :=__VARINFO( inoStatus.State.MotorOffState);                                                
-	THIS^.Messenger.OnCondition(_infoTimer.Q).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
+	_varInfo :=__VARINFO(inoStatus.State.Inputs.Robot.PW_IsPowerOn  );                                                
+	THIS^.Messenger.OnCondition(_infoTimer.Q AND  inoStatus.State.Inputs.Robot.PW_IsPowerOn ).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).Append('<# is OFF #>').ToString());
 	
-    DoneWhen(inoStatus.State.MotorOffState);
+    DoneWhen(NOT inoStatus.State.Inputs.Robot.PW_IsPowerOn );
     CallTimers(TRUE);
 	
 	THIS^.ThrowWhen(_errorTimer.Q);
@@ -68,7 +68,7 @@ METHOD PROTECTED OnAbort
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Start at Main was aborted, while not yet completed!#>';END_IF; 
-inoControl.MotorOff :=FALSE;
+inoControl.MotorOn  :=FALSE;
 ]]></ST>
       </Implementation>
     </Method>
@@ -127,7 +127,7 @@ THIS^._errorMessage.Error(_sb.Clear().Append(description).Append(' To restore ac
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.Restore();
-inoControl.MotorOff :=FALSE;
+inoControl.MotorOn :=FALSE;
 
 ]]></ST>
       </Implementation>

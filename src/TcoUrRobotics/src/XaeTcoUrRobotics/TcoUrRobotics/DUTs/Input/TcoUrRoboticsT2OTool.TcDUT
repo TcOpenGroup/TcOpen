@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="TcoUrRoboticsT2OTool" Id="{ca4244df-d10b-035a-2fe0-4e3e1488d3b9}">
+    <Declaration><![CDATA[TYPE TcoUrRoboticsT2OTool :
+STRUCT
+	{attribute addProperty Name "<#en-US@Tool mode#>"}
+	ToolMode : USINT;
+	{attribute addProperty Name "<#en-US@TDI: Tool Digital Inputs#>"}
+	TDI_ToolDigitalInputs : USINT;
+	{attribute addProperty Name "<#en-US@TDO: Tool Digital Outputs#>"}
+	TDO_ToolDigitalOutputs : USINT;
+	{attribute addProperty Name "<#en-US@ TAIT: Tool Analog Input Types#>"}
+	TAIT_ToolAnalogInputTypes : USINT;
+	{attribute addProperty Name "<#en-US@Tool analog input [A OR V]#>"}
+	ToolAnalogInput: ARRAY[0..1] OF REAL;
+	{attribute addProperty Name "<#en-US@Tool output voltage [V]#>"}
+	ToolOutputVoltage : REAL;
+	{attribute addProperty Name "<#en-US@Tool current [A]#>"}
+	ToolCurrent : REAL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

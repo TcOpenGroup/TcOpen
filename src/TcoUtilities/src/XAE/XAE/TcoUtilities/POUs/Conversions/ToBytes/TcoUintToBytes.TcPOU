@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="TcoUintToBytes" Id="{c49f015d-7d74-065d-20d0-ef4675393883}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION TcoUintToBytes 
+VAR_INPUT
+	inFormat : eTcoDataFormat;
+	inValue : UINT;
+END_VAR
+VAR_IN_OUT
+    outByte0: BYTE;
+    outByte1: BYTE;
+END_VAR
+VAR
+	_b0: BYTE;
+	_b1: BYTE;
+
+	_tmpUINT : UINT; 
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_tmpUINT:=inValue;
+
+_b1:=UDINT_TO_BYTE(_tmpUINT MOD 256);
+_tmpUINT:=SHR(_tmpUINT,8);
+_b0:=UDINT_TO_BYTE(_tmpUINT MOD 256);
+_tmpUINT:=SHR(_tmpUINT,8);
+
+IF inFormat=eTcoDataFormat.LittleEndian THEN
+	outByte0 := _b1;
+	outByte1 := _b0;	
+ELSIF inFormat=eTcoDataFormat.BigEndian THEN
+	outByte0 := _b0;
+	outByte1 := _b1;	
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

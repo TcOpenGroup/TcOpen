@@ -26,46 +26,59 @@ IF Execute() THEN
 		END_IF
 
 	END_IF
-	IF _progress = 1 THEN
-	
-		_varInfo :=__VARINFO( inoStatus.State.AutoOn);                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.AutoOn).Warning(_sb.Clear().Append('<#Waiting for Auto signal! #>').Append(_varInfo.Symbol).ToString());
-		IF  inoStatus.State.AutoOn THEN
-			_progress := _progress + 1;
-		END_IF;
-	END_IF;
-	
-	
-	IF _progress = 2 THEN	
-		Messenger.Debug('<#Robot Error Reset#>');
-		inoControl.ResetError := inoStatus.State.Error AND _blink.outQ;
-		IF NOT inoStatus.State.Error THEN
-			inoControl.ResetError:=FALSE;
+	IF _progress = 1 THEN	
+		Messenger.Warning('<#Robot has error Reset#>');
+		
+		IF NOT inoStatus.State.Inputs.Safety.FT_IsFault THEN
 			_progress := _progress + 1;
 		END_IF
 	END_IF;
 	
-	IF _progress = 3 THEN	
+	IF _progress = 2 THEN	
 		Messenger.Debug('<#Robot Emergency Stop Reset#>');
-		inoControl.ResetEmgStop := inoStatus.State.EmgStop AND _blink.outQ;
-		IF NOT inoStatus.State.EmgStop THEN
-			inoControl.ResetEmgStop:=FALSE;
+		_varInfo :=__VARINFO( inoStatus.State.Inputs.Safety.ES_IsEmergencyStopped );                                                
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.ES_IsEmergencyStopped ).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
+
+		_varInfo :=__VARINFO( inoStatus.State.Inputs.Safety.PS_IsProtectiveStopped );                                                
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.PS_IsProtectiveStopped ).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
+
+		_varInfo :=__VARINFO( inoStatus.State.Inputs.Safety.SS_IsSafeguardStopped );                                                
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.SS_IsSafeguardStopped ).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
+
+		_varInfo :=__VARINFO( inoStatus.State.Inputs.Safety.RC_IsRecoveryMode );                                                
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.RC_IsRecoveryMode ).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
+
+		_varInfo :=__VARINFO( inoStatus.State.Inputs.Safety.ST_IsStoppedDueSafety );                                                
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.ES_IsEmergencyStopped ).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
+
+		_varInfo :=__VARINFO( inoStatus.State.Inputs.Safety.VL_IsViolation );                                                
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.VL_IsViolation ).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
+
+		//inoControl.ResetEmgStop := inoStatus.State.EmgStop AND _blink.outQ;
+		IF NOT inoStatus.State.Inputs.Safety.ES_IsEmergencyStopped 
+				AND NOT inoStatus.State.Inputs.Safety.PS_IsProtectiveStopped  
+				AND NOT inoStatus.State.Inputs.Safety.SS_IsSafeguardStopped  
+				AND NOT inoStatus.State.Inputs.Safety.RC_IsRecoveryMode 
+				AND NOT inoStatus.State.Inputs.Safety.ST_IsStoppedDueSafety 
+				AND NOT inoStatus.State.Inputs.Safety.VL_IsViolation THEN
+			//inoControl.ResetEmgStop:=FALSE;
 			_progress := _progress + 1;
 		END_IF
 	END_IF;
 		
 	
-	IF _progress = 4 THEN	
-		IF inoStatus.State.Error THEN 
+	IF _progress = 3 THEN	
+		IF inoStatus.State.Inputs.Safety.FT_IsFault THEN 
 			_progress := 1;
 		END_IF
-		_varInfo :=__VARINFO( inoStatus.State.MotorOnState);                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.MotorOnState).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
-			_varInfo :=__VARINFO( inoStatus.State.Error);                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Error).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
-	
+		Messenger.Debug('<#Robot Power on#>');
+		_varInfo :=__VARINFO( inoStatus.State.Inputs.Robot.PW_IsPowerOn);                                                
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Robot.PW_IsPowerOn).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
+		_varInfo :=__VARINFO( inoStatus.State.Inputs.Safety.FT_IsFault);                                                
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.FT_IsFault).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
+		
 		inoControl.MotorOn:=_blink.outQ;	
-		IF inoStatus.State.MotorOnState  AND NOT inoStatus.State.Error THEN
+		IF inoStatus.State.Inputs.Robot.PW_IsPowerOn  AND NOT inoStatus.State.Inputs.Safety.FT_IsFault THEN
 			 inoControl.MotorOn:=FALSE;
 			_progress := _progress + 1;
 		END_IF
@@ -74,7 +87,7 @@ IF Execute() THEN
 	
 	
 	
-    DoneWhen(inoStatus.State.MotorOnState AND NOT inoStatus.State.Error);
+    DoneWhen(inoStatus.State.Inputs.Robot.PW_IsPowerOn AND NOT inoStatus.State.Inputs.Safety.FT_IsFault);
     CallTimers(TRUE);
 	
 	THIS^.ThrowWhen(_errorTimer.Q );
