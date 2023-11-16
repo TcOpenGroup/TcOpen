@@ -24,8 +24,7 @@
 	IF _progress = 1 THEN
 	
 		inoControl.Start :=   _blink.outQ;
-		//_varInfo :=__VARINFO( inoStatus.State.Inputs.Robot.PR_IsProgramRunning );                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Robot.PR_IsProgramRunning).Warning(_sb.Clear().Append('<#Waiting for program running signal! #>').Append(_varInfo.Symbol).ToString());
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Robot.PR_IsProgramRunning).Warning(_sb.Clear().Append('<#Waiting to program running! #>').ToString());
 		
 		IF inoStatus.State.Inputs.Robot.PR_IsProgramRunning THEN
 			inoControl.Start :=FALSE;
@@ -44,17 +43,6 @@ IF  THIS^.Error AND NOT _errorMessage.Pinned THEN
 	THIS^.Restore();
 END_IF]]></ST>
     </Implementation>
-    <Method Name="FB_init" Id="{858811fb-76a3-0086-188d-ab4f84c22d3d}">
-      <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
-VAR_INPUT
-    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
-  	ParentObject : ITcoObject;	
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="OnAbort" Id="{0b5410c1-a8cf-0883-0ab0-4162f1a0fb9f}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -113,7 +101,7 @@ THIS^._errorMessage.Error(_sb.Clear().Append(description).Append(' To restore ac
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN  THIS^.inoStatus.ActionDescription := '<#Start at Main started.#>'; END_IF; 
-]]></ST>
+CallTimers(FALSE);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{f0b03007-9a0f-02a4-14fa-38cd4c88bdbe}">

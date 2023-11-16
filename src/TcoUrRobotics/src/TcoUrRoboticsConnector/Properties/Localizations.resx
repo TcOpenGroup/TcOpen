@@ -120,8 +120,8 @@
   <data name="___Emergency_stop_active__" xml:space="preserve">
     <value>Emergency stop active</value>
   </data>
-  <data name="___Safety_Error___" xml:space="preserve">
-    <value>Safety Error </value>
+  <data name="___Stopped_due_safety__" xml:space="preserve">
+    <value>Stopped due safety</value>
   </data>
   <data name="___Drive_error_no___" xml:space="preserve">
     <value>Drive error no </value>
@@ -165,17 +165,17 @@
   <data name="___Stop_program__" xml:space="preserve">
     <value>Stop program</value>
   </data>
-  <data name="___Stop_motors__" xml:space="preserve">
-    <value>Stop motors</value>
-  </data>
   <data name="___Restore__" xml:space="preserve">
     <value>Restore</value>
+  </data>
+  <data name="___Safety_Error___" xml:space="preserve">
+    <value>Safety Error </value>
   </data>
   <data name="___Invalid_reference____" xml:space="preserve">
     <value>Invalid reference: </value>
   </data>
-  <data name="___Waiting_for_program_running_signal____" xml:space="preserve">
-    <value>Waiting for program running signal! </value>
+  <data name="___Waiting_to_program_running____" xml:space="preserve">
+    <value>Waiting to program running! </value>
   </data>
   <data name="___Start_at_Main_was_aborted__while_not_yet_completed___" xml:space="preserve">
     <value>Start at Main was aborted, while not yet completed!</value>
@@ -273,17 +273,8 @@
   <data name="___Stopping_program_started___" xml:space="preserve">
     <value>Stopping program started.</value>
   </data>
-  <data name="____is_OFF___" xml:space="preserve">
-    <value> is OFF </value>
-  </data>
-  <data name="___Stop_motors_was_completed_successfully___" xml:space="preserve">
-    <value>Stop motors was completed successfully.</value>
-  </data>
-  <data name="___Stop_motors_finished_with_error___" xml:space="preserve">
-    <value>Stop motors finished with error.</value>
-  </data>
-  <data name="___Stop_motors_started___" xml:space="preserve">
-    <value>Stop motors started.</value>
+  <data name="____Waiting_to_program_is_stopped____" xml:space="preserve">
+    <value> Waiting to program is stopped. </value>
   </data>
   <data name="___Stop_movements_and_program_was_aborted__while_not_yet_completed___" xml:space="preserve">
     <value>Stop movements and program was aborted, while not yet completed!</value>
@@ -465,26 +456,26 @@
   <data name="___TCP_force_scalar__N___" xml:space="preserve">
     <value>TCP force scalar [N]</value>
   </data>
-  <data name="___en_US_Tool_mode__" xml:space="preserve">
-    <value>en-US@Tool mode</value>
+  <data name="___Tool_mode__" xml:space="preserve">
+    <value>Tool mode</value>
   </data>
-  <data name="___en_US_TDI__Tool_Digital_Inputs__" xml:space="preserve">
-    <value>en-US@TDI: Tool Digital Inputs</value>
+  <data name="___TDI__Tool_Digital_Inputs__" xml:space="preserve">
+    <value>TDI: Tool Digital Inputs</value>
   </data>
-  <data name="___en_US_TDO__Tool_Digital_Outputs__" xml:space="preserve">
-    <value>en-US@TDO: Tool Digital Outputs</value>
+  <data name="___TDO__Tool_Digital_Outputs__" xml:space="preserve">
+    <value>TDO: Tool Digital Outputs</value>
   </data>
-  <data name="___en_US__TAIT__Tool_Analog_Input_Types__" xml:space="preserve">
-    <value>en-US@ TAIT: Tool Analog Input Types</value>
+  <data name="___TAIT__Tool_Analog_Input_Types__" xml:space="preserve">
+    <value>TAIT: Tool Analog Input Types</value>
   </data>
-  <data name="___en_US_Tool_analog_input__A_OR_V___" xml:space="preserve">
-    <value>en-US@Tool analog input [A OR V]</value>
+  <data name="___Tool_analog_input__A_OR_V___" xml:space="preserve">
+    <value>Tool analog input [A OR V]</value>
   </data>
-  <data name="___en_US_Tool_output_voltage__V___" xml:space="preserve">
-    <value>en-US@Tool output voltage [V]</value>
+  <data name="___Tool_output_voltage__V___" xml:space="preserve">
+    <value>Tool output voltage [V]</value>
   </data>
-  <data name="___en_US_Tool_current__A___" xml:space="preserve">
-    <value>en-US@Tool current [A]</value>
+  <data name="___Tool_current__A___" xml:space="preserve">
+    <value>Tool current [A]</value>
   </data>
   <data name="___Standard_digital_output_mask__" xml:space="preserve">
     <value>Standard digital output mask</value>

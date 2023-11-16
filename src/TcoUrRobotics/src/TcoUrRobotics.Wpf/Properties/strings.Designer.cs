@@ -61,6 +61,42 @@ namespace TcOpen.Inxton.TcoUrRobotics.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is emergency stopped.
+        /// </summary>
+        public static string EmergencyStopped {
+            get {
+                return ResourceManager.GetString("EmergencyStopped", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is fault.
+        /// </summary>
+        public static string IsFault {
+            get {
+                return ResourceManager.GetString("IsFault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is stopped due safety.
+        /// </summary>
+        public static string IsStoppedDueSafety {
+            get {
+                return ResourceManager.GetString("IsStoppedDueSafety", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is violation.
+        /// </summary>
+        public static string IsViolation {
+            get {
+                return ResourceManager.GetString("IsViolation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Key not in Auto.
         /// </summary>
         public static string KeyNotInAuto {
@@ -88,6 +124,15 @@ namespace TcOpen.Inxton.TcoUrRobotics.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is normal mode.
+        /// </summary>
+        public static string NormalMode {
+            get {
+                return ResourceManager.GetString("NormalMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Program is stoped.
         /// </summary>
         public static string ProgramIsNotRunning {
@@ -106,6 +151,51 @@ namespace TcOpen.Inxton.TcoUrRobotics.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is protective stopped.
+        /// </summary>
+        public static string ProtectiveStopped {
+            get {
+                return ResourceManager.GetString("ProtectiveStopped", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is recovery mode.
+        /// </summary>
+        public static string RecoveryMode {
+            get {
+                return ResourceManager.GetString("RecoveryMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is reduced mode.
+        /// </summary>
+        public static string ReducedMode {
+            get {
+                return ResourceManager.GetString("ReducedMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is robot emergency stopped.
+        /// </summary>
+        public static string RobotEmergencyStopped {
+            get {
+                return ResourceManager.GetString("RobotEmergencyStopped", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is safeguard stopped.
+        /// </summary>
+        public static string SafeguardStoppred {
+            get {
+                return ResourceManager.GetString("SafeguardStoppred", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Safety Error!.
         /// </summary>
         public static string SafetyError {
@@ -120,6 +210,15 @@ namespace TcOpen.Inxton.TcoUrRobotics.Wpf.Properties {
         public static string SafetyOk {
             get {
                 return ResourceManager.GetString("SafetyOk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is system emergency stopped.
+        /// </summary>
+        public static string SystemEmergencyStopped {
+            get {
+                return ResourceManager.GetString("SystemEmergencyStopped", resourceCulture);
             }
         }
     }

@@ -4,13 +4,13 @@
     <Declaration><![CDATA[TYPE TcoUrRoboticsT2OTcp :
 STRUCT
 	{attribute addProperty Name "<#Actual TCP Position#>"}
-	Postition : TcoRoboticsCoordinates;
+	Postition : TcoAbstractions.TcoRoboticsCoordinates;
 	{attribute addProperty Name "<#Actual TCP Velocity#>"}
-	Velocity : TcoRoboticsCoordinates;
+	Velocity : TcoAbstractions.TcoRoboticsCoordinates;
 	{attribute addProperty Name "<#Actual TCP Force#>"}
-	Force : TcoRoboticsBasicCoordinates;
+	Force : TcoAbstractions.TcoRoboticsBasicCoordinates;
 	{attribute addProperty Name "<#Actual TCP Torque#>"}
-	Torque : TcoRoboticsBasicCoordinates;
+	Torque : TcoAbstractions.TcoRoboticsBasicCoordinates;
 	{attribute addProperty Name "<#TCP force scalar [N]#>"}
 	TCP_ForceScalar : REAL;
 END_STRUCT

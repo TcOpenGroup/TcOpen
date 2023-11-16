@@ -98,17 +98,6 @@ IF  THIS^.Error AND NOT _errorMessage.Pinned THEN
 	THIS^.Restore();
 END_IF]]></ST>
     </Implementation>
-    <Method Name="FB_init" Id="{7d360fb1-da65-0180-1e0a-921cb5abca49}">
-      <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
-VAR_INPUT
-    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
-    ParentObject : ITcoObject;	
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="OnAbort" Id="{232ebecc-cbbc-0a34-338c-20e2cd172bea}">
       <Declaration><![CDATA[(*~
 	<docu>

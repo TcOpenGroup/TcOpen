@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="eTcoConversionTests" Id="{2c4d38a4-e246-0e28-3a47-d083af8566b6}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE eTcoConversionTests :
+(
+	None := 0,
+	Init := 10,
+	TcoBytesToReal := 20,
+	TcoRealToBytes := 30,
+	TcoBytesToRealPlcArrange := 40,
+	TcoRealToBytesPlcArrange := 50
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

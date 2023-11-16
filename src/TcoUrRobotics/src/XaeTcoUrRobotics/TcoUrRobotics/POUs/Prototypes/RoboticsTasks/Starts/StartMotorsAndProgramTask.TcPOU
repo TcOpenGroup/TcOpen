@@ -1,11 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="StartMotorsAndProgramTask" Id="{9167aefe-ea54-0bdf-1981-d8c8cc80b1bf}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK StartMotorsAndProgramTask EXTENDS TcoUrRoboticsTask
-
-
-
-]]></Declaration>
+    <Declaration><![CDATA[FUNCTION_BLOCK StartMotorsAndProgramTask EXTENDS TcoUrRoboticsTask]]></Declaration>
     <Implementation>
       <ST><![CDATA[
 
@@ -59,14 +55,13 @@ IF Execute() THEN
 		_varInfo :=__VARINFO( inoStatus.State.Inputs.Safety.VL_IsViolation );                                                
 		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.VL_IsViolation ).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
 
-		//inoControl.ResetEmgStop := inoStatus.State.EmgStop AND _blink.outQ;
+
 		IF NOT inoStatus.State.Inputs.Safety.ES_IsEmergencyStopped 
 				AND NOT inoStatus.State.Inputs.Safety.PS_IsProtectiveStopped  
 				AND NOT inoStatus.State.Inputs.Safety.SS_IsSafeguardStopped  
 				AND NOT inoStatus.State.Inputs.Safety.RC_IsRecoveryMode 
 				AND NOT inoStatus.State.Inputs.Safety.ST_IsStoppedDueSafety 
 				AND NOT inoStatus.State.Inputs.Safety.VL_IsViolation THEN
-			//inoControl.ResetEmgStop:=FALSE;
 			_progress := _progress + 1;
 		END_IF
 	END_IF;
@@ -94,9 +89,7 @@ IF Execute() THEN
 			_progress := 1;
 		END_IF
 		inoControl.Start:=_blink.outQ;
-		_varInfo :=__VARINFO( inoStatus.State.Inputs.Robot.PR_IsProgramRunning );                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Robot.PR_IsProgramRunning).Warning(_sb.Clear().Append('<#Waiting for program running signal! #>').Append(_varInfo.Symbol).ToString());
-		
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Robot.PR_IsProgramRunning).Warning(_sb.Clear().Append('<#Waiting to program running! #>').ToString());
 				
 		IF  inoStatus.State.Inputs.Robot.PR_IsProgramRunning AND NOT inoStatus.State.Inputs.Safety.FT_IsFault THEN
 				inoControl.Start:=FALSE;
@@ -115,17 +108,6 @@ IF  THIS^.Error AND NOT _errorMessage.Pinned THEN
 	THIS^.Restore();
 END_IF]]></ST>
     </Implementation>
-    <Method Name="FB_init" Id="{546590f0-f6a5-01c1-0130-46bfe36bd116}">
-      <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
-VAR_INPUT
-    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
-    ParentObject : ITcoObject;	
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="OnAbort" Id="{a212baff-46d2-0c08-08a3-cad23ed7282b}">
       <Declaration><![CDATA[(*~
 	<docu>

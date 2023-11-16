@@ -37,11 +37,9 @@ IF Execute() THEN
 		END_IF
 	END_IF;		
 
+	THIS^.Messenger.OnCondition(_infoTimer.Q AND  inoStatus.State.Inputs.Robot.PR_IsProgramRunning)
+		.Warning(_sb.Clear().Append('<# Waiting to program is stopped. #>').ToString());
 	
-	_varInfo :=__VARINFO( NOT inoStatus.State.Inputs.Robot.PR_IsProgramRunning);                                                
-	THIS^.Messenger.OnCondition(_infoTimer.Q).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
-	
-
     DoneWhen(NOT inoStatus.State.Inputs.Robot.PR_IsProgramRunning);
     CallTimers(TRUE);
 	
@@ -52,18 +50,6 @@ IF  THIS^.Error AND NOT _errorMessage.Pinned THEN
 	THIS^.Restore();
 END_IF]]></ST>
     </Implementation>
-    <Method Name="FB_init" Id="{87f99f68-da88-0f7e-2605-464ee16f7069}">
-      <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
-VAR_INPUT
-    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
-  	ParentObject : ITcoObject;	
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[		    
-                                ]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="InvokeWithParams" Id="{0fe2cb98-6620-072a-3cd8-c3ac8282f9ae}">
       <Declaration><![CDATA[METHOD INTERNAL InvokeWithParams : ITcoTaskStatus
 VAR_INPUT

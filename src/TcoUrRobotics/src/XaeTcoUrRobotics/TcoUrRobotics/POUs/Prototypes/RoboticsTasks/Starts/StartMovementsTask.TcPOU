@@ -28,9 +28,8 @@ IF Execute() THEN
 	END_IF
 	
 	IF _progress = 1 THEN
-		
-		//_varInfo :=__VARINFO( inoStatus.State.Inputs.Robot.PR_IsProgramRunning);                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Robot.PR_IsProgramRunning).Warning(_sb.Clear().Append('<#Waiting for program running signal! #>').Append(_varInfo.Symbol).ToString());
+		                                            
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Robot.PR_IsProgramRunning).Warning(_sb.Clear().Append('<#Waiting to program running! #>').ToString());
 		
 		_varInfo :=__VARINFO( inoStatus.State.Inputs.Robot.PW_IsPowerOn);                                                
 		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Robot.PW_IsPowerOn).Warning(_sb.Clear().Append('<#Waiting for motors are On! #>').Append(_varInfo.Symbol).ToString());	
@@ -106,17 +105,6 @@ IF  THIS^.Error AND NOT _errorMessage.Pinned THEN
 	THIS^.Restore();
 END_IF]]></ST>
     </Implementation>
-    <Method Name="FB_init" Id="{6a255b16-8133-00c2-0488-34f8dc0a0f2c}">
-      <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
-VAR_INPUT
-    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
-  	ParentObject : ITcoObject;	
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="InvokeWithParams" Id="{474e584f-0853-061a-1105-cc4bd8045490}">
       <Declaration><![CDATA[METHOD INTERNAL InvokeWithParams : ITcoTaskStatus
 VAR_INPUT

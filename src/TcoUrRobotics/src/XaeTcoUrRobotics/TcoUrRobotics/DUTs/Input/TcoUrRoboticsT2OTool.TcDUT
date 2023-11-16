@@ -3,19 +3,19 @@
   <DUT Name="TcoUrRoboticsT2OTool" Id="{ca4244df-d10b-035a-2fe0-4e3e1488d3b9}">
     <Declaration><![CDATA[TYPE TcoUrRoboticsT2OTool :
 STRUCT
-	{attribute addProperty Name "<#en-US@Tool mode#>"}
+	{attribute addProperty Name "<#Tool mode#>"}
 	ToolMode : USINT;
-	{attribute addProperty Name "<#en-US@TDI: Tool Digital Inputs#>"}
+	{attribute addProperty Name "<#TDI: Tool Digital Inputs#>"}
 	TDI_ToolDigitalInputs : USINT;
-	{attribute addProperty Name "<#en-US@TDO: Tool Digital Outputs#>"}
+	{attribute addProperty Name "<#TDO: Tool Digital Outputs#>"}
 	TDO_ToolDigitalOutputs : USINT;
-	{attribute addProperty Name "<#en-US@ TAIT: Tool Analog Input Types#>"}
+	{attribute addProperty Name "<#TAIT: Tool Analog Input Types#>"}
 	TAIT_ToolAnalogInputTypes : USINT;
-	{attribute addProperty Name "<#en-US@Tool analog input [A OR V]#>"}
+	{attribute addProperty Name "<#Tool analog input [A OR V]#>"}
 	ToolAnalogInput: ARRAY[0..1] OF REAL;
-	{attribute addProperty Name "<#en-US@Tool output voltage [V]#>"}
+	{attribute addProperty Name "<#Tool output voltage [V]#>"}
 	ToolOutputVoltage : REAL;
-	{attribute addProperty Name "<#en-US@Tool current [A]#>"}
+	{attribute addProperty Name "<#Tool current [A]#>"}
 	ToolCurrent : REAL;
 END_STRUCT
 END_TYPE

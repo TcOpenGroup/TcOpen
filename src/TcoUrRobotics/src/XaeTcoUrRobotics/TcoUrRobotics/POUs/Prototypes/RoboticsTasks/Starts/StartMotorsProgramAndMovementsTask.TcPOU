@@ -107,17 +107,6 @@ IF  THIS^.Error AND NOT _errorMessage.Pinned THEN
 	THIS^.Restore();
 END_IF]]></ST>
     </Implementation>
-    <Method Name="FB_init" Id="{1f636cc9-df38-0f41-2996-a02bb0bc32e4}">
-      <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
-VAR_INPUT
-    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
-  	ParentObject : ITcoObject;	
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="InvokeWithParams" Id="{133c4759-2021-0877-2f15-0f7839f948b2}">
       <Declaration><![CDATA[METHOD INTERNAL InvokeWithParams : ITcoTaskStatus
 VAR_INPUT

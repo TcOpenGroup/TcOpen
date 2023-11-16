@@ -34,6 +34,10 @@
     </SelectedLibraryCategories>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="POUs\Constants.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
     <Compile Include="POUs\Conversions\eTcoDataFormat.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -80,6 +84,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\TcoBlinker\TcoBlinker.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoGetBitFromByte.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoSetBitInByte.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

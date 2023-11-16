@@ -259,69 +259,6 @@ namespace TcoUrRoboticsConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to en-US@ TAIT: Tool Analog Input Types.
-        /// </summary>
-        public static string ___en_US__TAIT__Tool_Analog_Input_Types__ {
-            get {
-                return ResourceManager.GetString("___en_US__TAIT__Tool_Analog_Input_Types__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to en-US@TDI: Tool Digital Inputs.
-        /// </summary>
-        public static string ___en_US_TDI__Tool_Digital_Inputs__ {
-            get {
-                return ResourceManager.GetString("___en_US_TDI__Tool_Digital_Inputs__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to en-US@TDO: Tool Digital Outputs.
-        /// </summary>
-        public static string ___en_US_TDO__Tool_Digital_Outputs__ {
-            get {
-                return ResourceManager.GetString("___en_US_TDO__Tool_Digital_Outputs__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to en-US@Tool analog input [A OR V].
-        /// </summary>
-        public static string ___en_US_Tool_analog_input__A_OR_V___ {
-            get {
-                return ResourceManager.GetString("___en_US_Tool_analog_input__A_OR_V___", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to en-US@Tool current [A].
-        /// </summary>
-        public static string ___en_US_Tool_current__A___ {
-            get {
-                return ResourceManager.GetString("___en_US_Tool_current__A___", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to en-US@Tool mode.
-        /// </summary>
-        public static string ___en_US_Tool_mode__ {
-            get {
-                return ResourceManager.GetString("___en_US_Tool_mode__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to en-US@Tool output voltage [V].
-        /// </summary>
-        public static string ___en_US_Tool_output_voltage__V___ {
-            get {
-                return ResourceManager.GetString("___en_US_Tool_output_voltage__V___", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to ES: Is emergency stopped.
         /// </summary>
         public static string ___ES__Is_emergency_stopped__ {
@@ -1474,6 +1411,15 @@ namespace TcoUrRoboticsConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TAIT: Tool Analog Input Types.
+        /// </summary>
+        public static string ___TAIT__Tool_Analog_Input_Types__ {
+            get {
+                return ResourceManager.GetString("___TAIT__Tool_Analog_Input_Types__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to TB: Is teach button pressed.
         /// </summary>
         public static string ___TB__Is_teach_button_pressed__ {
@@ -1501,11 +1447,29 @@ namespace TcoUrRoboticsConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TDI: Tool Digital Inputs.
+        /// </summary>
+        public static string ___TDI__Tool_Digital_Inputs__ {
+            get {
+                return ResourceManager.GetString("___TDI__Tool_Digital_Inputs__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to TDO: Tool digital output.
         /// </summary>
         public static string ___TDO__Tool_digital_output__ {
             get {
                 return ResourceManager.GetString("___TDO__Tool_digital_output__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TDO: Tool Digital Outputs.
+        /// </summary>
+        public static string ___TDO__Tool_Digital_Outputs__ {
+            get {
+                return ResourceManager.GetString("___TDO__Tool_Digital_Outputs__", resourceCulture);
             }
         }
         
@@ -1591,11 +1555,47 @@ namespace TcoUrRoboticsConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tool analog input [A OR V].
+        /// </summary>
+        public static string ___Tool_analog_input__A_OR_V___ {
+            get {
+                return ResourceManager.GetString("___Tool_analog_input__A_OR_V___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tool current [A].
+        /// </summary>
+        public static string ___Tool_current__A___ {
+            get {
+                return ResourceManager.GetString("___Tool_current__A___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tool mode.
+        /// </summary>
+        public static string ___Tool_mode__ {
+            get {
+                return ResourceManager.GetString("___Tool_mode__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tool number.
         /// </summary>
         public static string ___Tool_number__ {
             get {
                 return ResourceManager.GetString("___Tool_number__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tool output voltage [V].
+        /// </summary>
+        public static string ___Tool_output_voltage__V___ {
+            get {
+                return ResourceManager.GetString("___Tool_output_voltage__V___", resourceCulture);
             }
         }
         
