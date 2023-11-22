@@ -30,7 +30,7 @@ IF Execute() THEN
 	    inoControl.Stop := TRUE ;
 	
 		
-		IF inoStatus.State.Inputs.Robot.PR_IsProgramRunning THEN
+		IF not inoStatus.State.Inputs.Robot.PR_IsProgramRunning THEN
 			inoControl.Stop := FALSE ;
 			_progress := _progress + 1;
 

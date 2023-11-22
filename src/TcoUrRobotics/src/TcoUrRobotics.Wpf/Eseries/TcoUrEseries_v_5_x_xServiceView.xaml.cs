@@ -20,13 +20,13 @@ using TcOpen.Inxton.Wpf;
 namespace TcoUrRobotics
 {
 
-    public partial class TcoUrEseries_V_1_x_xServiceView : UserControl
+    public partial class TcoUrEseries_v_5_x_xServiceView : UserControl
     {
-        public TcoUrEseries_V_1_x_xServiceView()
+        public TcoUrEseries_v_5_x_xServiceView()
         {
             if (DesignerProperties.GetIsInDesignMode(this))
             {
-                this.DataContext = new TcoUrEseries_V_1_x_xServiceViewModel();
+                this.DataContext = new TcoUrEseries_v_5_x_xServiceViewModel();
             }
 
             InitializeComponent();

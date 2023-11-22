@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
-  <POU Name="TcoUrEseries_v_1_x_x" Id="{52ead84b-d407-094c-3a59-d97fd9fd9089}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcoUrEseries_v_1_x_x EXTENDS TcoIo.TcoPnIoComponent  IMPLEMENTS TcoAbstractions.ITcoRobotics
+  <POU Name="TcoUrEseries_v_5_x_x" Id="{52ead84b-d407-094c-3a59-d97fd9fd9089}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoUrEseries_v_5_x_x EXTENDS TcoIo.TcoPnIoComponent  IMPLEMENTS TcoAbstractions.ITcoRobotics
 VAR_IN_OUT
-    inoData : TcoUrEseries_IO_v_1_x_x;
+    inoData : TcoUrEseries_IO_v_5_x_x;
 END_VAR
 VAR
     
@@ -103,13 +103,12 @@ _startMotorsAndProgramTask(inoConfig:=_config,inoControl:=_control,inoStatus:=_s
 _startMovementsTask.Enabled:=NOT _startMotorsProgramAndMovementsTask.Busy ;
 _startMovementsTask(inoConfig:=_config,inoControl:=_control,inoStatus:=_status);
 
-_startMotorsProgramAndMovementsTask.Enabled:=NOT _startMovementsTask.Busy ;
+_startMotorsProgramAndMovementsTask.Enabled:=NOT _startMovementsTask.Busy  ;
 _startMotorsProgramAndMovementsTask(refStartMotorsAndProgramTask:=_startMotorsAndProgramTask, inoConfig:=_config,inoControl:=_control,inoStatus:=_status);
 
 
 _stopMovementsTask.Enabled:=TRUE;
 _stopMovementsTask(inoConfig:=_config,inoControl:=_control,inoStatus:=_status);
-
 
 
 _stopProgramTask.Enabled:=TRUE;
@@ -144,15 +143,12 @@ IF _someTaskIsActive THEN
 	IF(_status.State.Inputs.Safety.ES_IsEmergencyStopped) THEN
 		Messenger.Error('<#Emergency stop active#>');
 	END_IF;
-	IF(NOT _status.State.Inputs.Safety.ST_IsStoppedDueSafety) THEN
-		Messenger.Warning('<#Safety Error #>');
+	IF( _status.State.Inputs.Safety.ST_IsStoppedDueSafety) THEN
+		Messenger.Warning('<#Stopped due safety#>');
 	END_IF;
 
   
 END_IF;
-//
-//IF(_status.State.Error) THEN Messenger.Error(_sb.Clear().Append('<#Drive error no #>').Append(UDINT_TO_STRING(_status.State.EventId)).Append(' |[[0]AdvancedDiagnosticMessage]|').Append('.').Append('For details see the service mode').ToString()); END_IF;
-//
 
 UpdateControl();]]></ST>
     </Implementation>
@@ -236,6 +232,29 @@ METHOD PROTECTED ServiceMode]]></Declaration>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
+    <Property Name="SpeedSliderFraction" Id="{0af748eb-2e07-06b1-039d-136a1fa72524}">
+      <Declaration><![CDATA[PROPERTY PUBLIC SpeedSliderFraction : REFERENCE TO real]]></Declaration>
+      <Get Name="Get" Id="{9f5584f0-ae79-09c8-1680-b94087545437}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[SpeedSliderFraction REF= _control.Outputs.Speed.SpeedSliderFraction;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="SSM_SpeedSliderFractionMask" Id="{95ec6af3-9f60-0083-01ea-50468fd395b5}">
+      <Declaration><![CDATA[PROPERTY PUBLIC SSM_SpeedSliderFractionMask : REFERENCE TO BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{21dd1703-5ad3-025d-252b-f00dd802b222}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[SSM_SpeedSliderFractionMask REF= _control.Outputs.Speed.SSM_SpeedSliderFractionMask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="StartAtMain" Id="{584de617-7d33-04a3-078d-32b9b8b62fc3}" FolderPath="Operations\">
       <Declaration><![CDATA[METHOD PUBLIC StartAtMain : TcoCore.ITcoTaskStatus
 VAR_INPUT

@@ -8,7 +8,7 @@ VAR
     _robot1 : TcoUrRobotics.TcoUrCb3_v_3_x_x(THIS^);
 		
     {attribute addProperty Name "<#UR E series#>"}
-    _robot2 : TcoUrRobotics.TcoUrEseries_v_1_x_x(THIS^);
+    _robot2 : TcoUrRobotics.TcoUrEseries_v_5_x_x(THIS^);
 
 
 
@@ -109,7 +109,10 @@ IF (seq.Step(inStepID := 0,
     inStepDescription := 'READY TO START')) THEN
     //--------------------------------------------------------
 	_param.GlobalSpeed :=100;
-		_noOfAttmets:=0;
+	_robot1.SSM_SpeedSliderFractionMask:=TRUE;
+	_robot1.SpeedSliderFraction:=_param.GlobalSpeed;
+	
+	_noOfAttmets:=0;
 
 	answer := _dialog			
 			.Show()	
@@ -194,6 +197,9 @@ IF (seq.Step(inStepID := 15,
     inStepDescription := 'START MOVEMENTS')) THEN
 //--------------------------------------------------------   
 	_param.ActionNo:=100;
+	_param.GlobalSpeed:=50;
+	_robot1.SSM_SpeedSliderFractionMask:=TRUE;
+	_robot1.SpeedSliderFraction:=_param.GlobalSpeed;
 	
 	IF _robot1.StartMovements(inData:=_param).Done   THEN
 		seq.CompleteStep();
@@ -209,7 +215,10 @@ IF (seq.Step(inStepID := 16,
     inStepDescription := 'START ANOTHER MOVE MOVEMENTS')) THEN
 //--------------------------------------------------------   
 	_param.ActionNo:=1;
-	_param.GlobalSpeed:=90;
+	_param.GlobalSpeed:=70;
+	_robot1.SSM_SpeedSliderFractionMask:=TRUE;
+	_robot1.SpeedSliderFraction:=_param.GlobalSpeed;
+	
 	IF _robot1.StartMovements(inData:=_param).Done  THEN
 		IF _noOfAttmets<_maxAllowedAttempts THEN
 			_noOfAttmets:=_noOfAttmets+1;
@@ -283,6 +292,8 @@ IF (seq.Step(inStepID := 525,
 		
 	_param.ActionNo:=100;	
 	_param.GlobalSpeed :=20;
+	_robot1.SSM_SpeedSliderFractionMask:=TRUE;
+	_robot1.SpeedSliderFraction:=_param.GlobalSpeed;
 	IF _robot1.StartMovements(inData:=_param).Done  THEN
 		seq.CompleteStep();
 	END_IF

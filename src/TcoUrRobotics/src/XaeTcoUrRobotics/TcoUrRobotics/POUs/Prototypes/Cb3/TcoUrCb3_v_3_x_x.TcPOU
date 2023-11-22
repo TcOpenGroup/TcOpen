@@ -141,15 +141,12 @@ IF _someTaskIsActive THEN
 	IF(_status.State.Inputs.Safety.ES_IsEmergencyStopped) THEN
 		Messenger.Error('<#Emergency stop active#>');
 	END_IF;
-	IF(NOT _status.State.Inputs.Safety.ST_IsStoppedDueSafety) THEN
+	IF( _status.State.Inputs.Safety.ST_IsStoppedDueSafety) THEN
 		Messenger.Warning('<#Stopped due safety#>');
 	END_IF;
 
   
 END_IF;
-//
-//IF(_status.State.Error) THEN Messenger.Error(_sb.Clear().Append('<#Drive error no #>').Append(UDINT_TO_STRING(_status.State.EventId)).Append(' |[[0]AdvancedDiagnosticMessage]|').Append('.').Append('For details see the service mode').ToString()); END_IF;
-//
 
 UpdateControl();]]></ST>
     </Implementation>
@@ -233,6 +230,29 @@ METHOD PROTECTED ServiceMode]]></Declaration>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
+    <Property Name="SpeedSliderFraction" Id="{46dce8b3-6275-0ee0-1c7f-99bdedbc4c0e}">
+      <Declaration><![CDATA[PROPERTY PUBLIC SpeedSliderFraction : REFERENCE TO real]]></Declaration>
+      <Get Name="Get" Id="{f9dad188-ded5-065c-33d5-47cbbb2a9a2b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[SpeedSliderFraction REF= _control.Outputs.Speed.SpeedSliderFraction;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="SSM_SpeedSliderFractionMask" Id="{1a5766db-f99e-0c6b-3c9d-c3c2cb34517a}">
+      <Declaration><![CDATA[PROPERTY PUBLIC SSM_SpeedSliderFractionMask : REFERENCE TO BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{a794d586-e547-08fe-37be-d5e9e202c460}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[SSM_SpeedSliderFractionMask REF= _control.Outputs.Speed.SSM_SpeedSliderFractionMask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="StartAtMain" Id="{fbb76925-92f3-07dc-20b4-53fde61ff6df}" FolderPath="Operations\">
       <Declaration><![CDATA[METHOD PUBLIC StartAtMain : TcoCore.ITcoTaskStatus
 VAR_INPUT
@@ -449,11 +469,9 @@ index := index + 1;
 _control.outputs.Reg1.Bits[index] := _control.Tool_4_Extend;
 index := index + 1;
 
-//master mode  such as manual/auto ....
-index := 0;
-_control.Outputs.Reg1.Ints[index] := _control.MasterMode;
+
 //zone
-index := index + 1;
+index :=0;
 _control.Outputs.Reg1.Ints[index] := _control.Zone;
 //position
 index := index + 1;
@@ -471,6 +489,9 @@ index := index + 1;
 _control.Outputs.Reg1.Ints[index] := _control.WorkobjectNo;
 index := index + 1;
 _control.Outputs.Reg1.Ints[index] := _control.PointNo;
+//master mode  such as manual/auto ....
+index := index +1;
+_control.Outputs.Reg1.Ints[index] := _control.MasterMode;
 
 index := 0;
 _control.Outputs.Reg1.Floats[index] := _control.UserSpecSpeed1;
@@ -479,18 +500,18 @@ _control.Outputs.Reg1.Floats[index] := _control.UserSpecSpeed2;
 
 index := index + 1;
 ////Coordinates
-_control.Outputs.Reg1.Floats[index] := _control.Coordinates.X / 1000;
+_control.Outputs.Reg1.Floats[index] := _control.Coordinates.X ;
 index := index + 1;
-_control.Outputs.Reg1.Floats[index] := _control.Coordinates.Y / 1000;
+_control.Outputs.Reg1.Floats[index] := _control.Coordinates.Y;
 index := index + 1;
-_control.Outputs.Reg1.Floats[index] := _control.Coordinates.Z / 1000;
+_control.Outputs.Reg1.Floats[index] := _control.Coordinates.Z ;
 
 index := index + 1;
-_control.Outputs.Reg1.Floats[index] := DEG_TO_RAD(_control.Coordinates.Rx);
+_control.Outputs.Reg1.Floats[index] := (_control.Coordinates.Rx);
 index := index + 1;
-_control.Outputs.Reg1.Floats[index] := DEG_TO_RAD(_control.Coordinates.Ry);
+_control.Outputs.Reg1.Floats[index] := (_control.Coordinates.Ry);
 index := index + 1;
-_control.Outputs.Reg1.Floats[index] := DEG_TO_RAD(_control.Coordinates.Rz);
+_control.Outputs.Reg1.Floats[index] := (_control.Coordinates.Rz);
 
 //st_URO_CB3_O2TSpeedData => 8_O2T Robot IO
 index := 0;
@@ -1218,10 +1239,9 @@ index := 0;
 _status.State.Zone := _status.State.Inputs.Ints.Register[index];
 index := index + 1;
 _status.State.InPosition := _status.State.Inputs.Ints.Register[index];
-index := index + 1;
 
 //Movement parameters
-
+index := index + 1;
 _status.State.ActionNo := _status.State.Inputs.Ints.Register[index];
 index := index + 1;
 
@@ -1244,17 +1264,17 @@ index := index + 1;
 _status.State.UserSpecSpeed2 := _status.State.Inputs.Floats.Register[index];
 index := index + 1;
 
-_status.State.Coordinates.X := Status.State.Inputs.Floats.Register[index] * 1000.0;
+_status.State.Coordinates.X := Status.State.Inputs.Floats.Register[index] ;
 index := index + 1;
-_status.State.Coordinates.Y := Status.State.Inputs.Floats.Register[index] * 1000.0;
+_status.State.Coordinates.Y := Status.State.Inputs.Floats.Register[index] ;
 index := index + 1;
-_status.State.Coordinates.Z := Status.State.Inputs.Floats.Register[index] * 1000.0;
+_status.State.Coordinates.Z := Status.State.Inputs.Floats.Register[index] ;
 index := index + 1;
-_status.State.Coordinates.Rx := RAD_TO_DEG(Status.State.Inputs.Floats.Register[index]);
+_status.State.Coordinates.Rx := Status.State.Inputs.Floats.Register[index];
 index := index + 1;
-_status.State.Coordinates.Ry := RAD_TO_DEG(Status.State.Inputs.Floats.Register[index]);
+_status.State.Coordinates.Ry := Status.State.Inputs.Floats.Register[index];
 index := index + 1;
-_status.State.Coordinates.Rz := RAD_TO_DEG(Status.State.Inputs.Floats.Register[index]);
+_status.State.Coordinates.Rz := Status.State.Inputs.Floats.Register[index];
 index := index + 1;
 
 //toido event id

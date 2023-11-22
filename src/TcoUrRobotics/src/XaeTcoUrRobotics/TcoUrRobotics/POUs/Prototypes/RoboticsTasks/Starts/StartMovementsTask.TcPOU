@@ -169,8 +169,7 @@ THIS^._errorMessage.Error(_sb.Clear().Append(description).Append(' To restore ac
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Start movements stared.#>'; END_IF;
-CallTimers(FALSE);
-inoControl.Pause := TRUE;]]></ST>
+CallTimers(FALSE);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{1a0ee7a6-1773-0e8f-1a18-17662b2115fa}">

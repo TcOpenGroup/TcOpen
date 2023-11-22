@@ -61,20 +61,20 @@ namespace TcoUrRoboticsConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  is OFF .
-        /// </summary>
-        public static string ____is_OFF___ {
-            get {
-                return ResourceManager.GetString("____is_OFF___", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to  Waiting for signal: .
         /// </summary>
         public static string ____Waiting_for_signal____ {
             get {
                 return ResourceManager.GetString("____Waiting_for_signal____", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  Waiting to program is stopped. .
+        /// </summary>
+        public static string ____Waiting_to_program_is_stopped____ {
+            get {
+                return ResourceManager.GetString("____Waiting_to_program_is_stopped____", resourceCulture);
             }
         }
         
@@ -237,15 +237,6 @@ namespace TcoUrRoboticsConnector.Properties {
         public static string ___Coordinates__ {
             get {
                 return ResourceManager.GetString("___Coordinates__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Drive error no .
-        /// </summary>
-        public static string ___Drive_error_no___ {
-            get {
-                return ResourceManager.GetString("___Drive_error_no___", resourceCulture);
             }
         }
         
@@ -853,15 +844,6 @@ namespace TcoUrRoboticsConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Safety Error .
-        /// </summary>
-        public static string ___Safety_Error___ {
-            get {
-                return ResourceManager.GetString("___Safety_Error___", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Safety mode.
         /// </summary>
         public static string ___Safety_mode__ {
@@ -1240,42 +1222,6 @@ namespace TcoUrRoboticsConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Stop motors.
-        /// </summary>
-        public static string ___Stop_motors__ {
-            get {
-                return ResourceManager.GetString("___Stop_motors__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Stop motors finished with error..
-        /// </summary>
-        public static string ___Stop_motors_finished_with_error___ {
-            get {
-                return ResourceManager.GetString("___Stop_motors_finished_with_error___", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Stop motors started..
-        /// </summary>
-        public static string ___Stop_motors_started___ {
-            get {
-                return ResourceManager.GetString("___Stop_motors_started___", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Stop motors was completed successfully..
-        /// </summary>
-        public static string ___Stop_motors_was_completed_successfully___ {
-            get {
-                return ResourceManager.GetString("___Stop_motors_was_completed_successfully___", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Stop movements.
         /// </summary>
         public static string ___Stop_movements__ {
@@ -1353,6 +1299,15 @@ namespace TcoUrRoboticsConnector.Properties {
         public static string ___Stop_program_was_completed_successfully___ {
             get {
                 return ResourceManager.GetString("___Stop_program_was_completed_successfully___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stopped due safety.
+        /// </summary>
+        public static string ___Stopped_due_safety__ {
+            get {
+                return ResourceManager.GetString("___Stopped_due_safety__", resourceCulture);
             }
         }
         
@@ -1654,20 +1609,20 @@ namespace TcoUrRoboticsConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Waiting for program running signal! .
-        /// </summary>
-        public static string ___Waiting_for_program_running_signal____ {
-            get {
-                return ResourceManager.GetString("___Waiting_for_program_running_signal____", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Waiting for system is without errors! .
         /// </summary>
         public static string ___Waiting_for_system_is_without_errors____ {
             get {
                 return ResourceManager.GetString("___Waiting_for_system_is_without_errors____", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting to program running! .
+        /// </summary>
+        public static string ___Waiting_to_program_running____ {
+            get {
+                return ResourceManager.GetString("___Waiting_to_program_running____", resourceCulture);
             }
         }
         
