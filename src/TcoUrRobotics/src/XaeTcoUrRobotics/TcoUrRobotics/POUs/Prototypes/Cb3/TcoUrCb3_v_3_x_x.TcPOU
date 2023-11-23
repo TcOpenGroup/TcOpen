@@ -4,6 +4,7 @@
     <Declaration><![CDATA[FUNCTION_BLOCK TcoUrCb3_v_3_x_x EXTENDS TcoIo.TcoPnIoComponent  IMPLEMENTS TcoAbstractions.ITcoRobotics
 VAR_IN_OUT
     inoData : TcoUrCb3_IO_v_3_x_x;
+	inoPowerOnPulse :BOOL;
 END_VAR
 VAR
     
@@ -54,7 +55,9 @@ VAR
 	{attribute addProperty Name "<#Stop program#>"}
     _stopProgramTask : StopProgramTask(THIS^);
 	
-
+	{attribute addProperty Name "<#Power On Task#>"}
+    _powerOnTask : TcoCore.TcoTask(THIS^);
+	
     {attribute addProperty Name "<#Restore#>"}
     _restoreTask : TcoCore.TcoTask(THIS^);
 	
@@ -116,6 +119,19 @@ _stopMovementsAndProgramTask.Enabled:=NOT _stopProgramTask.Busy AND NOT _stopPro
 _stopMovementsAndProgramTask(inoConfig:=_config,inoControl:=_control,inoStatus:=_status);
 
 
+//*************POWER ON********************
+_powerOnTask.Enabled := _status.State.RobotMode=eTcoUrRoboticsRobotMode.DISCONNECTED AND _config.RemotePowerOnEnabled;
+IF _powerOnTask.Execute() THEN
+	inoPowerOnPulse:=TRUE;
+	Messenger.Notify('<#POWER ON PULSE WAS SEND TO CONTROLER#>');
+	_powerOnTask.DoneWhen(_powerOnTask.ElapsedTime>_config.RemotePowerOnPulse);
+END_IF
+
+IF inoPowerOnPulse AND _powerOnTask.Done  OR NOT _config.RemotePowerOnEnabled THEN
+	inoPowerOnPulse:=FALSE;
+END_IF
+//****************************************
+
 
 //*************RESTORE********************
 
@@ -168,6 +184,15 @@ PROPERTY Config : REFERENCE TO TcoUrRobotics_Config_v_1_x_x]]></Declaration>
         </Implementation>
       </Get>
     </Property>
+    <Property Name="PowerOnPulseTask" Id="{52699810-392d-0f21-3690-320056d33474}" FolderPath="Task\">
+      <Declaration><![CDATA[PROPERTY PowerOnPulseTask : REFERENCE TO  TcoCore.TcoTask]]></Declaration>
+      <Get Name="Get" Id="{d3a353d3-5097-0022-20cd-c15df105fb42}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[PowerOnPulseTask REF= _powerOnTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="Restore" Id="{9b81539c-c0c3-070d-3d99-7b7c05b646b2}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -213,7 +238,8 @@ _startMotorsProgramAndMovementsTask.Restore();
 _stopMovementsTask.Restore();
 _startMotorsAndProgramTask.Restore();
 _stopMovementsAndProgramTask.Restore();
-_stopProgramTask.Restore();]]></ST>
+_stopProgramTask.Restore();
+_powerOnTask.Restore();]]></ST>
       </Implementation>
     </Method>
     <Method Name="ServiceMode" Id="{7e47a180-7edd-0b90-2f94-67b97c0bcee3}">
@@ -1192,7 +1218,7 @@ FOR offset := 0 TO 23 DO
 
     index := index + 4;
 END_FOR
-
+_status.State.RobotMode := GetRobotModeDescription(_status.State.Inputs.Robot.RobotMode);
 //SYSTEM INPUTS
 
 index := 0;

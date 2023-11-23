@@ -27,17 +27,31 @@ IF Execute() THEN
 		END_IF
 
 	END_IF
-	IF _progress = 1 THEN
-		inoControl.Pause := TRUE ;
 	
+	IF _progress = 1 THEN
+		
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.NO_IsNormalMode)
+		.Warning(_sb.Clear().Append('<# Waiting to Normal Mode. #>').ToString());
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.RD_IsReducedMode)
+		.Warning(_sb.Clear().Append('<# Waiting to Reduced Mode. #>').ToString());
+		
+		IF inoStatus.State.Inputs.Safety.NO_IsNormalMode OR inoStatus.State.Inputs.Safety.RD_IsReducedMode THEN
+			_progress := _progress + 1;
+
+		END_IF
+	END_IF;		
+	
+	IF _progress = 2 THEN
+		inoControl.Pause := TRUE ;
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND  inoStatus.State.Inputs.Robot.PR_IsProgramRunning)
+		.Warning(_sb.Clear().Append('<# Waiting to program is stopped. #>').ToString());
 		
 		IF NOT inoStatus.State.Inputs.Robot.PR_IsProgramRunning THEN
 			inoControl.Pause := FALSE ;
 		END_IF
 	END_IF;
 
-	THIS^.Messenger.OnCondition(_infoTimer.Q AND  inoStatus.State.Inputs.Robot.PR_IsProgramRunning)
-		.Warning(_sb.Clear().Append('<# Waiting to program is stopped. #>').ToString());
+
 
     DoneWhen(NOT inoStatus.State.Inputs.Robot.PR_IsProgramRunning);
     CallTimers(TRUE);

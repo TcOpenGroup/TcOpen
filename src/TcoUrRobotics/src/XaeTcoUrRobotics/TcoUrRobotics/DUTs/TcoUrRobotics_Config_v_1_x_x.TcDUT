@@ -6,6 +6,8 @@
     STRUCT
         InfoTime : TIME := T#2S;
         ErrorTime : TIME := T#0S;
+		RemotePowerOnEnabled:BOOL :=FALSE;
+		RemotePowerOnPulse : TIME := T#500MS;
 		IpAddress : STRING;
     END_STRUCT
 END_TYPE

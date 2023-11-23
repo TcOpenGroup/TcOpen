@@ -3,7 +3,8 @@
   <POU Name="TcoUrEseries_v_5_x_x" Id="{52ead84b-d407-094c-3a59-d97fd9fd9089}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoUrEseries_v_5_x_x EXTENDS TcoIo.TcoPnIoComponent  IMPLEMENTS TcoAbstractions.ITcoRobotics
 VAR_IN_OUT
-    inoData : TcoUrEseries_IO_v_5_x_x;
+	 inoData : TcoUrEseries_IO_v_5_x_x;
+	 inoPowerOnPulse :BOOL;
 END_VAR
 VAR
     
@@ -24,6 +25,7 @@ VAR
 	_stopTasksAreActive: BOOL;
 END_VAR
 VAR
+
 	{attribute addProperty Name "<#Start at Main#>"}
     _startAtMainTask : StartAtMainTask(THIS^);
 	
@@ -54,7 +56,8 @@ VAR
 	{attribute addProperty Name "<#Stop program#>"}
     _stopProgramTask : StopProgramTask(THIS^);
 	
-
+	{attribute addProperty Name "<#Power On Task#>"}
+    _powerOnTask : TcoCore.TcoTask(THIS^);
 	
 
     {attribute addProperty Name "<#Restore#>"}
@@ -77,6 +80,8 @@ END_VAR]]></Declaration>
     Messenger.Post('Invalid reference', TcoCore.eMessageCategory.ProgrammingError);
     RETURN;
 END_IF
+
+
 
 SUPER^(inPnIoBoxState := THIS^.inoData.PnIoBoxState,inPnIoBoxDiag := THIS^.inoData.PnIoBoxDiag);
 _pnError:= not _profinetReady;
@@ -117,6 +122,20 @@ _stopProgramTask(inoConfig:=_config,inoControl:=_control,inoStatus:=_status);
 _stopMovementsAndProgramTask.Enabled:=NOT _stopProgramTask.Busy AND NOT _stopProgramTask.Busy;
 _stopMovementsAndProgramTask(inoConfig:=_config,inoControl:=_control,inoStatus:=_status);
 
+
+
+//*************POWER ON********************
+_powerOnTask.Enabled :=  _status.State.RobotMode=eTcoUrRoboticsRobotMode.DISCONNECTED AND _config.RemotePowerOnEnabled;
+IF _powerOnTask.Execute() THEN
+	inoPowerOnPulse:=TRUE;
+	Messenger.Notify('<#POWER ON PULSE WAS SEND TO CONTROLER#>');
+	_powerOnTask.DoneWhen(_powerOnTask.ElapsedTime>_config.RemotePowerOnPulse);
+END_IF
+
+IF inoPowerOnPulse AND _powerOnTask.Done  OR NOT _config.RemotePowerOnEnabled THEN
+	inoPowerOnPulse:=FALSE;
+END_IF
+//****************************************
 
 
 //*************RESTORE********************
@@ -170,6 +189,15 @@ PROPERTY Config : REFERENCE TO TcoUrRobotics_Config_v_1_x_x]]></Declaration>
         </Implementation>
       </Get>
     </Property>
+    <Property Name="PowerOnPulseTask" Id="{8d03f1a8-76fd-0d7a-21e2-2233b15b3e92}" FolderPath="Task\">
+      <Declaration><![CDATA[PROPERTY PowerOnPulseTask : REFERENCE TO  TcoCore.TcoTask]]></Declaration>
+      <Get Name="Get" Id="{8795bdfe-5f17-0b4e-0481-42c8eb2d1e02}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[PowerOnPulseTask REF= _powerOnTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="Restore" Id="{8c8aed9c-3392-0de9-1291-e878569a6691}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -215,7 +243,8 @@ _startMotorsProgramAndMovementsTask.Restore();
 _stopMovementsTask.Restore();
 _startMotorsAndProgramTask.Restore();
 _stopMovementsAndProgramTask.Restore();
-_stopProgramTask.Restore();]]></ST>
+_stopProgramTask.Restore();
+_powerOnTask.Restore();]]></ST>
       </Implementation>
     </Method>
     <Method Name="ServiceMode" Id="{243f852d-e46e-0fc3-14ff-a23891087506}">
@@ -1193,7 +1222,7 @@ FOR offset := 0 TO 23 DO
 
     index := index + 4;
 END_FOR
-
+_status.State.RobotMode := GetRobotModeDescription(_status.State.Inputs.Robot.RobotMode);
 //SYSTEM INPUTS
 
 index := 0;

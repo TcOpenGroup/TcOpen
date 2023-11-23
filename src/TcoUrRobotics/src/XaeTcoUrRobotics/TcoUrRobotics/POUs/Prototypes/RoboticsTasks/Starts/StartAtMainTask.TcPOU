@@ -21,7 +21,20 @@
 		END_IF
 
 	END_IF
+	
 	IF _progress = 1 THEN
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.NO_IsNormalMode)
+		.Warning(_sb.Clear().Append('<# Waiting to Normal Mode. #>').ToString());
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.RD_IsReducedMode)
+		.Warning(_sb.Clear().Append('<# Waiting to Reduced Mode. #>').ToString());
+		
+		IF inoStatus.State.Inputs.Safety.NO_IsNormalMode OR inoStatus.State.Inputs.Safety.RD_IsReducedMode THEN
+			_progress := _progress + 1;
+
+		END_IF
+	END_IF;		
+	
+	IF _progress = 2 THEN
 	
 		inoControl.Start :=   _blink.outQ;
 		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Robot.PR_IsProgramRunning).Warning(_sb.Clear().Append('<#Waiting to program running! #>').ToString());

@@ -3,7 +3,8 @@
   <DUT Name="TcoUrRobotics_State_v_1_x_x" Id="{63d91a0d-d92d-05f1-2020-555a4196bb80}">
     <Declaration><![CDATA[TYPE TcoUrRobotics_State_v_1_x_x : 
 STRUCT
-	
+	{attribute addProperty Name "<#Robot Mode#>"}
+	RobotMode : eTcoUrRoboticsRobotMode;
 
 		
 	{attribute addProperty Name "<#In area 1#>"}
@@ -64,8 +65,6 @@ STRUCT
 
 	{attribute addProperty Name "<#Tool 4 extend#>"}
 	Tool_4_Extend : BOOL;
-
-
 	
 
 	{attribute addProperty Name "<#Action number#>"}

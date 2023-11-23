@@ -46,29 +46,25 @@ END_VAR
 METHOD PROTECTED Main]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF _serviceModeActive THEN
-   	_robot1.Service();
-  	_robot2.Service();
-
+    _robot1.Service();
+    _robot2.Service();
 
 END_IF
-_robot1(
-    inoData := GVL.Robot1);
-_robot2(
-    inoData := GVL.Robot2);
+_robot1.Config.RemotePowerOnEnabled:=TRUE;
+_robot1.Config.RemotePowerOnPulse:=T#500MS;
+_robot1(inoData := GVL.Robot1, inoPowerOnPulse := GVL.A2[0]);
+_robot2(inoData := GVL.Robot2, inoPowerOnPulse := GVL.A2[1]);
 
-
-_sequence1Task.Enabled :=NOT _sequence2Task.Busy;
+_sequence1Task.Enabled := NOT _sequence2Task.Busy;
 _sequence1Task(Sequence := _sequence1);
-IF(_sequence1Task.Execute())THEN
-	Sequence1();
+IF (_sequence1Task.Execute()) THEN
+    Sequence1();
 END_IF;
 
-
-
-_sequence2Task.Enabled :=NOT _sequence1Task.Busy;
+_sequence2Task.Enabled := NOT _sequence1Task.Busy;
 _sequence2Task(Sequence := _sequence2);
-IF(_sequence2Task.Execute())THEN
-	Sequence2();
+IF (_sequence2Task.Execute()) THEN
+    Sequence2();
 END_IF;
 ]]></ST>
       </Implementation>
@@ -132,7 +128,7 @@ IF (seq.Step(inStepID := 0,
 END_IF;
 
 
-IF (seq.Step(inStepID := 10,
+IF (seq.Step(inStepID := 5,
     inEnabled := TRUE,
     inStepDescription := 'RESTORE')) THEN
 //--------------------------------------------------------   
@@ -143,7 +139,8 @@ IF (seq.Step(inStepID := 10,
 		
 //--------------------------------------------------------			
 END_IF;
-IF (seq.Step(inStepID := 11,
+
+IF (seq.Step(inStepID := 5,
     inEnabled := TRUE,
     inStepDescription := 'STOP MOVEMENTS AND PROGRAM')) THEN
 //--------------------------------------------------------   
@@ -155,17 +152,29 @@ IF (seq.Step(inStepID := 11,
 //--------------------------------------------------------			
 END_IF;
 
-IF (seq.Step(inStepID := 12,
+IF (seq.Step(inStepID := 10,
     inEnabled := TRUE,
-    inStepDescription := 'START AT MAIN')) THEN
+    inStepDescription := 'START MOTORS')) THEN
 //--------------------------------------------------------   
 	
-	 	IF _robot1.StartAtMain().Done  THEN
+	 	IF _robot1.StartMotorsAndProgram().Done  THEN
 			seq.CompleteStep();
-		END_IF;
+		END_IF
 		
 //--------------------------------------------------------			
 END_IF;
+
+//IF (seq.Step(inStepID := 12,
+//    inEnabled := TRUE,
+//    inStepDescription := 'START AT MAIN')) THEN
+////--------------------------------------------------------   
+//	
+//	 	IF _robot1.StartAtMain().Done  THEN
+//			seq.CompleteStep();
+//		END_IF;
+//		
+////--------------------------------------------------------			
+//END_IF;
 
 IF (seq.Step(inStepID := 13,
     inEnabled := TRUE,

@@ -53,19 +53,19 @@
                     <TextBlock   Text="{x:Static p:strings.SafetyOk}" Foreground="{StaticResource Notification}"/>
                 </WrapPanel>
                 <WrapPanel  DataContext="{Binding _status.State.Inputs.Safety.ST_IsStoppedDueSafety}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=false}" Margin=" 5,0">
-                    <materialdesign:PackIcon Kind="CheckBox"  Foreground="{StaticResource Warning}"  VerticalAlignment="Center"/>
+                    <materialdesign:PackIcon Kind="WarningBox"  Foreground="{StaticResource Warning}"  VerticalAlignment="Center"/>
                     <TextBlock   Text="{x:Static p:strings.SafetyError}" Foreground="{StaticResource Warning}"/>
                 </WrapPanel>
                 <WrapPanel  DataContext="{Binding _status.State.Inputs.Safety.RD_IsReducedMode}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=false}" Margin=" 5,0">
-                    <materialdesign:PackIcon Kind="CheckBox"  Foreground="{StaticResource Warning}"  VerticalAlignment="Center"/>
+                    <materialdesign:PackIcon Kind="WarningBox"  Foreground="{StaticResource Warning}"  VerticalAlignment="Center"/>
                     <TextBlock   Text="{x:Static p:strings.ReducedMode}" Foreground="{StaticResource Warning}"/>
                 </WrapPanel>
                 <WrapPanel  DataContext="{Binding _status.State.Inputs.Safety.RC_IsRecoveryMode}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=false}" Margin=" 5,0">
-                    <materialdesign:PackIcon Kind="CheckBox"  Foreground="{StaticResource Warning}"  VerticalAlignment="Center"/>
+                    <materialdesign:PackIcon Kind="WarningBox"  Foreground="{StaticResource Warning}"  VerticalAlignment="Center"/>
                     <TextBlock   Text="{x:Static p:strings.RecoveryMode}" Foreground="{StaticResource Warning}"/>
                 </WrapPanel>
                 <WrapPanel DataContext="{Binding _status.State.Inputs.Safety.FT_IsFault}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
-                    <materialdesign:PackIcon Kind="AlertBox"  Foreground="{StaticResource Warning}"  VerticalAlignment="Center"/>
+                    <materialdesign:PackIcon Kind="WarningBox"  Foreground="{StaticResource Warning}"  VerticalAlignment="Center"/>
                     <TextBlock   Text="{x:Static p:strings.IsFault}" Foreground="{StaticResource Warning}"/>
                 </WrapPanel>
                 <WrapPanel DataContext="{Binding _status.State.Inputs.Safety.ES_IsEmergencyStopped}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
@@ -91,7 +91,7 @@
                     <materialdesign:PackIcon Kind="AlertBox"  Foreground="{StaticResource Errors}"  VerticalAlignment="Center"/>
                     <TextBlock VerticalAlignment="Center" Text="{Binding AttributeName}" Foreground="{StaticResource Errors}"  />
                 </WrapPanel>
-             
+                   <vortex:RenderableContentControl Margin="5" DataContext="{Binding _powerOnTask }" PresentationType="Base" />
                 <vortex:RenderableContentControl Margin="5" DataContext="{Binding _restoreTask }" PresentationType="Base" />
 
             </WrapPanel>

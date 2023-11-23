@@ -74,6 +74,15 @@
 			</ArrayInfo>
 		</DataType>
 		<DataType>
+			<Name GUID="{481A0C15-D2DB-59F6-F498-C30AA9C1998C}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..7] OF BOOL</Name>
+			<BitSize>64</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>8</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
 			<Name GUID="{18071995-0000-0000-0000-002000000001}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..0] OF BIT</Name>
 			<BitSize>1</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
@@ -333,7 +342,7 @@
 				</Instance>
 			</Project>
 			<Project GUID="{EF5C2F9B-C2D8-4E57-8889-660FBFCE8A20}" Name="TcoUrRoboticsTests" PrjFilePath="TcoUrRoboticsTests\TcoUrRoboticsTests.plcproj" TmcFilePath="TcoUrRoboticsTests\TcoUrRoboticsTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoUrRoboticsTests\TcoUrRoboticsTests.tmc" TmcHash="{17595C37-AC22-3DB7-C50B-C05FEDF3FE67}">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoUrRoboticsTests\TcoUrRoboticsTests.tmc" TmcHash="{322C509A-12F7-64FB-19B6-92EE1DA0C7A3}">
 					<Name>TcoUrRoboticsTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -444,6 +453,10 @@
 						<Var>
 							<Name>GVL.Robot2.Out.Reg2.bArray</Name>
 							<Type GUID="{CEF12769-C02E-89C0-2271-5247D92690FB}">ARRAY [0..99] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>GVL.A2</Name>
+							<Type GUID="{481A0C15-D2DB-59F6-F498-C30AA9C1998C}">ARRAY [0..7] OF BOOL</Type>
 						</Var>
 					</Vars>
 					<UnrestoredVarLinks ImportTime="2023-08-07T09:39:45">
@@ -2031,7 +2044,7 @@ Bit 8 - 15 : reserved]]></Comment>
 				</Box>
 				<EtherCAT DcSyncMode="3" EnableVirtualSwitch="true" MaxSwitchPorts="2" MaxSwitchFrames="120" MaxSwitchMACs="100"/>
 			</Device>
-			<Device Id="2" Disabled="true" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="192.168.4.1.3.1" RemoteName="Device 2 (EtherCAT)" InfoImageId="7">
+			<Device Id="2" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="192.168.4.1.3.1" RemoteName="Device 2 (EtherCAT)" InfoImageId="7">
 				<Name>Device 2 (EtherCAT)</Name>
 				<AddressInfo>
 					<Ccat>
@@ -3895,10 +3908,10 @@ Bit 8 - 15 : reserved]]></Comment>
 				</Box>
 				<EtherCAT/>
 			</Device>
-			<Device Id="5" Disabled="true" DevType="113" AmsPort="28677" AmsNetId="192.168.4.1.6.1" RemoteName="Device 5 (Profinet Controller)">
+			<Device Id="5" DevType="113" AmsPort="28677" AmsNetId="192.168.4.1.6.1" RemoteName="Device 5 (Profinet Controller)">
 				<Name>Device 5 (Profinet Controller)</Name>
-				<DevData>000000000000000000000000000000005c4445564943455c7b45414643393630312d453041302d343533322d394635392d3933384541464141344437447d000000000000000001000104a8c000ffffff0001056fc1bd040000000000000000000000000000000000000000000000000000000000000000000000000000000000</DevData>
-				<Image Id="10" AddrType="1" ImageType="3" SizeIn="2" SizeOut="6">
+				<DevData>000000000000000000000000a08601005c4445564943455c7b45414643393630312d453041302d343533322d394635392d3933384541464141344437447d000000000000000001000104a8c000ffffff0001056fc1bd040000000000000000000000000000000000000000000000000000000000000000000000000000000000</DevData>
+				<Image Id="10" AddrType="1" ImageType="3" SizeIn="228" SizeOut="490">
 					<Name>Image</Name>
 				</Image>
 				<Box Id="11" BoxType="9121">
@@ -4354,7 +4367,13 @@ Submodule Info: Write General Purpose Registers 2
 		</Io>
 	</Project>
 	<Mappings>
+		<MappingInfo Identifier="{00000000-2041-0850-4020-500860000403}" Id="#x02030010"/>
+		<MappingInfo Identifier="{00000000-2041-0850-4020-5008A0000403}" Id="#x02030020"/>
 		<OwnerA Name="TIPC^TcoUrRoboticsTests^TcoUrRoboticsTests Instance">
+			<OwnerB Name="TIID^Device 2 (EtherCAT)^Term 1 (EK1200)^Term 13 (EL2809)">
+				<Link VarA="PlcTask1 Outputs^GVL.A2[0]" VarB="Channel 1^Output"/>
+				<Link VarA="PlcTask1 Outputs^GVL.A2[1]" VarB="Channel 2^Output"/>
+			</OwnerB>
 			<OwnerB Name="TIID^Device 5 (Profinet Controller)^ur-op-80r">
 				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.BitRegs.bArray" VarB="API^Term 7 (5_T2O General Purpose Bit Registers)^Subterm 9 (5_T2O General Purpose Bit Registers)^Inputs^T2O Bit Registers"/>
 				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.FloatRegs.bArray" VarB="API^Term 9 (7_T2O General Purpose Float Registers)^Subterm 11 (7_T2O General Purpose Float Registers)^Inputs^T2O Float Registers"/>

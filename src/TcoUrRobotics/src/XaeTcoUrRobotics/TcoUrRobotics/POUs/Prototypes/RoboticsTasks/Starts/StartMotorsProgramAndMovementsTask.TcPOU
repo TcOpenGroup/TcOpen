@@ -58,7 +58,6 @@ IF Execute() THEN
 	
 		inoControl.ActionNo := 254;
 		IF inoControl.ActionNo = inoStatus.State.ActionNo THEN
-			inoControl.ActionNo := 255;
 			_progress:=_progress + 1;
 		END_IF
 	END_IF;	
@@ -100,7 +99,7 @@ IF Execute() THEN
 
    CallTimers(TRUE);
 	
-	THIS^.ThrowWhen(_errorTimer.Q );
+	THIS^.ThrowWhen(_errorTimer.Q OR inoStatus.State.Inputs.Safety.FT_IsFault);
 END_IF
 
 IF  THIS^.Error AND NOT _errorMessage.Pinned THEN

@@ -70,11 +70,29 @@ namespace TcoUrRoboticsConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to  Waiting to Normal Mode. .
+        /// </summary>
+        public static string ____Waiting_to_Normal_Mode____ {
+            get {
+                return ResourceManager.GetString("____Waiting_to_Normal_Mode____", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to  Waiting to program is stopped. .
         /// </summary>
         public static string ____Waiting_to_program_is_stopped____ {
             get {
                 return ResourceManager.GetString("____Waiting_to_program_is_stopped____", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  Waiting to Reduced Mode. .
+        /// </summary>
+        public static string ____Waiting_to_Reduced_Mode____ {
+            get {
+                return ResourceManager.GetString("____Waiting_to_Reduced_Mode____", resourceCulture);
             }
         }
         
@@ -624,6 +642,24 @@ namespace TcoUrRoboticsConnector.Properties {
         public static string ___PointNumber__ {
             get {
                 return ResourceManager.GetString("___PointNumber__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to POWER ON PULSE WAS SEND TO CONTROLER.
+        /// </summary>
+        public static string ___POWER_ON_PULSE_WAS_SEND_TO_CONTROLER__ {
+            get {
+                return ResourceManager.GetString("___POWER_ON_PULSE_WAS_SEND_TO_CONTROLER__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Power On Task.
+        /// </summary>
+        public static string ___Power_On_Task__ {
+            get {
+                return ResourceManager.GetString("___Power_On_Task__", resourceCulture);
             }
         }
         

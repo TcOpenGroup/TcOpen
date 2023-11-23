@@ -54,8 +54,7 @@ IF Execute() THEN
 		inoControl.Coordinates := _moveParams.Coordinates; 		
 	
 		inoControl.ActionNo := 254;
-		IF inoControl.ActionNo = inoStatus.State.ActionNo THEN
-			
+		IF inoControl.ActionNo = inoStatus.State.ActionNo THEN		
 			_progress:=_progress + 1;
 		END_IF
 	END_IF;	
