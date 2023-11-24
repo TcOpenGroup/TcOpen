@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="TcoSetBitInByte" Id="{39fba90b-22e5-0541-1828-2d1fdf6f30f4}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION TcoSetBitInByte 
+VAR_INPUT
+	inBitValue : BOOL;
+	inBit : UINT;
+END_VAR
+VAR_IN_OUT
+	inoOut : BYTE;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE inBit OF
+	0:	inoOut.0 := inBitValue;
+	1:	inoOut.1 := inBitValue;
+	2:	inoOut.2 := inBitValue;
+	3:	inoOut.3 := inBitValue;
+	4:	inoOut.4 := inBitValue;
+	5:	inoOut.5 := inBitValue;
+	6:	inoOut.6 := inBitValue;
+	7:	inoOut.7 := inBitValue;
+END_CASE
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

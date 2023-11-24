@@ -1,0 +1,1317 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="TcoUrEseries_v_5_x_x" Id="{52ead84b-d407-094c-3a59-d97fd9fd9089}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoUrEseries_v_5_x_x EXTENDS TcoIo.TcoPnIoComponent  IMPLEMENTS TcoAbstractions.ITcoRobotics
+VAR_IN_OUT
+	 inoData : TcoUrEseries_IO_v_5_x_x;
+	 inoPowerOnPulse :BOOL;
+END_VAR
+VAR
+    
+
+	{attribute addProperty Name "<#Status#>"}
+    {attribute clr [ReadOnly()]}
+    _status : TcoUrRobotics_Status_v_1_x_x;
+	{attribute addProperty Name "<#Control#>"}
+	_control 	: TcoUrRobotics_Control_v_1_x_x;
+	{attribute addProperty Name "<#Config#>"}
+    _config : TcoUrRobotics_Config_v_1_x_x;
+	{attribute addProperty Name "<#PN Error#>"}
+    {attribute clr [ReadOnly()]}
+    _pnError : BOOL;
+
+	_someTaskIsActive: BOOL;
+
+	_stopTasksAreActive: BOOL;
+END_VAR
+VAR
+
+	{attribute addProperty Name "<#Start at Main#>"}
+    _startAtMainTask : StartAtMainTask(THIS^);
+	
+	 {attribute addProperty Name "<#Start motors and program#>"}
+    _startMotorsAndProgramTask : StartMotorsAndProgramTask(THIS^);
+	
+	 {attribute addProperty Name "<#Start program#>"}
+    _startProgramTask : StartProgramTask(THIS^);
+	
+	{attribute addProperty Name "<#Start motors#>"}
+    _startMotorsTask : StartMotorsTask(THIS^);
+	
+  	{attribute addProperty Name "<#Start movements#>"}
+    _startMovementsTask : StartMovementsTask(THIS^);
+	
+	{attribute addProperty Name "<#Start motors program and movements#>"}
+    _startMotorsProgramAndMovementsTask : StartMotorsProgramAndMovementsTask(THIS^);
+	
+  	
+	
+	
+	 {attribute addProperty Name "<#Stop movements#>"}
+    _stopMovementsTask : StopMovementsTask(THIS^);
+
+	 {attribute addProperty Name "<#Stop movenents and program#>"}
+    _stopMovementsAndProgramTask : StopMovementsAndProgramTask(THIS^);
+	
+	{attribute addProperty Name "<#Stop program#>"}
+    _stopProgramTask : StopProgramTask(THIS^);
+	
+	{attribute addProperty Name "<#Power On Task#>"}
+    _powerOnTask : TcoCore.TcoTask(THIS^);
+	
+
+    {attribute addProperty Name "<#Restore#>"}
+    _restoreTask : TcoCore.TcoTask(THIS^);
+	
+
+  
+   
+
+  
+
+END_VAR
+
+VAR
+	{attribute 'hide'}
+	_sb : TcoCore.StringBuilder;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF NOT __ISVALIDREF(inoData) THEN
+    Messenger.Post('Invalid reference', TcoCore.eMessageCategory.ProgrammingError);
+    RETURN;
+END_IF
+
+
+
+SUPER^(inPnIoBoxState := THIS^.inoData.PnIoBoxState,inPnIoBoxDiag := THIS^.inoData.PnIoBoxDiag);
+_pnError:= not _profinetReady;
+
+
+UpdateStatus();
+_stopTasksAreActive :=  _stopMovementsTask.Busy 
+			AND _stopMovementsAndProgramTask.Busy 
+			AND _stopProgramTask.Busy;
+			
+_startAtMainTask.Enabled:=NOT _stopTasksAreActive;
+_startAtMainTask(inoConfig:=_config,inoControl:=_control,inoStatus:=_status);
+
+
+_startProgramTask.Enabled:=NOT _stopTasksAreActive;
+_startProgramTask(inoConfig:=_config,inoControl:=_control,inoStatus:=_status);
+
+_startMotorsTask.Enabled:=NOT _stopTasksAreActive AND NOT _startMotorsProgramAndMovementsTask.Busy AND NOT _startMotorsAndProgramTask.Busy;
+_startMotorsTask(inoConfig:=_config,inoControl:=_control,inoStatus:=_status);
+
+_startMotorsAndProgramTask.Enabled:=NOT _stopTasksAreActive AND NOT _startProgramTask.Busy AND NOT _startMotorsTask.Busy;
+_startMotorsAndProgramTask(inoConfig:=_config,inoControl:=_control,inoStatus:=_status);
+
+_startMovementsTask.Enabled:=NOT _startMotorsProgramAndMovementsTask.Busy ;
+_startMovementsTask(inoConfig:=_config,inoControl:=_control,inoStatus:=_status);
+
+_startMotorsProgramAndMovementsTask.Enabled:=NOT _startMovementsTask.Busy  ;
+_startMotorsProgramAndMovementsTask(refStartMotorsAndProgramTask:=_startMotorsAndProgramTask, inoConfig:=_config,inoControl:=_control,inoStatus:=_status);
+
+
+_stopMovementsTask.Enabled:=TRUE;
+_stopMovementsTask(inoConfig:=_config,inoControl:=_control,inoStatus:=_status);
+
+
+_stopProgramTask.Enabled:=TRUE;
+_stopProgramTask(inoConfig:=_config,inoControl:=_control,inoStatus:=_status);
+
+_stopMovementsAndProgramTask.Enabled:=NOT _stopProgramTask.Busy AND NOT _stopProgramTask.Busy;
+_stopMovementsAndProgramTask(inoConfig:=_config,inoControl:=_control,inoStatus:=_status);
+
+
+
+//*************POWER ON********************
+_powerOnTask.Enabled :=  _status.State.RobotMode=eTcoUrRoboticsRobotMode.DISCONNECTED AND _config.RemotePowerOnEnabled;
+IF _powerOnTask.Execute() THEN
+	inoPowerOnPulse:=TRUE;
+	Messenger.Notify('<#POWER ON PULSE WAS SEND TO CONTROLER#>');
+	_powerOnTask.DoneWhen(_powerOnTask.ElapsedTime>_config.RemotePowerOnPulse);
+END_IF
+
+IF inoPowerOnPulse AND _powerOnTask.Done  OR NOT _config.RemotePowerOnEnabled THEN
+	inoPowerOnPulse:=FALSE;
+END_IF
+//****************************************
+
+
+//*************RESTORE********************
+
+_restoreTask.Enabled := TRUE;
+IF _restoreTask.Execute() THEN
+	Restore();
+	_restoreTask.DoneWhen(TRUE);
+END_IF
+//****************************************
+
+_someTaskIsActive := _startAtMainTask.Busy 
+					OR _startMotorsAndProgramTask.Busy
+					OR _startMovementsTask.Busy
+					OR _startMovementsTask.Busy
+					OR _stopMovementsTask.Busy
+					OR _stopMovementsAndProgramTask.Busy
+					OR _stopProgramTask.Busy;
+					
+
+//do not publish diagnostic message when component is not used
+IF _someTaskIsActive THEN
+
+	IF(_status.State.Inputs.Safety.ES_IsEmergencyStopped) THEN
+		Messenger.Error('<#Emergency stop active#>');
+	END_IF;
+	IF( _status.State.Inputs.Safety.ST_IsStoppedDueSafety) THEN
+		Messenger.Warning('<#Stopped due safety#>');
+	END_IF;
+
+  
+END_IF;
+
+UpdateControl();]]></ST>
+    </Implementation>
+    <Folder Name="Operations" Id="{572297e4-26bd-056e-0acb-387734236275}" />
+    <Folder Name="Task" Id="{1b629307-10e2-0a49-1c51-e6e46fda7505}" />
+    <Property Name="Config" Id="{c1913e51-3ac2-0f29-03dd-c08ddfd329d5}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the configuration of the IRC 5. 					
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Config : REFERENCE TO TcoUrRobotics_Config_v_1_x_x]]></Declaration>
+      <Get Name="Get" Id="{632dad4a-9708-0d2d-131f-418d9ca74834}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Config REF= _config;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="PowerOnPulseTask" Id="{8d03f1a8-76fd-0d7a-21e2-2233b15b3e92}" FolderPath="Task\">
+      <Declaration><![CDATA[PROPERTY PowerOnPulseTask : REFERENCE TO  TcoCore.TcoTask]]></Declaration>
+      <Get Name="Get" Id="{8795bdfe-5f17-0b4e-0481-42c8eb2d1e02}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[PowerOnPulseTask REF= _powerOnTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Restore" Id="{8c8aed9c-3392-0de9-1291-e878569a6691}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.	
+		</summary>			
+	</docu>	
+~*)
+METHOD Restore : ITcoRestorable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[RestoreTasks();
+_control.ActionNo:=255;
+_control.GlobalSpeed:=0;
+_control.ToolNo:=0;
+_control.WorkobjectNo:=0;
+_control.PointNo:=0;
+_control.UserSpecSpeed1:=0;
+_control.UserSpecSpeed2:=0;
+_control.Coordinates.X:=0;
+_control.Coordinates.Y:=0;
+_control.Coordinates.Z:=0;
+_control.Coordinates.Rx:=0;
+_control.Coordinates.Ry:=0;
+_control.Coordinates.Rz:=0;
+_control.Start :=FALSE;
+_control.Stop:=FALSE;
+_control.Pause:=FALSE;
+_control.RunAction:=FALSE;
+_control.MotorOn:=FALSE;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RestoreTasks" Id="{0fadd43f-8f7e-0595-3c2b-711f2c0be36d}">
+      <Declaration><![CDATA[METHOD INTERNAL RestoreTasks 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//_resetTask.Restore();
+_startAtMainTask.Restore();
+_startMovementsTask.Restore();
+_startProgramTask.Restore();
+_startMotorsTask.Restore();
+_startMotorsProgramAndMovementsTask.Restore();
+_stopMovementsTask.Restore();
+_startMotorsAndProgramTask.Restore();
+_stopMovementsAndProgramTask.Restore();
+_stopProgramTask.Restore();
+_powerOnTask.Restore();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ServiceMode" Id="{243f852d-e46e-0fc3-14ff-a23891087506}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+		    Custom service (manual, maintenance) logic.
+			This method must be implemented in derived class.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED ServiceMode]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="SpeedSliderFraction" Id="{0af748eb-2e07-06b1-039d-136a1fa72524}">
+      <Declaration><![CDATA[PROPERTY PUBLIC SpeedSliderFraction : REFERENCE TO real]]></Declaration>
+      <Get Name="Get" Id="{9f5584f0-ae79-09c8-1680-b94087545437}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[SpeedSliderFraction REF= _control.Outputs.Speed.SpeedSliderFraction;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="SSM_SpeedSliderFractionMask" Id="{95ec6af3-9f60-0083-01ea-50468fd395b5}">
+      <Declaration><![CDATA[PROPERTY PUBLIC SSM_SpeedSliderFractionMask : REFERENCE TO BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{21dd1703-5ad3-025d-252b-f00dd802b222}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[SSM_SpeedSliderFractionMask REF= _control.Outputs.Speed.SSM_SpeedSliderFractionMask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="StartAtMain" Id="{584de617-7d33-04a3-078d-32b9b8b62fc3}" FolderPath="Operations\">
+      <Declaration><![CDATA[METHOD PUBLIC StartAtMain : TcoCore.ITcoTaskStatus
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[StartAtMain:=_startAtMainTask.Invoke();]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="StartAtMainTask" Id="{1a49fb8a-2a83-08c5-3a75-1f7696241229}" FolderPath="Task\">
+      <Declaration><![CDATA[PROPERTY StartAtMainTask : TcoCore.ITcoTaskStatus]]></Declaration>
+      <Get Name="Get" Id="{d4f23396-a272-0cef-0eac-0f3860e4222b}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[StartAtMainTask := _startAtMainTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="StartMotors" Id="{4b0a3d59-a709-0496-07f6-651c6a307044}" FolderPath="Operations\">
+      <Declaration><![CDATA[METHOD PUBLIC StartMotors : TcoCore.ITcoTaskStatus]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[StartMotors:=_startMotorsTask.Invoke();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StartMotorsAndProgram" Id="{857a6e05-6bee-0c57-0dbd-26f20a6cb484}" FolderPath="Operations\">
+      <Declaration><![CDATA[METHOD StartMotorsAndProgram : TcoCore.ITcoTaskStatus
+VAR_INPUT
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[StartMotorsAndProgram := THIS^._startMotorsAndProgramTask.Invoke();]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="StartMotorsAndProgramTask" Id="{78142da6-c22e-0deb-0cad-7b8731d71b34}" FolderPath="Task\">
+      <Declaration><![CDATA[PROPERTY StartMotorsAndProgramTask : TcoCore.ITcoTaskStatus]]></Declaration>
+      <Get Name="Get" Id="{e5d98be7-fa7f-0771-2e31-584db9182cd4}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[StartMotorsAndProgramTask := _startMotorsAndProgramTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="StartMotorsProgramAndMovements" Id="{f49b5c57-8cc8-00bd-37be-ca3298368403}" FolderPath="Operations\">
+      <Declaration><![CDATA[METHOD PUBLIC StartMotorsProgramAndMovements : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	inData : TcoRoboticsMovementsParams;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[StartMotorsProgramAndMovements:=_startMotorsProgramAndMovementsTask.InvokeWithParams(inData);]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="StartMotorsProgramAndMovementsTask" Id="{dbf4dba5-9e23-0b67-054e-c09eb8d2bfd8}" FolderPath="Task\">
+      <Declaration><![CDATA[PROPERTY StartMotorsProgramAndMovementsTask : TcoCore.ITcoTaskStatus]]></Declaration>
+      <Get Name="Get" Id="{19bddbb8-60b4-089a-2a0d-a543e0dd2e57}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[StartMotorsProgramAndMovementsTask := _startMotorsProgramAndMovementsTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="StartMotorsTask" Id="{f08b4e15-a9a7-00c9-0a67-851fee665552}" FolderPath="Task\">
+      <Declaration><![CDATA[PROPERTY StartMotorsTask : TcoCore.ITcoTaskStatus]]></Declaration>
+      <Get Name="Get" Id="{9ba74ac4-391e-0b69-2210-5f96892bead8}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[StartMotorsTask := _startMotorsTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="StartMovements" Id="{9d8e34e7-775c-0969-235e-9591628b2228}" FolderPath="Operations\">
+      <Declaration><![CDATA[METHOD PUBLIC StartMovements : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	inData : TcoRoboticsMovementsParams;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[StartMovements:=_startMovementsTask.InvokeWithParams(inData);]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="StartMovementsTask" Id="{0142800c-6058-03cc-01c2-0e9b2b9054b0}" FolderPath="Task\">
+      <Declaration><![CDATA[PROPERTY StartMovementsTask : TcoCore.ITcoTaskStatus]]></Declaration>
+      <Get Name="Get" Id="{b9334ff9-fa36-07b9-00be-a3c301333cdb}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[StartMovementsTask := _startMovementsTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="StartProgram" Id="{9aa3d973-b2f2-08ef-0f15-3e973a11ed87}" FolderPath="Operations\">
+      <Declaration><![CDATA[METHOD PUBLIC StartProgram : TcoCore.ITcoTaskStatus]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[StartProgram:=_startProgramTask.Invoke();]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="StartProgramTask" Id="{5f0518af-baed-0a0c-1bee-e7b9ac333468}" FolderPath="Task\">
+      <Declaration><![CDATA[PROPERTY StartProgramTask : TcoCore.ITcoTaskStatus]]></Declaration>
+      <Get Name="Get" Id="{818ad782-c4a9-04bf-27ad-fb9242c2f2d2}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[StartProgramTask := _startProgramTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Status" Id="{d4d84d44-a010-050e-099d-739be22eadc1}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the status of the IRC5. 					
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Status : REFERENCE TO TcoUrRobotics_Status_v_1_x_x]]></Declaration>
+      <Get Name="Get" Id="{f0fd164b-9ea5-04e6-3f78-40760b3cb74f}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Status REF= _status;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="StopMovements" Id="{898093b2-1716-0433-0e6a-84500b590a92}" FolderPath="Operations\">
+      <Declaration><![CDATA[METHOD PUBLIC StopMovements : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	inStopType : eTcoRoboticsStopType;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[StopMovements:=_stopMovementsTask.InvokeWithParams(inStopType);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StopMovementsAndProgram" Id="{61d4f5b9-837c-09f6-0813-20a8e0832277}" FolderPath="Operations\">
+      <Declaration><![CDATA[METHOD PUBLIC StopMovementsAndProgram : TcoCore.ITcoTaskStatus
+VAR_INPUT
+	inStopType : eTcoRoboticsStopType;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[StopMovementsAndProgram:=_stopMovementsAndProgramTask.InvokeWithParams(inStopType);]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="StopMovementsAndProgramTask" Id="{29e2c5ec-bd4e-073a-3dda-54164c0d5b18}" FolderPath="Task\">
+      <Declaration><![CDATA[PROPERTY StopMovementsAndProgramTask : TcoCore.ITcoTaskStatus]]></Declaration>
+      <Get Name="Get" Id="{b82821ff-083a-065d-2487-aff4245468cd}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[StopMovementsAndProgramTask := _stopMovementsAndProgramTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="StopMovementsTask" Id="{22b55981-fa1a-0817-2b42-d73f7224dce3}" FolderPath="Task\">
+      <Declaration><![CDATA[PROPERTY StopMovementsTask : TcoCore.ITcoTaskStatus]]></Declaration>
+      <Get Name="Get" Id="{e3163aef-c57f-067c-3500-1d7e1006e664}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[StopMovementsTask := _stopMovementsTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="StopProgram" Id="{00c70bf0-ed91-0796-0f8f-02b20d9ca467}" FolderPath="Operations\">
+      <Declaration><![CDATA[METHOD PUBLIC StopProgram : TcoCore.ITcoTaskStatus
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[StopProgram:=_stopProgramTask.Invoke();]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="StopProgramTask" Id="{b136750a-30e7-07ff-0812-981bddd1d7f1}" FolderPath="Task\">
+      <Declaration><![CDATA[PROPERTY StopProgramTask : TcoCore.ITcoTaskStatus]]></Declaration>
+      <Get Name="Get" Id="{fab2c069-92de-00a1-189e-0131c67ed141}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[StopProgramTask := _stopProgramTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="UpdateControl" Id="{e2308468-3a85-022b-17fc-5af1293ad167}">
+      <Declaration><![CDATA[METHOD INTERNAL UpdateControl
+VAR_INPUT
+END_VAR
+
+VAR
+	index: INT;
+	offset: INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+//SYSTEM OUTPUTS
+index := 0;
+_control.Outputs.Reg1.Bits[index] := _control.Start;
+index := index + 1;
+_control.outputs.Reg1.Bits[index] := _control.Stop;
+index := index + 1;
+_control.outputs.Reg1.Bits[index] := _control.Pause;
+index := index + 1;
+_control.outputs.Reg1.Bits[index] := _control.MotorOn;
+index := index + 1;
+//_control.outputs.Reg1.Bits[index] := _control.RunAction;
+//index := index + 1;
+
+index := 8;
+//Tool signals
+_control.Outputs.Reg1.Bits[index] := _control.Tool_1_Retract;
+index := index + 1;
+_control.outputs.Reg1.Bits[index] := _control.Tool_1_Extend;
+index := index + 1;
+_control.outputs.Reg1.Bits[index] := _control.Tool_2_Retract;
+index := index + 1;
+_control.outputs.Reg1.Bits[index] := _control.Tool_2_Extend;
+index := index + 1;
+_control.outputs.Reg1.Bits[index] := _control.Tool_3_Retract;
+index := index + 1;
+_control.outputs.Reg1.Bits[index] := _control.Tool_3_Extend;
+index := index + 1;
+_control.outputs.Reg1.Bits[index] := _control.Tool_4_Retract;
+index := index + 1;
+_control.outputs.Reg1.Bits[index] := _control.Tool_4_Extend;
+index := index + 1;
+
+//master mode  such as manual/auto ....
+index := 0;
+_control.Outputs.Reg1.Ints[index] := _control.MasterMode;
+//zone
+index := index + 1;
+_control.Outputs.Reg1.Ints[index] := _control.Zone;
+//position
+index := index + 1;
+_control.Outputs.Reg1.Ints[index] := _control.InPosition;
+
+//
+//Movement parameters
+index := index + 1;
+_control.Outputs.Reg1.Ints[index] := _control.ActionNo;
+index := index + 1;
+_control.Outputs.Reg1.Ints[index] := _control.GlobalSpeed;
+index := index + 1;
+_control.Outputs.Reg1.Ints[index] := _control.ToolNo;
+index := index + 1;
+_control.Outputs.Reg1.Ints[index] := _control.WorkobjectNo;
+index := index + 1;
+_control.Outputs.Reg1.Ints[index] := _control.PointNo;
+
+index := 0;
+_control.Outputs.Reg1.Floats[index] := _control.UserSpecSpeed1;
+index := index + 1;
+_control.Outputs.Reg1.Floats[index] := _control.UserSpecSpeed2;
+
+index := index + 1;
+////Coordinates
+_control.Outputs.Reg1.Floats[index] := _control.Coordinates.X / 1000;
+index := index + 1;
+_control.Outputs.Reg1.Floats[index] := _control.Coordinates.Y / 1000;
+index := index + 1;
+_control.Outputs.Reg1.Floats[index] := _control.Coordinates.Z / 1000;
+
+index := index + 1;
+_control.Outputs.Reg1.Floats[index] := DEG_TO_RAD(_control.Coordinates.Rx);
+index := index + 1;
+_control.Outputs.Reg1.Floats[index] := DEG_TO_RAD(_control.Coordinates.Ry);
+index := index + 1;
+_control.Outputs.Reg1.Floats[index] := DEG_TO_RAD(_control.Coordinates.Rz);
+
+//st_URO_CB3_O2TSpeedData => 8_O2T Robot IO
+index := 0;
+inoData.Out.RobotIO.bArray[index].0 := _control.Outputs.Speed.SSM_SpeedSliderFractionMask;
+index := index + 4; //Reserve
+TcoUtilities.TcoRealToBytes(TcoUtilities.eTcoDataFormat.BigEndian,
+    _control.Outputs.Speed.SpeedSliderFraction / 100.0,
+    inoData.Out.RobotIO.bArray[index],
+    inoData.Out.RobotIO.bArray[index + 1],
+    inoData.Out.RobotIO.bArray[index + 2],
+    inoData.Out.RobotIO.bArray[index + 3]);
+
+index := index + 4;
+
+//st_URO_CB3_O2TIoData => 8_O2T Robot IO
+inoData.Out.RobotIO.bArray[index] := _control.Outputs.IO.StandardDigitalOutputMask;
+index := index + 1;
+inoData.Out.RobotIO.bArray[index] := _control.Outputs.IO.ConfigurableDigitalOutputMask;
+index := index + 1;
+inoData.Out.RobotIO.bArray[index] := _control.Outputs.IO.StandardDigitalOutputs;
+index := index + 1;
+inoData.Out.RobotIO.bArray[index] := _control.Outputs.IO.ConfigurableDdigitalOutputs;
+index := index + 1;
+inoData.Out.RobotIO.bArray[index] := _control.Outputs.IO.AOM_AnalogOutputMask;
+index := index + 1;
+inoData.Out.RobotIO.bArray[index] := _control.Outputs.IO.AOT_AnalogOutputTypes;
+index := index + 1;
+inoData.Out.RobotIO.bArray[index] := _control.Outputs.IO.TDOM_ToolDigitalOutputMask;
+index := index + 1;
+inoData.Out.RobotIO.bArray[index] := _control.Outputs.IO.TDO_ToolDigitalOutput;
+index := index + 1;
+TcoUtilities.TcoRealToBytes(TcoUtilities.eTcoDataFormat.BigEndian,
+    _control.Outputs.IO.StandardAnalogOutput[0],
+    inoData.Out.RobotIO.bArray[index],
+    inoData.Out.RobotIO.bArray[index + 1],
+    inoData.Out.RobotIO.bArray[index + 2],
+    inoData.Out.RobotIO.bArray[index + 3]);
+
+index := index + 4;
+TcoUtilities.TcoRealToBytes(TcoUtilities.eTcoDataFormat.BigEndian,
+    _control.Outputs.IO.StandardAnalogOutput[1],
+    inoData.Out.RobotIO.bArray[index],
+    inoData.Out.RobotIO.bArray[index + 1],
+    inoData.Out.RobotIO.bArray[index + 2],
+    inoData.Out.RobotIO.bArray[index + 3]);
+
+index := index + 4;
+
+//st_URO_CB3_O2TRegData => 9_O2T General Purpose Registers 1
+index := 0;
+
+FOR offset := 0 TO 31 DO
+
+    TcoUtilities.TcoSetBitInByte(_control.Outputs.Reg1.Bits[offset], offset MOD 8, inoData.Out.Reg1.bArray[index + (offset - (offset MOD 8)) / 8]);
+END_FOR
+
+index := index + 4;
+
+FOR offset := 0 TO 11 DO
+    TcoUtilities.TcoDintToBytes(TcoUtilities.eTcoDataFormat.BigEndian,
+        _control.Outputs.Reg1.Ints[offset],
+        inodata.Out.Reg1.bArray[index],
+        inodata.Out.Reg1.bArray[index + 1],
+        inodata.Out.Reg1.bArray[index + 2],
+        inodata.Out.Reg1.bArray[index + 3]);
+
+    index := index + 4;
+END_FOR
+
+FOR offset := 0 TO 11 DO
+    TcoUtilities.TcoRealToBytes(TcoUtilities.eTcoDataFormat.BigEndian,
+        _control.Outputs.Reg1.Floats[offset],
+        inodata.Out.Reg1.bArray[index],
+        inodata.Out.Reg1.bArray[index + 1],
+        inodata.Out.Reg1.bArray[index + 2],
+        inodata.Out.Reg1.bArray[index + 3]);
+
+    index := index + 4;
+END_FOR
+
+//st_URO_CB3_O2TRegData => 10_O2T General Purpose Registers 2
+index := 0;
+
+FOR offset := 0 TO 31 DO
+
+   TcoUtilities.TcoSetBitInByte(_control.Outputs.Reg2.Bits[offset], offset MOD 8, inoData.Out.Reg2.bArray[index + (offset - (offset MOD 8)) / 8]);
+END_FOR
+
+index := index + 4;
+
+FOR offset := 0 TO 11 DO
+    TcoUtilities.TcoDintToBytes(TcoUtilities.eTcoDataFormat.BigEndian,
+        _control.Outputs.Reg2.Ints[offset],
+        inodata.Out.Reg2.bArray[index],
+        inodata.Out.Reg2.bArray[index + 1],
+        inodata.Out.Reg2.bArray[index + 2],
+        inodata.Out.Reg2.bArray[index + 3]);
+
+    index := index + 4;
+END_FOR
+
+FOR offset := 0 TO 11 DO
+    TcoUtilities.TcoRealToBytes(TcoUtilities.eTcoDataFormat.BigEndian,
+        _control.Outputs.Reg2.Floats[offset],
+        inodata.Out.Reg2.bArray[index],
+        inodata.Out.Reg2.bArray[index + 1],
+        inodata.Out.Reg2.bArray[index + 2],
+        inodata.Out.Reg2.bArray[index + 3]);
+
+    index := index + 4;
+END_FOR
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="UpdateStatus" Id="{3c545666-7998-0293-11d6-c25250ca7082}">
+      <Declaration><![CDATA[METHOD INTERNAL UpdateStatus
+VAR
+    _message : STRING(125);
+
+	tempOut: BYTE;
+	index: INT;
+	_bytes: DINT;
+	offset: INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//Inputs Low level
+//INPUTS T2O STATE ROBOT => st_URO_CB3_T2OInfoData
+index := 0;
+Status.State.Inputs.Robot.ControllerMajorVersion := inoData.In.State.bArray[index];
+index := index + 1;
+Status.State.Inputs.Robot.ControllerMinorVersion := inoData.In.State.bArray[index];
+index := index + 1;
+
+index := 4; //index + 2; //reserve
+Status.State.Inputs.Robot.RobotMode := inoData.In.State.bArray[index];
+index := index + 1;
+Status.State.Inputs.Robot.RealtimeMachineSeconds := inoData.In.State.bArray[index];
+index := index + 1;
+Status.State.Inputs.Robot.RealtimeMachineMilliseconds :=
+    TcoUtilities.TcoBytesToUint(TcoUtilities.eTcoDataFormat.BigEndian, inoData.In.State.bArray[index], inoData.In.State.bArray[index + 1]);
+
+//index := index + 2;
+index := 8;
+Status.State.Inputs.Robot.RealtimeMachineMinutes := inoData.In.State.bArray[index];
+index := index + 1;
+Status.State.Inputs.Robot.RealtimeMachineHours := inoData.In.State.bArray[index];
+index := index + 1;
+Status.State.Inputs.Robot.RealtimeMachineDays :=
+    TcoUtilities.TcoBytesToUint(TcoUtilities.eTcoDataFormat.BigEndian, inoData.In.State.bArray[index], inoData.In.State.bArray[index + 1]);
+
+//index := index + 2;
+
+index := 12;
+Status.State.Inputs.Robot.RobotCurrent := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.State.bArray[index],
+    inoData.In.State.bArray[index + 1],
+    inoData.In.State.bArray[index + 2],
+    inoData.In.State.bArray[index + 3]);
+
+//index := index + 4;
+
+index := 16;
+//INPUTS T2O STATE ROBOT => st_URO_CB3_T2OStateData
+Status.State.Inputs.Robot.PW_IsPowerOn := inoData.In.State.bArray[index].0;
+Status.State.Inputs.Robot.PR_IsProgramRunning := inoData.In.State.bArray[index].1;
+Status.State.Inputs.Robot.TB_IsTeachButtonPressed := inoData.In.State.bArray[index].2;
+Status.State.Inputs.Robot.PB_IsPowerButtonPressed := inoData.In.State.bArray[index].3;
+
+index := 20;
+Status.State.Inputs.Robot.SpeedSliderFraction := 100 *
+    TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+        inoData.In.State.bArray[index],
+        inoData.In.State.bArray[index + 1],
+        inoData.In.State.bArray[index + 2],
+        inoData.In.State.bArray[index + 3]);
+
+//index := index + 4;
+
+index := 24;
+Status.State.Inputs.Safety.SafetyMode := inoData.In.State.bArray[index];
+
+//index := index + 1;
+index := 28;
+Status.State.Inputs.Safety.NO_IsNormalMode := inoData.In.State.bArray[index].0;
+Status.State.Inputs.Safety.RD_IsReducedMode := inoData.In.State.bArray[index].1;
+Status.State.Inputs.Safety.PS_IsProtectiveStopped := inoData.In.State.bArray[index].2;
+Status.State.Inputs.Safety.RC_IsRecoveryMode := inoData.In.State.bArray[index].3;
+Status.State.Inputs.Safety.SS_IsSafeguardStopped := inoData.In.State.bArray[index].4;
+Status.State.Inputs.Safety.SES_IsSystemEmergencyStopped := inoData.In.State.bArray[index].5;
+Status.State.Inputs.Safety.RES_IsRobotEmergencyStopped := inoData.In.State.bArray[index].6;
+Status.State.Inputs.Safety.ES_IsEmergencyStopped := inoData.In.State.bArray[index].7;
+index := index + 1;
+Status.State.Inputs.Safety.VL_IsViolation := inoData.In.State.bArray[index].0;
+Status.State.Inputs.Safety.FT_IsFault := inoData.In.State.bArray[index].1;
+Status.State.Inputs.Safety.ST_IsStoppedDueSafety := inoData.In.State.bArray[index].2;
+
+//INPUTS T20 IO => st_URO_CB3_T2OIoStateData
+index := 0;
+Status.State.Inputs.IO.StandardDigitalInputs := inoData.In.IO.bArray[index];
+index := index + 1;
+Status.State.Inputs.IO.ConfigurableDigitalInputs := inoData.In.IO.bArray[index];
+index := index + 1;
+Status.State.Inputs.IO.StandardDigitalOutputs := inoData.In.IO.bArray[index];
+index := index + 1;
+Status.State.Inputs.IO.ConfigurableDigitalOutputs := inoData.In.IO.bArray[index];
+Index := 4;
+Status.State.Inputs.IO.AnalogIoTypes := inoData.In.IO.bArray[index];
+index := index + 1;
+index := 8; //reserve
+Status.State.Inputs.IO.StandardAnalogInput[0] := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.IO.bArray[index],
+    inoData.In.IO.bArray[index + 1],
+    inoData.In.IO.bArray[index + 2],
+    inoData.In.IO.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.IO.StandardAnalogInput[1] := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.IO.bArray[index],
+    inoData.In.IO.bArray[index + 1],
+    inoData.In.IO.bArray[index + 2],
+    inoData.In.IO.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.IO.StandardAnalogOutput[0] := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.IO.bArray[index],
+    inoData.In.IO.bArray[index + 1],
+    inoData.In.IO.bArray[index + 2],
+    inoData.In.IO.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.IO.StandardAnalogOutput[1] := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.IO.bArray[index],
+    inoData.In.IO.bArray[index + 1],
+    inoData.In.IO.bArray[index + 2],
+    inoData.In.IO.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.IO.Current := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.IO.bArray[index],
+    inoData.In.IO.bArray[index + 1],
+    inoData.In.IO.bArray[index + 2],
+    inoData.In.IO.bArray[index + 3]);
+
+index := index + 4;
+
+FOR offset := 0 TO 7 DO
+
+    Status.State.Inputs.IO.Euromap67InputBits[offset] := TcoUtilities.TcoGetBitFromByte(inoData.In.IO.bArray[index], offset);
+    Status.State.Inputs.IO.Euromap67InputBits[offset + 8] := TcoUtilities.TcoGetBitFromByte(inoData.In.IO.bArray[index + 1], offset);
+    Status.State.Inputs.IO.Euromap67InputBits[offset + 16] := TcoUtilities.TcoGetBitFromByte(inoData.In.IO.bArray[index + 2], offset);
+    Status.State.Inputs.IO.Euromap67InputBits[offset + 24] := TcoUtilities.TcoGetBitFromByte(inoData.In.IO.bArray[index + 3], offset);
+END_FOR
+
+index := index + 4;
+
+FOR offset := 0 TO 7 DO
+    Status.State.Inputs.IO.Euromap67OutputBits[offset] := TcoUtilities.TcoGetBitFromByte(inoData.In.IO.bArray[index], offset);
+    Status.State.Inputs.IO.Euromap67OutputBits[offset + 8] := TcoUtilities.TcoGetBitFromByte(inoData.In.IO.bArray[index + 1], offset);
+    Status.State.Inputs.IO.Euromap67OutputBits[offset + 16] := TcoUtilities.TcoGetBitFromByte(inoData.In.IO.bArray[index + 2], offset);
+    Status.State.Inputs.IO.Euromap67OutputBits[offset + 24] := TcoUtilities.TcoGetBitFromByte(inoData.In.IO.bArray[index + 3], offset);
+END_FOR
+
+index := index + 4;
+Status.State.Inputs.IO.Euromap6724Voltage := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.IO.bArray[index],
+    inoData.In.IO.bArray[index + 1],
+    inoData.In.IO.bArray[index + 2],
+    inoData.In.IO.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.IO.Euromap6724VCurrent := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.IO.bArray[index],
+    inoData.In.IO.bArray[index + 1],
+    inoData.In.IO.bArray[index + 2],
+    inoData.In.IO.bArray[index + 3]);
+
+index := index + 4;
+
+//INPUTS T20 IO => st_URO_CB3_T2OToolStateData
+Status.State.Inputs.Tool.ToolMode := inoData.In.IO.bArray[index];
+index := index + 1;
+Status.State.Inputs.Tool.TDI_ToolDigitalInputs := inoData.In.IO.bArray[index];
+index := index + 1;
+Status.State.Inputs.Tool.TDO_ToolDigitalOutputs := inoData.In.IO.bArray[index];
+index := index + 1;
+Status.State.Inputs.Tool.TAIT_ToolAnalogInputTypes := inoData.In.IO.bArray[index];
+index := index + 1;
+Status.State.Inputs.Tool.ToolAnalogInput[0] := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.IO.bArray[index],
+    inoData.In.IO.bArray[index + 1],
+    inoData.In.IO.bArray[index + 2],
+    inoData.In.IO.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.Tool.ToolAnalogInput[1] := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.IO.bArray[index],
+    inoData.In.IO.bArray[index + 1],
+    inoData.In.IO.bArray[index + 2],
+    inoData.In.IO.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.Tool.ToolOutputVoltage := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.IO.bArray[index],
+    inoData.In.IO.bArray[index + 1],
+    inoData.In.IO.bArray[index + 2],
+    inoData.In.IO.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.Tool.ToolCurrent := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.IO.bArray[index],
+    inoData.In.IO.bArray[index + 1],
+    inoData.In.IO.bArray[index + 2],
+    inoData.In.IO.bArray[index + 3]);
+
+index := index + 4;
+
+//INPUTS T20 JOINT => st_URO_CB3_T2OJointsData
+index := 0;
+Status.State.Inputs.Joints.JointPosition[0] := RAD_TO_DEG(TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+        inoData.In.Joints.bArray[index],
+        inoData.In.Joints.bArray[index + 1],
+        inoData.In.Joints.bArray[index + 2],
+        inoData.In.Joints.bArray[index + 3]));
+
+index := index + 4;
+Status.State.Inputs.Joints.JointPosition[1] := RAD_TO_DEG(TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+        inoData.In.Joints.bArray[index],
+        inoData.In.Joints.bArray[index + 1],
+        inoData.In.Joints.bArray[index + 2],
+        inoData.In.Joints.bArray[index + 3]));
+
+index := index + 4;
+Status.State.Inputs.Joints.JointPosition[2] := RAD_TO_DEG(TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+        inoData.In.Joints.bArray[index],
+        inoData.In.Joints.bArray[index + 1],
+        inoData.In.Joints.bArray[index + 2],
+        inoData.In.Joints.bArray[index + 3]));
+
+index := index + 4;
+Status.State.Inputs.Joints.JointPosition[3] := RAD_TO_DEG(TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+        inoData.In.Joints.bArray[index],
+        inoData.In.Joints.bArray[index + 1],
+        inoData.In.Joints.bArray[index + 2],
+        inoData.In.Joints.bArray[index + 3]));
+
+index := index + 4;
+Status.State.Inputs.Joints.JointPosition[4] := RAD_TO_DEG(TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+        inoData.In.Joints.bArray[index],
+        inoData.In.Joints.bArray[index + 1],
+        inoData.In.Joints.bArray[index + 2],
+        inoData.In.Joints.bArray[index + 3]));
+
+index := index + 4;
+Status.State.Inputs.Joints.JointPosition[5] := RAD_TO_DEG(TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+        inoData.In.Joints.bArray[index],
+        inoData.In.Joints.bArray[index + 1],
+        inoData.In.Joints.bArray[index + 2],
+        inoData.In.Joints.bArray[index + 3]));
+
+index := index + 4;
+Status.State.Inputs.Joints.JointVelocity[0] := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.Joints.bArray[index],
+    inoData.In.Joints.bArray[index + 1],
+    inoData.In.Joints.bArray[index + 2],
+    inoData.In.Joints.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.Joints.JointVelocity[1] := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.Joints.bArray[index],
+    inoData.In.Joints.bArray[index + 1],
+    inoData.In.Joints.bArray[index + 2],
+    inoData.In.Joints.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.Joints.JointVelocity[2] := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.Joints.bArray[index],
+    inoData.In.Joints.bArray[index + 1],
+    inoData.In.Joints.bArray[index + 2],
+    inoData.In.Joints.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.Joints.JointVelocity[3] := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.Joints.bArray[index],
+    inoData.In.Joints.bArray[index + 1],
+    inoData.In.Joints.bArray[index + 2],
+    inoData.In.Joints.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.Joints.JointVelocity[4] := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.Joints.bArray[index],
+    inoData.In.Joints.bArray[index + 1],
+    inoData.In.Joints.bArray[index + 2],
+    inoData.In.Joints.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.Joints.JointVelocity[5] := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.Joints.bArray[index],
+    inoData.In.Joints.bArray[index + 1],
+    inoData.In.Joints.bArray[index + 2],
+    inoData.In.Joints.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.Joints.JointCurrent[0] := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.Joints.bArray[index],
+    inoData.In.Joints.bArray[index + 1],
+    inoData.In.Joints.bArray[index + 2],
+    inoData.In.Joints.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.Joints.JointCurrent[1] := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.Joints.bArray[index],
+    inoData.In.Joints.bArray[index + 1],
+    inoData.In.Joints.bArray[index + 2],
+    inoData.In.Joints.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.Joints.JointCurrent[2] := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.Joints.bArray[index],
+    inoData.In.Joints.bArray[index + 1],
+    inoData.In.Joints.bArray[index + 2],
+    inoData.In.Joints.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.Joints.JointCurrent[3] := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.Joints.bArray[index],
+    inoData.In.Joints.bArray[index + 1],
+    inoData.In.Joints.bArray[index + 2],
+    inoData.In.Joints.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.Joints.JointCurrent[4] := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.Joints.bArray[index],
+    inoData.In.Joints.bArray[index + 1],
+    inoData.In.Joints.bArray[index + 2],
+    inoData.In.Joints.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.Joints.JointCurrent[5] := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.Joints.bArray[index],
+    inoData.In.Joints.bArray[index + 1],
+    inoData.In.Joints.bArray[index + 2],
+    inoData.In.Joints.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.Joints.JointTemperature[0] := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.Joints.bArray[index],
+    inoData.In.Joints.bArray[index + 1],
+    inoData.In.Joints.bArray[index + 2],
+    inoData.In.Joints.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.Joints.JointTemperature[1] := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.Joints.bArray[index],
+    inoData.In.Joints.bArray[index + 1],
+    inoData.In.Joints.bArray[index + 2],
+    inoData.In.Joints.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.Joints.JointTemperature[2] := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.Joints.bArray[index],
+    inoData.In.Joints.bArray[index + 1],
+    inoData.In.Joints.bArray[index + 2],
+    inoData.In.Joints.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.Joints.JointTemperature[3] := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.Joints.bArray[index],
+    inoData.In.Joints.bArray[index + 1],
+    inoData.In.Joints.bArray[index + 2],
+    inoData.In.Joints.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.Joints.JointTemperature[4] := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.Joints.bArray[index],
+    inoData.In.Joints.bArray[index + 1],
+    inoData.In.Joints.bArray[index + 2],
+    inoData.In.Joints.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.Joints.JointTemperature[5] := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.Joints.bArray[index],
+    inoData.In.Joints.bArray[index + 1],
+    inoData.In.Joints.bArray[index + 2],
+    inoData.In.Joints.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.Joints.JointMode[0] := inoData.In.Joints.bArray[index];
+index := index + 1;
+Status.State.Inputs.Joints.JointMode[1] := inoData.In.Joints.bArray[index];
+index := index + 1;
+Status.State.Inputs.Joints.JointMode[2] := inoData.In.Joints.bArray[index];
+index := index + 1;
+Status.State.Inputs.Joints.JointMode[3] := inoData.In.Joints.bArray[index];
+index := index + 1;
+Status.State.Inputs.Joints.JointMode[4] := inoData.In.Joints.bArray[index];
+index := index + 1;
+Status.State.Inputs.Joints.JointMode[5] := inoData.In.Joints.bArray[index];
+index := index + 1;
+
+//INPUTS T20 TCP => st_URO_CB3_T2OTcpData
+index := 0;
+Status.State.Inputs.TCP.Postition.X := 1000.0 *
+    TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+        inoData.In.TCP.bArray[index],
+        inoData.In.TCP.bArray[index + 1],
+        inoData.In.TCP.bArray[index + 2],
+        inoData.In.TCP.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.TCP.Postition.Y := 1000.0 *
+    TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+        inoData.In.TCP.bArray[index],
+        inoData.In.TCP.bArray[index + 1],
+        inoData.In.TCP.bArray[index + 2],
+        inoData.In.TCP.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.TCP.Postition.Z := 1000.0 *
+    TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+        inoData.In.TCP.bArray[index],
+        inoData.In.TCP.bArray[index + 1],
+        inoData.In.TCP.bArray[index + 2],
+        inoData.In.TCP.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.TCP.Postition.Rx := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+        inoData.In.TCP.bArray[index],
+        inoData.In.TCP.bArray[index + 1],
+        inoData.In.TCP.bArray[index + 2],
+        inoData.In.TCP.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.TCP.Postition.Ry := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+        inoData.In.TCP.bArray[index],
+        inoData.In.TCP.bArray[index + 1],
+        inoData.In.TCP.bArray[index + 2],
+        inoData.In.TCP.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.TCP.Postition.Rz := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+        inoData.In.TCP.bArray[index],
+        inoData.In.TCP.bArray[index + 1],
+        inoData.In.TCP.bArray[index + 2],
+        inoData.In.TCP.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.TCP.Velocity.X := 1000.0 *
+    TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+        inoData.In.TCP.bArray[index],
+        inoData.In.TCP.bArray[index + 1],
+        inoData.In.TCP.bArray[index + 2],
+        inoData.In.TCP.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.TCP.Velocity.Y := 1000.0 *
+    TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+        inoData.In.TCP.bArray[index],
+        inoData.In.TCP.bArray[index + 1],
+        inoData.In.TCP.bArray[index + 2],
+        inoData.In.TCP.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.TCP.Velocity.Z := 1000.0 *
+    TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+        inoData.In.TCP.bArray[index],
+        inoData.In.TCP.bArray[index + 1],
+        inoData.In.TCP.bArray[index + 2],
+        inoData.In.TCP.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.TCP.Velocity.Rx := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+        inoData.In.TCP.bArray[index],
+        inoData.In.TCP.bArray[index + 1],
+        inoData.In.TCP.bArray[index + 2],
+        inoData.In.TCP.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.TCP.Velocity.Ry := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+        inoData.In.TCP.bArray[index],
+        inoData.In.TCP.bArray[index + 1],
+        inoData.In.TCP.bArray[index + 2],
+        inoData.In.TCP.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.TCP.Velocity.Rz := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+        inoData.In.TCP.bArray[index],
+        inoData.In.TCP.bArray[index + 1],
+        inoData.In.TCP.bArray[index + 2],
+        inoData.In.TCP.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.TCP.Force.X := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.TCP.bArray[index],
+    inoData.In.TCP.bArray[index + 1],
+    inoData.In.TCP.bArray[index + 2],
+    inoData.In.TCP.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.TCP.Force.Y := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.TCP.bArray[index],
+    inoData.In.TCP.bArray[index + 1],
+    inoData.In.TCP.bArray[index + 2],
+    inoData.In.TCP.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.TCP.Force.Z := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.TCP.bArray[index],
+    inoData.In.TCP.bArray[index + 1],
+    inoData.In.TCP.bArray[index + 2],
+    inoData.In.TCP.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.TCP.Torque.X := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.TCP.bArray[index],
+    inoData.In.TCP.bArray[index + 1],
+    inoData.In.TCP.bArray[index + 2],
+    inoData.In.TCP.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.TCP.Torque.Y := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.TCP.bArray[index],
+    inoData.In.TCP.bArray[index + 1],
+    inoData.In.TCP.bArray[index + 2],
+    inoData.In.TCP.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.TCP.Torque.Z := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.TCP.bArray[index],
+    inoData.In.TCP.bArray[index + 1],
+    inoData.In.TCP.bArray[index + 2],
+    inoData.In.TCP.bArray[index + 3]);
+
+index := index + 4;
+Status.State.Inputs.TCP.TCP_ForceScalar := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+    inoData.In.TCP.bArray[index],
+    inoData.In.TCP.bArray[index + 1],
+    inoData.In.TCP.bArray[index + 2],
+    inoData.In.TCP.bArray[index + 3]);
+
+index := index + 4;
+
+//INPUTS T20 BITS => st_URO_CB3_T2OBitRegsData
+index := 0;
+
+FOR offset := 0 TO 7 DO
+    Status.State.Inputs.Bits.Register[offset] := TcoUtilities.TcoGetBitFromByte(inoData.In.BitRegs.bArray[index], offset);
+    Status.State.Inputs.Bits.Register[offset + 8] := TcoUtilities.TcoGetBitFromByte(inoData.In.BitRegs.bArray[index + 1], offset);
+    Status.State.Inputs.Bits.Register[offset + 16] := TcoUtilities.TcoGetBitFromByte(inoData.In.BitRegs.bArray[index + 2], offset);
+    Status.State.Inputs.Bits.Register[offset + 24] := TcoUtilities.TcoGetBitFromByte(inoData.In.BitRegs.bArray[index + 3], offset);
+    Status.State.Inputs.Bits.Register[offset + 32] := TcoUtilities.TcoGetBitFromByte(inoData.In.BitRegs.bArray[index + 4], offset);
+    Status.State.Inputs.Bits.Register[offset + 40] := TcoUtilities.TcoGetBitFromByte(inoData.In.BitRegs.bArray[index + 5], offset);
+    Status.State.Inputs.Bits.Register[offset + 48] := TcoUtilities.TcoGetBitFromByte(inoData.In.BitRegs.bArray[index + 6], offset);
+    Status.State.Inputs.Bits.Register[offset + 56] := TcoUtilities.TcoGetBitFromByte(inoData.In.BitRegs.bArray[index + 7], offset);
+END_FOR
+
+//INPUTS T20 BITS => st_URO_CB3_T2OIntRegsData
+index := 0;
+
+FOR offset := 0 TO 23 DO
+    Status.State.Inputs.Ints.Register[offset] := TcoUtilities.TcoBytesToDint(TcoUtilities.eTcoDataFormat.BigEndian,
+        inoData.In.IntRegs.bArray[index],
+        inoData.In.IntRegs.bArray[index + 1],
+        inoData.In.IntRegs.bArray[index + 2],
+        inoData.In.IntRegs.bArray[index + 3]);
+
+    index := index + 4;
+END_FOR
+
+//INPUTS T20 BITS => st_URO_CB3_T2OFloatRegsData
+index := 0;
+
+FOR offset := 0 TO 23 DO
+    Status.State.Inputs.Floats.Register[offset] := TcoUtilities.TcoBytesToReal(TcoUtilities.eTcoDataFormat.BigEndian,
+        inoData.In.FloatRegs.bArray[index],
+        inoData.In.FloatRegs.bArray[index + 1],
+        inoData.In.FloatRegs.bArray[index + 2],
+        inoData.In.FloatRegs.bArray[index + 3]);
+
+    index := index + 4;
+END_FOR
+_status.State.RobotMode := GetRobotModeDescription(_status.State.Inputs.Robot.RobotMode);
+//SYSTEM INPUTS
+
+index := 0;
+
+//Area/positions flags this  should be obsolete because Zones and InPosition is used as byte below
+index := 0;
+_status.State.InArea_1 := _status.State.Inputs.Bits.Register[index];
+index := index + 1;
+_status.State.InArea_2 := _status.State.Inputs.Bits.Register[index];
+index := index + 1;
+_status.State.InArea_3 := _status.State.Inputs.Bits.Register[index];
+index := index + 1;
+_status.State.InArea_4 := _status.State.Inputs.Bits.Register[index];
+index := index + 1;
+_status.State.InPosition_1 := _status.State.Inputs.Bits.Register[index];
+index := index + 1;
+_status.State.InPosition_2 := _status.State.Inputs.Bits.Register[index];
+index := index + 1;
+_status.State.InPosition_3 := _status.State.Inputs.Bits.Register[index];
+index := index + 1;
+_status.State.InPosition_4 := _status.State.Inputs.Bits.Register[index];
+index := index + 1;
+//
+//Tool signals
+
+_status.State.Tool_1_Retract := _status.State.Inputs.Bits.Register[index];
+index := index + 1;
+_status.State.Tool_1_Extend := _status.State.Inputs.Bits.Register[index];
+index := index + 1;
+_status.State.Tool_2_Retract := _status.State.Inputs.Bits.Register[index];
+index := index + 1;
+_status.State.Tool_2_Extend := _status.State.Inputs.Bits.Register[index];
+index := index + 1;
+_status.State.Tool_3_Retract := _status.State.Inputs.Bits.Register[index];
+index := index + 1;
+_status.State.Tool_3_Extend := _status.State.Inputs.Bits.Register[index];
+index := index + 1;
+_status.State.Tool_4_Retract := _status.State.Inputs.Bits.Register[index];
+index := index + 1;
+_status.State.Tool_4_Extend := _status.State.Inputs.Bits.Register[index];
+index := index + 1;
+
+index := 0;
+_status.State.Zone := _status.State.Inputs.Ints.Register[index];
+index := index + 1;
+_status.State.InPosition := _status.State.Inputs.Ints.Register[index];
+index := index + 1;
+
+//Movement parameters
+
+_status.State.ActionNo := _status.State.Inputs.Ints.Register[index];
+index := index + 1;
+
+_status.State.GlobalSpeed := _status.State.Inputs.Ints.Register[index];
+index := index + 1;
+
+_status.State.ToolNo := _status.State.Inputs.Ints.Register[index];
+index := index + 1;
+
+_status.State.WorkobjectNo := _status.State.Inputs.Ints.Register[index];
+index := index + 1;
+
+_status.State.PointNo := _status.State.Inputs.Ints.Register[index];
+index := index + 1;
+
+index := 0;
+_status.State.UserSpecSpeed1 := _status.State.Inputs.Floats.Register[index];
+index := index + 1;
+
+_status.State.UserSpecSpeed2 := _status.State.Inputs.Floats.Register[index];
+index := index + 1;
+
+_status.State.Coordinates.X := Status.State.Inputs.Floats.Register[index] * 1000.0;
+index := index + 1;
+_status.State.Coordinates.Y := Status.State.Inputs.Floats.Register[index] * 1000.0;
+index := index + 1;
+_status.State.Coordinates.Z := Status.State.Inputs.Floats.Register[index] * 1000.0;
+index := index + 1;
+_status.State.Coordinates.Rx := RAD_TO_DEG(Status.State.Inputs.Floats.Register[index]);
+index := index + 1;
+_status.State.Coordinates.Ry := RAD_TO_DEG(Status.State.Inputs.Floats.Register[index]);
+index := index + 1;
+_status.State.Coordinates.Rz := RAD_TO_DEG(Status.State.Inputs.Floats.Register[index]);
+index := index + 1;
+
+//toido event id
+
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

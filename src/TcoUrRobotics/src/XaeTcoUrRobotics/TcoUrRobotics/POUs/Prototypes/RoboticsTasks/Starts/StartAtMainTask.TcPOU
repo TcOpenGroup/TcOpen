@@ -21,21 +21,31 @@
 		END_IF
 
 	END_IF
-	IF _progress = 1 THEN
 	
-		inoControl.StartAtMain :=   _blink.outQ;
-		_varInfo :=__VARINFO( inoStatus.State.PpMoved);                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.PpMoved).Warning(_sb.Clear().Append('<#Waiting program pointer changed! #>').Append(_varInfo.Symbol).ToString());
-				
-	//	_varInfo :=__VARINFO( inoStatus.State.SystemInputBusy);                                                
-//		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.SystemInputBusy).Warning(_sb.Clear().Append('<#Waiting for system ready signal! #>').Append(_varInfo.Symbol).ToString());
-//		
-		IF inoStatus.State.PpMoved  THEN
-			inoControl.StartAtMain :=FALSE;
+	IF _progress = 1 THEN
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.NO_IsNormalMode)
+		.Warning(_sb.Clear().Append('<# Waiting to Normal Mode. #>').ToString());
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.RD_IsReducedMode)
+		.Warning(_sb.Clear().Append('<# Waiting to Reduced Mode. #>').ToString());
+		
+		IF inoStatus.State.Inputs.Safety.NO_IsNormalMode OR inoStatus.State.Inputs.Safety.RD_IsReducedMode THEN
+			_progress := _progress + 1;
+
+		END_IF
+	END_IF;		
+	
+	IF _progress = 2 THEN
+	
+		inoControl.Start :=   _blink.outQ;
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Robot.PR_IsProgramRunning).Warning(_sb.Clear().Append('<#Waiting to program running! #>').ToString());
+		
+		IF inoStatus.State.Inputs.Robot.PR_IsProgramRunning THEN
+			inoControl.Start :=FALSE;
 			_progress:=0;
 		END_IF
 	END_IF
-    DoneWhen(inoStatus.State.PpMoved );
+    DoneWhen(inoStatus.State.Inputs.Robot.PR_IsProgramRunning );
+
     CallTimers(TRUE);
 	
 	THIS^.ThrowWhen(_errorTimer.Q );
@@ -46,17 +56,6 @@ IF  THIS^.Error AND NOT _errorMessage.Pinned THEN
 	THIS^.Restore();
 END_IF]]></ST>
     </Implementation>
-    <Method Name="FB_init" Id="{858811fb-76a3-0086-188d-ab4f84c22d3d}">
-      <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
-VAR_INPUT
-    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
-  	ParentObject : ITcoObject;	
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="OnAbort" Id="{0b5410c1-a8cf-0883-0ab0-4162f1a0fb9f}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -115,7 +114,7 @@ THIS^._errorMessage.Error(_sb.Clear().Append(description).Append(' To restore ac
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN  THIS^.inoStatus.ActionDescription := '<#Start at Main started.#>'; END_IF; 
-]]></ST>
+CallTimers(FALSE);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{f0b03007-9a0f-02a4-14fa-38cd4c88bdbe}">

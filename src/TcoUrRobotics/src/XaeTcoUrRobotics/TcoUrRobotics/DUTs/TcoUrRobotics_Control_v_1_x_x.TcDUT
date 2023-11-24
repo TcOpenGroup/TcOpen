@@ -5,54 +5,16 @@
 STRUCT	
 	
 
-	
-	{attribute addProperty Name "<#Interuption actually running instruction#>"}
-	Interupt : BOOL;
-
-	{attribute addProperty Name "<#Load program#>"}
-	LoadProg : BOOL;	
-
-	{attribute addProperty Name "<#Load and run program#>"}
-	LoadAndStartProg : BOOL;
-
-	{attribute addProperty Name "<#Switch off the motors#>"}
-	MotorOff : BOOL;	
-
-	{attribute addProperty Name "<#Switch on the motors#>"}
-	MotorOn : BOOL;	
-
-	{attribute addProperty Name "<#Switch on the motors and start program#>"}
-	MotorOnAndStart : BOOL; 
-
-	{attribute addProperty Name "<#Emergency stop acknowledge#>"}
-	ResetEmgStop : BOOL;
-
-	{attribute addProperty Name "<#Error acknowledge#>"}
-	ResetError : BOOL; 
-
-	{attribute addProperty Name "<#Program start#>"}
-	StartProgram : BOOL;	
-
-	{attribute addProperty Name "<#Program start at main#>"}
-	StartAtMain : BOOL; 	
-
-	{attribute addProperty Name "<#Program stop#>"}
-	StopProgram : BOOL;	
-
-	{attribute addProperty Name "<#Stop movement-quick#>"}
-	QuickStop : BOOL; 
-
-	{attribute addProperty Name "<#Stop movement-soft#>"}
-	SoftStop : BOOL;	
-
-	{attribute addProperty Name "<#Stop program at the end of the cycle#>"}
-	StopCycle : BOOL; 	
-
-	{attribute addProperty Name "<#Stop program at the end of the instruction#>"}
-	StopInstruction : BOOL;
-
-	{attribute addProperty Name "<#Speed limitation#>"}
-	LimitSpeed : BOOL;
+	{attribute addProperty Name "<#Start program#>"}
+	Start : BOOL;
+	{attribute addProperty Name "<#Stop program#>"}
+	Stop : BOOL;
+	{attribute addProperty Name "<#Pause program#>"}
+	Pause : BOOL;
+	{attribute addProperty Name "<#Set motor on#>"}
+	MotorOn : BOOL;
+	{attribute addProperty Name "<#Run action#>"}
+	RunAction : BOOL;
 	
 	{attribute addProperty Name "<#Master mode#>"}
 	MasterMode : BYTE;
@@ -82,25 +44,25 @@ STRUCT
 	Tool_4_Extend : BOOL;
 
 	{attribute addProperty Name "<#Zones#>"}
-	Zone : BYTE;
+	Zone : DINT;
 
 	{attribute addProperty Name "<#In position#>"}
-	InPosition : BYTE;
+	InPosition : DINT;
 
 	{attribute addProperty Name "<#Action number#>"}
-	ActionNo : BYTE; 
+	ActionNo : DINT; 
 
 	{attribute addProperty Name "<#Global robot speed#>"}
-	GlobalSpeed : BYTE; 
+	GlobalSpeed : DINT; 
 
 	{attribute addProperty Name "<#Tool number#>"}
-	ToolNo : BYTE; 	
+	ToolNo : DINT; 	
 
 	{attribute addProperty Name "<#Workobject number#>"}
-	WorkobjectNo : BYTE; 
+	WorkobjectNo : DINT; 
 
 	{attribute addProperty Name "<#Point number#>"}
-	PointNo : BYTE; 		
+	PointNo : DINT; 		
 
 	{attribute addProperty Name "<#User specific speed 1#>"}
 	UserSpecSpeed1 : REAL; 
@@ -114,6 +76,9 @@ STRUCT
 	{attribute  addProperty Name "<#Coordinates#>"}     
 	Coordinates : TcoAbstractions.TcoRoboticsCoordinates; 		
 	
+	
+	{attribute addProperty Name "<UR Specific#>"}
+	Outputs : TcoUrRoboticsOutputData;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

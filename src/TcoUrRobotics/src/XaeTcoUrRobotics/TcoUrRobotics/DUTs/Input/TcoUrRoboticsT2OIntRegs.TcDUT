@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="TcoUrRoboticsT2OIntRegs" Id="{f0402f5c-0365-0169-162a-b4c9fd62fe9b}">
+    <Declaration><![CDATA[TYPE TcoUrRoboticsT2OIntRegs :
+STRUCT
+	{attribute addProperty Name "<#Int registers#>"}
+	Register : ARRAY[0..23] OF DINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

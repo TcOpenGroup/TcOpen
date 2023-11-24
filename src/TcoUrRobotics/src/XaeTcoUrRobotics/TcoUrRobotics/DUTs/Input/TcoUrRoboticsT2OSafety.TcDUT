@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="TcoUrRoboticsT2OSafety" Id="{68714ce7-ccc9-0187-0a5b-bd47c376ae8d}">
+    <Declaration><![CDATA[TYPE TcoUrRoboticsT2OSafety :
+STRUCT
+	
+	{attribute addProperty Name "<#Safety mode#>"}
+	SafetyMode : USINT;
+	{attribute addProperty Name "<#NO: Is normal mode#>"}
+	NO_IsNormalMode : BOOL;
+	{attribute addProperty Name "<#RD: Is reduced mode#>"}
+	RD_IsReducedMode : BOOL;
+	{attribute addProperty Name "<#PS: Is protective stopped#>"}
+	PS_IsProtectiveStopped : BOOL;
+	{attribute addProperty Name "<#RC: Is recovery mode#>"}
+	RC_IsRecoveryMode : BOOL;
+	{attribute addProperty Name "<#SS: Is safeguard stopped#>"}
+	SS_IsSafeguardStopped : BOOL;
+	{attribute addProperty Name "<#SES: Is system emergency stopped#>"}
+	SES_IsSystemEmergencyStopped : BOOL;
+	{attribute addProperty Name "<#RES: Is robot emergency stopped#>"}
+	RES_IsRobotEmergencyStopped : BOOL;
+	{attribute addProperty Name "<#ES: Is emergency stopped#>"}
+	ES_IsEmergencyStopped : BOOL;
+	{attribute addProperty Name "<#VL: Is violation#>"}
+	VL_IsViolation : BOOL;
+	{attribute addProperty Name "<#FT: Is fault#>"}
+	FT_IsFault : BOOL;
+	{attribute addProperty Name "<#ST: Is stopped due TO safety#>"}
+	ST_IsStoppedDueSafety : BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

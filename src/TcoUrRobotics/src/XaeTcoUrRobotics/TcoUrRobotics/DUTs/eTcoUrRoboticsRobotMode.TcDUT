@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="eTcoUrRoboticsRobotMode" Id="{89f62f5f-98b2-0cb1-0838-976f4d25a253}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE
+    eTcoUrRoboticsRobotMode :
+    (
+
+        DISCONNECTED := 0,
+        SAFETY := 1,
+        BOOTING := 2,
+        POWER_OFF := 3,
+       	POWER_ON := 4,
+        IDLE := 5,
+        BACKDRIVE := 6,
+        RUNNING := 7,
+        UPDATING_FIRMWARE := 8
+    );
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="TcoConversionTetsContext" Id="{c20c266f-a615-0b3b-2b44-4b66fdc9f538}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoConversionTetsContext EXTENDS TcoCore._internals_TcoContext
+VAR
+	_Byte0: BYTE;
+    _Byte1: BYTE;
+    _Byte2: BYTE;
+    _Byte3: BYTE;
+	_realValue:REAL;
+	_format: TcoUtilities.eTcoDataFormat;
+	_resultRealValue:REAL;
+	_resultByte0:BYTE;
+	_resultByte1:BYTE;
+	_resultByte2:BYTE;
+	_resultByte3:BYTE;
+	_tcoConversionTestDone: BOOL;
+	_union :floatUnion;
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{1090e884-bd07-0edc-08e4-cb029452f088}">
+      <Declaration><![CDATA[METHOD PROTECTED Main
+VAR
+
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE THIS^._testId OF
+	eTcoConversionTests.None :
+	eTcoBlinkerTestList.Init :
+		_Byte0:=0;
+		_Byte1:=0;
+		_Byte2:=0;
+		_Byte3:=0;
+		_resultByte0:=0;
+		_resultByte1:=0;
+		_resultByte2:=0;
+		_resultByte3:=0;
+		_realValue:=0;
+		_resultRealValue:=0;
+		_tcoConversionTestDone := FALSE;
+		_union.value:=0;
+		
+	eTcoConversionTests.TcoBytesToReal :			
+		_resultRealValue:= TcoBytesToReal(_format,_byte0,_byte1,_byte2,_byte3);
+	eTcoConversionTests.TcoRealToBytes :			
+		TcoRealToBytes(_format,_realValue,_resultByte0,_resultByte1,_resultByte2,_resultByte3);
+	eTcoConversionTests.TcoBytesToRealPlcArrange :	
+		_union.value:= _realValue;
+		IF _format = TcoUtilities.eTcoDataFormat.LittleEndian THEN
+			_resultRealValue:= TcoBytesToReal(_format,_union.bytes[0],_union.bytes[1],_union.bytes[2],_union.bytes[3]);
+		ELSE
+			_resultRealValue:= TcoBytesToReal(_format,_union.bytes[3],_union.bytes[2],_union.bytes[1],_union.bytes[0]);
+		END_IF;
+	eTcoConversionTests.TcoRealToBytesPlcArrange :	
+		_union.value:= _realValue;
+		IF _format = TcoUtilities.eTcoDataFormat.LittleEndian THEN
+			TcoRealToBytes(_format,_realValue,_resultByte0,_resultByte1,_resultByte2,_resultByte3);
+		ELSE
+			TcoRealToBytes(_format,_realValue,_resultByte3,_resultByte2,_resultByte1,_resultByte0);
+		END_IF;
+	
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

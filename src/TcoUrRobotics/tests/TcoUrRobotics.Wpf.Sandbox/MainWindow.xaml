@@ -13,7 +13,7 @@
 
     <Grid>
         <TabControl>
-            <TabItem Header="Robot IRC5">
+            <TabItem Header="Robot CB3">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -21,34 +21,32 @@
 
                     </Grid.RowDefinitions>
                     <vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext._robot1}" PresentationType="Service"/>
-                    <!--<vortex:RenderableContentControl Grid.Row="1" DataContext="{Binding MAIN._wpfContext._robot2}" PresentationType="Service"/>-->
-             
+                  
                 </Grid>     
             </TabItem>
-            <TabItem Header="Robot Omnicore">
+            <TabItem Header="Robot Eseries">
                 <Grid>
-                    <Grid.RowDefinitions>
+                   <Grid.RowDefinitions>
                         <RowDefinition/>
-                        <!--<RowDefinition/>-->
+                        <RowDefinition/>
 
                     </Grid.RowDefinitions>
                     <vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext._robot2}" PresentationType="Service"/>
-                    <!--<vortex:RenderableContentControl Grid.Row="1" DataContext="{Binding MAIN._wpfContext._robot2}" PresentationType="Service"/>-->
-
+                   
                 </Grid>
             </TabItem>
-            <TabItem Header="SequenceTest Irc5 ">
+            <TabItem Header="SequenceTest CB3 ">
                 <StackPanel Orientation="Vertical">
                     <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext._sequence1Task}" PresentationType="Base"></vortex:RenderableContentControl>
-                    <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext._sequence1}" PresentationType="Base"></vortex:RenderableContentControl>
-                    <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext._observer}" PresentationType="Base"></vortex:RenderableContentControl>
+                    <!--<vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext._sequence1}" PresentationType="Base"></vortex:RenderableContentControl>-->
+                    <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext._observer1}" PresentationType="Base"></vortex:RenderableContentControl>
                     <vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext._robot1}" PresentationType="Service"/>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="SequenceTest Omnicore ">
+            <TabItem Header="SequenceTest E series ">
                 <StackPanel Orientation="Vertical">
                     <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext._sequence2Task}" PresentationType="Base"></vortex:RenderableContentControl>
-                    <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext._sequence2}" PresentationType="Base"></vortex:RenderableContentControl>
+                    <!--<vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext._sequence2}" PresentationType="Base"></vortex:RenderableContentControl>-->
                     <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext._observer2}" PresentationType="Base"></vortex:RenderableContentControl>
                     <vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext._robot2}" PresentationType="Service"/>
                 </StackPanel>

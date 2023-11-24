@@ -1,0 +1,945 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="GSDML-Stylesheet-HTML-V2.31.xsl" type="text/xsl"?>
+<ISO15745Profile
+	xmlns="http://www.profibus.com/GSDML/2003/11/DeviceProfile"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.profibus.com/GSDML/2003/11/DeviceProfile ..\xsd\GSDML-DeviceProfile-v2.42.xsd">
+	<ProfileHeader>
+		<ProfileIdentification>PROFINET Device Profile</ProfileIdentification>
+		<ProfileRevision>1.00</ProfileRevision>
+		<ProfileName>Device Profile for PROFINET Devices</ProfileName>
+		<ProfileSource>PROFIBUS Nutzerorganisation e. V. (PNO)</ProfileSource>
+		<ProfileClassID>Device</ProfileClassID>
+		<ISO15745Reference>
+			<ISO15745Part>4</ISO15745Part>
+			<ISO15745Edition>1</ISO15745Edition>
+			<ProfileTechnology>GSDML</ProfileTechnology>
+		</ISO15745Reference>
+	</ProfileHeader>
+	<ProfileBody>
+		<DeviceIdentity VendorID="0x0361" DeviceID="0x0001">
+			<InfoText TextId="TOK_DevIdent_InfoText" />
+			<VendorName Value="Universal Robots A/S" />
+		</DeviceIdentity>
+		<DeviceFunction>
+			<Family MainFamily="I/O" ProductFamily="Collaborative Robot" />
+		</DeviceFunction>
+		<ApplicationProcess>
+			<DeviceAccessPointList>
+				<DeviceAccessPointItem ID="DAP 1" PhysicalSlots="0..11" ModuleIdentNumber="0x00000001" MinDeviceInterval="256" ImplementationType="portStack" DNS_CompatibleName="URIODev1" FixedInSlots="0" ObjectUUID_LocalIndex="1" RequiredSchemaVersion="V2.2" MaxSupportedRecordSize="4068" ParameterizationSpeedupSupported="false" PowerOnToCommReady="0" DeviceAccessSupported="true" PNIO_Version="V2.42" ResetToFactoryModes="2" CheckDeviceID_Allowed="true" MultipleWriteSupported="true" LLDP_NoD_Supported="true" NameOfStationNotTransferable="true" NumberOfDeviceAccessAR="1">
+					<ModuleInfo>
+						<Name TextId="TOK_V10" />
+						<InfoText TextId="TOK_ModInfo_InfoTextId_DAP1" />
+						<VendorName Value="Universal Robots A/S" />
+						<OrderNumber Value="0000201" />
+					</ModuleInfo>
+					<CertificationInfo ConformanceClass="A" ApplicationClass="" NetloadClass="I" />
+					<SubslotList>
+						<SubslotItem SubslotNumber="32768" TextId="TOK_Subslot_8000" />
+						<SubslotItem SubslotNumber="32769" TextId="TOK_Subslot_8001" />
+					</SubslotList>
+					<IOConfigData MaxInputLength="1440" MaxOutputLength="1440" />
+					<UseableModules>
+						<ModuleItemRef ModuleItemTarget="ID_Mod_11" AllowedInSlots="1" />
+						<ModuleItemRef ModuleItemTarget="ID_Mod_12" AllowedInSlots="2" />
+						<ModuleItemRef ModuleItemTarget="ID_Mod_13" AllowedInSlots="3" />
+						<ModuleItemRef ModuleItemTarget="ID_Mod_14" AllowedInSlots="4" />
+						<ModuleItemRef ModuleItemTarget="ID_Mod_15" AllowedInSlots="5" />
+						<ModuleItemRef ModuleItemTarget="ID_Mod_16" AllowedInSlots="6" />
+						<ModuleItemRef ModuleItemTarget="ID_Mod_17" AllowedInSlots="7" />
+						<ModuleItemRef ModuleItemTarget="ID_Mod_18" AllowedInSlots="8" />
+						<ModuleItemRef ModuleItemTarget="ID_Mod_19" AllowedInSlots="9" />
+						<ModuleItemRef ModuleItemTarget="ID_Mod_20" AllowedInSlots="10" />
+						<ModuleItemRef ModuleItemTarget="IDM_PS" AllowedInSlots="11" UsedInSlots="11" />
+					</UseableModules>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="DAP 1" SubmoduleIdentNumber="0x0001" Writeable_IM_Records="1 2 3" MayIssueProcessAlarm="false">
+							<IOData />
+							<ModuleInfo>
+								<Name TextId="TOK_V10" />
+								<InfoText TextId="TOK_ModInfo_InfoTextId_DAP1" />
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+					<SystemDefinedSubmoduleList>
+						<InterfaceSubmoduleItem ID="IDS_2I" SubslotNumber="32768" SubmoduleIdentNumber="0x8000" SupportedRT_Classes="RT_CLASS_1" TextId="TOK_DAP_InterfaceModule" IsochroneModeSupported="false" SupportedProtocols="LLDP" NetworkComponentDiagnosisSupported="false" PTP_BoundarySupported="true" DCP_BoundarySupported="true">
+							<ApplicationRelations NumberOfAdditionalInputCR="0" NumberOfAdditionalMulticastProviderCR="0" NumberOfAdditionalOutputCR="0" NumberOfMulticastConsumerCR="0" PullModuleAlarmSupported="true" StartupMode="Advanced;Legacy">
+								<TimingProperties SendClock="32" ReductionRatio="1 2 4 8 16 32 64 128 256 512" />
+							</ApplicationRelations>
+						</InterfaceSubmoduleItem>
+						<PortSubmoduleItem ID="IDS_2P" SubslotNumber="32769" SubmoduleIdentNumber="0x8001" TextId="TOK_Port1" MaxPortRxDelay="378" MaxPortTxDelay="1212" PortDeactivationSupported="true" LinkStateDiagnosisCapability="Up+Down">
+							<MAUTypeList>
+
+								<MAUTypeItem Value="16" AdjustSupported="false" />
+
+							</MAUTypeList>
+						</PortSubmoduleItem>
+					</SystemDefinedSubmoduleList>
+					<Graphics>
+						<GraphicItemRef Type="DeviceSymbol" GraphicItemTarget="ID_Graph_1" />
+					</Graphics>
+				</DeviceAccessPointItem>
+			</DeviceAccessPointList>
+			<ModuleList>
+				<ModuleItem ID="ID_Mod_11" ModuleIdentNumber="0x00000030">
+					<ModuleInfo>
+						<Name TextId="TOK_TextId_Module_URI_State" />
+						<InfoText TextId="TOK_InfoTextId_Module_URI_State" />
+						<HardwareRelease Value="1.0" />
+						<SoftwareRelease Value="1.0" />
+					</ModuleInfo>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="11" SubmoduleIdentNumber="0x0001" API="0" MayIssueProcessAlarm="false">
+							<IOData>
+								<Input Consistency="All items consistency">
+									<DataItem DataType="OctetString" TextId="TOK_Input_DataItem_1" Length="32" UseAsBits="true" />
+								</Input>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="TOK_TextId_Module_URI_State" />
+								<InfoText TextId="TOK_InfoTextId_Module_URI_State" />
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+				</ModuleItem>
+				<ModuleItem ID="ID_Mod_12" ModuleIdentNumber="0x00000031">
+					<ModuleInfo>
+						<Name TextId="TOK_TextId_Module_URI_IO" />
+						<InfoText TextId="TOK_InfoTextId_Module_URI_IO" />
+						<HardwareRelease Value="1.0" />
+						<SoftwareRelease Value="1.0" />
+					</ModuleInfo>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="12" SubmoduleIdentNumber="0x0001" API="0" MayIssueProcessAlarm="false">
+							<IOData>
+								<Input Consistency="All items consistency">
+									<DataItem DataType="OctetString" TextId="TOK_Input_DataItem_2" Length="68" UseAsBits="true" />
+								</Input>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="TOK_TextId_Module_URI_IO" />
+								<InfoText TextId="TOK_InfoTextId_Module_URI_IO" />
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+				</ModuleItem>
+				<ModuleItem ID="ID_Mod_13" ModuleIdentNumber="0x00000032">
+					<ModuleInfo>
+						<Name TextId="TOK_TextId_Module_URI_Joints" />
+						<InfoText TextId="TOK_InfoTextId_Module_URI_Joints" />
+						<HardwareRelease Value="1.0" />
+						<SoftwareRelease Value="1.0" />
+					</ModuleInfo>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="13" SubmoduleIdentNumber="0x0001" API="0" MayIssueProcessAlarm="false">
+							<IOData>
+								<Input Consistency="All items consistency">
+									<DataItem DataType="OctetString" TextId="TOK_Input_DataItem_3" Length="104" UseAsBits="true" />
+								</Input>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="TOK_TextId_Module_URI_Joints" />
+								<InfoText TextId="TOK_InfoTextId_Module_URI_Joints" />
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+				</ModuleItem>
+				<ModuleItem ID="ID_Mod_14" ModuleIdentNumber="0x00000033">
+					<ModuleInfo>
+						<Name TextId="TOK_TextId_Module_URI_TCP" />
+						<InfoText TextId="TOK_InfoTextId_Module_URI_TCP" />
+						<HardwareRelease Value="1.0" />
+						<SoftwareRelease Value="1.0" />
+					</ModuleInfo>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="14" SubmoduleIdentNumber="0x0001" API="0" MayIssueProcessAlarm="false">
+							<IOData>
+								<Input Consistency="All items consistency">
+									<DataItem DataType="OctetString" TextId="TOK_Input_DataItem_4" Length="76" UseAsBits="true" />
+								</Input>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="TOK_TextId_Module_URI_TCP" />
+								<InfoText TextId="TOK_InfoTextId_Module_URI_TCP" />
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+				</ModuleItem>
+				<ModuleItem ID="ID_Mod_15" ModuleIdentNumber="0x00000034">
+					<ModuleInfo>
+						<Name TextId="TOK_TextId_Module_URI_BIT_REG" />
+						<InfoText TextId="TOK_InfoTextId_Module_URI_BIT_REG" />
+						<HardwareRelease Value="1.0" />
+						<SoftwareRelease Value="1.0" />
+					</ModuleInfo>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="15" SubmoduleIdentNumber="0x0001" API="0" MayIssueProcessAlarm="false">
+							<IOData>
+								<Input Consistency="All items consistency">
+									<DataItem DataType="OctetString" TextId="TOK_Input_DataItem_5" Length="8" UseAsBits="true" />
+								</Input>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="TOK_TextId_Module_URI_BIT_REG" />
+								<InfoText TextId="TOK_InfoTextId_Module_URI_BIT_REG" />
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+				</ModuleItem>
+				<ModuleItem ID="ID_Mod_16" ModuleIdentNumber="0x00000035">
+					<ModuleInfo>
+						<Name TextId="TOK_TextId_Module_URI_INT_REG" />
+						<InfoText TextId="TOK_InfoTextId_Module_URI_INT_REG" />
+						<HardwareRelease Value="1.0" />
+						<SoftwareRelease Value="1.0" />
+					</ModuleInfo>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="16" SubmoduleIdentNumber="0x0001" API="0" MayIssueProcessAlarm="false">
+							<IOData>
+								<Input Consistency="All items consistency">
+									<DataItem DataType="OctetString" TextId="TOK_Input_DataItem_6" Length="96" UseAsBits="true" />
+								</Input>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="TOK_TextId_Module_URI_INT_REG" />
+								<InfoText TextId="TOK_InfoTextId_Module_URI_INT_REG" />
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+				</ModuleItem>
+				<ModuleItem ID="ID_Mod_17" ModuleIdentNumber="0x00000036">
+					<ModuleInfo>
+						<Name TextId="TOK_TextId_Module_URI_FLOAT_REG" />
+						<InfoText TextId="TOK_InfoTextId_Module_URI_FLOAT_REG" />
+						<HardwareRelease Value="1.0" />
+						<SoftwareRelease Value="1.0" />
+					</ModuleInfo>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="17" SubmoduleIdentNumber="0x0001" API="0" MayIssueProcessAlarm="false">
+							<IOData>
+								<Input Consistency="All items consistency">
+									<DataItem DataType="OctetString" TextId="TOK_Input_DataItem_7" Length="96" UseAsBits="true" />
+								</Input>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="TOK_TextId_Module_URI_FLOAT_REG" />
+								<InfoText TextId="TOK_InfoTextId_Module_URI_FLOAT_REG" />
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+				</ModuleItem>
+				<ModuleItem ID="ID_Mod_18" ModuleIdentNumber="0x00000040">
+					<ModuleInfo>
+						<Name TextId="TOK_TextId_Module_URO_IO" />
+						<InfoText TextId="TOK_InfoTextId_Module_URO_IO" />
+						<HardwareRelease Value="1.0" />
+						<SoftwareRelease Value="1.0" />
+					</ModuleInfo>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="18" SubmoduleIdentNumber="0x0001" API="0" MayIssueProcessAlarm="false" SupportedSubstitutionModes="0">
+							<IOData>
+								<Output Consistency="All items consistency">
+									<DataItem DataType="OctetString" TextId="TOK_Output_DataItem_1" Length="24" UseAsBits="true" />
+								</Output>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="TOK_TextId_Module_URO_IO" />
+								<InfoText TextId="TOK_InfoTextId_Module_URO_IO" />
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+				</ModuleItem>
+				<ModuleItem ID="ID_Mod_19" ModuleIdentNumber="0x00000041">
+					<ModuleInfo>
+						<Name TextId="TOK_TextId_Module_URO_REG1" />
+						<InfoText TextId="TOK_InfoTextId_Module_URO_REG1" />
+						<HardwareRelease Value="1.0" />
+						<SoftwareRelease Value="1.0" />
+					</ModuleInfo>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="19" SubmoduleIdentNumber="0x0001" API="0" MayIssueProcessAlarm="false" SupportedSubstitutionModes="0">
+							<IOData>
+								<Output Consistency="All items consistency">
+									<DataItem DataType="OctetString" TextId="TOK_Output_DataItem_2" Length="100" UseAsBits="true" />
+								</Output>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="TOK_TextId_Module_URO_REG1" />
+								<InfoText TextId="TOK_InfoTextId_Module_URO_REG1" />
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+				</ModuleItem>
+				<ModuleItem ID="ID_Mod_20" ModuleIdentNumber="0x00000042">
+					<ModuleInfo>
+						<Name TextId="TOK_TextId_Module_URO_REG2" />
+						<InfoText TextId="TOK_InfoTextId_Module_URO_REG2" />
+						<HardwareRelease Value="1.0" />
+						<SoftwareRelease Value="1.0" />
+					</ModuleInfo>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="20" SubmoduleIdentNumber="0x0001" API="0" MayIssueProcessAlarm="false" SupportedSubstitutionModes="0">
+							<IOData>
+								<Output Consistency="All items consistency">
+									<DataItem DataType="OctetString" TextId="TOK_Output_DataItem_3" Length="100" UseAsBits="true" />
+								</Output>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="TOK_TextId_Module_URO_REG2" />
+								<InfoText TextId="TOK_InfoTextId_Module_URO_REG2" />
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+				</ModuleItem>
+				<ModuleItem ID="IDM_PS" ModuleIdentNumber="0x3B000200" PhysicalSubslots="2">
+					<ModuleInfo>
+						<Name TextId="IDT_NAME_PSM_PROFIsafe" />
+						<InfoText TextId="IDT_INFO_PSM_PROFIsafe" />
+						<HardwareRelease Value="1.0" />
+						<SoftwareRelease Value="1.0" />
+					</ModuleInfo>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="IDM_PS_MAP" SubmoduleIdentNumber="0x3B000201" API="0" FixedInSubslots="1" MayIssueProcessAlarm="false">
+							<IOData/>
+							<ModuleInfo>
+								<Name TextId="IDT_NAME_PSM_MAP" />
+								<InfoText TextId="IDT_INFO_PSM_MAP" />
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+					<UseableSubmodules>
+						<SubmoduleItemRef SubmoduleItemTarget="IDS_PS_T01_3" AllowedInSubslots="2" />
+						<SubmoduleItemRef SubmoduleItemTarget="IDS_PS_T02_3" AllowedInSubslots="2" />
+						<SubmoduleItemRef SubmoduleItemTarget="IDS_PS_T01_4" AllowedInSubslots="2" />
+						<SubmoduleItemRef SubmoduleItemTarget="IDS_PS_T02_4" AllowedInSubslots="2" />
+					</UseableSubmodules>
+				</ModuleItem>
+			</ModuleList>
+			<SubmoduleList>
+				<!-- Safety Telegram 1 with 3-byte CRC -->
+				<SubmoduleItem ID="IDS_PS_T01_3" SubmoduleIdentNumber="0x00000001" API="0" MayIssueProcessAlarm="true" PROFIsafeSupported="true">
+					<IOData F_IO_StructureDescCRC="26684">
+						<Input Consistency="All items consistency">
+							<DataItem TextId="IDT_PS_STAT_BYTE0" DataType="Unsigned8" UseAsBits="true">
+								<BitDataItem BitOffset="0" TextId="IDT_SS0_STAT" />
+								<BitDataItem BitOffset="1" TextId="IDT_SS1_STAT" />
+								<BitDataItem BitOffset="2" TextId="IDT_SS2_STAT" />
+								<BitDataItem BitOffset="3" TextId="IDT_VIO_STAT" />
+								<BitDataItem BitOffset="4" TextId="IDT_FLT_STAT" />
+								<BitDataItem BitOffset="5" TextId="IDT_ESS_STAT" />
+								<BitDataItem BitOffset="6" TextId="IDT_ESR_STAT" />
+								<BitDataItem BitOffset="7" TextId="IDT_SGS_STAT" />
+							</DataItem>
+							<DataItem TextId="IDT_PS_STAT_BYTE1" DataType="Unsigned8" UseAsBits="true">
+								<BitDataItem BitOffset="0" TextId="IDT_SGSA_STAT" />
+								<BitDataItem BitOffset="1" TextId="IDT_3PE_STAT" />
+								<BitDataItem BitOffset="2" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="3" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="4" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="5" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="6" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="7" TextId="IDT_RESERVED_STAT" />
+							</DataItem>
+							<DataItem TextId="IDT_PS_STAT_BYTE2" DataType="Unsigned8" UseAsBits="true">
+								<BitDataItem BitOffset="0" TextId="IDT_OPM0_STAT" />
+								<BitDataItem BitOffset="1" TextId="IDT_OPM1_STAT" />
+								<BitDataItem BitOffset="2" TextId="IDT_REM_STAT" />
+								<BitDataItem BitOffset="3" TextId="IDT_ALS0_STAT" />
+								<BitDataItem BitOffset="4" TextId="IDT_ALS1_STAT" />
+								<BitDataItem BitOffset="5" TextId="IDT_RMO_STAT" />
+								<BitDataItem BitOffset="6" TextId="IDT_SHP_STAT" />
+								<BitDataItem BitOffset="7" TextId="IDT_RESERVED_STAT" />
+							</DataItem>
+							<DataItem TextId="IDT_PS_STAT_BYTE3" DataType="Unsigned8" UseAsBits="true">
+								<BitDataItem BitOffset="0" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="1" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="2" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="3" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="4" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="5" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="6" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="7" TextId="IDT_RESERVED_STAT" />
+							</DataItem>
+							<DataItem TextId="IDT_PS_STAT_BYTE4" DataType="Unsigned8" UseAsBits="true">
+								<BitDataItem BitOffset="0" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="1" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="2" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="3" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="4" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="5" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="6" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="7" TextId="IDT_RESERVED_STAT" />
+							</DataItem>
+							<DataItem DataType="F_MessageTrailer4Byte" TextId="IDT_Input_DataItem_PS_Safety" />
+						</Input>
+						<Output Consistency="All items consistency">
+							<DataItem TextId="IDT_PS_CTRL_BYTE0" DataType="Unsigned8" UseAsBits="true">
+								<BitDataItem BitOffset="0" TextId="IDT_ESS_CTRL" />
+								<BitDataItem BitOffset="1" TextId="IDT_SGS_CTRL" />
+								<BitDataItem BitOffset="2" TextId="IDT_RSGS_CTRL" />
+								<BitDataItem BitOffset="3" TextId="IDT_SGSA_CTRL" />
+								<BitDataItem BitOffset="4" TextId="IDT_RSGSA_CTRL" />
+								<BitDataItem BitOffset="5" TextId="IDT_REM_CTRL" />
+								<BitDataItem BitOffset="6" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="7" TextId="IDT_RESERVED_CTRL" />
+							</DataItem>
+							<DataItem TextId="IDT_PS_CTRL_BYTE1" DataType="Unsigned8" UseAsBits="true">
+								<BitDataItem BitOffset="0" TextId="IDT_OPM_CTRL" />
+								<BitDataItem BitOffset="1" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="2" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="3" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="4" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="5" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="6" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="7" TextId="IDT_RESERVED_CTRL" />
+							</DataItem>
+							<DataItem TextId="IDT_PS_CTRL_BYTE2" DataType="Unsigned8" UseAsBits="true">
+								<BitDataItem BitOffset="0" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="1" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="2" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="3" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="4" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="5" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="6" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="7" TextId="IDT_RESERVED_CTRL" />
+							</DataItem>
+							<DataItem DataType="F_MessageTrailer4Byte" TextId="IDT_Output_DataItem_PS_Safety" />
+						</Output>
+					</IOData>
+					<RecordDataList>
+						<F_ParameterRecordDataItem Index="100" F_ParamDescCRC="64977">
+							<F_Check_iPar />
+							<F_SIL DefaultValue="SIL3" AllowedValues="SIL3" Visible="true" Changeable="false" />
+							<F_CRC_Length DefaultValue="3-Byte-CRC" AllowedValues="3-Byte-CRC" Visible="true" Changeable="false" />
+							<F_Block_ID DefaultValue="1" AllowedValues="1" Visible="true" Changeable="false" />
+							<F_Par_Version />
+							<F_Source_Add AllowedValues="1..65534" Visible="true" Changeable="true" />
+							<F_Dest_Add AllowedValues="1..65534" Visible="true" Changeable="true" />
+							<F_WD_Time DefaultValue="200" AllowedValues="100..2000" Visible="true" Changeable="true" />
+							<F_Par_CRC DefaultValue="797" Visible="true" />
+							<F_iPar_CRC DefaultValue="0" Visible="true" Changeable="true" />
+						</F_ParameterRecordDataItem>
+					</RecordDataList>
+					<ModuleInfo>
+						<Name TextId="IDT_NAME_PS_T01_3" />
+						<InfoText TextId="IDT_INFO_PS_T01_3" />
+					</ModuleInfo>
+				</SubmoduleItem>
+				<!-- Safety Telegram 2 with 3-byte CRC -->
+				<SubmoduleItem ID="IDS_PS_T02_3" SubmoduleIdentNumber="0x00000002" API="0" MayIssueProcessAlarm="true" PROFIsafeSupported="true">
+					<IOData F_IO_StructureDescCRC="58570">
+						<Input Consistency="All items consistency">
+							<DataItem TextId="IDT_PS_STAT_BYTE0" DataType="Unsigned8" UseAsBits="true">
+								<BitDataItem BitOffset="0" TextId="IDT_SS0_STAT" />
+								<BitDataItem BitOffset="1" TextId="IDT_SS1_STAT" />
+								<BitDataItem BitOffset="2" TextId="IDT_SS2_STAT" />
+								<BitDataItem BitOffset="3" TextId="IDT_VIO_STAT" />
+								<BitDataItem BitOffset="4" TextId="IDT_FLT_STAT" />
+								<BitDataItem BitOffset="5" TextId="IDT_ESS_STAT" />
+								<BitDataItem BitOffset="6" TextId="IDT_ESR_STAT" />
+								<BitDataItem BitOffset="7" TextId="IDT_SGS_STAT" />
+							</DataItem>
+							<DataItem TextId="IDT_PS_STAT_BYTE1" DataType="Unsigned8" UseAsBits="true">
+								<BitDataItem BitOffset="0" TextId="IDT_SGSA_STAT" />
+								<BitDataItem BitOffset="1" TextId="IDT_3PE_STAT" />
+								<BitDataItem BitOffset="2" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="3" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="4" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="5" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="6" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="7" TextId="IDT_RESERVED_STAT" />
+							</DataItem>
+							<DataItem TextId="IDT_PS_STAT_BYTE2" DataType="Unsigned8" UseAsBits="true">
+								<BitDataItem BitOffset="0" TextId="IDT_OPM0_STAT" />
+								<BitDataItem BitOffset="1" TextId="IDT_OPM1_STAT" />
+								<BitDataItem BitOffset="2" TextId="IDT_REM_STAT" />
+								<BitDataItem BitOffset="3" TextId="IDT_ALS0_STAT" />
+								<BitDataItem BitOffset="4" TextId="IDT_ALS1_STAT" />
+								<BitDataItem BitOffset="5" TextId="IDT_RMO_STAT" />
+								<BitDataItem BitOffset="6" TextId="IDT_SHP_STAT" />
+								<BitDataItem BitOffset="7" TextId="IDT_RESERVED_STAT" />
+							</DataItem>
+							<DataItem TextId="IDT_PS_STAT_BYTE3" DataType="Unsigned8" UseAsBits="true">
+								<BitDataItem BitOffset="0" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="1" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="2" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="3" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="4" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="5" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="6" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="7" TextId="IDT_RESERVED_STAT" />
+							</DataItem>
+							<DataItem TextId="IDT_PS_STAT_BYTE4" DataType="Unsigned8" UseAsBits="true">
+								<BitDataItem BitOffset="0" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="1" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="2" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="3" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="4" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="5" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="6" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="7" TextId="IDT_RESERVED_STAT" />
+							</DataItem>
+							<DataItem DataType="F_MessageTrailer4Byte" TextId="IDT_Input_DataItem_PS_Safety" />
+						</Input>
+						<Output Consistency="All items consistency">
+							<DataItem TextId="IDT_PS_CTRL_BYTE0" DataType="Unsigned8" UseAsBits="true">
+								<BitDataItem BitOffset="0" TextId="IDT_ESS_CTRL" />
+								<BitDataItem BitOffset="1" TextId="IDT_SGS_CTRL" />
+								<BitDataItem BitOffset="2" TextId="IDT_RSGS_CTRL" />
+								<BitDataItem BitOffset="3" TextId="IDT_SGSA_CTRL" />
+								<BitDataItem BitOffset="4" TextId="IDT_RSGSA_CTRL" />
+								<BitDataItem BitOffset="5" TextId="IDT_REM_CTRL" />
+								<BitDataItem BitOffset="6" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="7" TextId="IDT_RESERVED_CTRL" />
+							</DataItem>
+							<DataItem TextId="IDT_PS_CTRL_BYTE1" DataType="Unsigned8" UseAsBits="true">
+								<BitDataItem BitOffset="0" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="1" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="2" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="3" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="4" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="5" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="6" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="7" TextId="IDT_RESERVED_CTRL" />
+							</DataItem>
+							<DataItem DataType="F_MessageTrailer4Byte" TextId="IDT_Output_DataItem_PS_Safety" />
+						</Output>
+					</IOData>
+					<RecordDataList>
+						<F_ParameterRecordDataItem Index="101" F_ParamDescCRC="64977">
+							<F_Check_iPar />
+							<F_SIL DefaultValue="SIL3" AllowedValues="SIL3" Visible="true" Changeable="false" />
+							<F_CRC_Length DefaultValue="3-Byte-CRC" AllowedValues="3-Byte-CRC" Visible="true" Changeable="false" />
+							<F_Block_ID DefaultValue="1" AllowedValues="1" Visible="true" Changeable="false" />
+							<F_Par_Version />
+							<F_Source_Add AllowedValues="1..65534" Visible="true" Changeable="true" />
+							<F_Dest_Add AllowedValues="1..65534" Visible="true" Changeable="true" />
+							<F_WD_Time DefaultValue="200" AllowedValues="100..2000" Visible="true" Changeable="true" />
+							<F_Par_CRC DefaultValue="797" Visible="true" />
+							<F_iPar_CRC DefaultValue="0" Visible="true" Changeable="true" />
+						</F_ParameterRecordDataItem>
+					</RecordDataList>
+					<ModuleInfo>
+						<Name TextId="IDT_NAME_PS_T02_3" />
+						<InfoText TextId="IDT_INFO_PS_T02_3" />
+					</ModuleInfo>
+				</SubmoduleItem>
+				<!-- Safety Telegram 1 with 4-byte CRC -->
+				<SubmoduleItem ID="IDS_PS_T01_4" SubmoduleIdentNumber="0x00000003" API="0" MayIssueProcessAlarm="true" PROFIsafeSupported="true">
+					<IOData F_IO_StructureDescCRC="44504">
+						<Input Consistency="All items consistency">
+							<DataItem TextId="IDT_PS_STAT_BYTE0" DataType="Unsigned8" UseAsBits="true">
+								<BitDataItem BitOffset="0" TextId="IDT_SS0_STAT" />
+								<BitDataItem BitOffset="1" TextId="IDT_SS1_STAT" />
+								<BitDataItem BitOffset="2" TextId="IDT_SS2_STAT" />
+								<BitDataItem BitOffset="3" TextId="IDT_VIO_STAT" />
+								<BitDataItem BitOffset="4" TextId="IDT_FLT_STAT" />
+								<BitDataItem BitOffset="5" TextId="IDT_ESS_STAT" />
+								<BitDataItem BitOffset="6" TextId="IDT_ESR_STAT" />
+								<BitDataItem BitOffset="7" TextId="IDT_SGS_STAT" />
+							</DataItem>
+							<DataItem TextId="IDT_PS_STAT_BYTE1" DataType="Unsigned8" UseAsBits="true">
+								<BitDataItem BitOffset="0" TextId="IDT_SGSA_STAT" />
+								<BitDataItem BitOffset="1" TextId="IDT_3PE_STAT" />
+								<BitDataItem BitOffset="2" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="3" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="4" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="5" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="6" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="7" TextId="IDT_RESERVED_STAT" />
+							</DataItem>
+							<DataItem TextId="IDT_PS_STAT_BYTE2" DataType="Unsigned8" UseAsBits="true">
+								<BitDataItem BitOffset="0" TextId="IDT_OPM0_STAT" />
+								<BitDataItem BitOffset="1" TextId="IDT_OPM1_STAT" />
+								<BitDataItem BitOffset="2" TextId="IDT_REM_STAT" />
+								<BitDataItem BitOffset="3" TextId="IDT_ALS0_STAT" />
+								<BitDataItem BitOffset="4" TextId="IDT_ALS1_STAT" />
+								<BitDataItem BitOffset="5" TextId="IDT_RMO_STAT" />
+								<BitDataItem BitOffset="6" TextId="IDT_SHP_STAT" />
+								<BitDataItem BitOffset="7" TextId="IDT_RESERVED_STAT" />
+							</DataItem>
+							<DataItem TextId="IDT_PS_STAT_BYTE3" DataType="Unsigned8" UseAsBits="true">
+								<BitDataItem BitOffset="0" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="1" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="2" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="3" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="4" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="5" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="6" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="7" TextId="IDT_RESERVED_STAT" />
+							</DataItem>
+							<DataItem TextId="IDT_PS_STAT_BYTE4" DataType="Unsigned8" UseAsBits="true">
+								<BitDataItem BitOffset="0" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="1" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="2" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="3" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="4" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="5" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="6" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="7" TextId="IDT_RESERVED_STAT" />
+							</DataItem>
+							<DataItem DataType="F_MessageTrailer5Byte" TextId="IDT_Input_DataItem_PS_Safety" />
+						</Input>
+						<Output Consistency="All items consistency">
+							<DataItem TextId="IDT_PS_CTRL_BYTE0" DataType="Unsigned8" UseAsBits="true">
+								<BitDataItem BitOffset="0" TextId="IDT_ESS_CTRL" />
+								<BitDataItem BitOffset="1" TextId="IDT_SGS_CTRL" />
+								<BitDataItem BitOffset="2" TextId="IDT_RSGS_CTRL" />
+								<BitDataItem BitOffset="3" TextId="IDT_SGSA_CTRL" />
+								<BitDataItem BitOffset="4" TextId="IDT_RSGSA_CTRL" />
+								<BitDataItem BitOffset="5" TextId="IDT_REM_CTRL" />
+								<BitDataItem BitOffset="6" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="7" TextId="IDT_RESERVED_CTRL" />
+							</DataItem>
+							<DataItem TextId="IDT_PS_CTRL_BYTE1" DataType="Unsigned8" UseAsBits="true">
+								<BitDataItem BitOffset="0" TextId="IDT_OPM_CTRL" />
+								<BitDataItem BitOffset="1" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="2" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="3" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="4" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="5" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="6" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="7" TextId="IDT_RESERVED_CTRL" />
+							</DataItem>
+							<DataItem TextId="IDT_PS_CTRL_BYTE2" DataType="Unsigned8" UseAsBits="true">
+								<BitDataItem BitOffset="0" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="1" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="2" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="3" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="4" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="5" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="6" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="7" TextId="IDT_RESERVED_CTRL" />
+							</DataItem>
+							<DataItem DataType="F_MessageTrailer5Byte" TextId="IDT_Output_DataItem_PS_Safety" />
+						</Output>
+					</IOData>
+					<RecordDataList>
+						<F_ParameterRecordDataItem Index="100" F_ParamDescCRC="40365">
+							<F_Check_iPar />
+							<F_SIL DefaultValue="SIL3" AllowedValues="SIL3" Visible="true" Changeable="false" />
+							<F_CRC_Length DefaultValue="4-Byte-CRC" AllowedValues="4-Byte-CRC" Visible="true" Changeable="false" />
+							<F_CRC_Seed AllowedValues="CRC-Seed24/32" Changeable="false" DefaultValue="CRC-Seed24/32" Visible="true"/>
+							<F_Passivation DefaultValue="Device/Module" AllowedValues="Device/Module" Changeable="false" Visible="true"/>
+							<F_Block_ID DefaultValue="1" AllowedValues="1" Visible="true" Changeable="false" />
+							<F_Par_Version />
+							<F_Source_Add AllowedValues="1..65534" Visible="true" Changeable="true" />
+							<F_Dest_Add AllowedValues="1..65534" Visible="true" Changeable="true" />
+							<F_WD_Time DefaultValue="200" AllowedValues="100..2000" Visible="true" Changeable="true" />
+							<F_Par_CRC DefaultValue="44703" Visible="true" />
+							<F_iPar_CRC DefaultValue="0" Visible="true" Changeable="true" />
+						</F_ParameterRecordDataItem>
+					</RecordDataList>
+					<ModuleInfo>
+						<Name TextId="IDT_NAME_PS_T01_4" />
+						<InfoText TextId="IDT_INFO_PS_T01_4" />
+					</ModuleInfo>
+				</SubmoduleItem>
+				<!-- Safety Telegram 2 with 4-byte CRC -->
+				<SubmoduleItem ID="IDS_PS_T02_4" SubmoduleIdentNumber="0x00000004" API="0" MayIssueProcessAlarm="true" PROFIsafeSupported="true">
+					<IOData F_IO_StructureDescCRC="36892">
+						<Input Consistency="All items consistency">
+							<DataItem TextId="IDT_PS_STAT_BYTE0" DataType="Unsigned8" UseAsBits="true">
+								<BitDataItem BitOffset="0" TextId="IDT_SS0_STAT" />
+								<BitDataItem BitOffset="1" TextId="IDT_SS1_STAT" />
+								<BitDataItem BitOffset="2" TextId="IDT_SS2_STAT" />
+								<BitDataItem BitOffset="3" TextId="IDT_VIO_STAT" />
+								<BitDataItem BitOffset="4" TextId="IDT_FLT_STAT" />
+								<BitDataItem BitOffset="5" TextId="IDT_ESS_STAT" />
+								<BitDataItem BitOffset="6" TextId="IDT_ESR_STAT" />
+								<BitDataItem BitOffset="7" TextId="IDT_SGS_STAT" />
+							</DataItem>
+							<DataItem TextId="IDT_PS_STAT_BYTE1" DataType="Unsigned8" UseAsBits="true">
+								<BitDataItem BitOffset="0" TextId="IDT_SGSA_STAT" />
+								<BitDataItem BitOffset="1" TextId="IDT_3PE_STAT" />
+								<BitDataItem BitOffset="2" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="3" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="4" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="5" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="6" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="7" TextId="IDT_RESERVED_STAT" />
+							</DataItem>
+							<DataItem TextId="IDT_PS_STAT_BYTE2" DataType="Unsigned8" UseAsBits="true">
+								<BitDataItem BitOffset="0" TextId="IDT_OPM0_STAT" />
+								<BitDataItem BitOffset="1" TextId="IDT_OPM1_STAT" />
+								<BitDataItem BitOffset="2" TextId="IDT_REM_STAT" />
+								<BitDataItem BitOffset="3" TextId="IDT_ALS0_STAT" />
+								<BitDataItem BitOffset="4" TextId="IDT_ALS1_STAT" />
+								<BitDataItem BitOffset="5" TextId="IDT_RMO_STAT" />
+								<BitDataItem BitOffset="6" TextId="IDT_SHP_STAT" />
+								<BitDataItem BitOffset="7" TextId="IDT_RESERVED_STAT" />
+							</DataItem>
+							<DataItem TextId="IDT_PS_STAT_BYTE3" DataType="Unsigned8" UseAsBits="true">
+								<BitDataItem BitOffset="0" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="1" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="2" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="3" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="4" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="5" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="6" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="7" TextId="IDT_RESERVED_STAT" />
+							</DataItem>
+							<DataItem TextId="IDT_PS_STAT_BYTE4" DataType="Unsigned8" UseAsBits="true">
+								<BitDataItem BitOffset="0" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="1" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="2" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="3" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="4" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="5" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="6" TextId="IDT_RESERVED_STAT" />
+								<BitDataItem BitOffset="7" TextId="IDT_RESERVED_STAT" />
+							</DataItem>
+							<DataItem DataType="F_MessageTrailer5Byte" TextId="IDT_Input_DataItem_PS_Safety" />
+						</Input>
+						<Output Consistency="All items consistency">
+							<DataItem TextId="IDT_PS_CTRL_BYTE0" DataType="Unsigned8" UseAsBits="true">
+								<BitDataItem BitOffset="0" TextId="IDT_ESS_CTRL" />
+								<BitDataItem BitOffset="1" TextId="IDT_SGS_CTRL" />
+								<BitDataItem BitOffset="2" TextId="IDT_RSGS_CTRL" />
+								<BitDataItem BitOffset="3" TextId="IDT_SGSA_CTRL" />
+								<BitDataItem BitOffset="4" TextId="IDT_RSGSA_CTRL" />
+								<BitDataItem BitOffset="5" TextId="IDT_REM_CTRL" />
+								<BitDataItem BitOffset="6" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="7" TextId="IDT_RESERVED_CTRL" />
+							</DataItem>
+							<DataItem TextId="IDT_PS_CTRL_BYTE1" DataType="Unsigned8" UseAsBits="true">
+								<BitDataItem BitOffset="0" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="1" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="2" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="3" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="4" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="5" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="6" TextId="IDT_RESERVED_CTRL" />
+								<BitDataItem BitOffset="7" TextId="IDT_RESERVED_CTRL" />
+							</DataItem>
+							<DataItem DataType="F_MessageTrailer5Byte" TextId="IDT_Output_DataItem_PS_Safety" />
+						</Output>
+					</IOData>
+					<RecordDataList>
+						<F_ParameterRecordDataItem Index="101" F_ParamDescCRC="40365">
+							<F_Check_iPar />
+							<F_SIL DefaultValue="SIL3" AllowedValues="SIL3" Visible="true" Changeable="false" />
+							<F_CRC_Length DefaultValue="4-Byte-CRC" AllowedValues="4-Byte-CRC" Visible="true" Changeable="false" />
+							<F_CRC_Seed AllowedValues="CRC-Seed24/32" Changeable="false" DefaultValue="CRC-Seed24/32" Visible="true"/>
+							<F_Passivation DefaultValue="Device/Module" AllowedValues="Device/Module" Changeable="false" Visible="true"/>
+							<F_Block_ID DefaultValue="1" AllowedValues="1" Visible="true" Changeable="false" />
+							<F_Par_Version />
+							<F_Source_Add AllowedValues="1..65534" Visible="true" Changeable="true" />
+							<F_Dest_Add AllowedValues="1..65534" Visible="true" Changeable="true" />
+							<F_WD_Time DefaultValue="200" AllowedValues="100..2000" Visible="true" Changeable="true" />
+							<F_Par_CRC DefaultValue="44703" Visible="true" />
+							<F_iPar_CRC DefaultValue="0" Visible="true" Changeable="true" />
+						</F_ParameterRecordDataItem>
+					</RecordDataList>
+					<ModuleInfo>
+						<Name TextId="IDT_NAME_PS_T02_4" />
+						<InfoText TextId="IDT_INFO_PS_T02_4" />
+					</ModuleInfo>
+				</SubmoduleItem>
+			</SubmoduleList>
+			<ChannelDiagList>
+				<!--Profisafe-->
+				<ChannelDiagItem ErrorType="64" MaintenanceAlarmState="D">
+					<!--error code 0x40, F-ParamError64-->
+					<Name TextId="IDT_Name_F-ParamError64" />
+				</ChannelDiagItem>
+				<ChannelDiagItem ErrorType="65" MaintenanceAlarmState="D">
+					<!--error code 0x41, F-ParamError65-->
+					<Name TextId="IDT_Name_F-ParamError65" />
+				</ChannelDiagItem>
+				<ChannelDiagItem ErrorType="66" MaintenanceAlarmState="D">
+					<!--error code 0x42, F-ParamError66-->
+					<Name TextId="IDT_Name_F-ParamError66" />
+				</ChannelDiagItem>
+				<ChannelDiagItem ErrorType="67" MaintenanceAlarmState="D">
+					<!--error code 0x43, F-ParamError67-->
+					<Name TextId="IDT_Name_F-ParamError67" />
+				</ChannelDiagItem>
+				<ChannelDiagItem ErrorType="68" MaintenanceAlarmState="D">
+					<!--error code 0x44, F-ParamError68-->
+					<Name TextId="IDT_Name_F-ParamError68" />
+				</ChannelDiagItem>
+				<ChannelDiagItem ErrorType="69" MaintenanceAlarmState="D">
+					<!--error code 0x45, F-ParamError69-->
+					<Name TextId="IDT_Name_F-ParamError69" />
+				</ChannelDiagItem>
+				<ChannelDiagItem ErrorType="70" MaintenanceAlarmState="D">
+					<!--error code 0x46, F-ParamError70-->
+					<Name TextId="IDT_Name_F-ParamError70" />
+				</ChannelDiagItem>
+				<ChannelDiagItem ErrorType="71" MaintenanceAlarmState="D">
+					<!--error code 0x47, F-ParamError71-->
+					<Name TextId="IDT_Name_F-ParamError71" />
+				</ChannelDiagItem>
+				<ChannelDiagItem ErrorType="72" MaintenanceAlarmState="D">
+					<!--error code 0x48, F-ParamError72-->
+					<Name TextId="IDT_Name_F-ParamError72" />
+				</ChannelDiagItem>
+				<ChannelDiagItem ErrorType="73" MaintenanceAlarmState="D">
+					<!--error code 0x49, F-ParamError73-->
+					<Name TextId="IDT_Name_F-ParamError73" />
+				</ChannelDiagItem>
+				<ChannelDiagItem ErrorType="74" MaintenanceAlarmState="D">
+					<!--error code 0x4A, F-ParamError74-->
+					<Name TextId="IDT_Name_F-ParamError74" />
+				</ChannelDiagItem>
+				<ChannelDiagItem ErrorType="75" MaintenanceAlarmState="D">
+					<!--error code 0x4B, F-ParamError75-->
+					<Name TextId="IDT_Name_F-ParamError75" />
+				</ChannelDiagItem>
+				<ChannelDiagItem ErrorType="76" MaintenanceAlarmState="D">
+					<!--error code 0x4C, F-ParamError76-->
+					<Name TextId="IDT_Name_F-ParamError76" />
+				</ChannelDiagItem>
+				<ChannelDiagItem ErrorType="77" MaintenanceAlarmState="D">
+					<!--error code 0x4D, F-ParamError77-->
+					<Name TextId="IDT_Name_F-ParamError77" />
+				</ChannelDiagItem>
+				<ChannelDiagItem ErrorType="78" MaintenanceAlarmState="D">
+					<!--error code 0x4E, F-ParamError78-->
+					<Name TextId="IDT_Name_F-ParamError78" />
+				</ChannelDiagItem>
+				<ChannelDiagItem ErrorType="256">
+					<Name TextId="TOK_Name_ErrorType256" />
+					<Help TextId="TOK_HelpName_ErrorType256" />
+				</ChannelDiagItem>
+				<ChannelDiagItem ErrorType="257">
+					<Name TextId="TOK_Name_ErrorType257" />
+					<Help TextId="TOK_HelpName_ErrorType257" />
+				</ChannelDiagItem>
+				<ChannelDiagItem ErrorType="258">
+					<Name TextId="TOK_Name_ErrorType258" />
+					<Help TextId="TOK_HelpName_ErrorType258" />
+				</ChannelDiagItem>
+			</ChannelDiagList>
+			<GraphicsList>
+				<GraphicItem ID="ID_Graph_1" GraphicFile="GSDML-0361-0001-UR" />
+			</GraphicsList>
+			<ExternalTextList>
+				<PrimaryLanguage>
+					<!--english-->
+					<Text TextId="TOK_DevIdent_InfoText" Value="UR PN IO Device" />
+					<!--DAP - port IO device example-->
+					<Text TextId="TOK_V10" Value="V1.0" />
+					<Text TextId="TOK_ModInfo_InfoTextId_DAP1" Value="UR IO device, for PNIO controller with PDev" />
+					<!--port name-->
+					<Text TextId="TOK_Subslot_8000" Value="X1" />
+					<Text TextId="TOK_Subslot_8001" Value="P1" />
+					<Text TextId="TOK_DAP_InterfaceModule" Value="Interface" />
+					<Text TextId="TOK_Port1" Value="RJ45 10/100 MBit/s" />
+					<!--module name-->
+					<Text TextId="TOK_TextId_Module_URI_State" Value="1_T2O State" />
+					<Text TextId="TOK_TextId_Module_URI_IO" Value="2_T2O IO" />
+					<Text TextId="TOK_TextId_Module_URI_Joints" Value="3_T2O Joints" />
+					<Text TextId="TOK_TextId_Module_URI_TCP" Value="4_T2O TCP" />
+					<Text TextId="TOK_TextId_Module_URI_BIT_REG" Value="5_T2O General Purpose Bit Registers" />
+					<Text TextId="TOK_TextId_Module_URI_INT_REG" Value="6_T2O General Purpose Int Registers" />
+					<Text TextId="TOK_TextId_Module_URI_FLOAT_REG" Value="7_T2O General Purpose Float Registers" />
+					<Text TextId="TOK_TextId_Module_URO_IO" Value="8_O2T Robot IO" />
+					<Text TextId="TOK_TextId_Module_URO_REG1" Value="9_O2T General Purpose Registers 1" />
+					<Text TextId="TOK_TextId_Module_URO_REG2" Value="10_O2T General Purpose Registers 2" />
+					<Text TextId="IDT_NAME_PSM_PROFIsafe" Value="PROFIsafe" />
+					<Text TextId="IDT_INFO_PSM_PROFIsafe" Value="UR PROFIsafe functional Safety" />
+					<Text TextId="IDT_NAME_PSM_MAP" Value="Module Access Point" />
+					<Text TextId="IDT_INFO_PSM_MAP" Value="PROFIsafe Module Access Point Parameter Channel" />
+					<!--module info name-->
+					<Text TextId="TOK_InfoTextId_Module_URI_State" Value="Robot and safety mode state" />
+					<Text TextId="TOK_InfoTextId_Module_URI_IO" Value="Robot electrical interface state" />
+					<Text TextId="TOK_InfoTextId_Module_URI_Joints" Value="Robot joints state" />
+					<Text TextId="TOK_InfoTextId_Module_URI_TCP" Value="Tool Center Point state" />
+					<Text TextId="TOK_InfoTextId_Module_URI_BIT_REG" Value="Read General Purpose Bit Registers" />
+					<Text TextId="TOK_InfoTextId_Module_URI_INT_REG" Value="Read General Purpose Int Registers" />
+					<Text TextId="TOK_InfoTextId_Module_URI_FLOAT_REG" Value="Read General Purpose Float Registers" />
+					<Text TextId="TOK_InfoTextId_Module_URO_IO" Value="Set electrical outputs" />
+					<Text TextId="TOK_InfoTextId_Module_URO_REG1" Value="Write General Purpose Registers 1" />
+					<Text TextId="TOK_InfoTextId_Module_URO_REG2" Value="Write General Purpose Registers 2" />
+					<!--dataitem name-->
+					<Text TextId="TOK_Input_DataItem_1" Value="T2O State" />
+					<Text TextId="TOK_Input_DataItem_2" Value="T2O IO" />
+					<Text TextId="TOK_Input_DataItem_3" Value="T2O Joints" />
+					<Text TextId="TOK_Input_DataItem_4" Value="T2O TCP" />
+					<Text TextId="TOK_Input_DataItem_5" Value="T2O Bit Registers" />
+					<Text TextId="TOK_Input_DataItem_6" Value="T2O Int Registers" />
+					<Text TextId="TOK_Input_DataItem_7" Value="T2O Float Registers" />
+					<Text TextId="TOK_Output_DataItem_1" Value="O2T IO" />
+					<Text TextId="TOK_Output_DataItem_2" Value="O2T Reg 1" />
+					<Text TextId="TOK_Output_DataItem_3" Value="O2T Reg 2" />
+					<Text TextId="IDT_Input_DataItem_PS_Safety" Value="Input 4 bytes Safety" />
+					<Text TextId="IDT_Output_DataItem_PS_Safety" Value="Output 4 bytes Safety" />
+					<!--errortype name-->
+					<!--F errors-->
+					<Text TextId="IDT_Name_F-ParamError64" Value="Mismatch of safety destination address (F_Dest_Add)" />
+					<Text TextId="IDT_Name_F-ParamError65" Value="Safety destination address not valid (F_Dest_Add)" />
+					<Text TextId="IDT_Name_F-ParamError66" Value="Safety source address not valid (F_Source_Add)" />
+					<Text TextId="IDT_Name_F-ParamError67" Value="Safety watchdog time value is 0 ms (F_WD_Time)" />
+					<Text TextId="IDT_Name_F-ParamError68" Value="Parameter &quot;F_SIL&quot; exceeds SIL from specific device application" />
+					<Text TextId="IDT_Name_F-ParamError69" Value="Parameter &quot;F_CRC_Length&quot; does not match the generated values" />
+					<Text TextId="IDT_Name_F-ParamError70" Value="Version of F-Parameter set incorrect" />
+					<Text TextId="IDT_Name_F-ParamError71" Value="CRC1-Fault" />
+					<Text TextId="IDT_Name_F-ParamError72" Value="General F-Parameter Error" />
+					<Text TextId="IDT_Name_F-ParamError73" Value="Save iParameter watchdog exceeded" />
+					<Text TextId="IDT_Name_F-ParamError74" Value="Restore iParameter watchdog time exceeded" />
+					<Text TextId="IDT_Name_F-ParamError75" Value="Inconsistent iParameters (iParCRC error)" />
+					<Text TextId="IDT_Name_F-ParamError76" Value="F_Block_ID not supported" />
+					<Text TextId="IDT_Name_F-ParamError77" Value="Transmission error: data inconsistent (CRC2 error)" />
+					<Text TextId="IDT_Name_F-ParamError78" Value="Transmission error: timeout (F_WD_Time or F_WD_Time_2 elapsed)" />
+					<Text TextId="TOK_Name_ErrorType256" Value="IO Output module cannot be plugged in." />
+					<Text TextId="TOK_HelpName_ErrorType256" Value="Check the robot's installation tab for PROFINET." />
+					<Text TextId="TOK_Name_ErrorType257" Value="Register Output module cannot be plugged in." />
+					<Text TextId="TOK_HelpName_ErrorType257" Value="Check the robot's installation tab for PROFINET." />
+					<Text TextId="TOK_Name_ErrorType258" Value="Input module failed to read data from robot controller." />
+					<Text TextId="TOK_HelpName_ErrorType258" Value="Check the robot's installation tab for PROFINET." />
+					<!--General PROFIsafe-->
+					<Text TextId="IDT_NAME_PS_T01_3" Value="Safety telegram 1 with 3-byte CRC" />
+					<Text TextId="IDT_NAME_PS_T02_3" Value="Safety telegram 2 with 3-byte CRC" />
+					<Text TextId="IDT_NAME_PS_T01_4" Value="Safety telegram 1 with 4-byte CRC" />
+					<Text TextId="IDT_NAME_PS_T02_4" Value="Safety telegram 2 with 4-byte CRC" />
+					<Text TextId="IDT_INFO_PS_T01_3" Value="Safety telegram 1 (3-byte CRC): control/status word" />
+					<Text TextId="IDT_INFO_PS_T02_3" Value="Safety telegram 2 (3-byte CRC): control/status word" />
+					<Text TextId="IDT_INFO_PS_T01_4" Value="Safety telegram 1 (4-byte CRC): control/status word" />
+					<Text TextId="IDT_INFO_PS_T02_4" Value="Safety telegram 2 (4-byte CRC): control/status word" />
+					<Text TextId="IDT_INFO_PS_PRM" Value="PROFIsafe parameter" />
+					<Text TextId="IDT_NAME_PS_PRM" Value="PROFIsafe parameter" />
+					<!--Control word-->
+					<Text TextId="IDT_PS_CTRL_BYTE0" Value="PROFIsafe control word byte 0" />
+					<Text TextId="IDT_PS_CTRL_BYTE1" Value="PROFIsafe control word byte 1" />
+					<Text TextId="IDT_PS_CTRL_BYTE2" Value="PROFIsafe control word byte 2" />
+					<Text TextId="IDT_ESS_CTRL" Value="Assert E-stop" />
+					<Text TextId="IDT_SGS_CTRL" Value="Assert safeguard stop" />
+					<Text TextId="IDT_RSGS_CTRL" Value="Reset safeguard stop" />
+					<Text TextId="IDT_SGSA_CTRL" Value="Assert safeguard stop in automatic mode" />
+					<Text TextId="IDT_RSGSA_CTRL" Value="Reset safeguard stop in automatic mode" />
+					<Text TextId="IDT_REM_CTRL" Value="Assert reduced mode" />
+					<Text TextId="IDT_RESERVED_CTRL" Value="Reserved" />
+					<Text TextId="IDT_OPM_CTRL" Value="Activate automatic operational mode" />
+					<!--Status word-->
+					<Text TextId="IDT_PS_STAT_BYTE0" Value="PROFIsafe status word byte 0" />
+					<Text TextId="IDT_PS_STAT_BYTE1" Value="PROFIsafe status word byte 1" />
+					<Text TextId="IDT_PS_STAT_BYTE2" Value="PROFIsafe status word byte 2" />
+					<Text TextId="IDT_PS_STAT_BYTE3" Value="PROFIsafe status word byte 3" />
+					<Text TextId="IDT_PS_STAT_BYTE4" Value="PROFIsafe status word byte 4" />
+					<Text TextId="IDT_SS0_STAT" Value="Category 0 stop asserted" />
+					<Text TextId="IDT_SS1_STAT" Value="Category 1 stop asserted" />
+					<Text TextId="IDT_SS2_STAT" Value="Category 2 stop asserted" />
+					<Text TextId="IDT_VIO_STAT" Value="Violation asserted" />
+					<Text TextId="IDT_FLT_STAT" Value="Fault asserted" />
+					<Text TextId="IDT_ESS_STAT" Value="Emergency-stop by system asserted" />
+					<Text TextId="IDT_ESR_STAT" Value="Emergency-stop by robot asserted" />
+					<Text TextId="IDT_SGS_STAT" Value="Safeguard stop asserted" />
+					<Text TextId="IDT_SGSA_STAT" Value="Safeguard stop in automatic mode asserted"/>
+					<Text TextId="IDT_3PE_STAT" Value="3PE stop asserted"/>
+					<Text TextId="IDT_RESERVED_STAT" Value="Reserved" />
+					<Text TextId="IDT_OPM0_STAT" Value="Operational mode bit 0" />
+					<Text TextId="IDT_OPM1_STAT" Value="Operational mode bit 1" />
+					<Text TextId="IDT_REM_STAT" Value="Reduced mode limits active" />
+					<Text TextId="IDT_ALS0_STAT" Value="Active limit set bit 0" />
+					<Text TextId="IDT_ALS1_STAT" Value="Active limit set bit 1" />
+					<Text TextId="IDT_RMO_STAT" Value="Robot is moving" />
+					<Text TextId="IDT_SHP_STAT" Value="Robot is at rest in Safe Home Position" />
+					<!---->
+					<Text TextId="IDT_MOD01_Param_Name" Value="iParameter" />
+					<Text TextId="IDT_MOD01_Param_EnableModeSelector" Value="Enable mode selector" />
+				</PrimaryLanguage>
+			</ExternalTextList>
+		</ApplicationProcess>
+	</ProfileBody>
+</ISO15745Profile>

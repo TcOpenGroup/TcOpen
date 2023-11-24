@@ -3,7 +3,10 @@
   <GVL Name="GVL" Id="{abc3d0a5-d666-0fe7-1282-f60d0d14a5bb}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
-	Robot1	:	TcoUrRobotics.TcoUr20_IO_v_1_x_x;
+ 	{attribute addProperty Name "A2"}
+	A2 AT %Q* : ARRAY[0..7] OF BOOL;
+	Robot1	:	TcoUrRobotics.TcoUrCb3_IO_v_3_x_x;
+	Robot2	:	TcoUrRobotics.TcoUrEseries_IO_v_5_x_x;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

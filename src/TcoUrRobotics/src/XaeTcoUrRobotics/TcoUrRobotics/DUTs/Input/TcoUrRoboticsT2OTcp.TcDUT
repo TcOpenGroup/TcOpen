@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="TcoUrRoboticsT2OTcp" Id="{8485adac-95a0-0541-194a-b3e2a998330b}">
+    <Declaration><![CDATA[TYPE TcoUrRoboticsT2OTcp :
+STRUCT
+	{attribute addProperty Name "<#Actual TCP Position#>"}
+	Postition : TcoAbstractions.TcoRoboticsCoordinates;
+	{attribute addProperty Name "<#Actual TCP Velocity#>"}
+	Velocity : TcoAbstractions.TcoRoboticsCoordinates;
+	{attribute addProperty Name "<#Actual TCP Force#>"}
+	Force : TcoAbstractions.TcoRoboticsBasicCoordinates;
+	{attribute addProperty Name "<#Actual TCP Torque#>"}
+	Torque : TcoAbstractions.TcoRoboticsBasicCoordinates;
+	{attribute addProperty Name "<#TCP force scalar [N]#>"}
+	TCP_ForceScalar : REAL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

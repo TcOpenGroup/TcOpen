@@ -42,10 +42,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Ur\Service\TcoUr20_v_1_x_xServiceView.xaml">
+    <Page Update="Cb3\Service\TcoUrCb3_v_3_x_xServiceView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Eseries\TcoUrEseries_v_5_x_xServiceView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
     </Page>
     <Page Update="TcoUrRoboticsBaseServiceView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>

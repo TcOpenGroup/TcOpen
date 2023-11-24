@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="TcoRealToBytes" Id="{481d959a-2884-4e7a-afad-640e0bc6270b}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION TcoRealToBytes
 VAR_INPUT
@@ -26,7 +26,7 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF (inValue <= -EXPT(2, 127)) OR (inValue >= EXPT(2, 127)) THEN
+      <ST><![CDATA[IF (inValue <= -EXPT(2, 128)) OR (inValue >= EXPT(2, 128)) THEN
     outByte0 := 0;
     outByte1 := 0;
     outByte2 := 0;

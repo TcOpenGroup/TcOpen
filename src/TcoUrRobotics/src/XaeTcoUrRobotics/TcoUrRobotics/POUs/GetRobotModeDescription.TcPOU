@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="GetRobotModeDescription" Id="{9e3dc3b7-6cc0-0908-07f4-1a5ecc56bd5a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION GetRobotModeDescription : eTcoUrRoboticsRobotMode
+VAR_INPUT
+	inMode:USINT;
+END_VAR
+VAR
+	retVal: eTcoUrRoboticsRobotMode;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE inMode OF
+    0: retVal := eTcoUrRoboticsRobotMode.DISCONNECTED;
+    1: retVal := eTcoUrRoboticsRobotMode.SAFETY;
+    2: retVal := eTcoUrRoboticsRobotMode.BOOTING;
+    3: retVal := eTcoUrRoboticsRobotMode.POWER_OFF;
+    4: retVal := eTcoUrRoboticsRobotMode.POWER_ON;
+    5: retVal := eTcoUrRoboticsRobotMode.IDLE;
+    6: retVal := eTcoUrRoboticsRobotMode.BACKDRIVE;
+    7: retVal := eTcoUrRoboticsRobotMode.RUNNING;
+	8: retVal:=eTcoUrRoboticsRobotMode.UPDATING_FIRMWARE;
+END_CASE
+GetRobotModeDescription:=retVal;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
