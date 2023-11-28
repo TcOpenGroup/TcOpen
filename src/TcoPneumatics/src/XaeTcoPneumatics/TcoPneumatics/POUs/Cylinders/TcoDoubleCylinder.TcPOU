@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="TcoDoubleCylinder" Id="{d3582c12-c860-0eaa-3a9d-5722503dc127}" SpecialFunc="None">
     <Declaration><![CDATA[{attribute addProperty _moveHomeDefaultName "<#MOVE HOME#>"}
 {attribute addProperty _moveWorkDefaultName "<#MOVE TO WORK#>"}
@@ -70,6 +70,7 @@ END_IF
 SUPER^(inoAtHomePos1 := inoAtHomePos1,inoAtHomePos2 := inoAtHomePos2, inoAtWorkPos1 := inoAtWorkPos1,inoAtWorkPos2 := inoAtWorkPos2, inoToHomePos := inoToHomePos, inoToWorkPos := inoToWorkPos);
 ]]></ST>
     </Implementation>
+    <Folder Name="Suspend" Id="{8f0b80eb-7303-01db-0190-de63d6303685}" />
     <Folder Name="Tasks" Id="{60aa6ba7-e67e-023f-1304-39016a36561e}" />
     <Method Name="AbortMoveHome" Id="{cf7c503f-527c-0336-05d0-5a9f6d728ab9}">
       <Declaration><![CDATA[(*~
@@ -271,7 +272,7 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="SuspendMoveHome" Id="{3aa84ed5-91d2-0f11-1930-a0514293ca17}">
+    <Method Name="SuspendMoveHome" Id="{3aa84ed5-91d2-0f11-1930-a0514293ca17}" FolderPath="Suspend\">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -308,7 +309,60 @@ END_VAR]]></Declaration>
 END_IF]]></ST>
       </Implementation>
     </Method>
-    <Method Name="SuspendMoveWork" Id="{3aa37d48-5017-0f07-0fb5-2874354f9258}">
+    <Method Name="SuspendMoveHomeExpression" Id="{7c03b395-6414-052c-35f1-68a17ac74779}" FolderPath="Suspend\">
+      <Declaration><![CDATA[METHOD SuspendMoveHomeExpression : BOOL
+VAR_INPUT
+		inDisableCondition : BOOL;
+		inMessage:STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (_toHomePos OR _moveHomeDefault.Busy) AND inDisableCondition THEN
+	Messenger.Error(CONCAT('<#Movement suspended due to#> : ' , inMessage));
+	_toHomePos := FALSE;
+	IF(__ISVALIDREF(THIS^.inoToHomePos)) THEN THIS^.inoToHomePos := FALSE; END_IF;
+	
+END_IF;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SuspendMoveHomeInverted" Id="{ec3e08c1-bb7e-0c1a-2638-d69f95238533}" FolderPath="Suspend\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Suspend the movement to home position when the condition is NOT 'true'. Task is still busy
+		</summary>
+		<remarks>			
+				<note type="warning">
+					The call of this method will be effective only when called AFTER the initialization of the instance of given TcoCylinder.
+				</note>
+		</remarks>	
+	</docu>
+~*)
+METHOD SuspendMoveHomeInverted : BOOL
+VAR_IN_OUT
+	(*~
+	<docu>
+		<summary>
+			Condition to abort the movement of the cylinder.
+		</summary>	
+	</docu>
+	~*)
+	inoDisableCondition : BOOL;
+END_VAR
+VAR
+	_signalInfo : TcoSignalInfo;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (_toHomePos OR _moveHomeDefault.Busy) AND NOT inoDisableCondition THEN
+	_signalInfo.GetSignalInfo(SIZEOF(inoDisableCondition), ADR(inoDisableCondition));
+	Messenger.Error(CONCAT('<#Movement suspended due to NOT#> : ' , _signalInfo.SymbolPath));
+	_toHomePos := FALSE;
+	IF(__ISVALIDREF(THIS^.inoToHomePos)) THEN THIS^.inoToHomePos := FALSE; END_IF;
+	
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SuspendMoveWork" Id="{3aa37d48-5017-0f07-0fb5-2874354f9258}" FolderPath="Suspend\">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -339,6 +393,59 @@ END_VAR]]></Declaration>
         <ST><![CDATA[IF (_toWorkPos OR _moveWorkDefault.Busy) AND inoDisableCondition THEN
 	_signalInfo.GetSignalInfo(SIZEOF(inoDisableCondition), ADR(inoDisableCondition));
 	Messenger.Error(CONCAT('<#Movement suspended due to#> : ' , _signalInfo.SymbolPath));
+	_toWorkPos := FALSE;
+	IF(__ISVALIDREF(THIS^.inoToWorkPos)) THEN THIS^.inoToWorkPos := FALSE; END_IF;
+
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SuspendMoveWorkExpression" Id="{3ca9f409-76d6-000b-3a1c-519eb1244a89}" FolderPath="Suspend\">
+      <Declaration><![CDATA[METHOD SuspendMoveWorkExpression : BOOL
+VAR_INPUT
+		inDisableCondition : BOOL;
+		inMessage:STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (_toWorkPos OR _moveWorkDefault.Busy) AND inDisableCondition THEN
+	Messenger.Error(CONCAT('<#Movement suspended due to#> : ' , inMessage));
+	_toWorkPos := FALSE;
+	IF(__ISVALIDREF(THIS^.inoToWorkPos)) THEN THIS^.inoToWorkPos := FALSE; END_IF;
+	
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SuspendMoveWorkInverted" Id="{092cfae4-2a01-0ef4-2d92-0c996cdf02aa}" FolderPath="Suspend\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Suspend the movement to work position when the condition is NOT 'true'. Task is still bussy
+		</summary>
+		<remarks>			
+				<note type="warning">
+					The call of this method will be effective only when called AFTER the initialization of the instance of given TcoCylinder.
+				</note>
+		</remarks>	
+	</docu>
+~*)
+METHOD SuspendMoveWorkInverted : BOOL
+VAR_IN_OUT
+	(*~
+		<docu>
+			<summary>
+				Condition to abort the movement of the cylinder.
+			</summary>	
+		</docu>
+	~*)
+	inoDisableCondition : BOOL;
+END_VAR
+VAR
+	_signalInfo : TcoSignalInfo;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (_toWorkPos OR _moveWorkDefault.Busy) AND NOT inoDisableCondition THEN
+	_signalInfo.GetSignalInfo(SIZEOF(inoDisableCondition), ADR(inoDisableCondition));
+	Messenger.Error(CONCAT('<#Movement suspended due to NOT#> : ' , _signalInfo.SymbolPath));
 	_toWorkPos := FALSE;
 	IF(__ISVALIDREF(THIS^.inoToWorkPos)) THEN THIS^.inoToWorkPos := FALSE; END_IF;
 
