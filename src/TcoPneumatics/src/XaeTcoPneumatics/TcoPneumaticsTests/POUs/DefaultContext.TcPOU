@@ -61,8 +61,8 @@ _wpfDoubleCyclinder(inoAtHomePos1 := IO.A1[0],
 	inoAtHomePos2 := IO.A1[1],
 	inoAtWorkPos1 := IO.A1[2],
 	inoAtWorkPos2 := IO.A1[3],
-	inoToHomePos := IO.A2[0],
-	inoToWorkPos := IO.A2[1]);
+	inoToHomePos := IO.A2[3],
+	inoToWorkPos := IO.A2[4]);
 	
 _wpfDoubleCyclinder.AbortMoveHome(disableSignalHome);
 _wpfDoubleCyclinder.AbortMoveWork(disableSignalWork);
