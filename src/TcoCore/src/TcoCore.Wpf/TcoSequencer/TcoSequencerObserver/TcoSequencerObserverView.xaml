@@ -30,7 +30,7 @@
                 <DataGridTextColumn Header="ID" Binding="{Binding ID}" IsReadOnly="True"></DataGridTextColumn>
                 <DataGridTextColumn Header="Description" Binding="{Binding Description}" IsReadOnly="True"></DataGridTextColumn>
                 <DataGridCheckBoxColumn Header="Enabled" Binding="{Binding Enabled}" IsReadOnly="True"></DataGridCheckBoxColumn>
-                <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="Duration"  Binding="{Binding Duration, StringFormat='hh\\:mm\\:ss\\.fff'}" IsReadOnly="True"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
