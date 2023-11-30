@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="DefaultContext" Id="{9566aeb0-f006-4c52-ace4-7824786d839b}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK DefaultContext EXTENDS TcoCore.TcoContext
 VAR
-	{attribute addProperty _moveHomeDefaultName "<#MOVE HOME a#>"}
-	{attribute addProperty _moveWorkDefaultName "<#MOVE TO WORK a#>"}
+	{attribute addProperty _moveHomeDefaultName "<#MOVE HOME#>"}
+	{attribute addProperty _moveWorkDefaultName "<#MOVE TO WORK#>"}
 	{attribute addProperty _stopDefaultName "<#STOP a#>"}
     _wpfCyclinder : TcoPneumatics.TcoCylinder(THIS^);
-	{attribute addProperty _moveHomeDefaultName "<#MOVE HOME a#>"}
-	{attribute addProperty _moveWorkDefaultName "<#MOVE TO WORK a#>"}
+	{attribute addProperty _moveHomeDefaultName "<#MOVE HOME#>"}
+	{attribute addProperty _moveWorkDefaultName "<#MOVE TO WORK#>"}
 	{attribute addProperty _stopDefaultName "<#STOPDOUBLE#>"}
     _wpfDoubleCyclinder : TcoPneumatics.TcoDoubleCylinder(THIS^);
 	{attribute addProperty NameMoveHomeTask "<#In task#>"}
@@ -50,6 +50,10 @@ _wpfCyclinder.AbortMoveWork(disableSignalWork);
 _wpfCyclinder.SuspendMoveHome(suspendSignalHome);
 _wpfCyclinder.SuspendMoveWork(suspendSignalWork);
 
+//optional blocking options
+//_wpfCyclinder.SuspendMoveWorkInverted(suspendSignalWork);	// is basicaly option how to reproduce exaxt symbol and Not condition
+//_wpfCyclinder.SuspendMoveWorkExpression(NOT suspendSignalWork,'Your own msg');	// is basicaly option how to reproduce exaxt symbol and Not condition
+
 _wpfCyclinder.Refill(T#200MS);
 
 _wpfDoubleCyclinder.Service();
@@ -57,14 +61,18 @@ _wpfDoubleCyclinder(inoAtHomePos1 := IO.A1[0],
 	inoAtHomePos2 := IO.A1[1],
 	inoAtWorkPos1 := IO.A1[2],
 	inoAtWorkPos2 := IO.A1[3],
-	inoToHomePos := IO.A2[0],
-	inoToWorkPos := IO.A2[1]);
+	inoToHomePos := IO.A2[3],
+	inoToWorkPos := IO.A2[4]);
 	
 _wpfDoubleCyclinder.AbortMoveHome(disableSignalHome);
 _wpfDoubleCyclinder.AbortMoveWork(disableSignalWork);
 
 _wpfDoubleCyclinder.SuspendMoveHome(suspendSignalHome);
 _wpfDoubleCyclinder.SuspendMoveWork(suspendSignalWork);
+
+//optional blocking options
+//_wpfDoubleCyclinder.SuspendMoveWorkInverted(suspendSignalWork);	// is basicaly option how to reproduce exaxt symbol and Not condition
+//_wpfDoubleCyclinder.SuspendMoveWorkExpression(NOT suspendSignalWork,'Your own msg');	// is basicaly option how to reproduce exaxt symbol and Not condition
 
 _wpfDoubleCyclinder.Refill(T#200MS);
 ]]></ST>

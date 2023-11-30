@@ -256,5 +256,187 @@ namespace TcoPneumaticsTests
             }
         }
 
+        [Test]
+        [Timeout(10000)]
+        [Order((int)eCyclinderTests.SuspendHome)]
+        [TestCase(true)]
+        [TestCase(false)]
+        public void Suspend_move_home_action_disabled(bool suspendSignal)
+        {
+            sut._sut._messenger.Clear();
+            var timeToAlarm = new System.TimeSpan(0, 0, 0, 0, 50);
+            sut._sut._config.TimeToReachHomePosition.Synchron = timeToAlarm;
+
+            sut.ExecuteProbeRun(2, (int)eCyclinderTests.StopMovement);
+
+            sut.ExecuteProbeRun(2, (int)eCyclinderTests.MoveHomeMoving);
+
+            Assert.AreEqual(false, sut._atHomeSignal.Synchron);
+            Assert.AreEqual(true, sut._moveHomeSignal.Synchron);
+
+            sut._suspendSignal.Synchron = suspendSignal;
+            sut.ExecuteProbeRun(1, (int)eCyclinderTests.SuspendHome);
+
+            Assert.AreEqual(false, sut._atHomeSignal.Synchron);
+            Assert.AreEqual(!suspendSignal, sut._moveHomeSignal.Synchron);
+
+            if (suspendSignal)
+            {
+                Assert.AreEqual("Movement suspended due to : MAIN._doubleCylinderTests._suspendSignal", sut._sut._messenger._mime.Text.Synchron);
+            }
+        }
+
+        [Test]
+        [Timeout(10000)]
+        [Order((int)eCyclinderTests.SuspendWork)]
+        [TestCase(true)]
+        [TestCase(false)]
+        public void Suspend_move_work_action_disabled(bool suspendSignal)
+        {
+            sut._sut._messenger.Clear();
+            var timeToAlarm = new System.TimeSpan(0, 0, 0, 0, 50);
+            sut._sut._config.TimeToReachWorkPosition.Synchron = timeToAlarm;
+
+            sut.ExecuteProbeRun(2, (int)eCyclinderTests.StopMovement);
+
+            sut.ExecuteProbeRun(2, (int)eCyclinderTests.MoveWorkMoving);
+
+            Assert.AreEqual(false, sut._atWorkSignal.Synchron);
+            Assert.AreEqual(true, sut._moveWorkSignal.Synchron);
+
+            sut._suspendSignal.Synchron = suspendSignal;
+            sut.ExecuteProbeRun(1, (int)eCyclinderTests.SuspendWork);
+
+            Assert.AreEqual(false, sut._atWorkSignal.Synchron);
+            Assert.AreEqual(!suspendSignal, sut._moveWorkSignal.Synchron);
+
+            if (suspendSignal)
+            {
+                Assert.AreEqual("Movement suspended due to : MAIN._doubleCylinderTests._suspendSignal", sut._sut._messenger._mime.Text.Synchron);
+            }
+        }
+
+
+
+        [Test]
+        [Timeout(10000)]
+        [Order((int)eCyclinderTests.SuspendHomeInverted)]
+        [TestCase(true)]
+        [TestCase(false)]
+        public void Suspend_move_home_inverted_action_disabled(bool suspendSignal)
+        {
+            sut._sut._messenger.Clear();
+            var timeToAlarm = new System.TimeSpan(0, 0, 0, 0, 50);
+            sut._sut._config.TimeToReachHomePosition.Synchron = timeToAlarm;
+
+            sut.ExecuteProbeRun(2, (int)eCyclinderTests.StopMovement);
+
+            sut.ExecuteProbeRun(2, (int)eCyclinderTests.MoveHomeMoving);
+
+            Assert.AreEqual(false, sut._atHomeSignal.Synchron);
+            Assert.AreEqual(true, sut._moveHomeSignal.Synchron);
+
+            sut._suspendSignal.Synchron = suspendSignal;
+            sut.ExecuteProbeRun(1, (int)eCyclinderTests.SuspendHomeInverted);
+
+            Assert.AreEqual(false, sut._atHomeSignal.Synchron);
+            Assert.AreEqual(suspendSignal, sut._moveHomeSignal.Synchron);
+
+            if (!suspendSignal)
+            {
+                Assert.AreEqual("Movement suspended due to NOT : MAIN._doubleCylinderTests._suspendSignal", sut._sut._messenger._mime.Text.Synchron);
+            }
+        }
+
+        [Test]
+        [Timeout(10000)]
+        [Order((int)eCyclinderTests.SuspendWorkInverted)]
+        [TestCase(true)]
+        [TestCase(false)]
+        public void Suspend_move_work_inverted_action_disabled(bool suspendSignal)
+        {
+            sut._sut._messenger.Clear();
+            var timeToAlarm = new System.TimeSpan(0, 0, 0, 0, 50);
+            sut._sut._config.TimeToReachWorkPosition.Synchron = timeToAlarm;
+
+            sut.ExecuteProbeRun(2, (int)eCyclinderTests.StopMovement);
+
+            sut.ExecuteProbeRun(2, (int)eCyclinderTests.MoveWorkMoving);
+
+            Assert.AreEqual(false, sut._atWorkSignal.Synchron);
+            Assert.AreEqual(true, sut._moveWorkSignal.Synchron);
+
+            sut._suspendSignal.Synchron = suspendSignal;
+            sut.ExecuteProbeRun(1, (int)eCyclinderTests.SuspendWorkInverted);
+
+            Assert.AreEqual(false, sut._atWorkSignal.Synchron);
+            Assert.AreEqual(suspendSignal, sut._moveWorkSignal.Synchron);
+
+            if (!suspendSignal)
+            {
+                Assert.AreEqual("Movement suspended due to NOT : MAIN._doubleCylinderTests._suspendSignal", sut._sut._messenger._mime.Text.Synchron);
+            }
+        }
+
+        [Test]
+        [Timeout(10000)]
+        [Order((int)eCyclinderTests.SuspendHomeExpression)]
+        [TestCase(true, "SUSPEND")]
+        [TestCase(false, "SUSPEND")]
+        public void Suspend_move_home_expression_action_disabled(bool suspendSignal, string msg)
+        {
+            sut._sut._messenger.Clear();
+            var timeToAlarm = new System.TimeSpan(0, 0, 0, 0, 50);
+            sut._sut._config.TimeToReachHomePosition.Synchron = timeToAlarm;
+
+            sut.ExecuteProbeRun(2, (int)eCyclinderTests.StopMovement);
+
+            sut.ExecuteProbeRun(2, (int)eCyclinderTests.MoveHomeMoving);
+            Assert.AreEqual(false, sut._atHomeSignal.Synchron);
+            Assert.AreEqual(true, sut._moveHomeSignal.Synchron);
+
+            sut._expresionMessage.Synchron = msg;
+            sut._suspendSignal.Synchron = suspendSignal;
+            sut.ExecuteProbeRun(1, (int)eCyclinderTests.SuspendHomeExpression);
+
+            Assert.AreEqual(false, sut._atHomeSignal.Synchron);
+            Assert.AreEqual(!suspendSignal, sut._moveHomeSignal.Synchron);
+
+            if (suspendSignal)
+            {
+                Assert.AreEqual("Movement suspended due to : " + msg, sut._sut._messenger._mime.Text.Synchron);
+            }
+        }
+
+        [Test]
+        [Timeout(10000)]
+        [Order((int)eCyclinderTests.SuspendWorkExpression)]
+        [TestCase(true, "SUSPEND")]
+        [TestCase(false, "SUSPEND")]
+        public void Suspend_move_work_expression_action_disabled(bool suspendSignal, string msg)
+        {
+            sut._sut._messenger.Clear();
+            var timeToAlarm = new System.TimeSpan(0, 0, 0, 0, 50);
+            sut._sut._config.TimeToReachWorkPosition.Synchron = timeToAlarm;
+
+            sut.ExecuteProbeRun(2, (int)eCyclinderTests.StopMovement);
+
+            sut.ExecuteProbeRun(2, (int)eCyclinderTests.MoveWorkMoving);
+
+            Assert.AreEqual(false, sut._atWorkSignal.Synchron);
+            Assert.AreEqual(true, sut._moveWorkSignal.Synchron);
+
+            sut._expresionMessage.Synchron = msg;
+            sut._suspendSignal.Synchron = suspendSignal;
+            sut.ExecuteProbeRun(1, (int)eCyclinderTests.SuspendWorkExpression);
+
+            Assert.AreEqual(false, sut._atWorkSignal.Synchron);
+            Assert.AreEqual(!suspendSignal, sut._moveWorkSignal.Synchron);
+
+            if (suspendSignal)
+            {
+                Assert.AreEqual("Movement suspended due to : " + msg, sut._sut._messenger._mime.Text.Synchron);
+            }
+        }
     }
 }

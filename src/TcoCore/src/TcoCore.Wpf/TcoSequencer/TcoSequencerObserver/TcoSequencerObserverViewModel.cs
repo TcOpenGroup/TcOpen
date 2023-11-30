@@ -19,7 +19,8 @@ namespace TcoCore
             Steps = Observer._steps.Take(Observer._stepsCount.LastValue).Select(p => 
                         { 
                             var plain = p.CreatePlainerType(); 
-                            plain.CopyCyclicToPlain(p); 
+                            plain.CopyCyclicToPlain(p);
+                            plain.Description = p.Description.Cyclic;
                             plain.IsActive = plain.Order == this.Observer._currentStepOrder.LastValue; 
                             return plain; 
                         });           

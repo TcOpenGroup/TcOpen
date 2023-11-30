@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="DoubleCylinderTestContext" Id="{67892a9f-aa9e-0430-052a-79d39f05e1de}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK DoubleCylinderTestContext EXTENDS TcoCore._internals_TcoContext
 VAR
@@ -18,10 +18,9 @@ VAR
 	_moveHomeDone	: BOOL;
 	_moveWorkDone : BOOL;	
 	_disableSignal : BOOL;
+	_suspendSignal : BOOL;
 	
-	_moveHomeDoubleDone	: BOOL;
-	_moveWorkDoubleDone : BOOL;	
-	_disableDoubleSignal : BOOL;
+	_expresionMessage : STRING;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -68,7 +67,19 @@ CASE _testId OF
 	eCyclinderTests.DisableHome:
         _sut.AbortMoveHome(_disableSignal);
 	eCyclinderTests.DisableWork:
-        _sut.AbortMoveWork(_disableSignal);		
+        _sut.AbortMoveWork(_disableSignal);	
+	eCyclinderTests.SuspendHome:
+        _sut.SuspendMoveHome(_suspendSignal);
+	eCyclinderTests.SuspendWork:
+        _sut.SuspendMoveWork(_suspendSignal);
+	eCyclinderTests.SuspendHomeInverted:
+        _sut.SuspendMoveHomeInverted(_suspendSignal);
+	eCyclinderTests.SuspendWorkInverted:
+        _sut.SuspendMoveWorkInverted(_suspendSignal);	
+	eCyclinderTests.SuspendHomeExpression:
+        _sut.SuspendMoveHomeExpression(_suspendSignal,_expresionMessage);
+	eCyclinderTests.SuspendWorkExpression:
+        _sut.SuspendMoveWorkExpression(_suspendSignal,_expresionMessage);			
 END_CASE]]></ST>
       </Implementation>
     </Method>
