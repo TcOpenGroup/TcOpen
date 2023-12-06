@@ -36,7 +36,7 @@
                     <materialdesign:PackIcon Kind="CheckBox"  Foreground="{StaticResource Notification}"  VerticalAlignment="Center"/>
                     <TextBlock  Text="Homed"  Foreground="{StaticResource Notification}"/>
                 </WrapPanel>
-                <WrapPanel  DataContext="{Binding _axisStatus.Homed}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=false}" Margin=" 5,0">
+                <WrapPanel  DataContext="{Binding _axisStatus.Homed}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}" Margin=" 5,0">
                     <materialdesign:PackIcon Kind="CheckBox"  Foreground="{StaticResource Warning}"  VerticalAlignment="Center"/>
                     <TextBlock  Text="Not Homed!"  Foreground="{StaticResource Warning}"/>
                 </WrapPanel>

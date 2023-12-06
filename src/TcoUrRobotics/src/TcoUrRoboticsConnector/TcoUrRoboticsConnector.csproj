@@ -37,6 +37,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="_meta\version.info" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="_meta\TcoUrRobotics.library" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="_meta\TcoUrRobotics.json" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Localizations.Designer.cs">
