@@ -187,6 +187,17 @@ PROPERTY Config : REFERENCE TO TcoMitsubishiRobotics_Config_v_1_x_x]]></Declarat
         </Implementation>
       </Get>
     </Property>
+    <Property Name="Control" Id="{42640567-f527-0ebc-0ee7-8c739433c3ec}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Control : REFERENCE TO TcoMitsubishiRobotics_Control_v_1_x_x]]></Declaration>
+      <Get Name="Get" Id="{fe867da0-00ec-0bb3-33ee-f01057c8dc56}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Control REF= _control;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="FB_init" Id="{38bfdeba-6232-0954-0701-387a681e834f}">
       <Declaration><![CDATA[METHOD FB_init : BOOL
 VAR_INPUT

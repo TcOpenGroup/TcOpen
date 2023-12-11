@@ -184,6 +184,17 @@ PROPERTY Config : REFERENCE TO TcoAbbRobotics_Config_v_1_x_x]]></Declaration>
         </Implementation>
       </Get>
     </Property>
+    <Property Name="Control" Id="{17acc0e5-2533-08c0-15cf-e005baee4a02}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Control : REFERENCE TO TcoAbbRobotics_Control_v_1_x_x]]></Declaration>
+      <Get Name="Get" Id="{ab4eb822-d0f8-0dcf-28c6-9c66791555b8}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Control REF= _control;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="FB_init" Id="{976c42cc-f2ca-074f-231e-6e359f8ccf77}">
       <Declaration><![CDATA[METHOD FB_init : BOOL
 VAR_INPUT

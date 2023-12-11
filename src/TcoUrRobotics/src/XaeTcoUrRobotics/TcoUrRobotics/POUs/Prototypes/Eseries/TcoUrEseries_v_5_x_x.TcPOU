@@ -189,6 +189,17 @@ PROPERTY Config : REFERENCE TO TcoUrRobotics_Config_v_1_x_x]]></Declaration>
         </Implementation>
       </Get>
     </Property>
+    <Property Name="Control" Id="{c61e88bb-76a4-05e3-2d2f-4542343a64ee}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Control : REFERENCE TO TcoUrRobotics_Control_v_1_x_x]]></Declaration>
+      <Get Name="Get" Id="{0f5bc537-2e44-0d9d-25ef-cdb45d89ef34}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Control REF= _control;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="PowerOnPulseTask" Id="{8d03f1a8-76fd-0d7a-21e2-2233b15b3e92}" FolderPath="Task\">
       <Declaration><![CDATA[PROPERTY PowerOnPulseTask : REFERENCE TO  TcoCore.TcoTask]]></Declaration>
       <Get Name="Get" Id="{8795bdfe-5f17-0b4e-0481-42c8eb2d1e02}">
