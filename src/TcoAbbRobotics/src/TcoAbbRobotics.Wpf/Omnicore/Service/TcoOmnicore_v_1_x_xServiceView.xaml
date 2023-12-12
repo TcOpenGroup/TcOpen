@@ -15,7 +15,9 @@
     </d:UserControl.DataContext>
 
     <StackPanel Grid.ColumnSpan="2" Orientation="Vertical">
-        <TextBlock DataContext="{Binding Component}"  Margin="5" Style="{StaticResource MaterialDesignBody1TextBlock}" Visibility="{Binding Component._status.State.Error.Cyclic ,Converter={vortex:BooleanToVisibilityConverter }}"
+
+        <TextBlock DataContext="{Binding Component}"  Margin="5" Style="{StaticResource MaterialDesignBody1TextBlock}" Visibility="{Binding _status.State.Error.Cyclic ,Converter={vortex:BooleanToVisibilityConverter }}"
+
                                 Foreground="{StaticResource OnErrors}" Background="{StaticResource Errors}" TextWrapping="WrapWithOverflow" Text="{Binding _status.State.EventId.Cyclic, Converter={local:TcoOmnicore_v_1_x_xEventsDescriptionConverter}}"></TextBlock>
 
         <local:TcoAbbRoboticsBaseServiceView DataContext="{Binding }"></local:TcoAbbRoboticsBaseServiceView>
