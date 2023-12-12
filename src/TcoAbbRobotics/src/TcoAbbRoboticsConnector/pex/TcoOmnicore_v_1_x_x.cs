@@ -30,8 +30,8 @@ namespace TcoAbbRobotics
                 uint errorCode;
 
                 UInt32.TryParse(numberFromString, out errorCode);
-                if (ControllerEvents.Ids.ContainsKey(errorCode))
-                    additionalInfo = ControllerEvents.Ids.Where(key => key.Key == errorCode).FirstOrDefault().Value;
+                if (TcoOmnicoreControlerEvents_v_1_x_x.Ids.ContainsKey(errorCode))
+                    additionalInfo = TcoOmnicoreControlerEvents_v_1_x_x.Ids.Where(key => key.Key == errorCode).FirstOrDefault().Value;
 
 
                 return additionalInfo;

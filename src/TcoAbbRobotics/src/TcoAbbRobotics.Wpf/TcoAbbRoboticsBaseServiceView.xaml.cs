@@ -37,37 +37,5 @@ namespace TcoAbbRobotics
 
     }
 
-    public class EventIdToDescriptionConverter : MarkupExtension, IValueConverter
-    {
-
-
-
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            try
-            {
-                uint errorId = (uint)value;
-                return ControllerEvents.Ids.ContainsKey(errorId) ? ControllerEvents.Ids[errorId] : "No error description available.";
-            }
-            catch (Exception)
-            {
-                throw;
-                // swallow
-            }
-
-            return string.Empty;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return null;
-        }
-
-        public override object ProvideValue(IServiceProvider serviceProvider)
-        {
-            return this;
-        }
-    }
-
 
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Vortex.Connector;
 
 namespace TcoAbbRobotics
 {
@@ -30,14 +31,22 @@ namespace TcoAbbRobotics
                 uint errorCode;
 
                 UInt32.TryParse(numberFromString, out errorCode);
-                if (ControllerEvents.Ids.ContainsKey(errorCode))
-                    additionalInfo = ControllerEvents.Ids.Where(key => key.Key == errorCode).FirstOrDefault().Value;
-            
+                if (TcoIrc5ControllerEvents_v_1_x_x.Ids.ContainsKey(errorCode))
+                    additionalInfo = TcoIrc5ControllerEvents_v_1_x_x.Ids.Where(key => key.Key == errorCode).FirstOrDefault().Value;
+
 
                 return additionalInfo;
 
             }
         }
+
+
+       
+
+
+
+
+
     }
     
 }
