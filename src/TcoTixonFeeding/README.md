@@ -2,7 +2,10 @@
 
 ## Introduction
 
-The **TcoTixonFeeding** is a set of libraries that cover two product platforms in ABB's manufacturing portfolio: the **IRC5** and the **Omnicore** platform." for the target PLC platform [Twincat](https://www.beckhoff.com/en-en/products/automation/twincat/twincat-3-build-4024/) and [TcOpen](https://github.com/TcOpenGroup/TcOpen#readme) framework.
+The **TcoTixonFeeding** is a set of software components that cover 5 products in MTS's manufacturing portfolio: the **Tixon Step**, **Tixon Vibro**, **Tixon Pick Step**, **Tixon Pick Vibro** and the **Tixon Pick Vibro Basic** which is suitable also for non-Tixon solutions.
+All products can be optionally equipped with a **HOPPER** conveyor that serves additional supply of feeding components.
+
+All of these are for the target PLC platform [Twincat](https://www.beckhoff.com/en-en/products/automation/twincat/twincat-3-build-4024/) and [TcOpen](https://github.com/TcOpenGroup/TcOpen#readme) framework.
 
 The package consists of a PLC library providing control logic and its .NET twin counterpart aimed at the visualization part.
 
@@ -10,7 +13,255 @@ The package consists of a PLC library providing control logic and its .NET twin 
 
 **Check general prerequisites for TcOpen [here](https://github.com/TcOpenGroup/TcOpen#prerequisites).**
 
- ## TcoTixonFeeding
+## Tixon Step
+![](assets/TixonStep_side.png)
+
+### Tixon Step - Inputs
+| Input	| Name |
+| ----- | ------- |
+| I1	| Tixon controller in auto |
+| I2	| Feeder has components |
+| I3	| Separator in home position |
+| I4	| Filling sensor |
+| I5	| Separator present |
+| I6	| Steper in home position |
+| I7	| Steper in work position |
+| I8	| Component out of box |
+
+### Tixon Step - Outputs
+| Output| Name |
+| ----- | ------- |
+| Q1	| Feeding A |
+| Q2	| Separe component |
+| Q3	| Blow |
+| Q4	| Red Led feeder |
+| Q5	| Green led feeder |
+| Q6	| Hopper |
+| Q7	| Steper valve |
+| Q8	| Shot component |
+
+### Tixon Step - Config
+| Variable Name					| Type	| Default value |
+| ----------------------------- | ----- | ------- | 
+| BlinkTime						| TIME	| T#500MS |
+| FeederEmptyTime				| TIME	| T#5S |
+| BufferEmptyTime				| TIME	| T#1S |
+| BufferFullTime				| TIME	| T#1S |
+| BufferBlowStartTime			| TIME	| T#300MS |
+| BufferIdleTime				| TIME	| T#5S |
+| BufferBlowFullTime			| TIME	| T#1S |
+| BufferBlowActive				| BOOL	| TRUE |
+| TimeToComponentInSeparator	| TIME	| T#300MS |
+| TimeToComponentOutSeparator	| TIME	| T#1S |
+| HopperActive					| BOOL	| FALSE |
+| TimeToHopperStart				| TIME	| T#5S |
+| TimeToHopperRun				| TIME	| T#30S |
+| SteperInWorkTime				| TIME	| T#1S |
+| SteperInHomeTime				| TIME	| T#1S |
+| ErrorTimeSeparator			| TIME	| T#0S |
+| ErrorTimeBuffer				| TIME	| T#0S |
+| ErrorTimeStepper				| TIME	| T#0S |
+| ErrorTimeHopper				| TIME	| T#0S |
+
+---
+
+## Tixon Vibro
+![](assets/TixonVibro_side_signals.png)
+
+### Tixon Vibro - Inputs
+| Input	| Name |
+| ----- | ------- |
+| I1	| Tixon controller in auto |
+| I2	| Feeder has components |
+| I3	| Separator in home position |
+| I4	| Filling sensor |
+| I5	| Separator present |
+| I6	| Component out of box |
+
+### Tixon Vibro - Outputs
+| Output| Name |
+| ----- | ------- |
+| Q1	| Feeding A |
+| Q2	| Separe component |
+| Q3	| Blow |
+| Q4	| Red Led feeder |
+| Q5	| Green led feeder |
+| Q6	| Hopper |
+| Q7	| Shot component |
+
+### Tixon Vibro - Config
+| Variable Name					| Type	| Default value |
+| ----------------------------- | ----- | ------- | 
+| BlinkTime						| TIME	| T#500MS |
+| FeederEmptyTime				| TIME	| T#5S |
+| BufferEmptyTime				| TIME	| T#1S |
+| BufferFullTime				| TIME	| T#1S |
+| BufferBlowStartTime			| TIME	| T#300MS |
+| BufferIdleTime				| TIME	| T#5S |
+| BufferBlowFullTime			| TIME	| T#1S |
+| BufferBlowActive				| BOOL	| TRUE |
+| TimeToComponentInSeparator	| TIME	| T#300MS |
+| TimeToComponentOutSeparator	| TIME	| T#1S |
+| HopperActive					| BOOL	| FALSE |
+| TimeToHopperStart				| TIME	| T#5S |
+| TimeToHopperRun				| TIME	| T#30S |
+| ErrorTimeSeparator			| TIME	| T#0S |
+| ErrorTimeBuffer				| TIME	| T#0S |
+| ErrorTimeHopper				| TIME	| T#0S |
+
+---
+
+## Tixon Pick Step
+![](assets/TixonPickStep_side.png)
+
+### Tixon Pick Step - Inputs
+| Input	| Name |
+| ----- | ------- |
+| I1	| Tixon controller in auto |
+| I2	| Feeder has components |
+| I3	| Separator in home position |
+| I4	| Filling sensor |
+| I5	| Separator present |
+| I6	| Separator in work position |
+| I7	| Stepper in home position |
+| I8	| Stepper in work position |
+| 		| InPickZone |
+
+
+### Tixon Pick Step - Outputs
+| Output| Name |
+| ----- | ------- |
+| Q1	| Feeding A |
+| Q2	| Separe component |
+| Q3	| Blow |
+| Q4	| Red Led feeder |
+| Q5	| Green led feeder |
+| Q6	| Hopper |
+| Q7	| Steper valve |
+
+### Tixon Pick Step - Config
+| Variable Name					| Type	| Default value |
+| ----------------------------- | ----- | ------- | 
+| BlinkTime						| TIME	| T#500MS |
+| FeederEmptyTime				| TIME	| T#5S |
+| BufferEmptyTime				| TIME	| T#1S |
+| BufferFullTime				| TIME	| T#1S |
+| BufferBlowStartTime			| TIME	| T#300MS |
+| BufferIdleTime				| TIME	| T#5S |
+| BufferBlowFullTime			| TIME	| T#1S |
+| BufferBlowActive				| BOOL	| TRUE |
+| TimeToComponentInSeparator	| TIME	| T#300MS |
+| TimeToComponentOutSeparator	| TIME	| T#1S |
+| HopperActive					| BOOL	| FALSE |
+| TimeToHopperStart				| TIME	| T#5S |
+| TimeToHopperRun				| TIME	| T#30S |
+| SeparatorActive				| BOOL	| TRUE |
+| SteperInWorkTime				| TIME	| T#1S |
+| SteperInHomeTime				| TIME	| T#1S |
+| ErrorTimeSeparator			| TIME	| T#0S |
+| ErrorTimeBuffer				| TIME	| T#0S |
+| ErrorTimeStepper				| TIME	| T#0S |
+| ErrorTimeHopper				| TIME	| T#0S |
+
+---
+
+## Tixon Pick Vibro
+![](assets/TixonPickVibro_side.png)
+
+### Tixon Pick Vibro - Inputs
+| Input	| Name |
+| ----- | ------- |
+| I1	| Tixon controller in auto |
+| I2	| Feeder has components |
+| I3	| Separator in home position |
+| I4	| Filling sensor |
+| I5	| Separator present |
+| I6	| Separator in work position |
+| 		| InPickZone |
+
+
+### Tixon Pick Vibro - Outputs
+| Output| Name |
+| ----- | ------- |
+| Q1	| Feeding A |
+| Q2	| Separe component |
+| Q3	| Blow |
+| Q4	| Red Led feeder |
+| Q5	| Green led feeder |
+| Q6	| Hopper |
+| Q7	| Feeding B |
+| Q8	| Blow B |
+
+### Tixon Pick Vibro - Config
+| Variable Name					| Type	| Default value |
+| ----------------------------- | ----- | ------- | 
+| BlinkTime						| TIME	| T#500MS |
+| FeederEmptyTime				| TIME	| T#5S |
+| BufferEmptyTime				| TIME	| T#1S |
+| BufferFullTime				| TIME	| T#1S |
+| BufferBlowStartTime			| TIME	| T#300MS |
+| BufferIdleTime				| TIME	| T#5S |
+| BufferBlowFullTime			| TIME	| T#1S |
+| BufferBlowActive				| BOOL	| TRUE |
+| TimeToComponentInSeparator	| TIME	| T#300MS |
+| TimeToComponentOutSeparator	| TIME	| T#1S |
+| HopperActive					| BOOL	| FALSE |
+| TimeToHopperStart				| TIME	| T#5S |
+| TimeToHopperRun				| TIME	| T#30S |
+| SeparatorActive				| BOOL	| TRUE |
+| FeederBlowBStartTime			| TIME	| T#1S |
+| FeederBlowBFullTime			| TIME	| T#1S |
+| FeederBlowBActive				| BOOL	| FALSE |
+| ErrorTimeSeparator			| TIME	| T#0S |
+| ErrorTimeBuffer				| TIME	| T#0S |
+| ErrorTimeHopper				| TIME	| T#0S |
+
+---
+
+## Tixon Pick Vibro Basic
+TODO: add picture
+
+### Tixon Pick Vibro Basic - Inputs
+| Input	| Name |
+| ----- | ------- |
+| I1	| Tixon controller in auto |
+| I2	| Feeder has components |
+| I3	| Separator in home position |
+| *I4*	| *FILLING SENSOR NOT USED*  |
+| I5	| Separator present |
+| I6	| Separator in work position |
+| 		| InPickZone |
+
+### Tixon Pick Vibro Basic - Outputs
+| Output| Name |
+| ----- | ------- |
+| Q1	| Feeding A |
+| Q2	| Separe component |
+| Q3	| Blow |
+| Q4	| Red Led feeder |
+| Q5	| Green led feeder |
+| Q6	| Hopper |
+
+### Tixon Pick Vibro Basic - Config
+| Variable Name					| Type	| Default value |
+| ----------------------------- | ----- | ------- | 
+| BlinkTime						| TIME	| T#500MS |
+| FeederEmptyTime				| TIME	| T#5S |
+| BufferEmptyTime				| TIME	| T#1S |
+| BufferFullTime				| TIME	| T#1S |
+| BufferBlowStartTime			| TIME	| T#300MS |
+| BufferIdleTime				| TIME	| T#5S |
+| BufferBlowFullTime			| TIME	| T#1S |
+| BufferBlowActive				| BOOL	| TRUE |
+| TimeToComponentInSeparator	| TIME	| T#300MS |
+| TimeToComponentOutSeparator	| TIME	| T#1S |
+| HopperActive					| BOOL	| FALSE |
+| TimeToHopperStart				| TIME	| T#5S |
+| TimeToHopperRun				| TIME	| T#30S |
+| SeparatorActive				| BOOL	| TRUE |
+| ErrorTimeSeparator			| TIME	| T#0S |
+| ErrorTimeHopper				| TIME	| T#0S |
+
 ### PLC enviroment
 --- 
 #### **_Preconditions:_** The **`gsdml`** file(s) should be copied into the subfolder ..\Config\Io\EtherCat\ of the TwinCAT3 instalation folder, before opening Visual Studio. The Profinet interface of the slave device is activated. The file depends on manufacturer of drive. Robot settings needs to by done in settings   by RobotStudio sfotware by ABB or directly via robot teach pendant. 
