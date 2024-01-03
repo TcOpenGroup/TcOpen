@@ -38,6 +38,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Analog\TcoAiAny\Service\TcoAiAnyServiceView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
     <Page Update="Analog\TcoAo\Service\TcoAoServiceView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>

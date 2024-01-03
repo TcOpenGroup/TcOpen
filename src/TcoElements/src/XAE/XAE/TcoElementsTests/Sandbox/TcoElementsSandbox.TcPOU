@@ -12,6 +12,10 @@ VAR
 	
 	{attribute addProperty Name "Analogue input"}
 	_ai : TcoElements.TcoAi(THIS^);
+	
+	
+	{attribute addProperty Name "Analogue input Any"}
+	_aiAnyType : TcoElements.TcoAiAny(THIS^);
 	{attribute addProperty Name "Analogue output"}
 	_ao : TcoElements.TcoAo(THIS^);
 	_aiSignal : DINT;
@@ -32,16 +36,22 @@ END_VAR]]></Declaration>
       <Declaration><![CDATA[METHOD PROTECTED Main 
 
 VAR
-	
+	_signalInfo : TcoCore.TcoSignalInfo;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_di.Service();
 _do.Service();
 _di(inoSignal := IO.A1._1);
 _do(inoSignal := IO.A2._1);
+
 _Ai.Service();
+_aiAnyType.Service();
 _Ao.Service();
-_Ai(inoSignal := IO.A3._1);
+
+_Ai(inoSignal := IO.A3._2);
+_signalInfo.GetSignalInfo(SIZEOF(IO.A3._1), ADR(IO.A3._1));
+_aiAnyType(inSignal := IO.A3._1,inSignalInfo:=_signalInfo);
+
 _Ao(inoSignal := IO.A4._1);
 
 _ai.Config.RawLow := 0;

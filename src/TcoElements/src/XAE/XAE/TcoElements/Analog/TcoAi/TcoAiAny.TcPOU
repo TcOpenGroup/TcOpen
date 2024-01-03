@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
-  <POU Name="TcoAi" Id="{e3ac9b8a-3cec-08be-2ff4-bf54abc2c974}" SpecialFunc="None">
+  <POU Name="TcoAiAny" Id="{0456be9b-b485-0bc2-3cd4-f89b3e825ad9}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -8,8 +8,8 @@
 		</summary>				
 	</docu>	
 ~*)	
-FUNCTION_BLOCK TcoAi EXTENDS TcoCore.TcoComponent
-VAR_IN_OUT
+FUNCTION_BLOCK TcoAiAny EXTENDS TcoCore.TcoComponent
+VAR_INPUT
 	(*~
 	<docu>
 		<summary>
@@ -17,8 +17,15 @@ VAR_IN_OUT
 		</summary>				
 	</docu>	
 	~*)
-	inoSignal : DINT;
-	
+	inSignal : DINT;
+	(*~
+	<docu>
+		<summary>
+			Input additional symbol information about continious signal. Typically an `%I* : INT` or `%I* : DINT`  variable. 												
+		</summary>				
+	</docu>	
+	~*)
+	inSignalInfo : TcoCore.TcoSignalInfo;
 END_VAR
 
 VAR
@@ -69,10 +76,9 @@ VAR
 	_scaled               : REAL;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF (__ISVALIDREF(inoSignal)) THEN
-    _signalInfo.GetSignalInfo(SIZEOF(inoSignal), ADR(inoSignal));
-    _signal := inoSignal;
-END_IF;
+      <ST><![CDATA[
+_signal := inSignal;
+_signalInfo:=inSignalInfo;
 
 //------------------scale-------------------------
 _rawRange  := DINT_TO_REAL(_config.RawHigh - _config.RawLow);
@@ -107,10 +113,10 @@ _status.RealRange := _realRange;
 _status.Scaled    := _scaled;
 ]]></ST>
     </Implementation>
-    <Folder Name="Status" Id="{1e4772af-86a5-0cae-307a-a70a6814fc61}" />
-    <Property Name="Config" Id="{e75ac111-9669-00ff-3236-b8c69a927111}">
+    <Folder Name="Status" Id="{11169c91-cd13-0c13-33b0-c2136e69a21b}" />
+    <Property Name="Config" Id="{ce089b39-65fc-0054-2c31-c550ea720ede}">
       <Declaration><![CDATA[PROPERTY Config : REFERENCE TO TcoAiConfig]]></Declaration>
-      <Get Name="Get" Id="{9f73d41a-059b-0e84-252d-1ccc676ef94b}">
+      <Get Name="Get" Id="{d26cf86b-db47-049b-3e93-eceba080e297}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
@@ -119,7 +125,7 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="FB_init" Id="{bb10cc22-dfe4-0847-0777-2e0272d143ba}">
+    <Method Name="FB_init" Id="{82651aaa-8366-0916-3673-2df74b8dfb80}">
       <Declaration><![CDATA[{attribute 'hide'}
 METHOD FB_init : BOOL
 VAR_INPUT
@@ -133,7 +139,7 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Restore" Id="{464e77c6-c039-0e58-17ca-0f427936fbe9}">
+    <Method Name="Restore" Id="{f215698f-5ab8-0d31-0c96-c7a0accbb658}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -149,7 +155,7 @@ METHOD  Restore : ITcoRestorable
         <ST><![CDATA[// No implementation needed for this componet.]]></ST>
       </Implementation>
     </Method>
-    <Method Name="ServiceMode" Id="{716081c8-73f5-09ca-1246-a9cc4f576fe2}">
+    <Method Name="ServiceMode" Id="{36a9e094-cb89-00d0-26e8-b7e6c7b3cbb8}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -164,9 +170,9 @@ METHOD PROTECTED  ServiceMode
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Status" Id="{bec574a2-a2b5-0f76-1cf9-03583d988f99}" FolderPath="Status\">
+    <Property Name="Status" Id="{da11a8fc-bd88-048a-278d-3f85da67a74f}" FolderPath="Status\">
       <Declaration><![CDATA[PROPERTY Status : REFERENCE TO TcoAiStatus]]></Declaration>
-      <Get Name="Get" Id="{99728b0e-7e4e-02d6-09fd-fd15ef6161b7}">
+      <Get Name="Get" Id="{7dab1aaa-2d18-06d2-358f-e065ad124beb}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>

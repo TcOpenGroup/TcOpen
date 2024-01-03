@@ -8,9 +8,9 @@ VAR_OUTPUT
 END_VAR
 VAR
 	{attribute addProperty Name "<#Pick Position#>"}
-	PickPosition:TcoDrivesBeckhoff.TcoMultiAxisMoveParam;
+	PickPosition:TcoDrivesBeckhoff.TcoSingleAxisMoveParam;
 	{attribute addProperty Name "<#Place  Position#>"}
-	PlacePosition:TcoDrivesBeckhoff.TcoMultiAxisMoveParam;
+	PlacePosition:TcoDrivesBeckhoff.TcoSingleAxisMoveParam;
 END_VAR
 ]]></Declaration>
     <Implementation>
