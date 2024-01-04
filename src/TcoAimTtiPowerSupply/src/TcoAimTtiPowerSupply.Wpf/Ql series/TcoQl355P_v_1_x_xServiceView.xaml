@@ -37,9 +37,7 @@
             </tcoCore:TcoComponentView.ComponentHeader>
             
             <tcoCore:TcoComponentView.ComponentDetails>
-            <ScrollViewer MaxHeight="600"  HorizontalScrollBarVisibility="Disabled" DataContext="{Binding Component}">
-
-                <WrapPanel>
+                  <WrapPanel DataContext="{Binding Component}">
                     <WrapPanel.Resources>
                         <Style TargetType="GroupBox"  BasedOn="{StaticResource MaterialDesignCardGroupBox}">
                             <Setter Property="MinWidth" Value="250"></Setter>
@@ -111,7 +109,6 @@
 
 
                 </WrapPanel>
-            </ScrollViewer>
         </tcoCore:TcoComponentView.ComponentDetails>
         </tcoCore:TcoComponentView>
    

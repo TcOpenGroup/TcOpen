@@ -16,21 +16,21 @@
 
             <WrapPanel VerticalAlignment="Center"   HorizontalAlignment="Left" DataContext="{Binding Component}" >
                 <tcoCore:RenderableContentControl DataContext="{Binding _request.Command }" PresentationType="Control"/>
-                <StackPanel VerticalAlignment="Top" Margin="5,0" Orientation="Horizontal" Visibility="{Binding _request.Command.Cyclic, Converter={converters:TcoSmartFunctionKitVisibilityDefaultConverter}}">
+                <WrapPanel VerticalAlignment="Top" Margin="5,0" Orientation="Horizontal" Visibility="{Binding _request.Command.Cyclic, Converter={converters:TcoSmartFunctionKitVisibilityDefaultConverter}}">
                     <tcoCore:RenderableContentControl Margin="5,0" DataContext="{Binding _request.Value1 }" PresentationType="Control"/>
                     <tcoCore:RenderableContentControl Margin="5,0" DataContext="{Binding _request.Value2 }" PresentationType="Control"/>
                     <tcoCore:RenderableContentControl Margin="5,0" DataContext="{Binding _request.Value3 }" PresentationType="Control"/>
 
-                </StackPanel>
+                </WrapPanel>
                 <StackPanel VerticalAlignment="Top" Margin="5,0" Orientation="Horizontal" Visibility="{Binding _request.Command.Cyclic, Converter={converters:TcoSmartFunctionKitVisibilityStartProgramConverter}}">
                     <tcoCore:RenderableContentControl Margin="5,0" DataContext="{Binding _request.SerialNumber }" PresentationType="Control"/>
                  
                 </StackPanel>
-                <StackPanel  VerticalAlignment="Top" Margin="5,0" Orientation="Horizontal" Visibility="{Binding _request.Command.Cyclic, Converter={converters:TcoSmartFunctionKitVisibilityJogTaraPositioningConverter}}">
+                <WrapPanel  VerticalAlignment="Top" Margin="5,0" Orientation="Horizontal" Visibility="{Binding _request.Command.Cyclic, Converter={converters:TcoSmartFunctionKitVisibilityJogTaraPositioningConverter}}">
                     <tcoCore:RenderableContentControl Margin="5,0" DataContext="{Binding _request.PositionDistanceTara }" PresentationType="Control"/>
                     <tcoCore:RenderableContentControl Margin="5,0" DataContext="{Binding _request.TravelSpeed }" PresentationType="Control"/>
                     <tcoCore:RenderableContentControl Margin="5,0" DataContext="{Binding _request.Acceleration }" PresentationType="Control"/>
-                </StackPanel>
+                </WrapPanel>
                 <StackPanel  VerticalAlignment="Top" Margin="5,0" Orientation="Horizontal" Visibility="{Binding _request.Command.Cyclic, Converter={converters:TcoSmartFunctionKitVisibilitySetProgramConverter}}">
                     <tcoCore:RenderableContentControl Margin="5,0" DataContext="{Binding _request.ProgramId }" PresentationType="Control"/>
                 </StackPanel>
@@ -48,9 +48,8 @@
             </tcoCore:TcoComponentView.ComponentHeader>
             
             <tcoCore:TcoComponentView.ComponentDetails>
-            <ScrollViewer MaxHeight="600"  HorizontalScrollBarVisibility="Disabled" DataContext="{Binding Component}">
 
-                <WrapPanel>
+            <WrapPanel DataContext="{Binding Component}">
                     <WrapPanel.Resources>
                         <Style TargetType="GroupBox"  BasedOn="{StaticResource MaterialDesignCardGroupBox}">
                             <Setter Property="MinWidth" Value="250"></Setter>
@@ -94,7 +93,6 @@
 
 
                 </WrapPanel>
-            </ScrollViewer>
         </tcoCore:TcoComponentView.ComponentDetails>
         </tcoCore:TcoComponentView>
    
