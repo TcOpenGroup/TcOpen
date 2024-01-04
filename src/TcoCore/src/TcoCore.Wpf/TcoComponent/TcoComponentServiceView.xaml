@@ -74,9 +74,24 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                     <Expander Grid.Row="1" Header="Details">
-                    <ScrollViewer MaxHeight="300">
-                        <tcocorelocal:DynamicTreeView DataContext="{Binding}" ></tcocorelocal:DynamicTreeView>
-                    </ScrollViewer>
+                    <TabControl>
+                        <TabItem Header="Presenter">
+                            <ItemsControl ItemsPanel="{StaticResource HorizontalWraped}"  HorizontalAlignment="Left" ItemsSource="{Binding Children}">
+
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <vortex:RenderableContentControl MinWidth="150" DataContext="{Binding}" PresentationType="Service-ControlSlim" Margin="5"></vortex:RenderableContentControl>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </TabItem>
+                        <TabItem Header="TreeView">
+                            <ScrollViewer MaxHeight="1000">
+                                <tcocorelocal:DynamicTreeView DataContext="{Binding}" ></tcocorelocal:DynamicTreeView>
+                            </ScrollViewer>
+                        </TabItem>
+                    </TabControl>   
+                   
                 </Expander>
             </Grid>
         </Expander>

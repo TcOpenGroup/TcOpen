@@ -15,9 +15,16 @@ namespace TcoCore
         }
 
         private IEnumerable<IsTask> _tasks;
+        private IEnumerable<TcoObject> _children;
+
         public IEnumerable<IsTask> Tasks 
         {
             get { if (_tasks == null) _tasks = this.GetDescendants<IsTask>(); return _tasks; }
+        }
+
+        public IEnumerable<TcoObject> Children
+        {
+            get { if (_children == null) _children = this.GetDescendants<TcoObject>(); return _children; }
         }
 
         public object StatusControl
