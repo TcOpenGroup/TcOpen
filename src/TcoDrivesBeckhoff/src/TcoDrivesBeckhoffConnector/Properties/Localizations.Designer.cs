@@ -349,6 +349,96 @@ namespace TcoDrivesBeckhoffConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hide Halt Tab.
+        /// </summary>
+        public static string ___Hide_Halt_Tab__ {
+            get {
+                return ResourceManager.GetString("___Hide_Halt_Tab__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hide Homing Tab.
+        /// </summary>
+        public static string ___Hide_Homing_Tab__ {
+            get {
+                return ResourceManager.GetString("___Hide_Homing_Tab__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hide Jogging Tab.
+        /// </summary>
+        public static string ___Hide_Jogging_Tab__ {
+            get {
+                return ResourceManager.GetString("___Hide_Jogging_Tab__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hide MoveAbsolute Tab.
+        /// </summary>
+        public static string ___Hide_MoveAbsolute_Tab__ {
+            get {
+                return ResourceManager.GetString("___Hide_MoveAbsolute_Tab__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hide MoveModulo Tab.
+        /// </summary>
+        public static string ___Hide_MoveModulo_Tab__ {
+            get {
+                return ResourceManager.GetString("___Hide_MoveModulo_Tab__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hide MoveRelative Tab.
+        /// </summary>
+        public static string ___Hide_MoveRelative_Tab__ {
+            get {
+                return ResourceManager.GetString("___Hide_MoveRelative_Tab__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hide MoveVelocity Tab.
+        /// </summary>
+        public static string ___Hide_MoveVelocity_Tab__ {
+            get {
+                return ResourceManager.GetString("___Hide_MoveVelocity_Tab__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hide Power Tab.
+        /// </summary>
+        public static string ___Hide_Power_Tab__ {
+            get {
+                return ResourceManager.GetString("___Hide_Power_Tab__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hide Reset Tab.
+        /// </summary>
+        public static string ___Hide_Reset_Tab__ {
+            get {
+                return ResourceManager.GetString("___Hide_Reset_Tab__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hide Stop Tab.
+        /// </summary>
+        public static string ___Hide_Stop_Tab__ {
+            get {
+                return ResourceManager.GetString("___Hide_Stop_Tab__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Homing.
         /// </summary>
         public static string ___Homing__ {

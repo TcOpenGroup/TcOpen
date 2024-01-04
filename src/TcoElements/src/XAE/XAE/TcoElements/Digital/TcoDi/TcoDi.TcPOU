@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="TcoDi" Id="{940ec0d0-0377-0ad5-2841-be1fc78a02da}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
 	<docu>
@@ -164,5 +164,16 @@ METHOD PROTECTED  ServiceMode
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
+    <Property Name="Signal" Id="{da673e5e-f603-0e32-130a-a651eb1a9294}" FolderPath="Status\">
+      <Declaration><![CDATA[PROPERTY PUBLIC Signal : Bool]]></Declaration>
+      <Get Name="Get" Id="{a37370b0-20e9-0540-367a-e01e45c92d06}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Signal :=  _signal;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
   </POU>
 </TcPlcObject>

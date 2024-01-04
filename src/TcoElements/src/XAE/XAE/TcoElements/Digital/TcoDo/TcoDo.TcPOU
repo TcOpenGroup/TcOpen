@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="TcoDo" Id="{a94c677a-ea37-0c4d-2eda-a26d576606a9}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
 	<docu>
@@ -176,5 +176,16 @@ _signal := TRUE;
 Set := TRUE;]]></ST>
       </Implementation>
     </Method>
+    <Property Name="Signal" Id="{21741c7b-be57-0224-394d-8eba10f7fef5}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Signal : Bool]]></Declaration>
+      <Get Name="Get" Id="{15d28176-9c49-02f5-384f-c21fc4407f09}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Signal :=  _signal;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
   </POU>
 </TcPlcObject>
