@@ -2,10 +2,15 @@
 
 ## Introduction
 
-The **TcoTixonFeeding** is a set of software components that cover 5 products in MTS's manufacturing portfolio: the **Tixon Step**, **Tixon Vibro**, **Tixon Pick Step**, **Tixon Pick Vibro** and the **Tixon Pick Vibro Basic** which is suitable also for non-Tixon solutions.
+The **TcoTixonFeeding** is a set of software components that cover 5 products in MTS's manufacturing portfolio: the
+[Tixon Step](#tixon-step), 
+[Tixon Vibro](#tixon-vibro),
+[Tixon Pick Step](#tixon-pick-step), 
+[Tixon Pick Vibro](#tixon-pick-vibro) and the 
+[Tixon Pick Vibro Basic](#tixon-pick-vibro-basic) which is suitable also for non-Tixon solutions.
 All products can be optionally equipped with a **HOPPER** conveyor that serves additional supply of feeding components.
 
-All of these are for the target PLC platform [Twincat](https://www.beckhoff.com/en-en/products/automation/twincat/twincat-3-build-4024/) and [TcOpen](https://github.com/TcOpenGroup/TcOpen#readme) framework.
+All of these are for the target PLC platform [TwinCAT](https://www.beckhoff.com/en-en/products/automation/twincat/) and [TcOpen](https://github.com/TcOpenGroup/TcOpen#readme) framework.
 
 The package consists of a PLC library providing control logic and its .NET twin counterpart aimed at the visualization part.
 
@@ -14,7 +19,7 @@ The package consists of a PLC library providing control logic and its .NET twin 
 **Check general prerequisites for TcOpen [here](https://github.com/TcOpenGroup/TcOpen#prerequisites).**
 
 ## Tixon Step
-![](assets/TixonStep_side.png)
+![](assets/TixonStep_side_signals.png)
 
 ### Tixon Step - Inputs
 | Input	| Name |
@@ -113,6 +118,7 @@ The package consists of a PLC library providing control logic and its .NET twin 
 
 ## Tixon Pick Step
 ![](assets/TixonPickStep_side.png)
+For placement of signals see [Tixon Step](#tixon-step) picture.
 
 ### Tixon Pick Step - Inputs
 | Input	| Name |
@@ -167,6 +173,7 @@ The package consists of a PLC library providing control logic and its .NET twin 
 
 ## Tixon Pick Vibro
 ![](assets/TixonPickVibro_side.png)
+For placement of signals see [Tixon Vibro](#tixon-vibro) picture.
 
 ### Tixon Pick Vibro - Inputs
 | Input	| Name |
