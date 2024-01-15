@@ -82,6 +82,7 @@
         <vortex:TcoComponentView.ComponentDetails>
 
             <Grid  DataContext="{Binding Component}">
+
                     <Grid.Resources>
                         <Style TargetType="GroupBox"  BasedOn="{StaticResource MaterialDesignCardGroupBox}">
                             <Setter Property="Margin" Value="5,0,0,5"></Setter>

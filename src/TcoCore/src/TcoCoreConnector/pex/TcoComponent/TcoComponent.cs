@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +18,6 @@ namespace TcoCore
         private IEnumerable<IsTask> _tasks;
         private IEnumerable<TcoObject> _children;
         private IEnumerable<TcoObject> _components;
-        private IEnumerable<IValueTag> valueTags;
 
         public IEnumerable<IsTask> Tasks 
         {
