@@ -40,6 +40,11 @@
 			<AutoGen>True</AutoGen>
 			<DependentUpon>Localization.resx</DependentUpon>
 		</Compile>
+		<Compile Update="Properties\strings.Designer.cs">
+		  <DesignTime>True</DesignTime>
+		  <AutoGen>True</AutoGen>
+		  <DependentUpon>strings.resx</DependentUpon>
+		</Compile>
 		<Compile Update="TcoComponent\TcoComponentSpotView.xaml.cs">
 			<SubType>Code</SubType>
 		</Compile>
@@ -49,8 +54,18 @@
 			<Generator>PublicResXFileCodeGenerator</Generator>
 			<LastGenOutput>Localization.Designer.cs</LastGenOutput>
 		</EmbeddedResource>
+		<EmbeddedResource Update="Properties\strings.resx">
+		  <Generator>PublicResXFileCodeGenerator</Generator>
+		  <LastGenOutput>strings.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Properties\strings.sk-Sk.resx">
+		  <Generator>PublicResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
 	</ItemGroup>
 	<ItemGroup>
+		<Page Update="TcoComponent\TcoComponentServiceView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		</Page>
 		<Page Update="TcoComponent\TcoComponentSpotView.xaml">
 			<XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 			<SubType>Designer</SubType>

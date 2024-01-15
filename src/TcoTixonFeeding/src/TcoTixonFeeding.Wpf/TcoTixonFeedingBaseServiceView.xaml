@@ -1,4 +1,4 @@
-﻿<UserControl
+<UserControl
     x:Class="TcoTixonFeeding.TcoTixonFeedingBaseServiceView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -16,7 +16,9 @@
     </d:UserControl.DataContext>
 
     <UserControl.Resources>
-
+        <ItemsPanelTemplate x:Key="HorizontalWraped">
+            <WrapPanel Background="Transparent" Width="{Binding (FrameworkElement.ActualWidth) , RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}" MinWidth="{Binding ItemWidth , RelativeSource={RelativeSource Self}}" ItemHeight="{Binding (ListView.View).ItemHeight , RelativeSource={RelativeSource AncestorType=ListView}}" ItemWidth="{Binding (ListView.View).ItemWidth , RelativeSource={RelativeSource AncestorType=ListView}}" />
+        </ItemsPanelTemplate>
 
     </UserControl.Resources>
     <vortex:TcoComponentView >
@@ -69,38 +71,32 @@
 
                         
                     </Grid.RowDefinitions>
-                    <GroupBox Grid.Column="0" Grid.RowSpan="2"  Padding="10" Grid.Row="1" DataContext="{Binding _status}"  Header="{Binding AttributeName}">
+
+                <GroupBox Grid.ColumnSpan="2" Padding="10" Header="{x:Static p:strings.Tasks}" >
+                     <ItemsControl ItemsPanel="{StaticResource HorizontalWraped}" HorizontalAlignment="Left" ItemsSource="{Binding Tasks}">
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <vortex:RenderableContentControl MinWidth="150" DataContext="{Binding}" Margin="5"></vortex:RenderableContentControl>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </GroupBox>
+
+             
+                <GroupBox Grid.Column="0" Grid.RowSpan="2"  Padding="10" Grid.Row="1" DataContext="{Binding _status}"  Header="{Binding AttributeName}">
                                <vortex:RenderableContentControl  DataContext="{Binding }" PresentationType="DisplaySlim"    />
-                     </GroupBox>
+                </GroupBox>
 
-                    <WrapPanel Grid.Column="1" Grid.Row="1">
-                        <GroupBox Padding="10" Header="{Binding _config.AttributeName}">
-                            <vortex:RenderableContentControl  DataContext="{Binding _config}" PresentationType="ControlSlim" />
-                        </GroupBox>
-                        <GroupBox Padding="10" Header="{Binding _control.AttributeName}">
-                            <vortex:RenderableContentControl  DataContext="{Binding _control}" PresentationType="ControlSlim" />
-                        </GroupBox>
-
-                        <GroupBox Padding="10" Header="{x:Static p:strings.Tasks}" >
-                            <WrapPanel Orientation="Vertical">
-
-                                <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _separatorTask}" />
-                                <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _bufferTask}" />
-                                <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _stepperTask}" />
-                                <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _hopperTask}" />
-                            </WrapPanel>
-                        </GroupBox>
-
-                  
-          
-
-                    
-          
-
-
-
-                    </WrapPanel>
-                </Grid>
+                <WrapPanel Grid.Column="1" Grid.Row="1">
+                    <GroupBox Padding="10" Header="{Binding _config.AttributeName}">
+                        <vortex:RenderableContentControl  DataContext="{Binding _config}" PresentationType="ControlSlim" />
+                    </GroupBox>
+                    <GroupBox Padding="10" Header="{Binding _control.AttributeName}">
+                        <vortex:RenderableContentControl  DataContext="{Binding _control}" PresentationType="ControlSlim" />
+                    </GroupBox>
+                </WrapPanel>
+            </Grid>
         </vortex:TcoComponentView.ComponentDetails>
     </vortex:TcoComponentView>
 </UserControl>

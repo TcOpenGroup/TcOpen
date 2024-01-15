@@ -12,17 +12,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Vortex.Presentation.Wpf;
 
 namespace TcoCore
 {
     /// <summary>
-    /// Interaction logic for TcoComponentView.xaml
+    /// Interaction logic for TcoComponentServiceView.xaml
     /// </summary>
-    public partial class TcoComponentSpotView : UserControl
+    public partial class TcoComponentTreeServiceView : UserControl
     {
-        public TcoComponentSpotView()
+        public TcoComponentTreeServiceView()
         {
             InitializeComponent();
-        }      
+        }
     }
+
+   
 }
