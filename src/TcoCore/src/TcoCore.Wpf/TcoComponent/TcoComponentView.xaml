@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:tcoCore="clr-namespace:TcoCore"
     xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=PresentationFramework"
+     xmlns:p="clr-namespace:TcOpen.Inxton.TcoCore.Wpf.Properties"
     mc:Ignorable="d"
     d:DesignHeight="450"
     d:DesignWidth="800">
@@ -62,7 +63,7 @@
                     <ContentControl Margin="5,0,0,0" Content="{Binding ComponentDetails, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" />
                 </Grid>
             </Expander>
-            <!--<Separator Margin="5" />-->
+            
         </StackPanel>
     </Grid>
 </UserControl>

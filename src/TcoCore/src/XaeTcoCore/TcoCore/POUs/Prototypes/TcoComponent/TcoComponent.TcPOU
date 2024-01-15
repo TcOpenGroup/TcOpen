@@ -19,8 +19,8 @@ VAR
 		</summary>			
 	</docu>	
 ~*)
-	{attribute addProperty Name "<#In service mode#>"}
-	{attribute clr [ReadOnly()]}
+
+   {attribute clr [RenderIgnore()]}
 	_inServiceMode : BOOL;	
 END_VAR]]></Declaration>
     <Implementation>

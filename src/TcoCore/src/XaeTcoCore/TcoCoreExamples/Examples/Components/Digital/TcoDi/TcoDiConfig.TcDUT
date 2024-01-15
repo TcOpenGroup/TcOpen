@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="TcoDiConfig" Id="{81cad678-50b3-0c03-09c5-050fe48ae5b3}">
+    <Declaration><![CDATA[TYPE TcoDiConfig :
+STRUCT
+	IsFalseTimeOut : TIME := T#10S;
+	IsTrueTimeOut : TIME := T#10S;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

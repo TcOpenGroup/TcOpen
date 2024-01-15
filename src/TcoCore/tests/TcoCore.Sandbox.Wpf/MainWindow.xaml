@@ -150,6 +150,31 @@
                 </Grid>
                 </ScrollViewer>
             </TabItem>
+            <TabItem Header="Components">
+                <ScrollViewer>
+                    <TabControl>
+                        <TabItem Header="Base">
+                            <vortex:RenderableContentControl DataContext="{Binding MAIN._station001._components}" PresentationType="Base" />
+                        </TabItem>
+                        <TabItem Header="Service ">
+                            <vortex:RenderableContentControl DataContext="{Binding MAIN._station001._components}" PresentationType="Service" />
+                        </TabItem>
+                        <TabItem Header="Base-Service ">
+                            <vortex:RenderableContentControl DataContext="{Binding MAIN._station001._components}" PresentationType="Base-Service" />
+                        </TabItem>
+                        <TabItem Header="Spot">
+                            <vortex:RenderableContentControl DataContext="{Binding MAIN._station001._components}" PresentationType="Spot" />
+                        </TabItem>
+                        <TabItem Header="TreeService ">
+                            <vortex:RenderableContentControl DataContext="{Binding MAIN._station001._components}" PresentationType="TreeService" />
+                        </TabItem>
+                        <TabItem Header="Cascade Tree->Service">
+                            <vortex:RenderableContentControl DataContext="{Binding MAIN._station001._components}" PresentationType="TreeService-Service" />
+                        </TabItem>
+
+                    </TabControl>
+                </ScrollViewer>
+            </TabItem>
             <TabItem Header="ST002">
                 <StackPanel>
                     <vortex:RenderableContentControl DataContext="{Binding MAIN._station002._s}" PresentationType="Base"></vortex:RenderableContentControl>

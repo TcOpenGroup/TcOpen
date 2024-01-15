@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="Example1WrappedComponent" Id="{d4287f36-2935-0b39-217a-2a1b69b3c8a2}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Example1WrappedComponent EXTENDS TcoCore.TcoComponent
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+		
+      	piston : fbPiston(THIS^);
+     	digitalInput : TcoDi(THIS^); 
+     	digitaOutput : TcoDo(THIS^);
+	
+		dummy1Task : TcoCore.TcoTask(THIS^);
+		dummy2Task : TcoCore.TcoTask(THIS^);
+		Setpoint:INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Restore" Id="{38596799-d63f-0b45-099b-198ffa020014}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.	
+		</summary>			
+	</docu>	
+~*)
+METHOD  Restore : ITcoRestorable
+
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ServiceMode" Id="{7a71b670-599d-0eef-2aa3-3fa94a6f3779}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+		    Custom service (manual, maintenance) logic.
+			This method must be implemented in derived class.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED  ServiceMode
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

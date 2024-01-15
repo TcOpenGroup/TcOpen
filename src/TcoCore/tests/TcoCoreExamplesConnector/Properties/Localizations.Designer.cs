@@ -61,6 +61,42 @@ namespace TcoCoreExamplesConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Check Off.
+        /// </summary>
+        public static string ___Check_Off__ {
+            get {
+                return ResourceManager.GetString("___Check_Off__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check On.
+        /// </summary>
+        public static string ___Check_On__ {
+            get {
+                return ResourceManager.GetString("___Check_On__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checks that the input is off.
+        /// </summary>
+        public static string ___Checks_that_the_input_is_off__ {
+            get {
+                return ResourceManager.GetString("___Checks_that_the_input_is_off__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checks that the input is on.
+        /// </summary>
+        public static string ___Checks_that_the_input_is_on__ {
+            get {
+                return ResourceManager.GetString("___Checks_that_the_input_is_on__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disabled.
         /// </summary>
         public static string ___Disabled__ {
@@ -79,11 +115,74 @@ namespace TcoCoreExamplesConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Off.
+        /// </summary>
+        public static string ___Off__ {
+            get {
+                return ResourceManager.GetString("___Off__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On.
+        /// </summary>
+        public static string ___On__ {
+            get {
+                return ResourceManager.GetString("___On__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reseting signal (off/false).
+        /// </summary>
+        public static string ___Reseting_signal__off_false___ {
+            get {
+                return ResourceManager.GetString("___Reseting_signal__off_false___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the output.
+        /// </summary>
+        public static string ___Resets_the_output__ {
+            get {
+                return ResourceManager.GetString("___Resets_the_output__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Running.
         /// </summary>
         public static string ___Running__ {
             get {
                 return ResourceManager.GetString("___Running__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sets the output.
+        /// </summary>
+        public static string ___Sets_the_output__ {
+            get {
+                return ResourceManager.GetString("___Sets_the_output__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Setting signal (on/true).
+        /// </summary>
+        public static string ___Setting_signal__on_true___ {
+            get {
+                return ResourceManager.GetString("___Setting_signal__on_true___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Signal.
+        /// </summary>
+        public static string ___Signal__ {
+            get {
+                return ResourceManager.GetString("___Signal__", resourceCulture);
             }
         }
         

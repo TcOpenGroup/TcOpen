@@ -2,7 +2,8 @@
 using MaterialDesignThemes.Wpf;
 using Serilog;
 using System;
-
+using System.Globalization;
+using System.Threading;
 using System.Windows;
 using System.Windows.Media;
 using TcoCoreExamples;
@@ -32,7 +33,9 @@ namespace TcoCore.Sandbox.Wpf
         }
         public App() : base()
         {
-           
+            CultureInfo ci = new CultureInfo("sk-SK");
+            Thread.CurrentThread.CurrentCulture = ci;
+
             PlcTcoCoreExamples.Connector.ReadWriteCycleDelay = 250;
             PlcTcoCoreExamples.Connector.BuildAndStart();
 
@@ -49,6 +52,7 @@ namespace TcoCore.Sandbox.Wpf
             PlcTcoCoreExamples.EXAMPLES_PRG._context._logger.StartLoggingMessages(eMessageCategory.All);
             PlcTcoCoreExamples.MAIN._station001._logger.StartLoggingMessages(eMessageCategory.All);
             PlcTcoCoreExamples.EXAMPLES_PRG._loggerContext._loggerUsage._logger.StartLoggingMessages(eMessageCategory.All);
+
         }
 
         
@@ -87,7 +91,7 @@ namespace TcoCore.Sandbox.Wpf
         {
             if (!IsInDesign)
             {
-                return new TcoCoreExamplesTwinController(Tc3ConnectorAdapter.Create(AMS_ID, 853, true));
+                return new TcoCoreExamplesTwinController(Tc3ConnectorAdapter.Create( 853, true));
             }
             else
             {

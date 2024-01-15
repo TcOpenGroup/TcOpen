@@ -29,6 +29,11 @@ namespace TcoDrivesBeckhoff
             _savePositionTask.InitializeExclusively(SaveFromPlc);
 
         }
+        public void Initialize(RepositoryDataSetHandler<PositioningParamItem> handler)
+        {
+            repoHandler = new RepositoryHandler(handler);
+
+        }
 
         private void SaveFromPlc()
         {

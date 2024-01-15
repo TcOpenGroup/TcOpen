@@ -26,6 +26,15 @@
     <CombineIds>true</CombineIds>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Examples\Components\Digital\TcoDi\TcoDi.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Components\Digital\TcoDi\TcoDiConfig.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Components\Digital\TcoDo\TcoDo.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Examples\Components\fbPiston.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -45,6 +54,24 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Examples\Components\IPistonVertical.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Components\WrappedComponent\Example1WrappedComponent.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Components\WrappedComponent\Example2WrappedComponent.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Components\WrappedComponent\Example2WrappedComponents.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Components\WrappedComponent\Example2WrappedComponents_Status.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Components\WrappedComponent\Example2WrappedComponents_Config.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Components\WrappedComponent\Example2WrappedComponents_Control.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Examples\Dialogs\DiaglogsContext.TcPOU">
@@ -145,6 +172,10 @@
   <ItemGroup>
     <Folder Include="DUTs" />
     <Folder Include="Examples\Components" />
+    <Folder Include="Examples\Components\Digital" />
+    <Folder Include="Examples\Components\Digital\TcoDi" />
+    <Folder Include="Examples\Components\Digital\TcoDo" />
+    <Folder Include="Examples\Components\WrappedComponent" />
     <Folder Include="Examples\Implementation" />
     <Folder Include="Examples\Implementation\TcoContext" />
     <Folder Include="Examples\Implementation\TcoObject" />
@@ -178,7 +209,6 @@
     </PlaceholderReference>
     <PlaceholderReference Include="TcoCore">
       <DefaultResolution>TcoCore, 0.6.0.913 (Vortex.Library)</DefaultResolution>
-      <Namespace>TcoCore</Namespace>
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
