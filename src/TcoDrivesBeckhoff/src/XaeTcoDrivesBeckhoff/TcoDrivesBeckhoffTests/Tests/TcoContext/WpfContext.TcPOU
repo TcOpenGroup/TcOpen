@@ -36,6 +36,8 @@ VAR
     {attribute addProperty Name "<#Test multi axis#>"}
     _multiAxis : TcoDrivesBeckhoff.TcoMultiAxis(THIS^);   
 	
+	 {attribute addProperty Name "<#Wrapped Component Example#>"}
+    _wrappedExample : WrappedComponentExample(THIS^);
 	
 	_sequence1      : TcoCore.TcoSequence(THIS^, eRestoreMode.None);
     _observer       : TcoCore.TcoSequencerObserver(THIS^);

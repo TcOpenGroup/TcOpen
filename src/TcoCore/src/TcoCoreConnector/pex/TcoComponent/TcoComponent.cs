@@ -33,7 +33,7 @@ namespace TcoCore
 
         public IEnumerable<TcoObject> Components
         {
-            get { if (_components == null) _components = this.GetDescendants<TcoComponent>(); return _components; }
+            get { if (_components == null) _components = this.GetChildren<TcoComponent>(); return _components; }
         }
 
         public bool HasComponents
