@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="WrappedComponentExample_Status" Id="{5b4807c6-cbbe-0ed2-2bbd-e81bc67735eb}">
+    <Declaration><![CDATA[TYPE WrappedComponentExample_Status EXTENDS TcoCore.TcoStruct:
+STRUCT
+
+		ProgressThrow:INT;
+		ActionDescription:STRING;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

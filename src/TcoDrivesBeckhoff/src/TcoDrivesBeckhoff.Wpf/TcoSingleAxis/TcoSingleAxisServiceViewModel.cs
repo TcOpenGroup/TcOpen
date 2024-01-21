@@ -14,6 +14,7 @@ using TcOpen.Inxton.TcoDrivesBeckhoff.Wpf.Properties;
 
 namespace TcoDrivesBeckhoff
 {
+
     public class TcoSingleAxisServiceViewModel : RenderableViewModel
     {
         private TcoMultiAxisMoveParam selectedItem;
@@ -175,4 +176,6 @@ namespace TcoDrivesBeckhoff
         public RelayCommand RefreshPositionsCommand { get; private set; }
     }
 
+    public class TcoSingleAxisViewModel : TcoSingleAxisServiceViewModel
+    { }
 }
