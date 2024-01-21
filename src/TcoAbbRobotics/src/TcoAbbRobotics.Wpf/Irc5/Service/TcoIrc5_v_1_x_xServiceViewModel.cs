@@ -21,5 +21,7 @@ namespace TcoAbbRobotics
 
         }
     }
+    public class TcoIrc5_v_1_x_xViewModel : TcoIrc5_v_1_x_xServiceViewModel
+    { }
 
 }
