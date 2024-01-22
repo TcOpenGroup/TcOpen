@@ -33,8 +33,13 @@ namespace TcoCore
 
         public IEnumerable<TcoObject> Components
         {
-            get { if (_components == null) _components = this.GetChildren<TcoComponent>(); return _components; }
+            get { if (_components == null) _components = this.GetDescendants<TcoComponent>(SearchComponentsDepth); return _components; }
         }
+
+        public int SearchComponentsDepth
+        {
+            get; set;
+        } = 2;
 
         public bool HasComponents
         {
