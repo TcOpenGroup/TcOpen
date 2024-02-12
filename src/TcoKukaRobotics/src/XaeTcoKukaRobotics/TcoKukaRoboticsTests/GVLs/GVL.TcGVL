@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <GVL Name="GVL" Id="{dd1a3262-ed2f-096e-37f4-f21e097fde66}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	Robot1	:	TcoKukaRobotics.TcoKrc4_IO_v_5_x_x;
+END_VAR
+]]></Declaration>
+  </GVL>
+</TcPlcObject>

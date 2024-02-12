@@ -1,0 +1,2664 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<ISO15745Profile xmlns="http://www.profibus.com/GSDML/2003/11/DeviceProfile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.profibus.com/GSDML/2003/11/DeviceProfile ..\xsd\GSDML-DeviceProfile-V2.33.xsd">
+  <ProfileHeader>
+    <ProfileIdentification>PROFINET Device Profile</ProfileIdentification>
+    <ProfileRevision>1.00</ProfileRevision>
+    <ProfileName>Device Profile for PROFINET Devices</ProfileName>
+    <ProfileSource>PROFIBUS Nutzerorganisation e. V. (PNO)</ProfileSource>
+    <ProfileClassID>Device</ProfileClassID>
+    <ISO15745Reference>
+      <ISO15745Part>4</ISO15745Part>
+      <ISO15745Edition>1</ISO15745Edition>
+      <ProfileTechnology>GSDML</ProfileTechnology>
+    </ISO15745Reference>
+  </ProfileHeader>
+  <ProfileBody>
+    <DeviceIdentity DeviceID="0x0300" VendorID="0x019B">
+      <InfoText TextId="InfoTextId1"/>
+      <VendorName Value="KUKA Deutschland GmbH"/>
+    </DeviceIdentity>
+    <DeviceFunction>
+      <Family MainFamily="I/O" ProductFamily="KRC4-ProfiNet_5.0"/>
+    </DeviceFunction>
+    <ApplicationProcess>
+      <DeviceAccessPointList>
+        <DeviceAccessPointItem ID="DIM 1" FixedInSlots="0" PhysicalSlots="0..2" MinDeviceInterval="32" ModuleIdentNumber="0x00000300" DNS_CompatibleName="KRC4" ImplementationType="SOFTWARE" ObjectUUID_LocalIndex="1" DeviceAccessSupported="true" NumberOfDeviceAccessAR="1" AddressAssignment="DCP;LOCAL" NameOfStationNotTransferable="true" PNIO_Version="V2.33" CheckDeviceID_Allowed="true" MultipleWriteSupported="true" LLDP_NoD_Supported="true" ResetToFactoryModes="2 4" PROFIenergyASE_Supported="false">
+          <ModuleInfo>
+            <Name TextId="KRC4-ProfiNet_5.0"/>
+            <InfoText TextId="InfoTextId1"/>
+            <VendorName Value="KUKA Deutschland GmbH"/>
+			<OrderNumber Value="0x300"/>
+            <HardwareRelease Value="1"/>
+            <SoftwareRelease Value="V5.0"/>
+          </ModuleInfo>
+		  <CertificationInfo ConformanceClass="B" ApplicationClass="" NetloadClass="III"/>
+          <IOConfigData MaxInputLength="512" MaxOutputLength="512"/>
+          <UseableModules>
+            <ModuleItemRef ModuleItemTarget="1" UsedInSlots="1"/>
+			<ModuleItemRef ModuleItemTarget="2" AllowedInSlots="1"/>
+			<ModuleItemRef ModuleItemTarget="3" AllowedInSlots="1"/>
+			<ModuleItemRef ModuleItemTarget="4" AllowedInSlots="1"/>
+            <ModuleItemRef ModuleItemTarget="5" AllowedInSlots="2"/>
+            <ModuleItemRef ModuleItemTarget="6" AllowedInSlots="2"/>
+            <ModuleItemRef ModuleItemTarget="7" AllowedInSlots="2"/>
+            <ModuleItemRef ModuleItemTarget="8" AllowedInSlots="2"/>
+            <ModuleItemRef ModuleItemTarget="9" AllowedInSlots="2"/>
+            <ModuleItemRef ModuleItemTarget="10" AllowedInSlots="2"/>
+            <ModuleItemRef ModuleItemTarget="11" UsedInSlots="2"/>
+            <ModuleItemRef ModuleItemTarget="12" AllowedInSlots="2"/>
+            <ModuleItemRef ModuleItemTarget="13" AllowedInSlots="2"/>
+            <ModuleItemRef ModuleItemTarget="14" AllowedInSlots="2"/>
+			<ModuleItemRef ModuleItemTarget="15" AllowedInSlots="2"/>
+			<ModuleItemRef ModuleItemTarget="16" AllowedInSlots="2"/>
+			<ModuleItemRef ModuleItemTarget="17" AllowedInSlots="2"/>
+			<ModuleItemRef ModuleItemTarget="18" AllowedInSlots="2"/>
+			<ModuleItemRef ModuleItemTarget="19" AllowedInSlots="2"/>
+          </UseableModules>
+          <VirtualSubmoduleList>
+            <VirtualSubmoduleItem ID="SUB DIM 1" SubmoduleIdentNumber="0x00000001" Writeable_IM_Records="1 2 3" MayIssueProcessAlarm="false">
+              <IOData/>
+              <ModuleInfo>
+                <Name TextId="KRC4-ProfiNet_5.0"/>
+                <InfoText TextId="InfoTextId1"/>
+              </ModuleInfo>
+			  <PROFIenergy ProfileVersion="V1.1" EntityClass="Class3">
+				<EnergySavingModeList>
+					<EnergySavingModeItem ID="1" TimeToPause="5000" RTTO="20000" TimeMinLengthOfStay="0"/>
+					<EnergySavingModeItem ID="2" TimeToPause="1000" RTTO="1000" TimeMinLengthOfStay="0"/>
+					<EnergySavingModeItem ID="254" TimeToPause="50000" RTTO="50000" TimeMinLengthOfStay="10000"/>
+				</EnergySavingModeList>
+				<MeasurementList>
+					<MeasurementItem Number="0">
+						<MeasurementValue ID="57345" AccuracyDomain="2" AccuracyClass="13"/>
+						<MeasurementValue ID="57346" AccuracyDomain="2" AccuracyClass="13"/>
+						<MeasurementValue ID="57347" AccuracyDomain="2" AccuracyClass="13"/>				
+						<MeasurementValue ID="57348" AccuracyDomain="2" AccuracyClass="13"/>				
+						<MeasurementValue ID="57349" AccuracyDomain="2" AccuracyClass="13"/>				
+					</MeasurementItem>
+				</MeasurementList>
+			  </PROFIenergy>
+            </VirtualSubmoduleItem>
+          </VirtualSubmoduleList>
+          <SystemDefinedSubmoduleList>
+            <InterfaceSubmoduleItem ID="IDS_3I" SubslotNumber="32768" SubmoduleIdentNumber="0x00000002" TextId="Interface1" SupportedRT_Classes="RT_CLASS_1" IsochroneModeSupported="false" SupportedProtocols="LLDP;SNMP" DCP_BoundarySupported="true" PTP_BoundarySupported="true">
+              <ApplicationRelations NumberOfAdditionalInputCR="0" NumberOfAdditionalMulticastProviderCR="0" NumberOfAdditionalOutputCR="0" NumberOfMulticastConsumerCR="0" StartupMode="Advanced;Legacy">
+                <TimingProperties SendClock="32" ReductionRatio="1 2 4 8 16 32 64 128 256 512"/>
+              </ApplicationRelations>
+            </InterfaceSubmoduleItem>
+            <PortSubmoduleItem ID="IDS_3P" SubslotNumber="32769" SubmoduleIdentNumber="0x00000003" TextId="Port1">
+				<MAUTypeList>
+					<MAUTypeItem Value="16"/>
+				</MAUTypeList>
+				</PortSubmoduleItem>
+          </SystemDefinedSubmoduleList>
+          <Graphics>
+            <GraphicItemRef Type="DeviceSymbol" GraphicItemTarget="1"/>
+          </Graphics>
+        </DeviceAccessPointItem>
+      </DeviceAccessPointList>
+      <ModuleList>
+        <ModuleItem ID="1" ModuleIdentNumber="0x0000008F">
+          <ModuleInfo>
+            <Name TextId="FDIO64"/>
+            <InfoText TextId="FDIO64_Info"/>
+            <OrderNumber Value="KUKADevF64_2.4"/>
+          </ModuleInfo>
+          <VirtualSubmoduleList>
+            <VirtualSubmoduleItem ID="1" SubmoduleIdentNumber="0x00000001" PROFIsafeSupported="true" Writeable_IM_Records="1 2 3" MayIssueProcessAlarm="false">
+              <IOData F_IO_StructureDescCRC="3595">
+                <Input Consistency="All items consistency">
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="F_MessageTrailer4Byte" TextId="IDT_DATAITEM_Safety"/>
+                </Input>
+                <Output Consistency="All items consistency">
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="F_MessageTrailer4Byte" TextId="IDT_DATAITEM_Safety"/>
+                </Output>
+              </IOData>
+              <RecordDataList>
+                 <F_ParameterRecordDataItem F_ParamDescCRC="55195" Index="128">
+				  <F_Check_iPar/>
+                  <F_SIL DefaultValue="SIL2" AllowedValues="SIL2" Changeable="false"/>
+                  <F_CRC_Length DefaultValue="3-Byte-CRC" AllowedValues="3-Byte-CRC" Visible="false"/>
+                  <F_Block_ID DefaultValue="0"/>
+                  <F_Par_Version/>
+                  <F_Source_Add AllowedValues="1..65534"/>
+                  <F_Dest_Add AllowedValues="1..65534"/>
+                  <F_WD_Time DefaultValue="500" AllowedValues="1..10000"/>
+                  <F_Par_CRC DefaultValue="37411"/>
+                </F_ParameterRecordDataItem>
+              </RecordDataList>
+			  <ModuleInfo>
+                <Name TextId="FDIO64"/>
+                <InfoText TextId="FDIO64_Info"/>
+              </ModuleInfo>
+            </VirtualSubmoduleItem>
+          </VirtualSubmoduleList>
+        </ModuleItem>
+		<ModuleItem ID="2" ModuleIdentNumber="0x0000018F">
+          <ModuleInfo>
+            <Name TextId="FDIO64_iPar"/>
+            <InfoText TextId="FDIO64_iPar_Info"/>
+            <OrderNumber Value="KUKADevF64_2.4_iPar"/>
+          </ModuleInfo>
+          <VirtualSubmoduleList>
+            <VirtualSubmoduleItem ID="2" SubmoduleIdentNumber="0x00000001" PROFIsafeSupported="true" Writeable_IM_Records="1 2 3" MayIssueProcessAlarm="false">
+              <IOData F_IO_StructureDescCRC="3595">
+                <Input Consistency="All items consistency">
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="F_MessageTrailer4Byte" TextId="IDT_DATAITEM_Safety"/>
+                </Input>
+                <Output Consistency="All items consistency">
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="F_MessageTrailer4Byte" TextId="IDT_DATAITEM_Safety"/>
+                </Output>
+              </IOData>
+              <RecordDataList>
+                 <F_ParameterRecordDataItem F_ParamDescCRC="18545" Index="128">
+				  <F_Check_iPar DefaultValue="NoCheck" AllowedValues="Check NoCheck" Changeable="false"/>
+                  <F_SIL DefaultValue="SIL2" AllowedValues="SIL2" Changeable="false"/>
+                  <F_CRC_Length DefaultValue="3-Byte-CRC" AllowedValues="3-Byte-CRC" Visible="false"/>
+                  <F_Block_ID DefaultValue="1"/>
+                  <F_Par_Version/>
+                  <F_Source_Add AllowedValues="1..65534"/>
+                  <F_Dest_Add AllowedValues="1..65534"/>
+                  <F_WD_Time DefaultValue="500" AllowedValues="1..10000"/>
+                  <F_Par_CRC DefaultValue="21193"/>
+				  <F_iPar_CRC DefaultValue="0"/>
+                </F_ParameterRecordDataItem>
+              </RecordDataList>
+			  <ModuleInfo>
+                <Name TextId="FDIO64_iPar"/>
+                <InfoText TextId="FDIO64_iPar_Info"/>
+              </ModuleInfo>
+            </VirtualSubmoduleItem>
+          </VirtualSubmoduleList>
+        </ModuleItem>
+		<ModuleItem ID="3" RequiredSchemaVersion="V2.31" ModuleIdentNumber="0x0000028F">
+          <ModuleInfo>
+            <Name TextId="FDIO64_2_61"/>
+            <InfoText TextId="FDIO64_2_61_Info"/>
+            <OrderNumber Value="KUKADevF64_2.6.1"/>
+          </ModuleInfo>
+          <VirtualSubmoduleList>
+            <VirtualSubmoduleItem ID="3" SubmoduleIdentNumber="0x00000001" PROFIsafeSupported="true" Writeable_IM_Records="1 2 3" MayIssueProcessAlarm="false">
+              <IOData F_IO_StructureDescCRC="57137">
+                <Input Consistency="All items consistency">
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="F_MessageTrailer5Byte" TextId="IDT_DATAITEM_Safety"/>
+                </Input>
+                <Output Consistency="All items consistency">
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="F_MessageTrailer5Byte" TextId="IDT_DATAITEM_Safety"/>
+                </Output>
+              </IOData>
+              <RecordDataList>
+                 <F_ParameterRecordDataItem F_ParamDescCRC="30322" Index="128">
+				  <F_Check_iPar/>
+                  <F_SIL DefaultValue="SIL2" AllowedValues="SIL2" Changeable="false"/>
+                  <F_CRC_Length DefaultValue="4-Byte-CRC" AllowedValues="4-Byte-CRC" Visible="true" Changeable="false"/>
+				  <F_CRC_Seed DefaultValue="CRC-Seed24/32" AllowedValues="CRC-Seed24/32" Visible="true" Changeable="false"/>
+				  <F_Passivation DefaultValue="Device/Module" AllowedValues="Device/Module" Visible="true" Changeable="false"/>
+                  <F_Block_ID DefaultValue="0"/>
+                  <F_Par_Version/>
+                  <F_Source_Add AllowedValues="1..65534"/>
+                  <F_Dest_Add AllowedValues="1..65534"/>
+                  <F_WD_Time DefaultValue="500" AllowedValues="1..10000"/>
+                  <F_Par_CRC DefaultValue="16289"/>
+                </F_ParameterRecordDataItem>
+              </RecordDataList>
+			  <ModuleInfo>
+                <Name TextId="FDIO64_2_61"/>
+                <InfoText TextId="FDIO64_2_61_Info"/>
+              </ModuleInfo>
+            </VirtualSubmoduleItem>
+          </VirtualSubmoduleList>
+        </ModuleItem>
+		<ModuleItem ID="4" RequiredSchemaVersion="V2.31" ModuleIdentNumber="0x0000038F">
+          <ModuleInfo>
+            <Name TextId="FDIO64_2_61_iPar"/>
+            <InfoText TextId="FDIO64_2_61_iPar_Info"/>
+            <OrderNumber Value="KUKADevF64_2.6.1iPar"/>
+          </ModuleInfo>
+          <VirtualSubmoduleList>
+            <VirtualSubmoduleItem ID="4" SubmoduleIdentNumber="0x00000001" PROFIsafeSupported="true" Writeable_IM_Records="1 2 3" MayIssueProcessAlarm="false">
+              <IOData F_IO_StructureDescCRC="57137">
+                <Input Consistency="All items consistency">
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDI8"/>
+                  <DataItem DataType="F_MessageTrailer5Byte" TextId="IDT_DATAITEM_Safety"/>
+                </Input>
+                <Output Consistency="All items consistency">
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="FDO8"/>
+                  <DataItem DataType="F_MessageTrailer5Byte" TextId="IDT_DATAITEM_Safety"/>
+                </Output>
+              </IOData>
+              <RecordDataList>
+                 <F_ParameterRecordDataItem F_ParamDescCRC="1587" Index="128">
+				  <F_Check_iPar DefaultValue="NoCheck" AllowedValues="Check NoCheck" Changeable="false"/>
+                  <F_SIL DefaultValue="SIL2" AllowedValues="SIL2" Changeable="false"/>
+                  <F_CRC_Length DefaultValue="4-Byte-CRC" AllowedValues="4-Byte-CRC" Visible="true" Changeable="false"/>
+				  <F_CRC_Seed DefaultValue="CRC-Seed24/32" AllowedValues="CRC-Seed24/32" Visible="true" Changeable="false"/>
+				  <F_Passivation DefaultValue="Device/Module" AllowedValues="Device/Module" Visible="true" Changeable="false"/>
+                  <F_Block_ID DefaultValue="1"/>
+                  <F_Par_Version/>
+                  <F_Source_Add AllowedValues="1..65534"/>
+                  <F_Dest_Add AllowedValues="1..65534"/>
+                  <F_WD_Time DefaultValue="500" AllowedValues="1..10000"/>
+                  <F_Par_CRC DefaultValue="65355"/>
+				  <F_iPar_CRC DefaultValue="0"/>
+                </F_ParameterRecordDataItem>
+              </RecordDataList>
+			  <ModuleInfo>
+                <Name TextId="FDIO64_2_61_iPar"/>
+                <InfoText TextId="FDIO64_2_61_iPar_Info"/>
+              </ModuleInfo>
+            </VirtualSubmoduleItem>
+          </VirtualSubmoduleList>
+        </ModuleItem>
+        <ModuleItem ID="5" ModuleIdentNumber="0x00000080">
+          <ModuleInfo>
+            <Name TextId="DIO8"/>
+            <InfoText TextId="DIO8"/>
+            <OrderNumber Value="KUKA Device IO8"/>
+          </ModuleInfo>
+          <VirtualSubmoduleList>
+            <VirtualSubmoduleItem ID="5" SubmoduleIdentNumber="0x00000001" Writeable_IM_Records="1 2 3" MayIssueProcessAlarm="false">
+              <IOData>
+                <Input>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                </Input>
+                <Output>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                </Output>
+              </IOData>
+              <ModuleInfo>
+                <Name TextId="DIO8"/>
+                <InfoText TextId="DIO8"/>
+              </ModuleInfo>
+            </VirtualSubmoduleItem>
+          </VirtualSubmoduleList>
+        </ModuleItem>
+        <ModuleItem ID="6" ModuleIdentNumber="0x00000100">
+          <ModuleInfo>
+            <Name TextId="DIO16"/>
+            <InfoText TextId="DIO16"/>
+            <OrderNumber Value="KUKA Device IO16"/>
+          </ModuleInfo>
+          <VirtualSubmoduleList>
+            <VirtualSubmoduleItem ID="6" SubmoduleIdentNumber="0x00000001" Writeable_IM_Records="1 2 3" MayIssueProcessAlarm="false">
+              <IOData>
+                <Input>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                </Input>
+                <Output>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                </Output>
+              </IOData>
+              <ModuleInfo>
+                <Name TextId="DIO16"/>
+                <InfoText TextId="DIO16"/>
+              </ModuleInfo>
+            </VirtualSubmoduleItem>
+          </VirtualSubmoduleList>
+        </ModuleItem>
+        <ModuleItem ID="7" ModuleIdentNumber="0x00000200">
+          <ModuleInfo>
+            <Name TextId="DIO32"/>
+            <InfoText TextId="DIO32"/>
+            <OrderNumber Value="KUKA Device IO32"/>
+          </ModuleInfo>
+          <VirtualSubmoduleList>
+            <VirtualSubmoduleItem ID="7" SubmoduleIdentNumber="0x00000001" Writeable_IM_Records="1 2 3" MayIssueProcessAlarm="false">
+              <IOData>
+                <Input>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                </Input>
+                <Output>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                </Output>
+              </IOData>
+              <ModuleInfo>
+                <Name TextId="DIO32"/>
+                <InfoText TextId="DIO32"/>
+              </ModuleInfo>
+            </VirtualSubmoduleItem>
+          </VirtualSubmoduleList>
+        </ModuleItem>
+        <ModuleItem ID="8" ModuleIdentNumber="0x00000400">
+          <ModuleInfo>
+            <Name TextId="DIO64"/>
+            <InfoText TextId="DIO64"/>
+            <OrderNumber Value="KUKA Device IO64"/>
+          </ModuleInfo>
+          <VirtualSubmoduleList>
+            <VirtualSubmoduleItem ID="8" SubmoduleIdentNumber="0x00000001" Writeable_IM_Records="1 2 3" MayIssueProcessAlarm="false">
+              <IOData>
+                <Input>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                </Input>
+                <Output>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                </Output>
+              </IOData>
+              <ModuleInfo>
+                <Name TextId="DIO64"/>
+                <InfoText TextId="DIO64"/>
+              </ModuleInfo>
+            </VirtualSubmoduleItem>
+          </VirtualSubmoduleList>
+        </ModuleItem>
+        <ModuleItem ID="9" ModuleIdentNumber="0x00000800">
+          <ModuleInfo>
+            <Name TextId="DIO128"/>
+            <InfoText TextId="DIO128"/>
+            <OrderNumber Value="KUKA Device IO128"/>
+          </ModuleInfo>
+          <VirtualSubmoduleList>
+            <VirtualSubmoduleItem ID="9" SubmoduleIdentNumber="0x00000001" Writeable_IM_Records="1 2 3" MayIssueProcessAlarm="false">
+              <IOData>
+                <Input>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                </Input>
+                <Output>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                </Output>
+              </IOData>
+              <ModuleInfo>
+                <Name TextId="DIO128"/>
+                <InfoText TextId="DIO128"/>
+              </ModuleInfo>
+            </VirtualSubmoduleItem>
+          </VirtualSubmoduleList>
+        </ModuleItem>
+		<ModuleItem ID="10" ModuleIdentNumber="0x00000C00">
+          <ModuleInfo>
+            <Name TextId="DIO192"/>
+            <InfoText TextId="DIO192"/>
+            <OrderNumber Value="KUKA Device IO192"/>
+          </ModuleInfo>
+          <VirtualSubmoduleList>
+            <VirtualSubmoduleItem ID="10" SubmoduleIdentNumber="0x00000001" Writeable_IM_Records="1 2 3" MayIssueProcessAlarm="false">
+              <IOData>
+                <Input>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                </Input>
+                <Output>
+				  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                </Output>
+              </IOData>
+              <ModuleInfo>
+                <Name TextId="DIO192"/>
+                <InfoText TextId="DIO192"/>
+              </ModuleInfo>
+            </VirtualSubmoduleItem>
+          </VirtualSubmoduleList>
+        </ModuleItem>
+        <ModuleItem ID="11" ModuleIdentNumber="0x00001000">
+          <ModuleInfo>
+            <Name TextId="DIO256"/>
+            <InfoText TextId="DIO256"/>
+            <OrderNumber Value="KUKA Device IO256"/>
+          </ModuleInfo>
+          <VirtualSubmoduleList>
+            <VirtualSubmoduleItem ID="11" SubmoduleIdentNumber="0x00000001" Writeable_IM_Records="1 2 3" MayIssueProcessAlarm="false">
+              <IOData>
+                <Input>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                </Input>
+                <Output>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                </Output>
+              </IOData>
+              <ModuleInfo>
+                <Name TextId="DIO256"/>
+                <InfoText TextId="DIO256"/>
+              </ModuleInfo>
+            </VirtualSubmoduleItem>
+          </VirtualSubmoduleList>
+        </ModuleItem>
+		<ModuleItem ID="12" ModuleIdentNumber="0x00001400">
+          <ModuleInfo>
+            <Name TextId="DIO320"/>
+            <InfoText TextId="DIO320"/>
+            <OrderNumber Value="KUKA Device IO320"/>
+          </ModuleInfo>
+          <VirtualSubmoduleList>
+            <VirtualSubmoduleItem ID="12" SubmoduleIdentNumber="0x00000001" Writeable_IM_Records="1 2 3" MayIssueProcessAlarm="false">
+              <IOData>
+                <Input>
+				  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                </Input>
+                <Output>
+				  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                </Output>
+              </IOData>
+              <ModuleInfo>
+                <Name TextId="DIO320"/>
+                <InfoText TextId="DIO320"/>
+              </ModuleInfo>
+            </VirtualSubmoduleItem>
+          </VirtualSubmoduleList>
+        </ModuleItem>
+		<ModuleItem ID="13" ModuleIdentNumber="0x00001800">
+          <ModuleInfo>
+            <Name TextId="DIO384"/>
+            <InfoText TextId="DIO384"/>
+            <OrderNumber Value="KUKA Device IO384"/>
+          </ModuleInfo>
+          <VirtualSubmoduleList>
+            <VirtualSubmoduleItem ID="13" SubmoduleIdentNumber="0x00000001" Writeable_IM_Records="1 2 3" MayIssueProcessAlarm="false">
+              <IOData>
+                <Input>
+				  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+				  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                </Input>
+                <Output>
+				  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+				  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                </Output>
+              </IOData>
+              <ModuleInfo>
+                <Name TextId="DIO384"/>
+                <InfoText TextId="DIO384"/>
+              </ModuleInfo>
+            </VirtualSubmoduleItem>
+          </VirtualSubmoduleList>
+        </ModuleItem>
+		<ModuleItem ID="14" ModuleIdentNumber="0x00001C00">
+          <ModuleInfo>
+            <Name TextId="DIO448"/>
+            <InfoText TextId="DIO448"/>
+            <OrderNumber Value="KUKA Device IO448"/>
+          </ModuleInfo>
+          <VirtualSubmoduleList>
+            <VirtualSubmoduleItem ID="14" SubmoduleIdentNumber="0x00000001" Writeable_IM_Records="1 2 3" MayIssueProcessAlarm="false">
+              <IOData>
+                <Input>
+				  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+				  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+				  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                </Input>
+                <Output>
+				  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+				  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+				  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                </Output>
+              </IOData>
+              <ModuleInfo>
+                <Name TextId="DIO448"/>
+                <InfoText TextId="DIO448"/>
+              </ModuleInfo>
+            </VirtualSubmoduleItem>
+          </VirtualSubmoduleList>
+        </ModuleItem>
+        <ModuleItem ID="15" ModuleIdentNumber="0x00002000">
+          <ModuleInfo>
+            <Name TextId="DIO512"/>
+            <InfoText TextId="DIO512"/>
+            <OrderNumber Value="KUKA Device IO512"/>
+          </ModuleInfo>
+          <VirtualSubmoduleList>
+            <VirtualSubmoduleItem ID="15" SubmoduleIdentNumber="0x00000001" Writeable_IM_Records="1 2 3" MayIssueProcessAlarm="false">
+              <IOData>
+                <Input>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                </Input>
+                <Output>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                </Output>
+              </IOData>
+              <ModuleInfo>
+                <Name TextId="DIO512"/>
+                <InfoText TextId="DIO512"/>
+              </ModuleInfo>
+            </VirtualSubmoduleItem>
+          </VirtualSubmoduleList>
+        </ModuleItem>
+		<ModuleItem ID="16" ModuleIdentNumber="0x00003000">
+          <ModuleInfo>
+            <Name TextId="DIO768"/>
+            <InfoText TextId="DIO768"/>
+            <OrderNumber Value="KUKA Device IO768"/>
+          </ModuleInfo>
+          <VirtualSubmoduleList>
+            <VirtualSubmoduleItem ID="16" SubmoduleIdentNumber="0x00000001" Writeable_IM_Records="1 2 3" MayIssueProcessAlarm="false">
+              <IOData>
+                <Input>
+				  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                </Input>
+                <Output>
+				  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                </Output>
+              </IOData>
+              <ModuleInfo>
+                <Name TextId="DIO768"/>
+                <InfoText TextId="DIO768"/>
+              </ModuleInfo>
+            </VirtualSubmoduleItem>
+          </VirtualSubmoduleList>
+        </ModuleItem>
+        <ModuleItem ID="17" ModuleIdentNumber="0x00004000">
+          <ModuleInfo>
+            <Name TextId="DIO1024"/>
+            <InfoText TextId="DIO1024"/>
+            <OrderNumber Value="KUKA Device IO1024"/>
+          </ModuleInfo>
+          <VirtualSubmoduleList>
+            <VirtualSubmoduleItem ID="17" SubmoduleIdentNumber="0x00000001" Writeable_IM_Records="1 2 3" MayIssueProcessAlarm="false">
+              <IOData>
+                <Input>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                </Input>
+                <Output>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                </Output>
+              </IOData>
+              <ModuleInfo>
+                <Name TextId="DIO1024"/>
+                <InfoText TextId="DIO1024"/>
+              </ModuleInfo>
+            </VirtualSubmoduleItem>
+          </VirtualSubmoduleList>
+        </ModuleItem>
+		<ModuleItem ID="18" ModuleIdentNumber="0x00006000">
+          <ModuleInfo>
+            <Name TextId="DIO1536"/>
+            <InfoText TextId="DIO1536"/>
+            <OrderNumber Value="KUKA Device IO1536"/>
+          </ModuleInfo>
+          <VirtualSubmoduleList>
+            <VirtualSubmoduleItem ID="18" SubmoduleIdentNumber="0x00000001" Writeable_IM_Records="1 2 3" MayIssueProcessAlarm="false">
+              <IOData>
+                <Input>
+				  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                </Input>
+                <Output>
+				  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                </Output>
+              </IOData>
+              <ModuleInfo>
+                <Name TextId="DIO1536"/>
+                <InfoText TextId="DIO1536"/>
+              </ModuleInfo>
+            </VirtualSubmoduleItem>
+          </VirtualSubmoduleList>
+        </ModuleItem>
+        <ModuleItem ID="19" ModuleIdentNumber="0x00007F00">
+          <ModuleInfo>
+            <Name TextId="DIO2032"/>
+            <InfoText TextId="DIO2032"/>
+            <OrderNumber Value="KUKA Device IO2032"/>
+          </ModuleInfo>
+          <VirtualSubmoduleList>
+            <VirtualSubmoduleItem ID="19" SubmoduleIdentNumber="0x00000001" Writeable_IM_Records="1 2 3" MayIssueProcessAlarm="false">
+              <IOData>
+                <Input>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DI8" DataType="Unsigned8" UseAsBits="true"/>
+                </Input>
+                <Output>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                  <DataItem TextId="DO8" DataType="Unsigned8" UseAsBits="true"/>
+                </Output>
+              </IOData>
+              <ModuleInfo>
+                <Name TextId="DIO2032"/>
+                <InfoText TextId="DIO2032"/>
+              </ModuleInfo>
+            </VirtualSubmoduleItem>
+          </VirtualSubmoduleList>
+        </ModuleItem>
+      </ModuleList>
+	  <ChannelDiagList>
+		<ChannelDiagItem ErrorType="256">
+			<Name TextId="ChannelErrorTypeNested"/>
+			<ExtChannelDiagList>
+				<ExtChannelDiagItem ErrorType="1">
+					<Name TextId="ExtChannelErrorTypeBusError"/>
+				</ExtChannelDiagItem>
+				<ExtChannelDiagItem ErrorType="2">
+					<Name TextId="ExtChannelErrorTypeMaintenanceRequest"/>
+				</ExtChannelDiagItem>
+				<ExtChannelDiagItem ErrorType="3">
+					<Name TextId="ExtChannelErrorTypeMaintenanceDemand"/>
+				</ExtChannelDiagItem>
+				<ExtChannelDiagItem ErrorType="4">
+					<Name TextId="ExtChannelErrorTypeDiagnosis"/>
+				</ExtChannelDiagItem>
+			</ExtChannelDiagList>
+		</ChannelDiagItem>
+      </ChannelDiagList>
+      <GraphicsList>
+        <GraphicItem ID="1" GraphicFile="GSDML-019B-0300-KRC"/>
+      </GraphicsList>
+      <ExternalTextList>
+        <PrimaryLanguage>
+          <Text TextId="InfoTextId1" Value="PROFINET IO"/>
+          <Text TextId="KRC4-ProfiNet_5.0" Value="KRC4-ProfiNet_5.0"/>
+          <Text TextId="IDT_DATAITEM_Safety" Value="Safety"/>
+          <Text TextId="Interface1" Value="Interface1"/>
+          <Text TextId="Port1" Value="Port1"/>
+          <Text TextId="FDIO64_iPar" Value="64 safe digital in- and outputs (2.4 + iParCRC)"/>
+		  <Text TextId="FDIO64_2_61_iPar" Value="64 safe digital in- and outputs (2.6.1 + iParCRC)"/>
+		  <Text TextId="FDIO64_2_61" Value="64 safe digital in- and outputs (2.6.1)"/>
+		  <Text TextId="FDIO64" Value="64 safe digital in- and outputs (2.4)"/>
+		  <Text TextId="FDIO64_Info" Value="64 safe digital in- and outputs, PROFIsafe Standard 2.4"/>
+		  <Text TextId="FDIO64_2_61_Info" Value="64 safe digital in- and outputs, PROFIsafe Standard 2.6.1"/>
+		  <Text TextId="FDIO64_2_61_iPar_Info" Value="64 safe digital in- and outputs, PROFIsafe Standard 2.6.1 with iParCRC"/>
+		  <Text TextId="FDIO64_iPar_Info" Value="64 safe digital in- and outputs, PROFIsafe Standard 2.4 with iParCRC"/>
+          <Text TextId="DIO8" Value="8 digital in- and outputs"/>
+          <Text TextId="DIO16" Value="16 digital in- and outputs"/>
+          <Text TextId="DIO32" Value="32 digital in- and outputs"/>
+          <Text TextId="DIO64" Value="64 digital in- and outputs"/>
+          <Text TextId="DIO128" Value="128 digital in- and outputs"/>
+		  <Text TextId="DIO192" Value="192 digital in- and outputs"/>
+          <Text TextId="DIO256" Value="256 digital in- and outputs"/>
+		  <Text TextId="DIO320" Value="320 digital in- and outputs"/>
+		  <Text TextId="DIO384" Value="384 digital in- and outputs"/>
+		  <Text TextId="DIO448" Value="448 digital in- and outputs"/>
+          <Text TextId="DIO512" Value="512 digital in- and outputs"/>
+		  <Text TextId="DIO768" Value="768 digital in- and outputs"/>
+          <Text TextId="DIO1024" Value="1024 digital in- and outputs"/>
+		  <Text TextId="DIO1536" Value="1536 digital in- and outputs"/>
+          <Text TextId="DIO2032" Value="2032 digital in- and outputs"/>
+          <Text TextId="DI8" Value="8 digital inputs"/>
+          <Text TextId="DO8" Value="8 digital outputs"/>
+          <Text TextId="FDI8" Value="8 safe digital inputs"/>
+          <Text TextId="FDO8" Value="8 safe digital outputs"/>
+		  <Text TextId="ChannelErrorTypeNested" Value="Alarm on underlying device"/>
+		  <Text TextId="ExtChannelErrorTypeBusError" Value="Bus error on underlying device"/>
+		  <Text TextId="ExtChannelErrorTypeMaintenanceRequest" Value="Maintenance request on underlying device"/>
+		  <Text TextId="ExtChannelErrorTypeMaintenanceDemand" Value="Maintenance demand on underlying device"/>
+		  <Text TextId="ExtChannelErrorTypeDiagnosis" Value="Diagnosis alert on underlying device"/>
+        </PrimaryLanguage>
+        <Language xml:lang="de">
+          <Text TextId="InfoTextId1" Value="PROFINET IO"/>
+          <Text TextId="KRC4-ProfiNet_5.0" Value="KRC4-ProfiNet_5.0"/>
+          <Text TextId="IDT_DATAITEM_Safety" Value="Safety"/>
+          <Text TextId="Interface1" Value="Interface1"/>
+          <Text TextId="Port1" Value="Port1"/>
+		  <Text TextId="FDIO64_iPar" Value="64 sichere digitale Ein- und Ausgänge (2.4 + iParCRC)"/>
+		  <Text TextId="FDIO64_2_61_iPar" Value="64 sichere digitale Ein- und Ausgänge (2.6.1 + iParCRC)"/>
+		  <Text TextId="FDIO64_2_61" Value="64 sichere digitale Ein- und Ausgänge (2.6.1)"/>
+          <Text TextId="FDIO64" Value="64 sichere digitale Ein- und Ausgänge (2.4)"/>
+		  <Text TextId="FDIO64_Info" Value="64 sichere digitale Ein- und Ausgänge, PROFIsafe Standard 2.4"/>
+		  <Text TextId="FDIO64_2_61_Info" Value="64 sichere digitale Ein- und Ausgänge, PROFIsafe Standard 2.6.1"/>
+		  <Text TextId="FDIO64_2_61_iPar_Info" Value="64 sichere digitale Ein- und Ausgänge, PROFIsafe Standard 2.6.1 mit iParCRC"/>
+		  <Text TextId="FDIO64_iPar_Info" Value="64 sichere digitale Ein- und Ausgänge, PROFIsafe Standard 2.4 mit iParCRC"/>
+          <Text TextId="DIO8" Value="8 digitale Ein- und Ausgänge"/>
+          <Text TextId="DIO16" Value="16 digitale Ein- und Ausgänge"/>
+          <Text TextId="DIO32" Value="32 digitale Ein- und Ausgänge"/>
+          <Text TextId="DIO64" Value="64 digitale Ein- und Ausgänge"/>
+          <Text TextId="DIO128" Value="128 digitale Ein- und Ausgänge"/>
+		  <Text TextId="DIO192" Value="192 digitale Ein- und Ausgänge"/>
+          <Text TextId="DIO256" Value="256 digitale Ein- und Ausgänge"/>
+		  <Text TextId="DIO320" Value="320 digitale Ein- und Ausgänge"/>
+		  <Text TextId="DIO384" Value="384 digitale Ein- und Ausgänge"/>
+		  <Text TextId="DIO448" Value="448 digitale Ein- und Ausgänge"/>
+          <Text TextId="DIO512" Value="512 digitale Ein- und Ausgänge"/>
+		  <Text TextId="DIO768" Value="768 digitale Ein- und Ausgänge"/>
+          <Text TextId="DIO1024" Value="1024 digitale Ein- und Ausgänge"/>
+		  <Text TextId="DIO1536" Value="1536 digitale Ein- und Ausgänge"/>
+          <Text TextId="DIO2032" Value="2032 digitale Ein- und Ausgänge"/>
+          <Text TextId="DI8" Value="8 digitale Eingänge"/>
+          <Text TextId="DO8" Value="8 digitale Ausgänge"/>
+          <Text TextId="FDI8" Value="8 sichere digitale Eingänge"/>
+          <Text TextId="FDO8" Value="8 sichere digitale Ausgänge"/>
+		  <Text TextId="ChannelErrorTypeNested" Value="Alarm auf unterlagertem Gerät"/>
+		  <Text TextId="ExtChannelErrorTypeBusError" Value="Busfehler auf unterlagerten Gerät"/>
+		  <Text TextId="ExtChannelErrorTypeMaintenanceRequest" Value="Wartungsanforderung auf unterlagertem Gerät"/>
+		  <Text TextId="ExtChannelErrorTypeMaintenanceDemand" Value="Wartungsbedarf auf unterlagertem Gerät"/>
+		  <Text TextId="ExtChannelErrorTypeDiagnosis" Value="Diagnosealarm auf unterlagertem Gerät"/>
+        </Language>
+      </ExternalTextList>
+    </ApplicationProcess>
+  </ProfileBody>
+</ISO15745Profile>

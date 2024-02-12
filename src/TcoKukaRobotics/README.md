@@ -1,8 +1,8 @@
-# TcoAbbRobotics
+# TcoKukaRobotics
 
 ## Introduction
 
-The **TcoAbbRobotics** is a set of libraries that cover two product platforms in ABB's manufacturing portfolio: the **IRC5** and the **Omnicore** platform." for the target PLC platform [Twincat](https://www.beckhoff.com/en-en/products/automation/twincat/twincat-3-build-4024/) and [TcOpen](https://github.com/TcOpenGroup/TcOpen#readme) framework.
+The **TcoKukaRobotics** is a set of libraries that cover  products platforms in Kukas's manufacturing portfolio (**Krc4**)  for the target PLC platform [Twincat](https://www.beckhoff.com/en-en/products/automation/twincat/twincat-3-build-4024/) and [TcOpen](https://github.com/TcOpenGroup/TcOpen#readme) framework.
 
 The package consists of a PLC library providing control logic and its .NET twin counterpart aimed at the visualization part.
 
@@ -10,44 +10,39 @@ The package consists of a PLC library providing control logic and its .NET twin 
 
 **Check general prerequisites for TcOpen [here](https://github.com/TcOpenGroup/TcOpen#prerequisites).**
 
- ## TcoAbbRobotics
+ ## TcoKukaRobotics
 ### PLC enviroment
 --- 
-#### **_Preconditions:_** The **`gsdml`** file(s) should be copied into the subfolder ..\Config\Io\EtherCat\ of the TwinCAT3 instalation folder, before opening Visual Studio. The Profinet interface of the slave device is activated. The file depends on manufacturer of drive. Robot settings needs to by done in settings   by RobotStudio sfotware by ABB or directly via robot teach pendant. 
+#### **_Preconditions:_** The **`gsdml`** file(s) should be copied into the subfolder ..\Config\Io\EtherCat\ of the TwinCAT3 instalation folder, before opening Visual Studio. The Profinet interface of the slave device is activated. (Kuka robot can be controled over Ethercat protocol). Robot settings needs to by done in settings   by  sfotware by Kuka and directly via robot teach pendant. 
 ---
 
-#### **_Preconditions:_** The robot software is part of repository. Use **RobotStudio** to open project. And transfer it  to robot.
----
 
 #### Implementation steps.
 #### 1. Declare the hardware structures in the Global Variable list (GVL).
 ```csharp
 
 VAR_GLOBAL
-  	Robot1	:	TcoAbbRobotics.TcoIrc5_IO_v_1_x_x;
-	Robot2	:	TcoAbbRobotics.TcoOmnicore_IO_v_1_x_x;
+  	Robot1	:	TcoKukaRobotics.TcoKrc4_IO_v_5_x_x;
+	
 END_VAR
 ```
 #### 2. Build the XAE project.
 
 #### 3. Add Profinet master device, set its network adapter and network parameters.
 
-#### 4. Scann for new Profinet devices, or use already prepared `xti` files and  use `Add Existing`. This files are localized in `.\src\TcoAbbRobotics\src\TcoAbbRoboticsConnector\ddf\`. `Robot1.xti` is valid for Irc5 and `Robot2.xti` for `Omnicore` 
+#### 4. Scann for new Profinet devices, or use already prepared `xti` files and  use `Add Existing`. This files are localized in `.\src\TcoKukaRobotics\src\TcoKukaRoboticsConnector\ddf\`. `Robot1.xti` is valid for Krc4.
 
 #### 5. Connect your Gvl structures with  hardware. Refers to bechokff  documentation if there are some issues, or for guidance how to mapping. 
 
 #### 6. Create the Function Block that extends the **`TcoCore.TcoContext`** function block.
 
-#### 7. Inside the declaration part of the function block created, add an instance of the **`TcoAbbRobotics.TcoIrc5_v_1_x_x`**  or **`TcoAbbRobotics.TcoOmnicore_v_1_x_x`**. Add the **`Main`** method into this function block  and insert the instances. Call with passing the mapped hardware structure
+#### 7. Inside the declaration part of the function block created, add an instance of the **`TcoKukaRobotics.TcoKrc4_v_5_x_x`**. Add the **`Main`** method into this function block  and insert the instances. Call with passing the mapped hardware structure
 
 ```csharp
 FUNCTION_BLOCK WpfContext EXTENDS TcoCore.TcoContext
 VAR
-     {attribute addProperty Name "<#Abb IRC 5#>"}
-    _robot1 : TcoAbbRobotics.TcoIrc5_v_1_x_x(THIS^);
-	{attribute addProperty Name "<#Abb Omnicore#>"}
-    _robot2 : TcoAbbRobotics.TcoOmnicore_v_1_x_x(THIS^);
-
+    {attribute addProperty Name "<#Krc4 #>"}
+    _robot1 : TcoKukaRobotics.TcoKrc4_v_5_x_x(THIS^);
 
 END_VAR
 
@@ -58,20 +53,16 @@ END_VAR
 ```csharp
 /IF _serviceModeActive THEN
    	_robot1.Service();
-  	_robot2.Service();
  
 
 
 END_IF
 _robot1(
     inoData := GVL.Robot1);
-
-
-_robot2(
-    inoData := GVL.Robot2);
 ```
 
 #### 9. In the declaration part of the **`MAIN(PRG)`** create an instance of the function block created in the step 7 according to the example. 
+
 ```csharp
 PROGRAM MAIN
 VAR
@@ -100,19 +91,19 @@ _wpfContext.Run();
 
 #### 1. Run the **`Vortex Builder`**.
 
-#### 2. Into the **`MainWindow.xaml`** define **`DataContext`** to the **`MAIN`** of the **`TcoAbbRoboticsTestsPlc`**.
+#### 2. Into the **`MainWindow.xaml`** define **`DataContext`** to the **`MAIN`** of the **`TcoKukaRoboticsTestsPlc`**.
 ```xml
-<Window x:Class="TcoAbbRobotics.Wpf.Sandbox.MainWindow"
+<Window x:Class="TcoKukaRobotics.Wpf.Sandbox.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:tcopen="clr-namespace:TcoAbbRoboticsTests;assembly=TcoAbbRoboticsTestsConnector"
+        xmlns:tcopen="clr-namespace:TcoKukaRoboticsTests;assembly=TcoKukaRoboticsTestsConnector"
         xmlns:vortex="http://vortex.mts/xaml" 
         Title="MainWindow"
         Width="800"
         Height="450"
-        DataContext="{x:Static tcopen:Entry.TcoAbbRoboticsTestsPlc}"
+        DataContext="{x:Static tcopen:Entry.TcoKukaRoboticsTestsPlc}"
         mc:Ignorable="d">
 
 
@@ -123,14 +114,13 @@ _wpfContext.Run();
        static string TargetAmsId = Environment.GetEnvironmentVariable("Tc3Target");
         static int TargetAmsPort = 852;
 
-        public static TcoAbbRoboticsTestsTwinController TcoAbbRoboticsTestsPlc { get; }
-            = new TcoAbbRoboticsTestsTwinController(Vortex.Adapters.Connector.Tc3.Adapter.Tc3ConnectorAdapter.Create(TargetAmsId, TargetAmsPort, true));
+        public static TcoKukaRoboticsTestsTwinController TcoKukaRoboticsTestsPlc { get; }
+            = new TcoKukaRoboticsTestsTwinController(Vortex.Adapters.Connector.Tc3.Adapter.Tc3ConnectorAdapter.Create(TargetAmsId, TargetAmsPort, true));
 ```
 
-#### 3. Into the container added, insert the **`RenderableContentControl`** and bind its **`DataContext`** to the **`   _robot1 : TcoAbbRobotics.TcoIrc5_v_1_x_x(THIS^)`** or **` _robot2 : TcoAbbRobotics.TcoOmnicore_v_1_x_x(THIS^)`**, using the **`PresentationType`** of the value **`Service`**.
+#### 3. Into the container added, insert the **`RenderableContentControl`** and bind its **`DataContext`** to the **`   _robot1 : TcoKukaRobotics.TcoKrc4_v_5_x_x(THIS^)`**, using the **`PresentationType`** of the value **`Service`**.
 ```XML
     <vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext._robot1}" PresentationType="Service"/>
-	<vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext._robot2}" PresentationType="Service"/>
 ```
 
 ```
@@ -151,6 +141,10 @@ Expanded (detailed info) view
 Service view report an error notification
 
 ![](assets/robotEstopActive.png)
+
+Report an error notification in diagnostic
+
+![](assets/robotEstopActiveDiagnostic.png)
 
 
 
