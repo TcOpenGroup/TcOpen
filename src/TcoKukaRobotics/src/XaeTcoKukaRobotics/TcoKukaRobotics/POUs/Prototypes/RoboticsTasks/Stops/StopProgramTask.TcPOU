@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="StopProgramTask" Id="{393fe41a-d99c-0f7a-132f-ead67400ce89}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK StopProgramTask EXTENDS TcoKukaRoboticsTask
+VAR
+
+	_stopType: TcoAbstractions.eTcoRoboticsStopType;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+
+IF Execute() THEN
+	IF _progress = 0 THEN
+		IF NOT __ISVALIDREF(inoControl) THEN
+			_varInfo :=__VARINFO(inoControl);
+			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+		ELSIF NOT __ISVALIDREF(inoConfig) THEN                                                  
+			_varInfo :=__VARINFO(inoConfig);                                                    
+			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+		ELSIF NOT __ISVALIDREF(inoStatus) THEN                                                  
+			_varInfo :=__VARINFO(inoStatus);                                                    
+			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+			ELSE
+			_progress := _progress + 1;
+		END_IF
+
+	END_IF
+	IF _progress = 1 THEN
+		inoControl.MoveEnable:=FALSE ;
+	
+	END_IF;		
+	
+	
+	_varInfo :=__VARINFO( inoStatus.State.ProActive);                                                
+	THIS^.Messenger.OnCondition(_infoTimer.Q AND  inoStatus.State.ProActive)
+		.Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).Append('<# is OFF #>').ToString());
+	
+    DoneWhen(NOT inoStatus.State.ProActive );
+    CallTimers(TRUE);
+	
+	THIS^.ThrowWhen(_errorTimer.Q);
+END_IF
+
+IF  THIS^.Error AND NOT _errorMessage.Pinned THEN
+	THIS^.Restore();
+END_IF]]></ST>
+    </Implementation>
+    <Method Name="FB_init" Id="{1b0eea46-4c62-019f-158b-4412a4bfd216}">
+      <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
+VAR_INPUT
+    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+  	ParentObject : ITcoObject;	
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[		    
+                                ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="InvokeWithParams" Id="{6b38ce0f-aa5a-0c25-1430-85b4cf78091e}">
+      <Declaration><![CDATA[METHOD INTERNAL InvokeWithParams : ITcoTaskStatus
+VAR_INPUT
+	inStopType : eTcoRoboticsStopType;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_stopType := inStopType;
+InvokeWithParams := THIS^.Invoke();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnAbort" Id="{4f32c2a1-d0f2-0225-328b-9a5fb2baec83}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task is aborted.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnAbort
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Stop program was aborted, while not yet completed!#>';END_IF; 
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnDone" Id="{ad29b971-074c-0aa3-1aae-f56bf7d7e925}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task reaches the ```Done``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnDone
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN  THIS^.inoStatus.ActionDescription := '<#Stop program was completed successfully.#>';END_IF; 
+_progress:=0;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnError" Id="{bd7df0ca-4350-0caa-3772-005b47f7f140}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task reaches the ```Error``` state.
+>
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnError
+VAR
+	description: STRING;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.inoStatus.ActionDescription := '<#Stopping program with error.#>';
+IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := description; END_IF;
+THIS^._errorMessage.Error(_sb.Clear().Append(description).Append(' To restore acknowledge this alarm.').ToString()).Pin();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStart" Id="{509b6d3e-b8a6-0ad8-18c2-dab4c0423ec7}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStart 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN  THIS^.inoStatus.ActionDescription := '<#Stopping program started.#>'; END_IF; 
+CallTimers(FALSE);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{ad9f40cc-10fa-0c83-1487-b256883e9190}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+			<para>
+				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD Restore : ITcoRestorable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.Restore();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

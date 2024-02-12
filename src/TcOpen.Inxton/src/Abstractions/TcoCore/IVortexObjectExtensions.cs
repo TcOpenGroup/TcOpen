@@ -86,7 +86,7 @@ namespace TcoCore
            
             currentDepth++;
             
-            if (obj != null && currentDepth < depth)
+            if (obj != null && currentDepth <= depth)
             {
                 foreach (var child in obj.GetChildren())
                 {
