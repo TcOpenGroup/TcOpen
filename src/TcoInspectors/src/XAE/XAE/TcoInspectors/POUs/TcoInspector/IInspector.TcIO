@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <Itf Name="IInspector" Id="{0cbe9e39-d5a4-05af-17ce-7965efd20de3}">
     <Declaration><![CDATA[INTERFACE IInspector EXTENDS __SYSTEM.IQueryInterface
 ]]></Declaration>
@@ -40,6 +40,23 @@ PROPERTY CommonData : REFERENCE TO TcoInspectorData]]></Declaration>
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
+    <Method Name="Instruct" Id="{224318fe-b0d5-052c-0281-f5490a547cae}">
+      <Declaration><![CDATA[METHOD Instruct : IInspector
+VAR_INPUT
+	inInstruction:STRING(255);
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="InstructWithImage" Id="{27b2b815-048c-0e70-370e-3cb41b72265b}">
+      <Declaration><![CDATA[METHOD InstructWithImage : IInspector
+VAR_INPUT
+	inImageSource:STRING(255);
+	inHeight:REAL;
+	inWidth:REAL;
+END_VAR
+
+]]></Declaration>
+    </Method>
     <Method Name="OnFail" Id="{ac3abd9c-363c-070f-178a-504f9b7741ff}">
       <Declaration><![CDATA[METHOD OnFail : IOnFail
 ]]></Declaration>
@@ -76,6 +93,42 @@ VAR_IN_OUT
 	~*)
     inoResult : TcoComprehensiveResult;
 END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="WithDescription" Id="{f186ff2b-9fb3-02e9-3cf4-5ab10df77bbe}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Provide information about the Inspector name (if there are multiple inspectors, only the failed ones will be displayed).  (e.g. {attribute addProperty Name "Bolt presence inspection"})
+		</summary>			
+	</docu>	
+~*)
+METHOD WithDescription : IInspector
+
+]]></Declaration>
+    </Method>
+    <Method Name="WithErrorCode" Id="{9309859b-94bb-06e6-10ab-dfe20f9fd755}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Provide information about ErrorCode (if there are multiple inspectors, only the failed ones will be displayed). Error codes shoud be defined in Inspectors
+		</summary>			
+	</docu>	
+~*)
+METHOD WithErrorCode : IInspector
+
+]]></Declaration>
+    </Method>
+    <Method Name="WithFailureDescription" Id="{2d34164d-c11f-0306-2984-768b8e4e972b}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Provide information about Failure Description (if there are multiple inspectors, only the failed ones will be displayed). Failure description shoud be defined in Inspectors.
+		</summary>			
+	</docu>	
+~*)
+METHOD WithFailureDescription : IInspector
+
 ]]></Declaration>
     </Method>
   </Itf>

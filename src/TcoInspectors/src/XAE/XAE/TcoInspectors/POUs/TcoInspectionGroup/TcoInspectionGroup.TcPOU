@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="TcoInspectionGroup" Id="{d3e13610-7815-0c15-1fa4-6b11279e6aa5}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoInspectionGroup EXTENDS TcoInspector IMPLEMENTS ITcoInspectionGroup, ITcoInspectionGroupAct
 VAR
@@ -10,13 +10,16 @@ VAR
     _overallResult            : TcoComprehensiveResult;
     _currentRunResult         : TcoComprehensiveResult;
     _inspections              : ARRAY[0..LAST_INSPECTION_INDEX] OF ULINT;
+	_inspectionsEmpty              : ARRAY[0..LAST_INSPECTION_INDEX] OF ULINT;
     _inspectionIndex          : INT;
     _tierAct                  : TcoCore.TcoTier(THIS^);
     _normalizedAllowedRetries : UINT;
+	
+	
 END_VAR
 
 VAR CONSTANT
-    LAST_INSPECTION_INDEX : INT := 15;
+    LAST_INSPECTION_INDEX : INT := 150;
 	MAX_NORMALIZED_RETRIES : UINT := 65535;
 END_VAR
 
@@ -26,7 +29,11 @@ END_VAR
 
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[
+
+
+
+]]></ST>
     </Implementation>
     <Folder Name="OnFail" Id="{6587d444-c4c8-0ba3-0430-72f2e8ae8a7c}" />
     <Method Name="Act" Id="{35f139a3-c8e1-0dfe-09ea-5e112c3b9b62}">
@@ -44,15 +51,24 @@ METHOD Act : ITcoInspectionGroup
 _inspectionIndex          := 0;
 _done                     := TRUE; // True then set to false if any inspector not done.
 _normalizedAllowedRetries := MAX_NORMALIZED_RETRIES;
-
 Act := THIS^;
 
 
 
 IF (_tierAct.IsNewTier()) THEN
+	_inspections:=_inspectionsEmpty;
     ClearResult(_currentRunResult);
 END_IF
 ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AddInspector" Id="{4d3e3ca0-8eb9-011a-2f20-73f05383d2e5}">
+      <Declaration><![CDATA[METHOD AddInspector : IInspector
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="ClearResult" Id="{f7b2a68e-e38b-05d5-0a30-07f805d8c74c}">
@@ -100,15 +116,15 @@ END_VAR]]></Declaration>
 		_tcoInspectorDialogue();	
 		
 		{warning disable C0357}
-		IF(_tcoInspectorDialogue._dialogueRetry) THEN			
+		IF(_tcoInspectorDialogue._dialogRetry) THEN			
 			Retry(inRetryStep);			
 		END_IF
 		
-		IF(_tcoInspectorDialogue._dialogueTerminate) THEN
+		IF(_tcoInspectorDialogue._dialogTerminate) THEN
 			Terminate();
 		END_IF
 		
-		IF(_tcoInspectorDialogue._dialogueOverride) THEN
+		IF(_tcoInspectorDialogue._dialogOverride) THEN
 			CarryOn();
 		END_IF
 		{warning enable C0357}
@@ -119,7 +135,65 @@ END_VAR]]></Declaration>
 	END_IF;	
 END_IF;
 
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="DialogWithExternalClose" Id="{672e39a2-df24-00dc-01ed-378f101e1a1c}" FolderPath="OnFail\">
+      <Declaration><![CDATA[METHOD DialogWithExternalClose : BOOL
+VAR_INPUT
+	inRetryStep : INT;
+	inRetrySignal:BOOL;
+	inTerminateSignal : BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//IF THIS^._tcoInspectorDialogue.State=eTaskState.Ready THEN
+//	THIS^._tcoInspectorDialogue.DialogRetry 	    :=  FALSE;	
+//	THIS^._tcoInspectorDialogue.DialogTerminate  	:=  FALSE;	
+//	THIS^._tcoInspectorDialogue.DialogOverride   	:=  FALSE;
+//END_IF
 
+
+
+
+_tcoInspectorDialogue.HandleExternalSignals(inRetrySignal:=inRetrySignal,inTerminateSignal:=inTerminateSignal);
+
+
+IF(THIS^.Done) THEN
+	_tcoInspectorDialogue.OverInspected := THIS^.OverInspected;		
+	IF(THIS^._currentRunResult.Result = eOverallResult.Failed) THEN
+		THIS^._tcoInspectorDialogue.Invoke();
+		_tcoInspectorDialogue();	
+						
+		
+		{warning disable C0357}
+		IF(_tcoInspectorDialogue._dialogRetry AND _tcoInspectorDialogue.DialogIsClosed ) THEN			
+			Retry(inRetryStep);	
+	
+		END_IF
+		
+		IF(_tcoInspectorDialogue._dialogTerminate AND _tcoInspectorDialogue.DialogIsClosed ) THEN
+			Terminate();
+		END_IF
+		
+		IF(_tcoInspectorDialogue._dialogOverride AND _tcoInspectorDialogue.DialogIsClosed) THEN
+			CarryOn();
+		END_IF
+		{warning enable C0357}
+	ELSE
+		IF(Coordinator <> 0) THEN
+			Coordinator.MoveNext();
+		END_IF;	
+	END_IF;	
+END_IF;
+
+IF THIS^._tcoInspectorDialogue.State=eTaskState.Done 
+		AND ( _tcoInspectorDialogue.DialogRetry
+		OR _tcoInspectorDialogue.DialogTerminate
+		OR _tcoInspectorDialogue.DialogOverride)
+		AND _tcoInspectorDialogue.DialogIsClosed  THEN	
+	THIS^._tcoInspectorDialogue.Restore();
+END_IF; 
 
 ]]></ST>
       </Implementation>
@@ -139,8 +213,11 @@ END_VAR
       </Get>
     </Property>
     <Method Name="Inspect" Id="{5050b1c2-e64a-023f-2d54-61af21de371f}">
-      <Declaration><![CDATA[{attribute 'hide'}
-{attribute 'obsolete' := 'You should access `Inspect` property via `Act()` method.'}
+      <Declaration><![CDATA[(*~
+	<summary>
+		Add inspector to inspection group to inspect
+	</summary>
+~*)
 METHOD Inspect : ITcoInspectionGroup
 VAR_INPUT
     Inspector : IInspector;
@@ -188,8 +265,7 @@ END_IF
 		</note>
 	</summary>
 ~*)
-{attribute 'hide'}
-{attribute 'obsolete' := 'You should access `NormalizeRetries` property via `Act` method.'}
+
 METHOD NormalizeRetries : ITcoInspectionGroup
 VAR_INPUT
 	inoInspection : IInspector;
@@ -303,8 +379,7 @@ Terminate := THIS^.Done;]]></ST>
 		</summary>			
 	</docu>	
 ~*)
-{attribute 'hide'}
-{attribute 'obsolete' := 'You should access `UpdateOverall` property via `Inspect` method.'}
+
 METHOD UpdateComprehensiveResult : IInspector
 VAR_IN_OUT
 	(*~

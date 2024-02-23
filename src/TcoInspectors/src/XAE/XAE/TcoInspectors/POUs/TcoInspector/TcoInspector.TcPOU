@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="TcoInspector" Id="{cdcabed1-7ff8-095e-24f6-ca93f0ca4004}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
 	<docu>
@@ -200,6 +200,34 @@ END_VAR
 //]]></ST>
       </Implementation>
     </Method>
+    <Method Name="Instruct" Id="{3cb26e75-7a50-092d-1479-a384f5c28729}">
+      <Declaration><![CDATA[METHOD PUBLIC Instruct:IInspector
+VAR_INPUT
+	inInstruction:STRING(255);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+Instruct := THIS^;
+
+_tcoInspectorDialogue.SetInstruction(inInstruction);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="InstructWithImage" Id="{a42d00c6-7233-0888-1090-6ce7efe6f393}">
+      <Declaration><![CDATA[METHOD PUBLIC InstructWithImage:IInspector
+VAR_INPUT
+	inImageSource:STRING(255);
+	inHeight:REAL;
+	inWidth:REAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+InstructWithImage := THIS^;
+
+_tcoInspectorDialogue.SetImageSource(inImageSource,inHeight,inWidth);]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="IsOverinspected" Id="{aad1e11e-ec79-08e0-1e07-69f2014dc971}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -351,7 +379,9 @@ Retry := THIS^.Done;]]></ST>
 METHOD PUBLIC Terminate : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF(_coordinator = 0) THEN
+        <ST><![CDATA[
+
+IF(_coordinator = 0) THEN
 	RETURN;	
 END_IF
 
@@ -450,6 +480,60 @@ END_VAR
 				.Append(';')
 				.ToString();	
 END_IF;			]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithDescription" Id="{b172f812-ddca-0db1-3a24-abfbaed0a77e}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Provide information(name defined in attribute name) about failed inspection (if there are multiple inspectors, only the failed ones will be displayed). 
+		</summary>			
+	</docu>	
+~*)
+METHOD WithDescription : IInspector
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+WithDescription := THIS^;
+
+_tcoInspectorDialogue.ShowDescription:=TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithErrorCode" Id="{722d66a6-523a-072c-2d1a-9dac6fc0da4a}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Provide information about ErrorCode (if there are multiple inspectors, only the failed ones will be displayed). Error codes shoud be defined in Inspectors
+		</summary>			
+	</docu>	
+~*)
+METHOD WithErrorCode : IInspector
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+WithErrorCode := THIS^;
+
+_tcoInspectorDialogue.ShowErrorCode:=TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithFailureDescription" Id="{ad46acc9-dde4-06ba-01ef-ec95bd43a9a8}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Provide information about Failure Description (if there are multiple inspectors, only the failed ones will be displayed). Failure description shoud be defined in Inspectors.
+		</summary>			
+	</docu>	
+~*)
+METHOD WithFailureDescription : IInspector
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+WithFailureDescription := THIS^;
+
+_tcoInspectorDialogue.ShowFailureDescription:=TRUE;]]></ST>
       </Implementation>
     </Method>
   </POU>

@@ -313,7 +313,7 @@ namespace TcoInspectorsUnitTests
             InspectorContainer.ExecuteProbeRun((int)eInspectionGroupTests.UpdateComprehensiveResultDescriptions, 
                 () => {
                     Task.Delay(failTime).Wait();
-                    InspectorContainer._sut._tcoInspectorDialogue._dialogueTerminate.Synchron = true;
+                    InspectorContainer._sut._tcoInspectorDialogue._dialogTerminate.Synchron = true;
                     return true;
             });
 
