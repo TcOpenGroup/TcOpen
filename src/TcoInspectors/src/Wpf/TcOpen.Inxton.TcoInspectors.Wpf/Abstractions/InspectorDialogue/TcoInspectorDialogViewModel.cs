@@ -26,13 +26,13 @@ namespace TcoInspectors
 
 
 
-            RetryCommand = new RelayCommand((a) => { Dialog._dialogueRetry.Synchron = true; CloseRequestEventHandler(this, new EventArgs()); },
+            RetryCommand = new RelayCommand((a) => { Dialog._dialogRetry.Synchron = true; CloseRequestEventHandler(this, new EventArgs()); },
                                             (b) => Dialog != null && !Dialog._isOverInspected.Synchron,
                                             () => TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"{nameof(RetryCommand)} of {Dialog.HumanReadable} was executed @{{payload}}.", new { Dialog.Symbol }));
-            TerminateCommand = new RelayCommand((a) => { Dialog._dialogueTerminate.Synchron = true; CloseRequestEventHandler(this, new EventArgs()); },
+            TerminateCommand = new RelayCommand((a) => { Dialog._dialogTerminate.Synchron = true; CloseRequestEventHandler(this, new EventArgs()); },
                                                 (b) => true,
                                                 () => TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"{nameof(TerminateCommand)} of {Dialog.HumanReadable} was executed @{{payload}}.", new { Dialog.Symbol }));
-            OverrideCommand = new RelayCommand((a) => { Dialog._dialogueOverride.Synchron = true; CloseRequestEventHandler(this, new EventArgs()); },
+            OverrideCommand = new RelayCommand((a) => { Dialog._dialogOverride.Synchron = true; CloseRequestEventHandler(this, new EventArgs()); },
                                                (b) => true,
                                                 () => TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"{nameof(OverrideCommand)} of {Dialog.HumanReadable} was executed @{{payload}}.", new { Dialog.Symbol }));
         }
@@ -72,6 +72,7 @@ namespace TcoInspectors
                 return _inspectorsList;
             }
         }
+
         public string Description
         {
             get
@@ -80,12 +81,110 @@ namespace TcoInspectors
                 var cv = new NameOrSymbolConverter();
                 foreach (var inspector in Inspectors)
                 {
-                    sb.Append(cv.Convert(inspector, typeof(string), null, System.Globalization.CultureInfo.InvariantCulture));
+
+                    var insp = inspector as IsInspector;
+                    if (insp != null)
+                    {
+
+                        if (insp.ResultAsEnum == eInspectorResult.Failed)
+                        {
+                            sb.Append(cv.Convert(inspector, typeof(string), null, System.Globalization.CultureInfo.InvariantCulture));
+                            sb.Append("; ");
+                        }
+                    }
+
+
+
                 }
 
-                return sb.ToString();
+                bool result = sb.ToString().All(c => c == ';' || c == ' ');
+
+                if (result)
+                {
+                    sb.Clear();//clear if failures descriptions are empty
+                }
+                return sb.ToString().TrimEnd(new char[] { ';', ' ' });
+    
             }
         }
+       
+        public string FailureDescription
+        {
+            get
+            {
+                var parent = Dialog.GetParent();
+                parent.Read();
+
+                var sb = new System.Text.StringBuilder();
+            
+                foreach (var inspector in Inspectors)
+                {
+
+                    var insp = inspector as IsInspector;
+                   
+                    if (insp != null)
+                    {
+
+                        if (insp.ResultAsEnum == eInspectorResult.Failed)
+                        {
+                            sb.Append(insp.InspectorData.FailureDescription.Synchron);
+                            sb.Append("; ");
+                        }
+                    }
+
+
+
+                }
+
+                bool result = sb.ToString().All(c => c == ';'|| c==' ');
+
+                if (result )
+                {
+                    sb.Clear();//clear if failures descriptions are empty
+                }
+                return sb.ToString().TrimEnd(new char[] { ';', ' ' });
+            }
+        }
+
+        public string ErrorCode
+        {
+            get
+            {
+                var parent = Dialog.GetParent();
+                parent.Read();
+                var sb = new System.Text.StringBuilder();
+                var cv = new NameOrSymbolConverter();
+                foreach (var inspector in Inspectors)
+                {
+
+                    var insp = inspector as IsInspector;
+                    if (insp != null)
+                    {
+
+                        if (insp.ResultAsEnum == eInspectorResult.Failed)
+                        {
+                            sb.Append(insp.InspectorData.ErrorCode.Synchron);
+                            sb.Append("; ");
+                        }
+                    }
+
+
+
+                }
+
+                bool result = sb.ToString().All(c => c == ';' || c == ' ');
+        
+                if (result)
+                {
+                    sb.Clear();//clear if failures descriptions are empty
+                }
+                return sb.ToString().TrimEnd(new char[] { ';', ' ' });
+            }
+        }
+
+
+
+
         public TcoInspectorDialog Dialog { get; private set; } = new TcoInspectorDialog();
         public override object Model { get => Dialog; set => Dialog = (TcoInspectorDialog)value; }
         public RelayCommand RetryCommand { get; }
@@ -93,17 +192,16 @@ namespace TcoInspectors
         public RelayCommand OverrideCommand { get; }
         public event EventHandler CloseRequestEventHandler;
 
-        int _progress = 0;
+
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-
             Dialog.Read();
-            if (Dialog._dialogueRetry.LastValue || Dialog._dialogueTerminate.LastValue)
+            if (Dialog._dialogRetry.LastValue || Dialog._dialogTerminate.LastValue || Dialog._dialogOverride.LastValue)
             {
-                Dialog._dialogIsClosed.Synchron = true;
+                
                 CloseRequestEventHandler?.Invoke(this, e);
-
+                Dialog._dialogIsClosed.Synchron = true;
                 if (dispatcherTimer != null)
                 {
                     dispatcherTimer.Stop(); // stop timer
