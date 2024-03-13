@@ -19,4 +19,7 @@ namespace TcoDrivesBeckhoff
 
         public override object Model { get => this.Component; set { this.Component = value as TcoDriveSimple; } }
     }
+
+    public class TcoDriveSimpleViewModel : TcoDriveSimpleServiceViewModel
+    { }
 }

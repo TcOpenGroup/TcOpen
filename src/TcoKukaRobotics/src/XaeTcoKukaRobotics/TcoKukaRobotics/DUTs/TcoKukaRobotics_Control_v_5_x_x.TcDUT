@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="TcoKukaRobotics_Control_v_5_x_x" Id="{f21afd50-8cef-01dd-1e2e-b9289c7a21cb}">
+    <Declaration><![CDATA[TYPE TcoKukaRobotics_Control_v_5_x_x : 
+STRUCT	
+	
+
+	{attribute addProperty Name "<#Program Start [EXT_START]#>"}
+	ExternalStart : BOOL;	
+	
+	{attribute addProperty Name "<#Move Enable [MOVE_ENABLE]#>"}
+	MoveEnable : BOOL;			
+	
+	{attribute addProperty Name "<#Error Confirmation [CONF_MESS]#>"} 
+	ErrorConfirmation : BOOL;	
+	
+	{attribute addProperty Name "<#Drives Off [DRIVES_OFF]#>"}
+	DrivesOff : BOOL;			
+	
+	{attribute addProperty Name "<#Drives On [DRIVES_ON]#>"}
+	DrivesOn : BOOL;			
+	
+	{attribute addProperty Name "<#Activate Interface [I_O_ACT]#>"}
+	ActivateInterface : BOOL;	
+	
+	{attribute addProperty Name "<#Start At Main [START_AT_MAIN]#>"}
+	StartAtMain : BOOL;			
+   
+	{attribute addProperty Name "<#Master mode#>"}
+	MasterMode : BYTE;
+	
+	{attribute addProperty Name "<#Tool 1 retract#>"}
+	Tool_1_Retract : BOOL;
+
+	{attribute addProperty Name "<#Tool 1 extend#>"}
+	Tool_1_Extend : BOOL;
+
+	{attribute addProperty Name "<#Tool 2 retract#>"}
+	Tool_2_Retract : BOOL;
+
+	{attribute addProperty Name "<#Tool 2 extend#>"}
+	Tool_2_Extend : BOOL;
+
+	{attribute addProperty Name "<#Tool 3 retract#>"}
+	Tool_3_Retract : BOOL;
+
+	{attribute addProperty Name "<#Tool 3 extend#>"}
+	Tool_3_Extend : BOOL;
+
+	{attribute addProperty Name "<#Tool 4 retract#>"}
+	Tool_4_Retract : BOOL;
+
+	{attribute addProperty Name "<#Tool 4 extend#>"}
+	Tool_4_Extend : BOOL;
+
+	{attribute addProperty Name "<#Zones#>"}
+	Zone : BYTE;
+
+	{attribute addProperty Name "<#In position#>"}
+	InPosition : BYTE;
+
+	{attribute addProperty Name "<#Action number#>"}
+	ActionNo : BYTE; 
+
+	{attribute addProperty Name "<#Global robot speed#>"}
+	GlobalSpeed : BYTE; 
+
+	{attribute addProperty Name "<#Tool number#>"}
+	ToolNo : BYTE; 	
+
+	{attribute addProperty Name "<#Workobject number#>"}
+	WorkobjectNo : BYTE; 
+
+	{attribute addProperty Name "<#Point number#>"}
+	PointNo : BYTE; 		
+
+	{attribute addProperty Name "<#User specific speed 1#>"}
+	UserSpecSpeed1 : REAL; 
+
+	{attribute addProperty Name "<#User specific speed 2#>"}
+	UserSpecSpeed2 : REAL; 
+
+	
+
+
+	{attribute  addProperty Name "<#Coordinates#>"}     
+	Coordinates : TcoAbstractions.TcoRoboticsCoordinates; 		
+	
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

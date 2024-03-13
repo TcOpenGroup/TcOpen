@@ -5,9 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:tcoCore="clr-namespace:TcoCore"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-               xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=PresentationFramework"
-             xmlns:local="clr-namespace:TcOpen.Inxton.TcoCore.Wpf.TcoComponent" 
-             xmlns:tcocorelocal="clr-namespace:Tco.Wpf"
+             xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=PresentationFramework"
+             xmlns:p="clr-namespace:TcOpen.Inxton.TcoCore.Wpf.Properties"
              xmlns:tcocore="clr-namespace:TcoCore;assembly=TcoCoreConnector" xmlns:vortex="http://vortex.mts/xaml"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -61,24 +60,75 @@
                 </Grid>
             </Expander.Header>
             <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <ItemsControl ItemsPanel="{StaticResource HorizontalWraped}"  HorizontalAlignment="Left" ItemsSource="{Binding Tasks}">
+                <Grid.Resources>
+                    <Style TargetType="GroupBox"  BasedOn="{StaticResource MaterialDesignCardGroupBox}">
+                        <Setter Property="Margin" Value="5,0,0,5"></Setter>
+                    </Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="MinWidth" Value="250"></Setter>
 
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate> 
-                                <vortex:RenderableContentControl MinWidth="150" DataContext="{Binding}" Margin="5"></vortex:RenderableContentControl>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                    <Expander Grid.Row="1" Header="Details">
-                    <ScrollViewer MaxHeight="300">
-                        <tcocorelocal:DynamicTreeView DataContext="{Binding}" ></tcocorelocal:DynamicTreeView>
-                    </ScrollViewer>
+                    </Style>
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <ItemsControl ItemsPanel="{StaticResource HorizontalWraped}"  HorizontalAlignment="Left"  ItemsSource="{Binding Tasks}">
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <vortex:RenderableContentControl MinWidth="150" DataContext="{Binding}" Margin="5"></vortex:RenderableContentControl>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <Expander Margin="5,0 " Grid.Row="2" Header="{x:Static p:strings.Details}">
+     
+                            <WrapPanel Margin="10">
+                                <WrapPanel.Resources>
+                                    <Style TargetType="GroupBox"  BasedOn="{StaticResource MaterialDesignCardGroupBox}">
+                                        <Setter Property="MinWidth" Value="300"></Setter>
+                                        <Setter Property="Margin" Value="5,0,0,5"></Setter>
+                                        <Setter Property="Padding" Value="10"></Setter>
+
+
+                                    </Style>
+                                </WrapPanel.Resources>
+
+                                <GroupBox   Header="{x:Static p:strings.Status}" Visibility="{Binding IsStatusControlRenderable,Converter={tcoCore:BooleanToVisibilityConverter}}">
+                                    <vortex:RenderableContentControl  DataContext="{Binding StatusControl}" PresentationType="DisplaySlim"    />
+
+                                </GroupBox>
+                                <GroupBox  Header="{x:Static p:strings.Config}"  Visibility="{Binding IsConfigControlRenderable,Converter={tcoCore:BooleanToVisibilityConverter}}">
+                                    <vortex:RenderableContentControl  DataContext="{Binding ConfigControl }" PresentationType="ControlSlim"    />
+
+                                </GroupBox>
+                                <GroupBox  Header="{x:Static p:strings.Components}"  Visibility="{Binding HasComponents,Converter={tcoCore:BooleanToVisibilityConverter}}">
+                                    <ItemsControl  HorizontalAlignment="Left" ItemsSource="{Binding Components}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <vortex:RenderableContentControl MinWidth="150" DataContext="{Binding}" Margin="5"></vortex:RenderableContentControl>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </GroupBox>
+
+                                <GroupBox  Header="{x:Static p:strings.Control}"  Visibility="{Binding IsControlRenderable,Converter={tcoCore:BooleanToVisibilityConverter}}">
+       
+                                      <vortex:RenderableContentControl MinWidth="150" DataContext="{Binding Control}" PresentationType="ControlSlim" Margin="5"></vortex:RenderableContentControl>
+                               
+                                </GroupBox>
+
+                            </WrapPanel>
+                  
+
                 </Expander>
             </Grid>
+
         </Expander>
+
     </StackPanel>
+           
 </UserControl>

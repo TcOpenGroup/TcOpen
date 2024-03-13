@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TcOpen.Inxton.TcoCore.Wpf.TcoComponent
+namespace TcoCore
 {
     /// <summary>
     /// Interaction logic for TcoComponentView.xaml

@@ -34,35 +34,74 @@
         materialDesign:ShadowAssist.ShadowEdges="Top,Bottom,Left,Right">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto"  />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0">
+            <ScrollViewer MaxHeight="500" Grid.Row="0" VerticalScrollBarVisibility="Auto">
+                <StackPanel >
                 <TextBlock
-                    Margin="10"
+                    Margin="5"
                     HorizontalAlignment="Center"
                     Style="{StaticResource MaterialDesignHeadline4TextBlock}"
                     Text="{x:Static s:strings.InspectionFailedYouWillNeedToDecideWhatSNext}" />
-                <TextBlock
-                    Margin="10"
-                    HorizontalAlignment="Center"
-                    Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                    Text="{Binding Description}" />
+              
+
+                        <TextBlock 
+                             Visibility="{Binding Dialog._showDescription.Cyclic,Converter={vortex:BooleanToVisibilityConverter}}"
+                        TextWrapping="WrapWithOverflow"
+                        Margin="5"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                        Text="{Binding Description}" />
+                
+                                    
+                        <TextBlock 
+                             Visibility="{Binding Dialog._showFailureDescription.Cyclic,Converter={vortex:BooleanToVisibilityConverter}}"
+                        TextWrapping="WrapWithOverflow"
+                        Margin="5"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                        Text="{Binding FailureDescription}" />
+          
+
+                    <TextBlock 
+                         Visibility="{Binding Dialog._showErrorCode.Cyclic,Converter={vortex:BooleanToVisibilityConverter}}"
+                        TextWrapping="WrapWithOverflow"
+                        Margin="5"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                        Text="{Binding ErrorCode}" />
+       
+                <TextBlock 
+                        TextWrapping="WrapWithOverflow"
+                        Margin="5"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                        Text="{Binding Dialog._instruction.Cyclic }" />
+          
+          
             </StackPanel>
-            <WrapPanel Grid.Row="1" HorizontalAlignment="Center">
-                <WrapPanel.Resources>
-                    <Style BasedOn="{StaticResource MaterialDesignRaisedSecondaryDarkButton}" TargetType="Button">
-                        <Setter Property="Width" Value="150" />
-                        <Setter Property="Margin" Value="10" />
-                    </Style>
-                </WrapPanel.Resources>
-                <Button Command="{Binding RetryCommand, Mode=OneWay}" Content="{x:Static s:strings.Retry}" />
-                <Button Command="{Binding TerminateCommand, Mode=OneWay}" Content="{x:Static s:strings.Terminate}" />
-                <vortexs:PermissionBox Permissions="can_override_inspection">
-                    <Button Command="{Binding OverrideCommand, Mode=OneWay}" Content="{x:Static s:strings.Override}" />
-                </vortexs:PermissionBox>
-            </WrapPanel>
+            </ScrollViewer>
+            <StackPanel Grid.Row="1">
+                <Image   Source="{Binding Dialog._source.Cyclic}" MaxHeight="{Binding Dialog._imageHeight.Cyclic}" MaxWidth="{Binding Dialog._imageWidth.Cyclic}"></Image>
+                <WrapPanel  HorizontalAlignment="Center">
+
+
+                    <WrapPanel.Resources>
+                        <Style BasedOn="{StaticResource MaterialDesignRaisedSecondaryDarkButton}" TargetType="Button">
+                            <Setter Property="Width" Value="150" />
+                            <Setter Property="Margin" Value="10" />
+                        </Style>
+                    </WrapPanel.Resources>
+                    <Button Command="{Binding RetryCommand, Mode=OneWay}" Content="{x:Static s:strings.Retry}" />
+                    <Button Command="{Binding TerminateCommand, Mode=OneWay}" Content="{x:Static s:strings.Terminate}" />
+                    <vortexs:PermissionBox Permissions="can_override_inspection">
+                        <Button Command="{Binding OverrideCommand, Mode=OneWay}" Content="{x:Static s:strings.Override}" />
+                    </vortexs:PermissionBox>
+                </WrapPanel>
+            </StackPanel>
+          
             <Expander
                 Grid.Row="2"               
                 HorizontalAlignment="Stretch"

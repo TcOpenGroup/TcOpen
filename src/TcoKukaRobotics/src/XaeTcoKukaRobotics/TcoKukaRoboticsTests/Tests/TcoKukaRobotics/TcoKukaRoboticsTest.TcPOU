@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="TcoKukaRoboticsTest" Id="{c77ba700-6b91-0152-34f4-6a034b6e8eb1}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoKukaRoboticsTest EXTENDS TcoKukaRobotics.TcoKrc4_v_5_x_x
+VAR
+    _serviceModeCount : ULINT;
+    _serviceModeOverride : LREAL;
+END_VAR
+VAR
+   
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//SUPER^(	inEnable 			:=	inEnable,
+//		inEnablePositive	:=	inEnablePositive,
+//		inEnableNegative	:=	inEnableNegative,
+//		inCalibrationCam	:=	inCalibrationCam,
+//		inoAxisRef			:=	inoAxisRef);
+//		
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

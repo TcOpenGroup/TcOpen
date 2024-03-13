@@ -235,4 +235,6 @@ namespace TcoDrivesBeckhoff
         public bool Axis4MoveAllowed { get => axis4MoveAllowed; set => SetProperty(ref axis4MoveAllowed, value); }
     }
 
+    public class TcoMultiAxisViewModel : TcoMultiAxisServiceViewModel
+    { }
 }

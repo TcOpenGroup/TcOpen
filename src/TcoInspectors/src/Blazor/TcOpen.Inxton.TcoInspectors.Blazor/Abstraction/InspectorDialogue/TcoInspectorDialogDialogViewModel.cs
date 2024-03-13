@@ -20,7 +20,7 @@ namespace TcoInspectors
             if (Dialog != null && !Dialog._isOverInspected.Synchron)
             {
                 RetryDisabled = false;
-                Dialog._dialogueRetry.Synchron = true;
+                Dialog._dialogRetry.Synchron = true;
             }
             else
             {
@@ -30,12 +30,12 @@ namespace TcoInspectors
         }
         public void Terminate()
         {
-            Dialog._dialogueTerminate.Synchron = true;
+            Dialog._dialogTerminate.Synchron = true;
             TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"{nameof(Terminate)} of {Dialog.HumanReadable} was executed @{{payload}}.", new { Dialog.Symbol });
         }
         public void Override()
         {
-            Dialog._dialogueOverride.Synchron = true;
+            Dialog._dialogOverride.Synchron = true;
             TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"{nameof(Override)} of {Dialog.HumanReadable} was executed @{{payload}}.", new { Dialog.Symbol });
         }
 

@@ -48,6 +48,21 @@
     <Compile Include="Tests\TcoContext\WpfContext.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\TcoContext\WrappedComponent\WrappedComponentExample.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoContext\WrappedComponent\WrappedComponentExample_Config.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoContext\WrappedComponent\WrappedComponentExample_Control.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoContext\WrappedComponent\WrappedComponentExample_Status.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\TcoContext\WrappedComponent\WrappedComponentsExample.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tests\TcoDriveSimple\eTcoDriveSimpleTests.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -80,6 +95,7 @@
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
     <Folder Include="Tests" />
+    <Folder Include="Tests\TcoContext\WrappedComponent" />
     <Folder Include="Tests\TcoSingleAxis" />
     <Folder Include="Tests\TcoContext" />
     <Folder Include="Tests\TcoDriveSimple" />

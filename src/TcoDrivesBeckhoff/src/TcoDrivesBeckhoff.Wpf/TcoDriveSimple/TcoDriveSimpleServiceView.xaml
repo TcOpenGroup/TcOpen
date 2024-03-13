@@ -13,8 +13,11 @@
         <local:TcoDriveSimpleServiceViewModel/>
     </d:UserControl.DataContext>
     <UserControl.Resources>
-     
-        
+        <ResourceDictionary>
+            <FrameworkElement x:Key="ProxyElement" DataContext="{Binding}"/>
+
+        </ResourceDictionary>
+
     </UserControl.Resources>
     <vortex:TcoComponentView >
         <vortex:TcoComponentView.ComponentHeader>
@@ -23,7 +26,9 @@
                 <WrapPanel.Resources>
                     <Style TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignBody1TextBlock}"/>
                 </WrapPanel.Resources>
-
+                <WrapPanel  DataContext="{Binding _axisStatus.ActPos}">
+                    <TextBlock  Text="{Binding Cyclic}"  Foreground="{StaticResource Notification}"/>
+                </WrapPanel>
                 <WrapPanel  DataContext="{Binding _axisStatus.Disabled}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter}}" Margin=" 5,0">
                     <materialdesign:PackIcon Kind="WarningBox"  Foreground="{StaticResource Warning}"  VerticalAlignment="Center"/>
                     <TextBlock  Text="Disabled"  Foreground="{StaticResource Warning}"/>
@@ -50,8 +55,12 @@
 
         </vortex:TcoComponentView.ComponentHeader>
         <vortex:TcoComponentView.ComponentDetails>
-            <ScrollViewer MaxHeight="1000"  HorizontalScrollBarVisibility="Disabled" DataContext="{Binding Component}">
-                <Grid>
+            <StackPanel Orientation="Vertical">
+                <ContentControl Content="{StaticResource ProxyElement}" Visibility="Collapsed" />
+            
+                <!--<ScrollViewer MaxHeight="1000"  HorizontalScrollBarVisibility="Disabled" DataContext="{Binding Component}">-->
+
+                    <Grid DataContext="{Binding Component}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
@@ -62,22 +71,8 @@
                         <RowDefinition></RowDefinition>
 
                     </Grid.RowDefinitions>
-
+                 
                     <StackPanel Grid.ColumnSpan="2" Orientation="Vertical">
-                            <!--<WrapPanel  >
-
-                                --><!--<vortex:RenderableContentControl DataContext="{Binding _axisStatus.CmdNo}"/>
-                                <vortex:RenderableContentControl DataContext="{Binding _axisStatus.CmdState}"/>--><!--
-                                <StackPanel  Grid.Column="2" Margin="5">
-                                    <TextBlock Text="{Binding _axisStatus.MotionState.AttributeName}"/>
-                                    <vortex:RenderableContentControl DataContext="{Binding _axisStatus.MotionState}"/>
-                                </StackPanel>
-                                <vortex:RenderableContentControl DataContext="{Binding _axisStatus.Error}" PresentationType="DisplaySlim"/>
-                                <vortex:RenderableContentControl  DataContext="{Binding _axisStatus.ErrorId}" PresentationType="DisplaySlim"/>
-                            </WrapPanel>
-                            <StackPanel  Grid.Column="5" Margin="5">-->
-
-
 
                         <TextBlock  Margin="5" Style="{StaticResource MaterialDesignBody1TextBlock}" Visibility="{Binding _axisStatus.Error.Cyclic ,Converter={vortex:BooleanToVisibilityConverter }}" Foreground="{StaticResource OnErrors}" Background="{StaticResource Errors}" TextWrapping="WrapWithOverflow" Text="{Binding _axisStatus.ErrorId.Cyclic, Converter={local:ErrorIdToDescriptionConverter}}"></TextBlock>
                             
@@ -99,9 +94,14 @@
                             </Style>
                         </WrapPanel.Resources>
 
+                        <GroupBox  DataContext="{Binding _config}" Header="{Binding AttributeName}">
+                            <vortex:RenderableContentControl  DataContext="{Binding }" PresentationType="ControlSlim"    />
 
+                        </GroupBox>
 
-                        <GroupBox Padding="10" Grid.Row="5" DataContext="{Binding _power}" Header="{Binding AttributeName}">
+                        <GroupBox Padding="10" Grid.Row="5" DataContext="{Binding _power}" Header="{Binding AttributeName}"
+                                  Visibility="{Binding DataContext.Component._config.HidePower.Cyclic,
+                                  Source={StaticResource ProxyElement}, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}">
                             <WrapPanel Orientation="Vertical">
 
                                 <vortex:RenderableContentControl   DataContext="{Binding _drivePowerOverrideTask}"  />
@@ -110,22 +110,28 @@
                                 <vortex:RenderableContentControl   DataContext="{Binding _driveEnableNegativeLocalTask}"  />
                             </WrapPanel>
                         </GroupBox>
-                        <GroupBox Padding="10" Grid.Row="7"  Header="{Binding _resetTask.AttributeName}">
-                            <WrapPanel Orientation="Vertical">
+                            <GroupBox Padding="10" Grid.Row="7"  Header="{Binding _resetTask.AttributeName}"
+                                       Visibility="{Binding DataContext.Component._config.HideReset.Cyclic,
+                                  Source={StaticResource ProxyElement}, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}">
+                                <WrapPanel Orientation="Vertical">
                                 <vortex:RenderableContentControl  DataContext="{Binding _resetTask}"    />
                                 <vortex:RenderableContentControl  DataContext="{Binding _soEResetTask}" />
                             </WrapPanel>
                         </GroupBox>
 
-                        <GroupBox Padding="10" Grid.Row="7" DataContext="{Binding _stopTask}" Header="{Binding AttributeName}">
+                        <GroupBox Padding="10" Grid.Row="7" DataContext="{Binding _stopTask}" Header="{Binding AttributeName}"
+                                       Visibility="{Binding DataContext.Component._config.HideStop.Cyclic,
+                                  Source={StaticResource ProxyElement}, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}">
                             <WrapPanel Orientation="Vertical">
                                 <vortex:RenderableContentControl Margin="5"  DataContext="{Binding }" />
                                 <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _deceleration}"   PresentationType="ControlSlim"/>
                                 <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _jerk}"           PresentationType="ControlSlim"/>
                             </WrapPanel>
                         </GroupBox>
-                        <GroupBox Padding="10" Grid.Row="7" DataContext="{Binding _haltTask}" Header="{Binding AttributeName}">
-                            <WrapPanel Orientation="Vertical">
+                            <GroupBox Padding="10" Grid.Row="7" DataContext="{Binding _haltTask}" Header="{Binding AttributeName}"     
+                                      Visibility="{Binding DataContext.Component._config.HideHalt.Cyclic,
+                                  Source={StaticResource ProxyElement}, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}">
+                                <WrapPanel Orientation="Vertical">
                                 <vortex:RenderableContentControl Margin="5"  DataContext="{Binding }" />
                                 <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _deceleration}"   PresentationType="ControlSlim"/>
                                 <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _jerk}"           PresentationType="ControlSlim"/>
@@ -133,7 +139,9 @@
                         </GroupBox>
 
 
-                        <GroupBox Padding="10" Grid.Row="5" DataContext="{Binding _homeTask}" Header="{Binding AttributeName}">
+                        <GroupBox Padding="10" Grid.Row="5" DataContext="{Binding _homeTask}" Header="{Binding AttributeName}"
+                                       Visibility="{Binding DataContext.Component._config.HideHoming.Cyclic,
+                                  Source={StaticResource ProxyElement}, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}">
                             <WrapPanel Orientation="Vertical">
 
                                 <vortex:RenderableContentControl Margin="5"  DataContext="{Binding }"/>
@@ -162,7 +170,9 @@
                                 </StackPanel>
                             </WrapPanel>
                         </GroupBox>
-                        <GroupBox Padding="10" Grid.Row="6" DataContext="{Binding _jog}" Header="{Binding AttributeName}">
+                        <GroupBox Padding="10" Grid.Row="6" DataContext="{Binding _jog}" Header="{Binding AttributeName}"
+                                       Visibility="{Binding DataContext.Component._config.HideJogging.Cyclic,
+                                  Source={StaticResource ProxyElement}, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}">
                             <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
                                 <vortex:RenderableContentControl Margin="5" DataContext="{Binding _jogBackwardsTask}"/>
                                 <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _jogForwardTask}"/>
@@ -177,8 +187,10 @@
                                 <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _jerk}" PresentationType="ControlSlim"/>
                             </StackPanel>
                         </GroupBox>
-                        <GroupBox Padding="10" Grid.Row="7" DataContext="{Binding _moveRelativeTask}" Header="{Binding AttributeName}">
-                            <WrapPanel Orientation="Vertical">
+                            <GroupBox Padding="10" Grid.Row="7" DataContext="{Binding _moveRelativeTask}" Header="{Binding AttributeName}"    
+                                      Visibility="{Binding DataContext.Component._config.HideMoveRelative.Cyclic,
+                                  Source={StaticResource ProxyElement}, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}">
+                                <WrapPanel Orientation="Vertical">
                                 <vortex:RenderableContentControl Margin="5"  DataContext="{Binding }" />
                                 <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _distance}"       PresentationType="ControlSlim"/>
                                 <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _velocity}"       PresentationType="ControlSlim"/>
@@ -187,7 +199,9 @@
                                 <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _jerk}"           PresentationType="ControlSlim"/>
                             </WrapPanel>
                         </GroupBox>
-                        <GroupBox Padding="10" Grid.Row="8" DataContext="{Binding _moveAbsoluteTask}" Header="{Binding AttributeName}">
+                        <GroupBox Padding="10" Grid.Row="8" DataContext="{Binding _moveAbsoluteTask}" Header="{Binding AttributeName}"
+                                       Visibility="{Binding DataContext.Component._config.HideMoveAbsolute.Cyclic,
+                                  Source={StaticResource ProxyElement}, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}">
                             <WrapPanel Orientation="Vertical">
                                 <vortex:RenderableContentControl Margin="5"  DataContext="{Binding }" />
                                 <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _position}"       PresentationType="ControlSlim"/>
@@ -197,7 +211,9 @@
                                 <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _jerk}"           PresentationType="ControlSlim"/>
                             </WrapPanel>
                         </GroupBox>
-                        <GroupBox Padding="10" Grid.Row="9" DataContext="{Binding _moveModuloTask}" Header="{Binding AttributeName}">
+                        <GroupBox Padding="10" Grid.Row="9" DataContext="{Binding _moveModuloTask}" Header="{Binding AttributeName}"
+                                       Visibility="{Binding DataContext.Component._config.HideMoveModulo.Cyclic,
+                                  Source={StaticResource ProxyElement}, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}">
                             <WrapPanel Orientation="Vertical" >
                                 <vortex:RenderableContentControl Margin="5"  DataContext="{Binding }" />
                                 <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _position}"       PresentationType="ControlSlim"/>
@@ -211,8 +227,10 @@
                                 </StackPanel>
                             </WrapPanel>
                         </GroupBox>
-                        <GroupBox Padding="10" Grid.Row="10" DataContext="{Binding _moveVelocityTask}" Header="{Binding AttributeName}">
-                            <WrapPanel Orientation="Vertical">
+                            <GroupBox Padding="10" Grid.Row="10" DataContext="{Binding _moveVelocityTask}" Header="{Binding AttributeName}"     
+                                      Visibility="{Binding DataContext.Component._config.HideMoveVelocity.Cyclic,
+                                  Source={StaticResource ProxyElement}, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}">
+                                <WrapPanel Orientation="Vertical">
 
 
                                 <vortex:RenderableContentControl  Margin="5" DataContext="{Binding }" VerticalAlignment="Center" />
@@ -227,7 +245,8 @@
                         </GroupBox>
                     </WrapPanel>
                 </Grid>
-            </ScrollViewer>
+            <!--</ScrollViewer>-->
+            </StackPanel>
         </vortex:TcoComponentView.ComponentDetails>
     </vortex:TcoComponentView>
 </UserControl>

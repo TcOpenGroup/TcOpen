@@ -127,6 +127,22 @@ _axisStatus.ErrorId := 0;
 ]]></ST>
       </Implementation>
     </Method>
+    <Property Name="Config" Id="{63b6b9a6-8b9d-049b-2280-e62b368686bb}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the configuration of the Axis. 					
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Config : REFERENCE TO TcoAxisConfig]]></Declaration>
+      <Get Name="Get" Id="{1bc6eedd-47d4-0d02-3e47-a9ba103b31fe}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Config REF= _config;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="DriveRef" Id="{3800d624-5130-0c3a-22c9-8c42027a5bf8}" FolderPath="Axis\">
       <Declaration><![CDATA[PROPERTY DriveRef : REFERENCE TO TcoDriveSimple]]></Declaration>
       <Get Name="Get" Id="{f663277e-3c9f-02d1-3d1a-bc1c267140dd}">

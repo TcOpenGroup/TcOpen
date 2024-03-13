@@ -23,4 +23,6 @@ namespace TcoAbbRobotics
       
     }
 
+    public class TcoOmnicore_v_1_x_xViewModel : TcoOmnicore_v_1_x_xServiceViewModel
+    { }
 }

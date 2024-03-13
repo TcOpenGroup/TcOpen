@@ -1,0 +1,1236 @@
+<?xml version="1.0"?>
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.44" ClassName="CPnIoBoxDef" SubType="9121">
+	<DataTypes>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-000300000004}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..3] OF BYTE</Name>
+			<BitSize>32</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>4</Elements>
+			</ArrayInfo>
+		</DataType>
+	</DataTypes>
+	<Box Id="20" BoxType="9121">
+		<Name>krc4</Name>
+		<Comment><![CDATA[GSDML Name: GSDML-V2.33-KUKA-KRC4-ProfiNet_4.1-20170630.xml
+Path: $(TWINCAT3DIR)Config\Io\Profinet\
+VendorName: KUKA Roboter GmbH
+OrderNumber: 0x300
+HW Release Version: 1
+SW Release Version: V4.1]]></Comment>
+		<ImageId>121</ImageId>
+		<Vars VarGrpType="1">
+			<Name>Inputs</Name>
+			<Var>
+				<Name>PnIoBoxState</Name>
+				<Comment><![CDATA[0 = No error
+1 = Profinet device state machine is in boot mode
+2 = Device not found
+3 = The stationname is not unique
+4 = IP could not be set
+5 = IP conflict
+6 = DCP set was not successful
+7 = Watchdog error
+8 = Datahold error
+9 = RTC3: Sync mode could not be initiated
+10 = Profinet controller has a link error
+11 = The aliasname is not unique
+12 = The automatic name assignement isn't possible - wrong device type
+13 = IOC-AR is established but no application ready
+14 = IOC-AR is established but module difference
+15 = At least one InputCR is invalid, provider in stop or problemindicator is set
+16 = At least one OutputCR is invalid, provider in stop or problemindicator is set
+31 = Only for EtherCAT gateways: WC-State of cyclic EtherCAT frame is 1
+]]></Comment>
+				<Type>UINT</Type>
+			</Var>
+			<Var>
+				<Name>PnIoBoxDiag</Name>
+				<Comment><![CDATA[0x0000 = No diagnosis
+0x0001 = IOC-AR is not established
+0x0002 = IOC-AR is established
+0x0004 = IOC-AR is established but no application ready
+0x0008 = IOC-AR is established but module difference
+0x0010 = At least one AlarmCR got a diagnosis alarm
+0x0100 = At least one InputCR is invalid
+0x0200 = At least one InputCR Provider is in stop
+0x0400 = At least one InputCR Problemindicator is set
+0x1000 = At least one OutputCR is invalid
+0x2000 = At least one OutputCR Provider is in stop
+0x4000 = At least one OutputCR Problemindicator is set
+]]></Comment>
+				<Type>UINT</Type>
+				<BitOffs>16</BitOffs>
+			</Var>
+		</Vars>
+		<Vars VarGrpType="2">
+			<Name>Outputs</Name>
+			<Var>
+				<Name>PnIoBoxCtrl</Name>
+				<Type>UINT</Type>
+			</Var>
+		</Vars>
+		<Profinet DeviceId="768" VendorId="411" FrameOffset="32768" IPAdd="c0a80103" ProtocolType="3" BoxOnDeviceTyp="119" MaxPhysSlotNr="2" InstanceServerPort="50000" InstanceClientPort="50001" InstanceId="1" InstanceNumberOfARs="1" InstanceNumberOfAPIs="1" MinDeviceInterval="32" SavePnIoBoxValues="0100" MultipleWriteSupported="true" Phase="3" WatchdogFaktor="3" ReductionRatio="8" SendClockFaktor="32" MaxInputLen="512" MaxOutputLen="512" SendClockFactorData="2000" RedRatio="0100020004000800100020004000800000010002" BoxTypeInfo="PROFINET IO" PDOmapping="1" OutputErrorBehavior="2" GSDMLPath="$(TWINCAT3DIR)Config\Io\Profinet\GSDML-V2.33-KUKA-KRC4-ProfiNet_4.1-20170630.xml" ImagePath="C:\TwinCAT\3.1\Config\Io\Profinet\KUKA-Logo-Orange-Gradient-RGB-S-Clear.bmp" MainFamily="I/O" ProductFamily="KRC4-ProfiNet_4.1" OrderNr="0x300" DefaultDNSName="KRC4" VendorName="KUKA Roboter GmbH" FamDescription="PROFINET IO" GraphicFile="KUKA-Logo-Orange-Gradient-RGB-S-Clear" SWVersion="V4.1" HWVersion="1" AltLanguage="7">
+			<GsdmlValue Id="F_Check_iPar" Content="00000100">
+				<RecordText>NoCheck</RecordText>
+				<RecordText>Check</RecordText>
+			</GsdmlValue>
+			<GsdmlValue Id="F_SIL" Content="0000010002000300">
+				<RecordText>SIL1</RecordText>
+				<RecordText>SIL2</RecordText>
+				<RecordText>SIL3</RecordText>
+				<RecordText>NoSIL</RecordText>
+			</GsdmlValue>
+			<GsdmlValue Id="F_CRC_Length" Content="00000200">
+				<RecordText>3-Byte-CRC</RecordText>
+				<RecordText>4-Byte-CRC</RecordText>
+			</GsdmlValue>
+			<UsedGsdmlModule ModuleIdentNumber="768" ModuleName="DAP Module" InfoText="PROFINET IO" OrderNumber="0x300">
+				<Slot>0</Slot>
+			</UsedGsdmlModule>
+			<UsedGsdmlModule ModuleIdentNumber="143" Id="1" ModuleName="64 safe digital in- and outputs" InfoText="64 safe digital in- and outputs" OrderNumber="KUKA Device FIO64">
+				<Slot>0</Slot>
+				<Slot>1</Slot>
+				<Slot>2</Slot>
+			</UsedGsdmlModule>
+			<UsedGsdmlModule ModuleIdentNumber="8192" Id="12" ModuleName="512 digital in- and outputs" InfoText="512 digital in- and outputs" OrderNumber="KUKA Device IO512">
+				<Slot>2</Slot>
+			</UsedGsdmlModule>
+			<UsedGsdmlSubModule SubModuleIdentNumber="1" SubSlotNumber="1" TypeOfSubmodule="3" Id="SUB DIM 1" SubModuleName="KRC4-ProfiNet_4.1" InfoText="PROFINET IO"/>
+			<UsedGsdmlSubModule SubModuleIdentNumber="1" SubSlotNumber="1" TypeOfSubmodule="3" Id="1" SubModuleName="64 safe digital in- and outputs" InfoText="64 safe digital in- and outputs" IsPROFISafeSubMod="true">
+				<Record Name="PROFIsafe" Length="10" Index="128" IsPROFISafeRecord="true">
+					<ConstData>4</ConstData>
+					<ConstData>64</ConstData>
+					<ConstData>0</ConstData>
+					<ConstData>1</ConstData>
+					<ConstData>0</ConstData>
+					<ConstData>1</ConstData>
+					<ConstData>1</ConstData>
+					<ConstData>244</ConstData>
+					<ConstData>146</ConstData>
+					<ConstData>35</ConstData>
+					<RecordDataDef Name="F_Check_iPar" DataType="Bit" BitOffset="1" BitLength="1" ValueItemTarget="F_Check_iPar">
+						<AllowedValue>0</AllowedValue>
+						<AllowedValue>1</AllowedValue>
+					</RecordDataDef>
+					<RecordDataDef Name="F_SIL" DataType="BitArea" DefaultValue="1" BitOffset="2" BitLength="2" Visible="true" ValueItemTarget="F_SIL">
+						<AllowedValue>1</AllowedValue>
+					</RecordDataDef>
+					<RecordDataDef Name="F_CRC_Length" DataType="BitArea" BitOffset="4" BitLength="2" ValueItemTarget="F_CRC_Length">
+						<AllowedValue>0</AllowedValue>
+					</RecordDataDef>
+					<RecordDataDef Name="F_Block_ID" DataType="BitArea" MaxAllowedValue="7" ByteOffset="1" BitOffset="3" BitLength="3" Visible="true"/>
+					<RecordDataDef Name="F_Par_Version" DataType="BitArea" DefaultValue="1" ByteOffset="1" BitOffset="6" BitLength="2" Visible="true">
+						<AllowedValue>1</AllowedValue>
+					</RecordDataDef>
+					<RecordDataDef Name="F_Source_Add" DataType="Unsigned16" MinAllowedValue="1" MaxAllowedValue="65534" DefaultValue="1" DataLength="2" ByteOffset="2" Visible="true" Changeable="true"/>
+					<RecordDataDef Name="F_Dest_Add" DataType="Unsigned16" MinAllowedValue="1" MaxAllowedValue="65534" DefaultValue="1" DataLength="2" ByteOffset="4" Visible="true" Changeable="true"/>
+					<RecordDataDef Name="F_WD_Time" DataType="Unsigned16" MinAllowedValue="1" MaxAllowedValue="10000" DefaultValue="500" DataLength="2" ByteOffset="6" Visible="true" Changeable="true"/>
+					<RecordDataDef Name="F_Par_CRC" DataType="Unsigned16" MaxAllowedValue="65535" DefaultValue="37411" DataLength="2" ByteOffset="8" Visible="true"/>
+				</Record>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+			</UsedGsdmlSubModule>
+			<UsedGsdmlSubModule SubModuleIdentNumber="1" SubSlotNumber="1" TypeOfSubmodule="3" Id="12" SubModuleName="512 digital in- and outputs" InfoText="512 digital in- and outputs">
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemIn/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+				<DataItemOut/>
+			</UsedGsdmlSubModule>
+			<API Id="1">
+				<Name>API</Name>
+				<ImageId>4</ImageId>
+				<Module Id="#x031d0004" DAP="true" ModuleIdentNumber="768" ModuleInfo="PROFINET IO">
+					<Name>Term 4 (DAP Module)</Name>
+					<Comment><![CDATA[GSDML: GSDML-V2.33-KUKA-KRC4-ProfiNet_4.1-20170630.xml
+Module Info: PROFINET IO
+OrderNumber: 0x300]]></Comment>
+					<ImageId>182</ImageId>
+					<SubModule Id="#x031c0006" SubModuleIdentNumber="1" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="SUB DIM 1" AddSubModFlags="2076">
+						<Name>Subterm 6 (KRC4-ProfiNet_4.1)</Name>
+						<Comment><![CDATA[GSDML: GSDML-V2.33-KUKA-KRC4-ProfiNet_4.1-20170630.xml
+Submodule Info: PROFINET IO
+]]></Comment>
+						<ImageId>183</ImageId>
+						<Vars VarGrpType="1">
+							<Name>Inputs</Name>
+						</Vars>
+						<Vars VarGrpType="2">
+							<Name>Outputs</Name>
+						</Vars>
+					</SubModule>
+					<SubModule Id="#x031c0007" SubModuleIdentNumber="2" TypeOfSubModule="1" SubSlotNumber="32768" IsFixSubmodule="true" SubModuleID="IDS_3I" InterfaceData="0100000000000000000000000000000000000000000098000300000000000000">
+						<Name>Subterm 7 (Interface)</Name>
+						<Comment><![CDATA[GSDML: GSDML-V2.33-KUKA-KRC4-ProfiNet_4.1-20170630.xml
+]]></Comment>
+						<ImageId>183</ImageId>
+						<Vars VarGrpType="1">
+							<Name>Inputs</Name>
+						</Vars>
+						<Vars VarGrpType="2">
+							<Name>Outputs</Name>
+						</Vars>
+					</SubModule>
+					<SubModule Id="#x031c0008" SubModuleIdentNumber="3" TypeOfSubModule="2" SubSlotNumber="32769" IsFixSubmodule="true" SubModuleID="IDS_3P" PortData="00000000000000000000000000000000000000000000000000000000">
+						<Name>Subterm 8 (Port1)</Name>
+						<Comment><![CDATA[GSDML: GSDML-V2.33-KUKA-KRC4-ProfiNet_4.1-20170630.xml
+]]></Comment>
+						<ImageId>183</ImageId>
+						<Vars VarGrpType="1">
+							<Name>Inputs</Name>
+						</Vars>
+						<Vars VarGrpType="2">
+							<Name>Outputs</Name>
+						</Vars>
+					</SubModule>
+				</Module>
+				<Module Id="#x031d0005" Disabled="true" ModuleIdentNumber="143" SlotNumber="1" ModuleInfo="64 safe digital in- and outputs" ModuleID="1" DirectDeletable="true">
+					<Name>Term 5 (64 safe digital in- and outputs)</Name>
+					<Comment><![CDATA[GSDML: GSDML-V2.33-KUKA-KRC4-ProfiNet_4.1-20170630.xml
+Module Info: 64 safe digital in- and outputs
+OrderNumber: KUKA Device FIO64]]></Comment>
+					<ImageId>182</ImageId>
+					<SubModule Id="#x031c0009" SubModuleIdentNumber="1" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" IsPROFIsafeSubMod="true" SubModuleID="1" AddSubModFlags="28">
+						<Name>Subterm 9 (64 safe digital in- and outputs)</Name>
+						<Comment><![CDATA[GSDML: GSDML-V2.33-KUKA-KRC4-ProfiNet_4.1-20170630.xml
+Submodule Info: 64 safe digital in- and outputs
+]]></Comment>
+						<ImageId>183</ImageId>
+						<Record Length="10" Index="128" ConstData="044001000100f4012392" IsPROFISafeRecord="true"/>
+						<Vars VarGrpType="1">
+							<Name>Inputs</Name>
+							<Var>
+								<Name>8 safe digital inputs[0]</Name>
+								<Type>BITARR8</Type>
+							</Var>
+							<Var>
+								<Name>8 safe digital inputs[1]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>8</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 safe digital inputs[2]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>16</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 safe digital inputs[3]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>24</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 safe digital inputs[4]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>32</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 safe digital inputs[5]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>40</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 safe digital inputs[6]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>48</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 safe digital inputs[7]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>56</BitOffs>
+							</Var>
+							<Var>
+								<Name>Safety</Name>
+								<Type GUID="{18071995-0000-0000-0000-000300000004}">ARRAY [0..3] OF BYTE</Type>
+								<BitOffs>64</BitOffs>
+							</Var>
+						</Vars>
+						<Vars VarGrpType="2">
+							<Name>Outputs</Name>
+							<Var>
+								<Name>8 safe digital outputs[0]</Name>
+								<Type>BITARR8</Type>
+							</Var>
+							<Var>
+								<Name>8 safe digital outputs[1]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>8</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 safe digital outputs[2]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>16</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 safe digital outputs[3]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>24</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 safe digital outputs[4]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>32</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 safe digital outputs[5]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>40</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 safe digital outputs[6]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>48</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 safe digital outputs[7]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>56</BitOffs>
+							</Var>
+							<Var>
+								<Name>Safety</Name>
+								<Type GUID="{18071995-0000-0000-0000-000300000004}">ARRAY [0..3] OF BYTE</Type>
+								<BitOffs>64</BitOffs>
+							</Var>
+						</Vars>
+					</SubModule>
+				</Module>
+				<Module Id="#x031d0006" ModuleIdentNumber="8192" SlotNumber="2" ModuleInfo="512 digital in- and outputs" ModuleID="12" DirectDeletable="true">
+					<Name>Term 6 (512 digital in- and outputs)</Name>
+					<Comment><![CDATA[GSDML: GSDML-V2.33-KUKA-KRC4-ProfiNet_4.1-20170630.xml
+Module Info: 512 digital in- and outputs
+OrderNumber: KUKA Device IO512]]></Comment>
+					<ImageId>182</ImageId>
+					<SubModule Id="#x031c000a" SubModuleIdentNumber="1" TypeOfSubModule="3" SubSlotNumber="1" IsFixSubmodule="true" SubModuleID="12" AddSubModFlags="28">
+						<Name>Subterm 10 (512 digital in- and outputs)</Name>
+						<Comment><![CDATA[GSDML: GSDML-V2.33-KUKA-KRC4-ProfiNet_4.1-20170630.xml
+Submodule Info: 512 digital in- and outputs
+]]></Comment>
+						<ImageId>183</ImageId>
+						<Vars VarGrpType="1">
+							<Name>Inputs</Name>
+							<Var>
+								<Name>8 digital inputs[0]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>32</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[1]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>40</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[2]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>48</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[3]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>56</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[4]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>64</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[5]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>72</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[6]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>80</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[7]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>88</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[8]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>96</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[9]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>104</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[10]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>112</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[11]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>120</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[12]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>128</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[13]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>136</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[14]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>144</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[15]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>152</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[16]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>160</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[17]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>168</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[18]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>176</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[19]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>184</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[20]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>192</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[21]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>200</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[22]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>208</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[23]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>216</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[24]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>224</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[25]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>232</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[26]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>240</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[27]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>248</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[28]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>256</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[29]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>264</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[30]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>272</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[31]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>280</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[32]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>288</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[33]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>296</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[34]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>304</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[35]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>312</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[36]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>320</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[37]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>328</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[38]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>336</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[39]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>344</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[40]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>352</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[41]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>360</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[42]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>368</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[43]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>376</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[44]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>384</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[45]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>392</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[46]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>400</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[47]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>408</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[48]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>416</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[49]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>424</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[50]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>432</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[51]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>440</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[52]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>448</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[53]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>456</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[54]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>464</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[55]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>472</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[56]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>480</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[57]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>488</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[58]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>496</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[59]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>504</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[60]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>512</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[61]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>520</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[62]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>528</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital inputs[63]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>536</BitOffs>
+							</Var>
+						</Vars>
+						<Vars VarGrpType="2">
+							<Name>Outputs</Name>
+							<Var>
+								<Name>8 digital outputs[0]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>16</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[1]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>24</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[2]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>32</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[3]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>40</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[4]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>48</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[5]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>56</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[6]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>64</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[7]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>72</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[8]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>80</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[9]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>88</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[10]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>96</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[11]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>104</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[12]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>112</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[13]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>120</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[14]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>128</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[15]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>136</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[16]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>144</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[17]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>152</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[18]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>160</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[19]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>168</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[20]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>176</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[21]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>184</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[22]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>192</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[23]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>200</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[24]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>208</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[25]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>216</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[26]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>224</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[27]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>232</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[28]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>240</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[29]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>248</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[30]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>256</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[31]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>264</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[32]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>272</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[33]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>280</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[34]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>288</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[35]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>296</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[36]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>304</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[37]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>312</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[38]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>320</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[39]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>328</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[40]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>336</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[41]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>344</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[42]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>352</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[43]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>360</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[44]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>368</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[45]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>376</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[46]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>384</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[47]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>392</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[48]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>400</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[49]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>408</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[50]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>416</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[51]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>424</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[52]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>432</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[53]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>440</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[54]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>448</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[55]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>456</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[56]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>464</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[57]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>472</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[58]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>480</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[59]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>488</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[60]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>496</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[61]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>504</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[62]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>512</BitOffs>
+							</Var>
+							<Var>
+								<Name>8 digital outputs[63]</Name>
+								<Type>BITARR8</Type>
+								<BitOffs>520</BitOffs>
+							</Var>
+						</Vars>
+					</SubModule>
+				</Module>
+			</API>
+		</Profinet>
+	</Box>
+	<Mappings>
+		<OwnerA Name="__THIS__">
+			<OwnerB Name="TIPC^TcoKukaRoboticsTests^TcoKukaRoboticsTests Instance">
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[0]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[0]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[10]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[10]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[11]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[11]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[12]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[12]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[13]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[13]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[14]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[14]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[15]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[15]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[16]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[16]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[17]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[17]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[18]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[18]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[19]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[19]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[1]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[1]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[20]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[20]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[21]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[21]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[22]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[22]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[23]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[23]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[24]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[24]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[25]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[25]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[26]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[26]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[27]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[27]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[28]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[28]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[29]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[29]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[2]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[2]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[30]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[30]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[31]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[31]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[32]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[32]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[33]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[33]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[34]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[34]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[35]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[35]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[36]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[36]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[37]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[37]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[38]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[38]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[39]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[39]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[3]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[3]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[40]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[40]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[41]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[41]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[42]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[42]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[43]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[43]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[44]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[44]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[45]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[45]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[46]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[46]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[47]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[47]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[48]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[48]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[49]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[49]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[4]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[4]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[50]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[50]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[51]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[51]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[52]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[52]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[53]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[53]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[54]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[54]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[55]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[55]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[56]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[56]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[57]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[57]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[58]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[58]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[59]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[59]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[5]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[5]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[60]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[60]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[61]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[61]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[62]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[62]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[63]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[63]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[6]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[6]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[7]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[7]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[8]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[8]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[9]" VarB="PlcTask1 Inputs^GVL.Robot1.In.Inputs[9]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[0]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[0]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[10]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[10]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[11]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[11]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[12]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[12]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[13]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[13]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[14]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[14]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[15]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[15]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[16]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[16]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[17]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[17]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[18]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[18]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[19]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[19]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[1]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[1]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[20]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[20]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[21]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[21]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[22]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[22]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[23]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[23]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[24]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[24]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[25]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[25]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[26]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[26]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[27]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[27]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[28]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[28]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[29]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[29]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[2]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[2]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[30]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[30]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[31]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[31]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[32]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[32]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[33]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[33]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[34]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[34]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[35]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[35]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[36]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[36]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[37]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[37]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[38]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[38]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[39]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[39]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[3]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[3]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[40]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[40]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[41]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[41]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[42]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[42]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[43]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[43]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[44]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[44]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[45]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[45]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[46]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[46]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[47]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[47]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[48]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[48]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[49]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[49]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[4]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[4]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[50]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[50]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[51]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[51]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[52]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[52]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[53]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[53]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[54]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[54]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[55]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[55]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[56]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[56]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[57]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[57]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[58]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[58]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[59]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[59]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[5]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[5]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[60]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[60]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[61]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[61]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[62]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[62]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[63]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[63]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[6]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[6]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[7]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[7]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[8]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[8]"/>
+				<Link VarA="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Outputs^8 digital outputs[9]" VarB="PlcTask1 Outputs^GVL.Robot1.Out.Outputs[9]"/>
+				<Link VarA="Inputs^PnIoBoxDiag" VarB="PlcTask1 Inputs^GVL.Robot1.PnIoBoxDiag"/>
+				<Link VarA="Inputs^PnIoBoxState" VarB="PlcTask1 Inputs^GVL.Robot1.PnIoBoxState"/>
+			</OwnerB>
+		</OwnerA>
+	</Mappings>
+</TcSmItem>

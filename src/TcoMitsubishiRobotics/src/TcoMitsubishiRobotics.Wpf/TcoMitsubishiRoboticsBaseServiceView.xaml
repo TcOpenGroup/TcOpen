@@ -80,8 +80,9 @@
 
         </vortex:TcoComponentView.ComponentHeader>
         <vortex:TcoComponentView.ComponentDetails>
-            <ScrollViewer MaxHeight="600" HorizontalScrollBarVisibility="Disabled" DataContext="{Binding Component}" >
-                <Grid>
+
+            <Grid  DataContext="{Binding Component}">
+
                     <Grid.Resources>
                         <Style TargetType="GroupBox"  BasedOn="{StaticResource MaterialDesignCardGroupBox}">
                             <Setter Property="Margin" Value="5,0,0,5"></Setter>
@@ -163,7 +164,7 @@
 
                     </WrapPanel>
                 </Grid>
-            </ScrollViewer>
+           
         </vortex:TcoComponentView.ComponentDetails>
     </vortex:TcoComponentView>
 </UserControl>

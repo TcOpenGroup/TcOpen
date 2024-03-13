@@ -14,12 +14,24 @@
 
     <Grid>
         <TabControl>
+            <TabItem Header="All">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <ScrollViewer>
+                        <vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext}" PresentationType="Base-Service"/>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
             <TabItem Header="Drives">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext._axis1}" PresentationType="Service"/>
+                    <ScrollViewer>
+                        <vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext._axis1}" PresentationType="Service"/>
+                    </ScrollViewer>
                 </Grid>
             </TabItem>
             <TabItem Header="SINGLE AXIS">
@@ -28,7 +40,9 @@
                         <RowDefinition/>
                         <RowDefinition ></RowDefinition>
                     </Grid.RowDefinitions>
-                    <vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext._singleAxis}" PresentationType="Service"/>
+                    <ScrollViewer>
+                        <vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext._singleAxis}" PresentationType="Service"/>
+                    </ScrollViewer>
                     <UniformGrid Grid.Row="1">
                         <StackPanel Orientation="Vertical">
                             <vortex:RenderableContentControl   DataContext="{Binding MAIN._wpfContext._singleAxis._moveAbsoluteTask}"  PresentationType="Base" />
@@ -59,6 +73,7 @@
                         <RowDefinition/>
                         <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
+                    
                     <vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext._positions}" />
                  
 

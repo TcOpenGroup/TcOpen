@@ -8,7 +8,20 @@ VAR
 	{attribute addProperty Name "Vertical cyclinder A2"}
 	_vertical : fbPiston(THIS^);
 	{attribute addProperty Name "Gripper A3"}
-	_gripper : fbPiston(THIS^);			
+	_gripper : fbPiston(THIS^);	
+
+	{attribute addProperty Name "Digital input"}
+	_di : TcoDi(THIS^);	
+	{attribute addProperty Name "Wrapped component example 1"}
+	_wrappedComponent1 : Example1WrappedComponent(THIS^);	
+	
+	{attribute addProperty Name "Wrapped component example 2"}
+	_wrappedComponent2 : Example2WrappedComponent(THIS^);	
+	
+	{attribute clr [RenderIgnore()]}
+	_wrappedComponents: Example2WrappedComponents;
+	tempSisgnal: BOOL;
+	temp2Sisgnal: BOOL;
 END_VAR
 
 VAR
@@ -20,6 +33,14 @@ END_VAR]]></Declaration>
 _vertical.Service();
 _horizontal();
 _gripper();
+
+_wrappedComponent1();
+
+
+_wrappedComponent2.Components.digitalInput(inoSignal:=tempSisgnal);
+_wrappedComponent2.Components.digitaOutput(inoSignal:=temp2Sisgnal);
+
+_wrappedComponent2();
 
 _simTimer(IN := TRUE, PT := UINT_TO_TIME(_simTimerValue));
 SimulateCylinder(_vertical);

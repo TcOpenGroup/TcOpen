@@ -62,10 +62,14 @@
                                 </Grid>
                         </TabItem>
                     </TabControl>
-                  
-                    <vortex:RenderableContentControl DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext._sequence1}" PresentationType="Base"></vortex:RenderableContentControl>
+                        <WrapPanel Orientation="Horizontal">
+                            <vortex:RenderableContentControl DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext.testRetry}" PresentationType="Control"></vortex:RenderableContentControl>
+                            <vortex:RenderableContentControl DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext.testTerminate}" PresentationType="Control"></vortex:RenderableContentControl>
+                        </WrapPanel>
+                        <vortex:RenderableContentControl DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext._sequence1}" PresentationType="Base"></vortex:RenderableContentControl>
                     <vortex:RenderableContentControl DataContext="{Binding TcoInspectorsPlc.MAIN._exampleContext._observer}" PresentationType="Base"></vortex:RenderableContentControl>
                     
+                        
                 </StackPanel>
                 </ScrollViewer>
             </TabItem>

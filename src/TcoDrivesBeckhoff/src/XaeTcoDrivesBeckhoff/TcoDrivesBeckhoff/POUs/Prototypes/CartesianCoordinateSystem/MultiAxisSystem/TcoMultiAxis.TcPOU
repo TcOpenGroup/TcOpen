@@ -129,55 +129,63 @@ END_IF
 IF NOT __ISVALIDREF(refAxis1)  AND NOT _config.Axis1Disabled THEN
     Messenger.Post('<#Invalid reference axis 1#>', TcoCore.eMessageCategory.ProgrammingError);
     RETURN;
+ELSIF NOT _config.Axis1Disabled THEN
+	_axis1Ref REF= refAxis1;
+
+
+	_axis1(
+		inEnable:=inEnableAxis1 , 
+		inEnablePositive:=inEnablePositiveAxis1 , 
+		inEnableNegative:=inEnableNegativeAxis1 , 
+		inCalibrationCam:=inCalibrationCamAxis1, 
+		inoAxisRef:= _axis1Ref);
 END_IF
-_axis1Ref REF= refAxis1;
 
-
-_axis1(
-	inEnable:=inEnableAxis1 , 
-	inEnablePositive:=inEnablePositiveAxis1 , 
-	inEnableNegative:=inEnableNegativeAxis1 , 
-	inCalibrationCam:=inCalibrationCamAxis1, 
-	inoAxisRef:= _axis1Ref);
 
 IF NOT __ISVALIDREF(refAxis2) AND NOT _config.Axis2Disabled THEN
     Messenger.Post('<#Invalid reference axis 2#>', TcoCore.eMessageCategory.ProgrammingError);
     RETURN;
-END_IF
-_axis2Ref REF= refAxis2;
+ELSIF  NOT _config.Axis2Disabled THEN
+	_axis2Ref REF= refAxis2;
 
-_axis2(
-	inEnable:=inEnableAxis2 , 
-	inEnablePositive:=inEnablePositiveAxis2 , 
-	inEnableNegative:=inEnableNegativeAxis2 , 
-	inCalibrationCam:=inCalibrationCamAxis2, 
-	inoAxisRef:= _axis2Ref);
+	_axis2(
+		inEnable:=inEnableAxis2 , 
+		inEnablePositive:=inEnablePositiveAxis2 , 
+		inEnableNegative:=inEnableNegativeAxis2 , 
+		inCalibrationCam:=inCalibrationCamAxis2, 
+		inoAxisRef:= _axis2Ref);
+END_IF
+
 
 IF NOT __ISVALIDREF(refAxis3) AND NOT _config.Axis3Disabled THEN
     Messenger.Post('<#Invalid reference axis 3#>', TcoCore.eMessageCategory.ProgrammingError);
     RETURN;
-END_IF	
-_axis3Ref REF= refAxis3;
+ELSIF NOT _config.Axis3Disabled THEN
+	_axis3Ref REF= refAxis3;
 
-_axis3(
-	inEnable:=inEnableAxis3 , 
-	inEnablePositive:=inEnablePositiveAxis3 , 
-	inEnableNegative:=inEnableNegativeAxis3 , 
-	inCalibrationCam:=inCalibrationCamAxis3, 
-	inoAxisRef:= _axis3Ref);
+	_axis3(
+		inEnable:=inEnableAxis3 , 
+		inEnablePositive:=inEnablePositiveAxis3 , 
+		inEnableNegative:=inEnableNegativeAxis3 , 
+		inCalibrationCam:=inCalibrationCamAxis3, 
+		inoAxisRef:= _axis3Ref);
+END_IF	
+
 	
 IF NOT __ISVALIDREF(refAxis4) AND NOT _config.Axis4Disabled THEN
     Messenger.Post('<#Invalid reference axis 4#>', TcoCore.eMessageCategory.ProgrammingError);
+	RETURN;
+ELSIF NOT _config.Axis4Disabled THEN
+	_axis4Ref REF= refAxis4;
 
+	_axis4(
+		inEnable:=inEnableAxis4 , 
+		inEnablePositive:=inEnablePositiveAxis4 , 
+		inEnableNegative:=inEnableNegativeAxis4 , 
+		inCalibrationCam:=inCalibrationCamAxis4, 
+		inoAxisRef:= _axis4Ref);
 END_IF
-_axis4Ref REF= refAxis4;
 
-_axis4(
-	inEnable:=inEnableAxis4 , 
-	inEnablePositive:=inEnablePositiveAxis4 , 
-	inEnableNegative:=inEnableNegativeAxis4 , 
-	inCalibrationCam:=inCalibrationCamAxis4, 
-	inoAxisRef:= _axis4Ref);
 
 	
 	

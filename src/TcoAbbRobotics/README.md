@@ -34,11 +34,11 @@ END_VAR
 
 #### 4. Scann for new Profinet devices, or use already prepared `xti` files and  use `Add Existing`. This files are localized in `.\src\TcoAbbRobotics\src\TcoAbbRoboticsConnector\ddf\`. `Robot1.xti` is valid for Irc5 and `Robot2.xti` for `Omnicore` 
 
-#### 5. Connect your Gvl structures with  hardware. Refers to bechokff drives documentation if there are some issues, or for guidance how to mapping. 
+#### 5. Connect your Gvl structures with  hardware. Refers to bechokff  documentation if there are some issues, or for guidance how to mapping. 
 
 #### 6. Create the Function Block that extends the **`TcoCore.TcoContext`** function block.
 
-#### 7. Inside the declaration part of the function block created, add an instance of the **`TcoAbbRobotics.TcoIrc5_v_1_x_x`** , **`TcoAbbRobotics.TcoSingleAxis`** or **`TcoAbbRobotics.TcoOmnicore_v_1_x_x`**. Add the **`Main`** method into this function block  and insert the instances. Call with passing the mapped hardware structure
+#### 7. Inside the declaration part of the function block created, add an instance of the **`TcoAbbRobotics.TcoIrc5_v_1_x_x`**  or **`TcoAbbRobotics.TcoOmnicore_v_1_x_x`**. Add the **`Main`** method into this function block  and insert the instances. Call with passing the mapped hardware structure
 
 ```csharp
 FUNCTION_BLOCK WpfContext EXTENDS TcoCore.TcoContext

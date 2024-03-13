@@ -106,15 +106,6 @@ namespace TcoCoreConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to In service mode.
-        /// </summary>
-        public static string ___In_service_mode__ {
-            get {
-                return ResourceManager.GetString("___In_service_mode__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Invoke request.
         /// </summary>
         public static string ___Invoke_request__ {
@@ -147,6 +138,24 @@ namespace TcoCoreConnector.Properties {
         public static string ___On__ {
             get {
                 return ResourceManager.GetString("___On__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Real time clock is invalid!.
+        /// </summary>
+        public static string ___Real_time_clock_is_invalid___ {
+            get {
+                return ResourceManager.GetString("___Real_time_clock_is_invalid___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Real time clock is not sychronized..
+        /// </summary>
+        public static string ___Real_time_clock_is_not_sychronized___ {
+            get {
+                return ResourceManager.GetString("___Real_time_clock_is_not_sychronized___", resourceCulture);
             }
         }
         
