@@ -37,10 +37,9 @@ namespace TcoCore
 
         }
 
-        public int SearchComponentsDepth
-        {
-            get; set;
-        } = 2;
+        public int SearchComponentsDepth{get; set;} = 2;
+
+        public bool IsExpanded { get;set;}
 
         public bool HasComponents
         {

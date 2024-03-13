@@ -24,6 +24,7 @@
                 </Style>
             </StackPanel.Resources>
             <Expander
+                IsExpanded="{Binding Model.IsExpanded}"
                 Margin="5,0,5,0"
                 Background="Transparent"
                 materialDesign:ExpanderAssist.HorizontalHeaderPadding="0"

@@ -4,12 +4,13 @@
     <Declaration><![CDATA[FUNCTION_BLOCK TcoTixonVibro_v_1_x_x EXTENDS TcoCore.TcoComponent  
 
 VAR_INPUT
+	inControllerInAuto : BOOL;
 	inNotEmptyFeeder : BOOL;	
 	inSeparatorHomePos : BOOL;
 	inFillingSensor : BOOL; 
 	inSeparatorPresent : BOOL;
 	inComponentOutOfBox : BOOL;
-	inControllerInAuto : BOOL;
+	inSeparatorWorkPos  : BOOL;
 END_VAR
 VAR_OUTPUT
 	outFeedingA : BOOL;
@@ -303,7 +304,8 @@ _status.NotEmptyFeeder:=inNotEmptyFeeder;
 _status.FillingSensor:=inFillingSensor;
 _status.SeparatorHomePos:=inSeparatorHomePos;
 _status.SeparatorPresent:=inSeparatorPresent;
-_status.ControllerInAuto:=inControllerInAuto;]]></ST>
+_status.ControllerInAuto:=inControllerInAuto;
+_status.SeparatorWorkPos:=inSeparatorWorkPos;]]></ST>
       </Implementation>
     </Method>
   </POU>

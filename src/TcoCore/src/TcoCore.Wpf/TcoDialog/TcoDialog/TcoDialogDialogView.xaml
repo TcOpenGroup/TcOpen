@@ -8,6 +8,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:tcocore="clr-namespace:TcoCore;assembly=TcoCoreConnector"
     xmlns:vortex="http://vortex.mts/xaml"
+    xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+  
+    xmlns:s="clr-namespace:TcOpen.Inxton.TcoCore.Wpf.Properties"
     Width="Auto"
     Height="Auto"
     mc:Ignorable="d"
@@ -18,6 +21,7 @@
     SizeToContent="WidthAndHeight"
     Title="InspectorDialogueWindow"
     Topmost="True"
+  
     WindowStartupLocation="CenterScreen"
     WindowStyle="None">
     <d:Window.DataContext>
@@ -40,12 +44,14 @@
                 <ColumnDefinition Width="80*" />
             </Grid.ColumnDefinitions>
             <materialDesign:PackIcon
-                Margin="20"
+                DataContext="{Binding Dialog._dialogType}"
+                Margin="10"
                 Grid.RowSpan="2"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Foreground="{Binding Dialog._dialogType.Synchron, Converter={local:DialogTypeToColorConverter}}" 
-                Kind="{Binding Dialog._dialogType.Synchron, Converter={local:DialogTypeToIconConverter}}" 
+                Visibility="{Binding Synchron, Converter={local:DialogTypeVisibilityConverter}}" 
+                Foreground="{Binding Synchron, Converter={local:DialogTypeToColorConverter}}" 
+                Kind="{Binding Synchron, Converter={local:DialogTypeToIconConverter}}" 
                 Width="75" Height="75"/>
             <StackPanel Grid.Row="0" Grid.Column="1">
                 <TextBlock
@@ -53,6 +59,8 @@
                     HorizontalAlignment="Center"
                     Style="{StaticResource MaterialDesignHeadline5TextBlock}"
                     Text="{Binding Dialog._caption.Synchron}" />
+                <wv2:WebView2 Visibility="{Binding  Dialog._imageSource.Synchron,Converter={local:EmptyStringToVisibilityConverter} }" Height="{Binding Dialog._imageHeight.Cyclic}" Width="{Binding Dialog._imageWidth.Cyclic}" Source="{Binding Dialog._imageSource.Synchron ,Mode=OneWay}" />
+
                 <TextBlock
                     Margin="0,10,10,10"
                     HorizontalAlignment="Center"
@@ -65,25 +73,25 @@
                 HorizontalAlignment="Center">
                 <WrapPanel.Resources>
                     <Style BasedOn="{StaticResource MaterialDesignRaisedDarkButton}" TargetType="Button">
-                        <Setter Property="Width" Value="150" />
+                        <Setter Property="Width" Value="250" />
                         <Setter Property="Margin" Value="10" />
                     </Style>
                 </WrapPanel.Resources>
                 <Button
                     Command="{Binding YesCommand, Mode=OneWay}"
-                    Content="Yes"
+                    Content="{x:Static s:strings.Yes}"
                     Visibility="{Binding Dialog._hasYes.LastValue, Converter={local:DialogAnswerButtonVisibility}}" />
                 <Button
                     Command="{Binding NoCommand, Mode=OneWay}"
-                    Content="No"
+                    Content="{x:Static s:strings.No}"
                     Visibility="{Binding Dialog._hasNo.LastValue, Converter={local:DialogAnswerButtonVisibility}}" />
                 <Button
                     Command="{Binding CancelCommand, Mode=OneWay}"
-                    Content="Cancel"
+                    Content="{x:Static s:strings.Cancel}"
                     Visibility="{Binding Dialog._hasCancel.LastValue, Converter={local:DialogAnswerButtonVisibility}}" />
                 <Button
                     Command="{Binding OkCommand, Mode=OneWay}"
-                    Content="OK"
+                    Content="{x:Static s:strings.Ok}"
                     Visibility="{Binding Dialog._hasOK.LastValue, Converter={local:DialogAnswerButtonVisibility}}" />
             </WrapPanel>
         </Grid>

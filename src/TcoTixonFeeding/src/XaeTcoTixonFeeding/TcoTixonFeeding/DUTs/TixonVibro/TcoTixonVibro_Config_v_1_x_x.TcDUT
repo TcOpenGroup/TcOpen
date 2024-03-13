@@ -13,6 +13,11 @@
 		{attribute addProperty Name "<#Error time Hopper #> - T_HOP_ERROR"}
 		ErrorTimeHopper : TIME := T#0S;
 		
+		{attribute addProperty Name "<#Out of box sensor disabled (usualy TRUE when pushing to up direction) #>"}
+		OutOfBoxSensorDisabled : BOOL := FALSE;
+		{attribute addProperty Name "<#Separator has work position (usualy TRUE when pushing to up direction)#>"}
+		SeparatorHasWorkPosition : BOOL := FALSE;
+		
     END_STRUCT
 END_TYPE
 ]]></Declaration>

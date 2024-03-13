@@ -18,6 +18,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2365.46" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\..\..\TcoCore\src\TcoCore.Wpf\TcOpen.Inxton.TcoCore.Wpf.csproj" />
     <ProjectReference Include="..\..\..\..\TcOpen.Inxton\src\Security.Wpf\TcOpen.Inxton.Local.Security.Wpf.csproj" />
     <ProjectReference Include="..\..\TcoInspectorsConnector\TcoInspectorsConnector.csproj" />

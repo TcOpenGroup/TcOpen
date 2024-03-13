@@ -11,6 +11,15 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
+    <Method Name="WithImage" Id="{6cc370aa-f9af-0a7c-3cbc-7bf459851493}" FolderPath="Format\">
+      <Declaration><![CDATA[METHOD WithImage : ITcoDialogAnswer
+VAR_INPUT
+	inSource : STRING(255);
+	inHeight:REAL;
+	inWidth:REAL;
+END_VAR
+]]></Declaration>
+    </Method>
     <Method Name="WithOk" Id="{e2f96920-7b83-023e-28d1-33a200d8eadf}" FolderPath="Format\">
       <Declaration><![CDATA[METHOD WithOk : ITcoDialogAnswer
 VAR_INPUT

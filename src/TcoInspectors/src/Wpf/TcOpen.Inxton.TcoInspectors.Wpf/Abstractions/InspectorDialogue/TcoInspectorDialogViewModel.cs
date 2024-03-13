@@ -44,19 +44,23 @@ namespace TcoInspectors
             get
             {
                 if (_inspectorsList == null)
-                {
+                {                    
                     _inspectorsList = new List<IVortexObject>();
                     try
                     {
-
-                        var parent = Dialog.GetParent();
+                  
+                       var parent = Dialog.GetParent();
+                    
                         switch (parent)
                         {
                             case TcoInspectionGroup g:
                                 g.Read();
-                                _inspectorsList = g._inspections.Take(g._inspectionIndex.LastValue)
-                                    .Select(p => g.GetConnector().IdentityProvider.GetVortexerByIdentity(p.LastValue) as IVortexObject)
+                     
+                                _inspectorsList = g._inspections.Take(g._inspectionIndex.Synchron)
+                                    .Select(p => g.GetConnector().IdentityProvider.GetVortexerByIdentity(p.Synchron) as IVortexObject)
                                     .Where(p => !(p is NullVortexIdentity)).ToList();
+
+                         
                                 break;
                             case TcoInspector i:
                                 _inspectorsList.Add(parent);
@@ -185,7 +189,7 @@ namespace TcoInspectors
 
 
 
-        public TcoInspectorDialog Dialog { get; private set; } = new TcoInspectorDialog();
+        public TcoInspectorDialog Dialog { get; private set; } //= new TcoInspectorDialog();
         public override object Model { get => Dialog; set => Dialog = (TcoInspectorDialog)value; }
         public RelayCommand RetryCommand { get; }
         public RelayCommand TerminateCommand { get; }

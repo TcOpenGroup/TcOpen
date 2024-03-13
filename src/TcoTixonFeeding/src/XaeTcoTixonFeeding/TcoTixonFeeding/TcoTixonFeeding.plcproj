@@ -57,6 +57,15 @@
     <Compile Include="DUTs\TixonPickStep\TcoTixonPickStep_Status_v_1_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\TixonPickVibroBasic\TcoTixonPickVibroBasic_Config_v_1_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\TixonPickVibroBasic\TcoTixonPickVibroBasic_Control_v_1_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\TixonPickVibroBasic\TcoTixonPickVibroBasic_Status_v_1_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\TixonStep\TcoTixonStep_Config_v_1_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -120,6 +129,12 @@
     <Compile Include="POUs\Prototypes\TiconPickVibro\TcoTixonPickVibro_v_1_x_x.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Prototypes\TixonPickVibroBasic\Tasks\TcoTixonPickVibroBasicSeparatorTask.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TixonPickVibroBasic\TcoTixonPickVibroBasic_v_1_x_x.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Prototypes\TixonStep\Tasks\Separe\TcoTixonStepSeparatorTask.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -140,6 +155,7 @@
     <Folder Include="DUTs" />
     <Folder Include="DUTs\GVLs" />
     <Folder Include="DUTs\TixonPickStep" />
+    <Folder Include="DUTs\TixonPickVibroBasic" />
     <Folder Include="DUTs\TixonVibro" />
     <Folder Include="DUTs\TixonStep" />
     <Folder Include="DUTs\TixonPickVibro" />
@@ -148,12 +164,14 @@
     <Folder Include="POUs\Prototypes\GenericTasks\Base" />
     <Folder Include="POUs\Prototypes\GenericTasks\Buffer" />
     <Folder Include="POUs\Prototypes\GenericTasks\Hopper" />
+    <Folder Include="POUs\Prototypes\TixonPickVibroBasic" />
     <Folder Include="POUs\Prototypes\TiconPickStep" />
     <Folder Include="POUs\Prototypes\TiconPickStep\Taks" />
     <Folder Include="POUs\Prototypes" />
     <Folder Include="POUs\Prototypes\TiconPickStep\Taks\Step" />
     <Folder Include="POUs\Prototypes\TiconPickVibro" />
     <Folder Include="POUs\Prototypes\TiconPickVibro\Taks" />
+    <Folder Include="POUs\Prototypes\TixonPickVibroBasic\Tasks" />
     <Folder Include="POUs\Prototypes\TixonStep" />
     <Folder Include="POUs\Prototypes\GenericTasks" />
     <Folder Include="POUs\Prototypes\TixonStep\Tasks" />

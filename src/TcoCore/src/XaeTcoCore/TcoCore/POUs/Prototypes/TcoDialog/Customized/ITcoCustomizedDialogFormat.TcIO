@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="ITcoCustomizedDialogFormat" Id="{1f0fd0b8-9642-0c00-1b66-e7529f799857}">
+    <Declaration><![CDATA[INTERFACE ITcoCustomizedDialogFormat
+]]></Declaration>
+    <Folder Name="Format" Id="{bd9e39c4-31f1-0f38-04ea-a904b8b6fb6e}" />
+    <Method Name="WithCaption" Id="{d8b002f1-f8bf-07d7-3800-213a17a3522d}" FolderPath="Format\">
+      <Declaration><![CDATA[METHOD WithCaption : ITcoCustomizedDialogAnswer
+VAR_INPUT
+	inCaption : STRING(255);
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="WithImage" Id="{aebba379-3941-0673-304f-e4ee1486f299}" FolderPath="Format\">
+      <Declaration><![CDATA[METHOD WithImage : ITcoCustomizedDialogAnswer
+VAR_INPUT
+	inSource : STRING(255);
+	inHeight:REAL;
+	inWidth:REAL;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="WithOption1" Id="{d112fe13-132c-049a-204f-54cbc6221094}" FolderPath="Format\">
+      <Declaration><![CDATA[METHOD WithOption1 : ITcoCustomizedDialogAnswer
+VAR_INPUT
+	inContent:STRING;
+END_VAR
+
+]]></Declaration>
+    </Method>
+    <Method Name="WithOption2" Id="{9c314ee7-7606-043b-1b6a-0d81488dc995}" FolderPath="Format\">
+      <Declaration><![CDATA[METHOD WithOption2 : ITcoCustomizedDialogAnswer
+VAR_INPUT
+	inContent:STRING;
+END_VAR
+
+]]></Declaration>
+    </Method>
+    <Method Name="WithOption3" Id="{d43c27d8-d80f-074f-2960-0daa9f8a3818}" FolderPath="Format\">
+      <Declaration><![CDATA[METHOD WithOption3 : ITcoCustomizedDialogAnswer
+VAR_INPUT
+	inContent:STRING;
+END_VAR
+
+]]></Declaration>
+    </Method>
+    <Method Name="WithOption4" Id="{107a5d45-002e-0221-1076-a8d140d4e744}" FolderPath="Format\">
+      <Declaration><![CDATA[METHOD WithOption4 : ITcoCustomizedDialogAnswer
+VAR_INPUT
+	inContent:STRING;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="WithText" Id="{dde53eba-581f-0056-2fc6-776a303264d5}" FolderPath="Format\">
+      <Declaration><![CDATA[METHOD WithText : ITcoCustomizedDialogAnswer
+VAR_INPUT
+	inText : STRING(500);
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="WithType" Id="{876b74e4-01b4-0e68-0e7f-d6f250a2c95d}" FolderPath="Format\">
+      <Declaration><![CDATA[METHOD WithType : ITcoCustomizedDialogAnswer
+VAR_INPUT
+	inDialogType : eDialogType;
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

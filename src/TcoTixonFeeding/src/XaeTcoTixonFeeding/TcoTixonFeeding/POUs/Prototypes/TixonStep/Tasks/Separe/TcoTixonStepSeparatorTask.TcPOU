@@ -29,9 +29,15 @@ IF Execute() THEN
 			Messenger.Warning(_sb.Clear().Append('<#Tixon control system not in auto #>').Append(_varInfo.Symbol).ToString());
 		ELSE
 
-			IF NOT THIS^._errorMessage.Pinned THEN	
-           		_progress := _progress + 1;
+			IF NOT inoConfig.OutOfBoxSensorDisabled 
+				AND inoConfig.SeparatorHasWorkPosition THEN
+				Messenger.Error(_sb.Clear().Append('<#Tixon has inconsistent configuration! (OutOfBoxSensorDisabled is not disabled instead of SeparatorHasWorkPosition is On!)#>').ToString()).Pin();
+			ELSE
+				IF NOT THIS^._errorMessage.Pinned THEN	
+           			_progress := _progress + 1;
+				END_IF;
 			END_IF;
+		
 
 		END_IF
 
@@ -58,12 +64,27 @@ IF Execute() THEN
 	
 	IF _progress = 3 THEN	
 		inoControl.SepareComponent:=TRUE;
-		Messenger.Debug('<#Waiting for component out of  separator#>');
+		Messenger.OnCondition(NOT inoConfig.OutOfBoxSensorDisabled).Debug('<#Waiting for component out of  separator#>');
+		Messenger.OnCondition(inoConfig.OutOfBoxSensorDisabled AND  inoConfig.SeparatorHasWorkPosition).Warning('<#Waiting to separator to reach work position.#>');
+
 		_timer(IN:=inoStatus.SeparatorPresent,Pt:=inoConfig.TimeToComponentOutSeparator);
-		IF inoStatus.ComponentOutOfBox THEN
+		IF  inoStatus.ComponentOutOfBox 
+			AND NOT inoConfig.OutOfBoxSensorDisabled  THEN
 			_progress := _progress + 1;
 			_timer(In:=FALSE);
-		ELSIF _timer.Q THEN
+		ELSIF inoConfig.OutOfBoxSensorDisabled 
+			AND inoConfig.SeparatorHasWorkPosition
+			AND inoStatus.SeparatorWorkPos THEN
+			_progress := _progress + 1;
+			_timer(In:=FALSE); 
+		ELSIF inoConfig.OutOfBoxSensorDisabled 
+			AND NOT inoConfig.SeparatorHasWorkPosition
+			AND _timer.Q  THEN
+			_progress := _progress + 1;
+			_timer(In:=FALSE); 
+			
+		ELSIF _timer.Q 
+			AND NOT inoConfig.OutOfBoxSensorDisabled  THEN
 			_progress := 1;
 			_timer(In:=FALSE);
 		END_IF

@@ -7,9 +7,20 @@ STRUCT
    Axis2Disabled:BOOL;
    Axis3Disabled:BOOL;
    Axis4Disabled:BOOL;
+ 
 
    InfoTime : TIME := T#2S;
    ErrorTime : TIME := T#5S;
+   
+     
+  {attribute addProperty Name "<#Hide Load position Tab#>"}
+  HideLoadPositionTask            : BOOL; 
+  {attribute addProperty Name "<#Hide Save position Tab#>"}
+  HideSavePositionTask            : BOOL; 	
+  {attribute addProperty Name "<#Hide MoveAbsolute Tab#>"}
+  HideMoveAbsoluteTask            : BOOL; 
+  {attribute addProperty Name "<#Hide Position Tab#>"}
+  HidePositionTable            : BOOL; 
 END_STRUCT
 END_TYPE
 ]]></Declaration>

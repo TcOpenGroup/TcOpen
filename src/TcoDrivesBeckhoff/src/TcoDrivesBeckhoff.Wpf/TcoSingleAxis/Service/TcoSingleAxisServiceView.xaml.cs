@@ -16,9 +16,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TcOpen.Inxton.Wpf;
+using Vortex.Presentation.Wpf;
 
 namespace TcoDrivesBeckhoff
 {
+    //public class GenericViewModel : RenderableViewModel
+    //{
+    //    public override object Model { get; set; }
+    //}
 
     public partial class TcoSingleAxisServiceView : UserControl
     {
@@ -39,14 +44,13 @@ namespace TcoDrivesBeckhoff
 
         //    if (e.Property == DataContextProperty)
         //    {
-        //        var a = this.DataContext as TcoSingleAxisServiceViewModel;
-        //        if (this.positions.DataContext is stManipulatorPtpXYZ_DataRootViewModel)
-        //            a.Positions = (stManipulatorPtpXYZ_DataRootViewModel)this.positions.DataContext;
+        //        this.DataContext = this.DataContext.ViewModelizeDataContext<GenericViewModel, TcoSingleAxis>();
+
         //    }
         //}
 
 
     }
 
-   
+
 }

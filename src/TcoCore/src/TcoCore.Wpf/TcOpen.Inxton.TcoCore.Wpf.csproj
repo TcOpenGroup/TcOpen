@@ -22,6 +22,7 @@
 	<ItemGroup>
 		<PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="2.0.0" />
 		<PackageReference Include="MaterialDesignThemes" Version="4.6.1" />
+		<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2365.46" />
 		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
 	</ItemGroup>
 	<ItemGroup>
@@ -54,6 +55,10 @@
 			<Generator>PublicResXFileCodeGenerator</Generator>
 			<LastGenOutput>Localization.Designer.cs</LastGenOutput>
 		</EmbeddedResource>
+		<EmbeddedResource Update="Properties\strings.cs-CZ.resx">
+		  <SubType>Designer</SubType>
+		  <Generator>PublicResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
 		<EmbeddedResource Update="Properties\strings.resx">
 		  <Generator>PublicResXFileCodeGenerator</Generator>
 		  <LastGenOutput>strings.Designer.cs</LastGenOutput>
@@ -69,6 +74,9 @@
 		<Page Update="TcoComponent\TcoComponentSpotView.xaml">
 			<XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 			<SubType>Designer</SubType>
+		</Page>
+		<Page Update="TcoDialog\TcoDialog\TcoCustomizedDialogDialogView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 		</Page>
 		<Page Update="TcoMessage\Health\HealthIndicatorView.xaml">
 		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>

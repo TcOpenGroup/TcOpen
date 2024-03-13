@@ -32,15 +32,20 @@ END_VAR]]></Declaration>
       <ST><![CDATA[_vertical();
 _vertical.Service();
 _horizontal();
+_horizontal.Service();
 _gripper();
 
-_wrappedComponent1();
+_wrappedComponent1(inSignal := tempSisgnal);
+_wrappedComponent1.Service();
 
 
 _wrappedComponent2.Components.digitalInput(inoSignal:=tempSisgnal);
 _wrappedComponent2.Components.digitaOutput(inoSignal:=temp2Sisgnal);
 
+
 _wrappedComponent2();
+_wrappedComponent2.Service();
+
 
 _simTimer(IN := TRUE, PT := UINT_TO_TIME(_simTimerValue));
 SimulateCylinder(_vertical);

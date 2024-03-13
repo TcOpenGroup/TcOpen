@@ -1,75 +1,66 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="TcoTixonStep_v_1_x_x" Id="{aff4f8a7-9f6d-0a6c-116c-43f06261788c}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcoTixonStep_v_1_x_x EXTENDS TcoCore.TcoComponent  
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoTixonStep_v_1_x_x EXTENDS TcoCore.TcoComponent
 VAR_INPUT
-	inControllerInAuto  : BOOL;
-	inNotEmptyFeeder  : BOOL;	
-	inSeparatorHomePos  : BOOL;
-	inFillingSensor  : BOOL; 
-	inSeparatorPresent  : BOOL;
-	inComponentOutOfBox  : BOOL;
-	inStepperHomePos  : BOOL;
-	inStepperWorkPos  : BOOL;
-	inPickZone  : BOOL;
-	
+    inControllerInAuto : BOOL;
+    inNotEmptyFeeder : BOOL;
+    inSeparatorHomePos : BOOL;
+    inFillingSensor : BOOL;
+    inSeparatorPresent : BOOL;
+    inStepperHomePos : BOOL;
+    inStepperWorkPos : BOOL;
+    inComponentOutOfBox : BOOL;
+    inSeparatorWorkPos : BOOL;
+
 END_VAR
 VAR_OUTPUT
-	outFeedingA : BOOL;
-	outSepareComponent : BOOL;
-	outBlowValveA : BOOL;
-	outRedLed : BOOL;	
-	outGreenLed : BOOL;
-	outHopper : BOOL;
-	outShotComponent : BOOL;
-	outStepperValve : BOOL;
+    outFeedingA : BOOL;
+    outSepareComponent : BOOL;
+    outBlowValveA : BOOL;
+    outRedLed : BOOL;
+    outGreenLed : BOOL;
+    outHopper : BOOL;
+    outShotComponent : BOOL;
+    outStepperValve : BOOL;
 
 END_VAR
 VAR
-    
 
-	{attribute addProperty Name "<#Status#>"}
+    {attribute addProperty Name "<#Status#>"}
     {attribute clr [ReadOnly()]}
     _status : TcoTixonStep_Status_v_1_x_x;
-	{attribute addProperty Name "<#Control#>"}
-	_control 	: TcoTixonStep_Control_v_1_x_x;
-	{attribute addProperty Name "<#Config#>"}
+    {attribute addProperty Name "<#Control#>"}
+    _control : TcoTixonStep_Control_v_1_x_x;
+    {attribute addProperty Name "<#Config#>"}
     _config : TcoTixonStep_Config_v_1_x_x;
-	
 
+    _someTaskIsActive : BOOL;
 
-	_someTaskIsActive: BOOL;
-
-	{attribute 'hide'}
-	_blink:TcoUtilities.TcoBlinker(THIS^);
-	_runAutomatic: BOOL;
-	_hasError: BOOL;
+    {attribute 'hide'}
+    _blink : TcoUtilities.TcoBlinker(THIS^);
+    _runAutomatic : BOOL;
+    _hasError : BOOL;
 END_VAR
 VAR
 
-	{attribute addProperty Name "<#Separator task#>"}
-    _separatorTask : TcoTixonStepSeparatorTask(THIS^);	
-	{attribute addProperty Name "<#Buffer task#>"}
+    {attribute addProperty Name "<#Separator task#>"}
+    _separatorTask : TcoTixonStepSeparatorTask(THIS^);
+    {attribute addProperty Name "<#Buffer task#>"}
     _bufferTask : TcoTixonBufferTask(THIS^);
-	{attribute addProperty Name "<#Step task#>"}
+    {attribute addProperty Name "<#Step task#>"}
     _stepperTask : TcoTixonStepTask(THIS^);
-	{attribute addProperty Name "<#Hopper task#>"}
+    {attribute addProperty Name "<#Hopper task#>"}
     _hopperTask : TcoTixonHopperTask(THIS^);
-  	
+
     {attribute addProperty Name "<#Restore#>"}
     _restoreTask : TcoCore.TcoTask(THIS^);
-	
-
-  
-   
-
-  
 
 END_VAR
 
 VAR
-	{attribute 'hide'}
-	_sb : TcoCore.StringBuilder;
+    {attribute 'hide'}
+    _sb : TcoCore.StringBuilder;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[
@@ -340,6 +331,8 @@ _status.SeparatorPresent:=inSeparatorPresent;
 _status.StepperHomePos:=inStepperHomePos;
 _status.StepperWorkPos:=inStepperWorkPos;
 _status.ControllerInAuto:=inControllerInAuto;
+_status.SeparatorWorkPos:=inSeparatorWorkPos;
+
 
 ]]></ST>
       </Implementation>

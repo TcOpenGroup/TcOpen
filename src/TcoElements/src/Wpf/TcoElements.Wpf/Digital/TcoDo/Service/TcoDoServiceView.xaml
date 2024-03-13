@@ -19,20 +19,22 @@
     </UserControl.Resources>
     <vortex:TcoComponentView>
         <vortex:TcoComponentView.ComponentHeader>
-            <Border
-            Grid.Column="2"
-            Margin="5,0,5,0"
-            Background="{Binding Model._signal.Cyclic, Converter={tcoCore:SignalToBrushConverter}}"
-            CornerRadius="2" />
+            <WrapPanel VerticalAlignment="Center" >
+                <vortex:RenderableContentControl DataContext="{Binding Model._setTask}"></vortex:RenderableContentControl>
+                <vortex:RenderableContentControl DataContext="{Binding Model._resetTask}"></vortex:RenderableContentControl>
+
+                <Border
+                    Margin="5,0,5,0" MinWidth="100"
+                    Background="{Binding Model._signal.Cyclic, Converter={tcoCore:SignalToBrushConverter}}"
+                    CornerRadius="2" />
+            </WrapPanel>
         </vortex:TcoComponentView.ComponentHeader>
         <vortex:TcoComponentView.ComponentDetails>
             <WrapPanel DataContext="{Binding Model}">
                 <tcoCore:TcoSignalInfoView Grid.Column="1" DataContext="{Binding _signalInfo}" VerticalAlignment="Center"/>
 
                 <ItemsControl ItemsPanel="{StaticResource HorizontalWraped}" Margin="10,10,0,0" >
-                <vortex:RenderableContentControl DataContext="{Binding _setTask}"></vortex:RenderableContentControl>
-                <vortex:RenderableContentControl DataContext="{Binding _resetTask}"></vortex:RenderableContentControl>
-            </ItemsControl>
+               </ItemsControl>
             </WrapPanel>
 
         </vortex:TcoComponentView.ComponentDetails>

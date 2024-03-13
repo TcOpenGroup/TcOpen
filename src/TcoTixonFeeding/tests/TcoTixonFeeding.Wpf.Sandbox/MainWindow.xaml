@@ -12,7 +12,8 @@
         mc:Ignorable="d">
 
     <Grid>
-        <StackPanel Orientation="Vertical">
+        <ScrollViewer>
+            <StackPanel Orientation="Vertical">
             <vortex:RenderableContentControl Margin="10" DataContext="{Binding MAIN._wpfContext._testedTixon}" PresentationType="Control" HorizontalAlignment="Center"/>
 
  
@@ -137,12 +138,41 @@
 
                 </TabItem>
 
-                <TabItem Header="Diagnostic">
+                    <TabItem Header="{Binding MAIN._wpfContext._tixonPickVibroBasicFeeder.AttributeName}">
+                        <TabControl>
+                            <TabItem Header="Service">
+                                <vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext._tixonPickVibroBasicFeeder}" PresentationType="Service"/>
+                            </TabItem>
+                            <TabItem Header="Test Sequence">
+                                <StackPanel Orientation="Vertical">
+                                    <GroupBox HorizontalAlignment="Center" Margin="10" Padding="10" Header="SETINGS">
+                                        <WrapPanel>
+                                            <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext._maxAllowedAttemptsTixonPickVibroBasic}" PresentationType="ControlSlim"></vortex:RenderableContentControl>
+                                            <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext._actualAttempt}" PresentationType="DisplaySlim"></vortex:RenderableContentControl>
+                                            <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext._estimatedCycleTime}" PresentationType="ControlSlim"></vortex:RenderableContentControl>
+
+                                        </WrapPanel>
+                                    </GroupBox>
+                                    <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext._sequenceTixonPickVibroBasicTask}" PresentationType="Base"></vortex:RenderableContentControl>
+
+                                    <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext._sequenceTixonPickVibroBasic}" PresentationType="Base"></vortex:RenderableContentControl>
+                                    <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext._observerTixonPickVibroBasic}" PresentationType="Base"></vortex:RenderableContentControl>
+
+                                    <vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext._tixonPickVibroBasicFeeder}" PresentationType="Service"/>
+                                </StackPanel>
+                            </TabItem>
+                        </TabControl>
+
+
+
+                    </TabItem>
+
+                    <TabItem Header="Diagnostic">
                     <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext }" PresentationType="Diagnostics"/>
 
             </TabItem>
         </TabControl>
     </StackPanel>
-
+        </ScrollViewer>
     </Grid>
 </Window>

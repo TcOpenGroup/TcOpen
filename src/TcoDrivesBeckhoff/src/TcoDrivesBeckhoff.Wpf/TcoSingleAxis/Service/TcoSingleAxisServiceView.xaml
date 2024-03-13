@@ -64,23 +64,26 @@
                         <GroupBox Header="{Binding Component._config.AttributeName}">
                             <vortex:RenderableContentControl  DataContext="{Binding Component._config}" PresentationType="ControlSlim" />
                         </GroupBox>
-                        <GroupBox Header="{Binding AttributeName}" DataContext="{Binding Component._loadPositionTask}">
-                            <StackPanel Orientation="Vertical">
+                    <GroupBox Header="{Binding Component.loadPositionTask.AttributeName}" 
+                                  Visibility="{Binding Component._config.HideLoadPositionTask.Cyclic, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}" >
+                        <StackPanel DataContext="{Binding Component._loadPositionTask}"  Orientation="Vertical">
                                 <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _identifier}" PresentationType="ControlSlim" />
                                 <vortex:RenderableContentControl Margin="5" DataContext="{Binding }" PresentationType="Base" />
                                 <vortex:RenderableContentControl Margin="5" DataContext="{Binding _doesNotExist}" PresentationType="DisplaySlim" />
                                 <vortex:RenderableContentControl Margin="5" DataContext="{Binding _exchangeSuccessfuly}" PresentationType="DisplaySlim" />
                             </StackPanel>
                         </GroupBox>
-                        <GroupBox Header="{Binding AttributeName}" DataContext="{Binding Component._savePositionTask}">
-                            <StackPanel Orientation="Vertical">
+                        <GroupBox Header="{Binding Component._savePositionTask.AttributeName}"
+                                  Visibility="{Binding Component._config.HideSavePositionTask.Cyclic, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}" >
+                        <StackPanel  DataContext="{Binding Component._savePositionTask}" Orientation="Vertical">
                                 <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _identifier}" PresentationType="ControlSlim" />
                                 <vortex:RenderableContentControl Margin="5" DataContext="{Binding }" PresentationType="Base" />
                                 <vortex:RenderableContentControl Margin="5" DataContext="{Binding _exchangeSuccessfuly}" PresentationType="DisplaySlim" />
                             </StackPanel>
                         </GroupBox>
 
-                        <GroupBox Header="{Binding Component._moveAbsoluteTask.AttributeName}" >
+                        <GroupBox Header="{Binding Component._moveAbsoluteTask.AttributeName}" 
+                                  Visibility="{Binding Component._config.HideMoveAbsoluteTask.Cyclic, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}" >
                             <StackPanel Orientation="Vertical">
                                 <GroupBox Header="{Binding Component._moveParams.AttributeName}" >
                                     <vortex:RenderableContentControl Margin="5" DataContext="{Binding Component._moveParams}" PresentationType="ControlSlim" />
@@ -89,7 +92,8 @@
                                 <vortex:RenderableContentControl Margin="5"  DataContext="{Binding Component._moveAbsoluteTask }" PresentationType="Base" />
                             </StackPanel>
                         </GroupBox>
-                        <GroupBox Header="{Binding Component._moveRelativeTask.AttributeName}" >
+                        <GroupBox Header="{Binding Component._moveRelativeTask.AttributeName}"
+                                  Visibility="{Binding Component._config.HideMoveRelativeTask.Cyclic, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}" >
                             <StackPanel Orientation="Vertical">
                                 <GroupBox Header="{Binding Component._moveParams.AttributeName}" >
                                     <vortex:RenderableContentControl Margin="5" DataContext="{Binding Component._moveParams}" PresentationType="ControlSlim" />
@@ -97,9 +101,10 @@
 
                                 <vortex:RenderableContentControl Margin="5"  DataContext="{Binding Component._moveRelativeTask }" PresentationType="Base" />
                             </StackPanel>
-                        </GroupBox>
 
-                        <GroupBox Padding="10"   Header="{x:Static p:strings.Positions}" HorizontalAlignment="Stretch">
+                        </GroupBox>
+                        <GroupBox Padding="10"   Header="{x:Static p:strings.Positions}" HorizontalAlignment="Stretch"
+                                  Visibility="{Binding Component._config.HidePositionTable.Cyclic, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}" >
                              <Grid >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto"></RowDefinition>
@@ -117,7 +122,9 @@
                                             SelectedItem="{Binding Component.SetId}"></ComboBox>
                                     </WrapPanel>
                                     <WrapPanel Margin="5" HorizontalAlignment="Center">
-                                        <Button Margin="10,0"  VerticalAlignment="Center" Command="{Binding DeleteDataSetCommand}" Content="{x:Static p:strings.DeleteSelected}"></Button>
+                                    <Button Margin="10,0" Command="{Binding LoadPositionsCommand}" Content="{x:Static p:strings.Load}"></Button>
+                                    <Button Margin="10,0" Command="{Binding SavePositionsCommand}" Content="{x:Static p:strings.Save}"></Button>
+                                    <Button Margin="10,0"  VerticalAlignment="Center" Command="{Binding DeleteDataSetCommand}" Content="{x:Static p:strings.DeleteSelected}"></Button>
 
 
                                         <TextBlock VerticalAlignment="Center"  Margin="5,0"  Text="{x:Static p:strings.SetId}"/>
@@ -174,8 +181,7 @@
 
                                     <Button Command="{Binding TeachPositionCommand}" Content="{x:Static p:strings.Teach}" ></Button>
                                     <Button Command="{Binding MoveToPositionCommand}" Content="{x:Static p:strings.MoveToPosition}"></Button>
-                                    <Button Command="{Binding LoadPositionsCommand}" Content="{x:Static p:strings.Load}"></Button>
-                                    <Button Command="{Binding SavePositionsCommand}" Content="{x:Static p:strings.Save}"></Button>
+
                                     <WrapPanel Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center">
                                         <WrapPanel.Resources>
 
