@@ -4,9 +4,10 @@
     <Declaration><![CDATA[TYPE TcoTixonVibro_Status_v_1_x_x EXTENDS TcoTixonGenericStatus:
 STRUCT
 
-		{attribute addProperty Name "<#Component out of box#>"}
+		{attribute addProperty Name "<#Component out of box#>- i6"}
         ComponentOutOfBox : BOOL;
-
+		{attribute addProperty Name "<#Separator in work position#> - i7"}
+        SeparatorWorkPos : BOOL;
 
 
 END_STRUCT

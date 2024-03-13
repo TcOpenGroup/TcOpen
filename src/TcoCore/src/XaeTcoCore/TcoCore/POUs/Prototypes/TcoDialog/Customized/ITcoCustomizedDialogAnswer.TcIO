@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="ITcoCustomizedDialogAnswer" Id="{114446a6-3bf5-02e2-334f-93684d65d8dc}">
+    <Declaration><![CDATA[INTERFACE ITcoCustomizedDialogAnswer EXTENDS ITcoCustomizedDialogFormat
+]]></Declaration>
+    <Property Name="Answer" Id="{a337f277-b9f4-0ef3-1e12-deaebf20924a}">
+      <Declaration><![CDATA[PROPERTY Answer : ecustomizedDialogAnswer]]></Declaration>
+      <Get Name="Get" Id="{a6757865-7a3a-03d8-0a1a-91dadcb685cc}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

@@ -122,6 +122,17 @@ PROPERTY Config : REFERENCE TO TcoTixonPickVibro_Config_v_1_x_x]]></Declaration>
         </Implementation>
       </Get>
     </Property>
+    <Method Name="CyclicBinFeed" Id="{9e7b8238-ac0f-0fe0-3778-9a33e96392c7}" FolderPath="Operations\Loop\">
+      <Declaration><![CDATA[METHOD PUBLIC CyclicBinFeed : TcoCore.ITcoTaskStatus
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CyclicBinFeed:=_binFeederTask.Invoke();
+_binFeederTask.AutoRestore:=true;
+]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="CyclicBufferFeed" Id="{e60f056d-2901-0b7a-0673-1ad36a68068e}" FolderPath="Operations\Loop\">
       <Declaration><![CDATA[METHOD PUBLIC CyclicBufferFeed : TcoCore.ITcoTaskStatus
 ]]></Declaration>
@@ -146,17 +157,6 @@ _hopperTask.AutoRestore:=TRUE;
       <Implementation>
         <ST><![CDATA[CyclicSepare:=_separatorTask.Invoke();
 _separatorTask.AutoRestore:=true;
-]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="CyclicStepperFeed" Id="{9e7b8238-ac0f-0fe0-3778-9a33e96392c7}" FolderPath="Operations\Loop\">
-      <Declaration><![CDATA[METHOD PUBLIC CyclicStepperFeed : TcoCore.ITcoTaskStatus
-VAR_INPUT
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[CyclicStepperFeed:=_binFeederTask.Invoke();
-_binFeederTask.AutoRestore:=true;
 ]]></ST>
       </Implementation>
     </Method>

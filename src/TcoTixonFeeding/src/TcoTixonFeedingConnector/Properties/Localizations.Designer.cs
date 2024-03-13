@@ -430,6 +430,15 @@ namespace TcoTixonFeedingConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Out of box sensor disabled (usualy TRUE when pushing to up direction) .
+        /// </summary>
+        public static string ___Out_of_box_sensor_disabled__usualy_TRUE_when_pushing_to_up_direction____ {
+            get {
+                return ResourceManager.GetString("___Out_of_box_sensor_disabled__usualy_TRUE_when_pushing_to_up_direction____", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Red led.
         /// </summary>
         public static string ___Red_led__ {
@@ -453,6 +462,15 @@ namespace TcoTixonFeedingConnector.Properties {
         public static string ___Separator__active___ {
             get {
                 return ResourceManager.GetString("___Separator__active___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Separator has work position (usualy TRUE when pushing to up direction).
+        /// </summary>
+        public static string ___Separator_has_work_position__usualy_TRUE_when_pushing_to_up_direction___ {
+            get {
+                return ResourceManager.GetString("___Separator_has_work_position__usualy_TRUE_when_pushing_to_up_direction___", resourceCulture);
             }
         }
         
@@ -727,6 +745,16 @@ namespace TcoTixonFeedingConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tixon has inconsistent configuration! (OutOfBoxSensorDisabled is not disabled instead of SeparatorHasWorkPosition is On!).
+        /// </summary>
+        public static string ___Tixon_has_inconsistent_configuration___OutOfBoxSensorDisabled_is_not_disabled_instead_of_SeparatorHasWorkPosition_is_On____ {
+            get {
+                return ResourceManager.GetString("___Tixon_has_inconsistent_configuration___OutOfBoxSensorDisabled_is_not_disabled_" +
+                        "instead_of_SeparatorHasWorkPosition_is_On____", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vib. bin task  finished successfully..
         /// </summary>
         public static string ___Vib__bin_task__finished_successfully___ {
@@ -885,6 +913,15 @@ namespace TcoTixonFeedingConnector.Properties {
         public static string ___Waiting_for_feeder_empty__ {
             get {
                 return ResourceManager.GetString("___Waiting_for_feeder_empty__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting to separator to reach work position..
+        /// </summary>
+        public static string ___Waiting_to_separator_to_reach_work_position___ {
+            get {
+                return ResourceManager.GetString("___Waiting_to_separator_to_reach_work_position___", resourceCulture);
             }
         }
     }

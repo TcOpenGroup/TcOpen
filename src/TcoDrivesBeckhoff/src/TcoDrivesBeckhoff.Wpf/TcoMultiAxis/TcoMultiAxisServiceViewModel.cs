@@ -136,6 +136,10 @@ namespace TcoDrivesBeckhoff
             var answer = MessageBox.Show($"{strings.ResourceManager.GetString("AskMovePos")}  {this.SelectedItem.HumanReadable.ToUpper()}?", strings.ResourceManager.GetString("Attention"), MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (answer == MessageBoxResult.Yes)
             {
+                //
+                Component._restoreTask._invokeRequest.Synchron = true; 
+
+
                 this.Component._axis1._moveAbsoluteTask._position.Synchron       = SelectedItem.Axis1.Position.Synchron;
                 this.Component._axis1._moveAbsoluteTask._velocity.Synchron       = SelectedItem.Axis1.Velocity.Synchron;
                 this.Component._axis1._moveAbsoluteTask._acceleration.Synchron   = SelectedItem.Axis1.Acceleration.Synchron;

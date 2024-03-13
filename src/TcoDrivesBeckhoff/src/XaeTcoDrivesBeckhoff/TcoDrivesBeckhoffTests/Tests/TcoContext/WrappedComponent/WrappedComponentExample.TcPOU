@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
-  <POU Name="WrappedComponentExample" Id="{f443fe68-822c-036d-122a-3f9c9f3200c7}" SpecialFunc="None">
+  <POU Name="WrappedComponentExample" Id="{47c5ed63-a639-0668-2732-bb135eb269d1}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK WrappedComponentExample EXTENDS TcoCore.TcoComponent
 
 
@@ -19,10 +19,10 @@ END_VAR
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Property Name="Components" Id="{f2a63328-27cd-090c-37b1-a3ac64a01290}">
+    <Property Name="Components" Id="{93c570c0-6fde-096d-1d23-f4f966fbd389}">
       <Declaration><![CDATA[PROPERTY Components : REFERENCE TO WrappedComponentsExample
 ]]></Declaration>
-      <Get Name="Get" Id="{0c7dcdd5-c057-0b17-279d-c3102bfded2d}">
+      <Get Name="Get" Id="{2f61461f-0e40-0651-14cf-7108bc9b05d2}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
@@ -31,7 +31,7 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="Restore" Id="{e7fc1b31-1ecd-0bb4-3914-4bad4e42e83f}">
+    <Method Name="Restore" Id="{07efd12a-84ef-01eb-0654-21e61fba155a}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
@@ -47,7 +47,7 @@ METHOD  Restore : ITcoRestorable
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Method Name="ServiceMode" Id="{a27c0e07-b8aa-070e-2ec6-644188aae071}">
+    <Method Name="ServiceMode" Id="{cb7697df-4f59-092b-27b8-f175ac230c09}">
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>

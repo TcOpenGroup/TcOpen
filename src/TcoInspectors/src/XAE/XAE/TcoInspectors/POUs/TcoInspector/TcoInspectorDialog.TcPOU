@@ -20,8 +20,8 @@ VAR
 	{attribute 'hide'}
 	_tierAct          : TcoCore.TcoTier(THIS^);
 	
-	_fTrigRetry		: F_TRIG;
-	_fTrigTerminate		: F_TRIG;
+	_rTrigRetry		: R_TRIG;
+	_rTrigTerminate		: R_TRIG;
 	_externalCloseReq : BOOL;
 	_closeRetrySignal:BOOL;
 	_closeTerminateSignal:BOOL;
@@ -119,13 +119,13 @@ _closeRetrySignal:=FALSE;
 _closeTerminateSignal:=FALSE;
 
 
-_fTrigRetry(CLK:=inRetrySignal);
-IF _fTrigRetry.q THEN
+_rTrigRetry(CLK:=inRetrySignal);
+IF _rTrigRetry.q THEN
 	_closeRetrySignal:=TRUE;
 END_IF
 
-_fTrigTerminate(CLK:=inTerminateSignal);
-IF _fTrigTerminate.q THEN
+_rTrigTerminate(CLK:=inTerminateSignal);
+IF _rTrigTerminate.q THEN
 	_closeTerminateSignal:=TRUE;
 END_IF
 

@@ -3,6 +3,7 @@
   <POU Name="Example1WrappedComponent" Id="{d4287f36-2935-0b39-217a-2a1b69b3c8a2}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK Example1WrappedComponent EXTENDS TcoCore.TcoComponent
 VAR_INPUT
+	inSignal: BOOL;
 END_VAR
 VAR_OUTPUT
 END_VAR
@@ -18,7 +19,13 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[piston();
+digitalInput(inoSignal:=inSignal);
+
+dummy1Task.Enabled:=TRUE;
+IF dummy1Task.Execute() THEN
+	;
+END_IF]]></ST>
     </Implementation>
     <Method Name="Restore" Id="{38596799-d63f-0b45-099b-198ffa020014}">
       <Declaration><![CDATA[(*~
@@ -48,7 +55,10 @@ METHOD  Restore : ITcoRestorable
 METHOD PROTECTED  ServiceMode
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[piston.Service();
+digitalInput.Service();
+digitaOutput.Service();
+]]></ST>
       </Implementation>
     </Method>
   </POU>

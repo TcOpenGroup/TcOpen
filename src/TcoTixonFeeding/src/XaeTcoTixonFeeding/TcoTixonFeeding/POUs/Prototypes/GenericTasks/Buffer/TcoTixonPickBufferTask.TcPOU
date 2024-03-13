@@ -52,7 +52,7 @@ IF Execute() THEN
         _timer(IN :=TRUE,
             Pt := inoConfig.BufferBlowStartTime);
 		  inoControl.BlowAValve := inoConfig.BufferBlowActive;	
-        IF _timer.Q THEN  
+        IF _timer.Q OR NOT inoConfig.BufferBlowActive THEN  
 			inoControl.FeedingA:=TRUE;
             _progress := _progress + 1;
             _timer(In := FALSE);
@@ -75,8 +75,8 @@ IF Execute() THEN
     IF _progress = 4 THEN
         inoControl.FeedingA := FALSE;
         Messenger.Debug('<#Waiting for buffer is full and blow ending#>');
-        _timer(IN := inoStatus.FillingSensor, Pt := inoConfig.BufferBlowFullTime);
-        IF _timer.Q THEN
+        _timer(IN := TRUE, Pt := inoConfig.BufferBlowFullTime);
+        IF _timer.Q OR NOT inoConfig.BufferBlowActive THEN
             inoControl.BlowAValve := FALSE;
             _progress := _progress + 1;
             _timer(In := FALSE);

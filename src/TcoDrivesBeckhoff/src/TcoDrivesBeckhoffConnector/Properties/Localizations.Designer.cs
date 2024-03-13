@@ -376,6 +376,15 @@ namespace TcoDrivesBeckhoffConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hide Load position Tab.
+        /// </summary>
+        public static string ___Hide_Load_position_Tab__ {
+            get {
+                return ResourceManager.GetString("___Hide_Load_position_Tab__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hide MoveAbsolute Tab.
         /// </summary>
         public static string ___Hide_MoveAbsolute_Tab__ {
@@ -412,6 +421,15 @@ namespace TcoDrivesBeckhoffConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hide Position Tab.
+        /// </summary>
+        public static string ___Hide_Position_Tab__ {
+            get {
+                return ResourceManager.GetString("___Hide_Position_Tab__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hide Power Tab.
         /// </summary>
         public static string ___Hide_Power_Tab__ {
@@ -426,6 +444,15 @@ namespace TcoDrivesBeckhoffConnector.Properties {
         public static string ___Hide_Reset_Tab__ {
             get {
                 return ResourceManager.GetString("___Hide_Reset_Tab__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hide Save position Tab.
+        /// </summary>
+        public static string ___Hide_Save_position_Tab__ {
+            get {
+                return ResourceManager.GetString("___Hide_Save_position_Tab__", resourceCulture);
             }
         }
         

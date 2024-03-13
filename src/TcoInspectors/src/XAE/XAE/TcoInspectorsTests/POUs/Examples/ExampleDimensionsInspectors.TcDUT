@@ -33,7 +33,28 @@
 		{attribute addProperty Name "Dimension inspection 10"}
         Dim_Inspector_10 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
 		
-		Inspectors : ARRAY[0..150] OF TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+		
+		{attribute addProperty Name "Dimension inspection 11"}
+        Dim_Inspector_11 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+		{attribute addProperty Name "Dimension inspection 12"}
+        Dim_Inspector_12 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+		{attribute addProperty Name "Dimension inspection 13"}
+		Dim_Inspector_13 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+		{attribute addProperty Name "Dimension inspection 14"}
+        Dim_Inspector_14 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+		{attribute addProperty Name "Dimension inspection 15"}
+        Dim_Inspector_15 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+		{attribute addProperty Name "Dimension inspection 16"}
+        Dim_Inspector_16 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+		{attribute addProperty Name "Dimension inspection 17"}
+        Dim_Inspector_17 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+		{attribute addProperty Name "Dimension inspection 18"}
+        Dim_Inspector_18 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+		{attribute addProperty Name "Dimension inspection 19"}
+        Dim_Inspector_19 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+		{attribute addProperty Name "Dimension inspection 20"}
+        Dim_Inspector_20 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+		//Inspectors : ARRAY[0..20] OF TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
     END_STRUCT
 END_TYPE
 ]]></Declaration>

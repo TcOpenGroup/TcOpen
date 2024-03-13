@@ -19,16 +19,20 @@
             <WrapPanel Background="Transparent" Width="{Binding (FrameworkElement.ActualWidth) , RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}" MinWidth="{Binding ItemWidth , RelativeSource={RelativeSource Self}}" ItemHeight="{Binding (ListView.View).ItemHeight , RelativeSource={RelativeSource AncestorType=ListView}}" ItemWidth="{Binding (ListView.View).ItemWidth , RelativeSource={RelativeSource AncestorType=ListView}}" />
         </ItemsPanelTemplate>
     </UserControl.Resources>
-    <vortex:TcoComponentView>
+    <vortex:TcoComponentView >
         <vortex:TcoComponentView.ComponentHeader>
-            <Border DataContext="{Binding Model}"
+            <WrapPanel Orientation="Horizontal"  >
+
+                <Border DataContext="{Binding Model}" MinWidth="100" MinHeight="30"
                         Grid.Column="1"
                         Margin="5,0,5,0"
                         Background="{Binding _signal.Cyclic, Converter={tcoCore:SignalToBrushConverter}}"
                         CornerRadius="2" />
+            </WrapPanel>
+
         </vortex:TcoComponentView.ComponentHeader>
         <vortex:TcoComponentView.ComponentDetails>
-            <WrapPanel DataContext="{Binding Model}">
+            <WrapPanel DataContext="{Binding Model}" VerticalAlignment="Center">
                 <tcoCore:TcoSignalInfoView Grid.Column="1" DataContext="{Binding _signalInfo}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
 
                 <ItemsControl ItemsPanel="{StaticResource HorizontalWraped}" Margin="10,10,0,0">

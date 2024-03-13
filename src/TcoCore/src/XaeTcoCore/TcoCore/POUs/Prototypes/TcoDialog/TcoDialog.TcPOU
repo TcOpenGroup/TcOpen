@@ -23,8 +23,9 @@ VAR
     _answer     : eDialogAnswer;
     _dialogType : eDialogType;
 	_rTrig		: R_TRIG;
-	_externalCloseReq : BOOL;
-	_closeSignal: BOOL;
+	_imageSource: STRING(255);
+	_imageHeight: REAL;
+	_imageWidth: REAL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -51,19 +52,6 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="FB_init" Id="{155d4d3f-f3ce-0be2-0054-4d5fc2900299}">
-      <Declaration><![CDATA[{attribute 'hide'}
-METHOD PUBLIC FB_init : BOOL
-VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	ParentObject : ITcoObject;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="OnStart" Id="{889d908b-4444-0ca3-12c3-2ee5a16d4c25}">
       <Declaration><![CDATA[METHOD PROTECTED OnStart ]]></Declaration>
       <Implementation>
@@ -78,8 +66,10 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.Restore();
-_externalCloseReq := FALSE;
-_closeSignal:=FALSE;]]></ST>
+_imageSource:='';
+_caption:='';
+_text:='';
+_dialogType  := eDialogType.Undefined;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Show" Id="{052bdc3b-8ff1-0bbd-0fbb-d25a0348416f}">
@@ -98,20 +88,22 @@ METHOD Show : ITcoDialogFormat
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF THIS^._taskState=eTaskState.Ready THEN
-	_answer:=eDialogAnswer.NoAnswer;
-END_IF
+        <ST><![CDATA[
 
 THIS^.Invoke();
 SUPER^();
+
 
 _hasOK       := FALSE;
 _hasYes      := FALSE;
 _hasNo       := FALSE;
 _hasCancel   := FALSE;
+
+_imageSource  :='';
 _text        := '';
 _caption     := '';
 _dialogType  := eDialogType.Undefined;
+
 
 Show := THIS^;
 
@@ -172,11 +164,7 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF THIS^._taskState=eTaskState.Ready THEN
-	_answer:=eDialogAnswer.NoAnswer;
-END_IF
-
-THIS^.Invoke();
+        <ST><![CDATA[THIS^.Invoke();
 SUPER^();
 
 
@@ -184,15 +172,16 @@ _hasOK       := FALSE;
 _hasYes      := FALSE;
 _hasNo       := FALSE;
 _hasCancel   := FALSE;
-_externalCloseReq := TRUE;
+
+_imageSource  :='';
 _text        := '';
 _caption     := '';
 _dialogType  := eDialogType.Undefined;
 
 ShowWithExternalClose := THIS^;
+
 _rTrig(CLK:=inOkAnswerSignal XOR inYesAnswerSignal XOR inNoAnswerSignal XOR inCancelAnswerSignal );
 IF _rTrig.q THEN
-	_closeSignal:=TRUE;
 	IF	inOkAnswerSignal THEN; _answer:=eDialogAnswer.Ok;
 	ELSIF	inYesAnswerSignal THEN; _answer:=eDialogAnswer.Yes;
 	ELSIF	inNoAnswerSignal THEN; _answer:=eDialogAnswer.No;
@@ -226,6 +215,31 @@ END_VAR
       <Implementation>
         <ST><![CDATA[_caption := inCaption;
 WithCaption := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithImage" Id="{801b5f27-5737-05a7-0821-0256f96be1b5}" FolderPath="Format\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Sets the image source of the dialog window. 			 					
+ 		</summary>					
+	</docu>	
+~*)
+{attribute 'hide'}
+{attribute 'obsolete' := 'You should access the method via `Show()` method.'}
+METHOD WithImage : ITcoDialogAnswer
+VAR_INPUT
+	inSource : STRING(255);
+	inHeight:REAL;
+	inWidth:REAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_imageSource := inSource;
+_imageHeight:=inHeight;
+_imageWidth:= inWidth;
+
+WithImage := THIS^;]]></ST>
       </Implementation>
     </Method>
     <Method Name="WithOk" Id="{c52dd3cb-da74-062c-2ff2-a375c59030c1}" FolderPath="Format\">

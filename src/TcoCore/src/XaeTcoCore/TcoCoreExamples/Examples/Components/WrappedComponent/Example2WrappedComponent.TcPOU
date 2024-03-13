@@ -20,7 +20,8 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[_resetTask();
+]]></ST>
     </Implementation>
     <Property Name="Components" Id="{9fcedbea-fc77-02b2-16ec-9e0bdd9823aa}">
       <Declaration><![CDATA[PROPERTY Components : REFERENCE TO Example2WrappedComponents
@@ -62,7 +63,9 @@ METHOD  Restore : ITcoRestorable
 METHOD PROTECTED  ServiceMode
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[_components.piston.Service();
+_components.digitalInput .Service();
+_components.digitaOutput.Service();]]></ST>
       </Implementation>
     </Method>
   </POU>

@@ -9,7 +9,8 @@ STRUCT
         StepperWorkPos : BOOL;
 		{attribute addProperty Name "<#Component out of box#> - i8"}
         ComponentOutOfBox : BOOL;
-      
+      	{attribute addProperty Name "<#Separator in work position#> - i9"}
+        SeparatorWorkPos : BOOL;
 
 
 END_STRUCT

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="eCustomizedDialogAnswer" Id="{d8ccb112-c774-059b-10fc-addce03e14ac}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE
+    eCustomizedDialogAnswer :
+    (
+        NoAnswer := 0,
+        Option1 := 10,
+        Option2 := 20,
+        Option3 := 30,
+        Option4 := 40
+    );
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

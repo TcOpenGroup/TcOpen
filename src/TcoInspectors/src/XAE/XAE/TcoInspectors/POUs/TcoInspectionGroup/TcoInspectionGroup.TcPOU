@@ -10,7 +10,7 @@ VAR
     _overallResult            : TcoComprehensiveResult;
     _currentRunResult         : TcoComprehensiveResult;
     _inspections              : ARRAY[0..LAST_INSPECTION_INDEX] OF ULINT;
-	_inspectionsEmpty              : ARRAY[0..LAST_INSPECTION_INDEX] OF ULINT;
+	_inspectionsEmpty         : ARRAY[0..LAST_INSPECTION_INDEX] OF ULINT;
     _inspectionIndex          : INT;
     _tierAct                  : TcoCore.TcoTier(THIS^);
     _normalizedAllowedRetries : UINT;
@@ -19,7 +19,7 @@ VAR
 END_VAR
 
 VAR CONSTANT
-    LAST_INSPECTION_INDEX : INT := 150;
+    LAST_INSPECTION_INDEX : INT := 50;
 	MAX_NORMALIZED_RETRIES : UINT := 65535;
 END_VAR
 
@@ -246,7 +246,7 @@ ELSE
 END_IF
 
 
-IF(_inspectionIndex <= LAST_INSPECTION_INDEX)THEN
+IF(_inspectionIndex < LAST_INSPECTION_INDEX)THEN
 	_inspections[_inspectionIndex] :=  Inspector.Identity;
 	_inspectionIndex := _inspectionIndex + 1;
 END_IF

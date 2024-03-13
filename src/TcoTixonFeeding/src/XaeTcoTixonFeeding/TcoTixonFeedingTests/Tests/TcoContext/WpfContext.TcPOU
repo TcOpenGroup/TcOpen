@@ -16,13 +16,17 @@ VAR
 	{attribute addProperty Name "<#TcoTixonPickStep #>"}
     _tixonPickStepFeeder : TcoTixonFeeding.TcoTixonPickStep_v_1_x_x(THIS^);
 
+	{attribute addProperty Name "<#TcoTixonPickVibroBasic #>"}
+    _tixonPickVibroBasicFeeder : TcoTixonFeeding.TcoTixonPickVibroBasic_v_1_x_x(THIS^);
+	
+	
+    _dialogTixon        	: TcoCore.TcoDialog(THIS^);
 
 	
 	_sequenceTixonStep      : TcoCore.TcoSequence(THIS^, eRestoreMode.None);
     _observerTixonStep       : TcoCore.TcoSequencerObserver(THIS^);
     {attribute addProperty Name "Start sequence Step"}
     _sequenceTixonStepTask 	: SequenceTask(THIS^);
-    _dialogTixonStep        	: TcoCore.TcoDialog(THIS^);
     {attribute addProperty Name "Requred attempts Step"}
     _maxAllowedAttemptsTixonStep: INT;
 
@@ -31,7 +35,6 @@ VAR
     _observerTixonVibro       : TcoCore.TcoSequencerObserver(THIS^);
     {attribute addProperty Name "Start sequence Vibro"}
     _sequenceTixonVibroTask 	: SequenceTask(THIS^);
-	_dialogTixonVibro        	: TcoCore.TcoDialog(THIS^);
     {attribute addProperty Name "Requred attempts Vibro"}
     _maxAllowedAttemptsTixonVibro: INT;
 	
@@ -39,7 +42,6 @@ VAR
     _observerTixonPickVibro       : TcoCore.TcoSequencerObserver(THIS^);
     {attribute addProperty Name "Start sequence PickVibro"}
     _sequenceTixonPickVibroTask 	: SequenceTask(THIS^);
-	_dialogTixonPickVibro       	: TcoCore.TcoDialog(THIS^);
     {attribute addProperty Name "Requred attempts PickVibro"}
     _maxAllowedAttemptsTixonPickVibro: INT;
 	
@@ -48,9 +50,15 @@ VAR
     _observerTixonPickStep       : TcoCore.TcoSequencerObserver(THIS^);
     {attribute addProperty Name "Start sequence PickStep"}
     _sequenceTixonPickStepTask 	: SequenceTask(THIS^);
-	_dialogTixonPickStep       	: TcoCore.TcoDialog(THIS^);
     {attribute addProperty Name "Requred attempts PickStep"}
     _maxAllowedAttemptsTixonPickStep: INT;
+	
+	_sequenceTixonPickVibroBasic     : TcoCore.TcoSequence(THIS^, eRestoreMode.None);
+    _observerTixonPickVibroBasic       : TcoCore.TcoSequencerObserver(THIS^);
+    {attribute addProperty Name "Start sequence Vibro"}
+    _sequenceTixonPickVibroBasicTask 	: SequenceTask(THIS^);
+    {attribute addProperty Name "Requred attempts Vibro"}
+    _maxAllowedAttemptsTixonPickVibroBasic: INT;
 	
 	{attribute addProperty Name "TYPE OF TIXON "}
 	_testedTixon:eTypeOfTixon;
@@ -89,22 +97,23 @@ END_IF
 CASE _testedTixon OF 
 	eTypeOfTixon.TixonStep:
 	_tixonStepFeeder(
-		inNotEmptyFeeder:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_1.Input , 
-		inSeparatorHomePos:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_2.Input , 
-		inFillingSensor:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_3.Input , 
-		inSeparatorPresent:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_4.Input , 
-		inComponentOutOfBox:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_5.Input , 
-		inStepperHomePos:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_7.Input , 
-		inStepperWorkPos:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_6.Input , 
-		inControllerInAuto:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_8.Input , 
+		inControllerInAuto:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_1.Input , 
+		inNotEmptyFeeder:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_2.Input , 
+		inSeparatorHomePos:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_3.Input , 
+		inFillingSensor:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_4.Input , 
+		inSeparatorPresent:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_5.Input , 
+		inStepperHomePos:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_6.Input , 
+		inStepperWorkPos:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_7.Input , 
+		inComponentOutOfBox:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_8.Input ,
+		//inSeparatorWorkPos:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_9.Input ,  
 		outFeedingA=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_1.Output , 
-		outRedLed=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_2.Output , 
-		outGreenLed=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_3.Output , 
-		outSepareComponent=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_4.Output , 
-		outShotComponent=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_5.Output, 
-		outBlowValveA=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_6.Output, 
+		outSepareComponent=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_2.Output , 
+		outBlowValveA=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_3.Output , 
+		outRedLed=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_4.Output , 
+		outGreenLed=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_5.Output, 
+		outHopper=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_6.Output, 
 		outStepperValve=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_7.Output, 
-		outHopper=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_8.Output );
+		outShotComponent=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_8.Output );
 		
 	
    	_tixonStepFeeder.Service();
@@ -112,38 +121,41 @@ CASE _testedTixon OF
 	eTypeOfTixon.TixonVibro:
 		
 	_tixonVibroFeeder(
-		inNotEmptyFeeder:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_1.Input , 
-		inSeparatorHomePos:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_2.Input , 
-		inFillingSensor:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_3.Input , 
-		inSeparatorPresent:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_4.Input , 
-		inComponentOutOfBox:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_5.Input , 
-		inControllerInAuto:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_6.Input , 
+		inControllerInAuto:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_1.Input , 
+		inNotEmptyFeeder:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_2.Input , 
+		inSeparatorHomePos:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_3.Input , 
+		inFillingSensor:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_4.Input , 
+		inSeparatorPresent:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_5.Input , 
+		inComponentOutOfBox:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_6.Input , 
+		inSeparatorWorkPos:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_7.Input , 
 		outFeedingA=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_1.Output , 
-		outRedLed=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_3.Output , 
-		outGreenLed=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_4.Output , 
-		outSepareComponent=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_5.Output , 
-		outShotComponent=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_6.Output, 
-		outBlowValveA=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_7.Output, 
-		outHopper=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_8.Output );
+		outSepareComponent=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_2.Output , 
+		outBlowValveA=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_3.Output , 
+		outRedLed=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_4.Output , 
+		outGreenLed=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_5.Output, 
+		outHopper=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_6.Output, 
+		outShotComponent=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_7.Output );
+		
+	
 		
     _tixonVibroFeeder.Service();
 	
 	eTypeOfTixon.TixonPickStep:
 	_tixonPickStepFeeder(
-		inNotEmptyFeeder:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_1.Input , 
-		inSeparatorHomePos:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_2.Input , 
-		inFillingSensor:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_3.Input , 
-		inSeparatorPresent:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_4.Input , 
-		inStepperHomePos:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_7.Input , 
-		inStepperWorkPos:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_6.Input , 
-		inControllerInAuto:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_8.Input , 
+	inControllerInAuto:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_1.Input , 
+		inNotEmptyFeeder:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_2.Input , 
+		inSeparatorHomePos:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_3.Input , 
+		inFillingSensor:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_4.Input , 
+		inSeparatorPresent:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_5.Input , 
+		inStepperHomePos:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_6.Input , 
+		inStepperWorkPos:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_7.Input , 
 		outFeedingA=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_1.Output , 
-		outRedLed=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_2.Output , 
-		outGreenLed=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_3.Output , 
-		outSepareComponent=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_4.Output , 
-		outBlowValveA=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_6.Output, 
-		outStepperValve=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_7.Output, 
-		outHopper=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_8.Output );
+		outSepareComponent=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_2.Output , 
+		outBlowValveA=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_3.Output , 
+		outRedLed=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_4.Output , 
+		outGreenLed=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_5.Output, 
+		outHopper=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_6.Output, 
+		outStepperValve=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_7.Output);
 		
 	
    	_tixonPickStepFeeder.Service();
@@ -151,25 +163,44 @@ CASE _testedTixon OF
 	eTypeOfTixon.TixonPickVibro:
 		
 	_tixonPickVibroFeeder(
-	inNotEmptyFeeder:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_1.Input , 
-	inSeparatorHomePos:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_2.Input , 
-	inSeparatorWorkPos:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_3.Input , 
-	inSeparatorPresent:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_4.Input ,
-	inFillingSensor:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_5.Input ,  
-	inControllerInAuto:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_6.Input , 
-	outFeedingA=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_1.Output , 
-	outFeedingB=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_2.Output , 
-	outSepareComponent=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_3.Output , 
-	outBlowValveA=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_4.Output, 
-	outBlowValveB=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_5.Output,
-	outRedLed=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_6.Output , 
-	outGreenLed=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_7.Output , 
-	outHopper=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_8.Output );
+		inControllerInAuto:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_1.Input , 
+		inNotEmptyFeeder:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_2.Input , 
+		inSeparatorHomePos:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_3.Input , 
+		inFillingSensor:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_4.Input , 
+		inSeparatorPresent:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_5.Input , 
+		inSeparatorWorkPos:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_6.Input , 
+		outFeedingA=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_1.Output , 
+		outSepareComponent=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_2.Output , 
+		outBlowValveA=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_3.Output , 
+		outRedLed=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_4.Output , 
+		outGreenLed=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_5.Output, 
+		outHopper=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_6.Output, 
+		outFeedingB=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_7.Output,
+		outBlowValveB=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_8.Output );
 		
     _tixonPickVibroFeeder.Service();
+	
+	
+	eTypeOfTixon.TixonPickVibroBasic:
+		
+	_tixonPickVibroBasicFeeder(
+		inControllerInAuto:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_1.Input , 
+		inNotEmptyFeeder:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_2.Input , 
+		inSeparatorHomePos:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_3.Input , 
+		inSeparatorPresent:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_5.Input , 
+		inSeparatorWorkPos:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_6.Input , 
+		outFeedingA=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_1.Output , 
+		outSepareComponent=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_2.Output , 
+		outBlowValveA=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_3.Output , 
+		outRedLed=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_4.Output , 
+		outGreenLed=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_5.Output, 
+		outHopper=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_6.Output, 
+	 );
+		
+    _tixonPickVibroBasicFeeder.Service();
+
 
 END_CASE
-
 
 
 
@@ -197,6 +228,11 @@ _sequenceTixonPickStepTask.Enabled :=_testedTixon =eTypeOfTixon.TixonPickStep;
 _sequenceTixonPickStepTask(Sequence := _sequenceTixonPickStep);
 IF(_sequenceTixonPickStepTask.Execute())THEN
 	SequenceTixonPickStep();
+END_IF;
+_sequenceTixonPickVibroBasicTask.Enabled :=_testedTixon =eTypeOfTixon.TixonPickVibroBasic;
+_sequenceTixonPickVibroBasicTask(Sequence := _sequenceTixonPickVibroBasic);
+IF(_sequenceTixonPickVibroBasicTask.Execute())THEN
+	SequenceTixonPickVibroBasic();
 END_IF;]]></ST>
       </Implementation>
     </Method>
@@ -236,7 +272,7 @@ IF (seq.Step(inStepID := 0,
 
 	_noOfAttmets:=0;
 
-	answer := _dialogTixonStep			
+	answer := _dialogTixon			
 			.Show()	
 			.WithType(eDialogType.Question)				
 			.WithCaption('Ready to go?')
@@ -340,7 +376,7 @@ IF (seq.Step(inStepID := 600,
     inStepDescription := 'ASKING FOR RESTORING')) THEN
 //    --------------------------------------------------------
 	_tixonPickVibroFeeder.Restore();
-	answer := _dialogTixonStep			
+	answer := _dialogTixon			
 			.Show()	
 			.WithType(eDialogType.Question)				
 			.WithCaption('Question?')
@@ -384,14 +420,14 @@ VAR_INST
 
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[seq REF= _sequenceTixonStep;
+        <ST><![CDATA[seq REF= _sequenceTixonVibro;
 
 seq.Open();
-seq.Observer := _observerTixonStep;
+seq.Observer := _observerTixonVibro;
 
 
 _tixonPickVibroFeeder.CyclicBufferFeed(); 
-_tixonPickVibroFeeder.CyclicStepperFeed();
+_tixonPickVibroFeeder.CyclicBinFeed();
 _tixonPickVibroFeeder.CyclicHopperFeed();
 _tixonPickVibroFeeder.DefaultSignalisation();
 
@@ -404,7 +440,7 @@ IF (seq.Step(inStepID := 0,
 
 	_noOfAttmets:=0;
 
-	answer := _dialogTixonStep			
+	answer := _dialogTixon			
 			.Show()	
 			.WithType(eDialogType.Question)				
 			.WithCaption('Ready to go?')
@@ -439,7 +475,7 @@ IF (seq.Step(inStepID := 11,
 //--------------------------------------------------------   
 	
 
-		seq.StepCompleteWhen(_tixonStepFeeder.Separe().Done);
+		seq.StepCompleteWhen(_tixonPickVibroFeeder.Separe().Done);
 
 		
 //--------------------------------------------------------			
@@ -464,7 +500,7 @@ IF (seq.Step(inStepID := 13,
     inStepDescription := 'WAIT FOR PICK - INTERUPT PICK ZONE')) THEN
 //--------------------------------------------------------   
 	
-	IF _tixonPickStepFeeder.Status.InPickZone  THEN
+	IF _tixonPickVibroFeeder.Status.InPickZone  THEN
 		seq.CompleteStep();
 	END_IF
 		
@@ -476,7 +512,7 @@ IF (seq.Step(inStepID := 14,
     inStepDescription := 'WAIT FOR PICK - RELEASE PICK')) THEN
 //--------------------------------------------------------   
 	
-	IF NOT _tixonPickStepFeeder.Status.InPickZone AND NOT _tixonPickStepFeeder.Status.SeparatorPresent  THEN
+	IF NOT _tixonPickVibroFeeder.Status.InPickZone AND NOT _tixonPickVibroFeeder.Status.SeparatorPresent  THEN
 		seq.CompleteStep();
 	END_IF
 		
@@ -510,7 +546,7 @@ IF (seq.Step(inStepID := 600,
     inStepDescription := 'ASKING FOR RESTORING')) THEN
 //    --------------------------------------------------------
 	_tixonPickVibroFeeder.Restore();
-	answer := _dialogTixonStep			
+	answer := _dialogTixon			
 			.Show()	
 			.WithType(eDialogType.Question)				
 			.WithCaption('Question?')
@@ -522,6 +558,176 @@ IF (seq.Step(inStepID := 600,
 		seq.CompleteStep();
 	 ELSIF(answer = TcoCore.eDialogAnswer.No) THEN
 		_sequenceTixonPickVibroTask.Restore();
+	 END_IF;	
+//    --------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := seq.RESTORE_STEP_ID,
+    inEnabled := TRUE,
+    inStepDescription := 'RETURN TO THE START OF THE SEQUENCE')) THEN
+    //--------------------------------------------------------	
+
+    	seq.CompleteSequence();
+    //--------------------------------------------------------			
+END_IF;
+
+seq.Close();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SequenceTixonPickVibroBasic" Id="{68d82ce5-18ce-0272-2b48-55bc80dcec0a}">
+      <Declaration><![CDATA[METHOD SequenceTixonPickVibroBasic
+VAR
+    seq    : REFERENCE TO TcoCore.TcoSequence;
+    answer : TcoCore.eDialogAnswer;
+	done: BOOL;
+	ProbeDoneWhen: INT;
+
+END_VAR
+
+VAR_INST
+	_noOfAttmets: INT;
+	_timer:ton;
+
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[seq REF= _sequenceTixonPickVibroBasic;
+
+seq.Open();
+seq.Observer := _observerTixonPickVibroBasic;
+
+
+_tixonPickVibroBasicFeeder.CyclicBufferFeed(); 
+
+_tixonPickVibroBasicFeeder.CyclicHopperFeed();
+_tixonPickVibroBasicFeeder.DefaultSignalisation();
+
+_actualAttempt:=_noOfAttmets; 
+		
+IF (seq.Step(inStepID := 0,
+    inEnabled := TRUE,
+    inStepDescription := 'READY TO START')) THEN
+    //--------------------------------------------------------
+
+	_noOfAttmets:=0;
+
+	answer := _dialogTixon			
+			.Show()	
+			.WithType(eDialogType.Question)				
+			.WithCaption('Ready to go?')
+			.WithText('Do you really want to start feeding? Do we go ahead?')			
+			.WithYesNo().Answer;
+			//
+			
+	 IF (answer = TcoCore.eDialogAnswer.Yes) THEN    	 	
+		seq.CompleteStep();
+	 ELSIF(answer = TcoCore.eDialogAnswer.No) THEN
+		_tixonPickVibroBasicFeeder.Restore();
+	 END_IF;	
+
+    //--------------------------------------------------------			
+END_IF;
+
+
+IF (seq.Step(inStepID := 10,
+    inEnabled := TRUE,
+    inStepDescription := 'RESTORE')) THEN
+//--------------------------------------------------------   
+	
+	_tixonPickVibroBasicFeeder.Restore();
+	seq.CompleteStep();
+	
+		
+//--------------------------------------------------------			
+END_IF;
+IF (seq.Step(inStepID := 11,
+    inEnabled := TRUE,
+    inStepDescription := 'START FEEDING TASK')) THEN
+//--------------------------------------------------------   
+	
+
+		seq.StepCompleteWhen(_tixonPickVibroBasicFeeder.Separe().Done);
+
+		
+//--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 12,
+    inEnabled := TRUE,
+    inStepDescription := 'WAIT FOR COMPONENT')) THEN
+//--------------------------------------------------------   
+	
+	 	IF _tixonPickVibroBasicFeeder.Status.ComponentReady  THEN
+			seq.CompleteStep();
+			_timer(IN:=FALSE);
+		END_IF;
+		
+//--------------------------------------------------------			
+END_IF;
+
+
+IF (seq.Step(inStepID := 13,
+    inEnabled := TRUE,
+    inStepDescription := 'WAIT FOR PICK - INTERUPT PICK ZONE')) THEN
+//--------------------------------------------------------   
+	
+	IF _tixonPickVibroBasicFeeder.Status.InPickZone  THEN
+		seq.CompleteStep();
+	END_IF
+		
+//--------------------------------------------------------			
+END_IF;
+
+IF (seq.Step(inStepID := 14,
+    inEnabled := TRUE,
+    inStepDescription := 'WAIT FOR PICK - RELEASE PICK')) THEN
+//--------------------------------------------------------   
+	
+	IF NOT _tixonPickVibroBasicFeeder.Status.InPickZone AND NOT _tixonPickVibroBasicFeeder.Status.SeparatorPresent  THEN
+		seq.CompleteStep();
+	END_IF
+		
+//--------------------------------------------------------			
+END_IF;
+
+
+IF (seq.Step(inStepID := 16,
+    inEnabled := TRUE,
+    inStepDescription := 'COUNT')) THEN
+//--------------------------------------------------------   
+
+
+		IF _noOfAttmets<_maxAllowedAttemptsTixonPickVibroBasic THEN
+			_noOfAttmets:=_noOfAttmets+1;
+			seq.RequestStep(11);
+		
+		ELSE 
+			seq.CompleteStep();
+		end_if;
+
+//--------------------------------------------------------			
+END_IF;
+
+
+
+
+
+IF (seq.Step(inStepID := 600,
+    inEnabled := TRUE,
+    inStepDescription := 'ASKING FOR RESTORING')) THEN
+//    --------------------------------------------------------
+	_tixonPickVibroBasicFeeder.Restore();
+	answer := _dialogTixon			
+			.Show()	
+			.WithType(eDialogType.Question)				
+			.WithCaption('Question?')
+			.WithText('Do you want to repat it?')			
+			.WithYesNo().Answer;
+			
+			
+	 IF (answer = TcoCore.eDialogAnswer.Yes) THEN    	 	
+		seq.CompleteStep();
+	 ELSIF(answer = TcoCore.eDialogAnswer.No) THEN
+		_tixonPickVibroBasicFeeder.Restore();
 	 END_IF;	
 //    --------------------------------------------------------			
 END_IF;
@@ -574,7 +780,7 @@ IF (seq.Step(inStepID := 0,
 
 	_noOfAttmets:=0;
 
-	answer := _dialogTixonStep			
+	answer := _dialogTixon			
 			.Show()	
 			.WithType(eDialogType.Question)				
 			.WithCaption('Ready to go?')
@@ -673,7 +879,7 @@ IF (seq.Step(inStepID := 600,
     inStepDescription := 'ASKING FOR RESTORING')) THEN
 //    --------------------------------------------------------
 	_tixonStepFeeder.Restore();
-	answer := _dialogTixonStep			
+	answer := _dialogTixon			
 			.Show()	
 			.WithType(eDialogType.Question)				
 			.WithCaption('Question?')
@@ -736,7 +942,7 @@ IF (seq.Step(inStepID := 0,
 
 	_noOfAttmets:=0;
 
-	answer := _dialogTixonStep			
+	answer := _dialogTixon			
 			.Show()	
 			.WithType(eDialogType.Question)				
 			.WithCaption('Ready to go?')
@@ -831,7 +1037,7 @@ IF (seq.Step(inStepID := 600,
     inStepDescription := 'ASKING FOR RESTORING')) THEN
 //    --------------------------------------------------------
 	_tixonVibroFeeder.Restore();
-	answer := _dialogTixonStep			
+	answer := _dialogTixon			
 			.Show()	
 			.WithType(eDialogType.Question)				
 			.WithCaption('Question?')

@@ -1,0 +1,373 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="TcoCustomizedDialog" Id="{d9b836e4-a737-0d10-0835-85d6cfdad771}" SpecialFunc="None">
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Provides customized dialog to interact with the user.		    			 					
+ 		</summary>
+		<example>										
+			[!code-pas[StandardDialog](~/../TcOpen/src/TcoInspectors/src/XAE/XAE/TcoInspectorsTests/POUs/Examples/ExampleContext.TcPOU?name=StandardDialog)]		
+			[!code-csharp[DialogInitialization](~/../TcOpen/src/TcoInspectors/tests/Sandbox.TcoInspectors.Wpf/App.xaml.cs?name=DialogProxyServiceInitialization)]
+		</example>					
+	</docu>	
+~*)
+FUNCTION_BLOCK TcoCustomizedDialog EXTENDS TcoDialogBase IMPLEMENTS ITcoCustomizedDialogFormat, ITcoCustomizedDialogAnswer
+VAR
+    _text : STRING(500);
+    _caption : STRING(255);
+    _hasOption1 : BOOL;
+    _hasOption2 : BOOL;
+    _hasOption3 : BOOL;
+    _hasOption4 : BOOL;
+    _contentOption1 : STRING;
+    _contentOption2 : STRING;
+    _contentOption3 : STRING;
+    _contentOption4 : STRING;
+    _answer : eCustomizedDialogAnswer;
+    _dialogType : eDialogType;
+    _rTrig : R_TRIG;
+    _imageSource : STRING(255);
+    _imageHeight : REAL;
+    _imageWidth : REAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[SUPER^();]]></ST>
+    </Implementation>
+    <Folder Name="Format" Id="{42844b44-35e6-0d3a-39ce-71b2ae5c11bf}" />
+    <Property Name="Answer" Id="{ac16659c-16a3-0ea7-280c-be48ce8cb8cc}">
+      <Declaration><![CDATA[{attribute 'hide'}
+{attribute 'obsolete' := 'You should access the property via `ITcoDialogAnswer)` interface.'}
+(*~
+	<docu>
+		<summary>
+			Gets the answer from the dialog. 			 					
+ 		</summary>					
+	</docu>	
+~*)
+PROPERTY Answer : eCustomizedDialogAnswer]]></Declaration>
+      <Get Name="Get" Id="{14d59846-f8fc-0138-29db-35f00228f3e6}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Answer := _answer;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="OnStart" Id="{bf8ba463-a3c1-01f6-35a4-f02acf9128ba}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStart ]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.OnStart();
+_answer := eCustomizedDialogAnswer.NoAnswer;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{5fc5f523-ea5c-0427-1adc-baeb66ae158a}">
+      <Declaration><![CDATA[METHOD Restore : ITcoRestorable
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.Restore();
+_imageSource:='';
+_caption:='';
+_text:='';
+_dialogType  := eDialogType.Undefined;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Show" Id="{450b74d4-edd3-0a58-040d-81caa87a3c2a}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Shows the customized dialog.
+			<note type="important">
+				In order for the dialog to be displayed to the user user application must initialized in the user application.
+				How to set up the observer in a WPF see `TcOpen.Inxton.TcoCore.Wpf.DialogProxyService`.
+			</note> 			 					
+ 		</summary>					
+	</docu>	
+~*)
+METHOD Show : ITcoCustomizedDialogFormat
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+THIS^.Invoke();
+SUPER^();
+
+_hasOption1 := FALSE;
+_hasOption2 := FALSE;
+_hasOption3 := FALSE;
+_hasOption4 := FALSE;
+_contentOption1 := '';
+_contentOption2 := '';
+_contentOption3 := '';
+_contentOption4 := '';
+
+
+
+_imageSource := '';
+_text := '';
+_caption := '';
+_dialogType := eDialogType.Undefined;
+
+Show := THIS^;
+
+IF THIS^._taskState = eTaskState.Done AND _answer <> eDialogAnswer.NoAnswer THEN
+    THIS^.Restore();
+END_IF;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ShowWithExternalClose" Id="{ea25b44d-24ec-0939-2b8d-cf34eb963f61}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Shows the dialog , closig this dialog is possibe  by external signal such as HW button press. Only one answer exclusively in same time is evaluated
+			<note type="important">
+				In order for the dialog to be displayed to the user user application must initialized in the user application.
+				How to set up the observer in a WPF see `TcOpen.Inxton.TcoCore.Wpf.DialogProxyService`.
+			</note> 			 					
+ 		</summary>					
+	</docu>	
+~*)
+METHOD ShowWithExternalClose : ITcoCustomizedDialogFormat
+VAR_INPUT
+	(*~
+	<docu>
+		<summary>
+			If True dialog is closed , and answer result is `eCustomizedDialogAnswer.Option1`
+		</summary>			
+	</docu>	
+	~*)
+    inOption1AnswerSignal      : BOOL:=FALSE;
+	(*~
+	<docu>
+		<summary>
+			If True dialog is closed , and answer result is `eCustomizedDialogAnswer.Option2`
+		</summary>			
+	</docu>	
+	~*)
+    inOption2AnswerSignal     : BOOL:=FALSE;
+	(*~
+	<docu>
+		<summary>
+			If True dialog is closed , and answer result is `eCustomizedDialogAnswer.Option3`
+		</summary>			
+	</docu>	
+	~*)
+    inOption3AnswerSignal      : BOOL:=FALSE;
+	(*~
+	<docu>
+		<summary>
+			If True dialog is closed , and answer result is `eCustomizedDialogAnswer.Option4`
+		</summary>			
+	</docu>	
+	~*)
+    inOption4AnswerSignal  : BOOL:=FALSE;
+
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.Invoke();
+SUPER^();
+
+
+_hasOption1 := FALSE;
+_hasOption2 := FALSE;
+_hasOption3 := FALSE;
+_hasOption4 := FALSE;
+_contentOption1 := '';
+_contentOption2 := '';
+_contentOption3 := '';
+_contentOption4 := '';
+
+_imageSource := '';
+_text        := '';
+_caption     := '';
+_dialogType  := eDialogType.Undefined;
+
+ShowWithExternalClose := THIS^;
+
+_rTrig(CLK:=inOption1AnswerSignal XOR inOption2AnswerSignal XOR inOption3AnswerSignal XOR inOption4AnswerSignal );
+IF _rTrig.q THEN
+	IF	inOption1AnswerSignal THEN; _answer:=eCustomizedDialogAnswer.Option1;
+	ELSIF	inOption2AnswerSignal THEN; _answer:=eCustomizedDialogAnswer.Option2;
+	ELSIF	inOption3AnswerSignal THEN; _answer:=eCustomizedDialogAnswer.Option3;
+	ELSIF	inOption4AnswerSignal THEN; _answer:=eCustomizedDialogAnswer.Option4;END_IF;
+
+
+
+END_IF
+
+
+IF THIS^._taskState=eTaskState.Done AND _answer<>eDialogAnswer.NoAnswer THEN	
+	THIS^.Restore();
+END_IF; ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithCaption" Id="{a731146a-3edc-0b63-2b8f-e75931347a00}" FolderPath="Format\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Sets the caption of the dialog window. 			 					
+ 		</summary>					
+	</docu>	
+~*)
+{attribute 'hide'}
+{attribute 'obsolete' := 'You should access the method via `Show()` method.'}
+METHOD WithCaption : ITcoCustomizedDialogAnswer
+VAR_INPUT
+	inCaption : STRING(255);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_caption := inCaption;
+WithCaption := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithImage" Id="{4518bb83-5b81-08a2-24a2-24bd9769f9cc}" FolderPath="Format\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Sets the image source of the dialog window. 			 					
+ 		</summary>					
+	</docu>	
+~*)
+{attribute 'hide'}
+{attribute 'obsolete' := 'You should access the method via `Show()` method.'}
+METHOD WithImage : ITcoCustomizedDialogAnswer
+VAR_INPUT
+	inSource : STRING(255);
+	inHeight:REAL;
+	inWidth:REAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_imageSource := inSource;
+_imageHeight:=inHeight;
+_imageWidth:= inWidth;
+
+WithImage := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithOption1" Id="{5bbc7965-c97b-0c8e-1084-27cf6508ee92}" FolderPath="Format\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Sets that the `Visibility` and `Content`  of button (Option1).This button should be available in the dialog prompt. 			 					
+ 		</summary>					
+	</docu>	
+~*)
+{attribute 'hide'}
+{attribute 'obsolete' := 'You should access the method via `Show()` method.'}
+METHOD WithOption1 : ITcoCustomizedDialogAnswer
+VAR_INPUT
+	inContent:STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_hasOption1 := TRUE;
+_contentOption1:=inContent;
+WithOption1 := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithOption2" Id="{36304a80-a289-05bd-2b9e-d5d2d97b4fe6}" FolderPath="Format\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Sets that the `Visibility` and `Content`  of button (Option2).This button should be available in the dialog prompt. 			 					
+ 		</summary>					
+	</docu>	
+~*)
+{attribute 'hide'}
+{attribute 'obsolete' := 'You should access the method via `Show()` method.'}
+METHOD WithOption2 : ITcoCustomizedDialogAnswer
+VAR_INPUT
+	inContent:STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_hasOption2 := TRUE;
+_contentOption2:=inContent;
+WithOption2 := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithOption3" Id="{cc355582-1cad-0f9f-17dc-4b8629aebcf8}" FolderPath="Format\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Sets that the `Visibility` and `Content`  of button (Option3).This button should be available in the dialog prompt. 			 					
+ 		</summary>					
+	</docu>	
+~*)
+{attribute 'hide'}
+{attribute 'obsolete' := 'You should access the method via `Show()` method.'}
+METHOD WithOption3 : ITcoCustomizedDialogAnswer
+VAR_INPUT
+	inContent:STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_hasOption3 := TRUE;
+_contentOption3:=inContent;
+WithOption3 := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithOption4" Id="{f9307ae8-38df-0750-34ff-83b1a58ac2de}" FolderPath="Format\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Sets that the `Visibility` and `Content`  of button (Option4).This button should be available in the dialog prompt. 			 					
+ 		</summary>					
+	</docu>	
+~*)
+{attribute 'hide'}
+{attribute 'obsolete' := 'You should access the method via `Show()` method.'}
+METHOD WithOption4 : ITcoCustomizedDialogAnswer
+VAR_INPUT
+	inContent:STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_hasOption4 := TRUE;
+_contentOption4:=inContent;
+WithOption4 := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithText" Id="{98ca591f-7f3f-0880-07a1-011ad2045d7c}" FolderPath="Format\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Sets the text of the dialog window. 			 					
+ 		</summary>					
+	</docu>	
+~*)
+{attribute 'hide'}
+{attribute 'obsolete' := 'You should access the method via `Show()` method.'}
+METHOD WithText : ITcoCustomizedDialogAnswer
+VAR_INPUT
+	inText : STRING(500);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_text := inText;
+WithText := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithType" Id="{04b586ca-a8ba-0deb-2c63-055b06278c6a}" FolderPath="Format\">
+      <Declaration><![CDATA[METHOD WithType : ITcoCustomizedDialogAnswer
+VAR_INPUT
+	inDialogType : eDialogType;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_dialogType := inDialogType;
+WithType := THIS^;
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

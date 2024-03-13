@@ -176,7 +176,7 @@ IF (seq.Step(inStepID := 203,
 		.Inspect(Components.BoltPresenceSensor)
 		.UpdateComprehensiveResult(Data.OverallResult)
 		.Instruct('Something is wrong')		//provide cuastomized instruction instead of automaticaly generated
-		.InstructWithImage('d:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenWide.png',1200,1200)
+		.InstructWithImage('d:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenWide.png',600,600)
         .OnFail()
 		.Dialog(seq.CurrentStep.ID+1);
     //--------------------------------------------------------			
@@ -260,15 +260,15 @@ IF (seq.Step(inStepID := 300,
     inEnabled := TRUE,
     inStepDescription := 'INSPECT DIMENSIONS - WITH NORMALIZE RETRIES (lower `number of allowed retries` for this call of inspection group)')) THEN
     //--------------------------------------------------------
-   	IF seq.IsFreshState THEN
-	    SetupData();
-   	END_IF    
+//   	IF seq.IsFreshState THEN
+//	    SetupData();
+//   	END_IF    
 	 GroupInspection
 		.WithCoordinator(seq)
 		.Act()	
-		.NormalizeRetries(Data.Dimensions.DimX_Inspector)
-		.NormalizeRetries(Data.Dimensions.DimY_Inspector)
-		.NormalizeRetries(Data.Dimensions.DimZ_Inspector)
+//		.NormalizeRetries(Data.Dimensions.DimX_Inspector)
+//		.NormalizeRetries(Data.Dimensions.DimY_Inspector)
+//		.NormalizeRetries(Data.Dimensions.DimZ_Inspector)
         .Inspect(Data.Dimensions.DimX_Inspector.Inspect(Components.DimX_Sensor))
         .Inspect(Data.Dimensions.DimY_Inspector.Inspect(Components.DimY_Sensor))
         .Inspect(Data.Dimensions.DimZ_Inspector.Inspect(Components.DimZ_Sensor))	
@@ -293,15 +293,13 @@ IF (seq.Step(inStepID := 309,
 		GroupInspection.Inspect(Data.Dimensions.DimX_Inspector.Inspect(Components.DimX_Sensor));
 		GroupInspection.Inspect(Data.Dimensions.DimY_Inspector.WithCoordinator(seq).Inspect(Components.DimY_Sensor));
 		GroupInspection.Inspect(Data.Dimensions.DimZ_Inspector.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));		
-		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_1.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));	
-		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_2.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));	
-		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_3.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));	
+
 		
   	
 		
 	GroupInspection.UpdateComprehensiveResult(Data.OverallResult)	
 		.Instruct('Something is wrong')
-		.InstructWithImage('d:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenWide.png',1000,1000)	
+		.InstructWithImage('d:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenWide.png',400,600)	
 		.OnFail()
 		.DialogWithExternalClose(309,inRetrySignal:=testRetry,inTerminateSignal:=testTerminate);			
 		
@@ -320,8 +318,9 @@ IF (seq.Step(inStepID := 310,
 	GroupInspection
 		.WithCoordinator(seq)
 		.Act();
-	
-		
+		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_1.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));	
+		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_2.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));	
+		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_3.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));		
 		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_4.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));	
 		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_5.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));	
 		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_6.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));	
@@ -333,15 +332,47 @@ IF (seq.Step(inStepID := 310,
 		
 	GroupInspection.UpdateComprehensiveResult(Data.OverallResult)	
 		.Instruct('Something is wrong')
-		.InstructWithImage('d:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenWide.png',1000,1000)	
+		.InstructWithImage('d:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenWide.png',400,600)	
 		.OnFail()
-		.DialogWithExternalClose(310,inRetrySignal:=testRetry,inTerminateSignal:=testTerminate);			
+		.DialogWithExternalClose(311,inRetrySignal:=testRetry,inTerminateSignal:=testTerminate);			
+		
+		
+    //--------------------------------------------------------			
+END_IF
+IF (seq.Step(inStepID := 311,
+    inEnabled := TRUE,
+    inStepDescription := 'INSPECT MULTI DIMENSIONS - EXTERNAL CLOSE')) THEN
+    //--------------------------------------------------------
+    IF seq.IsFreshState THEN
+	    SetupData();
+   	END_IF    
+	 
+	GroupInspection
+		.WithCoordinator(seq)
+		.Act();
+		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_11.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));	
+		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_12.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));	
+		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_13.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));		
+		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_14.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));	
+		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_15.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));	
+		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_16.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));	
+		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_17.WithCoordinator(seq).Inspect(1));	
+		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_18.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));	
+		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_19.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));
+		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_20.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));	
+  	
+		
+	GroupInspection.UpdateComprehensiveResult(Data.OverallResult)	
+		.Instruct('Something is wrong')
+		.InstructWithImage('d:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenWide.png',400,600)	
+		.OnFail()
+		.DialogWithExternalClose(312,inRetrySignal:=testRetry,inTerminateSignal:=testTerminate);			
 		
 		
     //--------------------------------------------------------			
 END_IF
 
-IF (seq.Step(inStepID := 311,
+IF (seq.Step(inStepID := 312,
     inEnabled := TRUE,
     inStepDescription := 'INSPECT MULTI DIMENSIONS - EXTERNAL CLOSE WITH FAILED DESCRIPTION')) THEN
     //--------------------------------------------------------
@@ -349,6 +380,7 @@ IF (seq.Step(inStepID := 311,
 	    SetupData();
    	END_IF    
 	 
+	
 	GroupInspection
 		.WithCoordinator(seq)
 		.Act();
@@ -360,73 +392,72 @@ IF (seq.Step(inStepID := 311,
   	
 		
 	GroupInspection.UpdateComprehensiveResult(Data.OverallResult)	
-		.Instruct('Something is wrong')
-		.InstructWithImage('d:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenWide.png',1000,1000)	
+		.Instruct('Something is wrong tooooooooooooooooooo  loooooooooooooooooooooooooooooooooooooooooooooooong')
+		.InstructWithImage('d:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenWide.png',400,600)	
 		.WithDescription()
 		.OnFail()
-		.DialogWithExternalClose(311,inRetrySignal:=testRetry,inTerminateSignal:=testTerminate);			
+		.DialogWithExternalClose(310,inRetrySignal:=testRetry,inTerminateSignal:=testTerminate);			
 		
 		
     //--------------------------------------------------------			
 END_IF;
 
 
-IF (seq.Step(inStepID := 314,
-    inEnabled := TRUE,
-    inStepDescription := 'SETUP DATA MANY')) THEN
-    //--------------------------------------------------------    
-	 	Data := EmptyData;
-	
-		FOR i:=0 TO 100 DO
-			Data.Dimensions.Inspectors[i].Data.PassTime := T#1500MS;    
-			Data.Dimensions.Inspectors[i].Data.FailTime := T#2000MS;
-			Data.Dimensions.Inspectors[i].Data.RequiredMin := 9.75;
-			Data.Dimensions.Inspectors[i].Data.RequiredMax := 10.25;
-			Data.Dimensions.Inspectors[i].Data.FailureDescription := 'Dimz inspection failed';
-			Data.Dimensions.Inspectors[i].Data.ErrorCode := '5';		
-		END_FOR
+//IF (seq.Step(inStepID := 314,
+//    inEnabled := TRUE,
+//    inStepDescription := 'SETUP DATA MANY')) THEN
+//    //--------------------------------------------------------    
+//	 	Data := EmptyData;
+//		Data.Dimensions.Inspectors[0].Data.NumberOfAllowedRetries := 3;    
+//		FOR i:=0 TO 15 DO
+//			Data.Dimensions.Inspectors[i].Data.PassTime := T#1500MS;    
+//			Data.Dimensions.Inspectors[i].Data.FailTime := T#2000MS;
+//			Data.Dimensions.Inspectors[i].Data.RequiredMin := 9.75;
+//			Data.Dimensions.Inspectors[i].Data.RequiredMax := 10.25;
+//			Data.Dimensions.Inspectors[i].Data.FailureDescription := 'Dimz inspection failed toooooooooooooooooooooooo loooooooooooooooooooong';
+//			Data.Dimensions.Inspectors[i].Data.ErrorCode := '5';		
+//		END_FOR
 
-		Data.Dimensions.Inspectors[i].Data.PassTime := T#1500MS;    
-		Data.Dimensions.Inspectors[i].Data.FailTime := T#2000MS;
-		Data.Dimensions.Inspectors[i].Data.RequiredMin := 9.75;
-		Data.Dimensions.Inspectors[i].Data.RequiredMax := 10.25;
-		Data.Dimensions.Inspectors[i].Data.FailureDescription := 'Dimz inspection failed';
-		Data.Dimensions.Inspectors[i].Data.ErrorCode := '5';		
+////		Data.Dimensions.Inspectors[i].Data.PassTime := T#1500MS;    
+////		Data.Dimensions.Inspectors[i].Data.FailTime := T#2000MS;
+////		Data.Dimensions.Inspectors[i].Data.RequiredMin := 9.75;
+////		Data.Dimensions.Inspectors[i].Data.RequiredMax := 10.25;
+////		Data.Dimensions.Inspectors[i].Data.FailureDescription := 'Dimz inspection failed';
+////		Data.Dimensions.Inspectors[i].Data.ErrorCode := '5';		
 		
 	
-		seq.CompleteStep();
-    //--------------------------------------------------------			
-END_IF;
-IF (seq.Step(inStepID := 315,
-    inEnabled := TRUE,
-    inStepDescription := 'INSPECT MANY - WITH EXTERNAL CLOSE')) THEN
-    //--------------------------------------------------------
+//		seq.CompleteStep();
+//    //--------------------------------------------------------			
+//END_IF;
+//IF (seq.Step(inStepID := 315,
+//    inEnabled := TRUE,
+//    inStepDescription := 'INSPECT MANY - WITH EXTERNAL CLOSE')) THEN
+//    //--------------------------------------------------------
     
 	 
-	GroupInspection
-		.WithCoordinator(seq)
-		.Act();
+//	GroupInspection
+//		.WithCoordinator(seq)
+//		.Act();
 	
-	FOR i:=0 TO 100 DO
-			GroupInspection.Inspect(Data.Dimensions.Inspectors[i].Inspect(Components.DimX_Sensor));
-	END_FOR
+//	FOR i:=0 TO 15 DO
+//			GroupInspection.Inspect(Data.Dimensions.Inspectors[i].Inspect(Components.DimX_Sensor));
+//	END_FOR
 	
+
 		
-	
-  	
-		
-	GroupInspection.UpdateComprehensiveResult(Data.OverallResult)	
-		.Instruct('Something is wrong')
-		.InstructWithImage('d:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenWide.png',1000,1000)
-		.WithDescription()
-		.WithErrorCode()
-		.WithFailureDescription()	
-		.OnFail()
-		.DialogWithExternalClose(314,inRetrySignal:=testRetry,inTerminateSignal:=testTerminate);			
+//	GroupInspection.UpdateComprehensiveResult(Data.OverallResult)	
+//		.Instruct('Something is wrong tooooooooooooooooooo  looooooooooooooooooong')
+
+//		.InstructWithImage('d:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenWide.png',400,400)
+//		.WithDescription()
+//		.WithErrorCode()
+//		.WithFailureDescription()	
+//		.OnFail()
+//		.DialogWithExternalClose(314,inRetrySignal:=testRetry,inTerminateSignal:=testTerminate);			
 		
 		
-    //--------------------------------------------------------			
-END_IF;
+//    //--------------------------------------------------------			
+//END_IF;
 
 IF (seq.Step(inStepID := seq.RESTORE_STEP_ID,
     inEnabled := TRUE,

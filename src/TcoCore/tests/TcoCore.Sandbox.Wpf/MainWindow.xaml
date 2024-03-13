@@ -153,9 +153,7 @@
             <TabItem Header="Components">
                 <ScrollViewer>
                     <TabControl>
-                        <TabItem Header="Base">
-                            <vortex:RenderableContentControl DataContext="{Binding MAIN._station001._components}" PresentationType="Base" />
-                        </TabItem>
+                   
                         <TabItem Header="Service ">
                             <vortex:RenderableContentControl DataContext="{Binding MAIN._station001._components}" PresentationType="Service" />
                         </TabItem>
@@ -171,7 +169,9 @@
                         <TabItem Header="Cascade Tree->Service">
                             <vortex:RenderableContentControl DataContext="{Binding MAIN._station001._components}" PresentationType="TreeService-Service" />
                         </TabItem>
-
+                        <TabItem Header="Base">
+                            <vortex:RenderableContentControl DataContext="{Binding MAIN._station001._components}" PresentationType="Base" />
+                        </TabItem>
                     </TabControl>
                 </ScrollViewer>
             </TabItem>
@@ -193,13 +193,15 @@
                     </UniformGrid>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Header="Diagnostics">
+            <!--<TabItem Header="Diagnostics">
                 <vortex:RenderableContentControl DataContext="{Binding MANIPULATOR._context }" PresentationType="Diagnostics"/>
-            </TabItem>
+            </TabItem>-->
             <TabItem Header="Dialogs">
                 <StackPanel>
+                    <vortex:RenderableContentControl DataContext="{Binding EXAMPLES_PRG._diaglogsContext._state}" PresentationType="ControlSlim"/>
                     <vortex:RenderableContentControl DataContext="{Binding EXAMPLES_PRG._diaglogsContext._invokeDiaglog1}" PresentationType="ControlSlim"/>
 
+                    <vortex:RenderableContentControl DataContext="{Binding EXAMPLES_PRG._diaglogsContext._invokeCustomizedDiaglog}" PresentationType="ControlSlim"/>
                     <vortex:RenderableContentControl DataContext="{Binding EXAMPLES_PRG._diaglogsContext._invokeDiaglogsConsequential }" PresentationType="ControlSlim"/>
                 </StackPanel>
             </TabItem>

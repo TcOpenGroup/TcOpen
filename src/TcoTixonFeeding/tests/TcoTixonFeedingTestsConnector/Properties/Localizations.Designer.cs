@@ -61,11 +61,47 @@ namespace TcoTixonFeedingTestsConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TcoTixonPickStep .
+        /// </summary>
+        public static string ___TcoTixonPickStep___ {
+            get {
+                return ResourceManager.GetString("___TcoTixonPickStep___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TcoTixonPickVibro .
+        /// </summary>
+        public static string ___TcoTixonPickVibro___ {
+            get {
+                return ResourceManager.GetString("___TcoTixonPickVibro___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TcoTixonPickVibroBasic .
+        /// </summary>
+        public static string ___TcoTixonPickVibroBasic___ {
+            get {
+                return ResourceManager.GetString("___TcoTixonPickVibroBasic___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to TcoTixonStep .
         /// </summary>
         public static string ___TcoTixonStep___ {
             get {
                 return ResourceManager.GetString("___TcoTixonStep___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TcoTixonVibro .
+        /// </summary>
+        public static string ___TcoTixonVibro___ {
+            get {
+                return ResourceManager.GetString("___TcoTixonVibro___", resourceCulture);
             }
         }
     }
