@@ -131,7 +131,9 @@ namespace TcoCore
                                             Cycle = plain.Cycle,
                                             PlcTimeStamp = plain.TimeStamp,
                                             Raw = plain.Raw,
-                                            Pcc = plain.PerCycleCount
+                                            Pcc = plain.PerCycleCount,
+                                            Identity = plain.Identity,
+                                            MessageDigest = plain.MessageDigest
                                         }
                                        });               
             }

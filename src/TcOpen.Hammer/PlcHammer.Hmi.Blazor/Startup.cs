@@ -1,3 +1,5 @@
+using BlazorStrap;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -31,8 +33,12 @@ using TcOpen.Inxton.Local.Security.Blazor.Extension;
 using TcOpen.Inxton.Local.Security.Blazor.Services;
 using TcOpen.Inxton.Local.Security.Blazor.Users;
 using TcOpen.Inxton.TcoCore.Blazor.Extensions;
+using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Configure;
+using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.Services;
 using TcOpen.Inxton.TcoCore.Blazor.TcoDialog.Hubs;
 using Vortex.Presentation.Blazor.Services;
+
+using static TcoCore.TcoDiagnosticsAlternativeViewModel;
 
 namespace PlcHammer.Hmi.Blazor
 {
@@ -41,9 +47,17 @@ namespace PlcHammer.Hmi.Blazor
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            MongoUri = Configuration["MongoDbSettings:MongoUri"];
+            DatabaseName = Configuration["MongoDbSettings:DatabaseName"];
+            CollectionName = Configuration["MongoDbSettings:CollectionName"];
         }
 
         public IConfiguration Configuration { get; }
+
+        //Uses Config from appsetings.Development.json, there the connection String etc. is configured
+        public static string MongoUri { get; private set; }
+        public static string DatabaseName { get; private set; }
+        public static string CollectionName { get; set; }
 
         public static StringWriter logMessages = new StringWriter();
 
@@ -63,7 +77,7 @@ namespace PlcHammer.Hmi.Blazor
 
             services.AddTcoCoreExtensions();
 
-            if (true)/*Mongo database*/
+            if (false)/*Mongo database*/
             {
                 (userRepo, groupRepo) = SetUpMongoDatabase();
             }
@@ -84,15 +98,23 @@ namespace PlcHammer.Hmi.Blazor
                                         .WriteTo.Notepad()        // This will write logs to first instance of notepad program.
                                                                   // uncomment this to send logs over MQTT, to receive the data run MQTTTestClient from this solution.
                                                                   // .WriteTo.MQTT(new MQTTnet.Client.Options.MqttClientOptionsBuilder().WithTcpServer("broker.emqx.io").Build(), "fun_with_TcOpen_Hammer") 
-                                        .Enrich.WithProperty("user",SecurityManager.Manager.Principal.Identity.Name)
-                                        .Enrich.With(new Serilog.Enrichers.EnvironmentNameEnricher())
-                                        .Enrich.With(new Serilog.Enrichers.EnvironmentUserNameEnricher())
-                                        .Enrich.With(new Serilog.Enrichers.MachineNameEnricher())
+                                        .WriteTo.MongoDBBson(
+                                                        databaseUrl: $"{MongoUri}/{DatabaseName}",
+                                                        collectionName: $"{CollectionName}")
+                                        //            ).Enrich.WithProperty("user", SecurityManager.Manager.Principal.Identity.Name)
+                                        //.Enrich.With(new Serilog.Enrichers.EnvironmentNameEnricher())
+                                        //.Enrich.With(new Serilog.Enrichers.EnvironmentUserNameEnricher())
+                                        //.Enrich.With(new Serilog.Enrichers.MachineNameEnricher())
                                         .MinimumLevel.Verbose())) // Sets the logger configuration (default reports only to console).
                 .SetSecurity(SecurityManager.Manager.Service)
                 .SetEditValueChangeLogging(Entry.PlcHammer.Connector);
 
+            services.Configure<MongoDbSettings>(Configuration.GetSection("MongoDbSettings"));
+            services.AddTransient<IDataService, DataService>();
+            services.AddSingleton<DataBaseMaxEntryCleanupService>();
+            services.AddBlazorStrap();
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -126,7 +148,7 @@ namespace PlcHammer.Hmi.Blazor
             });
 
             Entry.PlcHammer.Connector.BuildAndStart();
-            Entry.PlcHammer.TECH_MAIN._app._logger.StartLoggingMessages(TcoCore.eMessageCategory.Info);
+            Entry.PlcHammer.TECH_MAIN._app._logger.StartLoggingMessages(TcoCore.eMessageCategory.Debug);
         }
 
         private static void SetUpRepositories(IRepository<PlainStation001_ProductionData> processRecipiesRepository,
@@ -168,8 +190,8 @@ namespace PlcHammer.Hmi.Blazor
 
         private static (IRepository<UserData> userRepo, IRepository<GroupData> groupRepo) SetUpMongoDatabase()
         {
-            var mongoUri = "mongodb://localhost:27017";
-            var databaseName = "Hammer";
+            var mongoUri = MongoUri;
+            var databaseName = DatabaseName;
 
             /*Data*/
             var processRecipiesRepository = new MongoDbRepository<PlainStation001_ProductionData>(new MongoDbRepositorySettings<PlainStation001_ProductionData>(mongoUri, databaseName, "ProcessSettings"));

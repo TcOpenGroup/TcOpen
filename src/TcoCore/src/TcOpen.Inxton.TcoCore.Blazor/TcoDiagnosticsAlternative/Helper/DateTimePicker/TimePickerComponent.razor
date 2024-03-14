@@ -1,0 +1,99 @@
+﻿@using Microsoft.AspNetCore.Components;
+
+@if (UseNativeTimePicker)
+{
+    <input type="time" value="@(new DateTime(2000, 1, 1).AddSeconds(SecondOfDay).ToString("HH:mm"))"
+           class="form-control w-auto d-inline" disabled="@IsDisabled"
+           @onchange="async (e) =>
+                           {
+                               var time = Convert.ToDateTime(e.Value);
+                               Hour = time.Hour;
+                               Minute = time.Minute;
+                               await NotifyChanged();
+                           }" />
+}
+else
+{
+    <select @onchange="async (e) =>
+                           {
+                               Hour = Convert.ToInt32(e.Value);
+                               await NotifyChanged();
+                           }" @attributes="InputAttributes" disabled="@IsDisabled">
+        @foreach (var hour in Enumerable.Range(0, 24))
+        {
+            <option value="@hour" selected="@(hour == Hour)">@hour.ToString("00")</option>
+        }
+    </select>
+    <span class="pl-0">:</span>
+    <select @onchange="async (e) =>
+                           {
+                               Minute = Convert.ToInt32(e.Value);
+
+                               await NotifyChanged();
+                           }" @attributes="InputAttributes" disabled="@IsDisabled">
+
+        @foreach (var minute in Enumerable.Range(0, 60))
+        {
+            <option value="@minute" selected="@(minute == Minute)">@(minute.ToString("00"))</option>
+        }
+    </select>
+}
+
+@code {
+    [Parameter]
+    public int SecondOfDay
+    {
+        get
+        {
+            return Hour * 3600 + Minute * 60;
+        }
+
+        set
+        {
+            Hour = value / 3600;
+            Minute = (value % 3600) / 60;
+        }
+    }
+
+    [Parameter]
+    public EventCallback<int> SecondOfDayChanged
+    {
+        get; set;
+    }
+
+    [Parameter]
+    public bool UseNativeTimePicker
+    {
+        get; set;
+    }
+
+    [Parameter]
+    public bool IsDisabled
+    {
+        get; set;
+    }
+
+    public int Hour
+    {
+        get; set;
+    }
+
+    public int Minute
+    {
+        get; set;
+    }
+
+    private Task NotifyChanged()
+    {
+        return SecondOfDayChanged.InvokeAsync(SecondOfDay);
+    }
+
+    public Dictionary<string, object> InputAttributes
+    {
+        get; set;
+    } =
+        new Dictionary<string, object>()
+        {
+            { "class", "form-control w-auto d-inline" }
+                };
+}
