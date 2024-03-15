@@ -26,5 +26,15 @@ namespace TcoCore
         {
             InitializeComponent();        
         }
+
+        private void TcoDialogBaseView_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (webView != null)
+            {
+                webView.Dispose();
+                webView = null;
+            }
+        }
     }
+ 
 }

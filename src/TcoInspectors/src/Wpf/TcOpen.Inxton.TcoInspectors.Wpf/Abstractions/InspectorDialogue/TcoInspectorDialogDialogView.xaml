@@ -19,6 +19,7 @@
     Title="InspectorDialogueWindow"
     Topmost="True"   
     x:Name="HostWindow"
+    Closing="HostWindow_Closing"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     MouseLeftButtonDown="OnMouseLeftButtonDown"
@@ -113,7 +114,8 @@
                             
                             Visibility="{Binding  Dialog._source.Synchron,Converter={vortex:EmptyStringToVisibilityConverter} }" 
                 MinHeight="{Binding Dialog._imageHeight.Cyclic}" MinWidth="{Binding Dialog._imageWidth.Cyclic}">
-                <wv2:WebView2  
+                <wv2:WebView2 
+                            x:Name="webView"
                            Source="{Binding Dialog._source.Synchron ,Mode=OneWay}"></wv2:WebView2>
                       
             </ScrollViewer>

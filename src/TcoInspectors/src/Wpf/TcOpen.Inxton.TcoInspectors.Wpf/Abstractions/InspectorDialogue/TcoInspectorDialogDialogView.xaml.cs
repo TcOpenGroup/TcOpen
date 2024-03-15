@@ -74,5 +74,14 @@ namespace TcoInspectors
                 context.CloseRequestEventHandler -= (s, ev) => this.Close();
             }
         }
+
+        private void HostWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (webView != null)
+            {
+                webView.Dispose();
+                webView = null;
+            }
+        }
     }
 }
