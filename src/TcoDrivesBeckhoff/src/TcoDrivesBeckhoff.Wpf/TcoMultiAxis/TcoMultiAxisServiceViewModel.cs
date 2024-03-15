@@ -136,7 +136,7 @@ namespace TcoDrivesBeckhoff
             var answer = MessageBox.Show($"{strings.ResourceManager.GetString("AskMovePos")}  {this.SelectedItem.HumanReadable.ToUpper()}?", strings.ResourceManager.GetString("Attention"), MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (answer == MessageBoxResult.Yes)
             {
-                //
+                //restore before movements if necessary
                 Component._restoreTask._invokeRequest.Synchron = true; 
 
 

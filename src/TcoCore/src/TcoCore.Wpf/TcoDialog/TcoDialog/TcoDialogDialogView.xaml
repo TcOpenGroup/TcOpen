@@ -21,7 +21,7 @@
     SizeToContent="WidthAndHeight"
     Title="InspectorDialogueWindow"
     Topmost="True"
-  
+    Closing="TcoDialogBaseView_Closing"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None">
     <d:Window.DataContext>
@@ -59,7 +59,7 @@
                     HorizontalAlignment="Center"
                     Style="{StaticResource MaterialDesignHeadline5TextBlock}"
                     Text="{Binding Dialog._caption.Synchron}" />
-                <wv2:WebView2 Visibility="{Binding  Dialog._imageSource.Synchron,Converter={local:EmptyStringToVisibilityConverter} }" Height="{Binding Dialog._imageHeight.Cyclic}" Width="{Binding Dialog._imageWidth.Cyclic}" Source="{Binding Dialog._imageSource.Synchron ,Mode=OneWay}" />
+                <wv2:WebView2 x:Name="webView" Visibility="{Binding  Dialog._imageSource.Synchron,Converter={local:EmptyStringToVisibilityConverter} }" Height="{Binding Dialog._imageHeight.Cyclic}" Width="{Binding Dialog._imageWidth.Cyclic}" Source="{Binding Dialog._imageSource.Synchron ,Mode=OneWay}" />
 
                 <TextBlock
                     Margin="0,10,10,10"
