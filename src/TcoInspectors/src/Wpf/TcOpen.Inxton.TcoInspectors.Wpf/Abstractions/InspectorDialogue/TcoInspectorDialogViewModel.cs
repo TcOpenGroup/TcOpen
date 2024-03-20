@@ -37,30 +37,30 @@ namespace TcoInspectors
                                                 () => TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"{nameof(OverrideCommand)} of {Dialog.HumanReadable} was executed @{{payload}}.", new { Dialog.Symbol }));
         }
 
-       
+
         List<IVortexObject> _inspectorsList;
         public IEnumerable<IVortexObject> Inspectors
         {
             get
             {
                 if (_inspectorsList == null)
-                {                    
+                {
                     _inspectorsList = new List<IVortexObject>();
                     try
                     {
-                  
-                       var parent = Dialog.GetParent();
-                    
+
+                        var parent = Dialog.GetParent();
+
                         switch (parent)
                         {
                             case TcoInspectionGroup g:
                                 g.Read();
-                     
+
                                 _inspectorsList = g._inspections.Take(g._inspectionIndex.Synchron)
                                     .Select(p => g.GetConnector().IdentityProvider.GetVortexerByIdentity(p.Synchron) as IVortexObject)
                                     .Where(p => !(p is NullVortexIdentity)).ToList();
 
-                         
+
                                 break;
                             case TcoInspector i:
                                 _inspectorsList.Add(parent);
@@ -108,10 +108,10 @@ namespace TcoInspectors
                     sb.Clear();//clear if failures descriptions are empty
                 }
                 return sb.ToString().TrimEnd(new char[] { ';', ' ' });
-    
+
             }
         }
-       
+
         public string FailureDescription
         {
             get
@@ -120,12 +120,12 @@ namespace TcoInspectors
                 parent.Read();
 
                 var sb = new System.Text.StringBuilder();
-            
+
                 foreach (var inspector in Inspectors)
                 {
 
                     var insp = inspector as IsInspector;
-                   
+
                     if (insp != null)
                     {
 
@@ -140,9 +140,9 @@ namespace TcoInspectors
 
                 }
 
-                bool result = sb.ToString().All(c => c == ';'|| c==' ');
+                bool result = sb.ToString().All(c => c == ';' || c == ' ');
 
-                if (result )
+                if (result)
                 {
                     sb.Clear();//clear if failures descriptions are empty
                 }
@@ -177,7 +177,7 @@ namespace TcoInspectors
                 }
 
                 bool result = sb.ToString().All(c => c == ';' || c == ' ');
-        
+
                 if (result)
                 {
                     sb.Clear();//clear if failures descriptions are empty
@@ -201,7 +201,7 @@ namespace TcoInspectors
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             Dialog.Read();
-            if (Dialog._dialogRetry.LastValue || Dialog._dialogTerminate.LastValue || Dialog._dialogOverride.LastValue)
+            if (Dialog._dialogRetry.LastValue || Dialog._dialogTerminate.LastValue || Dialog._dialogOverride.LastValue || !Dialog._isInvoked.LastValue)
             {
                 
                 CloseRequestEventHandler?.Invoke(this, e);

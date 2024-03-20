@@ -48,7 +48,7 @@ namespace TcoCore
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             Dialog.Read();
-            if ( Dialog._answer.LastValue != (short)eCustomizedDialogAnswer.NoAnswer)
+            if (Dialog._answer.LastValue != (short)eCustomizedDialogAnswer.Invoked)
             {
                 this.Close(this, new EventArgs());
 

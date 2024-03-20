@@ -52,11 +52,24 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Method Name="ClearInfos" Id="{c6d266a9-164a-0722-16e5-669ea7a37376}">
+      <Declaration><![CDATA[METHOD INTERNAL ClearInfos
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_imageSource:='';
+_caption:='';
+_text:='';
+_dialogType  := eDialogType.Undefined;
+]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="OnStart" Id="{889d908b-4444-0ca3-12c3-2ee5a16d4c25}">
       <Declaration><![CDATA[METHOD PROTECTED OnStart ]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.OnStart();
-_answer := eDialogAnswer.NoAnswer;]]></ST>
+_answer := eDialogAnswer.Invoked;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{b1b04a3a-6e24-00f0-1f54-b5cc0b7efc8c}">
@@ -66,10 +79,8 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.Restore();
-_imageSource:='';
-_caption:='';
-_text:='';
-_dialogType  := eDialogType.Undefined;]]></ST>
+THIS^.ClearInfos();
+_answer:=eDialogAnswer.NoAnswer;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Show" Id="{052bdc3b-8ff1-0bbd-0fbb-d25a0348416f}">
@@ -99,16 +110,13 @@ _hasYes      := FALSE;
 _hasNo       := FALSE;
 _hasCancel   := FALSE;
 
-_imageSource  :='';
-_text        := '';
-_caption     := '';
-_dialogType  := eDialogType.Undefined;
-
+ClearInfos();
 
 Show := THIS^;
 
-IF THIS^._taskState=eTaskState.Done AND _answer<>eDialogAnswer.NoAnswer THEN
-	THIS^.Restore();
+IF THIS^._taskState=eTaskState.Done AND  _answer<>eDialogAnswer.Invoked AND  _answer<>eDialogAnswer.NoAnswer THEN
+	SUPER^.Restore();
+	THIS^.ClearInfos();
 END_IF; 
  ]]></ST>
       </Implementation>
@@ -173,10 +181,8 @@ _hasYes      := FALSE;
 _hasNo       := FALSE;
 _hasCancel   := FALSE;
 
-_imageSource  :='';
-_text        := '';
-_caption     := '';
-_dialogType  := eDialogType.Undefined;
+ClearInfos();
+
 
 ShowWithExternalClose := THIS^;
 
@@ -192,8 +198,9 @@ IF _rTrig.q THEN
 END_IF
 
 
-IF THIS^._taskState=eTaskState.Done AND _answer<>eDialogAnswer.NoAnswer THEN	
-	THIS^.Restore();
+IF THIS^._taskState=eTaskState.Done AND _answer<>eDialogAnswer.Invoked  AND  _answer<>eDialogAnswer.NoAnswer  THEN	
+	SUPER^.Restore();
+	THIS^.ClearInfos();
 END_IF; ]]></ST>
       </Implementation>
     </Method>

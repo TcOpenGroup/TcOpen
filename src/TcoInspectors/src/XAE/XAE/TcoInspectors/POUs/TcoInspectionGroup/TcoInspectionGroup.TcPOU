@@ -62,15 +62,6 @@ END_IF
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="AddInspector" Id="{4d3e3ca0-8eb9-011a-2f20-73f05383d2e5}">
-      <Declaration><![CDATA[METHOD AddInspector : IInspector
-VAR_INPUT
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="ClearResult" Id="{f7b2a68e-e38b-05d5-0a30-07f805d8c74c}">
       <Declaration><![CDATA[METHOD ClearResult
 VAR_IN_OUT
@@ -287,7 +278,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^._tcoInspectorDialogue.SetInspector(THIS^);
+        <ST><![CDATA[//THIS^._tcoInspectorDialogue.SetInspector(THIS^);
 OnFail := THIS^;
 
 ]]></ST>

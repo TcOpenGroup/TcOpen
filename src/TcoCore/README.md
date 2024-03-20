@@ -7,6 +7,17 @@
 
 ## Dialogs 
 
+### Plc Hide dialog
+
+```csharp		
+	0:
+		_dialog1.Restore();
+		_dialog2.Restore();
+		_dialog3.Restore();
+		_dialog4.Restore();
+		_dialogCustomized.Restore();
+```
+
 ### Plc Example usage of Dialog
 
 ```csharp

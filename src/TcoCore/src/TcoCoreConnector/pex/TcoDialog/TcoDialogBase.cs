@@ -10,5 +10,10 @@ namespace TcoCore
     public partial class TcoDialogBase : IsDialog
     {
         public string DialogId { get; set; }
+
+        public void ShowAgainIfInvoked()
+        {
+            
+        }
     }
 }

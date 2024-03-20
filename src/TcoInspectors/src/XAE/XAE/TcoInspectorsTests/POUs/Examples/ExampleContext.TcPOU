@@ -67,6 +67,10 @@ IF (seq.Step(inStepID := 0,
     inStepDescription := 'ASKING SOME QUESTION')) THEN
     //--------------------------------------------------------
 //<StandardDialog>	
+	//restore method also close inactive dialog
+	Data.BoltPresenceInspector.Restore();
+	GroupInspection.Restore();
+	
 	answer := _dialog			
 			.Show()	
 			.WithType(eDialogType.Question)				
@@ -476,7 +480,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[	Data := EmptyData;
+        <ST><![CDATA[	//Data := EmptyData;
 	
 	Data.DmcInspector.Data.RequiredStatus := 'A#*';
 	Data.DmcInspector.Data.StarNotationEnabled := TRUE;
