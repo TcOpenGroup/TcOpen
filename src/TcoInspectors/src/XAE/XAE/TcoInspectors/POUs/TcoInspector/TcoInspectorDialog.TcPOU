@@ -38,6 +38,7 @@ VAR
 	_showErrorCode:BOOL;
 	_showDescription:BOOL;
 	
+	_isInvoked: BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -143,8 +144,9 @@ END_IF
       <Declaration><![CDATA[METHOD PROTECTED OnStart ]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.OnStart();
+_isInvoked:=TRUE;
 _dialogIsClosed:=FALSE;
-_dialogRetry	    	:=  FALSE;	
+_dialogRetry	    :=  FALSE;	
 _dialogTerminate  	:=  FALSE;	
 _dialogOverride   	:=  FALSE;]]></ST>
       </Implementation>
@@ -175,17 +177,19 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.Restore();
-_dialogRetry	    	:=  FALSE;	
+_dialogRetry	    :=  FALSE;	
 _dialogTerminate  	:=  FALSE;	
 _dialogOverride   	:=  FALSE;
 
 _instruction:='';
 _source:='';
 _imageHeight:=400;
-_imageHeight:=400;
+_imageWidth:=600;
 _showDescription:=FALSE;
 _showFailureDescription:=FALSE;
 _showErrorCode:=FALSE;
+_isInvoked:=FALSE;
+
 ]]></ST>
       </Implementation>
     </Method>
@@ -245,14 +249,17 @@ END_IF
 		SUPER^();	
 		{warning disable C0357}
 		IF(_dialogRetry AND _dialogIsClosed) THEN
+			_isInvoked:=FALSE;
 			_refInspector.Retry(inRetryStep);
 		END_IF
 		
 		IF(_dialogTerminate AND _dialogIsClosed) THEN
+			_isInvoked:=FALSE;
 			_refInspector.Terminate();
 		END_IF
 		
 		IF(_dialogOverride AND _dialogIsClosed) THEN
+			_isInvoked:=FALSE;
 			_refInspector.CarryOn();
 		END_IF
 		{warning enable C0357}
@@ -343,19 +350,18 @@ HandleExternalSignals(inRetrySignal:=inRetrySignal,inTerminateSignal:=inTerminat
 	
 		
 		IF(_dialogRetry AND _dialogIsClosed) THEN
+			_isInvoked:=FALSE;
 			_refInspector.Retry(inRetryStep);
-				
-
 		END_IF
 		//terminate
 		
 		IF(_dialogTerminate  AND  _dialogIsClosed) THEN
+			_isInvoked:=FALSE;
 			_refInspector.Terminate();
-			
-
 		END_IF
 		
 		IF(_dialogOverride AND _dialogIsClosed) THEN
+			_isInvoked:=FALSE;
 			_refInspector.CarryOn();
 		END_IF
 		{warning enable C0357}

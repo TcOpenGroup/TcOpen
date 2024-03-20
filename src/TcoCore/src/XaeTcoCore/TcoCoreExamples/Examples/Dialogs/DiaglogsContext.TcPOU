@@ -44,7 +44,14 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[
 CASE _state OF
-    0:
+			
+	0:
+		_dialog1.Restore();
+		_dialog2.Restore();
+		_dialog3.Restore();
+		_dialog4.Restore();
+		_dialogCustomized.Restore();
+
         IF (_invokeDiaglog1) THEN
             _state := 10;
 		ELSIF (_invokeCustomizedDiaglog) THEN
@@ -234,7 +241,7 @@ CASE _state OF
 				_invokeDiaglog1 := FALSE;
 			END_IF;
 		
-	
+
     1000:
         IF (_dialog3.Show()
             .WithType(eDialogType.Warning)

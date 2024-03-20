@@ -29,24 +29,7 @@ namespace TcoInspectors
             this.DataContextChanged += TcoInspectorDialogView_DataContextChanged;
 
         }
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-        //    // Calculate the desired window size (80% of the screen resolution)
-        //    double screenWidth = SystemParameters.PrimaryScreenWidth;
-        //    double screenHeight = SystemParameters.PrimaryScreenHeight;
-
-        //    double desiredWidth = screenWidth * 0.9;
-        //    double desiredHeight = screenHeight * 0.9;
-
-        //    // Set the window size
-        //    MaxWidth = desiredWidth;
-        //    MaxHeight = desiredHeight;
-
-        //    // Center the window on the screen
-        //    Left = (screenWidth - Width) / 2;
-        //    Top = (screenHeight - Height) / 2;
-        }
-
+    
         private void TcoInspectorDialogView_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
         {
             context = this.DataContext as TcoInspectorDialogDialogViewModel;

@@ -54,6 +54,7 @@ namespace TcoCore.Sandbox.Wpf
             PlcTcoCoreExamples.EXAMPLES_PRG._loggerContext._loggerUsage._logger.StartLoggingMessages(eMessageCategory.All);
             PlcTcoCoreExamples.MAIN._station001._components._wrappedComponent2.SearchComponentsDepth = 1;
             PlcTcoCoreExamples.MAIN._station001._components._di.IsExpanded = false;
+            
         }
 
         
@@ -92,7 +93,7 @@ namespace TcoCore.Sandbox.Wpf
         {
             if (!IsInDesign)
             {
-                return new TcoCoreExamplesTwinController(Tc3ConnectorAdapter.Create(AMS_ID, 853, true));
+                return new TcoCoreExamplesTwinController(Tc3ConnectorAdapter.Create( 853, true));
             }
             else
             {

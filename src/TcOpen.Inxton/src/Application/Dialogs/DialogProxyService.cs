@@ -15,6 +15,7 @@ namespace TcOpen.Inxton
         protected DialogProxyServiceBase(IEnumerable<IVortexObject> observedObjects)
         {           
             UpdateDialogs(observedObjects);
+            ShowDialogsIfAlreadyInvoked(observedObjects);
         }
         void UpdateDialogs(IEnumerable<IVortexObject> observedObjects)
         {
@@ -27,6 +28,19 @@ namespace TcOpen.Inxton
                 }
             }
             
+        }
+
+        void ShowDialogsIfAlreadyInvoked(IEnumerable<IVortexObject> observedObjects)
+        {
+            if (observedObjects == null || observedObjects.Count() == 0) return;
+            foreach (var observedObject in observedObjects)
+            {
+                foreach (var dialog in observedObject.GetDescendants<IsDialog>())
+                {
+                    dialog.ShowAgainIfInvoked();
+                }
+            }
+
         }
         protected abstract void Queue(IsDialog dialog);        
     }

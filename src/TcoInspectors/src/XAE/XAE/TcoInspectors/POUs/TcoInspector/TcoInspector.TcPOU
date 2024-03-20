@@ -304,6 +304,16 @@ END_IF;					 ]]></ST>
         </Implementation>
       </Get>
     </Property>
+    <Method Name="Restore" Id="{6df40362-6e19-0549-1de5-416fb6a29bca}">
+      <Declaration><![CDATA[METHOD Restore : TcoCore.ITcoRestorable
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_tcoInspectorDialogue.Restore();
+]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="Result" Id="{3bfa3a4a-7888-017e-224d-3476f4ea51b3}">
       <Declaration><![CDATA[(*~
 	<docu>

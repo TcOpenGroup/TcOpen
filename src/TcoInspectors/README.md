@@ -13,6 +13,11 @@ IF (seq.Step(inStepID := 0,
     inStepDescription := 'ASKING SOME QUESTION')) THEN
     //--------------------------------------------------------
 //<StandardDialog>	
+	
+	//restore method also close each inactive dialog
+	Data.BoltPresenceInspector.Restore();
+	GroupInspection.Restore();
+
 	answer := _dialog			
 			.Show()	
 			.WithType(eDialogType.Question)				

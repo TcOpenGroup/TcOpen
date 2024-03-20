@@ -20,16 +20,19 @@ namespace Sandbox.TcoInspectors.Wpf
     {
         public App()
         {
-            #region DialogProxyServiceInitialization
-            TcOpen.Inxton.TcoAppDomain.Current.Builder
-                .SetPlcDialogs(DialogProxyServiceWpf.Create(new[] { App.Plc.MAIN._exampleContext }))
-            #endregion
-                .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter())
-                .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get)
-                .SetSecurity(SecurityManager.CreateDefault());                    
+                       
             
 
             Plc.Connector.BuildAndStart().ReadWriteCycleDelay = 75;
+
+            #region DialogProxyServiceInitialization
+            TcOpen.Inxton.TcoAppDomain.Current.Builder
+          
+            #endregion
+                .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter())
+                .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get)
+                .SetPlcDialogs(DialogProxyServiceWpf.Create(new[] { App.Plc.MAIN._exampleContext }))
+                .SetSecurity(SecurityManager.CreateDefault());
         }
 
         private static string AMS_ID = Environment.GetEnvironmentVariable("Tc3Target");
