@@ -96,16 +96,16 @@
     <Compile Include="POUs\Prototypes\TcoContext\TcoContextEnvironment.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\TcoDialog\Customized\eCustomizedDialogAnswer.TcDUT">
+    <Compile Include="POUs\Prototypes\TcoDialog\TcoCustomizedDialog\eCustomizedDialogAnswer.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\TcoDialog\Customized\ITcoCustomizedDialogAnswer.TcIO">
+    <Compile Include="POUs\Prototypes\TcoDialog\TcoCustomizedDialog\ITcoCustomizedDialogAnswer.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\TcoDialog\Customized\ITcoCustomizedDialogFormat.TcIO">
+    <Compile Include="POUs\Prototypes\TcoDialog\TcoCustomizedDialog\ITcoCustomizedDialogFormat.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Prototypes\TcoDialog\Customized\TcoCustomizedDialog.TcPOU">
+    <Compile Include="POUs\Prototypes\TcoDialog\TcoCustomizedDialog\TcoCustomizedDialog.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoDialog\eDialogAnswer.TcDUT">
@@ -124,6 +124,21 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoDialog\TcoDialogBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoDialog\TcoInputDialog\eInputDialogAnswer.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoDialog\TcoInputDialog\ITcoInputDialogAnswer.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoDialog\TcoInputDialog\ITcoInputDialogFormat.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoDialog\TcoInputDialog\TcoInputDialog.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Prototypes\TcoDialog\TcoInputDialog\TcoInputDialogContentContainer.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Prototypes\TcoLogger\ITcoLogger.TcIO">
@@ -343,7 +358,8 @@
     <Folder Include="GVLs" />
     <Folder Include="POUs\Compatibility" />
     <Folder Include="POUs\ImplicitChecks" />
-    <Folder Include="POUs\Prototypes\TcoDialog\Customized" />
+    <Folder Include="POUs\Prototypes\TcoDialog\TcoInputDialog" />
+    <Folder Include="POUs\Prototypes\TcoDialog\TcoCustomizedDialog" />
     <Folder Include="POUs\Prototypes\TcoTier" />
     <Folder Include="POUs\Prototypes\TcoDialog" />
     <Folder Include="POUs\Prototypes\TcoNothing" />

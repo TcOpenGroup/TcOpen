@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="ITcoInputDialogFormat" Id="{c5014424-cc29-0e94-1ae6-48b2ac5e9c60}">
+    <Declaration><![CDATA[INTERFACE ITcoInputDialogFormat
+]]></Declaration>
+    <Folder Name="Format" Id="{34a7c889-714e-0692-32bd-bf4c1ca2eb66}" />
+    <Method Name="WithCaption" Id="{961cabec-24cf-0fab-2de9-62679dbe5fc5}" FolderPath="Format\">
+      <Declaration><![CDATA[METHOD WithCaption : ITcoInputDialogAnswer
+VAR_INPUT
+	inCaption : STRING(255);
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="WithImage" Id="{8fb3da7e-3533-07f9-176e-b2332f5b4ef0}" FolderPath="Format\">
+      <Declaration><![CDATA[METHOD WithImage : ITcoInputDialogAnswer
+VAR_INPUT
+	inSource : STRING(255);
+	inHeight:REAL;
+	inWidth:REAL;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="WithOk" Id="{824d6293-b681-07ef-12ab-fb70dd1fa942}" FolderPath="Format\">
+      <Declaration><![CDATA[METHOD WithOk : ITcoInputDialogAnswer
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="WithText" Id="{ffb35f07-c7b9-09a0-160b-7d0019f9f510}" FolderPath="Format\">
+      <Declaration><![CDATA[METHOD WithText : ITcoInputDialogAnswer
+VAR_INPUT
+	inText : STRING(500);
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="WithType" Id="{827d4a98-c60c-0a51-23de-e68a8a9043a0}" FolderPath="Format\">
+      <Declaration><![CDATA[METHOD WithType : ITcoInputDialogAnswer
+VAR_INPUT
+	inDialogType : eDialogType;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="WithYesNo" Id="{f40f9819-83ad-0754-0917-c963310bb450}" FolderPath="Format\">
+      <Declaration><![CDATA[METHOD WithYesNo : ITcoInputDialogAnswer
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

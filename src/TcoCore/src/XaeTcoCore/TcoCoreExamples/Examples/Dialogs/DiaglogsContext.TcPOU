@@ -21,7 +21,13 @@ VAR
 	
     _invokeCustomizedDiaglog : BOOL;
     _dialogCustomized        : TcoCore.TcoCustomizedDialog(THIS^);
-    
+	
+	_invokeInputDiaglog : BOOL;
+
+    _customizedContentInput	: MyOwnContent(THIS^);
+	_dialogWithInput        : TcoCore.TcoInputDialog(THIS^);
+  
+
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -50,12 +56,15 @@ CASE _state OF
 		_dialog2.Restore();
 		_dialog3.Restore();
 		_dialog4.Restore();
+		_dialogWithInput.Restore();
 		_dialogCustomized.Restore();
 
         IF (_invokeDiaglog1) THEN
             _state := 10;
 		ELSIF (_invokeCustomizedDiaglog) THEN
             _state := 50;
+		ELSIF (_invokeInputDiaglog) THEN
+            _state := 100;
         
         END_IF;
     10:
@@ -232,7 +241,7 @@ CASE _state OF
 			END_IF;
 	
 			IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option2) THEN
-				_state := 0;
+				_state :=10;
 			END_IF;
 	
 			IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option3) THEN
@@ -240,14 +249,46 @@ CASE _state OF
 				_invokeCustomizedDiaglog := FALSE;
 				_invokeDiaglog1 := FALSE;
 			END_IF;
-		
+	100:
+			_dialogWithInput.Show(refContent:=_customizedContentInput)
+            .WithType(eDialogType.Question)
+            .WithYesNo()
+            .WithCaption('Hey wana set data')
+            .WithText('Do you realy want to sent data to ....?');
 
+			IF (_dialogWithInput.Answer = TcoCore.eInputDialogAnswer.Yes) THEN
+				_state := 110;
+			END_IF;
+	
+			IF (_dialogWithInput.Answer = TcoCore.eInputDialogAnswer.No) THEN
+            _invokeInputDiaglog := FALSE;
+
+				_state := 1000;
+			END_IF;
+
+	110:
+			_dialogWithInput.Show(refContent:=_customizedContentInput)
+            .WithType(eDialogType.Question)
+            .WithOk()
+			.WithImage('https://github.com/TcOpenGroup',400,600)
+            .WithCaption('Hey wana set data')
+            .WithText('Do you realy want to sent data to ....?');
+
+	
+	
+			IF (_dialogWithInput.Answer = TcoCore.eInputDialogAnswer.OK) THEN
+				_state := 1000;
+	            _invokeInputDiaglog := FALSE;
+
+			END_IF;
+
+      
     1000:
         IF (_dialog3.Show()
             .WithType(eDialogType.Warning)
             .WithOk()
             .WithCaption('Hey')
-            .WithText('We don`t go ahead.')
+            .WithText('We are done.')
             .Answer =
             TcoCore.eDialogAnswer.OK) THEN
             _state := 0;

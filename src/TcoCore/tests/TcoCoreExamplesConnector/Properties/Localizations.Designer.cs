@@ -115,6 +115,15 @@ namespace TcoCoreExamplesConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exclude.
+        /// </summary>
+        public static string ___Exclude__ {
+            get {
+                return ResourceManager.GetString("___Exclude__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Off.
         /// </summary>
         public static string ___Off__ {
@@ -129,6 +138,24 @@ namespace TcoCoreExamplesConnector.Properties {
         public static string ___On__ {
             get {
                 return ResourceManager.GetString("___On__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Qantity.
+        /// </summary>
+        public static string ___Qantity__ {
+            get {
+                return ResourceManager.GetString("___Qantity__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recipe.
+        /// </summary>
+        public static string ___Recipe__ {
+            get {
+                return ResourceManager.GetString("___Recipe__", resourceCulture);
             }
         }
         
@@ -192,6 +219,15 @@ namespace TcoCoreExamplesConnector.Properties {
         public static string ___Stopped__ {
             get {
                 return ResourceManager.GetString("___Stopped__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timeout.
+        /// </summary>
+        public static string ___Timeout__ {
+            get {
+                return ResourceManager.GetString("___Timeout__", resourceCulture);
             }
         }
     }

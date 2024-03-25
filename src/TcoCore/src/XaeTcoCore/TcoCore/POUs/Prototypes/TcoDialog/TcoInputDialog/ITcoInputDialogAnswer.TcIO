@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="ITcoInputDialogAnswer" Id="{0a757a56-ddf8-0a00-24fc-0d95df792179}">
+    <Declaration><![CDATA[INTERFACE ITcoInputDialogAnswer EXTENDS ITcoInputDialogFormat
+]]></Declaration>
+    <Property Name="Answer" Id="{ed328233-290c-0717-3b5b-c1190568855d}">
+      <Declaration><![CDATA[PROPERTY Answer : eInputDialogAnswer]]></Declaration>
+      <Get Name="Get" Id="{11e8414b-bbd9-0b00-1b71-a25c17c6b3a9}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>
