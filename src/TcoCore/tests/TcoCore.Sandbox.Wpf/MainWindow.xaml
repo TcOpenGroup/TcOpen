@@ -202,6 +202,8 @@
                     <vortex:RenderableContentControl DataContext="{Binding EXAMPLES_PRG._diaglogsContext._invokeDiaglog1}" PresentationType="ControlSlim"/>
 
                     <vortex:RenderableContentControl DataContext="{Binding EXAMPLES_PRG._diaglogsContext._invokeCustomizedDiaglog}" PresentationType="ControlSlim"/>
+                    <vortex:RenderableContentControl DataContext="{Binding EXAMPLES_PRG._diaglogsContext._invokeInputDiaglog}" PresentationType="ControlSlim"/>
+
                     <vortex:RenderableContentControl DataContext="{Binding EXAMPLES_PRG._diaglogsContext._invokeDiaglogsConsequential }" PresentationType="ControlSlim"/>
                 </StackPanel>
             </TabItem>

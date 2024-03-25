@@ -40,12 +40,12 @@ namespace TcoCore.Sandbox.Wpf
             PlcTcoCoreExamples.Connector.BuildAndStart();
 
             TcOpen.Inxton.TcoAppDomain.Current.Builder
-                .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter(new LoggerConfiguration()
-                                                        .WriteTo.Console(restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Verbose)
-                                                        .WriteTo.Notepad()
-                                                        .MinimumLevel.Verbose()))
-                .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get)
-                .SetPlcDialogs(DialogProxyServiceWpf.Create(new[] { PlcTcoCoreExamples.EXAMPLES_PRG._diaglogsContext}));
+            .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter(new LoggerConfiguration()
+                                                    .WriteTo.Console(restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Verbose)
+                                                    .WriteTo.Notepad()
+                                                    .MinimumLevel.Verbose()))
+            .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get)
+            .SetPlcDialogs(DialogProxyServiceWpf.Create(new[] { PlcTcoCoreExamples.EXAMPLES_PRG._diaglogsContext}));
 
             
             PlcTcoCoreExamples.MANIPULATOR._context._logger.StartLoggingMessages(eMessageCategory.All);

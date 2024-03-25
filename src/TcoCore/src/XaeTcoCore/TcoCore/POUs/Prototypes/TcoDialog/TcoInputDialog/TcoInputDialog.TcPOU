@@ -1,0 +1,335 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="TcoInputDialog" Id="{26ab3fb1-f79c-094f-0811-b001d93c2323}" SpecialFunc="None">
+    <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Provides standard dialog to interact with the user and provide fields for values input.		    			 					
+ 		</summary>
+		
+	</docu>	
+~*)
+FUNCTION_BLOCK TcoInputDialog EXTENDS TcoDialogBase IMPLEMENTS ITcoInputDialogAnswer, ITcoInputDialogAnswer
+
+VAR
+    _text       : STRING(500);
+    _caption    : STRING(255);
+    _hasOK      : BOOL;
+    _hasYes     : BOOL;
+    _hasNo      : BOOL;
+    _answer     : eInputDialogAnswer;
+    _dialogType : eDialogType;
+	_rTrig		: R_TRIG;
+	_imageSource: STRING(255);
+	_imageHeight: REAL;
+	_imageWidth: REAL;
+
+	{attribute clr [MemberByIdentity()]}
+	_content : TcoInputDialogContentContainer(THIS^);
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[SUPER^();]]></ST>
+    </Implementation>
+    <Folder Name="Format" Id="{c858b001-8d2c-0e22-3d94-bb415fe65795}" />
+    <Property Name="Answer" Id="{f98bcdc7-2fc0-0ee2-0a4e-6ffc8210df62}">
+      <Declaration><![CDATA[
+(*~
+	<docu>
+		<summary>
+			Gets the answer from the input dialog . 			 					
+ 		</summary>					
+	</docu>	
+~*)
+PROPERTY Answer : eInputDialogAnswer]]></Declaration>
+      <Get Name="Get" Id="{07e5a6ea-b640-03ea-2e0c-d344d8af0796}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Answer := _answer;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="ClearInfos" Id="{ff2e799e-e5f5-06b5-0faf-cca2eb74b0d6}">
+      <Declaration><![CDATA[METHOD INTERNAL ClearInfos
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_imageSource:='';
+_caption:='';
+_text:='';
+_dialogType  := eDialogType.Undefined;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStart" Id="{8bd75020-dbbf-0a7f-26e8-1b2cb11c9fc6}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStart ]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.OnStart();
+_answer := eDialogAnswer.Invoked;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{677b48fa-dbe5-0de6-0412-bb843234043d}">
+      <Declaration><![CDATA[METHOD Restore : ITcoRestorable
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.Restore();
+THIS^.ClearInfos();
+_answer:=eDialogAnswer.NoAnswer;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Show" Id="{8ff26d86-ff52-0e4a-1be3-d3b8f3f5411a}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Shows the dialog.
+			<note type="important">
+				In order for the dialog to be displayed to the user user application must initialized in the user application.
+				How to set up the observer in a WPF see `TcOpen.Inxton.TcoCore.Wpf.DialogProxyService`.
+			</note> 			 					
+ 		</summary>					
+	</docu>	
+~*)
+METHOD Show : ITcoInputDialogFormat
+VAR_INPUT
+	refContent: REFERENCE TO TcoInputDialogContentContainer;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT __ISVALIDREF(refContent) THEN
+    Messenger.Post('<#Invalid reference axis 1#>', eMessageCategory.ProgrammingError);
+    RETURN;
+END_IF
+_content :=refContent;
+THIS^.Invoke();
+SUPER^();
+
+
+_hasOK       := FALSE;
+_hasYes      := FALSE;
+_hasNo       := FALSE;
+
+ClearInfos();
+
+Show := THIS^;
+
+IF THIS^._taskState=eTaskState.Done AND  _answer<>eDialogAnswer.Invoked AND  _answer<>eDialogAnswer.NoAnswer THEN
+	SUPER^.Restore();
+	THIS^.ClearInfos();
+END_IF; 
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ShowWithExternalClose" Id="{7ac40319-18a6-05a4-1a23-b44c9203efa9}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Shows the dialog , closig this dialog is possibe  by external signal such as HW button press. Only one answer exclusively in same time is evaluated
+			<note type="important">
+				In order for the dialog to be displayed to the user user application must initialized in the user application.
+				How to set up the observer in a WPF see `TcOpen.Inxton.TcoCore.Wpf.DialogProxyService`.
+			</note> 			 					
+ 		</summary>					
+	</docu>	
+~*)
+METHOD ShowWithExternalClose : ITcoInputDialogFormat
+VAR_IN_OUT
+
+	inoContent:TcoInputDialogContentContainer;
+END_VAR
+VAR_INPUT
+	(*~
+	<docu>
+		<summary>
+			If True dialog is closed , and answer result is `eDialogAnsw.Ok`
+		</summary>			
+	</docu>	
+	~*)
+    inOkAnswerSignal      : BOOL:=FALSE;
+	(*~
+	<docu>
+		<summary>
+			If True dialog is closed , and answer result is `eDialogAnsw.Yes`
+		</summary>			
+	</docu>	
+	~*)
+    inYesAnswerSignal     : BOOL:=FALSE;
+	(*~
+	<docu>
+		<summary>
+			If True dialog is closed , and answer result is `eDialogAnsw.No`
+		</summary>			
+	</docu>	
+	~*)
+    inNoAnswerSignal      : BOOL:=FALSE;
+	(*~
+	<docu>
+		<summary>
+			If True dialog is closed , and answer result is `eDialogAnsw.Cancel`
+		</summary>			
+	</docu>	
+	~*)
+    inCancelAnswerSignal  : BOOL:=FALSE;
+
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_content :=inoContent;
+
+THIS^.Invoke();
+SUPER^();
+
+
+_hasOK       := FALSE;
+_hasYes      := FALSE;
+_hasNo       := FALSE;
+
+ClearInfos();
+
+
+ShowWithExternalClose := THIS^;
+
+_rTrig(CLK:=inOkAnswerSignal XOR inYesAnswerSignal XOR inNoAnswerSignal XOR inCancelAnswerSignal );
+IF _rTrig.q THEN
+	IF	inOkAnswerSignal THEN; _answer:=eDialogAnswer.Ok;
+	ELSIF	inYesAnswerSignal THEN; _answer:=eDialogAnswer.Yes;
+	ELSIF	inNoAnswerSignal THEN; _answer:=eDialogAnswer.No;
+	ELSIF	inCancelAnswerSignal THEN; _answer:=eDialogAnswer.Cancel;END_IF;
+
+
+
+END_IF
+
+
+IF THIS^._taskState=eTaskState.Done AND _answer<>eDialogAnswer.Invoked  AND  _answer<>eDialogAnswer.NoAnswer  THEN	
+	inoContent:=_content;
+	SUPER^.Restore();
+	THIS^.ClearInfos();
+END_IF; ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithCaption" Id="{b3ed09e5-c86c-04cd-1717-4f251346bccd}" FolderPath="Format\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Sets the caption of the dialog window. 			 					
+ 		</summary>					
+	</docu>	
+~*)
+{attribute 'hide'}
+{attribute 'obsolete' := 'You should access the method via `Show()` method.'}
+METHOD WithCaption : ITcoInputDialogAnswer
+VAR_INPUT
+	inCaption : STRING(255);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_caption := inCaption;
+WithCaption := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithImage" Id="{0d30c937-00bd-024d-1f6d-7f278ad78e42}" FolderPath="Format\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Sets the image source of the dialog window. 			 					
+ 		</summary>					
+	</docu>	
+~*)
+{attribute 'hide'}
+{attribute 'obsolete' := 'You should access the method via `Show()` method.'}
+METHOD WithImage : ITcoInputDialogAnswer
+VAR_INPUT
+	inSource : STRING(255);
+	inHeight:REAL;
+	inWidth:REAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_imageSource := inSource;
+_imageHeight:=inHeight;
+_imageWidth:= inWidth;
+
+WithImage := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithOk" Id="{1b7ef543-cf5d-0dc0-1b2f-8beb17abdd9e}" FolderPath="Format\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Sets that the `OK` button should be available in the dialog prompt. 			 					
+ 		</summary>					
+	</docu>	
+~*)
+{attribute 'hide'}
+{attribute 'obsolete' := 'You should access the method via `Show()` method.'}
+METHOD WithOk : ITcoInputDialogAnswer
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_hasOK := TRUE;
+WithOk := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithText" Id="{d65c76a8-c478-053c-35dc-66445ab9b27c}" FolderPath="Format\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Sets the text of the dialog window. 			 					
+ 		</summary>					
+	</docu>	
+~*)
+{attribute 'hide'}
+{attribute 'obsolete' := 'You should access the method via `Show()` method.'}
+METHOD WithText : ITcoInputDialogAnswer
+VAR_INPUT
+	inText : STRING(500);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_text := inText;
+WithText := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithType" Id="{37819d4e-5d38-0e6e-145e-3f5d3c25fe57}" FolderPath="Format\">
+      <Declaration><![CDATA[METHOD WithType : ITcoInputDialogAnswer
+VAR_INPUT
+	inDialogType : eDialogType;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_dialogType := inDialogType;
+WithType := THIS^;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithYesNo" Id="{a141c731-1fa5-023c-34c4-a0557ed8aa39}" FolderPath="Format\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Sets that the `Yes` and `No` buttons should be available in the dialog prompt. 			 					
+ 		</summary>					
+	</docu>	
+~*)
+{attribute 'hide'}
+{attribute 'obsolete' := 'You should access the method via `Show()` method.'}
+METHOD WithYesNo : ITcoInputDialogAnswer
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_hasYes := TRUE;
+_hasNo := TRUE;
+WithYesNo := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

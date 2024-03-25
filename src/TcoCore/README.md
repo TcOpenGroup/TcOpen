@@ -7,6 +7,22 @@
 
 ## Dialogs 
 
+Registration dialogs is defined by *.SetPlcDialogs(DialogProxyServiceWpf.Create(new[] { PlcTcoCoreExamples.EXAMPLES_PRG._diaglogsContext}));*
+
+### Important: For correct behavior use this order of definition in your app. 
+
+```csharp
+   PlcTcoCoreExamples.Connector.BuildAndStart();
+
+    TcOpen.Inxton.TcoAppDomain.Current.Builder
+    .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter(new LoggerConfiguration()
+                                            .WriteTo.Console(restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Verbose)
+                                            .WriteTo.Notepad()
+                                            .MinimumLevel.Verbose()))
+    .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get)
+    .SetPlcDialogs(DialogProxyServiceWpf.Create(new[] { PlcTcoCoreExamples.EXAMPLES_PRG._diaglogsContext}));
+```
+
 ### Plc Hide dialog
 
 ```csharp		
@@ -185,3 +201,77 @@ Here may be used any signal or condition when dialog should be closed with choos
 
 ![alt text](assets/customizedDialog3OptionsWithImage.png)
 ![alt text](assets/customizedDialog3OptionsWithZoomedImage.png)
+
+## Plc Example usage of Input Dialog 
+
+### Declaration
+
+```csharp
+     _customizedContentInput	: MyOwnContent(THIS^);
+	_dialogWithInput        : TcoCore.TcoInputDialog(THIS^);
+```
+
+### Structure defined by user that will be displayed in dialog as input fields 
+
+```csharp
+FUNCTION_BLOCK MyOwnContent EXTENDS TcoCore.TcoInputDialogContentContainer
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	{attribute addProperty Name "<#Recipe#>"}
+	Recipe:STRING;
+	{attribute addProperty Name "<#Qantity#>"}
+	RequiredQuantity:INT;
+	{attribute addProperty Name "<#Timeout#>"}
+	Timeout:DATE_AND_TIME;
+	{attribute addProperty Name "<#Exclude#>"}
+	Exclude:BOOL;
+
+END_VAR
+```
+
+### Usage
+
+```csharp
+    100:
+                _dialogWithInput.Show(refContent:=_customizedContentInput)
+                .WithType(eDialogType.Question)
+                .WithYesNo()
+                .WithCaption('Hey wana set data')
+                .WithText('Do you realy want to sent data to ....?');
+
+            IF (_dialogWithInput.Answer = TcoCore.eInputDialogAnswer.Yes) THEN
+                _state := 15;
+            END_IF;
+
+            IF (_dialogWithInput.Answer = TcoCore.eInputDialogAnswer.No) THEN
+                _state := 1000;
+            END_IF;
+
+```
+
+## Plc Example usage of Input Dialog with image
+
+### Usage
+
+```csharp
+110:
+			_dialogWithInput.Show(refContent:=_customizedContentInput)
+            .WithType(eDialogType.Question)
+            .WithOk()
+			.WithImage('https://github.com/TcOpenGroup',400,600)
+            .WithCaption('Hey wana set data')
+            .WithText('Do you realy want to sent data to ....?');
+
+	
+	
+			IF (_dialogWithInput.Answer = TcoCore.eInputDialogAnswer.OK) THEN
+				_state := 1000;
+	            _invokeInputDiaglog := FALSE;
+
+			END_IF;
+```
+
+![alt text](assets/InputDialogExampleWithImage.png)

@@ -75,7 +75,10 @@
 			<XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 			<SubType>Designer</SubType>
 		</Page>
-		<Page Update="TcoDialog\TcoDialog\TcoCustomizedDialogDialogView.xaml">
+		<Page Update="TcoDialog\CustomizedDialog\TcoCustomizedDialogDialogView.xaml">
+		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		</Page>
+		<Page Update="TcoDialog\InputDialog\TcoInputDialogDialogView.xaml">
 		  <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 		</Page>
 		<Page Update="TcoMessage\Health\HealthIndicatorView.xaml">

@@ -106,6 +106,15 @@ namespace TcoCoreConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid reference axis 1.
+        /// </summary>
+        public static string ___Invalid_reference_axis_1__ {
+            get {
+                return ResourceManager.GetString("___Invalid_reference_axis_1__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invoke request.
         /// </summary>
         public static string ___Invoke_request__ {
