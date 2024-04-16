@@ -69,6 +69,21 @@
     <Compile Include="POUs\Examples\eExamplesStates.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Examples\SandboxData_Plc1.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Examples\stProcessData_Plc1.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Examples\stProcessData_Plc2.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Examples\TcoDataManagerPlc1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Examples\TcoDataManagerPlc2.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -109,7 +124,6 @@
     </PlaceholderReference>
     <PlaceholderReference Include="TcoCore">
       <DefaultResolution>TcoCore, 0.6.0.913 (Vortex.Library)</DefaultResolution>
-      <Namespace>TcoCore</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcoData">
       <DefaultResolution>TcoData, 0.6.0.913 (Vortex.Library)</DefaultResolution>

@@ -1,11 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="SandboxContext" Id="{ed8218eb-5f5f-0973-2882-9b75bfb2ad4d}" SpecialFunc="None">
     <Declaration><![CDATA[
 //<Declaration>
 FUNCTION_BLOCK SandboxContext EXTENDS TcoCore.TcoContext
 VAR
     DataManager : TcoDataManager(THIS^);
+	
+	DataManagerFragmented : TcoDataManager(THIS^);
+	
+	DataManagerPlc1 : TcoDataManagerPlc1(THIS^);
+
+	DataManagerPlc2 : TcoDataManagerPlc2(THIS^);
+	
+//	DataManagerFragmentedPlc1 : TcoDataManagerPlc1(THIS^);
 END_VAR
 //</Declaration>
 VAR
@@ -38,7 +46,12 @@ Context.Environment.Messaging.MessengerLoggingMethod := eMessengerLogMethod.OnEv
 //<CyclicalDataMangerCall>
 // Cyclical data manage call.
 DataManager();
+DataManagerFragmented();
+DataManagerPlc1();
+DataManagerPlc2();
+
 //</CyclicalDataMangerCall>
+
 
 
 recordId_1 := 'scoundrel';
