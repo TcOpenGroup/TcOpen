@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="TcoDataManagerPlc1" Id="{9a7c20f5-5ec4-0a8b-1523-1e641a2c3703}" SpecialFunc="None">
+    <Declaration><![CDATA[//<DataManagerDeclarations>
+// Function block for data maipulation must extend from TcoData.TcoDataExchange.
+FUNCTION_BLOCK TcoDataManagerPlc1 EXTENDS TcoData.TcoDataExchange
+VAR
+	// This is the structure that contains the actual data we will work with. The `STRUCT` must extend `TcoData.TcoEntity`
+    _data : stProcessData_Plc1;
+END_VAR
+//</DataManagerDeclarations>
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//----------------------------------
+//<DataManagerSuperCall>
+
+// IMPLEMENTATION BODY OF FUNCTION BLOCK
+
+// IMPORTANT: SUPER CALL HERE IS REQUIRED TO CALL THE DATA MANAGER TASKS!!!
+SUPER^();
+
+//</DataManagerSuperCall>
+//----------------------------------
+
+
+]]></ST>
+    </Implementation>
+    <Property Name="Data" Id="{76076a73-aed0-0ed6-249c-f33af109b0e1}">
+      <Declaration><![CDATA[PROPERTY Data : REFERENCE TO stProcessData_Plc1]]></Declaration>
+      <Get Name="Get" Id="{4fb95632-6280-0a67-1f72-4c17a2bf2032}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Data REF= _data;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

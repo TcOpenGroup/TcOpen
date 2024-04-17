@@ -44,6 +44,77 @@
             </Grid>
          
         </TabItem>
+        <TabItem Header="DataFragmented">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <vortex:RenderableContentControl DataContext="{Binding Plc.MAIN.sandbox.DataManagerFragmented}" PresentationType="Control">
+                        <vortex:RenderableContentControl.RootContainer>
+                            <Grid />
+                        </vortex:RenderableContentControl.RootContainer>
+                    </vortex:RenderableContentControl>
+                </Grid>
+                <vortex:TcoDataExchangeSimpleSelectorView  Grid.Row="1" DataContext="{Binding Plc.MAIN.sandbox.DataManagerFragmented}"></vortex:TcoDataExchangeSimpleSelectorView>
+                <!--<UniformGrid
+                    Grid.Row="1"
+                    Columns="2"
+                    Rows="0">
+                    <vortex:DynamicTreeView x:Name="dynamicTreeView" DataContext="{Binding Plc.MAIN.sandbox, Mode=OneWay}" />
+                    <ScrollViewer>
+                        <vortex:ObservableContentControl DataContext="{Binding SelectedItem, ElementName=dynamicTreeView}" PresentationType="Base-Control" />
+                    </ScrollViewer>
+                </UniformGrid>-->
+                <!--<Button Grid.Row="2" Click="Button_Click">ExternalInvokeTest</Button>-->
+            </Grid>
+
+        </TabItem>
+
+        <TabItem Header="DataFragmented PLC1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <vortex:RenderableContentControl DataContext="{Binding Plc.MAIN.sandbox.DataManagerPlc1}" PresentationType="Control">
+                        <vortex:RenderableContentControl.RootContainer>
+                            <Grid />
+                        </vortex:RenderableContentControl.RootContainer>
+                    </vortex:RenderableContentControl>
+                </Grid>
+          
+            </Grid>
+
+        </TabItem>
+        <TabItem Header="DataFragmented PLC2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <vortex:RenderableContentControl DataContext="{Binding Plc.MAIN.sandbox.DataManagerPlc2}" PresentationType="Control">
+                        <vortex:RenderableContentControl.RootContainer>
+                            <Grid />
+                        </vortex:RenderableContentControl.RootContainer>
+                    </vortex:RenderableContentControl>
+                </Grid>
+
+            </Grid>
+
+        </TabItem>
         <TabItem Header="Diagnostics">
             <vortex:RenderableContentControl DataContext="{Binding Plc.MAIN.sandbox}" PresentationType="Diagnostics" />
         </TabItem>
