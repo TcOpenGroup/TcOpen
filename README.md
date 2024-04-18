@@ -102,11 +102,10 @@ Details about contribution [here](CONTRIBUTING.md)
 
 ----------------------------------
 #### Prerequisites
-1. [Visual Studio 2019 (at least Community Edition)](https://visualstudio.microsoft.com/vs/older-downloads/) v16.8.3+
+1. [Visual Studio 2019 (at least Community Edition)](https://visualstudio.microsoft.com/vs/older-downloads/) v16.8.3+ English version (other language mutation may not work properly).
 1. [TwinCAT 3.1 eXtended Automation Engineering (XAE)](https://www.beckhoff.com/english.asp?download/tc3-downloads.htm) TwinCAT 3.1 4024.17+
 1. [.NET Framework 4.8 developer pack](https://dotnet.microsoft.com/download/dotnet-framework/thank-you/net48-developer-pack-offline-installer)
 1. [.NET6 developer pack](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) (6.0.5)
-1. [Get free inxton developer licence](https://inxton.com/register)
 1. [Inxton Vortex Builder extension](https://marketplace.visualstudio.com/items?itemName=Inxton.InxtonVortexBuilderExtensionPre)
 ----------------------------------
 
