@@ -448,6 +448,15 @@ namespace TcoCognexVisionConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Config.
+        /// </summary>
+        internal static string ___Config__ {
+            get {
+                return ResourceManager.GetString("___Config__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current job ID.
         /// </summary>
         internal static string ___Current_job_ID__ {
@@ -989,6 +998,15 @@ namespace TcoCognexVisionConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Resuls.
+        /// </summary>
+        internal static string ___Resuls__ {
+            get {
+                return ResourceManager.GetString("___Resuls__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Result acknowledge.
         /// </summary>
         internal static string ___Result_acknowledge__ {
@@ -1157,6 +1175,15 @@ namespace TcoCognexVisionConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        internal static string ___Status__ {
+            get {
+                return ResourceManager.GetString("___Status__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to System busy.
         /// </summary>
         internal static string ___System_busy__ {
@@ -1288,6 +1315,15 @@ namespace TcoCognexVisionConnector.Properties {
         internal static string ___Update_signal_states__ {
             get {
                 return ResourceManager.GetString("___Update_signal_states__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UserData.
+        /// </summary>
+        internal static string ___UserData__ {
+            get {
+                return ResourceManager.GetString("___UserData__", resourceCulture);
             }
         }
         

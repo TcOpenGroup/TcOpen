@@ -277,6 +277,15 @@ namespace TcoDrivesBeckhoffConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Drive in override mode (Reduced velocity) due service mode! Limited to .
+        /// </summary>
+        public static string ___Drive_in_override_mode__Reduced_velocity__due_service_mode__Limited_to___ {
+            get {
+                return ResourceManager.GetString("___Drive_in_override_mode__Reduced_velocity__due_service_mode__Limited_to___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Drive power override.
         /// </summary>
         public static string ___Drive_power_override__ {
@@ -687,6 +696,15 @@ namespace TcoDrivesBeckhoffConnector.Properties {
         public static string ___Override__ {
             get {
                 return ResourceManager.GetString("___Override__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Override velocity in service [%].
+        /// </summary>
+        public static string ___Override_velocity_in_service______ {
+            get {
+                return ResourceManager.GetString("___Override_velocity_in_service______", resourceCulture);
             }
         }
         

@@ -10,6 +10,7 @@ using Vortex.Connector;
 using Vortex.Presentation.Wpf;
 using RelayCommand = TcOpen.Inxton.Input.RelayCommand;
 using TcOpen.Inxton.TcoDrivesBeckhoff.Wpf.Properties;
+using Microsoft.Win32;
 
 namespace TcoDrivesBeckhoff
 {
@@ -68,26 +69,43 @@ namespace TcoDrivesBeckhoff
 
         private void FillDefaultParams()
         {
+            var AllUnchecked = !(bool)Axis1MoveAllowed && !(bool)Axis2MoveAllowed && !(bool)Axis3MoveAllowed && !(bool)Axis4MoveAllowed;
             foreach (var item in Component.Positions)
             {
-                item.Axis1.Velocity.Cyclic = DefaultValues.Velocity;
-                item.Axis1.Acceleration.Cyclic = DefaultValues.Acceleration;
-                item.Axis1.Deceleration.Cyclic = DefaultValues.Deceleration;
-                item.Axis1.Jerk.Cyclic = DefaultValues.Jerk;
-                item.Axis2.Velocity.Cyclic = DefaultValues.Velocity;
-                item.Axis2.Acceleration.Cyclic = DefaultValues.Acceleration;
-                item.Axis2.Deceleration.Cyclic = DefaultValues.Deceleration;
-                item.Axis2.Jerk.Cyclic = DefaultValues.Jerk;
-                item.Axis3.Velocity.Cyclic = DefaultValues.Velocity;
-                item.Axis3.Acceleration.Cyclic = DefaultValues.Acceleration;
-                item.Axis3.Deceleration.Cyclic = DefaultValues.Deceleration;
-                item.Axis3.Jerk.Cyclic = DefaultValues.Jerk;
-                item.Axis4.Velocity.Cyclic = DefaultValues.Velocity;
-                item.Axis4.Acceleration.Cyclic = DefaultValues.Acceleration;
-                item.Axis4.Deceleration.Cyclic = DefaultValues.Deceleration;
-                item.Axis4.Jerk.Cyclic = DefaultValues.Jerk;
+                if ((bool)Axis1MoveAllowed || AllUnchecked)
+                {
+                    item.Axis1.Velocity.Cyclic = DefaultValues.Velocity;
+                    item.Axis1.Acceleration.Cyclic = DefaultValues.Acceleration;
+                    item.Axis1.Deceleration.Cyclic = DefaultValues.Deceleration;
+                    item.Axis1.Jerk.Cyclic = DefaultValues.Jerk;
+                }
 
+                if ((bool)Axis2MoveAllowed || AllUnchecked)
+                {
+                    item.Axis2.Velocity.Cyclic = DefaultValues.Velocity;
+                    item.Axis2.Acceleration.Cyclic = DefaultValues.Acceleration;
+                    item.Axis2.Deceleration.Cyclic = DefaultValues.Deceleration;
+                    item.Axis2.Jerk.Cyclic = DefaultValues.Jerk;
+                }
+
+                if ((bool)Axis3MoveAllowed || AllUnchecked)
+                {
+                    item.Axis3.Velocity.Cyclic = DefaultValues.Velocity;
+                    item.Axis3.Acceleration.Cyclic = DefaultValues.Acceleration;
+                    item.Axis3.Deceleration.Cyclic = DefaultValues.Deceleration;
+                    item.Axis3.Jerk.Cyclic = DefaultValues.Jerk;
+                }
+
+                if ((bool)Axis4MoveAllowed || AllUnchecked)
+                {
+                    item.Axis4.Velocity.Cyclic = DefaultValues.Velocity;
+                    item.Axis4.Acceleration.Cyclic = DefaultValues.Acceleration;
+                    item.Axis4.Deceleration.Cyclic = DefaultValues.Deceleration;
+                    item.Axis4.Jerk.Cyclic = DefaultValues.Jerk;
+                }
             }
+
+
 
         }
 
@@ -102,13 +120,57 @@ namespace TcoDrivesBeckhoff
             if (answer == MessageBoxResult.Yes)
             {
                 if (Component.RepositoryHandler != null)
+                {
                     Component.Save();
+                    if (Component.ExportAfterSaving)
+                    {
+                        ExportPositions();
+
+                    }
+                }
                 else
                     strings.ResourceManager.GetString("DefineRepository");
             }
 
         }
 
+        private void ExportPositions()
+        {
+            if (string.IsNullOrEmpty(this.Component.SetId))
+            {
+                MessageBox.Show(strings.ResourceManager.GetString("SelectSetId"), strings.ResourceManager.GetString("Attention"), MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            if (Component.RepositoryHandler != null)
+            {
+                try
+                {
+                    var exports = Component.Export();
+                    var sfd = new SaveFileDialog();
+                    sfd.FileName = Component.SetId+DateTime.Now.ToString("_yyyyMMdd_HHmmss");
+                    sfd.DefaultExt = "json";
+                    sfd.ShowDialog();
+
+
+                    using (var sw = new System.IO.StreamWriter(sfd.FileName))
+                    {
+
+
+                        sw.Write(exports);
+
+                    }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+            }
+            else
+                strings.ResourceManager.GetString("DefineRepository");
+
+
+        }
         private void LoadPositions()
         {
             if (string.IsNullOrEmpty(this.Component.SetId))

@@ -9,6 +9,7 @@ using TcoCore;
 using System.Text.RegularExpressions;
 using TcOpen.Inxton.RepositoryDataSet;
 using System.Collections.ObjectModel;
+using Newtonsoft.Json;
 
 namespace TcoDrivesBeckhoff
 {
@@ -81,13 +82,16 @@ namespace TcoDrivesBeckhoff
 
         public string SetId { get;  set; }
         public string NewSetId { get; set; }
+        public bool ExportAfterSaving { get; set; } = true;
 
-    
+
 
         public void Save()
         {
             if (RepositoryHandler != null)
             {
+                RepositoryHandler.LoadDataSet(SetId);
+
                 foreach (var item in Positions)
                 {
                     var any = RepositoryHandler.CurrentSet.Items.Where(p => p.Key == item.Symbol).Any();
@@ -117,6 +121,21 @@ namespace TcoDrivesBeckhoff
                 RepositoryHandler.SaveDataSet(SetId);
             }
         
+        }
+
+
+        public string Export()
+        {
+            string jsonString = string.Empty;
+            if (RepositoryHandler != null)
+            {
+                var pos = RepositoryHandler.CurrentSet.Items;
+                
+                jsonString = JsonConvert.SerializeObject(pos);              
+                
+
+            }
+            return jsonString;
         }
 
         public void Delete()

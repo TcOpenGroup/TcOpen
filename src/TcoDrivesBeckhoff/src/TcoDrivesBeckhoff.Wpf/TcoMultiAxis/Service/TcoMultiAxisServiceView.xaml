@@ -133,6 +133,8 @@
                                          SelectedItem="{Binding Component.SetId}"></ComboBox>
                                     <Button Margin="10,0"  Command="{Binding LoadPositionsCommand}" Content="{x:Static p:strings.Load}"></Button>
                                     <Button Margin="10,0"  Command="{Binding SavePositionsCommand}" Content="{x:Static p:strings.Save}"></Button>
+                                    <CheckBox Margin="10,0"  IsChecked="{Binding Component.ExportAfterSaving}" Content="{x:Static p:strings.ExportAfterSave}"></CheckBox>
+
                                     <Button Margin="10,0"  VerticalAlignment="Center" Command="{Binding DeleteDataSetCommand}" Content="{x:Static p:strings.DeleteSelected}"></Button>
 
                                 </WrapPanel>

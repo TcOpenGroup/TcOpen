@@ -196,6 +196,15 @@ namespace TcOpen.Inxton.TcoDrivesBeckhoff.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export after save.
+        /// </summary>
+        public static string ExportAfterSave {
+            get {
+                return ResourceManager.GetString("ExportAfterSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Jerk.
         /// </summary>
         public static string Jerk {

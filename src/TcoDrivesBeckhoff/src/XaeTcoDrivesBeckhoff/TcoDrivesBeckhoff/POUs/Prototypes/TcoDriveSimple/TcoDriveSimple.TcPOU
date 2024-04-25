@@ -19,13 +19,17 @@ VAR
     {attribute 'hide'}
     _mcReadStatus : Tc2_MC2.MC_ReadStatus;
 
-    {attribute 'hide'}
+
     _override : LREAL := 100.0;
+	{attribute 'hide'}
+	_overrideInternal : LREAL :=100.0;
 	{attribute addProperty Name "<#Axis status#>"}
     {attribute clr [ReadOnly()]}
     _axisStatus : TcoAxisStatus;
 	{attribute addProperty Name "<#Axis config#>"}
     _config : TcoAxisConfig;
+	
+	_reduceMovementsInServiceMode:REAL;
 
 END_VAR
 VAR
@@ -69,13 +73,22 @@ END_VAR]]></Declaration>
 END_IF
 
 _axisRef REF= inoAxisRef;
+
+
 _mcReadStatus(Axis := _axisRef, Enable := TRUE);
 UpdateAxisStatus();
+
+_overrideInternal:=_override;
+IF _config.OverrideInService>0.0 AND _config.OverrideInService<=100.0 AND THIS^.IsService THEN
+	_overrideInternal:=_config.OverrideInService;
+	Messenger.Notify(_sb.Clear().Append('<#Drive in override mode (Reduced velocity) due service mode! Limited to #>').Append(LREAL_TO_STRING(_overrideInternal)).Append(' %').ToString()); 
+END_IF
+
 
 _power(inEnable := inEnable,
     inEnablePositive := inEnablePositive,
     inEnableNegative := inEnableNegative,
-    inOverride := _override,
+    inOverride := _overrideInternal,
     inIsServiceMode := THIS^.IsService);
 
 _resetTask();
@@ -225,6 +238,17 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Method Name="InPosition" Id="{6abc727c-3362-0aa9-376e-13b2f183c2e4}" FolderPath="Axis\">
+      <Declaration><![CDATA[METHOD PUBLIC InPosition : BOOL
+VAR_INPUT
+inRequiredPos : LREAL;
+inWindow : LREAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[InPosition := ABS(_axisStatus.ActPos - inRequiredPos) < inWindow;]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="IsEnabled" Id="{280b02f2-a96c-00f4-06dc-f0cc9119d0d1}" FolderPath="Axis\">
       <Declaration><![CDATA[PROPERTY IsEnabled : BOOL]]></Declaration>
       <Get Name="Get" Id="{1993ae19-9e9a-0563-1e60-73ac2e003c87}">
@@ -368,7 +392,15 @@ END_VAR]]></Declaration>
       </Get>
     </Property>
     <Property Name="Override" Id="{7e6937a0-4ba3-05b0-2930-caf46da04f03}" FolderPath="Axis\">
-      <Declaration><![CDATA[PROPERTY Override : LREAL]]></Declaration>
+      <Declaration><![CDATA[
+(*~
+		<docu>
+			<summary>
+			Velocity override in % FOR all movement commands. (0 ≤ Override ≤ 100.0)	 
+			</summary>				
+		</docu>
+~*)
+PROPERTY Override : LREAL]]></Declaration>
       <Get Name="Get" Id="{b2639d12-3057-054a-1e0b-10829b617131}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
