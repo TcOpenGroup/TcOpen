@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="myVeryFirstTcoContext" Id="{6a4dbc2d-6b21-0fcb-2bc4-0055ab5a286d}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK myVeryFirstTcoContext EXTENDS TcoCore.TcoContext
 VAR
@@ -31,7 +31,8 @@ myVeryFirstInsight.Config.UserDataSize := eTcoInsightUserDataSize_v_5_x_x.USER_D
 myVeryFirstInsight.Config.ResultDataSize := eTcoInsightResultDataSize_v_5_x_x.RESULT_DATA_128B;
 myVeryFirstInsight(inoIoData:= GVL.myVeryFirstInsightGVL);
 myVeryFirstInsight.Service();
-]]></ST>
+myVeryFirstDataman.Read();
+myVeryFirstDataman.GetResultAsString(0,myVeryFirstDataman.Status.SignalStatus.ResultLength);]]></ST>
       </Implementation>
     </Method>
   </POU>

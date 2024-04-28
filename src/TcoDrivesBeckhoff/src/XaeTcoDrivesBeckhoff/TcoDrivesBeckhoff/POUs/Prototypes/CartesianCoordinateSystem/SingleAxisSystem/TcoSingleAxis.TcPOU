@@ -28,6 +28,8 @@ VAR
 	_moveAbsoluteTask :   TcoCore.TcoTask (THIS^);
 	{attribute addProperty Name "<#Move relative Task#>"}
 	_moveRelativeTask :   TcoCore.TcoTask (THIS^);
+
+	
 	{attribute addProperty Name "<#Restore Task#>"}
 	_restoreTask :   TcoCore.TcoTask (THIS^);
 	{attribute addProperty Name "<#Status#>"}
@@ -50,6 +52,10 @@ IF NOT __ISVALIDREF(refAxis)  THEN
     RETURN;
 END_IF
 _axisRef REF= refAxis;
+
+
+_savePositionTask();
+_loadPositionTask();	
 
 _axis(
 	inEnable:=inEnable , 
@@ -98,8 +104,7 @@ IF _moveRelativeTask.Execute() THEN
 END_IF;
 //****************************************
 
-_savePositionTask();
-_loadPositionTask();	
+
 
 
 
@@ -209,6 +214,18 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Method Name="ResetDrive" Id="{0e7b0a7a-f786-06d8-3922-516d2d347d70}">
+      <Declaration><![CDATA[METHOD ResetDrive : TcoCore.ITcoTaskStatus
+
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ResetDrive:=THIS^.Axis.Reset();
+
+
+]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Restore" Id="{6b84f7f5-bd0c-02a1-2804-19ef613c96e4}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -248,6 +265,18 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^._axis.Service();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SoeReset" Id="{e2ac31e5-3d50-05ab-00bc-49c90b5da0e1}">
+      <Declaration><![CDATA[METHOD SoeReset : TcoCore.ITcoTaskStatus
+
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SoeReset:=THIS^.Axis.SoEReset();
+
+
 ]]></ST>
       </Implementation>
     </Method>

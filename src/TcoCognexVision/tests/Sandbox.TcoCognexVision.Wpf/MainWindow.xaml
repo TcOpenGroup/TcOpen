@@ -13,8 +13,10 @@
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
+    <ScrollViewer>
     <StackPanel DataContext="{Binding TcoCognexVisionTestPlc.MAIN}">
         <vortex:RenderableContentControl DataContext="{Binding myVeryFirstTcoContextInstance.myVeryFirstDataman}" PresentationType="Service"/>
         <vortex:RenderableContentControl DataContext="{Binding myVeryFirstTcoContextInstance.myVeryFirstInsight}" PresentationType="Service"/>
     </StackPanel>
+    </ScrollViewer>
 </Window>

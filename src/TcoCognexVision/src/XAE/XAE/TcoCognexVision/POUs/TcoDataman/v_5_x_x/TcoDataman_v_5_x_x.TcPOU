@@ -1,18 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="TcoDataman_v_5_x_x" Id="{acfa500c-75b0-406d-8872-dce797f24ef6}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoDataman_v_5_x_x  EXTENDS TcoIo.TcoPnIoComponent IMPLEMENTS TcoAbstractions.ITcoCodeReader
 VAR_IN_OUT
-	inoIoData : TcoDatamanIO_v_5_x_x;
+inoIoData : TcoDatamanIO_v_5_x_x;
 END_VAR
 
 VAR
+	{attribute addProperty Name "<#Config#>"}
     _config : TcoDatamanConfig_v_5_x_x;
+	{attribute addProperty Name "<#Status#>"}
 	_status : TcoDatamanStatus_v_5_x_x;	
 END_VAR
 
 VAR
+	{attribute addProperty Name "<#UserData#>"}
 	_userData	: TcoDatamanUser_v_5_x_x;
+	{attribute addProperty Name "<#Results#>"}
 	_results	: TcoDatamanResults_v_5_x_x;
 END_VAR
 
@@ -42,6 +46,8 @@ END_IF
 
 SUPER^(inPnIoBoxState := THIS^.inoIoData.PnIoBoxState,inPnIoBoxDiag := THIS^.inoIoData.PnIoBoxDiag);
 
+
+
 IF THIS^._config.ContinuousReading THEN
 	ContinuousReading();
 END_IF
@@ -63,23 +69,32 @@ END_IF
 //****************************************
 
 //*************UPDATE*********************
-_taskEnabled := _taskEnabled AND NOT _restoreTask.Busy AND SUPER^.ProfinetReady;
-_updateSignalStatesTask.Enabled := _taskEnabled;
+IF _config.UpdateStatesPermanently THEN
+	UpdateSignalStates();
+END_IF;
+_taskEnabled := SUPER^.ProfinetReady;
+_updateSignalStatesTask.Enabled := _taskEnabled AND NOT _config.UpdateStatesPermanently ;
 IF _updateSignalStatesTask.Execute() THEN
 	UpdateSignalStates();
 END_IF
+
 //****************************************
 
 //*************CLEAR*DATA*****************
-_taskEnabled := _taskEnabled AND NOT _updateSignalStatesTask.Busy;
+_taskEnabled := SUPER^.ProfinetReady AND  NOT _readTask.Busy;
 _clearResultDataTask.Enabled := _taskEnabled;
 _clearResultDataTask(inoIoData := THIS^.inoIoData,inoConfig := THIS^._config,inoStatus := THIS^._status,inoResults := THIS^._results);
 //****************************************
 
 //*************READ***********************
-_taskEnabled := _taskEnabled AND NOT _clearResultDataTask.Busy;
+_taskEnabled := SUPER^.ProfinetReady AND NOT _clearResultDataTask.Busy;
 _readTask.Enabled :=  _taskEnabled;
 _readTask(inoIoData := THIS^.inoIoData,inoConfig := THIS^._config,inoStatus := THIS^._status,inoResults := THIS^._results);
+
+IF NOT _readTask.Busy AND NOT _readTask.Error 
+	AND NOT _clearResultDataTask.Busy AND NOT _clearResultDataTask.Error THEN
+	_status.ResultString := GetResultAsString(0,_status.SignalStatus.ResultLength);
+END_IF;
 //****************************************
 ]]></ST>
     </Implementation>
@@ -387,6 +402,9 @@ _readTask.Restore();
 
 Tc2_System.MEMSET(destAddr:= ADR(THIS^._results.Data) , fillByte:= 0 , n:= SIZEOF(THIS^._results.Data));
 
+THIS^.inoIoData.AcquisitionControl.TriggerEnable := FALSE;
+THIS^.inoIoData.AcquisitionControl.Trigger := FALSE;
+
 THIS^._results.Code := 0;
 THIS^._results.Extended := 0;
 THIS^._results.Id := 0;
@@ -397,6 +415,7 @@ IF InvalidReference() THEN
 END_IF
 
 Tc2_System.MEMSET(destAddr:= ADR(THIS^.inoIoData) , fillByte:= 0 , n:= SIZEOF(THIS^.inoIoData));
+
 
 _status.ActionDescription := '<#Restore executed!#>';
 _restoreTask.Restore();

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="TcoDatamanRead_v_5_x_x" Id="{bbfbdcf8-58e6-0eb9-1267-89fca8b94731}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoDatamanRead_v_5_x_x EXTENDS TcoCore.TcoTask
 VAR_IN_OUT
@@ -188,6 +188,7 @@ METHOD PROTECTED OnError
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^.inoStatus.ActionDescription := '<#Reading started.#>'; 
+THIS^.inoStatus.ResultString:='';
 ]]></ST>
       </Implementation>
     </Method>

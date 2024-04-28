@@ -9,7 +9,7 @@ namespace TcoCognexVision
 {
     public class TcoDataman_v_5_x_xViewModel : RenderableViewModel
     {
-        private eDisplayFormat _currentDisplayFormat;
+        private eDisplayFormat _currentDisplayFormat = eDisplayFormat.String;
         public eDisplayFormat CurrentDisplayFormat
         {
             get => _currentDisplayFormat;
@@ -19,7 +19,7 @@ namespace TcoCognexVision
                 UpdateAndFormatResultData();
             }
         }
-        public ObservableCollection<IndexedData<string>> ResultData { get ; private set; }
+        public ObservableCollection<IndexedData<string>> ResultData { get ; private set; }= new ObservableCollection<IndexedData<string>>();
         public TcoDataman_v_5_x_xViewModel() : base()
         {
             ResultData = new ObservableCollection<IndexedData<string>>();
@@ -44,14 +44,9 @@ namespace TcoCognexVision
             {
                 try
                 {
-                    if (ResultData == null)
-                    {
-                        ResultData = new ObservableCollection<IndexedData<string>>();
-                    }
-                    else
-                    {
-                        ResultData.Clear();
-                    }
+              
+                     ResultData.Clear();
+
                     if (Component != null && Component.GetConnector() != null && Component._results != null)
                     {
                         Component._results.Read();
@@ -75,9 +70,10 @@ namespace TcoCognexVision
                             {
                                 byte _byte = Component._results.Data[i].LastValue;
                                 string _string = "";
-                                if (_byte > 0)
-                                    _string = Encoding.UTF8.GetString(new byte[] { _byte });
-                                else _string = "N/A";
+                                if (_byte >= 32)
+                                    _string = Encoding.Default.GetString(new byte[] { _byte });
+                                else
+                                    _string = SpecialAsciiToSignConverters.SpecialAsciiToSign(_byte);
 
                                 ResultData.Add(new IndexedData<string>(i, _string));
                             }

@@ -11,6 +11,7 @@ using Vortex.Presentation.Wpf;
 using RelayCommand = TcOpen.Inxton.Input.RelayCommand;
 
 using TcOpen.Inxton.TcoDrivesBeckhoff.Wpf.Properties;
+using Microsoft.Win32;
 
 namespace TcoDrivesBeckhoff
 {
@@ -92,10 +93,52 @@ namespace TcoDrivesBeckhoff
             if (answer == MessageBoxResult.Yes)
             {
                 if (Component.RepositoryHandler != null)
+                {
                     Component.Save();
+                    if (Component.ExportAfterSaving)
+                    {
+                        ExportPositions();
+
+                    }
+                }
                 else
                     strings.ResourceManager.GetString("DefineRepository");
             }
+
+        }
+
+        private void ExportPositions()
+        {
+            if (string.IsNullOrEmpty(this.Component.SetId))
+            {
+                MessageBox.Show(strings.ResourceManager.GetString("SelectSetId"), strings.ResourceManager.GetString("Attention"), MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            if (Component.RepositoryHandler != null)
+            {
+                try
+                {
+                    var exports = Component.Export();
+                    var sfd = new SaveFileDialog();
+                    sfd.FileName = Component.SetId + DateTime.Now.ToString("_yyyyMMdd_HHmmss");
+                    sfd.DefaultExt = "json";
+                    sfd.ShowDialog();
+
+
+                    using (var sw = new System.IO.StreamWriter(sfd.FileName))
+                    {
+                        sw.Write(exports);
+                    }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+            }
+            else
+                strings.ResourceManager.GetString("DefineRepository");
+
 
         }
 

@@ -1,20 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoDatamanSignalStates_v_5_x_x" Id="{4ef5f122-57b8-0976-0ece-81690dcbec10}">
     <Declaration><![CDATA[{attribute addProperty Name "Signal states"}
-{attribute wpf [Container(Layout.Wrap)]}
+{attribute wpf [Container(Layout.Stack)]}
 TYPE TcoDatamanSignalStates_v_5_x_x :
 STRUCT
+	
+	{attribute wpf [Container(Layout.Stack,"Acquisition control")]}
+	{attribute wpf [Group(Layout.GroupBox)]}
 	{attribute addProperty Name "<#Trigger enable#>"}
 	TriggerEnable 			:	BOOL;
 	{attribute addProperty Name "<#Trigger#>"}
 	Trigger					:	BOOL;
 
+	{attribute wpf [Container(Layout.Stack,"Result control")]}
+	{attribute wpf [Group(Layout.GroupBox)]}
 	{attribute addProperty Name "<#Enable result buffering#>"}
 	EnableResultBuffering	:	BOOL;
 	{attribute addProperty Name "<#Result acknowledge#>"}
 	ResultsAcknowledge		:	BOOL;
 
+	{attribute wpf [Container(Layout.Stack,"Acquisition status")]}
+	{attribute wpf [Group(Layout.GroupBox)]}
 	{attribute addProperty Name "<#Trigger ready#>"}
 	TriggerReady 		:	BOOL;
 	{attribute addProperty Name "<#Trigger acknowledge#>"}
@@ -26,6 +33,8 @@ STRUCT
 	{attribute addProperty Name "<#Trigger ID#>"}
 	TriggerID 			:	UINT;
 
+	{attribute wpf [Container(Layout.Stack,"Result status")]}
+	{attribute wpf [Group(Layout.GroupBox)]}
 	{attribute addProperty Name "<#Decoding#>"}
 	Decoding 				:	BOOL;
 	{attribute addProperty Name "<#Decode complete#>"}
@@ -37,6 +46,8 @@ STRUCT
 	{attribute addProperty Name "<#Error detected#>"}
 	ErrorDetected 			:	BOOL;
 
+	{attribute wpf [Container(Layout.Stack,"Result data")]}
+	{attribute wpf [Group(Layout.GroupBox)]}
 	{attribute addProperty Name "<#Result ID#>"}
 	ResultID 				:	UINT;
 	{attribute addProperty Name "<#Result code#>"}
