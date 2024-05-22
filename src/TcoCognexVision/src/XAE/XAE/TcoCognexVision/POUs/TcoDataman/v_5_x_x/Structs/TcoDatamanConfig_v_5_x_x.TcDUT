@@ -11,6 +11,9 @@
 		UpdateStatesPermanently : BOOL := FALSE;
         InfoTime : TIME := T#2S;
         ErrorTime : TIME := T#5S;
+		ShowUserData : BOOL := FALSE;
+		ShowResultsData : BOOL := FALSE;
+
     END_STRUCT
 END_TYPE
 ]]></Declaration>

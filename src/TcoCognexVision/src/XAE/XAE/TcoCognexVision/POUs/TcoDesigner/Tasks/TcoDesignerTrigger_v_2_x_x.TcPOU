@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="TcoDesignerTrigger_v_2_x_x" Id="{34c24828-75cb-0fee-06b4-7614eae7d9e2}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoDesignerTrigger_v_2_x_x EXTENDS TcoCore.TcoTask
+VAR_INPUT
+	inTriggerType:eTcoDesignerTriggerType;
+	refClearResultsTask: REFERENCE TO TcoDesignerClearInspectionResults_v_2_x_x;
+END_VAR 
+
+VAR
+	_clearResultsTask: REFERENCE TO TcoDesignerClearInspectionResults_v_2_x_x;
+END_VAR
+VAR_IN_OUT
+	inoIoData	: TcoDesignerData_2_x_x;
+    inoConfig	: TcoDesignerConfig_v_2_x_x;
+	inoStatus	: TcoDesignerStatus_v_2_x_x;	
+	//inoResults	: TcoInsightResults_v_5_x_x;
+END_VAR
+VAR
+   
+	_progress : INT := 0;
+    {attribute 'hide'} 
+	_infoTimer :  TON;
+    {attribute 'hide'} 
+	_errorTimer :  TON;
+    {attribute 'hide'} 
+	_varInfo : __SYSTEM.VAR_INFO;
+    {attribute 'hide'} 
+	_sb : TcoCore.StringBuilder;
+  
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF NOT __ISVALIDREF(refClearResultsTask)  THEN
+    Messenger.Post('<#Invalid reference ClearResultsTask>', TcoCore.eMessageCategory.ProgrammingError);
+    RETURN;
+END_IF
+_clearResultsTask REF= refClearResultsTask;
+
+IF Execute() THEN
+	IF _progress = 0 THEN
+		IF NOT __ISVALIDREF(inoIoData) THEN
+			_varInfo :=__VARINFO(inoIoData);
+			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+		ELSIF NOT __ISVALIDREF(inoConfig) THEN                                                  
+			_varInfo :=__VARINFO(inoConfig);                                                    
+			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+		ELSIF NOT __ISVALIDREF(inoStatus) THEN                                                  
+			_varInfo :=__VARINFO(inoStatus);                                                    
+			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+//		ELSIF NOT __ISVALIDREF(inoResults) THEN                                              
+//			_varInfo :=__VARINFO(inoResults);                                                
+//			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+		ELSE
+			_progress := _progress + 1;
+			CallTimers(FALSE);
+
+		END_IF
+	END_IF
+	
+		
+	IF _progress = 1 THEN
+		IF inTriggerType = eTcoDesignerTriggerType.TriggerFast THEN
+			_progress := _progress + 1;
+		ELSIF _clearResultsTask.Invoke().Done THEN
+			_progress := _progress + 1;
+		END_IF
+
+	END_IF;
+
+	IF _progress = 2 THEN
+		THIS^.Messenger.OnCondition(_infoTimer.Q).Info('<#Trigger!#>'); 
+		THIS^.inoIoData.PlcToPc.Trigger:=TRUE;
+	
+		IF NOT THIS^.inoIoData.PcToPlc.InspectionReady  THEN
+			THIS^.inoIoData.PlcToPc.Trigger:=FALSE;
+			CallTimers(FALSE);
+			_progress := _progress + 1;
+		END_IF
+	END_IF
+	
+	
+	IF _progress=3 THEN	
+		Messenger.Info('Waiting for results available');
+		IF THIS^.inoIoData.PcToPlc.ResultsAvailable  THEN		
+			CallTimers(FALSE);
+			_progress := _progress + 1;
+		END_IF
+	END_IF
+	
+	IF _progress=4 THEN	
+		Messenger.Info('Acknovledge results');
+		THIS^.inoIoData.PlcToPc.ResultsAck:=TRUE;
+		IF NOT THIS^.inoIoData.PcToPlc.ResultsAvailable  THEN
+			THIS^.inoIoData.PlcToPc.ResultsAck:=FALSE;
+			THIS^.DoneWhen(TRUE);
+			
+		END_IF
+	END_IF
+	
+
+	
+
+	CallTimers(TRUE);
+	
+	THIS^.ThrowWhen(_errorTimer.Q  OR NOT(THIS^.inoIoData.PcToPlc.TriggerTimeout XOR inTriggerType = eTcoDesignerTriggerType.TriggerWithTimeout) OR THIS^.inoIoData.PcToPlc.Error );	
+END_IF
+]]></ST>
+    </Implementation>
+    <Method Name="CallTimers" Id="{b7ec5859-98ed-009d-331f-b2e23cb1dcfd}">
+      <Declaration><![CDATA[METHOD CallTimers
+VAR_INPUT
+	inValue : BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_infoTimer(IN := inValue, PT := THIS^.inoConfig.InfoTime);
+_errorTimer(IN := inValue, PT := THIS^.inoConfig.ErrorTime);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnAbort" Id="{fee7fe37-7d09-0a35-3b6e-db34c6b40ed8}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task is aborted.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnAbort
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.inoStatus.ActionDescription := '<#Trigger was aborted, while not yet completed!#>'; 
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnDone" Id="{27498230-0e21-074c-3591-33b08904246e}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task reaches the ```Done``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnDone
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.inoStatus.ActionDescription := '<#Trigger was completed successfully.#>'; 
+_progress:=0;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnError" Id="{409e6e93-f502-0b75-318d-4b1126b27ae7}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task reaches the ```Error``` state.
+			<para>
+				Do not confuse with <see cref="PlcDocu.TcoCore.TcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.inoStatus.ActionDescription := '<#Trigger finished with error.#>'; 
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStart" Id="{1b979094-8bfb-0136-3823-7af7f9cc07cb}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStart 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.inoStatus.ActionDescription := '<#Trigger started.#>'; 
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{05ef5298-f98e-091a-21f3-c18438677618}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+			<para>
+				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD Restore : ITcoRestorable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.Restore();
+_progress := 0;
+CallTimers(FALSE);
+Messenger.UnPin();
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

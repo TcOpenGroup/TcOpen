@@ -240,6 +240,78 @@
   <data name="___Restore_executed___" xml:space="preserve">
     <value>Restore executed!</value>
   </data>
+  <data name="___Invalid_reference_ClearResultsTask____TcoCore_eMessageCategory_ProgrammingError_______RETURN__END_IF__clearResultsTask_REF__refClearResultsTask___IF_Execute___THEN__IF__progress___0_THEN___IF_NOT___ISVALIDREF_inoIoData__THEN_____varInfo_____VARINFO_inoIoData______Messenger_Programming__sb_Clear___Append____Invalid_reference____" xml:space="preserve">
+    <value>Invalid reference ClearResultsTask&gt;', TcoCore.eMessageCategory.ProgrammingError);
+    RETURN;
+END_IF
+_clearResultsTask REF= refClearResultsTask;
+
+IF Execute() THEN
+	IF _progress = 0 THEN
+		IF NOT __ISVALIDREF(inoIoData) THEN
+			_varInfo :=__VARINFO(inoIoData);
+			Messenger.Programming(_sb.Clear().Append('Invalid reference: </value>
+  </data>
+  <data name="___Trigger___" xml:space="preserve">
+    <value>Trigger!</value>
+  </data>
+  <data name="___Trigger_was_aborted__while_not_yet_completed___" xml:space="preserve">
+    <value>Trigger was aborted, while not yet completed!</value>
+  </data>
+  <data name="___Trigger_was_completed_successfully___" xml:space="preserve">
+    <value>Trigger was completed successfully.</value>
+  </data>
+  <data name="___Trigger_finished_with_error___" xml:space="preserve">
+    <value>Trigger finished with error.</value>
+  </data>
+  <data name="___Trigger_started___" xml:space="preserve">
+    <value>Trigger started.</value>
+  </data>
+  <data name="___Reset_Request___" xml:space="preserve">
+    <value>Reset Request!</value>
+  </data>
+  <data name="___Waiting_for_the_Online_signal___" xml:space="preserve">
+    <value>Waiting for the Online signal!</value>
+  </data>
+  <data name="___Waiting_to_Acknowledge_results___" xml:space="preserve">
+    <value>Waiting to Acknowledge results!</value>
+  </data>
+  <data name="___Waiting_to_clear_old_data___" xml:space="preserve">
+    <value>Waiting to clear old data!</value>
+  </data>
+  <data name="___Waiting_for_Inspection_ready___" xml:space="preserve">
+    <value>Waiting for Inspection ready!</value>
+  </data>
+  <data name="___Waiting_for_data_were_cleared___" xml:space="preserve">
+    <value>Waiting for data were cleared!</value>
+  </data>
+  <data name="___Clearing_of_the_inspection_results_aborted__while_not_yet_finished___" xml:space="preserve">
+    <value>Clearing of the inspection results aborted, while not yet finished.</value>
+  </data>
+  <data name="___Clearing_of_the_inspection_results_was_completed_succesfully___" xml:space="preserve">
+    <value>Clearing of the inspection results was completed succesfully.</value>
+  </data>
+  <data name="___Clearing_of_the_inspection_results_finished_with_error___" xml:space="preserve">
+    <value>Clearing of the inspection results finished with error.</value>
+  </data>
+  <data name="___Clearing_of_the_inspection_results_started___" xml:space="preserve">
+    <value>Clearing of the inspection results started.</value>
+  </data>
+  <data name="___Vision_system_is_not__responding_via_Ads__Check_connection_with_Cognex_Designer___" xml:space="preserve">
+    <value>Vision system is not  responding via Ads. Check connection with Cognex Designer!</value>
+  </data>
+  <data name="___Generic_Data__" xml:space="preserve">
+    <value>Generic Data</value>
+  </data>
+  <data name="___Trigger__" xml:space="preserve">
+    <value>Trigger</value>
+  </data>
+  <data name="___Trigger_Fast__" xml:space="preserve">
+    <value>Trigger Fast</value>
+  </data>
+  <data name="___Trigger_with_Timeout__" xml:space="preserve">
+    <value>Trigger with Timeout</value>
+  </data>
   <data name="___Trigger_running___" xml:space="preserve">
     <value>Trigger running.</value>
   </data>
@@ -266,18 +338,6 @@
   </data>
   <data name="___Waiting_for_the_InspectionResults_to_be_copied___" xml:space="preserve">
     <value>Waiting for the InspectionResults to be copied!</value>
-  </data>
-  <data name="___Trigger_was_aborted__while_not_yet_completed___" xml:space="preserve">
-    <value>Trigger was aborted, while not yet completed!</value>
-  </data>
-  <data name="___Trigger_was_completed_successfully___" xml:space="preserve">
-    <value>Trigger was completed successfully.</value>
-  </data>
-  <data name="___Trigger_finished_with_error___" xml:space="preserve">
-    <value>Trigger finished with error.</value>
-  </data>
-  <data name="___Trigger_started___" xml:space="preserve">
-    <value>Trigger started.</value>
   </data>
   <data name="___Empty_job_name_inserted___" xml:space="preserve">
     <value>Empty job name inserted!</value>
@@ -363,18 +423,6 @@
   <data name="___Waiting_for_the_signal_ResultsValid_reseted___" xml:space="preserve">
     <value>Waiting for the signal ResultsValid reseted!</value>
   </data>
-  <data name="___Clearing_of_the_inspection_results_aborted__while_not_yet_finished___" xml:space="preserve">
-    <value>Clearing of the inspection results aborted, while not yet finished.</value>
-  </data>
-  <data name="___Clearing_of_the_inspection_results_was_completed_succesfully___" xml:space="preserve">
-    <value>Clearing of the inspection results was completed succesfully.</value>
-  </data>
-  <data name="___Clearing_of_the_inspection_results_finished_with_error___" xml:space="preserve">
-    <value>Clearing of the inspection results finished with error.</value>
-  </data>
-  <data name="___Clearing_of_the_inspection_results_started___" xml:space="preserve">
-    <value>Clearing of the inspection results started.</value>
-  </data>
   <data name="___SoftEvent_number______Append_UINT_TO_STRING__softEventNumber___Append____is_greater_than_the_maximal_value_of_7___" xml:space="preserve">
     <value>SoftEvent number: (').Append(UINT_TO_STRING(_softEventNumber)).Append(') is greater than the maximal value of 7!</value>
   </data>
@@ -413,9 +461,6 @@
   </data>
   <data name="___Soft_event__" xml:space="preserve">
     <value>Soft event</value>
-  </data>
-  <data name="___Trigger__" xml:space="preserve">
-    <value>Trigger</value>
   </data>
   <data name="___Camera_offline_The_vision_system__s_job_is_being_modified___" xml:space="preserve">
     <value>Camera offline:The vision system$'s job is being modified.</value>
@@ -501,6 +546,72 @@
   <data name="___Result_length__" xml:space="preserve">
     <value>Result length</value>
   </data>
+  <data name="___PCtoPLC__" xml:space="preserve">
+    <value>PCtoPLC</value>
+  </data>
+  <data name="___PLCtoPC__" xml:space="preserve">
+    <value>PLCtoPC</value>
+  </data>
+  <data name="___GeneralResult_Pass__" xml:space="preserve">
+    <value>GeneralResult Pass</value>
+  </data>
+  <data name="___GeneralResult_FAIL__" xml:space="preserve">
+    <value>GeneralResult FAIL</value>
+  </data>
+  <data name="____Trigger_Date___" xml:space="preserve">
+    <value> Trigger Date </value>
+  </data>
+  <data name="___SystemOnline__" xml:space="preserve">
+    <value>SystemOnline</value>
+  </data>
+  <data name="___InspectionReady__" xml:space="preserve">
+    <value>InspectionReady</value>
+  </data>
+  <data name="___ResultsAvailable__" xml:space="preserve">
+    <value>ResultsAvailable</value>
+  </data>
+  <data name="___JobId__" xml:space="preserve">
+    <value>JobId</value>
+  </data>
+  <data name="___JobName__" xml:space="preserve">
+    <value>JobName</value>
+  </data>
+  <data name="___JobLoadDone__" xml:space="preserve">
+    <value>JobLoadDone</value>
+  </data>
+  <data name="___ClearResultsAck__" xml:space="preserve">
+    <value>ClearResultsAck</value>
+  </data>
+  <data name="___Trigger_Counter__" xml:space="preserve">
+    <value>Trigger Counter</value>
+  </data>
+  <data name="___ErrorMsg__" xml:space="preserve">
+    <value>ErrorMsg</value>
+  </data>
+  <data name="___LiveBit__" xml:space="preserve">
+    <value>LiveBit</value>
+  </data>
+  <data name="___TriggerTimeout__" xml:space="preserve">
+    <value>TriggerTimeout</value>
+  </data>
+  <data name="___ResultsAck__" xml:space="preserve">
+    <value>ResultsAck</value>
+  </data>
+  <data name="___Reset__" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="___JobLoadId__" xml:space="preserve">
+    <value>JobLoadId</value>
+  </data>
+  <data name="___LoadJob__" xml:space="preserve">
+    <value>LoadJob</value>
+  </data>
+  <data name="___ClearResults__" xml:space="preserve">
+    <value>ClearResults</value>
+  </data>
+  <data name="____PartId___" xml:space="preserve">
+    <value> PartId </value>
+  </data>
   <data name="___Acquisition_trigger_enable__" xml:space="preserve">
     <value>Acquisition trigger enable</value>
   </data>
@@ -527,12 +638,6 @@
   </data>
   <data name="___Clear_error__" xml:space="preserve">
     <value>Clear error</value>
-  </data>
-  <data name="___Command__" xml:space="preserve">
-    <value>Command</value>
-  </data>
-  <data name="___Trigger_soft_event__" xml:space="preserve">
-    <value>Trigger soft event</value>
   </data>
   <data name="___Acquisition_trigger_ready__" xml:space="preserve">
     <value>Acquisition trigger ready</value>
@@ -594,8 +699,14 @@
   <data name="___Error_code__" xml:space="preserve">
     <value>Error code</value>
   </data>
+  <data name="___Command__" xml:space="preserve">
+    <value>Command</value>
+  </data>
   <data name="___Current_job_ID__" xml:space="preserve">
     <value>Current job ID</value>
+  </data>
+  <data name="___Trigger_soft_event__" xml:space="preserve">
+    <value>Trigger soft event</value>
   </data>
   <data name="___Trigger_soft_event_acknowledge__" xml:space="preserve">
     <value>Trigger soft event acknowledge</value>

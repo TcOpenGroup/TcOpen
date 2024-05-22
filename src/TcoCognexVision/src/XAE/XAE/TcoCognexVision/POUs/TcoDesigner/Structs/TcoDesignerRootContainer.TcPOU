@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="TcoDesignerRootContainer" Id="{c9188920-8b6d-08c2-3cbd-8695167d7e4d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoDesignerRootContainer EXTENDS TcoCore.TcoObject
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

@@ -24,6 +24,12 @@
     <CombineIds>true</CombineIds>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DUTs\DesignerResults.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\DesignerUserData.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="GVLs\GVL.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
@@ -31,10 +37,16 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\ITcoResultsData.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\myVeryFirstTcoContext.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\ProjectSpecificData.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -68,6 +80,10 @@
       <DefaultResolution>TcoCore, 0.6.0.913 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoCore</Namespace>
     </PlaceholderReference>
+    <PlaceholderReference Include="TcoInspectors">
+      <DefaultResolution>TcoInspectors, 0.6.0.913 (Vortex.Library)</DefaultResolution>
+      <Namespace>TcoInspectors</Namespace>
+    </PlaceholderReference>
     <PlaceholderReference Include="TcoIo">
       <DefaultResolution>TcoIo, 0.6.0.913 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoIo</Namespace>
@@ -86,6 +102,9 @@
     </PlaceholderResolution>
     <PlaceholderResolution Include="TcoCore">
       <Resolution>TcoCore, 0.6.0.913 (Vortex.Library)</Resolution>
+    </PlaceholderResolution>
+    <PlaceholderResolution Include="TcoInspectors">
+      <Resolution>TcoInspectors, 0.6.0.913 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="TcoIo">
       <Resolution>TcoIo, 0.6.0.913 (Vortex.Library)</Resolution>

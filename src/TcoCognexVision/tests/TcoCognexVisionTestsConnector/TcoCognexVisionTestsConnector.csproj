@@ -4,8 +4,10 @@
     <TargetFrameworks>net48;net5.0</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 	  <IsPackable>false</IsPackable>
+	  <UserSecretsId>e1f20d88-54cd-4e1c-a06a-6310136c3433</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\TcoInspectors\src\TcoInspectorsConnector\TcoInspectorsConnector.csproj" />
     <ProjectReference Include="..\..\src\TcoCognexVisionConnector\TcoCognexVisionConnector.csproj" />
   </ItemGroup>
   <ItemGroup>

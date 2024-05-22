@@ -542,7 +542,7 @@
 			</ArrayInfo>
 		</DataType>
 	</DataTypes>
-	<Project ProjectGUID="{F9E8CB0C-87A9-4377-9234-E2ACBFE1E5FE}" Target64Bit="true" ShowHideConfigurations="#x106">
+	<Project ProjectGUID="{F9E8CB0C-87A9-4377-9234-E2ACBFE1E5FE}" TargetNetId="192.168.4.1.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
 		<System>
 			<Settings MaxCpus="16">
 				<Cpu CpuId="1"/>
@@ -581,7 +581,7 @@
 				</Instance>
 			</Project>
 			<Project GUID="{FC83BAF7-9480-4C64-8D5C-B812256F7D0A}" Name="TcoCognexVisionTests" PrjFilePath="TcoCognexVisionTests\TcoCognexVisionTests.plcproj" TmcFilePath="TcoCognexVisionTests\TcoCognexVisionTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCognexVisionTests\TcoCognexVisionTests.tmc" TmcHash="{6F4E2102-A8FD-3228-88F6-F3EDB68D4407}">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCognexVisionTests\TcoCognexVisionTests.tmc" TmcHash="{A5455D9A-9254-8CCF-5233-B1ED6300EC76}">
 					<Name>TcoCognexVisionTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -802,6 +802,26 @@
 					<Vars VarGrpType="2" AreaNo="1">
 						<Name>PlcTask Outputs</Name>
 						<Var>
+							<Name>MAIN.myVeryFirstTcoContextInstance.myVeryFirstInsight._status.SignalStatus.EnableResultsBuffering</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.myVeryFirstTcoContextInstance.myVeryFirstInsight._status.SignalStatus.AcknowledgeInspectionResults</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.myVeryFirstTcoContextInstance.myVeryFirstInsight._status.SignalStatus.ExtendedUserDataSet</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.myVeryFirstTcoContextInstance.myVeryFirstInsight._status.SignalStatus.ExecuteCommand</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.myVeryFirstTcoContextInstance.myVeryFirstInsight._status.SignalStatus.ClearError</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
 							<Name>GVL.myVeryFirstDatamanGVL.PnIoBoxCtrl</Name>
 							<Type>UINT</Type>
 						</Var>
@@ -917,26 +937,6 @@
 							<Name>GVL.myVeryFirstInsightGVL.UserData.UserData</Name>
 							<Type GUID="{D753C2E1-3107-E7CE-854F-3E82FDAE9718}">ARRAY [0..253] OF BYTE</Type>
 						</Var>
-						<Var>
-							<Name>MAIN.myVeryFirstTcoContextInstance.myVeryFirstInsight._status.SignalStatus.EnableResultsBuffering</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>MAIN.myVeryFirstTcoContextInstance.myVeryFirstInsight._status.SignalStatus.AcknowledgeInspectionResults</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>MAIN.myVeryFirstTcoContextInstance.myVeryFirstInsight._status.SignalStatus.ExtendedUserDataSet</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>MAIN.myVeryFirstTcoContextInstance.myVeryFirstInsight._status.SignalStatus.ExecuteCommand</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>MAIN.myVeryFirstTcoContextInstance.myVeryFirstInsight._status.SignalStatus.ClearError</Name>
-							<Type>BOOL</Type>
-						</Var>
 					</Vars>
 					<Contexts>
 						<Context>
@@ -956,7 +956,7 @@
 			</Project>
 		</Plc>
 		<Io>
-			<Device Id="1" Disabled="true" DevType="113" AmsPort="28673" AmsNetId="172.20.21.220.2.1" RemoteName="Device 1 (Profinet Controller)">
+			<Device Id="1" Disabled="true" DevType="113" AmsPort="28673" AmsNetId="192.168.4.1.2.1" RemoteName="Device 1 (Profinet Controller)">
 				<Name>Device 1 (Profinet Controller)</Name>
 				<DevData>000000000000000000000000000000005c4445564943455c7b39383041424339332d314131322d343233322d394530362d3830313830393033454137377d00000000000000000200681e14ac00ffffff000105390b11040000000000000000000000000000000000000000000000000000000000000000000000000000000000</DevData>
 				<Image Id="1" AddrType="1" ImageType="3" SizeIn="2" SizeOut="6">

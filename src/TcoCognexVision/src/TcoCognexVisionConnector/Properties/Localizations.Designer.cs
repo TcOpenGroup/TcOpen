@@ -61,6 +61,24 @@ namespace TcoCognexVisionConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to  PartId .
+        /// </summary>
+        internal static string ____PartId___ {
+            get {
+                return ResourceManager.GetString("____PartId___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  Trigger Date .
+        /// </summary>
+        internal static string ____Trigger_Date___ {
+            get {
+                return ResourceManager.GetString("____Trigger_Date___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Acknowledge inspection results.
         /// </summary>
         internal static string ___Acknowledge_inspection_results__ {
@@ -412,6 +430,24 @@ namespace TcoCognexVisionConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ClearResults.
+        /// </summary>
+        internal static string ___ClearResults__ {
+            get {
+                return ResourceManager.GetString("___ClearResults__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ClearResultsAck.
+        /// </summary>
+        internal static string ___ClearResultsAck__ {
+            get {
+                return ResourceManager.GetString("___ClearResultsAck__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Command.
         /// </summary>
         internal static string ___Command__ {
@@ -538,6 +574,15 @@ namespace TcoCognexVisionConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ErrorMsg.
+        /// </summary>
+        internal static string ___ErrorMsg__ {
+            get {
+                return ResourceManager.GetString("___ErrorMsg__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Execute command.
         /// </summary>
         internal static string ___Execute_command__ {
@@ -570,6 +615,33 @@ namespace TcoCognexVisionConnector.Properties {
         internal static string ___Extended_user_data_set_acknowledge__ {
             get {
                 return ResourceManager.GetString("___Extended_user_data_set_acknowledge__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GeneralResult FAIL.
+        /// </summary>
+        internal static string ___GeneralResult_FAIL__ {
+            get {
+                return ResourceManager.GetString("___GeneralResult_FAIL__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GeneralResult Pass.
+        /// </summary>
+        internal static string ___GeneralResult_Pass__ {
+            get {
+                return ResourceManager.GetString("___GeneralResult_Pass__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generic Data.
+        /// </summary>
+        internal static string ___Generic_Data__ {
+            get {
+                return ResourceManager.GetString("___Generic_Data__", resourceCulture);
             }
         }
         
@@ -807,11 +879,38 @@ namespace TcoCognexVisionConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to InspectionReady.
+        /// </summary>
+        internal static string ___InspectionReady__ {
+            get {
+                return ResourceManager.GetString("___InspectionReady__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid reference: .
         /// </summary>
         internal static string ___Invalid_reference____ {
             get {
                 return ResourceManager.GetString("___Invalid_reference____", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid reference ClearResultsTask&gt;&apos;, TcoCore.eMessageCategory.ProgrammingError);
+        ///    RETURN;
+        ///END_IF
+        ///_clearResultsTask REF= refClearResultsTask;
+        ///
+        ///IF Execute() THEN
+        ///	IF _progress = 0 THEN
+        ///		IF NOT __ISVALIDREF(inoIoData) THEN
+        ///			_varInfo :=__VARINFO(inoIoData);
+        ///			Messenger.Programming(_sb.Clear().Append(&apos;Invalid reference: .
+        /// </summary>
+        internal static string ___Invalid_reference_ClearResultsTask____TcoCore_eMessageCategory_ProgrammingError_______RETURN__END_IF__clearResultsTask_REF__refClearResultsTask___IF_Execute___THEN__IF__progress___0_THEN___IF_NOT___ISVALIDREF_inoIoData__THEN_____varInfo_____VARINFO_inoIoData______Messenger_Programming__sb_Clear___Append____Invalid_reference____ {
+            get {
+                return ResourceManager.GetString(@"___Invalid_reference_ClearResultsTask____TcoCore_eMessageCategory_ProgrammingError_______RETURN__END_IF__clearResultsTask_REF__refClearResultsTask___IF_Execute___THEN__IF__progress___0_THEN___IF_NOT___ISVALIDREF_inoIoData__THEN_____varInfo_____VARINFO_inoIoData______Messenger_Programming__sb_Clear___Append____Invalid_reference____", resourceCulture);
             }
         }
         
@@ -841,6 +940,60 @@ namespace TcoCognexVisionConnector.Properties {
                 return ResourceManager.GetString("___Job_number_____Append_UINT_TO_STRING__jobNumber___Append____is_greater_than_th" +
                         "e_maximal_value_of____Append_UINT_TO_STRING_inoConfig_MaxJobNumber___Append_____" +
                         "", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to JobId.
+        /// </summary>
+        internal static string ___JobId__ {
+            get {
+                return ResourceManager.GetString("___JobId__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to JobLoadDone.
+        /// </summary>
+        internal static string ___JobLoadDone__ {
+            get {
+                return ResourceManager.GetString("___JobLoadDone__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to JobLoadId.
+        /// </summary>
+        internal static string ___JobLoadId__ {
+            get {
+                return ResourceManager.GetString("___JobLoadId__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to JobName.
+        /// </summary>
+        internal static string ___JobName__ {
+            get {
+                return ResourceManager.GetString("___JobName__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LiveBit.
+        /// </summary>
+        internal static string ___LiveBit__ {
+            get {
+                return ResourceManager.GetString("___LiveBit__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LoadJob.
+        /// </summary>
+        internal static string ___LoadJob__ {
+            get {
+                return ResourceManager.GetString("___LoadJob__", resourceCulture);
             }
         }
         
@@ -917,6 +1070,24 @@ namespace TcoCognexVisionConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PCtoPLC.
+        /// </summary>
+        internal static string ___PCtoPLC__ {
+            get {
+                return ResourceManager.GetString("___PCtoPLC__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PLCtoPC.
+        /// </summary>
+        internal static string ___PLCtoPC__ {
+            get {
+                return ResourceManager.GetString("___PLCtoPC__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Read.
         /// </summary>
         internal static string ___Read__ {
@@ -980,6 +1151,24 @@ namespace TcoCognexVisionConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        internal static string ___Reset__ {
+            get {
+                return ResourceManager.GetString("___Reset__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset Request!.
+        /// </summary>
+        internal static string ___Reset_Request___ {
+            get {
+                return ResourceManager.GetString("___Reset_Request___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Restore.
         /// </summary>
         internal static string ___Restore__ {
@@ -994,15 +1183,6 @@ namespace TcoCognexVisionConnector.Properties {
         internal static string ___Restore_executed___ {
             get {
                 return ResourceManager.GetString("___Restore_executed___", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Resuls.
-        /// </summary>
-        internal static string ___Resuls__ {
-            get {
-                return ResourceManager.GetString("___Resuls__", resourceCulture);
             }
         }
         
@@ -1061,6 +1241,15 @@ namespace TcoCognexVisionConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Results.
+        /// </summary>
+        internal static string ___Results__ {
+            get {
+                return ResourceManager.GetString("___Results__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Results available.
         /// </summary>
         internal static string ___Results_available__ {
@@ -1084,6 +1273,24 @@ namespace TcoCognexVisionConnector.Properties {
         internal static string ___Results_valid__ {
             get {
                 return ResourceManager.GetString("___Results_valid__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ResultsAck.
+        /// </summary>
+        internal static string ___ResultsAck__ {
+            get {
+                return ResourceManager.GetString("___ResultsAck__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ResultsAvailable.
+        /// </summary>
+        internal static string ___ResultsAvailable__ {
+            get {
+                return ResourceManager.GetString("___ResultsAvailable__", resourceCulture);
             }
         }
         
@@ -1193,6 +1400,15 @@ namespace TcoCognexVisionConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SystemOnline.
+        /// </summary>
+        internal static string ___SystemOnline__ {
+            get {
+                return ResourceManager.GetString("___SystemOnline__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Test run ready.
         /// </summary>
         internal static string ___Test_run_ready__ {
@@ -1211,6 +1427,15 @@ namespace TcoCognexVisionConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Trigger!.
+        /// </summary>
+        internal static string ___Trigger___ {
+            get {
+                return ResourceManager.GetString("___Trigger___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Trigger acknowledge.
         /// </summary>
         internal static string ___Trigger_acknowledge__ {
@@ -1220,11 +1445,29 @@ namespace TcoCognexVisionConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Trigger Counter.
+        /// </summary>
+        internal static string ___Trigger_Counter__ {
+            get {
+                return ResourceManager.GetString("___Trigger_Counter__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Trigger enable.
         /// </summary>
         internal static string ___Trigger_enable__ {
             get {
                 return ResourceManager.GetString("___Trigger_enable__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trigger Fast.
+        /// </summary>
+        internal static string ___Trigger_Fast__ {
+            get {
+                return ResourceManager.GetString("___Trigger_Fast__", resourceCulture);
             }
         }
         
@@ -1310,6 +1553,24 @@ namespace TcoCognexVisionConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Trigger with Timeout.
+        /// </summary>
+        internal static string ___Trigger_with_Timeout__ {
+            get {
+                return ResourceManager.GetString("___Trigger_with_Timeout__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TriggerTimeout.
+        /// </summary>
+        internal static string ___TriggerTimeout__ {
+            get {
+                return ResourceManager.GetString("___TriggerTimeout__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Update signal states.
         /// </summary>
         internal static string ___Update_signal_states__ {
@@ -1328,6 +1589,34 @@ namespace TcoCognexVisionConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vision system is not  responding via Ads. Check connection with Cognex Designer!.
+        /// </summary>
+        internal static string ___Vision_system_is_not__responding_via_Ads__Check_connection_with_Cognex_Designer___ {
+            get {
+                return ResourceManager.GetString("___Vision_system_is_not__responding_via_Ads__Check_connection_with_Cognex_Designe" +
+                        "r___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting for data were cleared!.
+        /// </summary>
+        internal static string ___Waiting_for_data_were_cleared___ {
+            get {
+                return ResourceManager.GetString("___Waiting_for_data_were_cleared___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting for Inspection ready!.
+        /// </summary>
+        internal static string ___Waiting_for_Inspection_ready___ {
+            get {
+                return ResourceManager.GetString("___Waiting_for_Inspection_ready___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Waiting for the InspectionResults to be copied!.
         /// </summary>
         internal static string ___Waiting_for_the_InspectionResults_to_be_copied___ {
@@ -1342,6 +1631,15 @@ namespace TcoCognexVisionConnector.Properties {
         internal static string ___Waiting_for_the_Job_name_to_be_written_to_the_User_data___ {
             get {
                 return ResourceManager.GetString("___Waiting_for_the_Job_name_to_be_written_to_the_User_data___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting for the Online signal!.
+        /// </summary>
+        internal static string ___Waiting_for_the_Online_signal___ {
+            get {
+                return ResourceManager.GetString("___Waiting_for_the_Online_signal___", resourceCulture);
             }
         }
         
@@ -1551,6 +1849,24 @@ namespace TcoCognexVisionConnector.Properties {
             get {
                 return ResourceManager.GetString("___Waiting_for_the_signal_TriggerSoftEvent____Append_UINT_TO_STRING_THIS___softEv" +
                         "entNumber___Append____to_be_set___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting to Acknowledge results!.
+        /// </summary>
+        internal static string ___Waiting_to_Acknowledge_results___ {
+            get {
+                return ResourceManager.GetString("___Waiting_to_Acknowledge_results___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting to clear old data!.
+        /// </summary>
+        internal static string ___Waiting_to_clear_old_data___ {
+            get {
+                return ResourceManager.GetString("___Waiting_to_clear_old_data___", resourceCulture);
             }
         }
     }

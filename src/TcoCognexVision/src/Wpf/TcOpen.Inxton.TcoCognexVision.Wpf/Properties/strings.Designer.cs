@@ -61,7 +61,88 @@ namespace TcOpen.Inxton.TcoCognexVision.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ulohy.
+        ///   Looks up a localized string similar to Designer connected.
+        /// </summary>
+        public static string DesignerConnected {
+            get {
+                return ResourceManager.GetString("DesignerConnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Designer not connected.
+        /// </summary>
+        public static string DesignerNotConnected {
+            get {
+                return ResourceManager.GetString("DesignerNotConnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter.
+        /// </summary>
+        public static string Filter {
+            get {
+                return ResourceManager.GetString("Filter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generate.
+        /// </summary>
+        public static string Generate {
+            get {
+                return ResourceManager.GetString("Generate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generate generic symbols.
+        /// </summary>
+        public static string GenerateGenericSymbols {
+            get {
+                return ResourceManager.GetString("GenerateGenericSymbols", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generate specific symbols.
+        /// </summary>
+        public static string GenerateSpecificSymbols {
+            get {
+                return ResourceManager.GetString("GenerateSpecificSymbols", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Job.
+        /// </summary>
+        public static string Job {
+            get {
+                return ResourceManager.GetString("Job", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PN Error.
+        /// </summary>
+        public static string PnError {
+            get {
+                return ResourceManager.GetString("PnError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SoftEvent.
+        /// </summary>
+        public static string SoftEvent {
+            get {
+                return ResourceManager.GetString("SoftEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tasks.
         /// </summary>
         public static string Tasks {
             get {

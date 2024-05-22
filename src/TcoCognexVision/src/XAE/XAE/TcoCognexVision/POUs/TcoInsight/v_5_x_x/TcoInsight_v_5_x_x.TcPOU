@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="TcoInsight_v_5_x_x" Id="{b36dba41-65c9-09aa-02f5-2313aa683dc2}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoInsight_v_5_x_x  EXTENDS TcoIo.TcoPnIoComponent 
 VAR_IN_OUT
@@ -7,12 +7,16 @@ VAR_IN_OUT
 END_VAR
 
 VAR
+	{attribute addProperty Name "<#Config#>"}
     _config : TcoInsightConfig_v_5_x_x;
+	{attribute addProperty Name "<#Status#>"}
 	_status : TcoInsightStatus_v_5_x_x;	
 END_VAR
 
 VAR
+	{attribute addProperty Name "<#UserData#>"}
 	_userData 	: TcoInsightUser_v_5_x_x;
+	{attribute addProperty Name "<#Results#>"}
 	_results : TcoInsightResults_v_5_x_x;
 END_VAR
 
@@ -68,7 +72,12 @@ END_IF
 //****************************************
 
 //*************UPDATE*********************
-_taskEnabled := _taskEnabled AND NOT _restoreTask.Busy AND SUPER^.ProfinetReady;
+IF _config.UpdateStatesPermanently THEN
+	UpdateSignalStates();
+END_IF;
+
+_taskEnabled:=SUPER^.ProfinetReady;
+_taskEnabled := _taskEnabled AND NOT _restoreTask.Busy ;
 _updateSignalStatesTask.Enabled := _taskEnabled;
 IF _updateSignalStatesTask.Execute() THEN
 	UpdateSignalStates();
@@ -76,30 +85,35 @@ END_IF
 //****************************************
 
 //*************CHANGE*JOB*BY*NUMBER*******
+_taskEnabled:=SUPER^.ProfinetReady;
 _taskEnabled := _taskEnabled AND NOT _updateSignalStatesTask.Busy;
 _changeJobByNumberTask.Enabled := _taskEnabled;
 _changeJobByNumberTask(inoIoData := THIS^.inoIoData,inoConfig := THIS^._config,inoStatus := THIS^._status);
 //****************************************
 
 //*************CHANGE*JOB*BY*NAME*********
+_taskEnabled:=SUPER^.ProfinetReady;
 _taskEnabled := _taskEnabled AND NOT _changeJobByNumberTask.Busy;
 _changeJobByNameTask.Enabled := _taskEnabled;
 _changeJobByNameTask(inoIoData := THIS^.inoIoData,inoConfig := THIS^._config,inoStatus := THIS^._status);
 //****************************************
 
 //*************CLEAR*DATA*****************
+_taskEnabled:=SUPER^.ProfinetReady;
 _taskEnabled := _taskEnabled AND NOT _changeJobByNameTask.Busy;
 _clearInspectionResultsTask.Enabled := _taskEnabled;
 _clearInspectionResultsTask(inoIoData := THIS^.inoIoData,inoConfig := THIS^._config,inoStatus := THIS^._status,inoResults := THIS^._results);
 //****************************************
 
 //*************SOFT*EVENT*****************
+_taskEnabled:=SUPER^.ProfinetReady;
 _taskEnabled := _taskEnabled AND THIS^.inoIoData.AcquisitionStatus.Online AND NOT _clearInspectionResultsTask.Busy;
 _softEventTask.Enabled := _taskEnabled;
 _softEventTask(inoIoData := THIS^.inoIoData,inoConfig := THIS^._config,inoStatus := THIS^._status);
 //****************************************
 
 //*************TRIGGER********************
+_taskEnabled:=SUPER^.ProfinetReady;
 _taskEnabled := _taskEnabled AND NOT _clearInspectionResultsTask.Busy;
 _triggerTask.Enabled :=  _taskEnabled;
 _triggerTask(inoIoData := THIS^.inoIoData,inoConfig := THIS^._config,inoStatus := THIS^._status,inoResults := THIS^._results);
