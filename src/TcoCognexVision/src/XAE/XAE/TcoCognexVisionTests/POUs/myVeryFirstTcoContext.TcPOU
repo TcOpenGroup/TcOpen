@@ -7,6 +7,17 @@ VAR
 	myVeryFirstDataman : TcoCognexVision.TcoDataman_v_5_x_x(THIS^);
 	{attribute addProperty Name "<#My very first INSIGHT#>"}
 	myVeryFirstInsight : TcoCognexVision.TcoInsight_v_5_x_x(THIS^);
+
+	
+
+	{attribute addProperty Name "<#Cognex Designer#>"}
+	designer : TcoCognexVision.TcoDesigner_v_2_x_x(THIS^);
+	
+	{attribute addProperty Name "<#Project Specific Data#>"}
+    _specificData : ProjectSpecificData(THIS^);
+	
+
+
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -22,7 +33,10 @@ END_VAR]]></Declaration>
 	</docu>
 ~*)
 METHOD PROTECTED  Main
-]]></Declaration>
+
+VAR
+	
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[myVeryFirstDataman(inoIoData:= GVL.myVeryFirstDatamanGVL);
 myVeryFirstDataman.Service();
@@ -32,7 +46,15 @@ myVeryFirstInsight.Config.ResultDataSize := eTcoInsightResultDataSize_v_5_x_x.RE
 myVeryFirstInsight(inoIoData:= GVL.myVeryFirstInsightGVL);
 myVeryFirstInsight.Service();
 myVeryFirstDataman.Read();
-myVeryFirstDataman.GetResultAsString(0,myVeryFirstDataman.Status.SignalStatus.ResultLength);]]></ST>
+myVeryFirstDataman.GetResultAsString(0,myVeryFirstDataman.Status.SignalStatus.ResultLength);
+
+
+
+
+designer(inoData:=_specificData );
+designer.Service();
+
+]]></ST>
       </Implementation>
     </Method>
   </POU>

@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="TcoDesigner_v_2_x_x" Id="{9f878dcf-5cb7-0a0b-0e25-b9cf0fab7696}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoDesigner_v_2_x_x  EXTENDS TcoCore.TcoComponent
+VAR_IN_OUT
+	inoData:TcoDesignerRootContainer;
+END_VAR
+
+VAR
+	{attribute addProperty Name "<#Generic Data#>"}
+	_genericData:TcoDesignerData_2_x_x;
+	{attribute addProperty Name "<#Config#>"}
+    _config : TcoDesignerConfig_v_2_x_x;
+	{attribute addProperty Name "<#Status#>"}
+	_status : TcoDesignerStatus_v_2_x_x;	
+
+END_VAR
+
+
+VAR
+
+	{attribute 'hide'}
+    _taskEnabled : BOOL;
+	{attribute addProperty Name "<#Restore#>"}
+    _restoreTask : TcoCore.TcoTask(THIS^);
+
+	{attribute addProperty Name "<#Clear result data#>"}
+    _clearResultDataTask : TcoDesignerClearInspectionResults_v_2_x_x(THIS^);
+
+	{attribute clr [RenderIgnore()]}
+    _triggerInternalTask :TcoDesignerTrigger_v_2_x_x(THIS^);
+	
+	{attribute addProperty Name "<#Trigger#>"}
+    _triggerTask : TcoCore.TcoTask(THIS^);
+	{attribute addProperty Name "<#Trigger Fast#>"}
+    _triggerFastTask : TcoCore.TcoTask(THIS^);
+	{attribute addProperty Name "<#Trigger with Timeout#>"}
+    _triggerWithTimeoutTask : TcoCore.TcoTask(THIS^);	
+	
+	{attribute addProperty Name "<#Results#>"}
+	{attribute clr [MemberByIdentity()]}
+	_specificData : TcoDesignerRootContainer(THIS^);
+	
+
+	_timerConnection: TON;
+	
+	
+	
+END_VAR
+
+VAR
+    {attribute 'hide'} 
+	_varInfo : __SYSTEM.VAR_INFO;
+    {attribute 'hide'} 
+	_sb : TcoCore.StringBuilder;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_specificData:=inoData;
+
+
+_timerConnection(In:=_status.SignalStatus.LiveBit,PT:=_config.ConnectionTimemout);
+_status.ClientConnected:= _timerConnection.ET<_timerConnection.PT AND _timerConnection.ET<>T#0MS;
+
+IF NOT _status.ClientConnected  THEN
+	THIS^._status.ActionDescription := '<#Vision system is not  responding via Ads. Check connection with Cognex Designer!#>';	
+	THIS^.Messenger.Error(_status.ActionDescription).Pin();
+
+END_IF
+
+
+//*************RESTORE********************
+_taskEnabled := TRUE;
+_restoreTask.Enabled := _taskEnabled;
+IF _restoreTask.Execute() THEN
+	Restore();
+	_restoreTask.DoneWhen(TRUE);
+END_IF
+//****************************************
+
+
+//****************************************
+
+//*************CLEAR*DATA*****************
+_taskEnabled := NOT _triggerTask.Busy AND   NOT _triggerFastTask.Busy AND NOT _triggerWithTimeoutTask.Busy  AND _status.ClientConnected;
+_clearResultDataTask.Enabled := _taskEnabled;
+_clearResultDataTask(inoIoData := _genericData,inoConfig := THIS^._config,inoStatus := THIS^._status);
+//****************************************
+
+//*************TRIGGER ********************
+_taskEnabled := NOT _clearResultDataTask.Busy AND   NOT _triggerFastTask.Busy AND NOT _triggerWithTimeoutTask.Busy  AND _status.ClientConnected;
+IF _triggerTask.Execute() THEN
+	_triggerInternalTask.Enabled :=  TRUE;
+	_triggerInternalTask(inTriggerType:=eTcoDesignerTriggerType.Trigger, refClearResultsTask:=_clearResultDataTask, inoIoData := _genericData,inoConfig := THIS^._config,inoStatus := THIS^._status);
+	_triggerTask.DoneWhen(_triggerInternalTask.Invoke().Done);
+	_triggerTask.ThrowWhen(_triggerInternalTask.Error);
+END_IF
+//***********************************************
+
+//*************TRIGGER WITH TIMEOUT********************
+_taskEnabled := TRUE;
+_triggerWithTimeoutTask.Enabled := NOT _clearResultDataTask.Busy AND   NOT _triggerFastTask.Busy AND NOT _triggerTask.Busy  AND _status.ClientConnected;
+IF _triggerTask.Execute() THEN
+	_triggerInternalTask.Enabled :=  TRUE;
+	_triggerInternalTask(inTriggerType:=eTcoDesignerTriggerType.TriggerWithTimeout, refClearResultsTask:=_clearResultDataTask, inoIoData := _genericData,inoConfig := THIS^._config,inoStatus := THIS^._status);
+	_triggerWithTimeoutTask.DoneWhen(_triggerInternalTask.Invoke().Done);
+	_triggerWithTimeoutTask.ThrowWhen(_triggerInternalTask.Error);
+END_IF
+//***********************************************
+
+
+
+//*************TRIGGER FAST********************
+_taskEnabled := TRUE;
+_triggerFastTask.Enabled := _taskEnabled;
+IF _triggerFastTask.Execute() THEN
+	_triggerInternalTask.Enabled :=  TRUE;
+	_triggerInternalTask(inTriggerType:=eTcoDesignerTriggerType.TriggerFast, refClearResultsTask:=_clearResultDataTask, inoIoData := _genericData,inoConfig := THIS^._config,inoStatus := THIS^._status);
+	_triggerFastTask.DoneWhen(_triggerInternalTask.Invoke().Done);
+	_triggerFastTask.ThrowWhen(_triggerInternalTask.Error);
+END_IF
+//***********************************************
+
+
+inoData:=_specificData;]]></ST>
+    </Implementation>
+    <Folder Name="Operations" Id="{47e2d9d4-0af7-08e0-0fee-e721868f0cf1}" />
+    <Folder Name="States" Id="{d0a8e5ee-226f-025d-2317-43e087f5181b}" />
+    <Folder Name="Tasks" Id="{fe8087d6-b331-067b-23fe-aafb6b2245f6}" />
+    <Method Name="ClearResultData" Id="{891905af-dcf8-0ff1-21e3-a5ddba00757d}" FolderPath="Operations\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Clears the result data. 		
+		</summary>			
+	</docu>	
+~*)
+METHOD ClearResultData : TcoCore.ITcoTaskStatus
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ClearResultData := THIS^._clearResultDataTask.Invoke();
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="ClearResultDataTask" Id="{b9c39b8a-f0d7-087a-3d53-0bc8c19bee68}" FolderPath="Tasks\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the `ClearResultDataTask` task that controls clearing of the results data. 		
+		</summary>			
+	</docu>	
+~*)
+PROPERTY ClearResultDataTask : TcoCore.ITcoTaskStatus]]></Declaration>
+      <Get Name="Get" Id="{fcfd6abe-9e31-02c6-37fd-28e6a0de5b6a}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ClearResultDataTask := _clearResultDataTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ClientConnected" Id="{f8eaf0b1-536f-04d5-3247-a2960b724abb}" FolderPath="States\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the status of ads connection	
+		</summary>			
+	</docu>	
+~*)
+PROPERTY ClientConnected : BOOL]]></Declaration>
+      <Get Name="Get" Id="{3d2780f8-7399-08af-328e-8a6dec721410}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ClientConnected := THIS^.Status.ClientConnected;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Config" Id="{603d38d2-fb08-0dd2-0461-0e9a42c9de7c}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the configuration of the cognex designer. 					
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Config : REFERENCE TO TcoDesignerConfig_v_2_x_x]]></Declaration>
+      <Get Name="Get" Id="{9c787bc3-ed0d-085a-126b-3f1e66869027}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Config REF= _config;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Restore" Id="{455480f9-dc73-0a25-2d1e-4f14b548ebb5}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.	
+		</summary>			
+	</docu>	
+~*)
+METHOD Restore : ITcoRestorable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+_clearResultDataTask.Restore();
+_triggerInternalTask.Restore();
+_triggerTask.Restore();
+
+_triggerFastTask.Restore();
+_triggerWithTimeoutTask.Restore();
+
+THIS^.Messenger.UnPin();
+
+//Tc2_System.MEMSET(destAddr:= ADR(THIS^._results.Data) , fillByte:= 0 , n:= SIZEOF(THIS^._results.Data));
+
+_genericData.PlcToPc.Trigger := FALSE;
+_genericData.PlcToPc.LoadJob := FALSE;
+_genericData.PlcToPc.ClearResults := FALSE;
+_genericData.PlcToPc.Reset := FALSE;
+_genericData.PlcToPc.ResultsAck := FALSE;
+_genericData.PlcToPc.JobLoadId := 0;
+_genericData.PlcToPc.PartId := '';
+
+
+
+
+
+
+
+//Tc2_System.MEMSET(destAddr:= ADR(THIS^.inoIoData) , fillByte:= 0 , n:= SIZEOF(THIS^.inoIoData));
+
+
+_status.ActionDescription := '<#Restore executed!#>';
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ServiceMode" Id="{247b42bb-8ed4-09ee-0acc-457eccafddc5}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+		    Custom service (manual, maintenance) logic.
+			This method must be implemented in derived class.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED ServiceMode]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Status" Id="{131e9295-2391-0914-2241-17713f2139e1}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the status of the cognex designer. 					
+		</summary>			
+	</docu>	
+~*)
+PROPERTY Status : REFERENCE TO TcoDesignerStatus_v_2_x_x]]></Declaration>
+      <Get Name="Get" Id="{9fbd2dc0-6b01-00be-0d9d-62d51d09c310}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Status REF= _status;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Trigger" Id="{fc45e393-d8e4-08c1-3318-9bae37762890}" FolderPath="Operations\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Triggers the designer  sequence and waits for results. 		
+		</summary>			
+	</docu>	
+~*)
+METHOD Trigger : TcoCore.ITcoTaskStatus
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Trigger := THIS^._triggerInternalTask.Invoke();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="TriggerTask" Id="{5f55162e-e626-0c85-21fe-9ebf1e15c997}" FolderPath="Tasks\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Gets the `ReadTask` task that controls the reading sequence. 		
+		</summary>			
+	</docu>	
+~*)
+PROPERTY TriggerTask : TcoCore.ITcoTaskStatus]]></Declaration>
+      <Get Name="Get" Id="{3079a623-9720-00c1-149b-0e3a7715508c}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[TriggerTask := _triggerInternalTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

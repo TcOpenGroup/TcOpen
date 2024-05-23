@@ -11,6 +11,6 @@ namespace TcoCognexVisionTests
         //public static TcoCognexVisionTestsTwinController TcoCognexVisionTestsPlc
         //    = new TcoCognexVisionTestsTwinController(Tc3ConnectorAdapter.Create(TargetAmsId, TargetAmsPort, true));
         public static TcoCognexVisionTestsTwinController TcoCognexVisionTestsPlc
-            = new TcoCognexVisionTestsTwinController(Tc3ConnectorAdapter.Create("172.20.10.104.1.1", TargetAmsPort, true));
+            = new TcoCognexVisionTestsTwinController(Tc3ConnectorAdapter.Create(TargetAmsId, TargetAmsPort, true));
     }
 }

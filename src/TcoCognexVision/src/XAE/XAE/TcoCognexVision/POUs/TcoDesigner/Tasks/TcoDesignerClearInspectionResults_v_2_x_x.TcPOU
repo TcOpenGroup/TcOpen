@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="TcoDesignerClearInspectionResults_v_2_x_x" Id="{e8ef7c4c-3177-0824-2334-795cb0911f81}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoDesignerClearInspectionResults_v_2_x_x EXTENDS TcoCore.TcoTask
+VAR_IN_OUT
+	inoIoData	: TcoDesignerData_2_x_x;
+    inoConfig	: TcoDesignerConfig_v_2_x_x;
+	inoStatus	: TcoDesignerStatus_v_2_x_x;	
+	//inoResults	: TcoInsightResults_v_5_x_x;
+END_VAR
+VAR
+    {attribute 'hide'} 
+	_progress : INT := 0;
+    {attribute 'hide'} 
+	_infoTimer :  TON;
+    {attribute 'hide'} 
+	_errorTimer :  TON;
+    {attribute 'hide'} 
+	_varInfo : __SYSTEM.VAR_INFO;
+    {attribute 'hide'} 
+	_sb : TcoCore.StringBuilder;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF Execute() THEN
+	IF _progress = 0 THEN
+		IF NOT __ISVALIDREF(inoIoData) THEN
+			_varInfo :=__VARINFO(inoIoData);
+			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+		ELSIF NOT __ISVALIDREF(inoConfig) THEN                                                  
+			_varInfo :=__VARINFO(inoConfig);                                                    
+			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+		ELSIF NOT __ISVALIDREF(inoStatus) THEN                                                  
+			_varInfo :=__VARINFO(inoStatus);                                                    
+			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+//		ELSIF NOT __ISVALIDREF(inoResults) THEN                                              
+//			_varInfo :=__VARINFO(inoResults);                                                
+//			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+		ELSE
+			_progress := _progress + 1;
+		END_IF
+	END_IF
+	
+	IF _progress = 1 THEN
+		CallTimers(FALSE);
+		THIS^.inoIoData.PlcToPc.Trigger := FALSE;
+		THIS^.inoIoData.PlcToPc.LoadJob := FALSE;
+		
+		THIS^.inoIoData.PlcToPc.Reset := FALSE;
+		THIS^.inoIoData.PlcToPc.ResultsAck := FALSE;
+
+		THIS^.inoIoData.PlcToPc.ClearResults:=FALSE;
+
+		_progress := _progress + 1;
+	END_IF
+	
+	IF _progress = 2 THEN
+		THIS^.Messenger.OnCondition(_infoTimer.Q).Info('<#Reset Request!#>'); 
+		THIS^.inoIoData.PlcToPc.Reset := TRUE;
+		IF THIS^.inoIoData.PcToPlc.InspectionReady
+			AND NOT THIS^.inoIoData.PcToPlc.ClearResultsAck
+			AND NOT THIS^.inoIoData.PcToPlc.ResultsAvailable 
+			AND NOT THIS^.inoIoData.PcToPlc.JobLoadDone THEN
+			THIS^.inoIoData.PlcToPc.Reset := FALSE;
+			_progress := _progress + 1;
+		END_IF
+	END_IF
+	
+	IF _progress = 3 THEN
+		THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the Online signal!#>'); 
+		IF THIS^.inoIoData.PcToPlc.SystemOnline THEN
+			CallTimers(FALSE);
+			_progress := _progress + 1;
+		END_IF
+	END_IF
+	
+	IF _progress = 4 THEN
+		THIS^.Messenger.OnCondition(_infoTimer.Q).Info('<#Waiting to Acknowledge results!#>'); 
+		THIS^.inoIoData.PlcToPc.ResultsAck:=TRUE;
+		IF NOT THIS^.inoIoData.PcToPlc.ResultsAvailable  THEN
+			THIS^.inoIoData.PlcToPc.ResultsAck:=FALSE;
+			CallTimers(FALSE);
+			_progress := _progress + 1;
+		END_IF
+	END_IF
+	
+	IF _progress = 5 THEN
+		THIS^.Messenger.OnCondition(_infoTimer.Q).Info('<#Waiting to clear old data!#>'); 
+		THIS^.inoIoData.PlcToPc.ClearResults:=TRUE;
+	
+		IF  THIS^.inoIoData.PcToPlc.ClearResultsAck  THEN
+			THIS^.inoIoData.PlcToPc.ClearResults:=FALSE;
+			CallTimers(FALSE);
+			_progress := _progress + 1;
+		END_IF
+	END_IF
+	
+	IF _progress = 6 THEN
+		THIS^.Messenger.OnCondition(_infoTimer.Q).Info('<#Waiting for Inspection ready!#>'); 
+		IF THIS^.inoIoData.PcToPlc.InspectionReady 
+			 THEN
+			CallTimers(FALSE);
+			_progress := _progress + 1;
+		END_IF
+	END_IF
+	
+	IF _progress = 7 THEN	
+		THIS^.Messenger.OnCondition(_infoTimer.Q).Info('<#Waiting for data were cleared!#>'); 
+			IF  NOT THIS^.inoIoData.PcToPlc.ClearResultsAck
+			AND NOT THIS^.inoIoData.PcToPlc.InspectionResults.ResultFail
+			AND NOT THIS^.inoIoData.PcToPlc.InspectionResults.ResultPass THEN
+			CallTimers(FALSE);
+			THIS^.DoneWhen(TRUE);
+		END_IF
+	END_IF
+	
+	CallTimers(TRUE);
+	
+		THIS^.ThrowWhen(_errorTimer.Q  OR THIS^.inoIoData.PcToPlc.TriggerTimeout OR THIS^.inoIoData.PcToPlc.Error );	
+END_IF
+]]></ST>
+    </Implementation>
+    <Method Name="CallTimers" Id="{20f1120c-e43e-0225-1470-baa6a7d49a9f}">
+      <Declaration><![CDATA[METHOD CallTimers
+VAR_INPUT
+	inValue : BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_infoTimer(IN := inValue, PT := THIS^.inoConfig.InfoTime);
+_errorTimer(IN := inValue, PT := THIS^.inoConfig.ErrorTime);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnAbort" Id="{eeeb0d6e-b9d5-027e-212b-c27a9bb61750}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task is aborted.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnAbort
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.inoStatus.ActionDescription := '<#Clearing of the inspection results aborted, while not yet finished.#>'; 
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnDone" Id="{0c3f7c44-2320-0e67-0ddb-e2bff473064c}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task reaches the ```Done``` state .
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnDone
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.inoStatus.ActionDescription := '<#Clearing of the inspection results was completed succesfully.#>'; 
+_progress:=0;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnError" Id="{20621a47-bfd9-03e5-3b6f-cd33eb6b89e9}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Executes when task reaches the ```Error``` state.
+			<para>
+				Do not confuse with <see cref="PlcDocu.TcoCore.TcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.inoStatus.ActionDescription := '<#Clearing of the inspection results finished with error.#>'; 
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStart" Id="{7c61dc07-cfb4-0703-05b6-4b1966f1999e}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStart 
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.inoStatus.ActionDescription := '<#Clearing of the inspection results started.#>'; 
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{ef084e57-b0bb-067b-3024-acafaa2e17dc}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+			<para>
+				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+			</para>
+		</summary>			
+	</docu>	
+~*)
+METHOD Restore : ITcoRestorable]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.Restore();
+_progress := 0;
+CallTimers(FALSE);
+Messenger.UnPin();
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

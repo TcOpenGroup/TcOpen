@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="DesignerResults" Id="{739b3c77-9387-0363-2fa0-1a7aff579c21}">
+    <Declaration><![CDATA[TYPE DesignerResults EXTENDS TcoCore.TcoStruct :
+STRUCT
+	{attribute addProperty Name "<#ResultBool#>"}
+	ResultBool:BOOL;
+	{attribute addProperty Name "<#ResultInt#>"}
+	ResultInt:INT;
+	{attribute addProperty Name "<#ResultString#>"}
+	ResultString:STRING;
+
+	
+	{attribute addProperty Name "<#Data inspector#>"}
+	DigitalInspector:TcoInspectors.TcoDigitalInspector(THISSTRUCT);
+	{attribute addProperty Name "<#Data inspector#>"}
+	DataInspector:TcoInspectors.TcoDataInspector(THISSTRUCT);
+	
+	{attribute addProperty Name "<#Analog inspector#>"}
+	AnalogInspector:TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

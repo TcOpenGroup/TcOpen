@@ -91,6 +91,39 @@
     <Compile Include="POUs\TcoDataman\v_5_x_x\TcoDataman_v_5_x_x.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\TcoDesigner\Structs\eTcoDesignerTriggerType.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDesigner\Structs\TcoDesignerConfig_v_2_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDesigner\Structs\TcoDesignerData_2_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDesigner\Structs\TcoDesignerRootContainer.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDesigner\Structs\TcoDesignerStatus_v_2_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDesigner\Structs\TcoDesignerGenericResults_v_2_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDesigner\Structs\TcoDesignerPcToPlc_v_2_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDesigner\Structs\TcoDesignerPlcToPc_v_2_x_x.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDesigner\Tasks\TcoDesignerTrigger_v_2_x_x.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDesigner\Tasks\TcoDesignerClearInspectionResults_v_2_x_x.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TcoDesigner\TcoDesigner_v_2_x_x.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\TcoInsight\v_5_x_x\IO\TcoInsightAcquisitionControl_v_5_x_x.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -163,12 +196,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="POUs\TcoDesigner" />
     <Folder Include="POUs" />
     <Folder Include="POUs\TcoDataman" />
     <Folder Include="POUs\TcoDataman\v_5_x_x" />
     <Folder Include="POUs\TcoDataman\v_5_x_x\IO" />
     <Folder Include="POUs\TcoDataman\v_5_x_x\Structs" />
     <Folder Include="POUs\TcoDataman\v_5_x_x\Tasks" />
+    <Folder Include="POUs\TcoDesigner\Tasks" />
+    <Folder Include="POUs\TcoDesigner\Structs" />
     <Folder Include="POUs\TcoInsight" />
     <Folder Include="POUs\TcoInsight\v_5_x_x" />
     <Folder Include="POUs\TcoInsight\v_5_x_x\IO" />

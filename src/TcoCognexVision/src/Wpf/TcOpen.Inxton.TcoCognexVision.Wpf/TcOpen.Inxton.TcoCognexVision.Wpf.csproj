@@ -53,6 +53,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="TcoDesigner\v_2_x_x\TcoDesigner_v_2_x_xServiceView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
     <Page Update="TcoInsight\v_5_x_x\TcoInsight_v_5_x_xServiceView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>

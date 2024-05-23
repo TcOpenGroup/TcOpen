@@ -61,6 +61,33 @@ namespace TcoCognexVisionTestsConnector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Analog inspector.
+        /// </summary>
+        public static string ___Analog_inspector__ {
+            get {
+                return ResourceManager.GetString("___Analog_inspector__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cognex Designer.
+        /// </summary>
+        public static string ___Cognex_Designer__ {
+            get {
+                return ResourceManager.GetString("___Cognex_Designer__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data inspector.
+        /// </summary>
+        public static string ___Data_inspector__ {
+            get {
+                return ResourceManager.GetString("___Data_inspector__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to My very first DATAMAN.
         /// </summary>
         public static string ___My_very_first_DATAMAN__ {
@@ -75,6 +102,60 @@ namespace TcoCognexVisionTestsConnector.Properties {
         public static string ___My_very_first_INSIGHT__ {
             get {
                 return ResourceManager.GetString("___My_very_first_INSIGHT__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PcToPlc.
+        /// </summary>
+        public static string ___PcToPlc__ {
+            get {
+                return ResourceManager.GetString("___PcToPlc__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PlcToPc.
+        /// </summary>
+        public static string ___PlcToPc__ {
+            get {
+                return ResourceManager.GetString("___PlcToPc__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project Specific Data.
+        /// </summary>
+        public static string ___Project_Specific_Data__ {
+            get {
+                return ResourceManager.GetString("___Project_Specific_Data__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ResultBool.
+        /// </summary>
+        public static string ___ResultBool__ {
+            get {
+                return ResourceManager.GetString("___ResultBool__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ResultInt.
+        /// </summary>
+        public static string ___ResultInt__ {
+            get {
+                return ResourceManager.GetString("___ResultInt__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ResultString.
+        /// </summary>
+        public static string ___ResultString__ {
+            get {
+                return ResourceManager.GetString("___ResultString__", resourceCulture);
             }
         }
     }

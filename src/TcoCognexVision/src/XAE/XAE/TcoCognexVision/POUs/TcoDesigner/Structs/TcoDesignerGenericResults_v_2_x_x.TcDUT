@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="TcoDesignerGenericResults_v_2_x_x" Id="{ef16599e-0ad8-0d45-14e2-e88ebe46757f}">
+    <Declaration><![CDATA[
+TYPE TcoDesignerGenericResults_v_2_x_x :
+STRUCT
+	
+	{attribute addProperty Name "<#GeneralResult Pass#>"}
+	ResultPass :	BOOL;	
+	{attribute addProperty Name "<#GeneralResult FAIL#>"}
+	ResultFail :	BOOL;	
+	{attribute addProperty Name "<# Trigger Date #>"}
+	TriggerDate :	DATE;	
+
+
+
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

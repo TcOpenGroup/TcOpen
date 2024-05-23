@@ -1,9 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoInsightSignalStates_v_5_x_x" Id="{8a5f3434-e1e5-079a-059f-4302c50f0240}">
     <Declaration><![CDATA[{attribute addProperty Name "Signal states"}
 TYPE TcoInsightSignalStates_v_5_x_x :
 STRUCT
+	{attribute wpf [Container(Layout.Stack,"Acquisition control")]}
+	{attribute wpf [Group(Layout.GroupBox)]}
 	{attribute addProperty Name "<#Acquisition trigger enable#>"}
 	AcquisitionTriggerEnable :  BOOL;
 	{attribute addProperty Name "<#Acquisition trigger#>"}
@@ -13,6 +15,8 @@ STRUCT
 	{attribute addProperty Name "<#Set offline#>"}
 	SetOffline :  BOOL;
 
+	{attribute wpf [Container(Layout.Stack,"Inspection control")]}
+	{attribute wpf [Group(Layout.GroupBox)]}
 	{attribute addProperty Name "<#Enable results buffering#>"}
 	EnableResultsBuffering AT %Q* : BOOL;
 	{attribute addProperty Name "<#Acknowledge inspection results#>"}
@@ -24,12 +28,10 @@ STRUCT
 	{attribute addProperty Name "<#Clear error#>"}
 	ClearError AT %Q* : BOOL;
 
-	{attribute addProperty Name "<#Command#>"}
-	Command : UINT;
 
-	{attribute addProperty Name "<#Trigger soft event#>"}
-	TriggerSoftEvent :BYTE;
-	
+
+	{attribute wpf [Container(Layout.Stack,"Acquisition status")]}
+	{attribute wpf [Group(Layout.GroupBox)]}
 	{attribute addProperty Name "<#Acquisition trigger ready#>"}
 	AcquisitionTriggerReady : BOOL;
 	{attribute addProperty Name "<#Acquisition trigger acknowledge#>"}
@@ -49,6 +51,8 @@ STRUCT
 	{attribute addProperty Name "<#Acquisition ID#>"}
 	AcquisitionID : UINT;
 	
+	{attribute wpf [Container(Layout.Stack,"Inspection status")]}
+	{attribute wpf [Group(Layout.GroupBox)]}
 	{attribute addProperty Name "<#System busy#>"}
 	SystemBusy : BOOL;
 	{attribute addProperty Name "<#Inspection completed#>"}
@@ -74,12 +78,23 @@ STRUCT
 	{attribute addProperty Name "<#Error code#>"}
 	ErrorCode : UINT;
 
+
+	{attribute wpf [Container(Layout.Stack,"Command control")]}
+	{attribute wpf [Group(Layout.GroupBox)]}
+	{attribute addProperty Name "<#Command#>"}
+	Command : UINT;
 	{attribute addProperty Name "<#Current job ID#>"}
 	CurrentJobID : UINT;
 
+	{attribute wpf [Container(Layout.Stack,"Command control")]}
+	{attribute wpf [Group(Layout.GroupBox)]}
+	{attribute addProperty Name "<#Trigger soft event#>"}
+	TriggerSoftEvent :BYTE;
 	{attribute addProperty Name "<#Trigger soft event acknowledge#>"}
 	TriggerSoftEventAcknowledge : BYTE;
 
+	{attribute wpf [Container(Layout.Stack,"Results data")]}
+	{attribute wpf [Group(Layout.GroupBox)]}
 	{attribute addProperty Name "<#Inspection ID#>"}
 	InspectionID : UINT;
 	{attribute addProperty Name "<#Result code#>"}

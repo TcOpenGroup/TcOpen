@@ -91,3 +91,126 @@ The package consists of a PLC library providing control logic and its .NET twin 
 
 
 
+## Components
+
+## TcoDataman
+
+![alt text](assets/TcoDataman.png)
+
+## TcoInsight
+
+![alt text](assets/TcoInsight.png)
+
+## TcoDesigner
+
+### Definition UserData and ResultsData
+
+### Important: Project specific data have to be derived from `TcoCognexVision.TcoDesignerRootContainer` (this is required  for correctly rendered Ui)
+
+```pascal
+    FUNCTION_BLOCK ProjectSpecificData EXTENDS TcoCognexVision.TcoDesignerRootContainer  
+    VAR_INPUT
+    END_VAR
+    VAR_OUTPUT
+    END_VAR
+    VAR
+        {attribute wpf [Container(Layout.Stack,"PcToPlc")]}	
+        {attribute wpf [Group(Layout.GroupBox)]}
+        {attribute addProperty Name "<#PcToPlc#>"}
+        PcToPlc:DesignerResults;
+        {attribute wpf [Container(Layout.Stack,"PlcToPc")]}	
+        {attribute wpf [Group(Layout.GroupBox)]}
+        {attribute addProperty Name "<#PlcToPc#>"}
+        PlcToPc:DesignerUserData;
+        
+    END_VAR
+```
+   
+where `DesignerResults` are (here may be placed customized data (what project required from vision system to plc))
+
+ ```pascal
+    TYPE DesignerResults EXTENDS TcoCore.TcoStruct :
+    STRUCT
+        {attribute addProperty Name "<#ResultBool#>"}
+        ResultBool:BOOL;
+        {attribute addProperty Name "<#ResultInt#>"}
+        ResultInt:INT;
+        {attribute addProperty Name "<#ResultString#>"}
+        ResultString:STRING;
+
+        
+        {attribute addProperty Name "<#Data inspector#>"}
+        DigitalInspector:TcoInspectors.TcoDigitalInspector(THISSTRUCT);
+        {attribute addProperty Name "<#Data inspector#>"}
+        DataInspector:TcoInspectors.TcoDataInspector(THISSTRUCT);
+        
+        {attribute addProperty Name "<#Analog inspector#>"}
+        AnalogInspector:TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+    END_STRUCT
+    END_TYPE
+```
+
+and where `DesignerUserData` are (here may be placed customized data (what project required from plc to vision system))
+
+
+ ```pascal
+    TYPE DesignerUserData EXTENDS TcoCore.TcoStruct :
+    STRUCT
+        {attribute addProperty Name "<#ResultBool#>"}
+        ResultBool:BOOL;
+        {attribute addProperty Name "<#ResultInt#>"}
+        ResultInt:INT;
+        {attribute addProperty Name "<#ResultString#>"}
+        ResultString:STRING;
+        
+    END_STRUCT
+    END_TYPE
+
+```
+
+### Declaration Plc
+
+```pascal
+    {attribute addProperty Name "<#Cognex Designer#>"}
+	designer : TcoCognexVision.TcoDesigner_v_2_x_x(THIS^);
+	//Project specific data
+	{attribute addProperty Name "<#Project Specific Data#>"}
+    _specificData : ProjectSpecificData(THIS^);
+```
+
+### Initialization
+
+```pascal
+    designer(inoData:=_specificData );
+    designer.Service();
+```
+
+### XAML 
+
+```xaml
+        <vortex:RenderableContentControl DataContext="{Binding myVeryFirstTcoContextInstance.designer}" PresentationType="Service"/>
+```
+
+### Service View
+
+![alt text](assets/designerCollapsed.png)
+
+![alt text](assets/designerExpanded.png)
+
+### ProjectSpecific data defined above in UI
+
+![alt text](assets/designerSpecificData.png)
+
+### Export symbols for visions purposes
+
+If filter field is empty all data wil be generated. If you would to ganerate only specific data you may apply filter(see picture below).
+![alt text](assets/designerExportDataFilter.png)
+![alt text](assets/designerExportDialog.png)
+
+Final data ready to import into designer  will be:
+
+```
+MAIN.myVeryFirstTcoContextInstance._specificData.PcToPlc.DigitalInspector._data.DetectedStatus;System.Boolean;
+MAIN.myVeryFirstTcoContextInstance._specificData.PcToPlc.DataInspector._data.DetectedStatus;System.String;
+MAIN.myVeryFirstTcoContextInstance._specificData.PcToPlc.AnalogInspector._data.DetectedStatus;System.Double;
+```
