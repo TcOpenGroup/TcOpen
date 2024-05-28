@@ -55,7 +55,11 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.RowSpan="2">
                 <DataGrid
                     x:Name="UsersList"
                     HorizontalAlignment="Stretch"
@@ -84,6 +88,11 @@
                             Header="{x:Static p:strings.CanChangePassword}" />
                         <DataGridTextColumn
                             Width="Auto"
+                            Binding="{Binding Level}"
+                            Foreground="{DynamicResource OnBackground}"
+                            Header="{x:Static p:strings.Level}" />
+                        <DataGridTextColumn
+                            Width="Auto"
                             Binding="{Binding _Created}"
                             Foreground="{DynamicResource OnBackground}"
                             Header="{x:Static p:strings.Created}" />
@@ -96,7 +105,7 @@
                 </DataGrid>
             </Grid>
             <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
-                <Grid Grid.Column="1" Margin="15,15,15,15">
+                <Grid Grid.Column="1" Margin="15">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
@@ -205,14 +214,15 @@
                             Grid.Row="6"
                             Grid.Column="2"
                             ItemsSource="{Binding AllGroups}" />
+
                         <!--<Label
                             Grid.Row="7"
                             Grid.Column="0"
                             Content="{x:Static p:strings.Level}" />
                         <TextBox
-                            x:Name="Level"
                             Grid.Row="7"
-                            Grid.Column="1"
+                            Grid.Column="2"
+                            VerticalContentAlignment="Center"
                             Text="{Binding ElementName=UsersList, Path=SelectedItem.Level}" />-->
                         <Button
                             Grid.Row="8"
@@ -225,11 +235,8 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
-                            <RowDefinition
-                                x:Name="RolesRow"
-                                Height=".5*"
-                                MaxHeight="250" />
-                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="2*" />
@@ -286,7 +293,7 @@
                             Grid.Row="2"
                             Grid.Column="2"
                             Padding="0"
-                            BorderBrush="{DynamicResource MaterialDesignTextAreaBorder}"
+                            
                             BorderThickness=".5">
                             <ListView
                                 x:Name="CurrentRoles"
@@ -308,8 +315,9 @@
                             Grid.Row="2"
                             Grid.Column="0"
                             Padding="0"
-                            BorderBrush="{DynamicResource MaterialDesignTextAreaBorder}"
+                         
                             BorderThickness=".5">
+                            
                             <ListView
                                 x:Name="AvailibleRoles"
                                 Grid.Row="2"
@@ -340,30 +348,31 @@
                                 CommandParameter="{Binding ElementName=CurrentRoles, Path=SelectedItems}"
                                 Content="←" />
                         </StackPanel>
-                        <Grid
-                            Grid.Row="3"
-                            Grid.ColumnSpan="3"
-                            Margin="15,25,15,15">
-                            <Button
-                                HorizontalAlignment="Left"
-                                Command="{Binding DeleteUserCommand}"
-                                Content="{x:Static p:strings.Delete}" />
-
-                            <Button
-                                Margin="0,0,10,0"
-                                HorizontalAlignment="Right"
-                                Command="{Binding StarEditUserCommand}"
-                                Content="{x:Static p:strings.Update}">
-                                <Button.CommandParameter>
-                                    <local:Pwds Pb1="{Binding ElementName=pb1}" Pb2="{Binding ElementName=pb2}" />
-                                </Button.CommandParameter>
-                            </Button>
-                        </Grid>
+                     
                     </Grid>
 
 
                 </Grid>
             </ScrollViewer>
+            <Grid
+                            Grid.Row="2"
+                            Grid.Column="2"
+                            Margin="15,25,15,15">
+                <Button
+                                HorizontalAlignment="Left"
+                                Command="{Binding DeleteUserCommand}"
+                                Content="{x:Static p:strings.Delete}" />
+
+                <Button
+                                Margin="0,0,10,0"
+                                HorizontalAlignment="Right"
+                                Command="{Binding StarEditUserCommand}"
+                                Content="{x:Static p:strings.Update}">
+                    <Button.CommandParameter>
+                        <local:Pwds Pb1="{Binding ElementName=pb1}" Pb2="{Binding ElementName=pb2}" />
+                    </Button.CommandParameter>
+                </Button>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

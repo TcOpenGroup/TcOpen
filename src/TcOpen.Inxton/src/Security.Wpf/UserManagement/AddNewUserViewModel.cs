@@ -98,6 +98,8 @@ namespace TcOpen.Inxton.Local.Security.Wpf
 
                 NewUser.SetPlainTextPassword(pwds.Pb1.Password);
                 UserRepository.Create(NewUser.Username, NewUser);
+                NewUser._Created = DateTime.Now;
+                NewUser._Modified = DateTime.Now;
 
                 TcoAppDomain.Current.Logger.Information($"New user '{NewUser.Username}' created. {{@sender}}", new { UserName = NewUser.Username, Roles = NewUser.Roles });
 

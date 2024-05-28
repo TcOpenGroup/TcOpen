@@ -28,7 +28,9 @@
     </UserControl.Resources>
     <Grid Margin="12" Grid.IsSharedSizeScope="True">
         <Grid.RowDefinitions>
+            <RowDefinition />
             <RowDefinition Height="Auto" />
+
         </Grid.RowDefinitions>
 
         <StackPanel
@@ -50,7 +52,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition SharedSizeGroup="FirstColumn" />
                     <ColumnDefinition Width="50" />
-                    <ColumnDefinition MinWidth="100" />
+                    <ColumnDefinition MinWidth="200" />
                 </Grid.ColumnDefinitions>
                 <Label
                     Grid.Row="0"
@@ -119,6 +121,7 @@
 
         </StackPanel>
         <Button
+            Grid.Row="2"
             Margin="10"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"

@@ -32,21 +32,21 @@
         <controls:PermissionBox Permissions="Administrator">
             <TabControl>
                 <TabItem Header="{x:Static p:strings.CurrentUsers}">
-                    <!--<ScrollViewer Background="{DynamicResource Surface}" VerticalScrollBarVisibility="Auto">-->
+                    <ScrollViewer  VerticalScrollBarVisibility="Auto">
                         <Grid Margin="12" Style="{DynamicResource Card}">
                         <controls:AllUsersGroupManagementView/>
                         </Grid>
-                    <!--</ScrollViewer>-->
+                    </ScrollViewer>
                 </TabItem>
                 <TabItem Header="{x:Static p:strings.NewUser}">
-                    <ScrollViewer Background="{DynamicResource Surface}" VerticalScrollBarVisibility="Auto">
+                    <ScrollViewer  VerticalScrollBarVisibility="Auto">
                         <Grid Margin="12" Style="{DynamicResource Card}">
                             <controls:AddNewUserGroupManagementView />
                         </Grid>
                     </ScrollViewer>
                 </TabItem>
                 <TabItem Header="Group management">
-                    <ScrollViewer Background="{DynamicResource Surface}" VerticalScrollBarVisibility="Auto">
+                    <ScrollViewer  VerticalScrollBarVisibility="Auto">
                         <Grid Margin="12" Style="{DynamicResource Card}">
                             <controls:AllGroupsGroupManagementView />
                         </Grid>
