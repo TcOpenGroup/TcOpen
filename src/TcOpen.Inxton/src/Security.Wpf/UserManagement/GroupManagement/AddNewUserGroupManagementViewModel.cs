@@ -52,7 +52,12 @@ namespace TcOpen.Inxton.Local.Security.Wpf
                     throw new Exception("Email does not have required format");
 
                 NewUser.SetPlainTextPassword(pwds.Pb1.Password);
+                NewUser._Created = DateTime.Now;
+                NewUser._Modified = DateTime.Now;
+                if (string.IsNullOrEmpty(SelectedGroup))
+                    throw new Exception("Assign group first");
                 NewUser.Roles = new ObservableCollection<string>(new string[] { SelectedGroup });
+                NewUser.Level = SelectedGroup;
                 UserRepository.Create(NewUser.Username, NewUser);
 
                 TcoAppDomain.Current.Logger.Information($"New user '{NewUser.Username}' created. {{@sender}}", new { UserName = NewUser.Username, Roles = NewUser.Roles });

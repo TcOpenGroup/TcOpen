@@ -18,23 +18,32 @@ namespace integration.Security.Wpf.netcore
         public MainWindow()
         {
             Directory.EnumerateFiles(@"C:\INXTON\USERS\").ToList().ForEach(File.Delete);
+            Directory.EnumerateFiles(@"C:\INXTON\GROUP\").ToList().ForEach(File.Delete);
             var userDataRepo = new DefaultUserDataRepository<UserData>();
-            SecurityManager.Create(userDataRepo);
+            var groups = new DefaultGroupDataRepository<GroupData>();
+            var roleGroupManager = new RoleGroupManager(groups);
+            
+            roleGroupManager.CreateGroup("OperatorGroup");
+            roleGroupManager.AddRoleToGroup("OperatorGroup", "Operator");
 
+            SecurityManager.Create(userDataRepo, roleGroupManager);
+            SecurityManager.Manager.GetOrCreateRole(new Role("Operator", "OperatorGroup"));
             authService = SecurityProvider.Get.AuthenticationService;
+
+
 
             var userName = "Admin";
             var password = "AdminPassword";
-            var roles = new string[] { "Administrator" };
-            userDataRepo.Create(userName, new UserData(userName, password, roles.ToList()) { CanUserChangePassword = true });
+            //newUser = new UserData("admin", string.Empty, "admin", new string[] { "AdminGroup" }, "Administrator", string.Empty);
+            userDataRepo.Create(userName, new UserData(userName, string.Empty, password, new string[] { "AdminGroup" }, "Administrator", string.Empty) { CanUserChangePassword = true });
 
             userName = "Operator";
             password = "OperatorPassword";
-            roles = new string[] { "Operator" };
 
-            userDataRepo.Create(userName, new UserData(userName, password, roles.ToList()) { CanUserChangePassword = true });
+            //userDataRepo.Create(userName, new UserData(userName, password, roles.ToList()) { CanUserChangePassword = true });
+            userDataRepo.Create(userName, new UserData(userName, string.Empty, password, new string[] { "OperatorGroup" }, "Operator", string.Empty) { CanUserChangePassword = true });
 
-            authService.ExternalAuthorization = ExternalTokenAuthorization.CreateComReader("COM3", deauthenticateWhenSame:true);
+            //  authService.ExternalAuthorization = ExternalTokenAuthorization.CreateComReader("COM3", deauthenticateWhenSame: true);
 
             authService.DeAuthenticateCurrentUser();
 

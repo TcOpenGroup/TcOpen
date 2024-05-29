@@ -84,6 +84,11 @@
                             Header="{x:Static p:strings.CanChangePassword}" />
                         <DataGridTextColumn
                             Width="Auto"
+                            Binding="{Binding Level}"
+                            Foreground="{DynamicResource OnBackground}"
+                            Header="{x:Static p:strings.Level}" />
+                        <DataGridTextColumn
+                            Width="Auto"
                             Binding="{Binding _Created}"
                             Foreground="{DynamicResource OnBackground}"
                             Header="{x:Static p:strings.Created}" />
@@ -126,7 +131,7 @@
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition SharedSizeGroup="FirstColumn" />
-                            <ColumnDefinition Width="24" />
+                            <ColumnDefinition Width="50" />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
 
@@ -207,6 +212,15 @@
                             DropDownOpened="Groups_DropDownOpened"
                             ItemsSource="{Binding Groups}"
                             SelectedItem="{Binding ElementName=UsersList, Path=SelectedItem.Roles[0]}"/>
+                        <!--<Label
+                            Grid.Row="7"
+                            Grid.Column="0"
+                            Content="{x:Static p:strings.Level}" />
+                        <TextBox
+                            Grid.Row="7"
+                            Grid.Column="2"
+                            VerticalContentAlignment="Center"
+                            Text="{Binding ElementName=UsersList, Path=SelectedItem.Level}" />-->
 
                     </Grid>
                     <Grid Grid.Row="1" Margin="0,24,0,0">

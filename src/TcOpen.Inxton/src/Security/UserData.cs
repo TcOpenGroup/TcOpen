@@ -38,7 +38,11 @@ namespace TcOpen.Inxton.Local.Security
             HashedPassword = CalculateHash(password, username);
             Roles = new ObservableCollection<string>(roles);
             RoleHash = CalculateRoleHash(roles, username);
-            Level = CalculateHash(level, username);
+            if (level!=string.Empty)
+            {
+                Level = Roles.First() ;
+            }
+    
             AuthenticationToken = CalculateHash(authenticationToken, string.Empty);
         }
              

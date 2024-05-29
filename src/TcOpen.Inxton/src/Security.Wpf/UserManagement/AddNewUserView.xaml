@@ -51,7 +51,7 @@
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition SharedSizeGroup="FirstColumn" />
-                    <ColumnDefinition Width="24" />
+                    <ColumnDefinition Width="50" />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Label
@@ -59,6 +59,7 @@
                     Grid.Column="0"
                     Content="{x:Static p:strings.Username}" />
                 <TextBox
+                    MinWidth="200"
                     Grid.Row="0"
                     Grid.Column="2"
                     VerticalContentAlignment="Center"
@@ -128,10 +129,7 @@
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition
-                    x:Name="RolesRow"
-                    Height="*"
-                    MaxHeight="250" />
+                <RowDefinition  />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
@@ -240,6 +238,7 @@
             </Border>
         </Grid>
         <Button
+            Grid.Row="2"
             Margin="10"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"

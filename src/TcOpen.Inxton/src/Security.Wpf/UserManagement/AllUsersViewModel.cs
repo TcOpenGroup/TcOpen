@@ -110,7 +110,8 @@ namespace TcOpen.Inxton.Local.Security.Wpf
 
                     if (pwds.Pb1.Password != pwds.Pb2.Password)
                         throw new Exception("Passwords do not match");
-
+           
+                    SelectedUser._Modified = DateTime.Now;
                     UserRepository.Update(this.SelectedUser.Username, SelectedUser);
                     TcoAppDomain.Current.Logger.Information($"User '{this.SelectedUser.Username}' updated. {{@sender}}", new { UserName = this.SelectedUser.Username, Roles = this.SelectedUser.Roles });
                     pwds.Pb1.Clear();
