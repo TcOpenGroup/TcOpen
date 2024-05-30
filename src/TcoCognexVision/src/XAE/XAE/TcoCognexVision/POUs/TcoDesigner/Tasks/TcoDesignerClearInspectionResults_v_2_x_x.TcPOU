@@ -116,7 +116,7 @@ END_VAR
 	
 	CallTimers(TRUE);
 	
-		THIS^.ThrowWhen(_errorTimer.Q  OR THIS^.inoIoData.PcToPlc.TriggerTimeout OR THIS^.inoIoData.PcToPlc.Error );	
+		THIS^.ThrowWhen(_errorTimer.Q   OR THIS^.inoIoData.PcToPlc.Error );	
 END_IF
 ]]></ST>
     </Implementation>

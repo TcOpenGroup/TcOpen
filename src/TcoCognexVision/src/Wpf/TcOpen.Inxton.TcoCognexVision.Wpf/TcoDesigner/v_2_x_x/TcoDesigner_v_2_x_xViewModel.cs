@@ -7,12 +7,12 @@ using System.Text;
 using System.Linq;
 using System.Collections.Generic;
 using System;
-using TcOpen.Inxton.Input;
 using RelayCommand = TcOpen.Inxton.Input.RelayCommand;
 using Microsoft.Win32;
 using System.Windows;
 using TcoCore;
 using StringBuilder = System.Text.StringBuilder;
+
 
 namespace TcoCognexVision
 {
@@ -34,7 +34,7 @@ namespace TcoCognexVision
         private void GenerateGenericSymbols()
         {
 
-            GetSymbols(this.Component._genericData, Filter, ref _sb);
+            GetSymbols(this.Component._genericData, Filter,TailFilter, ref _sb);
             try
             {
                 
@@ -61,7 +61,7 @@ namespace TcoCognexVision
         private void GenerateSpecificSymbols()
         {
             _sb.Clear();
-            GetSymbols(this.Component._specificData,Filter,ref _sb );
+            GetSymbols(this.Component._specificData,Filter,TailFilter,ref _sb );
             try
             {
                
@@ -85,36 +85,55 @@ namespace TcoCognexVision
             }
         }
 
-        private  void GetSymbols(IVortexObject obj, string filter, ref StringBuilder sb)
+        private  void GetSymbols(IVortexObject obj, string symbolFilter,string tailFilter,  ref StringBuilder sb)
         {
 
-            var splitted = filter.Split(';');
-           
+            var symbolSplited = symbolFilter.Split(';',',');
+            var tailSplited = tailFilter.Split(';', ',');
+
             foreach (var item in obj.GetValueTags())
             {
-                if (string.IsNullOrEmpty(filter) && !item.Symbol.Contains(Messenger))
-                {
-
+                if (string.IsNullOrEmpty(symbolFilter) && !item.Symbol.Contains(Messenger))
                     sb.AppendLine($"{item.Symbol};{((dynamic)item).Cyclic.GetType().ToString()}; ;");
 
-                }
                 else
-                    foreach (var split in splitted)
+                     if (!item.Symbol.Contains(Messenger))
                     {
-                        if (item.Symbol.Contains(split)  && !item.Symbol.Contains(Messenger))
-                        {
 
-                            sb.AppendLine($"{item.Symbol};{((dynamic)item).Cyclic.GetType().ToString()};");
+
+                        var isThere = true;
+                        foreach (var split in symbolSplited)
+                        {
+                            if (!item.Symbol.Contains(split))
+                            {
+
+                                isThere = false;
+                                break;
+                            }
+                        }
+                        if (isThere)
+                        {
+                            if(string.IsNullOrEmpty(tailFilter) &&  !item.Symbol.Contains(Messenger))
+                                sb.AppendLine($"{item.Symbol};{((dynamic)item).Cyclic.GetType().ToString()};");
+                            else
+                                foreach (var tail in tailSplited)
+                                {
+                                    if(item.Symbol.Contains(tail)) 
+                                        sb.AppendLine($"{item.Symbol};{((dynamic)item).Cyclic.GetType().ToString()};");
+                                                                    {
+
+                                    }
+                                }
+                            
 
                         }
                     }
                 
-
             }
 
             foreach (var item in obj.GetChildren())
             {
-                GetSymbols(item, filter,ref _sb);
+                GetSymbols(item, symbolFilter, tailFilter,ref _sb);
             }
         }
         public IEnumerable<IsTask> Tasks
@@ -137,6 +156,7 @@ namespace TcoCognexVision
         }
 
         public string Filter { get; set; } = string.Empty;
+        public string TailFilter { get; set; } = string.Empty;
         public RelayCommand GenerateSpecificSymbolsCommand { get; private set; }
         public RelayCommand GenerateGenericSymbolsCommand { get; private set; }
     }

@@ -14,6 +14,8 @@ VAR
 	{attribute addProperty Name "<#Status#>"}
 	_status : TcoDesignerStatus_v_2_x_x;	
 
+	_triggerType: eTcoDesignerTriggerType;
+	_internalLiveBit: BOOL;
 END_VAR
 
 
@@ -57,11 +59,11 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[_specificData:=inoData;
+_status.SignalStatus:=_genericData.PcToPlc;
 
-
-_timerConnection(In:=_status.SignalStatus.LiveBit,PT:=_config.ConnectionTimemout);
-_status.ClientConnected:= _timerConnection.ET<_timerConnection.PT AND _timerConnection.ET<>T#0MS;
-
+_timerConnection(In:=_internalLiveBit XOR _status.SignalStatus.LiveBit ,PT:=_config.ConnectionTimemout);
+_status.ClientConnected:= NOT  _timerConnection.Q;//_timerConnection.ET<_timerConnection.PT AND _timerConnection.ET<>T#0MS;
+_internalLiveBit:=NOT _status.SignalStatus.LiveBit;
 IF NOT _status.ClientConnected  THEN
 	THIS^._status.ActionDescription := '<#Vision system is not  responding via Ads. Check connection with Cognex Designer!#>';	
 	THIS^.Messenger.Error(_status.ActionDescription).Pin();
@@ -70,8 +72,8 @@ END_IF
 
 
 //*************RESTORE********************
-_taskEnabled := TRUE;
-_restoreTask.Enabled := _taskEnabled;
+
+_restoreTask.Enabled := TRUE;
 IF _restoreTask.Execute() THEN
 	Restore();
 	_restoreTask.DoneWhen(TRUE);
@@ -82,27 +84,26 @@ END_IF
 //****************************************
 
 //*************CLEAR*DATA*****************
-_taskEnabled := NOT _triggerTask.Busy AND   NOT _triggerFastTask.Busy AND NOT _triggerWithTimeoutTask.Busy  AND _status.ClientConnected;
-_clearResultDataTask.Enabled := _taskEnabled;
+_clearResultDataTask.Enabled := _status.ClientConnected;
 _clearResultDataTask(inoIoData := _genericData,inoConfig := THIS^._config,inoStatus := THIS^._status);
 //****************************************
 
 //*************TRIGGER ********************
-_taskEnabled := NOT _clearResultDataTask.Busy AND   NOT _triggerFastTask.Busy AND NOT _triggerWithTimeoutTask.Busy  AND _status.ClientConnected;
+_triggerTask.Enabled :=  NOT _triggerFastTask.Busy AND NOT _triggerWithTimeoutTask.Busy  AND _status.ClientConnected;
 IF _triggerTask.Execute() THEN
 	_triggerInternalTask.Enabled :=  TRUE;
-	_triggerInternalTask(inTriggerType:=eTcoDesignerTriggerType.Trigger, refClearResultsTask:=_clearResultDataTask, inoIoData := _genericData,inoConfig := THIS^._config,inoStatus := THIS^._status);
+	_triggerType :=eTcoDesignerTriggerType.Trigger;
 	_triggerTask.DoneWhen(_triggerInternalTask.Invoke().Done);
 	_triggerTask.ThrowWhen(_triggerInternalTask.Error);
 END_IF
 //***********************************************
 
 //*************TRIGGER WITH TIMEOUT********************
-_taskEnabled := TRUE;
-_triggerWithTimeoutTask.Enabled := NOT _clearResultDataTask.Busy AND   NOT _triggerFastTask.Busy AND NOT _triggerTask.Busy  AND _status.ClientConnected;
-IF _triggerTask.Execute() THEN
+
+_triggerWithTimeoutTask.Enabled :=  NOT _triggerFastTask.Busy AND NOT _triggerTask.Busy  AND _status.ClientConnected;
+IF _triggerWithTimeoutTask.Execute() THEN
 	_triggerInternalTask.Enabled :=  TRUE;
-	_triggerInternalTask(inTriggerType:=eTcoDesignerTriggerType.TriggerWithTimeout, refClearResultsTask:=_clearResultDataTask, inoIoData := _genericData,inoConfig := THIS^._config,inoStatus := THIS^._status);
+	_triggerType :=eTcoDesignerTriggerType.TriggerWithTimeout;
 	_triggerWithTimeoutTask.DoneWhen(_triggerInternalTask.Invoke().Done);
 	_triggerWithTimeoutTask.ThrowWhen(_triggerInternalTask.Error);
 END_IF
@@ -111,16 +112,18 @@ END_IF
 
 
 //*************TRIGGER FAST********************
-_taskEnabled := TRUE;
-_triggerFastTask.Enabled := _taskEnabled;
+
+_triggerFastTask.Enabled :=  NOT _triggerWithTimeoutTask.Busy AND NOT _triggerTask.Busy  AND _status.ClientConnected;
 IF _triggerFastTask.Execute() THEN
 	_triggerInternalTask.Enabled :=  TRUE;
-	_triggerInternalTask(inTriggerType:=eTcoDesignerTriggerType.TriggerFast, refClearResultsTask:=_clearResultDataTask, inoIoData := _genericData,inoConfig := THIS^._config,inoStatus := THIS^._status);
+	_triggerType :=eTcoDesignerTriggerType.TriggerFast;
+
 	_triggerFastTask.DoneWhen(_triggerInternalTask.Invoke().Done);
 	_triggerFastTask.ThrowWhen(_triggerInternalTask.Error);
 END_IF
 //***********************************************
 
+_triggerInternalTask(inTriggerType:=_triggerType, refClearResultsTask:=_clearResultDataTask, inoIoData := _genericData,inoConfig := THIS^._config,inoStatus := THIS^._status);
 
 inoData:=_specificData;]]></ST>
     </Implementation>

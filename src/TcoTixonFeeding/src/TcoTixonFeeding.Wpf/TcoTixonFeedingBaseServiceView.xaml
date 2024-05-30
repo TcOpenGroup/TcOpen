@@ -50,7 +50,7 @@
         </vortex:TcoComponentView.ComponentHeader>
         <vortex:TcoComponentView.ComponentDetails>
 
-            <Grid  DataContext="{Binding Component}">
+            <Grid  >
                     <Grid.Resources>
                         <Style TargetType="GroupBox"  BasedOn="{StaticResource MaterialDesignCardGroupBox}">
                             <Setter Property="Margin" Value="5,0,0,5"></Setter>
@@ -72,7 +72,7 @@
                         
                     </Grid.RowDefinitions>
 
-                <GroupBox Grid.ColumnSpan="2" Padding="10" Header="{x:Static p:strings.Tasks}" >
+                <GroupBox DataContext="{Binding Component}" Grid.ColumnSpan="2" Padding="10" Header="{x:Static p:strings.Tasks}" >
                      <ItemsControl ItemsPanel="{StaticResource HorizontalWraped}" HorizontalAlignment="Left" ItemsSource="{Binding Tasks}">
 
                         <ItemsControl.ItemTemplate>
@@ -83,16 +83,20 @@
                     </ItemsControl>
                 </GroupBox>
 
-             
-                <GroupBox Grid.Column="0" Grid.RowSpan="2"  Padding="10" Grid.Row="1" DataContext="{Binding _status}"  Header="{Binding AttributeName}">
+
+                <GroupBox DataContext="{Binding Component._status}" Grid.Column="0" Grid.RowSpan="2"  Padding="10" Grid.Row="1"   Header="{Binding AttributeName}">
                                <vortex:RenderableContentControl  DataContext="{Binding }" PresentationType="DisplaySlim"    />
                 </GroupBox>
 
-                <WrapPanel Grid.Column="1" Grid.Row="1">
-                    <GroupBox Padding="10" Header="{Binding _config.AttributeName}">
-                        <vortex:RenderableContentControl  DataContext="{Binding _config}" PresentationType="ControlSlim" />
+                <WrapPanel  Grid.Column="1" Grid.Row="1">
+                    <GroupBox Padding="10" Header="{Binding Component._config.AttributeName}">
+                        <StackPanel>
+                            <vortex:RenderableContentControl  DataContext="{Binding Component._config}" PresentationType="ControlSlim" />
+                            <Button Margin="5" Command="{Binding ExportConfigCommand}" Content="{x:Static p:strings.Export}"></Button>
+                            <Button Margin="5" Command="{Binding ImportConfigCommand}" Content="{x:Static p:strings.Import}"></Button>
+                        </StackPanel>
                     </GroupBox>
-                    <GroupBox Padding="10" Header="{Binding _control.AttributeName}">
+                    <GroupBox DataContext="{Binding Component}"  Padding="10" Header="{Binding _control.AttributeName}">
                         <vortex:RenderableContentControl  DataContext="{Binding _control}" PresentationType="ControlSlim" />
                     </GroupBox>
                 </WrapPanel>

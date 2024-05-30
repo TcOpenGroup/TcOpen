@@ -70,15 +70,6 @@ namespace TcoCognexVisionConnector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  Trigger Date .
-        /// </summary>
-        internal static string ____Trigger_Date___ {
-            get {
-                return ResourceManager.GetString("____Trigger_Date___", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Acknowledge inspection results.
         /// </summary>
         internal static string ___Acknowledge_inspection_results__ {
@@ -570,6 +561,15 @@ namespace TcoCognexVisionConnector.Properties {
         internal static string ___Error_detected__ {
             get {
                 return ResourceManager.GetString("___Error_detected__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error time is lower than timeout. Please check config!.
+        /// </summary>
+        internal static string ___Error_time_is_lower_than_timeout__Please_check_config___ {
+            get {
+                return ResourceManager.GetString("___Error_time_is_lower_than_timeout__Please_check_config___", resourceCulture);
             }
         }
         
@@ -1414,6 +1414,15 @@ namespace TcoCognexVisionConnector.Properties {
         internal static string ___Test_run_ready__ {
             get {
                 return ResourceManager.GetString("___Test_run_ready__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timeout[ms].
+        /// </summary>
+        internal static string ___Timeout_ms___ {
+            get {
+                return ResourceManager.GetString("___Timeout_ms___", resourceCulture);
             }
         }
         

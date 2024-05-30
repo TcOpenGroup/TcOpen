@@ -48,9 +48,11 @@ IF Execute() THEN
 		ELSIF NOT __ISVALIDREF(inoStatus) THEN                                                  
 			_varInfo :=__VARINFO(inoStatus);                                                    
 			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-//		ELSIF NOT __ISVALIDREF(inoResults) THEN                                              
-//			_varInfo :=__VARINFO(inoResults);                                                
-//			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+
+		ELSIF inTriggerType = eTcoDesignerTriggerType.TriggerWithTimeout 
+			AND inoConfig.ErrorTime < inoConfig.TriggerTimemout THEN
+				Messenger.Error(_sb.Clear().Append('<#Error time is lower than timeout. Please check config!#>').ToString()).Pin();
+
 		ELSE
 			_progress := _progress + 1;
 			CallTimers(FALSE);
@@ -62,6 +64,11 @@ IF Execute() THEN
 	IF _progress = 1 THEN
 		IF inTriggerType = eTcoDesignerTriggerType.TriggerFast THEN
 			_progress := _progress + 1;
+		ELSIF inTriggerType = eTcoDesignerTriggerType.TriggerWithTimeout THEN
+			inoIoData.PlcToPc.Timeout:=TIME_TO_UINT( inoConfig.TriggerTimemout);
+			IF _clearResultsTask.Invoke().Done THEN
+				_progress := _progress + 1;
+			END_IF;
 		ELSIF _clearResultsTask.Invoke().Done THEN
 			_progress := _progress + 1;
 		END_IF
@@ -103,7 +110,9 @@ IF Execute() THEN
 
 	CallTimers(TRUE);
 	
-	THIS^.ThrowWhen(_errorTimer.Q  OR NOT(THIS^.inoIoData.PcToPlc.TriggerTimeout XOR inTriggerType = eTcoDesignerTriggerType.TriggerWithTimeout) OR THIS^.inoIoData.PcToPlc.Error );	
+	THIS^.ThrowWhen(_errorTimer.Q  OR THIS^.inoIoData.PcToPlc.Error 
+		OR (inTriggerType = eTcoDesignerTriggerType.TriggerWithTimeout AND THIS^.inoIoData.PcToPlc.TriggerTimeout) );	
+
 END_IF
 ]]></ST>
     </Implementation>
@@ -173,6 +182,7 @@ METHOD PROTECTED OnError
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^.inoStatus.ActionDescription := '<#Trigger started.#>'; 
+inoIoData.PlcToPc.Timeout:=0;
 ]]></ST>
       </Implementation>
     </Method>

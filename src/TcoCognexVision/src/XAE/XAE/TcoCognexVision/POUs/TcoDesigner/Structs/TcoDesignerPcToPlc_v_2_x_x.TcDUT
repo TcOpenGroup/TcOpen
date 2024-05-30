@@ -26,7 +26,8 @@ STRUCT
 	{attribute addProperty Name "<#Trigger Counter#>"}
 	TriggerCounter :	UDINT;	
 
-	{attribute addProperty Name "<#ErrorMsg#>"}
+	{attribute addProperty Name "<#Error#>"}
+	
 	Error :	BOOL;		
 	{attribute addProperty Name "<#LiveBit#>"}
 	LiveBit :	BOOL;	
@@ -42,7 +43,6 @@ STRUCT
 	{attribute wpf [Container(Layout.Stack,"Results")]}	
 	{attribute addProperty Name "<#Results#>"}
 	InspectionResults :	TcoDesignerGenericResults_v_2_x_x;	
-
 
 
 END_STRUCT

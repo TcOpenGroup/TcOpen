@@ -20,7 +20,10 @@ STRUCT
 	{attribute addProperty Name "<#ClearResults#>"}
 	ClearResults	: BOOL;	
 	
-
+	
+	{attribute addProperty Name "<#Timeout[ms]#>"}
+	Timeout	: UINT;	
+	
 	{attribute addProperty Name "<# PartId #>"}
    	PartId			: STRING; //napr. DMC Code       
 	

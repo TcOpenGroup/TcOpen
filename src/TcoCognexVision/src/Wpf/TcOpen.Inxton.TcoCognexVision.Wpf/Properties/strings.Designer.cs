@@ -142,6 +142,15 @@ namespace TcOpen.Inxton.TcoCognexVision.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tail.
+        /// </summary>
+        public static string Tail {
+            get {
+                return ResourceManager.GetString("Tail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tasks.
         /// </summary>
         public static string Tasks {
