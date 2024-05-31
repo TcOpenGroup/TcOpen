@@ -76,6 +76,10 @@ _carousel(
 
 _carousel.Suspend(inoDisableCondition:= _disableSignal1 ,Invert:=FALSE); //this might be signal from Light Curtain (safety is inerupted)
 _carousel.Suspend(inoDisableCondition:=_disableSignal2 ,Invert:=TRUE);
+_carousel.Suspend(inoDisableCondition:=_disableSignal2 ,Invert:=TRUE);
+_carousel.SuspendExpression (inDisableCondition:=_disableSignal2 ,inMessage:='SOME BLOCKIKG ACTIVE');
+
+
 	
 _carousel.Service();
 
