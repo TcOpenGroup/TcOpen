@@ -581,7 +581,7 @@
 				</Instance>
 			</Project>
 			<Project GUID="{FC83BAF7-9480-4C64-8D5C-B812256F7D0A}" Name="TcoCognexVisionTests" PrjFilePath="TcoCognexVisionTests\TcoCognexVisionTests.plcproj" TmcFilePath="TcoCognexVisionTests\TcoCognexVisionTests.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCognexVisionTests\TcoCognexVisionTests.tmc" TmcHash="{A5455D9A-9254-8CCF-5233-B1ED6300EC76}">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcoCognexVisionTests\TcoCognexVisionTests.tmc" TmcHash="{4086D3D3-D168-7472-4B23-F1518D5F5990}">
 					<Name>TcoCognexVisionTests Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -802,26 +802,6 @@
 					<Vars VarGrpType="2" AreaNo="1">
 						<Name>PlcTask Outputs</Name>
 						<Var>
-							<Name>MAIN.myVeryFirstTcoContextInstance.myVeryFirstInsight._status.SignalStatus.EnableResultsBuffering</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>MAIN.myVeryFirstTcoContextInstance.myVeryFirstInsight._status.SignalStatus.AcknowledgeInspectionResults</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>MAIN.myVeryFirstTcoContextInstance.myVeryFirstInsight._status.SignalStatus.ExtendedUserDataSet</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>MAIN.myVeryFirstTcoContextInstance.myVeryFirstInsight._status.SignalStatus.ExecuteCommand</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>MAIN.myVeryFirstTcoContextInstance.myVeryFirstInsight._status.SignalStatus.ClearError</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
 							<Name>GVL.myVeryFirstDatamanGVL.PnIoBoxCtrl</Name>
 							<Type>UINT</Type>
 						</Var>
@@ -936,6 +916,26 @@
 						<Var>
 							<Name>GVL.myVeryFirstInsightGVL.UserData.UserData</Name>
 							<Type GUID="{D753C2E1-3107-E7CE-854F-3E82FDAE9718}">ARRAY [0..253] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.myVeryFirstTcoContextInstance.myVeryFirstInsight._status.SignalStatus.EnableResultsBuffering</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.myVeryFirstTcoContextInstance.myVeryFirstInsight._status.SignalStatus.AcknowledgeInspectionResults</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.myVeryFirstTcoContextInstance.myVeryFirstInsight._status.SignalStatus.ExtendedUserDataSet</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.myVeryFirstTcoContextInstance.myVeryFirstInsight._status.SignalStatus.ExecuteCommand</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.myVeryFirstTcoContextInstance.myVeryFirstInsight._status.SignalStatus.ClearError</Name>
+							<Type>BOOL</Type>
 						</Var>
 					</Vars>
 					<Contexts>

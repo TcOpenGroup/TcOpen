@@ -86,6 +86,8 @@
                             <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
                                 <TextBlock VerticalAlignment="Center" Margin="5" Text="{x:Static p:strings.Filter}"></TextBlock>
                                 <TextBox VerticalContentAlignment="Center" Margin="5" MinWidth="100" Text="{Binding Filter}"></TextBox>
+                            <TextBlock VerticalAlignment="Center" Margin="5" Text="{x:Static p:strings.Tail}"></TextBlock>
+                            <TextBox VerticalContentAlignment="Center" Margin="5" MinWidth="100" Text="{Binding TailFilter}"></TextBox>
                             <Button Margin="5" HorizontalAlignment="Center" Content="{x:Static p:strings.Generate}" Command="{Binding GenerateSpecificSymbolsCommand}"></Button>
                         </WrapPanel>
                     

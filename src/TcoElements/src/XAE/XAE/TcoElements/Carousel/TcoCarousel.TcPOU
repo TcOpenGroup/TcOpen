@@ -305,6 +305,23 @@ ELSIF (_turnTask.Busy OR _startTurn OR _enableTurn ) AND inoDisableCondition AND
 END_IF]]></ST>
       </Implementation>
     </Method>
+    <Method Name="SuspendExpression" Id="{d8fc797a-9968-0ca9-180a-dcf844ea4441}">
+      <Declaration><![CDATA[METHOD SuspendExpression : BOOL
+VAR_INPUT
+		inDisableCondition : BOOL;
+		inMessage:STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (_turnTask.Busy OR _startTurn OR _enableTurn ) AND inDisableCondition THEN
+	Messenger.Warning(CONCAT('<#Rotating is suspended due to#> : ' , inMessage));
+	_startTurn := FALSE;
+	_enableTurn := FALSE;
+	IF(__ISVALIDREF(THIS^.inoStartTurn)) THEN THIS^.inoStartTurn := FALSE; END_IF;
+	IF(__ISVALIDREF(THIS^.inoEnableTurn)) THEN THIS^.inoEnableTurn := FALSE; END_IF;
+END_IF;]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="TurnTask" Id="{edac1389-8e4f-0acd-2642-1f7433525494}" FolderPath="Tasks\">
       <Declaration><![CDATA[(*~
 	<docu>

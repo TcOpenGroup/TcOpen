@@ -252,6 +252,9 @@ IF Execute() THEN
 			_varInfo :=__VARINFO(inoIoData);
 			Messenger.Programming(_sb.Clear().Append('Invalid reference: </value>
   </data>
+  <data name="___Error_time_is_lower_than_timeout__Please_check_config___" xml:space="preserve">
+    <value>Error time is lower than timeout. Please check config!</value>
+  </data>
   <data name="___Trigger___" xml:space="preserve">
     <value>Trigger!</value>
   </data>
@@ -558,9 +561,6 @@ IF Execute() THEN
   <data name="___GeneralResult_FAIL__" xml:space="preserve">
     <value>GeneralResult FAIL</value>
   </data>
-  <data name="____Trigger_Date___" xml:space="preserve">
-    <value> Trigger Date </value>
-  </data>
   <data name="___SystemOnline__" xml:space="preserve">
     <value>SystemOnline</value>
   </data>
@@ -585,11 +585,14 @@ IF Execute() THEN
   <data name="___Trigger_Counter__" xml:space="preserve">
     <value>Trigger Counter</value>
   </data>
-  <data name="___ErrorMsg__" xml:space="preserve">
-    <value>ErrorMsg</value>
+  <data name="___Error__" xml:space="preserve">
+    <value>Error</value>
   </data>
   <data name="___LiveBit__" xml:space="preserve">
     <value>LiveBit</value>
+  </data>
+  <data name="___ErrorMsg__" xml:space="preserve">
+    <value>ErrorMsg</value>
   </data>
   <data name="___TriggerTimeout__" xml:space="preserve">
     <value>TriggerTimeout</value>
@@ -608,6 +611,9 @@ IF Execute() THEN
   </data>
   <data name="___ClearResults__" xml:space="preserve">
     <value>ClearResults</value>
+  </data>
+  <data name="___Timeout_ms___" xml:space="preserve">
+    <value>Timeout[ms]</value>
   </data>
   <data name="____PartId___" xml:space="preserve">
     <value> PartId </value>
@@ -692,9 +698,6 @@ IF Execute() THEN
   </data>
   <data name="___Test_run_ready__" xml:space="preserve">
     <value>Test run ready</value>
-  </data>
-  <data name="___Error__" xml:space="preserve">
-    <value>Error</value>
   </data>
   <data name="___Error_code__" xml:space="preserve">
     <value>Error code</value>

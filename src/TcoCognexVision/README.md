@@ -203,14 +203,19 @@ and where `DesignerUserData` are (here may be placed customized data (what proje
 
 ### Export symbols for visions purposes
 
-If filter field is empty all data wil be generated. If you would to ganerate only specific data you may apply filter(see picture below).
+If filter field is empty all data wil be generated. If you would to ganerate only specific data you may apply filter or tail filter.(see picture below).
+
+
+MAIN.myVeryFirstTcoContextInstance._specificData.PcToPlc.AnalogInspector._data.DetectedStatus
+
+
 ![alt text](assets/designerExportDataFilter.png)
 ![alt text](assets/designerExportDialog.png)
 
-Final data ready to import into designer  will be:
+Final data suitable for import into designer  will be:
 
 ```
-MAIN.myVeryFirstTcoContextInstance._specificData.PcToPlc.DigitalInspector._data.DetectedStatus;System.Boolean;
-MAIN.myVeryFirstTcoContextInstance._specificData.PcToPlc.DataInspector._data.DetectedStatus;System.String;
+MAIN.myVeryFirstTcoContextInstance._specificData.PcToPlc.AnalogInspector._data.RequiredMin;System.Double;
+MAIN.myVeryFirstTcoContextInstance._specificData.PcToPlc.AnalogInspector._data.RequiredMin;System.Double;
 MAIN.myVeryFirstTcoContextInstance._specificData.PcToPlc.AnalogInspector._data.DetectedStatus;System.Double;
 ```
