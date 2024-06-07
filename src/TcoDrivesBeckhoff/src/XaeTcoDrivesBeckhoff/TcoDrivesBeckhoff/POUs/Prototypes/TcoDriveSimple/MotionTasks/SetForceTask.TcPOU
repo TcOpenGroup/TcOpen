@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="SetForceTask" Id="{202acf02-6d0d-4bca-9f77-4501493a923b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK SetForceTask EXTENDS TcoTask IMPLEMENTS ITcoDriveSimple
+VAR
+    {attribute addProperty Name "<#Force#>"}
+    _force_percent : LREAL;
+    {attribute addProperty Name "<#Velocity limit#>"}
+    _velocityLimit : LREAL;
+    {attribute addProperty Name "<#Torque ramp#>"}
+    _torqueRamp : LREAL;
+END_VAR
+VAR
+    {attribute 'hide'}
+    _axisRef : REFERENCE TO TcoAxisRef;
+    {attribute 'hide'}
+    _mcForceControl : Tc2_MC2.MC_TorqueControl;
+    {attribute 'hide'}
+    _forceOptions : Tc2_MC2.ST_TorqueControlOptions;
+    {attribute 'hide'}
+    _message : STRING(125);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF NOT __ISVALIDREF(_axisRef) THEN
+    IF __ISVALIDREF(DriveRef) THEN
+        _axisRef REF= DriveRef.AxisRef;
+    ELSE
+        RETURN;
+    END_IF
+END_IF
+
+IF Execute() THEN
+    _forceOptions.EnableManualTorqueStartValue := TRUE;
+    _forceOptions.ManualTorqueStartValue := _axisRef.NcToPlc.ActTorque;
+    _mcForceControl(
+        Axis:=_axisRef,
+        Execute:=NOT _mcForceControl.Busy,
+        Torque:=_force_percent,
+        BufferMode:=Tc2_MC2.MC_Aborting,
+        ContinuousUpdate:=TRUE,
+        Options:=_forceOptions,
+        TorqueRamp:=_torqueRamp,
+        VelocityLimitHigh:=_velocityLimit,
+        VelocityLimitLow:=_velocityLimit * -1,
+        Busy=>,
+        Active=>,
+        CommandAborted=>,
+        Error=>,
+        ErrorID=>
+    );
+
+    IF _mcForceControl.CommandAborted THEN
+        THIS^.Abort();
+    END_IF
+
+    DoneWhen(_mcForceControl.InTorque);
+    ThrowWhen(_mcForceControl.Error);
+END_IF
+]]></ST>
+    </Implementation>
+    <Property Name="DriveRef" Id="{3d05b5df-cf94-4ecb-a8c7-154657b19d59}">
+      <Declaration><![CDATA[PROPERTY DriveRef : REFERENCE TO TcoDriveSimple
+]]></Declaration>
+      <Get Name="Get" Id="{5be2c727-f826-4b2c-b293-d8b1aed20eb9}">
+        <Declaration><![CDATA[VAR
+    _drive : ITcoDriveSimple := 0;
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF __QUERYINTERFACE(THIS^.Parent, _drive) THEN
+    DriveRef REF= _drive.DriveRef;
+END_IF
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="InvokeWithParams" Id="{96f3ce16-2674-4918-9288-6d9cb1447a5e}">
+      <Declaration><![CDATA[METHOD INTERNAL InvokeWithParams : ITcoTaskStatus
+VAR_INPUT
+    inForce_percent : LREAL;
+    inVelocityLimit : LREAL;
+    inTorqueRamp : LREAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_force_percent := inForce_percent;
+_velocityLimit := inVelocityLimit;
+_torqueRamp := inTorqueRamp;
+InvokeWithParams := THIS^.Invoke();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnAbort" Id="{7b302d13-93b1-428d-b6d4-ce1dbc732d0e}">
+      <Declaration><![CDATA[(*~
+    <docu>
+        <summary>
+            Executes when task is aborted.
+        </summary>
+    </docu>
+~*)
+METHOD PROTECTED OnAbort
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT __ISVALIDREF(_axisRef) THEN
+    IF __ISVALIDREF(DriveRef) THEN
+        _axisRef REF= DriveRef.AxisRef;
+    ELSE
+        RETURN;
+    END_IF
+END_IF
+
+THIS^.DriveRef.Stop(-1, -1);
+_mcForceControl(Axis:=_axisRef, Execute:=FALSE);
+THIS^.DriveRef._movementState.Restore();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnDone" Id="{9007e457-9563-4c42-bf13-1f19f60b8de2}">
+      <Declaration><![CDATA[(*~
+    <docu>
+        <summary>
+            Executes when task reaches the ```Done``` state .
+        </summary>
+    </docu>
+~*)
+METHOD PROTECTED OnDone
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_mcForceControl(Axis:=_axisRef, Execute:=FALSE);
+THIS^.DriveRef._movementState.Restore();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnError" Id="{4e24a163-b359-47b6-a0a7-57e7d9a45c78}">
+      <Declaration><![CDATA[(*~
+    <docu>
+        <summary>
+            Executes when task reaches the ```Error``` state.
+            <para>
+                Do not confuse with <see cref="PlcDocu.TcoCore.TcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
+            </para>
+        </summary>
+    </docu>
+~*)
+METHOD PROTECTED OnError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.DriveRef._movementState.Restore();
+
+IF NOT _axisRef.Status.Error THEN
+    DriveRef.SetErrorID(DriveRef._axisStatus.ErrorId);
+END_IF
+
+_mcForceControl(Axis:=_axisRef, Execute:=FALSE);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStart" Id="{be299f11-c5f4-4588-8158-9ce4a7891dec}">
+      <Declaration><![CDATA[METHOD PROTECTED OnStart
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_mcForceControl(Axis:=_axisRef, Execute:=FALSE);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Restore" Id="{19576e01-4841-4d6a-b398-2b5fa2d47cbe}">
+      <Declaration><![CDATA[(*~
+    <docu>
+        <summary>
+            Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+            <para>
+                See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+            </para>
+        </summary>
+    </docu>
+~*)
+METHOD Restore : ITcoRestorable
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.Restore();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WhileError" Id="{0cbfbbef-bcc6-42db-b8c2-8a980d0b2822}">
+      <Declaration><![CDATA[(*~
+    <docu>
+        <summary>
+            Executes until task is in ```Error``` state .
+            <para>
+                Do not confuse with <see cref="PlcDocu.TcoCore.TcoTask.OnError()"/>, that is called just ones when '''Error''' state is entered.
+            </para>
+        </summary>
+    </docu>
+~*)
+METHOD PROTECTED WhileError
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
+    DriveRef.SetErrorID(_mcForceControl.ErrorID);
+    _mcForceControl(Axis:=_axisRef, Execute:=FALSE);
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
