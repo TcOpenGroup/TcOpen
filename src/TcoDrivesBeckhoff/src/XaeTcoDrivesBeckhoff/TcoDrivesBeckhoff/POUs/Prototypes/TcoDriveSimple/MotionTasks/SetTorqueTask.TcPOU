@@ -1,22 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
-  <POU Name="SetForceTask" Id="{202acf02-6d0d-4bca-9f77-4501493a923b}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK SetForceTask EXTENDS TcoTask IMPLEMENTS ITcoDriveSimple
+  <POU Name="SetTorqueTask" Id="{202acf02-6d0d-4bca-9f77-4501493a923b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK SetTorqueTask EXTENDS TcoCore.TcoTask IMPLEMENTS ITcoDriveSimple
+VAR_INPUT
+	inIsServiceMode : BOOL;
+END_VAR
 VAR
-    {attribute addProperty Name "<#Force#>"}
-    _force_percent : LREAL;
-    {attribute addProperty Name "<#Velocity limit#>"}
-    _velocityLimit : LREAL;
+    {attribute addProperty Name "<#Torque/Force#>"}
+    _torque : LREAL;
+    {attribute addProperty Name "<#Relative#>"}
+    _relative : BOOL;
+    {attribute addProperty Name "<#Velocity limit high#>"}
+    _velocityLimitHigh : LREAL;
+	{attribute addProperty Name "<#Velocity limit low#>"}
+    _velocityLimitLow : LREAL;
+	{attribute addProperty Name "<#Continuous update#>"}
+    _continuousUpdate: BOOL:=TRUE;
     {attribute addProperty Name "<#Torque ramp#>"}
     _torqueRamp : LREAL;
+	{attribute addProperty Name "<#Torque Options: Enable Manual Torque Start value #>"}
+    _enableManualTorqueStartValue : BOOL;
+	{attribute addProperty Name "<#Torque Options:Manual Torque Start value#>"}
+    _manualTorqueStartValue : LREAL;
+   
+
 END_VAR
 VAR
     {attribute 'hide'}
     _axisRef : REFERENCE TO TcoAxisRef;
     {attribute 'hide'}
-    _mcForceControl : Tc2_MC2.MC_TorqueControl;
-    {attribute 'hide'}
-    _forceOptions : Tc2_MC2.ST_TorqueControlOptions;
+    _mcTorqueControl : Tc2_MC2.MC_TorqueControl;
+	    {attribute 'hide'}
+    _torqueOptions : Tc2_MC2.ST_TorqueControlOptions;
     {attribute 'hide'}
     _message : STRING(125);
 END_VAR
@@ -30,32 +45,40 @@ END_VAR
     END_IF
 END_IF
 
-IF Execute() THEN
-    _forceOptions.EnableManualTorqueStartValue := TRUE;
-    _forceOptions.ManualTorqueStartValue := _axisRef.NcToPlc.ActTorque;
-    _mcForceControl(
-        Axis:=_axisRef,
-        Execute:=NOT _mcForceControl.Busy,
-        Torque:=_force_percent,
-        BufferMode:=Tc2_MC2.MC_Aborting,
-        ContinuousUpdate:=TRUE,
-        Options:=_forceOptions,
-        TorqueRamp:=_torqueRamp,
-        VelocityLimitHigh:=_velocityLimit,
-        VelocityLimitLow:=_velocityLimit * -1,
-        Busy=>,
-        Active=>,
-        CommandAborted=>,
-        Error=>,
-        ErrorID=>
-    );
 
-    IF _mcForceControl.CommandAborted THEN
+IF Execute() THEN
+	
+IF inIsServiceMode AND _enableManualTorqueStartValue THEN
+	_torqueOptions.EnableManualTorqueStartValue:=_enableManualTorqueStartValue;
+	_torqueOptions.ManualTorqueStartValue:=_manualTorqueStartValue;
+END_IF;
+
+_mcTorqueControl(
+	Axis:=_axisRef , 
+	Execute:=NOT _mcTorqueControl.Busy , 
+	ContinuousUpdate:=_continuousUpdate , 
+	Relative:= _relative, 
+	Torque:= _torque , 
+	TorqueRamp:= _torqueRamp , 
+	VelocityLimitHigh:= _velocityLimitHigh, 
+	VelocityLimitLow:= _velocityLimitLow, 
+	BufferMode:= Tc2_MC2.MC_Aborting , 
+	Options:=_torqueOptions , 
+	InTorque=> , 
+	Busy=> , 
+	Active=> , 
+	CommandAborted=> , 
+	Error=> , 
+	ErrorId=> );
+	
+
+
+    IF _mcTorqueControl.CommandAborted THEN
         THIS^.Abort();
     END_IF
 
-    DoneWhen(_mcForceControl.InTorque);
-    ThrowWhen(_mcForceControl.Error);
+    DoneWhen(_mcTorqueControl.InTorque);
+    ThrowWhen(_mcTorqueControl.Error);
 END_IF
 ]]></ST>
     </Implementation>
@@ -75,18 +98,38 @@ END_IF
         </Implementation>
       </Get>
     </Property>
+    <Property Name="InTorque" Id="{07615de5-82e8-0962-3b23-9a16f7555453}">
+      <Declaration><![CDATA[PROPERTY PUBLIC InTorque : BOOL]]></Declaration>
+      <Get Name="Get" Id="{c6d386ad-c5b5-0a81-1a00-81d8c3c290d3}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[InTorque :=_mcTorqueControl.InTorque;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="InvokeWithParams" Id="{96f3ce16-2674-4918-9288-6d9cb1447a5e}">
       <Declaration><![CDATA[METHOD INTERNAL InvokeWithParams : ITcoTaskStatus
 VAR_INPUT
-    inForce_percent : LREAL;
-    inVelocityLimit : LREAL;
+    inTorque : LREAL;
+	inRelative : BOOL;
+    inVelocityLimitHigh : LREAL;
+    inVelocityLimitLow : LREAL;
+    inContinuousUpdate: BOOL:=TRUE;
     inTorqueRamp : LREAL;
+    inTorqueOptions : Tc2_MC2.ST_TorqueControlOptions;
 END_VAR
-]]></Declaration>
+
+	]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_force_percent := inForce_percent;
-_velocityLimit := inVelocityLimit;
+        <ST><![CDATA[_torque := inTorque ;
+_relative := inRelative ;
+_velocityLimitHigh := inVelocityLimitHigh;
+_velocityLimitLow := inVelocityLimitLow;
+_continuousUpdate:=inContinuousUpdate;
 _torqueRamp := inTorqueRamp;
+_torqueOptions:=inTorqueOptions;
 InvokeWithParams := THIS^.Invoke();
 ]]></ST>
       </Implementation>
@@ -111,7 +154,7 @@ METHOD PROTECTED OnAbort
 END_IF
 
 THIS^.DriveRef.Stop(-1, -1);
-_mcForceControl(Axis:=_axisRef, Execute:=FALSE);
+_mcTorqueControl(Axis:=_axisRef, Execute:=FALSE);
 THIS^.DriveRef._movementState.Restore();
 ]]></ST>
       </Implementation>
@@ -127,7 +170,7 @@ THIS^.DriveRef._movementState.Restore();
 METHOD PROTECTED OnDone
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_mcForceControl(Axis:=_axisRef, Execute:=FALSE);
+        <ST><![CDATA[_mcTorqueControl(Axis:=_axisRef, Execute:=FALSE);
 THIS^.DriveRef._movementState.Restore();
 ]]></ST>
       </Implementation>
@@ -152,7 +195,7 @@ IF NOT _axisRef.Status.Error THEN
     DriveRef.SetErrorID(DriveRef._axisStatus.ErrorId);
 END_IF
 
-_mcForceControl(Axis:=_axisRef, Execute:=FALSE);
+_mcTorqueControl(Axis:=_axisRef, Execute:=FALSE);
 ]]></ST>
       </Implementation>
     </Method>
@@ -160,7 +203,7 @@ _mcForceControl(Axis:=_axisRef, Execute:=FALSE);
       <Declaration><![CDATA[METHOD PROTECTED OnStart
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_mcForceControl(Axis:=_axisRef, Execute:=FALSE);
+        <ST><![CDATA[_mcTorqueControl(Axis:=_axisRef, Execute:=FALSE);
 ]]></ST>
       </Implementation>
     </Method>
@@ -197,8 +240,8 @@ METHOD PROTECTED WhileError
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
-    DriveRef.SetErrorID(_mcForceControl.ErrorID);
-    _mcForceControl(Axis:=_axisRef, Execute:=FALSE);
+    DriveRef.SetErrorID(_mcTorqueControl.ErrorID);
+    _mcTorqueControl(Axis:=_axisRef, Execute:=FALSE);
 END_IF
 ]]></ST>
       </Implementation>

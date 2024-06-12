@@ -48,6 +48,8 @@ VAR
     _homeTask : HomeTask(THIS^);
     {attribute addProperty Name "<#Jogging#>"}
     _jog : Jog(THIS^);
+	{attribute addProperty Name "<#Force/Torque#>"}
+    _torqueTask : SetTorqueTask(THIS^);
     {attribute addProperty Name "<#Move velocity#>"}
     _moveVelocityTask : MoveVelocityTask(THIS^);
     {attribute addProperty Name "<#Stop#>"}
@@ -73,6 +75,7 @@ END_VAR]]></Declaration>
 END_IF
 
 _axisRef REF= inoAxisRef;
+
 
 
 _mcReadStatus(Axis := _axisRef, Enable := TRUE);
@@ -103,6 +106,7 @@ _haltTask();
 _moveRelativeTask();
 _moveAbsoluteTask();
 _moveModuloTask();
+_torqueTask(inIsServiceMode:= THIS^.IsService);
 
 IF(_axisStatus.Error) THEN Messenger.Error(_sb.Clear().Append('<#Drive error no #>').Append(UDINT_TO_STRING(_axisStatus.ErrorId)).Append(' |[[0]AdvancedDiagnosticMessage]|').Append('.').Append('For details see the service mode').ToString()); END_IF;
 
@@ -463,7 +467,8 @@ _haltTask.Restore();
 _moveRelativeTask.Restore();
 _moveAbsoluteTask.Restore();
 _moveModuloTask.Restore();
-_movementState.Restore();]]></ST>
+_movementState.Restore();
+_torqueTask.Restore();]]></ST>
       </Implementation>
     </Method>
     <Method Name="ServiceMode" Id="{f2dcab5e-74c4-0882-12e2-82e083006063}">
@@ -510,6 +515,38 @@ END_VAR]]></Declaration>
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
           <ST><![CDATA[SetPositionTask := _setPositionTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="SetTorque" Id="{a5a969d5-5c13-0a76-173a-6e38461490a0}" FolderPath="Motion\">
+      <Declaration><![CDATA[METHOD SetTorque : ITcoTaskStatus
+VAR_INPUT
+   	inTorque : LREAL;
+	inRelative : BOOL;
+    inVelocityLimitHigh : LREAL;
+    inVelocityLimitLow : LREAL;
+    inContinuousUpdate: BOOL:=TRUE;
+    inTorqueRamp : LREAL;
+    inTorqueOptions : Tc2_MC2.ST_TorqueControlOptions;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SetTorque := THIS^._torqueTask.InvokeWithParams(
+	inTorque:=inTorque , 
+	inRelative:=inRelative , 
+	inVelocityLimitHigh:=inVelocityLimitHigh , 
+	inVelocityLimitLow:= inVelocityLimitLow, 
+	inContinuousUpdate:= inContinuousUpdate , 
+	inTorqueRamp:= inTorqueRamp , 
+	inTorqueOptions:= inTorqueOptions);
+	]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="SetTorqueTask" Id="{690cf8bc-ff65-0398-22a3-b3cc663a8c89}" FolderPath="Motion\">
+      <Declaration><![CDATA[PROPERTY SetTorqueTask : TcoCore.ITcoTaskStatus]]></Declaration>
+      <Get Name="Get" Id="{50a39b8e-1dec-04de-1f90-fa63cc279752}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[SetTorqueTask := _torqueTask;]]></ST>
         </Implementation>
       </Get>
     </Property>
