@@ -90,6 +90,17 @@ END_VAR]]></Declaration>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
+    <Property Name="InVelocity" Id="{d5a60ee2-c762-0ce1-0c1d-98b64e1b555a}">
+      <Declaration><![CDATA[PROPERTY PUBLIC InVelocity : BOOL]]></Declaration>
+      <Get Name="Get" Id="{d46b58c2-99eb-0f88-18dd-cc77bde30873}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[InVelocity :=_mcMoveVelocity.InVelocity;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="InvokeWithParams" Id="{a12cf93b-f374-0fd0-3a32-7a0f0ba29d34}">
       <Declaration><![CDATA[METHOD INTERNAL InvokeWithParams : ITcoTaskStatus
 VAR_INPUT

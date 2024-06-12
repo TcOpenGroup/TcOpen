@@ -24,6 +24,8 @@
         HideMoveModulo : BOOL;
         {attribute addProperty Name "<#Hide MoveVelocity Tab#>"}
         HideMoveVelocity : BOOL;
+		{attribute addProperty Name "<#Hide SetTorque Tab#>"}
+        HideSetTorque : BOOL;
 		{attribute addProperty Name "<#Override velocity in service [%]#>"}
 		OverrideInService : LREAL;
 
