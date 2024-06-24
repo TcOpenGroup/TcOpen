@@ -71,7 +71,14 @@ The package consists of a PLC library providing control logic and its .NET twin 
 | ErrorTimeHopper				| TIME	| T#0S |
 | OutOfBoxSensorDisabled		| BOOL	| FALSE |
 | SeparatorHasWorkPosition		| BOOL	| FALSE |
+| BufferStuckedOnFillingSensor  | TIME	| T#30S |
 ---
+
+### NOTE!
+ This option BufferStuckedOnFillingSensor is introduced due screw stuck on Filling sensor. (Required new step feed  to push this stucked component) See picture below (Thx AdamPitak)
+
+![](assets/stuckedscrew.png)
+
 
 ## Tixon Vibro
 ![](assets/TixonVibro_side_signals.png)

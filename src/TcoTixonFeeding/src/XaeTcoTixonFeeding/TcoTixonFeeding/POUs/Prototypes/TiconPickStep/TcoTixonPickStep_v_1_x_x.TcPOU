@@ -107,6 +107,17 @@ UpdateControl();]]></ST>
 _bufferTask.AutoRestore:=false;]]></ST>
       </Implementation>
     </Method>
+    <Property Name="BufferTask" Id="{2277a762-23e9-0546-3172-74a21ae7d575}" FolderPath="Task\">
+      <Declaration><![CDATA[PROPERTY PUBLIC BufferTask : REFERENCE TO TcoTixonBufferTask]]></Declaration>
+      <Get Name="Get" Id="{5e4ba501-d40b-04dd-286c-3dc1a858458c}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[BufferTask ref= _bufferTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="Config" Id="{175d044f-1652-0a17-2513-eb21bb7c4ca2}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -194,6 +205,17 @@ _hopperTask.AutoRestore:=false;
 ]]></ST>
       </Implementation>
     </Method>
+    <Property Name="HopperTask" Id="{3a00600b-e9cf-0160-2da8-db4cae866074}" FolderPath="Task\">
+      <Declaration><![CDATA[PROPERTY PUBLIC HopperTask : reference TO TcoTixonHopperTask]]></Declaration>
+      <Get Name="Get" Id="{8f43a6db-75b5-0249-0c47-aea26cc7a732}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[HopperTask ref= _hopperTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="Restore" Id="{9cf088e3-d91e-0f6f-3df8-ec09596724ad}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -231,6 +253,18 @@ _hopperTask.Restore();
 ]]></ST>
       </Implementation>
     </Method>
+    <Property Name="SeparatorTask" Id="{7316f358-efca-0f3f-01bf-f9034a3c59a1}" FolderPath="Task\">
+      <Declaration><![CDATA[PROPERTY PUBLIC SeparatorTask : REFERENCE TO TcoTixonPickStepSeparatorTask
+]]></Declaration>
+      <Get Name="Get" Id="{40567ae3-7af3-0bf3-0e14-eea0d9d0d1cc}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[SeparatorTask ref= _separatorTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="Separe" Id="{751db759-e6f9-0685-0767-2e3180999873}" FolderPath="Operations\Single\">
       <Declaration><![CDATA[METHOD PUBLIC Separe : TcoCore.ITcoTaskStatus
 
@@ -282,6 +316,17 @@ _stepperTask.AutoRestore:=FALSE;
 ]]></ST>
       </Implementation>
     </Method>
+    <Property Name="StepTask" Id="{f020a17b-fe06-0aa2-04b5-b9783c814ffa}" FolderPath="Task\">
+      <Declaration><![CDATA[PROPERTY PUBLIC StepTask : REFERENCE TO TcoTixonPickStepTask]]></Declaration>
+      <Get Name="Get" Id="{ecdb23e2-f68a-0783-0de1-ef47763ccab3}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[StepTask ref= _stepperTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="UpdateControl" Id="{d7832ece-df6c-067c-3144-c929cfec9ad6}">
       <Declaration><![CDATA[METHOD INTERNAL UpdateControl
 VAR_INPUT

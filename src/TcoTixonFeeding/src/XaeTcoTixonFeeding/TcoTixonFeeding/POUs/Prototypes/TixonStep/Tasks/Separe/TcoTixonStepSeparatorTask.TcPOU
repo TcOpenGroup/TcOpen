@@ -45,8 +45,13 @@ IF Execute() THEN
 	IF _progress = 1 THEN
 		inoControl.SepareComponent:=FALSE;
 		_varInfo :=__VARINFO( inoStatus.SeparatorHomePos);                                                
+		
 		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.SeparatorHomePos).Warning(_sb.Clear().Append('<#Waiting for #>').Append(_varInfo.Symbol).ToString());
-		IF  inoStatus.SeparatorHomePos THEN
+	
+		THIS^.Messenger.OnCondition(_infoTimer.Q AND  inoStatus.ComponentOutOfBox AND  NOT inoConfig.OutOfBoxSensorDisabled ).Error(_sb.Clear().Append('<#Check component at the separator output. The component is probably stuck!.#>').Append(_varInfo.Symbol).ToString()).Pin();
+		IF _infoTimer.Q AND  inoStatus.ComponentOutOfBox and  NOT inoConfig.OutOfBoxSensorDisabled  THEN
+			THIS^.ThrowWhen(_errorTimer.Q );
+		ELSIF  inoStatus.SeparatorHomePos AND NOT  inoStatus.ComponentOutOfBox THEN
 			_progress := _progress + 1;
 			_timer(In:=FALSE);
 		END_IF;

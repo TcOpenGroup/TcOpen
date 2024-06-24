@@ -444,11 +444,15 @@ PROPERTY Override : LREAL]]></Declaration>
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF __ISVALIDREF(_axisRef) THEN
-    _Power(inEnable := FALSE);
+	IF NOT inEnable THEN
+		_Power(inEnable := FALSE);
+	END_IF
     _mcReadStatus(Axis := _axisRef, Enable := FALSE);
 END_IF
 
-_override := 100;
+IF NOT (_override>0.0 AND _override<=100.0)  THEN
+	_override := 100;
+END_IF
 RestoreTasks();
 _resetTask.Restore();]]></ST>
       </Implementation>
