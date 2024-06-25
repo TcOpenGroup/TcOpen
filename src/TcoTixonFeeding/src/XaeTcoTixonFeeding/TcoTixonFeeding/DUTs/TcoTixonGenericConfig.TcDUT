@@ -20,8 +20,10 @@ STRUCT
 		BufferIdleTime : TIME := T#5S;
 		{attribute addProperty Name "<#Buffer full blow time after#> - T_BUF_BLOW_FULL"}
 		BufferBlowFullTime : TIME := T#1S;
+
 		{attribute addProperty Name "<#Buffer blow  active #>"}
 		BufferBlowActive : BOOL := TRUE;
+		
 		
 		{attribute addProperty Name "<#Time when component in separator #> - T_BUFSEP_ON"}
 		TimeToComponentInSeparator : TIME := T#300MS;

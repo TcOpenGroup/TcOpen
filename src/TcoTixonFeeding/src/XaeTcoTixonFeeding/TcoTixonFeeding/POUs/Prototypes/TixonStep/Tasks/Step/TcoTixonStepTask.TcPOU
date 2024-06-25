@@ -11,6 +11,7 @@ END_VAR
 VAR
     _timerIsFull : TON;
 	
+	_timerIsStucked :  TON;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF Execute() THEN
@@ -43,7 +44,11 @@ END_VAR]]></Declaration>
 	IF _progress = 1 THEN	
 		Messenger.Debug('<#Waiting for buffer empty#>');
 		_timer(IN:=NOT inoStatus.FillingSensor,Pt:=inoConfig.BufferEmptyTime);
+		_timerIsStucked(in:=inoConfig.BufferStuckedOnFillingSensor<>T#0S AND inoControl.FeedingA AND inoStatus.FillingSensor AND NOT inoStatus.SeparatorPresent,Pt:=inoConfig.BufferStuckedOnFillingSensor);
 		IF _timer.Q  AND inoControl.FeedingA THEN
+			_progress := _progress + 1;
+			_timer(In:=FALSE);
+		ELSIF _timerIsStucked.Q AND  inoControl.FeedingA AND inoStatus.FillingSensor AND NOT inoStatus.SeparatorPresent THEN
 			_progress := _progress + 1;
 			_timer(In:=FALSE);
 		END_IF
@@ -146,7 +151,8 @@ THIS^._errorMessage.Error(_sb.Clear().Append(description).Append(' To restore ac
       <Implementation>
         <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN  THIS^.inoStatus.ActionDescription := '<#Stepper task started.#>'; END_IF; 
 CallTimers(FALSE);
-_timerIsFull(In:=FALSE);]]></ST>
+_timerIsFull(In:=FALSE);
+_timerIsStucked(in:=FALSE);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{816649e7-4c39-0c99-3a81-0cf45a38318e}">
@@ -164,6 +170,7 @@ METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.Restore();
 _timerIsFull(In:=FALSE);
+_timerIsStucked(in:=FALSE);
 ]]></ST>
       </Implementation>
     </Method>

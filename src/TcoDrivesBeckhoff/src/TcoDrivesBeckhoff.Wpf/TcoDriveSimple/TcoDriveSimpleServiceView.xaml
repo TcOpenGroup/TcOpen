@@ -187,7 +187,27 @@
                                 <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _jerk}" PresentationType="ControlSlim"/>
                             </StackPanel>
                         </GroupBox>
-                            <GroupBox Padding="10" Grid.Row="7" DataContext="{Binding _moveRelativeTask}" Header="{Binding AttributeName}"    
+
+                        <GroupBox Padding="10" Grid.Row="7" DataContext="{Binding _torqueTask}" Header="{Binding AttributeName}"    
+                                      Visibility="{Binding DataContext.Component._config.HideSetTorque.Cyclic,
+                                  Source={StaticResource ProxyElement}, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}">
+                            <WrapPanel Orientation="Vertical">
+                                <vortex:RenderableContentControl Margin="5"  DataContext="{Binding }" />
+                                <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _torque}"            PresentationType="ControlSlim"/>
+                                <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _relative}"          PresentationType="ControlSlim"/>
+                                <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _continuousUpdate}"  PresentationType="ControlSlim"/>
+                                <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _velocityLimitHigh}" PresentationType="ControlSlim"/>
+                                <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _velocityLimitLow}"  PresentationType="ControlSlim"/>
+                                <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _torqueRamp}"        PresentationType="ControlSlim"/>
+                                <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _enableManualTorqueStartValue}"        PresentationType="ControlSlim"/>
+                                <WrapPanel IsEnabled="{Binding _enableManualTorqueStartValue.Cyclic}">
+                                    <vortex:RenderableContentControl Margin="5"  DataContext="{Binding _manualTorqueStartValue}"        PresentationType="ControlSlim"/>
+                                </WrapPanel>
+
+                            </WrapPanel>
+                        </GroupBox>
+                        
+                        <GroupBox Padding="10" Grid.Row="7" DataContext="{Binding _moveRelativeTask}" Header="{Binding AttributeName}"    
                                       Visibility="{Binding DataContext.Component._config.HideMoveRelative.Cyclic,
                                   Source={StaticResource ProxyElement}, Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}">
                                 <WrapPanel Orientation="Vertical">

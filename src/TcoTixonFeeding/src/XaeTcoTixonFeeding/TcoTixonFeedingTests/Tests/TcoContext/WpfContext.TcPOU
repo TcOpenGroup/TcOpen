@@ -95,7 +95,9 @@ METHOD PROTECTED Main]]></Declaration>
 
 END_IF
 CASE _testedTixon OF 
+
 	eTypeOfTixon.TixonStep:
+	
 	_tixonStepFeeder(
 		inControllerInAuto:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_1.Input , 
 		inNotEmptyFeeder:=GVL_iXlinker.ECAT_x.EK1200.IA1.Channel_2.Input , 
@@ -114,6 +116,7 @@ CASE _testedTixon OF
 		outHopper=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_6.Output, 
 		outStepperValve=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_7.Output, 
 		outShotComponent=>GVL_iXlinker.ECAT_x.EK1200.qA1.Channel_8.Output );
+
 		
 	
    	_tixonStepFeeder.Service();

@@ -106,6 +106,17 @@ UpdateControl();]]></ST>
 _bufferTask.AutoRestore:=false;]]></ST>
       </Implementation>
     </Method>
+    <Property Name="BufferTask" Id="{ab88bcb3-a0b1-0295-2445-c33abff0f050}" FolderPath="Task\">
+      <Declaration><![CDATA[PROPERTY PUBLIC BufferTask : REFERENCE TO TcoTixonBufferTask]]></Declaration>
+      <Get Name="Get" Id="{a6643d15-ccdb-0356-39f4-30a639398a41}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[BufferTask ref= _bufferTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="Config" Id="{bac766df-24ab-0afe-0792-40e103ff5fab}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -193,6 +204,17 @@ _hopperTask.AutoRestore:=false;
 ]]></ST>
       </Implementation>
     </Method>
+    <Property Name="HopperTask" Id="{5cf54943-9c5b-0c22-10ef-277f2fa1254d}" FolderPath="Task\">
+      <Declaration><![CDATA[PROPERTY PUBLIC HopperTask : reference TO TcoTixonHopperTask]]></Declaration>
+      <Get Name="Get" Id="{6fe43ffc-9cd5-0abb-13fb-e00cd6427080}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[HopperTask ref= _hopperTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="Restore" Id="{8644f063-a070-0375-0bdb-3c8072e80800}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -231,6 +253,18 @@ _hopperTask.Restore();
 ]]></ST>
       </Implementation>
     </Method>
+    <Property Name="SeparatorTask" Id="{b82d4086-3a66-07c8-099c-4570d40f25ab}" FolderPath="Task\">
+      <Declaration><![CDATA[PROPERTY PUBLIC SeparatorTask : REFERENCE TO TcoTixonPickVibroSeparatorTask
+]]></Declaration>
+      <Get Name="Get" Id="{8dc9ac57-b141-0b7f-0db3-2a56556bae1c}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[SeparatorTask ref= _separatorTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="Separe" Id="{f4a12d2f-a6d1-05fa-1cfd-29e32305e394}" FolderPath="Operations\Single\">
       <Declaration><![CDATA[METHOD PUBLIC Separe : TcoCore.ITcoTaskStatus
 

@@ -24,6 +24,8 @@
 		{attribute addProperty Name "<#Separator has work position (usualy TRUE when pushing to up direction)#>"}
 		SeparatorHasWorkPosition : BOOL := FALSE;
 		
+		{attribute addProperty Name "<#Buffer stucked on filing sensor#> - T_BUF_STUCK_FIL_SENSOR"}
+		BufferStuckedOnFillingSensor : TIME := T#20S;
     END_STRUCT
 END_TYPE
 ]]></Declaration>
