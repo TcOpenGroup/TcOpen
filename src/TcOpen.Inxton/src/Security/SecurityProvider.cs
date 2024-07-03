@@ -20,16 +20,14 @@ namespace TcOpen.Inxton.Local.Security
         {
             OnAnyAuthenticationEvent?.Invoke(username);
         }
+
         private static SecurityProvider provider;
         private static volatile object mutex = new object();
 
         /// <summary>
         /// Gets the authentication service for this application.
         /// </summary>
-        public IAuthenticationService AuthenticationService
-        {
-            get;
-        }
+        public IAuthenticationService AuthenticationService { get; }
 
         /// <summary>
         /// Gets security provider for this application.
@@ -44,7 +42,6 @@ namespace TcOpen.Inxton.Local.Security
                 }
 
                 return provider;
-
             }
         }
 
@@ -68,8 +65,10 @@ namespace TcOpen.Inxton.Local.Security
                     {
                         provider = new SecurityProvider(authenticationService);
                         provider.AuthenticationService.OnDeAuthenticated += OnAuthenticationEvent;
-                        provider.AuthenticationService.OnUserAuthenticateFailed += OnAuthenticationEvent;
-                        provider.AuthenticationService.OnUserAuthenticateSuccess += OnAuthenticationEvent;
+                        provider.AuthenticationService.OnUserAuthenticateFailed +=
+                            OnAuthenticationEvent;
+                        provider.AuthenticationService.OnUserAuthenticateSuccess +=
+                            OnAuthenticationEvent;
                     }
                 }
             }

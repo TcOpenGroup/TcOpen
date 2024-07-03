@@ -11,8 +11,10 @@ namespace TcOpen.Inxton.App.Logging
     {
         internal static void EditValueChange(IValueTag valueTag, dynamic original, dynamic newValue)
         {
-            TcoAppDomain.Current.Logger.Information($"'{valueTag.Symbol}' value changed from '{original}' to '{newValue}' {{@payload}}",
-                new { Path = valueTag.HumanReadable, Symbol = valueTag.Symbol });
+            TcoAppDomain.Current.Logger.Information(
+                $"'{valueTag.Symbol}' value changed from '{original}' to '{newValue}' {{@payload}}",
+                new { Path = valueTag.HumanReadable, Symbol = valueTag.Symbol }
+            );
         }
     }
 }

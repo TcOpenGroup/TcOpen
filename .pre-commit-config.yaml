@@ -35,7 +35,7 @@ repos:
       - id: check-yaml
       - id: end-of-file-fixer
         # These files are either edited in the IDE or auto generated. No point in adding a new line at the end.
-        exclude: '\.(TcPOU|TcDUT|TcTTO|TcGVL|TcGTLO|TcVMO|TcIO|TcVis|plcproj|tsproj|tcdmproj|tcdmdrv|tcmproj|xti|STweep)$'      
+        exclude: '\.(TcPOU|TcDUT|TcTTO|TcGVL|TcGTLO|TcVMO|TcIO|TcVis|plcproj|tsproj|tcdmproj|tcdmdrv|tcmproj|xti|STweep)$'
   # For this hook you need to have the Stweep.CLI installed and buy a license
   # See https://www.stweep.com/stweep-cli-beta-releases/
   - repo: local

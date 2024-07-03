@@ -32,18 +32,18 @@ END_VAR
 	<docu>
 		<summary>
 			Updates comprehensive result. The comprehensive result is set to `Failed` when any inspection fails or is inconclusive.
-			Any bypassed or excluded inspection are not taken in the account.			
-		</summary>			
-	</docu>	
+			Any bypassed or excluded inspection are not taken in the account.
+		</summary>
+	</docu>
 ~*)
 METHOD UpdateComprehensiveResult : IInspector
 VAR_IN_OUT
 	(*~
 	<docu>
 		<summary>
-			Comprehensive result data structure to be updated.	
-		</summary>			
-	</docu>	
+			Comprehensive result data structure to be updated.
+		</summary>
+	</docu>
 	~*)
     inoResult : TcoComprehensiveResult;
 END_VAR

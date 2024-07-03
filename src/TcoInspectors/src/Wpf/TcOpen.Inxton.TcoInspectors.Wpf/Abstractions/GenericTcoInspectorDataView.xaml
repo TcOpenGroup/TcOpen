@@ -1,61 +1,74 @@
-﻿<UserControl x:Class="TcoInspectors.GenericTcoInspectorDataView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TcoInspectors" 
-             xmlns:tcoinspectors="clr-namespace:TcoInspectors;assembly=TcoInspectorsConnector" xmlns:controls="http://vortex.mts/xaml" 
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+﻿<UserControl
+  x:Class="TcoInspectors.GenericTcoInspectorDataView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:TcoInspectors"
+  xmlns:tcoinspectors="clr-namespace:TcoInspectors;assembly=TcoInspectorsConnector"
+  xmlns:controls="http://vortex.mts/xaml"
+  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+  mc:Ignorable="d"
+  d:DesignHeight="450"
+  d:DesignWidth="800"
+>
     <d:UserControl.DataContext>
-        <tcoinspectors:TcoInspectorData></tcoinspectors:TcoInspectorData> 
+        <tcoinspectors:TcoInspectorData />
     </d:UserControl.DataContext>
     <materialDesign:Card
-        Margin="100,5,10,10"
-  materialDesign:ShadowAssist.ShadowDepth="Depth3"
-  materialDesign:ShadowAssist.ShadowEdges="Top"
-  Padding="32">
+    Margin="100,5,10,10"
+    materialDesign:ShadowAssist.ShadowDepth="Depth3"
+    materialDesign:ShadowAssist.ShadowEdges="Top"
+    Padding="32"
+  >
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Grid.IsSharedSizeScope="True">
                 <controls:RenderableContentControl
-                            Margin="5"
-                            DataContext="{Binding PassTime}"
-                             PresentationType="{Binding PresentationType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GenericTcoInspectorDataView}}}" />
+          Margin="5"
+          DataContext="{Binding PassTime}"
+          PresentationType="{Binding PresentationType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GenericTcoInspectorDataView}}}"
+        />
                 <controls:RenderableContentControl
-                            Margin="5"
-                            DataContext="{Binding FailTime}"
-                             PresentationType="{Binding PresentationType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GenericTcoInspectorDataView}}}" />
+          Margin="5"
+          DataContext="{Binding FailTime}"
+          PresentationType="{Binding PresentationType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GenericTcoInspectorDataView}}}"
+        />
                 <controls:RenderableContentControl
-                            Margin="5"
-                            DataContext="{Binding NumberOfAllowedRetries}"
-                             PresentationType="{Binding PresentationType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GenericTcoInspectorDataView}}}" />
+          Margin="5"
+          DataContext="{Binding NumberOfAllowedRetries}"
+          PresentationType="{Binding PresentationType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GenericTcoInspectorDataView}}}"
+        />
                 <controls:RenderableContentControl
-                            Margin="5"
-                            DataContext="{Binding FailureDescription}"
-                             PresentationType="{Binding PresentationType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GenericTcoInspectorDataView}}}" />
+          Margin="5"
+          DataContext="{Binding FailureDescription}"
+          PresentationType="{Binding PresentationType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GenericTcoInspectorDataView}}}"
+        />
                 <controls:RenderableContentControl
-                            Margin="5"
-                            DataContext="{Binding ErrorCode}"
-                             PresentationType="{Binding PresentationType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GenericTcoInspectorDataView}}}" />
+          Margin="5"
+          DataContext="{Binding ErrorCode}"
+          PresentationType="{Binding PresentationType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GenericTcoInspectorDataView}}}"
+        />
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.IsSharedSizeScope="True">
                 <controls:RenderableContentControl
-                            Margin="5"
-                            DataContext="{Binding TimeStamp}"
-                             PresentationType="Display" />
+          Margin="5"
+          DataContext="{Binding TimeStamp}"
+          PresentationType="Display"
+        />
                 <controls:RenderableContentControl
-                            Margin="5"
-                            DataContext="{Binding RetryAttemptsCount}"
-                             PresentationType="Display" />
+          Margin="5"
+          DataContext="{Binding RetryAttemptsCount}"
+          PresentationType="Display"
+        />
                 <controls:RenderableContentControl
-                            Margin="5"
-                            DataContext="{Binding Result}"
-                             PresentationType="Display" />
+          Margin="5"
+          DataContext="{Binding Result}"
+          PresentationType="Display"
+        />
             </StackPanel>
         </Grid>
     </materialDesign:Card>

@@ -7,81 +7,77 @@ using System.Xml.Serialization;
 
 namespace TcOpen.Inxton.Swift.TcAdapter.TcProject
 {
-	// using System.Xml.Serialization;
-	// XmlSerializer serializer = new XmlSerializer(typeof(TcPlcObject));
-	// using (StringReader reader = new StringReader(xml))
-	// {
-	//    var test = (TcPlcObject)serializer.Deserialize(reader);
-	// }
+    // using System.Xml.Serialization;
+    // XmlSerializer serializer = new XmlSerializer(typeof(TcPlcObject));
+    // using (StringReader reader = new StringReader(xml))
+    // {
+    //    var test = (TcPlcObject)serializer.Deserialize(reader);
+    // }
 
-	[XmlRoot(ElementName = "Implementation")]
-	public class Implementation
-	{
+    [XmlRoot(ElementName = "Implementation")]
+    public class Implementation
+    {
+        [XmlElement(ElementName = "ST")]
+        public string ST { get; set; }
+    }
 
-		[XmlElement(ElementName = "ST")]
-		public string ST { get; set; }
-	}
+    [XmlRoot(ElementName = "Method")]
+    public class Method
+    {
+        [XmlElement(ElementName = "Declaration")]
+        public string Declaration { get; set; }
 
-	[XmlRoot(ElementName = "Method")]
-	public class Method
-	{
+        [XmlElement(ElementName = "Implementation")]
+        public Implementation Implementation { get; set; }
 
-		[XmlElement(ElementName = "Declaration")]
-		public string Declaration { get; set; }
+        [XmlAttribute(AttributeName = "Name")]
+        public string Name { get; set; }
 
-		[XmlElement(ElementName = "Implementation")]
-		public Implementation Implementation { get; set; }
+        [XmlAttribute(AttributeName = "Id")]
+        public string Id { get; set; }
 
-		[XmlAttribute(AttributeName = "Name")]
-		public string Name { get; set; }
+        [XmlText]
+        public string Text { get; set; }
+    }
 
-		[XmlAttribute(AttributeName = "Id")]
-		public string Id { get; set; }
+    [XmlRoot(ElementName = "POU")]
+    public class POU
+    {
+        [XmlElement(ElementName = "Declaration")]
+        public string Declaration { get; set; }
 
-		[XmlText]
-		public string Text { get; set; }
-	}
+        [XmlElement(ElementName = "Implementation")]
+        public Implementation Implementation { get; set; }
 
-	[XmlRoot(ElementName = "POU")]
-	public class POU
-	{
+        [XmlElement(ElementName = "Method")]
+        public List<Method> Method { get; set; }
 
-		[XmlElement(ElementName = "Declaration")]
-		public string Declaration { get; set; }
+        [XmlAttribute(AttributeName = "Name")]
+        public string Name { get; set; }
 
-		[XmlElement(ElementName = "Implementation")]
-		public Implementation Implementation { get; set; }
+        [XmlAttribute(AttributeName = "Id")]
+        public string Id { get; set; }
 
-		[XmlElement(ElementName = "Method")]
-		public List<Method> Method { get; set; }
+        [XmlAttribute(AttributeName = "SpecialFunc")]
+        public string SpecialFunc { get; set; }
 
-		[XmlAttribute(AttributeName = "Name")]
-		public string Name { get; set; }
+        [XmlText]
+        public string Text { get; set; }
+    }
 
-		[XmlAttribute(AttributeName = "Id")]
-		public string Id { get; set; }
+    [XmlRoot(ElementName = "TcPlcObject")]
+    public class TcPlcObject
+    {
+        [XmlElement(ElementName = "POU")]
+        public POU POU { get; set; }
 
-		[XmlAttribute(AttributeName = "SpecialFunc")]
-		public string SpecialFunc { get; set; }
+        [XmlAttribute(AttributeName = "Version")]
+        public string Version { get; set; }
 
-		[XmlText]
-		public string Text { get; set; }
-	}
+        [XmlAttribute(AttributeName = "ProductVersion")]
+        public string ProductVersion { get; set; }
 
-	[XmlRoot(ElementName = "TcPlcObject")]
-	public class TcPlcObject
-	{
-
-		[XmlElement(ElementName = "POU")]
-		public POU POU { get; set; }
-
-		[XmlAttribute(AttributeName = "Version")]
-		public string Version { get; set; }
-
-		[XmlAttribute(AttributeName = "ProductVersion")]
-		public string ProductVersion { get; set; }
-
-		[XmlText]
-		public string Text { get; set; }
-	}
+        [XmlText]
+        public string Text { get; set; }
+    }
 }

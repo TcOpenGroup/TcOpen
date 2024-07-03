@@ -52,40 +52,28 @@ namespace TcoIo
         public int Row
         {
             get { return this.row; }
-            set
-            {
-                this.row = value;
-            }
+            set { this.row = value; }
         }
 
         private int column;
         public int Column
         {
             get { return this.column; }
-            set
-            {
-                this.column = value;
-            }
+            set { this.column = value; }
         }
 
         private double pos_X;
         public double Pos_X
         {
             get { return this.pos_X; }
-            set
-            {
-                this.pos_X = value;
-            }
+            set { this.pos_X = value; }
         }
 
         private double pos_Y;
         public double Pos_Y
         {
             get { return this.pos_Y; }
-            set
-            {
-                this.pos_Y = value;
-            }
+            set { this.pos_Y = value; }
         }
 
         private UniformGrid hardware;
@@ -114,7 +102,16 @@ namespace TcoIo
             Hardware = new UniformGrid();
             Wiring = new WiringObject();
         }
-        public TopologyObject(string name, string physics, string connection, int row, int column, double pos_X, double pos_Y)
+
+        public TopologyObject(
+            string name,
+            string physics,
+            string connection,
+            int row,
+            int column,
+            double pos_X,
+            double pos_Y
+        )
         {
             Name = name;
             Physics = physics;
@@ -126,7 +123,17 @@ namespace TcoIo
             Hardware = new UniformGrid();
             Wiring = new WiringObject();
         }
-        public TopologyObject(string name, string physics, string connection, int row, int column, double pos_X, double pos_Y, UniformGrid harwdware)
+
+        public TopologyObject(
+            string name,
+            string physics,
+            string connection,
+            int row,
+            int column,
+            double pos_X,
+            double pos_Y,
+            UniformGrid harwdware
+        )
         {
             Name = name;
             Physics = physics;
@@ -138,7 +145,18 @@ namespace TcoIo
             Hardware = harwdware;
             Wiring = new WiringObject();
         }
-        public TopologyObject(string name, string physics, string connection, int row, int column, double pos_X, double pos_Y, UniformGrid harwdware, WiringObject wiring)
+
+        public TopologyObject(
+            string name,
+            string physics,
+            string connection,
+            int row,
+            int column,
+            double pos_X,
+            double pos_Y,
+            UniformGrid harwdware,
+            WiringObject wiring
+        )
         {
             Name = name;
             Physics = physics;

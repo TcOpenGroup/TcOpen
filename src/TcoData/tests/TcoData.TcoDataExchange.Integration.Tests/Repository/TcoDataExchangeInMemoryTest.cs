@@ -9,6 +9,5 @@ namespace TcoDataUnitTests
         {
             Repository = new InMemoryRepository<PlainstProcessData>();
         }
-       
     }
 }

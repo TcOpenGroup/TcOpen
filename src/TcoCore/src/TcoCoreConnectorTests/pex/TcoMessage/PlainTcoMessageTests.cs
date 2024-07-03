@@ -6,7 +6,5 @@ using System.Threading.Tasks;
 
 namespace TcoCoreConnectorTests.pex.TcoMessage
 {
-    class PlainTcoMessageTests
-    {
-    }
+    class PlainTcoMessageTests { }
 }

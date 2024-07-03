@@ -1,9 +1,7 @@
 ﻿namespace Tco.Wpf.CustomTree.DataTemplates
 {
-    public partial class TreeItemTemplate 
+    public partial class TreeItemTemplate
     {
-        public TreeItemTemplate()
-        {
-        }
+        public TreeItemTemplate() { }
     }
 }

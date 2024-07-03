@@ -13,7 +13,7 @@ namespace TcOpen
         {
             try
             {
-                return (bool)value ?  Brushes.Green : Brushes.Black;
+                return (bool)value ? Brushes.Green : Brushes.Black;
             }
             catch (Exception)
             {
@@ -21,7 +21,12 @@ namespace TcOpen
             }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return value;
         }

@@ -20,7 +20,7 @@ using TcOpen.Inxton.TcoCore.Wpf;
 namespace TcoCore
 {
     /// <summary>
-    /// Simple indicator of <see cref="TcoObject"/> status.    
+    /// Simple indicator of <see cref="TcoObject"/> status.
     /// </summary>
     public partial class HealthIndicatorView : UserControl
     {
@@ -34,6 +34,7 @@ namespace TcoCore
         }
 
         private System.Timers.Timer messageUpdateTimer;
+
         private void SetTimer()
         {
             if (messageUpdateTimer == null)
@@ -59,6 +60,6 @@ namespace TcoCore
             {
                 MessageHandler?.UpdateHealthInfo();
             }
-        }                             
+        }
     }
 }

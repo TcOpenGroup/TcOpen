@@ -6,6 +6,7 @@
         /// IP Address or Host name.
         /// </summary>
         public string Host { get; }
+
         /// <summary>
         /// Port for LDAP connection.
         /// Default values are :
@@ -13,11 +14,13 @@
         /// With SSL : 636
         /// </summary>
         public int Port { get; }
+
         /// <summary>
         /// If you're using the port 389 set it to false
         /// If you're using the port 636 set it to true
         /// </summary>
         public bool UseSsl { get; }
+
         /// <summary>
         /// In case of Azure it may look like this :
         ///     OU=AADDC Users,DC=testldap,DC=com

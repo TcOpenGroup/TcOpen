@@ -3,13 +3,11 @@
   <DUT Name="eCheckResult" Id="{7531f9dc-26cd-4c0e-a6f8-2481f0149d69}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE eCheckResult :
-(
-	None   := 0,
-	Passed := 10,
-	Failed := 20
+TYPE eCheckResult : (
+    None := 0,
+    Passed := 10,
+    Failed := 20
 );
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

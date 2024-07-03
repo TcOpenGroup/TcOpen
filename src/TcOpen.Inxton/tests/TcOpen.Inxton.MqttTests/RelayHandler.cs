@@ -1,11 +1,10 @@
-﻿using MQTTnet;
-using MQTTnet.Client.Receiving;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using MQTTnet;
+using MQTTnet.Client.Receiving;
 
 namespace TcOpen.Inxton.MqttTests
 {
-
     class RelayHandler : IMqttApplicationMessageReceivedHandler
     {
         public Func<MqttApplicationMessageReceivedEventArgs, string> OnMessage;
@@ -16,7 +15,9 @@ namespace TcOpen.Inxton.MqttTests
             OnMessage = onMessage;
         }
 
-        public Task HandleApplicationMessageReceivedAsync(MqttApplicationMessageReceivedEventArgs eventArgs)
+        public Task HandleApplicationMessageReceivedAsync(
+            MqttApplicationMessageReceivedEventArgs eventArgs
+        )
         {
             if (MessageNotDelivered)
             {
@@ -26,7 +27,5 @@ namespace TcOpen.Inxton.MqttTests
             else
                 throw new Exception("Only one message per handler");
         }
-
-
     }
 }

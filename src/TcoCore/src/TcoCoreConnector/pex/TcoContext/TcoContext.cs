@@ -16,8 +16,11 @@ namespace TcoCore
         /// <summary>
         /// Gets the messages that belong to this Context.
         /// </summary>
-        public IEnumerable<TcoMessage> Messages { get { return _messages; } }
-               
+        public IEnumerable<TcoMessage> Messages
+        {
+            get { return _messages; }
+        }
+
         /// <summary>
         /// Get the identity of this Context.
         /// </summary>
@@ -36,18 +39,18 @@ namespace TcoCore
         {
             _messages.Add(message);
         }
-        
+
         partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
         {
             this.Connector.IdentityProvider.AddIdentity(this);
             this.MessageHandler = new TcoObjectMessageHandler(this, this);
         }
-     
+
         /// <summary>
         /// Gets last know value of start cycle counter of this context.
         /// </summary>
         public ulong LastStartCycleCount => this._startCycleCount.LastValue;
-       
+
         /// <summary>
         /// Gets 'Message Handler' for this Context.
         /// </summary>

@@ -13,21 +13,28 @@ namespace TcoIo
         {
             InitializeComponent();
         }
+
         private void OpenTerminalDetails(object sender, System.Windows.RoutedEventArgs e)
         {
             Window window = new Window();
             Grid grid = new Grid();
             var model = DataContext.GetType().GetProperty("Model")?.GetValue(DataContext);
-            string physics = model.GetType().GetProperty("AttributePhysics")?.GetValue(model).ToString();
+            string physics = model
+                .GetType()
+                .GetProperty("AttributePhysics")
+                ?.GetValue(model)
+                .ToString();
             if (physics == "KYKY" || physics == "KY")
             {
-                EtcSlaveTerminalBase_947E5A46SingleTerminalView box = new EtcSlaveTerminalBase_947E5A46SingleTerminalView();
-                box.DataContext = this.DataContext ;
+                EtcSlaveTerminalBase_947E5A46SingleTerminalView box =
+                    new EtcSlaveTerminalBase_947E5A46SingleTerminalView();
+                box.DataContext = this.DataContext;
                 grid.Children.Add(box);
             }
             else
             {
-                EtcSlaveTerminalBase_947E5A46TopologyTerminalView box = new EtcSlaveTerminalBase_947E5A46TopologyTerminalView();
+                EtcSlaveTerminalBase_947E5A46TopologyTerminalView box =
+                    new EtcSlaveTerminalBase_947E5A46TopologyTerminalView();
                 box.DataContext = this.DataContext;
                 grid.Children.Add(box);
             }
@@ -37,10 +44,12 @@ namespace TcoIo
             window.Show();
         }
 
-        private void tbName_TargetUpdated(object sender, System.Windows.Data.DataTransferEventArgs e)
+        private void tbName_TargetUpdated(
+            object sender,
+            System.Windows.Data.DataTransferEventArgs e
+        )
         {
             tbName.FontSize = TextBlockUtils.UpdateFontSizeToFitTheTextBlockMaxWidth(tbName);
         }
-
     }
 }

@@ -30,12 +30,11 @@ VAR
     _deceleration : LREAL;
     {attribute addProperty Name "<#Jerk#>"}
     _jerk : LREAL;
-	{attribute 'hide'}
-	_dummyPreconditionOK : BOOL;
-	
-	_serviceContexCycle : ULINT;
-	_myContextCycleCount : ULINT;
-	_inServiceMode : BOOL;
+    {attribute 'hide'}
+    _dummyPreconditionOK : BOOL;
+    _serviceContexCycle : ULINT;
+    _myContextCycleCount : ULINT;
+    _inServiceMode : BOOL;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF NOT __ISVALIDREF(_axisRef) THEN
@@ -50,7 +49,6 @@ _jogForwardTask.Enabled := inIsServiceMode;
 _jogBackwardsTask.Enabled := inIsServiceMode;
 _jogForwardTask.Run();
 _jogBackwardsTask.Run();
-
 
 IF _jogForwardTask.State THEN
     _dummyPreconditionOK := DriveRef._power._mcPower.Enable_Positive;
@@ -110,12 +108,10 @@ END_IF]]></ST>
     <Method Name="FB_init" Id="{755891a0-7e03-0106-1a40-9df64547eef6}">
       <Declaration><![CDATA[METHOD FB_init : BOOL
 VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-  	ParentObject : ITcoObject;	
-END_VAR
-
-]]></Declaration>
+    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+    ParentObject : ITcoObject;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
@@ -124,25 +120,22 @@ END_VAR
       <Declaration><![CDATA[PROPERTY IsService : BOOL]]></Declaration>
       <Get Name="Get" Id="{5c177e94-bddc-0ffc-016c-e570be195dcc}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[_myContextCycleCount := Context.StartCycleCount;
 //When component.Service() is called "before" invoking its task _serviceContexCycle is equal to Context.StartCycleCount
 //When component.Service() is called "after" invoking its task (_serviceContexCycle + 1) is equal to Context.StartCycleCount
 //otherwise _serviceContexCycle should be lower then Context.StartCycleCount until Context.StartCycleCount overflow its range
-//which should occur cca every 585 mil years at 1ms PLC task.    
+//which should occur cca every 585 mil years at 1ms PLC task.
 _inServiceMode := _serviceContexCycle = _myContextCycleCount OR (_serviceContexCycle + 1) = _myContextCycleCount;
-
 IsService := _inServiceMode;]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Method Name="Service" Id="{871179f7-f9a6-0093-224b-0caef669a4cb}">
-      <Declaration><![CDATA[METHOD PUBLIC Service ]]></Declaration>
+      <Declaration><![CDATA[METHOD PUBLIC Service]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_serviceContexCycle := Context.StartCycleCount;
-]]></ST>
+        <ST><![CDATA[_serviceContexCycle := Context.StartCycleCount;]]></ST>
       </Implementation>
     </Method>
   </POU>

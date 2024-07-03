@@ -3,72 +3,70 @@
   <POU Name="StopMovementsTask" Id="{20dcb46e-254f-02f0-2da2-56d3a58db5cc}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK StopMovementsTask EXTENDS TcoMitsubishiRoboticsTask
 VAR
-
-	_stopType: TcoAbstractions.eTcoRoboticsStopType;
-END_VAR
-]]></Declaration>
+    _stopType : TcoAbstractions.eTcoRoboticsStopType;
+END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
+      <ST><![CDATA[IF Execute() THEN
+    IF _progress = 0 THEN
+        IF NOT __ISVALIDREF(inoControl) THEN
+            _varInfo := __VARINFO(inoControl);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSIF NOT __ISVALIDREF(inoConfig) THEN
+            _varInfo := __VARINFO(inoConfig);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSIF NOT __ISVALIDREF(inoStatus) THEN
+            _varInfo := __VARINFO(inoStatus);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSE
+            _progress := _progress + 1;
+        END_IF
+    END_IF
 
-IF Execute() THEN
-IF _progress = 0 THEN
-		IF NOT __ISVALIDREF(inoControl) THEN
-			_varInfo :=__VARINFO(inoControl);
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSIF NOT __ISVALIDREF(inoConfig) THEN                                                  
-			_varInfo :=__VARINFO(inoConfig);                                                    
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSIF NOT __ISVALIDREF(inoStatus) THEN                                                  
-			_varInfo :=__VARINFO(inoStatus);                                                    
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-			ELSE
-			_progress := _progress + 1;
-		END_IF
+    IF _progress = 1 THEN
+        inoControl.AutoEnable := TRUE;
+        _varInfo := __VARINFO(inoStatus.State.AutoEnable);
 
-	END_IF
-	
-	
-	IF _progress = 1 THEN
-	
-		inoControl.AutoEnable:=TRUE;
-		_varInfo :=__VARINFO( inoStatus.State.AutoEnable);                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.AutoEnable).Warning(_sb.Clear().Append('<#Waiting for Auto signal! #>').Append(_varInfo.Symbol).ToString());
-		IF  inoStatus.State.AutoEnable THEN
-			_progress := _progress + 1;
-		END_IF;
-	END_IF;
-	
-	IF _progress = 2 THEN
-		inoControl.OperationEnable:=TRUE;
-		_varInfo :=__VARINFO( inoStatus.State.OperationEnable);                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.OperationEnable).Warning(_sb.Clear().Append('<#Waiting for Operation enable signal! #>').Append(_varInfo.Symbol).ToString());
-		IF  inoStatus.State.OperationEnable THEN
-			_progress := _progress + 1;
-		END_IF;
-	END_IF;
-	IF _progress = 3 THEN
-		inoControl.Stop:=TRUE ;
-		inoControl.Start:=FALSE ;
-		
-		
-		IF  inoStatus.State.Stop  THEN
-				inoControl.Stop:=FALSE;
-		END_IF
-	END_IF;		
-	
-	
-	_varInfo :=__VARINFO( inoStatus.State.Stop);                                                
-	THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Stop)
-		.Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).Append('<# is OFF #>').ToString());
-	
-    DoneWhen( inoStatus.State.Stop );
+        THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.AutoEnable)
+            .Warning(_sb.Clear().Append('<#Waiting for Auto signal! #>').Append(_varInfo.Symbol).ToString());
+
+        IF inoStatus.State.AutoEnable THEN
+            _progress := _progress + 1;
+        END_IF;
+    END_IF;
+
+    IF _progress = 2 THEN
+        inoControl.OperationEnable := TRUE;
+        _varInfo := __VARINFO(inoStatus.State.OperationEnable);
+
+        THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.OperationEnable)
+            .Warning(_sb.Clear().Append('<#Waiting for Operation enable signal! #>').Append(_varInfo.Symbol).ToString());
+
+        IF inoStatus.State.OperationEnable THEN
+            _progress := _progress + 1;
+        END_IF;
+    END_IF;
+
+    IF _progress = 3 THEN
+        inoControl.Stop := TRUE;
+        inoControl.Start := FALSE;
+
+        IF inoStatus.State.Stop THEN
+            inoControl.Stop := FALSE;
+        END_IF
+    END_IF;
+
+    _varInfo := __VARINFO(inoStatus.State.Stop);
+
+    THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Stop)
+        .Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).Append('<# is OFF #>').ToString());
+
+    DoneWhen(inoStatus.State.Stop);
     CallTimers(TRUE);
-	
-	THIS^.ThrowWhen(_errorTimer.Q);
+    THIS^.ThrowWhen(_errorTimer.Q);
 END_IF
 
-IF  THIS^.Error AND NOT _errorMessage.Pinned THEN
-	THIS^.Restore();
+IF THIS^.Error AND NOT _errorMessage.Pinned THEN
+    THIS^.Restore();
 END_IF]]></ST>
     </Implementation>
     <Method Name="FB_init" Id="{b800ca83-f90c-0c28-3f7e-82775baab21a}">
@@ -76,17 +74,16 @@ END_IF]]></ST>
 VAR_INPUT
     bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
     bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
-  	ParentObject : ITcoObject;	
+    ParentObject : ITcoObject;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[		    
-                                ]]></ST>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="InvokeWithParams" Id="{b0ab49b7-9c49-0193-293d-b5aa20b0e71b}">
       <Declaration><![CDATA[METHOD INTERNAL InvokeWithParams : ITcoTaskStatus
 VAR_INPUT
-	inStopType : eTcoRoboticsStopType;
+    inStopType : eTcoRoboticsStopType;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_stopType := inStopType;
@@ -95,71 +92,80 @@ InvokeWithParams := THIS^.Invoke();]]></ST>
     </Method>
     <Method Name="OnAbort" Id="{e40dd883-e968-01e5-3aaf-8bf5ef038e43}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task is aborted.
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task is aborted.
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnAbort
-]]></Declaration>
+METHOD PROTECTED OnAbort]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Stopping movements was aborted, while not yet completed!#>';END_IF; 
+        <ST><![CDATA[IF __ISVALIDREF(inoStatus) THEN
+    THIS^.inoStatus.ActionDescription := '<#Stopping movements was aborted, while not yet completed!#>';
+END_IF;
 //inoControl.SoftStop := FALSE;
 //inoControl.QuickStop := FALSE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnDone" Id="{282e7ad0-c321-06f7-2d6d-e423eb2ecca9}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task reaches the ```Done``` state .
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task reaches the ```Done``` state .
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnDone
-]]></Declaration>
+METHOD PROTECTED OnDone]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN  THIS^.inoStatus.ActionDescription := '<#Stopping movements was completed successfully.#>';END_IF; 
-_progress:=0;]]></ST>
+        <ST><![CDATA[IF __ISVALIDREF(inoStatus) THEN
+    THIS^.inoStatus.ActionDescription := '<#Stopping movements was completed successfully.#>';
+END_IF;
+
+_progress := 0;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnError" Id="{b4747eef-9337-0268-0cd1-e60e4cf2d1e9}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task reaches the ```Error``` state.
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task reaches the ```Error``` state.
+        </summary>
+    </docu>
 ~*)
 METHOD PROTECTED OnError
 VAR
-	description: STRING;
+    description : STRING;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.inoStatus.ActionDescription := '<#Stopping movement finished with error.#>'; 
-IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := description; END_IF;
+        <ST><![CDATA[THIS^.inoStatus.ActionDescription := '<#Stopping movement finished with error.#>';
+
+IF __ISVALIDREF(inoStatus) THEN
+    THIS^.inoStatus.ActionDescription := description;
+END_IF;
+
 THIS^._errorMessage.Error(_sb.Clear().Append(description).Append(' To restore acknowledge this alarm.').ToString()).Pin();]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStart" Id="{3d6112c6-d154-0644-0f75-3969d5b29f2e}">
-      <Declaration><![CDATA[METHOD PROTECTED OnStart 
-]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED OnStart]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN  THIS^.inoStatus.ActionDescription := '<#Stopping movements started.#>'; END_IF; 
+        <ST><![CDATA[IF __ISVALIDREF(inoStatus) THEN
+    THIS^.inoStatus.ActionDescription := '<#Stopping movements started.#>';
+END_IF;
+
 CallTimers(FALSE);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{06a682be-d62c-041e-281a-881c1bfd2397}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
-			<para>
-				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
-			</para>
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+            <para>
+                See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+            </para>
+        </summary>
+    </docu>
 ~*)
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>

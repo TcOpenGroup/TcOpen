@@ -9,13 +9,14 @@ namespace TcoCore
 {
     public class TcoSequencerViewModel : RenderableViewModelBase
     {
-        public TcoSequencerViewModel()
-        {
-
-        }
+        public TcoSequencerViewModel() { }
 
         public TcoSequencer TcoSequencer { get; private set; }
 
-        public override object Model { get => TcoSequencer; set { TcoSequencer = value as TcoSequencer; } }
+        public override object Model
+        {
+            get => TcoSequencer;
+            set { TcoSequencer = value as TcoSequencer; }
+        }
     }
 }

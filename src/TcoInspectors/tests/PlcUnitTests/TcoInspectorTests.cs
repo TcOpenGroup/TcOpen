@@ -1,10 +1,10 @@
+using System.Threading;
+using System.Threading.Tasks;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
-using TcoInspectorsTests;
 using Tc.Prober.Runners;
 using TcoInspectors;
-using System.Threading.Tasks;
-using System.Threading;
+using TcoInspectorsTests;
 
 namespace TcoInspectorsUnitTests
 {
@@ -15,9 +15,9 @@ namespace TcoInspectorsUnitTests
         protected TcoInspectorsTests.TcoInspectorTests InspectorContainer { get; set; }
 
         public abstract void OneTimeSetup();
-               
+
         public abstract void SetUp();
-      
+
         protected abstract void set_to_fail_below_threshold();
         protected abstract dynamic set_to_fail_above_threshold();
         protected abstract dynamic set_to_pass_at_bottom_threshold();
@@ -69,7 +69,7 @@ namespace TcoInspectorsUnitTests
             Assert.AreEqual(eInspectorResult.Passed, InspectorContainer.Inspector.ResultAsEnum);
         }
 
-        [Test]        
+        [Test]
         public void inspect_bypassed()
         {
             InspectorContainer.Inspector.InspectorData.IsByPassed.Synchron = true;
@@ -91,7 +91,10 @@ namespace TcoInspectorsUnitTests
 
             Assert.AreEqual(eInspectorResult.Excluded, InspectorContainer.Inspector.ResultAsEnum);
 
-            Assert.AreEqual(actualSignal, InspectorContainer.Inspector.InspectorData.DetectedStatus.Synchron);
+            Assert.AreEqual(
+                actualSignal,
+                InspectorContainer.Inspector.InspectorData.DetectedStatus.Synchron
+            );
         }
 
         [Test]
@@ -104,7 +107,10 @@ namespace TcoInspectorsUnitTests
 
             Assert.AreEqual(eInspectorResult.Excluded, InspectorContainer.Inspector.ResultAsEnum);
 
-            Assert.AreEqual(actualSignal, InspectorContainer.Inspector.InspectorData.DetectedStatus.Synchron);
+            Assert.AreEqual(
+                actualSignal,
+                InspectorContainer.Inspector.InspectorData.DetectedStatus.Synchron
+            );
         }
 
         [Test]
@@ -135,8 +141,10 @@ namespace TcoInspectorsUnitTests
         public void inspect_pass_time_more_than_file_time_must_fail()
         {
             set_to_pass_at_mid();
-            InspectorContainer.Inspector.InspectorData.PassTime.Synchron = System.TimeSpan.FromMilliseconds(1000);
-            InspectorContainer.Inspector.InspectorData.FailTime.Synchron = System.TimeSpan.FromMilliseconds(500);
+            InspectorContainer.Inspector.InspectorData.PassTime.Synchron =
+                System.TimeSpan.FromMilliseconds(1000);
+            InspectorContainer.Inspector.InspectorData.FailTime.Synchron =
+                System.TimeSpan.FromMilliseconds(500);
 
             InspectorContainer.ExecuteProbeRun((int)eInspectorTests.Inspect);
 
@@ -146,14 +154,23 @@ namespace TcoInspectorsUnitTests
         [Test]
         public void inspect_jitter_signal_must_fail()
         {
-#if DEBUG    
-    
+#if DEBUG
 
-            InspectorContainer.Inspector.InspectorData.PassTime.Synchron = System.TimeSpan.FromMilliseconds(250);
-            InspectorContainer.Inspector.InspectorData.FailTime.Synchron = System.TimeSpan.FromMilliseconds(700);
+
+            InspectorContainer.Inspector.InspectorData.PassTime.Synchron =
+                System.TimeSpan.FromMilliseconds(250);
+            InspectorContainer.Inspector.InspectorData.FailTime.Synchron =
+                System.TimeSpan.FromMilliseconds(700);
 
             var run = true;
-            var task = Task.Run(() => { while (run) { Thread.Sleep(10); set_introduce_jitter(); } });
+            var task = Task.Run(() =>
+            {
+                while (run)
+                {
+                    Thread.Sleep(10);
+                    set_introduce_jitter();
+                }
+            });
 
             InspectorContainer.ExecuteProbeRun((int)eInspectorTests.Inspect);
             run = false;
@@ -177,7 +194,10 @@ namespace TcoInspectorsUnitTests
                 InspectorContainer.ExecuteProbeRun((int)eInspectorTests.Inspect);
             }
 
-            Assert.AreEqual(9, InspectorContainer.Inspector.InspectorData.RetryAttemptsCount.Synchron);
+            Assert.AreEqual(
+                9,
+                InspectorContainer.Inspector.InspectorData.RetryAttemptsCount.Synchron
+            );
 
             InspectorContainer.ExecuteProbeRun(1, 0);
             InspectorContainer.ExecuteProbeRun((int)eInspectorTests.Inspect);
@@ -191,7 +211,6 @@ namespace TcoInspectorsUnitTests
 
             Assert.AreEqual(eInspectorResult.Failed, InspectorContainer.Inspector.ResultAsEnum);
             Assert.AreEqual(true, InspectorContainer._isOverIspected.Synchron);
-
         }
 
         [Test]
@@ -203,7 +222,10 @@ namespace TcoInspectorsUnitTests
             InspectorContainer.ExecuteProbeRun((int)eInspectorTests.Inspect);
 
             Assert.AreEqual(eInspectorResult.Failed, InspectorContainer.Inspector.ResultAsEnum);
-            Assert.AreEqual((short)eOverallResult.Failed, InspectorContainer._overallResult.Result.Synchron);
+            Assert.AreEqual(
+                (short)eOverallResult.Failed,
+                InspectorContainer._overallResult.Result.Synchron
+            );
         }
 
         [Test]
@@ -215,7 +237,10 @@ namespace TcoInspectorsUnitTests
             InspectorContainer.ExecuteProbeRun((int)eInspectorTests.Inspect);
 
             Assert.AreEqual(eInspectorResult.Passed, InspectorContainer.Inspector.ResultAsEnum);
-            Assert.AreEqual((short)eOverallResult.Failed, InspectorContainer._overallResult.Result.Synchron);
+            Assert.AreEqual(
+                (short)eOverallResult.Failed,
+                InspectorContainer._overallResult.Result.Synchron
+            );
         }
 
         [Test]
@@ -227,7 +252,10 @@ namespace TcoInspectorsUnitTests
             InspectorContainer.ExecuteProbeRun((int)eInspectorTests.Inspect);
 
             Assert.AreEqual(eInspectorResult.Failed, InspectorContainer.Inspector.ResultAsEnum);
-            Assert.AreEqual((short)eOverallResult.Failed, InspectorContainer._overallResult.Result.Synchron);
+            Assert.AreEqual(
+                (short)eOverallResult.Failed,
+                InspectorContainer._overallResult.Result.Synchron
+            );
         }
 
         [Test]
@@ -241,7 +269,10 @@ namespace TcoInspectorsUnitTests
             InspectorContainer.ExecuteProbeRun((int)eInspectorTests.Inspect);
 
             Assert.AreEqual(eInspectorResult.Bypassed, InspectorContainer.Inspector.ResultAsEnum);
-            Assert.AreEqual((short)eOverallResult.Failed, InspectorContainer._overallResult.Result.Synchron);
+            Assert.AreEqual(
+                (short)eOverallResult.Failed,
+                InspectorContainer._overallResult.Result.Synchron
+            );
         }
 
         [Test]
@@ -255,7 +286,10 @@ namespace TcoInspectorsUnitTests
             InspectorContainer.ExecuteProbeRun((int)eInspectorTests.Inspect);
 
             Assert.AreEqual(eInspectorResult.Excluded, InspectorContainer.Inspector.ResultAsEnum);
-            Assert.AreEqual((short)eOverallResult.Failed, InspectorContainer._overallResult.Result.Synchron);
+            Assert.AreEqual(
+                (short)eOverallResult.Failed,
+                InspectorContainer._overallResult.Result.Synchron
+            );
         }
 
         [Test]
@@ -268,7 +302,10 @@ namespace TcoInspectorsUnitTests
 
             InspectorContainer.ExecuteProbeRun((int)eInspectorTests.OnFailCarryOn);
             Assert.AreEqual(eInspectorResult.Failed, InspectorContainer.Inspector.ResultAsEnum);
-            Assert.AreEqual((short)eOverallResult.Failed, InspectorContainer._overallResult.Result.Synchron);
+            Assert.AreEqual(
+                (short)eOverallResult.Failed,
+                InspectorContainer._overallResult.Result.Synchron
+            );
 
             Assert.AreEqual(expectedState, InspectorContainer._coordinator._state.Synchron);
         }
@@ -342,12 +379,15 @@ namespace TcoInspectorsUnitTests
         [Test]
         public void inspect_previous_failed_now_pass()
         {
-            this.set_to_pass_at_mid();                     
+            this.set_to_pass_at_mid();
             InspectorContainer._overallResult.Result.Synchron = (short)eOverallResult.Failed;
-            
+
             InspectorContainer.ExecuteProbeRun((int)eInspectorTests.Inspect);
             Assert.AreEqual(eInspectorResult.Passed, InspectorContainer.Inspector.ResultAsEnum);
-            Assert.AreEqual(eOverallResult.Failed, (eOverallResult)InspectorContainer._overallResult.Result.Synchron);
+            Assert.AreEqual(
+                eOverallResult.Failed,
+                (eOverallResult)InspectorContainer._overallResult.Result.Synchron
+            );
         }
 
         [Test]
@@ -358,7 +398,10 @@ namespace TcoInspectorsUnitTests
 
             InspectorContainer.ExecuteProbeRun((int)eInspectorTests.Inspect);
             Assert.AreEqual(eInspectorResult.Passed, InspectorContainer.Inspector.ResultAsEnum);
-            Assert.AreEqual(eOverallResult.InProgress, (eOverallResult)InspectorContainer._overallResult.Result.Synchron);
+            Assert.AreEqual(
+                eOverallResult.InProgress,
+                (eOverallResult)InspectorContainer._overallResult.Result.Synchron
+            );
         }
 
         [Test]
@@ -369,7 +412,10 @@ namespace TcoInspectorsUnitTests
 
             InspectorContainer.ExecuteProbeRun((int)eInspectorTests.Inspect);
             Assert.AreEqual(eInspectorResult.Passed, InspectorContainer.Inspector.ResultAsEnum);
-            Assert.AreEqual(eOverallResult.NoAction, (eOverallResult)InspectorContainer._overallResult.Result.Synchron);
+            Assert.AreEqual(
+                eOverallResult.NoAction,
+                (eOverallResult)InspectorContainer._overallResult.Result.Synchron
+            );
         }
 
         [Test]
@@ -380,7 +426,10 @@ namespace TcoInspectorsUnitTests
 
             InspectorContainer.ExecuteProbeRun((int)eInspectorTests.Inspect);
             Assert.AreEqual(eInspectorResult.Failed, InspectorContainer.Inspector.ResultAsEnum);
-            Assert.AreEqual(eOverallResult.Failed, (eOverallResult)InspectorContainer._overallResult.Result.Synchron);
+            Assert.AreEqual(
+                eOverallResult.Failed,
+                (eOverallResult)InspectorContainer._overallResult.Result.Synchron
+            );
         }
 
         [Test]
@@ -391,7 +440,10 @@ namespace TcoInspectorsUnitTests
 
             InspectorContainer.ExecuteProbeRun((int)eInspectorTests.Inspect);
             Assert.AreEqual(eInspectorResult.Failed, InspectorContainer.Inspector.ResultAsEnum);
-            Assert.AreEqual(eOverallResult.Failed, (eOverallResult)InspectorContainer._overallResult.Result.Synchron);
+            Assert.AreEqual(
+                eOverallResult.Failed,
+                (eOverallResult)InspectorContainer._overallResult.Result.Synchron
+            );
         }
 
         [Test]
@@ -402,7 +454,10 @@ namespace TcoInspectorsUnitTests
 
             InspectorContainer.ExecuteProbeRun((int)eInspectorTests.Inspect);
             Assert.AreEqual(eInspectorResult.Failed, InspectorContainer.Inspector.ResultAsEnum);
-            Assert.AreEqual(eOverallResult.Failed, (eOverallResult)InspectorContainer._overallResult.Result.Synchron);
-        }        
+            Assert.AreEqual(
+                eOverallResult.Failed,
+                (eOverallResult)InspectorContainer._overallResult.Result.Synchron
+            );
+        }
     }
 }

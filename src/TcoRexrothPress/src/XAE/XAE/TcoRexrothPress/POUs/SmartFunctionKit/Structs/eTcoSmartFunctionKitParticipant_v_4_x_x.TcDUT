@@ -3,14 +3,11 @@
   <DUT Name="eTcoSmartFunctionKitParticipant_v_4_x_x" Id="{2c7c48de-6ab2-40ac-9be2-4f4c489b1dda}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE
-    eTcoSmartFunctionKitParticipant_v_4_x_x :
-    (
-        WebInterface := 1,
-        Fieldbus := 2,
-        PhysicalInputsOutputs := 3
-    );
-END_TYPE
-]]></Declaration>
+TYPE eTcoSmartFunctionKitParticipant_v_4_x_x : (
+    WebInterface := 1,
+    Fieldbus := 2,
+    PhysicalInputsOutputs := 3
+);
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -1,16 +1,16 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using Vortex.Connector;
-using System.Collections.ObjectModel;
-using System.Windows.Media;
-using System.Windows.Input;
+﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
+using System.Windows.Media;
 using TcOpen.Inxton.TcoCore.Wpf;
 using TcOpen.Inxton.TcoIo.Wpf.Diagnostics.EtherCAT;
+using Vortex.Connector;
 
 namespace TcoIo
 {
@@ -19,29 +19,45 @@ namespace TcoIo
     /// </summary>
     public partial class TopologyRenderer : UserControl
     {
-        private int row, maxrow, column, maxcolumn = 0;
-        private double Pos_X, MaxPos_X, Pos_Y, MaxPos_Y = 0.0;
+        private int row,
+            maxrow,
+            column,
+            maxcolumn = 0;
+        private double Pos_X,
+            MaxPos_X,
+            Pos_Y,
+            MaxPos_Y = 0.0;
         TopologyObject previousTopologyObject;
         ObservableCollection<TopologyObject> topologyObjects;
         static double strokeThicknessDef = 10.0;
-        static string _name , _conection , _boxtype, _physics;
+        static string _name,
+            _conection,
+            _boxtype,
+            _physics;
         public double zoom = 1.0;
         public ushort SummaryInfoDataState = 0;
         private IVortexObject dt;
         public List<GroupedViewItemObject> groupedViewItems = new List<GroupedViewItemObject>();
-        public bool FirstTopologyElementReached , LastTopologyElementReached , syncUnitError = false;
-        private int FirstElementRow, LastElementRow, FirstElementColumn, LastElementColumn = -1;
-        private IVortexObject firstTopologyElement, lastTopologyElement;
+        public bool FirstTopologyElementReached,
+            LastTopologyElementReached,
+            syncUnitError = false;
+        private int FirstElementRow,
+            LastElementRow,
+            FirstElementColumn,
+            LastElementColumn = -1;
+        private IVortexObject firstTopologyElement,
+            lastTopologyElement;
         private System.Timers.Timer visibilityCheckTimer;
         private static System.Timers.Timer generatingWindowHideTimer;
-        private bool isVisible, alreadyRendered = false;
+        private bool isVisible,
+            alreadyRendered = false;
         private static Generating generating;
         private static bool rendering = false;
         public static bool Rendering
         {
             get { return rendering; }
-            set 
-            { 
+            set
+            {
                 rendering = value;
                 if (!rendering)
                 {
@@ -53,7 +69,6 @@ namespace TcoIo
                 }
             }
         }
-
 
         public static Generating Generating
         {
@@ -86,7 +101,10 @@ namespace TcoIo
             }
         }
 
-        private void TopologyRenderer_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void TopologyRenderer_DataContextChanged(
+            object sender,
+            DependencyPropertyChangedEventArgs e
+        )
         {
             if (this.DataContext as IVortexObject != null)
             {
@@ -94,9 +112,10 @@ namespace TcoIo
             }
         }
 
-
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         private void SetVisibilityTimer()
         {
@@ -114,12 +133,14 @@ namespace TcoIo
             if (generatingWindowHideTimer == null)
             {
                 generatingWindowHideTimer = new System.Timers.Timer(1000);
-                generatingWindowHideTimer.Elapsed += GeneratingWindowHideTimer_Elapsed; ;
+                generatingWindowHideTimer.Elapsed += GeneratingWindowHideTimer_Elapsed;
+                ;
                 generatingWindowHideTimer.AutoReset = false;
                 generatingWindowHideTimer.Enabled = true;
             }
             generatingWindowHideTimer.Start();
         }
+
         private static void ResetGeneratingWindowHideTimer()
         {
             if (generatingWindowHideTimer != null)
@@ -127,7 +148,11 @@ namespace TcoIo
                 generatingWindowHideTimer.Stop();
             }
         }
-        private static void GeneratingWindowHideTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+
+        private static void GeneratingWindowHideTimer_Elapsed(
+            object sender,
+            System.Timers.ElapsedEventArgs e
+        )
         {
             TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() =>
             {
@@ -141,7 +166,7 @@ namespace TcoIo
             {
                 if (IsVisible)
                 {
-                    if(!alreadyRendered)
+                    if (!alreadyRendered)
                     {
                         RenderCompleteTopology();
                         alreadyRendered = true;

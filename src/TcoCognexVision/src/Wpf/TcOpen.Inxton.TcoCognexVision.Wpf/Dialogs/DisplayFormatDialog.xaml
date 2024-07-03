@@ -1,14 +1,16 @@
-﻿<Window x:Class="TcoCognexVision.DisplayFormatDialog"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TcoCognexVision"
-        mc:Ignorable="d"
-        Title="Display format" 
-        SizeToContent="WidthAndHeight" 
-        WindowStartupLocation="CenterScreen"
-        MinWidth="300">
+﻿<Window
+  x:Class="TcoCognexVision.DisplayFormatDialog"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:local="clr-namespace:TcoCognexVision"
+  mc:Ignorable="d"
+  Title="Display format"
+  SizeToContent="WidthAndHeight"
+  WindowStartupLocation="CenterScreen"
+  MinWidth="300"
+>
     <Grid Margin="10" DataContext="{Binding }">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -18,10 +20,26 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Content="Display data as:"/>
-        <ComboBox x:Name="cbRequiredFormat" Grid.Row="0" Grid.Column="1" SelectionChanged="cbRequiredFormat_SelectionChanged" />
-        <WrapPanel Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center"  Margin="0,15,0,0">
-            <Button IsCancel="True" x:Name="btnDialogCancel" Width="80" Click="btnDialogCancel_Click" Content ="Cancel"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="Display data as:" />
+        <ComboBox
+      x:Name="cbRequiredFormat"
+      Grid.Row="0"
+      Grid.Column="1"
+      SelectionChanged="cbRequiredFormat_SelectionChanged"
+    />
+        <WrapPanel
+      Grid.Row="2"
+      Grid.ColumnSpan="2"
+      HorizontalAlignment="Center"
+      Margin="0,15,0,0"
+    >
+            <Button
+        IsCancel="True"
+        x:Name="btnDialogCancel"
+        Width="80"
+        Click="btnDialogCancel_Click"
+        Content="Cancel"
+      />
         </WrapPanel>
     </Grid>
 </Window>

@@ -5,20 +5,15 @@ namespace TcOpen.Inxton.Data.InMemory
 {
     public class SameObjectReferenceException : Exception
     {
-        public SameObjectReferenceException()
-        {
-        }
-        
-        public SameObjectReferenceException(string message) : base(message)
-        {
-        }
+        public SameObjectReferenceException() { }
 
-        public SameObjectReferenceException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
+        public SameObjectReferenceException(string message)
+            : base(message) { }
 
-        protected SameObjectReferenceException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        public SameObjectReferenceException(string message, Exception innerException)
+            : base(message, innerException) { }
+
+        protected SameObjectReferenceException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

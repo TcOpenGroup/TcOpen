@@ -6,16 +6,14 @@
 {attribute addProperty Id "DevCtrlAT %Q*UINT2Frm0CtrlAT %Q*UINT2Frm0WcCtrlAT %Q*UINT2"}
 {attribute addProperty CRC "599846173"}
 {attribute addProperty Size "6"}
-TYPE Outputs_23C0ED1D :
-STRUCT
-	{attribute addProperty Name "DevCtrl"}
-	DevCtrl AT %Q* : UINT;
-	{attribute addProperty Name "Frm0Ctrl"}
-	Frm0Ctrl AT %Q* : UINT;
-	{attribute addProperty Name "Frm0WcCtrl"}
-	Frm0WcCtrl AT %Q* : UINT;
+TYPE Outputs_23C0ED1D : STRUCT
+    {attribute addProperty Name "DevCtrl"}
+    DevCtrl AT %Q* : UINT;
+    {attribute addProperty Name "Frm0Ctrl"}
+    Frm0Ctrl AT %Q* : UINT;
+    {attribute addProperty Name "Frm0WcCtrl"}
+    Frm0WcCtrl AT %Q* : UINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

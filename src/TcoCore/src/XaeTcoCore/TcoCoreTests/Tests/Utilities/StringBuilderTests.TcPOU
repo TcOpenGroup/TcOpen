@@ -3,10 +3,9 @@
   <POU Name="StringBuilderTests" Id="{0281a88e-2ecd-0d34-1bf3-8e430317f9db}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK StringBuilderTests
 VAR
-	StringBuilder : TcoCore.StringBuilder();
-	StringBuilderResult : STRING;
-END_VAR
-]]></Declaration>
+    StringBuilder : TcoCore.StringBuilder();
+    StringBuilderResult : STRING;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
@@ -14,7 +13,7 @@ END_VAR
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD Append
 VAR_INPUT
-	ToAppend : STRING;
+    ToAppend : STRING;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[StringBuilder.Append(ToAppend);
@@ -23,13 +22,10 @@ StringBuilderResult := StringBuilder._workString;]]></ST>
     </Method>
     <Method Name="AppendAnyTest" Id="{0674bf32-0aa6-01b8-156c-11f3869a6660}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD AppendAnyTest
-
-
-]]></Declaration>
+METHOD AppendAnyTest]]></Declaration>
       <Implementation>
         <ST><![CDATA[StringBuilder.Clear();
-// There was a strange compile-time error here... about function requiring exactly one input... could not get arround that... next time... 
+// There was a strange compile-time error here... about function requiring exactly one input... could not get arround that... next time...
 // 'AppendAny' is internal in the production code
 //				     .AppendAny(_bool);
 //					 .AppendAny(_real)
@@ -41,9 +37,7 @@ METHOD AppendAnyTest
 //					 .AppendAny(_wstring)
 //					 .AppendAny(_tod)
 //					 .AppendAny(_int);
-StringBuilderResult := StringBuilder._workString;
-
-]]></ST>
+StringBuilderResult := StringBuilder._workString;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Clear" Id="{164e99fa-4a83-04c8-2daa-d44516b3f0b2}">
@@ -58,18 +52,8 @@ StringBuilderResult := StringBuilder._workString;]]></ST>
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD FluentApi : STRING]]></Declaration>
       <Implementation>
-        <ST><![CDATA[FluentApi := StringBuilder
-	.Clear()
-	.Append('1')
-	.Append('2')
-	.Append('3')
-	.Append('4')
-	.Clear()
-	.Append('1')
-	.Append('2')
-	.Append('3')
-	.Append('4')
-	.ToString();]]></ST>
+        <ST><![CDATA[FluentApi :=
+    StringBuilder.Clear().Append('1').Append('2').Append('3').Append('4').Clear().Append('1').Append('2').Append('3').Append('4').ToString();]]></ST>
       </Implementation>
     </Method>
     <Method Name="ToString" Id="{846c6a91-7892-0d0b-1eff-bbd62d279f18}">

@@ -1,10 +1,10 @@
+using System.Threading;
+using System.Threading.Tasks;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
-using TcoInspectorsTests;
 using Tc.Prober.Runners;
 using TcoInspectors;
-using System.Threading.Tasks;
-using System.Threading;
+using TcoInspectorsTests;
 
 namespace Legacy.TcoInspectorsUnitTests
 {
@@ -26,7 +26,6 @@ namespace Legacy.TcoInspectorsUnitTests
             container._sut._data.FlushPlainToOnline(plain);
             container.ExecuteProbeRun(1, 0);
         }
-
 
         [Test]
         [TestCase(true, false)]
@@ -50,13 +49,13 @@ namespace Legacy.TcoInspectorsUnitTests
         {
             container._sut._data.RequiredStatus.Synchron = required;
             container._inspectedValue.Synchron = actualSignal;
-            
+
             container.ExecuteProbeRun((int)eDigitalInspectorTests.Inspect);
 
             Assert.AreEqual(eInspectorResult.Passed, container._sut.ResultAsEnum);
         }
 
-        [Test]     
+        [Test]
         public void inspect_bypassed()
         {
             container._sut._data.IsByPassed.Synchron = true;
@@ -70,7 +69,7 @@ namespace Legacy.TcoInspectorsUnitTests
 
         [Test]
         [TestCase(true, true)]
-        [TestCase(false, false)]     
+        [TestCase(false, false)]
         public void inspect_excluded(bool required, bool actualSignal)
         {
             container._sut._data.RequiredStatus.Synchron = required;
@@ -94,7 +93,7 @@ namespace Legacy.TcoInspectorsUnitTests
 
             container.ExecuteProbeRun(1, (int)eDigitalInspectorTests.GetResult);
 
-            Assert.AreEqual((short)eInspectorResult.Passed, container._result.Synchron);           
+            Assert.AreEqual((short)eInspectorResult.Passed, container._result.Synchron);
         }
 
         [Test]
@@ -110,17 +109,17 @@ namespace Legacy.TcoInspectorsUnitTests
             Assert.AreEqual((short)eInspectorResult.Failed, container._result.Synchron);
         }
 
-        [Test]       
+        [Test]
         public void inspect_pass_time_more_than_file_time_must_fail()
         {
             container._sut._data.RequiredStatus.Synchron = true;
             container._inspectedValue.Synchron = true;
             container._sut._data.PassTime.Synchron = System.TimeSpan.FromMilliseconds(1000);
-            container._sut._data.FailTime.Synchron = System.TimeSpan.FromMilliseconds(500);            
+            container._sut._data.FailTime.Synchron = System.TimeSpan.FromMilliseconds(500);
 
             container.ExecuteProbeRun((int)eDigitalInspectorTests.Inspect);
 
-            Assert.AreEqual(eInspectorResult.Failed, container._sut.ResultAsEnum);            
+            Assert.AreEqual(eInspectorResult.Failed, container._sut.ResultAsEnum);
         }
 
         [Test]
@@ -132,7 +131,14 @@ namespace Legacy.TcoInspectorsUnitTests
             container._sut._data.FailTime.Synchron = System.TimeSpan.FromMilliseconds(700);
 
             var run = true;
-            var task = Task.Run(() => { while (run) { Thread.Sleep(10); container._inspectedValue.Synchron = !container._inspectedValue.Synchron; } });
+            var task = Task.Run(() =>
+            {
+                while (run)
+                {
+                    Thread.Sleep(10);
+                    container._inspectedValue.Synchron = !container._inspectedValue.Synchron;
+                }
+            });
 
             container.ExecuteProbeRun((int)eDigitalInspectorTests.Inspect);
             run = false;
@@ -153,7 +159,7 @@ namespace Legacy.TcoInspectorsUnitTests
             for (int i = 0; i < 9; i++)
             {
                 container.ExecuteProbeRun(1, 0);
-                container.ExecuteProbeRun((int)eDigitalInspectorTests.Inspect);               
+                container.ExecuteProbeRun((int)eDigitalInspectorTests.Inspect);
             }
 
             Assert.AreEqual(9, container._sut._data.RetryAttemptsCount.Synchron);
@@ -166,19 +172,18 @@ namespace Legacy.TcoInspectorsUnitTests
             container._inspectedValue.Synchron = true;
             container.ExecuteProbeRun(1, 0);
             container.ExecuteProbeRun((int)eDigitalInspectorTests.Inspect);
-            container.ExecuteProbeRun(1,(int)eDigitalInspectorTests.GetResult);
+            container.ExecuteProbeRun(1, (int)eDigitalInspectorTests.GetResult);
 
             Assert.AreEqual(eInspectorResult.Failed, container._sut.ResultAsEnum);
             Assert.AreEqual(true, container._isOverIspected.Synchron);
-
         }
 
-        [Test]        
+        [Test]
         public void inspect_store_over_all_no_action_and_inspect_failed_test()
         {
             container._sut._data.RequiredStatus.Synchron = true;
             container._inspectedValue.Synchron = false;
-            container._overallResult.Result.Synchron = (short)eOverallResult.NoAction;            
+            container._overallResult.Result.Synchron = (short)eOverallResult.NoAction;
 
             container.ExecuteProbeRun((int)eDigitalInspectorTests.Inspect);
 
@@ -243,7 +248,7 @@ namespace Legacy.TcoInspectorsUnitTests
         [Test]
         public void inspect_on_fail_failed_carry_on_test()
         {
-            container._sut._data.RequiredStatus.Synchron = true;            
+            container._sut._data.RequiredStatus.Synchron = true;
             container._inspectedValue.Synchron = false;
             container._overallResult.Result.Synchron = (short)eOverallResult.Failed;
             var initialState = container._coordinator._state.Synchron;
@@ -253,20 +258,20 @@ namespace Legacy.TcoInspectorsUnitTests
             Assert.AreEqual(eInspectorResult.Failed, container._sut.ResultAsEnum);
             Assert.AreEqual((short)eOverallResult.Failed, container._overallResult.Result.Synchron);
 
-            Assert.AreEqual(expectedState, container._coordinator._state.Synchron);            
+            Assert.AreEqual(expectedState, container._coordinator._state.Synchron);
         }
 
         [Test]
         public void inspect_on_fail_passed_carry_on_test()
         {
             container._sut._data.RequiredStatus.Synchron = true;
-            container._inspectedValue.Synchron = true;            
+            container._inspectedValue.Synchron = true;
             var initialState = container._coordinator._state.Synchron;
             var expectedState = initialState + 1;
 
             container.ExecuteProbeRun((int)eDigitalInspectorTests.OnFailCarryOn);
             Assert.AreEqual(eInspectorResult.Passed, container._sut.ResultAsEnum);
-           
+
             Assert.AreEqual(expectedState, container._coordinator._state.Synchron);
         }
 
@@ -275,7 +280,7 @@ namespace Legacy.TcoInspectorsUnitTests
         {
             container._sut._data.RequiredStatus.Synchron = true;
             container._inspectedValue.Synchron = false;
-            
+
             var expectedState = 8005;
 
             container.ExecuteProbeRun((int)eDigitalInspectorTests.OnFailTerminate);
@@ -316,8 +321,8 @@ namespace Legacy.TcoInspectorsUnitTests
         public void inspect_on_fail_failed_retry_test()
         {
             container._sut._data.RequiredStatus.Synchron = true;
-            container._inspectedValue.Synchron = false;            
-            var initialState = container._coordinator._state.Synchron; 
+            container._inspectedValue.Synchron = false;
+            var initialState = container._coordinator._state.Synchron;
             var expectedState = (short)(initialState - 10);
             container._retryState.Synchron = expectedState;
 

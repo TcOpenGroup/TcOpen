@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 
-
 namespace Grafana.Backend.Model
 {
     internal enum enumModes
@@ -11,6 +10,7 @@ namespace Grafana.Backend.Model
         Ground = 2000,
         Service = 3000
     }
+
     public class enumModesObservedValue : IObservedValue<ushort>
     {
         public dynamic _recordId { get; set; }
@@ -24,9 +24,11 @@ namespace Grafana.Backend.Model
         {
             Timestamp = DateTime.Now;
             Value = value;
-            ValueDescription = Enum.GetValues(typeof(enumModes)).Cast<enumModes>().FirstOrDefault(x => (int)x == value).ToString();
+            ValueDescription = Enum.GetValues(typeof(enumModes))
+                .Cast<enumModes>()
+                .FirstOrDefault(x => (int)x == value)
+                .ToString();
             _recordId = Guid.NewGuid().ToString();
         }
     }
-
 }

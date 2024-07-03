@@ -14,23 +14,26 @@ namespace TcoDrivesBeckhoff
             DataHandler = dataSet;
         }
 
-          
-        public ObservableCollection<string> ListOfDataSets { 
+        public ObservableCollection<string> ListOfDataSets
+        {
             get
             {
-                var items = DataHandler.Repository.Queryable.Select(p => p._EntityId).OrderBy(i => i).ToList();
-                return  new ObservableCollection<string>(items);
+                var items = DataHandler
+                    .Repository.Queryable.Select(p => p._EntityId)
+                    .OrderBy(i => i)
+                    .ToList();
+                return new ObservableCollection<string>(items);
             }
         }
-       
 
         /// <summary>
         /// Gets current set.
         /// </summary>
-        public EntitySet<PositioningParamItem> CurrentSet { get; set; } = new EntitySet<PositioningParamItem>();
+        public EntitySet<PositioningParamItem> CurrentSet { get; set; } =
+            new EntitySet<PositioningParamItem>();
 
         /// <summary>
-        /// Gets production of this 
+        /// Gets production of this
         /// </summary>
         protected RepositoryDataSetHandler<PositioningParamItem> DataHandler { get; }
 
@@ -42,20 +45,19 @@ namespace TcoDrivesBeckhoff
         {
             try
             {
-                var result = DataHandler.Repository.Queryable.FirstOrDefault(p => p._EntityId == setid);
+                var result = DataHandler.Repository.Queryable.FirstOrDefault(p =>
+                    p._EntityId == setid
+                );
 
                 if (result != null)
                     CurrentSet = DataHandler.Read(setid);
-
 
                 OnPropertyChanged(nameof(CurrentSet));
             }
             catch (Exception)
             {
-
                 //todo
             }
-          
         }
 
         /// <summary>
@@ -76,14 +78,9 @@ namespace TcoDrivesBeckhoff
             }
             catch (Exception)
             {
-
-               //todo
+                //todo
             }
-         
-
-
         }
-
 
         /// <summary>
         /// Delete set from the repository.
@@ -97,18 +94,14 @@ namespace TcoDrivesBeckhoff
                 {
                     DataHandler.Repository.Delete(setId);
                 }
- 
+
                 OnPropertyChanged(nameof(CurrentSet));
                 OnPropertyChanged(nameof(ListOfDataSets));
             }
             catch (Exception)
             {
-
                 //todo
             }
-
-
-
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -117,10 +110,5 @@ namespace TcoDrivesBeckhoff
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-
-
-
     }
-
 }

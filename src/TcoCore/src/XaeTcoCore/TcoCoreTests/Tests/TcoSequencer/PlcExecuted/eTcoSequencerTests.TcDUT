@@ -3,8 +3,7 @@
   <DUT Name="eTcoSequencerTests" Id="{86900338-736d-0318-0242-d420a2213c90}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE eTcoSequencerTests :
-(
+TYPE eTcoSequencerTests : (
     none := -1,
     CallSequencerBodiesOnly := 100,
     RestoreSequencers,
@@ -56,11 +55,11 @@ TYPE eTcoSequencerTests :
     SwitchStepModeOnDuringStepExecution := 691,
     StepModeStepForwardFromRunningStep := 693,
     StepModeStepBackwardFromRunningStep := 695,
-	SwitchStepModeStepOffFromReadyToRun := 696,
-	SwitchStepModeStepOnFromRunning := 697,
-	SwitchStepModeStepOffFromRunning := 698,
+    SwitchStepModeStepOffFromReadyToRun := 696,
+    SwitchStepModeStepOnFromRunning := 697,
+    SwitchStepModeStepOffFromRunning := 698,
     OnStateChangeWhenChangingModes := 699
 );
-END_TYPE														]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

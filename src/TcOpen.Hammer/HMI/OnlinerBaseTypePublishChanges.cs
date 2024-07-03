@@ -1,7 +1,7 @@
-﻿using PlcHammer;
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using PlcHammer;
 using TcOpen.Inxton.Data;
 using Vortex.Connector.ValueTypes;
 
@@ -12,8 +12,8 @@ namespace HMI
         /// <summary>
         /// A function which will subscribe to an Onliner in a PLC.
         /// It will publish every change it detectes to an IRepository.
-        /// A new value is passed to the Creator function, which should be used to create and object of IObservedValue<T> which will be stored in the database     
-        /// 
+        /// A new value is passed to the Creator function, which should be used to create and object of IObservedValue<T> which will be stored in the database
+        ///
         /// </summary>
         /// <code>
         ///     var repoSettings = new MongoDbRepositorySettings<enumModesObservedValue>(Constants.CONNECTION_STRING_DB, Constants.DB_NAME, "observedModes");
@@ -27,35 +27,43 @@ namespace HMI
         /// <param name="onliner">The variable in PLC we're intereseted in</param>
         /// <param name="repository">The destionation repository where all the changes will be published to</param>
         /// <param name="Creator">Function which creates a IObservedValue<T> and also IBrowsableDataObject for the Repository</param>
-        public static OnlinerBaseType<T> PublishChanges<T>(this OnlinerBaseType<T> onliner, IRepository repository, Func<T, IObservedValue<T>> Creator)
+        public static OnlinerBaseType<T> PublishChanges<T>(
+            this OnlinerBaseType<T> onliner,
+            IRepository repository,
+            Func<T, IObservedValue<T>> Creator
+        )
         {
-            onliner.Subscribe((tag, newValue) =>
-            {
-                var observedEntity = Creator((T)newValue.NewValue);
-                if (observedEntity.ValueDescription == null)
+            onliner.Subscribe(
+                (tag, newValue) =>
                 {
-                    observedEntity.ValueDescription = onliner.Symbol;
+                    var observedEntity = Creator((T)newValue.NewValue);
+                    if (observedEntity.ValueDescription == null)
+                    {
+                        observedEntity.ValueDescription = onliner.Symbol;
+                    }
+                    if (observedEntity.Name == null)
+                    {
+                        observedEntity.Name = onliner.AttributeName;
+                    }
+                    _ = Task.Run(() =>
+                    {
+                        try
+                        {
+                            repository?.Create(observedEntity._recordId, observedEntity);
+                        }
+                        catch (Exception e)
+                        {
+                            TcOpen.Inxton.TcoAppDomain.Current.Logger.Error(
+                                $"Error {e} while publishing changes for {0}",
+                                onliner
+                            );
+                        }
+                    });
                 }
-                if (observedEntity.Name == null)
-                {
-                    observedEntity.Name = onliner.AttributeName;
-                }
-                _ = Task.Run(() =>
-                  {
-                      try
-                      {
-                          repository?.Create(observedEntity._recordId, observedEntity);
-                      }
-                      catch (Exception e)
-                      {
-                          TcOpen.Inxton.TcoAppDomain.Current.Logger.Error($"Error {e} while publishing changes for {0}", onliner);
-                      }
-                  });
-            });
+            );
             return onliner;
         }
     }
-
 
     public interface IObservedValue<T> : IBrowsableDataObject
     {
@@ -67,6 +75,7 @@ namespace HMI
         T Value { get; set; }
         string ValueDescription { get; set; }
     }
+
     public class ObservedValue<T> : IObservedValue<T>
     {
         public dynamic _recordId { get; set; }
@@ -82,6 +91,7 @@ namespace HMI
             Value = value;
         }
     }
+
     public class enumModesObservedValue : IObservedValue<short>
     {
         public dynamic _recordId { get; set; }
@@ -95,16 +105,13 @@ namespace HMI
         {
             Timestamp = DateTime.Now;
             Value = value;
-            ValueDescription = Enum.GetValues(typeof(enumModes)).Cast<enumModes>().FirstOrDefault(x => (int)x == value).ToString();
+            ValueDescription = Enum.GetValues(typeof(enumModes))
+                .Cast<enumModes>()
+                .FirstOrDefault(x => (int)x == value)
+                .ToString();
             _recordId = Guid.NewGuid().ToString();
         }
     }
 
 #pragma warning restore IDE1006 // Naming Styles
-
-
-
 }
-
-
-

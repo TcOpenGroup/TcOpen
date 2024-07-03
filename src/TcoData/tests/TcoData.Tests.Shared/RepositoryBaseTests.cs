@@ -1,6 +1,6 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
 using System.Linq;
+using NUnit.Framework;
 using TcOpen.Inxton.Data;
 
 namespace TcoDataUnitTests
@@ -53,7 +53,12 @@ namespace TcoDataUnitTests
         public void CreateTest()
         {
             //-- Arrange
-            var testObject = new DataTestObject() { Name = "Pepo", DateOfBirth = DateTime.Now, Age = 15 };
+            var testObject = new DataTestObject()
+            {
+                Name = "Pepo",
+                DateOfBirth = DateTime.Now,
+                Age = 15
+            };
             var id = $"test_{Guid.NewGuid()}";
             //-- Act
             repository.Create(id, testObject);
@@ -66,7 +71,12 @@ namespace TcoDataUnitTests
         public void CreateWithDelegatesTest()
         {
             //-- Arrange
-            var testObject = new DataTestObject() { Name = "Pepo", DateOfBirth = DateTime.Now, Age = 15 };
+            var testObject = new DataTestObject()
+            {
+                Name = "Pepo",
+                DateOfBirth = DateTime.Now,
+                Age = 15
+            };
             var id = $"test_{Guid.NewGuid()}";
             var onCreateCalled = false;
             var onCreateDoneCalled = false;
@@ -76,7 +86,8 @@ namespace TcoDataUnitTests
             repository.OnCreate = null;
             repository.OnCreate = (identifier, data) => onCreateCalled = id == identifier;
             repository.OnCreateDone = (identifier, data) => onCreateDoneCalled = id == identifier;
-            repository.OnCreateFailed = (identifier, data, exception) => onCreateFailedCalled = exception != null;
+            repository.OnCreateFailed = (identifier, data, exception) =>
+                onCreateFailedCalled = exception != null;
             repository.Create(id, testObject);
 
             //-- Assert
@@ -92,7 +103,13 @@ namespace TcoDataUnitTests
             //-- Arrange
             DateTimeProviders.DateTimeProvider = new StandardDateTimeProvider();
             var recordName = $"test_read_{Guid.NewGuid()}";
-            var testObject = new DataTestObject() { Name = recordName, DateOfBirth = DateTime.Now, Age = 25, _Created = new DateTime() };
+            var testObject = new DataTestObject()
+            {
+                Name = recordName,
+                DateOfBirth = DateTime.Now,
+                Age = 25,
+                _Created = new DateTime()
+            };
             repository.Create(recordName, testObject);
 
             //-- Act
@@ -113,7 +130,13 @@ namespace TcoDataUnitTests
             DateTimeProviders.DateTimeProvider = new StandardDateTimeProvider();
             var recordName = $"test_read_{Guid.NewGuid()}";
 
-            var testObject = new DataTestObject() { Name = recordName, DateOfBirth = DateTime.Now, Age = 25, _Created = DateTimeProviders.DateTimeProvider.Now };
+            var testObject = new DataTestObject()
+            {
+                Name = recordName,
+                DateOfBirth = DateTime.Now,
+                Age = 25,
+                _Created = DateTimeProviders.DateTimeProvider.Now
+            };
             repository.Create(recordName, testObject);
             var onReadCalled = false;
             var onReadDoneCalled = false;
@@ -140,7 +163,12 @@ namespace TcoDataUnitTests
         {
             //-- Arrange
             var recordName = "test_update_" + Guid.NewGuid();
-            var testObject = new DataTestObject() { Name = "Pepo prior update", DateOfBirth = DateTime.Now, Age = 88 };
+            var testObject = new DataTestObject()
+            {
+                Name = "Pepo prior update",
+                DateOfBirth = DateTime.Now,
+                Age = 88
+            };
             repository.Create(recordName, testObject);
 
             System.Threading.Thread.Sleep(200);
@@ -164,7 +192,12 @@ namespace TcoDataUnitTests
         {
             //-- Arrange
             var recordName = "test_update_" + Guid.NewGuid();
-            var testObject = new DataTestObject() { Name = "Pepo prior update", DateOfBirth = DateTime.Now, Age = 88 };
+            var testObject = new DataTestObject()
+            {
+                Name = "Pepo prior update",
+                DateOfBirth = DateTime.Now,
+                Age = 88
+            };
             repository.Create(recordName, testObject);
 
             var onUpdateCalled = false;
@@ -200,20 +233,33 @@ namespace TcoDataUnitTests
         public void CreateDuplicateExceptionTest()
         {
             //-- Arrange
-            var testObject = new DataTestObject() { Name = "Pepo", DateOfBirth = DateTime.Now, Age = 15 };
+            var testObject = new DataTestObject()
+            {
+                Name = "Pepo",
+                DateOfBirth = DateTime.Now,
+                Age = 15
+            };
             var id = $"test_{Guid.NewGuid()}";
             //-- Act
             repository.Create(id, testObject);
 
             //-- Assert
-            Assert.Throws(typeof(DuplicateIdException), () => repository.Create(id, new DataTestObject()));
+            Assert.Throws(
+                typeof(DuplicateIdException),
+                () => repository.Create(id, new DataTestObject())
+            );
         }
 
         [Test()]
         public void CreateDuplicateExceptionWithDelegatesTest()
         {
             //-- Arrange
-            var testObject = new DataTestObject() { Name = "Pepo", DateOfBirth = DateTime.Now, Age = 15 };
+            var testObject = new DataTestObject()
+            {
+                Name = "Pepo",
+                DateOfBirth = DateTime.Now,
+                Age = 15
+            };
             var onCreateCalled = false;
             var onCreateDoneCalled = false;
             var onCreateFailedCalled = false;
@@ -222,11 +268,19 @@ namespace TcoDataUnitTests
             //-- Act
             repository.Create(entityId, testObject);
             repository.OnCreate = null;
-            repository.OnCreate = (id, data) => { OnTcoCreate(id, data); onCreateCalled = true; };
+            repository.OnCreate = (id, data) =>
+            {
+                OnTcoCreate(id, data);
+                onCreateCalled = true;
+            };
             repository.OnCreateDone = (id, data) => onCreateDoneCalled = true;
-            repository.OnCreateFailed = (id, data, ex) => onCreateFailedCalled = ex.GetType() == typeof(DuplicateIdException);
+            repository.OnCreateFailed = (id, data, ex) =>
+                onCreateFailedCalled = ex.GetType() == typeof(DuplicateIdException);
             //-- Assert
-            Assert.Throws(typeof(DuplicateIdException), () => repository.Create(entityId, new DataTestObject()));
+            Assert.Throws(
+                typeof(DuplicateIdException),
+                () => repository.Create(entityId, new DataTestObject())
+            );
             Assert.True(onCreateCalled);
             Assert.False(onCreateDoneCalled);
             Assert.True(onCreateFailedCalled);
@@ -236,8 +290,12 @@ namespace TcoDataUnitTests
         public void UnableLocateRecordReadExceptionTest()
         {
             //-- Assert
-            Assert.Throws(typeof(UnableToLocateRecordId), () => repository.Read("nonexisting_record"));
+            Assert.Throws(
+                typeof(UnableToLocateRecordId),
+                () => repository.Read("nonexisting_record")
+            );
         }
+
         [Test()]
         public void UnableLocateRecordReadExceptionWithDelegatesTest()
         {
@@ -251,7 +309,10 @@ namespace TcoDataUnitTests
             repository.OnReadFailed = (id, ex) => onReadFailedCalled = ex is UnableToLocateRecordId;
 
             //-- Assert
-            Assert.Throws(typeof(UnableToLocateRecordId), () => repository.Read("nonexisting_record"));
+            Assert.Throws(
+                typeof(UnableToLocateRecordId),
+                () => repository.Read("nonexisting_record")
+            );
             Assert.True(onReadCalled);
             Assert.False(onReadDoneCalled);
             Assert.True(onReadFailedCalled);
@@ -263,7 +324,10 @@ namespace TcoDataUnitTests
             //-- Arrange
             var entityId = $"nonexisting_record_{Guid.NewGuid()}";
             //-- Assert
-            Assert.Throws(typeof(UnableToUpdateRecord), () => repository.Update(entityId, new DataTestObject() { _EntityId = entityId }));
+            Assert.Throws(
+                typeof(UnableToUpdateRecord),
+                () => repository.Update(entityId, new DataTestObject() { _EntityId = entityId })
+            );
         }
 
         [Test()]
@@ -278,9 +342,13 @@ namespace TcoDataUnitTests
             repository.OnUpdate = null;
             repository.OnUpdate = (id, data) => onUpdateCalled = true;
             repository.OnUpdateDone = (id, data) => onUpdateDoneCalled = true;
-            repository.OnUpdateFailed = (id, data, ex) => onUpdateFailedCalled = ex is UnableToUpdateRecord;
+            repository.OnUpdateFailed = (id, data, ex) =>
+                onUpdateFailedCalled = ex is UnableToUpdateRecord;
             //-- Assert
-            Assert.Throws(typeof(UnableToUpdateRecord), () => repository.Update(entityId, new DataTestObject() { _EntityId = entityId }));
+            Assert.Throws(
+                typeof(UnableToUpdateRecord),
+                () => repository.Update(entityId, new DataTestObject() { _EntityId = entityId })
+            );
             Assert.True(onUpdateCalled);
             Assert.False(onUpdateDoneCalled);
             Assert.True(onUpdateFailedCalled);
@@ -292,7 +360,10 @@ namespace TcoDataUnitTests
             //-- Arrange
             var entityId = $"test_{Guid.NewGuid()}";
             //-- Assert
-            Assert.Throws(typeof(IdentifierValueMismatchedException), () => repository.Update(entityId, new DataTestObject()));
+            Assert.Throws(
+                typeof(IdentifierValueMismatchedException),
+                () => repository.Update(entityId, new DataTestObject())
+            );
         }
 
         [Test()]
@@ -311,9 +382,13 @@ namespace TcoDataUnitTests
                 onUpdateCalled = true;
             };
             repository.OnUpdateDone = (id, data) => onUpdateDoneCalled = true;
-            repository.OnUpdateFailed = (id, data, ex) => onUpdateFailedCalled = ex is IdentifierValueMismatchedException;
+            repository.OnUpdateFailed = (id, data, ex) =>
+                onUpdateFailedCalled = ex is IdentifierValueMismatchedException;
             //-- Assert
-            Assert.Throws(typeof(IdentifierValueMismatchedException), () => repository.Update(entityId, new DataTestObject()));
+            Assert.Throws(
+                typeof(IdentifierValueMismatchedException),
+                () => repository.Update(entityId, new DataTestObject())
+            );
             Assert.True(onUpdateCalled);
             Assert.False(onUpdateDoneCalled);
             Assert.True(onUpdateFailedCalled);
@@ -323,13 +398,21 @@ namespace TcoDataUnitTests
         public void UnableUpateRecordUpdateExceptionTest()
         {
             //-- Arrange
-            var testObject = new DataTestObject() { Name = "Pepo", DateOfBirth = DateTime.Now, Age = 15 };
+            var testObject = new DataTestObject()
+            {
+                Name = "Pepo",
+                DateOfBirth = DateTime.Now,
+                Age = 15
+            };
 
             //-- Act
             repository.Create("unupdatable", testObject);
 
             //-- Assert
-            Assert.Throws(typeof(UnableToUpdateRecord), () => repository.Update("unupdatable", null));
+            Assert.Throws(
+                typeof(UnableToUpdateRecord),
+                () => repository.Update("unupdatable", null)
+            );
         }
 
         [Test()]
@@ -363,7 +446,13 @@ namespace TcoDataUnitTests
         {
             //-- Arrange
 
-            var testObject = new DataTestObject() { Name = "Pepo", DateOfBirth = DateTime.Now, Age = 15, _Created = new DateTime() };
+            var testObject = new DataTestObject()
+            {
+                Name = "Pepo",
+                DateOfBirth = DateTime.Now,
+                Age = 15,
+                _Created = new DateTime()
+            };
             var originalCount = repository.GetRecords("*").Count();
 
             //-- Act
@@ -371,10 +460,8 @@ namespace TcoDataUnitTests
             repository.Create($"test2_{Guid.NewGuid()}", new DataTestObject());
             repository.Create($"test3_{Guid.NewGuid()}", new DataTestObject());
 
-
             //-- Act
             var actual = repository.GetRecords("*");
-
 
             //-- Assert
             Assert.AreEqual(3 + originalCount, actual.Count());
@@ -385,7 +472,13 @@ namespace TcoDataUnitTests
         {
             //-- Arrange
 
-            var testObject = new DataTestObject() { Name = "Pepo", DateOfBirth = DateTime.Now, Age = 15, _Created = new DateTime() };
+            var testObject = new DataTestObject()
+            {
+                Name = "Pepo",
+                DateOfBirth = DateTime.Now,
+                Age = 15,
+                _Created = new DateTime()
+            };
 
             var records = repository.Queryable.Where(p => true).Select(p => p._EntityId).ToList();
             foreach (var id in records)
@@ -398,10 +491,8 @@ namespace TcoDataUnitTests
             repository.Create("ToFilter2", new DataTestObject());
             repository.Create("ToFilter3", new DataTestObject());
 
-
             //-- Act
             var actual = repository.GetRecords("ToFilter2");
-
 
             //-- Assert
             Assert.AreEqual(1, actual.Count(), this.GetType().ToString());
@@ -415,10 +506,20 @@ namespace TcoDataUnitTests
                 return;
 #endif
             //-- Arrange
-            var testObject = new DataTestObject() { Name = "Pepo", DateOfBirth = DateTime.Now, Age = 15, _Created = new DateTime() };
-            var testObjectAltered = new DataTestObjectAlteredStructure() { Name = "Pepo", DateOfBirth = DateTime.Now, Age = 15, _Created = new DateTime() };
-
-
+            var testObject = new DataTestObject()
+            {
+                Name = "Pepo",
+                DateOfBirth = DateTime.Now,
+                Age = 15,
+                _Created = new DateTime()
+            };
+            var testObjectAltered = new DataTestObjectAlteredStructure()
+            {
+                Name = "Pepo",
+                DateOfBirth = DateTime.Now,
+                Age = 15,
+                _Created = new DateTime()
+            };
 
             //-- Act
             repository.Create("test1", testObject);
@@ -430,7 +531,6 @@ namespace TcoDataUnitTests
             repository.Read("test1");
             repository.Read("test2");
             repository.Read("test3");
-
         }
 
         [Test()]
@@ -438,12 +538,16 @@ namespace TcoDataUnitTests
         {
             //-- Arrange
 
-            var testObject = new DataTestObject() { Name = "Pepo", DateOfBirth = DateTime.Now, Age = 15, _Created = new DateTime() };
+            var testObject = new DataTestObject()
+            {
+                Name = "Pepo",
+                DateOfBirth = DateTime.Now,
+                Age = 15,
+                _Created = new DateTime()
+            };
 
             //-- Act
             repository.Create("equality", testObject);
-
-
 
             //-- Act
 
@@ -463,29 +567,46 @@ namespace TcoDataUnitTests
             repository.Create("abcd", new DataTestObject());
             repository.Create("abcdf123", new DataTestObject());
 
-
-            Assert.AreEqual(0, repository.GetRecords("f12", searchMode : eSearchMode.Exact).Count());
-            Assert.AreEqual(1, repository.GetRecords("f123", searchMode: eSearchMode.Exact).Count());
+            Assert.AreEqual(0, repository.GetRecords("f12", searchMode: eSearchMode.Exact).Count());
+            Assert.AreEqual(
+                1,
+                repository.GetRecords("f123", searchMode: eSearchMode.Exact).Count()
+            );
             Assert.AreEqual(1, repository.GetRecords("abc", searchMode: eSearchMode.Exact).Count());
 
-            Assert.AreEqual(1, repository.GetRecords("f1234", searchMode: eSearchMode.StartsWith).Count());
-            Assert.AreEqual(2, repository.GetRecords("f12", searchMode: eSearchMode.StartsWith).Count());
+            Assert.AreEqual(
+                1,
+                repository.GetRecords("f1234", searchMode: eSearchMode.StartsWith).Count()
+            );
+            Assert.AreEqual(
+                2,
+                repository.GetRecords("f12", searchMode: eSearchMode.StartsWith).Count()
+            );
 
-            Assert.AreEqual(0, repository.GetRecords("z", searchMode: eSearchMode.Contains).Count());
-            Assert.AreEqual(3, repository.GetRecords("f123", searchMode: eSearchMode.Contains).Count());
-
-
+            Assert.AreEqual(
+                0,
+                repository.GetRecords("z", searchMode: eSearchMode.Contains).Count()
+            );
+            Assert.AreEqual(
+                3,
+                repository.GetRecords("f123", searchMode: eSearchMode.Contains).Count()
+            );
         }
 
         [Test(), Order(1000)]
         public void DateTimeProviderTest()
         {
-            //-- Arrange         
+            //-- Arrange
             var dateTimeProvider = new DummyDateTimeProvider();
             dateTimeProvider.SetDateTime = new DateTime(1976, 9, 1);
             DateTimeProviders.DateTimeProvider = dateTimeProvider;
-            var testObject = new DataTestObject() { Name = "SimulatedTimePepo", DateOfBirth = DateTime.Now, Age = 15, _Created = new DateTime() };
-
+            var testObject = new DataTestObject()
+            {
+                Name = "SimulatedTimePepo",
+                DateOfBirth = DateTime.Now,
+                Age = 15,
+                _Created = new DateTime()
+            };
 
             repository.Create(testObject.Name, testObject);
 
@@ -506,7 +627,10 @@ namespace TcoDataUnitTests
         class DummyDateTimeProvider : DateTimeProviderBase
         {
             public DateTime SetDateTime { private get; set; }
-            public override DateTime Now { get { return SetDateTime; } }
+            public override DateTime Now
+            {
+                get { return SetDateTime; }
+            }
         }
     }
 }

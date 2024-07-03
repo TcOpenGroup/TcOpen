@@ -9,6 +9,6 @@ namespace TcOpen.Inxton.Local.Security
     /// </summary>
     public interface ITokenProvider
     {
-        void SetTokenReceivedAction(Action<string> tokenReceivedAction);               
+        void SetTokenReceivedAction(Action<string> tokenReceivedAction);
     }
 }

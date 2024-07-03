@@ -2,144 +2,131 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <DUT Name="TcoInspectorData" Id="{434cc4c1-8bb2-0788-1dec-8e2efdacb9f3}">
     <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Defines data commonly used accross different types of inspectors. 	
-		</summary>	
-	</docu>	
+    <docu>
+        <summary>
+            Defines data commonly used accross different types of inspectors.
+        </summary>
+    </docu>
 ~*)
 {attribute 'qlik_entity:Checks'}
 {attribute 'qlik_ref_value_field:CheckName = AttributeHumanReadable'}
 {attribute 'qlik_ref_value_field:StationName = AttributeQlikGroup'}
-TYPE
-    TcoInspectorData :
-    STRUCT
-
-        (*~
-		<docu>
-		<summary>
-			Inspection timestamp.	
-		</summary>
-		</docu>
-	~*)
-        {attribute addProperty Name "<#Time stamp#>"}
-        {attribute clr [RenderIgnore("Control", "ShadowControl")]}
-        {attribute 'qlik_load:TimeStamp'}
-        TimeStamp : DT;
-
-        (*~
-		<docu>
-		<summary>
-			Pass time, elapses when the measured value has required value (see `ReuiredStatus`). 
-			The signal must have required value continuosly for this time span for the check to pass.  	
-		</summary>
-		</docu>
-	~*)
-        {attribute addProperty Name "<#Stab.Time#>"}
-        {attribute addProperty ToolTip "<#Stabilisation time. The inspection will pass when the condition is met continuously for the duration of this timespan.#>"}
-        {attribute 'qlik_load:PassedTime'}
-        PassTime : TIME;
-
-        (*~
-		<docu>
-		<summary>
-			Fail time. Is the maximum test duration (or timeout). If the condition for the successul test is not met within this time, the test fails.			  	
-		</summary>
-		</docu>
-	~*)
-        {attribute addProperty Name "<#Timeout#>"}
-        {attribute addProperty ToolTip "<#Timeout. Maximal duration of the inspection within which the condition must be met.#>"}
-        {attribute 'qlik_load:FailedTime'}
-        FailTime : TIME;
-
-        (*~
-		<docu>
-		<summary>
-			Test result.		  	
-		</summary>
-		</docu>
-	~*)
-        {attribute addProperty Name "<#Result#>"}
-        {attribute clr [RenderIgnore("Control", "ShadowControl")]}
-        {attribute addProperty ToolTip "<#Result of the inspection.#>"}
-        {attribute 'qlik_load:Result'}
-        Result : eInspectorResult;
-
-        (*~
-		<docu>
-		<summary>
-			Test is excluded from evaluation. If TRUE the check is excluded, the test will run and provide detected value. 
-			Evaluation of excluded test should be handled by user code.		  	
-		</summary>
-		</docu>
-	~*)
-        {attribute addProperty Name "<#Exclude#>"}
-        {attribute addProperty ToolTip "<#Inspection is excluded from the evaluation. The test will however run and provide detected value.#>"}
-        {attribute 'qlik_load:IsExcluded'}
-        IsExcluded : BOOL;
-
-        (*~
-		<docu>
-		<summary>
-			Test is bypassed, no eveluation occurs.  
-			Evaluation of excluded test should be handled by user code.		  	
-		</summary>
-		</docu>
-	~*)
-        {attribute addProperty Name "<#Bypass#>"}
-        {attribute addProperty ToolTip "<#Test is bypassed, no eveluation occurs.#>"}
-        {attribute 'qlik_load:IsByPassed'}
-        IsByPassed : BOOL;
-
-        (*~
-		<docu>
-		<summary>
-			Verbatim description of the failure.				  	
-		</summary>
-		</docu>
-	~*)
-        {attribute addProperty Name "<#Failure description#>"}
-        {attribute addProperty ToolTip "<#Brief failure desciption#>"}
-        {attribute 'qlik_ignore'}
-        FailureDescription : STRING(100);
-
-        (*~
-		<docu>
-		<summary>
-			Counter of allowed inspections.				  	
-		</summary>
-		</docu>
-	~*)
-        {attribute addProperty Name "<#Re-tries#>"}
-        {attribute addProperty ToolTip "<#Inspection will repeat given number of times when inspection fails.#>"}
-        {attribute 'qlik_load:NumberOfAllowedRetries'}
-        NumberOfAllowedRetries : UINT;
-
-        (*~
-		<docu>
-		<summary>
-			Counter inspections.				  	
-		</summary>
-		</docu>
-	~*)
-        {attribute addProperty Name "<#Attempts#>"}
-        {attribute addProperty ToolTip "<#Re-tries counter, count the number of times the inspection run on this inspector instance.#>"}
-        {attribute 'qlik_load:RetryAttemptsCount'}
-        RetryAttemptsCount : UINT;
-
-        (*~
-		<docu>
-		<summary>
-			Error code.			  	
-		</summary>
-		</docu>
-	~*)
-        {attribute addProperty Name "<#Code#>"}
-        {attribute addProperty ToolTip "<#Arbitrary error code for this inspection#>"}
-        {attribute 'qlik_load:ErrorCode'}
-        ErrorCode : STRING(20);
-    END_STRUCT
-END_TYPE
-]]></Declaration>
+TYPE TcoInspectorData : STRUCT
+    (*~
+        <docu>
+        <summary>
+            Inspection timestamp.
+        </summary>
+        </docu>
+    ~*)
+    {attribute addProperty Name "<#Time stamp#>"}
+    {attribute clr [RenderIgnore("Control", "ShadowControl")]}
+    {attribute 'qlik_load:TimeStamp'}
+    TimeStamp : DT;
+    (*~
+        <docu>
+        <summary>
+            Pass time, elapses when the measured value has required value (see `ReuiredStatus`).
+            The signal must have required value continuosly for this time span for the check to pass.
+        </summary>
+        </docu>
+    ~*)
+    {attribute addProperty Name "<#Stab.Time#>"}
+    {attribute addProperty ToolTip "<#Stabilisation time. The inspection will pass when the condition is met continuously for the duration of this timespan.#>"}
+    {attribute 'qlik_load:PassedTime'}
+    PassTime : TIME;
+    (*~
+        <docu>
+        <summary>
+            Fail time. Is the maximum test duration (or timeout). If the condition for the successul test is not met within this time, the test fails.
+        </summary>
+        </docu>
+    ~*)
+    {attribute addProperty Name "<#Timeout#>"}
+    {attribute addProperty ToolTip "<#Timeout. Maximal duration of the inspection within which the condition must be met.#>"}
+    {attribute 'qlik_load:FailedTime'}
+    FailTime : TIME;
+    (*~
+        <docu>
+        <summary>
+            Test result.
+        </summary>
+        </docu>
+    ~*)
+    {attribute addProperty Name "<#Result#>"}
+    {attribute clr [RenderIgnore("Control", "ShadowControl")]}
+    {attribute addProperty ToolTip "<#Result of the inspection.#>"}
+    {attribute 'qlik_load:Result'}
+    Result : eInspectorResult;
+    (*~
+        <docu>
+        <summary>
+            Test is excluded from evaluation. If TRUE the check is excluded, the test will run and provide detected value.
+            Evaluation of excluded test should be handled by user code.
+        </summary>
+        </docu>
+    ~*)
+    {attribute addProperty Name "<#Exclude#>"}
+    {attribute addProperty ToolTip "<#Inspection is excluded from the evaluation. The test will however run and provide detected value.#>"}
+    {attribute 'qlik_load:IsExcluded'}
+    IsExcluded : BOOL;
+    (*~
+        <docu>
+        <summary>
+            Test is bypassed, no eveluation occurs.
+            Evaluation of excluded test should be handled by user code.
+        </summary>
+        </docu>
+    ~*)
+    {attribute addProperty Name "<#Bypass#>"}
+    {attribute addProperty ToolTip "<#Test is bypassed, no eveluation occurs.#>"}
+    {attribute 'qlik_load:IsByPassed'}
+    IsByPassed : BOOL;
+    (*~
+        <docu>
+        <summary>
+            Verbatim description of the failure.
+        </summary>
+        </docu>
+    ~*)
+    {attribute addProperty Name "<#Failure description#>"}
+    {attribute addProperty ToolTip "<#Brief failure desciption#>"}
+    {attribute 'qlik_ignore'}
+    FailureDescription : STRING(100);
+    (*~
+        <docu>
+        <summary>
+            Counter of allowed inspections.
+        </summary>
+        </docu>
+    ~*)
+    {attribute addProperty Name "<#Re-tries#>"}
+    {attribute addProperty ToolTip "<#Inspection will repeat given number of times when inspection fails.#>"}
+    {attribute 'qlik_load:NumberOfAllowedRetries'}
+    NumberOfAllowedRetries : UINT;
+    (*~
+        <docu>
+        <summary>
+            Counter inspections.
+        </summary>
+        </docu>
+    ~*)
+    {attribute addProperty Name "<#Attempts#>"}
+    {attribute addProperty ToolTip "<#Re-tries counter, count the number of times the inspection run on this inspector instance.#>"}
+    {attribute 'qlik_load:RetryAttemptsCount'}
+    RetryAttemptsCount : UINT;
+    (*~
+        <docu>
+        <summary>
+            Error code.
+        </summary>
+        </docu>
+    ~*)
+    {attribute addProperty Name "<#Code#>"}
+    {attribute addProperty ToolTip "<#Arbitrary error code for this inspection#>"}
+    {attribute 'qlik_load:ErrorCode'}
+    ErrorCode : STRING(20);
+END_STRUCT
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

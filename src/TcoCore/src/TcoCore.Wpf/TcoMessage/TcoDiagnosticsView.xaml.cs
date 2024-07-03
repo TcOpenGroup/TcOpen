@@ -38,11 +38,13 @@ namespace TcoCore
             UpdateMessages();
         }
 
-        private TcoDiagnosticsViewModel _context { get { return this.DataContext as TcoDiagnosticsViewModel; } }
+        private TcoDiagnosticsViewModel _context
+        {
+            get { return this.DataContext as TcoDiagnosticsViewModel; }
+        }
 
         private void UpdateMessages()
         {
-           
             var inSight = false;
             TcoDiagnosticsViewModel MessageHandler = null;
             TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() =>
@@ -64,19 +66,19 @@ namespace TcoCore
             {
                 var sw = new System.Diagnostics.Stopwatch();
                 sw.Start();
-                
+
                 MessageHandler?.UpdateMessages();
 
                 sw.Stop();
                 updateRate = (updateRate + sw.ElapsedMilliseconds) / ++updateCount;
-                messageUpdateTimer.Interval = updateRate <= 300 ? 300 : (updateRate * 1.5) + 100;               
+                messageUpdateTimer.Interval = updateRate <= 300 ? 300 : (updateRate * 1.5) + 100;
             }
-
-          
-
         }
 
-        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void UserControl_IsVisibleChanged(
+            object sender,
+            DependencyPropertyChangedEventArgs e
+        )
         {
             if (this.Visibility == Visibility.Visible)
             {
@@ -90,7 +92,11 @@ namespace TcoCore
         public int DiagnosticsDepth
         {
             get { return this._context.DiagnosticsDepth; }
-            set { diagnosticsDepth = value; this._context.DiagnosticsDepth = value; }
+            set
+            {
+                diagnosticsDepth = value;
+                this._context.DiagnosticsDepth = value;
+            }
         }
     }
 }

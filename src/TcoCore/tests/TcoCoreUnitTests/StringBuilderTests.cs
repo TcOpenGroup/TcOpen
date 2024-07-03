@@ -1,12 +1,12 @@
-﻿using NUnit.Framework;
-using System.Text;
+﻿using System.Text;
+using NUnit.Framework;
 
 namespace TcoCoreUnitTests
 {
     public class StringBuilderTests
     {
-
-        TcoCoreTests.StringBuilderTests stringBuilderTests => ConnectorFixture.Connector.MAIN._stringBuilderTest;
+        TcoCoreTests.StringBuilderTests stringBuilderTests =>
+            ConnectorFixture.Connector.MAIN._stringBuilderTest;
 
         [Test, Order(000)]
         public void StringBuilderWillAppendText()
@@ -19,7 +19,7 @@ namespace TcoCoreUnitTests
             //act
             foreach (var word in listOfWordsToAppend)
             {
-                stringBuilderTests.Append(word+",");
+                stringBuilderTests.Append(word + ",");
                 csharpSb.Append(word + ",");
             }
 
@@ -41,8 +41,8 @@ namespace TcoCoreUnitTests
 
             //act
             var plcResult = stringBuilderTests.FluentApi();
-            csharpSb.
-                Clear()
+            csharpSb
+                .Clear()
                 .Append("1")
                 .Append("2")
                 .Append("3")
@@ -67,12 +67,11 @@ namespace TcoCoreUnitTests
             stringBuilderTests.Clear();
             //act
             var plcResult = stringBuilderTests.FluentApi();
-            Assert.AreEqual(plcResult,"1234");
+            Assert.AreEqual(plcResult, "1234");
             stringBuilderTests.Clear();
             //assert
             Assert.IsEmpty(stringBuilderTests.StringBuilderResult.Synchron);
         }
-
 
         [Test, Order(300)]
         public void WorksAsCSharpSb()
@@ -93,11 +92,9 @@ namespace TcoCoreUnitTests
             stringBuilderTests.Append("Two");
             stringBuilderTests.Append("Three");
             //assert
-            Assert.AreEqual(stringBuilderTests.ToString(),csharpSb.ToString());
+            Assert.AreEqual(stringBuilderTests.ToString(), csharpSb.ToString());
             Assert.IsNotEmpty(stringBuilderTests.ToString());
             Assert.IsNotEmpty(csharpSb.ToString());
         }
-
-
     }
 }

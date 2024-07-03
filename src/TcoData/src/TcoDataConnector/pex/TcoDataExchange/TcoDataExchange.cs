@@ -5,7 +5,6 @@ using Vortex.Connector;
 
 namespace TcoData
 {
-
     public partial class TcoDataExchange
     {
         /// <summary>An interaface which grants access to certain operations in DataExchange viewmodel, like searching by id, invoking search or filling the searchbox</summary>
@@ -18,11 +17,19 @@ namespace TcoData
             {
                 if (this._onliner == null)
                 {
-                    var dataProperty = this.GetType().GetProperties().ToList().Find(p => p.Name == "_data");
+                    var dataProperty = this.GetType()
+                        .GetProperties()
+                        .ToList()
+                        .Find(p => p.Name == "_data");
 
                     if (dataProperty == null)
                     {
-                        dataProperty = this.GetType().GetProperty("_data", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                        dataProperty = this.GetType()
+                            .GetProperty(
+                                "_data",
+                                System.Reflection.BindingFlags.NonPublic
+                                    | System.Reflection.BindingFlags.Instance
+                            );
                     }
 
                     if (dataProperty != null)
@@ -30,14 +37,18 @@ namespace TcoData
                         var exchangableObject = dataProperty.GetValue(this);
                         if (!(exchangableObject is TcoEntity || exchangableObject is ITcoEntity))
                         {
-                            throw new Exception($"Data exchange member '_data' in {this.Symbol}  must inherit from {nameof(TcoEntity)}");
+                            throw new Exception(
+                                $"Data exchange member '_data' in {this.Symbol}  must inherit from {nameof(TcoEntity)}"
+                            );
                         }
 
                         _onliner = exchangableObject;
                     }
                     else
                     {
-                        throw new Exception($"Data exchange member '_data' is not member of {this.Symbol}. '_data'  must inherit from {nameof(TcoEntity)}");
+                        throw new Exception(
+                            $"Data exchange member '_data' is not member of {this.Symbol}. '_data'  must inherit from {nameof(TcoEntity)}"
+                        );
                     }
                 }
 
@@ -47,18 +58,21 @@ namespace TcoData
 
         private IRepository _repository;
 
-        public IRepository<T> GetRepository<T>() where T : IBrowsableDataObject
-            => _repository as IRepository<T>;
+        public IRepository<T> GetRepository<T>()
+            where T : IBrowsableDataObject => _repository as IRepository<T>;
 
-        public IRepository GetRepository() => _repository ??
-            throw new RepositoryNotInitializedException($"Repository '{Symbol}' is not initialized. You must initialize repository by calling " +
-                $"'{nameof(InitializeRepository)}' method with respective parameters.");
+        public IRepository GetRepository() =>
+            _repository
+            ?? throw new RepositoryNotInitializedException(
+                $"Repository '{Symbol}' is not initialized. You must initialize repository by calling "
+                    + $"'{nameof(InitializeRepository)}' method with respective parameters."
+            );
 
-        public void InitializeRepository<T>(IRepository repository) where T : IBrowsableDataObject
-            => _repository = repository;
-        public void InitializeRepository<T>(IRepository<T> repository) where T : IBrowsableDataObject
-            => _repository = repository as IRepository;
+        public void InitializeRepository<T>(IRepository repository)
+            where T : IBrowsableDataObject => _repository = repository;
 
+        public void InitializeRepository<T>(IRepository<T> repository)
+            where T : IBrowsableDataObject => _repository = repository as IRepository;
 
         public void InitializeRemoteDataExchange()
         {
@@ -70,16 +84,18 @@ namespace TcoData
             _createOrUpdateTask.Initialize(CreateOrUpdate);
         }
 
-        public void InitializeRemoteDataExchange<T>(IRepository<T> repository) where T : IBrowsableDataObject
+        public void InitializeRemoteDataExchange<T>(IRepository<T> repository)
+            where T : IBrowsableDataObject
         {
             this.InitializeRepository(repository);
             this.InitializeRemoteDataExchange();
         }
 
-        partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
-        {
-           
-        }
+        partial void PexConstructor(
+            IVortexObject parent,
+            string readableTail,
+            string symbolTail
+        ) { }
 
         private bool Create()
         {
@@ -98,14 +114,13 @@ namespace TcoData
             }
         }
 
-
         private bool CreateOrUpdate()
         {
             _createOrUpdateTask.Read();
             var id = _createOrUpdateTask._identifier.LastValue;
             Onliner._EntityId.Synchron = id;
             if (!this._repository.Exists(id))
-            {                
+            {
                 var cloned = this.Onliner.CreatePlainerType();
                 this.Onliner.FlushOnlineToPlain(cloned);
                 try
@@ -124,9 +139,8 @@ namespace TcoData
                 this.Onliner.FlushOnlineToPlain(cloned);
                 _repository.Update(id, cloned);
                 return true;
-            }            
+            }
         }
-
 
         private bool Read()
         {
@@ -143,6 +157,7 @@ namespace TcoData
                 throw exception;
             }
         }
+
         private bool Update()
         {
             _updateTask.Read();
@@ -179,7 +194,9 @@ namespace TcoData
             _idExistsTask.Read();
             try
             {
-                _idExistsTask._exists.Synchron = _repository.Exists(_idExistsTask._identifier.Cyclic);                
+                _idExistsTask._exists.Synchron = _repository.Exists(
+                    _idExistsTask._identifier.Cyclic
+                );
                 return true;
             }
             catch (Exception exception)
@@ -201,7 +218,5 @@ namespace TcoData
                 return _onlinerVortex;
             }
         }
-
-
     }
 }

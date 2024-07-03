@@ -2,9 +2,8 @@
 name: Suggestion
 about: Suggest an idea for this project
 title: "[IDEA]"
-labels: ''
-assignees: ''
-
+labels: ""
+assignees: ""
 ---
 
 **Is your suggestion related to a problem? Please describe.**

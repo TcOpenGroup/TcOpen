@@ -6,12 +6,10 @@
 {attribute addProperty Id "I3_SamplesAT %I*I3_Samples_2549228720"}
 {attribute addProperty CRC "3110368094"}
 {attribute addProperty Size "20"}
-TYPE L3_Current_Samples_B964735E EXTENDS TcoIo.InputBase_8311D824 :
-STRUCT
-	{attribute addProperty Name "I3_Samples"}
-	I3_Samples AT %I* : I3_Samples_25492287;
+TYPE L3_Current_Samples_B964735E EXTENDS TcoIo.InputBase_8311D824 : STRUCT
+    {attribute addProperty Name "I3_Samples"}
+    I3_Samples AT %I* : I3_Samples_25492287;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -2,12 +2,11 @@ using TcoCognexVisionTests;
 
 namespace Sandbox.TcoCognexVision.Wpf
 {
-    public class MainWindowViewModel 
+    public class MainWindowViewModel
     {
-        public MainWindowViewModel()
-        {            
-        
-        }
-        public TcoCognexVisionTestsTwinController TcoCognexVisionTestPlc { get; } = Entry.TcoCognexVisionTestsPlc;       
+        public MainWindowViewModel() { }
+
+        public TcoCognexVisionTestsTwinController TcoCognexVisionTestPlc { get; } =
+            Entry.TcoCognexVisionTestsPlc;
     }
 }

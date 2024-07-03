@@ -12,8 +12,8 @@ namespace TcoCore
     public partial class TcoLogger
     {
         partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
-        {        
-            expectDequeingTags = this._buffer.Select(p => p.ExpectDequeing as IValueTag).ToList();            
+        {
+            expectDequeingTags = this._buffer.Select(p => p.ExpectDequeing as IValueTag).ToList();
         }
 
         /// <summary>
@@ -21,31 +21,29 @@ namespace TcoCore
         /// </summary>
         public eMessageCategory MinLogLevelCategory
         {
-            get
-            {
-                return (eMessageCategory)this._minLoggingLevel.Synchron;
-            }
-
-            set
-            {
-                this._minLoggingLevel.Synchron = (short)value;
-            }
+            get { return (eMessageCategory)this._minLoggingLevel.Synchron; }
+            set { this._minLoggingLevel.Synchron = (short)value; }
         }
 
         /// <summary>
         /// Starts the event retrieval loop.
         /// <note type="important">
-        /// The log retrieval operations for given logger can be started on one system only. 
+        /// The log retrieval operations for given logger can be started on one system only.
         /// Make sure you do not run the log retrieval from the same logger in multiple instances.
         /// </note>
         /// </summary>
         /// <param name="minLevelCategory">Sets the minimal logging level.</param>
         /// <param name="interLoopDelay">Sets the delay between retrievals of logs.</param>
         /// <param name="logTarget">Set custom log target. If default|null default application logger is used.</param>
-        public void StartLoggingMessages(eMessageCategory minLevelCategory, int interLoopDelay = 25, ILogger logTarget = null)
+        public void StartLoggingMessages(
+            eMessageCategory minLevelCategory,
+            int interLoopDelay = 25,
+            ILogger logTarget = null
+        )
         {
             this._minLoggingLevel.Synchron = (short)minLevelCategory;
-            this.InxtonLogger = logTarget == null ? TcOpen.Inxton.TcoAppDomain.Current.Logger : logTarget;
+            this.InxtonLogger =
+                logTarget == null ? TcOpen.Inxton.TcoAppDomain.Current.Logger : logTarget;
             Task.Run(() =>
             {
                 while (true)
@@ -57,7 +55,7 @@ namespace TcoCore
         }
 
         private IList<IValueTag> expectDequeingTags { get; set; }
-        
+
         /// <summary>
         /// Pops messages from this logger.
         /// </summary>
@@ -67,24 +65,26 @@ namespace TcoCore
             var poppedMessages = new List<PlainTcoLogItem>();
             this.Connector.ReadBatch(expectDequeingTags);
             var messagesToDequeue = this._buffer.Where(p => p.ExpectDequeing.LastValue);
-            
+
             if (messagesToDequeue.Count() > 0)
-            {               
-                var messagesToReadValueTags = messagesToDequeue.SelectMany(p => p.RetrieveValueTags());
+            {
+                var messagesToReadValueTags = messagesToDequeue.SelectMany(p =>
+                    p.RetrieveValueTags()
+                );
                 this.Connector.ReadBatch(messagesToReadValueTags);
-                
+
                 foreach (var message in messagesToDequeue)
                 {
-                    var plain = message.LastKnownPlain;                  
-                    poppedMessages.Add(plain);                                       
+                    var plain = message.LastKnownPlain;
+                    poppedMessages.Add(plain);
                     message.ExpectDequeing.Cyclic = false;
                 }
 
                 this.Connector.WriteBatch(expectDequeingTags);
             }
-            
-            return poppedMessages;            
-        }      
+
+            return poppedMessages;
+        }
 
         /// <summary>
         /// Peeks messaging from this logger without effecting dequeuing.
@@ -98,7 +98,9 @@ namespace TcoCore
 
             if (messagesToDequeue.Count() > 0)
             {
-                var messagesToReadValueTags = messagesToDequeue.SelectMany(p => p.RetrieveValueTags());
+                var messagesToReadValueTags = messagesToDequeue.SelectMany(p =>
+                    p.RetrieveValueTags()
+                );
                 this.Connector.ReadBatch(messagesToReadValueTags);
 
                 foreach (var message in messagesToDequeue)
@@ -119,51 +121,48 @@ namespace TcoCore
         /// </summary>
         /// <param name="messages">Messages to push to the application logger.</param>
         public void LogMessages(IEnumerable<PlainTcoLogItem> messages)
-        {          
+        {
             foreach (var plain in messages)
             {
-                LogMessage(plain, new { ControllerLogger = true,
-                                        Payload = new
-                                        {
-                                            PlcLogger = this.Symbol,
-                                            ParentSymbol = plain.ParentsObjectSymbol,
-                                            ParentName = plain.ParentsHumanReadable,
-                                            Cycle = plain.Cycle,
-                                            PlcTimeStamp = plain.TimeStamp,
-                                            Raw = plain.Raw,
-                                            Pcc = plain.PerCycleCount
-                                        }
-                                       });               
+                LogMessage(
+                    plain,
+                    new
+                    {
+                        ControllerLogger = true,
+                        Payload = new
+                        {
+                            PlcLogger = this.Symbol,
+                            ParentSymbol = plain.ParentsObjectSymbol,
+                            ParentName = plain.ParentsHumanReadable,
+                            Cycle = plain.Cycle,
+                            PlcTimeStamp = plain.TimeStamp,
+                            Raw = plain.Raw,
+                            Pcc = plain.PerCycleCount
+                        }
+                    }
+                );
             }
         }
-
 
         private ILogger _inxtonLogger;
         public ILogger InxtonLogger
         {
             get
             {
-                if(_inxtonLogger == null)
+                if (_inxtonLogger == null)
                 {
                     return TcOpen.Inxton.TcoAppDomain.Current.Logger;
                 }
 
                 return _inxtonLogger;
             }
-
-
-            internal set 
-            {
-                _inxtonLogger = value;
-            }
+            internal set { _inxtonLogger = value; }
         }
-
-
 
         private void LogMessage(PlainTcoLogItem message, object payload)
         {
             switch (message.CategoryAsEnum)
-            {               
+            {
                 case eMessageCategory.Debug:
                     InxtonLogger.Debug($"{message.Text} {{@sender}}", payload);
                     break;
@@ -182,10 +181,10 @@ namespace TcoCore
                 case eMessageCategory.ProgrammingError:
                     InxtonLogger.Error($"{message.Text} {{@sender}}", payload);
                     break;
-                case eMessageCategory.Critical:                   
+                case eMessageCategory.Critical:
                 case eMessageCategory.Catastrophic:
                     InxtonLogger.Fatal($"{message.Text} {{@sender}}", payload);
-                    break;               
+                    break;
                 default:
                     break;
             }

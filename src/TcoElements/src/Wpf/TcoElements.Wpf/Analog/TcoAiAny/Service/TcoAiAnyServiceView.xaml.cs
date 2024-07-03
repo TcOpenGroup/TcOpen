@@ -18,15 +18,18 @@ namespace TcoElements
             }
 
             InitializeComponent();
-
         }
+
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
 
             if (e.Property == DataContextProperty)
             {
-                this.DataContext = this.DataContext.ViewModelizeDataContext<GenericViewModel, TcoAiAny>();
+                this.DataContext = this.DataContext.ViewModelizeDataContext<
+                    GenericViewModel,
+                    TcoAiAny
+                >();
             }
         }
     }

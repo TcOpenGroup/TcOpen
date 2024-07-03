@@ -3,24 +3,21 @@
   <DUT Name="eTcoSmartFunctionKitCommand_v_4_x_x" Id="{47e57b49-42c3-4435-8a93-f0759bb03e42}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE
-    eTcoSmartFunctionKitCommand_v_4_x_x :
-    (
-        StartProgram := 1,
-        SetProgramActive := 2,
-        Positioning := 3,
-        Jog := 4,
-        ClearError := 5,
-        StopMovement := 6,
-        RestartDrive := 7,
-        Tare := 9,
-        StartHoming := 10,
-        SetSystemVariable := 11,
-        LockParticipant := 12,
-        SetReference := 13,
-        ReadSystemVariable := 14
-    );
-END_TYPE
-]]></Declaration>
+TYPE eTcoSmartFunctionKitCommand_v_4_x_x : (
+    StartProgram := 1,
+    SetProgramActive := 2,
+    Positioning := 3,
+    Jog := 4,
+    ClearError := 5,
+    StopMovement := 6,
+    RestartDrive := 7,
+    Tare := 9,
+    StartHoming := 10,
+    SetSystemVariable := 11,
+    LockParticipant := 12,
+    SetReference := 13,
+    ReadSystemVariable := 14
+);
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

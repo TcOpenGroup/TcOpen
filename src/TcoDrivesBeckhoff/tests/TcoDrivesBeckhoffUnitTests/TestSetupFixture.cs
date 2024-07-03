@@ -1,5 +1,5 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
+using NUnit.Framework;
 
 namespace TcoDrivesBeckhoffUnitTests
 {
@@ -17,10 +17,8 @@ namespace TcoDrivesBeckhoffUnitTests
         {
             TargetAmsId = Environment.GetEnvironmentVariable("Tc3Target");
         }
-        [OneTimeTearDown]
-        public void OneTimeTearDown()
-        {
 
-        }
+        [OneTimeTearDown]
+        public void OneTimeTearDown() { }
     }
 }

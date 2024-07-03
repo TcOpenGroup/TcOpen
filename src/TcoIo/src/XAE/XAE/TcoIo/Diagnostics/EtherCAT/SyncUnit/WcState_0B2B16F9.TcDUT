@@ -6,12 +6,10 @@
 {attribute addProperty Id "WcStateAT %I*BOOL1"}
 {attribute addProperty CRC "187373305"}
 {attribute addProperty Size "1"}
-TYPE WcState_0B2B16F9 :
-STRUCT
-	{attribute addProperty Name "WcState"}
-	WcState AT %I* : BOOL;
+TYPE WcState_0B2B16F9 : STRUCT
+    {attribute addProperty Name "WcState"}
+    WcState AT %I* : BOOL;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

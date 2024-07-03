@@ -2,23 +2,23 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="TcoDataTask" Id="{d746b7c0-aeef-0bb8-363a-a8b912d682b6}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Data task is a remote task  <see cref="PlcDocu.TcoCore.RemoteTask"/> with a paramater. 	
-		</summary>	
-		<param name="_identifier">The Identifier, ID  of an entity on which a CRUD operation should be executed</param>
-		<remarks>Inxton is required for this feature to work</remarks>		
-	</docu>	
+    <docu>
+        <summary>
+            Data task is a remote task  <see cref="PlcDocu.TcoCore.RemoteTask"/> with a paramater.
+        </summary>
+        <param name="_identifier">The Identifier, ID  of an entity on which a CRUD operation should be executed</param>
+        <remarks>Inxton is required for this feature to work</remarks>
+    </docu>
 ~*)
 FUNCTION_BLOCK TcoDataTask EXTENDS TcoCore.TcoRemoteTask
 VAR
-	(*~
-	<docu>
-		<summary>
-			The Identifier, ID  of an entity on which a CRUD operation should be executed. 	
-		</summary>						
-	</docu>	
-	~*)
+    (*~
+    <docu>
+        <summary>
+            The Identifier, ID  of an entity on which a CRUD operation should be executed.
+        </summary>
+    </docu>
+    ~*)
     _identifier : STRING(255);
 END_VAR]]></Declaration>
     <Implementation>
@@ -27,40 +27,37 @@ END_VAR]]></Declaration>
     <Method Name="FB_init" Id="{03c5aeaf-9a88-0e65-2886-43aec8e1a787}">
       <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
 VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	ParentObject : TcoCore.ITcoObject;	
-END_VAR
-]]></Declaration>
+    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+    ParentObject : TcoCore.ITcoObject;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="WithId" Id="{d8ebbe97-9c86-0568-17c4-bcc05d378bb1}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes CRUD operation on data entry with given identifier. 	
-		</summary>			
-		<remarks>Inxton is required for this feature to work</remarks>		
-	</docu>	
+    <docu>
+        <summary>
+            Executes CRUD operation on data entry with given identifier.
+        </summary>
+        <remarks>Inxton is required for this feature to work</remarks>
+    </docu>
 ~*)
 METHOD WithId : REFERENCE TO TcoDataTask
 VAR_INPUT
-	(*~
-	<docu>
-		<summary>
-			The Identifier, ID  of an entity on which a CRUD operation should be executed. 	
-		</summary>						
-	</docu>	
-	~*)
-	inIdentifier : STRING(254);
-END_VAR
-]]></Declaration>
+    (*~
+    <docu>
+        <summary>
+            The Identifier, ID  of an entity on which a CRUD operation should be executed.
+        </summary>
+    </docu>
+    ~*)
+    inIdentifier : STRING(254);
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^._identifier := inIdentifier;
-WithId REF= THIS^;
-]]></ST>
+WithId REF= THIS^;]]></ST>
       </Implementation>
     </Method>
   </POU>

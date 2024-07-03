@@ -7,13 +7,11 @@ END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
-	{attribute addProperty Name "<#Pick Position#>"}
-	PickPosition:TcoDrivesBeckhoff.TcoMultiAxisMoveParam;
-	{attribute addProperty Name "<#Place  Position#>"}
-	PlacePosition:TcoDrivesBeckhoff.TcoMultiAxisMoveParam;
-
-END_VAR
-]]></Declaration>
+    {attribute addProperty Name "<#Pick Position#>"}
+    PickPosition : TcoDrivesBeckhoff.TcoMultiAxisMoveParam;
+    {attribute addProperty Name "<#Place  Position#>"}
+    PlacePosition : TcoDrivesBeckhoff.TcoMultiAxisMoveParam;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
@@ -21,10 +19,9 @@ END_VAR
       <Declaration><![CDATA[PROPERTY PUBLIC PickPos : REFERENCE TO TcoDrivesBeckhoff.TcoMultiAxisMoveParam;]]></Declaration>
       <Get Name="Get" Id="{54fd2e36-1768-0b24-3aaa-aa9fb0032d69}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[PickPos REF=PickPosition;]]></ST>
+          <ST><![CDATA[PickPos REF= PickPosition;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -32,10 +29,9 @@ END_VAR
       <Declaration><![CDATA[PROPERTY PUBLIC PlacePos : REFERENCE TO TcoDrivesBeckhoff.TcoMultiAxisMoveParam;]]></Declaration>
       <Get Name="Get" Id="{51fcacf0-79b0-0952-0548-14f5f353edb9}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[PlacePos REF=PlacePosition;]]></ST>
+          <ST><![CDATA[PlacePos REF= PlacePosition;]]></ST>
         </Implementation>
       </Get>
     </Property>

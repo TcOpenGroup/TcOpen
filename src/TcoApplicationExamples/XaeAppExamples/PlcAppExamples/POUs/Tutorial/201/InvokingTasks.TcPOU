@@ -3,77 +3,64 @@
   <POU Name="InvokingTasks" Id="{12cfae65-b95f-0775-1a26-802c03070a44}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK InvokingTasks EXTENDS TcoCore.TcoContext
 VAR
-	Cylinder : TcoPneumatics.TcoCylinder(THIS^);
-	
-	TriggerHome : BOOL;
-	TriggerWork : BOOL;
-
-
-	
-	//simulate IO
-	AtHome:BOOL;
-	AtWork:BOOL;
-	ToHome:BOOL;
-	ToWork:BOOL;
-	
-	_simTimerValue : UINT := 500;
-	_simTimer : Tc2_Standard.TON;
-
-END_VAR
-]]></Declaration>
+    Cylinder : TcoPneumatics.TcoCylinder(THIS^);
+    TriggerHome : BOOL;
+    TriggerWork : BOOL;
+    //simulate IO
+    AtHome : BOOL;
+    AtWork : BOOL;
+    ToHome : BOOL;
+    ToWork : BOOL;
+    _simTimerValue : UINT := 500;
+    _simTimer : Tc2_Standard.TON;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[//Use main method]]></ST>
     </Implementation>
     <Method Name="Main" Id="{a6ba057b-ec5a-0051-11a4-7a811a9c8902}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Main method of the TcoContext. This is the entry point of any control logic that belongs to this context. 
-			The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
-			This method is abstract, and it must be overridden in derived block.
-		</summary>
-	</docu>
+    <docu>
+        <summary>
+            Main method of the TcoContext. This is the entry point of any control logic that belongs to this context.
+            The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
+            This method is abstract, and it must be overridden in derived block.
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED  Main
+METHOD PROTECTED Main
 VAR_INST
-	ToHomeTemp:BOOL;
-	ToWorkTemp:BOOL;
-
+    ToHomeTemp : BOOL;
+    ToWorkTemp : BOOL;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Cylinder
-(
-	inoAtHomePos := AtHome,
-	inoAtWorkPos := AtWork,
-	inoToHomePos := ToHome,
-	inoToWorkPos := ToWork
-);
+        <ST><![CDATA[Cylinder(inoAtHomePos := AtHome,
+    inoAtWorkPos := AtWork,
+    inoToHomePos := ToHome,
+    inoToWorkPos := ToWork);
 
 IF ToWork THEN
-	AtHome := FALSE;
-	_simTimer(IN:=TRUE,PT:= UINT_TO_TIME(_simTimerValue*4));
-	IF(_simTimer.Q) THEN
-		AtWork :=TRUE;
-		_simTimer(IN:=FALSE,PT:= UINT_TO_TIME(0));
-		Cylinder.Restore();
-	END_IF
+    AtHome := FALSE;
+    _simTimer(IN := TRUE, PT := UINT_TO_TIME(_simTimerValue * 4));
+
+    IF (_simTimer.Q) THEN
+        AtWork := TRUE;
+        _simTimer(IN := FALSE, PT := UINT_TO_TIME(0));
+        Cylinder.Restore();
+    END_IF
 END_IF
 
-
 IF ToHome THEN
-	AtWork := FALSE;
-	_simTimer(IN:=TRUE,PT:= UINT_TO_TIME(_simTimerValue*4));
-	IF(_simTimer.Q) THEN
-		AtHome :=TRUE;
-		_simTimer(IN:=FALSE,PT:= UINT_TO_TIME(0));
-		Cylinder.Restore();
-	END_IF
+    AtWork := FALSE;
+    _simTimer(IN := TRUE, PT := UINT_TO_TIME(_simTimerValue * 4));
+
+    IF (_simTimer.Q) THEN
+        AtHome := TRUE;
+        _simTimer(IN := FALSE, PT := UINT_TO_TIME(0));
+        Cylinder.Restore();
+    END_IF
 END_IF
 
 Cylinder.Service(); //enable manual control
-
-
-
 ]]></ST>
       </Implementation>
     </Method>

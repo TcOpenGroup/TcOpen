@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Library</OutputType>
@@ -12,11 +12,15 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <PackageTags>TwinCAT3 Beckhoff</PackageTags>
-    <PackageReleaseNotes>Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
+    <PackageReleaseNotes
+    >Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
     <PackageProjectUrl>http://docs.tcopengroup.org/</PackageProjectUrl>
-    <PackageIconUrl>https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
+    <PackageIconUrl
+    >https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net48|AnyCPU'">
+  <PropertyGroup
+    Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net48|AnyCPU'"
+  >
     <DefineConstants>TRACE;PLC_DOCU</DefineConstants>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
@@ -32,18 +36,41 @@
     <PackageReference Include="Inxton.iXlinker" Version="0.1.4-alpha.100">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="2.0.0" />
+    <PackageReference
+      Include="Inxton.Package.Vortex.Essentials"
+      Version="2.0.0"
+    />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\TcoCore\src\TcoCoreConnector\TcoCoreConnector.csproj" />
+    <ProjectReference
+      Include="..\..\..\TcoCore\src\TcoCoreConnector\TcoCoreConnector.csproj"
+    />
   </ItemGroup>
-	
+
 	<ItemGroup>
-		<Content Include="_meta\TcoIo.library" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
-		<Content Include="_meta\TcoIo.json" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
-		<Content Include="_meta\version.info" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
+		<Content
+      Include="_meta\TcoIo.library"
+      IncludeInPackage="true"
+      Pack="true"
+      PackagePath="lib"
+      CopyToOutputDirectory="PreserveNewest"
+    />
+		<Content
+      Include="_meta\TcoIo.json"
+      IncludeInPackage="true"
+      Pack="true"
+      PackagePath="lib"
+      CopyToOutputDirectory="PreserveNewest"
+    />
+		<Content
+      Include="_meta\version.info"
+      IncludeInPackage="true"
+      Pack="true"
+      PackagePath="lib"
+      CopyToOutputDirectory="PreserveNewest"
+    />
 	</ItemGroup>
-	
+
   <ItemGroup>
     <Compile Update="Properties\Localizations.Designer.cs">
       <DesignTime>True</DesignTime>

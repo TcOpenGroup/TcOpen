@@ -1,76 +1,133 @@
 ﻿<UserControl
-    x:Class="TcoCognexVision.TcoDesigner_v_2_x_xServiceView"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:TcoCognexVision"
-    xmlns:conv="clr-namespace:TcoCognexVision.Converters"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:p="clr-namespace:TcOpen.Inxton.TcoCognexVision.Wpf.Properties"
-    
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:tcoCore="http://vortex.mts/xaml"
-    xmlns:tcocognexvision="clr-namespace:TcoCognexVision" xmlns:vortex="clr-namespace:TcoCore;assembly=TcOpen.Inxton.TcoCore.Wpf" xmlns:wpf="clr-namespace:Tco.Wpf;assembly=TcOpen.Inxton.TcoCore.Wpf"
-    mc:Ignorable="d">
+  x:Class="TcoCognexVision.TcoDesigner_v_2_x_xServiceView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:TcoCognexVision"
+  xmlns:conv="clr-namespace:TcoCognexVision.Converters"
+  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+  xmlns:p="clr-namespace:TcOpen.Inxton.TcoCognexVision.Wpf.Properties"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:tcoCore="http://vortex.mts/xaml"
+  xmlns:tcocognexvision="clr-namespace:TcoCognexVision"
+  xmlns:vortex="clr-namespace:TcoCore;assembly=TcOpen.Inxton.TcoCore.Wpf"
+  xmlns:wpf="clr-namespace:Tco.Wpf;assembly=TcOpen.Inxton.TcoCore.Wpf"
+  mc:Ignorable="d"
+>
 
     <d:UserControl.DataContext>
         <tcocognexvision:TcoDesigner_v_2_x_xServiceViewModel />
     </d:UserControl.DataContext>
     <UserControl.Resources>
         <ItemsPanelTemplate x:Key="HorizontalWraped">
-            <WrapPanel Background="Transparent" Width="{Binding (FrameworkElement.ActualWidth) , RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}" MinWidth="{Binding ItemWidth , RelativeSource={RelativeSource Self}}" ItemHeight="{Binding (ListView.View).ItemHeight , RelativeSource={RelativeSource AncestorType=ListView}}" ItemWidth="{Binding (ListView.View).ItemWidth , RelativeSource={RelativeSource AncestorType=ListView}}" />
+            <WrapPanel
+        Background="Transparent"
+        Width="{Binding (FrameworkElement.ActualWidth) , RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+        MinWidth="{Binding ItemWidth , RelativeSource={RelativeSource Self}}"
+        ItemHeight="{Binding (ListView.View).ItemHeight , RelativeSource={RelativeSource AncestorType=ListView}}"
+        ItemWidth="{Binding (ListView.View).ItemWidth , RelativeSource={RelativeSource AncestorType=ListView}}"
+      />
         </ItemsPanelTemplate>
 
     </UserControl.Resources>
     <tcoCore:TcoComponentView>
-            <tcoCore:TcoComponentView.ComponentHeader >
-            <WrapPanel VerticalAlignment="Center"   HorizontalAlignment="Left">
-                <tcoCore:RenderableContentControl  DataContext="{Binding Component._triggerTask}" Margin="5,0" PresentationType="Base"></tcoCore:RenderableContentControl>
-                <tcoCore:RenderableContentControl  DataContext="{Binding Component._restoreTask}" Margin="5,0" PresentationType="Base"></tcoCore:RenderableContentControl>
+            <tcoCore:TcoComponentView.ComponentHeader>
+            <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Left">
+                <tcoCore:RenderableContentControl
+          DataContext="{Binding Component._triggerTask}"
+          Margin="5,0"
+          PresentationType="Base"
+        />
+                <tcoCore:RenderableContentControl
+          DataContext="{Binding Component._restoreTask}"
+          Margin="5,0"
+          PresentationType="Base"
+        />
 
 
-                <WrapPanel VerticalAlignment="Center" DataContext="{Binding Component._status.ClientConnected}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter} ,ConverterParameter=false}" Margin=" 5,0">
-                    <materialDesign:PackIcon Kind="Check"  Foreground="{StaticResource Notification}"  VerticalAlignment="Center"/>
-                    <TextBlock VerticalAlignment="Center" Text="{x:Static p:strings.DesignerConnected}" Foreground="{StaticResource Notification}"  />
+                <WrapPanel
+          VerticalAlignment="Center"
+          DataContext="{Binding Component._status.ClientConnected}"
+          Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter} ,ConverterParameter=false}"
+          Margin=" 5,0"
+        >
+                    <materialDesign:PackIcon
+            Kind="Check"
+            Foreground="{StaticResource Notification}"
+            VerticalAlignment="Center"
+          />
+                    <TextBlock
+            VerticalAlignment="Center"
+            Text="{x:Static p:strings.DesignerConnected}"
+            Foreground="{StaticResource Notification}"
+          />
                 </WrapPanel>
-                <WrapPanel VerticalAlignment="Center" DataContext="{Binding Component._status.ClientConnected}"  Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter} ,ConverterParameter=true}" Margin=" 5,0">
-                    <materialDesign:PackIcon Kind="AlertBox"  Foreground="{StaticResource Errors}"  VerticalAlignment="Center"/>
-                    <TextBlock VerticalAlignment="Center" Text="{x:Static p:strings.DesignerNotConnected}" Foreground="{StaticResource Errors}"  />
+                <WrapPanel
+          VerticalAlignment="Center"
+          DataContext="{Binding Component._status.ClientConnected}"
+          Visibility="{Binding Cyclic, Converter={vortex:BooleanToVisibilityConverter} ,ConverterParameter=true}"
+          Margin=" 5,0"
+        >
+                    <materialDesign:PackIcon
+            Kind="AlertBox"
+            Foreground="{StaticResource Errors}"
+            VerticalAlignment="Center"
+          />
+                    <TextBlock
+            VerticalAlignment="Center"
+            Text="{x:Static p:strings.DesignerNotConnected}"
+            Foreground="{StaticResource Errors}"
+          />
                 </WrapPanel>
             </WrapPanel>
             </tcoCore:TcoComponentView.ComponentHeader>
             <tcoCore:TcoComponentView.ComponentDetails>
-            <Grid  DataContext="{Binding }">
+            <Grid DataContext="{Binding }">
                 <Grid.Resources>
-                    <Style TargetType="GroupBox"  BasedOn="{StaticResource MaterialDesignCardGroupBox}">
-                        <Setter Property="Margin" Value="5,0,0,5"></Setter>
+                    <Style
+            TargetType="GroupBox"
+            BasedOn="{StaticResource MaterialDesignCardGroupBox}"
+          >
+                        <Setter Property="Margin" Value="5,0,0,5" />
                     </Style>
                     <Style TargetType="WrapPanel">
-                        <Setter Property="MinWidth" Value="300"></Setter>
+                        <Setter Property="MinWidth" Value="300" />
 
                     </Style>
                 </Grid.Resources>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" ></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
 
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
 
-                    <RowDefinition></RowDefinition>
+                    <RowDefinition />
 
 
                 </Grid.RowDefinitions>
 
-                <GroupBox Grid.ColumnSpan="2" Padding="10" Header="{x:Static p:strings.Tasks}" >
-                    <ItemsControl ItemsPanel="{StaticResource HorizontalWraped}" HorizontalAlignment="Left" ItemsSource="{Binding Tasks}">
+                <GroupBox
+          Grid.ColumnSpan="2"
+          Padding="10"
+          Header="{x:Static p:strings.Tasks}"
+        >
+                    <ItemsControl
+            ItemsPanel="{StaticResource HorizontalWraped}"
+            HorizontalAlignment="Left"
+            ItemsSource="{Binding Tasks}"
+          >
 
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <tcoCore:RenderableContentControl MinWidth="150" DataContext="{Binding Component}" Margin="5"></tcoCore:RenderableContentControl>
+                                <tcoCore:RenderableContentControl
+                  MinWidth="150"
+                  DataContext="{Binding Component}"
+                  Margin="5"
+                />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
@@ -78,55 +135,122 @@
 
 
                 <!--<GroupBox Padding="10" Grid.Row="2" Grid.ColumnSpan="2"  Header="{Binding Component._specificData.AttributeName}">-->
-                <Expander Margin="10,10,0,10" Padding="10" Grid.Row="2" Grid.ColumnSpan="2" Header="{Binding Component._specificData.AttributeName}">
+                <Expander
+          Margin="10,10,0,10"
+          Padding="10"
+          Grid.Row="2"
+          Grid.ColumnSpan="2"
+          Header="{Binding Component._specificData.AttributeName}"
+        >
 
-                        <StackPanel Orientation="Vertical"  >
-                            <tcoCore:RenderableContentControl DataContext="{Binding Component._specificData }" PresentationType="DisplaySlim-Display" />
-                        
-                            <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-                                <TextBlock VerticalAlignment="Center" Margin="5" Text="{x:Static p:strings.Filter}"></TextBlock>
-                                <TextBox VerticalContentAlignment="Center" Margin="5" MinWidth="100" Text="{Binding Filter}"></TextBox>
-                            <TextBlock VerticalAlignment="Center" Margin="5" Text="{x:Static p:strings.Tail}"></TextBlock>
-                            <TextBox VerticalContentAlignment="Center" Margin="5" MinWidth="100" Text="{Binding TailFilter}"></TextBox>
-                            <Button Margin="5" HorizontalAlignment="Center" Content="{x:Static p:strings.Generate}" Command="{Binding GenerateSpecificSymbolsCommand}"></Button>
+                        <StackPanel Orientation="Vertical">
+                            <tcoCore:RenderableContentControl
+              DataContext="{Binding Component._specificData }"
+              PresentationType="DisplaySlim-Display"
+            />
+
+                            <WrapPanel
+              VerticalAlignment="Center"
+              HorizontalAlignment="Center"
+              Orientation="Horizontal"
+            >
+                                <TextBlock
+                VerticalAlignment="Center"
+                Margin="5"
+                Text="{x:Static p:strings.Filter}"
+              />
+                                <TextBox
+                VerticalContentAlignment="Center"
+                Margin="5"
+                MinWidth="100"
+                Text="{Binding Filter}"
+              />
+                            <TextBlock
+                VerticalAlignment="Center"
+                Margin="5"
+                Text="{x:Static p:strings.Tail}"
+              />
+                            <TextBox
+                VerticalContentAlignment="Center"
+                Margin="5"
+                MinWidth="100"
+                Text="{Binding TailFilter}"
+              />
+                            <Button
+                Margin="5"
+                HorizontalAlignment="Center"
+                Content="{x:Static p:strings.Generate}"
+                Command="{Binding GenerateSpecificSymbolsCommand}"
+              />
                         </WrapPanel>
-                    
-                     
+
+
                     </StackPanel>
                     </Expander>
                 <!--</GroupBox>-->
-              
-                <GroupBox Grid.Column="0" Grid.RowSpan="2"  Padding="10" Grid.Row="3" DataContext="{Binding Component._status}"  Header="{Binding AttributeName}">
+
+                <GroupBox
+          Grid.Column="0"
+          Grid.RowSpan="2"
+          Padding="10"
+          Grid.Row="3"
+          DataContext="{Binding Component._status}"
+          Header="{Binding AttributeName}"
+        >
                     <GroupBox.Resources>
-                    <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
-                            <Setter Property="MaxWidth"  Value="200"></Setter>
+                    <Style
+              TargetType="TextBox"
+              BasedOn="{StaticResource MaterialDesignTextBox}"
+            >
+                            <Setter Property="MaxWidth" Value="200" />
                     </Style>
                     </GroupBox.Resources>
-                    <tcoCore:RenderableContentControl  DataContext="{Binding }" PresentationType="DisplaySlim"    />
+                    <tcoCore:RenderableContentControl
+            DataContext="{Binding }"
+            PresentationType="DisplaySlim"
+          />
                 </GroupBox>
                 <WrapPanel Grid.Column="1" Grid.Row="3">
-                    <GroupBox Padding="10"  Header="{Binding Component._config.AttributeName}">
+                    <GroupBox
+            Padding="10"
+            Header="{Binding Component._config.AttributeName}"
+          >
                         <StackPanel>
-                            <tcoCore:RenderableContentControl  DataContext="{Binding Component._config}" PresentationType="ControlSlim" />
-                            <Button Margin="5" HorizontalAlignment="Center" Content="{x:Static p:strings.GenerateGenericSymbols}" Command="{Binding GenerateGenericSymbolsCommand}"></Button>
+                            <tcoCore:RenderableContentControl
+                DataContext="{Binding Component._config}"
+                PresentationType="ControlSlim"
+              />
+                            <Button
+                Margin="5"
+                HorizontalAlignment="Center"
+                Content="{x:Static p:strings.GenerateGenericSymbols}"
+                Command="{Binding GenerateGenericSymbolsCommand}"
+              />
                         </StackPanel>
                     </GroupBox>
-                    <GroupBox Padding="10" DataContext="{Binding Component._genericData.PlcToPc}" Header="{Binding AttributeName}">
-                        
-                        <tcoCore:RenderableContentControl  DataContext="{Binding }" PresentationType="ControlSlim" />
-                        
+                    <GroupBox
+            Padding="10"
+            DataContext="{Binding Component._genericData.PlcToPc}"
+            Header="{Binding AttributeName}"
+          >
+
+                        <tcoCore:RenderableContentControl
+              DataContext="{Binding }"
+              PresentationType="ControlSlim"
+            />
+
                     </GroupBox>
 
 
 
                 </WrapPanel>
 
-               
+
 
 
             </Grid>
-       
+
             </tcoCore:TcoComponentView.ComponentDetails>
         </tcoCore:TcoComponentView>
-   
+
 </UserControl>

@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Identity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -8,6 +6,8 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Identity;
 using TcOpen.Inxton.Data;
 using TcOpen.Inxton.Local.Security.Blazor.Services;
 using TcOpen.Inxton.Local.Security.Blazor.Users;
@@ -15,24 +15,30 @@ using TcOpen.Inxton.Security;
 
 namespace TcOpen.Inxton.Local.Security.Blazor.Stores
 {
-    public class UserStore :
-        IUserStore<User>,
-        IUserPasswordStore<User>,
-        IUserRoleStore<User>,
-        IUserSecurityStampStore<User>,
-        IUserClaimStore<User>,
-        IQueryableUserStore<User>
+    public class UserStore
+        : IUserStore<User>,
+            IUserPasswordStore<User>,
+            IUserRoleStore<User>,
+            IUserSecurityStampStore<User>,
+            IUserClaimStore<User>,
+            IQueryableUserStore<User>
     {
         private readonly IRepositoryService _unitOfWork;
-        public UserStore(IRepositoryService unitOfWork, IdentityErrorDescriber errorDescriber = null)
+
+        public UserStore(
+            IRepositoryService unitOfWork,
+            IdentityErrorDescriber errorDescriber = null
+        )
         {
             ErrorDescriber = errorDescriber;
             _unitOfWork = unitOfWork;
         }
+
         /// <summary>
         /// Gets or sets the <see cref="IdentityErrorDescriber"/> for any error that occurred with the current operation.
         /// </summary>
         public IdentityErrorDescriber ErrorDescriber { get; set; }
+
         /// <summary>
         /// Get all available users from UserRepository./>.
         /// </summary>
@@ -40,28 +46,27 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         {
             get
             {
-                return _unitOfWork.UserRepository.GetRecords("*").Select(x => new User(x)).AsQueryable();
+                return _unitOfWork
+                    .UserRepository.GetRecords("*")
+                    .Select(x => new User(x))
+                    .AsQueryable();
             }
         }
+
         /// <summary>
         /// Get all available roles from RoleRepository./>.
         /// </summary>
         private IList<Role> _roleCollection
         {
-            get
-            {
-                return _unitOfWork.RoleGroupManager.inAppRoleCollection;
-            }
+            get { return _unitOfWork.RoleGroupManager.inAppRoleCollection; }
         }
         private RoleGroupManager _roleGroupManager
         {
-            get
-            {
-                return _unitOfWork.RoleGroupManager;
-            }
+            get { return _unitOfWork.RoleGroupManager; }
         }
 
         private bool _disposed;
+
         protected void ThrowIfDisposed()
         {
             if (_disposed)
@@ -74,6 +79,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         {
             _disposed = true;
         }
+
         /// <summary>
         /// Gets the user identifier for the specified <paramref name="user"/>.
         /// </summary>
@@ -82,7 +88,6 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the identifier for the specified <paramref name="user"/>.</returns>
         public Task<string> GetUserIdAsync(User user, CancellationToken cancellationToken = default)
         {
-
             cancellationToken.ThrowIfCancellationRequested();
 
             if (user == null)
@@ -90,13 +95,17 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
 
             return Task.FromResult(user.Id);
         }
+
         /// <summary>
         /// Gets the user name for the specified <paramref name="user"/>.
         /// </summary>
         /// <param name="user">The user whose name should be retrieved.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the name for the specified <paramref name="user"/>.</returns>
-        public Task<string> GetUserNameAsync(User user, CancellationToken cancellationToken = default)
+        public Task<string> GetUserNameAsync(
+            User user,
+            CancellationToken cancellationToken = default
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -105,6 +114,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
 
             return Task.FromResult(user.UserName);
         }
+
         /// <summary>
         /// Sets the given <paramref name="userName" /> for the specified <paramref name="user"/>.
         /// </summary>
@@ -112,7 +122,11 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         /// <param name="userName">The user name to set.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-        public Task SetUserNameAsync(User user, string userName, CancellationToken cancellationToken = default)
+        public Task SetUserNameAsync(
+            User user,
+            string userName,
+            CancellationToken cancellationToken = default
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -123,13 +137,17 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
 
             return Task.CompletedTask;
         }
+
         /// <summary>
         /// Gets the normalized user name for the specified <paramref name="user"/>.
         /// </summary>
         /// <param name="user">The user whose normalized name should be retrieved.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the normalized user name for the specified <paramref name="user"/>.</returns>
-        public Task<string> GetNormalizedUserNameAsync(User user, CancellationToken cancellationToken = default)
+        public Task<string> GetNormalizedUserNameAsync(
+            User user,
+            CancellationToken cancellationToken = default
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -146,7 +164,11 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         /// <param name="normalizedName">The normalized name to set.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-        public Task SetNormalizedUserNameAsync(User user, string normalizedName, CancellationToken cancellationToken = default)
+        public Task SetNormalizedUserNameAsync(
+            User user,
+            string normalizedName,
+            CancellationToken cancellationToken = default
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -157,13 +179,17 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
 
             return Task.CompletedTask;
         }
+
         /// <summary>
         /// Creates the specified <paramref name="user"/> in the user store.
         /// </summary>
         /// <param name="user">The user to create.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/> of the creation operation.</returns>
-        public Task<IdentityResult> CreateAsync(User user, CancellationToken cancellationToken = default)
+        public Task<IdentityResult> CreateAsync(
+            User user,
+            CancellationToken cancellationToken = default
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -179,7 +205,14 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
             }
             catch (DuplicateIdException)
             {
-                return Task.FromResult(IdentityResult.Failed(new IdentityError { Description = $"User with username {user.UserName} already exists." }));
+                return Task.FromResult(
+                    IdentityResult.Failed(
+                        new IdentityError
+                        {
+                            Description = $"User with username {user.UserName} already exists."
+                        }
+                    )
+                );
             }
 
             return Task.FromResult(IdentityResult.Success);
@@ -191,7 +224,10 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         /// <param name="user">The user to update.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/> of the update operation.</returns>
-        public Task<IdentityResult> UpdateAsync(User user, CancellationToken cancellationToken = default)
+        public Task<IdentityResult> UpdateAsync(
+            User user,
+            CancellationToken cancellationToken = default
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -212,26 +248,43 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
                 }
                 else
                 {
-                    return Task.FromResult(IdentityResult.Failed(new IdentityError { Description = $"User with username {user.UserName} doesn't exists." }));
+                    return Task.FromResult(
+                        IdentityResult.Failed(
+                            new IdentityError
+                            {
+                                Description = $"User with username {user.UserName} doesn't exists."
+                            }
+                        )
+                    );
                 }
 
                 _unitOfWork.UserRepository.Update(user.UserName, userData);
             }
             catch (UnableToLocateRecordId)
             {
-                return Task.FromResult(IdentityResult.Failed(new IdentityError { Description = $"User with username {user.UserName} doesn't exists." }));
+                return Task.FromResult(
+                    IdentityResult.Failed(
+                        new IdentityError
+                        {
+                            Description = $"User with username {user.UserName} doesn't exists."
+                        }
+                    )
+                );
             }
-
 
             return Task.FromResult(IdentityResult.Success);
         }
+
         /// <summary>
         /// Deletes the specified <paramref name="user"/> from the user store.
         /// </summary>
         /// <param name="user">The user to delete.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/> of the update operation.</returns>
-        public Task<IdentityResult> DeleteAsync(User user, CancellationToken cancellationToken = default)
+        public Task<IdentityResult> DeleteAsync(
+            User user,
+            CancellationToken cancellationToken = default
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -242,6 +295,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
 
             return Task.FromResult(IdentityResult.Success);
         }
+
         /// <summary>
         /// Finds and returns a user, if any, who has the specified <paramref name="userId"/>.
         /// </summary>
@@ -250,7 +304,10 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         /// <returns>
         /// The <see cref="Task"/> that represents the asynchronous operation, containing the user matching the specified <paramref name="userId"/> if it exists.
         /// </returns>
-        public Task<User> FindByIdAsync(string entityId, CancellationToken cancellationToken = default)
+        public Task<User> FindByIdAsync(
+            string entityId,
+            CancellationToken cancellationToken = default
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -267,9 +324,9 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
                 user = null;
             }
 
-
             return Task.FromResult(user);
         }
+
         /// <summary>
         /// Finds and returns a user, if any, who has the specified normalized user name.
         /// </summary>
@@ -278,7 +335,10 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         /// <returns>
         /// The <see cref="Task"/> that represents the asynchronous operation, containing the user matching the specified <paramref name="normalizedUserName"/> if it exists.
         /// </returns>
-        public Task<User> FindByNameAsync(string normalizedUserName, CancellationToken cancellationToken = default)
+        public Task<User> FindByNameAsync(
+            string normalizedUserName,
+            CancellationToken cancellationToken = default
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -296,9 +356,9 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
                 user = null;
             }
 
-
             return Task.FromResult(user);
         }
+
         /// <summary>
         /// Sets the password hash for a user.
         /// </summary>
@@ -306,7 +366,11 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         /// <param name="passwordHash">The password hash to set.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-        public Task SetPasswordHashAsync(User user, string passwordHash, CancellationToken cancellationToken = default)
+        public Task SetPasswordHashAsync(
+            User user,
+            string passwordHash,
+            CancellationToken cancellationToken = default
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -317,13 +381,17 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
 
             return Task.CompletedTask;
         }
+
         /// <summary>
         /// Gets the password hash for a user.
         /// </summary>
         /// <param name="user">The user to retrieve the password hash for.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>A <see cref="Task{TResult}"/> that contains the password hash for the user.</returns>
-        public Task<string> GetPasswordHashAsync(User user, CancellationToken cancellationToken = default)
+        public Task<string> GetPasswordHashAsync(
+            User user,
+            CancellationToken cancellationToken = default
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -332,12 +400,13 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
 
             return Task.FromResult(user.PasswordHash);
         }
+
         /// <summary>
         /// Returns a flag indicating if the specified user has a password.
         /// </summary>
         /// <param name="user">The user to retrieve the password hash for.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
-        /// <returns>A <see cref="Task{TResult}"/> containing a flag indicating if the specified user has a password. If the 
+        /// <returns>A <see cref="Task{TResult}"/> containing a flag indicating if the specified user has a password. If the
         /// user has a password the returned value with be true, otherwise it will be false.</returns>
         public Task<bool> HasPasswordAsync(User user, CancellationToken cancellationToken = default)
         {
@@ -348,6 +417,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
 
             return Task.FromResult(!string.IsNullOrWhiteSpace(user.PasswordHash));
         }
+
         /// <summary>
         /// Adds the given <paramref name="normalizedRoleName"/> to the specified <paramref name="user"/>.
         /// </summary>
@@ -355,7 +425,11 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         /// <param name="normalizedRoleName">The role to add.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-        public Task AddToRoleAsync(User user, string normalizedRoleName, CancellationToken cancellationToken = default)
+        public Task AddToRoleAsync(
+            User user,
+            string normalizedRoleName,
+            CancellationToken cancellationToken = default
+        )
         {
             //cancellationToken.ThrowIfCancellationRequested();
 
@@ -388,6 +462,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
             //return Task.CompletedTask;
             throw new Exception("Not implemented!");
         }
+
         /// <summary>
         /// Removes the given <paramref name="normalizedRoleName"/> from the specified <paramref name="user"/>.
         /// </summary>
@@ -395,7 +470,11 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         /// <param name="normalizedRoleName">The role to remove.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-        public Task RemoveFromRoleAsync(User user, string normalizedRoleName, CancellationToken cancellationToken = default)
+        public Task RemoveFromRoleAsync(
+            User user,
+            string normalizedRoleName,
+            CancellationToken cancellationToken = default
+        )
         {
             //cancellationToken.ThrowIfCancellationRequested();
 
@@ -416,13 +495,17 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
             //return Task.CompletedTask;
             throw new Exception("Not implemented!");
         }
+
         /// <summary>
         /// Retrieves the roles the specified <paramref name="user"/> is a member of.
         /// </summary>
         /// <param name="user">The user whose roles should be retrieved.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>A <see cref="Task{TResult}"/> that contains the roles the user is a member of.</returns>
-        public Task<IList<string>> GetRolesAsync(User user, CancellationToken cancellationToken = default)
+        public Task<IList<string>> GetRolesAsync(
+            User user,
+            CancellationToken cancellationToken = default
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -453,7 +536,11 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>A <see cref="Task{TResult}"/> containing a flag indicating if the specified user is a member of the given group. If the
         /// user is a member of the group the returned value with be true, otherwise it will be false.</returns>
-        public Task<bool> IsInRoleAsync(User user, string normalizedRoleName, CancellationToken cancellationToken = default)
+        public Task<bool> IsInRoleAsync(
+            User user,
+            string normalizedRoleName,
+            CancellationToken cancellationToken = default
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -463,13 +550,15 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
             if (string.IsNullOrWhiteSpace(normalizedRoleName))
                 throw new ArgumentNullException(nameof(normalizedRoleName));
 
-            
-            var blazorRole = _roleCollection.FirstOrDefault(x => x.NormalizedName == normalizedRoleName);
+            var blazorRole = _roleCollection.FirstOrDefault(x =>
+                x.NormalizedName == normalizedRoleName
+            );
             if (blazorRole == null)
                 throw (new Exception("Role doesn't exists"));
-            return Task.FromResult(_roleGroupManager.GetRolesFromGroup(user.Roles[0]).Contains(blazorRole.Name));
+            return Task.FromResult(
+                _roleGroupManager.GetRolesFromGroup(user.Roles[0]).Contains(blazorRole.Name)
+            );
         }
-
 
         /// <summary>
         /// Retrieves all users in the specified role.
@@ -479,16 +568,30 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         /// <returns>
         /// The <see cref="Task"/> contains a list of users, if any, that are in the specified role.
         /// </returns>
-        public Task<IList<User>> GetUsersInRoleAsync(string normalizedRoleName, CancellationToken cancellationToken = default)
+        public Task<IList<User>> GetUsersInRoleAsync(
+            string normalizedRoleName,
+            CancellationToken cancellationToken = default
+        )
         {
-            var blazorRole = _roleCollection.FirstOrDefault(x => x.NormalizedName == normalizedRoleName);
+            var blazorRole = _roleCollection.FirstOrDefault(x =>
+                x.NormalizedName == normalizedRoleName
+            );
             if (blazorRole == null)
                 throw (new Exception("Role doesn't exists"));
 
             IList<User> usersInRole = null;
-            usersInRole = Users.Where(x => x.Roles.Length > 0).Where(x => _roleGroupManager.GetAllGroup().Select(x => x.Name).Contains(x.Roles[0])).Where(x => _roleGroupManager.GetRolesFromGroup(x.Roles[0]).Contains(blazorRole.Name)).ToList();
+            usersInRole = Users
+                .Where(x => x.Roles.Length > 0)
+                .Where(x =>
+                    _roleGroupManager.GetAllGroup().Select(x => x.Name).Contains(x.Roles[0])
+                )
+                .Where(x =>
+                    _roleGroupManager.GetRolesFromGroup(x.Roles[0]).Contains(blazorRole.Name)
+                )
+                .ToList();
             return Task.FromResult(usersInRole);
         }
+
         // <summary>
         /// Sets the provided security <paramref name="stamp"/> for the specified <paramref name="user"/>.
         /// </summary>
@@ -496,7 +599,11 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
         /// <param name="stamp">The security stamp to set.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-        public Task SetSecurityStampAsync(User user, string stamp, CancellationToken cancellationToken = default)
+        public Task SetSecurityStampAsync(
+            User user,
+            string stamp,
+            CancellationToken cancellationToken = default
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -507,13 +614,17 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
 
             return Task.CompletedTask;
         }
+
         /// <summary>
         /// Get the security stamp for the specified <paramref name="user" />.
         /// </summary>
         /// <param name="user">The user whose security stamp should be set.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the security stamp for the specified <paramref name="user"/>.</returns>
-        public Task<string> GetSecurityStampAsync(User user, CancellationToken cancellationToken = default)
+        public Task<string> GetSecurityStampAsync(
+            User user,
+            CancellationToken cancellationToken = default
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -522,32 +633,50 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Stores
 
             return Task.FromResult(user.SecurityStamp);
         }
+
         // Not implemented, do not need for requested functionality in Blazor application.
-        public Task<IList<Claim>> GetClaimsAsync(User user, CancellationToken cancellationToken = default)
+        public Task<IList<Claim>> GetClaimsAsync(
+            User user,
+            CancellationToken cancellationToken = default
+        )
         {
             return Task.FromResult((IList<Claim>)new List<Claim>());
         }
 
-        public Task AddClaimsAsync(User user, IEnumerable<Claim> claims, CancellationToken cancellationToken = default)
+        public Task AddClaimsAsync(
+            User user,
+            IEnumerable<Claim> claims,
+            CancellationToken cancellationToken = default
+        )
         {
             return Task.CompletedTask;
         }
 
-        public Task ReplaceClaimAsync(User user, Claim claim, Claim newClaim, CancellationToken cancellationToken = default)
+        public Task ReplaceClaimAsync(
+            User user,
+            Claim claim,
+            Claim newClaim,
+            CancellationToken cancellationToken = default
+        )
         {
             return Task.CompletedTask;
         }
 
-        public Task RemoveClaimsAsync(User user, IEnumerable<Claim> claims, CancellationToken cancellationToken = default)
+        public Task RemoveClaimsAsync(
+            User user,
+            IEnumerable<Claim> claims,
+            CancellationToken cancellationToken = default
+        )
         {
             return Task.CompletedTask;
         }
 
-        public Task<IList<User>> GetUsersForClaimAsync(Claim claim, CancellationToken cancellationToken = default)
+        public Task<IList<User>> GetUsersForClaimAsync(
+            Claim claim,
+            CancellationToken cancellationToken = default
+        )
         {
             return Task.FromResult((IList<User>)new List<User>());
         }
-
-
     }
 }

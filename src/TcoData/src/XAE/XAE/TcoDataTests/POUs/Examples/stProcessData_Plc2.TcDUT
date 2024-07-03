@@ -2,29 +2,28 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="stProcessData_Plc2" Id="{dbbe4a07-986b-0fc8-0d6a-544726ed2b58}">
     <Declaration><![CDATA[{attribute wpf [Container(Layout.Tabs)]}
-TYPE stProcessData_Plc2 EXTENDS TcoData.TcoEntity :
-STRUCT
-	{attribute wpf [Container(Layout.Stack)]}
-	{attribute addProperty Name "Entity header"}
-	EntityHeader, stEntityHeader: BOOL;	
-	_Modified : DT;
-	_Created : DT;
-	{attribute wpf [Container(Layout.Stack)]}
-	// {attribute addProperty Name "ST 1"}
-	//Cu_1 : stCu_ProcessData;
-	{attribute addProperty Name "Cu2"}	
-	Cu_2 : stCu_ProcessData;
-	(*Cu_3 : stCu_ProcessData;
-	Cu_4 : stCu_ProcessData;
-	Cu_5 : stCu_ProcessData;
-	Cu_6 : stCu_ProcessData;
-	Cu_7 : stCu_ProcessData;
-	Cu_8 : stCu_ProcessData;
-	Cu_9 : stCu_ProcessData;
-	Cu_10 : stCu_ProcessData;
-	*)
+TYPE stProcessData_Plc2 EXTENDS TcoData.TcoEntity : STRUCT
+    {attribute wpf [Container(Layout.Stack)]}
+    {attribute addProperty Name "Entity header"}
+    EntityHeader,
+    stEntityHeader : BOOL;
+    _Modified : DT;
+    _Created : DT;
+    {attribute wpf [Container(Layout.Stack)]}
+    // {attribute addProperty Name "ST 1"}
+    //Cu_1 : stCu_ProcessData;
+    {attribute addProperty Name "Cu2"}
+    Cu_2 : stCu_ProcessData;
+(*Cu_3 : stCu_ProcessData;
+    Cu_4 : stCu_ProcessData;
+    Cu_5 : stCu_ProcessData;
+    Cu_6 : stCu_ProcessData;
+    Cu_7 : stCu_ProcessData;
+    Cu_8 : stCu_ProcessData;
+    Cu_9 : stCu_ProcessData;
+    Cu_10 : stCu_ProcessData;
+    *)
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

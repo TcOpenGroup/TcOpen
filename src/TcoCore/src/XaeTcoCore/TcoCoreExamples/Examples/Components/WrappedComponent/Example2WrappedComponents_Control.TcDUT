@@ -1,14 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <DUT Name="Example2WrappedComponents_Control" Id="{522653ec-0163-04ff-3aa5-9302596f169e}">
-    <Declaration><![CDATA[TYPE Example2WrappedComponents_Control EXTENDS TcoCore.TcoStruct:
-STRUCT
-
-		Setpoint1:INT;
-		Up:BOOL;
-		CommandAscii:STRING;
+    <Declaration><![CDATA[TYPE Example2WrappedComponents_Control EXTENDS TcoCore.TcoStruct : STRUCT
+    Setpoint1 : INT;
+    Up : BOOL;
+    CommandAscii : STRING;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

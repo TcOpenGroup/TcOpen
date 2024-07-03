@@ -3,11 +3,10 @@
   <POU Name="MAIN" Id="{6af77bf1-277e-0a98-2c35-6eb9f887cb1b}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	_testContext : TcoBlinkerTestContext;
-	_testEvalueateMeasurementContext : TcoEvaluateMeasurementContext;
-	_testConversionContext : TcoConversionTetsContext;
-END_VAR
-]]></Declaration>
+    _testContext : TcoBlinkerTestContext;
+    _testEvalueateMeasurementContext : TcoEvaluateMeasurementContext;
+    _testConversionContext : TcoConversionTetsContext;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[_testContext.ProbeRun();
 _testEvalueateMeasurementContext.ProbeRun();

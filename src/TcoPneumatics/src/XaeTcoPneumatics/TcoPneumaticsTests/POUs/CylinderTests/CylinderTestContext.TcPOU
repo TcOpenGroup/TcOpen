@@ -3,52 +3,47 @@
   <POU Name="CylinderTestContext" Id="{4f0e4024-4378-058d-21b2-dd1a5c077cb8}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK CylinderTestContext EXTENDS TcoCore._internals_TcoContext
 VAR
-	{attribute addProperty _moveHomeDefaultName "<#MOVE HOME SWEET HOME#>"}
-	{attribute addProperty _moveWorkDefaultName "<#MOVE TO WORK HARD WORK#>"}
-	{attribute addProperty _stopDefaultName "<#STOP AND THINK#>"}
-	_sut			: TcoPneumatics.TcoCylinder(THIS^);
-	_sutInvalid 	: TcoPneumatics.TcoCylinder(THIS^);
-	_atHomeSignal	: BOOL;
-	_moveHomeSignal : BOOL;
-	_atWorkSignal	: BOOL;
-	_moveWorkSignal : BOOL;
+    {attribute addProperty _moveHomeDefaultName "<#MOVE HOME SWEET HOME#>"}
+    {attribute addProperty _moveWorkDefaultName "<#MOVE TO WORK HARD WORK#>"}
+    {attribute addProperty _stopDefaultName "<#STOP AND THINK#>"}
+    _sut : TcoPneumatics.TcoCylinder(THIS^);
+    _sutInvalid : TcoPneumatics.TcoCylinder(THIS^);
+    _atHomeSignal : BOOL;
+    _moveHomeSignal : BOOL;
+    _atWorkSignal : BOOL;
+    _moveWorkSignal : BOOL;
 END_VAR
 VAR
-	_moveHomeDone	: BOOL;
-	_moveWorkDone : BOOL;	
-	_disableSignal : BOOL;
-	_suspendSignal : BOOL;
-	_expresionMessage : STRING;
-
-END_VAR
-]]></Declaration>
+    _moveHomeDone : BOOL;
+    _moveWorkDone : BOOL;
+    _disableSignal : BOOL;
+    _suspendSignal : BOOL;
+    _expresionMessage : STRING;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Main" Id="{d7464bf3-4a73-0bd9-1c20-65d4ea0101c4}">
-      <Declaration><![CDATA[METHOD PROTECTED Main
-]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED Main]]></Declaration>
       <Implementation>
-        <ST><![CDATA[
-_sut(inoAtHomePos := _atHomeSignal,
+        <ST><![CDATA[_sut(inoAtHomePos := _atHomeSignal,
     inoAtWorkPos := _atWorkSignal,
     inoToHomePos := _moveHomeSignal,
     inoToWorkPos := _moveWorkSignal);
 
-
 CASE _testId OF
-	eCyclinderTests.Invalid:
-	_sutInvalid.Stop();
-	_sutInvalid.MoveToHome();
-	_sutInvalid.MoveToWork();
-	_sutInvalid.Service();
-	_sutInvalid.AtHome;
-	_sutInvalid.AtWork;
-	_sutInvalid.AbortMoveHome(_disableSignal);
-	_sutInvalid.AbortMoveHome(_disableSignal);
-	_sutInvalid.Config.TimeToReachHomePosition := T#1MS;
-	_sutInvalid.Config.TimeToReachWorkPosition := T#1MS;
-	_sutInvalid.Status.ActionDescription;
+    eCyclinderTests.Invalid:
+        _sutInvalid.Stop();
+        _sutInvalid.MoveToHome();
+        _sutInvalid.MoveToWork();
+        _sutInvalid.Service();
+        _sutInvalid.AtHome;
+        _sutInvalid.AtWork;
+        _sutInvalid.AbortMoveHome(_disableSignal);
+        _sutInvalid.AbortMoveHome(_disableSignal);
+        _sutInvalid.Config.TimeToReachHomePosition := T#1MS;
+        _sutInvalid.Config.TimeToReachWorkPosition := T#1MS;
+        _sutInvalid.Status.ActionDescription;
     eCyclinderTests.StopMovement:
         _sut.Stop();
     eCyclinderTests.MoveHomeMoving:
@@ -60,23 +55,23 @@ CASE _testId OF
     eCyclinderTests.MoveWorkMovingReached:
         _moveWorkDone := _sut.MoveToWork().Done;
     eCyclinderTests.AbortMoveTask:
-        _sut.MoveHomeTask.Abort();	
-	eCyclinderTests.DisableHome:
+        _sut.MoveHomeTask.Abort();
+    eCyclinderTests.DisableHome:
         _sut.AbortMoveHome(_disableSignal);
-	eCyclinderTests.DisableWork:
-        _sut.AbortMoveWork(_disableSignal);	
-	eCyclinderTests.SuspendHome:
+    eCyclinderTests.DisableWork:
+        _sut.AbortMoveWork(_disableSignal);
+    eCyclinderTests.SuspendHome:
         _sut.SuspendMoveHome(_suspendSignal);
-	eCyclinderTests.SuspendWork:
+    eCyclinderTests.SuspendWork:
         _sut.SuspendMoveWork(_suspendSignal);
-	eCyclinderTests.SuspendHomeInverted:
+    eCyclinderTests.SuspendHomeInverted:
         _sut.SuspendMoveHomeInverted(_suspendSignal);
-	eCyclinderTests.SuspendWorkInverted:
-        _sut.SuspendMoveWorkInverted(_suspendSignal);	
-	eCyclinderTests.SuspendHomeExpression:
-        _sut.SuspendMoveHomeExpression(_suspendSignal,_expresionMessage);
-	eCyclinderTests.SuspendWorkExpression:
-        _sut.SuspendMoveWorkExpression(_suspendSignal,_expresionMessage);		
+    eCyclinderTests.SuspendWorkInverted:
+        _sut.SuspendMoveWorkInverted(_suspendSignal);
+    eCyclinderTests.SuspendHomeExpression:
+        _sut.SuspendMoveHomeExpression(_suspendSignal, _expresionMessage);
+    eCyclinderTests.SuspendWorkExpression:
+        _sut.SuspendMoveWorkExpression(_suspendSignal, _expresionMessage);
 END_CASE]]></ST>
       </Implementation>
     </Method>

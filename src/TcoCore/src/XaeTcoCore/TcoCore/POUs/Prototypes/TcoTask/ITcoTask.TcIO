@@ -31,9 +31,9 @@
 		<summary>
 			Use to start the execution of the task. The starting is possible from Ready state.
 			<para>Moreover it is also possible to start the task again from Done state by performing the '''rising edge''' of the calling of the Invoke() method.</para>
-			<p>Analogously to the xExecute signal of the <a href="https://plcopen.org/sites/default/files/downloads/creating_plcopen_compliant_function_block_libraries.pdf" title="Title"> PLCopen </a> motion function blocks.</p>			
-		</summary>			
-	</docu>	
+			<p>Analogously to the xExecute signal of the <a href="https://plcopen.org/sites/default/files/downloads/creating_plcopen_compliant_function_block_libraries.pdf" title="Title"> PLCopen </a> motion function blocks.</p>
+		</summary>
+	</docu>
 ~*)
 METHOD Invoke : ITcoTaskStatus
 ]]></Declaration>

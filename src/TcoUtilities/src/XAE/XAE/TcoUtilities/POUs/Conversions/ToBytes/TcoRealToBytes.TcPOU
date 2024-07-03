@@ -17,14 +17,12 @@ VAR
     _b1 : BYTE;
     _b2 : BYTE;
     _b3 : BYTE;
-
     _tmpReal : REAL;
     _rExponent : LREAL;
     _Exponent : DINT;
     _Fraction : DINT;
     _tmpDINT : DINT;
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF (inValue <= -EXPT(2, 128)) OR (inValue >= EXPT(2, 128)) THEN
     outByte0 := 0;
@@ -40,15 +38,12 @@ IF inValue < 0 THEN
 
     IF _rExponent >= 0 THEN
         _Exponent := TRUNC(_rExponent);
-
     ELSE
         _Exponent := TRUNC(_rExponent) - 1;
     END_IF
 
     _Fraction := REAL_TO_DINT((_tmpReal / EXPT(2, _Exponent) - 1) * 8388608);
-
     _tmpDINT := ANY_TO_DINT(2147483648 + (_Exponent + 127) * 8388608 + _Fraction);
-
 ELSIF inValue > 0 THEN
     _tmpReal := ABS(inValue);
     _rExponent := LOG(_tmpReal) / LOG(2);

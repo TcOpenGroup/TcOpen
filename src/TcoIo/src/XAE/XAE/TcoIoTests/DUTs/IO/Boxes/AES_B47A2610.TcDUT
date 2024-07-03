@@ -9,20 +9,18 @@
 {attribute addProperty Id "Module_1_32_Byte_Valve_Unit_0x7FModule_1_32_Byte_Valve_Unit_0x7F_85784B2764Device_StateAT %I*Device_State_384275F89Device_ControlAT %Q*Device_Control_5857DF0F3WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_23CBA8372"}
 {attribute addProperty CRC "3027904016"}
 {attribute addProperty Size "80"}
-TYPE AES_B47A2610 EXTENDS TcoIo.EtcSlaveBoxBase_77A0E4A7 :
-STRUCT
-	{attribute addProperty Name "Module_1_32_Byte_Valve_Unit_0x7F"}
-	Module_1_32_Byte_Valve_Unit_0x7F : Module_1_32_Byte_Valve_Unit_0x7F_85784B27;
-	{attribute addProperty Name "Device_State"}
-	Device_State : Device_State_384275F8;
-	{attribute addProperty Name "Device_Control"}
-	Device_Control : Device_Control_5857DF0F;
-	{attribute addProperty Name "WcState"}
-	WcState : TcoIo.WcState_9091E0EB;
-	{attribute addProperty Name "InfoData"}
-	InfoData : TcoIo.InfoData_23CBA837;
+TYPE AES_B47A2610 EXTENDS TcoIo.EtcSlaveBoxBase_77A0E4A7 : STRUCT
+    {attribute addProperty Name "Module_1_32_Byte_Valve_Unit_0x7F"}
+    Module_1_32_Byte_Valve_Unit_0x7F : Module_1_32_Byte_Valve_Unit_0x7F_85784B27;
+    {attribute addProperty Name "Device_State"}
+    Device_State : Device_State_384275F8;
+    {attribute addProperty Name "Device_Control"}
+    Device_Control : Device_Control_5857DF0F;
+    {attribute addProperty Name "WcState"}
+    WcState : TcoIo.WcState_9091E0EB;
+    {attribute addProperty Name "InfoData"}
+    InfoData : TcoIo.InfoData_23CBA837;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

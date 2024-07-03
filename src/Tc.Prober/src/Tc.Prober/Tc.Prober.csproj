@@ -5,9 +5,10 @@
     <Authors>petok</Authors>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/TcOpenGroup/tc.prober</PackageProjectUrl>
+    <PackageProjectUrl
+    >https://github.com/TcOpenGroup/tc.prober</PackageProjectUrl>
     <RepositoryUrl>https://github.com/TcOpenGroup/tc.prober</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>   
+    <RepositoryType>git</RepositoryType>
     <PackageVersion>$(InformationalVersion)</PackageVersion>
     <Version>$(InformationalVersion)</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -16,15 +17,18 @@
     <PackageIcon>TcOpenLogo128.png</PackageIcon>
     <PackageTags>twincat3 plc unit-testing</PackageTags>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-	<IsPackable>false</IsPackable>  
+	<IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="2.0.0" />
+    <PackageReference
+      Include="Inxton.Package.Vortex.Essentials"
+      Version="2.0.0"
+    />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TcOpenLogo128.png">
       <Pack>True</Pack>
-      <PackagePath></PackagePath>
+      <PackagePath />
     </None>
   </ItemGroup>
 </Project>

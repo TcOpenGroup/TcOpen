@@ -3,9 +3,8 @@
   <POU Name="MAIN" Id="{84d391ff-245d-469c-9f07-0280ac5ddd13}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	_app : AppContext;
-END_VAR
-]]></Declaration>
+    _app : AppContext;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[_app.Run();
 _app.RtcSynchronize(TRUE, '', 60);]]></ST>

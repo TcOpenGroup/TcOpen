@@ -1,16 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoUrEseries_Outputs_v_5_x_x" Id="{f082acb5-2dec-0bc1-0789-e7a9f9bcf15b}">
-    <Declaration><![CDATA[TYPE TcoUrEseries_Outputs_v_5_x_x :
-STRUCT
-	{attribute addProperty Name "<#RobotIO#>"}
-	RobotIO : TcoUrRobotics_O2T_Robot_IO;
-	{attribute addProperty Name "<#Reg2#>"}
-	Reg1 : TcoUrRobotics_O2T_Reg1_IO;
-	{attribute addProperty Name "<#Reg2#>"}
-	Reg2 : TcoUrRobotics_O2T_Reg2_IO;
+    <Declaration><![CDATA[TYPE TcoUrEseries_Outputs_v_5_x_x : STRUCT
+    {attribute addProperty Name "<#RobotIO#>"}
+    RobotIO : TcoUrRobotics_O2T_Robot_IO;
+    {attribute addProperty Name "<#Reg2#>"}
+    Reg1 : TcoUrRobotics_O2T_Reg1_IO;
+    {attribute addProperty Name "<#Reg2#>"}
+    Reg2 : TcoUrRobotics_O2T_Reg2_IO;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

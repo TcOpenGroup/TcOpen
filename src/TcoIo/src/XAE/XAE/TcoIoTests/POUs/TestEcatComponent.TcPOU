@@ -2,15 +2,12 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
   <POU Name="TestEcatComponent" Id="{ce615717-6db6-0331-2bc3-c8a98ad8d687}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC TestEcatComponent EXTENDS TcoIo.TcoEcatComponent
-
 VAR_OUTPUT
 END_VAR
 VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[SUPER^(AdsAddr:= AdsAddr);
-]]></ST>
+      <ST><![CDATA[SUPER^(AdsAddr := AdsAddr);]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

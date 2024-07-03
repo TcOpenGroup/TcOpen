@@ -12,9 +12,9 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Users
         public string ConcurrencyStamp { get; set; }
         public string Name { get; set; }
         public string NormalizedName { get; set; }
-        public dynamic _recordId { get; set ; }
-        public DateTime _Created { get; set ; }
+        public dynamic _recordId { get; set; }
+        public DateTime _Created { get; set; }
         public string _EntityId { get; set; }
-        public DateTime _Modified { get ; set; }
+        public DateTime _Modified { get; set; }
     }
 }

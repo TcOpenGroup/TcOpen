@@ -25,20 +25,19 @@ namespace Tco.Wpf
         {
             this.Header = Header;
         }
-        public TreeObject()
-        {
 
-        }
+        public TreeObject() { }
 
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
         public event PropertyChangedEventHandler PropertyChanged;
-
     }
 
     public static class TreeItemExtension
     {
-        public static IList<TSource> ToObservableCollection<TSource>(this IEnumerable<TSource> source) => new ObservableCollection<TSource>(source);
+        public static IList<TSource> ToObservableCollection<TSource>(
+            this IEnumerable<TSource> source
+        ) => new ObservableCollection<TSource>(source);
     }
-
-
 }

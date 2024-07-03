@@ -6,12 +6,10 @@
 {attribute addProperty Id "U2_StatusAT %I*U2_Status_DC9039207"}
 {attribute addProperty CRC "219681790"}
 {attribute addProperty Size "7"}
-TYPE L2_Voltage_Status_0D1813FE EXTENDS TcoIo.InputBase_8311D824 :
-STRUCT
-	{attribute addProperty Name "U2_Status"}
-	U2_Status AT %I* : U2_Status_DC903920;
+TYPE L2_Voltage_Status_0D1813FE EXTENDS TcoIo.InputBase_8311D824 : STRUCT
+    {attribute addProperty Name "U2_Status"}
+    U2_Status AT %I* : U2_Status_DC903920;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

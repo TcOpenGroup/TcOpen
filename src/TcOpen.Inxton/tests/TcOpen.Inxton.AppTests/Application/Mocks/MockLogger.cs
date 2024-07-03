@@ -7,6 +7,7 @@ namespace TcOpen.Inxton.AppTests
     public class MockLogger : ILogger
     {
         public string LastLog { get; private set; }
+
         public void Debug<T>(string stringTemplate, T payload = default)
         {
             LastLog = $"DEBUG:{stringTemplate}[{payload.ToString()}]";

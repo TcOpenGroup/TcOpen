@@ -19,12 +19,16 @@ namespace TcoCore
 
     public class SequenceModeVisibleInConverter : BaseConverter
     {
-
-        public override object ToConvert(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object ToConvert(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             eSequencerMode VisibleInMode = eSequencerMode.Invalid;
             Enum.TryParse((string)parameter, true, out VisibleInMode);
-            
+
             var enumValue = (eSequencerMode)Enum.ToObject(typeof(eSequencerMode), value);
             return enumValue == VisibleInMode ? Visibility.Visible : Visibility.Collapsed;
         }
@@ -32,10 +36,15 @@ namespace TcoCore
 
     public class SequenceModeDescriptionInConverter : BaseConverter
     {
-
-        public override object ToConvert(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object ToConvert(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
-            eSequencerMode mode = (eSequencerMode)Enum.Parse(typeof(eSequencerMode), value.ToString());
+            eSequencerMode mode = (eSequencerMode)
+                Enum.Parse(typeof(eSequencerMode), value.ToString());
 
             switch (mode)
             {
@@ -47,7 +56,7 @@ namespace TcoCore
                     return "Abandon step mode";
                 default:
                     return string.Empty;
-            }          
+            }
         }
     }
 }

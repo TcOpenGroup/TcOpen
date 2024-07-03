@@ -1,8 +1,7 @@
 ﻿using System;
-using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
-
+using Newtonsoft.Json;
 
 namespace TcoRexrothPressConnector.SmartfunctionKit.RestApi
 {
@@ -21,6 +20,7 @@ namespace TcoRexrothPressConnector.SmartfunctionKit.RestApi
             m_address = address;
             m_uri = "https://" + address + "/api";
         }
+
         public string m_uri;
         public string m_address;
         private readonly string _userName;
@@ -32,22 +32,18 @@ namespace TcoRexrothPressConnector.SmartfunctionKit.RestApi
             return new RestClient(m_uri + "/" + s);
         }
 
-
         public CurveItem GetLastCurveData()
         {
-
-
             var resp = this.Api("curves?page=0&size=1&sort={\"_id\":\"desc\"}").Get();
             var removeRootBracket = resp.Substring(1, resp.Length - 2);
             var curve = JsonConvert.DeserializeObject<CurveItem>(removeRootBracket);
 
             return curve;
         }
+
         public CurveItem GetCurveDataById(string id)
         {
-
-
-            var resp = this.Api("curves/"+id).Get();
+            var resp = this.Api("curves/" + id).Get();
             var removeRootBracket = resp.Substring(1, resp.Length - 2);
             var curve = JsonConvert.DeserializeObject<CurveItem>(removeRootBracket);
 
@@ -56,21 +52,14 @@ namespace TcoRexrothPressConnector.SmartfunctionKit.RestApi
 
         public CurveItem GetCurveDataByCustomId(string id)
         {
-
-
-            var resp = this.Api("curves?page=0&size=1&q={\"customId\": {\"$eq\":\""+id+ "\"}}" + id).Get();
+            var resp = this.Api(
+                    "curves?page=0&size=1&q={\"customId\": {\"$eq\":\"" + id + "\"}}" + id
+                )
+                .Get();
             var removeRootBracket = resp.Substring(1, resp.Length - 2);
             var curve = JsonConvert.DeserializeObject<CurveItem>(removeRootBracket);
 
             return curve;
         }
-
-
-
-      
     }
 }
-
-     
-
-

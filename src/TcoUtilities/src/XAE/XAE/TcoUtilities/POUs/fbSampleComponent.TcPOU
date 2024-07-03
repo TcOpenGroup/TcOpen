@@ -2,42 +2,41 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
   <POU Name="fbSampleComponent" Id="{58312ee6-e99b-4afb-aa9c-8c05761b5535}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
-	<docu>
-		<summary>Sample component for inspiration</summary>				
-	</docu>
+    <docu>
+        <summary>Sample component for inspiration</summary>
+    </docu>
 ~*)
 FUNCTION_BLOCK fbSampleComponent
 VAR
-	(*~
-		<docu>
-			<summary>Counter</summary>
-			<remarks>
-				> [!IMPORTANT]
-				> This member is ignored when rendering.	
-			</remarks>			
-		</docu>
-	~*)
-	{attribute clr [RenderIgnore()]}
-	_counter : INT;	
+    (*~
+        <docu>
+            <summary>Counter</summary>
+            <remarks>
+                > [!IMPORTANT]
+                > This member is ignored when rendering.
+            </remarks>
+        </docu>
+    ~*)
+    {attribute clr [RenderIgnore()]}
+    _counter : INT;
 END_VAR
-
 VAR
-	(*~
-		<docu>
-			<summary>Counter</summary>
-			<remarks>
-				> [!IMPORTANT]
-				> This member is readonly.
-			</remarks>		
-		</docu>
-	~*)
-	{attribute addProperty Name "Add Result"}
-	{attribute clr [ReadOnly()]}
-	_addResult : INT;
-	{attribute addProperty Name "A"}
-	_addNumberOne : INT;
-	{attribute addProperty Name "B"}
-	_addNumberTwo : INT;
+    (*~
+        <docu>
+            <summary>Counter</summary>
+            <remarks>
+                > [!IMPORTANT]
+                > This member is readonly.
+            </remarks>
+        </docu>
+    ~*)
+    {attribute addProperty Name "Add Result"}
+    {attribute clr [ReadOnly()]}
+    _addResult : INT;
+    {attribute addProperty Name "A"}
+    _addNumberOne : INT;
+    {attribute addProperty Name "B"}
+    _addNumberTwo : INT;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -45,18 +44,16 @@ END_VAR]]></Declaration>
     <Folder Name="_tests" Id="{5b8331b0-0029-4e78-a009-bf2eb8712373}" />
     <Method Name="AddTwoNumbers" Id="{2ee747c8-6af4-41fb-afed-608159322163}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>Adds two numbers</summary>		
-		<returns>Sum of two numbers</returns>
-	</docu>
+    <docu>
+        <summary>Adds two numbers</summary>
+        <returns>Sum of two numbers</returns>
+    </docu>
 ~*)
-
 METHOD AddTwoNumbers : INT
 VAR_INPUT
-	NumberOne : INT;
-	NumberTwo : INT;
-END_VAR
-]]></Declaration>
+    NumberOne : INT;
+    NumberTwo : INT;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[AddTwoNumbers := NumberOne + NumberTwo;]]></ST>
       </Implementation>
@@ -65,10 +62,9 @@ END_VAR
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL AddTwoNumbersTest : INT
 VAR_INPUT
-	NumberOne : INT;
-	NumberTwo : INT;
-END_VAR
-]]></Declaration>
+    NumberOne : INT;
+    NumberTwo : INT;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[AddTwoNumbersTest := THIS^.AddTwoNumbers(NumberOne, NumberTwo);]]></ST>
       </Implementation>
@@ -76,8 +72,7 @@ END_VAR
     <Method Name="Cyclic" Id="{bfe4b4a2-960e-417c-877e-2e6fa12b6282}">
       <Declaration><![CDATA[METHOD Cyclic
 VAR_INPUT
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_addResult := THIS^.AddTwoNumbers(_addNumberOne, _addNumberTwo);]]></ST>
       </Implementation>
@@ -85,9 +80,8 @@ END_VAR
     <Method Name="WaitForModulo" Id="{a1a1a029-7058-41f7-bac9-8a1faef1cdae}">
       <Declaration><![CDATA[METHOD WaitForModulo : BOOL
 VAR_INPUT
-	Modulo : INT;
-END_VAR
-]]></Declaration>
+    Modulo : INT;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_counter := _counter + 1;
 WaitForModulo := _counter MOD Modulo = 0;]]></ST>
@@ -97,33 +91,11 @@ WaitForModulo := _counter MOD Modulo = 0;]]></ST>
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL WaitForModuloTest : BOOL
 VAR_INPUT
-	Modulo : INT;
-END_VAR
-]]></Declaration>
+    Modulo : INT;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[WaitForModuloTest := THIS^.WaitForModulo(Modulo);
-	]]></ST>
+        <ST><![CDATA[WaitForModuloTest := THIS^.WaitForModulo(Modulo);]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="fbSampleComponent">
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="fbSampleComponent.AddTwoNumbers">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="fbSampleComponent.AddTwoNumbersTest">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="fbSampleComponent.Cyclic">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="fbSampleComponent.WaitForModulo">
-      <LineId Id="7" Count="0" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="fbSampleComponent.WaitForModuloTest">
-      <LineId Id="5" Count="0" />
-      <LineId Id="11" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

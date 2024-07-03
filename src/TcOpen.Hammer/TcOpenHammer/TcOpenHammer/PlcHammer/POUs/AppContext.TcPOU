@@ -3,33 +3,26 @@
   <POU Name="AppContext" Id="{e82506b0-90bc-42b7-916c-c4162fa94076}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK AppContext EXTENDS TcoCore.TcoContext
 VAR
-	_station001 : Station001(THIS^);
+    _station001 : Station001(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Main" Id="{a771a6c3-fdd4-4888-9f96-785131531d33}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Main method of the TcoContext. This is the entry point of any control logic that belongs to this context. 
-			The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
-			This method is abstract, and it must be overridden in derived block.
-		</summary>
-	</docu>
+    <docu>
+        <summary>
+            Main method of the TcoContext. This is the entry point of any control logic that belongs to this context.
+            The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
+            This method is abstract, and it must be overridden in derived block.
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED  Main]]></Declaration>
+METHOD PROTECTED Main]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^.RtcSynchronize(TRUE, '', 60);
 _station001();]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="AppContext">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="AppContext.Main">
-      <LineId Id="3" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

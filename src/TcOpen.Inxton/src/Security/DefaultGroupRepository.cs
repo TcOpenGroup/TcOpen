@@ -1,10 +1,10 @@
 ﻿namespace TcOpen.Inxton.Local.Security
 {
-    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using Newtonsoft.Json;
     using TcOpen.Inxton.Data;
     using TcOpen.Inxton.Security;
 
@@ -13,7 +13,8 @@
     /// Default folder is 'C:\INXTON\GROUP'.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class DefaultGroupDataRepository<T> : IRepository<T> where T : GroupData
+    public class DefaultGroupDataRepository<T> : IRepository<T>
+        where T : GroupData
     {
         /// <summary>
         /// Creates new instance of of <see cref="DefaultUserDataRepository{T}"/>
@@ -31,10 +32,8 @@
                 }
                 catch (Exception)
                 {
-
                     throw;
                 }
-
             }
         }
 
@@ -54,7 +53,10 @@
             {
                 if (RecordExists(identifier))
                 {
-                    throw new DuplicateIdException($"Record with ID {identifier} already exists in this collection.", null);
+                    throw new DuplicateIdException(
+                        $"Record with ID {identifier} already exists in this collection.",
+                        null
+                    );
                 }
 
                 Save(identifier, data);
@@ -63,7 +65,6 @@
             {
                 throw ex;
             }
-
         }
 
         /// <summary>
@@ -77,17 +78,18 @@
             {
                 if (!RecordExists(identifier))
                 {
-                    throw new UnableToLocateRecordId($"Unable to locate record with ID: {identifier} in {Location}.", null);
+                    throw new UnableToLocateRecordId(
+                        $"Unable to locate record with ID: {identifier} in {Location}.",
+                        null
+                    );
                 }
 
                 return this.Load(identifier, typeof(T));
-
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-
         }
 
         /// <summary>
@@ -101,17 +103,21 @@
             {
                 if (!RecordExists(identifier))
                 {
-                    throw new UnableToLocateRecordId($"Unable to locate record with ID: {identifier} in {Location}.", null);
+                    throw new UnableToLocateRecordId(
+                        $"Unable to locate record with ID: {identifier} in {Location}.",
+                        null
+                    );
                 }
 
                 Save(identifier.ToString(), data);
             }
             catch (Exception ex)
             {
-
-                throw new UnableToUpdateRecord($"Unable to update record ID:{identifier} in {Location}.", ex);
+                throw new UnableToUpdateRecord(
+                    $"Unable to update record ID:{identifier} in {Location}.",
+                    ex
+                );
             }
-
         }
 
         /// <summary>
@@ -141,13 +147,22 @@
         /// <param name="identifier">Identifier to search.</param>
         /// <param name="skip">Skip records.</param>
         /// <param name="limit">Limit number of records.</param>
-        /// <returns></returns>        
+        /// <returns></returns>
         [Obsolete("Use 'Queryable' instead")]
-        public IEnumerable<T> GetRecords(string identifier, int skip = 0, int limit = 1000, eSearchMode searchMode = eSearchMode.Exact)
+        public IEnumerable<T> GetRecords(
+            string identifier,
+            int skip = 0,
+            int limit = 1000,
+            eSearchMode searchMode = eSearchMode.Exact
+        )
         {
             var filetered = new List<T>();
 
-            if (string.IsNullOrEmpty(identifier) || string.IsNullOrWhiteSpace(identifier) || identifier == "*")
+            if (
+                string.IsNullOrEmpty(identifier)
+                || string.IsNullOrWhiteSpace(identifier)
+                || identifier == "*"
+            )
             {
                 foreach (var item in Directory.EnumerateFiles(this.Location))
                 {
@@ -156,7 +171,9 @@
             }
             else
             {
-                var files = Directory.EnumerateFiles(this.Location).Where(p => p.Contains(identifier));
+                var files = Directory
+                    .EnumerateFiles(this.Location)
+                    .Where(p => p.Contains(identifier));
 
                 foreach (var item in files)
                 {
@@ -165,7 +182,6 @@
             }
 
             return filetered;
-
         }
 
         /// <summary>
@@ -214,7 +230,12 @@
 
             using (var jw = new JsonTextWriter(new System.IO.StreamWriter(path)))
             {
-                var serializer = Newtonsoft.Json.JsonSerializer.Create(new Newtonsoft.Json.JsonSerializerSettings() { Formatting = Newtonsoft.Json.Formatting.Indented });
+                var serializer = Newtonsoft.Json.JsonSerializer.Create(
+                    new Newtonsoft.Json.JsonSerializerSettings()
+                    {
+                        Formatting = Newtonsoft.Json.Formatting.Indented
+                    }
+                );
                 serializer.Serialize(jw, obj, obj.GetType());
             }
         }
@@ -263,4 +284,3 @@
         public OnDeleteFailedDelegate OnDeleteFailed { get; set; } = null;
     }
 }
-

@@ -14,6 +14,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
         {
             SeedData();
         }
+
         public void SeedData()
         {
             ExistUser = new User

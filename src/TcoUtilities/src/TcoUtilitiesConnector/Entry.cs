@@ -11,7 +11,7 @@ namespace TcoUtilities
     {
         const string AmdId = "172.20.10.2.1.1";
 
-        public static TcoUtilities.TcoUtilitiesTwinController TcoUtilitiesPlc 
-            = new TcoUtilitiesTwinController(Tc3ConnectorAdapter.Create(AmdId, 851, true));
+        public static TcoUtilities.TcoUtilitiesTwinController TcoUtilitiesPlc =
+            new TcoUtilitiesTwinController(Tc3ConnectorAdapter.Create(AmdId, 851, true));
     }
 }

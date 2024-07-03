@@ -6,48 +6,42 @@
 {attribute 'qlik_ref_value_field:CheckName = AttributeHumanReadable'}
 {attribute 'qlik_ref_value_field:StationName = AttributeQlikGroup'}
 {attribute 'qlik_value_field:CheckType = Analogue'}
-TYPE
-    TcoDataInspectorData EXTENDS TcoInspectorData :
-    STRUCT
-        (*~
-		<docu>
-		<summary>
-			Required status for the check to Pass.	
-		</summary>
-		</docu>
-		~*)
-        {attribute addProperty Name "<#Required#>"}
-		{attribute addProperty ToolTip "<#Required status for inspection to pass. Can contain pattern string when `Star notation is enabled`#>"}
-        {attribute 'qlik_load:RequiredStatus'}
-        RequiredStatus : STRING(255);
-
-        (*~
-		<docu>
-		<summary>
-			Detected status.	
-		</summary>
-		</docu>
-		~*)
-        {attribute addProperty  Name "<#Detected#>"}
-		{attribute addProperty ToolTip "<#Detected data#>"}
-        {attribute clr [RenderIgnore("Control", "ShadowControl", "ControlSlim", "ShadowControlSlim")]}
-        {attribute 'qlik_load:Measured'}
-        DetectedStatus : STRING(255);  
-
-
-		(*~
-		<docu>
-		<summary>
-			When enabled (`true`) the date are evaluating with simple pattern matching.
-		</summary>
-		</docu>
-		~*)
-        {attribute addProperty  Name "<*>"}  
-	    {attribute addProperty ToolTip "<#Required status for inspection to pass. Can contain pattern string when `Star notation is enabled`#>"}      
-        {attribute 'qlik_load:Measured'}
-		StarNotationEnabled : BOOL;      
-    END_STRUCT
-END_TYPE
-]]></Declaration>
+TYPE TcoDataInspectorData EXTENDS TcoInspectorData : STRUCT
+    (*~
+        <docu>
+        <summary>
+            Required status for the check to Pass.
+        </summary>
+        </docu>
+        ~*)
+    {attribute addProperty Name "<#Required#>"}
+    {attribute addProperty ToolTip "<#Required status for inspection to pass. Can contain pattern string when `Star notation is enabled`#>"}
+    {attribute 'qlik_load:RequiredStatus'}
+    RequiredStatus : STRING(255);
+    (*~
+        <docu>
+        <summary>
+            Detected status.
+        </summary>
+        </docu>
+        ~*)
+    {attribute addProperty  Name "<#Detected#>"}
+    {attribute addProperty ToolTip "<#Detected data#>"}
+    {attribute clr [RenderIgnore("Control", "ShadowControl", "ControlSlim", "ShadowControlSlim")]}
+    {attribute 'qlik_load:Measured'}
+    DetectedStatus : STRING(255);
+    (*~
+        <docu>
+        <summary>
+            When enabled (`true`) the date are evaluating with simple pattern matching.
+        </summary>
+        </docu>
+        ~*)
+    {attribute addProperty  Name "<*>"}
+    {attribute addProperty ToolTip "<#Required status for inspection to pass. Can contain pattern string when `Star notation is enabled`#>"}
+    {attribute 'qlik_load:Measured'}
+    StarNotationEnabled : BOOL;
+END_STRUCT
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

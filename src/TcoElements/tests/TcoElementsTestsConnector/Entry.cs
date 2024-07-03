@@ -9,10 +9,9 @@ namespace TcoElementsTests
 {
     public static class Entry
     {
-        readonly static string AmdId = Environment.GetEnvironmentVariable("Tc3Target");
+        static readonly string AmdId = Environment.GetEnvironmentVariable("Tc3Target");
 
-
-        public static TcoElementsTestsTwinController TcoElementsTests 
-            = new TcoElementsTestsTwinController(Tc3ConnectorAdapter.Create(AmdId, 852, true));
+        public static TcoElementsTestsTwinController TcoElementsTests =
+            new TcoElementsTestsTwinController(Tc3ConnectorAdapter.Create(AmdId, 852, true));
     }
 }

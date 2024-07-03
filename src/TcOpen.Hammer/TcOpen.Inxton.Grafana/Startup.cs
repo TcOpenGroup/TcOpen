@@ -1,4 +1,5 @@
-using TcOpenHammer.Grafana.API.Model.Mongo;
+using System;
+using System.Globalization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -7,8 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Globalization;
+using TcOpenHammer.Grafana.API.Model.Mongo;
 
 namespace TcOpenHammer.Grafana.API
 {
@@ -30,15 +30,24 @@ namespace TcOpenHammer.Grafana.API
             {
                 c.AddSimpleConsole(options =>
                 {
-                    options.ColorBehavior = Microsoft.Extensions.Logging.Console.LoggerColorBehavior.Enabled;
+                    options.ColorBehavior = Microsoft
+                        .Extensions
+                        .Logging
+                        .Console
+                        .LoggerColorBehavior
+                        .Enabled;
                     options.SingleLine = true;
                     options.TimestampFormat = "[HH:mm:ss.fff]";
                 });
                 c.AddConfiguration(Configuration.GetSection("Logging"));
             });
 
-            services.Configure<DatabaseSettings>(Configuration.GetSection(nameof(DatabaseSettings)));
-            services.AddSingleton<DatabaseSettings>(sp => sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
+            services.Configure<DatabaseSettings>(
+                Configuration.GetSection(nameof(DatabaseSettings))
+            );
+            services.AddSingleton<DatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<DatabaseSettings>>().Value
+            );
             services.AddSingleton<MongoService>();
             services.AddSingleton<StationModesService>();
             services.AddSingleton<ProcessDataService>();
@@ -47,7 +56,10 @@ namespace TcOpenHammer.Grafana.API
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TcOpenHammer.Grafana.API", Version = "v1" });
+                c.SwaggerDoc(
+                    "v1",
+                    new OpenApiInfo { Title = "TcOpenHammer.Grafana.API", Version = "v1" }
+                );
             });
 
             services.AddMvc();
@@ -59,7 +71,9 @@ namespace TcOpenHammer.Grafana.API
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "DataBackend v1"));
+                app.UseSwaggerUI(c =>
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "DataBackend v1")
+                );
             }
             SetupCulture();
             app.UseRouting();

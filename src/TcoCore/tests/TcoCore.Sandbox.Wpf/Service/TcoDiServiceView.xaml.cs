@@ -27,13 +27,16 @@ namespace TcoCoreExamples
 
             if (e.Property == DataContextProperty)
             {
-                this.DataContext = this.DataContext.ViewModelizeDataContext<GenericViewModel, TcoDi>();
+                this.DataContext = this.DataContext.ViewModelizeDataContext<
+                    GenericViewModel,
+                    TcoDi
+                >();
             }
         }
     }
+
     public class GenericViewModel : RenderableViewModel
     {
         public override object Model { get; set; }
     }
-
 }

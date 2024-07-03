@@ -6,22 +6,20 @@
 {attribute addProperty Id "ChangeCountAT %I*UINT2DevIdAT %I*UINT2AmsNetIdAT %I*AMSNETID6CfgSlaveCountAT %I*UINT2DcToTcTimeOffsetAT %I*LINT8DcToExtTimeOffsetAT %I*LINT8"}
 {attribute addProperty CRC "3867959757"}
 {attribute addProperty Size "28"}
-TYPE InfoData_E68C61CD :
-STRUCT
-	{attribute addProperty Name "ChangeCount"}
-	ChangeCount AT %I* : UINT;
-	{attribute addProperty Name "DevId"}
-	DevId AT %I* : UINT;
-	{attribute addProperty Name "AmsNetId"}
-	AmsNetId AT %I* : AMSNETID;
-	{attribute addProperty Name "CfgSlaveCount"}
-	CfgSlaveCount AT %I* : UINT;
-	{attribute addProperty Name "DcToTcTimeOffset"}
-	DcToTcTimeOffset AT %I* : LINT;
-	{attribute addProperty Name "DcToExtTimeOffset"}
-	DcToExtTimeOffset AT %I* : LINT;
+TYPE InfoData_E68C61CD : STRUCT
+    {attribute addProperty Name "ChangeCount"}
+    ChangeCount AT %I* : UINT;
+    {attribute addProperty Name "DevId"}
+    DevId AT %I* : UINT;
+    {attribute addProperty Name "AmsNetId"}
+    AmsNetId AT %I* : AMSNETID;
+    {attribute addProperty Name "CfgSlaveCount"}
+    CfgSlaveCount AT %I* : UINT;
+    {attribute addProperty Name "DcToTcTimeOffset"}
+    DcToTcTimeOffset AT %I* : LINT;
+    {attribute addProperty Name "DcToExtTimeOffset"}
+    DcToExtTimeOffset AT %I* : LINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

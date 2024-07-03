@@ -3,19 +3,15 @@
   <DUT Name="eTcoUrRoboticsSimpleTests" Id="{c1207581-4710-0499-1215-86964475da8b}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE eTcoUrRoboticsSimpleTests :
-(
+TYPE eTcoUrRoboticsSimpleTests : (
     Restore := 1,
     CleanUp,
     Message,
     PowerDisable,
     PowerEnable,
     Reset,
- 
-	
     Last
 );
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

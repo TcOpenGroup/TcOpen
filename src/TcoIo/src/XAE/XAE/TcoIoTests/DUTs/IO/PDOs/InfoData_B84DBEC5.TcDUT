@@ -6,18 +6,16 @@
 {attribute addProperty Id "AdsAddrAT %I*TcoIo.TcoAmsAddr0DcOutputShiftAT %I*DINT4DcInputShiftAT %I*DINT4StateAT %I*UINT2"}
 {attribute addProperty CRC "3092102853"}
 {attribute addProperty Size "10"}
-TYPE InfoData_B84DBEC5 EXTENDS TcoIo.InputBase_8311D824 :
-STRUCT
-	{attribute addProperty Name "AdsAddr"}
-	AdsAddr AT %I* : TcoIo.TcoAmsAddr;
-	{attribute addProperty Name "DcOutputShift"}
-	DcOutputShift AT %I* : DINT;
-	{attribute addProperty Name "DcInputShift"}
-	DcInputShift AT %I* : DINT;
-	{attribute addProperty Name "State"}
-	State AT %I* : UINT;
+TYPE InfoData_B84DBEC5 EXTENDS TcoIo.InputBase_8311D824 : STRUCT
+    {attribute addProperty Name "AdsAddr"}
+    AdsAddr AT %I* : TcoIo.TcoAmsAddr;
+    {attribute addProperty Name "DcOutputShift"}
+    DcOutputShift AT %I* : DINT;
+    {attribute addProperty Name "DcInputShift"}
+    DcInputShift AT %I* : DINT;
+    {attribute addProperty Name "State"}
+    State AT %I* : UINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

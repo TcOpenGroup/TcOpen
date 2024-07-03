@@ -19,12 +19,15 @@ namespace TcOpen.Inxton.Local.Security.Wpf
 
         ICollectionView AvailibleRolesCollectionView { get; set; }
         ICollectionView UserRolesCollectionView { get; set; }
+
         private void SelectionChanged(object sender, RoutedEventArgs e)
         {
-            AvailibleRolesCollectionView = CollectionViewSource.GetDefaultView(AvailibleRoles.ItemsSource);
+            AvailibleRolesCollectionView = CollectionViewSource.GetDefaultView(
+                AvailibleRoles.ItemsSource
+            );
             UserRolesCollectionView = CollectionViewSource.GetDefaultView(CurrentRoles.ItemsSource);
             AvailibleRolesCollectionView.Filter = AvailibleRolesFilter;
-            if(UserRolesCollectionView != null)
+            if (UserRolesCollectionView != null)
                 UserRolesCollectionView.Filter = UserRolesFilter;
         }
 
@@ -39,7 +42,8 @@ namespace TcOpen.Inxton.Local.Security.Wpf
 
         private bool UserRolesFilter(object obj) => RoleFilter(obj, CurrentRolesTextFilter.Text);
 
-        private bool AvailibleRolesFilter(object obj) => RoleFilter(obj, AvailableRolesTextFilter.Text);
+        private bool AvailibleRolesFilter(object obj) =>
+            RoleFilter(obj, AvailableRolesTextFilter.Text);
 
         private void AvailableRolesTextFilter_TextChanged(object sender, TextChangedEventArgs e)
         {

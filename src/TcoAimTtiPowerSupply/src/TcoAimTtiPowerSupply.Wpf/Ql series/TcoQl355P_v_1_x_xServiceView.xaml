@@ -1,19 +1,21 @@
 ﻿<UserControl
-    x:Class="TcoAimTtiPowerSupply.TcoQl355P_v_1_x_xServiceView"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:tcoCore="http://vortex.mts/xaml"  xmlns:tcoaimttipowersupply="clr-namespace:TcoAimTtiPowerSupply"
-    xmlns:p="clr-namespace:TcOpen.Inxton.TcoAimTtiPowerSupply.Wpf.Properties"
-    mc:Ignorable="d">
+  x:Class="TcoAimTtiPowerSupply.TcoQl355P_v_1_x_xServiceView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:tcoCore="http://vortex.mts/xaml"
+  xmlns:tcoaimttipowersupply="clr-namespace:TcoAimTtiPowerSupply"
+  xmlns:p="clr-namespace:TcOpen.Inxton.TcoAimTtiPowerSupply.Wpf.Properties"
+  mc:Ignorable="d"
+>
 
     <d:UserControl.DataContext>
         <tcoaimttipowersupply:TcoQl355P_v_1_x_xViewModel />
     </d:UserControl.DataContext>
     <UserControl.Resources>
         <ResourceDictionary>
-            <FrameworkElement x:Key="ProxyElement" DataContext="{Binding}"/>
+            <FrameworkElement x:Key="ProxyElement" DataContext="{Binding}" />
 
         </ResourceDictionary>
 
@@ -21,87 +23,152 @@
 
     <tcoCore:TcoComponentView>
         <tcoCore:TcoComponentView.ComponentHeader>
-        
-            <WrapPanel VerticalAlignment="Center"   HorizontalAlignment="Left" DataContext="{Binding Component}" >
-           
-            
-                    
 
-                <tcoCore:RenderableContentControl Margin="10,0" DataContext="{Binding _restoreTask}"/>
+            <WrapPanel
+        VerticalAlignment="Center"
+        HorizontalAlignment="Left"
+        DataContext="{Binding Component}"
+      >
+
+
+
+
+                <tcoCore:RenderableContentControl
+          Margin="10,0"
+          DataContext="{Binding _restoreTask}"
+        />
 
 
 
 
             </WrapPanel>
-     
+
             </tcoCore:TcoComponentView.ComponentHeader>
-            
+
             <tcoCore:TcoComponentView.ComponentDetails>
                   <WrapPanel DataContext="{Binding Component}">
                     <WrapPanel.Resources>
-                        <Style TargetType="GroupBox"  BasedOn="{StaticResource MaterialDesignCardGroupBox}">
-                            <Setter Property="MinWidth" Value="250"></Setter>
-                            <Setter Property="MaxWidth" Value="400"></Setter>
-                            <Setter Property="Margin" Value="10"></Setter>
-                            
+                        <Style
+            TargetType="GroupBox"
+            BasedOn="{StaticResource MaterialDesignCardGroupBox}"
+          >
+                            <Setter Property="MinWidth" Value="250" />
+                            <Setter Property="MaxWidth" Value="400" />
+                            <Setter Property="Margin" Value="10" />
+
                         </Style>
                     </WrapPanel.Resources>
-             
-              
-     
+
+
+
                     <GroupBox Header="{Binding _config.AttributeName}">
-                        <tcoCore:RenderableContentControl  DataContext="{Binding _config}" PresentationType="ControlSlim" />
-                    </GroupBox>
-        
-                
-                  
-                    <GroupBox Header="{Binding _status.AttributeName}" >
-                        <tcoCore:RenderableContentControl  DataContext="{Binding _status}" PresentationType="DisplaySlim" />
+                        <tcoCore:RenderableContentControl
+            DataContext="{Binding _config}"
+            PresentationType="ControlSlim"
+          />
                     </GroupBox>
 
-                    <ContentControl Content="{StaticResource ProxyElement}" Visibility="Collapsed" />
-                    <GroupBox  Header="{Binding _getCommandTask.AttributeName}">
+
+
+                    <GroupBox Header="{Binding _status.AttributeName}">
+                        <tcoCore:RenderableContentControl
+            DataContext="{Binding _status}"
+            PresentationType="DisplaySlim"
+          />
+                    </GroupBox>
+
+                    <ContentControl
+          Content="{StaticResource ProxyElement}"
+          Visibility="Collapsed"
+        />
+                    <GroupBox Header="{Binding _getCommandTask.AttributeName}">
                         <StackPanel Orientation="Vertical">
                             <WrapPanel>
-                                <tcoCore:RenderableContentControl Margin="5,0"  DataContext="{Binding _getCommandTask._command.Command}" PresentationType="ControlSlim" />
-                                <WrapPanel Visibility="{Binding _getCommandTask._command.Command.Cyclic,Converter={tcoaimttipowersupply:TcoQlSeriesGetNValueVisibilityConverter}}">
-                                    <tcoCore:RenderableContentControl Margin="5,0" DataContext="{Binding _getCommandTask._command.NValue}" PresentationType="ControlSlim" />
+                                <tcoCore:RenderableContentControl
+                Margin="5,0"
+                DataContext="{Binding _getCommandTask._command.Command}"
+                PresentationType="ControlSlim"
+              />
+                                <WrapPanel
+                Visibility="{Binding _getCommandTask._command.Command.Cyclic,Converter={tcoaimttipowersupply:TcoQlSeriesGetNValueVisibilityConverter}}"
+              >
+                                    <tcoCore:RenderableContentControl
+                  Margin="5,0"
+                  DataContext="{Binding _getCommandTask._command.NValue}"
+                  PresentationType="ControlSlim"
+                />
                                 </WrapPanel>
 
-                                <tcoCore:RenderableContentControl  Margin="5,0" DataContext="{Binding _getCommandTask}"/>
+                                <tcoCore:RenderableContentControl
+                Margin="5,0"
+                DataContext="{Binding _getCommandTask}"
+              />
 
 
-                            </WrapPanel >
+                            </WrapPanel>
 
-                            <Expander Margin="5" Style="{StaticResource MaterialDesignExpander}" Header="{x:Static p:strings.ShowCommandDescription}" >
+                            <Expander
+              Margin="5"
+              Style="{StaticResource MaterialDesignExpander}"
+              Header="{x:Static p:strings.ShowCommandDescription}"
+            >
 
-                                <TextBlock   Text="{Binding _getCommandTask._command.Command.Cyclic,Converter={tcoaimttipowersupply:TcoQlSeriesGetCommandDescriptionConverter}}" TextWrapping="WrapWithOverflow"></TextBlock>
+                                <TextBlock
+                Text="{Binding _getCommandTask._command.Command.Cyclic,Converter={tcoaimttipowersupply:TcoQlSeriesGetCommandDescriptionConverter}}"
+                TextWrapping="WrapWithOverflow"
+              />
                             </Expander>
                         </StackPanel>
                 </GroupBox>
-                    <GroupBox  Header="{Binding _setCommandTask.AttributeName}">
+                    <GroupBox Header="{Binding _setCommandTask.AttributeName}">
                         <StackPanel Orientation="Vertical">
                             <WrapPanel>
-                                <tcoCore:RenderableContentControl Margin="5,0" DataContext="{Binding _setCommandTask._command.Command}" PresentationType="ControlSlim" />
+                                <tcoCore:RenderableContentControl
+                Margin="5,0"
+                DataContext="{Binding _setCommandTask._command.Command}"
+                PresentationType="ControlSlim"
+              />
 
-                                <WrapPanel Visibility="{Binding _setCommandTask._command.Command.Cyclic,Converter={tcoaimttipowersupply:TcoQlSeriesSetNValueVisibilityConverter}}">
-                                    <tcoCore:RenderableContentControl Margin="5,0" DataContext="{Binding _setCommandTask._command.NValue}" PresentationType="ControlSlim" />
+                                <WrapPanel
+                Visibility="{Binding _setCommandTask._command.Command.Cyclic,Converter={tcoaimttipowersupply:TcoQlSeriesSetNValueVisibilityConverter}}"
+              >
+                                    <tcoCore:RenderableContentControl
+                  Margin="5,0"
+                  DataContext="{Binding _setCommandTask._command.NValue}"
+                  PresentationType="ControlSlim"
+                />
                                 </WrapPanel>
 
-                                <WrapPanel Visibility="{Binding _setCommandTask._command.Command.Cyclic,Converter={tcoaimttipowersupply:TcoQlSeriesSetNrfValueVisibilityConverter}}">
-                                    <tcoCore:RenderableContentControl Margin="5,0" DataContext="{Binding _setCommandTask._command.NrfValue}" PresentationType="ControlSlim" />
+                                <WrapPanel
+                Visibility="{Binding _setCommandTask._command.Command.Cyclic,Converter={tcoaimttipowersupply:TcoQlSeriesSetNrfValueVisibilityConverter}}"
+              >
+                                    <tcoCore:RenderableContentControl
+                  Margin="5,0"
+                  DataContext="{Binding _setCommandTask._command.NrfValue}"
+                  PresentationType="ControlSlim"
+                />
                                 </WrapPanel>
-                                <tcoCore:RenderableContentControl  Margin="5,0" DataContext="{Binding _setCommandTask}"/>
+                                <tcoCore:RenderableContentControl
+                Margin="5,0"
+                DataContext="{Binding _setCommandTask}"
+              />
 
 
                              </WrapPanel>
-                        
-                                <Expander Margin="5" Style="{StaticResource MaterialDesignExpander}" Header="{x:Static p:strings.ShowCommandDescription}" >
-                                    
-                                    <TextBlock   Text="{Binding _setCommandTask._command.Command.Cyclic,Converter={tcoaimttipowersupply:TcoQlSeriesSetCommandDescriptionConverter}}" TextWrapping="WrapWithOverflow"></TextBlock>
+
+                                <Expander
+              Margin="5"
+              Style="{StaticResource MaterialDesignExpander}"
+              Header="{x:Static p:strings.ShowCommandDescription}"
+            >
+
+                                    <TextBlock
+                Text="{Binding _setCommandTask._command.Command.Cyclic,Converter={tcoaimttipowersupply:TcoQlSeriesSetCommandDescriptionConverter}}"
+                TextWrapping="WrapWithOverflow"
+              />
                                 </Expander>
-                               
-                       
+
+
                         </StackPanel>
                 </GroupBox>
 
@@ -111,5 +178,5 @@
                 </WrapPanel>
         </tcoCore:TcoComponentView.ComponentDetails>
         </tcoCore:TcoComponentView>
-   
+
 </UserControl>

@@ -4,7 +4,5 @@
     {
         public string Property { get; set; }
         public T Value { get; set; }
-
     }
-
 }

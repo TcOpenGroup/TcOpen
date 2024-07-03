@@ -10,5 +10,4 @@ namespace TcOpen.Inxton.Mqtt
             return deserialize.Value;
         }
     }
-
 }

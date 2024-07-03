@@ -26,13 +26,11 @@ namespace TcOpen.Inxton.Local.Security
             Name = name;
             Roles = new ObservableCollection<string>();
         }
-        
+
         public string Name
         {
-            get => _name; set
-            {
-                _name = value;
-            }
+            get => _name;
+            set { _name = value; }
         }
 
         private List<string> _changes = new List<string>();

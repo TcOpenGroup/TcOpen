@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.JSInterop;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using TcOpen.Inxton.Local.Security.Blazor.Users;
 using TcOpen.Inxton.Security;
-using System.Linq;
 
 namespace TcOpen.Inxton.Local.Security.Blazor
 {
@@ -17,23 +17,29 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             {
                 Role = role;
             }
+
             public Role Role { get; set; }
             public bool IsSelected { get; set; }
         }
 
         [Inject]
         private UserManager<User> _userManager { get; set; }
+
         [Inject]
         private BlazorAlertManager _alertManager { get; set; }
 
         private User SelectedUser { get; set; }
         private RegisterUserModel _model { get; set; }
 
-        private ObservableCollection<UserData> AllUsers {
-            get {
-                return new ObservableCollection<UserData>(SecurityManager.Manager.UserRepository.GetRecords());
+        private ObservableCollection<UserData> AllUsers
+        {
+            get
+            {
+                return new ObservableCollection<UserData>(
+                    SecurityManager.Manager.UserRepository.GetRecords()
+                );
             }
-            }
+        }
 
         public void RowClicked(UserData user)
         {
@@ -60,14 +66,20 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             await _userManager.DeleteAsync(user);
             SelectedUser = null;
             _alertManager.addAlert("success", "User succesfully deleted!");
-            TcoAppDomain.Current.Logger.Information($"User '{user.UserName}' deleted. {{@sender}}", new { UserName = user.UserName });
+            TcoAppDomain.Current.Logger.Information(
+                $"User '{user.UserName}' deleted. {{@sender}}",
+                new { UserName = user.UserName }
+            );
         }
 
         private async void OnValidUpdate()
         {
             if (_model.Password != "password")
             {
-                SelectedUser.PasswordHash = SecurityManager.Manager.Service.CalculateHash(_model.Password, _model.Username);
+                SelectedUser.PasswordHash = SecurityManager.Manager.Service.CalculateHash(
+                    _model.Password,
+                    _model.Username
+                );
             }
             SelectedUser.UserName = _model.Username;
             SelectedUser.CanUserChangePassword = _model.CanUserChangePassword;
@@ -77,7 +89,10 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             if (result.Succeeded)
             {
                 _alertManager.addAlert("success", "User succesfully updated!");
-                TcoAppDomain.Current.Logger.Information($"User '{SelectedUser.UserName}' updated. {{@sender}}", new { UserName = SelectedUser.UserName, Group = SelectedUser.Roles });
+                TcoAppDomain.Current.Logger.Information(
+                    $"User '{SelectedUser.UserName}' updated. {{@sender}}",
+                    new { UserName = SelectedUser.UserName, Group = SelectedUser.Roles }
+                );
             }
             else
             {

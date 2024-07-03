@@ -25,6 +25,9 @@ namespace TcOpen.Inxton.Local.Security.Wpf
             InitializeComponent();
         }
 
-        internal InsufficientRightsBoxViewModel ViewModel { get { return this.DataContext as InsufficientRightsBoxViewModel; } } 
+        internal InsufficientRightsBoxViewModel ViewModel
+        {
+            get { return this.DataContext as InsufficientRightsBoxViewModel; }
+        }
     }
 }

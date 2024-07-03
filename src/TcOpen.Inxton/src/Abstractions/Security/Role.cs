@@ -3,7 +3,7 @@
 namespace TcOpen.Inxton.Security
 {
     public class Role : IdentityRole<string>
-    {       
+    {
         public string DefaultGroup { get; private set; }
 
         public Role(string Name, string DefaultGroup)

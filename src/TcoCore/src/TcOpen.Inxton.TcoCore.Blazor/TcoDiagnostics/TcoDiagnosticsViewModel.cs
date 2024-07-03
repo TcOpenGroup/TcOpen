@@ -12,27 +12,37 @@ namespace TcoCore
 {
     public class TcoDiagnosticsViewModel : RenderableViewModelBase
     {
-
         private volatile object updatemutex = new object();
         PlainTcoMessage selectedMessage;
 
         public TcoDiagnosticsViewModel()
         {
-            this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), (x) => !this.DiagnosticsRunning);
+            this.UpdateMessagesCommand = new RelayCommand(
+                a => this.UpdateMessages(),
+                (x) => !this.DiagnosticsRunning
+            );
         }
 
         public TcoDiagnosticsViewModel(IsTcoObject tcoObject)
         {
             _tcoObject = tcoObject;
-            this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), (x) => !this.DiagnosticsRunning);
+            this.UpdateMessagesCommand = new RelayCommand(
+                a => this.UpdateMessages(),
+                (x) => !this.DiagnosticsRunning
+            );
         }
+
         /// <summary>
         /// Gets the command that executes update of messages on demand.
         /// </summary>
         public RelayCommand UpdateMessagesCommand { get; private set; }
 
         internal IsTcoObject _tcoObject { get; set; }
-        public override object Model { get => this._tcoObject; set => this._tcoObject = value as IsTcoObject; }
+        public override object Model
+        {
+            get => this._tcoObject;
+            set => this._tcoObject = value as IsTcoObject;
+        }
 
         public object Categories
         {
@@ -41,16 +51,12 @@ namespace TcoCore
                 return Enum.GetValues(typeof(eMessageCategory)).Cast<eMessageCategory>().Skip(1);
             }
         }
-        public eMessageCategory MinMessageCategoryFilter
-        {
-            get;
-            set;
-        } = DefaulCategory;
+        public eMessageCategory MinMessageCategoryFilter { get; set; } = DefaulCategory;
 
-        public static eMessageCategory SetDefaultCategory(eMessageCategory item) => DefaulCategory = item;
+        public static eMessageCategory SetDefaultCategory(eMessageCategory item) =>
+            DefaulCategory = item;
 
         public static eMessageCategory DefaulCategory { get; set; } = eMessageCategory.Info;
-
 
         bool diagnosticsRunning;
 
@@ -83,30 +89,30 @@ namespace TcoCore
 
             lock (updatemutex)
             {
-
                 DiagnosticsRunning = true;
 
                 Task.Run(() =>
-                {
-                    MessageDisplay = _tcoObject.MessageHandler.GetActiveMessages().Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)
-                                             .OrderByDescending(p => p.Category)
-                                             .OrderBy(p => p.TimeStamp);
-
-
-                }).Wait();
+                    {
+                        MessageDisplay = _tcoObject
+                            .MessageHandler.GetActiveMessages()
+                            .Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)
+                            .OrderByDescending(p => p.Category)
+                            .OrderBy(p => p.TimeStamp);
+                    })
+                    .Wait();
 
                 DiagnosticsRunning = false;
-
             }
         }
+
         IEnumerable<PlainTcoMessage> messageDisplay = new List<PlainTcoMessage>();
+
         /// <summary>
         /// Gets list of messages to be displayed in message list of the view.
         /// </summary>
         public IEnumerable<PlainTcoMessage> MessageDisplay
         {
             get => messageDisplay;
-
             private set
             {
                 if (messageDisplay == value)
@@ -116,7 +122,6 @@ namespace TcoCore
 
                 SetProperty(ref messageDisplay, value);
             }
-
         }
 
         /// <summary>
@@ -124,10 +129,7 @@ namespace TcoCore
         /// </summary>
         public PlainTcoMessage SelectedMessage
         {
-            get
-            {
-                return selectedMessage;
-            }
+            get { return selectedMessage; }
             set
             {
                 if (value == null)
@@ -143,12 +145,21 @@ namespace TcoCore
                 SetProperty(ref selectedMessage, clone);
             }
         }
+
         public void RogerMessage(PlainTcoMessage msg)
         {
             if (msg != null)
             {
                 msg.OnlinerMessage.Pinned.Cyclic = false;
-                TcoAppDomain.Current.Logger.Information("Message acknowledged {@payload}", new { Text = msg.Text, Category = msg.CategoryAsEnum, Cycle = msg.Cycle });
+                TcoAppDomain.Current.Logger.Information(
+                    "Message acknowledged {@payload}",
+                    new
+                    {
+                        Text = msg.Text,
+                        Category = msg.CategoryAsEnum,
+                        Cycle = msg.Cycle
+                    }
+                );
             }
         }
 
@@ -158,28 +169,35 @@ namespace TcoCore
             {
                 try
                 {
-
-                    TcoAppDomain.Current.Logger.Information("All message acknowledged {@payload}", new { rootObject = _tcoObject.HumanReadable, rootSymbol = _tcoObject.Symbol });
+                    TcoAppDomain.Current.Logger.Information(
+                        "All message acknowledged {@payload}",
+                        new
+                        {
+                            rootObject = _tcoObject.HumanReadable,
+                            rootSymbol = _tcoObject.Symbol
+                        }
+                    );
                     foreach (var item in MessageDisplay.Where(p => p.Pinned))
                     {
                         item.OnlinerMessage.Pinned.Cyclic = false;
-                        TcoAppDomain.Current.Logger.Information("Message acknowledged {@message}", new { Text = item.Text, Category = item.CategoryAsEnum });
+                        TcoAppDomain.Current.Logger.Information(
+                            "Message acknowledged {@message}",
+                            new { Text = item.Text, Category = item.CategoryAsEnum }
+                        );
                     }
-
                 }
                 catch (Exception ex)
                 {
                     // Log the error message
-                    TcoAppDomain.Current.Logger.Error("An error occurred while acknowledging messages: {@error}", ex);                  
+                    TcoAppDomain.Current.Logger.Error(
+                        "An error occurred while acknowledging messages: {@error}",
+                        ex
+                    );
                     // Swallow
                 }
             }
         }
 
         public IVortexObject AffectedObject { get; set; }
-
     }
-
-
-
 }

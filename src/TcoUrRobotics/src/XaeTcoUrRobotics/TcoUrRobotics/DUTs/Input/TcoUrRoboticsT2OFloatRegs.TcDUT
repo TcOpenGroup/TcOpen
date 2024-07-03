@@ -1,12 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoUrRoboticsT2OFloatRegs" Id="{bf5a76cf-ab69-003f-1aa4-d04b0642bc88}">
-    <Declaration><![CDATA[TYPE TcoUrRoboticsT2OFloatRegs :
-STRUCT
-	{attribute addProperty Name "<#Float registers#>"}
-	Register : ARRAY[0..23] OF REAL;
+    <Declaration><![CDATA[TYPE TcoUrRoboticsT2OFloatRegs : STRUCT
+    {attribute addProperty Name "<#Float registers#>"}
+    Register : ARRAY[0..23] OF REAL;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

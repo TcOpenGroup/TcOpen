@@ -7,22 +7,20 @@
 {attribute addProperty CRC "1249953653"}
 {attribute addProperty Size "23"}
 {attribute addProperty Name "EK1200"}
-TYPE EK1200_4A80C775 EXTENDS EK1200_013D0B49 :
-STRUCT
-	{attribute addProperty Name "IA1"}
-	{attribute addProperty PreviousPort "EK1200 : B"}
-	{attribute addProperty SyncUnit "default"}
-	IA1 : EL1008_78E8D3DD;
-	{attribute addProperty Name "QA1"}
-	{attribute addProperty PreviousPort "IA1 : B"}
-	{attribute addProperty SyncUnit "default"}
-	QA1 : EL2008_E2806B95;
-	{attribute addProperty Name "Term 4 (EL9011)"}
-	{attribute addProperty PreviousPort "QA1 : B"}
-	{attribute addProperty SyncUnit "default"}
-	Term_4_EL9011 : EL9011_D65D3D32;
+TYPE EK1200_4A80C775 EXTENDS EK1200_013D0B49 : STRUCT
+    {attribute addProperty Name "IA1"}
+    {attribute addProperty PreviousPort "EK1200 : B"}
+    {attribute addProperty SyncUnit "default"}
+    IA1 : EL1008_78E8D3DD;
+    {attribute addProperty Name "QA1"}
+    {attribute addProperty PreviousPort "IA1 : B"}
+    {attribute addProperty SyncUnit "default"}
+    QA1 : EL2008_E2806B95;
+    {attribute addProperty Name "Term 4 (EL9011)"}
+    {attribute addProperty PreviousPort "QA1 : B"}
+    {attribute addProperty SyncUnit "default"}
+    Term_4_EL9011 : EL9011_D65D3D32;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -6,12 +6,10 @@
 {attribute addProperty Id "I3_StatusAT %I*I3_Status_DC9039207"}
 {attribute addProperty CRC "3599763744"}
 {attribute addProperty Size "7"}
-TYPE L3_Current_Status_D6900920 EXTENDS TcoIo.InputBase_8311D824 :
-STRUCT
-	{attribute addProperty Name "I3_Status"}
-	I3_Status AT %I* : I3_Status_DC903920;
+TYPE L3_Current_Status_D6900920 EXTENDS TcoIo.InputBase_8311D824 : STRUCT
+    {attribute addProperty Name "I3_Status"}
+    I3_Status AT %I* : I3_Status_DC903920;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

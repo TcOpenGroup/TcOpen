@@ -3,15 +3,12 @@
   <DUT Name="eTcoMultiAxisSystem" Id="{c90cee85-4ef5-06ca-3149-7bb41bf7d22c}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE eTcoMultiAxisSystem :
-(
-	SingleAxisSystem := 1,
-	TwoAxisSystem := 2,
-	ThreeAxisSystem := 3,
-	FourAxissystem := 4
-
+TYPE eTcoMultiAxisSystem : (
+    SingleAxisSystem := 1,
+    TwoAxisSystem := 2,
+    ThreeAxisSystem := 3,
+    FourAxissystem := 4
 );
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

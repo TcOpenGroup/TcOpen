@@ -9,22 +9,20 @@
 {attribute addProperty Id "AI_Standard_Channel_1AT %I*AI_Standard_Channel_4A3944819AI_Standard_Channel_2AT %I*AI_Standard_Channel_4A3944819AI_Standard_Channel_3AT %I*AI_Standard_Channel_4A3944819AI_Standard_Channel_4AT %I*AI_Standard_Channel_4A3944819WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_23CBA8372"}
 {attribute addProperty CRC "3337055066"}
 {attribute addProperty Size "40"}
-TYPE EL3024_C6E76B5A EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
-STRUCT
-	{attribute addProperty Name "AI_Standard_Channel_1"}
-	AI_Standard_Channel_1 : AI_Standard_Channel_4A394481;
-	{attribute addProperty Name "AI_Standard_Channel_2"}
-	AI_Standard_Channel_2 : AI_Standard_Channel_4A394481;
-	{attribute addProperty Name "AI_Standard_Channel_3"}
-	AI_Standard_Channel_3 : AI_Standard_Channel_4A394481;
-	{attribute addProperty Name "AI_Standard_Channel_4"}
-	AI_Standard_Channel_4 : AI_Standard_Channel_4A394481;
-	{attribute addProperty Name "WcState"}
-	WcState : TcoIo.WcState_9091E0EB;
-	{attribute addProperty Name "InfoData"}
-	InfoData : TcoIo.InfoData_23CBA837;
+TYPE EL3024_C6E76B5A EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 : STRUCT
+    {attribute addProperty Name "AI_Standard_Channel_1"}
+    AI_Standard_Channel_1 : AI_Standard_Channel_4A394481;
+    {attribute addProperty Name "AI_Standard_Channel_2"}
+    AI_Standard_Channel_2 : AI_Standard_Channel_4A394481;
+    {attribute addProperty Name "AI_Standard_Channel_3"}
+    AI_Standard_Channel_3 : AI_Standard_Channel_4A394481;
+    {attribute addProperty Name "AI_Standard_Channel_4"}
+    AI_Standard_Channel_4 : AI_Standard_Channel_4A394481;
+    {attribute addProperty Name "WcState"}
+    WcState : TcoIo.WcState_9091E0EB;
+    {attribute addProperty Name "InfoData"}
+    InfoData : TcoIo.InfoData_23CBA837;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -1,8 +1,8 @@
 ﻿using System.Collections.ObjectModel;
-using Vortex.Presentation.Wpf;
+using System.Text;
 using TcoCognexVision.Converters;
 using Vortex.Connector;
-using System.Text;
+using Vortex.Presentation.Wpf;
 
 namespace TcoCognexVision
 {
@@ -18,23 +18,29 @@ namespace TcoCognexVision
                 UpdateAndFormatResultData();
             }
         }
-        public ObservableCollection<IndexedData<string>> InspectionResults { get ; private set; }
-        public TcoInsight_v_5_x_xViewModel() : base()
+        public ObservableCollection<IndexedData<string>> InspectionResults { get; private set; }
+
+        public TcoInsight_v_5_x_xViewModel()
+            : base()
         {
             InspectionResults = new ObservableCollection<IndexedData<string>>();
             Model = new TcoInsight_v_5_x_x();
         }
+
         public TcoInsight_v_5_x_x Component { get; private set; }
-        public override object Model 
-        { 
-            get => Component; 
-            set 
+        public override object Model
+        {
+            get => Component;
+            set
             {
                 Component = value as TcoInsight_v_5_x_x;
                 UpdateAndFormatResultData();
-                Component._results.InspectionId.Subscribe((sender, arg) => UpdateAndFormatResultData());
+                Component._results.InspectionId.Subscribe(
+                    (sender, arg) => UpdateAndFormatResultData()
+                );
             }
         }
+
         private void UpdateAndFormatResultData()
         {
             TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() =>
@@ -49,7 +55,11 @@ namespace TcoCognexVision
                     {
                         InspectionResults.Clear();
                     }
-                    if (Component != null && Component.GetConnector() != null && Component._results != null)
+                    if (
+                        Component != null
+                        && Component.GetConnector() != null
+                        && Component._results != null
+                    )
                     {
                         Component._results.Read();
                         int resultLength = Component._config.ResultDataSize.Synchron;
@@ -57,14 +67,26 @@ namespace TcoCognexVision
                         {
                             for (int i = 0; i < resultLength; i++)
                             {
-                                InspectionResults.Add(new IndexedData<string>(i, Component._results.InspectionResults[i].LastValue.ToString()));
+                                InspectionResults.Add(
+                                    new IndexedData<string>(
+                                        i,
+                                        Component._results.InspectionResults[i].LastValue.ToString()
+                                    )
+                                );
                             }
                         }
                         else if (CurrentDisplayFormat == eDisplayFormat.Array_of_hexdecimals)
                         {
                             for (int i = 0; i < resultLength; i++)
                             {
-                                InspectionResults.Add(new IndexedData<string>(i, Component._results.InspectionResults[i].LastValue.ToString("X")));
+                                InspectionResults.Add(
+                                    new IndexedData<string>(
+                                        i,
+                                        Component
+                                            ._results.InspectionResults[i]
+                                            .LastValue.ToString("X")
+                                    )
+                                );
                             }
                         }
                         else if (CurrentDisplayFormat == eDisplayFormat.String)
@@ -75,7 +97,8 @@ namespace TcoCognexVision
                                 string _string = "";
                                 if (_byte > 0)
                                     _string = Encoding.UTF8.GetString(new byte[] { _byte });
-                                else _string = "N/A";
+                                else
+                                    _string = "N/A";
 
                                 InspectionResults.Add(new IndexedData<string>(i, _string));
                             }
@@ -84,15 +107,11 @@ namespace TcoCognexVision
                 }
                 catch (System.Exception ex)
                 {
-
                     throw;
                 }
             });
         }
     }
-    public class TcoInsight_v_5_x_xServiceViewModel : TcoInsight_v_5_x_xViewModel
-    {
 
-    }
+    public class TcoInsight_v_5_x_xServiceViewModel : TcoInsight_v_5_x_xViewModel { }
 }
-

@@ -2,65 +2,63 @@
 <TcPlcObject Version="1.1.0.1">
   <DUT Name="eTaskState" Id="{8ea1a889-abc5-49bb-b218-0957533cf8b5}">
     <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Describes the state of the respective task.
-		</summary>				
-	</docu>	
+    <docu>
+        <summary>
+            Describes the state of the respective task.
+        </summary>
+    </docu>
 ~*)
 {attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE eTaskState :
-(
-(*~
-	<docu>
-		<summary>
-			Task is in Ready state, the Execute() method returns FALSE. 
-			Task can be started by calling the Invoke() method. 
-		</summary>				
-	</docu>	
+TYPE eTaskState : (
+    (*~
+    <docu>
+        <summary>
+            Task is in Ready state, the Execute() method returns FALSE.
+            Task can be started by calling the Invoke() method.
+        </summary>
+    </docu>
 ~*)
-	Ready := 0,
-(*~
-	<docu>
-		<summary>
-			Task is in Requested state, if Invoke() method has been called and the Execute() method has not been called yet. The first following call of the method Execute() 
-			change the task state to Executing and returns TRUE, until Done or Error state is reached.
-		</summary>				
-	</docu>	
+    Ready := 0,
+    (*~
+    <docu>
+        <summary>
+            Task is in Requested state, if Invoke() method has been called and the Execute() method has not been called yet. The first following call of the method Execute()
+            change the task state to Executing and returns TRUE, until Done or Error state is reached.
+        </summary>
+    </docu>
 ~*)
-	Requested := 10,
-(*~
-	<docu>
-		<summary>
-			When the task is in Busy state, Execute() method returns TRUE. Leaving this state is possible as follows:
-			<para>1.) By calling the Abort() task gets into the Idle state.</para>
-			<para>2.) By calling the DoneWhen(true) task gets into the Done state.</para>
-			<para>3.) By calling the Restore() task gets into the Idle state.</para>
-			<para>4.) By calling the ThrowWhen(true) task gets into the Error state.</para>
-		</summary>				
-	</docu>	
+    Requested := 10,
+    (*~
+    <docu>
+        <summary>
+            When the task is in Busy state, Execute() method returns TRUE. Leaving this state is possible as follows:
+            <para>1.) By calling the Abort() task gets into the Idle state.</para>
+            <para>2.) By calling the DoneWhen(true) task gets into the Done state.</para>
+            <para>3.) By calling the Restore() task gets into the Idle state.</para>
+            <para>4.) By calling the ThrowWhen(true) task gets into the Error state.</para>
+        </summary>
+    </docu>
 ~*)
-	Busy := 20,
-(*~
-	<docu>
-		<summary>
-			Task is in Error state. To be able to start the task again the error state has to be reseted by calling the Restore() method.
-		</summary>				
-	</docu>	
-~*)	
-	Error := 30,
-(*~
-	<docu>
-		<summary>
-			Task is in Done state, Execute() method returns FALSE. To be able to start the task again '''rising edge''' of the calling of the Invoke() method needs to be performed.
-			<p>Analogously to the xExecute signal of the <a href="https://plcopen.org/sites/default/files/downloads/creating_plcopen_compliant_function_block_libraries.pdf" title="Title"> PLCopen </a> motion function blocks.</p>
-		</summary>				
-	</docu>	
-~*)	
-	Done := 40
+    Busy := 20,
+    (*~
+    <docu>
+        <summary>
+            Task is in Error state. To be able to start the task again the error state has to be reseted by calling the Restore() method.
+        </summary>
+    </docu>
+~*)
+    Error := 30,
+    (*~
+    <docu>
+        <summary>
+            Task is in Done state, Execute() method returns FALSE. To be able to start the task again '''rising edge''' of the calling of the Invoke() method needs to be performed.
+            <p>Analogously to the xExecute signal of the <a href="https://plcopen.org/sites/default/files/downloads/creating_plcopen_compliant_function_block_libraries.pdf" title="Title"> PLCopen </a> motion function blocks.</p>
+        </summary>
+    </docu>
+~*)
+    Done := 40
 );
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

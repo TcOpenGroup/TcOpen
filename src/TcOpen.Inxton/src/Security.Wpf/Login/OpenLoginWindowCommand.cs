@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace TcOpen.Inxton.Local.Security.Wpf
-{    
+{
     public class OpenLoginWindowCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
@@ -18,12 +18,11 @@ namespace TcOpen.Inxton.Local.Security.Wpf
 
         public void Execute(object parameter)
         {
-            TcoAppDomain.Current.Dispatcher.Invoke(() => { 
+            TcoAppDomain.Current.Dispatcher.Invoke(() =>
+            {
                 var lw = new LoginWindow();
                 lw.ShowDialog();
             });
         }
     }
 }
-
-

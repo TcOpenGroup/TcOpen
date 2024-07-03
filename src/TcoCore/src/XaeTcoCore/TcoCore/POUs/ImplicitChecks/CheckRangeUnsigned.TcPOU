@@ -4,18 +4,19 @@
     <Declaration><![CDATA[// Implicitly generated code : DO NOT EDIT
 FUNCTION CheckRangeUnsigned : UDINT
 VAR_INPUT
-	value, lower, upper: UDINT;
+    value, lower, upper : UDINT;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[// Implicitly generated code : Only an Implementation suggestion
 {noflow}
 IF (value < lower) THEN
-	CheckRangeUnsigned := lower;
-ELSIF(value > upper) THEN
-	CheckRangeUnsigned := upper;
+    CheckRangeUnsigned := lower;
+ELSIF (value > upper) THEN
+    CheckRangeUnsigned := upper;
 ELSE
-	CheckRangeUnsigned := value;
+    CheckRangeUnsigned := value;
 END_IF
+
 {flow}]]></ST>
     </Implementation>
   </POU>

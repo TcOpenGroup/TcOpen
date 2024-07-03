@@ -10,7 +10,7 @@ namespace TcOpen.Inxton.Swift
     public interface ICodeProvider
     {
         string Code(params object[] args);
-        
+
         IVortexObject Origin { get; }
     }
 }

@@ -8,7 +8,7 @@ namespace TcoIo
 {
     public class BaseHardwareType
     {
-        public bool IsEtcMasterBase{ get; set; }
+        public bool IsEtcMasterBase { get; set; }
         public bool IsEtcSlaveBoxBase { get; set; }
         public bool IsEtcSlaveTerminalBase { get; set; }
 

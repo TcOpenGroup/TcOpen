@@ -6,12 +6,10 @@
 {attribute addProperty Id "Target_positionAT %Q*UDINT4"}
 {attribute addProperty CRC "86249236"}
 {attribute addProperty Size "4"}
-TYPE DRV_Target_position_05240F14 EXTENDS TcoIo.OutputBase_10CEE7DE :
-STRUCT
-	{attribute addProperty Name "Target_position"}
-	Target_position AT %Q* : UDINT;
+TYPE DRV_Target_position_05240F14 EXTENDS TcoIo.OutputBase_10CEE7DE : STRUCT
+    {attribute addProperty Name "Target_position"}
+    Target_position AT %Q* : UDINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

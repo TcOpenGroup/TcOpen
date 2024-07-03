@@ -17,11 +17,15 @@
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="4.6.1" />
   </ItemGroup>
-  
+
   <ItemGroup>
-   
-    <ProjectReference Include="..\..\src\TcoKukaRobotics.Wpf\TcOpen.Inxton.TcoKukaRobotics.Wpf.csproj" />
-    <ProjectReference Include="..\TcoKukaRoboticsTestsConnector\TcoKukaRoboticsTestsConnector.csproj" />
+
+    <ProjectReference
+      Include="..\..\src\TcoKukaRobotics.Wpf\TcOpen.Inxton.TcoKukaRobotics.Wpf.csproj"
+    />
+    <ProjectReference
+      Include="..\TcoKukaRoboticsTestsConnector\TcoKukaRoboticsTestsConnector.csproj"
+    />
 
   </ItemGroup>
 

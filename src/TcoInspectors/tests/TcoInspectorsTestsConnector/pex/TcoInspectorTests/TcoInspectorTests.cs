@@ -9,6 +9,9 @@ namespace TcoInspectorsTests
 {
     public partial class TcoInspectorTests
     {
-        public IsInspector Inspector { get { return ((dynamic)this)._sut; } }
+        public IsInspector Inspector
+        {
+            get { return ((dynamic)this)._sut; }
+        }
     }
 }

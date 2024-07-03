@@ -13,6 +13,5 @@ namespace TcOpen.Inxton.Dialogs
 
         void ShowAgainIfInvoked();
         void Initialize(Action dialogAction);
-        
     }
 }

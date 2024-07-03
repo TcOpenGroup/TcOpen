@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Input;
 
-
 namespace TcOpen.Inxton.Local.Security.Wpf
 {
     /// <summary>
@@ -18,24 +17,21 @@ namespace TcOpen.Inxton.Local.Security.Wpf
 
         private LoginWindowViewModel _context
         {
-            get
-            {
-                return this.DataContext as LoginWindowViewModel;
-            }
+            get { return this.DataContext as LoginWindowViewModel; }
         }
 
         private void pb_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Enter)
+            if (e.Key == Key.Enter)
             {
                 try
-                {                    
+                {
                     this.loginButton.Command.Execute(pb);
                 }
                 catch (Exception)
                 {
                     //++ Ingore
-                }                
+                }
             }
         }
     }

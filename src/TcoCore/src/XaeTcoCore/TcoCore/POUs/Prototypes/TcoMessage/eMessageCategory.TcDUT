@@ -2,129 +2,122 @@
 <TcPlcObject Version="1.1.0.1">
   <DUT Name="eMessageCategory" Id="{0dbef8f9-4da7-450e-a58c-60eab75cfcb1}">
     <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Message categories.
-		</summary>
-	</docu>	
+    <docu>
+        <summary>
+            Message categories.
+        </summary>
+    </docu>
 ~*)
-
 // ATTENTION: Values must be multiply of 100
 {attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE eMessageCategory :
-(		
-	All := 0,
-	(*~
-	<docu>
-		<summary>
-			Trace message to be used for tracing purpose.
-			Use when you need to track detailed information about internal states of the program for detailed visibility. 
-			This is lowest level of category that can be used in production, for detailed observation of PLC program.
-		</summary>
-	</docu>	
-	~*)
-	Trace := 100,		
+TYPE eMessageCategory : (
+    All := 0,
     (*~
-	<docu>
-		<summary>
-			Debug message to be used for debugging purpose only.
-			Use when you need to report debug information for you as programmer. 
-		</summary>
-	</docu>	
-	~*)		
-	Debug := 200,	
-	(*~
-	<docu>
-		<summary>
-			Info message.
-			Use when you want to deliver information to the user, that has only informative character and does not adversely affect a process.
-		</summary>
-	</docu>	
-	~*)	
-	Info := 300,
-	(*~
-	<docu>
-		<summary>
-			Time-out message.
-			Use this category when you want to report a timed-out information, that may eventually succed.
-		</summary>
-	</docu>	
-	~*)
-	TimedOut := 400,
-	(*~
-	<docu>
-		<summary>
-			Notification message.
-			Use this category when you want to report a notification that may be of interest to the user, but does not adversly affect a process.
-		</summary>
-	</docu>	
-	~*)
-	Notification := 500,
-	(*~
-	<docu>
-		<summary>
-			Warning message.
-			Use this category when you want to report to the user an information about a possible problem, that may adversly affect a process.
-			Information in this cateogory aims to help the user to identify a problem, the cause of such problem does not necessarily stops the process.
-		</summary>
-	</docu>	
-	~*)
-	Warning := 600,
-	(*~
-	<docu>
-		<summary>
-			Error message.
-			Use this categoty when there is a failure that cannot be immediately recovered and an intervention is needed. This is typically a situation when a device fails
-			to deliver expected result. 
-			Do not use this category to report information about failed process like measurement or detection.
-		</summary>
-	</docu>	
-	~*)
-	Error := 700,	
-	(*~
-	<docu>
-		<summary>
-			Programming issue.
-			Use this category to inform about a possible programming error, defect in settings or missing information at a level of programming or system or process settings. 
-		</summary>
-	</docu>	
-	~*)
-	ProgrammingError := 900,
-	
-	(*~
-	<docu>
-		<summary>
-			Critical error. 
-			Use this category when a critical error occured, that is not recoverable by the means of software (reset/restore) and but device still operates under such conditions; a detailed inspection and an expert action is required.
-		</summary>
-	</docu>	
-	~*)			
-	Critical := 1000,
-	
-	(*~
-	<docu>
-		<summary>
-			Fatal error. 
-			Use this category when a fatal error occured, that is not recoverable by the means of software (reset/restore) and a detailed inspection is required, the device is not able to continue without special intervention,
-		</summary>
-	</docu>	
-	~*)
-	Fatal    := 1100,
-		
-	(*~
-	<docu>
-		<summary>
-			Catastrophic error. 
-			Use this category when there is a situation when the device cannot continue operations due to irrecoverable failure.
-		</summary>
-	</docu>	
-	~*)
-	Catastrophic := 1200,
-	
-	None := 32000
+    <docu>
+        <summary>
+            Trace message to be used for tracing purpose.
+            Use when you need to track detailed information about internal states of the program for detailed visibility.
+            This is lowest level of category that can be used in production, for detailed observation of PLC program.
+        </summary>
+    </docu>
+    ~*)
+    Trace := 100,
+    (*~
+    <docu>
+        <summary>
+            Debug message to be used for debugging purpose only.
+            Use when you need to report debug information for you as programmer.
+        </summary>
+    </docu>
+    ~*)
+    Debug := 200,
+    (*~
+    <docu>
+        <summary>
+            Info message.
+            Use when you want to deliver information to the user, that has only informative character and does not adversely affect a process.
+        </summary>
+    </docu>
+    ~*)
+    Info := 300,
+    (*~
+    <docu>
+        <summary>
+            Time-out message.
+            Use this category when you want to report a timed-out information, that may eventually succed.
+        </summary>
+    </docu>
+    ~*)
+    TimedOut := 400,
+    (*~
+    <docu>
+        <summary>
+            Notification message.
+            Use this category when you want to report a notification that may be of interest to the user, but does not adversly affect a process.
+        </summary>
+    </docu>
+    ~*)
+    Notification := 500,
+    (*~
+    <docu>
+        <summary>
+            Warning message.
+            Use this category when you want to report to the user an information about a possible problem, that may adversly affect a process.
+            Information in this cateogory aims to help the user to identify a problem, the cause of such problem does not necessarily stops the process.
+        </summary>
+    </docu>
+    ~*)
+    Warning := 600,
+    (*~
+    <docu>
+        <summary>
+            Error message.
+            Use this categoty when there is a failure that cannot be immediately recovered and an intervention is needed. This is typically a situation when a device fails
+            to deliver expected result.
+            Do not use this category to report information about failed process like measurement or detection.
+        </summary>
+    </docu>
+    ~*)
+    Error := 700,
+    (*~
+    <docu>
+        <summary>
+            Programming issue.
+            Use this category to inform about a possible programming error, defect in settings or missing information at a level of programming or system or process settings.
+        </summary>
+    </docu>
+    ~*)
+    ProgrammingError := 900,
+    (*~
+    <docu>
+        <summary>
+            Critical error.
+            Use this category when a critical error occured, that is not recoverable by the means of software (reset/restore) and but device still operates under such conditions; a detailed inspection and an expert action is required.
+        </summary>
+    </docu>
+    ~*)
+    Critical := 1000,
+    (*~
+    <docu>
+        <summary>
+            Fatal error.
+            Use this category when a fatal error occured, that is not recoverable by the means of software (reset/restore) and a detailed inspection is required, the device is not able to continue without special intervention,
+        </summary>
+    </docu>
+    ~*)
+    Fatal := 1100,
+    (*~
+    <docu>
+        <summary>
+            Catastrophic error.
+            Use this category when there is a situation when the device cannot continue operations due to irrecoverable failure.
+        </summary>
+    </docu>
+    ~*)
+    Catastrophic := 1200,
+    None := 32000
 );
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

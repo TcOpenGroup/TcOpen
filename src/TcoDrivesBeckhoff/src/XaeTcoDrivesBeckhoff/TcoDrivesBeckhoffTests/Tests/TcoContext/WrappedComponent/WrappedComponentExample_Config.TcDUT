@@ -1,13 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="WrappedComponentExample_Config" Id="{93841d13-2f87-029a-1502-f9b95b8f885b}">
-    <Declaration><![CDATA[TYPE WrappedComponentExample_Config EXTENDS TcoCore.TcoStruct:
-STRUCT
-
-	VacuumReachedStabilisation:TIME:=T#100MS;
-	VacuumPushTime:TIME:=T#100MS;
+    <Declaration><![CDATA[TYPE WrappedComponentExample_Config EXTENDS TcoCore.TcoStruct : STRUCT
+    VacuumReachedStabilisation : TIME := T#100MS;
+    VacuumPushTime : TIME := T#100MS;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

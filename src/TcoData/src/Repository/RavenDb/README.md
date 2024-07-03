@@ -4,7 +4,7 @@ This is an implementation of data persistence via RavenDB.
 
 ## What is RavenDB?
 
-[RavenDB](https://github.com/ravendb/ravendb) is an Open Source ACID NoSQL database. 
+[RavenDB](https://github.com/ravendb/ravendb) is an Open Source ACID NoSQL database.
 
 It started in 2009 as a document database, but over time included many ways to model data, so you will be able to accomodate various business and industry scenarios.
 
@@ -17,6 +17,7 @@ You will be able to use it a fast CRUD engine to [read](https://ravendb.net/docs
 You can [install](https://ravendb.net/docs/article-page/latest/csharp/start/installation/setup-wizard) and maintain yourself a single node or multinode cluster. Follow [instructions](https://ravendb.net/docs/article-page/latest/csharp/start/installation/setup-wizard) to easily set up secured instance of RavenDB.
 
 [Various options](https://ravendb.net/download) are at your disposal
+
 - Native installation on Linux and Windows
 - Raspberry Pi
 - Docker

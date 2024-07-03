@@ -1,14 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <POU Name="TcoEcatSlaveState" Id="{5035a144-a13f-0775-217b-e1425fee930c}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK  TcoEcatSlaveState EXTENDS TcoObject 
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoEcatSlaveState EXTENDS TcoObject
 VAR_INPUT
     AdsAddr : AMSADDR;
 END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
-
     //*	{attribute addProperty Name "<#Actual state#>"}
     //*	{attribute clr [ReadOnly()]}
     _ecatState : eEcatState;
@@ -18,29 +17,21 @@ VAR
     //*	{attribute addProperty Name "<#ECAT Communication Ok#>"}
     //*	{attribute clr [ReadOnly()]}
     _ecatOk : BOOL;
- 
     //*	{attribute clr [RenderIgnore()]}
     _progress : INT := 0;
-	
-
     //*	{attribute addProperty Name "<#EtherCat masters Ams Net Id#>"}
     //*	{attribute clr [ReadOnly()]}
-    _netId : STRING[23]; //as string	
-
-	 //* {attribute clr [RenderIgnore()]}
+    _netId : STRING[23]; //as string
+    //* {attribute clr [RenderIgnore()]}
     _etherCAT_Addr : UINT;
-
-	//*	{attribute addProperty Name "<#State check Time(Period)#>"}
-   	_periodStateCheckTime: TIME :=T#1S;
-	
-	//*	{attribute addProperty Name "<#Error Time#>"}
-   	_errorTime: TIME :=T#5S;
+    //*	{attribute addProperty Name "<#State check Time(Period)#>"}
+    _periodStateCheckTime : TIME := T#1S;
+    //*	{attribute addProperty Name "<#Error Time#>"}
+    _errorTime : TIME := T#5S;
     //*	{attribute clr [RenderIgnore()]}
     _getSlaveState : FB_EcGetSlaveState;
     //*	{attribute clr [RenderIgnore()]}
     _setSlaveState : FB_EcSetSlaveState;
-
-
     //*	{attribute clr [RenderIgnore()]}
     bExecute : BOOL;
     //*	{attribute clr [RenderIgnore()]}
@@ -53,88 +44,72 @@ VAR
     _errId : UDINT;
     //*	{attribute clr [RenderIgnore()]}
     _stateTimer : TON;
-	//*	{attribute clr [RenderIgnore()]}
+    //*	{attribute clr [RenderIgnore()]}
     _errorTimer : TON;
-	
     //*	{attribute addProperty Name "<#Required state#>"}
     _ecatReqestState : eEcatState;
-	
     //*	{attribute addProperty Name "<#Change State#>"}
     _changeStateTask : TcoCore.TcoTask(THIS^);
-
     //*	{attribute addProperty Name "<#Restore#>"}
     _restoreTask : TcoCore.TcoTask(THIS^);
-
-	 {attribute 'hide'} 
-	_sb : TcoCore.StringBuilder;
-	{attribute 'hide'} 
-	_amsEmpty: BOOL;
-END_VAR
-]]></Declaration>
+    {attribute 'hide'}
+    _sb : TcoCore.StringBuilder;
+    {attribute 'hide'}
+    _amsEmpty : BOOL;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[_netId := F_CreateAmsNetId(nIds := AdsAddr.netId);
 _etherCAT_Addr := AdsAddr.port;
-_amsEmpty:=(_netId = '0.0.0.0.0.0') OR (_etherCAT_Addr = 0);
-	
+_amsEmpty := (_netId = '0.0.0.0.0.0') OR (_etherCAT_Addr = 0);
 
 IF _changeStateTask.Execute() THEN
-	_changeStateTask.DoneWhen(ChangeState(RequestedDeviceState:=_ecatReqestState ));
+    _changeStateTask.DoneWhen(ChangeState(RequestedDeviceState := _ecatReqestState));
 END_IF
 
-THIS^._changeStateTask.ThrowWhen((_changeStateTask.ElapsedTime>=_errorTime AND _progress>0) 
-								OR _amsEmpty ); 
-
+THIS^._changeStateTask.ThrowWhen((_changeStateTask.ElapsedTime >= _errorTime AND _progress > 0) OR _amsEmpty);
 THIS^._changeStateTask.Messenger.OnCondition(_amsEmpty).Error('<#Ads address information is not defined!#>');
 //*************RESTORE********************
-
 _restoreTask.Enabled := TRUE;
+
 IF _restoreTask.Execute() THEN
-	Restore();
+    Restore();
 END_IF
+
 //****************************************
-
-
-IF (_amsEmpty) THEN		
-	RETURN;
+IF (_amsEmpty) THEN
+    RETURN;
 END_IF
 
-
-THIS^._GetState(_periodStateCheckTime);
-
-
-
-
-]]></ST>
+THIS^._GetState(_periodStateCheckTime);]]></ST>
     </Implementation>
     <Folder Name="Internal" Id="{a2e5e2ee-1878-07e8-1f6d-0423d58d8da9}" />
     <Folder Name="Public" Id="{093f1a08-c90b-0553-3579-1779a2c8bb6b}" />
     <Method Name="_GetState" Id="{5814f303-9529-0909-235f-53a111b03cf0}" FolderPath="Internal\">
       <Declaration><![CDATA[METHOD PRIVATE _GetState
 VAR_INPUT
-	Period:TIME;
-END_VAR
-]]></Declaration>
+    Period : TIME;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_stateTimer(IN := TRUE,PT := Period);		
+        <ST><![CDATA[_stateTimer(IN := TRUE, PT := Period);
 
 IF _stateTimer.Q THEN
-	bExecute := TRUE;
-	_stateTimer(IN := FALSE);
+    bExecute := TRUE;
+    _stateTimer(IN := FALSE);
 END_IF
- 
-_getSlaveState(sNetId:= _netId, 
-				nSlaveAddr := _etherCAT_Addr, 
-				bExecute := bExecute,
-				bBusy => _busy,
-				state => state,
-				bError => _error,
-				nErrId => _ErrId);
+
+_getSlaveState(sNetId := _netId,
+    nSlaveAddr := _etherCAT_Addr,
+    bExecute := bExecute,
+    bBusy => _busy,
+    state => state,
+    bError => _error,
+    nErrId => _ErrId);
 
 IF NOT _busy THEN
-	_ecatState := state.deviceState;
-	_linkState := state.linkState;
-	_ecatOk := (state.deviceState = EC_DEVICE_STATE_OP);
-	bExecute := FALSE;
+    _ecatState := state.deviceState;
+    _linkState := state.linkState;
+    _ecatOk := (state.deviceState = EC_DEVICE_STATE_OP);
+    bExecute := FALSE;
 END_IF]]></ST>
       </Implementation>
     </Method>
@@ -142,10 +117,9 @@ END_IF]]></ST>
       <Declaration><![CDATA[PROPERTY PUBLIC EcatOk : BOOL]]></Declaration>
       <Get Name="Get" Id="{047e20bc-f624-0618-3d51-5a57753e58de}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[EcatOk:=_ecatOk;]]></ST>
+          <ST><![CDATA[EcatOk := _ecatOk;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -153,28 +127,24 @@ END_VAR
       <Declaration><![CDATA[PROPERTY PUBLIC ErrorTime : TIME]]></Declaration>
       <Get Name="Get" Id="{e82ab372-955d-0a1b-3c81-28905b737981}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[ErrorTime:=_errorTime;]]></ST>
+          <ST><![CDATA[ErrorTime := _errorTime;]]></ST>
         </Implementation>
       </Get>
       <Set Name="Set" Id="{d8909174-7c04-0e77-13f5-17ccdf218cc4}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[_errorTime:=ErrorTime;
-]]></ST>
+          <ST><![CDATA[_errorTime := ErrorTime;]]></ST>
         </Implementation>
       </Set>
     </Property>
     <Method Name="ChangeState" Id="{3b8371cc-b5cf-0927-320c-caa7528b1d35}">
       <Declaration><![CDATA[METHOD PUBLIC ChangeState : BOOL
 VAR_INPUT
-	RequestedDeviceState:BYTE;
-END_VAR
-]]></Declaration>
+    RequestedDeviceState : BYTE;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[ChangeState := FALSE;
 
@@ -193,7 +163,6 @@ CASE _progress OF
         _ecatOk := FALSE;
         _setSlaveState(bExecute := FALSE);
         _progress := 10;
-
     10:
         _setSlaveState(reqState := EC_DEVICE_STATE_INIT);
         _setSlaveState(bExecute := TRUE);
@@ -214,9 +183,7 @@ CASE _progress OF
             _progress := 20;
         ELSIF NOT _setSlaveState.bBusy AND (state.deviceState) = RequestedDeviceState THEN
             _progress := 100;
-
         END_IF
-
     20:
         _setSlaveState(reqState := EC_DEVICE_STATE_BOOTSTRAP);
         _setSlaveState(bExecute := TRUE);
@@ -229,7 +196,6 @@ CASE _progress OF
             _setSlaveState(bExecute := FALSE);
             _progress := 100;
         END_IF
-
     30:
         _setSlaveState(reqState := EC_DEVICE_STATE_PREOP);
         _setSlaveState(bExecute := TRUE);
@@ -244,7 +210,6 @@ CASE _progress OF
         ELSIF NOT _setSlaveState.bBusy AND (state.deviceState) = RequestedDeviceState THEN
             _progress := 100;
         END_IF
-
     40:
         _setSlaveState(reqState := EC_DEVICE_STATE_SAFEOP);
         _setSlaveState(bExecute := TRUE);
@@ -259,7 +224,6 @@ CASE _progress OF
         ELSIF NOT _setSlaveState.bBusy AND (state.deviceState) = RequestedDeviceState THEN
             _progress := 100;
         END_IF
-
     50: //OP
         _setSlaveState(reqState := EC_DEVICE_STATE_OP);
         _setSlaveState(bExecute := TRUE);
@@ -268,15 +232,12 @@ CASE _progress OF
             _setSlaveState(bExecute := FALSE);
             _ecatOk := TRUE;
             _progress := 100;
-
         END_IF
-
     100:
-
         ChangeState := TRUE;
         _progress := 0;
-
 END_CASE
+
 Messenger.OnCondition(NOT _setSlaveState.bBusy AND RequestedDeviceState > EC_DEVICE_STATE_OP)
     .Post(_sb.Clear().Append('<#Unexpected state: #>').Append(TO_STRING(state.deviceState)).ToString(), eMessageCategory.Error);]]></ST>
       </Implementation>
@@ -285,10 +246,9 @@ Messenger.OnCondition(NOT _setSlaveState.bBusy AND RequestedDeviceState > EC_DEV
       <Declaration><![CDATA[PROPERTY PUBLIC ChangeStateTask : TcoCore.ITcoTaskStatus]]></Declaration>
       <Get Name="Get" Id="{3b18ffe4-915b-0d73-15e6-481ccf859b65}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[ChangeStateTask:=_changeStateTask;]]></ST>
+          <ST><![CDATA[ChangeStateTask := _changeStateTask;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -296,30 +256,27 @@ END_VAR
       <Declaration><![CDATA[PROPERTY PUBLIC PeriodCheckState : TIME]]></Declaration>
       <Get Name="Get" Id="{95709821-c07d-067e-2643-2f586889bbc3}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[PeriodCheckState:= _periodStateCheckTime;]]></ST>
+          <ST><![CDATA[PeriodCheckState := _periodStateCheckTime;]]></ST>
         </Implementation>
       </Get>
       <Set Name="Set" Id="{239a42eb-b878-05ee-1163-39f86025e757}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[_periodStateCheckTime:=PeriodCheckState;]]></ST>
+          <ST><![CDATA[_periodStateCheckTime := PeriodCheckState;]]></ST>
         </Implementation>
       </Set>
     </Property>
     <Method Name="Restore" Id="{0fe634ae-4b55-037f-150d-2d2eb2241799}">
-      <Declaration><![CDATA[METHOD Restore  : ITcoRestorable
+      <Declaration><![CDATA[METHOD Restore : ITcoRestorable
 VAR_INPUT
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_changeStateTask.Restore();
-_ecatOk:=false;
-_progress:=0;
+_ecatOk := false;
+_progress := 0;
 _restoreTask.Restore();]]></ST>
       </Implementation>
     </Method>

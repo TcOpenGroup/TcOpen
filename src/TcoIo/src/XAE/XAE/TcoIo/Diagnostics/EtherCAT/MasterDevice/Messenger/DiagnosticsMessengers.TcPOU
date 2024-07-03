@@ -3,9 +3,8 @@
   <POU Name="DiagnosticsMessengers" Id="{e7f0eaf9-7f78-03a2-3372-f47f97235dbf}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK DiagnosticsMessengers EXTENDS TcoCore.TcoObject
 VAR
-	Messengers : ARRAY [0..2] OF DiagnosticsMessenger(THIS^);
-END_VAR
-]]></Declaration>
+    Messengers : ARRAY[0..2] OF DiagnosticsMessenger(THIS^);
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
@@ -13,18 +12,14 @@ END_VAR
       <Declaration><![CDATA[{attribute 'hide'}
 METHOD FB_init : BOOL
 VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	ParentObject : ITcoObject;	
-END_VAR
-
-
-]]></Declaration>
+    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+    ParentObject : ITcoObject;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Messengers[0].FB_init(bInitRetains,bInCopyCode,ParentObject);
-Messengers[1].FB_init(bInitRetains,bInCopyCode,ParentObject);
-Messengers[2].FB_init(bInitRetains,bInCopyCode,ParentObject);
-]]></ST>
+        <ST><![CDATA[Messengers[0].FB_init(bInitRetains, bInCopyCode, ParentObject);
+Messengers[1].FB_init(bInitRetains, bInCopyCode, ParentObject);
+Messengers[2].FB_init(bInitRetains, bInCopyCode, ParentObject);]]></ST>
       </Implementation>
     </Method>
   </POU>

@@ -36,23 +36,23 @@ namespace TcoIo
             }
         }
 
-
-        public EtcGroupedDataContext(EtcGroupedViewData groupedViewData, EtcUngroupedViewData ungroupedViewData)
+        public EtcGroupedDataContext(
+            EtcGroupedViewData groupedViewData,
+            EtcUngroupedViewData ungroupedViewData
+        )
         {
             GroupedViewData = groupedViewData;
             UngroupedViewData = ungroupedViewData;
         }
 
-
         public event PropertyChangedEventHandler PropertyChanged;
 
-    protected void NotifyPropertyChanged(string info)
-    {
-        if (this.PropertyChanged != null)
+        protected void NotifyPropertyChanged(string info)
         {
-            this.PropertyChanged(this, new PropertyChangedEventArgs(info));
+            if (this.PropertyChanged != null)
+            {
+                this.PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
         }
     }
 }
-}
-

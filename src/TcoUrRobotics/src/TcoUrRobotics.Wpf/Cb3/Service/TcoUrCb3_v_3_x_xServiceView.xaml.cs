@@ -19,7 +19,6 @@ using TcOpen.Inxton.Wpf;
 
 namespace TcoUrRobotics
 {
-
     public partial class TcoUrCb3_v_3_x_xServiceView : UserControl
     {
         public TcoUrCb3_v_3_x_xServiceView()
@@ -31,12 +30,5 @@ namespace TcoUrRobotics
 
             InitializeComponent();
         }
-
-
-       
-
     }
-
-  
-
 }

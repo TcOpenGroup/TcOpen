@@ -7,50 +7,48 @@
 {attribute addProperty CRC "880521987"}
 {attribute addProperty Size "120"}
 {attribute addProperty Name "RC70_EPP (EPP1322-0001)"}
-TYPE RC70_EPP_EPP1322_0001_347BB303 EXTENDS EPP1322_1FC0878B :
-STRUCT
-	{attribute addProperty Name "RC70_AB1 (EPP1008-0001)"}
-	{attribute addProperty PreviousPort "RC70_EPP (EPP1322-0001) : D"}
-	{attribute addProperty SyncUnit "C70"}
-	RC70_AB1_EPP1008_0001 : EPP1008_78E8D3DD;
-	{attribute addProperty Name "RC70_AB2 (EPP1008-0001)"}
-	{attribute addProperty PreviousPort "RC70_AB1 (EPP1008-0001) : B"}
-	{attribute addProperty SyncUnit "C70"}
-	RC70_AB2_EPP1008_0001 : EPP1008_78E8D3DD;
-	{attribute addProperty Name "RC70_AB6 (EPP1008-0001)"}
-	{attribute addProperty PreviousPort "RC70_AB2 (EPP1008-0001) : B"}
-	{attribute addProperty SyncUnit "C70"}
-	RC70_AB6_EPP1008_0001 : EPP1008_78E8D3DD;
-	{attribute addProperty Name "RC70_AB3 (EPP1008-0001)"}
-	{attribute addProperty PreviousPort "RC70_AB6 (EPP1008-0001) : B"}
-	{attribute addProperty SyncUnit "C70"}
-	RC70_AB3_EPP1008_0001 : EPP1008_78E8D3DD;
-	{attribute addProperty Name "RC70_AB4 (EPP1008-0001)"}
-	{attribute addProperty PreviousPort "RC70_AB3 (EPP1008-0001) : B"}
-	{attribute addProperty SyncUnit "C70"}
-	RC70_AB4_EPP1008_0001 : EPP1008_78E8D3DD;
-	{attribute addProperty Name "RC70_AB7 (EPP1008-0001)"}
-	{attribute addProperty PreviousPort "RC70_EPP (EPP1322-0001) : B"}
-	{attribute addProperty SyncUnit "C70"}
-	RC70_AB7_EPP1008_0001 : EPP1008_78E8D3DD;
-	{attribute addProperty Name "RC70_AB9 (EPP1008-0001)"}
-	{attribute addProperty PreviousPort "RC70_AB7 (EPP1008-0001) : B"}
-	{attribute addProperty SyncUnit "C70"}
-	RC70_AB9_EPP1008_0001 : EPP1008_78E8D3DD;
-	{attribute addProperty Name "RC70_AB10 (EPP1008-0001)"}
-	{attribute addProperty PreviousPort "RC70_AB9 (EPP1008-0001) : B"}
-	{attribute addProperty SyncUnit "C70"}
-	RC70_AB10_EPP1008_0001 : EPP1008_78E8D3DD;
-	{attribute addProperty Name "RC70_AB8 (EPP1008-0001)"}
-	{attribute addProperty PreviousPort "RC70_AB10 (EPP1008-0001) : B"}
-	{attribute addProperty SyncUnit "C70"}
-	RC70_AB8_EPP1008_0001 : EPP1008_78E8D3DD;
-	{attribute addProperty Name "RC70_AB5 (EPP1008-0001)"}
-	{attribute addProperty PreviousPort "RC70_AB8 (EPP1008-0001) : B"}
-	{attribute addProperty SyncUnit "C70"}
-	RC70_AB5_EPP1008_0001 : EPP1008_78E8D3DD;
+TYPE RC70_EPP_EPP1322_0001_347BB303 EXTENDS EPP1322_1FC0878B : STRUCT
+    {attribute addProperty Name "RC70_AB1 (EPP1008-0001)"}
+    {attribute addProperty PreviousPort "RC70_EPP (EPP1322-0001) : D"}
+    {attribute addProperty SyncUnit "C70"}
+    RC70_AB1_EPP1008_0001 : EPP1008_78E8D3DD;
+    {attribute addProperty Name "RC70_AB2 (EPP1008-0001)"}
+    {attribute addProperty PreviousPort "RC70_AB1 (EPP1008-0001) : B"}
+    {attribute addProperty SyncUnit "C70"}
+    RC70_AB2_EPP1008_0001 : EPP1008_78E8D3DD;
+    {attribute addProperty Name "RC70_AB6 (EPP1008-0001)"}
+    {attribute addProperty PreviousPort "RC70_AB2 (EPP1008-0001) : B"}
+    {attribute addProperty SyncUnit "C70"}
+    RC70_AB6_EPP1008_0001 : EPP1008_78E8D3DD;
+    {attribute addProperty Name "RC70_AB3 (EPP1008-0001)"}
+    {attribute addProperty PreviousPort "RC70_AB6 (EPP1008-0001) : B"}
+    {attribute addProperty SyncUnit "C70"}
+    RC70_AB3_EPP1008_0001 : EPP1008_78E8D3DD;
+    {attribute addProperty Name "RC70_AB4 (EPP1008-0001)"}
+    {attribute addProperty PreviousPort "RC70_AB3 (EPP1008-0001) : B"}
+    {attribute addProperty SyncUnit "C70"}
+    RC70_AB4_EPP1008_0001 : EPP1008_78E8D3DD;
+    {attribute addProperty Name "RC70_AB7 (EPP1008-0001)"}
+    {attribute addProperty PreviousPort "RC70_EPP (EPP1322-0001) : B"}
+    {attribute addProperty SyncUnit "C70"}
+    RC70_AB7_EPP1008_0001 : EPP1008_78E8D3DD;
+    {attribute addProperty Name "RC70_AB9 (EPP1008-0001)"}
+    {attribute addProperty PreviousPort "RC70_AB7 (EPP1008-0001) : B"}
+    {attribute addProperty SyncUnit "C70"}
+    RC70_AB9_EPP1008_0001 : EPP1008_78E8D3DD;
+    {attribute addProperty Name "RC70_AB10 (EPP1008-0001)"}
+    {attribute addProperty PreviousPort "RC70_AB9 (EPP1008-0001) : B"}
+    {attribute addProperty SyncUnit "C70"}
+    RC70_AB10_EPP1008_0001 : EPP1008_78E8D3DD;
+    {attribute addProperty Name "RC70_AB8 (EPP1008-0001)"}
+    {attribute addProperty PreviousPort "RC70_AB10 (EPP1008-0001) : B"}
+    {attribute addProperty SyncUnit "C70"}
+    RC70_AB8_EPP1008_0001 : EPP1008_78E8D3DD;
+    {attribute addProperty Name "RC70_AB5 (EPP1008-0001)"}
+    {attribute addProperty PreviousPort "RC70_AB8 (EPP1008-0001) : B"}
+    {attribute addProperty SyncUnit "C70"}
+    RC70_AB5_EPP1008_0001 : EPP1008_78E8D3DD;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

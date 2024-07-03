@@ -3,72 +3,52 @@
   <POU Name="MAIN" Id="{368cd394-e432-4029-bb9d-e4bf92b24162}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-//TcRpc tests
-	_tcoRtcTest_A						:	TcoRtcTest;
-	_tcoRtcTest_B						:	TcoRtcTest;
-	_tcoContextTest_A					:	TcoContextTest;
-	_tcoContextTest_B					:	TcoContextTest;
-	_tcoSequencerAutoRestorableTest		:	TcoSequencerAutoRestorableTest;
-	_tcoSequencerNonAutoRestorableTest	:	TcoSequencerNonAutoRestorableTest;
-	_tcoSequenceAutoRestorableTest		:	TcoSequenceAutoRestorableTest;
-	_tcoSequenceNonAutoRestorableTest	:	TcoSequenceNonAutoRestorableTest;
-	_tcoMessengerContextTest			:	TcoMessengerContextTest;
-	_tcoContextMessagingPerf 			: 	TcoContextMessagingPerf;
-	_tcoComponentTest					:	TcoComponentTest;
-	_stringBuilderTest					: 	StringBuilderTests;
-	
-//PLC executed tests
-	_tcoTaskTestContext 				:	TcoTaskTestContext;
-	_tcoToggleTaskTestContext			:	TcoToggleTaskTestContext;
-	{attribute addProperty Name "Test base component class"}
-	_tcoComponentTestContext			:   TcoComponentTestContext;
-	_tcoRemoteTaskTestContext			:	TcoRemoteTaskTestContext;
-	_tcoSequencerTestContext			:	TcoSequencerTestContext;
-	_tcoSequenceTestContext				:	TcoSequenceTestContext;
-	_tcoLoggerTestContext				:	TcoLoggerTestContext;	
-	_tcoSequenceObserverTests			: 	TcoSequenceObserverTests;
+    //TcRpc tests
+    _tcoRtcTest_A : TcoRtcTest;
+    _tcoRtcTest_B : TcoRtcTest;
+    _tcoContextTest_A : TcoContextTest;
+    _tcoContextTest_B : TcoContextTest;
+    _tcoSequencerAutoRestorableTest : TcoSequencerAutoRestorableTest;
+    _tcoSequencerNonAutoRestorableTest : TcoSequencerNonAutoRestorableTest;
+    _tcoSequenceAutoRestorableTest : TcoSequenceAutoRestorableTest;
+    _tcoSequenceNonAutoRestorableTest : TcoSequenceNonAutoRestorableTest;
+    _tcoMessengerContextTest : TcoMessengerContextTest;
+    _tcoContextMessagingPerf : TcoContextMessagingPerf;
+    _tcoComponentTest : TcoComponentTest;
+    _stringBuilderTest : StringBuilderTests;
+    //PLC executed tests
+    _tcoTaskTestContext : TcoTaskTestContext;
+    _tcoToggleTaskTestContext : TcoToggleTaskTestContext;
+    {attribute addProperty Name "Test base component class"}
+    _tcoComponentTestContext : TcoComponentTestContext;
+    _tcoRemoteTaskTestContext : TcoRemoteTaskTestContext;
+    _tcoSequencerTestContext : TcoSequencerTestContext;
+    _tcoSequenceTestContext : TcoSequenceTestContext;
+    _tcoLoggerTestContext : TcoLoggerTestContext;
+    _tcoSequenceObserverTests : TcoSequenceObserverTests;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[//TcRpc tests
 _tcoRtcTest_A();
-
 _tcoRtcTest_B();
-
 _tcoContextTest_A();
-
 _tcoContextTest_B();
-
 _tcoSequencerAutoRestorableTest();
-
 _tcoSequencerNonAutoRestorableTest();
-
-_tcoSequenceAutoRestorableTest();		
-
+_tcoSequenceAutoRestorableTest();
 _tcoSequenceNonAutoRestorableTest();
-
 _tcoMessengerContextTest();
-
 _tcoContextMessagingPerf();
-
 _tcoComponentTest();
-
 _stringBuilderTest();
-
 //PLC executed tests
 _tcoTaskTestContext.ProbeRun();
-
 _tcoToggleTaskTestContext.ProbeRun();
-
 _tcoComponentTestContext.ProbeRun();
-
 _tcoRemoteTaskTestContext.ProbeRun();
-
 _tcoSequencerTestContext.ProbeRun();
-
 _tcoSequenceTestContext.ProbeRun();
-
 _tcoLoggerTestContext.ProbeRun();
-
 _tcoSequenceObserverTests.ProbeRun();]]></ST>
     </Implementation>
   </POU>

@@ -1,10 +1,10 @@
-﻿using MQTTnet;
+﻿using System;
+using System.Linq;
+using System.Threading;
+using MQTTnet;
 using MQTTnet.Client;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using System;
-using System.Linq;
-using System.Threading;
 using TcOpen.Inxton.Mqtt;
 using Vortex.Connector.ValueTypes;
 
@@ -21,27 +21,33 @@ namespace TcOpen.Inxton.MqttTests
         [OneTimeSetUp]
         public void OneTimeSetup()
         {
-
             MqttFactory = new MqttFactory();
             Broker = MqttFactory.CreateMqttServer();
             var mqttServerOptions = MqttFactory
-                    .CreateServerOptionsBuilder()
-                    .WithDefaultEndpointPort(MqttPort)
-                    .Build();
+                .CreateServerOptionsBuilder()
+                .WithDefaultEndpointPort(MqttPort)
+                .Build();
             Broker.StartAsync(mqttServerOptions);
         }
 
         private IMqttClient CreateClientAndConnect()
         {
             var c = MqttFactory.CreateMqttClient();
-            var mqttClientOptions = MqttFactory.CreateClientOptionsBuilder().WithTcpServer("localhost", MqttPort).Build();
+            var mqttClientOptions = MqttFactory
+                .CreateClientOptionsBuilder()
+                .WithTcpServer("localhost", MqttPort)
+                .Build();
             c.ConnectAsync(mqttClientOptions, CancellationToken.None).Wait();
             c.UseApplicationMessageReceivedHandler(new TcoAppMqttHandler());
             return c;
         }
+
         private void Disconnect(IMqttClient c)
         {
-            c.DisconnectAsync(new MQTTnet.Client.Disconnecting.MqttClientDisconnectOptions(), CancellationToken.None);
+            c.DisconnectAsync(
+                new MQTTnet.Client.Disconnecting.MqttClientDisconnectOptions(),
+                CancellationToken.None
+            );
         }
 
         [Test]
@@ -55,15 +61,19 @@ namespace TcOpen.Inxton.MqttTests
             var stringJson = JsonConvert.SerializeObject(objectToPublish);
             //act
             string deliveredMessage = "no_message";
-            var messageHandler = new RelayHandler((msg) => deliveredMessage = msg.ApplicationMessage.ConvertPayloadToString());
+            var messageHandler = new RelayHandler(
+                (msg) => deliveredMessage = msg.ApplicationMessage.ConvertPayloadToString()
+            );
             Broker.ApplicationMessageReceivedHandler = messageHandler;
             mqtt.PublishAsync(objectToPublish, "/topic").Wait();
-            while (messageHandler.MessageNotDelivered) { Thread.Sleep(20); }
+            while (messageHandler.MessageNotDelivered)
+            {
+                Thread.Sleep(20);
+            }
             Disconnect(client);
             //assert
             Assert.That(deliveredMessage, Is.EqualTo(stringJson));
         }
-
 
         [Test]
         public void Subscribed_object_will_mirror_the_content_of_published()
@@ -81,12 +91,14 @@ namespace TcOpen.Inxton.MqttTests
 
             publisher.PublishAsync(objectToPublish, "/topic").Wait();
 
-            while (objectToMirror.Nested == null) { Thread.Sleep(10); }
+            while (objectToMirror.Nested == null)
+            {
+                Thread.Sleep(10);
+            }
             Disconnect(client);
             //assert
             Assert.That(objectToPublish, Is.EqualTo(objectToMirror));
         }
-
 
         [Test]
         public void Subscribing_to_different_topic_will_timeout()
@@ -109,13 +121,14 @@ namespace TcOpen.Inxton.MqttTests
             Disconnect(client);
         }
 
-
         [Test]
         public void Using_tcomqqt_subscriber_without_AppMqttHandler_will_throw_exception()
         {
             //arrange
             var client = CreateClientAndConnect();
-            client.UseApplicationMessageReceivedHandler(new RelayHandler((message) => message.ApplicationMessage.ConvertPayloadToString()));
+            client.UseApplicationMessageReceivedHandler(
+                new RelayHandler((message) => message.ApplicationMessage.ConvertPayloadToString())
+            );
             var publisher = new TcoMqttPublisher<MqttData>(client);
 
             Assert.Throws<ArgumentException>(() =>
@@ -124,15 +137,16 @@ namespace TcOpen.Inxton.MqttTests
             });
         }
 
-
         [Test]
         public void Unsubscribe_from_onliner_base_will_remove_the_handle()
         {
             //arrange
             var client = CreateClientAndConnect();
             var handler = client.ApplicationMessageReceivedHandler as TcoAppMqttHandler;
-            var adapter = new Vortex.Connector.ConnectorAdapter(typeof(Vortex.Connector.DummyConnectorFactory));
-            var parent = new PlcParent(adapter.GetConnector(null),"","");
+            var adapter = new Vortex.Connector.ConnectorAdapter(
+                typeof(Vortex.Connector.DummyConnectorFactory)
+            );
+            var parent = new PlcParent(adapter.GetConnector(null), "", "");
             var plcInt = adapter.Adapter.CreateINT(parent, "int", "int");
 
             var handle = plcInt.Subscribe(client, "/topic");
@@ -140,10 +154,5 @@ namespace TcOpen.Inxton.MqttTests
             handle.UnsubscribeAsync();
             Assert.That(handler.TopicNames.ToList().Count, Is.EqualTo(0));
         }
-
-
     }
-
-
-
 }

@@ -5,12 +5,24 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Style", "IDE0090:Use 'new(...)'",
+[assembly: SuppressMessage(
+    "Style",
+    "IDE0090:Use 'new(...)'",
     Justification = "If someone uses this project with older target, he will have to rewrite the code",
     Scope = "member",
-    Target = "~P:TcOpenHammer.Grafana.API.Transformation.TableWithTimeColumn`1.TimeColumn")]
-[assembly: SuppressMessage("Style", "IDE0090:Use 'new(...)'", 
+    Target = "~P:TcOpenHammer.Grafana.API.Transformation.TableWithTimeColumn`1.TimeColumn"
+)]
+[assembly: SuppressMessage(
+    "Style",
+    "IDE0090:Use 'new(...)'",
     Justification = "If someone uses this project with older target, he will have to rewrite the code",
-    Scope = "member", 
-    Target = "~F:TcOpenHammer.Grafana.API.Controllers.ImageController.NotFoundImage")]
-[assembly: SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "PLC Twin object", Scope = "namespaceanddescendants", Target = "~N:Grafana.Backend.Model")]
+    Scope = "member",
+    Target = "~F:TcOpenHammer.Grafana.API.Controllers.ImageController.NotFoundImage"
+)]
+[assembly: SuppressMessage(
+    "Style",
+    "IDE1006:Naming Styles",
+    Justification = "PLC Twin object",
+    Scope = "namespaceanddescendants",
+    Target = "~N:Grafana.Backend.Model"
+)]

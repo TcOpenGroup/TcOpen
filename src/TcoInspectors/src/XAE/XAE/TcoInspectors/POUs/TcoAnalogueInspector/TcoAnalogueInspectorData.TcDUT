@@ -7,48 +7,42 @@
 {attribute 'qlik_ref_value_field:CheckName = AttributeHumanReadable'}
 {attribute 'qlik_ref_value_field:StationName = AttributeQlikGroup'}
 {attribute 'qlik_value_field:CheckType = Analogue'}
-TYPE
-    TcoAnalogueInspectorData EXTENDS TcoInspectorData :
-    STRUCT
-        (*~
-		<docu>
-		<summary>
-			Required minimum value for the inspection to pass.
-		</summary>
-		</docu>
-		~*)
-        {attribute addProperty  Name "<#Min.#>"}
-        {attribute 'qlik_load:Minimum'}
-		{attribute addProperty ToolTip "<#Min. value for the inspection to pass.#>"}
-        RequiredMin : LREAL;
-
-        (*~
-		<docu>
-		<summary>
-			Detected status.	
-		</summary>
-		</docu>
-		~*)
-        {attribute addProperty  Name "<#Detected#>"}
-        {attribute clr [RenderIgnore("Control", "ShadowControl", "ControlSlim", "ShadowControlSlim")]}
-		{attribute addProperty ToolTip "<#Detected value#>"}
-        {attribute 'qlik_load:Measured'}
-        DetectedStatus : LREAL;
-
-        (*~
-		<docu>
-		<summary>
-			Required maximum value for the inspection to pass.
-		</summary>
-		</docu>
-		~*)
-        {attribute addProperty  Name "<#Max.#>"}
-        {attribute 'qlik_load:Maximum'}
-		{attribute addProperty ToolTip "<#Max. value for the inspection to pass.#>"}
-        RequiredMax : LREAL;
-
-    END_STRUCT
-END_TYPE
-]]></Declaration>
+TYPE TcoAnalogueInspectorData EXTENDS TcoInspectorData : STRUCT
+    (*~
+        <docu>
+        <summary>
+            Required minimum value for the inspection to pass.
+        </summary>
+        </docu>
+        ~*)
+    {attribute addProperty  Name "<#Min.#>"}
+    {attribute 'qlik_load:Minimum'}
+    {attribute addProperty ToolTip "<#Min. value for the inspection to pass.#>"}
+    RequiredMin : LREAL;
+    (*~
+        <docu>
+        <summary>
+            Detected status.
+        </summary>
+        </docu>
+        ~*)
+    {attribute addProperty  Name "<#Detected#>"}
+    {attribute clr [RenderIgnore("Control", "ShadowControl", "ControlSlim", "ShadowControlSlim")]}
+    {attribute addProperty ToolTip "<#Detected value#>"}
+    {attribute 'qlik_load:Measured'}
+    DetectedStatus : LREAL;
+    (*~
+        <docu>
+        <summary>
+            Required maximum value for the inspection to pass.
+        </summary>
+        </docu>
+        ~*)
+    {attribute addProperty  Name "<#Max.#>"}
+    {attribute 'qlik_load:Maximum'}
+    {attribute addProperty ToolTip "<#Max. value for the inspection to pass.#>"}
+    RequiredMax : LREAL;
+END_STRUCT
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

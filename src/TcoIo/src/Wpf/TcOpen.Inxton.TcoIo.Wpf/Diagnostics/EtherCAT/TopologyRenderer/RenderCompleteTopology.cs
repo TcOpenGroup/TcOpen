@@ -1,16 +1,16 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using Vortex.Connector;
-using System.Collections.ObjectModel;
-using System.Windows.Media;
-using System.Windows.Input;
+﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
+using System.Windows.Media;
 using TcOpen.Inxton.TcoCore.Wpf;
 using TcOpen.Inxton.TcoIo.Wpf.Diagnostics.EtherCAT;
+using Vortex.Connector;
 
 namespace TcoIo
 {
@@ -19,7 +19,6 @@ namespace TcoIo
     /// </summary>
     public partial class TopologyRenderer : UserControl
     {
-
         private void RenderCompleteTopology()
         {
             if (dt != null && !alreadyRendered)

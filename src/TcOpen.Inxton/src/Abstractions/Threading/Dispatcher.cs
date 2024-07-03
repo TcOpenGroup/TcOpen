@@ -8,10 +8,7 @@ namespace TcOpen.Inxton.Threading
     /// </summary>
     public class Dispatcher : IDispatcher
     {
-        private Dispatcher()
-        {
-           
-        }
+        private Dispatcher() { }
 
         private static IDispatcher _dispatcher;
 
@@ -41,11 +38,11 @@ namespace TcOpen.Inxton.Threading
         /// <param name="action">Action to run.</param>
         public Task InvokeAsync(Action action)
         {
-           return _dispatcher?.InvokeAsync(action);
+            return _dispatcher?.InvokeAsync(action);
         }
 
-        private volatile static object mutex = new object();
-        
+        private static volatile object mutex = new object();
+
         /// <summary>
         /// Gets dispatcher mediator of currently running application.
         /// </summary>

@@ -28,14 +28,12 @@ namespace TcoIo
         public bool IsInErrorState
         {
             get { return inInErrorState; }
-            set 
-            { 
+            set
+            {
                 inInErrorState = value;
                 NotifyPropertyChanged(nameof(IsInErrorState));
             }
         }
-
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -52,6 +50,7 @@ namespace TcoIo
             Name = name;
             IsInErrorState = isInErrorState;
         }
+
         public GroupedViewItemObject(string name)
         {
             Name = name;

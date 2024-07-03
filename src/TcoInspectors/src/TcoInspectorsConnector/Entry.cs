@@ -9,7 +9,13 @@ namespace TcoInspectorsPlc
 {
     public class Entry
     {
-        public static TcoInspectorsTwinController TcoInspectorsPlc { get; } = 
-            new TcoInspectorsTwinController(Vortex.Adapters.Connector.Tc3.Adapter.Tc3ConnectorAdapter.Create(Environment.GetEnvironmentVariable("Tc3Target"), 852, true));
+        public static TcoInspectorsTwinController TcoInspectorsPlc { get; } =
+            new TcoInspectorsTwinController(
+                Vortex.Adapters.Connector.Tc3.Adapter.Tc3ConnectorAdapter.Create(
+                    Environment.GetEnvironmentVariable("Tc3Target"),
+                    852,
+                    true
+                )
+            );
     }
 }

@@ -32,10 +32,12 @@ namespace TcOpen.Inxton.TcoCore.Wpf.TcoComponent
         }
 
         public static readonly DependencyProperty ComponentHeaderProperty =
-            DependencyProperty.Register("ComponentHeaderProperty", typeof(UIElement), typeof(TcoComponentView),
-                new PropertyMetadata(null));
-
-
+            DependencyProperty.Register(
+                "ComponentHeaderProperty",
+                typeof(UIElement),
+                typeof(TcoComponentView),
+                new PropertyMetadata(null)
+            );
 
         public UIElement ComponentDetails
         {
@@ -44,7 +46,11 @@ namespace TcOpen.Inxton.TcoCore.Wpf.TcoComponent
         }
 
         public static readonly DependencyProperty ComponentDetailsProperty =
-            DependencyProperty.Register("ComponentDetails", typeof(UIElement), typeof(TcoComponentView),
-                new PropertyMetadata(null));
+            DependencyProperty.Register(
+                "ComponentDetails",
+                typeof(UIElement),
+                typeof(TcoComponentView),
+                new PropertyMetadata(null)
+            );
     }
 }

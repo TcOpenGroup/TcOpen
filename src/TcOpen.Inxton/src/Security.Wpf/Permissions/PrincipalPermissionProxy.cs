@@ -12,6 +12,7 @@ namespace TcOpen.Inxton.Local.Security.Wpf
     public sealed class PrincipalPermissionProxy : IPermission, IUnrestrictedPermission
     {
         private readonly PrincipalPermission _inner;
+
         public PrincipalPermissionProxy(PrincipalPermission inner)
         {
             _inner = inner;
@@ -62,4 +63,3 @@ namespace TcOpen.Inxton.Local.Security.Wpf
         }
     }
 }
-

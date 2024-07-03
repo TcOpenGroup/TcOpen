@@ -1,11 +1,11 @@
 using System;
-using Xunit;
-using System.Linq;
-using System.Threading.Tasks;
-using TcOpen.Inxton.Data;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using TcOpen.Inxton.Data;
+using Xunit;
 
 namespace TcOpen.Inxton.Local.Security.Blazor.Tests
 {
@@ -179,7 +179,9 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
         {
             //Arrange
             //Act
-            var user = await _fixture.UserStore.FindByNameAsync(_fixture.SeedData.ExistUser.UserName);
+            var user = await _fixture.UserStore.FindByNameAsync(
+                _fixture.SeedData.ExistUser.UserName
+            );
             //Assert
             Assert.NotNull(user);
         }
@@ -189,7 +191,9 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
         {
             //Arrange
             //Act
-            var user = await _fixture.UserStore.FindByNameAsync(_fixture.SeedData.NoExistUser.NormalizedUserName);
+            var user = await _fixture.UserStore.FindByNameAsync(
+                _fixture.SeedData.NoExistUser.NormalizedUserName
+            );
             //Assert
             Assert.Null(user);
         }
@@ -237,7 +241,9 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
             //Arrange
             var expectedUsername = _fixture.SeedData.ExistUser.NormalizedUserName;
             //Act
-            var username = await _fixture.UserStore.GetNormalizedUserNameAsync(_fixture.SeedData.ExistUser);
+            var username = await _fixture.UserStore.GetNormalizedUserNameAsync(
+                _fixture.SeedData.ExistUser
+            );
             //Assert
             Assert.NotNull(username);
             Assert.Equal(expectedUsername, username);
@@ -268,7 +274,9 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
             //Arrange
             var expectedPassword = _fixture.SeedData.ExistUser.PasswordHash;
             //Act
-            var password = await _fixture.UserStore.GetPasswordHashAsync(_fixture.SeedData.ExistUser);
+            var password = await _fixture.UserStore.GetPasswordHashAsync(
+                _fixture.SeedData.ExistUser
+            );
             //Assert
             Assert.NotNull(password);
             Assert.Equal(expectedPassword, password);
@@ -340,7 +348,9 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
             //Arrange
             var expectedSecurityStamp = _fixture.SeedData.ExistUser.SecurityStamp;
             //Act
-            var securityStamp = await _fixture.UserStore.GetSecurityStampAsync(_fixture.SeedData.ExistUser);
+            var securityStamp = await _fixture.UserStore.GetSecurityStampAsync(
+                _fixture.SeedData.ExistUser
+            );
             //Assert
             Assert.NotNull(securityStamp);
             Assert.Equal(expectedSecurityStamp, securityStamp);
@@ -531,7 +541,10 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
             //Arrange
             var normalizedRoleName = "DEFAULT";
             //Act
-            var result = await _fixture.UserStore.IsInRoleAsync(_fixture.SeedData.DefaultUser, normalizedRoleName);
+            var result = await _fixture.UserStore.IsInRoleAsync(
+                _fixture.SeedData.DefaultUser,
+                normalizedRoleName
+            );
             //Assert
             Assert.True(result);
         }
@@ -544,7 +557,10 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
             //Act
             try
             {
-                result = await _fixture.UserStore.IsInRoleAsync(_fixture.SeedData.NoExistUser, "NOEXISTROLE");
+                result = await _fixture.UserStore.IsInRoleAsync(
+                    _fixture.SeedData.NoExistUser,
+                    "NOEXISTROLE"
+                );
             }
             catch (Exception)
             {
@@ -562,7 +578,10 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
             //Act
             try
             {
-                result = await _fixture.UserStore.IsInRoleAsync(_fixture.SeedData.ExistUser, "NOEXISTROLE");
+                result = await _fixture.UserStore.IsInRoleAsync(
+                    _fixture.SeedData.ExistUser,
+                    "NOEXISTROLE"
+                );
             }
             catch (Exception)
             {
@@ -598,7 +617,10 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
             //Act
             try
             {
-                result = await _fixture.UserStore.IsInRoleAsync(_fixture.SeedData.DefaultUser, null);
+                result = await _fixture.UserStore.IsInRoleAsync(
+                    _fixture.SeedData.DefaultUser,
+                    null
+                );
             }
             catch (ArgumentNullException)
             {
@@ -615,7 +637,10 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
             //Arrange
             var normalizedName = "NEWNORMALIZEDNAME";
             //Act
-            await _fixture.UserStore.SetNormalizedUserNameAsync(_fixture.SeedData.UpdateUser, normalizedName);
+            await _fixture.UserStore.SetNormalizedUserNameAsync(
+                _fixture.SeedData.UpdateUser,
+                normalizedName
+            );
             //Assert
             Assert.Equal(normalizedName, _fixture.SeedData.UpdateUser.NormalizedUserName);
         }
@@ -627,7 +652,10 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
             //Act
             try
             {
-                await _fixture.UserStore.SetNormalizedUserNameAsync(_fixture.SeedData.NoExistUser, "normalizedName");
+                await _fixture.UserStore.SetNormalizedUserNameAsync(
+                    _fixture.SeedData.NoExistUser,
+                    "normalizedName"
+                );
             }
             catch (UnableToLocateRecordId)
             {
@@ -643,7 +671,10 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
             //Act
             try
             {
-                await _fixture.UserStore.SetNormalizedUserNameAsync(_fixture.SeedData.DefaultUser, "");
+                await _fixture.UserStore.SetNormalizedUserNameAsync(
+                    _fixture.SeedData.DefaultUser,
+                    ""
+                );
             }
             catch (ArgumentNullException)
             {
@@ -658,7 +689,10 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
             //Act
             try
             {
-                await _fixture.UserStore.SetNormalizedUserNameAsync(_fixture.SeedData.DefaultUser, null);
+                await _fixture.UserStore.SetNormalizedUserNameAsync(
+                    _fixture.SeedData.DefaultUser,
+                    null
+                );
             }
             catch (ArgumentNullException)
             {
@@ -686,7 +720,10 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
             //Act
             try
             {
-                await _fixture.UserStore.SetPasswordHashAsync(_fixture.SeedData.NoExistUser, "password");
+                await _fixture.UserStore.SetPasswordHashAsync(
+                    _fixture.SeedData.NoExistUser,
+                    "password"
+                );
             }
             catch (UnableToLocateRecordId)
             {
@@ -746,7 +783,10 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
             //Act
             try
             {
-                await _fixture.UserStore.SetSecurityStampAsync(_fixture.SeedData.NoExistUser, "securityStamp");
+                await _fixture.UserStore.SetSecurityStampAsync(
+                    _fixture.SeedData.NoExistUser,
+                    "securityStamp"
+                );
             }
             catch (UnableToLocateRecordId)
             {
@@ -806,7 +846,10 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
             //Act
             try
             {
-                await _fixture.UserStore.SetUserNameAsync(_fixture.SeedData.NoExistUser, "userName");
+                await _fixture.UserStore.SetUserNameAsync(
+                    _fixture.SeedData.NoExistUser,
+                    "userName"
+                );
             }
             catch (UnableToLocateRecordId)
             {
@@ -852,7 +895,9 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
         public async Task UpdateAsync_Success()
         {
             //Arrange
-            var userData = _fixture.Repository.UserRepository.Read(_fixture.SeedData.UpdateUser.UserName);
+            var userData = _fixture.Repository.UserRepository.Read(
+                _fixture.SeedData.UpdateUser.UserName
+            );
             var user = new User(userData);
             user.Email = "newupdate@newupdate.com";
             user.PasswordHash = "password";
@@ -863,7 +908,9 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
             var result = await _fixture.UserStore.UpdateAsync(user);
             //Assert
             Assert.True(result.Succeeded);
-            var updatedUser = _fixture.Repository.UserRepository.Read(_fixture.SeedData.UpdateUser.UserName);
+            var updatedUser = _fixture.Repository.UserRepository.Read(
+                _fixture.SeedData.UpdateUser.UserName
+            );
             Assert.Equal(user.UserName, updatedUser.Username);
             Assert.Equal(user.Email, updatedUser.Email);
             Assert.Equal(user.PasswordHash, updatedUser.HashedPassword);

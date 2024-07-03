@@ -1,15 +1,15 @@
+using System.Threading;
+using System.Threading.Tasks;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
-using TcoInspectorsTests;
 using Tc.Prober.Runners;
 using TcoInspectors;
-using System.Threading.Tasks;
-using System.Threading;
+using TcoInspectorsTests;
 
 namespace TcoInspectorsUnitTests
 {
     public class TcoDataInspectorTests : TcoInspectorTests
-    {        
+    {
         private TcoInspectorsTests.TcoDataInspectorTests container;
 
         [OneTimeSetUp]
@@ -17,7 +17,7 @@ namespace TcoInspectorsUnitTests
         {
             Entry.TcoInspectorsTests.Connector.BuildAndStart().ReadWriteCycleDelay = 100;
             container = Entry.TcoInspectorsTests.MAIN._dataInspectorTests;
-            InspectorContainer = container;            
+            InspectorContainer = container;
         }
 
         [SetUp]
@@ -27,11 +27,11 @@ namespace TcoInspectorsUnitTests
             container._sut._data.FlushPlainToOnline(plain);
             container.ExecuteProbeRun(1, 0);
         }
-        
+
         protected override void set_to_fail_below_threshold()
         {
             container._sut._data.RequiredStatus.Synchron = "this is some data to compare";
-            container._inspectedValue.Synchron = "data to compare and fail";            
+            container._inspectedValue.Synchron = "data to compare and fail";
         }
 
         protected override dynamic set_to_fail_above_threshold()
@@ -70,10 +70,12 @@ namespace TcoInspectorsUnitTests
             var ok = "this is some data to compare and pass";
             var nok = "this is some data to compare and fail";
 
-            container._inspectedValue.Synchron = container._inspectedValue.Synchron == "this is some data to compare and pass" ? nok : ok;
+            container._inspectedValue.Synchron =
+                container._inspectedValue.Synchron == "this is some data to compare and pass"
+                    ? nok
+                    : ok;
 
             return container._inspectedValue.Synchron;
         }
-
     }
 }

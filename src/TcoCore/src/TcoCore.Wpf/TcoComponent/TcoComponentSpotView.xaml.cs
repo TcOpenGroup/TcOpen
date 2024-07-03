@@ -23,6 +23,6 @@ namespace TcoCore
         public TcoComponentSpotView()
         {
             InitializeComponent();
-        }      
+        }
     }
 }

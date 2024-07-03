@@ -9,9 +9,13 @@ namespace TcoDrivesBeckhoffUnitTests
     {
         public MockRootObject()
         {
-            _adapter = new ConnectorAdapter(typeof(DummyConnectorFactory));            
+            _adapter = new ConnectorAdapter(typeof(DummyConnectorFactory));
             _connector = _adapter.GetConnector(null);
-            _connector.GetConnector().SuspendWriteProtection("Hoj morho vetvo mojho rodu, kto kramou rukou siahne na tvoju slobodu a co i dusu das v tom boji divokom vol nebyt ako byt otrokom!");
+            _connector
+                .GetConnector()
+                .SuspendWriteProtection(
+                    "Hoj morho vetvo mojho rodu, kto kramou rukou siahne na tvoju slobodu a co i dusu das v tom boji divokom vol nebyt ako byt otrokom!"
+                );
         }
 
         public string Symbol => string.Empty;
@@ -48,8 +52,9 @@ namespace TcoDrivesBeckhoffUnitTests
 
         private ConnectorAdapter _adapter;
         private IConnector _connector;
+
         public IConnector GetConnector()
-        {            
+        {
             return _connector;
         }
 
@@ -57,7 +62,7 @@ namespace TcoDrivesBeckhoffUnitTests
         {
             return _kids;
         }
-        
+
         public IVortexObject GetParent()
         {
             return GetConnector();

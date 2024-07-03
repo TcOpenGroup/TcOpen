@@ -1,9 +1,9 @@
-﻿using PlcAppExamples;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
+using PlcAppExamples;
 
 namespace TcoApplicationExamples.Wpf
 {
@@ -12,17 +12,23 @@ namespace TcoApplicationExamples.Wpf
     /// </summary>
     public partial class App : Application
     {
-        public App() : base()
+        public App()
+            : base()
         {
-            TcOpen.Inxton.TcoAppDomain.Current.Builder
-                .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter())
+            TcOpen
+                .Inxton.TcoAppDomain.Current.Builder.SetUpLogger(
+                    new TcOpen.Inxton.Logging.SerilogAdapter()
+                )
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
 
             PlcAppExamples.Connector.ReadWriteCycleDelay = 100;
             PlcAppExamples.Connector.BuildAndStart();
         }
 
-        public static PlcAppExamplesTwinController PlcAppExamples { get { return Entry.PlcAppExamples; } }
+        public static PlcAppExamplesTwinController PlcAppExamples
+        {
+            get { return Entry.PlcAppExamples; }
+        }
     }
 
     public static class HyperlinkExtensions
@@ -36,10 +42,19 @@ namespace TcoApplicationExamples.Wpf
         {
             obj.SetValue(IsExternalProperty, value);
         }
-        public static readonly DependencyProperty IsExternalProperty =
-            DependencyProperty.RegisterAttached("IsExternal", typeof(bool), typeof(HyperlinkExtensions), new UIPropertyMetadata(false, OnIsExternalChanged));
 
-        private static void OnIsExternalChanged(object sender, DependencyPropertyChangedEventArgs args)
+        public static readonly DependencyProperty IsExternalProperty =
+            DependencyProperty.RegisterAttached(
+                "IsExternal",
+                typeof(bool),
+                typeof(HyperlinkExtensions),
+                new UIPropertyMetadata(false, OnIsExternalChanged)
+            );
+
+        private static void OnIsExternalChanged(
+            object sender,
+            DependencyPropertyChangedEventArgs args
+        )
         {
             var hyperlink = sender as Hyperlink;
 
@@ -49,7 +64,10 @@ namespace TcoApplicationExamples.Wpf
                 hyperlink.RequestNavigate -= Hyperlink_RequestNavigate;
         }
 
-        private static void Hyperlink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
+        private static void Hyperlink_RequestNavigate(
+            object sender,
+            System.Windows.Navigation.RequestNavigateEventArgs e
+        )
         {
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
             e.Handled = true;

@@ -1,28 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoUrRobotics_O2TIo" Id="{45bf1e90-711e-0f92-0a72-ac03a5b52739}">
-    <Declaration><![CDATA[TYPE TcoUrRobotics_O2TIo :
-STRUCT
-	{attribute addProperty Name "<#Standard digital output mask#>"}
-	StandardDigitalOutputMask : USINT;
-	{attribute addProperty Name "<#Configurable digital output mask#>"}
-	ConfigurableDigitalOutputMask : USINT;
-	{attribute addProperty Name "<#Standard digital outputs#>"}
-	StandardDigitalOutputs : USINT;
-	{attribute addProperty Name "<#Configurable digital outputs#>"}
-	ConfigurableDdigitalOutputs : USINT;
-	{attribute addProperty Name "<#AOM: Analog output mask#>"}
-	AOM_AnalogOutputMask : USINT;
-	{attribute addProperty Name "<#AOT: Analog output types#>"}
-	AOT_AnalogOutputTypes : USINT;
-	{attribute addProperty Name "<#TDOM: Tool digital output mask#>"}
-	TDOM_ToolDigitalOutputMask : USINT;
-	{attribute addProperty Name "<#TDO: Tool digital output#>"}
-	TDO_ToolDigitalOutput : USINT;
-	{attribute addProperty Name "<#Standard analog output#>"}
-	StandardAnalogOutput : ARRAY[0..1] OF REAL;
+    <Declaration><![CDATA[TYPE TcoUrRobotics_O2TIo : STRUCT
+    {attribute addProperty Name "<#Standard digital output mask#>"}
+    StandardDigitalOutputMask : USINT;
+    {attribute addProperty Name "<#Configurable digital output mask#>"}
+    ConfigurableDigitalOutputMask : USINT;
+    {attribute addProperty Name "<#Standard digital outputs#>"}
+    StandardDigitalOutputs : USINT;
+    {attribute addProperty Name "<#Configurable digital outputs#>"}
+    ConfigurableDdigitalOutputs : USINT;
+    {attribute addProperty Name "<#AOM: Analog output mask#>"}
+    AOM_AnalogOutputMask : USINT;
+    {attribute addProperty Name "<#AOT: Analog output types#>"}
+    AOT_AnalogOutputTypes : USINT;
+    {attribute addProperty Name "<#TDOM: Tool digital output mask#>"}
+    TDOM_ToolDigitalOutputMask : USINT;
+    {attribute addProperty Name "<#TDO: Tool digital output#>"}
+    TDO_ToolDigitalOutput : USINT;
+    {attribute addProperty Name "<#Standard analog output#>"}
+    StandardAnalogOutput : ARRAY[0..1] OF REAL;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

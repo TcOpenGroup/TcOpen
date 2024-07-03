@@ -4,21 +4,19 @@
     <Declaration><![CDATA[FUNCTION_BLOCK ExamplesImplementationWithDone EXTENDS TcoCore.TcoObject
 VAR
     _inspectorsSignal : BOOL;
-    _inspector        : TcoInspectors.TcoDigitalInspector(THIS^);
-    _inspectorTask    : TcoCore.TcoTask(THIS^);
-END_VAR
-]]></Declaration>
+    _inspector : TcoInspectors.TcoDigitalInspector(THIS^);
+    _inspectorTask : TcoCore.TcoTask(THIS^);
+END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF(_inspectorTask.Execute()) THEN	
-	IF(_inspector.Inspect(_inspectorsSignal).Done) THEN
-		IF(_inspector.Result = TcoInspectors.eInspectorResult.Failed) THEN
-			_inspector.Messenger.Build().Append('I failed').As().AsInfo().Pin();
-		ELSIF(_inspector.Result = TcoInspectors.eInspectorResult.Passed) THEN
-			_inspector.Messenger.Build().Append('I passed').As().AsInfo().Pin();
-		END_IF
-	END_IF;		
-END_IF;
-]]></ST>
+      <ST><![CDATA[IF (_inspectorTask.Execute()) THEN
+    IF (_inspector.Inspect(_inspectorsSignal).Done) THEN
+        IF (_inspector.Result = TcoInspectors.eInspectorResult.Failed) THEN
+            _inspector.Messenger.Build().Append('I failed').As().AsInfo().Pin();
+        ELSIF (_inspector.Result = TcoInspectors.eInspectorResult.Passed) THEN
+            _inspector.Messenger.Build().Append('I passed').As().AsInfo().Pin();
+        END_IF
+    END_IF;
+END_IF;]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

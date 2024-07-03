@@ -1,25 +1,26 @@
 ﻿<Window
-    x:Class="TcoCore.Sandbox.Wpf.MainWindow"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"   
-    xmlns:local="clr-namespace:TcoCore.Sandbox.Wpf"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"    
-    xmlns:vortex="http://vortex.mts/xaml"
-    Title="MainWindow"
-    Width="800"
-    Height="850"
-    DataContext="{x:Static local:App.PlcTcoCoreExamples}"
-    mc:Ignorable="d">
+  x:Class="TcoCore.Sandbox.Wpf.MainWindow"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:TcoCore.Sandbox.Wpf"
+  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:vortex="http://vortex.mts/xaml"
+  Title="MainWindow"
+  Width="800"
+  Height="850"
+  DataContext="{x:Static local:App.PlcTcoCoreExamples}"
+  mc:Ignorable="d"
+>
     <Grid>
         <TabControl>
             <TabItem Header="Sequencer">
                 <ScrollViewer>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="163*"/>
-                        <ColumnDefinition Width="623*"/>
+                        <ColumnDefinition Width="163*" />
+                        <ColumnDefinition Width="623*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -32,73 +33,103 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <materialDesign:Card
-                        Grid.Row="0"
-                        Margin="5,5,4.666,5"
-                        Padding="3"
-                        materialDesign:ShadowAssist.ShadowDepth="Depth1" Grid.ColumnSpan="2">
+              Grid.Row="0"
+              Margin="5,5,4.666,5"
+              Padding="3"
+              materialDesign:ShadowAssist.ShadowDepth="Depth1"
+              Grid.ColumnSpan="2"
+            >
                         <GroupBox Header="Current step info">
                             <Grid Grid.IsSharedSizeScope="true">
-                                <vortex:RenderableContentControl DataContext="{Binding MAIN._station001._sequence._currentStep}" PresentationType="DisplaySlim" />
+                                <vortex:RenderableContentControl
+                    DataContext="{Binding MAIN._station001._sequence._currentStep}"
+                    PresentationType="DisplaySlim"
+                  />
                             </Grid>
                         </GroupBox>
                     </materialDesign:Card>
                     <materialDesign:Card
-                        Grid.Row="1"
-                        Margin="5"
-                        Padding="3"
-                        materialDesign:ShadowAssist.ShadowDepth="Depth1" Grid.ColumnSpan="2">
+              Grid.Row="1"
+              Margin="5"
+              Padding="3"
+              materialDesign:ShadowAssist.ShadowDepth="Depth1"
+              Grid.ColumnSpan="2"
+            >
                         <GroupBox Header="Sequencer step-by step controller">
                             <WrapPanel Margin="10" HorizontalAlignment="Center">
                                 <StackPanel>
                                     <CheckBox
-                                        Margin="3"
-                                        Content="Changing mode disabled"
-                                        IsChecked="{Binding MAIN._station001._sequence._modeController._DisableModeChanging.Cyclic}" />
+                      Margin="3"
+                      Content="Changing mode disabled"
+                      IsChecked="{Binding MAIN._station001._sequence._modeController._DisableModeChanging.Cyclic}"
+                    />
                                     <CheckBox
-                                        Margin="3"
-                                        Content="Step skipping disabled"
-                                        IsChecked="{Binding MAIN._station001._sequence._modeController._DisableStepSkipping.Cyclic}" />
+                      Margin="3"
+                      Content="Step skipping disabled"
+                      IsChecked="{Binding MAIN._station001._sequence._modeController._DisableStepSkipping.Cyclic}"
+                    />
                                 </StackPanel>
 
                                 <Button
-                                    Margin="3"
-                                    Command="{Binding MAIN._station001._sequence._modeController._changeMode}"
-                                    Content="Change mode" />
-                                <WrapPanel Margin="10" HorizontalAlignment="Center">
+                    Margin="3"
+                    Command="{Binding MAIN._station001._sequence._modeController._changeMode}"
+                    Content="Change mode"
+                  />
+                                <WrapPanel
+                    Margin="10"
+                    HorizontalAlignment="Center"
+                  >
                                     <TextBlock Text="Mode " />
-                                    <TextBox Text="{Binding MAIN._station001._sequence._modeController._mode.Cyclic}" />
+                                    <TextBox
+                      Text="{Binding MAIN._station001._sequence._modeController._mode.Cyclic}"
+                    />
                                 </WrapPanel>
                                 <Button
-                                    Margin="3"
-                                    Command="{Binding MAIN._station001._sequence._modeController._stepBackward}"
-                                    Content="Step --" />
+                    Margin="3"
+                    Command="{Binding MAIN._station001._sequence._modeController._stepBackward}"
+                    Content="Step --"
+                  />
                                 <Button
-                                    Margin="3"
-                                    Command="{Binding MAIN._station001._sequence._modeController._stepIn}"
-                                    Content="Step In" />
+                    Margin="3"
+                    Command="{Binding MAIN._station001._sequence._modeController._stepIn}"
+                    Content="Step In"
+                  />
                                 <Button
-                                    Margin="3"
-                                    Command="{Binding MAIN._station001._sequence._modeController._stepForward}"
-                                    Content="Step ++" />
+                    Margin="3"
+                    Command="{Binding MAIN._station001._sequence._modeController._stepForward}"
+                    Content="Step ++"
+                  />
                             </WrapPanel>
                         </GroupBox>
                     </materialDesign:Card>
                     <materialDesign:Card
-                        Grid.Row="2"
-                        Margin="5"
-                        Padding="3"
-                        materialDesign:ShadowAssist.ShadowDepth="Depth1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+              Grid.Row="2"
+              Margin="5"
+              Padding="3"
+              materialDesign:ShadowAssist.ShadowDepth="Depth1"
+              Grid.ColumnSpan="2"
+              Grid.RowSpan="2"
+            >
                         <GroupBox Header="Sequencer counters">
                             <WrapPanel Margin="10" HorizontalAlignment="Center">
-                                <StackPanel Margin="5,0,0,0" DataContext="{Binding MAIN._station001._sequence._onStateChangeCount}">
+                                <StackPanel
+                    Margin="5,0,0,0"
+                    DataContext="{Binding MAIN._station001._sequence._onStateChangeCount}"
+                  >
                                     <TextBlock Text="{Binding AttributeName}" />
                                     <TextBlock Text="{Binding Cyclic}" />
                                 </StackPanel>
-                                <StackPanel Margin="5,0,0,0" DataContext="{Binding MAIN._station001._sequence._sequenceCompleteCount}">
+                                <StackPanel
+                    Margin="5,0,0,0"
+                    DataContext="{Binding MAIN._station001._sequence._sequenceCompleteCount}"
+                  >
                                     <TextBlock Text="{Binding AttributeName}" />
                                     <TextBlock Text="{Binding Cyclic}" />
                                 </StackPanel>
-                                <StackPanel Margin="5,0,0,0" DataContext="{Binding MAIN._station001._sequence._stepsPerSequence}">
+                                <StackPanel
+                    Margin="5,0,0,0"
+                    DataContext="{Binding MAIN._station001._sequence._stepsPerSequence}"
+                  >
                                     <TextBlock Text="{Binding AttributeName}" />
                                     <TextBlock Text="{Binding Cyclic}" />
                                 </StackPanel>
@@ -106,42 +137,64 @@
                         </GroupBox>
                     </materialDesign:Card>
                     <materialDesign:Card
-                        Grid.Row="3"
-              
-                        Padding="2"
-                        materialDesign:ShadowAssist.ShadowDepth="Depth1" Grid.ColumnSpan="2">
-                        <GroupBox  Header="Simulation delay">
+              Grid.Row="3"
+              Padding="2"
+              materialDesign:ShadowAssist.ShadowDepth="Depth1"
+              Grid.ColumnSpan="2"
+            >
+                        <GroupBox Header="Simulation delay">
                             <Slider
-                                Maximum="5000"
-                                Minimum="50"
-                                Style="{StaticResource MaterialDesignDiscreteSlider}"
-                                TickFrequency="50"
-                                TickPlacement="TopLeft"
-                                Value="{Binding MAIN._station001._components._simTimerValue.Cyclic}" />
+                  Maximum="5000"
+                  Minimum="50"
+                  Style="{StaticResource MaterialDesignDiscreteSlider}"
+                  TickFrequency="50"
+                  TickPlacement="TopLeft"
+                  Value="{Binding MAIN._station001._components._simTimerValue.Cyclic}"
+                />
                         </GroupBox>
                     </materialDesign:Card>
 
                     <CheckBox
-                        Grid.Row="4"
-                        Content="Simulate failed to load"
-                        IsChecked="{Binding MAIN._station001._sequence._failedToLoad.Cyclic}" Grid.ColumnSpan="2" Margin="0,89.333,-0.334,50" />
-                    <materialDesign:Card Grid.Row="5" Grid.ColumnSpan="2" Margin="5">
+              Grid.Row="4"
+              Content="Simulate failed to load"
+              IsChecked="{Binding MAIN._station001._sequence._failedToLoad.Cyclic}"
+              Grid.ColumnSpan="2"
+              Margin="0,89.333,-0.334,50"
+            />
+                    <materialDesign:Card
+              Grid.Row="5"
+              Grid.ColumnSpan="2"
+              Margin="5"
+            >
                         <StackPanel>
-                         
+
                                 <StackPanel
-                                    Margin="10"
-                                    Orientation="Vertical"
-                                    TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
-                                    <vortex:RenderableContentControl DataContext="{Binding MAIN }" PresentationType="Diagnostics"/>
+                  Margin="10"
+                  Orientation="Vertical"
+                  TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+                >
+                                    <vortex:RenderableContentControl
+                    DataContext="{Binding MAIN }"
+                    PresentationType="Diagnostics"
+                  />
                                     <!--<vortex:TcoDiagnosticsView x:Name="DiagnosticsView" />-->
-                                    <TextBlock Style="{DynamicResource HorizontalExpanderContentTextBlock}" />
+                                    <TextBlock
+                    Style="{DynamicResource HorizontalExpanderContentTextBlock}"
+                  />
                                 </StackPanel>
-                      
+
                         </StackPanel>
                     </materialDesign:Card>
-            
-                        <materialDesign:Card Grid.Row="6" Grid.ColumnSpan="2" Grid.RowSpan="5">
-                        <vortex:RenderableContentControl DataContext="{Binding MAIN._station001._components, Mode=OneWay}" PresentationType="Service" />
+
+                        <materialDesign:Card
+              Grid.Row="6"
+              Grid.ColumnSpan="2"
+              Grid.RowSpan="5"
+            >
+                        <vortex:RenderableContentControl
+                DataContext="{Binding MAIN._station001._components, Mode=OneWay}"
+                PresentationType="Service"
+              />
                     </materialDesign:Card>
                     <!--<materialDesign:Card Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="5">
                         <vortex:RenderableContentControl DataContext="{Binding MAIN._station001._components, Mode=OneWay}" PresentationType="Spot" />
@@ -153,43 +206,72 @@
             <TabItem Header="Components">
                 <ScrollViewer>
                     <TabControl>
-                   
+
                         <TabItem Header="Service ">
-                            <vortex:RenderableContentControl DataContext="{Binding MAIN._station001._components}" PresentationType="Service" />
+                            <vortex:RenderableContentControl
+                DataContext="{Binding MAIN._station001._components}"
+                PresentationType="Service"
+              />
                         </TabItem>
                         <TabItem Header="Base-Service ">
-                            <vortex:RenderableContentControl DataContext="{Binding MAIN._station001._components}" PresentationType="Base-Service" />
+                            <vortex:RenderableContentControl
+                DataContext="{Binding MAIN._station001._components}"
+                PresentationType="Base-Service"
+              />
                         </TabItem>
                         <TabItem Header="Spot">
-                            <vortex:RenderableContentControl DataContext="{Binding MAIN._station001._components}" PresentationType="Spot" />
+                            <vortex:RenderableContentControl
+                DataContext="{Binding MAIN._station001._components}"
+                PresentationType="Spot"
+              />
                         </TabItem>
                         <TabItem Header="TreeService ">
-                            <vortex:RenderableContentControl DataContext="{Binding MAIN._station001._components}" PresentationType="TreeService" />
+                            <vortex:RenderableContentControl
+                DataContext="{Binding MAIN._station001._components}"
+                PresentationType="TreeService"
+              />
                         </TabItem>
                         <TabItem Header="Cascade Tree->Service">
-                            <vortex:RenderableContentControl DataContext="{Binding MAIN._station001._components}" PresentationType="TreeService-Service" />
+                            <vortex:RenderableContentControl
+                DataContext="{Binding MAIN._station001._components}"
+                PresentationType="TreeService-Service"
+              />
                         </TabItem>
                         <TabItem Header="Base">
-                            <vortex:RenderableContentControl DataContext="{Binding MAIN._station001._components}" PresentationType="Base" />
+                            <vortex:RenderableContentControl
+                DataContext="{Binding MAIN._station001._components}"
+                PresentationType="Base"
+              />
                         </TabItem>
                     </TabControl>
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="ST002">
                 <StackPanel>
-                    <vortex:RenderableContentControl DataContext="{Binding MAIN._station002._s}" PresentationType="Base"></vortex:RenderableContentControl>
-                    <vortex:RenderableContentControl DataContext="{Binding MAIN._station002._sObserver}" PresentationType="Base"></vortex:RenderableContentControl>
+                    <vortex:RenderableContentControl
+            DataContext="{Binding MAIN._station002._s}"
+            PresentationType="Base"
+          />
+                    <vortex:RenderableContentControl
+            DataContext="{Binding MAIN._station002._sObserver}"
+            PresentationType="Base"
+          />
                 </StackPanel>
             </TabItem>
             <TabItem Header="Sequence recorder">
-                <vortex:SwiftRecorderView x:Name="swiftRecorder"></vortex:SwiftRecorderView>
+                <vortex:SwiftRecorderView x:Name="swiftRecorder" />
             </TabItem>
             <TabItem Header="Object tree viewer">
                 <ScrollViewer MaxHeight="500">
                     <UniformGrid>
-                        <vortex:DynamicTreeView x:Name="DynamicTree" DataContext="{Binding MAIN, Mode=OneWay}" />
+                        <vortex:DynamicTreeView
+              x:Name="DynamicTree"
+              DataContext="{Binding MAIN, Mode=OneWay}"
+            />
 
-                        <vortex:ObservableContentControl DataContext="{Binding ElementName=DynamicTree, Path=SelectedItem}"  />
+                        <vortex:ObservableContentControl
+              DataContext="{Binding ElementName=DynamicTree, Path=SelectedItem}"
+            />
                     </UniformGrid>
                 </ScrollViewer>
             </TabItem>
@@ -198,13 +280,28 @@
             </TabItem>-->
             <TabItem Header="Dialogs">
                 <StackPanel>
-                    <vortex:RenderableContentControl DataContext="{Binding EXAMPLES_PRG._diaglogsContext._state}" PresentationType="ControlSlim"/>
-                    <vortex:RenderableContentControl DataContext="{Binding EXAMPLES_PRG._diaglogsContext._invokeDiaglog1}" PresentationType="ControlSlim"/>
+                    <vortex:RenderableContentControl
+            DataContext="{Binding EXAMPLES_PRG._diaglogsContext._state}"
+            PresentationType="ControlSlim"
+          />
+                    <vortex:RenderableContentControl
+            DataContext="{Binding EXAMPLES_PRG._diaglogsContext._invokeDiaglog1}"
+            PresentationType="ControlSlim"
+          />
 
-                    <vortex:RenderableContentControl DataContext="{Binding EXAMPLES_PRG._diaglogsContext._invokeCustomizedDiaglog}" PresentationType="ControlSlim"/>
-                    <vortex:RenderableContentControl DataContext="{Binding EXAMPLES_PRG._diaglogsContext._invokeInputDiaglog}" PresentationType="ControlSlim"/>
+                    <vortex:RenderableContentControl
+            DataContext="{Binding EXAMPLES_PRG._diaglogsContext._invokeCustomizedDiaglog}"
+            PresentationType="ControlSlim"
+          />
+                    <vortex:RenderableContentControl
+            DataContext="{Binding EXAMPLES_PRG._diaglogsContext._invokeInputDiaglog}"
+            PresentationType="ControlSlim"
+          />
 
-                    <vortex:RenderableContentControl DataContext="{Binding EXAMPLES_PRG._diaglogsContext._invokeDiaglogsConsequential }" PresentationType="ControlSlim"/>
+                    <vortex:RenderableContentControl
+            DataContext="{Binding EXAMPLES_PRG._diaglogsContext._invokeDiaglogsConsequential }"
+            PresentationType="ControlSlim"
+          />
                 </StackPanel>
             </TabItem>
         </TabControl>

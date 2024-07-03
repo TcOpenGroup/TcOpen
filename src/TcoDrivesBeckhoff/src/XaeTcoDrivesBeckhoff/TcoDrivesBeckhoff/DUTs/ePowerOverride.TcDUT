@@ -3,12 +3,10 @@
   <DUT Name="ePowerOverride" Id="{2079d13c-119f-0423-12e4-1fd7a51f6243}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE ePowerOverride :
-(
-	Global_control := 0,
-	Local_control	:= 1
+TYPE ePowerOverride : (
+    Global_control := 0,
+    Local_control := 1
 );
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

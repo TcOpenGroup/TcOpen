@@ -5,8 +5,7 @@
         public class AnonymousIdentity : AppIdentity
         {
             public AnonymousIdentity()
-                : base(string.Empty, string.Empty, new string[] { }, false, string.Empty)
-            { }
+                : base(string.Empty, string.Empty, new string[] { }, false, string.Empty) { }
         }
     }
 }

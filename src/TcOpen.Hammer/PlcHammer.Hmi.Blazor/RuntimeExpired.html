@@ -1,126 +1,144 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>Runtime expired</title>
     <style>
-        html {
-            font-family: sans-serif;
-            background-color: #f1f1f1;
-        }
+      html {
+        font-family: sans-serif;
+        background-color: #f1f1f1;
+      }
 
-        body {
-            display: flex;
-            justify-content: center;
-        }
+      body {
+        display: flex;
+        justify-content: center;
+      }
 
-        .icon-svg {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+      .icon-svg {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-        svg {
-            fill: currentColor;
-            display: inline-block;
-            vertical-align: top;
-            fill: #c4d93f
-        }
+      svg {
+        fill: currentColor;
+        display: inline-block;
+        vertical-align: top;
+        fill: #c4d93f;
+      }
 
-        h1 {
-            color: #0a319e
-        }
+      h1 {
+        color: #0a319e;
+      }
 
-        a {
-            color: #c4d93f;
-            text-decoration: none;
-        }
+      a {
+        color: #c4d93f;
+        text-decoration: none;
+      }
 
-        .card {
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            transition: 0.3s;
-            padding: 16px 16px;
-        }
+      .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        padding: 16px 16px;
+      }
 
-            .card:hover {
-                box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-            }
+      .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      }
 
-        .code {
-            background-color: #666666;
-            color: #fff;
-            font-family: monospace;
-            display: inline;
-            padding: 10px;
-        }
+      .code {
+        background-color: #666666;
+        color: #fff;
+        font-family: monospace;
+        display: inline;
+        padding: 10px;
+      }
 
-        .btn {
-            background-color: #ff4b27;
-            border: none;
-            text-align: center;
-            text-decoration: none;
-            cursor: pointer;
-        }
+      .btn {
+        background-color: #ff4b27;
+        border: none;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+      }
 
-        .btn:hover {
-            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-        }
+      .btn:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      }
 
-        .prevent-select {
-            -moz-user-select: none;
-            -webkit-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-        .enable-select {
-            -moz-user-select: text;
-            -webkit-user-select: text;
-            -ms-user-select: text;
-            user-select: text;
-        }
+      .prevent-select {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      .enable-select {
+        -moz-user-select: text;
+        -webkit-user-select: text;
+        -ms-user-select: text;
+        user-select: text;
+      }
     </style>
+  </head>
 
-</head>
-
-<body>
+  <body>
     <div class="card centered">
-        <span class="icon-svg">
-            <svg width="132px" height="26px" viewBox="0 0 132 26">
-                <path d="M10.8.1L27.3 14V.5h5.9v25.6h-.7L16 11.7v13.9h-5.9v-10L12 13l-1.8-2.5V.1h.6zM50.5 13l8.7 12.9h-6.8l-5.3-8.2 3.4-4.7zM91.7.2c7.5 0 13.5 5.3 13.5 12.9s-6.1 12.8-13.5 12.8c-5.1 0-9.5-2.6-11.8-6.7l4.3-6.2-4.3-6.3c2.3-4 6.7-6.5 11.8-6.5zm17.2-.1L125.4 14V.5h5.9v25.6h-.7l-16.4-14.3v13.9h-5.9v-8.2l3.1-4.4-3.1-4.5V.1h.6zm-31 .6v3.1l-.1-.1V6h-6.2v19.5h-5.9V6h-6.3V.7h18.5zM5.5.1v25H0V.1h5.5zm37.2 0l1.7 2.7v18.9L42.2 25h-6.1l8.3-12.5-8-12.4h6.3zm49 5.6c-4.1 0-7.4 2.9-7.4 7.4s3.3 7.4 7.4 7.4c4 0 7.4-2.9 7.4-7.4-.1-4.4-3.4-7.4-7.4-7.4zM58.3.1l-8 12-3.1-4.6L52 0h6.3v.1z">
-                </path>
-            </svg>
-        </span>
-        <h1>You're using developer licence</h1>
-        <p>You can continue using developer licence to develop and test until you deploy to production environment.</p>
-        <p>Your app under development license will periodically close. To prevent it from closing</p>
-        <h2>Go to <a href="https://inxton.com/licences">inxton.com/licences</a> to purchase a licence</h2>
-        <h2 class="prevent-select">Your HW ID is <p id="hwid" class="code enable-select">T84JG-4SD2A-8I6TG-8HBIJ-W5R48</p> <a id="copybtn" onclick="copy()" class="code btn prevent-select">COPY</a></h2>
+      <span class="icon-svg">
+        <svg width="132px" height="26px" viewBox="0 0 132 26">
+          <path
+            d="M10.8.1L27.3 14V.5h5.9v25.6h-.7L16 11.7v13.9h-5.9v-10L12 13l-1.8-2.5V.1h.6zM50.5 13l8.7 12.9h-6.8l-5.3-8.2 3.4-4.7zM91.7.2c7.5 0 13.5 5.3 13.5 12.9s-6.1 12.8-13.5 12.8c-5.1 0-9.5-2.6-11.8-6.7l4.3-6.2-4.3-6.3c2.3-4 6.7-6.5 11.8-6.5zm17.2-.1L125.4 14V.5h5.9v25.6h-.7l-16.4-14.3v13.9h-5.9v-8.2l3.1-4.4-3.1-4.5V.1h.6zm-31 .6v3.1l-.1-.1V6h-6.2v19.5h-5.9V6h-6.3V.7h18.5zM5.5.1v25H0V.1h5.5zm37.2 0l1.7 2.7v18.9L42.2 25h-6.1l8.3-12.5-8-12.4h6.3zm49 5.6c-4.1 0-7.4 2.9-7.4 7.4s3.3 7.4 7.4 7.4c4 0 7.4-2.9 7.4-7.4-.1-4.4-3.4-7.4-7.4-7.4zM58.3.1l-8 12-3.1-4.6L52 0h6.3v.1z"
+          ></path>
+        </svg>
+      </span>
+      <h1>You're using developer licence</h1>
+      <p>
+        You can continue using developer licence to develop and test until you
+        deploy to production environment.
+      </p>
+      <p>
+        Your app under development license will periodically close. To prevent
+        it from closing
+      </p>
+      <h2>
+        Go to <a href="https://inxton.com/licences">inxton.com/licences</a> to
+        purchase a licence
+      </h2>
+      <h2 class="prevent-select">
+        Your HW ID is
+        <p id="hwid" class="code enable-select">
+          T84JG-4SD2A-8I6TG-8HBIJ-W5R48
+        </p>
+        <a id="copybtn" onclick="copy()" class="code btn prevent-select"
+          >COPY</a
+        >
+      </h2>
     </div>
 
     <script>
-        function copy() {
-            var element = document.getElementById('hwid');
-            if (document.body.createTextRange) { // ie
-                var range = document.body.createTextRange();
-                range.moveToElementText(element);
-                range.select();
-                document.execCommand("Copy");
-                setInterval(function () { selection.removeAllRanges(); }, 1000);
-
-            } else if (window.getSelection) { // moz, opera, webkit
-                var selection = window.getSelection();
-                var range = document.createRange();
-                range.selectNodeContents(element);
-                selection.removeAllRanges();
-                selection.addRange(range);
-                document.execCommand("Copy");
-                setInterval(function () { selection.removeAllRanges(); }, 1000);
-
-            }
-            document.getElementById("copybtn").innerText = 'COPIED';
+      function copy() {
+        var element = document.getElementById("hwid");
+        if (document.body.createTextRange) {
+          // ie
+          var range = document.body.createTextRange();
+          range.moveToElementText(element);
+          range.select();
+          document.execCommand("Copy");
+          setInterval(function () {
+            selection.removeAllRanges();
+          }, 1000);
+        } else if (window.getSelection) {
+          // moz, opera, webkit
+          var selection = window.getSelection();
+          var range = document.createRange();
+          range.selectNodeContents(element);
+          selection.removeAllRanges();
+          selection.addRange(range);
+          document.execCommand("Copy");
+          setInterval(function () {
+            selection.removeAllRanges();
+          }, 1000);
         }
-
+        document.getElementById("copybtn").innerText = "COPIED";
+      }
     </script>
-</body>
-
+  </body>
 </html>

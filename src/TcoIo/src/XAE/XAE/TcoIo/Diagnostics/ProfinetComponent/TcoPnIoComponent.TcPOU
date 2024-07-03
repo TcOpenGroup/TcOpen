@@ -3,13 +3,13 @@
   <POU Name="TcoPnIoComponent" Id="{e730e25c-8334-0f49-19fd-f3042165d353}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT TcoPnIoComponent EXTENDS TcoCore.TcoComponent
 VAR_INPUT
-	inPnIoBoxState : UINT;
-	inPnIoBoxDiag : UINT;
+    inPnIoBoxState : UINT;
+    inPnIoBoxDiag : UINT;
 END_VAR
 VAR
-	 //*{attribute addProperty Name "<#PN ready#>"}
-     //*{attribute clr [ReadOnly()]}
-	_profinetReady : BOOL;
+    //*{attribute addProperty Name "<#PN ready#>"}
+    //*{attribute clr [ReadOnly()]}
+    _profinetReady : BOOL;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[//PnIoBoxState
@@ -31,25 +31,23 @@ END_VAR]]></Declaration>
 //15 = At least one InputCR is invalid, provider in stop or problemindicator is set
 //16 = At least one OutputCR is invalid, provider in stop or problemindicator is set
 //31 = Only for EtherCAT gateways: WC-State of cyclic EtherCAT frame is 1
-
-THIS^.Messenger.OnCondition(inPnIoBoxState=1 ).Error('<#Profinet device state machine is in boot mode!#>'); 
-THIS^.Messenger.OnCondition(inPnIoBoxState=2 ).Error('<#Device NOT found!#>'); 
-THIS^.Messenger.OnCondition(inPnIoBoxState=3 ).Error('<#The stationname is not unique!#>'); 
-THIS^.Messenger.OnCondition(inPnIoBoxState=4 ).Error('<#IP could NOT be set!#>'); 
-THIS^.Messenger.OnCondition(inPnIoBoxState=5 ).Error('<#IP conflict!#>'); 
-THIS^.Messenger.OnCondition(inPnIoBoxState=6 ).Error('<#DCP set was NOT successful!#>'); 
-THIS^.Messenger.OnCondition(inPnIoBoxState=7 ).Error('<#Watchdog error!#>'); 
-THIS^.Messenger.OnCondition(inPnIoBoxState=8 ).Error('<#Datahold error!#>'); 
-THIS^.Messenger.OnCondition(inPnIoBoxState=9 ).Error('<#RTC3: Sync mode could not be initiated!#>'); 
-THIS^.Messenger.OnCondition(inPnIoBoxState=10).Error('<#Profinet controller has a link error!#>'); 
-THIS^.Messenger.OnCondition(inPnIoBoxState=11).Error('<#The aliasname is not unique!#>'); 
-THIS^.Messenger.OnCondition(inPnIoBoxState=12).Error('<#The automatic name assignement is not possible - wrong device TYPE!#>'); 
-THIS^.Messenger.OnCondition(inPnIoBoxState=13).Error('<#IOC-AR is established but no application ready!#>'); 
-THIS^.Messenger.OnCondition(inPnIoBoxState=14).Error('<#IOC-AR is established but module difference!#>'); 
-THIS^.Messenger.OnCondition(inPnIoBoxState=15).Error('<#AT least one InputCR is invalid, provider in stop OR problemindicator is set!#>'); 
-THIS^.Messenger.OnCondition(inPnIoBoxState=16).Error('<#At least one OutputCR is invalid, provider in stop or problemindicator is set!#>'); 
-THIS^.Messenger.OnCondition(inPnIoBoxState=31).Error('<#EtherCAT gateway: WC-State OF cyclic EtherCAT frame is 1!#>'); 
-
+THIS^.Messenger.OnCondition(inPnIoBoxState = 1).Error('<#Profinet device state machine is in boot mode!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxState = 2).Error('<#Device NOT found!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxState = 3).Error('<#The stationname is not unique!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxState = 4).Error('<#IP could NOT be set!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxState = 5).Error('<#IP conflict!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxState = 6).Error('<#DCP set was NOT successful!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxState = 7).Error('<#Watchdog error!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxState = 8).Error('<#Datahold error!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxState = 9).Error('<#RTC3: Sync mode could not be initiated!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxState = 10).Error('<#Profinet controller has a link error!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxState = 11).Error('<#The aliasname is not unique!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxState = 12).Error('<#The automatic name assignement is not possible - wrong device TYPE!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxState = 13).Error('<#IOC-AR is established but no application ready!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxState = 14).Error('<#IOC-AR is established but module difference!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxState = 15).Error('<#AT least one InputCR is invalid, provider in stop OR problemindicator is set!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxState = 16).Error('<#At least one OutputCR is invalid, provider in stop or problemindicator is set!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxState = 31).Error('<#EtherCAT gateway: WC-State OF cyclic EtherCAT frame is 1!#>');
 //PnIoBoxDiag
 //0x0000 = No diagnosis
 //0x0001 = IOC-AR is not established
@@ -63,22 +61,18 @@ THIS^.Messenger.OnCondition(inPnIoBoxState=31).Error('<#EtherCAT gateway: WC-Sta
 //0x1000 = At least one OutputCR is invalid
 //0x2000 = At least one OutputCR Provider is in stop
 //0x4000 = At least one OutputCR Problemindicator is set
-
-THIS^.Messenger.OnCondition(inPnIoBoxDiag.0 ).Error('<#IOC-AR is not established!#>'); 
-THIS^.Messenger.OnCondition(NOT _profinetReady AND inPnIoBoxDiag.1 ).Info('<#IOC-AR is established!#>');
-THIS^.Messenger.OnCondition(inPnIoBoxDiag.2 ).Error('<#IOC-AR is established but no application ready!#>');
-THIS^.Messenger.OnCondition(inPnIoBoxDiag.3 ).Error('<#IOC-AR is established but module difference!#>');
-THIS^.Messenger.OnCondition(inPnIoBoxDiag.4 ).Error('<#AT least one AlarmCR got a diagnosis alarm!#>');
-THIS^.Messenger.OnCondition(inPnIoBoxDiag.8 ).Error('<#At least one InputCR is invalid!#>');
-THIS^.Messenger.OnCondition(inPnIoBoxDiag.9 ).Error('<#AT least one InputCR Provider is in stop!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxDiag.0).Error('<#IOC-AR is not established!#>');
+THIS^.Messenger.OnCondition(NOT _profinetReady AND inPnIoBoxDiag.1).Info('<#IOC-AR is established!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxDiag.2).Error('<#IOC-AR is established but no application ready!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxDiag.3).Error('<#IOC-AR is established but module difference!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxDiag.4).Error('<#AT least one AlarmCR got a diagnosis alarm!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxDiag.8).Error('<#At least one InputCR is invalid!#>');
+THIS^.Messenger.OnCondition(inPnIoBoxDiag.9).Error('<#AT least one InputCR Provider is in stop!#>');
 THIS^.Messenger.OnCondition(inPnIoBoxDiag.10).Error('<#At least one InputCR Problemindicator is set!#>');
 THIS^.Messenger.OnCondition(inPnIoBoxDiag.12).Error('<#AT least one OutputCR is invalid!#>');
 THIS^.Messenger.OnCondition(inPnIoBoxDiag.13).Error('<#At least one OutputCR Provider is in stop!#>');
 THIS^.Messenger.OnCondition(inPnIoBoxDiag.14).Error('<#AT least one OutputCR Problemindicator is set!#>');
-
-
-_profinetReady := inPnIoBoxState = 0 AND inPnIoBoxDiag = 2;
-]]></ST>
+_profinetReady := inPnIoBoxState = 0 AND inPnIoBoxDiag = 2;]]></ST>
     </Implementation>
     <Property Name="ProfinetReady" Id="{66996268-ad69-0a4b-27de-dac45a04f4a2}">
       <Declaration><![CDATA[PROPERTY ProfinetReady : BOOL]]></Declaration>

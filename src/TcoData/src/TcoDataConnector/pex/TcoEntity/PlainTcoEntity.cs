@@ -10,15 +10,8 @@ namespace TcoData
         List<ValueChangeItem> changes = new List<ValueChangeItem>();
         public List<ValueChangeItem> Changes
         {
-            get
-            {
-                return changes;
-            }
-            set
-            {
-                changes = value;
-            }
+            get { return changes; }
+            set { changes = value; }
         }
     }
-
 }

@@ -7,14 +7,18 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
-  <ItemGroup>        
-    <PackageReference Include="MahApps.Metro" Version="2.4.3" />        
+  <ItemGroup>
+    <PackageReference Include="MahApps.Metro" Version="2.4.3" />
     <PackageReference Include="MaterialDesignThemes" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\TcoCore.Wpf\Inxton.TcoCore.Wpf.csproj" />
-    <ProjectReference Include="..\TcoCoreExamplesConnector\Inxton.TcoCoreExamplesConnector.csproj" />
+    <ProjectReference
+      Include="..\..\src\TcoCore.Wpf\Inxton.TcoCore.Wpf.csproj"
+    />
+    <ProjectReference
+      Include="..\TcoCoreExamplesConnector\Inxton.TcoCoreExamplesConnector.csproj"
+    />
   </ItemGroup>
 
 </Project>

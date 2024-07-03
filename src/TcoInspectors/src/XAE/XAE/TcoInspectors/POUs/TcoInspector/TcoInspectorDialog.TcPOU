@@ -2,94 +2,77 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="TcoInspectorDialog" Id="{c6c9fa75-2ded-0851-0bf8-095f61987545}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Provides dialog with the user to allow for deciding how to proceed in case of failure.	
-		</summary>	
-	</docu>	
+    <docu>
+        <summary>
+            Provides dialog with the user to allow for deciding how to proceed in case of failure.
+        </summary>
+    </docu>
 ~*)
 FUNCTION_BLOCK PUBLIC TcoInspectorDialog EXTENDS TcoCore.TcoDialogBase
-VAR  	
-	_dialogRetry	    	: BOOL;	
-	_dialogTerminate  	: BOOL;	
-	_dialogOverride   	: BOOL;
-	_dialogIsClosed				: BOOL;
-    _isOverInspected      	: BOOL;
+VAR
+    _dialogRetry : BOOL;
+    _dialogTerminate : BOOL;
+    _dialogOverride : BOOL;
+    _dialogIsClosed : BOOL;
+    _isOverInspected : BOOL;
     {attribute 'hide'}
     _refInspector : REFERENCE TO TcoInspector;
-	{attribute 'hide'}
-	_tierAct          : TcoCore.TcoTier(THIS^);
-	
-	_rTrigRetry		: R_TRIG;
-	_rTrigTerminate		: R_TRIG;
-	_externalCloseReq : BOOL;
-	_closeRetrySignal:BOOL;
-	_closeTerminateSignal:BOOL;
-	
-
-
-
-	_instruction:STRING(255);
-	_source:STRING(255);
-	_imageHeight: REAL;
-	_imageWidth: REAL;
-
-	_showFailureDescription: BOOL;
-	_showErrorCode:BOOL;
-	_showDescription:BOOL;
-	
-	_isInvoked: BOOL;
-END_VAR
-]]></Declaration>
+    {attribute 'hide'}
+    _tierAct : TcoCore.TcoTier(THIS^);
+    _rTrigRetry : R_TRIG;
+    _rTrigTerminate : R_TRIG;
+    _externalCloseReq : BOOL;
+    _closeRetrySignal : BOOL;
+    _closeTerminateSignal : BOOL;
+    _instruction : STRING(255);
+    _source : STRING(255);
+    _imageHeight : REAL;
+    _imageWidth : REAL;
+    _showFailureDescription : BOOL;
+    _showErrorCode : BOOL;
+    _showDescription : BOOL;
+    _isInvoked : BOOL;
+END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[SUPER^();
-]]></ST>
+      <ST><![CDATA[SUPER^();]]></ST>
     </Implementation>
     <Property Name="DialogIsClosed" Id="{900abfef-1a0b-0cce-18b4-df02c0b16f5f}">
-      <Declaration><![CDATA[PROPERTY DialogIsClosed: REFERENCE TO BOOL
-]]></Declaration>
+      <Declaration><![CDATA[PROPERTY DialogIsClosed : REFERENCE TO BOOL]]></Declaration>
       <Get Name="Get" Id="{5e312fda-6cce-064e-0243-b8216abdd75e}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[DialogIsClosed ref=_dialogIsClosed;]]></ST>
+          <ST><![CDATA[DialogIsClosed ref= _dialogIsClosed;]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Property Name="DialogOverride" Id="{281b3990-8d8d-0186-31f8-bf848fda4f1c}">
-      <Declaration><![CDATA[PROPERTY DialogOverride: REFERENCE TO BOOL
-]]></Declaration>
+      <Declaration><![CDATA[PROPERTY DialogOverride : REFERENCE TO BOOL]]></Declaration>
       <Get Name="Get" Id="{95830134-ead6-01d5-1f16-0598f3037cba}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[DialogOverride ref=_dialogOverride;]]></ST>
+          <ST><![CDATA[DialogOverride ref= _dialogOverride;]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Property Name="DialogRetry" Id="{dfa7c167-d55b-0582-151b-0d52ee730a93}">
-      <Declaration><![CDATA[PROPERTY DialogRetry: REFERENCE TO BOOL
-]]></Declaration>
+      <Declaration><![CDATA[PROPERTY DialogRetry : REFERENCE TO BOOL]]></Declaration>
       <Get Name="Get" Id="{c89bbf42-f18d-01a7-2d2c-1e07d87b2852}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[DialogRetry ref=_dialogRetry;]]></ST>
+          <ST><![CDATA[DialogRetry ref= _dialogRetry;]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Property Name="DialogTerminate" Id="{4fa1d0b1-f38a-01a5-29f5-3a702c142068}">
-      <Declaration><![CDATA[PROPERTY DialogTerminate: REFERENCE TO BOOL
-]]></Declaration>
+      <Declaration><![CDATA[PROPERTY DialogTerminate : REFERENCE TO BOOL]]></Declaration>
       <Get Name="Get" Id="{42cb2924-62bf-0436-3801-068fa1c81f9c}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[DialogTerminate ref=_dialogTerminate;]]></ST>
+          <ST><![CDATA[DialogTerminate ref= _dialogTerminate;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -97,11 +80,10 @@ END_VAR
       <Declaration><![CDATA[{attribute 'hide'}
 METHOD PUBLIC FB_init : BOOL
 VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	ParentObject : ITcoObject;
-END_VAR
-]]></Declaration>
+    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+    ParentObject : ITcoObject;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
@@ -109,62 +91,58 @@ END_VAR
     <Method Name="HandleExternalSignals" Id="{14a31570-9b7f-0461-2846-3d69314473d6}">
       <Declaration><![CDATA[METHOD HandleExternalSignals
 VAR_INPUT
-	inRetrySignal:BOOL;
-	inTerminateSignal : BOOL;
-	
-END_VAR
-]]></Declaration>
+    inRetrySignal : BOOL;
+    inTerminateSignal : BOOL;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[
-_closeRetrySignal:=FALSE;
-_closeTerminateSignal:=FALSE;
+        <ST><![CDATA[_closeRetrySignal := FALSE;
+_closeTerminateSignal := FALSE;
+_rTrigRetry(CLK := inRetrySignal);
 
-
-_rTrigRetry(CLK:=inRetrySignal);
 IF _rTrigRetry.q THEN
-	_closeRetrySignal:=TRUE;
+    _closeRetrySignal := TRUE;
 END_IF
 
-_rTrigTerminate(CLK:=inTerminateSignal);
+_rTrigTerminate(CLK := inTerminateSignal);
+
 IF _rTrigTerminate.q THEN
-	_closeTerminateSignal:=TRUE;
+    _closeTerminateSignal := TRUE;
 END_IF
 
- IF(_refInspector.Done) THEN	
-	 	IF NOT ( _dialogRetry) THEN
-			_dialogRetry:=_closeRetrySignal;
-		END_IF;
-		IF NOT ( _dialogTerminate) THEN
-			_dialogTerminate:=_closeTerminateSignal;
-		END_IF;
- END_IF]]></ST>
+IF (_refInspector.Done) THEN
+    IF NOT (_dialogRetry) THEN
+        _dialogRetry := _closeRetrySignal;
+    END_IF;
+
+    IF NOT (_dialogTerminate) THEN
+        _dialogTerminate := _closeTerminateSignal;
+    END_IF;
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStart" Id="{4e966f6d-76df-011e-1b96-699bb030acd0}">
-      <Declaration><![CDATA[METHOD PROTECTED OnStart ]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED OnStart]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.OnStart();
-_isInvoked:=TRUE;
-_dialogIsClosed:=FALSE;
-_dialogRetry	    :=  FALSE;	
-_dialogTerminate  	:=  FALSE;	
-_dialogOverride   	:=  FALSE;]]></ST>
+_isInvoked := TRUE;
+_dialogIsClosed := FALSE;
+_dialogRetry := FALSE;
+_dialogTerminate := FALSE;
+_dialogOverride := FALSE;]]></ST>
       </Implementation>
     </Method>
     <Property Name="OverInspected" Id="{c039d7c8-ebe8-06e7-0a4c-2c6e9d3b65b1}">
       <Declaration><![CDATA[PROPERTY INTERNAL OverInspected : BOOL]]></Declaration>
       <Get Name="Get" Id="{2cff58c9-26c6-058e-2a22-8b77b31102ff}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[OverInspected := _isOverInspected;]]></ST>
         </Implementation>
       </Get>
       <Set Name="Set" Id="{afe25584-5d3b-06f4-2804-c454f9d136dc}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[_isOverInspected := OverInspected;]]></ST>
         </Implementation>
@@ -173,49 +151,40 @@ END_VAR
     <Method Name="Restore" Id="{f6a8b19c-7de2-0d61-29e8-f9ef96a63093}">
       <Declaration><![CDATA[METHOD Restore : TcoCore.ITcoRestorable
 VAR_INPUT
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.Restore();
-_dialogRetry	    :=  FALSE;	
-_dialogTerminate  	:=  FALSE;	
-_dialogOverride   	:=  FALSE;
-
-_instruction:='';
-_source:='';
-_imageHeight:=400;
-_imageWidth:=600;
-_showDescription:=FALSE;
-_showFailureDescription:=FALSE;
-_showErrorCode:=FALSE;
-_isInvoked:=FALSE;
-
-]]></ST>
+_dialogRetry := FALSE;
+_dialogTerminate := FALSE;
+_dialogOverride := FALSE;
+_instruction := '';
+_source := '';
+_imageHeight := 400;
+_imageWidth := 600;
+_showDescription := FALSE;
+_showFailureDescription := FALSE;
+_showErrorCode := FALSE;
+_isInvoked := FALSE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetImageSource" Id="{eb1ebace-4d18-04ce-12df-a38f92f39585}">
       <Declaration><![CDATA[METHOD SetImageSource
 VAR_INPUT
-	inSource:STRING(255);
-	inHeight:REAL;
-	inWidth:REAL;
-END_VAR
-	
-]]></Declaration>
+    inSource : STRING(255);
+    inHeight : REAL;
+    inWidth : REAL;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_source:=inSource;
-_imageHeight:=inHeight;
-_imageWidth:= inWidth;
-
-]]></ST>
+        <ST><![CDATA[_source := inSource;
+_imageHeight := inHeight;
+_imageWidth := inWidth;]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetInspector" Id="{59f6bb8e-40b5-01f0-1137-0e38be5ca644}">
       <Declaration><![CDATA[METHOD SetInspector
-VAR_INPUT 
-	refInspector : REFERENCE TO TcoInspector;
-END_VAR
-]]></Declaration>
+VAR_INPUT
+    refInspector : REFERENCE TO TcoInspector;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_refInspector REF= refInspector;]]></ST>
       </Implementation>
@@ -223,163 +192,141 @@ END_VAR
     <Method Name="SetInstruction" Id="{a27a8031-8f15-094c-1f76-4c697b319fbf}">
       <Declaration><![CDATA[METHOD SetInstruction
 VAR_INPUT
-	inInstruction:STRING(255);
-END_VAR
-	]]></Declaration>
+    inInstruction : STRING(255);
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_instruction:=inInstruction;]]></ST>
+        <ST><![CDATA[_instruction := inInstruction;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Show" Id="{409527dd-7ec4-05bd-0a53-372d7df86c62}">
       <Declaration><![CDATA[METHOD Show
 VAR_INPUT
-	inRetryStep : INT;
-END_VAR
-]]></Declaration>
+    inRetryStep : INT;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_isOverInspected := _refInspector.OverInspected;
 
-IF(_tierAct.IsNewTier()) THEN
-	THIS^.Restore();
+IF (_tierAct.IsNewTier()) THEN
+    THIS^.Restore();
 END_IF
 
- IF(_refInspector.Done) THEN		
-	IF(_refInspector.Result = eInspectorResult.Failed) THEN
-		THIS^.Invoke();
-		SUPER^();	
-		{warning disable C0357}
-		IF(_dialogRetry AND _dialogIsClosed) THEN
-			_isInvoked:=FALSE;
-			_refInspector.Retry(inRetryStep);
-		END_IF
-		
-		IF(_dialogTerminate AND _dialogIsClosed) THEN
-			_isInvoked:=FALSE;
-			_refInspector.Terminate();
-		END_IF
-		
-		IF(_dialogOverride AND _dialogIsClosed) THEN
-			_isInvoked:=FALSE;
-			_refInspector.CarryOn();
-		END_IF
-		{warning enable C0357}
-	ELSE
-		IF(_refInspector.Coordinator <> 0) THEN
-			_refInspector.Coordinator.MoveNext();
-		END_IF;	
-	END_IF;	
+IF (_refInspector.Done) THEN
+    IF (_refInspector.Result = eInspectorResult.Failed) THEN
+        THIS^.Invoke();
+        SUPER^();
+
+        {warning disable C0357}
+        IF (_dialogRetry AND _dialogIsClosed) THEN
+            _isInvoked := FALSE;
+            _refInspector.Retry(inRetryStep);
+        END_IF
+
+        IF (_dialogTerminate AND _dialogIsClosed) THEN
+            _isInvoked := FALSE;
+            _refInspector.Terminate();
+        END_IF
+
+        IF (_dialogOverride AND _dialogIsClosed) THEN
+            _isInvoked := FALSE;
+            _refInspector.CarryOn();
+        END_IF
+        {warning enable C0357}
+    ELSE
+        IF (_refInspector.Coordinator <> 0) THEN
+            _refInspector.Coordinator.MoveNext();
+        END_IF;
+    END_IF;
 END_IF;
 
-IF THIS^._taskState=eTaskState.Done 
-		AND ( _dialogRetry
-		OR _dialogTerminate
-		OR _dialogOverride)
-		and _dialogIsClosed  THEN	
-	THIS^.Restore();
-END_IF; 
-]]></ST>
+IF THIS^._taskState = eTaskState.Done AND (_dialogRetry OR _dialogTerminate OR _dialogOverride) and _dialogIsClosed THEN
+    THIS^.Restore();
+END_IF;]]></ST>
       </Implementation>
     </Method>
     <Property Name="ShowDescription" Id="{04301ae4-3bbf-01b9-0f26-429a5fcb5a78}">
-      <Declaration><![CDATA[PROPERTY ShowDescription: REFERENCE TO BOOL
-]]></Declaration>
+      <Declaration><![CDATA[PROPERTY ShowDescription : REFERENCE TO BOOL]]></Declaration>
       <Get Name="Get" Id="{aba9d6bb-2ed1-0d20-0c13-83ac210d5219}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[ShowDescription ref=_showDescription;]]></ST>
+          <ST><![CDATA[ShowDescription ref= _showDescription;]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Property Name="ShowErrorCode" Id="{5d0895ac-ac37-05c8-0546-600355d053f3}">
-      <Declaration><![CDATA[PROPERTY ShowErrorCode: REFERENCE TO BOOL
-]]></Declaration>
+      <Declaration><![CDATA[PROPERTY ShowErrorCode : REFERENCE TO BOOL]]></Declaration>
       <Get Name="Get" Id="{7963a26b-1d4b-01ec-2f04-af4b01ee12ef}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[ShowErrorCode ref=_showErrorCode;]]></ST>
+          <ST><![CDATA[ShowErrorCode ref= _showErrorCode;]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Property Name="ShowFailureDescription" Id="{388439b9-2b0d-035a-3ccf-e519ea25639f}">
-      <Declaration><![CDATA[PROPERTY ShowFailureDescription: REFERENCE TO BOOL
-]]></Declaration>
+      <Declaration><![CDATA[PROPERTY ShowFailureDescription : REFERENCE TO BOOL]]></Declaration>
       <Get Name="Get" Id="{4023948d-09d9-0a1a-36d7-38282c54ea38}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[ShowFailureDescription ref=_showFailureDescription;]]></ST>
+          <ST><![CDATA[ShowFailureDescription ref= _showFailureDescription;]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Method Name="ShowWithExternalClose" Id="{e354156d-00e4-0400-3d3e-1803329c2fbb}">
       <Declaration><![CDATA[METHOD ShowWithExternalClose
 VAR_INPUT
-	inRetryStep : INT;
-	inRetrySignal:BOOL;
-	inTerminateSignal : BOOL;
-	
-END_VAR
-]]></Declaration>
+    inRetryStep : INT;
+    inRetrySignal : BOOL;
+    inTerminateSignal : BOOL;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[//IF THIS^._taskState=eTaskState.Ready THEN
-//	_dialogRetry	    	:=  FALSE;	
-//	_dialogTerminate  	:=  FALSE;	
+//	_dialogRetry	    	:=  FALSE;
+//	_dialogTerminate  	:=  FALSE;
 //	_dialogOverride   	:=  FALSE;
 //END_IF
-
 _isOverInspected := _refInspector.OverInspected;
 
-IF(_tierAct.IsNewTier()) THEN
-	THIS^.Restore();
+IF (_tierAct.IsNewTier()) THEN
+    THIS^.Restore();
 END_IF
 
-HandleExternalSignals(inRetrySignal:=inRetrySignal,inTerminateSignal:=inTerminateSignal);
+HandleExternalSignals(inRetrySignal := inRetrySignal, inTerminateSignal := inTerminateSignal);
 
+IF (_refInspector.Done) THEN
+    IF (_refInspector.Result = eInspectorResult.Failed) THEN
+        THIS^.Invoke();
+        SUPER^();
 
- IF(_refInspector.Done) THEN		
-	IF(_refInspector.Result = eInspectorResult.Failed) THEN
-		THIS^.Invoke();
-		SUPER^();	
-		{warning disable C0357}
-		//retry
-	
-		
-		IF(_dialogRetry AND _dialogIsClosed) THEN
-			_isInvoked:=FALSE;
-			_refInspector.Retry(inRetryStep);
-		END_IF
-		//terminate
-		
-		IF(_dialogTerminate  AND  _dialogIsClosed) THEN
-			_isInvoked:=FALSE;
-			_refInspector.Terminate();
-		END_IF
-		
-		IF(_dialogOverride AND _dialogIsClosed) THEN
-			_isInvoked:=FALSE;
-			_refInspector.CarryOn();
-		END_IF
-		{warning enable C0357}
-	ELSE
-		IF(_refInspector.Coordinator <> 0) THEN
-			_refInspector.Coordinator.MoveNext();
-		END_IF;	
-	END_IF;	
+        {warning disable C0357}
+        //retry
+        IF (_dialogRetry AND _dialogIsClosed) THEN
+            _isInvoked := FALSE;
+            _refInspector.Retry(inRetryStep);
+        END_IF
+
+        //terminate
+        IF (_dialogTerminate AND _dialogIsClosed) THEN
+            _isInvoked := FALSE;
+            _refInspector.Terminate();
+        END_IF
+
+        IF (_dialogOverride AND _dialogIsClosed) THEN
+            _isInvoked := FALSE;
+            _refInspector.CarryOn();
+        END_IF
+        {warning enable C0357}
+    ELSE
+        IF (_refInspector.Coordinator <> 0) THEN
+            _refInspector.Coordinator.MoveNext();
+        END_IF;
+    END_IF;
 END_IF;
 
-
-IF THIS^._taskState=eTaskState.Done 
-		AND ( _dialogRetry
-		OR _dialogTerminate
-		OR _dialogOverride)
-		and _dialogIsClosed  THEN	
-	THIS^.Restore();
-END_IF; ]]></ST>
+IF THIS^._taskState = eTaskState.Done AND (_dialogRetry OR _dialogTerminate OR _dialogOverride) and _dialogIsClosed THEN
+    THIS^.Restore();
+END_IF;]]></ST>
       </Implementation>
     </Method>
   </POU>

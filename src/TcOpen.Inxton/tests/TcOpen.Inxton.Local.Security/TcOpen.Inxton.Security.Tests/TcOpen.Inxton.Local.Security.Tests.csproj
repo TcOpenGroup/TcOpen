@@ -15,9 +15,15 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\Abstractions\TcOpen.Inxton.Abstractions.csproj" />
-    <ProjectReference Include="..\..\..\src\Security\TcOpen.Inxton.Local.Security.csproj" />
-    <ProjectReference Include="..\..\..\src\TcOpen.Inxton.Local.Security.LDAP\TcOpen.Inxton.Local.Security.LDAP.csproj" />
+    <ProjectReference
+      Include="..\..\..\src\Abstractions\TcOpen.Inxton.Abstractions.csproj"
+    />
+    <ProjectReference
+      Include="..\..\..\src\Security\TcOpen.Inxton.Local.Security.csproj"
+    />
+    <ProjectReference
+      Include="..\..\..\src\TcOpen.Inxton.Local.Security.LDAP\TcOpen.Inxton.Local.Security.LDAP.csproj"
+    />
   </ItemGroup>
 
 

@@ -19,7 +19,6 @@ using TcOpen.Inxton.Wpf;
 
 namespace TcoMitsubishiRobotics
 {
-
     public partial class TcoCr800_v_1_x_xServiceView : UserControl
     {
         public TcoCr800_v_1_x_xServiceView()
@@ -31,12 +30,5 @@ namespace TcoMitsubishiRobotics
 
             InitializeComponent();
         }
-
-
-       
-
     }
-
-  
-
 }

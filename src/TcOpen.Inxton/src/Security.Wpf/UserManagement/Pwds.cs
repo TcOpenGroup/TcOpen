@@ -14,11 +14,11 @@ namespace TcOpen.Inxton.Local.Security.Wpf
         }
 
         // Using a DependencyProperty as the backing store for Pb1.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty Pb1Property =
-            DependencyProperty.Register("Pb1", typeof(PasswordBox), typeof(Pwds));
-
-
-
+        public static readonly DependencyProperty Pb1Property = DependencyProperty.Register(
+            "Pb1",
+            typeof(PasswordBox),
+            typeof(Pwds)
+        );
 
         public PasswordBox Pb2
         {
@@ -27,8 +27,11 @@ namespace TcOpen.Inxton.Local.Security.Wpf
         }
 
         // Using a DependencyProperty as the backing store for Pb2.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty Pb2Property =
-            DependencyProperty.Register("Pb2", typeof(PasswordBox), typeof(Pwds));
+        public static readonly DependencyProperty Pb2Property = DependencyProperty.Register(
+            "Pb2",
+            typeof(PasswordBox),
+            typeof(Pwds)
+        );
 
         protected override Freezable CreateInstanceCore()
         {

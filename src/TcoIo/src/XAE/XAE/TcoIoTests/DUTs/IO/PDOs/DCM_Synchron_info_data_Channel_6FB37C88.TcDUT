@@ -6,12 +6,10 @@
 {attribute addProperty Id "Info_DataAT %I*ARRAY[0..1] OF UINT4"}
 {attribute addProperty CRC "1491064414"}
 {attribute addProperty Size "4"}
-TYPE DCM_Synchron_info_data_Channel_6FB37C88 EXTENDS TcoIo.InputBase_8311D824 :
-STRUCT
-	{attribute addProperty Name "Info_Data"}
-	Info_Data AT %I* : ARRAY[0..1] OF UINT;
+TYPE DCM_Synchron_info_data_Channel_6FB37C88 EXTENDS TcoIo.InputBase_8311D824 : STRUCT
+    {attribute addProperty Name "Info_Data"}
+    Info_Data AT %I* : ARRAY[0..1] OF UINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -17,6 +17,6 @@ namespace TcOpen.Inxton.Security
         /// <returns>Requested role</returns>
         Role GetOrCreateRole(Role role);
 
-        IEnumerable<Role> AvailableRoles { get; }      
+        IEnumerable<Role> AvailableRoles { get; }
     }
 }

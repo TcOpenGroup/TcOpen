@@ -4,13 +4,10 @@ using Vortex.Connector;
 
 namespace Tco.Wpf
 {
-
     public class TreeItem : TreeObject
     {
-
-        public TreeItem(string Header) : base(Header)
-        {
-        }
+        public TreeItem(string Header)
+            : base(Header) { }
 
         public TreeItem(IValueTag tag)
         {
@@ -18,16 +15,12 @@ namespace Tco.Wpf
             Item = tag;
         }
 
-        public TreeItem(string Header, object Item) : base(Header)
+        public TreeItem(string Header, object Item)
+            : base(Header)
         {
             this.Item = Item;
         }
 
-
         public object Item { get; set; }
-
     }
-
-
-
 }

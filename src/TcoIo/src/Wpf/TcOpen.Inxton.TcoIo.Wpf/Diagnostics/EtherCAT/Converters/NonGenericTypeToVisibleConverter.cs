@@ -13,10 +13,22 @@ namespace TcoIo.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value.GetType().GetProperties().Where(p => p.PropertyType.BaseType.IsGenericType).Count() == 1 ? Visibility.Collapsed : Visibility.Visible;
+            return
+                value
+                    .GetType()
+                    .GetProperties()
+                    .Where(p => p.PropertyType.BaseType.IsGenericType)
+                    .Count() == 1
+                ? Visibility.Collapsed
+                : Visibility.Visible;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }

@@ -7,22 +7,20 @@
 {attribute addProperty CRC "3952060993"}
 {attribute addProperty Size "62"}
 {attribute addProperty Name "Term 307 (EK1100)"}
-TYPE Term_307_EK1100_EB8FAA41 EXTENDS EK1100_1FC0878B :
-STRUCT
-	{attribute addProperty Name "Term 330 (EK1122)"}
-	{attribute addProperty PreviousPort "Term 307 (EK1100) : B"}
-	{attribute addProperty SyncUnit "default"}
-	Term_330_EK1122 : Term_330_EK1122_0EDE60FE;
-	{attribute addProperty Name "Term 335 (EL2008)"}
-	{attribute addProperty PreviousPort "Term 330 (EK1122) : C"}
-	{attribute addProperty SyncUnit "default"}
-	Term_335_EL2008 : EL2008_E2806B95;
-	{attribute addProperty Name "Term 336 (EL2008)"}
-	{attribute addProperty PreviousPort "Term 335 (EL2008) : B"}
-	{attribute addProperty SyncUnit "default"}
-	Term_336_EL2008 : EL2008_E2806B95;
+TYPE Term_307_EK1100_EB8FAA41 EXTENDS EK1100_1FC0878B : STRUCT
+    {attribute addProperty Name "Term 330 (EK1122)"}
+    {attribute addProperty PreviousPort "Term 307 (EK1100) : B"}
+    {attribute addProperty SyncUnit "default"}
+    Term_330_EK1122 : Term_330_EK1122_0EDE60FE;
+    {attribute addProperty Name "Term 335 (EL2008)"}
+    {attribute addProperty PreviousPort "Term 330 (EK1122) : C"}
+    {attribute addProperty SyncUnit "default"}
+    Term_335_EL2008 : EL2008_E2806B95;
+    {attribute addProperty Name "Term 336 (EL2008)"}
+    {attribute addProperty PreviousPort "Term 335 (EL2008) : B"}
+    {attribute addProperty SyncUnit "default"}
+    Term_336_EL2008 : EL2008_E2806B95;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

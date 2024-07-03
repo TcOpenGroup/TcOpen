@@ -1,24 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoUrCb3_Inputs_v_3_x_x" Id="{26a40705-e58d-0fc2-3d98-35d604caf658}">
-    <Declaration><![CDATA[TYPE TcoUrCb3_Inputs_v_3_x_x :
-STRUCT
-	{attribute addProperty Name "<#State#>"}
-	State : TcoUrRobotics_T2O_State_IO;
-	{attribute addProperty Name "<#IO#>"}
-	IO : TcoUrRobotics_T2O_IO_IO;
-	{attribute addProperty Name "<#Joints#>"}
-	Joints : TcoUrRobotics_T2O_Joints_IO;
-	{attribute addProperty Name "<#TCP#>"}
-	TCP : TcoUrRobotics_T2O_TCP_IO;
-	{attribute addProperty Name "<#Bit registers#>"}
-	BitRegs : TcoUrRobotics_T2O_BitRegs_IO;
-	{attribute addProperty Name "<#Int registers#>"}
-	IntRegs : TcoUrRobotics_T2O_IntRegs_IO;
-	{attribute addProperty Name "<#Float registers#>"}
-	FloatRegs : TcoUrRobotics_T2O_FloatRegs_IO;	
+    <Declaration><![CDATA[TYPE TcoUrCb3_Inputs_v_3_x_x : STRUCT
+    {attribute addProperty Name "<#State#>"}
+    State : TcoUrRobotics_T2O_State_IO;
+    {attribute addProperty Name "<#IO#>"}
+    IO : TcoUrRobotics_T2O_IO_IO;
+    {attribute addProperty Name "<#Joints#>"}
+    Joints : TcoUrRobotics_T2O_Joints_IO;
+    {attribute addProperty Name "<#TCP#>"}
+    TCP : TcoUrRobotics_T2O_TCP_IO;
+    {attribute addProperty Name "<#Bit registers#>"}
+    BitRegs : TcoUrRobotics_T2O_BitRegs_IO;
+    {attribute addProperty Name "<#Int registers#>"}
+    IntRegs : TcoUrRobotics_T2O_IntRegs_IO;
+    {attribute addProperty Name "<#Float registers#>"}
+    FloatRegs : TcoUrRobotics_T2O_FloatRegs_IO;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

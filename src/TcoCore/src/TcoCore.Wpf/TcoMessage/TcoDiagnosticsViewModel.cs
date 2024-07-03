@@ -11,7 +11,6 @@
     using TcOpen.Inxton.Input;
     using Vortex.Connector;
 
-
     public class TcoDiagnosticsViewModel : Vortex.Presentation.Wpf.RenderableViewModel
     {
         PlainTcoMessage selectedMessage;
@@ -26,9 +25,37 @@
 
         private void CreateCommands()
         {
-            this.UpdateMessagesCommand = new RelayCommand(a => this.UpdateMessages(), (x) => !this.AutoUpdate && !this.DiagnosticsRunning);
-            this.RogerSelectedMessageCommand = new RelayCommand(a => this.RogerSelectedMessage(), b => true, () => TcoAppDomain.Current.Logger.Information("Message acknowledged {@payload}", new { Text = SelectedMessage.Text, Category = SelectedMessage.CategoryAsEnum, Cycle = SelectedMessage.Cycle }));
-            this.RogerAllMessagesCommand = new RelayCommand(a => this.RogerAllMessages(), b => true, () => TcoAppDomain.Current.Logger.Information("All message acknowledged {@payload}", new { rootObject = _tcoObject.HumanReadable, rootSymbol = _tcoObject.Symbol }));
+            this.UpdateMessagesCommand = new RelayCommand(
+                a => this.UpdateMessages(),
+                (x) => !this.AutoUpdate && !this.DiagnosticsRunning
+            );
+            this.RogerSelectedMessageCommand = new RelayCommand(
+                a => this.RogerSelectedMessage(),
+                b => true,
+                () =>
+                    TcoAppDomain.Current.Logger.Information(
+                        "Message acknowledged {@payload}",
+                        new
+                        {
+                            Text = SelectedMessage.Text,
+                            Category = SelectedMessage.CategoryAsEnum,
+                            Cycle = SelectedMessage.Cycle
+                        }
+                    )
+            );
+            this.RogerAllMessagesCommand = new RelayCommand(
+                a => this.RogerAllMessages(),
+                b => true,
+                () =>
+                    TcoAppDomain.Current.Logger.Information(
+                        "All message acknowledged {@payload}",
+                        new
+                        {
+                            rootObject = _tcoObject.HumanReadable,
+                            rootSymbol = _tcoObject.Symbol
+                        }
+                    )
+            );
         }
 
         /// <summary>
@@ -41,11 +68,13 @@
             CreateCommands();
         }
 
-
         /// <summary>
         /// Sets the <see cref="TcoObject"/> to be observed.
         /// </summary>
-        public IsTcoObject TcoObject { set { _tcoObject = value; } }
+        public IsTcoObject TcoObject
+        {
+            set { _tcoObject = value; }
+        }
 
         protected IsTcoObject _tcoObject { get; set; }
 
@@ -55,34 +84,34 @@
         /// Updates messages of diagnostics view.
         /// </summary>
         public void UpdateMessages(eMessageCategory category = eMessageCategory.All)
-        {           
+        {
             lock (updatemutex)
             {
                 if (DiagnosticsRunning)
                 {
                     return;
                 }
-            
+
                 DiagnosticsRunning = true;
 
                 //Task.Run(() =>
                 //{
-                    MessageDisplay = _tcoObject?.MessageHandler?.GetActiveMessages(category)
-                                             .Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)                                             
-                                             .OrderByDescending(p => p.Category)
-                                             .OrderBy(p => p.TimeStamp);
-
+                MessageDisplay = _tcoObject
+                    ?.MessageHandler?.GetActiveMessages(category)
+                    .Where(p => p.CategoryAsEnum >= MinMessageCategoryFilter)
+                    .OrderByDescending(p => p.Category)
+                    .OrderBy(p => p.TimeStamp);
 
                 //}).Wait();
 
                 DiagnosticsRunning = false;
-            }       
+            }
         }
+
         void RogerSelectedMessage()
         {
             this.SelectedMessage.OnlinerMessage.Pinned.Cyclic = false;
             UpdateMessages();
-
         }
 
         void RogerAllMessages()
@@ -90,9 +119,12 @@
             lock (updatemutex)
             {
                 foreach (var item in MessageDisplay.Where(p => p.Pinned))
-                {                    
+                {
                     item.OnlinerMessage.Pinned.Cyclic = false;
-                    TcoAppDomain.Current.Logger.Information("Message acknowledged {@message}", new { Text = item.Text, Category = item.CategoryAsEnum });
+                    TcoAppDomain.Current.Logger.Information(
+                        "Message acknowledged {@message}",
+                        new { Text = item.Text, Category = item.CategoryAsEnum }
+                    );
                 }
             }
 
@@ -119,15 +151,13 @@
         }
 
         bool autoUpdate;
+
         /// <summary>
         /// Gets or sets whether the diagnostics view should auto refresh.
         /// </summary>
         public bool AutoUpdate
         {
-            get
-            {
-                return autoUpdate;
-            }
+            get { return autoUpdate; }
             set
             {
                 if (autoUpdate == value)
@@ -151,13 +181,13 @@
         }
 
         IEnumerable<PlainTcoMessage> messageDisplay = new List<PlainTcoMessage>();
+
         /// <summary>
         /// Gets list of messages to be displayed in message list of the view.
         /// </summary>
         public IEnumerable<PlainTcoMessage> MessageDisplay
         {
             get => messageDisplay;
-
             private set
             {
                 if (messageDisplay == value)
@@ -167,28 +197,19 @@
 
                 SetProperty(ref messageDisplay, value);
             }
-
         }
 
         /// <summary>
         /// Gets or sets the minimal category that will appear in the diagnostics view.
         /// </summary>
-        public eMessageCategory MinMessageCategoryFilter
-        {
-            get;
-            set;
-        } = eMessageCategory.Info;
-
+        public eMessageCategory MinMessageCategoryFilter { get; set; } = eMessageCategory.Info;
 
         /// <summary>
         ///  Gets or sets currently selected message from the list of messages.
         /// </summary>
         public PlainTcoMessage SelectedMessage
         {
-            get
-            {
-                return selectedMessage;
-            }
+            get { return selectedMessage; }
             set
             {
                 if (value == null)
@@ -211,9 +232,19 @@
         /// </summary>
         public RelayCommand UpdateMessagesCommand { get; private set; }
 
-        public override object Model { get => this._tcoObject; set => this._tcoObject = value as IsTcoObject; }
+        public override object Model
+        {
+            get => this._tcoObject;
+            set => this._tcoObject = value as IsTcoObject;
+        }
 
-        private static string NoFurtherInfo = TcOpen.Inxton.TcoCore.Wpf.Properties.Localization.WeHaveNoFurtherInfoAboutThisMessage;
+        private static string NoFurtherInfo = TcOpen
+            .Inxton
+            .TcoCore
+            .Wpf
+            .Properties
+            .Localization
+            .WeHaveNoFurtherInfoAboutThisMessage;
 
         private ulong lastSelectedMessageIdentity = 0;
         private object affectedObjectPresenation = NoFurtherInfo;
@@ -235,7 +266,10 @@
 
                 if (SelectedMessage != null)
                 {
-                    var affectedObject = this._tcoObject.GetConnector().IdentityProvider.GetVortexerByIdentity(SelectedMessage.Identity) as IVortexObject;
+                    var affectedObject =
+                        this._tcoObject.GetConnector()
+                            .IdentityProvider.GetVortexerByIdentity(SelectedMessage.Identity)
+                        as IVortexObject;
                     IVortexObject affectedObjectsParent = null;
 
                     switch (affectedObject)
@@ -247,7 +281,7 @@
                             break;
                         default:
                             break;
-                    }                   
+                    }
 
                     if (affectedObject != null)
                     {
@@ -255,17 +289,33 @@
                         {
                             TcoAppDomain.Current.Dispatcher.Invoke(() =>
                             {
-                                if (Vortex.Presentation.Wpf.Renderer.Get.GetView("Service-Manual", affectedObject?.GetType()) != null)
+                                if (
+                                    Vortex.Presentation.Wpf.Renderer.Get.GetView(
+                                        "Service-Manual",
+                                        affectedObject?.GetType()
+                                    ) != null
+                                )
                                 {
-                                    affectedObjectPresenation = Vortex.Presentation.Wpf.LazyRenderer.Get.CreatePresentation("Service-Manual", (IVortexObject)affectedObject);
+                                    affectedObjectPresenation =
+                                        Vortex.Presentation.Wpf.LazyRenderer.Get.CreatePresentation(
+                                            "Service-Manual",
+                                            (IVortexObject)affectedObject
+                                        );
                                 }
-                                else if(Vortex.Presentation.Wpf.Renderer.Get.GetView("Service-Manual", affectedObjectsParent?.GetType()) != null)
+                                else if (
+                                    Vortex.Presentation.Wpf.Renderer.Get.GetView(
+                                        "Service-Manual",
+                                        affectedObjectsParent?.GetType()
+                                    ) != null
+                                )
                                 {
-                                    affectedObjectPresenation = Vortex.Presentation.Wpf.LazyRenderer.Get.CreatePresentation("Service-Manual", (IVortexObject)affectedObjectsParent);
+                                    affectedObjectPresenation =
+                                        Vortex.Presentation.Wpf.LazyRenderer.Get.CreatePresentation(
+                                            "Service-Manual",
+                                            (IVortexObject)affectedObjectsParent
+                                        );
                                 }
-
                             });
-
                         }
                         catch (Exception)
                         {
@@ -284,17 +334,14 @@
         /// </summary>
         public int DiagnosticsDepth
         {
-            get
-            {
-                return diagnosticsDepth;
-            }
+            get { return diagnosticsDepth; }
             set
             {
                 if (diagnosticsDepth == value)
                 {
                     return;
                 }
-                
+
                 SetProperty(ref diagnosticsDepth, value);
                 this._tcoObject.MessageHandler.DiagnosticsDepth = value;
             }

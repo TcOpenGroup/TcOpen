@@ -7,21 +7,18 @@ using Vortex.Presentation.Wpf;
 
 namespace TcoPneumatics
 {
-   
     public class TcoCylinderViewModel : RenderableViewModel
     {
-        public TcoCylinderViewModel()
-        {
-           
-        }
+        public TcoCylinderViewModel() { }
 
         public TcoCylinder Component { get; private set; }
 
-        public override object Model { get => this.Component; set { this.Component = value as TcoCylinder; } }
+        public override object Model
+        {
+            get => this.Component;
+            set { this.Component = value as TcoCylinder; }
+        }
     }
 
-    public class TcoCylinderServiceViewModel : TcoCylinderViewModel
-    {
-
-    }
+    public class TcoCylinderServiceViewModel : TcoCylinderViewModel { }
 }

@@ -4,76 +4,62 @@
     <Declaration><![CDATA[FUNCTION_BLOCK DiaglogsContext EXTENDS TcoCore.TcoContext
 VAR
     _invokeDiaglog1 : BOOL;
-    _dialog1        : TcoCore.TcoDialog(THIS^);
-    _dialog2        : TcoCore.TcoDialog(THIS^);
-    _dialog3        : TcoCore.TcoDialog(THIS^);
-	_dialog4        : TcoCore.TcoDialog(THIS^);
-
+    _dialog1 : TcoCore.TcoDialog(THIS^);
+    _dialog2 : TcoCore.TcoDialog(THIS^);
+    _dialog3 : TcoCore.TcoDialog(THIS^);
+    _dialog4 : TcoCore.TcoDialog(THIS^);
     _invokeDiaglogsConsequential : BOOL;
-    _dialog1Consequential        : TcoCore.TcoDialog(THIS^);
-    _dialog2Consequential        : TcoCore.TcoDialog(THIS^);
-    _dialog3Consequential        : TcoCore.TcoDialog(THIS^);
-	
-	diag: ITcoDialogAnswer;
-	_tonDisposeDialog: TON;
+    _dialog1Consequential : TcoCore.TcoDialog(THIS^);
+    _dialog2Consequential : TcoCore.TcoDialog(THIS^);
+    _dialog3Consequential : TcoCore.TcoDialog(THIS^);
+    diag : ITcoDialogAnswer;
+    _tonDisposeDialog : TON;
     _state : INT;
-	
-	
     _invokeCustomizedDiaglog : BOOL;
-    _dialogCustomized        : TcoCore.TcoCustomizedDialog(THIS^);
-	
-	_invokeInputDiaglog : BOOL;
-
-    _customizedContentInput	: MyOwnContent(THIS^);
-	_dialogWithInput        : TcoCore.TcoInputDialog(THIS^);
-  
-
-END_VAR
-]]></Declaration>
+    _dialogCustomized : TcoCore.TcoCustomizedDialog(THIS^);
+    _invokeInputDiaglog : BOOL;
+    _customizedContentInput : MyOwnContent(THIS^);
+    _dialogWithInput : TcoCore.TcoInputDialog(THIS^);
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Main" Id="{e7316bfc-71e9-02be-0fac-515246b2a0e2}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Main method of the TcoContext. This is the entry point of any control logic that belongs to this context. 
-			The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
-			This method is abstract, and it must be overridden in derived block.
-		</summary>
-	</docu>
+    <docu>
+        <summary>
+            Main method of the TcoContext. This is the entry point of any control logic that belongs to this context.
+            The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
+            This method is abstract, and it must be overridden in derived block.
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED  Main
+METHOD PROTECTED Main
 VAR
-
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[
-CASE _state OF
-			
-	0:
-		_dialog1.Restore();
-		_dialog2.Restore();
-		_dialog3.Restore();
-		_dialog4.Restore();
-		_dialogWithInput.Restore();
-		_dialogCustomized.Restore();
+        <ST><![CDATA[CASE _state OF
+    0:
+        _dialog1.Restore();
+        _dialog2.Restore();
+        _dialog3.Restore();
+        _dialog4.Restore();
+        _dialogWithInput.Restore();
+        _dialogCustomized.Restore();
 
         IF (_invokeDiaglog1) THEN
             _state := 10;
-		ELSIF (_invokeCustomizedDiaglog) THEN
+        ELSIF (_invokeCustomizedDiaglog) THEN
             _state := 50;
-		ELSIF (_invokeInputDiaglog) THEN
+        ELSIF (_invokeInputDiaglog) THEN
             _state := 100;
-        
         END_IF;
     10:
         _dialog1.Show()
             .WithType(eDialogType.Question)
             .WithYesNoCancel()
-			.WithImage('D:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenLogo.png',500,500)
-            .WithCaption('Hey 1')
-            .WithText('Do we go ahead to 2?');
+            .WithImage('D:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenLogo.png', 500, 500)
+            .WithCaption('Hey 1').WithText('Do we go ahead to 2?');
 
         IF (_dialog1.Answer = TcoCore.eDialogAnswer.Yes) THEN
             _state := 15;
@@ -88,12 +74,7 @@ CASE _state OF
             _invokeDiaglog1 := FALSE;
         END_IF;
     15:
-        _dialog1.Show()
-            .WithType(eDialogType.Question)
-            .WithYesNoCancel()
-			.WithImage('',500,500)
-            .WithCaption('Hey 2')
-            .WithText('Do we go ahead?');
+        _dialog1.Show().WithType(eDialogType.Question).WithYesNoCancel().WithImage('', 500, 500).WithCaption('Hey 2').WithText('Do we go ahead?');
 
         IF (_dialog1.Answer = TcoCore.eDialogAnswer.Yes) THEN
             _state := 20;
@@ -108,13 +89,7 @@ CASE _state OF
             _invokeDiaglog1 := FALSE;
         END_IF;
     20:
-        IF (_dialog2.Show()
-            .WithType(eDialogType.Info)
-            .WithOk()
-            .WithCaption('Hey')
-            .WithText('We go ahead.')
-            .Answer =
-            TcoCore.eDialogAnswer.OK) THEN
+        IF (_dialog2.Show().WithType(eDialogType.Info).WithOk().WithCaption('Hey').WithText('We go ahead.').Answer = TcoCore.eDialogAnswer.OK) THEN
             _state := 30;
         END_IF
     30:
@@ -122,11 +97,14 @@ CASE _state OF
         _tonDisposeDialog(In := FALSE);
     40:
         _tonDisposeDialog(IN := TRUE, PT := T#4S);
-		_dialog4.ShowWithExternalClose(inOkAnswerSignal:=FALSE , inYesAnswerSignal:= _tonDisposeDialog.Q, inNoAnswerSignal:= FALSE, inCancelAnswerSignal:= FALSE)
-		    .WithType(eDialogType.Info)
+
+        _dialog4.ShowWithExternalClose(inOkAnswerSignal := FALSE,
+            inYesAnswerSignal := _tonDisposeDialog.Q,
+            inNoAnswerSignal := FALSE,
+            inCancelAnswerSignal := FALSE)
+            .WithType(eDialogType.Info)
             .WithYesNoCancel()
-            .WithCaption('Hey')
-            .WithText('Do you wana retry it? Yes answer will be set in 4 sec?');
+            .WithCaption('Hey').WithText('Do you wana retry it? Yes answer will be set in 4 sec?');
 
         IF (_dialog4.Answer = TcoCore.eDialogAnswer.Yes) THEN
             _state := 0;
@@ -140,72 +118,70 @@ CASE _state OF
             _state := 0;
             _invokeDiaglog1 := FALSE;
         END_IF;
-	50:
-         _dialogCustomized.Show()
+    50:
+        _dialogCustomized.Show()
             .WithType(eDialogType.Info)
             .WithOption1('This is Option1=>retry')
-			  .WithOption2('This is Option2=>first step')
-			    .WithOption3('This is Option3 =>continue')
-				  .WithOption4('This is Option4=>stop sequence')
-            .WithCaption('Hey')
-            .WithText('What we are going to do.');
-            
-			 IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option1) THEN
-				_state := 50;
-			END_IF;
-	
-			IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option2) THEN
-				_state := 0;
-			END_IF;
-	
-			IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option3) THEN
-				_state := 51;
-			END_IF;
-	
-			IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option4) THEN
-				_state := 0;
-				_invokeCustomizedDiaglog := FALSE;
-				_invokeDiaglog1 := FALSE;
-			END_IF;
-	51:
-         _dialogCustomized.Show()
-            
+            .WithOption2('This is Option2=>first step')
+            .WithOption3('This is Option3 =>continue')
+            .WithOption4('This is Option4=>stop sequence')
+            .WithCaption('Hey').WithText('What we are going to do.');
+
+        IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option1) THEN
+            _state := 50;
+        END_IF;
+
+        IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option2) THEN
+            _state := 0;
+        END_IF;
+
+        IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option3) THEN
+            _state := 51;
+        END_IF;
+
+        IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option4) THEN
+            _state := 0;
+            _invokeCustomizedDiaglog := FALSE;
+            _invokeDiaglog1 := FALSE;
+        END_IF;
+    51:
+        _dialogCustomized.Show()
             .WithOption1('This is Option1=>retry')
-			  .WithOption2('This is Option2=>first step')
-			    .WithOption3('This is Option3 =>continue')
-			.WithImage('D:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenWide.png',500,500)
-            .WithCaption('Hey')
-            .WithText('What we are going to do.');
-            
-			 IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option1) THEN
-				_state := 50;
-			END_IF;
-	
-			IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option2) THEN
-				_state := 0;
-			END_IF;
-	
-			IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option3) THEN
-				_state := 60;
-			END_IF;
-	
-			IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option4) THEN
-				_state := 0;
-				_invokeCustomizedDiaglog := FALSE;
-				_invokeDiaglog1 := FALSE;
-			END_IF;
-     
-     
+            .WithOption2('This is Option2=>first step')
+            .WithOption3('This is Option3 =>continue')
+            .WithImage('D:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenWide.png', 500, 500)
+            .WithCaption('Hey').WithText('What we are going to do.');
+
+        IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option1) THEN
+            _state := 50;
+        END_IF;
+
+        IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option2) THEN
+            _state := 0;
+        END_IF;
+
+        IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option3) THEN
+            _state := 60;
+        END_IF;
+
+        IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option4) THEN
+            _state := 0;
+            _invokeCustomizedDiaglog := FALSE;
+            _invokeDiaglog1 := FALSE;
+        END_IF;
     60:
         _state := 70;
         _tonDisposeDialog(In := FALSE);
-	70:
+    70:
         _tonDisposeDialog(IN := TRUE, PT := T#4S);
-		_dialog4.ShowWithExternalClose(inOkAnswerSignal:=FALSE , inYesAnswerSignal:= _tonDisposeDialog.Q, inNoAnswerSignal:= FALSE, inCancelAnswerSignal:= FALSE)
-		    .WithType(eDialogType.Info)
+
+        _dialog4.ShowWithExternalClose(inOkAnswerSignal := FALSE,
+            inYesAnswerSignal := _tonDisposeDialog.Q,
+            inNoAnswerSignal := FALSE,
+            inCancelAnswerSignal := FALSE)
+            .WithType(eDialogType.Info)
             .WithYesNoCancel()
-            .WithCaption('Hey')
-            .WithText('Do you wana retry it? Yes answer will be set in 4 sec?');
+            .WithCaption('Hey').WithText('Do you wana retry it? Yes answer will be set in 4 sec?');
 
         IF (_dialog4.Answer = TcoCore.eDialogAnswer.Yes) THEN
             _state := 0;
@@ -219,84 +195,66 @@ CASE _state OF
             _state := 0;
             _invokeDiaglog1 := FALSE;
         END_IF;
-		
-	 80:
+    80:
         _state := 90;
         _tonDisposeDialog(In := FALSE);
-	90:
+    90:
         _tonDisposeDialog(IN := TRUE, PT := T#4S);
-		 _dialogCustomized.ShowWithExternalClose(inOption1AnswerSignal:=FALSE,inOption2AnswerSignal:=FALSE, inOption3AnswerSignal:=_tonDisposeDialog.Q,inOption4AnswerSignal:=FALSE)
-            
+
+        _dialogCustomized.ShowWithExternalClose(inOption1AnswerSignal := FALSE,
+            inOption2AnswerSignal := FALSE,
+            inOption3AnswerSignal := _tonDisposeDialog.Q,
+            inOption4AnswerSignal := FALSE)
             .WithOption1('This is Option1=>retry')
-			  .WithOption2('This is Option2=>first step')
-			    .WithOption3('This is Option3 =>continue and finish in 4s')
-			.WithImage('D:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenWide.png',500,500)
-            .WithCaption('Hey')
-            .WithText('What we are going to do.');
-            
-		
-            
-			 IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option1) THEN
-				_state := 80;
-			END_IF;
-	
-			IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option2) THEN
-				_state :=10;
-			END_IF;
-	
-			IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option3) THEN
-				_state := 0;
-				_invokeCustomizedDiaglog := FALSE;
-				_invokeDiaglog1 := FALSE;
-			END_IF;
-	100:
-			_dialogWithInput.Show(refContent:=_customizedContentInput)
-            .WithType(eDialogType.Question)
-            .WithYesNo()
-            .WithCaption('Hey wana set data')
+            .WithOption2('This is Option2=>first step')
+            .WithOption3('This is Option3 =>continue and finish in 4s')
+            .WithImage('D:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenWide.png', 500, 500)
+            .WithCaption('Hey').WithText('What we are going to do.');
+
+        IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option1) THEN
+            _state := 80;
+        END_IF;
+
+        IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option2) THEN
+            _state := 10;
+        END_IF;
+
+        IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option3) THEN
+            _state := 0;
+            _invokeCustomizedDiaglog := FALSE;
+            _invokeDiaglog1 := FALSE;
+        END_IF;
+    100:
+        _dialogWithInput.Show(refContent := _customizedContentInput).WithType(eDialogType.Question).WithYesNo().WithCaption('Hey wana set data')
             .WithText('Do you realy want to sent data to ....?');
 
-			IF (_dialogWithInput.Answer = TcoCore.eInputDialogAnswer.Yes) THEN
-				_state := 110;
-			END_IF;
-	
-			IF (_dialogWithInput.Answer = TcoCore.eInputDialogAnswer.No) THEN
+        IF (_dialogWithInput.Answer = TcoCore.eInputDialogAnswer.Yes) THEN
+            _state := 110;
+        END_IF;
+
+        IF (_dialogWithInput.Answer = TcoCore.eInputDialogAnswer.No) THEN
             _invokeInputDiaglog := FALSE;
-
-				_state := 1000;
-			END_IF;
-
-	110:
-			_dialogWithInput.Show(refContent:=_customizedContentInput)
+            _state := 1000;
+        END_IF;
+    110:
+        _dialogWithInput.Show(refContent := _customizedContentInput)
             .WithType(eDialogType.Question)
             .WithOk()
-			.WithImage('https://github.com/TcOpenGroup',400,600)
-            .WithCaption('Hey wana set data')
-            .WithText('Do you realy want to sent data to ....?');
+            .WithImage('https://github.com/TcOpenGroup', 400, 600)
+            .WithCaption('Hey wana set data').WithText('Do you realy want to sent data to ....?');
 
-	
-	
-			IF (_dialogWithInput.Answer = TcoCore.eInputDialogAnswer.OK) THEN
-				_state := 1000;
-	            _invokeInputDiaglog := FALSE;
-
-			END_IF;
-
-      
+        IF (_dialogWithInput.Answer = TcoCore.eInputDialogAnswer.OK) THEN
+            _state := 1000;
+            _invokeInputDiaglog := FALSE;
+        END_IF;
     1000:
-        IF (_dialog3.Show()
-            .WithType(eDialogType.Warning)
-            .WithOk()
-            .WithCaption('Hey')
-            .WithText('We are done.')
-            .Answer =
-            TcoCore.eDialogAnswer.OK) THEN
+        IF (_dialog3.Show().WithType(eDialogType.Warning).WithOk().WithCaption('Hey').WithText('We are done.').Answer = TcoCore.eDialogAnswer.OK)
+            THEN
             _state := 0;
         END_IF
 END_CASE
 
 //IF(_invokeDiaglog1) THEN
-
 //	IF(_dialog1.Answer = TcoCore.eDialogAnswer.Yes) THEN
 //		IF(_dialog2.Show()
 //			.WithType(eDialogType.Info)
@@ -314,9 +272,8 @@ END_CASE
 //					.Answer = TcoCore.eDialogAnswer.OK) THEN
 //			_invokeDiaglog1 := FALSE;
 //		END_IF
-//	END_IF			
-//END_IF;	
-
+//	END_IF
+//END_IF;
 IF (_invokeDiaglogsConsequential) THEN
     _dialog1Consequential.Show().WithYesNoCancel().WithCaption('Hey D1').WithText('D1');
     _dialog2Consequential.Show().WithYesNoCancel().WithCaption('Hey D2').WithText('D2');

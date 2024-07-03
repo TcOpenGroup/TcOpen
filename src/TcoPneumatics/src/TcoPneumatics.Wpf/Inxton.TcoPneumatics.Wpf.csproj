@@ -13,13 +13,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="1.9.1-alpha.37" />
+    <PackageReference
+      Include="Inxton.Package.Vortex.Essentials.Wpf"
+      Version="1.9.1-alpha.37"
+    />
     <PackageReference Include="MahApps.Metro.IconPacks" Version="4.8.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\TcoCore\src\TcoCore.Wpf\TcoCore.Wpf.csproj" />
-    <ProjectReference Include="..\TcoPneumaticsConnector\TcoPneumaticsConnector.csproj" />
+    <ProjectReference
+      Include="..\..\..\TcoCore\src\TcoCore.Wpf\TcoCore.Wpf.csproj"
+    />
+    <ProjectReference
+      Include="..\TcoPneumaticsConnector\TcoPneumaticsConnector.csproj"
+    />
   </ItemGroup>
 
 </Project>

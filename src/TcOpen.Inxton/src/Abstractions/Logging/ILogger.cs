@@ -10,11 +10,11 @@
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="stringTemplate">Message template</param>
-        /// <param name="payload">Object for structured logging</param>        
+        /// <param name="payload">Object for structured logging</param>
         void Debug<T>(string stringTemplate, T payload = default(T));
 
         /// <summary>
-        /// Logs verbose message level. Use for detailed information collection. This level should be activated in particular situations 
+        /// Logs verbose message level. Use for detailed information collection. This level should be activated in particular situations
         /// and should not be active as a rule in production environment.
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -23,7 +23,7 @@
         void Verbose<T>(string stringTemplate, T payload = default(T));
 
         /// <summary>
-        /// Logs information message level. User for logging information that is of interest, such as user actions 
+        /// Logs information message level. User for logging information that is of interest, such as user actions
         /// (log-in / log-out, value change, manual command execution, etc.)
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -33,7 +33,7 @@
 
         /// <summary>
         /// Logs warning message level. Use to preserve information about possible problem or to emphasize an information that
-        /// the user should be aware of.        
+        /// the user should be aware of.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="stringTemplate">Message template</param>
@@ -55,5 +55,5 @@
         /// <param name="stringTemplate">Message template</param>
         /// <param name="payload">Object for structured logging</param>
         void Fatal<T>(string stringTemplate, T payload = default(T));
-    }    
+    }
 }

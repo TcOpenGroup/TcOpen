@@ -2,18 +2,14 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoDesignerData_2_x_x" Id="{13cdfe06-e3db-0030-375e-d2b6ebec163c}">
     <Declaration><![CDATA[{attribute wpf [Container(Layout.Stack)]}
-TYPE TcoDesignerData_2_x_x  :
-STRUCT
-	
-	{attribute wpf [Container(Layout.Stack,"PcToPlc")]}	
-	{attribute addProperty Name "<#PCtoPLC#>"}
-	PcToPlc: TcoDesignerPcToPlc_v_2_x_x;
-	{attribute wpf [Container(Layout.Stack,"PlcToPc")]}	
-	{attribute addProperty Name "<#PLCtoPC#>"}
-	PlcToPc: TcoDesignerPlcToPc_v_2_x_x;
-
+TYPE TcoDesignerData_2_x_x : STRUCT
+    {attribute wpf [Container(Layout.Stack,"PcToPlc")]}
+    {attribute addProperty Name "<#PCtoPLC#>"}
+    PcToPlc : TcoDesignerPcToPlc_v_2_x_x;
+    {attribute wpf [Container(Layout.Stack,"PlcToPc")]}
+    {attribute addProperty Name "<#PLCtoPC#>"}
+    PlcToPc : TcoDesignerPlcToPc_v_2_x_x;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

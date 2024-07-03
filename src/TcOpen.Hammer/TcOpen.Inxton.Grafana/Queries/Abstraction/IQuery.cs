@@ -1,6 +1,6 @@
-﻿using TcOpenHammer.Grafana.API.Transformation;
-using System;
+﻿using System;
 using System.Linq;
+using TcOpenHammer.Grafana.API.Transformation;
 
 namespace Grafana.Backend.Queries
 {

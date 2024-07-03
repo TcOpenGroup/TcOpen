@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -28,7 +27,7 @@ namespace TcoRexrothPressConnector.SmartfunctionKit.RestApi
         /// Time out (in milliseconds) to wait for an answer from the httpResponse
         /// Default = 3000; The .Net default is 100000 (= 1.6 minutes)
         /// Please observe that a DNS request can take up to 15 seconds to time out
-        /// 
+        ///
         /// </summary>
         protected int Timeout { get; set; }
 
@@ -43,13 +42,10 @@ namespace TcoRexrothPressConnector.SmartfunctionKit.RestApi
         /// </summary>
         protected string ResourcePath { get; set; }
 
-
         public string Get()
         {
             return this.Request(m_getMethod, null);
         }
-
-
 
         public string Get(string args)
         {
@@ -86,7 +82,6 @@ namespace TcoRexrothPressConnector.SmartfunctionKit.RestApi
             return this.Request(m_putMethod, buffer);
         }
 
-
         public string Post(string args, string body)
         {
             if (body == null)
@@ -99,6 +94,7 @@ namespace TcoRexrothPressConnector.SmartfunctionKit.RestApi
             byte[] buffer = Encoding.ASCII.GetBytes(body);
             return this.Request(m_postMethod, buffer);
         }
+
         private CredentialCache GetCredential()
         {
             if (ResourcePath == null)
@@ -106,7 +102,11 @@ namespace TcoRexrothPressConnector.SmartfunctionKit.RestApi
 
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
             CredentialCache credentialCache = new CredentialCache();
-            credentialCache.Add(new System.Uri(ResourcePath), "Basic", new NetworkCredential("admin","admin"));
+            credentialCache.Add(
+                new System.Uri(ResourcePath),
+                "Basic",
+                new NetworkCredential("admin", "admin")
+            );
             return credentialCache;
         }
 
@@ -118,13 +118,30 @@ namespace TcoRexrothPressConnector.SmartfunctionKit.RestApi
 
             // Create and configure our web request
             HttpWebRequest httpRequest = (HttpWebRequest)HttpWebRequest.Create(this.ResourcePath);
-            System.Net.ServicePointManager.ServerCertificateValidationCallback = (senderX, certificate, chain, sslPolicyErrors) => { return true; };
+            System.Net.ServicePointManager.ServerCertificateValidationCallback = (
+                senderX,
+                certificate,
+                chain,
+                sslPolicyErrors
+            ) =>
+            {
+                return true;
+            };
             //httpRequest.Credentials = GetCredential();
             //httpRequest.PreAuthenticate = true;
             if (httpRequest == null)
-                return MyErrorHandler("HttpWebRequest.Create(" + this.ResourcePath + "); returned null");
+                return MyErrorHandler(
+                    "HttpWebRequest.Create(" + this.ResourcePath + "); returned null"
+                );
 
-            m_logger.Log(String.Format(CultureInfo.InvariantCulture, "Entering Rest.Request({0}, {1})", httpMethod, ResourcePath));
+            m_logger.Log(
+                String.Format(
+                    CultureInfo.InvariantCulture,
+                    "Entering Rest.Request({0}, {1})",
+                    httpMethod,
+                    ResourcePath
+                )
+            );
 
             // Set some reasonable properties on our Http Request
             httpRequest.Method = httpMethod;
@@ -153,29 +170,37 @@ namespace TcoRexrothPressConnector.SmartfunctionKit.RestApi
             }
             catch (WebException e)
             {
-                if (httpRequest != null) httpRequest.Abort();
-                if (httpResponse != null) httpResponse.Close();
+                if (httpRequest != null)
+                    httpRequest.Abort();
+                if (httpResponse != null)
+                    httpResponse.Close();
 
                 return MyErrorHandler(e, statusCode);
             }
             catch (ProtocolViolationException e)
             {
-                if (httpRequest != null) httpRequest.Abort();
-                if (httpResponse != null) httpResponse.Close();
+                if (httpRequest != null)
+                    httpRequest.Abort();
+                if (httpResponse != null)
+                    httpResponse.Close();
 
                 return MyErrorHandler(e, statusCode);
             }
             catch (InvalidOperationException e)
             {
-                if (httpRequest != null) httpRequest.Abort();
-                if (httpResponse != null) httpResponse.Close();
+                if (httpRequest != null)
+                    httpRequest.Abort();
+                if (httpResponse != null)
+                    httpResponse.Close();
 
                 return MyErrorHandler(e, statusCode);
             }
             catch (NotSupportedException e)
             {
-                if (httpRequest != null) httpRequest.Abort();
-                if (httpResponse != null) httpResponse.Close();
+                if (httpRequest != null)
+                    httpRequest.Abort();
+                if (httpResponse != null)
+                    httpResponse.Close();
 
                 return MyErrorHandler(e, statusCode);
             }
@@ -184,7 +209,12 @@ namespace TcoRexrothPressConnector.SmartfunctionKit.RestApi
                 return MyErrorHandler("httpRequest.GetResponse() returned null");
 
             string response;
-            using (StreamReader streamReader = new StreamReader(httpResponse.GetResponseStream(), Encoding.ASCII))
+            using (
+                StreamReader streamReader = new StreamReader(
+                    httpResponse.GetResponseStream(),
+                    Encoding.ASCII
+                )
+            )
             {
                 response = streamReader.ReadToEnd();
             }
@@ -193,8 +223,18 @@ namespace TcoRexrothPressConnector.SmartfunctionKit.RestApi
 
             if (m_logger.TraceInfo)
             {
-                m_logger.Log(String.Format(CultureInfo.InvariantCulture, "Leaving Rest.Request({0}, {1}), [StatusCode={2}]", httpMethod, ResourcePath, statusCode));
-                m_logger.Log(String.Format(CultureInfo.InvariantCulture, "Response = {0}", response));
+                m_logger.Log(
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        "Leaving Rest.Request({0}, {1}), [StatusCode={2}]",
+                        httpMethod,
+                        ResourcePath,
+                        statusCode
+                    )
+                );
+                m_logger.Log(
+                    String.Format(CultureInfo.InvariantCulture, "Response = {0}", response)
+                );
                 m_logger.Log("");
             }
 
@@ -217,8 +257,15 @@ namespace TcoRexrothPressConnector.SmartfunctionKit.RestApi
             m_logger.LogIf(TraceLevel.Error, "        Status = " + status);
             m_logger.LogIf(TraceLevel.Error, "----------------------------------");
 
-            return String.Format(CultureInfo.InvariantCulture, "<*error*>\nResource={0}\nStatusCode={1}\nType={2}\nMessage={3}\nStatus={4}",
-                ResourcePath, statusCode, t, e.Message, status);
+            return String.Format(
+                CultureInfo.InvariantCulture,
+                "<*error*>\nResource={0}\nStatusCode={1}\nType={2}\nMessage={3}\nStatus={4}",
+                ResourcePath,
+                statusCode,
+                t,
+                e.Message,
+                status
+            );
         }
 
         private string MyErrorHandler(string errorMsg)
@@ -228,9 +275,12 @@ namespace TcoRexrothPressConnector.SmartfunctionKit.RestApi
             m_logger.LogIf(TraceLevel.Error, "     ErrorMsg  = " + errorMsg);
             m_logger.LogIf(TraceLevel.Error, "----------------------------------");
 
-            return String.Format(CultureInfo.InvariantCulture,
+            return String.Format(
+                CultureInfo.InvariantCulture,
                 "<*error*>\nResource={0}\nErrorMsg={1}",
-                ResourcePath, errorMsg);
+                ResourcePath,
+                errorMsg
+            );
         }
 
         private const string m_getMethod = "GET";

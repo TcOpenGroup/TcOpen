@@ -12,7 +12,7 @@ namespace TcoCore
         /// </summary>
         /// <param name="message">Message to add.</param>
         void AddMessage(TcoMessage message);
-       
+
         /// <summary>
         /// Gets last know value of start cycle counter of this context.
         /// </summary>

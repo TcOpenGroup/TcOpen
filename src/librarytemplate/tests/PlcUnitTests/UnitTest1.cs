@@ -27,7 +27,6 @@ namespace PlcTemplateUnitTests
             //-- Act
             var actual = sut.Run(p => sut.AddTwoNumbersTest(number1, number2), 1);
 
-
             //-- Assert
             Assert.AreEqual(expected, actual);
         }
@@ -37,9 +36,9 @@ namespace PlcTemplateUnitTests
         [TestCase(50)]
         [Timeout(1000)]
         public void WaitForModuloTest(short modulo)
-        {            
-            //-- Act            
-            sut.Run(a => sut.WaitForModuloTest(modulo));            
+        {
+            //-- Act
+            sut.Run(a => sut.WaitForModuloTest(modulo));
         }
     }
 }

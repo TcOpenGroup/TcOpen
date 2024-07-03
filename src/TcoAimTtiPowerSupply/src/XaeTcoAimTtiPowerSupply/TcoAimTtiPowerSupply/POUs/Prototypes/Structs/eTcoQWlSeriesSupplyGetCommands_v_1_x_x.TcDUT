@@ -3,48 +3,40 @@
   <DUT Name="eTcoQWlSeriesSupplyGetCommands_v_1_x_x" Id="{174d7279-a678-4166-9c67-51a2e3a4f60d}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE
-    eTcoQWlSeriesSupplyGetCommands_v_1_x_x :
-    (
-		//Instrument Specific Commands
-		V	:=1,
-		I	:=2,
-		OVP	:=3,
-		OCP	:=4,
-		VO	:=5,
-		IO	:=6,
-		RANGE :=7,
-		DELTAV:=8,
-		DELTAI:=9,
-		OP:=10,
-        LSR :=11,
-		LSE:=12,
-		
-		//System and Status Commands
-		EER:=22,
-		QER:=23, 
-		ESE:=24, 
-		ESR:=25,
-		IST:=26,
-		OPC:=27,
-		PRE:=28,
-		SRE:=29, 
-		STB:=30, 
-		
-		//Interface Management Commands
-		IFLOCK:=41,
-		ADDRESS:=42,
-		IPADDR:=43, 
-		NETMASK:=44,
-		NETCONFIG:=45,
-		
-		//Miscellaneous Commands
-		IDN:=70,
-		TST:=71
-		
-
-    );
-END_TYPE
-]]></Declaration>
+TYPE eTcoQWlSeriesSupplyGetCommands_v_1_x_x : (
+    //Instrument Specific Commands
+    V := 1,
+    I := 2,
+    OVP := 3,
+    OCP := 4,
+    VO := 5,
+    IO := 6,
+    RANGE := 7,
+    DELTAV := 8,
+    DELTAI := 9,
+    OP := 10,
+    LSR := 11,
+    LSE := 12,
+    //System and Status Commands
+    EER := 22,
+    QER := 23,
+    ESE := 24,
+    ESR := 25,
+    IST := 26,
+    OPC := 27,
+    PRE := 28,
+    SRE := 29,
+    STB := 30,
+    //Interface Management Commands
+    IFLOCK := 41,
+    ADDRESS := 42,
+    IPADDR := 43,
+    NETMASK := 44,
+    NETCONFIG := 45,
+    //Miscellaneous Commands
+    IDN := 70,
+    TST := 71
+);
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

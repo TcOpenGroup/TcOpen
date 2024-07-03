@@ -6,12 +6,10 @@
 {attribute addProperty Id "PositionAT %I*UDINT4"}
 {attribute addProperty CRC "1067488493"}
 {attribute addProperty Size "4"}
-TYPE FB_Position_3FA094ED EXTENDS TcoIo.InputBase_8311D824 :
-STRUCT
-	{attribute addProperty Name "Position"}
-	Position AT %I* : UDINT;
+TYPE FB_Position_3FA094ED EXTENDS TcoIo.InputBase_8311D824 : STRUCT
+    {attribute addProperty Name "Position"}
+    Position AT %I* : UDINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

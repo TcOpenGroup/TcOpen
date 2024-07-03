@@ -11,7 +11,7 @@ namespace TcOpen.Inxton.Data
     }
 
     public class SearchOptions
-    {       
+    {
         public eSearchMode SearchMode { get; set; }
     }
 }

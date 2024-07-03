@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Library</OutputType>
@@ -9,15 +9,20 @@
     <RepositoryUrl>https://github.com/PTKu/TcOpen</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
 	<IsPackable>false</IsPackable>
-  </PropertyGroup>  
+  </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="2.0.0" />
+    <PackageReference
+      Include="Inxton.Package.Vortex.Essentials"
+      Version="2.0.0"
+    />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="_generated\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\TcoPneumaticsConnector\TcoPneumaticsConnector.csproj" />
+    <ProjectReference
+      Include="..\..\src\TcoPneumaticsConnector\TcoPneumaticsConnector.csproj"
+    />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Localizations.Designer.cs">

@@ -1,15 +1,14 @@
 ﻿namespace TcOpen.Inxton
 {
-    using TcOpen.Inxton.Data;
-    using TcOpen.Inxton.Logging;
-    using TcOpen.Inxton.Security;  
-    using TcOpen.Inxton.App.Logging;
-    using TcOpen.Inxton.Threading;
-    using Vortex.Connector;
     using System;
     using System.Collections.Generic;
     using TcOpen.Inxton.App;
-
+    using TcOpen.Inxton.App.Logging;
+    using TcOpen.Inxton.Data;
+    using TcOpen.Inxton.Logging;
+    using TcOpen.Inxton.Security;
+    using TcOpen.Inxton.Threading;
+    using Vortex.Connector;
 
     /// <summary>
     /// TcOpen application configuration builder.
@@ -23,7 +22,7 @@
         {
             Domain = domain;
         }
-     
+
         private TcoAppDomain Domain { get; }
 
         /// <summary>
@@ -55,10 +54,9 @@
         /// <returns>AppBuilder</returns>
         public TcoAppBuilder SetSecurity(IAuthenticationService authenticationService)
         {
-            Domain.AuthenticationService = authenticationService;            
+            Domain.AuthenticationService = authenticationService;
             return this;
         }
-        
 
         /// <summary>
         /// Sets the logging for the 'Edit' -> 'Online' value change.
@@ -71,12 +69,12 @@
             {
                 valtag.EditValueChange = LoggingHelpers.EditValueChange;
             }
-            
+
             return this;
-        }         
-        
+        }
+
         public TcoAppBuilder SetPlcDialogs(DialogProxyServiceBase dialogProxy)
-        {            
+        {
             return this;
         }
 
@@ -85,8 +83,5 @@
             Domain.LoginAction = loginAction;
             return this;
         }
-
-
     }
 }
- 

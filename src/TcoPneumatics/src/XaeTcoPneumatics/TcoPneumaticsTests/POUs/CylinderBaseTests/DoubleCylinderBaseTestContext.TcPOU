@@ -3,43 +3,40 @@
   <POU Name="DoubleCylinderBaseTestContext" Id="{d872de45-e829-05c4-2cef-dfad02f8f7a2}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK DoubleCylinderBaseTestContext EXTENDS TcoCore._internals_TcoContext
 VAR
-	_sut			: DoubleCylinderBaseImplemented(THIS^);
-	_sutInvalid		: DoubleCylinderBaseImplemented(THIS^);
-	_atHomeSignal	: BOOL;	
-	_atWorkSignal	: BOOL;	
-	_toHomeSignal	: BOOL;	
-	_toWorkSignal	: BOOL;
+    _sut : DoubleCylinderBaseImplemented(THIS^);
+    _sutInvalid : DoubleCylinderBaseImplemented(THIS^);
+    _atHomeSignal : BOOL;
+    _atWorkSignal : BOOL;
+    _toHomeSignal : BOOL;
+    _toWorkSignal : BOOL;
 END_VAR
 VAR
-	_get_AtHome	: BOOL;
-	_get_AtWork : BOOL;	
-END_VAR
-]]></Declaration>
+    _get_AtHome : BOOL;
+    _get_AtWork : BOOL;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Main" Id="{6480da05-d898-0bdf-317f-5e0e346c2889}">
-      <Declaration><![CDATA[METHOD PROTECTED Main
-
-]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED Main]]></Declaration>
       <Implementation>
         <ST><![CDATA[_sut(inoAtHomePos1 := _atHomeSignal,
-	inoAtHomePos2 := _atHomeSignal,
+    inoAtHomePos2 := _atHomeSignal,
     inoAtWorkPos1 := _atWorkSignal,
     inoAtWorkPos2 := _atWorkSignal,
     inoToHomePos := _toHomeSignal,
     inoToWorkPos := _toWorkSignal);
-	
+
 CASE _testId OF
-	eCyclinderBaseTests.Invalid:
-		_sutInvalid.AtHome;
-		_sutInvalid.AtWork;
-		_sutInvalid.Restore();
-		_sutInvalid.Stop();
+    eCyclinderBaseTests.Invalid:
+        _sutInvalid.AtHome;
+        _sutInvalid.AtWork;
+        _sutInvalid.Restore();
+        _sutInvalid.Stop();
     eCyclinderBaseTests.GetAtHome:
-		_get_AtHome := _sut.AtHome;		
-    eCyclinderBaseTests.GetAtWork: 
-		_get_AtWork := _sut.AtWork;               
+        _get_AtHome := _sut.AtHome;
+    eCyclinderBaseTests.GetAtWork:
+        _get_AtWork := _sut.AtWork;
 END_CASE]]></ST>
       </Implementation>
     </Method>

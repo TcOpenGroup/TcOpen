@@ -10,10 +10,11 @@ namespace TcoCore
         public TcoRemoteTaskViewModel()
         {
             OpenDetailsDialog = new RelayCommand(action => OpenTaskDialogue());
-            RestoreCommand = new RelayCommand(action => this.TcoRemoteTask._restoreRequest.Cyclic = true);            
+            RestoreCommand = new RelayCommand(action =>
+                this.TcoRemoteTask._restoreRequest.Cyclic = true
+            );
         }
 
-       
         object taskDetailContent;
         public object TaskDetailContent
         {
@@ -32,7 +33,8 @@ namespace TcoCore
         bool isTaskDetailDialogueOpened;
         public bool IsTaskDetailDialogueOpened
         {
-            get => isTaskDetailDialogueOpened; set
+            get => isTaskDetailDialogueOpened;
+            set
             {
                 if (isTaskDetailDialogueOpened == value)
                 {
@@ -51,11 +53,15 @@ namespace TcoCore
 
         public TcoRemoteTask TcoRemoteTask { get; private set; }
 
-        public override object Model { get => TcoRemoteTask; set => TcoRemoteTask = value as TcoRemoteTask; }
+        public override object Model
+        {
+            get => TcoRemoteTask;
+            set => TcoRemoteTask = value as TcoRemoteTask;
+        }
 
-        public RelayCommand RestoreCommand { get; }   
-        
-        public RelayCommand OpenDetailsDialog { get; }        
+        public RelayCommand RestoreCommand { get; }
+
+        public RelayCommand OpenDetailsDialog { get; }
     }
 
     public class TcoRemoteTaskProgressBarViewModel : TcoRemoteTaskViewModel { }

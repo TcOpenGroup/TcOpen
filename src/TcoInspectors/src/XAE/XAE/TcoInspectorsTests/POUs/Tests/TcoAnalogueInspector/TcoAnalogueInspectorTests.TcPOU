@@ -3,12 +3,11 @@
   <POU Name="TcoAnalogueInspectorTests" Id="{8dc99e3a-e964-0734-3e39-363ce73c5757}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoAnalogueInspectorTests EXTENDS TcoInspectorTests
 VAR
-    _sut            : TcoInspectors.TcoAnalogueInspector(THIS^);
+    _sut : TcoInspectors.TcoAnalogueInspector(THIS^);
     _inspectedValue : LREAL;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
-]]></ST>
+      <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Inspect" Id="{3703065d-567a-0583-2b5d-991c71f6123a}">
       <Declaration><![CDATA[METHOD Inspect : TcoInspectors.IInspector]]></Declaration>
@@ -17,19 +16,16 @@ END_VAR]]></Declaration>
       </Implementation>
     </Method>
     <Method Name="Main" Id="{060cfbf3-cf54-0d00-1452-4a68e42aa954}">
-      <Declaration><![CDATA[METHOD PROTECTED Main
-]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED Main]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.Main();
-]]></ST>
+        <ST><![CDATA[SUPER^.Main();]]></ST>
       </Implementation>
     </Method>
     <Method Name="WithCoordinator" Id="{9d0edf65-b764-0fe1-0ea6-c44ac1de6e92}">
-      <Declaration><![CDATA[METHOD  WithCoordinator : REFERENCE TO TcoInspectorTests
+      <Declaration><![CDATA[METHOD WithCoordinator : REFERENCE TO TcoInspectorTests
 VAR_INPUT
-	inoCoordinator : TcoCore.ITcoCoordinator;
-END_VAR
-]]></Declaration>
+    inoCoordinator : TcoCore.ITcoCoordinator;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_sut.WithCoordinator(_coordinator);
 WithCoordinator REF= THIS^;]]></ST>

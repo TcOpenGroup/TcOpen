@@ -1,14 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <DUT Name="EC001" Id="{88b7d664-8900-036e-3874-96016a870d5c}">
-    <Declaration><![CDATA[TYPE EC001 :
-STRUCT
-	{attribute addProperty Name "A1"}
-	A1 	: EL1008;
-	{attribute addProperty Name "A10"}
-	A10 : EL2008;
+    <Declaration><![CDATA[TYPE EC001 : STRUCT
+    {attribute addProperty Name "A1"}
+    A1 : EL1008;
+    {attribute addProperty Name "A10"}
+    A10 : EL2008;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

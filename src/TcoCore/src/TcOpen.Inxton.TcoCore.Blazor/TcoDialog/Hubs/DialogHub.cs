@@ -15,10 +15,10 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDialog.Hubs
         {
             await Clients.All.SendAsync(DialogMessages.RECEIVE_DIALOG_OPEN, message);
         }
+
         public async Task SendDialogClose(string message)
         {
             await Clients.All.SendAsync(DialogMessages.RECEIVE_DIALOG_CLOSE, message);
         }
-       
     }
 }

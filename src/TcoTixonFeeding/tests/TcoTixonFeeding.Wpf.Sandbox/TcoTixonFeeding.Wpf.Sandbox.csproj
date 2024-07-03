@@ -17,11 +17,15 @@
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="4.6.1" />
   </ItemGroup>
-  
+
   <ItemGroup>
-   
-    <ProjectReference Include="..\..\src\TcoTixonFeeding.Wpf\TcOpen.Inxton.TcoTixonFeeding.Wpf.csproj" />
-    <ProjectReference Include="..\TcoTixonFeedingTestsConnector\TcoTixonFeedingTestsConnector.csproj" />
+
+    <ProjectReference
+      Include="..\..\src\TcoTixonFeeding.Wpf\TcOpen.Inxton.TcoTixonFeeding.Wpf.csproj"
+    />
+    <ProjectReference
+      Include="..\TcoTixonFeedingTestsConnector\TcoTixonFeedingTestsConnector.csproj"
+    />
 
   </ItemGroup>
 

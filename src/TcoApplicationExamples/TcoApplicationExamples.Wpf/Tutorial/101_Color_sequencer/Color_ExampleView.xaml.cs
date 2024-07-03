@@ -15,23 +15,28 @@ namespace PlcAppExamples
             InitializeComponent();
         }
     }
+
     public class Color_ExampleViewModel : RenderableViewModel
     {
-        public Color_ExampleViewModel()
-        {
-
-        }
+        public Color_ExampleViewModel() { }
 
         public Color_Example Color_Example { get; set; }
 
-        public override object Model { get => Color_Example; set => Color_Example = value as Color_Example; }
+        public override object Model
+        {
+            get => Color_Example;
+            set => Color_Example = value as Color_Example;
+        }
     }
-
 
     public class RgbConverter : MarkupExtension, IMultiValueConverter
     {
-
-        public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(
+            object[] values,
+            Type targetType,
+            object parameter,
+            System.Globalization.CultureInfo culture
+        )
         {
             var vals = values.ToList().Cast<bool>().Select(x => x ? 255 : 0).ToArray();
             var r = System.Convert.ToByte(vals[0]);
@@ -40,9 +45,12 @@ namespace PlcAppExamples
             return System.Windows.Media.Color.FromRgb(r, g, b);
         }
 
-
-
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)
+        public object[] ConvertBack(
+            object value,
+            Type[] targetTypes,
+            object parameter,
+            System.Globalization.CultureInfo culture
+        )
         {
             throw new NotImplementedException();
         }
@@ -52,5 +60,4 @@ namespace PlcAppExamples
             return this;
         }
     }
-
 }

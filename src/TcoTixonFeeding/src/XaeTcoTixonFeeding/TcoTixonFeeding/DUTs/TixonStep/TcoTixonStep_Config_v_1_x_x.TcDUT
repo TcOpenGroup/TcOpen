@@ -1,33 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoTixonStep_Config_v_1_x_x" Id="{ba956026-ef4f-08fe-397f-e203910d64f9}">
-    <Declaration><![CDATA[TYPE
-    TcoTixonStep_Config_v_1_x_x EXTENDS TcoTixonGenericConfig :
-    STRUCT
-       
-		{attribute addProperty Name "<#Time when stepper in work #> - T_STEP_WORK"}
-		SteperInWorkTime : TIME := T#1S;
-		{attribute addProperty Name "<#Time when stepper in home #> - T_STEP_HOME"}
-		SteperInHomeTime : TIME := T#1S;
-			
-		{attribute addProperty Name "<#Error time separator #> - T_SEP_ERROR"}
-		ErrorTimeSeparator : TIME := T#0S;
-		{attribute addProperty Name "<#Error time buffer #> - T_BUFF_ERROR"}
-		ErrorTimeBuffer : TIME := T#0S;
-		{attribute addProperty Name "<#Error time Stepper #> - T_STEP_ERROR"}
-		ErrorTimeStepper : TIME := T#0S;
-		{attribute addProperty Name "<#Error time Hopper #> - T_HOP_ERROR"}
-		ErrorTimeHopper : TIME := T#0S;
-		
-		{attribute addProperty Name "<#Out of box sensor disabled (usualy TRUE when pushing to up direction) #>"}
-		OutOfBoxSensorDisabled : BOOL := FALSE;
-		{attribute addProperty Name "<#Separator has work position (usualy TRUE when pushing to up direction)#>"}
-		SeparatorHasWorkPosition : BOOL := FALSE;
-		
-		{attribute addProperty Name "<#Buffer stucked on filing sensor#> - T_BUF_STUCK_FIL_SENSOR"}
-		BufferStuckedOnFillingSensor : TIME := T#20S;
-    END_STRUCT
-END_TYPE
-]]></Declaration>
+    <Declaration><![CDATA[TYPE TcoTixonStep_Config_v_1_x_x EXTENDS TcoTixonGenericConfig : STRUCT
+    {attribute addProperty Name "<#Time when stepper in work #> - T_STEP_WORK"}
+    SteperInWorkTime : TIME := T#1S;
+    {attribute addProperty Name "<#Time when stepper in home #> - T_STEP_HOME"}
+    SteperInHomeTime : TIME := T#1S;
+    {attribute addProperty Name "<#Error time separator #> - T_SEP_ERROR"}
+    ErrorTimeSeparator : TIME := T#0S;
+    {attribute addProperty Name "<#Error time buffer #> - T_BUFF_ERROR"}
+    ErrorTimeBuffer : TIME := T#0S;
+    {attribute addProperty Name "<#Error time Stepper #> - T_STEP_ERROR"}
+    ErrorTimeStepper : TIME := T#0S;
+    {attribute addProperty Name "<#Error time Hopper #> - T_HOP_ERROR"}
+    ErrorTimeHopper : TIME := T#0S;
+    {attribute addProperty Name "<#Out of box sensor disabled (usualy TRUE when pushing to up direction) #>"}
+    OutOfBoxSensorDisabled : BOOL := FALSE;
+    {attribute addProperty Name "<#Separator has work position (usualy TRUE when pushing to up direction)#>"}
+    SeparatorHasWorkPosition : BOOL := FALSE;
+    {attribute addProperty Name "<#Buffer stucked on filing sensor#> - T_BUF_STUCK_FIL_SENSOR"}
+    BufferStuckedOnFillingSensor : TIME := T#20S;
+END_STRUCT
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

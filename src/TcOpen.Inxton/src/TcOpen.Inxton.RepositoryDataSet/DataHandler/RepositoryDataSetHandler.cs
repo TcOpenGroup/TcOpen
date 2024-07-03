@@ -2,7 +2,8 @@
 
 namespace TcOpen.Inxton.RepositoryDataSet
 {
-    public class RepositoryDataSetHandler<T> where T : class, new()
+    public class RepositoryDataSetHandler<T>
+        where T : class, new()
     {
         /// <summary>
         /// Creates new instance of <see cref="RepositorySetDataHandler"/>
@@ -12,8 +13,9 @@ namespace TcOpen.Inxton.RepositoryDataSet
         {
             Repository = repository;
         }
+
         /// <summary>
-        /// Creates new instance of <see cref="RepositorySetDataHandler"/>    
+        /// Creates new instance of <see cref="RepositorySetDataHandler"/>
         /// </summary>
         /// <param name="repository">Instructions repository</param>
         /// <returns>New instnace of <see cref="RepositorySetDataHandler"/></returns>
@@ -26,8 +28,6 @@ namespace TcOpen.Inxton.RepositoryDataSet
         /// Gets the repository of instructor data sets.
         /// </summary>
         public IRepository<EntitySet<T>> Repository { get; }
-
-
 
         /// <summary>
         /// Loads instruction set from the repository to this <see cref="ProductionSet"/> of this <see cref="RepositorySetDataHandler"/>.
@@ -57,7 +57,5 @@ namespace TcOpen.Inxton.RepositoryDataSet
         {
             Repository.Update(itemSetId, itemsSet);
         }
-
-     
     }
 }

@@ -4,7 +4,6 @@ using System.Linq;
 
 namespace Grafana.Backend.Model
 {
-
     /// Represents a request to the /query endpoint.  As described by the SimpleJson
     /// plugin docs, the following JSON represents this object:
     /// {
@@ -53,5 +52,4 @@ namespace Grafana.Backend.Model
             return this;
         }
     }
-
 }

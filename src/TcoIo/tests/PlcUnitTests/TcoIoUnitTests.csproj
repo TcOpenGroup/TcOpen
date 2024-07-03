@@ -10,12 +10,17 @@
     <PackageReference Include="nunit" Version="3.13.3" />
     <PackageReference Include="JunitXml.TestLogger" Version="3.0.114" />
 	<PackageReference Include="NUnit3TestAdapter" Version="4.3.0-alpha-net7.4" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.0-preview-20220707-01" />
+    <PackageReference
+      Include="Microsoft.NET.Test.Sdk"
+      Version="17.4.0-preview-20220707-01"
+    />
     <PackageReference Include="TcOpen.Tc.Prober" Version="0.3.0-alpha.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TcoIoTestsConnector\TcoIoTestsConnector.csproj" />
+    <ProjectReference
+      Include="..\TcoIoTestsConnector\TcoIoTestsConnector.csproj"
+    />
   </ItemGroup>
 
 </Project>

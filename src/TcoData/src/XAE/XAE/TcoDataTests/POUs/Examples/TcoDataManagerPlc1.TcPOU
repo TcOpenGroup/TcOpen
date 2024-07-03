@@ -5,7 +5,7 @@
 // Function block for data maipulation must extend from TcoData.TcoDataExchange.
 FUNCTION_BLOCK TcoDataManagerPlc1 EXTENDS TcoData.TcoDataExchange
 VAR
-	// This is the structure that contains the actual data we will work with. The `STRUCT` must extend `TcoData.TcoEntity`
+    // This is the structure that contains the actual data we will work with. The `STRUCT` must extend `TcoData.TcoEntity`
     _data : stProcessData_Plc1;
 END_VAR
 //</DataManagerDeclarations>
@@ -13,12 +13,9 @@ END_VAR
     <Implementation>
       <ST><![CDATA[//----------------------------------
 //<DataManagerSuperCall>
-
 // IMPLEMENTATION BODY OF FUNCTION BLOCK
-
 // IMPORTANT: SUPER CALL HERE IS REQUIRED TO CALL THE DATA MANAGER TASKS!!!
 SUPER^();
-
 //</DataManagerSuperCall>
 //----------------------------------
 
@@ -29,8 +26,7 @@ SUPER^();
       <Declaration><![CDATA[PROPERTY Data : REFERENCE TO stProcessData_Plc1]]></Declaration>
       <Get Name="Get" Id="{4fb95632-6280-0a67-1f72-4c17a2bf2032}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[Data REF= _data;]]></ST>
         </Implementation>

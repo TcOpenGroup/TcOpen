@@ -7,14 +7,12 @@
 {attribute addProperty CRC "3579990636"}
 {attribute addProperty Size "68"}
 {attribute addProperty Name "R5_A2_EC (EK1122)"}
-TYPE R5_A2_EC_EK1122_D562526C EXTENDS EK1122_1FC0878B :
-STRUCT
-	{attribute addProperty Name "VI-5 (AES-D-BC-ECAT)"}
-	{attribute addProperty PreviousPort "R5_A2_EC (EK1122) : D"}
-	{attribute addProperty SyncUnit "default"}
-	VI_5_AES_D_BC_ECAT_x : AES_A3B07071;
+TYPE R5_A2_EC_EK1122_D562526C EXTENDS EK1122_1FC0878B : STRUCT
+    {attribute addProperty Name "VI-5 (AES-D-BC-ECAT)"}
+    {attribute addProperty PreviousPort "R5_A2_EC (EK1122) : D"}
+    {attribute addProperty SyncUnit "default"}
+    VI_5_AES_D_BC_ECAT_x : AES_A3B07071;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

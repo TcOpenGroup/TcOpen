@@ -1,11 +1,10 @@
-﻿using MQTTnet;
-using MQTTnet.Client.Receiving;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using MQTTnet;
+using MQTTnet.Client.Receiving;
 
 namespace TcOpen.Inxton.Mqtt
 {
-
     public class TopicHandleRelay<T> : IMqttApplicationMessageReceivedHandler
     {
         public Action<T> TopicHandle;
@@ -15,22 +14,28 @@ namespace TcOpen.Inxton.Mqtt
 
         public TcoAppMqttHandler TcoAppHandler { get; }
 
-        public TopicHandleRelay(string Topic,IPayloadDeserializer<T> Deserializer, TcoAppMqttHandler TcoAppHandler)
+        public TopicHandleRelay(
+            string Topic,
+            IPayloadDeserializer<T> Deserializer,
+            TcoAppMqttHandler TcoAppHandler
+        )
         {
             this.Topic = Topic;
             this.Deserializer = Deserializer;
             this.TcoAppHandler = TcoAppHandler;
-            this.TcoAppHandler.TryAdd(Topic,this);
+            this.TcoAppHandler.TryAdd(Topic, this);
         }
 
-        public Task HandleApplicationMessageReceivedAsync(MqttApplicationMessageReceivedEventArgs eventArgs)
+        public Task HandleApplicationMessageReceivedAsync(
+            MqttApplicationMessageReceivedEventArgs eventArgs
+        )
         {
             var topic = eventArgs.ApplicationMessage.Topic;
             var payload = eventArgs.ApplicationMessage.ConvertPayloadToString();
             return Task.Run(() =>
             {
-                    T deserialized = Deserializer.Deserialize(payload);
-                    TopicHandle.Invoke(deserialized);
+                T deserialized = Deserializer.Deserialize(payload);
+                TopicHandle.Invoke(deserialized);
             });
         }
 
@@ -44,6 +49,5 @@ namespace TcOpen.Inxton.Mqtt
             TopicHandle = null;
             TcoAppHandler.TryRemove(Topic);
         }
-
     }
 }

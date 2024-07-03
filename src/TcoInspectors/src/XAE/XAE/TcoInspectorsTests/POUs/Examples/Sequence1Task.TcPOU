@@ -3,21 +3,21 @@
   <POU Name="Sequence1Task" Id="{ad0f6b0c-345e-08b6-1323-01e956e9764c}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK Sequence1Task EXTENDS TcoCore.TcoTask
 VAR_INPUT
-	Sequence : TcoCore.ITcoSequencer;
+    Sequence : TcoCore.ITcoSequencer;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Restore" Id="{6752d25d-e765-045a-345e-5d7ba00f993a}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
-			<para>
-				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
-			</para>
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+            <para>
+                See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+            </para>
+        </summary>
+    </docu>
 ~*)
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>

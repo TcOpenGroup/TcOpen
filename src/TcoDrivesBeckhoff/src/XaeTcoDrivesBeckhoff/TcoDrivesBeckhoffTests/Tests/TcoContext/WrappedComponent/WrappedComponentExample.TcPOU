@@ -2,62 +2,52 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="WrappedComponentExample" Id="{47c5ed63-a639-0668-2732-bb135eb269d1}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK WrappedComponentExample EXTENDS TcoCore.TcoComponent
-
-
 VAR_OUTPUT
 END_VAR
 VAR
-	_config:WrappedComponentExample_Config;
-	_status:WrappedComponentExample_Status;
-	_control:WrappedComponentExample_Control;
-    _components:WrappedComponentsExample:= (Parent := THIS^);
-	_throwTask:TcoCore.TcoTask(THIS^);
-	_restoreTask:TcoCore.TcoTask(THIS^);
-
-END_VAR
-]]></Declaration>
+    _config : WrappedComponentExample_Config;
+    _status : WrappedComponentExample_Status;
+    _control : WrappedComponentExample_Control;
+    _components : WrappedComponentsExample := (Parent := THIS^);
+    _throwTask : TcoCore.TcoTask(THIS^);
+    _restoreTask : TcoCore.TcoTask(THIS^);
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Property Name="Components" Id="{93c570c0-6fde-096d-1d23-f4f966fbd389}">
-      <Declaration><![CDATA[PROPERTY Components : REFERENCE TO WrappedComponentsExample
-]]></Declaration>
+      <Declaration><![CDATA[PROPERTY Components : REFERENCE TO WrappedComponentsExample]]></Declaration>
       <Get Name="Get" Id="{2f61461f-0e40-0651-14cf-7108bc9b05d2}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Components ref=_components;]]></ST>
+          <ST><![CDATA[Components ref= _components;]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Method Name="Restore" Id="{07efd12a-84ef-01eb-0654-21e61fba155a}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.	
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+        </summary>
+    </docu>
 ~*)
-METHOD  Restore : ITcoRestorable
-
-
-]]></Declaration>
+METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="ServiceMode" Id="{cb7697df-4f59-092b-27b8-f175ac230c09}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-		    Custom service (manual, maintenance) logic.
-			This method must be implemented in derived class.
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Custom service (manual, maintenance) logic.
+            This method must be implemented in derived class.
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED  ServiceMode
-]]></Declaration>
+METHOD PROTECTED ServiceMode]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>

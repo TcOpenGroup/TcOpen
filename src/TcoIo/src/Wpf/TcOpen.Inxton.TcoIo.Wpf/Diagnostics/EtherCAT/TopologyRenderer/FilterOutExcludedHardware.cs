@@ -1,17 +1,16 @@
-﻿
-using System;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Shapes;
+using TcoIo.Converters;
+using TcoIo.Topology;
 using Vortex.Connector;
 using Vortex.Presentation.Wpf;
-using System.Collections.ObjectModel;
-using TcoIo.Topology;
-using System.Windows.Shapes;
-using System.Windows.Media;
-using System.Windows.Data;
-using TcoIo.Converters;
-using System.Windows.Input;
 
 namespace TcoIo
 {
@@ -22,11 +21,19 @@ namespace TcoIo
     {
         public void FilterOutExcludedHardware()
         {
-            if (ExcludeSlavesConnectedToJunctionBox && !GroupedView && (!String.IsNullOrEmpty(FirstTopologyElementName) || !String.IsNullOrEmpty(LastTopologyElementName)))
+            if (
+                ExcludeSlavesConnectedToJunctionBox
+                && !GroupedView
+                && (
+                    !String.IsNullOrEmpty(FirstTopologyElementName)
+                    || !String.IsNullOrEmpty(LastTopologyElementName)
+                )
+            )
             {
                 if (LastElementRow != -1 && LastElementColumn != -1)
                 {
-                    ObservableCollection<TopologyObject> filteredTopologyObjects = new ObservableCollection<TopologyObject>();
+                    ObservableCollection<TopologyObject> filteredTopologyObjects =
+                        new ObservableCollection<TopologyObject>();
 
                     foreach (TopologyObject topologyObject in topologyObjects)
                     {

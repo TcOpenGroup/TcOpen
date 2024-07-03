@@ -6,12 +6,10 @@
 {attribute addProperty Id "New_Messages_AvailableAT %I*BOOL1"}
 {attribute addProperty CRC "1434060703"}
 {attribute addProperty Size "1"}
-TYPE NewMessageFlag_557A079F EXTENDS TcoIo.InputBase_8311D824 :
-STRUCT
-	{attribute addProperty Name "New_Messages_Available"}
-	New_Messages_Available AT %I* : BOOL;
+TYPE NewMessageFlag_557A079F EXTENDS TcoIo.InputBase_8311D824 : STRUCT
+    {attribute addProperty Name "New_Messages_Available"}
+    New_Messages_Available AT %I* : BOOL;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace TcoCoreTests
 {
-    public partial class TcoSequencerNonAutoRestorableTest : ITestTcoSequencerNonAutoRestorable
-    {
-    }
+    public partial class TcoSequencerNonAutoRestorableTest : ITestTcoSequencerNonAutoRestorable { }
 
-    public partial class TcoSequenceNonAutoRestorableTest : ITestTcoSequencerNonAutoRestorable
-    {
-    }
+    public partial class TcoSequenceNonAutoRestorableTest : ITestTcoSequencerNonAutoRestorable { }
 }

@@ -1,27 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoQlSeriesSupply_SetControl_v_1_x_x" Id="{5b7e996b-7820-07af-3dc8-3af852db01ee}">
-    <Declaration><![CDATA[TYPE TcoQlSeriesSupply_SetControl_v_1_x_x : 
-STRUCT	
-	
-	Command :eTcoQWlSeriesSupplySetCommands_v_1_x_x;
-	
-	{attribute addProperty Name "<#NRF#>"}
-	NrfValue : REAL; 	//A number in any format. e.g. 12, 12·00, 1·2 e1 and 120 e-1 are all accepted as the
-						//number 12. Any number, when received, is converted to the required precision
-						//consistent with the use then rounded up to obtain the value of the command.
-
-	{attribute addProperty Name "<#Nvalue#>"}
-	NValue : USINT :=1;		//The number of the output or status register to which the command relates.
-						//Note that on single output supplies <N>=1 always.
-						//Note also that <N>= 3 refers to the AUX output. The AUX output has limited remote
-						//control functionality. For clarity, the commands where <N>= 3 can be used are
-						//explicitly commented; elsewhere only <N>= 1 or <N>= 2 can be used.	
-
-
-	
+    <Declaration><![CDATA[TYPE TcoQlSeriesSupply_SetControl_v_1_x_x : STRUCT
+    Command : eTcoQWlSeriesSupplySetCommands_v_1_x_x;
+    {attribute addProperty Name "<#NRF#>"}
+    NrfValue : REAL; //A number in any format. e.g. 12, 12·00, 1·2 e1 and 120 e-1 are all accepted as the
+    //number 12. Any number, when received, is converted to the required precision
+    //consistent with the use then rounded up to obtain the value of the command.
+    {attribute addProperty Name "<#Nvalue#>"}
+    NValue : USINT := 1; //The number of the output or status register to which the command relates.
+//Note that on single output supplies <N>=1 always.
+//Note also that <N>= 3 refers to the AUX output. The AUX output has limited remote
+//control functionality. For clarity, the commands where <N>= 3 can be used are
+//explicitly commented; elsewhere only <N>= 1 or <N>= 2 can be used.
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -2,44 +2,39 @@
 <TcPlcObject Version="1.1.0.1">
   <POU Name="RecordableStation001" Id="{d8716088-3f58-05d3-3548-fce641607337}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK RecordableStation001 EXTENDS TcoCore.TcoContext
-VAR		
-	_components : RecordableStation001_Components(THIS^);	
-	_sequence : RecordableStation001_Sequencer(THIS^, eRestoreMode.None);
-	_serviceModeTask : TcoCore.TcoTask(THIS^);
-	_automatModeTask : TcoCore.TcoTask(THIS^);
-END_VAR
-
-
-				
-]]></Declaration>
+VAR
+    _components : RecordableStation001_Components(THIS^);
+    _sequence : RecordableStation001_Sequencer(THIS^, eRestoreMode.None);
+    _serviceModeTask : TcoCore.TcoTask(THIS^);
+    _automatModeTask : TcoCore.TcoTask(THIS^);
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Main" Id="{a859f906-ea2c-0da9-0be2-e7f4df0f11d5}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Main method of the TcoContext. This is the entry point of any control logic that belongs to this context. 
-			The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
-			This method is abstract, and it must be overridden in derived block.
-		</summary>
-	</docu>
+    <docu>
+        <summary>
+            Main method of the TcoContext. This is the entry point of any control logic that belongs to this context.
+            The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
+            This method is abstract, and it must be overridden in derived block.
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED  Main]]></Declaration>
+METHOD PROTECTED Main]]></Declaration>
       <Implementation>
         <ST><![CDATA[_sequence(components := _components);
 _components();
 
+IF (_serviceModeTask.Execute()) THEN
+    _automatModeTask.Restore();
+    _components.Service();
+END_IF;
 
-IF(_serviceModeTask.Execute()) THEN
-	_automatModeTask.Restore();
-	_components.Service();
-END_IF;	
-
-IF(_automatModeTask.Execute()) THEN
-	_serviceModeTask.Restore();
-	_sequence.Run();
-END_IF;	]]></ST>
+IF (_automatModeTask.Execute()) THEN
+    _serviceModeTask.Restore();
+    _sequence.Run();
+END_IF;]]></ST>
       </Implementation>
     </Method>
   </POU>

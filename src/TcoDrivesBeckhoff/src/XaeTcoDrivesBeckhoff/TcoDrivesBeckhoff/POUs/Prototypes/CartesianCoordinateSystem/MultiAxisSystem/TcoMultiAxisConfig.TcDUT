@@ -1,28 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoMultiAxisConfig" Id="{eab5815d-9041-0da5-153b-9891035b007d}">
-    <Declaration><![CDATA[TYPE TcoMultiAxisConfig :
-STRUCT
-   Axis1Disabled:BOOL;
-   Axis2Disabled:BOOL;
-   Axis3Disabled:BOOL;
-   Axis4Disabled:BOOL;
- 
-
-   InfoTime : TIME := T#2S;
-   ErrorTime : TIME := T#5S;
-   
-     
-  {attribute addProperty Name "<#Hide Load position Tab#>"}
-  HideLoadPositionTask            : BOOL; 
-  {attribute addProperty Name "<#Hide Save position Tab#>"}
-  HideSavePositionTask            : BOOL; 	
-  {attribute addProperty Name "<#Hide MoveAbsolute Tab#>"}
-  HideMoveAbsoluteTask            : BOOL; 
-  {attribute addProperty Name "<#Hide Position Tab#>"}
-  HidePositionTable            : BOOL; 
+    <Declaration><![CDATA[TYPE TcoMultiAxisConfig : STRUCT
+    Axis1Disabled : BOOL;
+    Axis2Disabled : BOOL;
+    Axis3Disabled : BOOL;
+    Axis4Disabled : BOOL;
+    InfoTime : TIME := T#2S;
+    ErrorTime : TIME := T#5S;
+    {attribute addProperty Name "<#Hide Load position Tab#>"}
+    HideLoadPositionTask : BOOL;
+    {attribute addProperty Name "<#Hide Save position Tab#>"}
+    HideSavePositionTask : BOOL;
+    {attribute addProperty Name "<#Hide MoveAbsolute Tab#>"}
+    HideMoveAbsoluteTask : BOOL;
+    {attribute addProperty Name "<#Hide Position Tab#>"}
+    HidePositionTable : BOOL;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -3,144 +3,134 @@
   <POU Name="TcoTurnTableTask" Id="{e945cbb0-e24e-06b7-37ff-953e1c9b5eb4}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoTurnTableTask EXTENDS TcoCore.TcoTask
 VAR_INPUT
-	inSafetyCondition:BOOL;
+    inSafetyCondition : BOOL;
 END_VAR
 VAR_IN_OUT
-
-	inoInPosition : BOOL;
-	inoInPrecisePosition : BOOL;
-	inoEnableTurn : BOOL;
-	inoStartTurn : BOOL;
-	inoConfig : TcoCarouselConfig;
-	inoStatus : TcoCarouselStatus;
+    inoInPosition : BOOL;
+    inoInPrecisePosition : BOOL;
+    inoEnableTurn : BOOL;
+    inoStartTurn : BOOL;
+    inoConfig : TcoCarouselConfig;
+    inoStatus : TcoCarouselStatus;
 END_VAR
-
 VAR
- 	{attribute 'hide'} 
-	_progress : INT := 0;
-    {attribute 'hide'} 
-	_infoTimer :  TON;
-    {attribute 'hide'} 
-	_errorTimer :  TON;
-    {attribute 'hide'} 
-	_varInfo : __SYSTEM.VAR_INFO;
-    {attribute 'hide'} 
-	_sb : TcoCore.StringBuilder;
-	
-	_notInPositionMessage : TcoCore.TcoMessenger(THIS^);	
-END_VAR
-
-]]></Declaration>
+    {attribute 'hide'}
+    _progress : INT := 0;
+    {attribute 'hide'}
+    _infoTimer : TON;
+    {attribute 'hide'}
+    _errorTimer : TON;
+    {attribute 'hide'}
+    _varInfo : __SYSTEM.VAR_INFO;
+    {attribute 'hide'}
+    _sb : TcoCore.StringBuilder;
+    _notInPositionMessage : TcoCore.TcoMessenger(THIS^);
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF (THIS^.Execute()) THEN
+    IF _progress = 0 THEN
+        IF NOT __ISVALIDREF(inoInPosition) THEN
+            _varInfo := __VARINFO(inoInPosition);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSIF NOT __ISVALIDREF(inoInPrecisePosition) THEN
+            _varInfo := __VARINFO(inoInPrecisePosition);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSIF NOT __ISVALIDREF(inoEnableTurn) THEN
+            _varInfo := __VARINFO(inoEnableTurn);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSIF NOT __ISVALIDREF(inoStartTurn) THEN
+            _varInfo := __VARINFO(inoStartTurn);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSIF NOT __ISVALIDREF(inoConfig) THEN
+            _varInfo := __VARINFO(inoConfig);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSIF NOT __ISVALIDREF(inoStatus) THEN
+            _varInfo := __VARINFO(inoStatus);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSE
+            _progress := _progress + 1;
+        END_IF
+    END_IF
 
+    IF _progress = 1 THEN
+        _notInPositionMessage.OnCondition(NOT inoInPosition)
+            .Error('<#Rotatiting started , but table is not in default position! Acknowledge this alarm if you still want to turn! #>').Pin();
 
-	IF _progress = 0 THEN
-		IF NOT __ISVALIDREF(inoInPosition) THEN
-			_varInfo :=__VARINFO(inoInPosition);
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSIF NOT __ISVALIDREF(inoInPrecisePosition) THEN                                              
-			_varInfo :=__VARINFO(inoInPrecisePosition);                                                
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSIF NOT __ISVALIDREF(inoEnableTurn) THEN                                              
-			_varInfo :=__VARINFO(inoEnableTurn);                                                
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSIF NOT __ISVALIDREF(inoStartTurn) THEN                                              
-			_varInfo :=__VARINFO(inoStartTurn);                                                
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSIF NOT __ISVALIDREF(inoConfig) THEN                                                  
-			_varInfo :=__VARINFO(inoConfig);                                                    
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSIF NOT __ISVALIDREF(inoStatus) THEN                                                  
-			_varInfo :=__VARINFO(inoStatus);                                                    
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-	
-		ELSE
-			_progress := _progress + 1;
-		END_IF
+        _progress := 10;
+    END_IF;
 
-	END_IF
-	IF _progress=1 THEN	
-		_notInPositionMessage.OnCondition(NOT inoInPosition).Error('<#Rotatiting started , but table is not in default position! Acknowledge this alarm if you still want to turn! #>').Pin();
-		_progress:=10;
-	
-	END_IF;
-	
+    IF _progress = 10 THEN
+        Messenger.Info('<#Calulate next expected Id position#>');
 
-	
-	IF _progress=10 THEN	
-		Messenger.Info('<#Calulate next expected Id position#>');
-		IF inoStatus.CurrentPosition <> 0 THEN
-			inoStatus.ExpectedNextPosition := GetIdentifierAtPosition( inoConfig.NumberOfPositions,inoStatus.Positions);	
-		END_IF;
-		
-		Messenger.OnCondition(inoStatus.CurrentPosition=0  AND inoInPosition).Error('<#Incorrectly coded current position. Check configuration of code bits! #>').Pin();
-		
-		IF	inoStatus.CurrentPosition <> 0 AND inoInPosition THEN
-			_progress := 20;
-		ELSIF NOT 	_notInPositionMessage.Pinned THEN
-			_progress:=20;
-			_notInPositionMessage.UnPin();
-	
-		END_IF;		
-	END_IF;
-	
-	IF _progress=20 THEN	
-		inoEnableTurn:=TRUE; 
-		inoStartTurn:=TRUE;	
-		Messenger.Info('<#Table turning. Trying to leave sensor#>');
-		
-		IF NOT inoInPosition THEN
-			inoEnableTurn:=FALSE;	
-			_progress :=  _progress+10;				
-		END_IF
-	END_IF;
-	
-	
-	IF _progress=30 THEN	
-		Messenger.Info('<#Table turning. Trying to reach sensor table in positon.#>');
-		inoStartTurn:=TRUE;	
-		IF inoInPosition THEN
-			inoEnableTurn:=FALSE; 
-			inoStartTurn:=FALSE;	
-			_progress :=  _progress+10;				
-		END_IF
-	END_IF;
-	
-	IF _progress=40 THEN	
-		Messenger.OnCondition(inoStatus.CurrentPosition > 0 AND_THEN inoStatus.ExpectedNextPosition  <>  GetIdentifierAtPosition(1,inoStatus.Positions)).
-			Error(_sb.Clear().Append('<#Table after turn does not have expected coding. Expected id at position #1 is#> ').Append( UINT_TO_STRING(inoStatus.ExpectedNextPosition)).ToString()).Pin();
-	
-		IF(inoStatus.CurrentPosition > 0 AND inoStatus.ExpectedNextPosition = GetIdentifierAtPosition(1,inoStatus.Positions)) THEN
-			
-			THIS^.DoneWhen(TRUE);	
-	
-		END_IF;	
-	END_IF;
-	
-	
-	CallTimers(TRUE);
-	THIS^.ThrowWhen(_errorTimer.Q);	
-	
+        IF inoStatus.CurrentPosition <> 0 THEN
+            inoStatus.ExpectedNextPosition := GetIdentifierAtPosition(inoConfig.NumberOfPositions, inoStatus.Positions);
+        END_IF;
+
+        Messenger.OnCondition(inoStatus.CurrentPosition = 0 AND inoInPosition)
+            .Error('<#Incorrectly coded current position. Check configuration of code bits! #>').Pin();
+
+        IF inoStatus.CurrentPosition <> 0 AND inoInPosition THEN
+            _progress := 20;
+        ELSIF NOT _notInPositionMessage.Pinned THEN
+            _progress := 20;
+            _notInPositionMessage.UnPin();
+        END_IF;
+    END_IF;
+
+    IF _progress = 20 THEN
+        inoEnableTurn := TRUE;
+        inoStartTurn := TRUE;
+        Messenger.Info('<#Table turning. Trying to leave sensor#>');
+
+        IF NOT inoInPosition THEN
+            inoEnableTurn := FALSE;
+            _progress := _progress + 10;
+        END_IF
+    END_IF;
+
+    IF _progress = 30 THEN
+        Messenger.Info('<#Table turning. Trying to reach sensor table in positon.#>');
+        inoStartTurn := TRUE;
+
+        IF inoInPosition THEN
+            inoEnableTurn := FALSE;
+            inoStartTurn := FALSE;
+            _progress := _progress + 10;
+        END_IF
+    END_IF;
+
+    IF _progress = 40 THEN
+        Messenger
+            .OnCondition(inoStatus.CurrentPosition > 0 AND_THEN inoStatus.ExpectedNextPosition <> GetIdentifierAtPosition(1, inoStatus.Positions))
+            .Error(_sb.Clear()
+                .Append('<#Table after turn does not have expected coding. Expected id at position #1 is#> ')
+                .Append(UINT_TO_STRING(inoStatus.ExpectedNextPosition))
+                .ToString()).Pin();
+
+        IF (inoStatus.CurrentPosition > 0 AND inoStatus.ExpectedNextPosition = GetIdentifierAtPosition(1, inoStatus.Positions)) THEN
+            THIS^.DoneWhen(TRUE);
+        END_IF;
+    END_IF;
+
+    CallTimers(TRUE);
+    THIS^.ThrowWhen(_errorTimer.Q);
 END_IF
 
-
 IF NOT inSafetyCondition THEN
-	inoEnableTurn:=FALSE; 
-	inoStartTurn:=FALSE;	
-	Messenger.Error('<#Safety conditions to turn the table are not met.#>').Pin();
+    inoEnableTurn := FALSE;
+    inoStartTurn := FALSE;
+    Messenger.Error('<#Safety conditions to turn the table are not met.#>').Pin();
 END_IF]]></ST>
     </Implementation>
     <Method Name="CallTimers" Id="{817b00f3-1c92-4152-a33f-19342858ca0b}">
       <Declaration><![CDATA[METHOD CallTimers
 VAR_INPUT
-	inValue : BOOL;
-END_VAR
-]]></Declaration>
+    inValue : BOOL;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoConfig) THEN  
-_infoTimer(IN := inValue, PT := THIS^.inoConfig.InfoTime);
-_errorTimer(IN := inValue, PT := THIS^.inoConfig.ErrorTime);
+        <ST><![CDATA[IF __ISVALIDREF(inoConfig) THEN
+    _infoTimer(IN := inValue, PT := THIS^.inoConfig.InfoTime);
+    _errorTimer(IN := inValue, PT := THIS^.inoConfig.ErrorTime);
 END_IF;]]></ST>
       </Implementation>
     </Method>
@@ -148,26 +138,24 @@ END_IF;]]></ST>
       <Declaration><![CDATA[{attribute 'hide'}
 METHOD PUBLIC FB_init : BOOL
 VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	ParentObject : ITcoObject;
-END_VAR
-]]></Declaration>
+    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+    ParentObject : ITcoObject;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="GetIdentifierAtPosition" Id="{262cda27-16a2-029a-3fa1-b5808259c3c3}">
-      <Declaration><![CDATA[METHOD  GetIdentifierAtPosition : UINT
+      <Declaration><![CDATA[METHOD GetIdentifierAtPosition : UINT
 VAR_INPUT
-	inPosition : UINT;
-	inPositions : ARRAY[0..20] OF UINT;
-END_VAR
-]]></Declaration>
+    inPosition : UINT;
+    inPositions : ARRAY[0..20] OF UINT;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF(inPosition < 1 OR inPosition >  SIZEOF (inPositions)) THEN
-	Messenger.Programming(Concat('<#Required position must be in range 1 - 20 but was:#>', UINT_TO_STRING(inPosition)));
-	RETURN;
+        <ST><![CDATA[IF (inPosition < 1 OR inPosition > SIZEOF(inPositions)) THEN
+    Messenger.Programming(Concat('<#Required position must be in range 1 - 20 but was:#>', UINT_TO_STRING(inPosition)));
+    RETURN;
 END_IF
 
 GetIdentifierAtPosition := inPositions[inPosition - 1];]]></ST>
@@ -175,62 +163,60 @@ GetIdentifierAtPosition := inPositions[inPosition - 1];]]></ST>
     </Method>
     <Method Name="OnAbort" Id="{659b7591-9971-01e4-39b0-97607c21f7a9}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task is aborted.
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task is aborted.
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnAbort
-]]></Declaration>
+METHOD PROTECTED OnAbort]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Turning table was aborted, while not yet completed!#>';END_IF; 
-
-]]></ST>
+        <ST><![CDATA[IF __ISVALIDREF(inoStatus) THEN
+    THIS^.inoStatus.ActionDescription := '<#Turning table was aborted, while not yet completed!#>';
+END_IF;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnDone" Id="{e941d52b-d7a3-4eb5-8fe7-6fca43392f98}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task reaches the ```Done``` state .
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task reaches the ```Done``` state .
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnDone
-]]></Declaration>
+METHOD PROTECTED OnDone]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN  THIS^.inoStatus.ActionDescription := '<#Truning table  was completed successfully.#>';END_IF; 
-]]></ST>
+        <ST><![CDATA[IF __ISVALIDREF(inoStatus) THEN
+    THIS^.inoStatus.ActionDescription := '<#Truning table  was completed successfully.#>';
+END_IF;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnError" Id="{36120222-8a71-0b05-36c3-23f43b5da412}">
-      <Declaration><![CDATA[METHOD PROTECTED OnError
-
-]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED OnError]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Turning table finished with an error.#>'; END_IF;
-]]></ST>
+        <ST><![CDATA[IF __ISVALIDREF(inoStatus) THEN
+    THIS^.inoStatus.ActionDescription := '<#Turning table finished with an error.#>';
+END_IF;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStart" Id="{ffa18bcb-323b-0efb-14e7-58615fcb839e}">
-      <Declaration><![CDATA[METHOD PROTECTED OnStart 
-]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED OnStart]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN  THIS^.inoStatus.ActionDescription := '<#Turning table started.#>'; END_IF; 
-]]></ST>
+        <ST><![CDATA[IF __ISVALIDREF(inoStatus) THEN
+    THIS^.inoStatus.ActionDescription := '<#Turning table started.#>';
+END_IF;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{c347b644-4b95-0ebe-1f2f-4e6781dfc275}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
-			<para>
-				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
-			</para>
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+            <para>
+                See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+            </para>
+        </summary>
+    </docu>
 ~*)
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
@@ -238,8 +224,7 @@ METHOD Restore : ITcoRestorable]]></Declaration>
 _progress := 0;
 CallTimers(FALSE);
 Messenger.UnPin();
-_notInPositionMessage.UnPin();
-]]></ST>
+_notInPositionMessage.UnPin();]]></ST>
       </Implementation>
     </Method>
   </POU>

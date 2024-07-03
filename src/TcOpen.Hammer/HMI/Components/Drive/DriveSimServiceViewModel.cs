@@ -9,11 +9,7 @@ namespace PlcHammer
 {
     public class DriveSimServiceViewModel : RenderableViewModel
     {
-        public DriveSimServiceViewModel()
-        {
-           
-        }
-
+        public DriveSimServiceViewModel() { }
 
         public PlainDriveSim GetLogPayload()
         {
@@ -24,6 +20,14 @@ namespace PlcHammer
 
         public DriveSim Component { get; private set; }
 
-        public override object Model { get { return Component; } set { Component = value as DriveSim; Component._moveAbsoluteTask.LogPayloadDecoration = () => GetLogPayload(); } }
+        public override object Model
+        {
+            get { return Component; }
+            set
+            {
+                Component = value as DriveSim;
+                Component._moveAbsoluteTask.LogPayloadDecoration = () => GetLogPayload();
+            }
+        }
     }
 }

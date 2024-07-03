@@ -14,12 +14,9 @@ VAR
     _updateDataWithInvalidIdDone : BOOL;
     _readDataWithInvlaidIdDone : BOOL;
     _deleteDataWithInvalidIdDone : BOOL;
-	_dataExistsDone : BOOL;
-	_createOrUpdateDone : BOOL;
-
-
-END_VAR
-]]></Declaration>
+    _dataExistsDone : BOOL;
+    _createOrUpdateDone : BOOL;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
@@ -32,15 +29,15 @@ END_VAR]]></Declaration>
         <ST><![CDATA[DataTests();
 
 CASE THIS^._testId OF
-	eDataTests.RestoreTasks :
-		DataTests.DataManager._createTask.Restore();
-		DataTests.DataManager._readTask.Restore();
-		DataTests.DataManager._updateTask.Restore();
-		DataTests.DataManager._deleteTask.Restore();
-		DataTests.DataManager._idExistsTask.Restore();
-		DataTests.DataManager._createOrUpdateTask.Restore();		
+    eDataTests.RestoreTasks:
+        DataTests.DataManager._createTask.Restore();
+        DataTests.DataManager._readTask.Restore();
+        DataTests.DataManager._updateTask.Restore();
+        DataTests.DataManager._deleteTask.Restore();
+        DataTests.DataManager._idExistsTask.Restore();
+        DataTests.DataManager._createOrUpdateTask.Restore();
     eDataTests.CreateData:
-        _createDataDone := DataTests.Create(_identifier);		
+        _createDataDone := DataTests.Create(_identifier);
     eDataTests.UpdateData:
         _updateDataDone := DataTests.Update(_identifier);
     eDataTests.ReadData:
@@ -55,12 +52,11 @@ CASE THIS^._testId OF
         _readDataWithInvlaidIdDone := DataTests.ReadDataWithInvlaidId();
     eDataTests.DeleteDataWithInvalidId:
         _deleteDataWithInvalidIdDone := DataTests.DeleteDataWithInvalidId();
-	eDataTests.DataExist:
+    eDataTests.DataExist:
         _dataExistsDone := DataTests.ExistsTest(_identifier);
-	eDataTests.CreateOrUpdate:	
-	   _createOrUpdateDone := DataTests.CreateOrUpdate(_identifier);
-END_CASE
-]]></ST>
+    eDataTests.CreateOrUpdate:
+        _createOrUpdateDone := DataTests.CreateOrUpdate(_identifier);
+END_CASE]]></ST>
       </Implementation>
     </Method>
   </POU>

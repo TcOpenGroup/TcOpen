@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.SignalR.Client;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.SignalR.Client;
 
 namespace TcOpen.Inxton.TcoCore.Blazor.TcoDialog.Hubs
 {
@@ -25,6 +25,7 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDialog.Hubs
         {
             await _hubConnection.SendAsync(DialogMessages.SEND_DIALOG_OPEN, message);
         }
+
         public async Task SendDialogClose(string message)
         {
             await _hubConnection.SendAsync(DialogMessages.SEND_DIALOG_CLOSE, message);
@@ -34,36 +35,44 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDialog.Hubs
         {
             if (!_isConnected)
             {
-                _hubConnection = new HubConnectionBuilder()
-                    .WithUrl(_hubUrl)
-                    .Build();
-                
-                _hubConnection.On<string>(DialogMessages.RECEIVE_DIALOG_OPEN, (message) =>
-                {
-                    HandleReceiveMessage(message);
-                });
-                _hubConnection.On<string>(DialogMessages.RECEIVE_DIALOG_CLOSE, (message) =>
-                {
-                    HandleReceiveDialogClose(message);
-                });
+                _hubConnection = new HubConnectionBuilder().WithUrl(_hubUrl).Build();
+
+                _hubConnection.On<string>(
+                    DialogMessages.RECEIVE_DIALOG_OPEN,
+                    (message) =>
+                    {
+                        HandleReceiveMessage(message);
+                    }
+                );
+                _hubConnection.On<string>(
+                    DialogMessages.RECEIVE_DIALOG_CLOSE,
+                    (message) =>
+                    {
+                        HandleReceiveDialogClose(message);
+                    }
+                );
 
                 // start the connection
                 await _hubConnection.StartAsync();
                 _isConnected = true;
             }
         }
+
         private void HandleReceiveMessage(string message)
         {
             // raise an event to subscribers
             MessageReceived?.Invoke(this, new MessageReceivedEventArgs(message));
         }
+
         private void HandleReceiveDialogClose(string message)
         {
             // raise an event to subscribers
             MessageReceivedDialogClose?.Invoke(this, new MessageReceivedEventArgs(message));
         }
+
         public event MessageReceivedEventHandler MessageReceived;
         public event MessageReceivedEventHandler MessageReceivedDialogClose;
+
         public async Task StopAsync()
         {
             if (_isConnected && _hubConnection != null)
@@ -75,6 +84,7 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDialog.Hubs
                 _isConnected = false;
             }
         }
+
         public async ValueTask DisposeAsync()
         {
             if (_isConnected)
@@ -82,8 +92,8 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDialog.Hubs
                 await StopAsync();
             }
         }
-
     }
+
     public class MessageReceivedEventArgs : EventArgs
     {
         public MessageReceivedEventArgs(string message)
@@ -92,6 +102,5 @@ namespace TcOpen.Inxton.TcoCore.Blazor.TcoDialog.Hubs
         }
 
         public string Message { get; set; }
-
     }
 }

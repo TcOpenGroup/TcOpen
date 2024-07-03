@@ -14,8 +14,8 @@
 	<docu>
 		<summary>
 			Gets common data settings of inspectors.
-		</summary>			
-	</docu>	
+		</summary>
+	</docu>
 ~*)
 PROPERTY CommonData : REFERENCE TO TcoInspectorData]]></Declaration>
       <Get Name="Get" Id="{9b5ef77f-71b0-07b1-3bad-27c8bab87325}">
@@ -78,18 +78,18 @@ END_VAR
 	<docu>
 		<summary>
 			Updates comprehensive result. The comprehensive result is set to `Failed` when any inspection fails or is inconclusive.
-			Any bypassed or excluded inspection are not taken in the account.			
-		</summary>			
-	</docu>	
+			Any bypassed or excluded inspection are not taken in the account.
+		</summary>
+	</docu>
 ~*)
 METHOD UpdateComprehensiveResult : IInspector
 VAR_IN_OUT
 	(*~
 	<docu>
 		<summary>
-			Comprehensive result data structure to be updated.	
-		</summary>			
-	</docu>	
+			Comprehensive result data structure to be updated.
+		</summary>
+	</docu>
 	~*)
     inoResult : TcoComprehensiveResult;
 END_VAR
@@ -100,8 +100,8 @@ END_VAR
 	<docu>
 		<summary>
 			Provide information about the Inspector name (if there are multiple inspectors, only the failed ones will be displayed).  (e.g. {attribute addProperty Name "Bolt presence inspection"})
-		</summary>			
-	</docu>	
+		</summary>
+	</docu>
 ~*)
 METHOD WithDescription : IInspector
 
@@ -112,8 +112,8 @@ METHOD WithDescription : IInspector
 	<docu>
 		<summary>
 			Provide information about ErrorCode (if there are multiple inspectors, only the failed ones will be displayed). Error codes shoud be defined in Inspectors
-		</summary>			
-	</docu>	
+		</summary>
+	</docu>
 ~*)
 METHOD WithErrorCode : IInspector
 
@@ -124,8 +124,8 @@ METHOD WithErrorCode : IInspector
 	<docu>
 		<summary>
 			Provide information about Failure Description (if there are multiple inspectors, only the failed ones will be displayed). Failure description shoud be defined in Inspectors.
-		</summary>			
-	</docu>	
+		</summary>
+	</docu>
 ~*)
 METHOD WithFailureDescription : IInspector
 

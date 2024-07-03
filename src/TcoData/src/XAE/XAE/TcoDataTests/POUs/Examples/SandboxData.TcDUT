@@ -1,17 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <DUT Name="SandboxData" Id="{db6560ed-fb2a-0049-1f52-f29952b65ec0}">
-    <Declaration><![CDATA[
-//<SandboxData>
-
+    <Declaration><![CDATA[//<SandboxData>
 // DATA STRUCTURE ELIGIBLE FOR USE WITH TcoDataExchange.
-TYPE
-    SandboxData EXTENDS TcoData.TcoEntity :
-    STRUCT
-        sampleData : SampleDataStructure;
-		someInteger : INT;
-		someString : STRING;
-    END_STRUCT
+TYPE SandboxData EXTENDS TcoData.TcoEntity : STRUCT
+    sampleData : SampleDataStructure;
+    someInteger : INT;
+    someString : STRING;
+END_STRUCT
 END_TYPE
 //</SandboxData>
 ]]></Declaration>

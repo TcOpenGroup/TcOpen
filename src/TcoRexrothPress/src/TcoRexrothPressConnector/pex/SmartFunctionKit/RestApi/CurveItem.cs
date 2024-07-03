@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace TcoRexrothPressConnector.SmartfunctionKit.RestApi
 {
-   
     public class Function
     {
         public List<Parameter> parameters { get; set; }
@@ -95,6 +94,4 @@ namespace TcoRexrothPressConnector.SmartfunctionKit.RestApi
         public int x { get; set; }
         public int y { get; set; }
     }
-
-
 }

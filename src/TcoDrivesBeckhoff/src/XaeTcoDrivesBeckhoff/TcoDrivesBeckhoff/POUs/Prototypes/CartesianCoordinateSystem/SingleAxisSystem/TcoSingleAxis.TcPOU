@@ -3,153 +3,128 @@
   <POU Name="TcoSingleAxis" Id="{185b24d3-f25a-4e21-b88b-2cef8570a6ca}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoSingleAxis EXTENDS TcoCore.TcoComponent IMPLEMENTS ITcoSingleAxis
 VAR_INPUT
-	inEnable : BOOL;
+    inEnable : BOOL;
     inEnablePositive : BOOL;
     inEnableNegative : BOOL;
     inCalibrationCam : BOOL;
-	refAxis : REFERENCE TO TcoAxisRef;
+    refAxis : REFERENCE TO TcoAxisRef;
 END_VAR
 VAR_IN_OUT
-	inoPositions:TcoSingleAxisPositionsRootContainer;
+    inoPositions : TcoSingleAxisPositionsRootContainer;
 END_VAR
 VAR
-	 {attribute 'hide'}
+    {attribute 'hide'}
     _axisRef : REFERENCE TO TcoAxisRef;
-	{attribute addProperty Name "<#Axis#>"}
-	_axis :   TcoDriveSimple(THIS^);
-	{attribute addProperty Name "<#Load positions Task#>"}
-	_loadPositionTask :   TcoAxisExchangeDataTask(THIS^);
-	{attribute addProperty Name "<#Save positions Task#>"}
-	_savePositionTask :   TcoAxisExchangeDataTask(THIS^);
-	{attribute addProperty Name "<#Positions#>"}
-	{attribute clr [MemberByIdentity()]}
-	_positions : TcoSingleAxisPositionsRootContainer(THIS^);
-	{attribute addProperty Name "<#Move absolute Task#>"}
-	_moveAbsoluteTask :   TcoCore.TcoTask (THIS^);
-	{attribute addProperty Name "<#Move relative Task#>"}
-	_moveRelativeTask :   TcoCore.TcoTask (THIS^);
-
-	
-	{attribute addProperty Name "<#Restore Task#>"}
-	_restoreTask :   TcoCore.TcoTask (THIS^);
-	{attribute addProperty Name "<#Status#>"}
+    {attribute addProperty Name "<#Axis#>"}
+    _axis : TcoDriveSimple(THIS^);
+    {attribute addProperty Name "<#Load positions Task#>"}
+    _loadPositionTask : TcoAxisExchangeDataTask(THIS^);
+    {attribute addProperty Name "<#Save positions Task#>"}
+    _savePositionTask : TcoAxisExchangeDataTask(THIS^);
+    {attribute addProperty Name "<#Positions#>"}
+    {attribute clr [MemberByIdentity()]}
+    _positions : TcoSingleAxisPositionsRootContainer(THIS^);
+    {attribute addProperty Name "<#Move absolute Task#>"}
+    _moveAbsoluteTask : TcoCore.TcoTask(THIS^);
+    {attribute addProperty Name "<#Move relative Task#>"}
+    _moveRelativeTask : TcoCore.TcoTask(THIS^);
+    {attribute addProperty Name "<#Restore Task#>"}
+    _restoreTask : TcoCore.TcoTask(THIS^);
+    {attribute addProperty Name "<#Status#>"}
     {attribute clr [ReadOnly()]}
     _status : TcoSingleAxisStatus;
-	{attribute addProperty Name "<#Config#>"}
+    {attribute addProperty Name "<#Config#>"}
     _config : TcoSingleAxisConfig;
-	_moveParams: TcoSingleAxisMoveParam;
-	{attribute 'hide'} 
-	_infoTimer :  TON;
-    {attribute 'hide'} 
-	_errorTimer :  TON;
-END_VAR
-]]></Declaration>
+    _moveParams : TcoSingleAxisMoveParam;
+    {attribute 'hide'}
+    _infoTimer : TON;
+    {attribute 'hide'}
+    _errorTimer : TON;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[_positions := inoPositions;
 
-IF NOT __ISVALIDREF(refAxis)  THEN
+IF NOT __ISVALIDREF(refAxis) THEN
     Messenger.Post('<#Invalid reference axis #>', TcoCore.eMessageCategory.ProgrammingError);
     RETURN;
 END_IF
+
 _axisRef REF= refAxis;
-
-
 _savePositionTask();
-_loadPositionTask();	
+_loadPositionTask();
 
-_axis(
-	inEnable:=inEnable , 
-	inEnablePositive:=inEnablePositive , 
-	inEnableNegative:=inEnableNegative , 
-	inCalibrationCam:=inCalibrationCam, 
-	inoAxisRef:= _axisRef);
-
+_axis(inEnable := inEnable,
+    inEnablePositive := inEnablePositive,
+    inEnableNegative := inEnableNegative,
+    inCalibrationCam := inCalibrationCam,
+    inoAxisRef := _axisRef);
 //*************MOVE ABSOLUTE********************
-_moveAbsoluteTask.Enabled:=NOT _moveRelativeTask.Busy; 
+_moveAbsoluteTask.Enabled := NOT _moveRelativeTask.Busy;
+
 IF _moveAbsoluteTask.Execute() THEN
-	
+    THIS^._axis.MoveAbsolute(inPosition := _moveParams.Position,
+        inVelocity := _moveParams.Velocity,
+        inAcceleration := _moveParams.Acceleration,
+        inDeceleration := _moveParams.Deceleration,
+        inJerk := _moveParams.Jerk);
 
-		
-	THIS^._axis.MoveAbsolute(inPosition:=_moveParams.Position,
-												inVelocity:=_moveParams.Velocity,
-												inAcceleration:=_moveParams.Acceleration,
-												inDeceleration:=_moveParams.Deceleration,		
-												inJerk:=_moveParams.Jerk);
-	
-
-		
-
-			
-	_moveAbsoluteTask.DoneWhen(THIS^._axis.MoveAbsoluteTask.Done);
-	_moveAbsoluteTask.ThrowWhen(THIS^._axis.MoveAbsoluteTask.Error);	
-
+    _moveAbsoluteTask.DoneWhen(THIS^._axis.MoveAbsoluteTask.Done);
+    _moveAbsoluteTask.ThrowWhen(THIS^._axis.MoveAbsoluteTask.Error);
 END_IF;
 //****************************************
-
-
 //*************MOVE RELATIVE********************
-_moveRelativeTask.Enabled:=NOT _moveAbsoluteTask.Busy; 
+_moveRelativeTask.Enabled := NOT _moveAbsoluteTask.Busy;
+
 IF _moveRelativeTask.Execute() THEN
-	
-	THIS^._axis.MoveRelative(inDistance:=_moveParams.Position,
-												inVelocity:=_moveParams.Velocity,
-												inAcceleration:=_moveParams.Acceleration,
-												inDeceleration:=_moveParams.Deceleration,		
-												inJerk:=_moveParams.Jerk);
-	
+    THIS^._axis.MoveRelative(inDistance := _moveParams.Position,
+        inVelocity := _moveParams.Velocity,
+        inAcceleration := _moveParams.Acceleration,
+        inDeceleration := _moveParams.Deceleration,
+        inJerk := _moveParams.Jerk);
 
-	_moveRelativeTask.DoneWhen(THIS^._axis.MoveRelativeTask.Done);
-	_moveRelativeTask.ThrowWhen(_errorTimer.Q OR THIS^._axis.MoveRelativeTask.Error);	
-
+    _moveRelativeTask.DoneWhen(THIS^._axis.MoveRelativeTask.Done);
+    _moveRelativeTask.ThrowWhen(_errorTimer.Q OR THIS^._axis.MoveRelativeTask.Error);
 END_IF;
 //****************************************
-
-
-
-
-
 //*************RESTORE********************
-
 _restoreTask.Enabled := TRUE;
+
 IF _restoreTask.Execute() THEN
-	Restore();
+    Restore();
 END_IF
 //****************************************
-	
- inoPositions :=_positions;]]></ST>
+inoPositions := _positions;]]></ST>
     </Implementation>
     <Folder Name="Tasks" Id="{8e70240b-7b2d-0f4b-36dc-8581181f84a9}" />
     <Property Name="Axis" Id="{afff7752-8ff5-4a6a-bbec-f2ed8a50befd}">
       <Declaration><![CDATA[PROPERTY Axis : REFERENCE TO TcoDriveSimple]]></Declaration>
       <Get Name="Get" Id="{e127fc3c-3f90-4aa4-b69d-4652a2960be6}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Axis REF=_axis;]]></ST>
+          <ST><![CDATA[Axis REF= _axis;]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Method Name="CallTimers" Id="{0a49e5e5-97c0-0f12-142a-9bf3e067c1fc}">
       <Declaration><![CDATA[METHOD CallTimers
 VAR_INPUT
-	inValue : BOOL;
-END_VAR
-]]></Declaration>
+    inValue : BOOL;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(Config) THEN  
-_infoTimer(IN := inValue, PT := THIS^.Config.InfoTime);
-_errorTimer(IN := inValue, PT := THIS^.Config.ErrorTime);
+        <ST><![CDATA[IF __ISVALIDREF(Config) THEN
+    _infoTimer(IN := inValue, PT := THIS^.Config.InfoTime);
+    _errorTimer(IN := inValue, PT := THIS^.Config.ErrorTime);
 END_IF;]]></ST>
       </Implementation>
     </Method>
     <Property Name="Config" Id="{df1222ea-72d5-049a-39f8-23da831666e8}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Gets the configuration of the Axis. 					
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Gets the configuration of the Axis.
+        </summary>
+    </docu>
 ~*)
 PROPERTY Config : REFERENCE TO TcoSingleAxisConfig]]></Declaration>
       <Get Name="Get" Id="{e56e9c0c-4520-0832-01b4-c85d7919c76e}">
@@ -163,8 +138,7 @@ PROPERTY Config : REFERENCE TO TcoSingleAxisConfig]]></Declaration>
       <Declaration><![CDATA[PROPERTY PUBLIC LoadPositionsTask : REFERENCE TO TcoAxisExchangeDataTask]]></Declaration>
       <Get Name="Get" Id="{58593eb5-875f-01d6-2914-ba92ebdb8a66}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[LoadPositionsTask REF= _loadPositionTask;]]></ST>
         </Implementation>
@@ -173,71 +147,58 @@ END_VAR
     <Method Name="MoveAbsolute" Id="{e3d5c00a-e76c-4868-85c9-ff706578a857}">
       <Declaration><![CDATA[METHOD MoveAbsolute : ITcoTaskStatus
 VAR_INPUT
-	MoveParams : TcoSingleAxisMoveParam;
-END_VAR
-]]></Declaration>
+    MoveParams : TcoSingleAxisMoveParam;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_moveParams:=MoveParams;
-MoveAbsolute:=THIS^._moveAbsoluteTask.Invoke();]]></ST>
+        <ST><![CDATA[_moveParams := MoveParams;
+MoveAbsolute := THIS^._moveAbsoluteTask.Invoke();]]></ST>
       </Implementation>
     </Method>
     <Property Name="MoveAbsoluteTask" Id="{c823d07c-b5d3-018d-1f33-9a3264abca62}" FolderPath="Tasks\">
       <Declaration><![CDATA[PROPERTY PUBLIC MoveAbsoluteTask : REFERENCE TO TcoCore.TcoTask]]></Declaration>
       <Get Name="Get" Id="{5e7f405f-d3b3-0134-0a57-ea4887c1ef97}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[MoveAbsoluteTask REF=_moveAbsoluteTask;]]></ST>
+          <ST><![CDATA[MoveAbsoluteTask REF= _moveAbsoluteTask;]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Method Name="MoveRelative" Id="{27f1f345-1e04-0346-3019-bfb9b1560ada}">
       <Declaration><![CDATA[METHOD MoveRelative : ITcoTaskStatus
 VAR_INPUT
-	MoveParams : TcoSingleAxisMoveParam;
-END_VAR
-]]></Declaration>
+    MoveParams : TcoSingleAxisMoveParam;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_moveParams:=MoveParams;
-MoveRelative:=THIS^._moveRelativeTask.Invoke();]]></ST>
+        <ST><![CDATA[_moveParams := MoveParams;
+MoveRelative := THIS^._moveRelativeTask.Invoke();]]></ST>
       </Implementation>
     </Method>
     <Property Name="MoveRelativeTask" Id="{4784ac79-7dd3-00da-368d-7b075008258b}" FolderPath="Tasks\">
       <Declaration><![CDATA[PROPERTY PUBLIC MoveRelativeTask : REFERENCE TO TcoCore.TcoTask]]></Declaration>
       <Get Name="Get" Id="{496e91ee-c0bc-029b-3484-05a455e99e60}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[MoveRelativeTask REF=_moveRelativeTask;]]></ST>
+          <ST><![CDATA[MoveRelativeTask REF= _moveRelativeTask;]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Method Name="ResetDrive" Id="{0e7b0a7a-f786-06d8-3922-516d2d347d70}">
-      <Declaration><![CDATA[METHOD ResetDrive : TcoCore.ITcoTaskStatus
-
-
-]]></Declaration>
+      <Declaration><![CDATA[METHOD ResetDrive : TcoCore.ITcoTaskStatus]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ResetDrive:=THIS^.Axis.Reset();
-
-
-]]></ST>
+        <ST><![CDATA[ResetDrive := THIS^.Axis.Reset();]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{6b84f7f5-bd0c-02a1-2804-19ef613c96e4}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.	
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+        </summary>
+    </docu>
 ~*)
-METHOD  Restore : ITcoRestorable
-
-
-]]></Declaration>
+METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[_axis.Restore();
 _restoreTask.Restore();
@@ -253,40 +214,31 @@ Messenger.UnPin();]]></ST>
       <Declaration><![CDATA[PROPERTY PUBLIC SavePositionsTask : REFERENCE TO TcoAxisExchangeDataTask]]></Declaration>
       <Get Name="Get" Id="{32880dc6-5d56-0f0c-039c-126a92fcd425}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[SavePositionsTask REF= _savePositionTask;]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Method Name="ServiceMode" Id="{e1df90eb-bcf6-4c99-8bb6-a097504284b8}">
-      <Declaration><![CDATA[METHOD PROTECTED ServiceMode
-]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED ServiceMode]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^._axis.Service();
-]]></ST>
+        <ST><![CDATA[THIS^._axis.Service();]]></ST>
       </Implementation>
     </Method>
     <Method Name="SoeReset" Id="{e2ac31e5-3d50-05ab-00bc-49c90b5da0e1}">
-      <Declaration><![CDATA[METHOD SoeReset : TcoCore.ITcoTaskStatus
-
-
-]]></Declaration>
+      <Declaration><![CDATA[METHOD SoeReset : TcoCore.ITcoTaskStatus]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SoeReset:=THIS^.Axis.SoEReset();
-
-
-]]></ST>
+        <ST><![CDATA[SoeReset := THIS^.Axis.SoEReset();]]></ST>
       </Implementation>
     </Method>
     <Property Name="Status" Id="{e0852ccd-fd4f-0f31-356f-1c11062ed8c3}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Gets the status of the Axis system. 					
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Gets the status of the Axis system.
+        </summary>
+    </docu>
 ~*)
 PROPERTY Status : REFERENCE TO TcoSingleAxisStatus]]></Declaration>
       <Get Name="Get" Id="{0853f10e-8dfb-0801-1cac-8d43d6440150}">

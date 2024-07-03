@@ -30,6 +30,7 @@ END_VAR]]></Declaration>
         RETURN;
     END_IF
 END_IF
+
 IF Execute() THEN
     _dummyPreconditionOK := TRUE;
 
@@ -59,7 +60,6 @@ IF Execute() THEN
 
     DoneWhen(_mcMoveRelative.Done);
     ThrowWhen(_mcMoveRelative.Error);
-
 END_IF]]></ST>
     </Implementation>
     <Property Name="DriveRef" Id="{146efb26-7f32-04da-32b9-93685dec6a03}">
@@ -80,7 +80,7 @@ END_IF]]></ST>
 VAR_INPUT
     bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
     bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
-  	ParentObject : ITcoObject;	
+    ParentObject : ITcoObject;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
@@ -106,11 +106,11 @@ InvokeWithParams := THIS^.Invoke();]]></ST>
     </Method>
     <Method Name="OnAbort" Id="{b2c16ee0-afd5-068f-3960-07dec1b46405}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task is aborted.
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task is aborted.
+        </summary>
+    </docu>
 ~*)
 METHOD PROTECTED OnAbort]]></Declaration>
       <Implementation>
@@ -129,14 +129,13 @@ _mcMoveRelative(Axis := _axisRef, Execute := FALSE);]]></ST>
     </Method>
     <Method Name="OnDone" Id="{57a9f802-273a-0f02-25dc-2e184a738dba}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task reaches the ```Done``` state .
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task reaches the ```Done``` state .
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnDone
-]]></Declaration>
+METHOD PROTECTED OnDone]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^.DriveRef._movementState.Restore();
 _mcMoveRelative(Axis := _axisRef, Execute := FALSE);]]></ST>
@@ -144,43 +143,42 @@ _mcMoveRelative(Axis := _axisRef, Execute := FALSE);]]></ST>
     </Method>
     <Method Name="OnError" Id="{04568080-7829-0dc8-1387-20a80a858f6e}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task reaches the ```Error``` state.
-			<para>
-				Do not confuse with <see cref="PlcDocu.TcoCore.TcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
-			</para>
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task reaches the ```Error``` state.
+            <para>
+                Do not confuse with <see cref="PlcDocu.TcoCore.TcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
+            </para>
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnError
-]]></Declaration>
+METHOD PROTECTED OnError]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^.DriveRef._movementState.Restore();
+
 IF NOT _axisRef.Status.Error THEN
-	DriveRef.SetErrorID(DriveRef._moveRelativeTask._mcMoveRelative.ErrorID);
+    DriveRef.SetErrorID(DriveRef._moveRelativeTask._mcMoveRelative.ErrorID);
 END_IF
-_mcMoveRelative(Axis := _axisRef, Execute := FALSE);
-]]></ST>
+
+_mcMoveRelative(Axis := _axisRef, Execute := FALSE);]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStart" Id="{3ab86d75-bbf1-0431-304b-74df4f8dfd95}">
-      <Declaration><![CDATA[METHOD PROTECTED OnStart 
-]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED OnStart]]></Declaration>
       <Implementation>
         <ST><![CDATA[_mcMoveRelative(Axis := _axisRef, Execute := FALSE);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{e976de80-cfea-01a1-1fd9-673984f12c06}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
-			<para>
-				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
-			</para>
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+            <para>
+                See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+            </para>
+        </summary>
+    </docu>
 ~*)
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
@@ -189,20 +187,18 @@ METHOD Restore : ITcoRestorable]]></Declaration>
     </Method>
     <Method Name="WhileError" Id="{5b8e54de-475c-0f46-2d99-ccc66c7867aa}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes until task is in ```Error``` state .
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes until task is in ```Error``` state .
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED WhileError
-]]></Declaration>
+METHOD PROTECTED WhileError]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
-	DriveRef.SetErrorID(DriveRef._moveRelativeTask._mcMoveRelative.ErrorID);
+    DriveRef.SetErrorID(DriveRef._moveRelativeTask._mcMoveRelative.ErrorID);
     _mcMoveRelative(Axis := _axisRef, Execute := FALSE);
-END_IF
-]]></ST>
+END_IF]]></ST>
       </Implementation>
     </Method>
   </POU>

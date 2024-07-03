@@ -3,18 +3,16 @@
   <POU Name="fbInheritanceLevel_4" Id="{ba63cbe9-92bb-4b9b-8666-6c548873f4d8}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK fbInheritanceLevel_4 EXTENDS fbInheritanceLevel_3
 VAR
-	{attribute addProperty Name "LEVEL 4"}
-	level_4 : stAllTypes;	
-END_VAR
-]]></Declaration>
+    {attribute addProperty Name "LEVEL 4"}
+    level_4 : stAllTypes;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[SUPER^();]]></ST>
     </Implementation>
     <Method Name="Init" Id="{b14964ff-8deb-4680-8a1b-107600890b21}">
       <Declaration><![CDATA[METHOD Init : BOOL
 VAR_INPUT
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.Init();]]></ST>
       </Implementation>

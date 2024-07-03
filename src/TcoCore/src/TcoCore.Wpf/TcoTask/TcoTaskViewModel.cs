@@ -5,17 +5,14 @@ using TcOpen.Inxton.Input;
 
 namespace TcoCore
 {
-    public class TaskDetailsView : UserControl
-    {
-
-    }
+    public class TaskDetailsView : UserControl { }
 
     public class TcoTaskViewModel : Vortex.Presentation.Wpf.RenderableViewModel
     {
         public TcoTaskViewModel()
         {
             OpenDetailsDialog = new RelayCommand(action => OpenTaskDialogue());
-            RestoreCommand = new RelayCommand(action => this.TcoTask._restoreRequest.Cyclic = true);         
+            RestoreCommand = new RelayCommand(action => this.TcoTask._restoreRequest.Cyclic = true);
         }
 
         object taskDetailContent;
@@ -36,7 +33,8 @@ namespace TcoCore
         bool isTaskDetailDialogueOpened;
         public bool IsTaskDetailDialogueOpened
         {
-            get => isTaskDetailDialogueOpened; set
+            get => isTaskDetailDialogueOpened;
+            set
             {
                 if (isTaskDetailDialogueOpened == value)
                 {
@@ -55,10 +53,14 @@ namespace TcoCore
 
         public TcoTask TcoTask { get; private set; }
 
-        public override object Model { get => TcoTask; set => TcoTask = value as TcoTask; }
+        public override object Model
+        {
+            get => TcoTask;
+            set => TcoTask = value as TcoTask;
+        }
 
-        public RelayCommand RestoreCommand { get; }   
-        
+        public RelayCommand RestoreCommand { get; }
+
         public RelayCommand OpenDetailsDialog { get; }
     }
 

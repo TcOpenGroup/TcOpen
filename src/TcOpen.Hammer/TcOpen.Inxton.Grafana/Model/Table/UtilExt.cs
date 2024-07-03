@@ -1,13 +1,15 @@
-﻿using Grafana.Backend.Model;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Grafana.Backend.Model;
 
 namespace TcOpenHammer.Grafana.API.Transformation
 {
     internal static class UtilExt
     {
         public static ITable ToTable<T>(this IEnumerable<T> enumerable) => new Table<T>(enumerable);
-        public static ITable ToTableWithTimeColumn<T>(this IEnumerable<T> enumerable) => new TableWithTimeColumn<T>(enumerable);
+
+        public static ITable ToTableWithTimeColumn<T>(this IEnumerable<T> enumerable) =>
+            new TableWithTimeColumn<T>(enumerable);
 
         public static ITable Transpose(this ITable source)
         {
@@ -25,6 +27,5 @@ namespace TcOpenHammer.Grafana.API.Transformation
             pivoted.Rows = new List<IEnumerable<object>> { secondColumn };
             return pivoted;
         }
-
     }
 }

@@ -11,12 +11,9 @@ namespace TcoRexrothPress
 {
     public partial class TcoSmartFunctionKit_v_4_x_xServiceView : UserControl
     {
-
-       
         public TcoSmartFunctionKit_v_4_x_xServiceView()
         {
             InitializeComponent();
         }
-
     }
 }

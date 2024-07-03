@@ -9,18 +9,15 @@ using System.Windows;
 using Vortex.Connector;
 using Vortex.Presentation.Wpf;
 
-
 namespace TcoTixonFeeding
 {
-    public class TcoTixonVibro_v_1_x_xServiceViewModel : TcoTixonFeedingBaseServiceViewModel<TcoTixonVibro_v_1_x_x,PlainTcoTixonVibro_Config_v_1_x_x>
+    public class TcoTixonVibro_v_1_x_xServiceViewModel
+        : TcoTixonFeedingBaseServiceViewModel<
+            TcoTixonVibro_v_1_x_x,
+            PlainTcoTixonVibro_Config_v_1_x_x
+        >
     {
-
-        public TcoTixonVibro_v_1_x_xServiceViewModel():base()
-        {
-           
-
-        }
-      
-}
-
+        public TcoTixonVibro_v_1_x_xServiceViewModel()
+            : base() { }
+    }
 }

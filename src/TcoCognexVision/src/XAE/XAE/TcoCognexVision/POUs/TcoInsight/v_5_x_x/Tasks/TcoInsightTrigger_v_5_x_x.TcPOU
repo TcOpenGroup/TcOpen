@@ -3,255 +3,250 @@
   <POU Name="TcoInsightTrigger_v_5_x_x" Id="{4f857f87-dc80-0969-0de1-1c9cd2ff1b91}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoInsightTrigger_v_5_x_x EXTENDS TcoCore.TcoTask
 VAR_IN_OUT
-	inoIoData	: TcoInsightIO_v_5_x_x;
-    inoConfig	: TcoInsightConfig_v_5_x_x;
-	inoStatus	: TcoInsightStatus_v_5_x_x;	
-	inoResults	: TcoInsightResults_v_5_x_x;
+    inoIoData : TcoInsightIO_v_5_x_x;
+    inoConfig : TcoInsightConfig_v_5_x_x;
+    inoStatus : TcoInsightStatus_v_5_x_x;
+    inoResults : TcoInsightResults_v_5_x_x;
 END_VAR
 VAR
-    {attribute 'hide'} 
-	_progress : INT := 0;
-    {attribute 'hide'} 
-	_infoTimer :  TON;
-    {attribute 'hide'} 
-	_errorTimer :  TON;
-    {attribute 'hide'} 
-	_varInfo : __SYSTEM.VAR_INFO;
-    {attribute 'hide'} 
-	_sb : TcoCore.StringBuilder;
-    {attribute 'hide'} 
-	_inspectionCompleted : BOOL;
-    {attribute 'hide'} 
-	_size : UINT;
-END_VAR
-]]></Declaration>
+    {attribute 'hide'}
+    _progress : INT := 0;
+    {attribute 'hide'}
+    _infoTimer : TON;
+    {attribute 'hide'}
+    _errorTimer : TON;
+    {attribute 'hide'}
+    _varInfo : __SYSTEM.VAR_INFO;
+    {attribute 'hide'}
+    _sb : TcoCore.StringBuilder;
+    {attribute 'hide'}
+    _inspectionCompleted : BOOL;
+    {attribute 'hide'}
+    _size : UINT;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF Execute() THEN
-	IF _progress = 0 THEN
-		IF NOT __ISVALIDREF(inoIoData) THEN
-			_varInfo :=__VARINFO(inoIoData);
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSIF NOT __ISVALIDREF(inoConfig) THEN                                                  
-			_varInfo :=__VARINFO(inoConfig);                                                    
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSIF NOT __ISVALIDREF(inoStatus) THEN                                                  
-			_varInfo :=__VARINFO(inoStatus);                                                    
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSIF NOT __ISVALIDREF(inoResults) THEN                                              
-			_varInfo :=__VARINFO(inoResults);                                                
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSE
-			_progress := _progress + 1;
-		END_IF
-	END_IF
-	
-	IF _progress = 1 THEN
-		THIS^.inoStatus.ActionDescription := '<#Trigger running.#>'; 
-		CallTimers(FALSE);
-		THIS^.inoIoData.AcquisitionControl.AcquisitionTriggerEnable := TRUE;
-		THIS^.inoIoData.AcquisitionControl.AcquisitionTrigger := FALSE;
-		THIS^.inoIoData.AcquisitionControl.ClearExposureComplete := THIS^.inoIoData.AcquisitionStatus.ExposureComplete;
-		THIS^.inoIoData.AcquisitionControl.SetOffline := FALSE;
-	
-		THIS^.inoIoData.InspectionControl.EnableResultsBuffering := FALSE; 
-		THIS^.inoIoData.InspectionControl.AcknowledgeInspectionResults := THIS^.inoIoData.InspectionStatus.ResultsValid;
-		THIS^.inoIoData.InspectionControl.ExtendedUserDataSet := FALSE;
-		THIS^.inoIoData.InspectionControl.ExecuteCommand := FALSE;
-		THIS^.inoIoData.InspectionControl.ClearError := THIS^.inoIoData.InspectionStatus.Error;
-		
-		THIS^.inoIoData.CommandControl.Command:=0;
+    IF _progress = 0 THEN
+        IF NOT __ISVALIDREF(inoIoData) THEN
+            _varInfo := __VARINFO(inoIoData);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSIF NOT __ISVALIDREF(inoConfig) THEN
+            _varInfo := __VARINFO(inoConfig);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSIF NOT __ISVALIDREF(inoStatus) THEN
+            _varInfo := __VARINFO(inoStatus);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSIF NOT __ISVALIDREF(inoResults) THEN
+            _varInfo := __VARINFO(inoResults);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSE
+            _progress := _progress + 1;
+        END_IF
+    END_IF
 
-		_progress := _progress + 1;
-	END_IF
-	
-	IF _progress = 2 THEN
-		THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal ExposureComplete to be reseted!#>').Pin(); 
-		IF NOT THIS^.inoIoData.AcquisitionStatus.ExposureComplete THEN
-			THIS^.inoIoData.AcquisitionControl.ClearExposureComplete := FALSE;
-			CallTimers(FALSE);
-			_progress := _progress + 1;
-		END_IF
-	END_IF
-	
-	IF _progress = 3 THEN
-		THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal ResultsValid to be reseted!#>').Pin(); 
-		IF NOT THIS^.inoIoData.InspectionStatus.ResultsValid THEN
-			THIS^.inoIoData.InspectionControl.AcknowledgeInspectionResults := FALSE;
-			CallTimers(FALSE);
-			_progress := _progress + 1;
-		END_IF
-	END_IF
-	
-	IF _progress = 4 THEN
-		THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal Error to be reseted!#>').Pin(); 
-		IF NOT THIS^.inoIoData.InspectionStatus.Error THEN
-			THIS^.inoIoData.InspectionControl.ClearError := FALSE;
-			CallTimers(FALSE);
-			_progress := _progress + 1;
-		END_IF
-	END_IF
-	
-	IF _progress = 5 THEN
-		THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal AcquisitionTriggerReady to be set!#>').Pin(); 
-		_inspectionCompleted := THIS^.inoIoData.InspectionStatus.InspectionCompleted;
-		IF THIS^.inoIoData.AcquisitionStatus.AcquisitionTriggerReady THEN
-			CallTimers(FALSE);
-			_progress := _progress + 1;
-		END_IF
-	END_IF
-	
-	IF _progress = 6 THEN
-		THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal AcquisitionTriggerAcknowledge to be set!#>').Pin(); 
-		THIS^.inoIoData.AcquisitionControl.AcquisitionTrigger := TRUE;
-		IF THIS^.inoIoData.AcquisitionStatus.AcquisitionTriggerAcknowledge THEN
-			CallTimers(FALSE);
-			_progress := _progress + 1;
-		END_IF
-	END_IF
-	
-	IF _progress = 7 THEN	
-		THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal InspectionCompleted to be toggled!#>').Pin(); 
-		THIS^.inoIoData.AcquisitionControl.AcquisitionTrigger := FALSE;
-		IF THIS^._inspectionCompleted <> THIS^.inoIoData.InspectionStatus.InspectionCompleted THEN
-			CallTimers(FALSE);
-			_progress := _progress + 1;
-		END_IF
-	END_IF
+    IF _progress = 1 THEN
+        THIS^.inoStatus.ActionDescription := '<#Trigger running.#>';
+        CallTimers(FALSE);
+        THIS^.inoIoData.AcquisitionControl.AcquisitionTriggerEnable := TRUE;
+        THIS^.inoIoData.AcquisitionControl.AcquisitionTrigger := FALSE;
+        THIS^.inoIoData.AcquisitionControl.ClearExposureComplete := THIS^.inoIoData.AcquisitionStatus.ExposureComplete;
+        THIS^.inoIoData.AcquisitionControl.SetOffline := FALSE;
+        THIS^.inoIoData.InspectionControl.EnableResultsBuffering := FALSE;
+        THIS^.inoIoData.InspectionControl.AcknowledgeInspectionResults := THIS^.inoIoData.InspectionStatus.ResultsValid;
+        THIS^.inoIoData.InspectionControl.ExtendedUserDataSet := FALSE;
+        THIS^.inoIoData.InspectionControl.ExecuteCommand := FALSE;
+        THIS^.inoIoData.InspectionControl.ClearError := THIS^.inoIoData.InspectionStatus.Error;
+        THIS^.inoIoData.CommandControl.Command := 0;
+        _progress := _progress + 1;
+    END_IF
 
-	IF _progress = 8 THEN
-		THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal ResultsValid to be set!#>').Pin(); 
-		IF THIS^.inoIoData.InspectionStatus.ResultsValid THEN
-			CallTimers(FALSE);
-			_progress := _progress + 1;
-		END_IF
-	END_IF
-	
-	IF _progress = 9 THEN
-		THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the InspectionResults to be copied!#>').Pin(); 
-		THIS^.inoResults.InspectionId := THIS^.inoIoData.ResultsData.InspectionID;
-		THIS^.inoResults.ResultCode := THIS^.inoIoData.ResultsData.ResultCode;
-		_size := THIS^.inoConfig.ResultDataSize;
-		IF  Tc2_System.MEMCPY(srcAddr := ADR(THIS^.inoIoData.ResultsData.InspectionResults) , destAddr:= ADR(THIS^.inoResults.InspectionResults) ,  n:= _size) > 0 AND 
-			Tc2_System.MEMSET(destAddr:= ADR(THIS^.inoResults.InspectionResults) + _size, fillByte:= 0 , n:= SIZEOF(THIS^.inoResults.InspectionResults) - _size)>0 THEN
-			CallTimers(FALSE);
-			_progress := _progress + 1;
-		END_IF
-	END_IF
-	
-	IF _progress = 10 THEN
-		THIS^.inoIoData.AcquisitionControl.AcquisitionTrigger := FALSE;
-		THIS^.inoIoData.InspectionControl.EnableResultsBuffering := FALSE;
-		THIS^.inoIoData.InspectionControl.AcknowledgeInspectionResults := TRUE;
-		THIS^.ThrowWhen(THIS^.inoIoData.InspectionStatus.Error);
-		THIS^.DoneWhen(TRUE);
-		_progress := 0;
-	END_IF
-	
-	CallTimers(TRUE);
-	
-	THIS^.ThrowWhen(_errorTimer.Q OR _progress >4 AND THIS^.inoIoData.InspectionStatus.Error);	
-END_IF
-]]></ST>
+    IF _progress = 2 THEN
+        THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal ExposureComplete to be reseted!#>').Pin();
+
+        IF NOT THIS^.inoIoData.AcquisitionStatus.ExposureComplete THEN
+            THIS^.inoIoData.AcquisitionControl.ClearExposureComplete := FALSE;
+            CallTimers(FALSE);
+            _progress := _progress + 1;
+        END_IF
+    END_IF
+
+    IF _progress = 3 THEN
+        THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal ResultsValid to be reseted!#>').Pin();
+
+        IF NOT THIS^.inoIoData.InspectionStatus.ResultsValid THEN
+            THIS^.inoIoData.InspectionControl.AcknowledgeInspectionResults := FALSE;
+            CallTimers(FALSE);
+            _progress := _progress + 1;
+        END_IF
+    END_IF
+
+    IF _progress = 4 THEN
+        THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal Error to be reseted!#>').Pin();
+
+        IF NOT THIS^.inoIoData.InspectionStatus.Error THEN
+            THIS^.inoIoData.InspectionControl.ClearError := FALSE;
+            CallTimers(FALSE);
+            _progress := _progress + 1;
+        END_IF
+    END_IF
+
+    IF _progress = 5 THEN
+        THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal AcquisitionTriggerReady to be set!#>').Pin();
+        _inspectionCompleted := THIS^.inoIoData.InspectionStatus.InspectionCompleted;
+
+        IF THIS^.inoIoData.AcquisitionStatus.AcquisitionTriggerReady THEN
+            CallTimers(FALSE);
+            _progress := _progress + 1;
+        END_IF
+    END_IF
+
+    IF _progress = 6 THEN
+        THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal AcquisitionTriggerAcknowledge to be set!#>').Pin();
+        THIS^.inoIoData.AcquisitionControl.AcquisitionTrigger := TRUE;
+
+        IF THIS^.inoIoData.AcquisitionStatus.AcquisitionTriggerAcknowledge THEN
+            CallTimers(FALSE);
+            _progress := _progress + 1;
+        END_IF
+    END_IF
+
+    IF _progress = 7 THEN
+        THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal InspectionCompleted to be toggled!#>').Pin();
+        THIS^.inoIoData.AcquisitionControl.AcquisitionTrigger := FALSE;
+
+        IF THIS^._inspectionCompleted <> THIS^.inoIoData.InspectionStatus.InspectionCompleted THEN
+            CallTimers(FALSE);
+            _progress := _progress + 1;
+        END_IF
+    END_IF
+
+    IF _progress = 8 THEN
+        THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal ResultsValid to be set!#>').Pin();
+
+        IF THIS^.inoIoData.InspectionStatus.ResultsValid THEN
+            CallTimers(FALSE);
+            _progress := _progress + 1;
+        END_IF
+    END_IF
+
+    IF _progress = 9 THEN
+        THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the InspectionResults to be copied!#>').Pin();
+        THIS^.inoResults.InspectionId := THIS^.inoIoData.ResultsData.InspectionID;
+        THIS^.inoResults.ResultCode := THIS^.inoIoData.ResultsData.ResultCode;
+        _size := THIS^.inoConfig.ResultDataSize;
+
+        IF Tc2_System
+            .MEMCPY(srcAddr := ADR(THIS^.inoIoData.ResultsData.InspectionResults), destAddr := ADR(THIS^.inoResults.InspectionResults), n := _size) >
+            0 AND
+            Tc2_System.MEMSET(destAddr := ADR(THIS^.inoResults.InspectionResults) + _size,
+                fillByte := 0,
+                n := SIZEOF(THIS^.inoResults.InspectionResults) - _size) >
+            0 THEN
+            CallTimers(FALSE);
+            _progress := _progress + 1;
+        END_IF
+    END_IF
+
+    IF _progress = 10 THEN
+        THIS^.inoIoData.AcquisitionControl.AcquisitionTrigger := FALSE;
+        THIS^.inoIoData.InspectionControl.EnableResultsBuffering := FALSE;
+        THIS^.inoIoData.InspectionControl.AcknowledgeInspectionResults := TRUE;
+        THIS^.ThrowWhen(THIS^.inoIoData.InspectionStatus.Error);
+        THIS^.DoneWhen(TRUE);
+        _progress := 0;
+    END_IF
+
+    CallTimers(TRUE);
+    THIS^.ThrowWhen(_errorTimer.Q OR _progress > 4 AND THIS^.inoIoData.InspectionStatus.Error);
+END_IF]]></ST>
     </Implementation>
     <Method Name="CallTimers" Id="{bab2928d-6b76-0ec7-0c18-685e3b3e6ae8}">
       <Declaration><![CDATA[METHOD CallTimers
 VAR_INPUT
-	inValue : BOOL;
-END_VAR
-]]></Declaration>
+    inValue : BOOL;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_infoTimer(IN := inValue, PT := THIS^.inoConfig.InfoTime);
-_errorTimer(IN := inValue, PT := THIS^.inoConfig.ErrorTime);
-]]></ST>
+_errorTimer(IN := inValue, PT := THIS^.inoConfig.ErrorTime);]]></ST>
       </Implementation>
     </Method>
     <Method Name="FB_init" Id="{441a1245-a5e1-0ac2-35d2-523e44c65a5f}">
       <Declaration><![CDATA[{attribute 'hide'}
 METHOD PUBLIC FB_init : BOOL
 VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	ParentObject : ITcoObject;
-END_VAR
-]]></Declaration>
+    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+    ParentObject : ITcoObject;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnAbort" Id="{1865531c-9bc6-0696-1f6b-57c6ab156cd0}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task is aborted.
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task is aborted.
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnAbort
-]]></Declaration>
+METHOD PROTECTED OnAbort]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.inoStatus.ActionDescription := '<#Trigger was aborted, while not yet completed!#>'; 
-]]></ST>
+        <ST><![CDATA[THIS^.inoStatus.ActionDescription := '<#Trigger was aborted, while not yet completed!#>';]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnDone" Id="{c962a13e-8157-0b53-33e9-510185845503}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task reaches the ```Done``` state .
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task reaches the ```Done``` state .
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnDone
-]]></Declaration>
+METHOD PROTECTED OnDone]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.inoStatus.ActionDescription := '<#Trigger was completed successfully.#>'; 
-]]></ST>
+        <ST><![CDATA[THIS^.inoStatus.ActionDescription := '<#Trigger was completed successfully.#>';]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnError" Id="{8855ec6d-b502-0ba5-30de-4871db511694}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task reaches the ```Error``` state.
-			<para>
-				Do not confuse with <see cref="PlcDocu.TcoCore.TcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
-			</para>
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task reaches the ```Error``` state.
+            <para>
+                Do not confuse with <see cref="PlcDocu.TcoCore.TcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
+            </para>
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnError
-]]></Declaration>
+METHOD PROTECTED OnError]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.inoStatus.ActionDescription := '<#Trigger finished with error.#>'; 
-]]></ST>
+        <ST><![CDATA[THIS^.inoStatus.ActionDescription := '<#Trigger finished with error.#>';]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStart" Id="{717e7d1e-28b6-0cea-0d18-1fda9e278fa9}">
-      <Declaration><![CDATA[METHOD PROTECTED OnStart 
-]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED OnStart]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.inoStatus.ActionDescription := '<#Trigger started.#>'; 
-]]></ST>
+        <ST><![CDATA[THIS^.inoStatus.ActionDescription := '<#Trigger started.#>';]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{63c229b3-06af-099f-1f41-26c8fafa343b}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
-			<para>
-				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
-			</para>
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+            <para>
+                See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+            </para>
+        </summary>
+    </docu>
 ~*)
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.Restore();
 _progress := 0;
 CallTimers(FALSE);
-Messenger.UnPin();
-]]></ST>
+Messenger.UnPin();]]></ST>
       </Implementation>
     </Method>
   </POU>

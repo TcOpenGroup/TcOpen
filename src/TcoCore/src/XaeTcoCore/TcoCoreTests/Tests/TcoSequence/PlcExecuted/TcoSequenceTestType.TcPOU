@@ -3,44 +3,37 @@
   <POU Name="TcoSequenceTestType" Id="{a078dca2-adb3-097e-327d-7525ae7a7cb8}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoSequenceTestType EXTENDS TcoCore._internals_TcoSequence
 VAR
-	_runOneStep							:	BOOL;
-	_runAllSteps						:	BOOL;
-	_finishStep							:	BOOL;
-	_stepId								:	INT;
-	_enabled							:	BOOL;
-	_stepDescription					:	STRING(254);	
-	_currentStepId						:	INT;
-	_currentStepDescription				:	STRING(254);
-	_myTcoChildState					: 	TcoSequencerTestChildState(THIS^, eRestoreMode.None);
-	_onCompleteStepCount 				: 	INT;
-	_onSequenceCompleteCount 			: 	INT;
-	_onSequencerErrorCount	 			: 	ULINT;
-	_onStateChangeCount 				:	ULINT;
-	_stateChangeFrom					:	INT;
-	_stateChangeTo						:	INT;
-	_callRestoreInOnStateChange			:	BOOL;
-
-	_numberOfSteps						:	UINT;
-	_previousNumberOfSteps						:	UINT;
-	_tcoSequenceTest : eTcoSequenceTests;
+    _runOneStep : BOOL;
+    _runAllSteps : BOOL;
+    _finishStep : BOOL;
+    _stepId : INT;
+    _enabled : BOOL;
+    _stepDescription : STRING(254);
+    _currentStepId : INT;
+    _currentStepDescription : STRING(254);
+    _myTcoChildState : TcoSequencerTestChildState(THIS^, eRestoreMode.None);
+    _onCompleteStepCount : INT;
+    _onSequenceCompleteCount : INT;
+    _onSequencerErrorCount : ULINT;
+    _onStateChangeCount : ULINT;
+    _stateChangeFrom : INT;
+    _stateChangeTo : INT;
+    _callRestoreInOnStateChange : BOOL;
+    _numberOfSteps : UINT;
+    _previousNumberOfSteps : UINT;
+    _tcoSequenceTest : eTcoSequenceTests;
     _totalStepNumber : UINT;
-	_sequenceRun : ULINT;
-	_reqStep : INT;
+    _sequenceRun : ULINT;
+    _reqStep : INT;
     _reqStepNotExists : INT;
-	_initReqStepCycle		:	UINT;
-	
-	_postOpenRequestStepCycle : UINT;
-	_preCloseRequestStepCycle : UINT;
-
-	_restoreCycleCount : UINT;
-	_cyclicCycles :	UINT;
-    _stepInEvents :	UINT;
-	_sequenceCycles :	UINT;
-
-END_VAR
-
-
-]]></Declaration>
+    _initReqStepCycle : UINT;
+    _postOpenRequestStepCycle : UINT;
+    _preCloseRequestStepCycle : UINT;
+    _restoreCycleCount : UINT;
+    _cyclicCycles : UINT;
+    _stepInEvents : UINT;
+    _sequenceCycles : UINT;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
@@ -50,9 +43,8 @@ END_VAR
     <Method Name="_RequestStep" Id="{c95b942f-a2c0-0823-1832-45c1d2992fd2}" FolderPath="_Tests\">
       <Declaration><![CDATA[METHOD _RequestStep
 VAR_INPUT
-	inRequestedStepId : INT;
-END_VAR
-]]></Declaration>
+    inRequestedStepId : INT;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^.RequestStep(inRequestedStepId);]]></ST>
       </Implementation>
@@ -60,8 +52,7 @@ END_VAR
     <Method Name="_RunExecutionSubstitute" Id="{f008b1d2-34fa-092d-16be-28669f572893}">
       <Declaration><![CDATA[METHOD _RunExecutionSubstitute
 VAR_INPUT
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^.Open();
 THIS^.Main();
@@ -71,34 +62,30 @@ THIS^.Close();]]></ST>
     <Method Name="_SequenceComplete" Id="{0d07da38-add0-0d55-108f-09e3b9860458}" FolderPath="_Tests\">
       <Declaration><![CDATA[METHOD _SequenceComplete]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.CompleteSequence();
-]]></ST>
+        <ST><![CDATA[THIS^.CompleteSequence();]]></ST>
       </Implementation>
     </Method>
     <Method Name="_Step" Id="{083d38ba-2338-03c7-3e04-25519c175d87}" FolderPath="_Tests\">
       <Declaration><![CDATA[METHOD INTERNAL _Step : BOOL
 VAR_INPUT
-	inStepId			:	INT;
-	inEnabled			:	BOOL;
-	inStepDescription	:	STRING(254);		
-END_VAR
-]]></Declaration>
+    inStepId : INT;
+    inEnabled : BOOL;
+    inStepDescription : STRING(254);
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_Step := SUPER^.Step(inStepID := inStepId, inEnabled := inEnabled, inStepDescription := inStepDescription);
-]]></ST>
+        <ST><![CDATA[_Step := SUPER^.Step(inStepID := inStepId, inEnabled := inEnabled, inStepDescription := inStepDescription);]]></ST>
       </Implementation>
     </Method>
     <Method Name="_StepBackward" Id="{ce086e2c-ea79-0ad3-16db-f3609abcd4b3}" FolderPath="_Tests\">
       <Declaration><![CDATA[METHOD _StepBackward]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.ModeController.StepBackward();
-]]></ST>
+        <ST><![CDATA[THIS^.ModeController.StepBackward();]]></ST>
       </Implementation>
     </Method>
     <Method Name="_StepCompleteWhen" Id="{1cd51cd6-1ec5-03ab-0b25-98134af6df4e}" FolderPath="_Tests\">
-      <Declaration><![CDATA[METHOD _StepCompleteWhen 
+      <Declaration><![CDATA[METHOD _StepCompleteWhen
 VAR_INPUT
-	inCondition : BOOL;
+    inCondition : BOOL;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^.StepCompleteWhen(inCondition);]]></ST>
@@ -107,12 +94,11 @@ END_VAR]]></Declaration>
     <Method Name="_StepForward" Id="{601c61da-43de-058c-178b-70930ce2cb8d}" FolderPath="_Tests\">
       <Declaration><![CDATA[METHOD _StepForward]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.ModeController.StepForward();
-]]></ST>
+        <ST><![CDATA[THIS^.ModeController.StepForward();]]></ST>
       </Implementation>
     </Method>
     <Method Name="_StepIn" Id="{cd8c3752-6fef-0e86-2668-fe4727637839}" FolderPath="_Tests\">
-      <Declaration><![CDATA[METHOD INTERNAL _StepIn ]]></Declaration>
+      <Declaration><![CDATA[METHOD INTERNAL _StepIn]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^.ModeController.StepIn();]]></ST>
       </Implementation>
@@ -128,36 +114,30 @@ END_VAR]]></Declaration>
       <Set Name="Set" Id="{8eb6e2c7-e5df-052c-286b-c87c7968dba3}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
-          <ST><![CDATA[_callRestoreInOnStateChange:=CallRestoreInOnStateChange;]]></ST>
+          <ST><![CDATA[_callRestoreInOnStateChange := CallRestoreInOnStateChange;]]></ST>
         </Implementation>
       </Set>
     </Property>
     <Method Name="ChildHasAutoRestoreEnabled" Id="{da4e96fa-8b8f-0db8-1b1a-b964d6f92f79}" FolderPath="_Tests\">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL ChildHasAutoRestoreEnabled : BOOL
-]]></Declaration>
+METHOD INTERNAL ChildHasAutoRestoreEnabled : BOOL]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ChildHasAutoRestoreEnabled := THIS^._myTcoChildState.IsAutoRestoreEnabled;
-]]></ST>
+        <ST><![CDATA[ChildHasAutoRestoreEnabled := THIS^._myTcoChildState.IsAutoRestoreEnabled;]]></ST>
       </Implementation>
     </Method>
     <Method Name="ChildIsAutoRestorable" Id="{dd6980f6-e7a2-003d-3677-6c6447bc161e}" FolderPath="_Tests\">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL ChildIsAutoRestorable : BOOL
-]]></Declaration>
+METHOD INTERNAL ChildIsAutoRestorable : BOOL]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ChildIsAutoRestorable := THIS^._myTcoChildState.AutoRestorable;
-]]></ST>
+        <ST><![CDATA[ChildIsAutoRestorable := THIS^._myTcoChildState.AutoRestorable;]]></ST>
       </Implementation>
     </Method>
     <Method Name="ClearNumberOfSteps" Id="{26c5d13b-8880-0206-09f0-db807701b452}" FolderPath="_Tests\">
-      <Declaration><![CDATA[METHOD INTERNAL ClearNumberOfSteps 
-]]></Declaration>
+      <Declaration><![CDATA[METHOD INTERNAL ClearNumberOfSteps]]></Declaration>
       <Implementation>
         <ST><![CDATA[_stepCounter := 0;
 _numberOfStepsInSequence := 0;
-_previousNumberOfStepsInSequence := 0;
-]]></ST>
+_previousNumberOfStepsInSequence := 0;]]></ST>
       </Implementation>
     </Method>
     <Property Name="CyclicCycles" Id="{b6f5d22a-fc3e-0716-3271-b4eea83f4200}" FolderPath="_Tests\">
@@ -207,42 +187,35 @@ _previousNumberOfStepsInSequence := 0;
     </Property>
     <Method Name="GetChildState" Id="{3c61e758-881e-07ce-2657-5146ba932ce9}" FolderPath="_Tests\">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL GetChildState :	INT
-]]></Declaration>
+METHOD INTERNAL GetChildState : INT]]></Declaration>
       <Implementation>
-        <ST><![CDATA[GetChildState := THIS^._myTcoChildState.State;
-]]></ST>
+        <ST><![CDATA[GetChildState := THIS^._myTcoChildState.State;]]></ST>
       </Implementation>
     </Method>
     <Method Name="GetOrderOfTheCurrentlyEvaluatedStep" Id="{312eb82a-831e-0196-3a25-d23bd8aef8c8}" FolderPath="_Tests\">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD GetOrderOfTheCurrentlyEvaluatedStep : UINT
-]]></Declaration>
+METHOD GetOrderOfTheCurrentlyEvaluatedStep : UINT]]></Declaration>
       <Implementation>
         <ST><![CDATA[GetOrderOfTheCurrentlyEvaluatedStep := _theOrderOfTheCurrentlyEvaluatedStep;]]></ST>
       </Implementation>
     </Method>
     <Method Name="GetOrderOfTheCurrentlyExecutedStep" Id="{267f659b-caa9-02f8-2e8e-b9bacf7af60c}" FolderPath="_Tests\">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD GetOrderOfTheCurrentlyExecutedStep : UINT
-]]></Declaration>
+METHOD GetOrderOfTheCurrentlyExecutedStep : UINT]]></Declaration>
       <Implementation>
         <ST><![CDATA[GetOrderOfTheCurrentlyExecutedStep := _theOrderOfTheCurrentlyExecutedStep;]]></ST>
       </Implementation>
     </Method>
     <Method Name="GetRequestStepCycle" Id="{62ed0e0f-86de-050e-0799-aef70f8e4bcf}" FolderPath="_Tests\">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD GetRequestStepCycle : UINT
-]]></Declaration>
+METHOD GetRequestStepCycle : UINT]]></Declaration>
       <Implementation>
-        <ST><![CDATA[GetRequestStepCycle := RequestStepCycle;
-]]></ST>
+        <ST><![CDATA[GetRequestStepCycle := RequestStepCycle;]]></ST>
       </Implementation>
     </Method>
     <Method Name="HasAutoRestoreEnabled" Id="{66fbc43c-5014-017c-3394-28486ed441e5}" FolderPath="_Tests\">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL HasAutoRestoreEnabled : BOOL
-]]></Declaration>
+METHOD INTERNAL HasAutoRestoreEnabled : BOOL]]></Declaration>
       <Implementation>
         <ST><![CDATA[HasAutoRestoreEnabled := SUPER^.IsAutoRestoreEnabled;]]></ST>
       </Implementation>
@@ -253,27 +226,26 @@ METHOD INTERNAL HasAutoRestoreEnabled : BOOL
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
           <ST><![CDATA[_initReqStepCycle := RequestStepCycle;
-InitReqStepCycle:=_initReqStepCycle;]]></ST>
+InitReqStepCycle := _initReqStepCycle;]]></ST>
         </Implementation>
       </Get>
       <Set Name="Set" Id="{57b53abf-69b2-0f0d-1dad-69c7b8c2c237}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
-          <ST><![CDATA[_initReqStepCycle:=InitReqStepCycle;
+          <ST><![CDATA[_initReqStepCycle := InitReqStepCycle;
 RequestStepCycle := _initReqStepCycle;]]></ST>
         </Implementation>
       </Set>
     </Property>
     <Method Name="IsAutoRestorable" Id="{e3b93f74-745d-08cd-331a-375a0d45cebb}" FolderPath="_Tests\">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL IsAutoRestorable : BOOL
-]]></Declaration>
+METHOD INTERNAL IsAutoRestorable : BOOL]]></Declaration>
       <Implementation>
         <ST><![CDATA[IsAutoRestorable := SUPER^.AutoRestorable;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Main" Id="{7cd483d4-4c79-0cb8-3ef2-900b7113f4aa}">
-      <Declaration><![CDATA[METHOD PROTECTED Main : BOOL ]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED Main : BOOL]]></Declaration>
       <Implementation>
         <ST><![CDATA[CASE _tcoSequenceTest OF
     eTcoSequenceTests.NumberOfStepsCount, eTcoSequenceTests.OnStateChangeWithRestoreCallInside:
@@ -351,87 +323,86 @@ END_CASE]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_ChangeStepIdDuringExecution" Id="{c3e35577-8969-0f7a-25fc-2d3e2211a756}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_ChangeStepIdDuringExecution 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_ChangeStepIdDuringExecution
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF _sequenceRun =1 THEN
-	IF Step(0, TRUE, 'Step number 0') THEN
-	   StepCompleteWhen(TRUE);
-	END_IF
-	
-	FOR i := 1 TO _totalStepNumber-2 DO
-		IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
-			StepCompleteWhen(FALSE);
-		END_IF
-	END_FOR
-	
-	IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
-	  _SequenceComplete();
-	END_IF
+        <ST><![CDATA[IF _sequenceRun = 1 THEN
+    IF Step(0, TRUE, 'Step number 0') THEN
+        StepCompleteWhen(TRUE);
+    END_IF
+
+    FOR i := 1 TO _totalStepNumber - 2 DO
+        IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
+            StepCompleteWhen(FALSE);
+        END_IF
+    END_FOR
+
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
+        _SequenceComplete();
+    END_IF
 END_IF
 
-IF _sequenceRun =2 THEN
-	IF Step(0, TRUE, 'Step 0') THEN
-	   StepCompleteWhen(TRUE);
-	END_IF
-	
-	IF Step(1, TRUE, 'Step 1') THEN
-	   StepCompleteWhen(TRUE);
-	END_IF
+IF _sequenceRun = 2 THEN
+    IF Step(0, TRUE, 'Step 0') THEN
+        StepCompleteWhen(TRUE);
+    END_IF
 
-	IF Step(2, TRUE, 'Step 2') THEN
-	   StepCompleteWhen(FALSE);
-	END_IF
+    IF Step(1, TRUE, 'Step 1') THEN
+        StepCompleteWhen(TRUE);
+    END_IF
 
-	IF Step(3, TRUE, 'Step 3') THEN
-	   StepCompleteWhen(FALSE);
-	END_IF
+    IF Step(2, TRUE, 'Step 2') THEN
+        StepCompleteWhen(FALSE);
+    END_IF
 
-	FOR i := 4 TO _totalStepNumber-2 DO
-		IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
-			StepCompleteWhen(FALSE);
-		END_IF
-	END_FOR
-	
-	IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
-	  _SequenceComplete();
-	END_IF
+    IF Step(3, TRUE, 'Step 3') THEN
+        StepCompleteWhen(FALSE);
+    END_IF
+
+    FOR i := 4 TO _totalStepNumber - 2 DO
+        IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
+            StepCompleteWhen(FALSE);
+        END_IF
+    END_FOR
+
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
+        _SequenceComplete();
+    END_IF
 END_IF
 
-IF _sequenceRun =3 THEN
-	IF Step(0, TRUE, 'Step 0') THEN
-	   StepCompleteWhen(TRUE);
-	END_IF
-	
-	IF Step(1, TRUE, 'Step 1') THEN
-	   StepCompleteWhen(TRUE);
-	END_IF
+IF _sequenceRun = 3 THEN
+    IF Step(0, TRUE, 'Step 0') THEN
+        StepCompleteWhen(TRUE);
+    END_IF
 
-	IF Step(3, TRUE, 'Step 2') THEN
-	   StepCompleteWhen(FALSE);
-	END_IF
+    IF Step(1, TRUE, 'Step 1') THEN
+        StepCompleteWhen(TRUE);
+    END_IF
 
-	IF Step(2, TRUE, 'Step 3') THEN
-	   StepCompleteWhen(FALSE);
-	END_IF
+    IF Step(3, TRUE, 'Step 2') THEN
+        StepCompleteWhen(FALSE);
+    END_IF
 
-	FOR i := 4 TO _totalStepNumber-2 DO
-		IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
-			StepCompleteWhen(FALSE);
-		END_IF
-	END_FOR
-	
-	IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
-	  _SequenceComplete();
-	END_IF
+    IF Step(2, TRUE, 'Step 3') THEN
+        StepCompleteWhen(FALSE);
+    END_IF
+
+    FOR i := 4 TO _totalStepNumber - 2 DO
+        IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
+            StepCompleteWhen(FALSE);
+        END_IF
+    END_FOR
+
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
+        _SequenceComplete();
+    END_IF
 END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_CheckStepIdUniqueness" Id="{94d68c00-42c5-06e5-19fb-7b168034f84b}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_CheckStepIdUniqueness 
-]]></Declaration>
+      <Declaration><![CDATA[METHOD MAIN_CheckStepIdUniqueness]]></Declaration>
       <Implementation>
         <ST><![CDATA[//******************************************************************
 IF SUPER^.Step(0, TRUE, 'Step number 0') THEN
@@ -9662,115 +9633,111 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_CommentOutPartOfRunningSequencer" Id="{71fa6f12-9cd1-0764-19c7-65883cf277d1}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_CommentOutPartOfRunningSequencer 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_CommentOutPartOfRunningSequencer
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF _sequenceRun =1 THEN
-	IF Step(0, TRUE, 'Step 0') THEN
-	   StepCompleteWhen(TRUE);
-	END_IF
+        <ST><![CDATA[IF _sequenceRun = 1 THEN
+    IF Step(0, TRUE, 'Step 0') THEN
+        StepCompleteWhen(TRUE);
+    END_IF
 
-	IF Step(1, TRUE, 'Step 1') THEN
-	   StepCompleteWhen(TRUE);
-	END_IF
+    IF Step(1, TRUE, 'Step 1') THEN
+        StepCompleteWhen(TRUE);
+    END_IF
 
-	IF Step(2, TRUE, 'Step 2') THEN
-	   StepCompleteWhen(TRUE);
-	END_IF
+    IF Step(2, TRUE, 'Step 2') THEN
+        StepCompleteWhen(TRUE);
+    END_IF
 
-	IF Step(3, TRUE, 'Step 3') THEN
-			StepCompleteWhen(FALSE);
-	END_IF
-	
-	FOR i := 4 TO _totalStepNumber-2 DO
-		IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
-			StepCompleteWhen(FALSE);
-		END_IF
-	END_FOR
-	
-	IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
-	  _SequenceComplete();
-	END_IF
+    IF Step(3, TRUE, 'Step 3') THEN
+        StepCompleteWhen(FALSE);
+    END_IF
+
+    FOR i := 4 TO _totalStepNumber - 2 DO
+        IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
+            StepCompleteWhen(FALSE);
+        END_IF
+    END_FOR
+
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
+        _SequenceComplete();
+    END_IF
 END_IF
 
-IF _sequenceRun >=2 THEN
-	IF Step(0, TRUE, 'Step 0') THEN
-	   StepCompleteWhen(TRUE);
-	END_IF
+IF _sequenceRun >= 2 THEN
+    IF Step(0, TRUE, 'Step 0') THEN
+        StepCompleteWhen(TRUE);
+    END_IF
 
-//	IF Step(1, TRUE, 'Step 1') THEN
-//	   StepCompleteWhen(TRUE);
-//	END_IF
+    //	IF Step(1, TRUE, 'Step 1') THEN
+    //	   StepCompleteWhen(TRUE);
+    //	END_IF
+    //	IF Step(2, TRUE, 'Step 2') THEN
+    //	   StepCompleteWhen(TRUE);
+    //	END_IF
+    IF Step(3, TRUE, 'Step 3') THEN
+        StepCompleteWhen(FALSE);
+    END_IF
 
-//	IF Step(2, TRUE, 'Step 2') THEN
-//	   StepCompleteWhen(TRUE);
-//	END_IF
+    FOR i := 4 TO _totalStepNumber - 2 DO
+        IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
+            StepCompleteWhen(FALSE);
+        END_IF
+    END_FOR
 
-	IF Step(3, TRUE, 'Step 3') THEN
-	   StepCompleteWhen(FALSE);
-	END_IF
-	
-	FOR i := 4 TO _totalStepNumber-2 DO
-		IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
-			StepCompleteWhen(FALSE);
-		END_IF
-	END_FOR
-	
-	IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
-	  _SequenceComplete();
-	END_IF
-END_IF
-]]></ST>
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
+        _SequenceComplete();
+    END_IF
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_ExecutionInOnePLCcycle" Id="{df3fc404-c332-0991-0741-c71c254c84bf}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_ExecutionInOnePLCcycle 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_ExecutionInOnePLCcycle
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[FOR i := 0 TO _totalStepNumber-2 DO
+        <ST><![CDATA[FOR i := 0 TO _totalStepNumber - 2 DO
     IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
         StepCompleteWhen(TRUE);
     END_IF
 END_FOR
 
 IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
-   	_SequenceComplete();
+    _SequenceComplete();
 END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_MaxStepId" Id="{6e483f01-ba14-0f16-1bc7-8c0dc743b277}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_MaxStepId 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_MaxStepId
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[FOR i := 0 TO _totalStepNumber-1 DO
+        <ST><![CDATA[FOR i := 0 TO _totalStepNumber - 1 DO
     IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
         StepCompleteWhen(_finishStep);
     END_IF
 END_FOR
+
 IF Step(_stepId, TRUE, CONCAT('Step ', INT_TO_STRING(_stepId))) THEN
     StepCompleteWhen(TRUE);
-END_IF
-
-]]></ST>
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_MinStepId" Id="{a62d3e76-a8e0-0f2e-12d9-99c6ca676bac}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_MinStepId 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_MinStepId
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF Step(_stepId, TRUE, CONCAT('Step ', INT_TO_STRING(_stepId))) THEN
     StepCompleteWhen(TRUE);
 END_IF
 
-FOR i := 1 TO _totalStepNumber-1 DO
+FOR i := 1 TO _totalStepNumber - 1 DO
     IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
         StepCompleteWhen(_finishStep);
     END_IF
@@ -9778,16 +9745,16 @@ END_FOR]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_NumberOfStepsCount" Id="{24259989-41e3-0d4c-3980-d3f83add522d}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_NumberOfStepsCount 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_NumberOfStepsCount
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF Step(0, TRUE, 'Step 0') THEN
     StepCompleteWhen(TRUE);
 END_IF
 
-FOR i := 1 TO _totalStepNumber-1 DO
+FOR i := 1 TO _totalStepNumber - 1 DO
     IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
         StepCompleteWhen(_finishStep);
     END_IF
@@ -9795,9 +9762,9 @@ END_FOR]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_OnStateChangeWhenChangingModes" Id="{66b3a3ec-ed4f-0536-304f-3abf886c8bec}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_OnStateChangeWhenChangingModes 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_OnStateChangeWhenChangingModes
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF _sequenceRun <= _cyclicCycles OR _sequenceRun > _cyclicCycles + _stepInEvents + 1 THEN
@@ -9809,18 +9776,21 @@ END_VAR]]></Declaration>
         END_IF
     END_FOR
 
-    IF Step(_totalStepNumber-1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber-1))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         CompleteSequence();
-		_sequenceCycles := _sequenceCycles + 1;
+        _sequenceCycles := _sequenceCycles + 1;
     END_IF
 END_IF
-IF _sequenceRun = _cyclicCycles+1 THEN
+
+IF _sequenceRun = _cyclicCycles + 1 THEN
     SetStepMode();
-	Step(0,FALSE,'');	
+    Step(0, FALSE, '');
 END_IF
-IF _sequenceRun > _cyclicCycles+1  AND _sequenceRun <= _cyclicCycles + _stepInEvents +1 THEN
+
+IF _sequenceRun > _cyclicCycles + 1 AND _sequenceRun <= _cyclicCycles + _stepInEvents + 1 THEN
     SetStepMode();
-	_StepIn();
+    _StepIn();
+
     FOR i := 0 TO _totalStepNumber - 2 DO
         IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
             _StepCompleteWhen(TRUE);
@@ -9829,60 +9799,60 @@ IF _sequenceRun > _cyclicCycles+1  AND _sequenceRun <= _cyclicCycles + _stepInEv
 
     IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         CompleteSequence();
-		_sequenceCycles := _sequenceCycles + 1;
+        _sequenceCycles := _sequenceCycles + 1;
     END_IF
 END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_RequestStep" Id="{198ed2c1-0d74-0033-03b4-f7268587ca06}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_RequestStep 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_RequestStep
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF _sequenceRun =1 THEN
-	FOR i := -5 TO -1 DO
-		IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
-			StepCompleteWhen(TRUE);
-		END_IF
-	END_FOR
-	
-	IF Step(0, TRUE, 'Step 0') THEN
-		RequestStep(-5);
-	END_IF
-	
-	FOR i := 1 TO 5 DO
-		IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
-			StepCompleteWhen(TRUE);
-		END_IF
-	END_FOR
+        <ST><![CDATA[IF _sequenceRun = 1 THEN
+    FOR i := -5 TO -1 DO
+        IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
+            StepCompleteWhen(TRUE);
+        END_IF
+    END_FOR
+
+    IF Step(0, TRUE, 'Step 0') THEN
+        RequestStep(-5);
+    END_IF
+
+    FOR i := 1 TO 5 DO
+        IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
+            StepCompleteWhen(TRUE);
+        END_IF
+    END_FOR
 END_IF
 
-IF _sequenceRun =2 THEN
-	FOR i := -5 TO 5 DO
-		IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
-			StepCompleteWhen(FALSE);
-		END_IF
-	END_FOR
+IF _sequenceRun = 2 THEN
+    FOR i := -5 TO 5 DO
+        IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
+            StepCompleteWhen(FALSE);
+        END_IF
+    END_FOR
 END_IF
 
-IF _sequenceRun =3 THEN
-	IF Step(-5, TRUE, 'Step -5') THEN
-		RequestStep(0);
-	END_IF
+IF _sequenceRun = 3 THEN
+    IF Step(-5, TRUE, 'Step -5') THEN
+        RequestStep(0);
+    END_IF
 
-	FOR i := -4 TO 5 DO
-		IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
-			StepCompleteWhen(FALSE);
-		END_IF
-	END_FOR
+    FOR i := -4 TO 5 DO
+        IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
+            StepCompleteWhen(FALSE);
+        END_IF
+    END_FOR
 END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_RequestStepFromHigherToLower" Id="{173d6e19-ec12-09f3-3657-552bbf2ee8ff}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_RequestStepFromHigherToLower 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_RequestStepFromHigherToLower
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF _sequenceRun = 1 THEN
@@ -9915,9 +9885,9 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_RequestStepFromLowerToHigher" Id="{ac379fce-6f90-076f-0f33-f781c47fc5bf}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_RequestStepFromLowerToHigher 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_RequestStepFromLowerToHigher
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF _sequenceRun = 1 THEN
@@ -9945,16 +9915,16 @@ IF _sequenceRun = 2 THEN
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
-    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber- 1))) THEN
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         _SequenceComplete();
     END_IF
 END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_RequestStepToFirstStepWithStepId0" Id="{3c1e2b30-a8d1-0876-3543-45f8a1ef6bd7}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_RequestStepToFirstStepWithStepId0 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_RequestStepToFirstStepWithStepId0
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[FOR i := 0 TO 4 DO
@@ -9967,7 +9937,7 @@ IF Step(5, TRUE, 'Step 5') THEN
     RequestStep(0);
 END_IF
 
-FOR i := 6 TO _totalStepNumber -1 DO
+FOR i := 6 TO _totalStepNumber - 1 DO
     IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
         StepCompleteWhen(_finishStep);
     END_IF
@@ -9975,9 +9945,9 @@ END_FOR]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_RequestStepToNotExistingStep" Id="{9f2d0e9b-5ee0-0444-3ac8-b2acf625df04}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_RequestStepToNotExistingStep 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_RequestStepToNotExistingStep
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF _sequenceRun = 1 THEN
@@ -10004,9 +9974,9 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_RequestStepWhilePreviousRequestStepHasNotBeenYetProcessed" Id="{13885226-cac1-0bac-0919-fa6ea31c8772}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_RequestStepWhilePreviousRequestStepHasNotBeenYetProcessed 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_RequestStepWhilePreviousRequestStepHasNotBeenYetProcessed
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[FOR i := 0 TO _reqStep + 4 DO
@@ -10029,29 +9999,29 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_RestoreChildBetweenSteps" Id="{bc467ad1-9715-0d90-255c-9c7e93d80d14}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_RestoreChildBetweenSteps 
-VAR 
-	i : INT;
-	_childState : INT;
+      <Declaration><![CDATA[METHOD MAIN_RestoreChildBetweenSteps
+VAR
+    i : INT;
+    _childState : INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[FOR i := 0 TO _totalStepNumber-2 DO
+        <ST><![CDATA[FOR i := 0 TO _totalStepNumber - 2 DO
     IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
-		_childState := _myTcoChildState.State;
-		_myTcoChildState.ChangeState(_myTcoChildState._requestedState);
+        _childState := _myTcoChildState.State;
+        _myTcoChildState.ChangeState(_myTcoChildState._requestedState);
         StepCompleteWhen(TRUE);
     END_IF
 END_FOR
 
 IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
-   	_SequenceComplete();
+    _SequenceComplete();
 END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_SetStepMode" Id="{c8954608-0f9b-0e60-2965-44cc8609a07d}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_SetStepMode 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_SetStepMode
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF _sequenceRun = 1 THEN
@@ -10068,28 +10038,27 @@ END_VAR]]></Declaration>
     END_IF
 END_IF
 
-IF _sequenceRun =4 THEN
+IF _sequenceRun = 4 THEN
     IF Step(0, TRUE, 'Initial step') THEN
         StepCompleteWhen(TRUE);
     END_IF
 
     FOR i := 1 TO _totalStepNumber - 2 DO
         IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
-	        StepCompleteWhen(TRUE);
-		END_IF
+            StepCompleteWhen(TRUE);
+        END_IF
     END_FOR
 
     IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         _SequenceComplete();
     END_IF
-END_IF
-]]></ST>
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_StepMode" Id="{55a75494-51cd-061d-2d8b-31e4481e05f2}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_StepMode 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_StepMode
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF _sequenceRun = 1 THEN
@@ -10126,14 +10095,14 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_StepModeChangeStepIdDuringExecution" Id="{1116d3f0-e241-07b4-1956-abe49a29fcdf}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_StepModeChangeStepIdDuringExecution 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_StepModeChangeStepIdDuringExecution
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF _sequenceRun = 1 THEN
     IF _currentStep.Status = 20 THEN
-       _StepIn();
+        _StepIn();
     END_IF
 
     // Step 0
@@ -10164,9 +10133,10 @@ END_VAR]]></Declaration>
         _SequenceComplete();
     END_IF
 END_IF
+
 IF _sequenceRun = 2 THEN
     IF _currentStep.Status = 20 THEN
-       _StepIn();
+        _StepIn();
     END_IF
 
     // Step 0
@@ -10200,14 +10170,14 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_StepModeChangeStepOrder" Id="{41237a48-2c9b-0a10-2b82-277c049a95e8}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_StepModeChangeStepOrder 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_StepModeChangeStepOrder
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF _sequenceRun <= _totalStepNumber + 1 THEN
     IF _currentStep.Status = 20 THEN
-       _StepIn();
+        _StepIn();
     END_IF
 
     // Step 0
@@ -10238,9 +10208,10 @@ END_VAR]]></Declaration>
         _SequenceComplete();
     END_IF
 END_IF
+
 IF _sequenceRun = _totalStepNumber + 2 THEN
     IF _currentStep.Status = 20 THEN
-       _StepIn();
+        _StepIn();
     END_IF
 
     // Step 0
@@ -10274,81 +10245,78 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_StepModeCommentOutPartOfRunningSequencer" Id="{100634a5-64cb-093d-00f1-41c535fdc4eb}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_StepModeCommentOutPartOfRunningSequencer 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_StepModeCommentOutPartOfRunningSequencer
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF _sequenceRun =1 THEN
+        <ST><![CDATA[IF _sequenceRun = 1 THEN
     IF (_currentStep.Status = 20) THEN
         _StepIn();
     END_IF
 
-	IF Step(0, TRUE, 'Step 0') THEN
-	   StepCompleteWhen(TRUE);
-	END_IF
+    IF Step(0, TRUE, 'Step 0') THEN
+        StepCompleteWhen(TRUE);
+    END_IF
 
-	IF Step(1, TRUE, 'Step 1') THEN
-	   StepCompleteWhen(TRUE);
-	END_IF
+    IF Step(1, TRUE, 'Step 1') THEN
+        StepCompleteWhen(TRUE);
+    END_IF
 
-	IF Step(2, TRUE, 'Step 2') THEN
-	   StepCompleteWhen(TRUE);
-	END_IF
+    IF Step(2, TRUE, 'Step 2') THEN
+        StepCompleteWhen(TRUE);
+    END_IF
 
-	IF Step(3, TRUE, 'Step 3') THEN
-			StepCompleteWhen(FALSE);
-	END_IF
-	
-	FOR i := 4 TO _totalStepNumber-2 DO
-		IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
-			StepCompleteWhen(FALSE);
-		END_IF
-	END_FOR
-	
-	IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
-	  _SequenceComplete();
-	END_IF
+    IF Step(3, TRUE, 'Step 3') THEN
+        StepCompleteWhen(FALSE);
+    END_IF
+
+    FOR i := 4 TO _totalStepNumber - 2 DO
+        IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
+            StepCompleteWhen(FALSE);
+        END_IF
+    END_FOR
+
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
+        _SequenceComplete();
+    END_IF
 END_IF
 
-IF _sequenceRun >=2 THEN
+IF _sequenceRun >= 2 THEN
     IF (_currentStep.Status = 20) THEN
         _StepIn();
     END_IF
 
-	IF Step(0, TRUE, 'Step 0') THEN
-	   StepCompleteWhen(TRUE);
-	END_IF
+    IF Step(0, TRUE, 'Step 0') THEN
+        StepCompleteWhen(TRUE);
+    END_IF
 
-//	IF Step(1, TRUE, 'Step 1') THEN
-//	   StepCompleteWhen(TRUE);
-//	END_IF
+    //	IF Step(1, TRUE, 'Step 1') THEN
+    //	   StepCompleteWhen(TRUE);
+    //	END_IF
+    //	IF Step(2, TRUE, 'Step 2') THEN
+    //	   StepCompleteWhen(TRUE);
+    //	END_IF
+    IF Step(3, TRUE, 'Step 3') THEN
+        StepCompleteWhen(FALSE);
+    END_IF
 
-//	IF Step(2, TRUE, 'Step 2') THEN
-//	   StepCompleteWhen(TRUE);
-//	END_IF
+    FOR i := 4 TO _totalStepNumber - 2 DO
+        IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
+            StepCompleteWhen(FALSE);
+        END_IF
+    END_FOR
 
-	IF Step(3, TRUE, 'Step 3') THEN
-	   StepCompleteWhen(FALSE);
-	END_IF
-	
-	FOR i := 4 TO _totalStepNumber-2 DO
-		IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
-			StepCompleteWhen(FALSE);
-		END_IF
-	END_FOR
-	
-	IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
-	  _SequenceComplete();
-	END_IF
-END_IF
-]]></ST>
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
+        _SequenceComplete();
+    END_IF
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_StepModeDisabledStep" Id="{f314ae6d-ba2a-0c87-2c0f-932cf34b4ce5}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_StepModeDisabledStep 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_StepModeDisabledStep
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF _sequenceRun = 1 THEN
@@ -10415,21 +10383,22 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_StepModeRequestStepFromHigherToLower" Id="{2a14da23-88e1-0e24-1ec4-ecf46bfd64ac}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_StepModeRequestStepFromHigherToLower 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_StepModeRequestStepFromHigherToLower
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF _sequenceRun <=_reqStep + 5 THEN
+        <ST><![CDATA[IF _sequenceRun <= _reqStep + 5 THEN
     FOR i := 0 TO _reqStep + 4 DO
-       _StepIn();
+        _StepIn();
+
         IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
             StepCompleteWhen(TRUE);
         END_IF
     END_FOR
 
     FOR i := _reqStep + 5 TO _totalStepNumber - 2 DO
-       _StepIn();
+        _StepIn();
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
@@ -10438,16 +10407,17 @@ END_VAR]]></Declaration>
     END_IF
 END_IF
 
-IF _sequenceRun =_reqStep + 6 THEN
+IF _sequenceRun = _reqStep + 6 THEN
     FOR i := 0 TO _reqStep + 4 DO
-       _StepIn();
+        _StepIn();
+
         IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
             StepCompleteWhen(TRUE);
         END_IF
     END_FOR
 
     FOR i := _reqStep + 5 TO _totalStepNumber - 2 DO
-       _StepIn();
+        _StepIn();
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
@@ -10458,29 +10428,29 @@ IF _sequenceRun =_reqStep + 6 THEN
     END_IF
 END_IF
 
-IF _sequenceRun >=_reqStep + 7 THEN
+IF _sequenceRun >= _reqStep + 7 THEN
     FOR i := 0 TO _totalStepNumber - 1 DO
-       _StepIn();
+        _StepIn();
         Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
     END_FOR
 
     IF Step(_totalStepNumber, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber))) THEN
         _SequenceComplete();
     END_IF
-END_IF
-]]></ST>
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_StepModeRequestStepFromLowerToHigher" Id="{ce362780-51b7-07a7-1cf8-36c6219376f5}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_StepModeRequestStepFromLowerToHigher 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_StepModeRequestStepFromLowerToHigher
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF _sequenceRun = 1 THEN
     IF _currentStep.Status = 20 THEN
-       _StepIn();
+        _StepIn();
     END_IF
+
     IF Step(0, TRUE, 'Step 0') THEN
         StepCompleteWhen(TRUE);
     END_IF
@@ -10496,8 +10466,9 @@ END_IF
 
 IF _sequenceRun = 2 THEN
     IF _currentStep.Status = 20 THEN
-       _StepIn();
+        _StepIn();
     END_IF
+
     IF Step(0, TRUE, 'Step 0') THEN
         StepCompleteWhen(TRUE);
     END_IF
@@ -10515,9 +10486,9 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_StepModeStepBackwardFromRunningStep" Id="{739c3154-4164-0849-2911-133282de98e4}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_StepModeStepBackwardFromRunningStep 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_StepModeStepBackwardFromRunningStep
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF _sequenceRun = 1 THEN
@@ -10549,9 +10520,9 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_StepModeStepForwardBackward" Id="{2c7298e9-ddc6-054c-09e1-7d092809dffe}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_StepModeStepForwardBackward 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_StepModeStepForwardBackward
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF _sequenceRun = 1 THEN
@@ -10642,15 +10613,13 @@ IF _sequenceRun = 7 THEN
     IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         CompleteSequence();
     END_IF
-END_IF
-
-]]></ST>
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_StepModeStepForwardFromRunningStep" Id="{61b23bc4-218a-0e07-052d-5c69743369a7}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_StepModeStepForwardFromRunningStep 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_StepModeStepForwardFromRunningStep
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF _sequenceRun = 1 THEN
@@ -10682,9 +10651,9 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_StepModeStepIn" Id="{e5736456-11e0-01df-1d83-672610ff8007}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_StepModeStepIn 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_StepModeStepIn
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF _sequenceRun = 1 THEN
@@ -10703,7 +10672,7 @@ END_IF
 
 IF _sequenceRun > 1 THEN
     IF _currentStep.Status = 20 THEN
-       _StepIn();
+        _StepIn();
     END_IF
 
     // Step 0
@@ -10737,9 +10706,9 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_StepModeStepInDetailed" Id="{df946c0e-e1f0-08b2-31fd-00db6d6f556d}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_StepModeStepInDetailed 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_StepModeStepInDetailed
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF _sequenceRun = 1 OR _sequenceRun = 5 THEN
@@ -10786,15 +10755,13 @@ IF _sequenceRun = 3 OR _sequenceRun = 4 THEN
     IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         CompleteSequence();
     END_IF
-END_IF
-
-]]></ST>
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_StepModeUncommentPartOfRunningSequencer" Id="{fa6ef621-d917-0fa9-18d8-34b8354d15b1}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_StepModeUncommentPartOfRunningSequencer 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_StepModeUncommentPartOfRunningSequencer
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF _sequenceRun = 1 THEN
@@ -10861,9 +10828,9 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_SwitchStepModeOnDuringStepExecution" Id="{16c90f55-993d-0561-35eb-a0aeb9d3db7a}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_SwitchStepModeOnDuringStepExecution 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_SwitchStepModeOnDuringStepExecution
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF _sequenceRun = 1 THEN
@@ -10890,10 +10857,11 @@ IF _sequenceRun > 1 THEN
     END_IF
 
     IF Step(1, TRUE, 'Step 1') THEN
-		IF _sequenceRun >=5 THEN
-			SetStepMode();
-		END_IF
-        StepCompleteWhen(_sequenceRun >=10);
+        IF _sequenceRun >= 5 THEN
+            SetStepMode();
+        END_IF
+
+        StepCompleteWhen(_sequenceRun >= 10);
     END_IF
 
     FOR i := 2 TO _totalStepNumber - 2 DO
@@ -10903,14 +10871,13 @@ IF _sequenceRun > 1 THEN
     IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
         CompleteSequence();
     END_IF
-END_IF
-]]></ST>
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_SwitchStepModeStepOffFromReadyToRun" Id="{32a7c0a6-2180-0554-2f60-a1ada697be68}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_SwitchStepModeStepOffFromReadyToRun 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_SwitchStepModeStepOffFromReadyToRun
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[SetCyclicMode();
@@ -10935,9 +10902,9 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_SwitchStepModeStepOffFromRunning" Id="{001d6e24-4c3a-0c64-24a6-61067704836e}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_SwitchStepModeStepOffFromRunning 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_SwitchStepModeStepOffFromRunning
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[SetCyclicMode();
@@ -10962,9 +10929,9 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_SwitchStepModeStepOnFromRunning" Id="{2b458c99-1b1a-0bf6-1afa-6a09733b094a}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_SwitchStepModeStepOnFromRunning 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_SwitchStepModeStepOnFromRunning
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[SetStepMode();
@@ -10989,68 +10956,64 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="MAIN_UncommentPartOfRunningSequencer" Id="{49646959-6e36-01e8-260c-1f55f5ec7fc9}" FolderPath="_Tests\MAINS\">
-      <Declaration><![CDATA[METHOD MAIN_UncommentPartOfRunningSequencer 
-VAR 
-	i : INT;
+      <Declaration><![CDATA[METHOD MAIN_UncommentPartOfRunningSequencer
+VAR
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF _sequenceRun =1 THEN
-	IF Step(0, TRUE, 'Step 0') THEN
-	   StepCompleteWhen(TRUE);
-	END_IF
+        <ST><![CDATA[IF _sequenceRun = 1 THEN
+    IF Step(0, TRUE, 'Step 0') THEN
+        StepCompleteWhen(TRUE);
+    END_IF
 
-//	IF Step(1, TRUE, 'Step 1') THEN
-//	   StepCompleteWhen(TRUE);
-//	END_IF
+    //	IF Step(1, TRUE, 'Step 1') THEN
+    //	   StepCompleteWhen(TRUE);
+    //	END_IF
+    //	IF Step(2, TRUE, 'Step 2') THEN
+    //	   StepCompleteWhen(TRUE);
+    //	END_IF
+    IF Step(3, TRUE, 'Step 3') THEN
+        StepCompleteWhen(FALSE);
+    END_IF
 
-//	IF Step(2, TRUE, 'Step 2') THEN
-//	   StepCompleteWhen(TRUE);
-//	END_IF
+    FOR i := 4 TO _totalStepNumber - 2 DO
+        IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
+            StepCompleteWhen(FALSE);
+        END_IF
+    END_FOR
 
-	IF Step(3, TRUE, 'Step 3') THEN
-	   StepCompleteWhen(FALSE);
-	END_IF
-	
-	FOR i := 4 TO _totalStepNumber-2 DO
-		IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
-			StepCompleteWhen(FALSE);
-		END_IF
-	END_FOR
-	
-	IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
-	  _SequenceComplete();
-	END_IF
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
+        _SequenceComplete();
+    END_IF
 END_IF
 
-IF _sequenceRun =2 THEN
-	IF Step(0, TRUE, 'Step 0') THEN
-	   StepCompleteWhen(TRUE);
-	END_IF
+IF _sequenceRun = 2 THEN
+    IF Step(0, TRUE, 'Step 0') THEN
+        StepCompleteWhen(TRUE);
+    END_IF
 
-	IF Step(1, TRUE, 'Step 1') THEN
-	   StepCompleteWhen(TRUE);
-	END_IF
+    IF Step(1, TRUE, 'Step 1') THEN
+        StepCompleteWhen(TRUE);
+    END_IF
 
-	IF Step(2, TRUE, 'Step 2') THEN
-	   StepCompleteWhen(TRUE);
-	END_IF
+    IF Step(2, TRUE, 'Step 2') THEN
+        StepCompleteWhen(TRUE);
+    END_IF
 
-	IF Step(3, TRUE, 'Step 3') THEN
-			StepCompleteWhen(FALSE);
-	END_IF
-	
-	FOR i := 4 TO _totalStepNumber-2 DO
-		IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
-			StepCompleteWhen(FALSE);
-		END_IF
-	END_FOR
-	
-	IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
-	  _SequenceComplete();
-	END_IF
-END_IF
+    IF Step(3, TRUE, 'Step 3') THEN
+        StepCompleteWhen(FALSE);
+    END_IF
 
-]]></ST>
+    FOR i := 4 TO _totalStepNumber - 2 DO
+        IF Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
+            StepCompleteWhen(FALSE);
+        END_IF
+    END_FOR
+
+    IF Step(_totalStepNumber - 1, TRUE, CONCAT('Step ', INT_TO_STRING(_totalStepNumber - 1))) THEN
+        _SequenceComplete();
+    END_IF
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnRestore" Id="{f1c046c4-e6d7-0fa8-39c8-970edc9f12be}">
@@ -11060,67 +11023,59 @@ END_IF
       </Implementation>
     </Method>
     <Method Name="OnSequenceCompleted" Id="{60298763-4824-09b1-2830-be21d8dcaa4e}" FolderPath="_Tests\">
-      <Declaration><![CDATA[METHOD PROTECTED OnSequenceCompleted ]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED OnSequenceCompleted]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_onSequenceCompleteCount := _onSequenceCompleteCount + 1;
-]]></ST>
+        <ST><![CDATA[_onSequenceCompleteCount := _onSequenceCompleteCount + 1;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnSequencerError" Id="{fb11aee0-1df3-0d7f-03b6-1d9211fb2b0f}" FolderPath="_Tests\">
       <Declaration><![CDATA[METHOD PROTECTED OnSequencerError
 VAR_INPUT
-	inErrorId : eSequencerError;
-END_VAR
-
-]]></Declaration>
+    inErrorId : eSequencerError;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[CASE inErrorId OF
-	eSequencerError.noError :
-		_onSequencerErrorCount := _onSequencerErrorCount + 0;
-	eSequencerError.NotUniqueStepId :
-		_onSequencerErrorCount := _onSequencerErrorCount + 10;
-	eSequencerError.StepIdHasBeenChanged :
-		_onSequencerErrorCount := _onSequencerErrorCount + 20;
-	eSequencerError.OrderOfTheStepHasBeenChanged :
-		_onSequencerErrorCount := _onSequencerErrorCount + 40;
-	eSequencerError.StepWithRequestedIdDoesNotExists :
-		_onSequencerErrorCount := _onSequencerErrorCount + 50;
-	eSequencerError.MultipleRequestStepMethodCall :
-		_onSequencerErrorCount := _onSequencerErrorCount + 60;
-	eSequencerError.StepIdTooLow :
-		_onSequencerErrorCount := _onSequencerErrorCount + 70;
-	eSequencerError.StepIdTooHigh :
-		_onSequencerErrorCount := _onSequencerErrorCount + 80;
-	ELSE
-		_onSequencerErrorCount := _onSequencerErrorCount + 0;
-END_CASE
-]]></ST>
+    eSequencerError.noError:
+        _onSequencerErrorCount := _onSequencerErrorCount + 0;
+    eSequencerError.NotUniqueStepId:
+        _onSequencerErrorCount := _onSequencerErrorCount + 10;
+    eSequencerError.StepIdHasBeenChanged:
+        _onSequencerErrorCount := _onSequencerErrorCount + 20;
+    eSequencerError.OrderOfTheStepHasBeenChanged:
+        _onSequencerErrorCount := _onSequencerErrorCount + 40;
+    eSequencerError.StepWithRequestedIdDoesNotExists:
+        _onSequencerErrorCount := _onSequencerErrorCount + 50;
+    eSequencerError.MultipleRequestStepMethodCall:
+        _onSequencerErrorCount := _onSequencerErrorCount + 60;
+    eSequencerError.StepIdTooLow:
+        _onSequencerErrorCount := _onSequencerErrorCount + 70;
+    eSequencerError.StepIdTooHigh:
+        _onSequencerErrorCount := _onSequencerErrorCount + 80;
+ELSE
+    _onSequencerErrorCount := _onSequencerErrorCount + 0;
+END_CASE]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStateChange" Id="{e9815ab8-29e5-062b-1852-98a159765651}" FolderPath="_Tests\">
       <Declaration><![CDATA[METHOD PROTECTED OnStateChange
 VAR_INPUT
-	PreviousState	: INT;
-	NewState 		: INT;
-END_VAR
-]]></Declaration>
+    PreviousState : INT;
+    NewState : INT;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^._onStateChangeCount := THIS^._onStateChangeCount + 1;
-
 _stateChangeFrom := PreviousState;
 _stateChangeTo := NewState;
 
 IF _callRestoreInOnStateChange THEN
-	Restore();
-END_IF
-]]></ST>
+    Restore();
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStepCompleted" Id="{ddd486f4-6c54-07e5-3977-6d0473cb44b6}" FolderPath="_Tests\">
       <Declaration><![CDATA[METHOD PROTECTED OnStepCompleted]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_onCompleteStepCount := _onCompleteStepCount + 1;
-]]></ST>
+        <ST><![CDATA[_onCompleteStepCount := _onCompleteStepCount + 1;]]></ST>
       </Implementation>
     </Method>
     <Property Name="PostOpenRequestStepCycle" Id="{3be1f7f2-d985-03fa-0786-a8933695867e}">
@@ -11164,8 +11119,7 @@ END_IF
       <Set Name="Set" Id="{ef57e2c3-34c9-00f6-1646-753997a02fb9}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
-          <ST><![CDATA[_reqStep := ReqStep;
-]]></ST>
+          <ST><![CDATA[_reqStep := ReqStep;]]></ST>
         </Implementation>
       </Set>
     </Property>
@@ -11180,13 +11134,12 @@ END_IF
       <Set Name="Set" Id="{38a8284e-8fc3-07dc-0a90-9fdbd889b646}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
-          <ST><![CDATA[_reqStepNotExists:=ReqStepNotExists;]]></ST>
+          <ST><![CDATA[_reqStepNotExists := ReqStepNotExists;]]></ST>
         </Implementation>
       </Set>
     </Property>
     <Property Name="RequestStepCycle" Id="{bda0e552-817a-067e-0895-613878e0f39a}" FolderPath="_Tests\">
-      <Declaration><![CDATA[PROPERTY INTERNAL RequestStepCycle : UINT
-]]></Declaration>
+      <Declaration><![CDATA[PROPERTY INTERNAL RequestStepCycle : UINT]]></Declaration>
       <Get Name="Get" Id="{02fb61fa-4cd8-0b30-22bf-f6a1251a7177}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
@@ -11232,12 +11185,10 @@ END_IF
     </Property>
     <Method Name="SaveNumberOfStepsInSequence" Id="{bf56cbc7-5304-07bb-0341-b1d009e5e5ac}" FolderPath="_Tests\">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD SaveNumberOfStepsInSequence
-]]></Declaration>
+METHOD SaveNumberOfStepsInSequence]]></Declaration>
       <Implementation>
         <ST><![CDATA[_numberOfSteps := THIS^._numberOfStepsInSequence;
-_previousNumberOfSteps	:= THIS^._previousNumberOfStepsInSequence;
-]]></ST>
+_previousNumberOfSteps := THIS^._previousNumberOfStepsInSequence;]]></ST>
       </Implementation>
     </Method>
     <Property Name="SequenceCycles" Id="{0dc7b43b-5dd7-03f4-1814-0911e8b39393}" FolderPath="_Tests\">
@@ -11256,18 +11207,15 @@ _previousNumberOfSteps	:= THIS^._previousNumberOfStepsInSequence;
       </Set>
     </Property>
     <Method Name="SequencerClose" Id="{5cccc8f6-8740-0c81-3163-241e13fcbeb6}">
-      <Declaration><![CDATA[METHOD INTERNAL SequencerClose 
-]]></Declaration>
+      <Declaration><![CDATA[METHOD INTERNAL SequencerClose]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^._Close();]]></ST>
       </Implementation>
     </Method>
     <Method Name="SequencerOpen" Id="{31aab523-a57b-028e-1000-2e46dbf7483b}">
-      <Declaration><![CDATA[METHOD INTERNAL SequencerOpen
-]]></Declaration>
+      <Declaration><![CDATA[METHOD INTERNAL SequencerOpen]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^._Open();
-]]></ST>
+        <ST><![CDATA[SUPER^._Open();]]></ST>
       </Implementation>
     </Method>
     <Property Name="SequenceRun" Id="{d6112955-355b-0178-3ba4-bb2f212985f4}">
@@ -11279,130 +11227,101 @@ _previousNumberOfSteps	:= THIS^._previousNumberOfStepsInSequence;
         </Implementation>
       </Get>
       <Set Name="Set" Id="{7389e3b2-b6a4-002e-3417-721dac6d658b}">
-        <Declaration><![CDATA[	]]></Declaration>
+        <Declaration><![CDATA[]]></Declaration>
         <Implementation>
-          <ST><![CDATA[_sequenceRun:=SequenceRun;]]></ST>
+          <ST><![CDATA[_sequenceRun := SequenceRun;]]></ST>
         </Implementation>
       </Set>
     </Property>
     <Method Name="SetChildState" Id="{ca54244a-6d31-0632-05fb-fb3e6fa5d119}" FolderPath="_Tests\">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL SetChildState 
+METHOD INTERNAL SetChildState
 VAR_INPUT
-	inState			:	INT;
-END_VAR
-]]></Declaration>
+    inState : INT;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^._myTcoChildState.ChangeState(inState);
-]]></ST>
+        <ST><![CDATA[THIS^._myTcoChildState.ChangeState(inState);]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetCurrentStep" Id="{f17f581f-7d98-0644-0c00-f263d0dfa946}" FolderPath="_Tests\">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL SetCurrentStep 
+METHOD INTERNAL SetCurrentStep
 VAR_INPUT
-	inStepID 			:	INT;
-	inStepDescription	:	STRING(254);
-END_VAR
-]]></Declaration>
+    inStepID : INT;
+    inStepDescription : STRING(254);
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^._currentStep.ID			:=	inStepID;
-THIS^._currentStep.Description	:=	inStepDescription;
-]]></ST>
+        <ST><![CDATA[THIS^._currentStep.ID := inStepID;
+THIS^._currentStep.Description := inStepDescription;]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetCurrentStepToErrorState" Id="{210f6dc4-adf4-0e2b-3e75-6cbd34cf51e4}" FolderPath="_Tests\">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD SetCurrentStepToErrorState : BOOL
-]]></Declaration>
+METHOD SetCurrentStepToErrorState : BOOL]]></Declaration>
       <Implementation>
         <ST><![CDATA[_currentStep.Status := TcoCore.eStepStatus.Error;
-
-SetCurrentStepToErrorState := _currentStep.Status = TcoCore.eStepStatus.Error;
-
-]]></ST>
+SetCurrentStepToErrorState := _currentStep.Status = TcoCore.eStepStatus.Error;]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetCyclicMode" Id="{bfbf5225-839d-0c49-021c-5ca0db52c603}" FolderPath="_Tests\">
-      <Declaration><![CDATA[METHOD SetCyclicMode : BOOL
-]]></Declaration>
+      <Declaration><![CDATA[METHOD SetCyclicMode : BOOL]]></Declaration>
       <Implementation>
         <ST><![CDATA[ModeController.Mode := eSequencerMode.CyclicMode;
-
-SetCyclicMode := ModeController.Mode = eSequencerMode.CyclicMode;
-
-]]></ST>
+SetCyclicMode := ModeController.Mode = eSequencerMode.CyclicMode;]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetInvalidMode" Id="{5ddc53f7-d2c6-0855-0a9c-e60a2b64947f}" FolderPath="_Tests\">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD SetInvalidMode : BOOL
-]]></Declaration>
+METHOD SetInvalidMode : BOOL]]></Declaration>
       <Implementation>
         <ST><![CDATA[ModeController.Mode := eSequencerMode.Invalid;
-
-SetInvalidMode := ModeController.Mode = eSequencerMode.Invalid;
-
-]]></ST>
+SetInvalidMode := ModeController.Mode = eSequencerMode.Invalid;]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetNumberOfSteps" Id="{f8d0f7aa-093e-0131-12ce-c1fa912c1d32}" FolderPath="_Tests\">
-      <Declaration><![CDATA[METHOD INTERNAL SetNumberOfSteps 
+      <Declaration><![CDATA[METHOD INTERNAL SetNumberOfSteps
 VAR_INPUT
-	inNumberOfSteps : UINT;
-END_VAR
-]]></Declaration>
+    inNumberOfSteps : UINT;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_stepCounter 						:=	inNumberOfSteps;
-_numberOfStepsInSequence			:=	inNumberOfSteps;
-_previousNumberOfStepsInSequence 	:=	inNumberOfSteps;
-]]></ST>
+        <ST><![CDATA[_stepCounter := inNumberOfSteps;
+_numberOfStepsInSequence := inNumberOfSteps;
+_previousNumberOfStepsInSequence := inNumberOfSteps;]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetSequenceAsChecked" Id="{4326a977-738e-0b21-3421-c92a826986ad}" FolderPath="_Tests\">
-      <Declaration><![CDATA[METHOD INTERNAL SetSequenceAsChecked
-]]></Declaration>
+      <Declaration><![CDATA[METHOD INTERNAL SetSequenceAsChecked]]></Declaration>
       <Implementation>
         <ST><![CDATA[_stepIDUniquenessChecked := TRUE;
-_StepIdUniquenessControlState := eStepIdUniquenessControlState.Done;
-
-]]></ST>
+_StepIdUniquenessControlState := eStepIdUniquenessControlState.Done;]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetSequenceAsNotChecked" Id="{0e043be6-f20b-0526-1c74-dadaf5fede50}" FolderPath="_Tests\">
-      <Declaration><![CDATA[METHOD INTERNAL SetSequenceAsNotChecked
-]]></Declaration>
+      <Declaration><![CDATA[METHOD INTERNAL SetSequenceAsNotChecked]]></Declaration>
       <Implementation>
         <ST><![CDATA[_stepIDUniquenessChecked := FALSE;
-_StepIdUniquenessControlState := eStepIdUniquenessControlState.NotYetStarted;
-]]></ST>
+_StepIdUniquenessControlState := eStepIdUniquenessControlState.NotYetStarted;]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetStepMode" Id="{6c94eaba-bcb8-0e97-34d9-b3ee7c3ee17e}" FolderPath="_Tests\">
-      <Declaration><![CDATA[METHOD SetStepMode : BOOL
-]]></Declaration>
+      <Declaration><![CDATA[METHOD SetStepMode : BOOL]]></Declaration>
       <Implementation>
         <ST><![CDATA[ModeController.Mode := eSequencerMode.StepMode;
-
-SetStepMode := ModeController.Mode = eSequencerMode.StepMode;
-
-]]></ST>
+SetStepMode := ModeController.Mode = eSequencerMode.StepMode;]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetupChildRequestedState" Id="{5a5235ff-1915-0a32-2b03-9bcc9425c4d0}" FolderPath="_Tests\">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL SetupChildRequestedState 
+METHOD INTERNAL SetupChildRequestedState
 VAR_INPUT
-	inState			:	INT;
-END_VAR
-]]></Declaration>
+    inState : INT;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^._myTcoChildState.RequestedState:=inState;
-]]></ST>
+        <ST><![CDATA[THIS^._myTcoChildState.RequestedState := inState;]]></ST>
       </Implementation>
     </Method>
     <Property Name="StepDescription" Id="{7dc35663-a4b9-0a1b-083b-d7ec981d8b48}" FolderPath="_Tests\">
-      <Declaration><![CDATA[PROPERTY StepDescription : STRING(254);	]]></Declaration>
+      <Declaration><![CDATA[PROPERTY StepDescription : STRING(254);]]></Declaration>
       <Get Name="Get" Id="{24687b75-d257-0c86-0fbc-c080703770d4}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
@@ -11462,7 +11381,7 @@ END_VAR
       </Set>
     </Property>
     <Property Name="TotalStepNumber" Id="{511cc388-c125-0ad8-0046-6f0984089ec4}" FolderPath="_Tests\">
-      <Declaration><![CDATA[PROPERTY TotalStepNumber : UINT ]]></Declaration>
+      <Declaration><![CDATA[PROPERTY TotalStepNumber : UINT]]></Declaration>
       <Get Name="Get" Id="{e5be93c8-9592-0b7d-2029-35c59093f619}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>

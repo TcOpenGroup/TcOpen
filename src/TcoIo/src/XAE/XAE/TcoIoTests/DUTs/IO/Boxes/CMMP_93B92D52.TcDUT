@@ -9,20 +9,18 @@
 {attribute addProperty Id "InputsAT %I*Inputs_424E3ECB8Inputs_1AT %I*Inputs_845131828OutputsAT %Q*Outputs_3179CEF48WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_F60A43AC11"}
 {attribute addProperty CRC "2478386514"}
 {attribute addProperty Size "37"}
-TYPE CMMP_93B92D52 EXTENDS TcoIo.EtcSlaveBoxBase_77A0E4A7 :
-STRUCT
-	{attribute addProperty Name "Inputs"}
-	Inputs : Inputs_424E3ECB;
-	{attribute addProperty Name "Inputs_1"}
-	Inputs_1 : Inputs_84513182;
-	{attribute addProperty Name "Outputs"}
-	Outputs : Outputs_3179CEF4;
-	{attribute addProperty Name "WcState"}
-	WcState : TcoIo.WcState_9091E0EB;
-	{attribute addProperty Name "InfoData"}
-	InfoData : InfoData_F60A43AC;
+TYPE CMMP_93B92D52 EXTENDS TcoIo.EtcSlaveBoxBase_77A0E4A7 : STRUCT
+    {attribute addProperty Name "Inputs"}
+    Inputs : Inputs_424E3ECB;
+    {attribute addProperty Name "Inputs_1"}
+    Inputs_1 : Inputs_84513182;
+    {attribute addProperty Name "Outputs"}
+    Outputs : Outputs_3179CEF4;
+    {attribute addProperty Name "WcState"}
+    WcState : TcoIo.WcState_9091E0EB;
+    {attribute addProperty Name "InfoData"}
+    InfoData : InfoData_F60A43AC;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

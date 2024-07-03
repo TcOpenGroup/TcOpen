@@ -20,32 +20,43 @@ namespace TcOpen.Inxton.Local.Security
         {
             Roles = new ObservableCollection<string>();
         }
+
         public UserData(User user)
         {
             Username = user.UserName;
             Email = user.Email;
             HashedPassword = user.PasswordHash;
             SecurityStamp = user.SecurityStamp;
-            Roles = user.Roles == null ? new ObservableCollection<string>() : new ObservableCollection<string>(user.Roles.ToList());
+            Roles =
+                user.Roles == null
+                    ? new ObservableCollection<string>()
+                    : new ObservableCollection<string>(user.Roles.ToList());
             Email = user.Email;
             CanUserChangePassword = user.CanUserChangePassword;
-            
         }
-        public UserData(string username, string email, string password, IEnumerable<string> roles, string level, string authenticationToken)
+
+        public UserData(
+            string username,
+            string email,
+            string password,
+            IEnumerable<string> roles,
+            string level,
+            string authenticationToken
+        )
         {
             Username = username;
             Email = email;
             HashedPassword = CalculateHash(password, username);
             Roles = new ObservableCollection<string>(roles);
             RoleHash = CalculateRoleHash(roles, username);
-            if (level!=string.Empty)
+            if (level != string.Empty)
             {
-                Level = Roles.First() ;
+                Level = Roles.First();
             }
-    
+
             AuthenticationToken = CalculateHash(authenticationToken, string.Empty);
         }
-             
+
         public UserData(string username, string password, IEnumerable<string> roles)
         {
             Username = username;
@@ -53,11 +64,13 @@ namespace TcOpen.Inxton.Local.Security
             Roles = new ObservableCollection<string>(roles);
             RoleHash = CalculateRoleHash(roles, username);
         }
+
         public string SecurityStamp { get; set; }
         public dynamic _recordId { get; set; }
         public string Username
         {
-            get => _username; set
+            get => _username;
+            set
             {
                 _username = value;
                 OnPropertyChanged(nameof(Username));
@@ -65,7 +78,8 @@ namespace TcOpen.Inxton.Local.Security
         }
         public string Email
         {
-            get => _email; set
+            get => _email;
+            set
             {
                 _email = value;
                 OnPropertyChanged(nameof(Email));
@@ -81,10 +95,7 @@ namespace TcOpen.Inxton.Local.Security
 
                 return string.Empty;
             }
-            set
-            {
-                hashedPassword = value;
-            }
+            set { hashedPassword = value; }
         }
         public ObservableCollection<string> Roles { get; set; }
         public Boolean CanUserChangePassword
@@ -105,10 +116,7 @@ namespace TcOpen.Inxton.Local.Security
         string level;
         public string Level
         {
-            get
-            {
-                return level;
-            }
+            get { return level; }
             set
             {
                 if (level == value)
@@ -147,7 +155,8 @@ namespace TcOpen.Inxton.Local.Security
 
         public void UpdateRoleHash() => RoleHash = CalculateRoleHash(Roles, Username);
 
-        public void SetPlainTextPassword(string plainTextPassowrd) => HashedPassword = CalculateHash(plainTextPassowrd, Username);
+        public void SetPlainTextPassword(string plainTextPassowrd) =>
+            HashedPassword = CalculateHash(plainTextPassowrd, Username);
 
         private string CalculateHash(string textToHash, string salt)
         {
@@ -161,7 +170,7 @@ namespace TcOpen.Inxton.Local.Security
         }
 
         private String CalculateRoleHash(IEnumerable<string> roles, string username) =>
-             CalculateHash(String.Join(",", roles.OrderByDescending(x => x).ToList()), username);
+            CalculateHash(String.Join(",", roles.OrderByDescending(x => x).ToList()), username);
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -178,10 +187,7 @@ namespace TcOpen.Inxton.Local.Security
         TimeSpan logoutTime;
         public TimeSpan LogoutTime
         {
-            get
-            {
-                return logoutTime;
-            }
+            get { return logoutTime; }
             set
             {
                 if (logoutTime == value)

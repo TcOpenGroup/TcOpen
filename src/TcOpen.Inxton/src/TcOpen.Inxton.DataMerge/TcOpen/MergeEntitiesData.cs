@@ -6,17 +6,20 @@ using Vortex.Connector;
 
 namespace TcOpen.Inxton.Data.Merge
 {
-    public class MergeEntitiesData<T> : MergeEntityDataBase<T>, IMergeEntitiesData<T> where T : IBrowsableDataObject, new()
+    public class MergeEntitiesData<T> : MergeEntityDataBase<T>, IMergeEntitiesData<T>
+        where T : IBrowsableDataObject, new()
     {
         private static IRepository<T> _sourceRepository;
         private static IRepository<T> _targetRepository;
 
-        public MergeEntitiesData(IRepository<T> sourceRepository, 
-                                  IRepository<T> targetRepository, 
-                                  IEnumerable<Type> requiredTypes, 
-                                  IEnumerable<string> requiredProperties,
-                                  Func<object, bool> exclusion,
-                                  Func<object, bool> inclusion)
+        public MergeEntitiesData(
+            IRepository<T> sourceRepository,
+            IRepository<T> targetRepository,
+            IEnumerable<Type> requiredTypes,
+            IEnumerable<string> requiredProperties,
+            Func<object, bool> exclusion,
+            Func<object, bool> inclusion
+        )
         {
             SourceRepository = sourceRepository;
             TargetRepository = targetRepository;
@@ -25,24 +28,31 @@ namespace TcOpen.Inxton.Data.Merge
             Exclusion = exclusion;
             Inclusion = inclusion;
         }
-        public MergeEntitiesData(IRepository<T> sourceRepository,
-                                 IRepository<T> targetRepository)
+
+        public MergeEntitiesData(IRepository<T> sourceRepository, IRepository<T> targetRepository)
         {
             SourceRepository = sourceRepository;
             TargetRepository = targetRepository;
             RequiredTypes = new List<Type>();
-            RequiredProperties = new List<string>();  
+            RequiredProperties = new List<string>();
         }
 
         public T Source { get; set; }
         public T Target { get; set; }
-        public IRepository<T> SourceRepository { get => _sourceRepository; set => _sourceRepository = value; }
-        public IRepository<T> TargetRepository { get => _targetRepository; set => _targetRepository = value; }
+        public IRepository<T> SourceRepository
+        {
+            get => _sourceRepository;
+            set => _sourceRepository = value;
+        }
+        public IRepository<T> TargetRepository
+        {
+            get => _targetRepository;
+            set => _targetRepository = value;
+        }
 
         public override T GetEntityData(string id, IRepository<T> repository)
         {
-
-            var entity = repository.Queryable .FirstOrDefault<T>(p => p._EntityId == id);
+            var entity = repository.Queryable.FirstOrDefault<T>(p => p._EntityId == id);
             return entity;
         }
 
@@ -50,7 +60,6 @@ namespace TcOpen.Inxton.Data.Merge
         {
             return repository.Queryable.Where(p => true);
         }
-
 
         public override void UpdateEntityData(T data, IRepository<T> repository)
         {
@@ -64,7 +73,6 @@ namespace TcOpen.Inxton.Data.Merge
         /// <returns></returns>
         public bool Merge(string sourceId)
         {
-
             if (string.IsNullOrEmpty(sourceId))
             {
                 return false;
@@ -84,14 +92,13 @@ namespace TcOpen.Inxton.Data.Merge
         }
 
         /// <summary>
-        /// Merge specified data from source entity to target entity 
+        /// Merge specified data from source entity to target entity
         /// </summary>
         /// <param name="sourceId"></param>
         /// <param name="targetId"></param>
         /// <returns></returns>
-        public bool Merge(string sourceId,string targetId)
+        public bool Merge(string sourceId, string targetId)
         {
-
             if (string.IsNullOrEmpty(sourceId) || string.IsNullOrEmpty(targetId))
             {
                 return false;
@@ -100,7 +107,7 @@ namespace TcOpen.Inxton.Data.Merge
             Source = GetEntityData(sourceId, SourceRepository);
             Target = GetEntityData(targetId, TargetRepository);
 
-            MergeEntities( (IPlain)Target, (IPlain)Source);
+            MergeEntities((IPlain)Target, (IPlain)Source);
 
             UpdateEntityData(Target, TargetRepository);
             return true;
@@ -113,9 +120,13 @@ namespace TcOpen.Inxton.Data.Merge
         /// <param name="exclude"></param>
         /// <param name="include"></param>
         /// <returns></returns>
-        public bool Merge(string sourceId, Func<object, bool> exclude = null, Func<object, bool> include = null, Func<object, IEnumerable<string>> includeProperties = null)
+        public bool Merge(
+            string sourceId,
+            Func<object, bool> exclude = null,
+            Func<object, bool> include = null,
+            Func<object, IEnumerable<string>> includeProperties = null
+        )
         {
-
             if (string.IsNullOrEmpty(sourceId))
             {
                 return false;
@@ -126,24 +137,30 @@ namespace TcOpen.Inxton.Data.Merge
             foreach (var entity in GetEntities(TargetRepository))
             {
                 Target = GetEntityData(entity._EntityId, TargetRepository);
-                MergeEntities((IPlain)Target, (IPlain)Source,exclude, include,includeProperties);
+                MergeEntities((IPlain)Target, (IPlain)Source, exclude, include, includeProperties);
 
                 UpdateEntityData(Target, TargetRepository);
             }
 
             return true;
         }
+
         /// <summary>
-        /// Merge specified data from source entity to target entity 
+        /// Merge specified data from source entity to target entity
         /// </summary>
         /// <param name="sourceId"></param>
         /// <param name="targetId"></param>
         /// <param name="exclude"></param>
         /// <param name="include"></param>
         /// <returns></returns>
-        public bool Merge(string sourceId, string targetId, Func<object, bool> exclude = null, Func<object, bool> include = null, Func<object, IEnumerable<string>> includeProperties = null)
+        public bool Merge(
+            string sourceId,
+            string targetId,
+            Func<object, bool> exclude = null,
+            Func<object, bool> include = null,
+            Func<object, IEnumerable<string>> includeProperties = null
+        )
         {
-
             if (string.IsNullOrEmpty(sourceId) || string.IsNullOrEmpty(targetId))
             {
                 return false;
@@ -152,20 +169,17 @@ namespace TcOpen.Inxton.Data.Merge
             Source = GetEntityData(sourceId, SourceRepository);
             Target = GetEntityData(targetId, TargetRepository);
 
-            MergeEntities((IPlain)Target, (IPlain)Source,exclude,include,includeProperties);
+            MergeEntities((IPlain)Target, (IPlain)Source, exclude, include, includeProperties);
 
             UpdateEntityData(Target, TargetRepository);
             return true;
         }
 
-
         private bool IsRequiredType(object obj)
         {
-            return RequiredTypes.Any(p => p == obj.GetType()); 
+            return RequiredTypes.Any(p => p == obj.GetType());
         }
 
-       
-       
         public IEnumerable<Type> RequiredTypes { get; }
 
         public IEnumerable<string> RequiredProperties { get; }
@@ -175,77 +189,79 @@ namespace TcOpen.Inxton.Data.Merge
 
         private void MergeEntities(IPlain childObjTarget, IPlain childObjSource)
         {
-           //foreach (var childTarget in childObjTarget.GetType().GetProperties().Where(p => true).Select(p => p.GetValue(childObjTarget)))
- 
+            //foreach (var childTarget in childObjTarget.GetType().GetProperties().Where(p => true).Select(p => p.GetValue(childObjTarget)))
+
             foreach (var child in childObjTarget.GetType().GetProperties().Where(p => true))
             {
                 var childTarget = child.GetValue(childObjTarget);
-                var childSource = childObjSource.GetType().GetProperties().FirstOrDefault(p => p.Name == child.Name).GetValue(childObjSource);
-
-
+                var childSource = childObjSource
+                    .GetType()
+                    .GetProperties()
+                    .FirstOrDefault(p => p.Name == child.Name)
+                    .GetValue(childObjSource);
 
                 if (childTarget != null)
                 {
-
-                    
-                    if (IsRequiredType(childTarget) )
+                    if (IsRequiredType(childTarget))
                     {
-                      
-                        CopyValues(childTarget, childSource, RequiredProperties, Exclusion);                      
+                        CopyValues(childTarget, childSource, RequiredProperties, Exclusion);
                     }
                     else if (Inclusion != null)
                     {
                         if (Inclusion(childTarget))
                         {
                             CopyValues(childTarget, childSource, RequiredProperties, Exclusion);
-
                         }
                     }
-
 
                     if (childTarget.GetType().IsArray)
                     {
                         var arrayTarget = childTarget as Array;
                         var arraySource = childTarget as Array;
 
-                        if (arrayTarget != null || arraySource!= null)
+                        if (arrayTarget != null || arraySource != null)
                             for (int i = 0; i < arrayTarget.Length; i++)
                             {
-                                MergeEntities((IPlain)arrayTarget.GetValue(i), (IPlain)arraySource.GetValue(i));
+                                MergeEntities(
+                                    (IPlain)arrayTarget.GetValue(i),
+                                    (IPlain)arraySource.GetValue(i)
+                                );
                             }
-                         
                     }
 
                     if (childTarget is IPlain)
                     {
                         MergeEntities((IPlain)childTarget, (IPlain)childSource);
                     }
-
-
                 }
             }
         }
 
-
-        private void MergeEntities(IPlain childObjTarget, IPlain childObjSource, Func<object, bool> exclude = null, Func<object, bool> include = null, Func<object, IEnumerable<string>>properties = null)
+        private void MergeEntities(
+            IPlain childObjTarget,
+            IPlain childObjSource,
+            Func<object, bool> exclude = null,
+            Func<object, bool> include = null,
+            Func<object, IEnumerable<string>> properties = null
+        )
         {
-
             foreach (var child in childObjTarget.GetType().GetProperties().Where(p => true))
             {
                 var childTarget = child.GetValue(childObjTarget);
-                var childSource = childObjSource.GetType().GetProperties().FirstOrDefault(p => p.Name == child.Name).GetValue(childObjSource);
+                var childSource = childObjSource
+                    .GetType()
+                    .GetProperties()
+                    .FirstOrDefault(p => p.Name == child.Name)
+                    .GetValue(childObjSource);
 
                 if (childTarget != null)
                 {
-
                     if (include != null)
                     {
                         if (include(childTarget) || IsRequiredType(childTarget))
                         {
-
-                                CopyValues(childTarget, childSource, properties(childTarget), exclude);
+                            CopyValues(childTarget, childSource, properties(childTarget), exclude);
                         }
-
 
                         if (childTarget.GetType().IsArray)
                         {
@@ -255,23 +271,38 @@ namespace TcOpen.Inxton.Data.Merge
                             if (arrayTarget != null || arraySource != null)
                                 for (int i = 0; i < arrayTarget.Length; i++)
                                 {
-                                    MergeEntities((IPlain)arrayTarget.GetValue(i), (IPlain)arraySource.GetValue(i), exclude, include,properties);
+                                    MergeEntities(
+                                        (IPlain)arrayTarget.GetValue(i),
+                                        (IPlain)arraySource.GetValue(i),
+                                        exclude,
+                                        include,
+                                        properties
+                                    );
                                 }
-
                         }
 
                         if (childTarget is IPlain)
                         {
-                            MergeEntities((IPlain)childTarget, (IPlain)childSource, exclude, include,properties);
+                            MergeEntities(
+                                (IPlain)childTarget,
+                                (IPlain)childSource,
+                                exclude,
+                                include,
+                                properties
+                            );
                         }
-
                     }
                 }
             }
         }
 
-        private void CopyValues(object target, object source, IEnumerable<string> requiredProperties, Func<object,bool> exclude = null)
-        {            
+        private void CopyValues(
+            object target,
+            object source,
+            IEnumerable<string> requiredProperties,
+            Func<object, bool> exclude = null
+        )
+        {
             Type targetType = target.GetType();
             var _properties = targetType.GetProperties();
 
@@ -289,7 +320,6 @@ namespace TcOpen.Inxton.Data.Merge
                     {
                         var value = prop.GetValue(source, null);
                         prop.SetValue(target, value, null);
-
                     }
                 }
                 else
@@ -299,8 +329,5 @@ namespace TcOpen.Inxton.Data.Merge
                 }
             }
         }
-
-      
-
     }
 }

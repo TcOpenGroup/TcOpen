@@ -1,10 +1,10 @@
-﻿using NUnit.Framework;
-using TcoDrivesBeckhoff;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NUnit.Framework;
+using TcoDrivesBeckhoff;
 using TcoDrivesBeckhoffUnitTests;
 
 namespace TcoDrivesBeckhoff.Pex.Tests
@@ -12,7 +12,6 @@ namespace TcoDrivesBeckhoff.Pex.Tests
     [TestFixture()]
     public class MoveModuloTaskCodeProviderTests
     {
-
         private static string InOneLine(string input)
         {
             return input.Replace("\n", "").Replace("\r", "").Replace("\t", "");
@@ -32,9 +31,10 @@ namespace TcoDrivesBeckhoff.Pex.Tests
             var provider = new MoveModuloTaskCodeProvider(drive);
 
             var actual = InOneLine(provider.Code());
-            var expected = "servoSymbol.MoveModulo(                                                         inPosition := 10,                                                         inVelocity := 20,                                                         inAcceleration := 30,                                                         inDeceleration := 40,                                                         inJerk := 50,                                                         inDirection := 1).Done";
-           
+            var expected =
+                "servoSymbol.MoveModulo(                                                         inPosition := 10,                                                         inVelocity := 20,                                                         inAcceleration := 30,                                                         inDeceleration := 40,                                                         inJerk := 50,                                                         inDirection := 1).Done";
+
             Assert.AreEqual(expected, actual);
-        }  
+        }
     }
 }

@@ -9,17 +9,12 @@ using System.Windows;
 using Vortex.Connector;
 using Vortex.Presentation.Wpf;
 
-
 namespace TcoUrRobotics
 {
-    public class TcoUrCb3_v_3_x_xServiceViewModel : TcoUrRoboticsBaseServiceViewModel<TcoUrCb3_v_3_x_x>
+    public class TcoUrCb3_v_3_x_xServiceViewModel
+        : TcoUrRoboticsBaseServiceViewModel<TcoUrCb3_v_3_x_x>
     {
-
-        public TcoUrCb3_v_3_x_xServiceViewModel():base()
-        { }
-
-
-    
+        public TcoUrCb3_v_3_x_xServiceViewModel()
+            : base() { }
     }
-
 }

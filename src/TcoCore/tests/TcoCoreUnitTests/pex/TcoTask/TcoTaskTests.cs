@@ -1,12 +1,12 @@
-﻿using NUnit.Framework;
-using TcoCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TcOpen.Inxton;
+using NUnit.Framework;
+using TcoCore;
 using TcoCore.Logging;
+using TcOpen.Inxton;
 
 namespace TcoCore.PexTests
 {
@@ -26,7 +26,7 @@ namespace TcoCore.PexTests
         public void PexCtor()
         {
             var task = new TcoTask(new MockRootObject(), string.Empty, string.Empty);
-            Assert.IsNotNull(task);           
+            Assert.IsNotNull(task);
         }
 
         [Test()]
@@ -44,21 +44,24 @@ namespace TcoCore.PexTests
         [TestCase(true)]
         [TestCase(false)]
         public void ValidateCanExecuteAbortRestoreTest_nested_commands(bool serviceable)
-        {            
-            var task = new TcoTask();           
+        {
+            var task = new TcoTask();
             task._isServiceable.Synchron = serviceable;
             task._restoreRequest.Synchron = false;
             task._abortRequest.Synchron = false;
             _logger.ClearLastMessage();
 
-            task.ValidateCanExecuteAbortRestore(null, new Vortex.Connector.ValueTypes.ValueChangedEventArgs(0));
+            task.ValidateCanExecuteAbortRestore(
+                null,
+                new Vortex.Connector.ValueTypes.ValueChangedEventArgs(0)
+            );
 
             Assert.AreEqual(serviceable, task.Abort.CanExecute(null));
             Assert.AreEqual(serviceable, task.Restore.CanExecute(null));
 
             task.Abort.Execute(null);
 
-            if(serviceable)
+            if (serviceable)
             {
                 Assert.AreEqual("Task '' aborted. {@sender}", _logger.LastMessage.message);
                 Assert.IsInstanceOf<LogInfo>(_logger.LastMessage.payload);
@@ -84,7 +87,6 @@ namespace TcoCore.PexTests
 
             Assert.AreEqual(serviceable, task._abortRequest.Synchron);
             Assert.AreEqual(serviceable, task._restoreRequest.Synchron);
-
         }
 
         [Test()]
@@ -95,15 +97,14 @@ namespace TcoCore.PexTests
         {
             var task = new TcoTask();
             task._enabled.Synchron = isEnabled;
-            task._isServiceable.Synchron = isServiceable;            
+            task._isServiceable.Synchron = isServiceable;
             var expected = isEnabled && isServiceable;
 
             var actual = task.CanExecute(new object());
 
-            Assert.AreEqual(expected, actual);           
+            Assert.AreEqual(expected, actual);
         }
 
-        
         [Test()]
         [TestCase(true, false)]
         [TestCase(false, true)]
@@ -122,8 +123,8 @@ namespace TcoCore.PexTests
             Assert.AreEqual(expected, task._invokeRequest.Synchron);
             Assert.AreEqual(expected, !_logger.IsLastMessageEmpty());
 
-            if(expected)
-            { 
+            if (expected)
+            {
                 Assert.AreEqual("Task '' invoked. {@sender}", _logger.LastMessage.message);
                 Assert.IsInstanceOf<LogInfo>(_logger.LastMessage.payload);
                 Assert.AreEqual("Information", _logger.LastMessage.serverity);
@@ -151,7 +152,6 @@ namespace TcoCore.PexTests
             var expected = isEnabled && isServiceable;
 
             task.Execute(new object());
-
 
             Assert.AreEqual(expected, task._restoreRequest.Synchron);
             Assert.AreEqual(expected, task._invokeRequest.Synchron);

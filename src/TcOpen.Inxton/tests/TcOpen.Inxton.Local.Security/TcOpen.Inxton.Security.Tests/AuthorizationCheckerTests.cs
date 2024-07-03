@@ -1,7 +1,7 @@
-﻿using NUnit.Framework;
-using System.Linq;
-using TcOpen.Inxton.Security;
+﻿using System.Linq;
+using NUnit.Framework;
 using TcOpen.Inxton.Local.Security;
+using TcOpen.Inxton.Security;
 using TcOpen.Inxton.Security;
 
 namespace Vortex.SecurityTests
@@ -9,14 +9,16 @@ namespace Vortex.SecurityTests
     [TestFixture]
     public class AuthorizationCheckerTests
     {
-
         [OneTimeSetUp]
         public void SetUp()
         {
             TcOpen.Inxton.Local.Security.SecurityManager.CreateDefault();
-            NUnit.Framework.Internal.TestExecutionContext.CurrentContext.CurrentPrincipal = SecurityManager.Manager.Principal;
+            NUnit.Framework.Internal.TestExecutionContext.CurrentContext.CurrentPrincipal =
+                SecurityManager.Manager.Principal;
 
-            var authService = TcOpen.Inxton.Local.Security.SecurityManager.Manager.Service as AuthenticationService;
+            var authService =
+                TcOpen.Inxton.Local.Security.SecurityManager.Manager.Service
+                as AuthenticationService;
 
             var records = authService.UserRepository.GetRecords("*").Select(p => p._EntityId);
 
@@ -28,15 +30,19 @@ namespace Vortex.SecurityTests
             var userName = "Admin";
             var password = "AdminPassword";
             var roles = new string[] { "Administrator" };
-            authService.UserRepository.Create(userName, new UserData(userName, password, roles.ToList())
-);
+            authService.UserRepository.Create(
+                userName,
+                new UserData(userName, password, roles.ToList())
+            );
 
             userName = "Operator";
             password = "OperatorPassword";
             roles = new string[] { "Operator" };
 
-            authService.UserRepository.Create(userName, new UserData(userName, password, roles.ToList())
-);
+            authService.UserRepository.Create(
+                userName,
+                new UserData(userName, password, roles.ToList())
+            );
         }
 
         [Test]
@@ -49,7 +55,10 @@ namespace Vortex.SecurityTests
         [Test]
         public void authentication_checker_failed()
         {
-            SecurityProvider.Get.AuthenticationService.AuthenticateUser("Operator", "OperatorPassword");
+            SecurityProvider.Get.AuthenticationService.AuthenticateUser(
+                "Operator",
+                "OperatorPassword"
+            );
             Assert.AreEqual(false, AuthorizationChecker.HasAuthorization("Administrator"));
         }
 
@@ -63,18 +72,36 @@ namespace Vortex.SecurityTests
 
         [Test]
         public void authentication_checker_re_authenticate_success()
-        {            
+        {
             SecurityProvider.Get.AuthenticationService.DeAuthenticateCurrentUser();
-            Assert.AreEqual(true, AuthorizationChecker.HasAuthorization("Administrator", 
-                () => SecurityProvider.Get.AuthenticationService.AuthenticateUser("Admin", "AdminPassword")));
+            Assert.AreEqual(
+                true,
+                AuthorizationChecker.HasAuthorization(
+                    "Administrator",
+                    () =>
+                        SecurityProvider.Get.AuthenticationService.AuthenticateUser(
+                            "Admin",
+                            "AdminPassword"
+                        )
+                )
+            );
         }
 
         [Test]
         public void authentication_checker_re_authenticate_failed()
         {
             SecurityProvider.Get.AuthenticationService.DeAuthenticateCurrentUser();
-            Assert.AreEqual(false, AuthorizationChecker.HasAuthorization("Administrator",
-                () => SecurityProvider.Get.AuthenticationService.AuthenticateUser("Admin", "AdminPassword1")));
+            Assert.AreEqual(
+                false,
+                AuthorizationChecker.HasAuthorization(
+                    "Administrator",
+                    () =>
+                        SecurityProvider.Get.AuthenticationService.AuthenticateUser(
+                            "Admin",
+                            "AdminPassword1"
+                        )
+                )
+            );
         }
     }
 }

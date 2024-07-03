@@ -8,10 +8,10 @@ using Vortex.Connector;
 
 namespace TcoCore
 {
-    public class TreeViewWrapper 
+    public class TreeViewWrapper
     {
-
         public IVortexObject Wrapper { get; set; }
+
         public TreeViewWrapper(IVortexObject obj)
         {
             Wrapper = obj;
@@ -21,9 +21,9 @@ namespace TcoCore
                 Children = Wrapper.GetKids();
             }
         }
+
         public IEnumerable<IVortexElement> Children;
 
         public bool HasChildren { get; set; }
-       
     }
 }

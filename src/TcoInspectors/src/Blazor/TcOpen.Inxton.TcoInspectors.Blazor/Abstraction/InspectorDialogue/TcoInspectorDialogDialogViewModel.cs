@@ -12,9 +12,14 @@ namespace TcoInspectors
     public class TcoInspectorDialogDialogViewModel : RenderableViewModelBase
     {
         public TcoInspectorDialog Dialog { get; private set; } = new TcoInspectorDialog();
-        public override object Model { get => Dialog; set => Dialog = (TcoInspectorDialog)value; }
+        public override object Model
+        {
+            get => Dialog;
+            set => Dialog = (TcoInspectorDialog)value;
+        }
 
         public bool RetryDisabled { get; set; } = false;
+
         public void Retry()
         {
             if (Dialog != null && !Dialog._isOverInspected.Synchron)
@@ -26,17 +31,28 @@ namespace TcoInspectors
             {
                 RetryDisabled = true;
             }
-            TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"{nameof(Retry)} of {Dialog.HumanReadable} was executed @{{payload}}.", new { Dialog.Symbol });
+            TcOpen.Inxton.TcoAppDomain.Current.Logger.Information(
+                $"{nameof(Retry)} of {Dialog.HumanReadable} was executed @{{payload}}.",
+                new { Dialog.Symbol }
+            );
         }
+
         public void Terminate()
         {
             Dialog._dialogTerminate.Synchron = true;
-            TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"{nameof(Terminate)} of {Dialog.HumanReadable} was executed @{{payload}}.", new { Dialog.Symbol });
+            TcOpen.Inxton.TcoAppDomain.Current.Logger.Information(
+                $"{nameof(Terminate)} of {Dialog.HumanReadable} was executed @{{payload}}.",
+                new { Dialog.Symbol }
+            );
         }
+
         public void Override()
         {
             Dialog._dialogOverride.Synchron = true;
-            TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"{nameof(Override)} of {Dialog.HumanReadable} was executed @{{payload}}.", new { Dialog.Symbol });
+            TcOpen.Inxton.TcoAppDomain.Current.Logger.Information(
+                $"{nameof(Override)} of {Dialog.HumanReadable} was executed @{{payload}}.",
+                new { Dialog.Symbol }
+            );
         }
 
         List<IVortexObject> _inspectorsList;
@@ -49,15 +65,20 @@ namespace TcoInspectors
                     _inspectorsList = new List<IVortexObject>();
                     try
                     {
-
                         var parent = Dialog.GetParent();
                         switch (parent)
                         {
                             case TcoInspectionGroup g:
                                 g.Read();
-                                _inspectorsList = g._inspections.Take(g._inspectionIndex.LastValue)
-                                    .Select(p => g.GetConnector().IdentityProvider.GetVortexerByIdentity(p.LastValue) as IVortexObject)
-                                    .Where(p => !(p is NullVortexIdentity)).ToList();
+                                _inspectorsList = g
+                                    ._inspections.Take(g._inspectionIndex.LastValue)
+                                    .Select(p =>
+                                        g.GetConnector()
+                                            .IdentityProvider.GetVortexerByIdentity(p.LastValue)
+                                        as IVortexObject
+                                    )
+                                    .Where(p => !(p is NullVortexIdentity))
+                                    .ToList();
                                 break;
                             case TcoInspector i:
                                 _inspectorsList.Add(parent);
@@ -80,13 +101,16 @@ namespace TcoInspectors
                 var sb = new StringBuilder();
                 foreach (var inspector in Inspectors)
                 {
-                    var value = inspector != null ? string.IsNullOrEmpty(inspector.AttributeName) ? inspector.GetSymbolTail() : inspector.AttributeName : "Missing object information";
+                    var value =
+                        inspector != null
+                            ? string.IsNullOrEmpty(inspector.AttributeName)
+                                ? inspector.GetSymbolTail()
+                                : inspector.AttributeName
+                            : "Missing object information";
                     sb.Append(value);
                 }
                 return sb.ToString();
             }
         }
-
-        
     }
 }

@@ -1,43 +1,78 @@
-﻿<UserControl x:Class="TcoInspectors.TcoDigitalInspectorShadowControlView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TcoInspectors" 
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-             xmlns:tcoinspectors="clr-namespace:TcoInspectors;assembly=TcoInspectorsConnector" 
-             xmlns:controls="http://vortex.mts/xaml" xmlns:wpf="clr-namespace:TcOpen.Inxton.TcoInspectors.Wpf" xmlns:sys="clr-namespace:System;assembly=netstandard"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="1000">
+﻿<UserControl
+  x:Class="TcoInspectors.TcoDigitalInspectorShadowControlView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:TcoInspectors"
+  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+  xmlns:tcoinspectors="clr-namespace:TcoInspectors;assembly=TcoInspectorsConnector"
+  xmlns:controls="http://vortex.mts/xaml"
+  xmlns:wpf="clr-namespace:TcOpen.Inxton.TcoInspectors.Wpf"
+  xmlns:sys="clr-namespace:System;assembly=netstandard"
+  mc:Ignorable="d"
+  d:DesignHeight="450"
+  d:DesignWidth="1000"
+>
     <UserControl.Resources>
-        <ResourceDictionary Source="/TcOpen.Inxton.TcoInspectors.Wpf;component/Converters/InspectorResourceDictionary.xaml"/>
+        <ResourceDictionary
+      Source="/TcOpen.Inxton.TcoInspectors.Wpf;component/Converters/InspectorResourceDictionary.xaml"
+    />
     </UserControl.Resources>
     <d:UserControl.DataContext>
-        <tcoinspectors:TcoDigitalInspector></tcoinspectors:TcoDigitalInspector>
+        <tcoinspectors:TcoDigitalInspector />
     </d:UserControl.DataContext>
     <StackPanel>
         <Expander>
             <Expander.Header>
                 <Grid Margin="5" Grid.IsSharedSizeScope="True">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition MinWidth="150" SharedSizeGroup="NameGroup"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition
+              MinWidth="150"
+              SharedSizeGroup="NameGroup"
+            />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="3*" />
                         <ColumnDefinition Width="Auto" />
 
                     </Grid.ColumnDefinitions>
-                    <TextBlock Margin="0,0,20,0" Grid.ColumnSpan="2" TextWrapping="WrapWithOverflow" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Text="{Binding Converter={controls:NameOrSymbolConverter}}"></TextBlock>
+                    <TextBlock
+            Margin="0,0,20,0"
+            Grid.ColumnSpan="2"
+            TextWrapping="WrapWithOverflow"
+            FontWeight="Bold"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Grid.Row="1"
+            Grid.Column="0"
+            Text="{Binding Converter={controls:NameOrSymbolConverter}}"
+          />
 
                     <WrapPanel Grid.Column="2">
-                        <controls:RenderableContentControl Margin="10,0" DataContext="{Binding _data.RequiredStatus}" PresentationType="ShadowControlSlim"/>
-                        <controls:RenderableContentControl Margin="10,0" DataContext="{Binding _data.IsByPassed}" PresentationType="ShadowControlSlim"/>
-                        <controls:RenderableContentControl Margin="10,0" DataContext="{Binding _data.IsExcluded}" PresentationType="ShadowControlSlim"/>
+                        <controls:RenderableContentControl
+              Margin="10,0"
+              DataContext="{Binding _data.RequiredStatus}"
+              PresentationType="ShadowControlSlim"
+            />
+                        <controls:RenderableContentControl
+              Margin="10,0"
+              DataContext="{Binding _data.IsByPassed}"
+              PresentationType="ShadowControlSlim"
+            />
+                        <controls:RenderableContentControl
+              Margin="10,0"
+              DataContext="{Binding _data.IsExcluded}"
+              PresentationType="ShadowControlSlim"
+            />
                     </WrapPanel>
                 </Grid>
             </Expander.Header>
 
-            <local:GenericTcoInspectorDataView DataContext="{Binding _data}" PresentationType="ShadowControlSlim"></local:GenericTcoInspectorDataView>
+            <local:GenericTcoInspectorDataView
+        DataContext="{Binding _data}"
+        PresentationType="ShadowControlSlim"
+      />
         </Expander>
-        
+
     </StackPanel>
 </UserControl>

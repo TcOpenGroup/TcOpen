@@ -3,8 +3,7 @@
   <DUT Name="eTcoAimTtiPowerSupplyTests" Id="{f2a00a44-6906-068c-16e5-c34f2e71ab27}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE eTcoAimTtiPowerSupplyTests :
-(
+TYPE eTcoAimTtiPowerSupplyTests : (
     Restore := 1,
     CleanUp,
     Message,
@@ -21,15 +20,13 @@ TYPE eTcoAimTtiPowerSupplyTests :
     Stop,
     MoveVelocityNegativeWithDisabledNegativeDirection,
     MoveVelocityNegativeWithEnabledNegativeDirection,
-	MoveAbsoluteDisabled,
-	MoveAbsoluteDisabledPositiveDirection,
-	MoveAbsoluteEnabledPositiveDirection,
-	MoveAbsoluteDisabledNegativeDirection,
-	MoveAbsoluteEnabledNegativeDirection,
-	
+    MoveAbsoluteDisabled,
+    MoveAbsoluteDisabledPositiveDirection,
+    MoveAbsoluteEnabledPositiveDirection,
+    MoveAbsoluteDisabledNegativeDirection,
+    MoveAbsoluteEnabledNegativeDirection,
     Last
 );
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

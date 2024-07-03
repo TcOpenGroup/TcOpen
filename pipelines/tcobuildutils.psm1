@@ -1,4 +1,4 @@
-# [START] ensure_gitversion.ps1 
+# [START] ensure_gitversion.ps1
 
 function DeGZip-File
 {
@@ -23,34 +23,34 @@ function DeGZip-File
 function EnsureGitVersion {
     param (
         [string] $pathToGitVersion,
-        [string] $gitversionUrl = "https://github.com/GitTools/GitVersion/releases/download/5.5.0/gitversion-win-x64-5.5.0.tar.gz"        
+        [string] $gitversionUrl = "https://github.com/GitTools/GitVersion/releases/download/5.5.0/gitversion-win-x64-5.5.0.tar.gz"
     )
 
-   
-    
+
+
     $gitVersionFolder = Split-Path $pathToGitVersion
     Push-Location $gitVersionFolder
     $gitVersionExecutableFullName = ((Join-Path (pwd) "gitversion.exe"))
     $gitVersionPwd = Get-Location
     Pop-Location
 
-    DownloadIfMissing -folder $gitVersionFolder -url $gitversionUrl 
-    
-    
+    DownloadIfMissing -folder $gitVersionFolder -url $gitversionUrl
+
+
     if(Test-Path $gitVersionExecutableFullName)
     {
         Pop-Location
         return "GitVersion exists"
     }
-   
-    
+
+
     $gitVersionFile = Join-Path ($gitVersionPwd) (Split-Path $gitversionUrl -Leaf)
     $tar = $gitVersionFile.Replace(".gz","")
 
     DeGZip-File -infile $gitVersionFile -outfile $tar
     if (-not (Get-Command Expand-7Zip -ErrorAction Ignore)) {
         Install-Package -Scope CurrentUser -Force 7Zip4PowerShell > $null -ProviderName PowerShellGet
-    }      
+    }
       Expand-7Zip $tar .\_toolz
       Remove-Item $gitVersionFile -ErrorAction Ignore
       Remove-Item $tar -ErrorAction Ignore
@@ -64,15 +64,15 @@ if($gitVersion.Exists)
     Write-Host 'Git version is already retrieved.'
     return(0);
 }
-# [END] ensure_gitversion.ps1 
+# [END] ensure_gitversion.ps1
 
-# [START] download_file.ps1 
+# [START] download_file.ps1
 
 function DownloadIfMissing{
     param
     (
         [string] $folder,
-        [string] $url 
+        [string] $url
     )
     $fileName = (Split-Path ($url) -Leaf)
     $absolutePath =  Resolve-Path $folder
@@ -81,7 +81,7 @@ function DownloadIfMissing{
     {
         Write-Host "Couldn't find $outFilePath"
         Write-Host "Downloading from $url to $outFilePath"
-        try 
+        try
         {
             (New-Object System.Net.WebClient).DownloadFile($url,  $outFilePath)
             return  "Downloaded from $url to $outFilePath"
@@ -115,7 +115,7 @@ function PushNugets
        [Parameter(Mandatory)]
        [string] $token,
        [Parameter(Mandatory)]
-       [string] $source 
+       [string] $source
     )
     Push-Location $folderWithNugets
     $names = Get-ChildItem -n -file
@@ -128,13 +128,13 @@ function PushNugets
        } catch {
           Write-Output $_
           Write-Output "Error while $name"
-       } 
+       }
     }
     Pop-Location
 }
-# [END] push_nugets_in_folder.ps1 
+# [END] push_nugets_in_folder.ps1
 
-# [START] clean.ps1 
+# [START] clean.ps1
 
 # Will clean every bin obj of every csproj in subfolders
 function GetRootDirectoryOf{
@@ -145,7 +145,7 @@ function GetRootDirectoryOf{
 }
 
 function CleanObjBin {
-    GetRootDirectoryOf "*.csproj" | ForEach-Object { 
+    GetRootDirectoryOf "*.csproj" | ForEach-Object {
         Push-Location ($_)
 
         $removeFolders = @( ".\obj",".\bin")
@@ -163,7 +163,7 @@ function CleanObjBin {
 }
 
 function RemoveTcBins {
-    GetRootDirectoryOf "*.tsproj" | ForEach-Object { 
+    GetRootDirectoryOf "*.tsproj" | ForEach-Object {
         Push-Location ($_)
 
         $removeFolders = @( ".\_Boot",".\_Config")
@@ -182,7 +182,7 @@ function RemoveTcBins {
 
 
 function RemoveTcProjBins {
-    GetRootDirectoryOf "*.plcproj" | ForEach-Object { 
+    GetRootDirectoryOf "*.plcproj" | ForEach-Object {
         Push-Location ($_)
 
         $removeFolders = @( ".\_CompileInfo")
@@ -200,7 +200,7 @@ function RemoveTcProjBins {
 }
 
 function RemoveGenerated {
-    GetRootDirectoryOf "*.csproj" | ForEach-Object { 
+    GetRootDirectoryOf "*.csproj" | ForEach-Object {
         Push-Location ($_)
 
         $removeFolders = @( ".\_generated")
@@ -218,7 +218,7 @@ function RemoveGenerated {
 }
 
 function RemoveMeta {
-    GetRootDirectoryOf "*.csproj" | ForEach-Object { 
+    GetRootDirectoryOf "*.csproj" | ForEach-Object {
         Push-Location ($_)
 
         $removeFolders = @( ".\_meta")
@@ -240,9 +240,9 @@ function GitVersionToPlcVersion{
     return $gitVersion.Major.ToString() + "." + $gitVersion.Minor.ToString() + "." + $gitVersion.Patch.ToString() + "." + $gitVersion.PreReleaseNumber.ToString()
 }
 
-# [END] clean.ps1 
+# [END] clean.ps1
 
-# Isolated core functions 
+# Isolated core functions
 
 function Has-Isolated-Core($tcproj)
 {
@@ -263,7 +263,7 @@ function Has-RT-Isolated-Core($tcproj)
 {
     $cpuNodes = Select-Xml -Path $tcproj -XPath "TcSmProject/Project/System/Settings/Cpu"
     if($cpuNodes -eq $null){ return $false }
-    $firstIsolatedCoreId = Shared-Cores $tcproj 
+    $firstIsolatedCoreId = Shared-Cores $tcproj
     foreach($cpuNode in $cpuNodes)
     {
         if($cpuNode.Node.CpuId -ige $firstIsolatedCoreId){ return $true;}
@@ -292,15 +292,15 @@ function Set-CPU-Cores($tcproj, $shared, $isolated)
 
     $isolatedCoreXmlNode = $xml.CreateElement('Cpu')
     $isolatedCoreXmlNode.SetAttribute("CpuId", ($shared).ToString())
-    
+
     $settingsCpuNodes= $xml.SelectNodes("TcSmProject/Project/System/Settings/Cpu")
     foreach($cpuNode in $settingsCpuNodes)
     {
         $settingsNode.RemoveChild($cpuNode)
     }
-    
+
     $settingsNode.AppendChild($isolatedCoreXmlNode)
-    
+
     $xml.Save($tcproj)
 }
 
@@ -335,15 +335,15 @@ function Is-License-Valid($targetAmsId)
     $licenses = Get-TcLicense -Address $targetAmsId  -OrderId TC1200
     $result = $false
     $recepients = New-Object Collections.Generic.List[string]
-    $recepients.Add($PK_PHOENY) 
-    $recepients.Add($TK_PHOENY) 
+    $recepients.Add($PK_PHOENY)
+    $recepients.Add($TK_PHOENY)
     $url = "https://api.twilio.com/2010-04-01/Accounts/" + $TW_USER + "/Messages.json"
     $credential = New-Object System.Management.Automation.PSCredential($TW_USER, $TW_TOKEN)
 
     foreach($licence in $licenses )
     {
-        $result = $licence.Valid -or $result 
-        $dt2Expire = NEW-TIMESPAN -Start (Get-Date) -End $licence.ExpireTime 
+        $result = $licence.Valid -or $result
+        $dt2Expire = NEW-TIMESPAN -Start (Get-Date) -End $licence.ExpireTime
         $hrs2Expire = ($dt2Expire.Days ) * 24 + $dt2Expire.Hours
         if($hrs2Expire -lt 48)
         {
@@ -373,11 +373,11 @@ function Is-License-Valid($targetAmsId)
 }
 
 function GetTwincat3Dir{
-    try 
+    try
     {
         $TC3DIR = Get-ChildItem -Path Env:\TWINCAT3DIR
     }
-    catch 
+    catch
     {
         Write-Host "Twincat 3 directory not discovered."
     }
@@ -437,7 +437,7 @@ function DisableDevices($tsproj)
             if(-not $deviceNode.HasAttribute("Disabled"))
             {
                 $deviceNode.SetAttribute("Disabled","true")
-                Write-Host "Disabled device`t" $deviceNode.RemoteName " in`t" $tsproj 
+                Write-Host "Disabled device`t" $deviceNode.RemoteName " in`t" $tsproj
             }
         }
         $xml.Save($tsproj)

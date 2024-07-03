@@ -8,10 +8,11 @@ using TcOpen.Inxton.RavenDb;
 
 namespace IntegrationTests.RavenDb
 {
-    public class RavenDbTestRepositorySettings<T> : RavenDbRepositorySettingsBase<T> where T : IBrowsableDataObject
+    public class RavenDbTestRepositorySettings<T> : RavenDbRepositorySettingsBase<T>
+        where T : IBrowsableDataObject
     {
         public readonly Fixture Fixture;
-        
+
         public RavenDbTestRepositorySettings()
         {
             Fixture = new Fixture();

@@ -12,8 +12,8 @@ namespace TcoCore
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var flag = false;
-            try 
-            { 
+            try
+            {
                 if (value is bool)
                 {
                     flag = (bool)value;
@@ -30,15 +30,20 @@ namespace TcoCore
                         flag = !flag;
                     }
                 }
-        }
-            catch 
+            }
+            catch
             {
                 //swalow
             }
             return flag ? Visibility.Visible : Visibility.Collapsed;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }

@@ -18,7 +18,7 @@ VAR
     {attribute 'hide'}
     _message : STRING(125);
     {attribute 'hide'}
-	_dummyPreconditionOK : BOOL;
+    _dummyPreconditionOK : BOOL;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF NOT __ISVALIDREF(_axisRef) THEN
@@ -60,7 +60,7 @@ END_IF]]></ST>
 VAR_INPUT
     bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
     bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
-  	ParentObject : ITcoObject;	
+    ParentObject : ITcoObject;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
@@ -80,33 +80,30 @@ InvokeWithParams := THIS^.Invoke();]]></ST>
     </Method>
     <Method Name="OnDone" Id="{fca9e9ba-5551-01ee-2de0-cb5d4f8b6e5c}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task reaches the ```Done``` state .
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task reaches the ```Done``` state .
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnDone
-]]></Declaration>
+METHOD PROTECTED OnDone]]></Declaration>
       <Implementation>
         <ST><![CDATA[_mcSetPosition(Axis := _axisRef, Execute := FALSE);
-THIS^.DriveRef._movementState.Restore();
-]]></ST>
+THIS^.DriveRef._movementState.Restore();]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnError" Id="{c6448ca0-70a4-08b2-10ac-09c391131b59}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task reaches the ```Error``` state.
-			<para>
-				Do not confuse with <see cref="PlcDocu.TcoCore.TcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
-			</para>
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task reaches the ```Error``` state.
+            <para>
+                Do not confuse with <see cref="PlcDocu.TcoCore.TcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
+            </para>
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnError
-]]></Declaration>
+METHOD PROTECTED OnError]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^.DriveRef._movementState.Restore();
 
@@ -118,8 +115,7 @@ _mcSetPosition(Axis := _axisRef, Execute := FALSE);]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStart" Id="{6601a4a2-967c-0153-1048-59a593730fea}">
-      <Declaration><![CDATA[METHOD PROTECTED OnStart 
-]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED OnStart]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF NOT Tco_TO_Tc2MC2_SetPositionMode(_mode, _mc_mode) THEN
     _message := Tc2_Standard.CONCAT('Unable to cast _mode variable of type TcoDrivesBeckhoff.eSetPositionMode (', TO_STRING(_mode));
@@ -129,20 +125,19 @@ _mcSetPosition(Axis := _axisRef, Execute := FALSE);]]></ST>
     RETURN;
 END_IF
 
-_mcSetPosition(Axis := _axisRef, Execute := FALSE);
-]]></ST>
+_mcSetPosition(Axis := _axisRef, Execute := FALSE);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{33a6b430-fc43-0769-1ad1-7e8a3938d411}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
-			<para>
-				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
-			</para>
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+            <para>
+                See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+            </para>
+        </summary>
+    </docu>
 ~*)
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
@@ -151,17 +146,16 @@ METHOD Restore : ITcoRestorable]]></Declaration>
     </Method>
     <Method Name="WhileError" Id="{fce8bf04-eb72-07e6-1188-99bd90b2f028}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes until task is in ```Error``` state .
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes until task is in ```Error``` state .
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED WhileError
-]]></Declaration>
+METHOD PROTECTED WhileError]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
-	DriveRef.SetErrorID(DriveRef._setPositionTask._mcSetPosition.ErrorID);
+    DriveRef.SetErrorID(DriveRef._setPositionTask._mcSetPosition.ErrorID);
     _mcSetPosition(Axis := _axisRef, Execute := FALSE);
 END_IF]]></ST>
       </Implementation>

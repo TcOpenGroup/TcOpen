@@ -1,10 +1,10 @@
-﻿using MaterialDesignColors;
-using System;
+﻿using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
 using System.Windows.Media;
+using MaterialDesignColors;
 using TcoCore;
 
 namespace TcoCore
@@ -20,7 +20,6 @@ namespace TcoCore
                 Color color = default;
                 switch (category)
                 {
-                  
                     case eMessageCategory.Debug:
                         SwatchHelper.Lookup.TryGetValue(MaterialDesignColor.Indigo500, out color);
                         return new SolidColorBrush(new ColorPair(color).GetForegroundColor());
@@ -63,7 +62,12 @@ namespace TcoCore
             return Brushes.Gray;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }
@@ -76,7 +80,6 @@ namespace TcoCore
 
     public class MessageCategoryToBackgroundBrushConverter : MarkupExtension, IValueConverter
     {
-       
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             try
@@ -129,7 +132,12 @@ namespace TcoCore
             return Brushes.Gray;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }

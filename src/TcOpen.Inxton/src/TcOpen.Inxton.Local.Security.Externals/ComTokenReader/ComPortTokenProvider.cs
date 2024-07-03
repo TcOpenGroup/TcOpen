@@ -10,7 +10,13 @@ namespace TcOpen.Inxton.Local.Security
 
         private string _tokenData;
 
-        public ComPortTokenProvider(string portName, int baudRate = 9600, int dataBits = 8, StopBits stopBits = StopBits.One, Parity parity = Parity.None)
+        public ComPortTokenProvider(
+            string portName,
+            int baudRate = 9600,
+            int dataBits = 8,
+            StopBits stopBits = StopBits.One,
+            Parity parity = Parity.None
+        )
         {
             port = new SerialPort();
             port.BaudRate = baudRate;
@@ -22,19 +28,17 @@ namespace TcOpen.Inxton.Local.Security
             port.DataReceived += PortDataReceived;
         }
 
-
         public void SetTokenReceivedAction(Action<string> tokenReceivedAction)
         {
             IncomingTokenAction = tokenReceivedAction;
         }
-                
+
         public Action<string> IncomingTokenAction;
-      
-        
+
         void PortDataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             try
-            {                             
+            {
                 IncomingTokenAction?.Invoke(port.ReadExisting());
             }
             catch (Exception)
@@ -42,7 +46,5 @@ namespace TcOpen.Inxton.Local.Security
                 throw;
             }
         }
-
-        
     }
 }

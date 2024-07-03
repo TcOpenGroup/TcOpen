@@ -1,12 +1,12 @@
-﻿using Microsoft.Win32;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Microsoft.Win32;
+using Newtonsoft.Json;
 using TcoCore;
 using TcOpen.Inxton.Input;
 using Vortex.Presentation.Wpf;
@@ -17,21 +17,19 @@ namespace TcoTixonFeeding
     public interface IHasConfigObject
     {
         dynamic _config { get; set; }
-
-  
     }
 
-    abstract public class TcoTixonFeedingBaseServiceViewModel<T,U> : RenderableViewModel where T : TcoCore.TcoComponent, new() where U :class
+    public abstract class TcoTixonFeedingBaseServiceViewModel<T, U> : RenderableViewModel
+        where T : TcoCore.TcoComponent, new()
+        where U : class
     {
-
-        public TcoTixonFeedingBaseServiceViewModel() : base()
+        public TcoTixonFeedingBaseServiceViewModel()
+            : base()
         {
             Component = new T();
             ExportConfigCommand = new RelayCommand(a => ExportParams());
             ImportConfigCommand = new RelayCommand(a => ImportParams());
-
         }
-
 
         public T Component { get; internal set; }
         public RelayCommand ExportConfigCommand { get; private set; }
@@ -40,55 +38,38 @@ namespace TcoTixonFeeding
         public override object Model
         {
             get => Component;
-            set
-            {
-                Component = value as T;
-
-            }
+            set { Component = value as T; }
         }
-
-       
 
         private void ExportParams()
         {
+            try
+            {
+                string jsonString = string.Empty;
 
+                var cloned = this.Component.GetPlainFromOnline();
+                var config = cloned.GetType().GetProperty("_config").GetValue(cloned);
 
-                try
+                jsonString = JsonConvert.SerializeObject(config, Formatting.Indented);
+
+                var sfd = new SaveFileDialog();
+                sfd.FileName = Component.AttributeName + DateTime.Now.ToString("_yyyyMMdd_HHmmss");
+                sfd.DefaultExt = "json";
+                sfd.ShowDialog();
+
+                using (var sw = new System.IO.StreamWriter(sfd.FileName))
                 {
-                    string jsonString = string.Empty;
-
-                    var cloned = this.Component.GetPlainFromOnline();
-                    var config = cloned.GetType().GetProperty("_config").GetValue(cloned);
-                               
-
-                    jsonString = JsonConvert.SerializeObject(config, Formatting.Indented);
-
-
-                    var sfd = new SaveFileDialog();
-                    sfd.FileName = Component.AttributeName + DateTime.Now.ToString("_yyyyMMdd_HHmmss");
-                    sfd.DefaultExt = "json";
-                    sfd.ShowDialog();
-
-
-                    using (var sw = new System.IO.StreamWriter(sfd.FileName))
-                    {
-
-
-                        sw.Write(jsonString);
-
-                    }
+                    sw.Write(jsonString);
                 }
-                catch (Exception e)
-                {
-                    MessageBox.Show(e.Message);
-                }
-        
-
-
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
+
         private void ImportParams()
         {
-
             string jsonString = string.Empty;
             try
             {
@@ -102,18 +83,14 @@ namespace TcoTixonFeeding
 
                     // Read the contents of the file
                     jsonString = File.ReadAllText(filePath);
-                
+
                     U deserialized = JsonConvert.DeserializeObject<U>(jsonString);
 
-                    var plainer = this.Component.GetPlainFromOnline() ;
-                    plainer.GetType().GetProperty("_config").SetValue(plainer,deserialized);
+                    var plainer = this.Component.GetPlainFromOnline();
+                    plainer.GetType().GetProperty("_config").SetValue(plainer, deserialized);
 
                     this.Component.FlushPlainToOnline((dynamic)plainer);
-
                 }
-
-               
-
             }
             catch (JsonReaderException ex)
             {
@@ -123,15 +100,10 @@ namespace TcoTixonFeeding
             {
                 MessageBox.Show("JSON deserialization error: " + ex.Message);
             }
-
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
             }
-
-
-
         }
     }
-
 }

@@ -7,8 +7,8 @@
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Categotizes and creates the message as 'debug'.								 
-			</summary>		
+				Categotizes and creates the message as 'debug'.
+			</summary>
 		</docu>
 ~*)
 METHOD PUBLIC AsDebug : ITcoMessageProperties
@@ -18,8 +18,8 @@ METHOD PUBLIC AsDebug : ITcoMessageProperties
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Categotizes and creates the message as 'error'.								 
-			</summary>		
+				Categotizes and creates the message as 'error'.
+			</summary>
 		</docu>
 ~*)
 METHOD PUBLIC AsError : ITcoMessageProperties
@@ -29,8 +29,8 @@ METHOD PUBLIC AsError : ITcoMessageProperties
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Categotizes and creates the message as 'fatal'.								 
-			</summary>		
+				Categotizes and creates the message as 'fatal'.
+			</summary>
 		</docu>
 ~*)
 METHOD PUBLIC AsFatal : ITcoMessageProperties
@@ -40,8 +40,8 @@ METHOD PUBLIC AsFatal : ITcoMessageProperties
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Categotizes and creates the message as 'information'.								 
-			</summary>		
+				Categotizes and creates the message as 'information'.
+			</summary>
 		</docu>
 ~*)
 METHOD PUBLIC AsInfo : ITcoMessageProperties
@@ -51,8 +51,8 @@ METHOD PUBLIC AsInfo : ITcoMessageProperties
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Categotizes and creates the message as 'trace'.								 
-			</summary>		
+				Categotizes and creates the message as 'trace'.
+			</summary>
 		</docu>
 ~*)
 METHOD PUBLIC AsTrace : ITcoMessageProperties
@@ -62,8 +62,8 @@ METHOD PUBLIC AsTrace : ITcoMessageProperties
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Categotizes and creates the message as 'warning'.								 
-			</summary>		
+				Categotizes and creates the message as 'warning'.
+			</summary>
 		</docu>
 ~*)
 METHOD PUBLIC AsWarning : ITcoMessageProperties

@@ -19,7 +19,6 @@ using TcOpen.Inxton.Wpf;
 
 namespace TcoAbbRobotics
 {
-
     public partial class TcoAbbRoboticsBaseServiceView : UserControl
     {
         public TcoAbbRoboticsBaseServiceView()
@@ -31,11 +30,5 @@ namespace TcoAbbRobotics
 
             InitializeComponent();
         }
-
-
-       
-
     }
-
-
 }

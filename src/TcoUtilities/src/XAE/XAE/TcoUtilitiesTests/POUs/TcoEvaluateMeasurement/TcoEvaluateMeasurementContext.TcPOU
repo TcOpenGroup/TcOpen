@@ -3,36 +3,33 @@
   <POU Name="TcoEvaluateMeasurementContext" Id="{d0fe2cbe-cf00-0658-3d1c-1456d9ead9a9}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoEvaluateMeasurementContext EXTENDS TcoCore._internals_TcoContext
 VAR
-	_tcoMeasEvaluator : TcoUtilities.TcoEvaluateMeasurementTask(THIS^);
-	_entityId :STRING;
-
-	_tcoMeasEvaluatorConfig :TcoUtilities.TcoEvaluateMeasurementConfig;
-	_measData: ARRAY [0..1000] OF TcoUtilities.TcoEvaluateMeasurementDataItem;
-	_tcoEvaluateTestDone: BOOL;
-
-
-END_VAR
-
-]]></Declaration>
+    _tcoMeasEvaluator : TcoUtilities.TcoEvaluateMeasurementTask(THIS^);
+    _entityId : STRING;
+    _tcoMeasEvaluatorConfig : TcoUtilities.TcoEvaluateMeasurementConfig;
+    _measData : ARRAY[0..1000] OF TcoUtilities.TcoEvaluateMeasurementDataItem;
+    _tcoEvaluateTestDone : BOOL;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Main" Id="{f5d45085-1503-0fcc-0230-daaec2d9e720}">
       <Declaration><![CDATA[METHOD PROTECTED Main
 VAR
-	_cleanData:ARRAY [0..1000] OF TcoEvaluateMeasurementDataItem;	
+    _cleanData : ARRAY[0..1000] OF TcoEvaluateMeasurementDataItem;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_tcoMeasEvaluator();
+
 CASE THIS^._testId OF
     eTcoEvaluateMeasurementTestList.None:
         ;
     eTcoEvaluateMeasurementTestList.Init:
-		_tcoEvaluateTestDone:=FALSE;
-		_measData:=_cleanData;
+        _tcoEvaluateTestDone := FALSE;
+        _measData := _cleanData;
         _tcoMeasEvaluator.Restore();
     eTcoEvaluateMeasurementTestList.Evaluate:
-        _tcoEvaluateTestDone := _tcoMeasEvaluator.Run(inEntityId:=_entityId ,inConfig := _tcoMeasEvaluatorConfig, inData := _measData).Invoke().Done;
+        _tcoEvaluateTestDone :=
+            _tcoMeasEvaluator.Run(inEntityId := _entityId, inConfig := _tcoMeasEvaluatorConfig, inData := _measData).Invoke().Done;
 
         IF (_tcoEvaluateTestDone) THEN
             THIS^._testId := 0;

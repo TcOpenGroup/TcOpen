@@ -1,16 +1,16 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Shapes;
+using TcoIo.Converters;
+using TcoIo.Topology;
 using Vortex.Connector;
 using Vortex.Presentation.Wpf;
-using System.Collections.ObjectModel;
-using TcoIo.Topology;
-using System.Windows.Shapes;
-using System.Windows.Media;
-using System.Windows.Data;
-using TcoIo.Converters;
-using System.Windows.Input;
 
 namespace TcoIo
 {
@@ -31,7 +31,16 @@ namespace TcoIo
                 LineSegment vertical1 = new LineSegment();
                 LineSegment vertical2 = new LineSegment();
                 PathSegmentCollection wiring = new PathSegmentCollection();
-                double x1, x2, x3, x4, x5, y1, y2, y3, y4, y5;
+                double x1,
+                    x2,
+                    x3,
+                    x4,
+                    x5,
+                    y1,
+                    y2,
+                    y3,
+                    y4,
+                    y5;
 
                 foreach (TopologyObject topologyObject in topologyObjects)
                 {
@@ -70,7 +79,11 @@ namespace TcoIo
                         case WiringObject.ConectionType.Y2Y:
                             foreach (TopologyObject connectionPartnerPossible in topologyObjects)
                             {
-                                if (topologyObject.Connection.StartsWith(connectionPartnerPossible.Name))
+                                if (
+                                    topologyObject.Connection.StartsWith(
+                                        connectionPartnerPossible.Name
+                                    )
+                                )
                                 {
                                     connectionPartner = connectionPartnerPossible;
                                     break;
@@ -93,7 +106,6 @@ namespace TcoIo
                             pathGeometry = new PathGeometry();
                             pathGeometry.Figures = pathFigureCollection;
 
-
                             topologyObject.Wiring.Path.Data = pathGeometry;
                             wiringGrid.Children.Add(topologyObject.Wiring.Path);
                             break;
@@ -101,7 +113,11 @@ namespace TcoIo
                         case WiringObject.ConectionType.Y2YKY:
                             foreach (TopologyObject connectionPartnerPossible in topologyObjects)
                             {
-                                if (topologyObject.Connection.StartsWith(connectionPartnerPossible.Name))
+                                if (
+                                    topologyObject.Connection.StartsWith(
+                                        connectionPartnerPossible.Name
+                                    )
+                                )
                                 {
                                     connectionPartner = connectionPartnerPossible;
                                     break;
@@ -109,7 +125,10 @@ namespace TcoIo
                             }
                             x1 = topologyObject.Pos_X - DimsDef.slaveWidthWithBorders;
                             y1 = topologyObject.Pos_Y + DimsDef.slaveInput;
-                            x2 = topologyObject.Pos_X + DimsDef.juntionOutputX1 - DimsDef.slaveWidthWithBorders;
+                            x2 =
+                                topologyObject.Pos_X
+                                + DimsDef.juntionOutputX1
+                                - DimsDef.slaveWidthWithBorders;
                             y2 = connectionPartner.Pos_Y + DimsDef.slaveOutputFront + 10;
 
                             pathFigure = new PathFigure() { StartPoint = new Point(x1, y1) };
@@ -130,7 +149,6 @@ namespace TcoIo
                             pathGeometry = new PathGeometry();
                             pathGeometry.Figures = pathFigureCollection;
 
-
                             topologyObject.Wiring.Path.Data = pathGeometry;
                             wiringGrid.Children.Add(topologyObject.Wiring.Path);
                             break;
@@ -139,15 +157,37 @@ namespace TcoIo
                         case WiringObject.ConectionType.Y2KYKY_X1:
                             foreach (TopologyObject connectionPartnerPossible in topologyObjects)
                             {
-                                if (topologyObject.Connection.StartsWith(connectionPartnerPossible.Name))
+                                if (
+                                    topologyObject.Connection.StartsWith(
+                                        connectionPartnerPossible.Name
+                                    )
+                                )
                                 {
                                     connectionPartner = connectionPartnerPossible;
                                     break;
                                 }
                             }
-                            pathFigure = new PathFigure() { StartPoint = new Point(topologyObject.Pos_X - DimsDef.slaveWidthWithBorders, topologyObject.Pos_Y + DimsDef.slaveInput) };
-                            horizontal1 = new LineSegment() { Point = new Point(connectionPartner.Pos_X + DimsDef.juntionOutputX1, topologyObject.Pos_Y + DimsDef.slaveInput) };
-                            vertical1 = new LineSegment() { Point = new Point(connectionPartner.Pos_X + DimsDef.juntionOutputX1, connectionPartner.Pos_Y + DimsDef.slaveHeightWithBorders) };
+                            pathFigure = new PathFigure()
+                            {
+                                StartPoint = new Point(
+                                    topologyObject.Pos_X - DimsDef.slaveWidthWithBorders,
+                                    topologyObject.Pos_Y + DimsDef.slaveInput
+                                )
+                            };
+                            horizontal1 = new LineSegment()
+                            {
+                                Point = new Point(
+                                    connectionPartner.Pos_X + DimsDef.juntionOutputX1,
+                                    topologyObject.Pos_Y + DimsDef.slaveInput
+                                )
+                            };
+                            vertical1 = new LineSegment()
+                            {
+                                Point = new Point(
+                                    connectionPartner.Pos_X + DimsDef.juntionOutputX1,
+                                    connectionPartner.Pos_Y + DimsDef.slaveHeightWithBorders
+                                )
+                            };
 
                             wiring = new PathSegmentCollection();
                             wiring.Add(horizontal1);
@@ -160,7 +200,6 @@ namespace TcoIo
 
                             pathGeometry = new PathGeometry();
                             pathGeometry.Figures = pathFigureCollection;
-
 
                             topologyObject.Wiring.Path.Data = pathGeometry;
                             wiringGrid.Children.Add(topologyObject.Wiring.Path);
@@ -170,15 +209,37 @@ namespace TcoIo
                         case WiringObject.ConectionType.Y2KYKY_X2:
                             foreach (TopologyObject connectionPartnerPossible in topologyObjects)
                             {
-                                if (topologyObject.Connection.StartsWith(connectionPartnerPossible.Name))
+                                if (
+                                    topologyObject.Connection.StartsWith(
+                                        connectionPartnerPossible.Name
+                                    )
+                                )
                                 {
                                     connectionPartner = connectionPartnerPossible;
                                     break;
                                 }
                             }
-                            pathFigure = new PathFigure() { StartPoint = new Point(topologyObject.Pos_X - DimsDef.slaveWidthWithBorders, topologyObject.Pos_Y + DimsDef.slaveInput) };
-                            horizontal1 = new LineSegment() { Point = new Point(connectionPartner.Pos_X + DimsDef.juntionOutputX2, topologyObject.Pos_Y + DimsDef.slaveInput) };
-                            vertical1 = new LineSegment() { Point = new Point(connectionPartner.Pos_X + DimsDef.juntionOutputX2, connectionPartner.Pos_Y + DimsDef.slaveHeightWithBorders) };
+                            pathFigure = new PathFigure()
+                            {
+                                StartPoint = new Point(
+                                    topologyObject.Pos_X - DimsDef.slaveWidthWithBorders,
+                                    topologyObject.Pos_Y + DimsDef.slaveInput
+                                )
+                            };
+                            horizontal1 = new LineSegment()
+                            {
+                                Point = new Point(
+                                    connectionPartner.Pos_X + DimsDef.juntionOutputX2,
+                                    topologyObject.Pos_Y + DimsDef.slaveInput
+                                )
+                            };
+                            vertical1 = new LineSegment()
+                            {
+                                Point = new Point(
+                                    connectionPartner.Pos_X + DimsDef.juntionOutputX2,
+                                    connectionPartner.Pos_Y + DimsDef.slaveHeightWithBorders
+                                )
+                            };
 
                             wiring = new PathSegmentCollection();
                             wiring.Add(horizontal1);
@@ -191,7 +252,6 @@ namespace TcoIo
 
                             pathGeometry = new PathGeometry();
                             pathGeometry.Figures = pathFigureCollection;
-
 
                             topologyObject.Wiring.Path.Data = pathGeometry;
                             wiringGrid.Children.Add(topologyObject.Wiring.Path);
@@ -205,7 +265,12 @@ namespace TcoIo
             return wiringGrid;
         }
 
-        private void CreateWiring(IVortexObject obj, ref Path path, ref WiringObject wiring, WiringObject.ConectionType conection)
+        private void CreateWiring(
+            IVortexObject obj,
+            ref Path path,
+            ref WiringObject wiring,
+            WiringObject.ConectionType conection
+        )
         {
             var InfoData = obj.GetType().GetProperty("InfoData")?.GetValue(obj);
             if (InfoData != null)
@@ -213,7 +278,13 @@ namespace TcoIo
                 var State = InfoData.GetType().GetProperty("State")?.GetValue(InfoData);
                 if (State != null)
                 {
-                    Binding binding = new Binding { Source = State, Path = new PropertyPath("Cyclic"), Converter = new InfoDataStateToWireStroke(), Mode = BindingMode.OneWay };
+                    Binding binding = new Binding
+                    {
+                        Source = State,
+                        Path = new PropertyPath("Cyclic"),
+                        Converter = new InfoDataStateToWireStroke(),
+                        Mode = BindingMode.OneWay
+                    };
                     path.SetBinding(Line.StrokeProperty, binding);
                     wiring.Path = path;
                     wiring.WiringType = conection;

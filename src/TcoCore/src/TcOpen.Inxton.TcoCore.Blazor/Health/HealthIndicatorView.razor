@@ -1,7 +1,7 @@
 ﻿@namespace TcoCore
 @inherits RenderableComplexComponentBase<TcoObjectMessageHandler>
 
-@if (Component.ActiveMessagesCount > 0 && 
+@if (Component.ActiveMessagesCount > 0 &&
     !string.IsNullOrEmpty(Component.HighestSeverityMessage))
 {
     <i class="fas fa-exclamation-circle text-danger"

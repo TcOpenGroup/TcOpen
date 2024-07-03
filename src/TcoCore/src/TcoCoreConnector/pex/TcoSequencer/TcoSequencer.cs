@@ -23,9 +23,9 @@ namespace TcoCore
 
         private object LogStepDetailsInfo()
         {
-             var currentStepInfo = this._currentStep.CreatePlainerType();
-             currentStepInfo.CopyCyclicToPlain(this._currentStep);
-             return currentStepInfo;
+            var currentStepInfo = this._currentStep.CreatePlainerType();
+            currentStepInfo.CopyCyclicToPlain(this._currentStep);
+            return currentStepInfo;
         }
-    }    
+    }
 }

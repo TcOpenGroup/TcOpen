@@ -19,7 +19,6 @@ using TcOpen.Inxton.Wpf;
 
 namespace TcoUrRobotics
 {
-
     public partial class TcoUrRoboticsBaseServiceView : UserControl
     {
         public TcoUrRoboticsBaseServiceView()
@@ -31,23 +30,18 @@ namespace TcoUrRobotics
 
             InitializeComponent();
         }
-
-
-       
-
     }
 
     public class EventIdToDescriptionConverter : MarkupExtension, IValueConverter
     {
-
-
-
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             try
             {
                 uint errorId = (uint)value;
-                return ControllerEvents.Ids.ContainsKey(errorId) ? ControllerEvents.Ids[errorId] : "No error description available.";
+                return ControllerEvents.Ids.ContainsKey(errorId)
+                    ? ControllerEvents.Ids[errorId]
+                    : "No error description available.";
             }
             catch (Exception)
             {
@@ -58,7 +52,12 @@ namespace TcoUrRobotics
             return string.Empty;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }
@@ -68,6 +67,4 @@ namespace TcoUrRobotics
             return this;
         }
     }
-
-
 }

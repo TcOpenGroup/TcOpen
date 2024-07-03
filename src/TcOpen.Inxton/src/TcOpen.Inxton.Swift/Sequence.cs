@@ -8,10 +8,7 @@ namespace TcOpen.Inxton.Swift
 {
     public class Sequence
     {
-        public Sequence()
-        {
-
-        }
+        public Sequence() { }
 
         readonly IList<Step> steps = new List<Step>();
 
@@ -29,14 +26,14 @@ namespace TcOpen.Inxton.Swift
             var newStep = new Step(origin);
             steps.Add(newStep);
             return newStep;
-        }        
+        }
 
         public StringBuilder EmitCode(StringBuilder sb)
         {
             int stepId = 0;
             foreach (var step in Steps)
-            {               
-                step.EmitCode(sb, ++stepId);               
+            {
+                step.EmitCode(sb, ++stepId);
             }
 
             return sb;

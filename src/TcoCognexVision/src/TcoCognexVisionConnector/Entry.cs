@@ -8,7 +8,9 @@ namespace TcoCognexVision
         static string TargetAmsId = Environment.GetEnvironmentVariable("Tc3Target");
         static int TargetAmsPort = 851;
 
-        public static TcoCognexVisionTwinController TcoCognexVisionPlc 
-            = new TcoCognexVisionTwinController(Tc3ConnectorAdapter.Create(TargetAmsId, TargetAmsPort, true));
+        public static TcoCognexVisionTwinController TcoCognexVisionPlc =
+            new TcoCognexVisionTwinController(
+                Tc3ConnectorAdapter.Create(TargetAmsId, TargetAmsPort, true)
+            );
     }
 }

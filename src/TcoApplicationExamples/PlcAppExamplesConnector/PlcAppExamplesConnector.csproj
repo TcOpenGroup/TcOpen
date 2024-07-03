@@ -1,12 +1,16 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net48</TargetFramework>
 	<IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\TcoCore\src\TcoCoreConnector\TcoCoreConnector.csproj" />
-    <ProjectReference Include="..\..\TcoPneumatics\src\TcoPneumaticsConnector\TcoPneumaticsConnector.csproj" />
+    <ProjectReference
+      Include="..\..\TcoCore\src\TcoCoreConnector\TcoCoreConnector.csproj"
+    />
+    <ProjectReference
+      Include="..\..\TcoPneumatics\src\TcoPneumaticsConnector\TcoPneumaticsConnector.csproj"
+    />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Localizations.Designer.cs">

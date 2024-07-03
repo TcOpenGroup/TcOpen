@@ -16,7 +16,7 @@ namespace TcoCore
             {
                 var taskState = (eTaskState)((short)value);
 
-                if(taskState== eTaskState.Error)
+                if (taskState == eTaskState.Error)
                 {
                     return Visibility.Visible;
                 }
@@ -33,7 +33,12 @@ namespace TcoCore
             return false;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }

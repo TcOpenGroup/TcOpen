@@ -1,19 +1,18 @@
-﻿using NUnit.Framework;
-using TcoCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Vortex.Connector;
+using NUnit.Framework;
+using TcoCore;
 using TcOpen.Inxton.Input;
+using Vortex.Connector;
 
 namespace TcoCore.Tests
 {
     [TestFixture()]
     public class TcoDiagnosticsViewModelTests
     {
-
         [Test()]
         public void CtorTcoDiagnosticsViewModelTest()
         {
@@ -22,11 +21,13 @@ namespace TcoCore.Tests
             Assert.IsInstanceOf<RelayCommand>(vm.UpdateMessagesCommand);
         }
 
-           
         [Test()]
         public void ModelTest()
         {
-            var vm = new TcoDiagnosticsViewModel() { Model = new TcoContext(new MockRootObject(), string.Empty, string.Empty) };      
+            var vm = new TcoDiagnosticsViewModel()
+            {
+                Model = new TcoContext(new MockRootObject(), string.Empty, string.Empty)
+            };
             Assert.IsInstanceOf<IsTcoObject>(vm.Model);
         }
 
@@ -69,7 +70,9 @@ namespace TcoCore.Tests
             var twin = new TcoContext(new MockRootObject(), string.Empty, string.Empty);
 
             var vm = new TcoDiagnosticsViewModel(twin);
-            var expected = Enum.GetValues(typeof(eMessageCategory)).Cast<eMessageCategory>().Skip(1);
+            var expected = Enum.GetValues(typeof(eMessageCategory))
+                .Cast<eMessageCategory>()
+                .Skip(1);
 
             Assert.AreEqual(expected, vm.Categories);
         }
@@ -122,14 +125,14 @@ namespace TcoCore.Tests
             var twin = new TcoContext(new MockRootObject(), string.Empty, string.Empty);
 
             var vm = new TcoDiagnosticsViewModel(twin);
-         
+
             Assert.IsInstanceOf<IsTcoObject>(vm.Model);
         }
 
         [Test()]
         public void SelectedMessageTest()
         {
-            var twin = new TcoContext(new MockRootObject(), string.Empty, string.Empty);            
+            var twin = new TcoContext(new MockRootObject(), string.Empty, string.Empty);
             var vm = new TcoDiagnosticsViewModel(twin);
             var message = new PlainTcoMessage() { Text = "message text" };
             vm.SelectedMessage = message;

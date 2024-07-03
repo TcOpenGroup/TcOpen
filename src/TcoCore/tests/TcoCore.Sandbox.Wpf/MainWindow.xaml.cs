@@ -19,13 +19,15 @@ namespace TcoCore.Sandbox.Wpf
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow 
+    public partial class MainWindow
     {
         public MainWindow()
         {
             InitializeComponent();
             //this.DataContext = TcoCore.Sandbox.Wpf.App.PlcTcoCoreExamples;
-            swiftRecorder.DataContext = new TcOpen.Inxton.Swift.Wpf.SwiftRecorderViewModel(TcoCoreExamples.Entry.PlcTcoCoreExamples.EXAMPLES_PRG._recordableStations);          
+            swiftRecorder.DataContext = new TcOpen.Inxton.Swift.Wpf.SwiftRecorderViewModel(
+                TcoCoreExamples.Entry.PlcTcoCoreExamples.EXAMPLES_PRG._recordableStations
+            );
         }
     }
 }

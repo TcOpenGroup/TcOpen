@@ -3,39 +3,30 @@
   <POU Name="TcoAoTests" Id="{8d741bb6-9e93-02ce-3e4d-993315fa9ad3}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoAoTests EXTENDS TcoCore._internals_TcoContext
 VAR
-	_signal : DINT;
-	_sut : TcoElements.TcoAo(THIS^);
-	_sutNotInitialized : TcoElements.TcoAo(THIS^);
+    _signal : DINT;
+    _sut : TcoElements.TcoAo(THIS^);
+    _sutNotInitialized : TcoElements.TcoAo(THIS^);
 END_VAR
-
 VAR
-	_UnscaledResult: DINT;
-
+    _UnscaledResult : DINT;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Main" Id="{d0895826-ad73-0daf-0979-e7f4a547483d}">
-      <Declaration><![CDATA[METHOD PROTECTED Main
-
-]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED Main]]></Declaration>
       <Implementation>
         <ST><![CDATA[CASE _testId OF
-	50:
-
-		_sutNotInitialized.Service();
-		_sutNotInitialized.Restore();
-	100:
-		_sut(inoSignal := _signal);
-		
-		_UnscaledResult := _signal;	
-
-	200:
-		_sut(inoSignal := _signal);
-		
-		_UnscaledResult := REAL_TO_DINT(_sut.Status.Unscaled);					
-END_CASE
-]]></ST>
+    50:
+        _sutNotInitialized.Service();
+        _sutNotInitialized.Restore();
+    100:
+        _sut(inoSignal := _signal);
+        _UnscaledResult := _signal;
+    200:
+        _sut(inoSignal := _signal);
+        _UnscaledResult := REAL_TO_DINT(_sut.Status.Unscaled);
+END_CASE]]></ST>
       </Implementation>
     </Method>
   </POU>

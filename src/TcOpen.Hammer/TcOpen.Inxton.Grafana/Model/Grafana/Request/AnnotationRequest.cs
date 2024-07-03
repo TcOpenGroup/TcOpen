@@ -1,6 +1,5 @@
 namespace Grafana.Backend.Model
 {
-
     /// Represents a request to the /annotations endpoint.  As described by the SimpleJson
     /// plugin docs, the following JSON represents this object:
     /// {
@@ -20,8 +19,9 @@ namespace Grafana.Backend.Model
     ///     "query": "#deploy"
     ///   }
     /// }
-    public sealed class AnnotationRequest {
-    public TimeRange Range { get; set; }
-    public AnnotationDescriptor Annotation { get; set; }
-  }
+    public sealed class AnnotationRequest
+    {
+        public TimeRange Range { get; set; }
+        public AnnotationDescriptor Annotation { get; set; }
+    }
 }

@@ -1,18 +1,16 @@
 // #define WITH_HARDWARE
-using NUnit.Framework;
 using System;
 using System.Text;
 using System.Threading;
-using TcoDrivesBeckhoffTests;
-using TcoDrivesBeckhoff;
+using NUnit.Framework;
 using TcoCore;
+using TcoDrivesBeckhoff;
+using TcoDrivesBeckhoffTests;
 
 namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
 {
-
     public class TcoSingleAxisTests
     {
-
         TcoSingleAxisContext tc = ConnectorFixture.Connector.MAIN._tcoSingleAxisTestContext;
 
         [OneTimeSetUp]
@@ -67,10 +65,10 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
         {
             string message = "Test error message";
             tc._inString.Synchron = message;
-            tc.ExecuteProbeRun((int)eTcoSingleAxisTests.Message,()=>tc._done.Synchron);
-            Assert.AreEqual(message, tc._sut._messenger._mime.Text.Synchron);                                 //Check if message apears in the mime.
+            tc.ExecuteProbeRun((int)eTcoSingleAxisTests.Message, () => tc._done.Synchron);
+            Assert.AreEqual(message, tc._sut._messenger._mime.Text.Synchron); //Check if message apears in the mime.
             tc.ExecuteProbeRun(1, (int)eTcoSingleAxisTests.CleanUp);
-            Assert.AreEqual(string.Empty, tc._sut._messenger._mime.Text.Synchron);                                
+            Assert.AreEqual(string.Empty, tc._sut._messenger._mime.Text.Synchron);
         }
 
         [Test, Order((int)eTcoSingleAxisTests.PowerDisable)]
@@ -120,7 +118,10 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
         {
             while (!tc._arranged.Synchron)
             {
-                tc.ExecuteProbeRun(1, (int)eTcoSingleAxisTests.MoveRelativePositiveWithDisabledPositiveDirection);
+                tc.ExecuteProbeRun(
+                    1,
+                    (int)eTcoSingleAxisTests.MoveRelativePositiveWithDisabledPositiveDirection
+                );
             }
             double actpos = tc._sut._axis._axisStatus.ActPos.Synchron;
             double setpos = 1000;
@@ -129,9 +130,12 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
             tc._acceleration.Synchron = 50000;
             tc._deceleration.Synchron = 50000;
             tc._jerk.Synchron = 150000;
-            tc.ExecuteProbeRun((int)eTcoSingleAxisTests.MoveRelativePositiveWithDisabledPositiveDirection, () => tc._done.Synchron);
+            tc.ExecuteProbeRun(
+                (int)eTcoSingleAxisTests.MoveRelativePositiveWithDisabledPositiveDirection,
+                () => tc._done.Synchron
+            );
             Assert.IsTrue(tc._sut._axis._axisStatus.Error.Synchron);
-            Assert.AreEqual(16931, tc._sut._axis._axisStatus.ErrorId.Synchron);   //"No enable for controller and/or feed (Master axis)"
+            Assert.AreEqual(16931, tc._sut._axis._axisStatus.ErrorId.Synchron); //"No enable for controller and/or feed (Master axis)"
             while (tc._sut._axis._axisStatus.Error.Synchron)
             {
                 tc.ExecuteProbeRun(1, (int)eTcoSingleAxisTests.Reset);
@@ -145,7 +149,10 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
         {
             while (!tc._arranged.Synchron)
             {
-                tc.ExecuteProbeRun(1, (int)eTcoSingleAxisTests.MoveRelativePositiveWithEnabledPositiveDirection);
+                tc.ExecuteProbeRun(
+                    1,
+                    (int)eTcoSingleAxisTests.MoveRelativePositiveWithEnabledPositiveDirection
+                );
             }
             double actpos = tc._sut._axis._axisStatus.ActPos.Synchron;
             double setpos = 1000;
@@ -155,7 +162,10 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
             tc._acceleration.Synchron = 50000;
             tc._deceleration.Synchron = 50000;
             tc._jerk.Synchron = 150000;
-            tc.ExecuteProbeRun((int)eTcoSingleAxisTests.MoveRelativePositiveWithEnabledPositiveDirection, () => tc._done.Synchron);
+            tc.ExecuteProbeRun(
+                (int)eTcoSingleAxisTests.MoveRelativePositiveWithEnabledPositiveDirection,
+                () => tc._done.Synchron
+            );
             Assert.AreEqual(0, tc._sut._axis._axisStatus.ErrorId.Synchron);
             Assert.IsFalse(tc._sut._axis._axisStatus.Error.Synchron);
             Assert.AreEqual(actpos + setpos, tc._sut._axis._axisStatus.ActPos.Synchron, 1);
@@ -166,20 +176,27 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
         {
             while (!tc._arranged.Synchron)
             {
-                tc.ExecuteProbeRun(1, (int)eTcoSingleAxisTests.MoveRelativeNegativeWithDisabledNegativeDirection);
+                tc.ExecuteProbeRun(
+                    1,
+                    (int)eTcoSingleAxisTests.MoveRelativeNegativeWithDisabledNegativeDirection
+                );
             }
             double actpos = tc._sut._axis._axisStatus.ActPos.Synchron;
             double setpos = -1000;
-            if ((actpos + setpos) < 10 && (actpos + setpos) > -10) setpos = -2000;  //just to ensure that final position won't be close to zero
+            if ((actpos + setpos) < 10 && (actpos + setpos) > -10)
+                setpos = -2000; //just to ensure that final position won't be close to zero
             tc._position.Synchron = setpos;
             tc._velocity.Synchron = 1400;
             tc._acceleration.Synchron = 50000;
             tc._deceleration.Synchron = 50000;
             tc._jerk.Synchron = 150000;
-            tc.ExecuteProbeRun((int)eTcoSingleAxisTests.MoveRelativeNegativeWithDisabledNegativeDirection, () => tc._done.Synchron);
+            tc.ExecuteProbeRun(
+                (int)eTcoSingleAxisTests.MoveRelativeNegativeWithDisabledNegativeDirection,
+                () => tc._done.Synchron
+            );
             Assert.AreEqual(actpos, tc._sut._axis._axisStatus.ActPos.Synchron, 1);
             Assert.IsTrue(tc._sut._axis._axisStatus.Error.Synchron);
-            Assert.AreEqual(16931, tc._sut._axis._axisStatus.ErrorId.Synchron);   //"No enable for controller and/or feed (Master axis)"
+            Assert.AreEqual(16931, tc._sut._axis._axisStatus.ErrorId.Synchron); //"No enable for controller and/or feed (Master axis)"
             while (tc._sut._axis._axisStatus.Error.Synchron)
             {
                 tc.ExecuteProbeRun(1, (int)eTcoSingleAxisTests.Reset);
@@ -193,17 +210,24 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
         {
             while (!tc._arranged.Synchron)
             {
-                tc.ExecuteProbeRun(1, (int)eTcoSingleAxisTests.MoveRelativeNegativeWithEnabledNegativeDirection);
+                tc.ExecuteProbeRun(
+                    1,
+                    (int)eTcoSingleAxisTests.MoveRelativeNegativeWithEnabledNegativeDirection
+                );
             }
             double actpos = tc._sut._axis._axisStatus.ActPos.Synchron;
             double setpos = -1000;
-            if ((actpos + setpos) < 10 && (actpos + setpos) > -10) setpos = -2000;  //just to ensure that final position won't be close to zero
+            if ((actpos + setpos) < 10 && (actpos + setpos) > -10)
+                setpos = -2000; //just to ensure that final position won't be close to zero
             tc._position.Synchron = setpos;
             tc._velocity.Synchron = 1400;
             tc._acceleration.Synchron = 50000;
             tc._deceleration.Synchron = 50000;
             tc._jerk.Synchron = 150000;
-            tc.ExecuteProbeRun((int)eTcoSingleAxisTests.MoveRelativeNegativeWithEnabledNegativeDirection, () => tc._done.Synchron);
+            tc.ExecuteProbeRun(
+                (int)eTcoSingleAxisTests.MoveRelativeNegativeWithEnabledNegativeDirection,
+                () => tc._done.Synchron
+            );
             Assert.AreEqual(0, tc._sut._axis._axisStatus.ErrorId.Synchron);
             Assert.IsFalse(tc._sut._axis._axisStatus.Error.Synchron);
             Assert.AreEqual(actpos + setpos, tc._sut._axis._axisStatus.ActPos.Synchron, 1);
@@ -232,7 +256,10 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
         {
             while (!tc._arranged.Synchron)
             {
-                tc.ExecuteProbeRun(1, (int)eTcoSingleAxisTests.MoveVelocityPositiveWithDisabledPositiveDirection);
+                tc.ExecuteProbeRun(
+                    1,
+                    (int)eTcoSingleAxisTests.MoveVelocityPositiveWithDisabledPositiveDirection
+                );
             }
             double startpos = tc._sut._axis._axisStatus.ActPos.Synchron;
             double velocity = 1300;
@@ -242,11 +269,14 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
             tc._acceleration.Synchron = accdcc;
             tc._deceleration.Synchron = accdcc;
             tc._jerk.Synchron = jerk;
-            tc.ExecuteProbeRun((int)eTcoSingleAxisTests.MoveVelocityPositiveWithDisabledPositiveDirection, () => tc._done.Synchron);
+            tc.ExecuteProbeRun(
+                (int)eTcoSingleAxisTests.MoveVelocityPositiveWithDisabledPositiveDirection,
+                () => tc._done.Synchron
+            );
             Assert.AreEqual(startpos, tc._sut._axis._axisStatus.ActPos.Synchron, 1);
             Assert.AreEqual(0, tc._sut._axis._axisStatus.ActVelo.Synchron, 1);
             Assert.IsTrue(tc._sut._axis._axisStatus.Error.Synchron);
-            Assert.AreEqual(16931, tc._sut._axis._axisStatus.ErrorId.Synchron);   //"No enable for controller and/or feed (Master axis)"
+            Assert.AreEqual(16931, tc._sut._axis._axisStatus.ErrorId.Synchron); //"No enable for controller and/or feed (Master axis)"
             while (tc._sut._axis._axisStatus.Error.Synchron)
             {
                 tc.ExecuteProbeRun(1, (int)eTcoSingleAxisTests.Reset);
@@ -260,7 +290,10 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
         {
             while (!tc._arranged.Synchron)
             {
-                tc.ExecuteProbeRun(1, (int)eTcoSingleAxisTests.MoveVelocityPositiveWithEnabledPositiveDirection);
+                tc.ExecuteProbeRun(
+                    1,
+                    (int)eTcoSingleAxisTests.MoveVelocityPositiveWithEnabledPositiveDirection
+                );
             }
             double startpos = tc._sut._axis._axisStatus.ActPos.Synchron;
             double velocity = 1300;
@@ -270,11 +303,14 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
             tc._acceleration.Synchron = accdcc;
             tc._deceleration.Synchron = accdcc;
             tc._jerk.Synchron = jerk;
-            tc.ExecuteProbeRun((int)eTcoSingleAxisTests.MoveVelocityPositiveWithEnabledPositiveDirection, () => tc._done.Synchron);
+            tc.ExecuteProbeRun(
+                (int)eTcoSingleAxisTests.MoveVelocityPositiveWithEnabledPositiveDirection,
+                () => tc._done.Synchron
+            );
             Assert.AreEqual(0, tc._sut._axis._axisStatus.ErrorId.Synchron);
             Assert.IsFalse(tc._sut._axis._axisStatus.Error.Synchron);
             Assert.AreNotEqual(startpos, tc._sut._axis._axisStatus.ActPos.Synchron);
-            Assert.AreEqual(velocity, tc._sut._axis._axisStatus.ActVelo.Synchron, velocity*0.02);
+            Assert.AreEqual(velocity, tc._sut._axis._axisStatus.ActVelo.Synchron, velocity * 0.02);
             //tc.ExecuteProbeRun((int)eTcoSingleAxisTests.Stop);
         }
 
@@ -287,7 +323,7 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
             }
             double velocity = 1300;
             double decceleration = 50000;
-            double jerk= 150000;
+            double jerk = 150000;
             tc._deceleration.Synchron = decceleration;
             tc._jerk.Synchron = jerk;
             tc.ExecuteProbeRun((int)eTcoSingleAxisTests.Stop, () => tc._done.Synchron);
@@ -301,7 +337,10 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
         {
             while (!tc._arranged.Synchron)
             {
-                tc.ExecuteProbeRun(1, (int)eTcoSingleAxisTests.MoveVelocityNegativeWithDisabledNegativeDirection);
+                tc.ExecuteProbeRun(
+                    1,
+                    (int)eTcoSingleAxisTests.MoveVelocityNegativeWithDisabledNegativeDirection
+                );
             }
             double startpos = tc._sut._axis._axisStatus.ActPos.Synchron;
             double velocity = 1300;
@@ -311,11 +350,14 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
             tc._acceleration.Synchron = accdcc;
             tc._deceleration.Synchron = accdcc;
             tc._jerk.Synchron = jerk;
-            tc.ExecuteProbeRun((int)eTcoSingleAxisTests.MoveVelocityNegativeWithDisabledNegativeDirection, () => tc._done.Synchron);
+            tc.ExecuteProbeRun(
+                (int)eTcoSingleAxisTests.MoveVelocityNegativeWithDisabledNegativeDirection,
+                () => tc._done.Synchron
+            );
             Assert.AreEqual(startpos, tc._sut._axis._axisStatus.ActPos.Synchron, 1);
             Assert.AreEqual(0, tc._sut._axis._axisStatus.ActVelo.Synchron, 1);
             Assert.IsTrue(tc._sut._axis._axisStatus.Error.Synchron);
-            Assert.AreEqual(16931, tc._sut._axis._axisStatus.ErrorId.Synchron);   //"No enable for controller and/or feed (Master axis)"
+            Assert.AreEqual(16931, tc._sut._axis._axisStatus.ErrorId.Synchron); //"No enable for controller and/or feed (Master axis)"
             while (tc._sut._axis._axisStatus.Error.Synchron)
             {
                 tc.ExecuteProbeRun(1, (int)eTcoSingleAxisTests.Reset);
@@ -329,7 +371,10 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
         {
             while (!tc._arranged.Synchron)
             {
-                tc.ExecuteProbeRun(1, (int)eTcoSingleAxisTests.MoveVelocityNegativeWithEnabledNegativeDirection);
+                tc.ExecuteProbeRun(
+                    1,
+                    (int)eTcoSingleAxisTests.MoveVelocityNegativeWithEnabledNegativeDirection
+                );
             }
             double startpos = tc._sut._axis._axisStatus.ActPos.Synchron;
             double velocity = 1300;
@@ -339,7 +384,10 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
             tc._acceleration.Synchron = accdcc;
             tc._deceleration.Synchron = accdcc;
             tc._jerk.Synchron = jerk;
-            tc.ExecuteProbeRun((int)eTcoSingleAxisTests.MoveVelocityNegativeWithEnabledNegativeDirection, () => tc._done.Synchron);
+            tc.ExecuteProbeRun(
+                (int)eTcoSingleAxisTests.MoveVelocityNegativeWithEnabledNegativeDirection,
+                () => tc._done.Synchron
+            );
             Assert.AreEqual(0, tc._sut._axis._axisStatus.ErrorId.Synchron);
             Assert.IsFalse(tc._sut._axis._axisStatus.Error.Synchron);
             Assert.AreNotEqual(startpos, tc._sut._axis._axisStatus.ActPos.Synchron);
@@ -360,10 +408,13 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
             tc._acceleration.Synchron = 50000;
             tc._deceleration.Synchron = 50000;
             tc._jerk.Synchron = 150000;
-            tc.ExecuteProbeRun((int)eTcoSingleAxisTests.MoveAbsoluteDisabled, () => tc._done.Synchron);
+            tc.ExecuteProbeRun(
+                (int)eTcoSingleAxisTests.MoveAbsoluteDisabled,
+                () => tc._done.Synchron
+            );
 #if WITH_HARDWARE
-            Assert.AreEqual(16992, tc._sut._axis._axisStatus.ErrorId.Synchron);   //"Controller enable"
-           
+            Assert.AreEqual(16992, tc._sut._axis._axisStatus.ErrorId.Synchron); //"Controller enable"
+
             Assert.IsTrue(tc._sut._axis._axisStatus.Error.Synchron);
 #endif
             while (tc._sut._axis._axisStatus.Error.Synchron)
@@ -372,7 +423,6 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
             }
             Assert.AreEqual(0, tc._sut._axis._axisStatus.ErrorId.Synchron);
             Assert.IsFalse(tc._sut._axis._axisStatus.Error.Synchron);
-
         }
 
         [Test, Order((int)eTcoSingleAxisTests.MoveAbsoluteDisabledPositiveDirection)]
@@ -380,7 +430,10 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
         {
             while (!tc._arranged.Synchron)
             {
-                tc.ExecuteProbeRun(1, (int)eTcoSingleAxisTests.MoveAbsoluteDisabledPositiveDirection);
+                tc.ExecuteProbeRun(
+                    1,
+                    (int)eTcoSingleAxisTests.MoveAbsoluteDisabledPositiveDirection
+                );
             }
             double actpos = tc._sut._axis._axisStatus.ActPos.Synchron;
             double setpos = 1000;
@@ -389,10 +442,13 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
             tc._acceleration.Synchron = 50000;
             tc._deceleration.Synchron = 50000;
             tc._jerk.Synchron = 150000;
-            tc.ExecuteProbeRun((int)eTcoSingleAxisTests.MoveAbsoluteDisabledPositiveDirection, () => tc._done.Synchron);
+            tc.ExecuteProbeRun(
+                (int)eTcoSingleAxisTests.MoveAbsoluteDisabledPositiveDirection,
+                () => tc._done.Synchron
+            );
             Assert.IsTrue(tc._sut._axis._axisStatus.Error.Synchron);
-            Assert.AreEqual(16931, tc._sut._axis._axisStatus.ErrorId.Synchron);   //"No enable for controller and/or feed (Master axis)"
-            Assert.AreEqual(actpos, tc._sut._axis._axisStatus.ActPos.Synchron,1);
+            Assert.AreEqual(16931, tc._sut._axis._axisStatus.ErrorId.Synchron); //"No enable for controller and/or feed (Master axis)"
+            Assert.AreEqual(actpos, tc._sut._axis._axisStatus.ActPos.Synchron, 1);
             while (tc._sut._axis._axisStatus.Error.Synchron)
             {
                 tc.ExecuteProbeRun(1, (int)eTcoSingleAxisTests.Reset);
@@ -406,7 +462,10 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
         {
             while (!tc._arranged.Synchron)
             {
-                tc.ExecuteProbeRun(1, (int)eTcoSingleAxisTests.MoveAbsoluteEnabledPositiveDirection);
+                tc.ExecuteProbeRun(
+                    1,
+                    (int)eTcoSingleAxisTests.MoveAbsoluteEnabledPositiveDirection
+                );
             }
             double actpos = tc._sut._axis._axisStatus.ActPos.Synchron;
             double setpos = 1000;
@@ -415,10 +474,13 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
             tc._acceleration.Synchron = 50000;
             tc._deceleration.Synchron = 50000;
             tc._jerk.Synchron = 150000;
-            tc.ExecuteProbeRun((int)eTcoSingleAxisTests.MoveAbsoluteEnabledPositiveDirection, () => tc._done.Synchron);
+            tc.ExecuteProbeRun(
+                (int)eTcoSingleAxisTests.MoveAbsoluteEnabledPositiveDirection,
+                () => tc._done.Synchron
+            );
             Assert.IsFalse(tc._sut._axis._axisStatus.Error.Synchron);
             Assert.AreEqual(0, tc._sut._axis._axisStatus.ErrorId.Synchron);
-            Assert.AreEqual(actpos+setpos, tc._sut._axis._axisStatus.ActPos.Synchron, 1);
+            Assert.AreEqual(actpos + setpos, tc._sut._axis._axisStatus.ActPos.Synchron, 1);
         }
 
         [Test, Order((int)eTcoSingleAxisTests.MoveAbsoluteDisabledNegativeDirection)]
@@ -426,7 +488,10 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
         {
             while (!tc._arranged.Synchron)
             {
-                tc.ExecuteProbeRun(1, (int)eTcoSingleAxisTests.MoveAbsoluteDisabledNegativeDirection);
+                tc.ExecuteProbeRun(
+                    1,
+                    (int)eTcoSingleAxisTests.MoveAbsoluteDisabledNegativeDirection
+                );
             }
             double actpos = tc._sut._axis._axisStatus.ActPos.Synchron;
             double setpos = 1000;
@@ -435,10 +500,13 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
             tc._acceleration.Synchron = 50000;
             tc._deceleration.Synchron = 50000;
             tc._jerk.Synchron = 150000;
-            tc.ExecuteProbeRun((int)eTcoSingleAxisTests.MoveAbsoluteDisabledNegativeDirection, () => tc._done.Synchron);
+            tc.ExecuteProbeRun(
+                (int)eTcoSingleAxisTests.MoveAbsoluteDisabledNegativeDirection,
+                () => tc._done.Synchron
+            );
             Assert.IsTrue(tc._sut._axis._axisStatus.Error.Synchron);
-            Assert.AreEqual(16931, tc._sut._axis._axisStatus.ErrorId.Synchron);   //"No enable for controller and/or feed (Master axis)"
-            Assert.AreEqual(actpos , tc._sut._axis._axisStatus.ActPos.Synchron, 1);
+            Assert.AreEqual(16931, tc._sut._axis._axisStatus.ErrorId.Synchron); //"No enable for controller and/or feed (Master axis)"
+            Assert.AreEqual(actpos, tc._sut._axis._axisStatus.ActPos.Synchron, 1);
             while (tc._sut._axis._axisStatus.Error.Synchron)
             {
                 tc.ExecuteProbeRun(1, (int)eTcoSingleAxisTests.Reset);
@@ -452,7 +520,10 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
         {
             while (!tc._arranged.Synchron)
             {
-                tc.ExecuteProbeRun(1, (int)eTcoSingleAxisTests.MoveAbsoluteEnabledNegativeDirection);
+                tc.ExecuteProbeRun(
+                    1,
+                    (int)eTcoSingleAxisTests.MoveAbsoluteEnabledNegativeDirection
+                );
             }
             double actpos = tc._sut._axis._axisStatus.ActPos.Synchron;
             double setpos = 1000;
@@ -461,17 +532,18 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
             tc._acceleration.Synchron = 50000;
             tc._deceleration.Synchron = 50000;
             tc._jerk.Synchron = 150000;
-            tc.ExecuteProbeRun((int)eTcoSingleAxisTests.MoveAbsoluteEnabledNegativeDirection, () => tc._done.Synchron);
+            tc.ExecuteProbeRun(
+                (int)eTcoSingleAxisTests.MoveAbsoluteEnabledNegativeDirection,
+                () => tc._done.Synchron
+            );
             Assert.IsFalse(tc._sut._axis._axisStatus.Error.Synchron);
-            Assert.AreEqual(0, tc._sut._axis._axisStatus.ErrorId.Synchron);   //"No enable for controller and/or feed (Master axis)"
+            Assert.AreEqual(0, tc._sut._axis._axisStatus.ErrorId.Synchron); //"No enable for controller and/or feed (Master axis)"
             Assert.AreEqual(actpos - setpos, tc._sut._axis._axisStatus.ActPos.Synchron, 1);
         }
-
 
         [Test, Order((int)eTcoSingleAxisTests.MoveAbsoluteAxisDisabled)]
         public void T022_MoveAbsoluteDisabled()
         {
-           
             while (!tc._arranged.Synchron)
             {
                 tc.ExecuteProbeRun(1, (int)eTcoSingleAxisTests.MoveAbsoluteAxisDisabled);
@@ -483,10 +555,13 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
             tc._acceleration.Synchron = 50000;
             tc._deceleration.Synchron = 50000;
             tc._jerk.Synchron = 150000;
-            tc.ExecuteProbeRun((int)eTcoSingleAxisTests.MoveAbsoluteAxisDisabled, () => tc._done.Synchron);
+            tc.ExecuteProbeRun(
+                (int)eTcoSingleAxisTests.MoveAbsoluteAxisDisabled,
+                () => tc._done.Synchron
+            );
 #if WITH_HARDWARE
-            Assert.AreEqual(16992, tc._sut._axis._axisStatus.ErrorId.Synchron);   //"Controller enable"
-           
+            Assert.AreEqual(16992, tc._sut._axis._axisStatus.ErrorId.Synchron); //"Controller enable"
+
             Assert.IsTrue(tc._sut._axis._axisStatus.Error.Synchron);
 #endif
             while (tc._sut._axis._axisStatus.Error.Synchron)
@@ -495,17 +570,17 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
             }
             Assert.AreEqual(0, tc._sut._axis._axisStatus.ErrorId.Synchron);
             Assert.IsFalse(tc._sut._axis._axisStatus.Error.Synchron);
-
         }
 
         [Test, Order((int)eTcoSingleAxisTests.MoveAbsoluteAxisDisabledPositiveDirection)]
         public void T023_MoveAbsoluteDisabledPositiveDirection()
         {
-         
-
             while (!tc._arranged.Synchron)
             {
-                tc.ExecuteProbeRun(1, (int)eTcoSingleAxisTests.MoveAbsoluteAxisDisabledPositiveDirection);
+                tc.ExecuteProbeRun(
+                    1,
+                    (int)eTcoSingleAxisTests.MoveAbsoluteAxisDisabledPositiveDirection
+                );
             }
             double actpos = tc._sut._axis._axisStatus.ActPos.Synchron;
             double setpos = 1000;
@@ -514,9 +589,12 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
             tc._acceleration.Synchron = 50000;
             tc._deceleration.Synchron = 50000;
             tc._jerk.Synchron = 150000;
-            tc.ExecuteProbeRun((int)eTcoSingleAxisTests.MoveAbsoluteAxisDisabledPositiveDirection, () => tc._done.Synchron);
+            tc.ExecuteProbeRun(
+                (int)eTcoSingleAxisTests.MoveAbsoluteAxisDisabledPositiveDirection,
+                () => tc._done.Synchron
+            );
             Assert.IsTrue(tc._sut._axis._axisStatus.Error.Synchron);
-            Assert.AreEqual(16931, tc._sut._axis._axisStatus.ErrorId.Synchron);   //"No enable for controller and/or feed (Master axis)"
+            Assert.AreEqual(16931, tc._sut._axis._axisStatus.ErrorId.Synchron); //"No enable for controller and/or feed (Master axis)"
             Assert.AreEqual(actpos, tc._sut._axis._axisStatus.ActPos.Synchron, 1);
             while (tc._sut._axis._axisStatus.Error.Synchron)
             {
@@ -529,11 +607,12 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
         [Test, Order((int)eTcoSingleAxisTests.MoveAbsoluteAxisEnabledPositiveDirection)]
         public void T024_MoveAbsoluteEnabledPositiveDirection()
         {
-  
-
             while (!tc._arranged.Synchron)
             {
-                tc.ExecuteProbeRun(1, (int)eTcoSingleAxisTests.MoveAbsoluteAxisEnabledPositiveDirection);
+                tc.ExecuteProbeRun(
+                    1,
+                    (int)eTcoSingleAxisTests.MoveAbsoluteAxisEnabledPositiveDirection
+                );
             }
             double actpos = tc._sut._axis._axisStatus.ActPos.Synchron;
             double setpos = 1000;
@@ -542,7 +621,10 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
             tc._acceleration.Synchron = 50000;
             tc._deceleration.Synchron = 50000;
             tc._jerk.Synchron = 150000;
-            tc.ExecuteProbeRun((int)eTcoSingleAxisTests.MoveAbsoluteAxisEnabledPositiveDirection, () => tc._done.Synchron);
+            tc.ExecuteProbeRun(
+                (int)eTcoSingleAxisTests.MoveAbsoluteAxisEnabledPositiveDirection,
+                () => tc._done.Synchron
+            );
             Assert.IsFalse(tc._sut._axis._axisStatus.Error.Synchron);
             Assert.AreEqual(0, tc._sut._axis._axisStatus.ErrorId.Synchron);
             Assert.AreEqual(actpos + setpos, tc._sut._axis._axisStatus.ActPos.Synchron, 1);
@@ -553,7 +635,10 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
         {
             while (!tc._arranged.Synchron)
             {
-                tc.ExecuteProbeRun(1, (int)eTcoSingleAxisTests.MoveAbsoluteAxisDisabledNegativeDirection);
+                tc.ExecuteProbeRun(
+                    1,
+                    (int)eTcoSingleAxisTests.MoveAbsoluteAxisDisabledNegativeDirection
+                );
             }
             double actpos = tc._sut._axis._axisStatus.ActPos.Synchron;
             double setpos = 1000;
@@ -562,9 +647,12 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
             tc._acceleration.Synchron = 50000;
             tc._deceleration.Synchron = 50000;
             tc._jerk.Synchron = 150000;
-            tc.ExecuteProbeRun((int)eTcoSingleAxisTests.MoveAbsoluteAxisDisabledNegativeDirection, () => tc._done.Synchron);
+            tc.ExecuteProbeRun(
+                (int)eTcoSingleAxisTests.MoveAbsoluteAxisDisabledNegativeDirection,
+                () => tc._done.Synchron
+            );
             Assert.IsTrue(tc._sut._axis._axisStatus.Error.Synchron);
-            Assert.AreEqual(16931, tc._sut._axis._axisStatus.ErrorId.Synchron);   //"No enable for controller and/or feed (Master axis)"
+            Assert.AreEqual(16931, tc._sut._axis._axisStatus.ErrorId.Synchron); //"No enable for controller and/or feed (Master axis)"
             Assert.AreEqual(actpos, tc._sut._axis._axisStatus.ActPos.Synchron, 1);
             while (tc._sut._axis._axisStatus.Error.Synchron)
             {
@@ -579,7 +667,10 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
         {
             while (!tc._arranged.Synchron)
             {
-                tc.ExecuteProbeRun(1, (int)eTcoSingleAxisTests.MoveAbsoluteAxisEnabledNegativeDirection);
+                tc.ExecuteProbeRun(
+                    1,
+                    (int)eTcoSingleAxisTests.MoveAbsoluteAxisEnabledNegativeDirection
+                );
             }
             double actpos = tc._sut._axis._axisStatus.ActPos.Synchron;
             double setpos = 1000;
@@ -588,12 +679,14 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
             tc._acceleration.Synchron = 50000;
             tc._deceleration.Synchron = 50000;
             tc._jerk.Synchron = 150000;
-            tc.ExecuteProbeRun((int)eTcoSingleAxisTests.MoveAbsoluteAxisEnabledNegativeDirection, () => tc._done.Synchron);
+            tc.ExecuteProbeRun(
+                (int)eTcoSingleAxisTests.MoveAbsoluteAxisEnabledNegativeDirection,
+                () => tc._done.Synchron
+            );
             Assert.IsFalse(tc._sut._axis._axisStatus.Error.Synchron);
-            Assert.AreEqual(0, tc._sut._axis._axisStatus.ErrorId.Synchron);   //"No enable for controller and/or feed (Master axis)"
+            Assert.AreEqual(0, tc._sut._axis._axisStatus.ErrorId.Synchron); //"No enable for controller and/or feed (Master axis)"
             Assert.AreEqual(actpos - setpos, tc._sut._axis._axisStatus.ActPos.Synchron, 1);
         }
-
 
         [Test, Order((int)eTcoSingleAxisTests.MoveRelativeAxisDisabled)]
         public void T027_MoveRelativeDisabled()
@@ -609,10 +702,13 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
             tc._acceleration.Synchron = 50000;
             tc._deceleration.Synchron = 50000;
             tc._jerk.Synchron = 150000;
-            tc.ExecuteProbeRun((int)eTcoSingleAxisTests.MoveRelativeAxisDisabled, () => tc._done.Synchron);
+            tc.ExecuteProbeRun(
+                (int)eTcoSingleAxisTests.MoveRelativeAxisDisabled,
+                () => tc._done.Synchron
+            );
 #if WITH_HARDWARE
-            Assert.AreEqual(16992, tc._sut._axis._axisStatus.ErrorId.Synchron);   //"Controller enable"
-           
+            Assert.AreEqual(16992, tc._sut._axis._axisStatus.ErrorId.Synchron); //"Controller enable"
+
             Assert.IsTrue(tc._sut._axis._axisStatus.Error.Synchron);
 #endif
             while (tc._sut._axis._axisStatus.Error.Synchron)
@@ -621,7 +717,6 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
             }
             Assert.AreEqual(0, tc._sut._axis._axisStatus.ErrorId.Synchron);
             Assert.IsFalse(tc._sut._axis._axisStatus.Error.Synchron);
-
         }
 
         [Test, Order((int)eTcoSingleAxisTests.MoveRelativeAxisDisabledPositiveDirection)]
@@ -629,7 +724,10 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
         {
             while (!tc._arranged.Synchron)
             {
-                tc.ExecuteProbeRun(1, (int)eTcoSingleAxisTests.MoveRelativeAxisDisabledPositiveDirection);
+                tc.ExecuteProbeRun(
+                    1,
+                    (int)eTcoSingleAxisTests.MoveRelativeAxisDisabledPositiveDirection
+                );
             }
             double actpos = tc._sut._axis._axisStatus.ActPos.Synchron;
             double setpos = 1000;
@@ -638,9 +736,12 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
             tc._acceleration.Synchron = 50000;
             tc._deceleration.Synchron = 50000;
             tc._jerk.Synchron = 150000;
-            tc.ExecuteProbeRun((int)eTcoSingleAxisTests.MoveRelativeAxisDisabledPositiveDirection, () => tc._done.Synchron);
+            tc.ExecuteProbeRun(
+                (int)eTcoSingleAxisTests.MoveRelativeAxisDisabledPositiveDirection,
+                () => tc._done.Synchron
+            );
             Assert.IsTrue(tc._sut._axis._axisStatus.Error.Synchron);
-            Assert.AreEqual(16931, tc._sut._axis._axisStatus.ErrorId.Synchron);   //"No enable for controller and/or feed (Master axis)"
+            Assert.AreEqual(16931, tc._sut._axis._axisStatus.ErrorId.Synchron); //"No enable for controller and/or feed (Master axis)"
             Assert.AreEqual(actpos, tc._sut._axis._axisStatus.ActPos.Synchron, 1);
             while (tc._sut._axis._axisStatus.Error.Synchron)
             {
@@ -655,7 +756,10 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
         {
             while (!tc._arranged.Synchron)
             {
-                tc.ExecuteProbeRun(1, (int)eTcoSingleAxisTests.MoveRelativeAxisEnabledPositiveDirection);
+                tc.ExecuteProbeRun(
+                    1,
+                    (int)eTcoSingleAxisTests.MoveRelativeAxisEnabledPositiveDirection
+                );
             }
 
             double actpos = tc._sut._axis._axisStatus.ActPos.Synchron;
@@ -665,7 +769,10 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
             tc._acceleration.Synchron = 50000;
             tc._deceleration.Synchron = 50000;
             tc._jerk.Synchron = 150000;
-            tc.ExecuteProbeRun((int)eTcoSingleAxisTests.MoveRelativeAxisEnabledPositiveDirection, () => tc._done.Synchron);
+            tc.ExecuteProbeRun(
+                (int)eTcoSingleAxisTests.MoveRelativeAxisEnabledPositiveDirection,
+                () => tc._done.Synchron
+            );
             Assert.IsFalse(tc._sut._axis._axisStatus.Error.Synchron);
             Assert.AreEqual(0, tc._sut._axis._axisStatus.ErrorId.Synchron);
             Assert.AreEqual(actpos + setpos, tc._sut._axis._axisStatus.ActPos.Synchron, 1);
@@ -676,19 +783,26 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
         {
             while (!tc._arranged.Synchron)
             {
-                tc.ExecuteProbeRun(1, (int)eTcoSingleAxisTests.MoveRelativeAxisDisabledNegativeDirection);
+                tc.ExecuteProbeRun(
+                    1,
+                    (int)eTcoSingleAxisTests.MoveRelativeAxisDisabledNegativeDirection
+                );
             }
             double actpos = tc._sut._axis._axisStatus.ActPos.Synchron;
             double setpos = -1000;
-            if ((actpos + setpos) < 10 && (actpos + setpos) > -10) setpos = -2000;  //just to ensure that final position won't be close to zero
+            if ((actpos + setpos) < 10 && (actpos + setpos) > -10)
+                setpos = -2000; //just to ensure that final position won't be close to zero
             tc._position.Synchron = setpos;
             tc._velocity.Synchron = 1400;
             tc._acceleration.Synchron = 50000;
             tc._deceleration.Synchron = 50000;
             tc._jerk.Synchron = 150000;
-            tc.ExecuteProbeRun((int)eTcoSingleAxisTests.MoveRelativeAxisDisabledNegativeDirection, () => tc._done.Synchron);
+            tc.ExecuteProbeRun(
+                (int)eTcoSingleAxisTests.MoveRelativeAxisDisabledNegativeDirection,
+                () => tc._done.Synchron
+            );
             Assert.IsTrue(tc._sut._axis._axisStatus.Error.Synchron);
-            Assert.AreEqual(16931, tc._sut._axis._axisStatus.ErrorId.Synchron);   //"No enable for controller and/or feed (Master axis)"
+            Assert.AreEqual(16931, tc._sut._axis._axisStatus.ErrorId.Synchron); //"No enable for controller and/or feed (Master axis)"
             Assert.AreEqual(actpos, tc._sut._axis._axisStatus.ActPos.Synchron, 1);
             while (tc._sut._axis._axisStatus.Error.Synchron)
             {
@@ -703,25 +817,27 @@ namespace TcoDrivesBeckhoffUnitTests.PlcExecutedTests
         {
             while (!tc._arranged.Synchron)
             {
-                tc.ExecuteProbeRun(1, (int)eTcoSingleAxisTests.MoveRelativeAxisEnabledNegativeDirection);
+                tc.ExecuteProbeRun(
+                    1,
+                    (int)eTcoSingleAxisTests.MoveRelativeAxisEnabledNegativeDirection
+                );
             }
             double actpos = tc._sut._axis._axisStatus.ActPos.Synchron;
             double setpos = -1000;
-            if ((actpos + setpos) < 10 && (actpos + setpos) > -10) setpos = -2000;  //just to ensure that final position won't be close to zero
+            if ((actpos + setpos) < 10 && (actpos + setpos) > -10)
+                setpos = -2000; //just to ensure that final position won't be close to zero
             tc._position.Synchron = setpos;
             tc._velocity.Synchron = 1400;
             tc._acceleration.Synchron = 50000;
             tc._deceleration.Synchron = 50000;
             tc._jerk.Synchron = 150000;
-            tc.ExecuteProbeRun((int)eTcoSingleAxisTests.MoveRelativeAxisEnabledNegativeDirection, () => tc._done.Synchron);
+            tc.ExecuteProbeRun(
+                (int)eTcoSingleAxisTests.MoveRelativeAxisEnabledNegativeDirection,
+                () => tc._done.Synchron
+            );
             Assert.IsFalse(tc._sut._axis._axisStatus.Error.Synchron);
-            Assert.AreEqual(0, tc._sut._axis._axisStatus.ErrorId.Synchron);   //"No enable for controller and/or feed (Master axis)"
+            Assert.AreEqual(0, tc._sut._axis._axisStatus.ErrorId.Synchron); //"No enable for controller and/or feed (Master axis)"
             Assert.AreEqual((actpos + setpos), tc._sut._axis._axisStatus.ActPos.Synchron, 1);
         }
-
-
-
     }
-
 }
-

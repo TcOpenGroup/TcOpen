@@ -9,20 +9,18 @@
 {attribute addProperty Id "NewMessageFlagAT %I*NewMessageFlag_557A079F1Gateway_to_EtherCAT_Data_100_BytesAT %I*Gateway_to_EtherCAT_Data_100_Bytes_AE1F4D6F0EtherCAT_to_Gateway_Data_100_BytesAT %Q*EtherCAT_to_Gateway_Data_100_Bytes_44CA1D220WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_23CBA8372"}
 {attribute addProperty CRC "1117703024"}
 {attribute addProperty Size "5"}
-TYPE Flexi_Gateway_GETC1_429ECB70 EXTENDS TcoIo.EtcSlaveBoxBase_77A0E4A7 :
-STRUCT
-	{attribute addProperty Name "NewMessageFlag"}
-	NewMessageFlag : NewMessageFlag_557A079F;
-	{attribute addProperty Name "Gateway_to_EtherCAT_Data_100_Bytes"}
-	Gateway_to_EtherCAT_Data_100_Bytes : Gateway_to_EtherCAT_Data_100_Bytes_AE1F4D6F;
-	{attribute addProperty Name "EtherCAT_to_Gateway_Data_100_Bytes"}
-	EtherCAT_to_Gateway_Data_100_Bytes : EtherCAT_to_Gateway_Data_100_Bytes_44CA1D22;
-	{attribute addProperty Name "WcState"}
-	WcState : TcoIo.WcState_9091E0EB;
-	{attribute addProperty Name "InfoData"}
-	InfoData : TcoIo.InfoData_23CBA837;
+TYPE Flexi_Gateway_GETC1_429ECB70 EXTENDS TcoIo.EtcSlaveBoxBase_77A0E4A7 : STRUCT
+    {attribute addProperty Name "NewMessageFlag"}
+    NewMessageFlag : NewMessageFlag_557A079F;
+    {attribute addProperty Name "Gateway_to_EtherCAT_Data_100_Bytes"}
+    Gateway_to_EtherCAT_Data_100_Bytes : Gateway_to_EtherCAT_Data_100_Bytes_AE1F4D6F;
+    {attribute addProperty Name "EtherCAT_to_Gateway_Data_100_Bytes"}
+    EtherCAT_to_Gateway_Data_100_Bytes : EtherCAT_to_Gateway_Data_100_Bytes_44CA1D22;
+    {attribute addProperty Name "WcState"}
+    WcState : TcoIo.WcState_9091E0EB;
+    {attribute addProperty Name "InfoData"}
+    InfoData : TcoIo.InfoData_23CBA837;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

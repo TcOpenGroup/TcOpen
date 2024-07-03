@@ -28,15 +28,22 @@ namespace TcoCore
             this.DataContextChanged += TcoSequencerObserverView_DataContextChanged;
         }
 
-        private void TcoSequencerObserverView_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void TcoSequencerObserverView_DataContextChanged(
+            object sender,
+            DependencyPropertyChangedEventArgs e
+        )
         {
-            if(!(this.DataContext is TcoSequencerObserverViewModel) && (this.DataContext is TcoSequencerObserver))
+            if (
+                !(this.DataContext is TcoSequencerObserverViewModel)
+                && (this.DataContext is TcoSequencerObserver)
+            )
             {
                 this.DataContext = new TcoSequencerObserverViewModel() { Model = this.DataContext };
             }
         }
 
         private System.Timers.Timer messageUpdateTimer;
+
         private void SetTimer()
         {
             if (messageUpdateTimer == null)
@@ -47,7 +54,6 @@ namespace TcoCore
                 messageUpdateTimer.Enabled = true;
             }
         }
-
 
         private void MessageUpdateTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {

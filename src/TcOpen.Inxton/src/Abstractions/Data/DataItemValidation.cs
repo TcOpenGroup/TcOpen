@@ -20,7 +20,7 @@
         /// Gets failed when the validation failed.
         /// </summary>
         public bool Failed { get; }
-        
+
         /// <summary>
         /// Get validation error description.
         /// </summary>

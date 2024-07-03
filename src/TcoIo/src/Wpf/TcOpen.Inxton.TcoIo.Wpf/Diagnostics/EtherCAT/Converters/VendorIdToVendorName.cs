@@ -9,10 +9,16 @@ namespace TcoIo.Converters
 {
     public class VendorIdToVendorName : MarkupExtension, IValueConverter
     {
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }
+
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
             return this;
@@ -21,3710 +27,10714 @@ namespace TcoIo.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             string vendorId = !string.IsNullOrEmpty(value.ToString()) ? value.ToString() : "";
-            if (vendorId != null && vendorId.StartsWith("#x")) vendorId = vendorId.Replace("#x", "0x");
+            if (vendorId != null && vendorId.StartsWith("#x"))
+                vendorId = vendorId.Replace("#x", "0x");
             //Complete content of the switch statement are copied from Sheet2 of the VendorIdList.xlsx
             //Content of the Sheet1 of the VendorIdList.xlsx is copied from https://ethercat.org/en/vendor_id_list.html
             switch (vendorId)
             {
                 //This page was last updated on June 29, 2022
 
-                case "0x00000001": return "EtherCAT Technology Group"; break;
-                case "0x00000002": return "Beckhoff Automation GmbH & Co. KG"; break;
-                case "0x00000003": return "Scuola Superiore S. Anna"; break;
-                case "0x00000004": return "HMS Technology Center Ravensburg GmbH"; break;
-                case "0x00000005": return "Vector Informatik GmbH"; break;
-                case "0x00000006": return "KNESTEL Technologie & Elektronik GmbH"; break;
-                case "0x00000007": return "Janz Tec AG"; break;
-                case "0x00000009": return "A&C Institute of Shenyang University of Technology"; break;
-                case "0x0000000A": return "CMZ Sistemi Elettronici"; break;
-                case "0x0000000B": return "JSL Technology Co.,Ltd"; break;
-                case "0x0000000C": return "comemso GmbH"; break;
-                case "0x0000000D": return "Softing Industrial Automation GmbH"; break;
-                case "0x0000000E": return "MicroControl GmbH & Co. KG"; break;
-                case "0x0000000F": return "ESR Pollmeier GmbH"; break;
-
-                case "0x00000010": return "Beihang University, School of Mechanical Engineering & Automation"; break;
-                case "0x00000011": return "GKG Precision Machine Co., Ltd."; break;
-                case "0x00000012": return "Inatech Co., Ltd."; break;
-                case "0x00000013": return "Fritz Kübler GmbH"; break;
-                case "0x00000014": return "KEB Automation KG"; break;
-                case "0x00000015": return "AJINEXTEK Co. Ltd."; break;
-                case "0x00000016": return "KEBA Industrial Automation Germany GmbH"; break;
-                case "0x00000017": return "esd electronics gmbh"; break;
-                case "0x00000018": return "M2I Corporation"; break;
-                case "0x00000019": return "NSD Corporation"; break;
-                case "0x0000001A": return "Shanghai ECAT Science and Technology Co.,Ltd"; break;
-                case "0x0000001B": return "HMS Industrial Networks AB"; break;
-                case "0x0000001C": return "epis Automation GmbH & Co. KG"; break;
-                case "0x0000001D": return "Festo SE & Co. KG"; break;
-                case "0x0000001E": return "Shanghai MicroPort Medical (Group) Co., Ltd."; break;
-
-                case "0x00000020": return "DST Robot Co. Ltd."; break;
-                case "0x00000021": return "WAGO GmbH & Co. KG"; break;
-                case "0x00000022": return "Wuhan Farley Laserlab Cutting Welding System Engineering Co., Ltd."; break;
-                case "0x00000023": return "ACTi Corporation"; break;
-                case "0x00000024": return "Bosch Rexroth AG"; break;
-                case "0x00000025": return "Inexbot NanJing Technology Co., Ltd."; break;
-                case "0x00000026": return "Hongke Technology Co., Ltd."; break;
-                case "0x00000027": return "Selcom Group S.p.A."; break;
-                case "0x00000028": return "Moog GmbH"; break;
-                case "0x00000029": return "INTEC - Motion Systems GmbH"; break;
-                case "0x0000002A": return "HIGHYAG Lasertechnologie GmbH"; break;
-                case "0x0000002B": return "Doosan Robotics Inc."; break;
-                case "0x0000002C": return "Probot Automation GmbH"; break;
-                case "0x0000002D": return "Beijing NiMotion Control Technology Co., Ltd."; break;
-                case "0x0000002E": return "Dinkle Enterprise Co. Ltd."; break;
-                case "0x0000002F": return "Guangzhou Kossi Intelligent Technology Co., Ltd."; break;
-                case "0x00000030": return "Epec Oy"; break;
-                case "0x00000031": return "Chengdu EVControl Technology Co., Ltd."; break;
-                case "0x00000032": return "Robotek Otomasyon Teknolojileri San. Tic. Ltd. Sti."; break;
-                case "0x00000033": return "Shenzhen Liwi Automation Co., Ltd."; break;
-                case "0x00000034": return "port industrial automation GmbH"; break;
-                case "0x00000035": return "Weissler Information Technology GmbH"; break;
-                case "0x00000036": return "FAS Electronics (Fujian) Co.,LTD."; break;
-                case "0x00000037": return "Guangzhou Honest Automation Co., Ltd."; break;
-                case "0x00000038": return "InCAT"; break;
-                case "0x00000039": return "Bürkert Werke GmbH"; break;
-                case "0x0000003A": return "Adtec Plasma Technology Co. Ltd."; break;
-                case "0x0000003B": return "Lenze SE"; break;
-                case "0x0000003C": return "Shanghai 3cRobot Co.,Ltd."; break;
-                case "0x0000003D": return "Tianjin Fuyun Tianyi Technology Co., Ltd."; break;
-                case "0x0000003E": return "MH Robot & Automation Co., Ltd."; break;
-                case "0x0000003F": return "Weihai IDENCODER Electronic Technology Co.,Ltd"; break;
-                case "0x00000040": return "Temposonics GmbH & Co. KG"; break;
-                case "0x00000041": return "HIOKI E.E. Corporation"; break;
-                case "0x00000042": return "TIGRIS Electronic GmbH"; break;
-                case "0x00000043": return "Hangzhou Muxun Technology Co., Ltd."; break;
-                case "0x00000044": return "Hilscher GmbH"; break;
-                case "0x00000045": return "MINTROBOT Co., Ltd."; break;
-                case "0x00000046": return "Bosch Rexroth (Xi’an) Electric Drives and Controls Co., Ltd."; break;
-                case "0x00000047": return "WIKA Alexander Wiegand SE & Co. KG"; break;
-                case "0x00000048": return "Handtmann e-solutions GmbH & Co. KG"; break;
-                case "0x00000049": return "Industrial Software Co."; break;
-                case "0x0000004A": return "Henschel-Robotics GmbH"; break;
-                case "0x0000004B": return "Ever Elettronica srl"; break;
-                case "0x0000004C": return "Smart Motion Control Co., Ltd."; break;
-                case "0x0000004D": return "Monolithic Power Systems Inc. (dba Monolithic Motion Solutions)"; break;
-                case "0x0000004E": return "Xeryon bvba"; break;
-                case "0x0000004F": return "Murrelektronik GmbH"; break;
-
-                case "0x00000050": return "Orion Technology Co., Ltd."; break;
-                case "0x00000051": return "PowerTech Converter GmbH"; break;
-                case "0x00000052": return "Beijing Jingwei New Technology Textile Machinery CO., LTD."; break;
-                case "0x00000053": return "Delta Farm Co., Ltd."; break;
-                case "0x00000057": return "Komax AG"; break;
-                case "0x00000058": return "Shanghai Fangling Software Co., Ltd."; break;
-                case "0x00000059": return "SEW-EURODRIVE GmbH & Co KG"; break;
-                case "0x0000005A": return "Shenzhen Yoda Motion Control Technology Co., Ltd."; break;
-                case "0x0000005D": return "Schleicher Electronic Berlin GmbH"; break;
-                case "0x00000060": return "INCAA Computers BV"; break;
-                case "0x00000062": return "Bachmann electronic GmbH"; break;
-                case "0x00000066": return "ROFIN-SINAR Laser GmbH"; break;
-                case "0x00000067": return "MAC Valves, Inc."; break;
-                case "0x00000068": return "Fagor Automation Sociedad Cooperativa"; break;
-                case "0x0000006A": return "KOLLMORGEN Corporation"; break;
-                case "0x0000006B": return "Woodward Kempen GmbH"; break;
-                case "0x0000006C": return "Bernecker + Rainer Industrie-Elektronik Ges.m.b.H"; break;
-                case "0x00000070": return "MIRAPRO Co., Ltd."; break;
-                case "0x00000072": return "INAMCT CO.,LTD."; break;
-                case "0x00000077": return "SLC Sautter Lift Components GmbH & Co. KG"; break;
-                case "0x00000079": return "ETLsoft Kft."; break;
-                case "0x0000007A": return "SIBONAC Laser Technologies Co.,Ltd."; break;
-                case "0x0000007B": return "TÜV SÜD Rail GmbH"; break;
-                case "0x00000080": return "YDIIT Co., Ltd."; break;
-                case "0x00000081": return "AUBO (BEIJING) ROBOTICS TECHNOLOGY CO., LTD"; break;
-                case "0x00000082": return "Infranor SAS"; break;
-                case "0x00000083": return "OMRON Corporation"; break;
-                case "0x00000084": return "Phoenix Contact GmbH & Co. KG"; break;
-                case "0x00000087": return "Boneng Transmission Co. Ltd."; break;
-                case "0x00000088": return "THINKVO Automation Equipment Co.,Ltd."; break;
-                case "0x00000089": return "Shenyang Jinchi Chuangxin Technology Co.,LTD"; break;
-                case "0x0000008A": return "System Ceramics S.p.A."; break;
-                case "0x0000008E": return "Lazer Safe Pty Ltd"; break;
-                case "0x00000090": return "Vacon Oy"; break;
-                case "0x00000093": return "Gefran S.P.A."; break;
-                case "0x00000097": return "Camozzi Automation S.p.A."; break;
-                case "0x00000099": return "SHENZHEN CO-TRUST TECHNOLOGY CO., LTD."; break;
-                case "0x0000009A": return "Elmo Motion Control Ltd."; break;
-                case "0x0000009B": return "Hope Win Industrial Co.,Ltd."; break;
-                case "0x0000009C": return "Hans Turck GmbH & Co. KG"; break;
-                case "0x0000009F": return "Konsept Elektronik Otomasyon ve Yazilim"; break;
-
-                case "0x000000A0": return "Sontheim Industrie Elektronik GmbH"; break;
-                case "0x000000A2": return "HORIBA STEC, Co., Ltd."; break;
-                case "0x000000A3": return "HORIBA Instruments Incorporated"; break;
-                case "0x000000A4": return "HORIBA Precision Instruments (Beijing) Co,.Ltd."; break;
-                case "0x000000A5": return "Hirschmann Automation and Control GmbH"; break;
-                case "0x000000A7": return "Wieland Electric GmbH"; break;
-                case "0x000000AA": return "Beijing A&E Technologies Co., Ltd."; break;
-                case "0x000000AB": return "Copley Controls, a Division of Analogic Corporation"; break;
-                case "0x000000AC": return "Atlas Copco IAS GmbH"; break;
-                case "0x000000AD": return "Pepperl+Fuchs SE"; break;
-                case "0x000000AF": return "Johannes Hübner Fabrik elektrischer Maschinen GmbH"; break;
-                case "0x000000B1": return "Bristol Industrial & Research Associates Ltd (Biral)"; break;
-                case "0x000000B3": return "Jetter AG"; break;
-                case "0x000000B4": return "Rob Surgical Systems S.L."; break;
-                case "0x000000B7": return "ABB Oy Drives"; break;
-                case "0x000000B9": return "STÖBER ANTRIEBSTECHNIK GmbH & Co. KG"; break;
-                case "0x000000BB": return "Shanghai Baobin Robot Automation Technology CO., LTD."; break;
-                case "0x000000BC": return "AEC S.r.l."; break;
-                case "0x000000BD": return "ADVANCED Motion Controls"; break;
-                case "0x000000BE": return "Bloom Energy (India) Private Limited"; break;
-
-                case "0x000000C0": return "Technofusion Co.,Ltd."; break;
-                case "0x000000C5": return "Comdel, Inc."; break;
-                case "0x000000C6": return "Mitrol S.r.l."; break;
-                case "0x000000CC": return "DENSAN CO., LTD."; break;
-                case "0x000000CD": return "Wipotec GmbH"; break;
-                case "0x000000CE": return "Mitsubishi Electric India Pvt. Ltd."; break;
-                case "0x000000D5": return "Bonfiglioli Vectron MDS GmbH"; break;
-                case "0x000000D6": return "HENSOLDT Optronics GmbH"; break;
-                case "0x000000D9": return "Phase Motion Control SpA"; break;
-                case "0x000000DA": return "Diener Automation GmbH & Co. KG"; break;
-                case "0x000000DB": return "Dorabot Inc."; break;
-                case "0x000000DD": return "Samsung Electro-Mechanics Co., Ltd."; break;
-                case "0x000000DE": return "Dave Engineering LLC"; break;
-                case "0x000000E2": return "plating electronic GmbH"; break;
-                case "0x000000E3": return "CHONGQING PULSE ROBOT CONTROL SYSTEM CO., LTD."; break;
-                case "0x000000E4": return "Metronix Messgeräte und Elektronik GmbH"; break;
-                case "0x000000E9": return "Ascon S.p.A."; break;
-                case "0x000000EA": return "ESAB-ATAS GmbH"; break;
-                case "0x000000EB": return "Elektrobit Automotive GmbH"; break;
-                case "0x000000EC": return "Baumer IVO GmbH & Co. KG"; break;
-                case "0x000000ED": return "E.D. Elettronica Dedicata S.r.l."; break;
-                case "0x000000EE": return "Ingenieurbüro Dr. Tammo Winkler"; break;
-                case "0x000000EF": return "Elcis Encoder S.r.l."; break;
-                case "0x000000F1": return "McLaren Group Limited"; break;
-                case "0x000000F2": return "Guangdong University of Technology"; break;
-                case "0x000000F4": return "Atos SpA"; break;
-                case "0x000000F5": return "Giant Magellan Telescope Corporation"; break;
-                case "0x000000F8": return "Shanghai Micron Automation Co. Ltd."; break;
-                case "0x000000F9": return "Nidec Control Techniques Ltd."; break;
-                case "0x000000FB": return "maxon motor ag"; break;
-                case "0x000000FC": return "Yacoub Automation GmbH"; break;
-                case "0x000000FE": return "Precitec GmbH & Co. KG"; break;
-                case "0x000000FF": return "South China University of Technology"; break;
-
-                case "0x00000100": return "Easydur Italiana di Renato Affri"; break;
-                case "0x00000101": return "ISAC Srl."; break;
-                case "0x00000104": return "LMD GmbH & Co. KG aA"; break;
-                case "0x00000105": return "Microcyber Corporation"; break;
-                case "0x0000010A": return "WITTENSTEIN cyber motor GmbH"; break;
-                case "0x0000010B": return "WITTENSTEIN motion control GmbH"; break;
-                case "0x0000010D": return "TWK-Elektronik GmbH"; break;
-                case "0x0000010F": return "PSA Elettronica di F. Grifa"; break;
-                case "0x00000110": return "Maxphotonics Co.,Ltd."; break;
-                case "0x00000111": return "HEITEC AG"; break;
-                case "0x00000113": return "Soft Service Co., Ltd."; break;
-                case "0x00000114": return "SMC Corporation"; break;
-                case "0x00000116": return "Eckelmann AG"; break;
-                case "0x00000117": return "JVL Industri Elektronik A/S"; break;
-                case "0x00000118": return "Hangzhou Liwei Technology Co. LTD."; break;
-                case "0x0000011C": return "ATESTEO GmbH"; break;
-                case "0x0000011D": return "Hottinger Brüel & Kjaer GmbH"; break;
-                case "0x00000121": return "Leuze electronic GmbH + Co. KG"; break;
-                case "0x00000123": return "WEG Equipamentos Elétricos S.A."; break;
-                case "0x00000126": return "JUMO GmbH & Co. KG"; break;
-                case "0x00000128": return "Han's Smart Control Technology Co., Ltd."; break;
-                case "0x00000129": return "HSD S.p.A"; break;
-                case "0x0000012B": return "Digital Electronics Corporation"; break;
-                case "0x0000012E": return "Lika Electronic Srl"; break;
-                case "0x0000012F": return "CSM GmbH"; break;
-                case "0x00000135": return "DUOmetric AG"; break;
-                case "0x00000137": return "Fenwal Controls of Japan,Ltd."; break;
-                case "0x00000142": return "SCAIME S.A.S."; break;
-                case "0x00000144": return "TECNOLOGIX Srl"; break;
-                case "0x00000146": return "LPKF SolarQuipment GmbH"; break;
-                case "0x00000147": return "Dr. Fritz Faulhaber GmbH & Co. KG"; break;
-                case "0x00000149": return "Fraunhofer-Institut für Produktionsanlagen und Konstruktionstechnik IPK"; break;
-                case "0x0000014A": return "imc Messysteme GmbH"; break;
-                case "0x0000014F": return "TMG Technologie und Engineering GmbH"; break;
-
-                case "0x00000151": return "Zaklad Produkcji Urzadzen Automatyki Sp. z o.o."; break;
-                case "0x00000152": return "Eckelmann FCS GmbH"; break;
-                case "0x00000155": return "Bluechips Microhouse Co., Ltd."; break;
-                case "0x0000015A": return "Baumüller Nürnberg GmbH"; break;
-                case "0x0000015B": return "ENGEL Elektroantriebe GmbH"; break;
-                case "0x0000015D": return "OSRAM GmbH"; break;
-                case "0x00000160": return "Seltek Ltd."; break;
-                case "0x00000163": return "AeroLas GmbH"; break;
-                case "0x00000166": return "Metso Automation Oy"; break;
-                case "0x00000168": return "Shanghai AMP&MOONS' Automation Co., Ltd."; break;
-                case "0x00000169": return "RINCO ULTRASONICS AG"; break;
-                case "0x0000016D": return "COMSOFT GmbH"; break;
-                case "0x00000170": return "Woodward, Inc."; break;
-                case "0x00000171": return "Prima Electro S.p.A."; break;
-                case "0x00000172": return "Fraunhofer-Institut für Produktionsanlagen und Konstruktionstechnik IPK"; break;
-                case "0x00000173": return "Korea Aerospace University"; break;
-                case "0x00000175": return "Massachusetts Institute of Technology (MIT)"; break;
-                case "0x00000178": return "Foshan Korter Automatic Precision Measurement & Control Technology Co., Ltd."; break;
-                case "0x0000017A": return "Pneumax S.p.A."; break;
-                case "0x0000017F": return "R.T.A. S.r.l."; break;
-                case "0x00000181": return "FEV Software and Testing Solutions GmbH"; break;
-                case "0x00000184": return "BEI Sensors SAS"; break;
-                case "0x00000186": return "Zhejiang University of Technology, College of Information Engineering"; break;
-                case "0x00000188": return "Flexiv Robotics Ltd."; break;
-                case "0x00000189": return "Pilz GmbH & Co. KG"; break;
-                case "0x0000018A": return "ASA-RT srl"; break;
-                case "0x0000018C": return "University of Patras"; break;
-                case "0x00000190": return "Promess Incorporated"; break;
-                case "0x00000191": return "PROMESS Gesellschaft für Montage- und Prüfsysteme mbH"; break;
-                case "0x00000192": return "Matsusada Precision Inc."; break;
-                case "0x00000194": return "Leine & Linde AB"; break;
-                case "0x00000195": return "SIKO GmbH"; break;
-                case "0x00000196": return "Ningbo Taicen Electronic-Test Technology Co., Ltd."; break;
-                case "0x00000198": return "Automation Modules, Inc."; break;
-                case "0x0000019B": return "SP.EL. srl"; break;
-                case "0x0000019D": return "Deutschmann Automation GmbH & Co. KG"; break;
-                case "0x0000019E": return "Golden A/S"; break;
-
-                case "0x000001A1": return "Brunner Elektronik AG"; break;
-                case "0x000001A2": return "Heckner Electronics GmbH"; break;
-                case "0x000001A3": return "TECHNOSOFT S.A."; break;
-                case "0x000001A4": return "Kongsberg Maritime AS"; break;
-                case "0x000001A6": return "REO AG"; break;
-                case "0x000001AC": return "Kyushu Institute of Technology, Ochi & Kurosaki Lab, School of Computer Science and Systems Engineering"; break;
-                case "0x000001AF": return "Yanfeng Automotive Interior Systems Co. Ltd."; break;
-                case "0x000001B0": return "ABB AB, Jokab Safety"; break;
-                case "0x000001B2": return "AVENTICS GmbH"; break;
-                case "0x000001B3": return "ASCO Numatics GmbH"; break;
-                case "0x000001B4": return "Peyer Engineering"; break;
-                case "0x000001B5": return "Robox S.P.A."; break;
-                case "0x000001B8": return "PMB Elektronik GmbH"; break;
-                case "0x000001B9": return "Sanyo Denki Co., Ltd."; break;
-                case "0x000001BA": return "ZHONGSHAN MLTOR CNC TECHNOLOGY CO., LTD."; break;
-                case "0x000001BB": return "Sciemetric Instruments ULC"; break;
-                case "0x000001BC": return "Eurotherm Limited"; break;
-                case "0x000001BD": return "Eurotherm Automation SAS"; break;
-                case "0x000001BE": return "PRIMES GmbH"; break;
-                case "0x000001C0": return "Kobe Steel, Ltd."; break;
-                case "0x000001C4": return "Regatron AG"; break;
-                case "0x000001C7": return "Eaton Industries GmbH"; break;
-                case "0x000001DD": return "Delta Electronics, Inc."; break;
-                case "0x000001DF": return "Xeikon N.V. - Xeikon Manufacturing and R&D Center"; break;
-                case "0x000001E1": return "ASCO L.P."; break;
-                case "0x000001EB": return "AMKmotion GmbH + Co KG"; break;
-                case "0x000001EC": return "Plus Electric Co.,Ltd."; break;
-                case "0x000001EE": return "ADTECH (SHENZHEN) CNC TECHNOLOGY CO., LTD."; break;
-                case "0x000001F4": return "Robatech AG"; break;
-                case "0x000001F7": return "Industrial Technology Research Institute (ITRI)"; break;
-                case "0x000001F8": return "Hunan Lianghu Electromechanical Technology Co., Ltd."; break;
-                case "0x000001F9": return "National Instruments Corporation"; break;
-                case "0x000001FC": return "Fernsteuergeräte Kurt Oelsch GmbH"; break;
-                case "0x000001FD": return "INA - Drives & Mechatronics GmbH & Co. KG"; break;
-                case "0x000001FE": return "PRÜFTECHNIK NDT GmbH"; break;
-                case "0x000001FF": return "Zhejiang Qixing Electron Co., Ltd."; break;
-
-                case "0x00000205": return "BDF DIGITAL S.p.A."; break;
-                case "0x00000207": return "esitron-electronic GmbH"; break;
-                case "0x0000020C": return "ITOH DENKI CO.,LTD."; break;
-                case "0x00000210": return "iASYS Technology Solution Pvt Ltd."; break;
-                case "0x00000214": return "Kniel System-Electronic GmbH"; break;
-                case "0x00000218": return "GERMAN POWER GmbH"; break;
-                case "0x00000219": return "Real Time Automation, Inc."; break;
-                case "0x0000021B": return "Swift Engineering, Inc."; break;
-                case "0x0000021F": return "Wachendorff Automation GmbH & Co. KG"; break;
-                case "0x00000222": return "IBH-Tec GmbH"; break;
-                case "0x00000223": return "Helmholz GmbH & Co. KG"; break;
-                case "0x00000225": return "Pantec Engineering AG"; break;
-                case "0x0000022B": return "YASKAWA Europe GmbH"; break;
-                case "0x0000022F": return "TOKYO KEIKI INC."; break;
-                case "0x00000230": return "Weidmüller Interface GmbH & Co. KG"; break;
-                case "0x00000233": return "Guangdong Xi'an Jiaotong University Academy"; break;
-                case "0x00000234": return "AStepTech (Shenzhen) CNC Co., Ltd."; break;
-                case "0x0000023A": return "ABB Automation Products GmbH"; break;
-                case "0x0000023B": return "Berghof Automation GmbH"; break;
-                case "0x0000023C": return "NS System Co., Ltd."; break;
-                case "0x0000023D": return "Sensor-Technik Wiedemann GmbH"; break;
-                case "0x00000240": return "Spezialantriebstechnik GmbH"; break;
-                case "0x00000242": return "Yuanda Robotics GmbH"; break;
-                case "0x00000246": return "MKP Co., Ltd."; break;
-                case "0x00000247": return "Harmonic Drive LLC"; break;
-                case "0x0000024B": return "Dongguan Kaifull Electronics Technology Co., Ltd."; break;
-                case "0x0000024F": return "Stotz Feinmesstechnik GmbH"; break;
-                case "0x00000250": return "Litens Automotive Partnership"; break;
-                case "0x00000252": return "Hilscher North America, Inc."; break;
-                case "0x00000255": return "The Chinese University of Hong Kong, T Stone Robotics Institute"; break;
-                case "0x00000256": return "Chengdu CRP Automation Control Technology Co., Ltd."; break;
-                case "0x00000257": return "Dunkermotoren GmbH"; break;
-                case "0x0000025E": return "Fuji Electric Co., Ltd."; break;
-                case "0x00000260": return "TRUMPF Hüttinger GmbH + Co. KG"; break;
-                case "0x00000265": return "Aros Electronics AB"; break;
-                case "0x00000268": return "Ho Chi Minh University of Technology, Faculty of Mechanical Engineering"; break;
-                case "0x0000026C": return "Nanotec Electronic GmbH & Co. KG"; break;
-                case "0x00000270": return "ME-Meßsysteme GmbH"; break;
-                case "0x00000275": return "Interroll Engineering GmbH"; break;
-                case "0x00000276": return "Interroll Innovation GmbH"; break;
-                case "0x00000279": return "ISH Ingenieursozietät GmbH"; break;
-                case "0x0000027A": return "Moog Unna GmbH"; break;
-                case "0x0000027D": return "ebm-papst St. Georgen GmbH & Co. KG"; break;
-                case "0x00000280": return "MKPRECISION"; break;
-                case "0x00000283": return "Roche Diagnostics AG"; break;
-                case "0x00000284": return "Toshiba Schneider Inverter Corporation"; break;
-                case "0x00000285": return "Bihl-Wiedemann GmbH"; break;
-                case "0x00000286": return "TRINAMIC Motion Control GmbH & Co. KG"; break;
-                case "0x00000289": return "HDT Srl"; break;
-                case "0x00000291": return "Terzo Power Systems, LLC"; break;
-                case "0x00000292": return "Horner APG LLC"; break;
-                case "0x00000296": return "Performance Motion Devices, Inc."; break;
-                case "0x00000297": return "UNIVER S.p.A."; break;
-                case "0x0000029A": return "C.L.GERHARTL Smart Systems GmbH"; break;
-                case "0x0000029C": return "INGENIA-CAT, S.L."; break;
-                case "0x0000029D": return "CREVIS Co., Ltd."; break;
-
-                case "0x000002AA": return "WalthMac Measurement & Control Technology Co., Ltd."; break;
-                case "0x000002AD": return "NIMAK GmbH"; break;
-                case "0x000002B4": return "ELAP S.R.L."; break;
-                case "0x000002B8": return "Gripping Power, Inc."; break;
-                case "0x000002B9": return "Advanced Energy Industries, Inc."; break;
-                case "0x000002BA": return "PBA Systems Pte Ltd"; break;
-                case "0x000002BE": return "ORIENTAL MOTOR CO., LTD."; break;
-                case "0x000002C0": return "Glentek, Inc."; break;
-                case "0x000002C1": return "Fronius International GmbH"; break;
-                case "0x000002CE": return "SHANGHAI GEMPLE M&E CO.,LTD"; break;
-                case "0x000002D0": return "THK Co., Ltd."; break;
-                case "0x000002D1": return "SAMICK THK CO.,LTD."; break;
-                case "0x000002D3": return "Joint Peer Systec Corp."; break;
-                case "0x000002D8": return "halstrup-walcher GmbH"; break;
-                case "0x000002DE": return "Trio Motion Technology Ltd."; break;
-                case "0x000002E1": return "Servotronix Motion Control Ltd."; break;
-                case "0x000002EA": return "Suzhou NODKA Automation Technology Co., Ltd."; break;
-                case "0x000002EB": return "Analytica GmbH"; break;
-                case "0x000002EE": return "Metal Work S.p.A"; break;
-                case "0x000002FE": return "Shanghai Chaifu Robot Co., Ltd."; break;
-
-                case "0x00000300": return "Korea Textile Machinery Research Institute (KOTMI)"; break;
-                case "0x00000302": return "Digitronic Automationsanlagen GmbH"; break;
-                case "0x00000303": return "Dental Manufacturing Unit GmbH"; break;
-                case "0x00000309": return "Seowoo Electron CO., LTD."; break;
-                case "0x0000030C": return "LAM Technologies S.a.S."; break;
-                case "0x0000030E": return "IEP Ingenieurbüro für Echtzeitprogrammierung GmbH"; break;
-                case "0x00000311": return "Kontron Electronics AG"; break;
-                case "0x00000312": return "A-KYUNG Motion Inc."; break;
-                case "0x00000314": return "PI Electronics (H.K.) Ltd."; break;
-                case "0x00000317": return "TOFLO CORPORATION"; break;
-                case "0x00000318": return "AXIS CORPORATION"; break;
-                case "0x00000319": return "emotas embedded communication GmbH"; break;
-                case "0x0000031D": return "Cognex Corporation"; break;
-                case "0x00000321": return "CODESYS GmbH"; break;
-                case "0x00000325": return "SiboTech Automation Co., Ltd."; break;
-                case "0x00000326": return "Intelligent Platforms LLC"; break;
-                case "0x00000327": return "ECSPRIME Co., Ltd."; break;
-                case "0x00000331": return "SHANGHAI SANY SCIENCE & TECHNOLOGY CO., LTD"; break;
-                case "0x00000333": return "HIKARI Co.,Ltd."; break;
-                case "0x00000334": return "CYBELEC S.A."; break;
-                case "0x00000337": return "KOSTAL Industrie Elektrik GmbH"; break;
-                case "0x0000033D": return "RS Automation Co., Ltd."; break;
-                case "0x00000340": return "Satelcom Telekomünikasyon, Bilgi ve Iletisim Teknolojileri Ithalat ve Ihracat Sanayi A.S."; break;
-                case "0x00000343": return "K.C.Tech CO.,LTD."; break;
-                case "0x00000344": return "Exlar Corporation"; break;
-                case "0x0000034A": return "Drägerwerk AG & Co. KGaA"; break;
-                case "0x0000034D": return "Schaefer Elektronik GmbH"; break;
-                case "0x0000034E": return "Infineon Technologies AG"; break;
-
-                case "0x00000355": return "AIDIN ROBOTICS, INC"; break;
-                case "0x00000358": return "Shenzhen Rmotion Technology Co,Ltd."; break;
-                case "0x00000367": return "Novatech-Group Ltd."; break;
-                case "0x00000368": return "Tianjin Geneuo Technology Co.,Ltd."; break;
-                case "0x00000369": return "Kinestas d.o.o."; break;
-                case "0x00000373": return "TAIAN TECHNOLOGY(WUXI)CO.,LTD."; break;
-                case "0x0000037F": return "XMOS Semiconductor"; break;
-                case "0x00000384": return "MKS Denmark ApS"; break;
-                case "0x0000038B": return "PLASUS GmbH"; break;
-                case "0x0000038C": return "Promicon Elektronik GmbH + Co. KG"; break;
-                case "0x00000397": return "Hein Lanz GmbH"; break;
-                case "0x0000039D": return "dieEntwickler Elektronik GmbH"; break;
-                case "0x000003AA": return "LARsys-Automation GmbH"; break;
-                case "0x000003AD": return "Procon Electronics Pty Ltd"; break;
-                case "0x000003AE": return "HanYang System"; break;
-                case "0x000003B0": return "J. Schneider Elektrotechnik GmbH"; break;
-                case "0x000003B8": return "Unitronics LTD"; break;
-                case "0x000003CC": return "Motovario S.p.A."; break;
-                case "0x000003D0": return "Wuxi Pneumatic Technical Research Institute Co., Ltd."; break;
-                case "0x000003DB": return "Baldor UK Ltd"; break;
-                case "0x000003DC": return "Wuxi Lingke Automation Technology Co., Ltd."; break;
-                case "0x000003E1": return "Lite-On Technology Corporation"; break;
-                case "0x000003EB": return "Stahl GmbH"; break;
-                case "0x000003F3": return "CoreTigo Ltd."; break;
-                case "0x000003F5": return "Chieftek Precision Co., Ltd."; break;
-                case "0x000003FF": return "MEXICAN REPS OPERATION S DE RL DE CV"; break;
-
-                case "0x00000400": return "Fenac Mühendislik San. ve Tic. Ltd. Sti."; break;
-                case "0x00000404": return "Applied Motion Products, Inc."; break;
-                case "0x0000040C": return "WITZ Corporation"; break;
-                case "0x00000413": return "Shenzhen X-TEC Technology Co., Ltd."; break;
-                case "0x00000418": return "Zume, Inc."; break;
-                case "0x0000041B": return "Shenzhen Zmotion Technology Co., Ltd."; break;
-                case "0x00000428": return "TOKKYOKIKI CORPORATION"; break;
-                case "0x0000042B": return "TeMec Drive Srl"; break;
-                case "0x00000432": return "Peter Huber Kältemaschinenbau AG"; break;
-                case "0x00000434": return "Peter Mess- und Automatisierungstechnik"; break;
-                case "0x00000441": return "Langer & Laumann Ing.-Büro GmbH"; break;
-                case "0x00000444": return "Ilkotek Otomasyon"; break;
-                case "0x00000456": return "Philips Medical Systems Technologies Ltd."; break;
-                case "0x00000471": return "FURONTEER, INC."; break;
-                case "0x00000482": return "KYOCERA Corporation"; break;
-                case "0x00000489": return "Infinity Sales, Inc."; break;
-                case "0x000004A2": return "UniSwarm SASU"; break;
-                case "0x000004B3": return "Pivotal Systems Corporation"; break;
-                case "0x000004B5": return "Randy Nürnberger Software und Mikroelektronik"; break;
-                case "0x000004BD": return "AMETEK Inc. Haydon Kerk Pittman Division"; break;
-                case "0x000004C1": return "IVEK Corporation"; break;
-                case "0x000004C6": return "MIDDEX-ELECTRONIC GMBH"; break;
-                case "0x000004CD": return "WEETECH GmbH"; break;
-                case "0x000004D2": return "Noda Radio Frequency Technologies Co., Ltd."; break;
-                case "0x000004D8": return "Microchip Technology Inc."; break;
-                case "0x000004F8": return "Duplomatic MS S.p.A"; break;
-                case "0x000004F9": return "PHYTEC America, LLC"; break;
-
-                case "0x00000500": return "Speciaal Machinefabriek Ketels v.o.f."; break;
-                case "0x00000501": return "Beck IPC GmbH"; break;
-                case "0x00000502": return "ETAS GmbH"; break;
-                case "0x00000504": return "PHYTEC Messtechnik GmbH"; break;
-                case "0x00000505": return "ANCA Motion Pty. Ltd"; break;
-                case "0x00000506": return "Fachhochschule Köln"; break;
-                case "0x00000507": return "IPG Automotive GmbH"; break;
-                case "0x00000508": return "Nuvation Research Corporation"; break;
-                case "0x00000509": return "TR-Electronic GmbH"; break;
-                case "0x0000050A": return "Gantner Instruments GmbH"; break;
-                case "0x0000050B": return "MKS Instruments Inc."; break;
-                case "0x0000050C": return "ABB AB"; break;
-                case "0x0000050D": return "Unitro-Fleischmann"; break;
-                case "0x0000050E": return "zub machine control AG"; break;
-                case "0x0000050F": return "dSPACE GmbH"; break;
-
-                case "0x00000510": return "Shenzhen ProU software Ltd."; break;
-                case "0x00000511": return "Samsung Heavy Industries"; break;
-                case "0x00000512": return "BCE Elektronik GmbH"; break;
-                case "0x00000513": return "Jäger Computergesteuerte Messtechnik GmbH"; break;
-                case "0x00000514": return "avateramedical Mechatronics GmbH"; break;
-                case "0x00000515": return "Justek Inc."; break;
-                case "0x00000516": return "Baumer Thalheim GmbH & Co. KG"; break;
-                case "0x00000517": return "Elin EBG Traction GmbH"; break;
-                case "0x00000518": return "Meka Robotics"; break;
-                case "0x00000519": return "Altera Japan Ltd."; break;
-                case "0x0000051A": return "EBV Elektronik GmbH & Co KG"; break;
-                case "0x0000051B": return "Ingenieurgemeinschaft IgH"; break;
-                case "0x0000051C": return "IAV GmbH"; break;
-                case "0x0000051D": return "Hitachi Industrial Equipment Systems"; break;
-                case "0x0000051E": return "TenAsys Corp."; break;
-                case "0x0000051F": return "PONDis AG"; break;
-
-                case "0x00000520": return "Moog Italiana S.r.l."; break;
-                case "0x00000521": return "Walt Disney Imagineering"; break;
-                case "0x00000522": return "Wallner Automation"; break;
-                case "0x00000523": return "AVL List GmbH"; break;
-                case "0x00000524": return "RITTER-Elektronik GmbH"; break;
-                case "0x00000527": return "ZwickRoell GmbH & Co. KG"; break;
-                case "0x00000528": return "dresden elektronik ingenieurtechnik gmbh"; break;
-                case "0x00000529": return "Tokyo Keiso Co., Ltd."; break;
-                case "0x0000052C": return "Philips Healthcare (CT Division)"; break;
-                case "0x0000052D": return "Chess B.V."; break;
-                case "0x0000052E": return "NCT kft"; break;
-                case "0x0000052F": return "Anywire Corporation"; break;
-
-                case "0x00000530": return "Shadow Robot Company Ltd."; break;
-                case "0x00000531": return "FeCon GmbH"; break;
-                case "0x00000532": return "FH Südwestfalen, Fachbereich Elektrische Energietechnik"; break;
-                case "0x00000533": return "add2 Ldt"; break;
-                case "0x00000534": return "ARM Automation, Inc."; break;
-                case "0x00000537": return "KNAPP AG"; break;
-                case "0x00000538": return "Getriebebau NORD GmbH & Co. KG"; break;
-                case "0x00000539": return "Yaskawa Electric Corporation"; break;
-                case "0x0000053A": return "OKI IDS Co., Ltd."; break;
-                case "0x0000053B": return "Takasaki Kyoudou Computing Center Co."; break;
-                case "0x0000053C": return "NITTETSU ELEX Co., Ltd."; break;
-                case "0x0000053D": return "WACOH-TECH Inc."; break;
-                case "0x0000053E": return "Unjo AB"; break;
-                case "0x0000053F": return "Airbus Defence and Space GmbH"; break;
-
-                case "0x00000540": return "ACS Motion Control Ltd."; break;
-                case "0x00000541": return "KEYENCE Corporation"; break;
-                case "0x00000542": return "MEFI s.r.o."; break;
-                case "0x00000543": return "m-u-t AG Messgeräte für Medizin- und Umwelttechnik"; break;
-                case "0x00000544": return "Universität Stuttgart, Institut ISW"; break;
-                case "0x00000545": return "ELSENA, Inc."; break;
-                case "0x00000546": return "BE Semiconductor Industries N.V."; break;
-                case "0x00000547": return "Hauni LNI Electronics S.A."; break;
-                case "0x00000548": return "ETEL S.A."; break;
-                case "0x00000549": return "VAT Vakuumventile AG"; break;
-                case "0x0000054A": return "LayTec AG"; break;
-                case "0x0000054B": return "NUM AG"; break;
-                case "0x0000054C": return "Hauni Maschinenbau GmbH"; break;
-                case "0x0000054D": return "Exatronic, Engenharia Electrónica, Lda"; break;
-                case "0x0000054E": return "Chinese Academy of Sciences, Institute of Intelligent Machines"; break;
-                case "0x0000054F": return "Eindhoven University of Technology"; break;
-
-                case "0x00000550": return "Scansonic MI GmbH"; break;
-                case "0x00000551": return "Shanghai Sodick Software Co., Ltd."; break;
-                case "0x00000552": return "CHUO ELECTRONICS CO., LTD"; break;
-                case "0x00000553": return "Agie Charmilles SA"; break;
-                case "0x00000554": return "miControl GmbH"; break;
-                case "0x00000555": return "Haute Ecoled'Ingénierie et de Gestion du Canton de Vaud"; break;
-                case "0x00000556": return "Wuxi Xinje Electric Co., Ltd."; break;
-                case "0x00000557": return "Jenny Science AG"; break;
-                case "0x00000558": return "Industrial Control Communications, Inc."; break;
-                case "0x0000055A": return "CKD ELEKTROTECHNIKA, a.s."; break;
-                case "0x0000055B": return "QEM S.r.l."; break;
-                case "0x0000055C": return "Simatex AG"; break;
-                case "0x0000055D": return "Kithara Software GmbH"; break;
-                case "0x0000055E": return "GE Energy Power Conversion GmbH"; break;
-                case "0x0000055F": return "ARA apparatenfabriek b.v."; break;
-
-                case "0x00000560": return "Tata Consultancy Services Ltd."; break;
-                case "0x00000561": return "Harmonic Drive Systems Inc."; break;
-                case "0x00000562": return "Tiab Limited"; break;
-                case "0x00000563": return "RKC INSTRUMENT INC."; break;
-                case "0x00000564": return "Switched Reluctance Drives Ltd."; break;
-                case "0x00000566": return "Avnet Electronics Marketing"; break;
-                case "0x00000567": return "ABB AB"; break;
-                case "0x00000568": return "Yamaha Motor Co., Ltd."; break;
-                case "0x00000569": return "KUNBUS GmbH"; break;
-                case "0x0000056A": return "ACD Antriebstechnik GmbH"; break;
-                case "0x0000056B": return "Bronkhorst High-Tech B.V."; break;
-                case "0x0000056C": return "K.MECS Co., Ltd."; break;
-                case "0x0000056D": return "Ampegon AG"; break;
-                case "0x0000056E": return "UFG Elettronica s.r.l."; break;
-                case "0x0000056F": return "Xilinx Inc."; break;
-
-                case "0x00000570": return "Hitachi Energy Sweden AB"; break;
-                case "0x00000571": return "Servoland Corporation"; break;
-                case "0x00000572": return "Hivertec, Inc."; break;
-                case "0x00000573": return "Mesa Electronics"; break;
-                case "0x00000574": return "OMICRON electronics GmbH"; break;
-                case "0x00000575": return "Fike Europe B.v.b.a."; break;
-                case "0x00000576": return "ROPEX Industrie-Elektronik GmbH"; break;
-                case "0x00000577": return "TLU - Thüringer Leistungselektronik Union GmbH"; break;
-                case "0x00000579": return "Prodrive Technologies B.V."; break;
-                case "0x0000057A": return "miho Inspektionssysteme GmbH"; break;
-                case "0x0000057B": return "Tokyo Electron Device Limited"; break;
-                case "0x0000057C": return "LINTEC CO., LTD."; break;
-                case "0x0000057D": return "Emhart Glass Vision GmbH"; break;
-                case "0x0000057E": return "Seiko Epson Corporation"; break;
-                case "0x0000057F": return "ZINSER GmbH"; break;
-
-                case "0x00000580": return "abk-technology GmbH"; break;
-                case "0x00000581": return "SUS Corporation"; break;
-                case "0x00000582": return "TRsystems GmbH"; break;
-                case "0x00000583": return "Harmonic Drive SE"; break;
-                case "0x00000584": return "Stäubli Faverges SCA"; break;
-                case "0x00000585": return "ScienLab electronic systems GmbH"; break;
-                case "0x00000586": return "DETO drive systems GmbH"; break;
-                case "0x00000587": return "FUJISOFT Incorporated"; break;
-                case "0x00000588": return "IAI Corporation"; break;
-                case "0x00000589": return "PromAvtomatika"; break;
-                case "0x0000058A": return "Kistler Instrumente AG"; break;
-                case "0x0000058B": return "LAUDA DR. R. WOBSER GmbH & Co. KG"; break;
-                case "0x0000058C": return "Schweitzer Engineering Laboratories, Inc."; break;
-                case "0x0000058D": return "Vital Systems Inc."; break;
-                case "0x0000058E": return "MuTracx International B.V."; break;
-                case "0x0000058F": return "Algo System Co., Ltd."; break;
-
-                case "0x00000590": return "Mühlbauer GmbH & Co. KG"; break;
-                case "0x00000591": return "DETO drive systems GmbH"; break;
-                case "0x00000592": return "Sealevel Systems, Inc."; break;
-                case "0x00000593": return "igm Robotersysteme AG"; break;
-                case "0x00000594": return "WITTENSTEIN electronics GmbH"; break;
-                case "0x00000595": return "ZBE Inc."; break;
-                case "0x00000597": return "Fraunhofer IOSB-INA Kompetenzzentrum Industrial Automation"; break;
-                case "0x00000598": return "SKF Canada Limited"; break;
-                case "0x00000599": return "Galil Motion Control Inc."; break;
-                case "0x0000059A": return "IHI Corporation"; break;
-                case "0x0000059B": return "wenglor sensoric gmbh"; break;
-                case "0x0000059C": return "Ingeteam Power Technology S.A."; break;
-                case "0x0000059D": return "Texas Instruments Incorporated"; break;
-                case "0x0000059E": return "Micro-Vu Corporation"; break;
-                case "0x0000059F": return "oehri electronic ag"; break;
-
-                case "0x000005A0": return "Triphase N.V."; break;
-                case "0x000005A1": return "Glass Soft - Robótica & Sistemas Lda."; break;
-                case "0x000005A2": return "Cambridge Medical Robotics Limited"; break;
-                case "0x000005A3": return "China Machinery International Engineering Design & Research Institute CO.,LTD."; break;
-                case "0x000005A4": return "Kastanienbaum GmbH"; break;
-                case "0x000005A5": return "HANYOUNG NUX CO., LTD"; break;
-                case "0x000005A6": return "SLE quality engineering GmbH & Co. KG"; break;
-                case "0x000005A7": return "Omicron NanoTechnology GmbH"; break;
-                case "0x000005A8": return "Micromeritics Instrument Corporation"; break;
-                case "0x000005A9": return "TRUMPF Laser- und Systemtechnik GmbH"; break;
-                case "0x000005AB": return "Beratron GmbH"; break;
-                case "0x000005AA": return "HORIBA Europe GmbH"; break;
-                case "0x000005AC": return "Heinz Siegfried AG"; break;
-                case "0x000005AD": return "Cebora S.p.A."; break;
-                case "0x000005AE": return "W.E.ST Elektronik GmbH"; break;
-                case "0x000005AF": return "ABB gomtec GmbH"; break;
-
-                case "0x000005B0": return "SIEB & MEYER AG"; break;
-                case "0x000005B1": return "Harbin Robotics Technology Co., Ltd."; break;
-                case "0x000005B2": return "Protechna Herbst GmbH & Co. KG"; break;
-                case "0x000005B3": return "TAEHA Mechatronics Co., Ltd."; break;
-                case "0x000005B4": return "WITTMANN Technology GmbH"; break;
-                case "0x000005B5": return "iotec GmbH"; break;
-                case "0x000005B6": return "Prodel Technologies"; break;
-                case "0x000005B7": return "The Leland Stanford Junior University, Department of Bioengineering"; break;
-                case "0x000005B8": return "Tarasheh System Pishro .co. Ltd"; break;
-                case "0x000005B9": return "CS-Lab s.c. Janusz Wawak, Andrzej Rogozynski, Szymon Paprocki"; break;
-                case "0x000005BA": return "Elitron IPM s.r.l."; break;
-                case "0x000005BB": return "KORYO ELECTRONICS CO.,LTD."; break;
-                case "0x000005BC": return "Shihlin Electric & Engineering Corporation"; break;
-                case "0x000005BD": return "Kookmin University, Graduate School of Automotive Engineering"; break;
-                case "0x000005BE": return "Techmation Co., Ltd."; break;
-                case "0x000005BF": return "ZAPI S.p.A."; break;
-
-                case "0x000005C0": return "Claus Pribbernow Mikrosystementwicklung eProcessorSolutions"; break;
-                case "0x000005C1": return "Pragati Automation PVT. Limited"; break;
-                case "0x000005C2": return "Siemens Industry Software B.V."; break;
-                case "0x000005C3": return "MicroNova AG"; break;
-                case "0x000005C4": return "Xi'An Aerospace Precision Electromechanical Institute"; break;
-                case "0x000005C5": return "Dr. Mergenthaler GmbH & Co. KG"; break;
-                case "0x000005C6": return "China National Machinery Industry Corporation"; break;
-                case "0x000005C7": return "Berufliches Schulzentrum Hof, Staatliche Fachschule für Technik"; break;
-                case "0x000005C8": return "NDR Co., Ltd"; break;
-                case "0x000005C9": return "'NPK MSA' LLC"; break;
-                case "0x000005CA": return "Southeast University, School of Mechanical Engineering"; break;
-                case "0x000005CB": return "Shanghai Baosight Software Co., Ltd."; break;
-                case "0x000005CC": return "Hakko Electronics Co., Ltd."; break;
-                case "0x000005CD": return "GMK electronic design GmbH"; break;
-                case "0x000005CE": return "SIMTEC Elektronik GmbH"; break;
-
-                case "0x000005D0": return "TEConcept GmbH"; break;
-                case "0x000005D1": return "ESS Co., Ltd."; break;
-                case "0x000005D3": return "MABI AG - Robotic"; break;
-                case "0x000005D4": return "OptoForce Ltd."; break;
-                case "0x000005D5": return "TOSHIBA MITSUBISHI-ELECTRIC INDUSTRIAL SYSTEMS CORPORATION"; break;
-                case "0x000005D6": return "WITTENSTEIN ternary Co.,Ltd."; break;
-                case "0x000005D7": return "Shanghai Friendess Electronic Technology Co., Ltd."; break;
-                case "0x000005D8": return "Aversan Inc."; break;
-                case "0x000005DA": return "Lorch Schweißtechnik GmbH"; break;
-                case "0x000005D9": return "LOTES (GuangZhou) CO., LTD."; break;
-                case "0x000005DB": return "Sungkyunkwan University, School of Mechanical Engineering"; break;
-                case "0x000005DC": return "Tsinghua University, Graduate School at Shenzhen"; break;
-                case "0x000005DD": return "Universidad de los Andes, Faculty of Engineering"; break;
-                case "0x000005DE": return "PFU LIMITED"; break;
-                case "0x000005DF": return "Slovak University of Technology in Bratislava, Faculty of Electrical Engineering and Information Technology"; break;
-
-                case "0x000005E0": return "Esomatec GmbH"; break;
-                case "0x000005E1": return "LS ELECTRIC Co., Ltd."; break;
-                case "0x000005E2": return "StateCore B.V."; break;
-                case "0x000005E3": return "KJ-Infinity Enterprises Inc."; break;
-                case "0x000005E4": return "Center of Human-centered Interaction for Coexistence (CHIC)"; break;
-                case "0x000005E5": return "Littelfuse Selco A/S"; break;
-                case "0x000005E6": return "ITR GmbH Informationstechnologie Rauch"; break;
-                case "0x000005E8": return "University of Massachusetts at Amherst, Computer Science Department, Laboratory for Perceptual Robotics"; break;
-                case "0x000005E9": return "Pfeiffer Vacuum SAS"; break;
-                case "0x000005EA": return "AXOR INDUSTRIES s.n.c."; break;
-                case "0x000005EB": return "QuadRep Electronics (Taiwan) Ltd."; break;
-                case "0x000005EC": return "Herrmann Ultraschalltechnik GmbH & Co. KG"; break;
-                case "0x000005ED": return "Precizika Metrology, UAB"; break;
-                case "0x000005EE": return "Shanghai ReCAT Automation Control Technology Co., Ltd."; break;
-                case "0x000005EF": return "U&R GmbH Hardware- und Systemdesign"; break;
-
-                case "0x000005F0": return "XiaMen MicroControl Technology Co., Ltd."; break;
-                case "0x000005F1": return "The Oilgear Company"; break;
-                case "0x000005F2": return "MIE ELECTRONICS CO.,LTD. iSPC"; break;
-                case "0x000005F3": return "in-tech GmbH"; break;
-                case "0x000005F5": return "Starflight Electronics"; break;
-                case "0x000005F6": return "ZIEHL-ABEGG SE"; break;
-                case "0x000005F7": return "Ackermann Automation GmbH"; break;
-                case "0x000005F8": return "Helios Technologies, Inc."; break;
-                case "0x000005F9": return "Italsensor s.r.l."; break;
-                case "0x000005FA": return "Sartorius Mechatronics C&D GmbH & Co. KG"; break;
-                case "0x000005FB": return "Evergrid Solutions & Systems"; break;
-                case "0x000005FC": return "Germanjet Company Limited"; break;
-                case "0x000005FD": return "Mapacode Inc."; break;
-                case "0x000005FE": return "BIBA - Bremer Institut für Produktion und Logistik GmbH"; break;
-                case "0x000005FF": return "The University of Texas at Austin"; break;
-
-                case "0x00000600": return "OKI Nextech Co.,Ltd."; break;
-                case "0x00000601": return "Condalo GmbH"; break;
-                case "0x00000602": return "Brooks Instrument, LLC"; break;
-                case "0x00000603": return "FLORIDA INSTITUTE FOR HUMAN & MACHINE COGNITION"; break;
-                case "0x00000604": return "Leica Geosystems AG"; break;
-                case "0x00000605": return "Nabtesco Corporation"; break;
-                case "0x00000606": return "BP&M Representações e Consultoria LTDA"; break;
-                case "0x00000607": return "MICRO-EPSILON Optronic GmbH"; break;
-                case "0x00000608": return "Diamond Technologies, Inc."; break;
-                case "0x0000060A": return "ESTUN AUTOMATION CO.,LTD"; break;
-                case "0x0000060B": return "IMS Messsysteme GmbH"; break;
-                case "0x0000060C": return "M-System Co., Ltd."; break;
-                case "0x0000060D": return "Ferrotec (USA) Corporation - Temescal Division"; break;
-                case "0x0000060E": return "SICK IVP AB"; break;
-                case "0x0000060F": return "Oregon State University, School of Mechanical, Industrial and Manufacturing Engineering"; break;
-
-                case "0x00000610": return "SINFONIA TECHNOLOGY CO., LTD."; break;
-                case "0x00000611": return "Pfeiffer Vacuum GmbH"; break;
-                case "0x00000612": return "Froude Hofmann Limited"; break;
-                case "0x00000613": return "SABO Elektronik GmbH"; break;
-                case "0x00000615": return "Bystronic Laser AG"; break;
-                case "0x00000616": return "INVT Industrial Technology (Shanghai) Co., Ltd."; break;
-                case "0x00000618": return "LumaSense Technologies GmbH"; break;
-                case "0x00000619": return "BBH Products GmbH"; break;
-                case "0x0000061A": return "Hecht Automatisierungs-Systeme GmbH"; break;
-                case "0x0000061B": return "Xelmo AB"; break;
-                case "0x0000061C": return "Carl Zeiss Industrielle Messtechnik GmbH"; break;
-                case "0x0000061D": return "University of Genova, Faculty of Engineering"; break;
-                case "0x0000061E": return "JOT Automation Oy"; break;
-                case "0x0000061F": return "Sankyo Seisakusho Co."; break;
-
-                case "0x00000620": return "ATV-Elektronik Ges.m.b.H."; break;
-                case "0x00000621": return "Panasonic Industrial Devices SUNX Co., Ltd."; break;
-                case "0x00000622": return "ifm electronic gmbh"; break;
-                case "0x00000623": return "Fisher Technical Services Inc."; break;
-                case "0x00000624": return "SCLE SFE"; break;
-                case "0x00000625": return "HIGEN Motor Co., Ltd."; break;
-                case "0x00000626": return "Baumer hhs GmbH"; break;
-                case "0x00000627": return "Moog Inc."; break;
-                case "0x00000628": return "XIOS Hogeschool Limburg, Department N-Technology"; break;
-                case "0x00000629": return "Azbil Corporation"; break;
-                case "0x0000062A": return "Delta Tau Data Systems, Inc."; break;
-                case "0x0000062B": return "Heraeus Electro-Nite International N.V."; break;
-                case "0x0000062C": return "ESW GmbH"; break;
-                case "0x0000062D": return "CG Drives & Automation AB"; break;
-                case "0x0000062E": return "ProCom GmbH"; break;
-                case "0x0000062F": return "GE Grid Solutions SAS"; break;
-
-                case "0x00000630": return "Robot Makers GmbH"; break;
-                case "0x00000631": return "Brooks Automation, Inc"; break;
-                case "0x00000632": return "Hitachi Metals Ltd."; break;
-                case "0x00000633": return "Interroll Automation GmbH"; break;
-                case "0x00000634": return "CKD Corporation"; break;
-                case "0x00000635": return "STIWA Automation GmbH"; break;
-                case "0x00000636": return "T.P.A. S.p.A"; break;
-                case "0x00000637": return "Guodian Nanjing Automation Co., Ltd."; break;
-                case "0x00000638": return "Prosoft-Systems Ltd."; break;
-                case "0x00000639": return "Polytype SA"; break;
-                case "0x0000063A": return "SENSODRIVE GmbH"; break;
-                case "0x0000063B": return "Delta Computer Systems, Inc."; break;
-                case "0x0000063C": return "Friedrich Lütze GmbH"; break;
-                case "0x0000063D": return "Compressor Controls Corporation"; break;
-                case "0x0000063E": return "Diamond Light Source Limited"; break;
-                case "0x0000063F": return "Beckman Coulter, Inc."; break;
-
-                case "0x00000640": return "Allied Motion Technologies, Inc."; break;
-                case "0x00000641": return "Nor-Cal Products, Inc."; break;
-                case "0x00000642": return "AUTOMATA GmbH & Co. KG"; break;
-                case "0x00000643": return "Fraunhofer Institut für Werkstoff- und Strahlentechnik IWS"; break;
-                case "0x00000644": return "INFICON AG"; break;
-                case "0x00000645": return "Hexagon Metrology GmbH"; break;
-                case "0x00000646": return "Shimadzu Corporation"; break;
-                case "0x00000647": return "Dasa Control Systems AB"; break;
-                case "0x00000648": return "SHOEI Electric Co.,Ltd."; break;
-                case "0x00000649": return "Progressio, LLC"; break;
-                case "0x0000064A": return "MACCON GmbH"; break;
-                case "0x0000064B": return "Moog Ireland, Ltd."; break;
-                case "0x0000064C": return "ESPERA-WERKE GMBH"; break;
-                case "0x0000064D": return "Automation W+R GmbH"; break;
-                case "0x0000064E": return "Oceaneering Space Systems"; break;
-                case "0x0000064F": return "EOStech S.r.l."; break;
-
-                case "0x00000650": return "Lycée Jean-Baptiste de Baudre"; break;
-                case "0x00000651": return "University of Banja Luka"; break;
-                case "0x00000652": return "Eding CNC"; break;
-                case "0x00000653": return "Zühlke Engineering AG"; break;
-                case "0x00000654": return "Addiva Consulting AB"; break;
-                case "0x00000655": return "Pteris Global Limited"; break;
-                case "0x00000656": return "Chaos Technology"; break;
-                case "0x00000657": return "Tokyo Institute of Technology, Hirose Fukushima Lab."; break;
-                case "0x00000658": return "Seichter GmbH"; break;
-                case "0x00000659": return "Motion Control Systems, Inc."; break;
-                case "0x0000065A": return "Moog B.V. in the Netherlands"; break;
-                case "0x0000065B": return "Kinlo Technology & System (Shenzhen) Co.,Ltd."; break;
-                case "0x0000065C": return "CellSystems, LLC"; break;
-                case "0x0000065D": return "Shinano Kenshi Co., Ltd."; break;
-                case "0x0000065E": return "MICRO-EPSILON MESSTECHNIK GmbH & Co. KG"; break;
-                case "0x0000065F": return "Viable Bytes, Inc."; break;
-
-                case "0x00000660": return "Kontron Europe GmbH"; break;
-                case "0x00000661": return "IKERLAN, S. Coop."; break;
-                case "0x00000662": return "hmk Daten-System-Technik GmbH"; break;
-                case "0x00000664": return "Istituto Italiano di Tecnologia (IIT)"; break;
-                case "0x00000663": return "Qingdao INCMAN Robot Co., Ltd."; break;
-                case "0x00000665": return "Kashiyama Industries, Ltd."; break;
-                case "0x00000666": return "TG Drives s.r.o."; break;
-                case "0x00000667": return "Watlow Electric Manufacturing Company"; break;
-                case "0x00000668": return "synertronixx GmbH"; break;
-                case "0x00000669": return "batalpha Bobach GmbH"; break;
-                case "0x0000066A": return "Edwards Limited"; break;
-                case "0x0000066B": return "ENGEL AUSTRIA GmbH"; break;
-                case "0x0000066C": return "Fujikin Incorporated"; break;
-                case "0x0000066D": return "COMET Technologies USA, Inc."; break;
-                case "0x0000066E": return "Schleuniger AG"; break;
-                case "0x0000066F": return "Panasonic Industry Co., Ltd."; break;
-
-                case "0x00000670": return "TangShan Kaiyuan Welding Automation Technology Institute Co., Ltd."; break;
-                case "0x00000671": return "Solectrix GmbH"; break;
-                case "0x00000672": return "St. Cloud State University, Electrical and Computer Engineering Department"; break;
-                case "0x00000673": return "JLG AUTOMATION BVBA"; break;
-                case "0x00000674": return "Burckhardt Compression AG"; break;
-                case "0x00000675": return "Rong Shun Xuan Corp."; break;
-                case "0x00000676": return "Balluff STM GmbH"; break;
-                case "0x00000677": return "Endress+Hauser Flowtec AG"; break;
-                case "0x00000678": return "Motor Power Company S.r.l."; break;
-                case "0x0000067A": return "EBI Electric Inc."; break;
-                case "0x0000067B": return "Hochschule Luzern - Technik & Architektur"; break;
-                case "0x0000067C": return "GE Global Research"; break;
-                case "0x0000067D": return "Katholieke Universiteit Leuven, Department of Mechanical Engineering"; break;
-                case "0x0000067E": return "centrotherm international AG"; break;
-                case "0x0000067F": return "Bundesamt für Wehrtechnik und Beschaffung, Dienststelle WTD 81"; break;
-
-                case "0x00000680": return "DAIHEN Corporation"; break;
-                case "0x00000681": return "HCL Technologies Ltd."; break;
-                case "0x00000682": return "3T B.V."; break;
-                case "0x00000683": return "Eindhoven University of Technology"; break;
-                case "0x00000684": return "INNOVENT e.V."; break;
-                case "0x00000685": return "Surrey Satellite Technology Limited"; break;
-                case "0x00000686": return "AMETEK Programmable Power, Inc."; break;
-                case "0x00000687": return "engleder embedded"; break;
-                case "0x00000688": return "Pusan National University"; break;
-                case "0x00000689": return "ETH Zürich, Institute of Robotics and Intelligent Systems"; break;
-                case "0x0000068A": return "Assystem Germany GmbH"; break;
-                case "0x0000068B": return "HORIBA, Ltd."; break;
-                case "0x0000068C": return "Changwon National University, College of Engineering, Department of Electrical Engineering"; break;
-                case "0x0000068D": return "Penko Engineering B.V."; break;
-                case "0x0000068E": return "Fujitsu Semiconductor Europe GmbH"; break;
-
-                case "0x00000690": return "Mirle Automation Corporation"; break;
-                case "0x00000691": return "FANUC CORPORATION"; break;
-                case "0x00000692": return "KSE GmbH"; break;
-                case "0x00000693": return "EUCHNER GmbH + Co. KG"; break;
-                case "0x00000694": return "benjamin GmbH"; break;
-                case "0x00000695": return "Han's Laser Technology Co.,Ltd."; break;
-                case "0x00000696": return "Guangdong University of Technology, Faculty of Automation"; break;
-                case "0x00000699": return "Instituto Federal de Santa Catarina"; break;
-                case "0x0000069A": return "InstruTech Inc."; break;
-                case "0x0000069B": return "KTL Corporation"; break;
-                case "0x0000069C": return "Hochschule Pforzheim, Fakultät für Technik"; break;
-                case "0x0000069D": return "EWM HIGHTEC WELDING GmbH"; break;
-                case "0x0000069E": return "Jilin Yongda Group Company Ltd."; break;
-                case "0x0000069F": return "Arrow Central Europe GmbH"; break;
-
-                case "0x000006A0": return "Phoseon Technology"; break;
-                case "0x000006A1": return "item Industrietechnik GmbH"; break;
-                case "0x000006A2": return "Shanghai Inno-drive Electric Co., Ltd."; break;
-                case "0x000006A3": return "Wuhan University of Technology, School of Automation"; break;
-                case "0x000006A4": return "Advanet Inc."; break;
-                case "0x000006A5": return "Wandercraft SAS"; break;
-                case "0x000006A6": return "Changzhou Xiangyun Monitoring Software Co., Ltd."; break;
-                case "0x000006A7": return "SANTEST CO., LTD."; break;
-                case "0x000006A8": return "EnTeSys GmbH"; break;
-                case "0x000006A9": return "LOT Vacuum Co., Ltd."; break;
-                case "0x000006AA": return "ASM America Inc."; break;
-                case "0x000006AB": return "Taiwan Pulse Motion Co. Ltd."; break;
-                case "0x000006AC": return "CNi Informatica S.r.l."; break;
-                case "0x000006AD": return "enfas GmbH"; break;
-                case "0x000006AE": return "Shenzhen Megmeet Drive Technology Co., Ltd."; break;
-                case "0x000006AF": return "Danish Aerospace Company"; break;
-
-                case "0x000006B0": return "Panasonic Production Engineering Co., Ltd."; break;
-                case "0x000006B1": return "ARADEX AG"; break;
-                case "0x000006B2": return "TOYOGIKEN CO.,LTD."; break;
-                case "0x000006B3": return "ZAO Trascon Technology"; break;
-                case "0x000006B4": return "AREM PRO, s.r.o."; break;
-                case "0x000006B5": return "Googol Technology (HK) Ltd."; break;
-                case "0x000006B6": return "Vecna Technologies, Inc."; break;
-                case "0x000006B7": return "Technische Universität Dresden, Fakultät Elektrotechnik und Informationstechnik"; break;
-                case "0x000006B8": return "Axxon Computer Corporation"; break;
-                case "0x000006B9": return "Beijing Motrotech Technology Co., Ltd."; break;
-                case "0x000006BA": return "Wöhner GmbH & Co. KG"; break;
-                case "0x000006BB": return "Hangzhou Tongling Automation Co., Ltd."; break;
-                case "0x000006BC": return "Audix Corporation"; break;
-                case "0x000006BD": return "Technische Universität Wien, Fakultät für Elektrotechnik und Informationstechnik"; break;
-                case "0x000006BE": return "AREVA NP"; break;
-                case "0x000006BF": return "TAURUS instruments GmbH"; break;
-
-                case "0x000006C0": return "Aveox Inc."; break;
-                case "0x000006C1": return "ASML Netherlands B.V."; break;
-                case "0x000006C2": return "HaslerRail AG"; break;
-                case "0x000006C3": return "Intek Technology Co., Ltd."; break;
-                case "0x000006C4": return "National Computer System Engineering Research Institute of China"; break;
-                case "0x000006C5": return "Crouzet Automatismes"; break;
-                case "0x000006C7": return "Joshua 1 Systems Inc."; break;
-                case "0x000006C8": return "Artech Electronics Co., Ltd."; break;
-                case "0x000006CA": return "FUJI MACHINERY CO.,LTD."; break;
-                case "0x000006CB": return "FoShan Logen Robotics Co., Ltd."; break;
-                case "0x000006CC": return "DVDB-electronics bvba"; break;
-                case "0x000006CD": return "Tool Express-Service Schraubertechnik GmbH (TESS GmbH)"; break;
-                case "0x000006CE": return "King Giants Precision Industry Co., Ltd."; break;
-                case "0x000006CF": return "PANAX SYSTEM Co., Ltd."; break;
-
-                case "0x000006D0": return "Hitachi Europe GmbH"; break;
-                case "0x000006D1": return "ZDAUTO AZDAUTO Automation Technology Co., Ltd. utomation Technology Co., Ltd."; break;
-                case "0x000006D2": return "Temis S.r.l."; break;
-                case "0x000006D3": return "DAIKIN INDUSTRIES, LTD., Oil Hydraulics Division"; break;
-                case "0x000006D4": return "Avalue Technology Inc."; break;
-                case "0x000006D5": return "LDZ Technology Co., Ltd."; break;
-                case "0x000006D6": return "Eletech S.r.l."; break;
-                case "0x000006D9": return "Portwell, Inc."; break;
-                case "0x000006DA": return "Shenzhen Sine Electric Co., Ltd"; break;
-                case "0x000006DB": return "HIMA Paul Hildebrandt GmbH"; break;
-                case "0x000006DC": return "Covidien LP"; break;
-                case "0x000006DD": return "Weintek Labs., Inc."; break;
-                case "0x000006DE": return "MITWELL Inc."; break;
-                case "0x000006DF": return "DORNA Technology Co., Ltd."; break;
-
-                case "0x000006E0": return "A M Consulting"; break;
-                case "0x000006E1": return "GENESI ELETTRONICA Srl"; break;
-                case "0x000006E2": return "Molex Canada Limited"; break;
-                case "0x000006E3": return "Vanguard Systems Inc."; break;
-                case "0x000006E4": return "Shenzhen UniMAT Automation Technology Co., Ltd."; break;
-                case "0x000006E5": return "ifatos GmbH & Co. KG"; break;
-                case "0x000006E6": return "Ingeniería UNO S.L"; break;
-                case "0x000006E7": return "Daekhon Corporation"; break;
-                case "0x000006EA": return "Marubeni Information Systems Co., Ltd."; break;
-                case "0x000006EB": return "YDK Co., Ltd."; break;
-                case "0x000006EC": return "E-T-A Elektrotechnische Apparate GmbH"; break;
-                case "0x000006EE": return "Justech Precision Industry Co., Ltd."; break;
-
-                case "0x000006F0": return "VOLLMER WERKE Maschinenfabrik GmbH"; break;
-                case "0x000006F1": return "Technische Hochschule Nürnberg Georg Simon Ohm"; break;
-                case "0x000006F2": return "Gene Automation Technology Ltd."; break;
-                case "0x000006F3": return "Weihai Zheng Qi Mechatronics Technology Ltd."; break;
-                case "0x000006F5": return "Gopher Inc."; break;
-                case "0x000006F6": return "IntervalZero, Inc."; break;
-                case "0x000006F7": return "AXONIM LLC"; break;
-                case "0x000006F8": return "University of Seoul, College of Engineering, Department of Mechanical and Information Engineering"; break;
-                case "0x000006F9": return "Professional Computer Technology Limited"; break;
-                case "0x000006FA": return "Ninna Solutions Co,.Ltd"; break;
-                case "0x000006FC": return "Shenyang CASNC Technology Co., Ltd."; break;
-                case "0x000006FD": return "IWAKI CO., LTD."; break;
-                case "0x000006FE": return "TRP Engineering College, Department of Electronics & Communication Engineering (ECE)"; break;
-                case "0x000006FF": return "EPI elettronica s.a.s."; break;
-
-                case "0x00000700": return "Institut de RadioAstronomie Millimétrique"; break;
-                case "0x00000701": return "Technische Universität Graz, Fakultät für Maschinenbau und Wirtschaftswissenschaften"; break;
-                case "0x00000702": return "pro-beam AG & Co. KGaA"; break;
-                case "0x00000703": return "Servotechnica ZAO"; break;
-                case "0x00000704": return "Hanwha Precision Machinery CO., LTD."; break;
-                case "0x00000705": return "G&S Intelligent Technology Co., Ltd."; break;
-                case "0x00000706": return "Schaeffler Engineering"; break;
-                case "0x00000707": return "University of the Basque Country, Faculty of Engineering, Department of Electronics and Telecommunications"; break;
-                case "0x00000708": return "ARGES GmbH"; break;
-                case "0x00000709": return "Control Chief Corporation"; break;
-                case "0x0000070A": return "konplan systemhaus ag"; break;
-                case "0x0000070B": return "embeX GmbH"; break;
-                case "0x0000070C": return "COSMOTECHS Co., Ltd"; break;
-                case "0x0000070D": return "Dynamic Systems Inc."; break;
-                case "0x0000070E": return "SEMIKRON Elektronik GmbH & Co. KG"; break;
-                case "0x0000070F": return "Wuxi Ivoyage Control Technology CO.,LTD"; break;
-
-                case "0x00000710": return "CAF Signalling S.L."; break;
-                case "0x00000711": return "SMART Electronic Development GmbH"; break;
-                case "0x00000712": return "Yokogawa Electric Corporation"; break;
-                case "0x00000713": return "Norwegian University of Science and Technoloogy,"; break;
-
-                case "0x00000714": return "Robostar Co., Ltd"; break;
-                case "0x00000715": return "TRUMPF Werkzeugmaschinen SE + Co. KG"; break;
-                case "0x00000716": return "High Performance Motion System Development Co., Ltd."; break;
-                case "0x00000717": return "Kozaka Electronic Design Inc."; break;
-                case "0x00000718": return "Aeronautical Systems Engineering Inc."; break;
-                case "0x00000719": return "Agile Planet, Inc."; break;
-                case "0x0000071A": return "Hon Hai Precision Industry Co., Ltd."; break;
-                case "0x0000071B": return "Systeme + Steuerungen GmbH"; break;
-                case "0x0000071C": return "Huron Net Works, Inc."; break;
-                case "0x0000071D": return "University of Applied Sciences of Southern Switzerland, Department of Innovative Technologies (DTI)"; break;
-
-                case "0x0000071E": return "MAKO Surgical Corp."; break;
-                case "0x0000071F": return "Rainer Thomas Messtechnik GmbH"; break;
-
-                case "0x00000720": return "ELTEK spol. s r.o."; break;
-                case "0x00000721": return "Vecow Co., Ltd."; break;
-                case "0x00000722": return "M&P Motion Control and Power Electronics GmbH"; break;
-                case "0x00000723": return "Leybold GmbH"; break;
-                case "0x00000725": return "Panasonic Industrial Devices Sales Company of America"; break;
-                case "0x00000726": return "Eilersen Electric Digital Systems A/S"; break;
-                case "0x00000727": return "Inter Factory Partners Co., LTD."; break;
-                case "0x00000728": return "Power Instrument Co., Ltd."; break;
-                case "0x00000729": return "Cosworth Group Holdings Ltd"; break;
-                case "0x0000072A": return "South China University of Technology, School of Mechanical & Automotive Engineering"; break;
-                case "0x0000072B": return "WARWICK INSTRUMENTS LTD."; break;
-                case "0x0000072C": return "Shenzhen INVT Co., Ltd."; break;
-                case "0x0000072D": return "WIEDEG Elektronik GmbH"; break;
-                case "0x0000072E": return "NKE corporation"; break;
-                case "0x0000072F": return "Universidad Politécnica de Madrid"; break;
-
-                case "0x00000730": return "Bot & Dolly"; break;
-                case "0x00000731": return "RECIF Technologies"; break;
-                case "0x00000732": return "ATI Industrial Automation"; break;
-                case "0x00000733": return "ADVANTEST CORPORATION"; break;
-                case "0x00000734": return "MULTIVAC Sepp Haggenmüller SE & Co. KG"; break;
-                case "0x00000735": return "ROLAND ELECTRONIC GmbH"; break;
-                case "0x00000736": return "CONTEC Co., Ltd."; break;
-                case "0x00000737": return "Alizem Inc."; break;
-                case "0x00000738": return "Chyng Hong Electronic Co., Ltd."; break;
-                case "0x00000739": return "Yaskawa America Inc."; break;
-                case "0x0000073A": return "Georg Schlegel GmbH & Co. KG"; break;
-                case "0x0000073B": return "Faraday Technology Corporation"; break;
-                case "0x0000073C": return "SIPRO S.r.l."; break;
-                case "0x0000073D": return "University of Twente, Faculty of Engineering Technology (CTW)"; break;
-                case "0x0000073E": return "Aalborg University"; break;
-                case "0x0000073F": return "S-SYS bvba"; break;
-
-                case "0x00000740": return "Ningbo Mingpu Automation Technology Co."; break;
-                case "0x00000741": return "elrest Automationssysteme GmbH"; break;
-                case "0x00000742": return "Kyosan Electric Manufacturing Co., Ltd."; break;
-                case "0x00000743": return "Custom Machines"; break;
-                case "0x00000744": return "KFM Regelungstechnik GmbH"; break;
-                case "0x00000745": return "ISHIDA CO., LTD."; break;
-                case "0x00000746": return "Beijing University of Technology"; break;
-                case "0x00000748": return "Tsino-dynatron Electrical Technology Beijing Co., Ltd."; break;
-                case "0x00000749": return "PENTA TRADING Spol. S.r.o."; break;
-                case "0x0000074A": return "University of Electronic Science and Technology of China, School of Optoelectronic Information"; break;
-                case "0x0000074B": return "Altus Sistemas de Informática S/A"; break;
-                case "0x0000074C": return "Sanming University, Sanming Mechanical CAD Engineering Research Center"; break;
-                case "0x0000074E": return "JENOPTIK Industrial Metrology Germany GmbH"; break;
-                case "0x0000074F": return "Beijing KND CNC Technique Co., Ltd."; break;
-
-                case "0x00000750": return "JW Shannon Engineers"; break;
-                case "0x00000751": return "A2V Mécatronique SAS"; break;
-                case "0x00000752": return "NEXCOM International Co., Ltd."; break;
-                case "0x00000753": return "Jiangyin Huafeng Printing Machinery Co., Ltd."; break;
-                case "0x00000754": return "Lectra SA"; break;
-                case "0x00000755": return "Beijer Electronics Products AB"; break;
-                case "0x00000756": return "C J Hartman Elektronik AB"; break;
-                case "0x00000757": return "Hurco Automation Ltd."; break;
-                case "0x00000759": return "Autonics Corporation"; break;
-                case "0x0000075A": return "Brom Mechatronica B.V."; break;
-                case "0x0000075B": return "Vrije Universiteit Brussel, Faculty of Engineering"; break;
-                case "0x0000075C": return "Alluris GmbH & Co. KG"; break;
-                case "0x0000075D": return "Hochschule Offenburg, Fakultät Elektrotechnik und Informationstechnik"; break;
-                case "0x0000075E": return "Instron - Division of ITW Ltd."; break;
-                case "0x0000075F": return "Heidolph Elektro GmbH & Co. KG"; break;
-
-                case "0x00000760": return "GE Transportation"; break;
-                case "0x00000761": return "MÄX GmbH"; break;
-                case "0x00000762": return "Durst Phototechnik Digital Technology GmbH"; break;
-                case "0x00000763": return "Omsk State Technical University, Department of „Electricity industry“"; break;
-                case "0x00000764": return "Embedded-Bonjour GmbH"; break;
-                case "0x00000765": return "Mettler-Toledo Garvens GmbH"; break;
-                case "0x00000766": return "Renesas Electronics Corp."; break;
-                case "0x00000767": return "Conductix-Wampfler Automation GmbH"; break;
-                case "0x00000768": return "EURA DRIVES ELECTRIC CO. LTD"; break;
-                case "0x00000769": return "EUTRON S.p.A."; break;
-                case "0x0000076A": return "FLANDERS Inc."; break;
-                case "0x0000076B": return "Digital Dynamics, Inc."; break;
-                case "0x0000076C": return "GE Medical Systems Europe"; break;
-                case "0x0000076D": return "Physik Instumente GmbH & Co. KG"; break;
-                case "0x0000076E": return "Hypertherm Inc."; break;
-                case "0x0000076F": return "HRID d.o.o."; break;
-
-                case "0x00000770": return "Aotai Electric Co., LTD"; break;
-                case "0x00000771": return "Control Concepts Inc."; break;
-                case "0x00000772": return "JoveTech Co., Ltd."; break;
-                case "0x00000773": return "POHANG UNIVERSITY OF SCIENCE AND TECHNOLOGY, Department of Electrical Engineering"; break;
-                case "0x00000774": return "CycloMedia Technology B.V."; break;
-                case "0x00000775": return "SUN-TECTRO LTD."; break;
-                case "0x00000776": return "Shanghai Jiao Tong University, School of Electronic Information and Electrical Engineering"; break;
-                case "0x00000777": return "koenig-pa GmbH"; break;
-                case "0x00000778": return "Anton Paar TriTec SA"; break;
-                case "0x00000779": return "V TEX Corporation"; break;
-                case "0x0000077A": return "Edge Technologies"; break;
-                case "0x0000077B": return "EBARA CORPORATION"; break;
-                case "0x0000077C": return "University at Buffalo"; break;
-                case "0x0000077D": return "Aurotek Corporation"; break;
-                case "0x0000077E": return "Blubit d.o.o."; break;
-                case "0x0000077F": return "Toplens Hangzhou, Inc."; break;
-
-                case "0x00000780": return "National Chung Cheng University"; break;
-                case "0x00000781": return "Hexagon Technology Center GmbH"; break;
-                case "0x00000782": return "Graph-Tech AG"; break;
-                case "0x00000783": return "Lanthan GmbH & Co. KG"; break;
-                case "0x00000784": return "Nucleus GmbH"; break;
-                case "0x00000785": return "STRATEC CONTROL-SYSTEMS GmbH"; break;
-                case "0x00000786": return "Universität Wien, Fakultät für Physik, Isotopenforschung"; break;
-                case "0x00000787": return "inno-spec GmbH"; break;
-                case "0x00000788": return "ThyssenKrupp Presta AG"; break;
-                case "0x0000078A": return "DENSO WAVE INCORPORATED"; break;
-                case "0x0000078B": return "EuroSoft S.r.l."; break;
-                case "0x0000078C": return "University of British Columbia, Faculty of Applied Science, Department of Mechanical Engineering"; break;
-                case "0x0000078D": return "REnergy Electric Tianjin Ltd."; break;
-                case "0x0000078E": return "NewYoungSystem Co., Ltd."; break;
-                case "0x0000078F": return "ESA S.p.A."; break;
-
-                case "0x00000790": return "University of Reading, School of Systems Engineering"; break;
-                case "0x00000791": return "KOGANEI CORPORATION"; break;
-                case "0x00000792": return "MAZeT GmbH"; break;
-                case "0x00000793": return "The University of Nottingham, Faculty of Engineering, Electrical Systems and Optics Research Division"; break;
-                case "0x00000794": return "Quanta Storage Inc."; break;
-                case "0x00000795": return "Azbil Taishin Co., Ltd."; break;
-                case "0x00000796": return "Relitech B.V."; break;
-                case "0x00000797": return "DHPC Technologies, Inc."; break;
-                case "0x00000798": return "Jordan Valley Semiconductors Ltd."; break;
-                case "0x00000799": return "MicroCreate System Co., Ltd."; break;
-                case "0x0000079A": return "AB&T S.r.l."; break;
-                case "0x0000079B": return "Medic LLC"; break;
-                case "0x0000079C": return "T3LAB - Technology Transfer Team"; break;
-                case "0x0000079D": return "Coptonix GmbH"; break;
-                case "0x0000079E": return "KARL MAYER STOLL Textilmaschinenfabrik GmbH"; break;
-                case "0x0000079F": return "inoson GmbH"; break;
-
-                case "0x000007A0": return "GE Power & Water Distributed Power"; break;
-                case "0x000007A1": return "Shanghai Yuanzhi Robot Co., Ltd."; break;
-                case "0x000007A2": return "OYO ELECTRIC CO., LTD."; break;
-                case "0x000007A3": return "Solwit SA"; break;
-                case "0x000007A4": return "Jabil Inc."; break;
-                case "0x000007A5": return "Renesas Semiconductor Package & Test Solutions Co., Ltd."; break;
-                case "0x000007A6": return "Technische Universität Berlin, Fakultät Verkehrs- und Maschinensysteme"; break;
-                case "0x000007A7": return "Mettler-Toledo (Changzhou) Precision Instrument Ltd."; break;
-                case "0x000007A8": return "Sentronic International Corp."; break;
-                case "0x000007A9": return "LEAS (Laboratoire d'électronique Angelidis et Sarrault)"; break;
-                case "0x000007AA": return "MAPNA Electric & Control, Engineering & Manufacturing Co."; break;
-                case "0x000007AB": return "NetTechnix E&P GmbH"; break;
-                case "0x000007AC": return "Excelpoint Systems (H.K.) Limited"; break;
-                case "0x000007AD": return "Integrated Dynamics Engineering GmbH"; break;
-                case "0x000007AE": return "Toho Technology Corporation"; break;
-                case "0x000007AF": return "Salvagnini Italia S.p.A."; break;
-
-                case "0x000007B0": return "Shanghai Triowin Automation Machinery Co., Ltd."; break;
-                case "0x000007B1": return "Hytec Electronics Ltd."; break;
-                case "0x000007B2": return "Xi’an Xiangxun Technology Co., Ltd."; break;
-                case "0x000007B3": return "Schmidiger GmbH"; break;
-                case "0x000007B4": return "MASTER LTD."; break;
-                case "0x000007B5": return "Korea University, College of Engineering"; break;
-                case "0x000007B6": return "H. Kufferath GmbH"; break;
-                case "0x000007B7": return "EFTEC Engineering GmbH"; break;
-                case "0x000007B9": return "DFC Design, s.r.o."; break;
-                case "0x000007BA": return "FUKUDA CO., LTD."; break;
-                case "0x000007BB": return "Fachhochschule Flensburg"; break;
-                case "0x000007BC": return "Karlsruher Institut für Technologie, IAR, H²T"; break;
-                case "0x000007BD": return "Burnon International Ltd."; break;
-                case "0x000007BE": return "Nuova Fima S.P.A."; break;
-                case "0x000007BF": return "Yuban & Co."; break;
-
-                case "0x000007C2": return "Ricoh Industry Co., Ltd."; break;
-                case "0x000007C3": return "RDC Semiconductor Co., Ltd."; break;
-                case "0x000007C4": return "SETEX Schermuly textile computer GmbH"; break;
-                case "0x000007C5": return "elowerk GmbH & Co. KG"; break;
-                case "0x000007C6": return "iThemba Laboratory for Accelerator Based Sciences (iThemba LABS)"; break;
-                case "0x000007C8": return "CNCSAZAN"; break;
-                case "0x000007C9": return "ShiningView Electronic Technology (Shanghai) Co., Ltd."; break;
-                case "0x000007CA": return "Mikysek Engineering"; break;
-                case "0x000007CB": return "VICTRON TECHNOLOGY CO., LTD."; break;
-                case "0x000007CD": return "Michigan Scientific Corporation"; break;
-                case "0x000007CE": return "ADFweb.com s.r.l."; break;
-                case "0x000007CF": return "Nortion Servo Technology (Beijing) Co., Ltd."; break;
-
-                case "0x000007D0": return "AKKA DNO GmbH"; break;
-                case "0x000007D1": return "Zhejiang Synmot Electrical Technology Co., Ltd."; break;
-                case "0x000007D2": return "HK-MnS Co., Ltd."; break;
-                case "0x000007D3": return "Tattile S.r.l."; break;
-                case "0x000007D4": return "ELFIN Pracownia Elektroniki"; break;
-                case "0x000007D5": return "Bimba Manufacturing Company"; break;
-                case "0x000007D6": return "Winsonic Electronics Co., Ltd."; break;
-                case "0x000007D7": return "DIMETIX AG"; break;
-                case "0x000007D8": return "GENETEC CORPORATION"; break;
-                case "0x000007D9": return "Tianjin Hengxin Chuangyuan Science & Technology Co., Ltd."; break;
-                case "0x000007DA": return "SFA Engineering Corp."; break;
-                case "0x000007DB": return "Opticon Inc."; break;
-                case "0x000007DC": return "NPN Co., Ltd."; break;
-                case "0x000007DD": return "Wuhan Maxsine Electric Co., Ltd."; break;
-                case "0x000007DF": return "Concept Overdrive Inc."; break;
-
-                case "0x000007E0": return "HETRONIK GmbH"; break;
-                case "0x000007E2": return "JBT Corporation"; break;
-                case "0x000007E3": return "Technische Universität Dresden, Fakultät Elektrotechnik und Informationstechnik"; break;
-                case "0x000007E4": return "DAJO Solutions Ltd."; break;
-                case "0x000007E5": return "Criterion NDT, Inc."; break;
-                case "0x000007E6": return "Quanzhou Sangchuan Electric Equipment Co., Ltd."; break;
-                case "0x000007E7": return "DATA TECNO Co. Ltd."; break;
-                case "0x000007E8": return "Rainbow Springs Pvt Ltd."; break;
-                case "0x000007E9": return "Renu Electronics Pvt. Ltd."; break;
-                case "0x000007EA": return "Max-Planck-Institut für biologische Kybernetik; Wahrnehmung, Kognition und Handlung"; break;
-                case "0x000007EB": return "Intelligent Automation Equipment (Zhuhai) Co., Ltd."; break;
-                case "0x000007EC": return "SCREEN Holdings Co., Ltd."; break;
-                case "0x000007ED": return "Sysmex Corporation"; break;
-                case "0x000007EE": return "ASM Japan K.K."; break;
-                case "0x000007EF": return "IMAGO Technologies GmbH"; break;
-
-                case "0x000007F0": return "Happiest Minds Technologies Private Limited"; break;
-                case "0x000007F1": return "Open Control System Technology Co. Ltd."; break;
-                case "0x000007F2": return "University of Seoul, College of Engineering"; break;
-                case "0x000007F3": return "ULVAC, Inc."; break;
-                case "0x000007F4": return "Meliora Scientific Inc."; break;
-                case "0x000007F5": return "Toshiba Corporation"; break;
-                case "0x000007F6": return "Schnell Spa"; break;
-                case "0x000007F7": return "Industrial Technology Research Institute (ITRI)"; break;
-                case "0x000007F8": return "4PICO BV"; break;
-                case "0x000007F9": return "AVL SET GmbH"; break;
-                case "0x000007FA": return "CHANGNAM I.N.T. LTD."; break;
-                case "0x000007FB": return "Shanghai Ruking Technology Co., Ltd."; break;
-                case "0x000007FC": return "META Srl"; break;
-                case "0x000007FD": return "GHM Messtechnik GmbH"; break;
-                case "0x000007FF": return "Xihua University"; break;
-
-                case "0x00000800": return "Stratus Automation Sdn. Bhd."; break;
-                case "0x00000801": return "OTSL Inc."; break;
-                case "0x00000802": return "Aromasoft Corp."; break;
-                case "0x00000803": return "Bobst S.A."; break;
-                case "0x00000804": return "Beijing Powerbeck Automation Technology CO., LTD."; break;
-                case "0x00000805": return "TESSERA TECHNOLOGY INC."; break;
-                case "0x00000806": return "JWiesemann.com - Dr. Joachim Wiesemann"; break;
-                case "0x00000807": return "Istanbul Ulasim San Tic. A.S."; break;
-                case "0x00000808": return "ProPhotonix (Irl) Ltd."; break;
-                case "0x00000809": return "B.I.N.S.S Datennetze und Gefahrenmeldesysteme GmbH Berlin"; break;
-                case "0x0000080A": return "University 'Stefan cel Mare' Suceava, Electrical Engineering and Computer Science"; break;
-                case "0x0000080B": return "Modrol Electric CO., Ltd."; break;
-                case "0x0000080C": return "OBS Korea Co.,Ltd"; break;
-                case "0x0000080D": return "Shanghai Jiao Tong University, School of Mechanical Engineering"; break;
-                case "0x0000080E": return "TEAM ELECTRONICS GmbH"; break;
-                case "0x0000080F": return "Southwest University of Science and Technology (SWUST) National University Science Park"; break;
-
-                case "0x00000810": return "TDK-Lambda Americas Inc."; break;
-                case "0x00000811": return "Ta Liang Technology Co. Ltd."; break;
-                case "0x00000812": return "CCS Inc."; break;
-                case "0x00000813": return "adaptronic Prüftechnik GmbH"; break;
-                case "0x00000814": return "TOHO Electronics Inc."; break;
-                case "0x00000815": return "VMek Group LLC (dba VMek Sorting Technology)"; break;
-                case "0x00000816": return "CKD Nikki Denso Co., Ltd."; break;
-                case "0x00000817": return "Systematic Consulting Group, Inc."; break;
-                case "0x00000818": return "PERITEC Corporation"; break;
-                case "0x00000819": return "Bachmann Technology GmbH & Co. KG"; break;
-                case "0x0000081A": return "BMK electronic solutions GmbH & Co. KG"; break;
-                case "0x0000081B": return "TECO Electric & Machinery Co., Ltd."; break;
-                case "0x0000081C": return "Mechtronic Industries Ltd."; break;
-                case "0x0000081D": return "Mernok Elektronik (Pty) Ltd."; break;
-                case "0x0000081E": return "Universität Bremen, Institut für elektrische Antriebe, Leistungselektronik und Bauelemente"; break;
-                case "0x0000081F": return "Hydro-Québec Research Institute"; break;
-
-                case "0x00000820": return "GEMTEC Laseroptische Systeme GmbH"; break;
-                case "0x00000821": return "SINTEF Raufoss Manufacturing AS"; break;
-                case "0x00000822": return "Advanced Manufacturing Engineering Technologies Inc."; break;
-                case "0x00000823": return "Levitronix GmbH"; break;
-                case "0x00000825": return "Dipl.-Ing. Carsten Spieß Softwareentwicklung"; break;
-                case "0x00000826": return "Reivax S/A Automação e Controle"; break;
-                case "0x00000827": return "Lappeenranta University of Technology (LUT), School of Energy Systems, Electrical Engineering"; break;
-                case "0x00000828": return "TOTANI CORPORATION"; break;
-                case "0x00000829": return "SERAD S.A.S."; break;
-                case "0x0000082A": return "ITW Dynatec GmbH"; break;
-                case "0x0000082B": return "Hochschule Emden/Leer, Fachbereich Technik"; break;
-                case "0x0000082C": return "JFControl Co., Ltd."; break;
-                case "0x0000082D": return "SAEL srl"; break;
-                case "0x0000082E": return "Beckman Coulter Biomedical GmbH"; break;
-                case "0x0000082F": return "Walter Maschinenbau GmbH"; break;
-
-                case "0x00000830": return "Alterface s.a."; break;
-                case "0x00000831": return "Lectronix, Inc."; break;
-                case "0x00000832": return "HOKUYO AUTOMATIC CO., LTD."; break;
-                case "0x00000833": return "Shanghai Empower Technologies Co., Ltd."; break;
-                case "0x00000834": return "Thyracont Vacuum Instruments GmbH"; break;
-                case "0x00000835": return "OMAX Corporation"; break;
-                case "0x00000836": return "TOX® PRESSOTECHNIK GmbH & Co. KG"; break;
-                case "0x00000837": return "National Chiao Tung University, College of Electrical and Computer Engineering, Department of Electrical Engineering"; break;
-                case "0x00000838": return "Inspiro BV"; break;
-                case "0x00000839": return "Maxcess International"; break;
-                case "0x0000083A": return "Chell Instruments Ltd."; break;
-                case "0x0000083B": return "FUJI CORPORATION"; break;
-                case "0x0000083C": return "NIDEC SANKYO CORPORATION"; break;
-                case "0x0000083D": return "Shizuoka Oki Electric Co., Ltd."; break;
-                case "0x0000083E": return "Frencken America Inc."; break;
-                case "0x0000083F": return "Granite Devices Oy"; break;
-
-                case "0x00000840": return "SANEZOO EUROPE s.r.o."; break;
-                case "0x00000842": return "AGILiCOM SARL"; break;
-                case "0x00000843": return "Philips Technologie GmbH, Photonics Aachen"; break;
-                case "0x00000844": return "KLA Corporation"; break;
-                case "0x00000845": return "Meidensha Corporation"; break;
-                case "0x00000849": return "Rolls-Royce Nuclear Services"; break;
-                case "0x0000084A": return "University of West Bohemia, Faculty of Applied Sciences"; break;
-                case "0x0000084B": return "Korea Electrotechnology Research Institute (KERI)"; break;
-                case "0x0000084C": return "MPI Corporation"; break;
-                case "0x0000084D": return "Röders GmbH"; break;
-                case "0x0000084E": return "Melec Inc."; break;
-                case "0x0000084F": return "Mianyang Weibo Electronic Co., Ltd."; break;
-
-                case "0x00000851": return "Wuhan Huazhong Numerical Control Co., Ltd."; break;
-                case "0x00000852": return "Datalogic Automation S.r.l."; break;
-                case "0x00000853": return "Tri-Tek Corp."; break;
-                case "0x00000855": return "YUHENG OPTICS CO.,LTD (Changchun)"; break;
-                case "0x00000856": return "ETH-messtechnik gmbh"; break;
-                case "0x00000857": return "JTEKT CORPORATION"; break;
-                case "0x00000858": return "ergo: elektronik GmbH"; break;
-                case "0x00000859": return "Engineerdream Co., Ltd."; break;
-                case "0x0000085A": return "Samsung Electronics Co. Ltd."; break;
-                case "0x0000085B": return "KSJ Co. Ltd."; break;
-                case "0x0000085C": return "Messer Cutting Systems GmbH"; break;
-                case "0x0000085D": return "Krones AG"; break;
-                case "0x0000085F": return "Northwestern Polytechnical University, School of Power&Energy, Department of Power Control and Test"; break;
-
-                case "0x00000860": return "Blackbird Robotersysteme GmbH"; break;
-                case "0x00000861": return "Mitsuba Corporation"; break;
-                case "0x00000863": return "Foshan Shunde Gatherwin Information Technology Co., Ltd."; break;
-                case "0x00000864": return "duagon Germany GmbH"; break;
-                case "0x00000865": return "Thermo Fisher Scientific Oy"; break;
-                case "0x00000866": return "Pyramid Technical Consultants"; break;
-                case "0x00000867": return "Verity Instruments, Inc."; break;
-                case "0x00000868": return "KAI PLUS TECHNOLOGY CO., LTD."; break;
-                case "0x00000869": return "Texas A&M University at Qatar, Electrical & Computer Engineering"; break;
-                case "0x0000086A": return "FPT Motorenforschung AG"; break;
-                case "0x0000086B": return "Industries Machinex Inc."; break;
-                case "0x0000086C": return "Shanghai Rising Digital Co.,Ltd."; break;
-                case "0x0000086D": return "SICK OPTEX CO., LTD."; break;
-                case "0x0000086E": return "Laserline GmbH"; break;
-                case "0x0000086F": return "Xpress Precision Engineering B.V."; break;
-
-                case "0x00000870": return "ELECTRA S.p.A."; break;
-                case "0x00000871": return "Magnescale Co., Ltd."; break;
-                case "0x00000872": return "Hitachi Kokusai Electric Inc."; break;
-                case "0x00000873": return "Hangzhou Jingwei Automation Co., Ltd."; break;
-                case "0x00000874": return "Shanghai LYNUC CNC Technology Co., Ltd."; break;
-                case "0x00000875": return "ATLAS ELEKTRONIK GmbH"; break;
-                case "0x00000876": return "EDAC Electronics Technology (Hangzhou) Co., Ltd."; break;
-                case "0x00000877": return "MYCOM, INC."; break;
-                case "0x00000878": return "ElectroCraft, Inc."; break;
-                case "0x00000879": return "Foxconn Technology Group"; break;
-                case "0x0000087A": return "Qinhuangdao Boostsolar Photovoltatic Equipment Co.,Ltd."; break;
-                case "0x0000087B": return "Chinese Academy of Sciences, Shenyang Institute of Automation (SIA)"; break;
-                case "0x0000087C": return "Deere & Company"; break;
-                case "0x0000087D": return "Leibniz Universität Hannover, Institut für Mechatronische Systeme (IMES)"; break;
-                case "0x0000087F": return "ELTRO Gesellschaft für Elektrotechnik mbH"; break;
-
-                case "0x00000880": return "UK Grid Solutions Limited"; break;
-                case "0x00000881": return "Control Gaging, Inc."; break;
-                case "0x00000882": return "Trilix Engineering AG"; break;
-                case "0x00000883": return "HFE professionelle Studiotechnik GmbH"; break;
-                case "0x00000884": return "HMT Co., Ltd."; break;
-                case "0x00000885": return "SCHNIER Elektrostatik GmbH"; break;
-                case "0x00000886": return "Wuhan HuaGong Laser Engineering Co.,Ltd."; break;
-                case "0x00000888": return "Zhejiang Keqiang Intelligent Control System Co., Ltd."; break;
-                case "0x00000889": return "Impedans Ltd."; break;
-                case "0x0000088A": return "Chinese Academy of Sciences, Institute of Automation"; break;
-                case "0x0000088B": return "GCCAlliance Inc."; break;
-                case "0x0000088C": return "Interface Corporation"; break;
-                case "0x0000088D": return "NEC Platforms, Inc."; break;
-                case "0x0000088E": return "Shenyang Piotech Co., Ltd."; break;
-                case "0x0000088F": return "TQ-Systems GmbH"; break;
-
-                case "0x00000890": return "Shanghai Panelmate Electronics Co., Ltd."; break;
-                case "0x00000891": return "Haute Ecole Arc Ingénierie"; break;
-                case "0x00000892": return "Korea Institute of Industrial Technology - KITECH"; break;
-                case "0x00000893": return "CETA Testsysteme GmbH"; break;
-                case "0x00000895": return "STEP Corporation"; break;
-                case "0x00000896": return "Dalian Guangyang Science & Technology Group Co., Ltd."; break;
-                case "0x00000897": return "Hermes Microvision, Inc."; break;
-                case "0x00000898": return "Kawasaki Heavy Industries, Ltd., Robot Division"; break;
-                case "0x00000899": return "ELCO Industry Automation AG"; break;
-                case "0x0000089A": return "Neuromeka"; break;
-                case "0x0000089D": return "SEMES Co., Ltd."; break;
-                case "0x0000089E": return "FEV SA"; break;
-                case "0x0000089F": return "Plasmart Inc."; break;
-
-                case "0x000008A0": return "DRESCHER Industrieelektronik GmbH"; break;
-                case "0x000008A1": return "MK · SYSTEM CO.,LTD"; break;
-                case "0x000008A2": return "bebro electronic GmbH"; break;
-                case "0x000008A3": return "MC-monitoring SA"; break;
-                case "0x000008A4": return "Variable Message Signs"; break;
-                case "0x000008A5": return "Dukane Corporation - Intelligent Assembly Solutions"; break;
-                case "0x000008A6": return "Mecatronix GmbH"; break;
-                case "0x000008A7": return "Prima Power Laserdyne LLC"; break;
-                case "0x000008A8": return "ISOCOMP srl"; break;
-                case "0x000008A9": return "Shinko Shoji Co.,Ltd."; break;
-                case "0x000008AA": return "ASEC International Corporation"; break;
-                case "0x000008AB": return "RTC Electronics Ltd."; break;
-                case "0x000008AC": return "Entegris, Inc."; break;
-                case "0x000008AD": return "ASEM S.r.l."; break;
-                case "0x000008AE": return "Beijing Agie Charmilles Industrial Electronics Co., Ltd."; break;
-                case "0x000008AF": return "Zhengzhou Changhe Electronic Engineering Co., Ltd."; break;
-
-                case "0x000008B0": return "Leister Technologies AG"; break;
-                case "0x000008B2": return "SAGINOMIYA SEISAKUSHO, INC."; break;
-                case "0x000008B3": return "LNC Technology Co., Ltd."; break;
-                case "0x000008B4": return "Guangdong ELESY Electric CO., LTD."; break;
-                case "0x000008B5": return "Newtouch Electronics (Shanghai) Co.,Ltd."; break;
-                case "0x000008B6": return "TOYO AUTOMATION CO., LTD."; break;
-                case "0x000008B7": return "Université de Bretagne-Sud"; break;
-                case "0x000008B8": return "Shenzhen Zhiyou Battery Integration Technology Co., Ltd."; break;
-                case "0x000008B9": return "Malema Engineering Corporation"; break;
-                case "0x000008BB": return "Ricoh Industrial Solutions Inc."; break;
-                case "0x000008BC": return "Tri-City X-ray, LLC"; break;
-                case "0x000008BD": return "Rutronik Elektronische Bauelemente GmbH"; break;
-                case "0x000008BE": return "SANEI HYTECHS VIETNAM Co.,Ltd."; break;
-                case "0x000008BF": return "Delixi (Hangzhou) Inverter Co.,LTD."; break;
-
-                case "0x000008C0": return "RITZ Co., Ltd."; break;
-                case "0x000008C1": return "Ricoh Company, Ltd."; break;
-                case "0x000008C2": return "TAE Antriebstechnik GmbH"; break;
-                case "0x000008C3": return "Fontys University of Applied Sciences"; break;
-                case "0x000008C4": return "Hangzhou Riding Control Technology Co., Ltd."; break;
-                case "0x000008C5": return "Atlas Copco Industrial Technique AB"; break;
-                case "0x000008C6": return "Mindtribe Product Engineering, Inc."; break;
-                case "0x000008C7": return "Centre de recherche industrielle du Québec (CRIQ)"; break;
-                case "0x000008C8": return "Elster GmbH"; break;
-                case "0x000008C9": return "Panasonic Industrial Devices Systems and Technology Co., Ltd."; break;
-                case "0x000008CA": return "STV Electronic GmbH & Co. KG"; break;
-                case "0x000008CB": return "Hentschel System GmbH"; break;
-                case "0x000008CC": return "Gree Electric Appliances, Inc. of Zhuhai"; break;
-                case "0x000008CD": return "Futurestar Corp."; break;
-                case "0x000008CE": return "PARA-ENT CO.,LTD."; break;
-                case "0x000008CF": return "SIASUN CO., LTD."; break;
-
-                case "0x000008D0": return "WFE Technology Corporation"; break;
-                case "0x000008D1": return "driveXpert GmbH"; break;
-                case "0x000008D2": return "Universität zu Lübeck, Institut für Medizinische Elektrotechnik"; break;
-                case "0x000008D4": return "Branson Ultrasonics Corporation"; break;
-                case "0x000008D5": return "Rolls-Royce@NTU Corporate Lab"; break;
-                case "0x000008D6": return "Guilin Stars Science and Technology CO., LTD."; break;
-                case "0x000008D7": return "Ace Designers Limited"; break;
-                case "0x000008D8": return "Biochar Now LLC"; break;
-                case "0x000008D9": return "Varian Medical Systems Inc."; break;
-                case "0x000008DA": return "DAMEDICS GmbH"; break;
-                case "0x000008DB": return "EnergopromAvtomatizaciya LLC"; break;
-                case "0x000008DC": return "MicroSure B.V."; break;
-                case "0x000008DE": return "Finisar SHG Inc."; break;
-                case "0x000008DF": return "PLANET Technology Corporation"; break;
-
-                case "0x000008E0": return "PEES Components GmbH"; break;
-                case "0x000008E1": return "Belden Deutschland GmbH"; break;
-                case "0x000008E2": return "NACHI-FUJIKOSHI CORP."; break;
-                case "0x000008E3": return "K. A. Schmersal GmbH & Co. KG"; break;
-                case "0x000008E4": return "Radic Technologies, Inc."; break;
-                case "0x000008E5": return "Weightpack S.r.l."; break;
-                case "0x000008E6": return "BS2 MULTIDATA GmbH"; break;
-                case "0x000008E7": return "Sumitomo Heavy Industries, Ltd."; break;
-                case "0x000008E8": return "Micro-Controle Spectra-Physics S.A."; break;
-                case "0x000008E9": return "Apptronik Inc."; break;
-                case "0x000008EA": return "Dr.-Ing. S. Haußmann Industrieelektronik"; break;
-                case "0x000008EB": return "Great River Electronics, Inc."; break;
-                case "0x000008EC": return "Eltra S.p.a. Unipersonale"; break;
-                case "0x000008ED": return "SINOBONDER Co., Ltd."; break;
-                case "0x000008EE": return "ROBOTOUS Co., Ltd."; break;
-                case "0x000008EF": return "Tianjin Sentinel Electronics Co.,Ltd."; break;
-
-                case "0x000008F0": return "IZOVAC LTD"; break;
-                case "0x000008F1": return "Technical University of Kosice, Faculty of Electrical Engineering and Informatics"; break;
-                case "0x000008F2": return "SANMEI ELECTRONICS Co., Ltd."; break;
-                case "0x000008F3": return "EA Elektro-Automatik GmbH & Co. KG"; break;
-                case "0x000008F4": return "Dynamic Motion Italia S.r.l."; break;
-                case "0x000008F5": return "OOO PKF «Ersted»"; break;
-                case "0x000008F6": return "SHANGHAI MAIHONG ELECTRONIC TECHNOLOGY CO.LTD"; break;
-                case "0x000008F7": return "China Electronics Harvest Technology Co.,Ltd."; break;
-                case "0x000008F8": return "Advanced Scientific Technology & Management Research Institute of Kyoto (ASTEM RI)"; break;
-                case "0x000008F9": return "Mini Motor srl"; break;
-                case "0x000008FA": return "BitifEye Digital Test Solutions GmbH"; break;
-                case "0x000008FB": return "IBIS Computer Pty Ltd"; break;
-                case "0x000008FC": return "Hanbit Micro Inc."; break;
-                case "0x000008FD": return "TATEYAMA KAGAKU MODULE TECHNOLOGY CO., LTD."; break;
-                case "0x000008FF": return "Aone Co.,Ltd"; break;
-
-                case "0x00000900": return "Shanghai Capital Numerical Control Co., Ltd."; break;
-                case "0x00000901": return "Bose Corporation"; break;
-                case "0x00000902": return "Flow Devices and Systems, Inc."; break;
-                case "0x00000904": return "Anritsu Engineering Co., Ltd."; break;
-                case "0x00000905": return "NUTPOR BREADS, UNIPESSOAL LDA."; break;
-                case "0x00000906": return "Emerson SolaHD (a division of Appleton GRP LLC dba Appleton Group)"; break;
-                case "0x00000907": return "modusoft GmbH"; break;
-                case "0x00000908": return "Sichuan MK Servo Technology"; break;
-                case "0x00000909": return "Intron Technology (China) Co. Ltd."; break;
-                case "0x0000090A": return "Jimei University, College of Information Engineering"; break;
-                case "0x0000090C": return "CORE CORPORATION"; break;
-                case "0x0000090D": return "H.I.B Systemtechnik GmbH"; break;
-                case "0x0000090E": return "Nova Fabrica Ltd."; break;
-                case "0x0000090F": return "ROTA TEKNIK MAKINA SAN. ve TIC. A.S."; break;
-
-                case "0x00000910": return "Bird Technologies Group, Inc."; break;
-                case "0x00000911": return "SHENZHEN VMMORE CTRL&TECH CO., LTD"; break;
-                case "0x00000912": return "Leibniz Universität Hannover, Fakultät für Elektrotechnik und Informatik"; break;
-                case "0x00000913": return "Motion Control Products Ltd."; break;
-                case "0x00000914": return "Saft S.A.S."; break;
-                case "0x00000915": return "Star Denshi Co.,Ltd."; break;
-                case "0x00000916": return "MARPOSS S.p.A."; break;
-                case "0x00000917": return "China Orient Institute of Noise & Vibration"; break;
-                case "0x00000918": return "Cosys Inc."; break;
-                case "0x00000919": return "Shenzhen Vector Automation Technology Co., Lt"; break;
-                case "0x0000091B": return "INTRAVIS GmbH"; break;
-                case "0x0000091C": return "Drobak Unlimited Co."; break;
-                case "0x0000091D": return "Technische Hochschule Nürnberg Georg Simon Ohm"; break;
-                case "0x0000091E": return "Zenitron Corporation"; break;
-                case "0x0000091F": return "Wuhan Endeavor Intelligent Machine Co., Ltd."; break;
-
-                case "0x00000920": return "LEADJECK AUTOMATION CO., LTD."; break;
-                case "0x00000922": return "Fujian Raynen Technology Co., Ltd."; break;
-                case "0x00000923": return "Demcon Advanced Mechatronics B.V."; break;
-                case "0x00000924": return "serva transport systems GmbH"; break;
-                case "0x00000925": return "Shenyang Neusoft Medical Systems Co., Ltd."; break;
-                case "0x00000926": return "Ruhr-Universität Bochum"; break;
-                case "0x00000927": return "Banner Engineering Corporation"; break;
-                case "0x00000929": return "Guangdong Topstar Technology Co., Ltd."; break;
-                case "0x0000092A": return "Evinsys LLC"; break;
-                case "0x0000092B": return "Shenzhen Huacheng Industrial Control Co., Ltd."; break;
-                case "0x0000092C": return "Mondragon Unibertsitatea"; break;
-                case "0x0000092D": return "Katholieke Hogeschool Vives (VIVES)"; break;
-                case "0x0000092E": return "Ekso Bionics Inc."; break;
-                case "0x0000092F": return "Kaufman & Robinson Inc."; break;
-
-                case "0x00000930": return "KSM-ELECTRONIC GmbH"; break;
-                case "0x00000932": return "Technical & Try Co.,Ltd"; break;
-                case "0x00000935": return "MAXCOM Co.,Ltd."; break;
-                case "0x00000936": return "National NC System Engineering Research Center"; break;
-                case "0x00000937": return "Ryoei Technica Corporation"; break;
-                case "0x00000938": return "Schaeffler Technologies AG & Co. KG"; break;
-                case "0x00000939": return "NTS-Group"; break;
-                case "0x0000093A": return "Alicat Scientific, Inc."; break;
-                case "0x0000093B": return "Tekt Industries Pty. Ltd."; break;
-                case "0x0000093C": return "Xi’an Aerospace Automation Co., Ltd"; break;
-                case "0x0000093D": return "Gal"; break;
-                case "0x0000093E": return "TOA Electronics Inc. Hamatou Company"; break;
-
-                case "0x00000940": return "Friedrich-Alexander-Universität Erlangen-Nürnberg, Technische Fakultät"; break;
-                case "0x00000941": return "Sirius Electronic Systems s.r.l."; break;
-                case "0x00000942": return "Chengdu InPlus Technology Co., Ltd."; break;
-                case "0x00000943": return "MicroStep spol s.r.o."; break;
-                case "0x00000944": return "Murata Machinery, Ltd."; break;
-                case "0x00000946": return "Cabinplant A/S"; break;
-                case "0x00000948": return "FRANKA EMIKA GmbH"; break;
-                case "0x0000094A": return "Smart Move GmbH"; break;
-                case "0x0000094B": return "Ampere Inc."; break;
-                case "0x0000094C": return "Stichting Moving Bird (dba Project March)"; break;
-                case "0x0000094D": return "Imkon Endustriyel Otomasyon Sistemleri"; break;
-                case "0x0000094E": return "Tangshan Baichuan Intelligent Machine Co Ltd."; break;
-                case "0x0000094F": return "Christian-Albrechts-Universität zu Kiel"; break;
-
-                case "0x00000950": return "University of Lorraine, IUT Nancy-Brabois"; break;
-                case "0x00000951": return "Fraunhofer-Institut für Optronik, Systemtechnik und Bildauswertung IOSB"; break;
-                case "0x00000952": return "IP-Automatika Kft."; break;
-                case "0x00000953": return "EMKO Elektronik San. ve Tic. A.S."; break;
-                case "0x00000954": return "FINE Inc."; break;
-                case "0x00000955": return "Science and Technology Facilities Council, UK Astronomy Technology Centre (UK ATC)"; break;
-                case "0x00000956": return "ITmems s.r.l."; break;
-                case "0x00000957": return "LumaSense Technologies, Inc."; break;
-                case "0x00000958": return "ACUTRONIC Switzerland Ltd."; break;
-                case "0x00000959": return "DieBie EngineeringTSC"; break;
-                case "0x0000095A": return "Procept Pty Ltd"; break;
-                case "0x0000095B": return "New Power Plasma Co., Ltd"; break;
-                case "0x0000095C": return "Advanced Mining Technology Center (AMTC)"; break;
-                case "0x0000095D": return "ASM Technology Singapore Pte Ltd."; break;
-                case "0x0000095E": return "Weigl GmbH & Co KG"; break;
-                case "0x0000095F": return "Wagner International AG"; break;
-
-                case "0x00000960": return "Liebherr-Components Biberach GmbH"; break;
-                case "0x00000961": return "Mechatronics Labs S.r.l."; break;
-                case "0x00000962": return "JIANGSU TORSUNG M&E CO.,LTD"; break;
-                case "0x00000963": return "Technické služby BAHOZA s.r.o."; break;
-                case "0x00000964": return "Siec Badawcza Lukasiewicz - Instytut Tele- i Radiotechniczny"; break;
-                case "0x00000965": return "Beijing Institute of Technology (BIT), School of Mechatronical Engineering"; break;
-                case "0x00000966": return "ElastiSense ApS"; break;
-                case "0x00000967": return "North China University of Technology, Beijing Key Laboratory of Fieldbus and Automation"; break;
-                case "0x00000968": return "Nidec Corporation"; break;
-                case "0x00000969": return "Hangzhou Zhishan Intelligent Control Technology Co. Ltd."; break;
-                case "0x0000096A": return "Interface Devices Ltd."; break;
-                case "0x0000096B": return "Nikon Corporation"; break;
-                case "0x0000096C": return "FUJITSU COMPONENT LIMITED"; break;
-                case "0x0000096D": return "Jiaxing Dealour Electric Technology Co.,Ltd."; break;
-                case "0x0000096E": return "ETH Zürich, Department of Mechanical and Process Engineering (D-MAVT), Institute of Robotics and Intelligent Systems (IRIS), Robotic Systems Lab (RSL)"; break;
-                case "0x0000096F": return "SURUGA Production Platform Co., Ltd."; break;
-
-                case "0x00000970": return "Advanio Technology Co., Ltd."; break;
-                case "0x00000971": return "EMBL Hamburg"; break;
-                case "0x00000972": return "Erle Robotics S.L."; break;
-                case "0x00000973": return "SURUGA SEIKI CO., LTD."; break;
-                case "0x00000974": return "EVA Robotics Pty Ltd"; break;
-                case "0x00000975": return "Beijing Etechwin Electric Co., Ltd."; break;
-                case "0x00000976": return "KE Elektronik GmbH"; break;
-                case "0x00000977": return "ACCREA Bartlomiej Stanczyk"; break;
-                case "0x00000978": return "SCHUNK GmbH & Co. KG"; break;
-                case "0x00000979": return "Sciaky, Inc."; break;
-                case "0x0000097A": return "Tokyo Robotics Inc."; break;
-                case "0x0000097C": return "embeddeers GmbH"; break;
-                case "0x0000097D": return "GAMACO s.r.l."; break;
-                case "0x0000097E": return "NPP VIUS, LLC"; break;
-                case "0x0000097F": return "ISG Industrielle Steuerungstechnik GmbH"; break;
-
-                case "0x00000980": return "FUJI ELECTRONICS CO.,LTD."; break;
-                case "0x00000981": return "SHENZHEN MINGSU AUTOMATION EQUIPMENT CO., LTD"; break;
-                case "0x00000982": return "Jiangsu Ysphotech Technology Co.,LTD"; break;
-                case "0x00000983": return "Beijing JCZ Technology Co., Ltd."; break;
-                case "0x00000984": return "DMG MORI CO., LTD."; break;
-                case "0x00000985": return "TELSONIC AG"; break;
-                case "0x00000986": return "Tolomatic Inc."; break;
-                case "0x00000987": return "NCWorks"; break;
-                case "0x00000988": return "Van Mierlo Ingenieursbureau BV"; break;
-                case "0x00000989": return "Control Technology Corporation"; break;
-                case "0x0000098A": return "TEAC Corporation"; break;
-                case "0x0000098D": return "Crossworks Inc."; break;
-                case "0x0000098E": return "Agility Robotics"; break;
-                case "0x0000098F": return "ShenZhen Double CNC Tech Co., Ltd."; break;
-
-                case "0x00000991": return "TSC Inc."; break;
-                case "0x00000992": return "TE Connectivity Germany GmbH"; break;
-                case "0x00000993": return "Galli Brasil Comercio de Aparelhos Eletronicos Ltda."; break;
-                case "0x00000994": return "Shenzhen YAKO Automation Technology Co.,Ltd"; break;
-                case "0x00000995": return "PRETTL Electronics India Pvt. Ltd."; break;
-                case "0x00000997": return "Kehua Data Co., Ltd"; break;
-                case "0x00000998": return "Mayser GmbH & Co. KG"; break;
-                case "0x00000999": return "HAITIAN Plastics Machinery Group Co., Ltd"; break;
-                case "0x0000099A": return "Waco Giken Co., Ltd."; break;
-                case "0x0000099B": return "Mike & Weingartner GmbH"; break;
-                case "0x0000099C": return "Ionicon Analytik Gesellschaft m.b.H."; break;
-                case "0x0000099D": return "INESC TEC - Instituto de Engenharia de Sistemas e Computadores Tecnologia e Ciência"; break;
-                case "0x0000099E": return "4automation"; break;
-                case "0x0000099F": return "Moog India Technology Center Pvt Ltd"; break;
-
-                case "0x000009A0": return "University of Cape Town, Department of Electrical Engineering"; break;
-                case "0x000009A1": return "Auris Health, Inc."; break;
-                case "0x000009A3": return "Technische Universität Ilmenau, Fakultät für Maschinenbau, Fachgebiet Mechatronik"; break;
-                case "0x000009A4": return "HIT SPECIAL ROBOT CO.,LTD"; break;
-                case "0x000009A5": return "SmartDV Technologies India Private Limited"; break;
-                case "0x000009A6": return "Visitech AS"; break;
-                case "0x000009A7": return "Solartron Metrology Ltd."; break;
-                case "0x000009A8": return "NKSystem K.K."; break;
-                case "0x000009A9": return "INTRONIX spol. s.r.o."; break;
-                case "0x000009AA": return "NetModule AG"; break;
-                case "0x000009AB": return "BZ Robot INC."; break;
-                case "0x000009AC": return "PUES Corporation"; break;
-                case "0x000009AD": return "S.H.S. s.r.l."; break;
-                case "0x000009AE": return "Manter International B.V."; break;
-                case "0x000009AF": return "Delft University of Technology, Faculty of Aerospace Engineering"; break;
-
-                case "0x000009B0": return "GAMADE s.n.c. di Westfal Michèle & C."; break;
-                case "0x000009B1": return "ima-tec GmbH"; break;
-                case "0x000009B2": return "Evest Corporation"; break;
-                case "0x000009B3": return "SHINKO TECHNOS CO.,LTD."; break;
-                case "0x000009B4": return "Sichuan University, School of Manufacturing Science and Engineering"; break;
-                case "0x000009B5": return "FLC Zbigniew Huber"; break;
-                case "0x000009B6": return "Taizhou Topcut-Bullmer Mechanical and Electrical Technology Co., Ltd."; break;
-                case "0x000009B7": return "Shiratech Embedded Ltd."; break;
-                case "0x000009B9": return "Eastern Logic Inc."; break;
-                case "0x000009BA": return "WEBER Schraubautomaten GmbH"; break;
-                case "0x000009BB": return "Power Solution Network"; break;
-                case "0x000009BC": return "Advanced Thermal Sciences Corporation"; break;
-                case "0x000009BE": return "KITZ SCT Corporation"; break;
-                case "0x000009BF": return "Motorcon Inc."; break;
-
-                case "0x000009C0": return "clownfish information technology GmbH"; break;
-                case "0x000009C1": return "RABE Engineering"; break;
-                case "0x000009C2": return "Ghost Robotics LLC"; break;
-                case "0x000009C3": return "Technische Universität Graz"; break;
-                case "0x000009C5": return "Socionext Inc."; break;
-                case "0x000009C6": return "Shenzhen Best Motion Technology Limited"; break;
-                case "0x000009C7": return "ESCAD Automation GmbH"; break;
-                case "0x000009C8": return "Université Laval"; break;
-                case "0x000009CA": return "AKKA GmbH & Co. KGaA"; break;
-                case "0x000009CB": return "AMS - Gesellschaft für Automatisierungs- und Meß-Systemtechnik GmbH"; break;
-                case "0x000009CC": return "Techno-Holon Corporation"; break;
-                case "0x000009CD": return "J. Zimmer Maschinenbau GmbH"; break;
-                case "0x000009CE": return "e.sigma Technology GmbH"; break;
-                case "0x000009CF": return "OMRON AUTOMATION SYSTEM (HANGZHOU) CO.,LTD."; break;
-
-                case "0x000009D0": return "SOF-TEK Integrators, Inc."; break;
-                case "0x000009D1": return "Contrinex SA"; break;
-                case "0x000009D2": return "SISE SAS"; break;
-                case "0x000009D3": return "Christ Electronic Systems GmbH"; break;
-                case "0x000009D4": return "Hosta Motion Control Co., LTD"; break;
-                case "0x000009D5": return "Spintrol Limited Corp."; break;
-                case "0x000009D6": return "T.E.M.A. spa"; break;
-                case "0x000009D7": return "Ingenieurbüro Für IC-Technologie Franz Sprenger"; break;
-                case "0x000009D8": return "OPTO4L GmbH"; break;
-                case "0x000009D9": return "QuEST Global Services Pte. Ltd."; break;
-                case "0x000009DB": return "ZIS Industrietechnik GmbH"; break;
-                case "0x000009DC": return "LOVATO Electric S.p.A"; break;
-                case "0x000009DD": return "E2M Technologies B.V."; break;
-                case "0x000009DE": return "Zefatek Co., Ltd."; break;
-                case "0x000009DF": return "Birket Engineering, Inc."; break;
-
-                case "0x000009E0": return "JD Co., Ltd."; break;
-                case "0x000009E1": return "Institut Clément Ader (ICA)"; break;
-                case "0x000009E2": return "OKANO CABLE CO., LTD"; break;
-                case "0x000009E3": return "Shenzhen OUR New Medical Technologies Development Co., Ltd."; break;
-                case "0x000009E4": return "J. Schmalz GmbH"; break;
-                case "0x000009E5": return "Fives OTO S.p.a."; break;
-                case "0x000009E6": return "INNOCONTACT CO.,LTD."; break;
-                case "0x000009E7": return "silex technology, Inc."; break;
-                case "0x000009E8": return "ShinMaywa Industries, LTD."; break;
-                case "0x000009E9": return "ib prozessleittechnik GmbH & Co. KG"; break;
-                case "0x000009EA": return "EJTECH Inc."; break;
-                case "0x000009EB": return "Shenzhen Hymson Laser Technologies Co.,Ltd."; break;
-                case "0x000009EC": return "FlashCut CNC"; break;
-                case "0x000009ED": return "CTB Co., Ltd."; break;
-                case "0x000009EE": return "Alexander Binzel Schweisstechnik GmbH & Co. KG"; break;
-                case "0x000009EF": return "SAWAMURA DENKI IND.CO.,LTD."; break;
-
-                case "0x000009F0": return "Robowell Korea Co."; break;
-                case "0x000009F1": return "MUSE Robotics Inc."; break;
-                case "0x000009F2": return "Shenzhen WELLAUTO Technology CO., LTD."; break;
-                case "0x000009F3": return "Primagest Inc."; break;
-                case "0x000009F4": return "Aignep S.p.A."; break;
-                case "0x000009F5": return "Pusan National University"; break;
-                case "0x000009F6": return "KUMOH MACH. & ELEC. CO., LTD."; break;
-                case "0x000009F7": return "Chinese Academy of Sciences, Institute of Modern Physics (IMP)"; break;
-                case "0x000009F8": return "Houston Mechatronics, Inc."; break;
-                case "0x000009F9": return "IAR Systems AB"; break;
-                case "0x000009FA": return "KOSHIDA KOREA CORPORATION"; break;
-                case "0x000009FB": return "Advanced Micro-Fabrication Equipment Inc."; break;
-                case "0x000009FC": return "STEPHANIX S.A."; break;
-                case "0x000009FD": return "CPI Technologies, Inc"; break;
-                case "0x000009FE": return "Harris Corporation"; break;
-                case "0x000009FF": return "Suzhou AGIOE Equipment Co. Ltd."; break;
-
-                case "0x00000A00": return "OPTOELECTRONICS CO., LTD."; break;
-                case "0x00000A01": return "Hitachi Energy Switzerland Ltd., Semiconductors"; break;
-                case "0x00000A02": return "FMS Force Measuring Systems AG"; break;
-                case "0x00000A03": return "Kulicke & Soffa Pte Ltd"; break;
-                case "0x00000A04": return "HEXMOTO Controls Pvt. Ltd"; break;
-                case "0x00000A05": return "Esautomotion s.r.l"; break;
-                case "0x00000A06": return "Canon ANELVA Corporation"; break;
-                case "0x00000A07": return "Glowbuzzer Ltd"; break;
-                case "0x00000A08": return "Technische Universität München, Fakultät für Maschinenwesen"; break;
-                case "0x00000A09": return "Beijing iTegva Technology Co., Ltd."; break;
-                case "0x00000A0A": return "Zhejiang Wolong Servo Technology Co., Ltd."; break;
-                case "0x00000A0B": return "SINOMACH Intelligence Technology Research Institute Co., Ltd."; break;
-                case "0x00000A0C": return "Pusan National University, Department of Electronics Engineering, Embedded Control System Lab."; break;
-                case "0x00000A0D": return "CRRC ZHUZHOU INSTITUTE CO.,LTD."; break;
-                case "0x00000A0E": return "FATEK Automation Corporation"; break;
-                case "0x00000A0F": return "Racelogic Limited"; break;
-
-                case "0x00000A10": return "GRITEC AG"; break;
-                case "0x00000A11": return "Synhelion Germany GmbH"; break;
-                case "0x00000A12": return "National Technical University of Athens, School of Mechanical Engineering"; break;
-                case "0x00000A13": return "Changzhou GS Technology Co., Ltd."; break;
-                case "0x00000A14": return "isel facility GmbH"; break;
-                case "0x00000A15": return "inotech Meter Calibration Systems GmbH"; break;
-                case "0x00000A16": return "HYUNDAI WIA CORP."; break;
-                case "0x00000A17": return "DARPAMotion Ltd."; break;
-                case "0x00000A18": return "MICRO TREND AUTOMATION CO.,LTD"; break;
-                case "0x00000A19": return "Suzhou Xiling Control Technology Co., Ltd."; break;
-                case "0x00000A1A": return "UCAM Pvt. Ltd."; break;
-                case "0x00000A1B": return "Thomas More Mechelen-Antwerpen vzw, Campus De Nayer, Department Technology & IT, EmSys Research Group"; break;
-                case "0x00000A1C": return "Planar Motor Incorporated"; break;
-                case "0x00000A1D": return "DYNAX Corporation"; break;
-                case "0x00000A1E": return "Mitsubishi Electric Corporation"; break;
-                case "0x00000A1F": return "Neways Technologies B.V."; break;
-
-                case "0x00000A20": return "By Three projects Co.,Ltd."; break;
-                case "0x00000A21": return "FMI Industrial Automation B.V."; break;
-                case "0x00000A22": return "elecgator bvba"; break;
-                case "0x00000A23": return "EPA GmbH"; break;
-                case "0x00000A24": return "TESEC Corporation"; break;
-                case "0x00000A25": return "FUJITSU GENERAL ELECTRONICS LIMITED"; break;
-                case "0x00000A26": return "HOERBIGER Automatisierungstechnik GmbH"; break;
-                case "0x00000A27": return "RRRobotica Srl"; break;
-                case "0x00000A29": return "Servo Industrial Systems Co., Ltd."; break;
-                case "0x00000A2A": return "Guangzhou Hongsen Servo Motor Co., Ltd."; break;
-                case "0x00000A2C": return "U-System Co. Ltd."; break;
-                case "0x00000A2D": return "Sarissa GmbH"; break;
-                case "0x00000A2E": return "Zitte Corporation"; break;
-                case "0x00000A2F": return "EOPTIS S.r.l."; break;
-
-                case "0x00000A30": return "Aerotech, Inc."; break;
-                case "0x00000A31": return "Cognizant Technology Solutions India Private Limited"; break;
-                case "0x00000A32": return "eSSys Co., Ltd."; break;
-                case "0x00000A33": return "Alltec GmbH"; break;
-                case "0x00000A34": return "TDG Co.,Ltd."; break;
-                case "0x00000A35": return "STAR SEIKI CO., LTD."; break;
-                case "0x00000A36": return "SYNTEC TECHNOLOGY CO., LTD."; break;
-                case "0x00000A38": return "COWIN.FA CO., Ltd."; break;
-                case "0x00000A39": return "Rokae (Beijing) Robotics Technology Co.,Ltd."; break;
-                case "0x00000A3A": return "JASA Packaging Systems BV"; break;
-                case "0x00000A3B": return "Tecnos G.A. Srl"; break;
-                case "0x00000A3C": return "NIPPON SYSTEMWARE CO.,LTD."; break;
-                case "0x00000A3D": return "SPG Co., Ltd."; break;
-                case "0x00000A3E": return "ISIT"; break;
-                case "0x00000A3F": return "Mirae Corporation"; break;
-
-                case "0x00000A40": return "STANLEY Engineered Fastening"; break;
-                case "0x00000A41": return "Beijing Does Robotics Co., Ltd."; break;
-                case "0x00000A42": return "Amazipoint Technology Ltd."; break;
-                case "0x00000A43": return "Arbite Robotics"; break;
-                case "0x00000A44": return "Lodz University of Technology, Faculty of Electrical, Electronic, Computer and Control Engineering"; break;
-                case "0x00000A45": return "Libertron Co., Ltd."; break;
-                case "0x00000A46": return "Performance Controls, Inc."; break;
-                case "0x00000A47": return "Kwangwoon University, College of Electronics and Information Engineering, School of Robotics"; break;
-                case "0x00000A48": return "SCANLAB GmbH"; break;
-                case "0x00000A49": return "Global Electronics Corporation"; break;
-                case "0x00000A4A": return "Embaix Consulting Dipl.-Ing Cord Elias"; break;
-                case "0x00000A4B": return "Wuxi Chihai Intelligent Technology Co., Ltd."; break;
-                case "0x00000A4C": return "PAC TECH CO., LTD."; break;
-                case "0x00000A4D": return "Tietech Co., Ltd."; break;
-                case "0x00000A4E": return "Hauch & Bach ApS"; break;
-                case "0x00000A4F": return "OOO Vnedrencheskaya Firma Elna"; break;
-
-                case "0x00000A50": return "Shenzhen RuiDa Technology Co., Ltd."; break;
-                case "0x00000A51": return "PTM mechatronics GmbH"; break;
-                case "0x00000A52": return "Schildknecht AG"; break;
-                case "0x00000A53": return "Shanghai Weihong Electronic Technology Co.,Ltd."; break;
-                case "0x00000A54": return "OOO Compel"; break;
-                case "0x00000A55": return "Zixel sas di Beschin Augusto & C."; break;
-                case "0x00000A57": return "Bender Robotics s.r.o."; break;
-                case "0x00000A58": return "Power Standards Lab Inc."; break;
-                case "0x00000A59": return "École Polytechnique de Montréal, Electrical Engineering Department"; break;
-                case "0x00000A5A": return "Novanta IMS"; break;
-                case "0x00000A5B": return "Winservo (Xiamen) Electrical Technology Co., Ltd."; break;
-                case "0x00000A5C": return "Weber Ultrasonics AG"; break;
-                case "0x00000A5D": return "NIDEC COPAL ELECTRONICS CORP."; break;
-                case "0x00000A5E": return "Mattson Thermal Products GmbH"; break;
-                case "0x00000A5F": return "ReACT Technologies Inc."; break;
-
-                case "0x00000A60": return "MILLAN Automation SAS"; break;
-                case "0x00000A61": return "ANDRITZ HYDRO GmbH"; break;
-                case "0x00000A62": return "Shenzhen Yuejiang Technology Co., Ltd."; break;
-                case "0x00000A63": return "Fineline Limited"; break;
-                case "0x00000A64": return "OEMB SA"; break;
-                case "0x00000A65": return "Philoptics Co., Ltd."; break;
-                case "0x00000A66": return "Vetaphone A/S"; break;
-                case "0x00000A67": return "Herkules-Resotec Elektronik GmbH"; break;
-                case "0x00000A68": return "ArtifactNoise, LLP"; break;
-                case "0x00000A69": return "DEPRAG SCHULZ GMBH & CO."; break;
-                case "0x00000A6A": return "Kinema AST S.r.l"; break;
-                case "0x00000A6B": return "ASAHI SURGICAL ROBOTICS CO.,LTD."; break;
-                case "0x00000A6C": return "LLC 'Plasmatic RnD'"; break;
-                case "0x00000A6D": return "Shanghai Tongyi Automation Technology Co., Ltd."; break;
-                case "0x00000A6F": return "Plasmatreat GmbH"; break;
-
-                case "0x00000A70": return "Balt-System Ltd."; break;
-                case "0x00000A71": return "Jack Sewing Machine Co., Ltd."; break;
-                case "0x00000A72": return "Okura Yusoki Co., Ltd."; break;
-                case "0x00000A73": return "CB7 Systems LLC"; break;
-                case "0x00000A74": return "Orotig S.r.l."; break;
-                case "0x00000A75": return "SCHMIDT Technology GmbH"; break;
-                case "0x00000A76": return "Ingenieurbüro Holtgrewe"; break;
-                case "0x00000A77": return "SWIGRO Additive Manufacturing Inc."; break;
-                case "0x00000A78": return "SPI Developments Ltd."; break;
-                case "0x00000A79": return "Shenzhen Xinchuan Electric Technology Co., Ltd."; break;
-                case "0x00000A7A": return "Saab AB"; break;
-                case "0x00000A7B": return "Beckman Coulter K.K."; break;
-                case "0x00000A7D": return "Crosscut Prototypes, LLC"; break;
-                case "0x00000A7E": return "Goertek Inc."; break;
-                case "0x00000A7F": return "SHINKAWA LTD."; break;
-
-                case "0x00000A80": return "adphos Innovative Technologies GmbH"; break;
-                case "0x00000A81": return "University of Stavanger, Faculty of Science and Technology"; break;
-                case "0x00000A82": return "RealSYS"; break;
-                case "0x00000A83": return "MTS Systems Corporation"; break;
-                case "0x00000A84": return "ZUKEN ELMIC, Inc."; break;
-                case "0x00000A85": return "'Power Supply Systems' Limited"; break;
-                case "0x00000A86": return "Nanjing Control Intelligent Technology Co.,Ltd."; break;
-                case "0x00000A87": return "Laser Institute of Shandong Academy of Sciences"; break;
-                case "0x00000A88": return "Shenzhen Ruitech Mechanical and Electrical Technology Co.,Ltd."; break;
-                case "0x00000A89": return "Shenzhen Hengyu Controller Technology Co., Ltd."; break;
-                case "0x00000A8A": return "BE.services GmbH"; break;
-                case "0x00000A8B": return "Enertronica Santerno S.p.A."; break;
-                case "0x00000A8C": return "O-DEAR INTERNATIONAL CORP."; break;
-                case "0x00000A8D": return "Scanivalve Corp."; break;
-                case "0x00000A8E": return "SMARTMOTION Co., Ltd."; break;
-                case "0x00000A8F": return "TOYO SYSTEM Co., Ltd."; break;
-
-                case "0x00000A90": return "Rheinmetall Electronics GmbH"; break;
-                case "0x00000A91": return "Vishay Nobel AB"; break;
-                case "0x00000A92": return "DMM Technology Corp."; break;
-                case "0x00000A93": return "Crossmuller Pty Ltd"; break;
-                case "0x00000A94": return "ibg Prüfcomputer GmbH"; break;
-                case "0x00000A95": return "NSK Ltd."; break;
-                case "0x00000A96": return "ELEDUS s.r.o."; break;
-                case "0x00000A97": return "Baldwin Technology GmbH"; break;
-                case "0x00000A98": return "Blum-Novotest GmbH"; break;
-                case "0x00000A99": return "KROHNE Messtechnik GmbH"; break;
-                case "0x00000A9B": return "Shenzhen ECON Technology Co.,Ltd."; break;
-                case "0x00000A9C": return "National Institute of Advanced Industrial Science and Technology (AIST), Intelligent Systems Research Institute (ISRI)"; break;
-                case "0x00000A9E": return "ZELTWANGER Leaktesting & Automation GmbH"; break;
-                case "0x00000A9F": return "CoSynth GmbH & Co. KG"; break;
-
-                case "0x00000AA0": return "Technical Development Corporation"; break;
-                case "0x00000AA1": return "AREVO INC."; break;
-                case "0x00000AA2": return "MTT Corporation"; break;
-                case "0x00000AA3": return "MTT Corporation"; break;
-                case "0x00000AA4": return "Mackware GmbH"; break;
-                case "0x00000AA5": return "Reno Sub-Systems Inc."; break;
-                case "0x00000AA6": return "BARBERAN S.A."; break;
-                case "0x00000AA7": return "Stratasys, Ltd."; break;
-                case "0x00000AA8": return "DEPUSH Technology Co.,Ltd."; break;
-                case "0x00000AA9": return "Justus-Liebig-Universität Gießen, I. Physikalisches Institut, Arbeitsgruppe Atom- und Molekülphysik"; break;
-                case "0x00000AAA": return "Think Surgical, Inc."; break;
-                case "0x00000AAC": return "Unipulse Corporation"; break;
-                case "0x00000AAD": return "Foshan City Coyo Precision Machinery Manufacturing Co. Ltd"; break;
-                case "0x00000AAE": return "Teknix Argentina SRL"; break;
-                case "0x00000AAF": return "TDK Corporation"; break;
-
-                case "0x00000AB0": return "HYUNDAI MOVEX"; break;
-                case "0x00000AB1": return "The Charles Stark Draper Laboratory, Inc."; break;
-                case "0x00000AB2": return "Technische Universität Berlin, Fakultät Elektrotechnik und Informatik, Fachgebiet Telekommunikationsnetze"; break;
-                case "0x00000AB3": return "Star Asia Trading Pte. Ltd."; break;
-                case "0x00000AB4": return "Changzhou Fulling Motor Co., Ltd."; break;
-                case "0x00000AB5": return "Shenzhen Qinglan Automation Technology Co.,Ltd"; break;
-                case "0x00000AB6": return "Beijing Hollysys Electric Technology Co., Ltd."; break;
-                case "0x00000AB7": return "ANTRIMON Group AG"; break;
-                case "0x00000AB8": return "Technische Universität Dresden (TU Dresden), Fakultät Maschinenwesen, Institut für Werkzeugmaschinen und Steuerungstechnik"; break;
-                case "0x00000AB9": return "MikroElektronika d.o.o."; break;
-                case "0x00000ABA": return "Sasken Technologies Limited"; break;
-                case "0x00000ABB": return "ABB AS Corporate Research"; break;
-                case "0x00000ABD": return "STIGAL"; break;
-                case "0x00000ABE": return "TnS Co., Ltd"; break;
-                case "0x00000ABF": return "PAIX Co.,Ltd"; break;
-
-                case "0x00000AC0": return "Senfit Ltd."; break;
-                case "0x00000AC1": return "Promaster Technology Corporation"; break;
-                case "0x00000AC2": return "CRSC Urban Rail Transit Technology Co.,Ltd"; break;
-                case "0x00000AC3": return "Anthony Best Dynamics Ltd."; break;
-                case "0x00000AC4": return "TVM Signalling and Transportation Systems Pvt. Ltd"; break;
-                case "0x00000AC5": return "neuroConn GmbH"; break;
-                case "0x00000AC6": return "Servelec Technologies Pty Ltd"; break;
-                case "0x00000AC7": return "Stereotaxis, Inc."; break;
-                case "0x00000AC8": return "National Formosa University, College of Engineering"; break;
-                case "0x00000AC9": return "Alma Mater Studiorum - Università di Bologna, Department of Electrical, Electronic and Information Engineering “Guglielmo Marconi”, Laboratory of Automation and Robotics"; break;
-                case "0x00000ACA": return "Centroid Corporation"; break;
-                case "0x00000ACC": return "Nidec Motor Corporation"; break;
-                case "0x00000ACD": return "NAVER LABS Corp."; break;
-                case "0x00000ACE": return "Hitachi Industry & Control Solutions, Ltd."; break;
-                case "0x00000ACF": return "Thermo Fisher Scientific Messtechnik GmbH"; break;
-
-                case "0x00000AD0": return "JSC 'T-Platforms'"; break;
-                case "0x00000AD1": return "Halodi Robotics AS"; break;
-                case "0x00000AD2": return "Skala Sp. z o.o."; break;
-                case "0x00000AD3": return "Jin Solution Co., Ltd."; break;
-                case "0x00000AD4": return "KingSemi Co.,Ltd"; break;
-                case "0x00000AD5": return "VA Laserautomation GmbH"; break;
-                case "0x00000AD6": return "Kleintges Elektrogerätebau GmbH"; break;
-                case "0x00000AD7": return "Logosol, Inc."; break;
-                case "0x00000AD8": return "REJ Co., Ltd."; break;
-                case "0x00000AD9": return "TCK Inc."; break;
-                case "0x00000ADA": return "Axetris AG"; break;
-                case "0x00000ADB": return "Replicant Automation FZE"; break;
-                case "0x00000ADC": return "AIRTEC Pneumatic GmbH"; break;
-                case "0x00000ADD": return "Equip-Test Kft."; break;
-                case "0x00000ADE": return "ChromaTan Corporation"; break;
-                case "0x00000ADF": return "Ford Motor Company Limited"; break;
-
-                case "0x00000AE0": return "thyssenkrupp Marine Systems GmbH"; break;
-                case "0x00000AE1": return "GEFAZ mbH"; break;
-                case "0x00000AE3": return "L&T Technology Services Limited"; break;
-                case "0x00000AE5": return "The Cyber University of Korea, Department of Mechanical and Control Engineering"; break;
-                case "0x00000AE6": return "SCHOBER Elektronik GmbH"; break;
-                case "0x00000AE7": return "Simulation and Control Technologies, Inc"; break;
-                case "0x00000AE8": return "Guangdong Sumida Automation Co.,Ltd."; break;
-                case "0x00000AE9": return "GEMSS Medical Systems Co.,Ltd."; break;
-                case "0x00000AEA": return "Shanghai Electric Power T&D Group"; break;
-                case "0x00000AEB": return "Shandong University, School of Control Science and Engineering"; break;
-                case "0x00000AEC": return "Fiessler Elektronik GmbH & Co. KG"; break;
-                case "0x00000AED": return "Cencorp Automation Technology Co, Ltd."; break;
-                case "0x00000AEE": return "Venture International Pte Ltd"; break;
-                case "0x00000AEF": return "EcoTronic GmbH"; break;
-
-                case "0x00000AF0": return "Shenzhen Donglaier Smart Technology Co., Ltd."; break;
-                case "0x00000AF1": return "Domino UK Limited"; break;
-                case "0x00000AF3": return "Elekta Solutions AB"; break;
-                case "0x00000AF4": return "Logic Fruit Technologies Pvt. Ltd."; break;
-                case "0x00000AF5": return "ecocoach AG"; break;
-                case "0x00000AF6": return "SIOS Meßtechnik GmbH"; break;
-                case "0x00000AF7": return "Jabil Circuit Magyarország Kft."; break;
-                case "0x00000AF8": return "seven dreamers laundroid, inc."; break;
-                case "0x00000AF9": return "VR Group, a.s."; break;
-                case "0x00000AFA": return "Afag Automation AG"; break;
-                case "0x00000AFB": return "Miyagi Nikon Precision Co., Ltd."; break;
-                case "0x00000AFC": return "AutomationWare S.r.l."; break;
-                case "0x00000AFD": return "Isar Aerospace Technologies GmbH"; break;
-                case "0x00000AFE": return "GTSystem GmbH"; break;
-                case "0x00000AFF": return "Technische Universität München, Department of Physics"; break;
-
-                case "0x00000B00": return "S+S Regeltechnik GmbH"; break;
-                case "0x00000B01": return "Osaka University, Graduate School of Engineering Science"; break;
-                case "0x00000B02": return "Vögtlin Instruments GmbH"; break;
-                case "0x00000B03": return "TOHAN DENSHI KIKI CO.,LTD."; break;
-                case "0x00000B04": return "Shinwa Industries, Inc."; break;
-                case "0x00000B05": return "Suzhou Linkhou Robot Co.,Ltd"; break;
-                case "0x00000B06": return "DMC, Inc."; break;
-                case "0x00000B07": return "Nippon Pulse Motor Co., Ltd."; break;
-                case "0x00000B08": return "LANG GmbH & Co. KG"; break;
-                case "0x00000B09": return "STICHT Technologie GmbH"; break;
-                case "0x00000B0A": return "HIMS Co., Ltd."; break;
-                case "0x00000B0B": return "WITRON Logistik + Informatik GmbH"; break;
-                case "0x00000B0C": return "Vistec Electron Beam GmbH"; break;
-                case "0x00000B0D": return "General Atomics"; break;
-                case "0x00000B0E": return "Teubner Industrie-Elektronik GmbH"; break;
-                case "0x00000B0F": return "DEWETRON GmbH"; break;
-
-                case "0x00000B10": return "Philip Morris Products SA"; break;
-                case "0x00000B11": return "Nihon Protech Software Co., Ltd."; break;
-                case "0x00000B13": return "Industrial Indexing Systems, Inc."; break;
-                case "0x00000B14": return "AKIM METAL Sanayi Ve Ticaret Anonim Sirketi"; break;
-                case "0x00000B15": return "MEODAT Messtechnik, Ortung und Datenverarbeitung GmbH"; break;
-                case "0x00000B17": return "Goyo Electronics Co.,Ltd."; break;
-                case "0x00000B18": return "Shanghai Golytec Automation Co., Ltd."; break;
-                case "0x00000B19": return "Redcur GmbH"; break;
-                case "0x00000B1A": return "Room3327, Inc."; break;
-                case "0x00000B1C": return "Love Electronics Ltd"; break;
-                case "0x00000B1D": return "Fontys University of Applied Sciences, School of Information & Communication Technology"; break;
-                case "0x00000B1E": return "Hocoma AG"; break;
-                case "0x00000B1F": return "Sensor Instruments Entwicklungs- und Vertriebs GmbH"; break;
-
-                case "0x00000B20": return "Reboocon Bionics B.V."; break;
-                case "0x00000B21": return "Olympus NDT Canada, a subsidiary of Olympus Scientific Solutions Americas"; break;
-                case "0x00000B22": return "Photon Control Inc."; break;
-                case "0x00000B23": return "NK Labs, LLC"; break;
-                case "0x00000B24": return "Excelpoint Systems (India) Pvt Ltd"; break;
-                case "0x00000B25": return "'Gheorghe Asachi' Technical University of Iasi, Faculty of Automatic Control and Computer Engineering"; break;
-                case "0x00000B26": return "Manroland Sheetfed GmbH"; break;
-                case "0x00000B27": return "OPTEX FA CO., LTD."; break;
-                case "0x00000B28": return "SMAC Corporation"; break;
-                case "0x00000B29": return "Toshiba Infrastructure Systems & Solutions Corporation"; break;
-                case "0x00000B2A": return "SAITEL S.r.l."; break;
-                case "0x00000B2B": return "Hebi Haichang Special Equipment Co.,Ltd."; break;
-                case "0x00000B2C": return "Salunda Ltd"; break;
-                case "0x00000B2D": return "Higerman CNC Technology (SZ) Limited"; break;
-                case "0x00000B2E": return "IPG Laser GmbH"; break;
-                case "0x00000B2F": return "RTSoft, AO"; break;
-
-                case "0x00000B30": return "Dalian Hi-Sensor Technology Co., Ltd."; break;
-                case "0x00000B31": return "alpiscan srls"; break;
-                case "0x00000B32": return "DYNAMIC OPTICS s.r.l."; break;
-                case "0x00000B33": return "OOO “ITS-Sibir”"; break;
-                case "0x00000B34": return "SUMITOMO RIKO Company Limited"; break;
-                case "0x00000B35": return "Tianjin Automa Technology Co. Ltd."; break;
-                case "0x00000B37": return "Human Automation Co., Ltd."; break;
-                case "0x00000B38": return "Aplex Technology Inc."; break;
-                case "0x00000B39": return "Shanghai Jesee Auto System Co., Ltd"; break;
-                case "0x00000B3A": return "Kunming Unionscience Technology Co.,Ltd"; break;
-                case "0x00000B3B": return "Fitz-Thors Engineering, Inc."; break;
-                case "0x00000B3C": return "ACTIA Automotive SA"; break;
-                case "0x00000B3D": return "Kunshan SVL Electric Co.,Ltd"; break;
-                case "0x00000B3E": return "SilCore Technology"; break;
-                case "0x00000B3F": return "SHENZHEN QITAI TECHNOLOGY CO.LTD"; break;
-
-                case "0x00000B40": return "A. Sturzenegger Elektronik GmbH"; break;
-                case "0x00000B41": return "ZEUS CO., LTD."; break;
-                case "0x00000B42": return "BETAMONT s.r.o."; break;
-                case "0x00000B43": return "Strategy Automation S.r.l."; break;
-                case "0x00000B44": return "Fachhochschule Nordwestschweiz, Hochschule für Technik, Institut für Automation"; break;
-                case "0x00000B45": return "SMS group GmbH"; break;
-                case "0x00000B46": return "TRUMPF Schweiz AG"; break;
-                case "0x00000B47": return "Fraunhofer-Institut für Silicatforschung"; break;
-                case "0x00000B48": return "The University of Tokyo, Graduate School of Information Science and Technology"; break;
-                case "0x00000B49": return "Indian Institute of Science, Interdisciplinary Centre for Energy Research"; break;
-                case "0x00000B4A": return "Overlay Technology OÜ"; break;
-                case "0x00000B4B": return "CK Automation, LLC"; break;
-                case "0x00000B4D": return "OOO 'Kompex-T'"; break;
-                case "0x00000B4E": return "Ostbayerische Technische Hochschule Regensburg, Fakultät Maschinenbau"; break;
-                case "0x00000B4F": return "Hefei Eagle Automation Engineering Technology Co., Ltd."; break;
-
-                case "0x00000B50": return "Vertiv Tech Co., Ltd"; break;
-                case "0x00000B51": return "Sanying MotionControl Instruments Ltd."; break;
-                case "0x00000B52": return "Jiangsu Saiyang Mechanical & Electrical Technology Co., Ltd."; break;
-                case "0x00000B53": return "Robosoft NV"; break;
-                case "0x00000B54": return "MotionBank"; break;
-                case "0x00000B55": return "South China University of Technology, School of Automation Science & Engineering"; break;
-                case "0x00000B56": return "Oetiker Schweiz AG"; break;
-                case "0x00000B57": return "Chiang Mai University, Faculty of Engineering"; break;
-                case "0x00000B58": return "Shenzhen FOXON Automation Technology Co., Ltd."; break;
-                case "0x00000B59": return "Heinmade BV"; break;
-                case "0x00000B5A": return "ING-AUTOMATION"; break;
-                case "0x00000B5B": return "Vanteon Corporation"; break;
-                case "0x00000B5C": return "Solvine, Inc."; break;
-                case "0x00000B5D": return "SHINWA Controls Co., Ltd."; break;
-                case "0x00000B5E": return "Sierra CP Engineering Ltd."; break;
-                case "0x00000B5F": return "Rope Robotics ApS"; break;
-
-                case "0x00000B60": return "Hefei Sineva Intelligent Machine Co.,Ltd"; break;
-                case "0x00000B61": return "Shenzhen Porcheson Technology Co., Ltd"; break;
-                case "0x00000B62": return "Greenlight Innovation Inc."; break;
-                case "0x00000B63": return "PCB Piezotronics, Inc."; break;
-                case "0x00000B64": return "microGauge AG"; break;
-                case "0x00000B65": return "EL Klaszter Iroda Kft."; break;
-                case "0x00000B66": return "A.B.Esse Spa"; break;
-                case "0x00000B67": return "Corindus, Inc."; break;
-                case "0x00000B68": return "Celeroton AG"; break;
-                case "0x00000B69": return "SAMHYUN Co. Ltd."; break;
-                case "0x00000B6A": return "Ecole Polytechnique Fédérale de Lausanne, School of Basic Sciences"; break;
-                case "0x00000B6B": return "AVIC-XINHANG YUBEI STEERING SYSTEM (XINXIANG) CO.,LTD"; break;
-                case "0x00000B6C": return "Creative Conners, Inc."; break;
-                case "0x00000B6D": return "Mamezou Co.,Ltd."; break;
-                case "0x00000B6E": return "Raith B.V."; break;
-                case "0x00000B6F": return "Soft Harmony"; break;
-
-                case "0x00000B70": return "Elektrik Üretim A.S."; break;
-                case "0x00000B71": return "Delft University of Technology, Electronic and Mechanical Support Division (DEMO)"; break;
-                case "0x00000B72": return "machineering GmbH & Co. KG"; break;
-                case "0x00000B73": return "GRAPHIMECC S.r.l."; break;
-                case "0x00000B74": return "TOPTICA Projects GmbH"; break;
-                case "0x00000B75": return "Enlaica Co., Ltd."; break;
-                case "0x00000B76": return "SYSTEC Corporation"; break;
-                case "0x00000B77": return "Sherpa Inc."; break;
-                case "0x00000B78": return "Sioux Embedded Systems B.V."; break;
-                case "0x00000B79": return "UNISEM Co., Ltd."; break;
-                case "0x00000B7A": return "William Petersen Elektronik A/S"; break;
-                case "0x00000B7B": return "Shanghai Velle Automobile Air Conditioner Co., Ltd."; break;
-                case "0x00000B7C": return "Vision Tech Co."; break;
-                case "0x00000B7D": return "Technische Universität Wien, Fakultät für Elektrotechnik und Informationstechnik"; break;
-                case "0x00000B7E": return "Universität Augsburg, Fakultät für Angewandte Informatik"; break;
-                case "0x00000B7F": return "Tecnomotion Srl"; break;
-
-                case "0x00000B80": return "Microservo Co., Ltd."; break;
-                case "0x00000B81": return "Micro CleanRoom Technology GmbH"; break;
-                case "0x00000B82": return "Global Motion & Systems Inc."; break;
-                case "0x00000B83": return "L3 Datron Advanced Technologies"; break;
-                case "0x00000B84": return "NTN Technical Service Corporation"; break;
-                case "0x00000B85": return "Chugoku Electric Manufacturing Co.,Inc."; break;
-                case "0x00000B86": return "European Spallation Source ERIC, Integrated Control System Division"; break;
-                case "0x00000B87": return "MARS CO., LTD."; break;
-                case "0x00000B88": return "SCOPX LABS"; break;
-                case "0x00000B89": return "Laser Mechanisms, Inc."; break;
-                case "0x00000B8A": return "TechnoPro, Inc."; break;
-                case "0x00000B8B": return "Advanced Micro Controls, Inc."; break;
-                case "0x00000B8C": return "Intelligence Technology of CEC Co., Ltd"; break;
-                case "0x00000B8D": return "Applied Dynamics International, Inc."; break;
-                case "0x00000B8E": return "Conch Electronic Co.,Ltd."; break;
-                case "0x00000B8F": return "Shenzhen Lisan M&E Co., Ltd."; break;
-
-                case "0x00000B90": return "FOXIDE LLC"; break;
-                case "0x00000B91": return "C2P Inc."; break;
-                case "0x00000B92": return "SonMicroSystem Co."; break;
-                case "0x00000B94": return "HUST Automation System Co., Ltd."; break;
-                case "0x00000B95": return "ASIX Electronics Corporation"; break;
-                case "0x00000B97": return "Laboratoire d'Analyse et d'Architecture des Systèmes (LAAS-CNRS)"; break;
-                case "0x00000B98": return "KM DIGITECH CO., LTD."; break;
-                case "0x00000B99": return "Sens4 A/S"; break;
-                case "0x00000B9A": return "Nidec Research and Development Center, Taiwan"; break;
-                case "0x00000B9D": return "Cajo Technologies Oy"; break;
-                case "0x00000B9E": return "VAS HIGH TECHNOLOGY SOLUTION CORPORATION"; break;
-                case "0x00000B9F": return "Beijing Chymotion Control Technology Co. Ltd"; break;
-
-                case "0x00000BA0": return "MarquipWardUnited"; break;
-                case "0x00000BA1": return "Komax Singapore Pte Ltd"; break;
-                case "0x00000BA2": return "Persimmon Technologies Corporation"; break;
-                case "0x00000BA3": return "Tohoku University, New Industry Creation Hatchery Center (NICHe), Fluctuation Free Facility (FFF)"; break;
-                case "0x00000BA4": return "Rheinische Fachhochschule Köln gGmbH, Ingenieurwesen"; break;
-                case "0x00000BA5": return "Luminize"; break;
-                case "0x00000BA6": return "v6e Limited"; break;
-                case "0x00000BA7": return "ECA ROBOTICS SASU"; break;
-                case "0x00000BA8": return "Sphere Fluidics Limited"; break;
-                case "0x00000BA9": return "WELCON Systems Inc."; break;
-                case "0x00000BAA": return "Exor International S.p.A"; break;
-                case "0x00000BAB": return "Dekimo Turnhout"; break;
-                case "0x00000BAC": return "Lavender CE Pty Ltd"; break;
-                case "0x00000BAD": return "Science in Motion Technology Corporation, Ltd."; break;
-                case "0x00000BAE": return "IST Ingenieurbüro für Sensortechnik GmbH"; break;
-                case "0x00000BAF": return "maku engineering GmbH"; break;
-
-                case "0x00000BB0": return "Geoservices Equipements SAS"; break;
-                case "0x00000BB1": return "NEST Electronics GmbH"; break;
-                case "0x00000BB2": return "MR Shim GmbH"; break;
-                case "0x00000BB4": return "Zettaone Technologies India Pvt Ltd"; break;
-                case "0x00000BB6": return "Universität Augsburg, Fakultät für angewandte Informatik, Institut für Informatik"; break;
-                case "0x00000BB7": return "SCHUNK Electronic Solutions GmbH"; break;
-                case "0x00000BB8": return "KOORD Sàrl"; break;
-                case "0x00000BB9": return "regenHU Ltd."; break;
-                case "0x00000BBA": return "VONSCH spol. s r.o."; break;
-                case "0x00000BBC": return "Bore Automation Tech. Co., Ltd."; break;
-                case "0x00000BBD": return "Board Planning Co., Ltd."; break;
-                case "0x00000BBE": return "Kamp & Kötter GmbH"; break;
-                case "0x00000BBF": return "IOTech Systems Limited"; break;
-
-                case "0x00000BC0": return "Altinay Robot Technologies Inc."; break;
-                case "0x00000BC1": return "Lorenz Messtechnik GmbH"; break;
-                case "0x00000BC2": return "LJ Welding Automation"; break;
-                case "0x00000BC3": return "DMP Electronics Inc."; break;
-                case "0x00000BC4": return "Dima Motor Tec. Co., Ltd."; break;
-                case "0x00000BC5": return "Fraunhofer-Institut für Produktionstechnik und Automatisierung"; break;
-                case "0x00000BC6": return "Schneider Electric (China) Co., Ltd."; break;
-                case "0x00000BC7": return "Suzhou DaFang Special Vehicle Co., Ltd"; break;
-                case "0x00000BC8": return "Shenzhen OUYE Intelligent Technology Co., Ltd"; break;
-                case "0x00000BC9": return "HBH Microwave GmbH"; break;
-                case "0x00000BCA": return "MTA B.V."; break;
-                case "0x00000BCB": return "SYSTEM ARTWARE, Inc."; break;
-                case "0x00000BCC": return "ProDSP Technologies Zrt."; break;
-                case "0x00000BCD": return "Hypersen Technologies Co., Ltd"; break;
-                case "0x00000BCE": return "Pyramid Vacuum LLC"; break;
-                case "0x00000BCF": return "Hanbaek Tech Co., Ltd."; break;
-
-                case "0x00000BD0": return "SC3 Automation Inc."; break;
-                case "0x00000BD1": return "Fachhochschule Nordwestschweiz, Hochschule für Technik, Institut für Sensorik und Elektronik"; break;
-                case "0x00000BD2": return "innofas GmbH"; break;
-                case "0x00000BD3": return "Adamant Namiki Precision Jewel Co., Ltd."; break;
-                case "0x00000BD4": return "YUNNAN KSEC INTELLIGENT EQUIPMENT CO.,LTD."; break;
-                case "0x00000BD6": return "Industrial Solutions Zuid-Oost B.V. (Actemium Electronics)"; break;
-                case "0x00000BD7": return "BETONMAC S.A."; break;
-                case "0x00000BD8": return "Manufacturing Objects"; break;
-                case "0x00000BD9": return "Chen Yuan International Co., Ltd."; break;
-                case "0x00000BDB": return "Griffin Technology Co., Ltd."; break;
-                case "0x00000BDC": return "RORZE CORPORATION"; break;
-                case "0x00000BDD": return "Bruker Daltonik GmbH"; break;
-                case "0x00000BDE": return "Logos01 Srl"; break;
-                case "0x00000BDF": return "Coaters Paradise GmbH"; break;
-
-                case "0x00000BE0": return "Hahn-Schickard-Gesellschaft für angewandte Forschung e.V."; break;
-                case "0x00000BE2": return "R&D Company 'Vector' LLC"; break;
-                case "0x00000BE3": return "ReeR SpA"; break;
-                case "0x00000BE4": return "HP Scitex Ltd."; break;
-                case "0x00000BE5": return "Hitachi Automotive Systems Americas, Inc."; break;
-                case "0x00000BE6": return "Zhejiang Eternal Automation Sci-Tec Co.,Ltd"; break;
-                case "0x00000BE7": return "Shenzhen Siron Electrical Co.,Ltd."; break;
-                case "0x00000BE8": return "ARUP Laboratories"; break;
-                case "0x00000BE9": return "LETech Co.,Ltd."; break;
-                case "0x00000BEA": return "Bangkok University, School of Engineering, Robotics Laboratory"; break;
-                case "0x00000BEB": return "Kontron Electronics GmbH"; break;
-                case "0x00000BEC": return "Shanghai Junqian Sensing Technology Co., Ltd."; break;
-                case "0x00000BEE": return "VI.BE.MAC s.p.a."; break;
-                case "0x00000BEF": return "EMG Automation GmbH"; break;
-
-                case "0x00000BF0": return "American Controls & Automation, Inc."; break;
-                case "0x00000BF1": return "Ascale Enterprise Co., Ltd."; break;
-                case "0x00000BF2": return "University of Applied Sciences and Arts Western Switzerland (HES-SO Fribourg)"; break;
-                case "0x00000BF3": return "Lantronix, Inc."; break;
-                case "0x00000BF4": return "Technische Hochschule Rosenheim"; break;
-                case "0x00000BF5": return "LEIFERT INDUCTION GmbH"; break;
-                case "0x00000BF6": return "Automation of Things Europe GmbH"; break;
-                case "0x00000BF7": return "SAMWON ACT Co.,Ltd"; break;
-                case "0x00000BF8": return "Wenling Yuhai Electromechanical CO.,LTD"; break;
-                case "0x00000BF9": return "Faraday Motion Controls Ltd."; break;
-                case "0x00000BFA": return "Nikon Systems Inc."; break;
-                case "0x00000BFB": return "Sanitas EG S.r.l."; break;
-                case "0x00000BFC": return "Videojet Technologies Inc."; break;
-                case "0x00000BFD": return "ABB Automation GmbH"; break;
-                case "0x00000BFE": return "WARDJet LLC"; break;
-                case "0x00000BFF": return "Ichor Systems, Inc."; break;
-
-                case "0x00000C00": return "UTAREX Co., Ltd."; break;
-                case "0x00000C01": return "GAON SOLUTION Ltd."; break;
-                case "0x00000C02": return "Highlight Tech Corp."; break;
-                case "0x00000C03": return "PO OWEN LLC"; break;
-                case "0x00000C04": return "RFPT Co., Ltd."; break;
-                case "0x00000C05": return "Roboteq, Inc."; break;
-                case "0x00000C06": return "Norgren Manufacturing Co., Ltd."; break;
-                case "0x00000C07": return "FarmWise Labs, Inc."; break;
-                case "0x00000C08": return "AŽD Praha s.r.o."; break;
-                case "0x00000C0A": return "Can Man AG"; break;
-                case "0x00000C0B": return "Plustherm Point AG"; break;
-                case "0x00000C0C": return "MinebeaMitsumi Inc."; break;
-                case "0x00000C0D": return "System Level Solutions (India) Pvt. Ltd."; break;
-                case "0x00000C0E": return "EverMAX s.r.o."; break;
-                case "0x00000C0F": return "Maruyama Manufacturing Corporation (DBA Maruyama Chillers Corporation)"; break;
-
-                case "0x00000C10": return "Han's Laser (Singapore) Pte Ltd"; break;
-                case "0x00000C11": return "Cordova Industrial Integradores S.A. de C.V."; break;
-                case "0x00000C12": return "NAMOO Co., Ltd."; break;
-                case "0x00000C13": return "Blu Technology di Ing Carlo Mauri"; break;
-                case "0x00000C14": return "isel Germany AG"; break;
-                case "0x00000C15": return "UNITEK Industrie Elektronik GmbH"; break;
-                case "0x00000C16": return "Tohan-Engineering Corporation"; break;
-                case "0x00000C17": return "Machine Prognostics AS"; break;
-                case "0x00000C18": return "Avestron Inc."; break;
-                case "0x00000C19": return "AP Systems Co., Ltd."; break;
-                case "0x00000C1A": return "TIAN JIN SUNKE DIGITAL CONTROL TECHNOLOGY CO.,LTD"; break;
-                case "0x00000C1B": return "Robotech Co., Ltd."; break;
-                case "0x00000C1C": return "AccuteX Technologies Co., Ltd."; break;
-                case "0x00000C1D": return "Coherent Mainz (DILAS Diodenlaser GmbH)"; break;
-                case "0x00000C1E": return "Daxta Equipamentos Eletrônicos Indústria e Comércio Ltda"; break;
-
-                case "0x00000C20": return "ADG Automatisierung Dresden GmbH"; break;
-                case "0x00000C21": return "WHITEvoid GmbH"; break;
-                case "0x00000C22": return "BAS BV"; break;
-                case "0x00000C23": return "RS Elektroniksysteme GmbH"; break;
-                case "0x00000C25": return "HORIBA FuelCon GmbH"; break;
-                case "0x00000C26": return "miCos Iberia S.L."; break;
-                case "0x00000C27": return "Slovak Academy of Sciences, Institute of Electrical Engineering"; break;
-                case "0x00000C28": return "Roketsan A.S."; break;
-                case "0x00000C29": return "Bescom Global Co., Ltd."; break;
-                case "0x00000C2A": return "Magnet-Schultz GmbH & Co. KG"; break;
-                case "0x00000C2B": return "NEWSUBSTANCE Limited"; break;
-                case "0x00000C2C": return "JingQi (Tianjin) Technology Co., Ltd."; break;
-                case "0x00000C2D": return "TSK Prüfsysteme GmbH"; break;
-                case "0x00000C2E": return "Airity Technologies, Inc."; break;
-                case "0x00000C2F": return "EEP Elektro Elektronik Pranjic GmbH"; break;
-
-                case "0x00000C30": return "MovekoTech Oy"; break;
-                case "0x00000C31": return "Federal State Institution 'Scientific Research Institute for System Analysis of the Russian Academy of Sciences'"; break;
-                case "0x00000C32": return "Nearfield Instruments B.V."; break;
-                case "0x00000C33": return "TÜBITAK BILGEM, National Research Institute of Electronics and Cryptology (UEKAE)"; break;
-                case "0x00000C34": return "Siemens Energy Global GmbH & Co. KG"; break;
-                case "0x00000C35": return "progress Maschinen & Automation AG"; break;
-                case "0x00000C36": return "Heliotis AG"; break;
-                case "0x00000C37": return "Strong Plus Technology GmbH"; break;
-                case "0x00000C38": return "LS Energy Solutions LLC"; break;
-                case "0x00000C39": return "Yaskawa Controls Co., Ltd."; break;
-                case "0x00000C3A": return "NOVUSS-Automation GmbH"; break;
-                case "0x00000C3C": return "Sanwa Engineering Corp."; break;
-                case "0x00000C3D": return "WIBOND Informationssysteme GmbH"; break;
-                case "0x00000C3E": return "MSP, a division of TSI Inc."; break;
-                case "0x00000C3F": return "Wuxi Xinchang Electronic Technology Co., Ltd."; break;
-
-                case "0x00000C40": return "NDK Semiconductor Co., Ltd."; break;
-                case "0x00000C41": return "MS Ultraschall Technologie GmbH"; break;
-                case "0x00000C42": return "Korea University of Technology and Education (KOREATECH)"; break;
-                case "0x00000C43": return "Accelerated Software Engineering Ltd."; break;
-                case "0x00000C44": return "Shenzhen Instar Electromechanical Technology Development Co., Ltd."; break;
-                case "0x00000C45": return "Redler Technologies Ltd."; break;
-                case "0x00000C46": return "NPOOO 'Sital'"; break;
-                case "0x00000C47": return "Eaton Corporation"; break;
-                case "0x00000C48": return "Techservo (Shenzhen) Co., Ltd."; break;
-                case "0x00000C49": return "Fabmatics GmbH"; break;
-                case "0x00000C4A": return "Sasaki Sekkei Co., Ltd."; break;
-                case "0x00000C4B": return "Löhnert Elektronik GmbH"; break;
-                case "0x00000C4C": return "Vendée Concept SA"; break;
-                case "0x00000C4D": return "Nobleo Technology Holding BV"; break;
-                case "0x00000C4E": return "ECI Technology, Inc."; break;
-                case "0x00000C4F": return "Linus G Productions GmbH"; break;
-
-                case "0x00000C50": return "PCB Elektronik San. Ve Tic. Ltd. Sti."; break;
-                case "0x00000C51": return "Omron Scientific Technologies, Inc."; break;
-                case "0x00000C52": return "Engineered Arts Limited"; break;
-                case "0x00000C53": return "NASA Jet Propulsion Laboratory"; break;
-                case "0x00000C54": return "Accelovant Technologies Corporation"; break;
-                case "0x00000C55": return "Hirata Corporation"; break;
-                case "0x00000C56": return "Fujian Nebula Electronics Co.,Ltd."; break;
-                case "0x00000C58": return "CYSCO Co., Ltd."; break;
-                case "0x00000C59": return "Esko-Graphics Kongsberg AS"; break;
-                case "0x00000C5A": return "WOT Co.,Ltd."; break;
-                case "0x00000C5C": return "SHENZHEN SENMUN ELECTRICAL CO.,LTD"; break;
-                case "0x00000C5D": return "Izhprest Ltd."; break;
-                case "0x00000C5E": return "HAWE Hydraulik SE"; break;
-                case "0x00000C5F": return "Finetech GmbH & Co. KG"; break;
-
-                case "0x00000C60": return "Mitutoyo Corporation"; break;
-                case "0x00000C61": return "Cremer Speciaalmachines B.V."; break;
-                case "0x00000C62": return "Astec Co., Ltd."; break;
-                case "0x00000C64": return "ELNA LTD."; break;
-                case "0x00000C65": return "Janasi Industries Ltd."; break;
-                case "0x00000C66": return "Universidad de La Frontera, Facultad de Ingeniería y Ciencias, Centro de Modelación y Computación Científica (CEMCC)"; break;
-                case "0x00000C67": return "KALEJA GmbH"; break;
-                case "0x00000C68": return "Caldwell Machines & Tools (CMT Engineering)"; break;
-                case "0x00000C69": return "ILJIN Global Holdings Co., Ltd."; break;
-                case "0x00000C6A": return "Proteus Vietnam Limited"; break;
-                case "0x00000C6C": return "JUKI CORPORATION"; break;
-                case "0x00000C6D": return "MT Drive & Control (Shenzhen) Co.,Ltd"; break;
-                case "0x00000C6E": return "ShenZhen HongChuangXing Motion Technology Co.,Ltd"; break;
-                case "0x00000C6F": return "isMedia Co., Ltd."; break;
-
-                case "0x00000C70": return "Shenzhen Yangshun Tongda Digital Technology Co., Ltd."; break;
-                case "0x00000C71": return "MVTECH Co.,Ltd."; break;
-                case "0x00000C72": return "Kane Terry Partridge dba Open Designer"; break;
-                case "0x00000C73": return "EK-Electronics GmbH"; break;
-                case "0x00000C74": return "Jiann Sheng Machinery & Electric Industrial Co., Ltd"; break;
-                case "0x00000C75": return "Gable Systems B.V."; break;
-                case "0x00000C76": return "Constructions-3D SAS"; break;
-                case "0x00000C77": return "MIP robotics"; break;
-                case "0x00000C78": return "YouTool Automation Co., Ltd."; break;
-                case "0x00000C79": return "Nanjing WEILAN Intelligent Technologies Co., Ltd."; break;
-                case "0x00000C7A": return "ABB S.p.A."; break;
-                case "0x00000C7B": return "Typhoon HIL Inc."; break;
-                case "0x00000C7C": return "BLUTek Inc."; break;
-                case "0x00000C7D": return "University of Engineering and Technology, Lahore, Al-Khwarizmi Institute of Computer Science, Human-Centered Robotics Lab"; break;
-                case "0x00000C7E": return "Technische Universität München, Fakultät für Informatik, Lehrstuhl für Robotik, Künstliche Intelligenz und Echtzeitsysteme (Informatik 6)"; break;
-                case "0x00000C7F": return "Northrop Grumman Sperry Marine B.V., German Branch"; break;
-
-                case "0x00000C80": return "Technical University of Munich, Department of Electrical and Computer Engineering, Institute for Cognitive Systems (ICS)"; break;
-                case "0x00000C81": return "TNO"; break;
-                case "0x00000C82": return "IK Electronic Manufacturing Services S.L.U"; break;
-                case "0x00000C83": return "Ningbo Schleicher Technology Group Co., Ltd."; break;
-                case "0x00000C84": return "TOWA Corporation"; break;
-                case "0x00000C85": return "Amacker Automation"; break;
-                case "0x00000C86": return "Hardt B.V."; break;
-                case "0x00000C87": return "Anurichip System Inc."; break;
-                case "0x00000C88": return "MESCO Engineering GmbH"; break;
-                case "0x00000C89": return "Oki Electric Industry Co., Ltd."; break;
-                case "0x00000C8A": return "Motorsports Electronics, LLC"; break;
-                case "0x00000C8B": return "PPT Co., Ltd."; break;
-                case "0x00000C8C": return "KYEONGIN TECH Co., Ltd."; break;
-                case "0x00000C8D": return "SAS GYS"; break;
-                case "0x00000C8E": return "Cyber Surgery S.L."; break;
-                case "0x00000C8F": return "CASTEK Mechatron Ind Co., Ltd."; break;
-
-                case "0x00000C90": return "ERMAKSAN MAKINA SANAYI VE TICARET A.S."; break;
-                case "0x00000C91": return "Elbit Systems Land Ltd."; break;
-                case "0x00000C93": return "Javox Solutions GmbH"; break;
-                case "0x00000C94": return "Resilient Power Systems, Inc."; break;
-                case "0x00000C95": return "CMRO Engineering"; break;
-                case "0x00000C96": return "Teknic, Inc."; break;
-                case "0x00000C97": return "Lug Healthcare Technology S.L."; break;
-                case "0x00000C98": return "Michael Koch GmbH"; break;
-                case "0x00000C99": return "UEC Scientific Instrument Co., Ltd."; break;
-                case "0x00000C9A": return "WEISS GmbH"; break;
-                case "0x00000C9B": return "NITTOSEIKO CO., LTD."; break;
-                case "0x00000C9C": return "WANTS Inc."; break;
-                case "0x00000C9D": return "Tecnosens S.p.A."; break;
-                case "0x00000C9F": return "Print Web International, Inc."; break;
-
-                case "0x00000CA0": return "FAIR Innovation(Suzhou) Robot System Co.,Ltd."; break;
-                case "0x00000CA1": return "OptiViz Technology, Inc."; break;
-                case "0x00000CA2": return "Shanghai YISU Information Technologies Co.,Ltd."; break;
-                case "0x00000CA3": return "Re S.p.A. Controlli Industriali"; break;
-                case "0x00000CA4": return "Canon Medical Systems Corporation"; break;
-                case "0x00000CA5": return "Suzhou Geyuan Electric Co., Ltd."; break;
-                case "0x00000CA6": return "Shenzhen MICFIND Drive Technology Co., Ltd."; break;
-                case "0x00000CA7": return "SECOM SRL"; break;
-                case "0x00000CA8": return "Panasonic Smart Factory Solutions Co., Ltd."; break;
-                case "0x00000CA9": return "BeiJing Agile Robots Technology Co.,Ltd."; break;
-                case "0x00000CAB": return "Taiwan Innovative Space, Inc."; break;
-                case "0x00000CAC": return "ABB Technikerschule"; break;
-                case "0x00000CAD": return "NOMOS Srl Tecnologie del Software"; break;
-                case "0x00000CAF": return "JSCC AUTOMATION (XIAMEN) LTD."; break;
-
-                case "0x00000CB0": return "GMVT GmbH"; break;
-                case "0x00000CB1": return "Swisslog AG"; break;
-                case "0x00000CB2": return "Therm-x of California Inc."; break;
-                case "0x00000CB3": return "CogniMade s.r.l."; break;
-                case "0x00000CB4": return "SERT METAL SAS"; break;
-                case "0x00000CB5": return "Kardanan Shargh Co."; break;
-                case "0x00000CB6": return "MPEX ROBOTICS KFT."; break;
-                case "0x00000CB7": return "Critical Link LLC"; break;
-                case "0x00000CB8": return "Flokontrol Endüstriyel Otomasyon San. ve Tic. Koll. Sti."; break;
-                case "0x00000CB9": return "Nidec Avtron Automation Corporation"; break;
-                case "0x00000CBA": return "Alphasystem Co.,Ltd."; break;
-                case "0x00000CBB": return "Carendes BVBA"; break;
-                case "0x00000CBC": return "Eltorque AS"; break;
-                case "0x00000CBD": return "University of Alberta, Faculty of Engineering"; break;
-                case "0x00000CBE": return "TOSIL Systems Private Limited"; break;
-                case "0x00000CBF": return "DELTA I/O CO.,LTD"; break;
-
-                case "0x00000CC0": return "Sipronika d.o.o."; break;
-                case "0x00000CC1": return "TESA SARL"; break;
-                case "0x00000CC2": return "NXP B.V."; break;
-                case "0x00000CC3": return "HERMOS AG"; break;
-                case "0x00000CC4": return "Svaya Robotics Pvt. Ltd."; break;
-                case "0x00000CC5": return "ARRIVAL LTD."; break;
-                case "0x00000CC6": return "Mold-Masters (2007) Limited"; break;
-                case "0x00000CC8": return "Hypex, d.o.o."; break;
-                case "0x00000CC9": return "Sansei Technologies, Inc."; break;
-                case "0x00000CCA": return "Shanghai United Imaging Healthcare Co., Ltd."; break;
-                case "0x00000CCB": return "Seoul National University"; break;
-                case "0x00000CCC": return "3C MACHINERY CO.,LTD."; break;
-                case "0x00000CCD": return "CHINO CORPORATION"; break;
-                case "0x00000CCE": return "WUHAN MOTUS TECH CO.,LTD."; break;
-                case "0x00000CCF": return "TPC Mechatronics Corp."; break;
-
-                case "0x00000CD0": return "Philips Medical Systems DMC GmbH"; break;
-                case "0x00000CD1": return "TAZMO Co., Ltd."; break;
-                case "0x00000CD2": return "Robo-Technology GmbH"; break;
-                case "0x00000CD3": return "Vivo Surgical Private Limited"; break;
-                case "0x00000CD4": return "Defence Research and Development Organisation, Research & Development Establishment (Engineers)"; break;
-                case "0x00000CD5": return "Jiangsu Shenzhou Semiconductor Technology Co., Ltd."; break;
-                case "0x00000CD6": return "GrainSoft"; break;
-                case "0x00000CD7": return "MECCAD Sàrl"; break;
-                case "0x00000CD9": return "National Formosa University, Department of Aeronautical Engineering, Innovative Design and Energy Application Lab. (IDEALab)"; break;
-                case "0x00000CDA": return "TOS Inc."; break;
-                case "0x00000CDB": return "GTM Testing and Metrology GmbH"; break;
-                case "0x00000CDC": return "První Signální, a.s."; break;
-                case "0x00000CDD": return "Georgia Institute of Technology, ECE Department, Center for Distributed Energy (CDE)"; break;
-                case "0x00000CDE": return "Plexim GmbH"; break;
-                case "0x00000CDF": return "Automation Industrial, Inc."; break;
-
-                case "0x00000CE0": return "Regloplas AG"; break;
-                case "0x00000CE1": return "Azureus Solutions Ltd"; break;
-                case "0x00000CE2": return "Safran Electronics & Defense SAS"; break;
-                case "0x00000CE3": return "Sogeti Nederland B.V."; break;
-                case "0x00000CE4": return "AKRYVIA SAS"; break;
-                case "0x00000CE5": return "FIRSTEC CO.,LTD."; break;
-                case "0x00000CE6": return "M.D. Micro Detectors S.p.A."; break;
-                case "0x00000CE7": return "Dataletics GmbH"; break;
-                case "0x00000CE8": return "Korea Institute of Machinery & Materials, Advanced Manufacturing Systems Research Division, Department of Ultra-Precision Machines and Systems"; break;
-                case "0x00000CE9": return "AEG Identifikationssysteme GmbH"; break;
-                case "0x00000CEA": return "CEA LIST"; break;
-                case "0x00000CEB": return "Shenyang Siasun Digital Drive Co., Ltd."; break;
-                case "0x00000CEC": return "TissUse GmbH"; break;
-                case "0x00000CED": return "LithExx-Systems GmbH"; break;
-                case "0x00000CEE": return "AICRA s.r.o."; break;
-                case "0x00000CEF": return "JANOME Corporation"; break;
-
-                case "0x00000CF0": return "Cambridge Filter Corporation"; break;
-                case "0x00000CF2": return "Celox Photonics Technology Inc."; break;
-                case "0x00000CF3": return "swissQprint AG"; break;
-                case "0x00000CF4": return "COMFILE Technology INC."; break;
-                case "0x00000CF5": return "Chengdu Vantron Technology Co., Ltd."; break;
-                case "0x00000CF6": return "Duale Hochschule Baden-Württemberg Mannheim, Fakultät Technik, Studiengang Elektrotechnik"; break;
-                case "0x00000CF7": return "Tesollo Inc."; break;
-                case "0x00000CF8": return "Roundpeg Technologies GmbH"; break;
-                case "0x00000CF9": return "Tianjin Research Institute of Electric Science Co.,Ltd."; break;
-                case "0x00000CFB": return "Chicago Flyhouse, Inc."; break;
-                case "0x00000CFC": return "Vectis Drive Inc."; break;
-                case "0x00000CFD": return "IMSTec GmbH"; break;
-                case "0x00000CFE": return "Leibniz Universität Hannover, Fakultät für Elektrotechnik und Informatik, Institut für Antriebssysteme und Leistungselektronik"; break;
-                case "0x00000CFF": return "Coretronic Corporation"; break;
-
-                case "0x00000D00": return "SOTHIS CIC TECH (Shanghai) Co., Ltd"; break;
-                case "0x00000D01": return "The Manufacturing Technology Centre Limited"; break;
-                case "0x00000D02": return "Tramper Technology B.V."; break;
-                case "0x00000D03": return "Reaction Dynamics Lab Inc."; break;
-                case "0x00000D04": return "Aeoon Technologies GmbH"; break;
-                case "0x00000D05": return "John Deere GmbH & Co. KG, John Deere Werk Mannheim"; break;
-                case "0x00000D06": return "Co.fin Elettronica s.r.l."; break;
-                case "0x00000D07": return "CISWORKS GmbH & Co. KG"; break;
-                case "0x00000D09": return "Lucas-Nülle GmbH"; break;
-                case "0x00000D0A": return "Battelle Memorial Institute"; break;
-                case "0x00000D0B": return "Fine Logic Co., Ltd."; break;
-                case "0x00000D0C": return "PACK'R SAS"; break;
-                case "0x00000D0D": return "HP Indigo Ltd."; break;
-                case "0x00000D0E": return "EMBEDDED SYSTEMS INC. dba ESI MOTION"; break;
-                case "0x00000D0F": return "DEIF A/S"; break;
-
-                case "0x00000D10": return "CEDRAT TECHNOLOGIES SA"; break;
-                case "0x00000D12": return "Givi Misure S.r.l. a socio unico"; break;
-                case "0x00000D13": return "ZETES Industries S.A."; break;
-                case "0x00000D14": return "Ideaflex sp. z o.o."; break;
-                case "0x00000D15": return "Emsiso d.o.o."; break;
-                case "0x00000D16": return "SysTec Systemtechnik und Industrieautomation GmbH"; break;
-                case "0x00000D17": return "Soehnle Industrial Solutions GmbH"; break;
-                case "0x00000D18": return "Unizen Technologies Pvt. Ltd."; break;
-                case "0x00000D19": return "White Oaks Engineering, LLC"; break;
-                case "0x00000D1A": return "Beijing BiTa Technical Services Co., Ltd."; break;
-                case "0x00000D1B": return "Nordmann GmbH & Co. KG"; break;
-                case "0x00000D1C": return "Seven Metal Corp."; break;
-                case "0x00000D1D": return "Festo Korea Co., Ltd."; break;
-                case "0x00000D1E": return "Hyperspectral Sciences, Inc."; break;
-                case "0x00000D1F": return "AA EDM Corporation"; break;
-
-                case "0x00000D20": return "Corelase Oy"; break;
-                case "0x00000D21": return "CETHIK Group Co., Ltd"; break;
-                case "0x00000D22": return "LIVSMED, Inc."; break;
-                case "0x00000D23": return "Hochschule München"; break;
-                case "0x00000D24": return "WSA:Automation"; break;
-                case "0x00000D26": return "Universität Stuttgart, Fakultät Konstruktions-, Produktions- und Fahrzeugtechnik, Institut für Systemdynamik"; break;
-                case "0x00000D27": return "AXIOS 3D® Services GmbH"; break;
-                case "0x00000D28": return "CASCINATION AG"; break;
-                case "0x00000D29": return "Kontinent ETS LLC"; break;
-                case "0x00000D2B": return "STXI Motion Ltd."; break;
-                case "0x00000D2C": return "RFHIC Corporation"; break;
-                case "0x00000D2D": return "Technische Universität Wien, Fakultät für Maschinenwesen und Betriebswissenschaften, Institut für Fertigungstechnik und Photonische Technologien"; break;
-                case "0x00000D2E": return "RT Corporation"; break;
-                case "0x00000D2F": return "Automation Controls Group, a Division of Milwaukee Electronics Corporation"; break;
-
-                case "0x00000D30": return "AIRS Medical Inc."; break;
-                case "0x00000D31": return "Cardinal Scale Manufacturing Company"; break;
-                case "0x00000D32": return "Mehta Cad Cam Systems Pvt. Ltd."; break;
-                case "0x00000D33": return "TWERD Power Electronics"; break;
-                case "0x00000D34": return "Canon Nanotechnologies Inc."; break;
-                case "0x00000D35": return "Karlsruher Institut für Technologie, Fakultät für Elektrotechnik und Informationstechnik, Institut für Elektroenergiesysteme und Hochspannungstechnik"; break;
-                case "0x00000D36": return "Beijing Grand Hitek Co., Ltd."; break;
-                case "0x00000D38": return "Y2 Corporation"; break;
-                case "0x00000D39": return "Posts and Telecommunications Institute of Technology, Ho Chi Minh City (PTIT-HCM), Electronics 2 Department, Automatic Control Division"; break;
-                case "0x00000D3A": return "RoPeM Solution Co., Ltd."; break;
-                case "0x00000D3B": return "SEPION TECHNOLOGY INC."; break;
-                case "0x00000D3C": return "TRUMPF Lasersystems for Semiconductor Manufacturing GmbH"; break;
-                case "0x00000D3D": return "Sagentia Limited"; break;
-                case "0x00000D3F": return "ColorPartner GmbH"; break;
-
-                case "0x00000D40": return "Dongguan embedfire Electronic Technology Co., Ltd."; break;
-                case "0x00000D41": return "Cell-Vit Co., Ltd."; break;
-                case "0x00000D42": return "East China University of Science and Technology, School of Chemistry and Molecular Engineering, Nanopore Single Molecule Detection Laboratory"; break;
-                case "0x00000D43": return "Vanwyk Systems B.V."; break;
-                case "0x00000D44": return "NGK INSULATORS, LTD."; break;
-                case "0x00000D45": return "NIHON KOSHUHA Co., Ltd."; break;
-                case "0x00000D46": return "HEMERIA SAS"; break;
-                case "0x00000D47": return "Qmax Systems India Pvt. Ltd."; break;
-                case "0x00000D48": return "TENDLY ENTERPRISES CO., LTD."; break;
-                case "0x00000D49": return "Chenghuan Technology (Shenzhen) Co., Ltd."; break;
-                case "0x00000D4A": return "Shanghai Weihong Automation Technology Co., Ltd."; break;
-                case "0x00000D4B": return "Uster Technologies (China) Co., Ltd."; break;
-                case "0x00000D4C": return "MGI Tech Co., Ltd."; break;
-                case "0x00000D4D": return "KELI MOTOR GROUP CO., LTD."; break;
-                case "0x00000D4E": return "Carlo Gavazzi Ltd. (Malta)"; break;
-
-                case "0x00000D50": return "Optiflux NV"; break;
-                case "0x00000D51": return "Mistral Solutions Pvt. Ltd."; break;
-                case "0x00000D52": return "Fraunhofer-Institut für Windenergiesysteme IWES"; break;
-                case "0x00000D53": return "Enekom Enerji Bilisim ve Muhendislik San Tic A.S."; break;
-                case "0x00000D54": return "MASEP Medical Science & Technology Development (Shenzhen) Co., Ltd."; break;
-                case "0x00000D55": return "Shenzhen Soogeen Electronics Co., LTD."; break;
-                case "0x00000D56": return "UJin Technology, Inc."; break;
-                case "0x00000D57": return "TOSEI SYSTEMS CO., LTD."; break;
-                case "0x00000D58": return "TAIYO, LTD."; break;
-                case "0x00000D59": return "Alloc Corporation"; break;
-                case "0x00000D5A": return "WaferPath, Inc."; break;
-                case "0x00000D5B": return "Genesis Dimensions LLC"; break;
-                case "0x00000D5C": return "Zhuhai Tai-Action Electronics Co., Ltd."; break;
-                case "0x00000D5D": return "JSC Diakont"; break;
-                case "0x00000D5E": return "SCHNEKON Automation (Shanghai) Co.,Ltd."; break;
-                case "0x00000D5F": return "NSI-MI Technologies LLC"; break;
-
-                case "0x00000D60": return "JD Squared, Inc."; break;
-                case "0x00000D61": return "Sanctuary Cognitive Systems Corporation"; break;
-                case "0x00000D62": return "NICEMACH CO., LTD."; break;
-                case "0x00000D63": return "ERTURK MAKINE SAN TIC. LTD. STI"; break;
-                case "0x00000D64": return "Surgnova Healthcare Technologies (Beijing) Co., Ltd."; break;
-                case "0x00000D65": return "soniKKs® Ultrasonics Technology GmbH"; break;
-                case "0x00000D66": return "NBB Controls + Components GmbH"; break;
-                case "0x00000D68": return "OOO 'NPP Mera'"; break;
-                case "0x00000D69": return "Poulten Selfe & Lee Ltd"; break;
-                case "0x00000D6A": return "Monolithic Power Systems, Inc."; break;
-                case "0x00000D6B": return "UK Atomic Energy Authority, RACE"; break;
-                case "0x00000D6C": return "PULS GmbH"; break;
-                case "0x00000D6D": return "FUGEN CO., LTD"; break;
-                case "0x00000D6E": return "coboworx GmbH"; break;
-                case "0x00000D6F": return "A&D Company, Limited"; break;
-
-                case "0x00000D70": return "JOOWON TECHNOLOGY Co., Ltd."; break;
-                case "0x00000D71": return "ODC Co., Ltd."; break;
-                case "0x00000D72": return "Asyril SA"; break;
-                case "0x00000D73": return "Robotics Robotics (Shenzhen) Ltd."; break;
-                case "0x00000D74": return "Automated Precision Inc."; break;
-                case "0x00000D75": return "Özyegin University, Faculty of Engineering, Department of Mechanical Engineering, Robotics Laboratory"; break;
-                case "0x00000D76": return "Fujikura Ltd."; break;
-                case "0x00000D77": return "Relativity Space, Inc."; break;
-                case "0x00000D78": return "Hangzhou Core Control Robotics CO.,LTD"; break;
-                case "0x00000D79": return "Beijing Shangcon Intelligent Technology Co., Ltd."; break;
-                case "0x00000D7A": return "Panasonic Advanced Technology Development Co.,Ltd."; break;
-                case "0x00000D7B": return "Philips Electronics Nederland B.V., Philips Engineering Solutions"; break;
-                case "0x00000D7C": return "Emoco Labs AB"; break;
-                case "0x00000D7D": return "Otto Heuss GmbH"; break;
-                case "0x00000D7F": return "PRAUCON"; break;
-
-                case "0x00000D80": return "Ashby Microsystems Ltd"; break;
-                case "0x00000D81": return "Suzhou Veichi Electric Co., Ltd"; break;
-                case "0x00000D82": return "SCAME SISTEMI S.R.L."; break;
-                case "0x00000D83": return "J.M. Voith SE & Co KG"; break;
-                case "0x00000D84": return "Sier Motor (Dongguan) Co., Ltd."; break;
-                case "0x00000D85": return "Shanghai Wingbow Precision Technology Co.,Ltd."; break;
-                case "0x00000D86": return "Mertech Elektronik Arge Sanayi ve Ticaret Anonim Sirketi"; break;
-                case "0x00000D87": return "Summa nv"; break;
-                case "0x00000D88": return "Bucher Hydraulics AG Frutigen"; break;
-                case "0x00000D89": return "Pulse Structural Monitoring Ltd"; break;
-                case "0x00000D8A": return "Sanovo Technology Netherlands B.V."; break;
-                case "0x00000D8B": return "ACCRETECH POWERTRO SYSTEM CO., LTD."; break;
-                case "0x00000D8C": return "TOYOTA INDUSTRIES CORPORATION"; break;
-                case "0x00000D8D": return "KOEM CO., LTD."; break;
-                case "0x00000D8E": return "Beijing NAURA Microelectronics Equipment Co., Ltd."; break;
-                case "0x00000D8F": return "NEXT Prototypes e.V."; break;
-
-                case "0x00000D90": return "Ningbo Advance Automation Technology Co.,Ltd."; break;
-                case "0x00000D91": return "TRUMPF Laser GmbH"; break;
-                case "0x00000D92": return "Asensus Surgical, Inc."; break;
-                case "0x00000D93": return "Exluce Inc."; break;
-                case "0x00000D94": return "Computer Gesteuerte Systeme GmbH"; break;
-                case "0x00000D95": return "ALSTOM Belgium SA"; break;
-                case "0x00000D96": return "HG-Tronik"; break;
-                case "0x00000D97": return "HAFNER Pneumatika Kft."; break;
-                case "0x00000D98": return "Intigia S.L."; break;
-                case "0x00000D99": return "Next Generation Rail Technologies S.L."; break;
-                case "0x00000D9A": return "APEX Semiconductors (USA) Co., Ltd."; break;
-                case "0x00000D9B": return "True Velocity Ammunition, LLC"; break;
-                case "0x00000D9C": return "Anderson Electric Controls, Inc."; break;
-                case "0x00000D9E": return "Exonetik Inc."; break;
-                case "0x00000D9F": return "R&D Test Systems A/S"; break;
-
-                case "0x00000DA0": return "SDP (Shanghai) Industrial Corporation Ltd."; break;
-                case "0x00000DA1": return "NOVASEN Co., Ltd."; break;
-                case "0x00000DA2": return "RTDS Technologies Inc."; break;
-                case "0x00000DA3": return "CPI Vertex Antennentechnik GmbH"; break;
-                case "0x00000DA4": return "Eindhoven Medical Robotics B.V."; break;
-                case "0x00000DA5": return "QEI Corporation"; break;
-                case "0x00000DA6": return "Reliste Ges.m.b.H."; break;
-                case "0x00000DA8": return "PostProcess Technologies, Inc."; break;
-                case "0x00000DA9": return "SEcontrol Automation (Shanghai) Co., Ltd."; break;
-                case "0x00000DAA": return "Phoenix Contact Asia-Pacific (Nanjing) Co., Ltd."; break;
-                case "0x00000DAB": return "Heal Force Huayao Biological Technology (Shanghai) Co., Ltd"; break;
-                case "0x00000DAC": return "Spellman High Voltage Electronics Ltd."; break;
-                case "0x00000DAD": return "Wipro GE Healthcare Private Limited"; break;
-                case "0x00000DAE": return "KOFLOC Corp."; break;
-                case "0x00000DAF": return "Niryo SAS"; break;
-
-                case "0x00000DB0": return "Friedrich Maschinen- und Werkzeugbau GmbH"; break;
-                case "0x00000DB1": return "Togatec Sàrl"; break;
-                case "0x00000DB2": return "EDAG Engineering GmbH"; break;
-                case "0x00000DB3": return "Arius Technology Inc."; break;
-                case "0x00000DB4": return "ROKKO SYSTEMS PTE LTD"; break;
-                case "0x00000DB5": return "Novotechnik Messwertaufnehmer OHG"; break;
-                case "0x00000DB6": return "Shanghai Chenzhu Instrument Co.,LTD"; break;
-                case "0x00000DB7": return "Yantai Free Intelligent Equipment Co.,Ltd."; break;
-                case "0x00000DB8": return "The University of Newcastle, College of Engineering Science and Environment, School of Engineering"; break;
-                case "0x00000DB9": return "California Polytechnic State University, College of Engineering, Computer Engineering Department"; break;
-                case "0x00000DBA": return "PRACTEK Technology Co., Ltd."; break;
-                case "0x00000DBC": return "Ningbo Longtai Medical Technology Co., Ltd."; break;
-                case "0x00000DBE": return "TechMagic, Inc."; break;
-                case "0x00000DBF": return "Bagtech International Pty Ltd"; break;
-
-                case "0x00000DC0": return "DCO Systems Ltd"; break;
-                case "0x00000DC1": return "Shenzhen Pengxing Intelligence Research Co., Ltd."; break;
-                case "0x00000DC2": return "Sunny Instruments Singapore Pte Ltd"; break;
-                case "0x00000DC3": return "Tokyo Denki University, School of Science and Technology for Future Life, Department of Robotics and Mechatronics"; break;
-                case "0x00000DC4": return "RMD Engineering Inc."; break;
-                case "0x00000DC5": return "Ganzhou Zhongke TOYODA Intelligent Equipment Technology Co., Ltd."; break;
-                case "0x00000DC6": return "&Feurer Automation AG"; break;
-                case "0x00000DC8": return "PLC2 Design GmbH"; break;
-                case "0x00000DC9": return "Elesa S.p.A."; break;
-                case "0x00000DCA": return "SHENYANG KING CAREER TECHNOLOGY CO.,LTD."; break;
-                case "0x00000DCB": return "NexCOBOT Taiwan Co., Ltd."; break;
-                case "0x00000DCC": return "HOERBIGER Flow Control GmbH"; break;
-                case "0x00000DCE": return "KRONO-SAFE, SAS"; break;
-                case "0x00000DCF": return "Merz Maschinenfabrik GmbH"; break;
-
-                case "0x00000DD0": return "EKS InTec GmbH"; break;
-                case "0x00000DD1": return "HiSilicon (Shanghai) Technologies Co., Ltd."; break;
-                case "0x00000DD2": return "Jiangsu JITRI Sioux Technologies Co.,Ltd."; break;
-                case "0x00000DD3": return "ConTeK, spol. s.r.o."; break;
-                case "0x00000DD4": return "Dr. Hubert GmbH"; break;
-                case "0x00000DD5": return "DELTATEC s.a."; break;
-                case "0x00000DD6": return "ShangHai LeiTong Technology Center Co., Ltd."; break;
-                case "0x00000DD7": return "Shanghai Xinrui Drive Technology Co., Ltd."; break;
-                case "0x00000DD8": return "Macnica Galaxy International Limited"; break;
-                case "0x00000DDA": return "PICODE Corp."; break;
-                case "0x00000DDB": return "VGD Engineering Ltd."; break;
-                case "0x00000DDC": return "WIRobotics Inc."; break;
-                case "0x00000DDD": return "Xingyu Electron (NINGBO) Co.,Ltd."; break;
-                case "0x00000DDE": return "Yamaki Electric Corporation"; break;
-                case "0x00000DDF": return "MST Co., Ltd."; break;
-
-                case "0x00000DE0": return "Brinkmann Electronic Berlin GmbH"; break;
-                case "0x00000DE1": return "Mazor Robotics Ltd."; break;
-                case "0x00000DE2": return "Center for Power Electronics and Drives"; break;
-                case "0x00000DE3": return "SINTEF Energi AS"; break;
-                case "0x00000DE4": return "Suzhou ST-Intelligence Technology Co., Ltd."; break;
-                case "0x00000DE5": return "GEFASOFT Automatisierung und Software GmbH Regensburg"; break;
-                case "0x00000DE6": return "Shenzhen AS-AI Technology Co., Ltd."; break;
-                case "0x00000DE7": return "Shenzhen Beilai Technology Co.,Ltd"; break;
-                case "0x00000DE8": return "PETER HIRT GmbH"; break;
-                case "0x00000DE9": return "ADTEC Technology Inc."; break;
-                case "0x00000DEA": return "SEMICS Inc."; break;
-                case "0x00000DEB": return "Digitronik Labs Inc."; break;
-                case "0x00000DEC": return "University of Denver, Ritchie School of Engineering and Computer Science, Department of Mechanical and Materials Engineering, Robotics, Locomotion, and Control Lab"; break;
-                case "0x00000DED": return "Capto UG (haftungsbeschränkt)"; break;
-                case "0x00000DEE": return "DST Dräxlmaier Systemtechnik GmbH"; break;
-                case "0x00000DEF": return "Rototest International AB"; break;
-
-                case "0x00000DF0": return "Shenzhen DH-Robotics Technology Co.,Ltd."; break;
-                case "0x00000DF1": return "Centre Suisse d'Electronique et de Microtechnique"; break;
-                case "0x00000DF2": return "DIGALOG Industrie-Mikroelektronik GmbH"; break;
-                case "0x00000DF3": return "Gevasol Feedback Technologies Ltd."; break;
-                case "0x00000DF4": return "Jiangsu Gtake Electric Co., Ltd."; break;
-                case "0x00000DF5": return "Thermo Fisher Scientific Inc."; break;
-                case "0x00000DF6": return "Stony MicroWorks LTD"; break;
-                case "0x00000DF8": return "Shanghai Tayor Heavy Industry(Group) Co., Ltd."; break;
-                case "0x00000DF9": return "Heartland.Data Inc."; break;
-                case "0x00000DFA": return "FLSmidth Pfister GmbH"; break;
-                case "0x00000DFB": return "Viscom AG"; break;
-                case "0x00000DFC": return "Toyo Label Co., Ltd."; break;
-                case "0x00000DFD": return "Harbin Intelligent Surgery Equipment Co.,Ltd."; break;
-                case "0x00000DFE": return "TGA Industries Limited"; break;
-
-                case "0x00000E00": return "Phase 1 Engineering, LLC"; break;
-                case "0x00000E01": return "EGON HARIG GmbH"; break;
-                case "0x00000E02": return "I.A.S.G. Kereskedelmi és Szolgáltató Kft."; break;
-                case "0x00000E03": return "MONS University, Faculty of Engineering, Department of Electromagnetism and Telecommunications"; break;
-                case "0x00000E88": return "Four Technos Co., Ltd."; break;
-                case "0x00000EC5": return "E.C.S. Sistemi Elettronici S.p.A"; break;
-                case "0x00000ECD": return "Dürr Systems AG"; break;
-                case "0x00000EED": return "Eagle Wing Design"; break;
-                case "0x00000EEE": return "Espotel Oy"; break;
-                case "0x00000EFA": return "Foshan Zhiang Technology Co., Ltd."; break;
-                case "0x00000EFF": return "FUZHOU FU CHANG WECON ELECTRONIC TECHNOLOGY CO., LTD"; break;
-                case "0x00000F0B": return "Distalmotion SA"; break;
-                case "0x00000F1A": return "FIAtec GmbH"; break;
-                case "0x00000F71": return "JAY Electronique S.A.S."; break;
-                case "0x00000FA0": return "KOCH Pac-Systeme GmbH"; break;
-                case "0x00000FAE": return "Arrow (China) Electronics Trading Co. Ltd., Shenzhen Branch"; break;
-                case "0x00000FCA": return "Flowsoft Co., Ltd."; break;
-                case "0x00000FCE": return "KIKUSUI ELECTRONICS CORP."; break;
-                case "0x00000FEE": return "Camera Positioning Systems Inc"; break;
-                case "0x00000FFA": return "PineSolution Co., Ltd."; break;
-                case "0x00000FFE": return "Atel Corp."; break;
-                case "0x00000FFF": return "ZEROSYSTEM CO,LTD"; break;
-
-                case "0x00001000": return "Motiv Robotics, Inc."; break;
-                case "0x00001001": return "Ray-Links (Beijing) Technologies Co., Ltd."; break;
-                case "0x00001008": return "Rheinmetall Canada Inc."; break;
-                case "0x00001009": return "Smart Buildings BVBA"; break;
-                case "0x00001010": return "NEXTW Technology CO., LTD."; break;
-                case "0x00001018": return "GZ Photonics Technology Co., Ltd."; break;
-                case "0x00001024": return "Jcast Networks Korea, Inc."; break;
-                case "0x0000102B": return "Matrox Electronic Systems Ltd."; break;
-                case "0x0000103B": return "VELTRU AG"; break;
-                case "0x00001048": return "Shibaura Machine Co., Ltd."; break;
-                case "0x000010FA": return "Beijing BBF Servo Technology Co.,Ltd."; break;
-                case "0x00001110": return "A-KYUNG Motion Inc."; break;
-                case "0x00001111": return "MLS Lanny GmbH"; break;
-                case "0x00001122": return "CanTops"; break;
-                case "0x00001132": return "FERAG AG"; break;
-                case "0x0000115C": return "YASKAWA Europe GmbH"; break;
-                case "0x0000115F": return "K-TRONIC S.r.l"; break;
-                case "0x00001191": return "Techno Create, Inc."; break;
-                case "0x00001204": return "EAST Group Co., Ltd."; break;
-                case "0x00001219": return "Contexa SA"; break;
-                case "0x000012A5": return "i2A Systems Co., Ltd."; break;
-                case "0x000012AD": return "VIVAVIS AG"; break;
-                case "0x00001337": return "rt-labs AB"; break;
-                case "0x00001357": return "Cosmo Instruments Co.,Ltd."; break;
-                case "0x000013FE": return "Advantech Co., Ltd."; break;
-                case "0x00001430": return "ChengDu HiCNC Equipment Co., Ltd."; break;
-                case "0x0000144A": return "ADLINK TECHNOLOGY INC."; break;
-                case "0x0000147A": return "eubus GmbH"; break;
-                case "0x000014FF": return "Precise Automation, Inc."; break;
-
-                case "0x00001502": return "Unico Inc."; break;
-                case "0x0000150E": return "Ono Sokki Co. Ltd."; break;
-                case "0x00001521": return "CHIKO AIRTEC CO., LTD."; break;
-                case "0x00001582": return "TRsystems GmbH"; break;
-                case "0x00001600": return "Helmholtz-Zentrum Dresden-Rossendorf e.V."; break;
-                case "0x00001616": return "DLR Deutsches Zentrum für Luft- und Raumfahrt e.V."; break;
-                case "0x00001619": return "Kyoto Denkiki Co.,Ltd."; break;
-                case "0x0000166D": return "YXLON International GmbH"; break;
-                case "0x00001688": return "Shanghai Allinmodule Intelligence Co., Ltd"; break;
-                case "0x00001701": return "PLR Prüftechnik Linke & Rühe GmbH"; break;
-                case "0x00001729": return "TOSHIBA MACHINE (CHENNAI) PVT. LTD."; break;
-                case "0x0000177A": return "NanJing Aegis-Iron Technology Co., Ltd."; break;
-                case "0x00001799": return "K-one Co., Ltd."; break;
-                case "0x0000179A": return "Haute Ecole d'Ingénierie et de Gestion du Canton de Vaud du Canton de Vaud"; break;
-                case "0x00001800": return "TAMAGAWA SEIKI CO.,LTD."; break;
-                case "0x00001809": return "LLC «DOMINANTA-STAGE»"; break;
-                case "0x00001810": return "L & S Electric, Inc."; break;
-                case "0x00001818": return "Fujian Huafeng New Materials Co. Ltd."; break;
-                case "0x00001848": return "Keysight Technologies Deutschland GmbH"; break;
-                case "0x00001899": return "Hagenuk Marinekommunikation GmbH"; break;
-                case "0x00001919": return "SACMI IMOLA S.C."; break;
-                case "0x00001946": return "AMADA Co., Ltd."; break;
-                case "0x00001962": return "Tomsk State University of Control Systems and Radioelectronics, Institute of Innovations"; break;
-                case "0x00001980": return "HANMI Semiconductor Co., Ltd."; break;
-                case "0x00001984": return "LAUMAS Elettronica s.r.l."; break;
-                case "0x00001987": return "DINA Elektronik GmbH"; break;
-                case "0x00001991": return "Shenzhen Samkoon Technology Co., Ltd."; break;
-                case "0x00001993": return "PushCorp, Inc."; break;
-                case "0x00001997": return "MEDICAL TECHNOLOGIES Ltd"; break;
-
-                case "0x00001A05": return "SYN-TEK Automation Co., Ltd."; break;
-                case "0x00001A21": return "BySTORM & CO. srl"; break;
-                case "0x00001A85": return "Michel Van de Wiele NV"; break;
-                case "0x00001A90": return "IPETRONIK GmbH & Co. KG"; break;
-                case "0x00001B2C": return "Opal-RT Technologies, Inc."; break;
-                case "0x00001B66": return "Sennheiser electronic GmbH & Co. KG"; break;
-
-                case "0x00002000": return "Motiv Space Systems, Inc."; break;
-                case "0x00002001": return "Nextec Technologies 2001 Ltd."; break;
-                case "0x00002010": return "Shenzhen Xhorse Electronics Co., Ltd."; break;
-                case "0x00002018": return "Thermo Fisher Scientific (Bremen) GmbH"; break;
-                case "0x00002019": return "Komito Bleu BVBA"; break;
-                case "0x000021DE": return "Rüthi Electronic AG"; break;
-                case "0x00002055": return "Bristol Robotics Laboratory"; break;
-                case "0x0000205E": return "HyVISION SYSTEM Inc."; break;
-                case "0x00002103": return "ASE Co., Ltd."; break;
-                case "0x00002186": return "Sobal Corporation"; break;
-                case "0x000021C1": return "ATSENSE INC."; break;
-                case "0x000022CD": return "Kinova Inc."; break;
-                case "0x000022D2": return "Synapticon GmbH"; break;
-                case "0x00002304": return "DANIELI AUTOMATION SPA"; break;
-                case "0x00002380": return "Nanjing SCIYON Automation Group Co., Ltd."; break;
-                case "0x00002501": return "EO Technics Co., Ltd."; break;
-                case "0x00002518": return "KUBO Technologies LLC"; break;
-                case "0x00002631": return "MICROPAP ENGINEERING SL"; break;
-                case "0x0000266D": return "Comet AG"; break;
-                case "0x00002727": return "Altra Industrial Motion do Brasil Equipamentos Industriais LTDA"; break;
-                case "0x0000276A": return "Shenzhen SuperFar lntelligent Control Technology Co.,LTD."; break;
-                case "0x000027AB": return "Rollmann Elektronik"; break;
-                case "0x00002838": return "burster präzisionsmesstechnik gmbh & co kg"; break;
-                case "0x00002888": return "TCOS System Sdn Bhd"; break;
-                case "0x00002939": return "Zaber Technologies Inc."; break;
-                case "0x00002AA8": return "NiniX Technologies NV"; break;
-                case "0x00002ECC": return "PSK Inc."; break;
-
-                case "0x000030E0": return "DotLine GmbH"; break;
-                case "0x000031CF": return "Schleißheimer Soft- und Hardwareentwicklung GmbH"; break;
-                case "0x00003333": return "Protokit Robotics Pty Ltd"; break;
-                case "0x00003388": return "MEIJI ELECTRIC INDUSTRIES CO., LTD."; break;
-                case "0x000033AA": return "Sanlab Yazilim Arastirma Gelistirme Enerji Mühendislik San. ve Tic. Ltd. Sti"; break;
-                case "0x000033C3": return "MatrixGroup (CMS) Pty Ltd"; break;
-                case "0x00003443": return "4C Electronics Limited"; break;
-                case "0x00003508": return "PURPOSE CO., LTD"; break;
-                case "0x00003610": return "eProLinkTek Co., Ltd."; break;
-                case "0x00003777": return "UBI, Inc."; break;
-
-                case "0x00004000": return "Automotive Parts and Accessory Systems (APAS) R&D Centre"; break;
-                case "0x00004100": return "Fusion Information Technology Co., Ltd."; break;
-                case "0x00004123": return "University of Basel, Faculty of Medicine"; break;
-                case "0x00004150": return "Korea Advanced Institute of Science and Technology, College of Engineering, Department of Mechanical Engineering, Robotics & Artificial Intelligence Lab"; break;
-                case "0x00004154": return "acontis technologies GmbH"; break;
-                case "0x00004301": return "Ocean Optics, Inc."; break;
-                case "0x00004321": return "Leadshine Technology Co., Ltd."; break;
-                case "0x0000434D": return "Columbus McKinnon Corporation"; break;
-                case "0x00004351": return "OPCsoft Co., Ltd."; break;
-                case "0x00004441": return "Myostat Motion Control Inc."; break;
-                case "0x00004553": return "Energy Support Corporation"; break;
-                case "0x00004567": return "Shanghai University"; break;
-                case "0x00004604": return "Budker Institute of Nuclear Physics of Siberian Branch Russian Academy of Sciences (BINP SB RAS)"; break;
-                case "0x00004654": return "FUKOKU TOKAI Co., Ltd."; break;
-                case "0x00004685": return "Sandensha Co., Ltd."; break;
-                case "0x00004711": return "FRABA B.V."; break;
-                case "0x00004752": return "Generic Robotics Limited"; break;
-                case "0x00004957": return "INTERWORKS Co., Ltd."; break;
-                case "0x00004B41": return "Kratzer Automation AG"; break;
-                case "0x00004D43": return "SKS Control OY"; break;
-                case "0x00004D50": return "Max-Planck-Institut für extraterestrische Physik"; break;
-                case "0x00004D63": return "MAGICS Instruments NV"; break;
-
-                case "0x00005050": return "TSUZUKI DENKI CO., LTD"; break;
-                case "0x00005053": return "PRESTOSOLUTION Ltd."; break;
-                case "0x00005071": return "COTS Technology Co., Ltd."; break;
-                case "0x00005100": return "WOORI Technology Inc."; break;
-                case "0x00005146": return "Ningbo Qifan Automation Technology Co., LTD"; break;
-                case "0x00005244": return "Desird Tasarim Arge Uygulama Elektronik Destek Ithalat Ihracat San. ve Tic. Ltd. Sti."; break;
-                case "0x00005257": return "Rösch & Walter Industrie-Elektronik GmbH"; break;
-                case "0x00005341": return "SOHOAID Corporation"; break;
-                case "0x00005368": return "WUHAN SHARE AUTOMATION TECHNOLOGY CO.,LTD"; break;
-                case "0x00005549": return "Genius Technology Co., Ltd."; break;
-                case "0x00005858": return "Shenyang REDTECH Electric Co., Ltd."; break;
-                case "0x00005995": return "Kristl, Seibt & Co GmbH"; break;
-                case "0x00005F0A": return "Technische Universität Darmstadt, Fachgebiet Elektrotechnik und Informationstechnik"; break;
-                case "0x00005F5F": return "Maurizio Ferraris (dba Studio Ferraris)"; break;
-
-                case "0x00006084": return "Gerber Technology Inc."; break;
-                case "0x000060C8": return "KUKA Deutschland GmbH"; break;
-                case "0x000060CB": return "Hitachi Zosen Corporation, Precision Machinery Headquarters, Electronic Control Business Unit"; break;
-                case "0x00006100": return "Kurvatur A/S"; break;
-                case "0x00006145": return "Shenzhen Huanan Numerical Control System Co., Ltd."; break;
-                case "0x00006339": return "SINTOKOGIO, LTD."; break;
-                case "0x00006432": return "Beijing Jingwei Hirain Technologies Co.,Ltd."; break;
-                case "0x00006482": return "YUSHIN PRECISION EQUIPMENT CO., LTD."; break;
-                case "0x00006500": return "Triductor Technology(Suzhou), Inc"; break;
-                case "0x00006666": return "Qingdao Technological University, College of Mechanical Engineering"; break;
-                case "0x00006688": return "Gsolar Power Co., Ltd."; break;
-                case "0x00006741": return "NIPPON SIGNAL CO.,LTD."; break;
-                case "0x00006789": return "University of Electronic Science and Technology of China"; break;
-                case "0x00006888": return "Shenzhen Hayhon Equipment Technologies Co., LTD"; break;
-                case "0x00006889": return "JKControl Co., Ltd."; break;
-                case "0x00006A64": return "Beijing Jingdiao Co., Ltd."; break;
-                case "0x00006A6B": return "JK Robots Co., Ltd."; break;
-                case "0x00006C78": return "N.A.T. GmbH"; break;
-
-                case "0x00007071": return "Thermal Dynamics Oy"; break;
-                case "0x00007073": return "Mahr GmbH"; break;
-                case "0x00007170": return "Hyundai Robotics Co., Ltd."; break;
-                case "0x00007203": return "TOYOTA MOTOR CORPORATION"; break;
-                case "0x00007217": return "YunKe Intelligent Servo Control Technology Co.,Ltd."; break;
-                case "0x00007220": return "Shenyang Machine Tool(Group) Research & Design Institute Co,Ltd. Shanghai Branch"; break;
-                case "0x00007595": return "LS Mecapion Co., Ltd."; break;
-                case "0x00007604": return "ONTEC CO., LTD"; break;
-                case "0x00007680": return "HUNAN SUPER INFORMATION CO., LTD"; break;
-                case "0x00007684": return "LOGTICS Inc."; break;
-                case "0x00007715": return "Foxnum Technology Co., Ltd."; break;
-                case "0x00007716": return "Kyoei Electronics Co., Ltd."; break;
-                case "0x00007777": return "Sheltronics Control Systems Private Limited"; break;
-                case "0x00007880": return "NISSIN SYSTEMS Co., Ltd."; break;
-                case "0x00007978": return "Junchuang (Xiamen) Automation Technology Co., Ltd."; break;
-                case "0x00007A17": return "Tait Towers Manufacturing, LLC"; break;
-                case "0x00007EC5": return "tec5 AG"; break;
-
-                case "0x00008027": return "Tech Mahindra Ltd."; break;
-                case "0x00008086": return "Intel Corporation"; break;
-                case "0x00008281": return "China Electric Power Research Institute (CEPRI)"; break;
-                case "0x00008421": return "Raonwoori Technology"; break;
-                case "0x00008484": return "PHOENIX CONTACT Power Supplies GmbH"; break;
-                case "0x00008562": return "Brother Industries Ltd."; break;
-                case "0x00008632": return "Shenzhen Anicetech Automation Company Limited"; break;
-                case "0x00008800": return "Akribis Systems Pte Ltd"; break;
-                case "0x00008818": return "Shenyang Machine Tool(Group) Research & Design Institute, Shanghai Branch"; break;
-                case "0x00008866": return "Shanghai DOYEE CNC Technology Co., Ltd."; break;
-                case "0x00008888": return "Changzhou Lead-Motion Intelligent Technology Co., Ltd."; break;
-                case "0x000088F6": return "Harbin Institute of Technology ShenZhen Graduate School"; break;
-                case "0x000088FA": return "SIGMATEK GmbH & Co. KG"; break;
-                case "0x00008900": return "Genesis Systems, IPG Photonics Company"; break;
-                case "0x00008909": return "AIXTRON SE"; break;
-                case "0x00008A8C": return "Zhejiang Sci-Tech University, School of Mechanical Engineering and Automation"; break;
-
-                case "0x00009300": return "Shotover Camera Systems LP"; break;
-                case "0x00009320": return "Saurer AG, Zweigniederlassung Arbon"; break;
-                case "0x00009403": return "Vosch Electronic AG"; break;
-                case "0x00009434": return "Shenzhen Han's Motor S&T Co., Ltd."; break;
-                case "0x00009450": return "Zünd Systemtechnik AG"; break;
-                case "0x00009555": return "Soft Servo Systems, Inc."; break;
-                case "0x0000962F": return "Sun Fuel Technologies, Inc."; break;
-                case "0x00009638": return "Sungrow Power Supply Co., Ltd."; break;
-                case "0x00009863": return "ViE Technologies Sdn. Bhd."; break;
-                case "0x00009999": return "Amoy Dynamics (Xiamen) Co., Ltd."; break;
-                case "0x00009A9A": return "Xi'an Jiaotong University, School of Electronic and Information Engineering"; break;
-
-                case "0x0000A007": return "Shenzhen Han's Scanner S&T Co., Ltd."; break;
-                case "0x0000A0B6": return "Sanritz Automation Co., Ltd."; break;
-                case "0x0000A0FB": return "Toray Engineering D Solutions Co., Ltd."; break;
-                case "0x0000A1AA": return "Shanghai AIM Intelligence Technologies Co., Ltd."; break;
-                case "0x0000A2A2": return "MDSI Ventures LLC"; break;
-                case "0x0000A600": return "ASIX s.r.o."; break;
-                case "0x0000A75E": return "ATSE. LLC"; break;
-                case "0x0000A8A8": return "Zhejiang CHINT Electrics Co., Ltd."; break;
-                case "0x0000A8AA": return "FUDA Intelligent Systems"; break;
-                case "0x0000AA00": return "HATATECH CO., LTD."; break;
-                case "0x0000AA77": return "Muscle Corporation"; break;
-                case "0x0000AAAA": return "HIWIN MIKROSYSTEM CORP."; break;
-                case "0x0000AABB": return "GuangZhou Ronsuo Electronic Technology Co.,Ltd"; break;
-                case "0x0000AACC": return "Mega-Fabs Motion Systems Ltd. (A Hiwin Company)"; break;
-                case "0x0000AAEC": return "AXIMETRIX Automation Inc."; break;
-                case "0x0000AB57": return "RMIT University, School of Electrical and Computer Engineering"; break;
-                case "0x0000ABAB": return "Beijing Juntai Tiancheng Technology Co., Ltd."; break;
-                case "0x0000ABBA": return "Triamec Motion AG"; break;
-                case "0x0000ABCD": return "SoftEnergy Controls Inc"; break;
-                case "0x0000AC00": return "ifm software gmbh"; break;
-                case "0x0000ACC0": return "Accutron Ltd"; break;
-                case "0x0000ACDC": return "Warp9 Tech Design Inc."; break;
-                case "0x0000AD84": return "Topcon Precision Agriculture"; break;
-                case "0x0000ADDA": return "Fraunhofer-Institut für Lasertechnik (ILT)"; break;
-                case "0x0000ADE5": return "ADVES GmbH & Co. KG"; break;
-                case "0x0000AED0": return "ANEDO Ltd."; break;
-                case "0x0000AF1E": return "Alpine Racing Ltd"; break;
-                case "0x0000AFEC": return "Galaxy Far East Corp."; break;
-                case "0x0000AFFE": return "YASKAWA Europe GmbH"; break;
-                case "0x0000B02A": return "Orsys Orth System GmbH"; break;
-                case "0x0000B07A": return "Bota Systems AG"; break;
-                case "0x0000B0CE": return "Viveris Technologies"; break;
-                case "0x0000B7A8": return "Heinzinger electronic GmbH"; break;
-                case "0x0000BB80": return "Sensa automatisering BV"; break;
-                case "0x0000BBAA": return "B. Braun Avitum AG"; break;
-                case "0x0000BC00": return "Brainchild Electronic Co., Ltd."; break;
-                case "0x0000BE7A": return "BETA Dyn GmbH & Co. KG"; break;
-                case "0x0000BEBE": return "G.D SpA"; break;
-                case "0x0000BEEF": return "National Radio Astronomy Observatory"; break;
-                case "0x0000C00F": return "ControlWorks, Inc."; break;
-                case "0x0000C0DE": return "Riedl GmbH"; break;
-                case "0x0000C15A": return "CISA Intelligent Systems & Automation S.L."; break;
-                case "0x0000C918": return "Jiangsu CPTEK Servo Technology Co.Ltd."; break;
-                case "0x0000CAFE": return "SOTEC Software Entwicklungs GmbH + Co. Mikrocomputertechnik KG"; break;
-                case "0x0000CEBA": return "KEBA Industrial Automation GmbH"; break;
-                case "0x0000D00F": return "FRAKO Kondensatoren- und Anlagenbau GmbH"; break;
-                case "0x0000DAB0": return "DABO Corporation"; break;
-                case "0x0000DE88": return "Dalian University of Technology"; break;
-                case "0x0000DEDA": return "Potomac Electric Corporation"; break;
-                case "0x0000E0EE": return "Marel Hf."; break;
-                case "0x0000E5AB": return "ESAB Welding & Cutting GmbH"; break;
-                case "0x0000EAEA": return "meastream GmbH"; break;
-                case "0x0000ECA7": return "Emmission"; break;
-                case "0x0000EEEE": return "Willow Garage, Inc."; break;
-                case "0x0000EF56": return "TA Instruments - Waters LLC"; break;
-                case "0x0000EFFE": return "Shanghai Passiontech Information Technology Co., Ltd."; break;
-                case "0x0000F00D": return "Hyphen Technologies, Inc."; break;
-                case "0x0000F0CA": return "Imagos S.a.s di Renato Andreola e C."; break;
-                case "0x0000F1F1": return "Red Bull Technology Ltd."; break;
-                case "0x0000F4F4": return "fos4X GmbH"; break;
-                case "0x0000F666": return "National Yunlin University of Science and Technology"; break;
-                case "0x0000F888": return "GMT GLOBAL INC."; break;
-                case "0x0000FAB9": return "Fab-9 Corporation"; break;
-                case "0x0000FACE": return "Korea Institute of Robot and Convergence (KIRO)"; break;
-                case "0x0000FE09": return "Interroll Trommelmotoren GmbH"; break;
-                case "0x0000FEDC": return "Silica, Avnet EMG GmbH"; break;
-                case "0x0000FF66": return "Harbin Institute of Technology"; break;
-                case "0x0000FFFE": return "UENO SEIKI Co.,LTD."; break;
-                case "0x0000FFAA": return "RB3D"; break;
-                case "0x0000FFF1": return "BTHL Equipment (Beijing) Co., Ltd."; break;
-                case "0x0000FFFF": return "Robotiq Inc."; break;
-
-                case "0x00010000": return "Zhejiang Alpha Automotive Technology Co., Ltd."; break;
-                case "0x00010001": return "Hitachi Terminal Mechatronics, Corp."; break;
-                case "0x00010101": return "Glidewell Laboratories"; break;
-                case "0x00010151": return "Beijing SaintWise Intelligent Technology Development co.LTD"; break;
-                case "0x00010203": return "Jiangsu Kaiserdrive Intelligent Technology Co., Ltd."; break;
-                case "0x00010502": return "Beijing Sunwise Space Technology Co., Ltd."; break;
-                case "0x00010608": return "Shenzhen Jiayu Mechatronic Co., Ltd."; break;
-                case "0x00010780": return "Servotecnica SpA"; break;
-                case "0x00010816": return "İleri Denetleyici Teknolojiler Mekatronik San. ve Tic. Ltd. Şti."; break;
-                case "0x00011107": return "Utthunga Technologies Pvt. Ltd."; break;
-                case "0x00011111": return "Beijing University of Posts and Telecommunications, School of Automation"; break;
-                case "0x00011211": return "BeiJing ETOUCH Technology CO.,LTD."; break;
-                case "0x000116C7": return "Zhejiang Hechuan Technology Co.,Ltd."; break;
-                case "0x00012550": return "KERAjet S.A."; break;
-                case "0x00012555": return "PROAUT TECHNOLOGY GmbH"; break;
-                case "0x00013930": return "DANAM SYSTEMS INC."; break;
-                case "0x000144AB": return "Carl Zeiss Optotechnik GmbH"; break;
-                case "0x00015422": return "ALPHA MOTION CO., LTD."; break;
-                case "0x00018843": return "M8M Private Limited"; break;
-                case "0x0001DA7A": return "MonoDAQ d.o.o."; break;
-                case "0x0001F001": return "EN Technologies Inc."; break;
-                case "0x00020608": return "Harbin Yiao Information Technology Co., Ltd."; break;
-                case "0x00023155": return "Carl Zeiss SMT GmbH"; break;
-                case "0x00028DEC": return "Sichuan Dongfang Electric Autocontrol Engineering Co., Ltd."; break;
-                case "0x00030004": return "XP Power LLC"; break;
-                case "0x00030205": return "Levitection Ltd."; break;
-                case "0x0003030D": return "Sioux CCM B.V."; break;
-                case "0x00033332": return "Motion Tech Automation, LLC"; break;
-                case "0x00033333": return "Lion Precision"; break;
-                case "0x00039055": return "Sipartek di Marcello Ferri"; break;
-                case "0x00040411": return "Narranz Soluciones SL"; break;
-                case "0x00040716": return "SYSWORK CO.,LTD."; break;
-                case "0x00041415": return "Harmuth Elektronik GmbH"; break;
-                case "0x00048186": return "Intra Corporation"; break;
-                case "0x00050903": return "Guangdong OPPO Mobile Telecommunications Corp.,Ltd."; break;
-                case "0x00051C4B": return "SICK, Inc."; break;
-                case "0x00053258": return "Shenzhen Encom Electric Technologies Co., Ltd."; break;
-                case "0x0005AE41": return "Saeki Partners KlG"; break;
-                case "0x00060688": return "China Wide Prevention Telecom Technology Co.,Ltd."; break;
-                case "0x00064541": return "R&D Robotics"; break;
-                case "0x00066570": return "LG Electronics Inc."; break;
-                case "0x00070707": return "Sodick America Corp."; break;
-                case "0x00073188": return "Hunan Matrix Electronic Technology Co., Ltd."; break;
-                case "0x00074074": return "Roll-2-Roll Technologies LLC"; break;
-                case "0x00074076": return "SIC! Software GmbH"; break;
-                case "0x00074855": return "LÄPPLE AG"; break;
-                case "0x00075500": return "ShenZhen Tongchuan Technology Co.,Ltd"; break;
-                case "0x00076761": return "ITK Engineering GmbH"; break;
-                case "0x00077054": return "ColubrisMX, Inc."; break;
-                case "0x00077777": return "Shanghai Sinyo Electronics Co.,Ltd."; break;
-                case "0x00080301": return "CK Precision Instrument"; break;
-                case "0x00080A0C": return "Xi'an Puyuan Industrial Technology Co., Ltd."; break;
-                case "0x00088326": return "Willig Embedded Software"; break;
-                case "0x00088888": return "Alexan Tech. Inc."; break;
-                case "0x00090130": return "Exvision Corporation"; break;
-                case "0x00090588": return "Guangzhou YanWei Electronic Technology Co., Ltd."; break;
-                case "0x00090606": return "Tex Computer SRL"; break;
-                case "0x00090802": return "Suzhou EastTech Electronics Co.,Ltd"; break;
-                case "0x00090909": return "AONE TECHNOLOGY CO.,LTD."; break;
-                case "0x00099099": return "Nanjing Daqo Electrical Institute Co., Ltd."; break;
-
-                case "0x000A05E5": return "KOSES Co.,Ltd"; break;
-                case "0x000A4D7A": return "Warsaw University of Technology, Faculty of Electrical Engineering"; break;
-                case "0x000A7B00": return "Cornelius Consult"; break;
-                case "0x000AAAAA": return "Shandong SIASUN Industrial Software Research Institute Co.,Ltd."; break;
-                case "0x000AAAEC": return "AITEC Corporation"; break;
-                case "0x000AB1DE": return "The Dude Abides LLC dba Lensrentals.com"; break;
-                case "0x000ABCDE": return "ASU PRO LLC"; break;
-                case "0x000ADC05": return "adcos GmbH"; break;
-                case "0x000B00B0": return "Institute of Physics of the Czech Academy of Sciences"; break;
-                case "0x000BE11A": return "Quality Firmware and Processes Solutions, LLC"; break;
-                case "0x000C0815": return "CGX Intelligent Manufacturing (Wuxi) Co., Ltd."; break;
-                case "0x000C0C0C": return "YES ENERGY srl"; break;
-                case "0x000C1984": return "Chroma ATE Inc."; break;
-                case "0x000D0B0C": return "WUHAN DBLC SCIENCE & TECHNOLOGY CO.,LTD."; break;
-                case "0x000E1048": return "Toshiba Transport Engineering Inc."; break;
-                case "0x000F1016": return "OPVengineering GmbH"; break;
-
-                case "0x00100000": return "Shenzhen Inovance Technology Co., Ltd."; break;
-                case "0x00100006": return "Shenzhen Veinar Technology Co., Ltd."; break;
-                case "0x00100100": return "Cyberlogix Ltd"; break;
-                case "0x00101998": return "Fundação Amazônica de Amparo à Pesquisa e Desenvolvimento Tecnológico Desembargador Paulo dos Anjos"; break;
-                case "0x00102030": return "SERWIS CNC Mariusz Mareczko"; break;
-                case "0x00104104": return "SBS Science & Technology Co., Ltd."; break;
-                case "0x00105041": return "Inovance Technology Europe GmbH"; break;
-                case "0x00111111": return "Zhejiang Feida Environmental Science & Technology Co., Ltd."; break;
-                case "0x00111713": return "Robotic Systems Integration, Inc."; break;
-                case "0x00112233": return "YoungTek Electronics Corp."; break;
-                case "0x00112299": return "MELSİS Elektrik Elektronik Yazılım Donanım Ltd. Şti."; break;
-                case "0x00113322": return "SS Innovations China Co., Ltd."; break;
-                case "0x00116688": return "REYA ELECTRIC CO.,LTD."; break;
-                case "0x00120187": return "Beijing Institute of Technology, School of Mechatronical Engineering"; break;
-                case "0x00120331": return "UBTECH Robotics Corp."; break;
-                case "0x00123456": return "ERAETECH Co., Ltd."; break;
-                case "0x001234CC": return "Compucare India Pvt. Ltd."; break;
-                case "0x00123ABC": return "Microtech Laboratory Inc."; break;
-                case "0x00124000": return "Automatisation JRT Inc."; break;
-                case "0x00124816": return "Easy Etudes et applications système SA"; break;
-                case "0x00126815": return "EQ GLOBAL Inc."; break;
-                case "0x00130268": return "Eule Industrial Robotics GmbH & Co. KG"; break;
-                case "0x00132333": return "Sudhir Srivastava Innovations Pvt. Ltd."; break;
-                case "0x00136013": return "Beijing RichAuto S&T Co., Ltd"; break;
-                case "0x00141003": return "ULVAC AUTOMATION TAIWAN Inc."; break;
-                case "0x00141209": return "EIKO SOKKI Co. Ltd."; break;
-                case "0x00147852": return "Wuxi Lead Intelligent Equipment CO.,LTD."; break;
-                case "0x00150306": return "Shenyang XBANG Technology Co., Ltd."; break;
-                case "0x0015E65E": return "iseg Spezialelektronik GmbH"; break;
-                case "0x00161718": return "Guangzhou Start To Sail Industrial Robot Co.,Ltd."; break;
-                case "0x00168888": return "WU-YANG Technology Co., Ltd."; break;
-                case "0x00170815": return "MUHA INC"; break;
-                case "0x00171010": return "NIIC (SUZHOU) TECHNOLOGY CO., LTD."; break;
-                case "0x00178200": return "SmartRay GmbH"; break;
-                case "0x00180201": return "KOMOTEK Co., Ltd."; break;
-                case "0x00180522": return "Shenzhen iManifold Robot Technology Co., Ltd."; break;
-                case "0x00180613": return "Shenzhen Shenzhixin Technology Co., Ltd."; break;
-                case "0x00181818": return "Ningbo Yunsheng Co., Ltd."; break;
-                case "0x001897EC": return "Loop Technology Ltd"; break;
-                case "0x00190050": return "Kayser-Threde GmbH"; break;
-                case "0x00190556": return "AXYZ Automation Inc."; break;
-                case "0x00190683": return "Ege Robotics CNC Makine Elektronik Otomasyon Medikal"; break;
-                case "0x001918EE": return "Tallinn University of Technology (TUT), Faculty of Information Technology"; break;
-                case "0x001919EE": return "Tallinn University of Technology (TUT), Faculty of Information Technology"; break;
-                case "0x00198452": return "NIHON SEIGYO CO.,LTD."; break;
-
-                case "0x00200000": return "Shenzhen Farwide Electric Co.,Ltd."; break;
-                case "0x00200924": return "ARUM DENTISTRY Co., Ltd."; break;
-                case "0x00201111": return "Glass Expansion Pty Ltd"; break;
-                case "0x00201811": return "Guangzhou ZHIYUAN Electronics Co., Ltd."; break;
-                case "0x00201812": return "FoShan Syckin Intelligent Technology Co., Ltd"; break;
-                case "0x00201911": return "Shenzhen Han's Robot Co., Ltd"; break;
-                case "0x00202009": return "Tismo Technology Solutions (P) Ltd"; break;
-                case "0x00202288": return "Jiangsu DINGS' Intelligent Control Technology Co., Ltd"; break;
-                case "0x00203040": return "meerecompany Inc."; break;
-                case "0x00220110": return "Research and Production Plant «EKRA»"; break;
-                case "0x00223344": return "FPT Software Ltd."; break;
-                case "0x00228100": return "eMotion Co., Ltd."; break;
-                case "0x00231970": return "HRK-BRK SRLS"; break;
-                case "0x0023EFAB": return "Shenzhen ROBOTMETA Technology Co., Ltd."; break;
-                case "0x00250001": return "Nanjing Chenguang Group Co., Ltd."; break;
-                case "0x00250002": return "Jiangsu Jinling Institute of Intelligent Manufacturing Co.,Ltd."; break;
-                case "0x00250993": return "Manner Sensortelemetrie GmbH"; break;
-                case "0x00252525": return "EODIGITEK Co.,Ltd"; break;
-                case "0x00255210": return "SMART TESTSOLUTIONS GmbH"; break;
-                case "0x00260954": return "Meinhard Koppitz, Elektronikentwicklung"; break;
-                case "0x00270919": return "GUREN Design & Engineering"; break;
-                case "0x00289117": return "SHENZHEN JINGFENG MEDICAL TECHNOLOGY CO., LTD."; break;
-                case "0x00290968": return "RUAG Defence Deutschland GmbH"; break;
-
-                case "0x00300354": return "Jiangsu Donghua Testing Technology Co., Ltd."; break;
-                case "0x00308012": return "Creasoft SL"; break;
-                case "0x0030DB07": return "Modbot, Inc."; break;
-                case "0x00310713": return "Sruhad Technologies Pvt Ltd"; break;
-                case "0x003111C0": return "RJG Inc."; break;
-                case "0x00314000": return "Balance Systems S.r.l."; break;
-                case "0x00314159": return "Weka Robotics Limited"; break;
-                case "0x0031636F": return "T1 Co., LTD."; break;
-                case "0x00323232": return "STMicroelectronics International NV"; break;
-                case "0x00334658": return "CaTs³ Limited"; break;
-                case "0x00335160": return "Precision Technology Corporation"; break;
-                case "0x00335233": return "Shanghai HOCH Laser Technology Co., Ltd."; break;
-                case "0x00340702": return "Shanghai Rui Fast Automation Equipment Co.,Ltd."; break;
-                case "0x00345588": return "UTECHZONE CO., LTD."; break;
-                case "0x00345678": return "ABB Beijing Drive Systems Co., Ltd."; break;
-                case "0x00345869": return "APE Technology Co., Ltd."; break;
-                case "0x00351090": return "Zhejiang Dafeng Industry Co., Ltd."; break;
-                case "0x00361300": return "Egle Systems S.L."; break;
-                case "0x00369369": return "Honeywell Technology Solutions Lab Private Limited"; break;
-                case "0x003C6F3A": return "NeoHealthTechnology, LTD."; break;
-
-                case "0x00404040": return "ViewMove Technologies Inc."; break;
-                case "0x004083A9": return "Deutsches Elektronen-Synchrotron (DESY)"; break;
-                case "0x00414141": return "Bruker Technologies Ltd."; break;
-                case "0x0041444C": return "ADL Analoge und Digitale Leistungselektronik GmbH"; break;
-                case "0x0041444D": return "Adullam Tech Co., Ltd."; break;
-                case "0x00414458": return "ADX Systems SA"; break;
-                case "0x00414853": return "Riole Eletrônica Ltda"; break;
-                case "0x00414C54": return "ALTIMA Corp."; break;
-                case "0x00414E59": return "ANYbotics AG"; break;
-                case "0x00415041": return "APA Sp. z o.o."; break;
-                case "0x00415049": return "Teledyne API"; break;
-                case "0x0041504C": return "APL Automobil-Prüftechnik Landau GmbH"; break;
-                case "0x00415450": return "Atonarp Inc."; break;
-                case "0x00416C78": return "AiLux S.r.l."; break;
-                case "0x00418108": return "Shanghai Xiangshi Intelligent Technology Co.,Ltd."; break;
-                case "0x00424345": return "Seren Industrial Power Systems, Inc."; break;
-                case "0x00424D54": return "Burghart Messtechnik GmbH"; break;
-                case "0x00425343": return "L3 Commercial Training Solutions (Aerosim Technologies, INC)"; break;
-                case "0x00434954": return "Chiba Institute of Technology (CIT)"; break;
-                case "0x00434D45": return "Cambridge Micro Engineering Limited"; break;
-                case "0x00434D4E": return "CIMON CO.,LTD."; break;
-                case "0x00442656": return "D&V Electronics Ltd."; break;
-                case "0x00444444": return "Eltech Ltd."; break;
-                case "0x00444543": return "Nanjing DECOWELL Automation Co., Ltd"; break;
-                case "0x00444949": return "DISTek Integration, Inc."; break;
-                case "0x00444950": return "Astrodyne TDI"; break;
-                case "0x00444D54": return "Dematic Corp."; break;
-                case "0x00445341": return "DS AUTOMOTION GmbH"; break;
-                case "0x00445345": return "Daewoo Shipbuilding & Marine Engineering Co., Ltd."; break;
-                case "0x00445653": return "Shenzhen DVS Mechatronics Co., Ltd."; break;
-                case "0x00448976": return "Busch Manufacturing Korea, Ltd."; break;
-                case "0x00454854": return "Eagle Harbor Technologies Inc."; break;
-                case "0x00455354": return "Steinbeis Embedded Systems Technologies GmbH"; break;
-                case "0x00455443": return "Electronic Theatre Controls, Inc."; break;
-                case "0x00455453": return "ITMO University, Department of Control Systems and Industrial Robotics, Chair of Electrical Engineering and Precision Electromechanical Systems"; break;
-                case "0x0045564F": return "Evolution Measurement Ltd."; break;
-                case "0x00456789": return "SKY TECHNOLOGY DEVELOPMENT CO.,LTD. CHINESE ACADEMY OF SCIENCES"; break;
-                case "0x00456E76": return "Envision Energy (Jiangsu) CO., LTD."; break;
-                case "0x00465554": return "Future Electronics Inc."; break;
-                case "0x004711BB": return "Moehwald GmbH"; break;
-                case "0x0047494E": return "Ginolis Oy"; break;
-                case "0x00474E44": return "Shanghai GND eTech Co., Ltd."; break;
-                case "0x00475349": return "GSI GeoSolutions International Ltd"; break;
-                case "0x00475354": return "Global Standard Technology Co., Ltd."; break;
-                case "0x00481417": return "Innodelec Sàrl"; break;
-                case "0x0048414D": return "Hamilton Bonaduz AG"; break;
-                case "0x00484D30": return "Hexagon Metrology S.p.A."; break;
-                case "0x00485247": return "Neura Robotics GmbH"; break;
-                case "0x00485349": return "Headspring Inc."; break;
-                case "0x0048554B": return "Kendrion Kuhnke Automation GmbH"; break;
-                case "0x00485645": return "High Voltage Engineering Europa B.V."; break;
-                case "0x00485653": return "HV Sistemas S.L."; break;
-                case "0x00485749": return "Halleck-Willard Incorporated"; break;
-                case "0x00490628": return "KYOWA ELECTRONIC INSTRUMENTS CO., LTD."; break;
-                case "0x00491617": return "FST Co., Ltd."; break;
-                case "0x00494253": return "IBS Precision Engineering BV"; break;
-                case "0x00494256": return "IBV - Echtzeit- und Embedded GmbH & Co. KG"; break;
-                case "0x00494350": return "ICP DAS Co.,Ltd."; break;
-                case "0x00494458": return "IDX Co. Ltd."; break;
-                case "0x00495253": return "IRS Systementwicklung GmbH"; break;
-                case "0x00495254": return "IRT SA"; break;
-                case "0x00499816": return "Seoul Precision Machines Co., Ltd."; break;
-                case "0x004A4154": return "Jenaer Antriebstechnik GmbH"; break;
-                case "0x004A542E": return "JT Corp."; break;
-                case "0x004B4544": return "Kinetic Engineering Design Ltd"; break;
-                case "0x004B4657": return "Hangzhou ConfirmWare Technology Co., Ltd."; break;
-                case "0x004B465A": return "Deutsches Krebsforschungszentrum (DKFZ)"; break;
-                case "0x004B4743": return "Keisokugiken Corporation"; break;
-                case "0x004B494D": return "PRESYS Co., Ltd."; break;
-                case "0x004B5243": return "KAWADA ROBOTICS CORPORATION"; break;
-                case "0x004B6561": return "RobCo GmbH"; break;
-                case "0x004C434D": return "Linz Center of Mechatronics GmbH"; break;
-                case "0x004C4F43": return "Locomotec GmbH´"; break;
-                case "0x004C545A": return "Lithoz GmbH"; break;
-                case "0x004C5552": return "University of Oviedo, Electrical, Electronic, Computer and Systems Engineering Department"; break;
-                case "0x004D4153": return "AGEMA Germany GmbH"; break;
-                case "0x004D4159": return "Chr. Mayr GmbH + Co. KG"; break;
-                case "0x004d4448": return "Heidelberger Druckmaschinen AG"; break;
-                case "0x004D4543": return "Mecalc PTY Limited"; break;
-                case "0x004D4945": return "SuperVac Maschinenbau GmbH"; break;
-                case "0x004D5249": return "Volga State University of Technology, Faculty of Information Technologies and Computer Engineering"; break;
-                case "0x004D544E": return "MOTEON GmbH"; break;
-                case "0x004E4154": return "NARAE NANOTECH Corporation"; break;
-                case "0x004E4355": return "Nicolaus Copernicus University in Torun (NCU), Faculty of Physics, Astronomy and Informatics"; break;
-                case "0x004E454D": return "NEMONOS GmbH"; break;
-                case "0x004E5854": return "NEXTY Electronics Corporation"; break;
-                case "0x004F5053": return "Opsens Inc."; break;
-                case "0x004F524D": return "ORMEC Systems Corp."; break;
-
-                case "0x00502654": return "POSCO ENGINEERING Co., Ltd."; break;
-                case "0x00504155": return "ONA Electroerosión S.A."; break;
-                case "0x0050434B": return "PC Krause and Associates, Inc."; break;
-                case "0x00504D43": return "Ningbo Physis Technology Co.,Ltd."; break;
-                case "0x0050524F": return "PROTEC Co.,Ltd."; break;
-                case "0x00505344": return "Panasonic System Design Co., Ltd."; break;
-                case "0x00505347": return "PowerSparks GmbH"; break;
-                case "0x00505349": return "Paul Scherrer Institut"; break;
-                case "0x0050535A": return "Packsize Technologies AB"; break;
-                case "0x00505450": return "PT Photonic Tools GmbH"; break;
-                case "0x00509188": return "Ching Hung Machinery & Electric Industrial Co., Ltd."; break;
-                case "0x00515151": return "Shanghai VolBoff Electron Science & Technology Co., Ltd."; break;
-                case "0x00518888": return "Shanghai Rock Technology Co., Ltd."; break;
-                case "0x00522543": return "Shanghai JiQi Robot Technology Co., Ltd."; break;
-                case "0x00524254": return "Daegu Gyeongbuk Institute of Science & Technology, Robotics System Research Division"; break;
-                case "0x0052454E": return "Renishaw plc"; break;
-                case "0x00524D54": return "Rheonik Messtechnik GmbH"; break;
-                case "0x00528785": return "Suzhou Lingchen Acquisition Computer Co., Ltd."; break;
-                case "0x00532579": return "NANORAY Co., Ltd."; break;
-                case "0x00534543": return "Samsung Electronics Co. Ltd."; break;
-                case "0x00534549": return "Sumitomo Electric Industries, Ltd."; break;
-                case "0x00534649": return "Starfire Industries, LLC"; break;
-                case "0x00534652": return "SFERA S.r.l."; break;
-                case "0x00534743": return "Skyloom Global Corp."; break;
-                case "0x00534745": return "SG Electronic Systems SRLS"; break;
-                case "0x00534C4E": return "SLN Technologies Pvt. Ltd."; break;
-                case "0x00534E50": return "Marmatek Mühendislik Endüstriyel Test Ölçüm ve Otomasyon San. ve Tic. Ltd. Sti."; break;
-                case "0x00535349": return "SSI CO.,LTD."; break;
-                case "0x0053554E": return "SUNSAY GENERIC CO., LTD."; break;
-                case "0x00536D61": return "SmarAct GmbH"; break;
-                case "0x00544544": return "Tokyo Electron Kyushu Limited"; break;
-                case "0x0054454B": return "Toray Engineering Co., Ltd."; break;
-                case "0x0054454C": return "Tokyo Electron Limited"; break;
-                case "0x0054454D": return "Tem-Tech Lab."; break;
-                case "0x00544855": return "Technische Hochschule Ulm, Fakultät für Mechatronik und Medizintechnik"; break;
-                case "0x00544D45": return "TOMEN ELECTRONICS CORPORATION"; break;
-                case "0x00544E47": return "Technolution B.V."; break;
-                case "0x00544E4D": return "STE Trekwerk B.V."; break;
-                case "0x00544E5A": return "TEAM NEW ZEALAND AC35 CHALLENGE LIMITED (dba Emirates Team New Zealand)"; break;
-                case "0x00545145": return "TRONTEQ Electronic GbR"; break;
-                case "0x00545249": return "Techman Robot Inc."; break;
-                case "0x00545454": return "Sakarya University, Faculty of Computer and Information Sciences, Computer Engineering Department"; break;
-                case "0x00546936": return "JS Automation Corp."; break;
-                case "0x00554549": return "United Electronic Industries, Inc. (UEIDAQ)"; break;
-                case "0x00554C54": return "Ultimaker B.V."; break;
-                case "0x00555555": return "Jiangxi Fashion Technology Co., Ltd."; break;
-                case "0x0055555A": return "Korea Institute of Machinery & Materials, Advanced Manufacturing Systems Research Division"; break;
-                case "0x0055555B": return "Korea Institute of Machinery & Materials, Nano-Convergence Manufacturing Systems Research Division, Department of Printed Electronics"; break;
-                case "0x00555888": return "Zhejiang Shuanghuan Driveline Co., Ltd."; break;
-                case "0x00556666": return "ShenZhen V&T Technologies Co., Ltd."; break;
-                case "0x0055AA88": return "Dongguan Strong Intelligent Equipment Co., LTD"; break;
-                case "0x00564343": return "Volvo Car Group"; break;
-                case "0x00564D49": return "VMI Holland B.V."; break;
-                case "0x00565203": return "Shenzhen DOHHO Electric Co., Ltd."; break;
-                case "0x00568568": return "Karma Technology Ltd."; break;
-                case "0x00574154": return "watttron GmbH"; break;
-                case "0x00574654": return "Weatherford Oil Tool GmbH"; break;
-                case "0x00574954": return "Witium Co., Ltd."; break;
-                case "0x00577800": return "Inca Digital Printers Limited"; break;
-                case "0x00578485": return "Cerebrus Corporation"; break;
-                case "0x00584D4D": return "Xiamen Micromatch Electronic Information Technology Co.,Ltd."; break;
-                case "0x00594188": return "Shenzhen TianAn Sensor Technology Co.,Ltd"; break;
-                case "0x005A5A5A": return "Hangzhou Zhenzheng Robot Technology Co.,LTD"; break;
-                case "0x005A7967": return "Zygo Corporation"; break;
-                case "0x005E5E5E": return "Ser.mac srl"; break;
-                case "0x005EA71E": return "Tethers Unlimited, Inc."; break;
-
-                case "0x00600613": return "Google Inc."; break;
-                case "0x00616978": return "aixcon PowerSystems GmbH"; break;
-                case "0x00616C6C": return "Allestec Corporation"; break;
-                case "0x00618618": return "Panasonic Software Development Center Dalian Co., Ltd."; break;
-                case "0x00618913": return "TECHEST Co.,Ltd."; break;
-                case "0x0062696F": return "Harmonic Bionics, Inc."; break;
-                case "0x0062AE2D": return "Redstone Aerospace Corporation"; break;
-                case "0x00640627": return "MORNSUN Guangzhou Science & Technology Co., Ltd."; break;
-                case "0x00643000": return "Maple Electronics"; break;
-                case "0x00654321": return "YUCHANG TECH Co., Ltd."; break;
-                case "0x00660066": return "Ningbo Zhafir Plastics Machinery Co., LTD."; break;
-                case "0x00666666": return "Changzhou MVision IT Technology Co., Ltd."; break;
-                case "0x00666888": return "Hunan Sharing Intelligent Machines Co., Ltd."; break;
-                case "0x00666999": return "Shenzhen Diju Intelligent Technology Co., Ltd."; break;
-                case "0x00667675": return "Bilko Computer Control & Automation Co."; break;
-                case "0x00681168": return "Kinco Electric (Shenzhen) Ltd."; break;
-                case "0x00686868": return "Chengdu GUNT Weida CNC Technology Co., Ltd."; break;
-                case "0x00688165": return "EFORT Intelligent Equipment Co., Ltd."; break;
-                case "0x00688191": return "Shanghai Fuxu Tech Co., Ltd."; break;
-                case "0x00688888": return "GUILIN WINDCON CO.,LTD"; break;
-                case "0x00690069": return "SHENZHEN HENGKETONG ROBOT CO., LTD"; break;
-                case "0x00696969": return "Mianyang Fude Robot Co., Ltd."; break;
-                case "0x006AFE96": return "ShuraCore LLC"; break;
-                case "0x006B4F53": return "Kjellberg Finsterwalde Plasma und Maschinen GmbH"; break;
-                case "0x006C6267": return "SHODENSHA Co., Ltd."; break;
-                case "0x006D7361": return "Hefei MacroSilicon Technology Co.,Ltd"; break;
-                case "0x006E542D": return "Genesis Robotics and Motion Technologies Canada, ULC"; break;
-
-                case "0x00700100": return "Cyber Control Systems LLC"; break;
-                case "0x00706E74": return "PONUTech"; break;
-                case "0x007207EC": return "Trotec Laser GmbH"; break;
-                case "0x00730220": return "PLASOURCE Co., Ltd."; break;
-                case "0x00746563": return "tecVenture UG (haftungsbeschränkt)"; break;
-                case "0x00746568": return "MechAdept Limited"; break;
-                case "0x00746C65": return "BST GmbH"; break;
-                case "0x00750608": return "ZHITENG (Shenzhen) Motion Technology Co., Ltd."; break;
-                case "0x00756500": return "Zhuhai Motion Control Motor Co., Ltd."; break;
-                case "0x00770712": return "Rainbow Co."; break;
-                case "0x0077696E": return "krtkl inc."; break;
-                case "0x00777700": return "SENTROL Co., Ltd."; break;
-                case "0x00777777": return "HangZhou Dianzi University, School of Mechanical Engineering"; break;
-                case "0x00779999": return "PHUC SON TECHNOLOGY CO., LTD."; break;
-                case "0x00782782": return "Hangzhou Bergerda Automation Technology Co., Ltd."; break;
-                case "0x00789456": return "Devol Advanced Automation, Inc."; break;
-                case "0x00796866": return "Chengdu Yanxing Automation Engineering Co., Ltd."; break;
-                case "0x0079796D": return "METIS Co., Ltd."; break;
-                case "0x00799245": return "Goldlücke GmbH"; break;
-                case "0x007AFE76": return "Promwad Soft LLC"; break;
-                case "0x00800188": return "NIDEC READ CORPORATION"; break;
-                case "0x00811791": return "Microtime Computer Inc."; break;
-                case "0x00811811": return "EGICON S.R.L."; break;
-                case "0x00828845": return "AL. Robot Co., Inc."; break;
-                case "0x00830517": return "Korea Institute of Science and Technology (KIST)"; break;
-                case "0x00830518": return "Korea Institute of Science and Technology (KIST)"; break;
-                case "0x00831219": return "Chengdu Sino-Tech Smart Energy Co., Ltd."; break;
-                case "0x00836699": return "Hunan Aicortech Intelligent Technology Co.,Ltd."; break;
-                case "0x00850104": return "Shenzhen Veichi Electric Co., Ltd"; break;
-                case "0x00860816": return "Sichuan Odot Automation System Co.,Ltd."; break;
-                case "0x00868686": return "Changzhou Baolong Motor Co., Ltd."; break;
-                case "0x00871217": return "Rocket Lab Kft."; break;
-                case "0x00875111": return "Protech Systems Co., Ltd."; break;
-                case "0x00876543": return "KONE Oyj"; break;
-                case "0x00880088": return "Atop Technologies, Inc."; break;
-                case "0x00884443": return "Nanjing Solidot Electronic Technology Co., Ltd."; break;
-                case "0x00886688": return "Simplo Technology CO., LTD."; break;
-                case "0x00888880": return "NINGBO EST TECHNOLOGY CO., LTD"; break;
-                case "0x00888882": return "Hitachi High-Technologies Corporation"; break;
-                case "0x00889606": return "Dongguan Avatar System Automation Equipment Co., Ltd."; break;
-                case "0x00889999": return "Hangzhou Wahaha Group Co., LTD., Mechanical and Electrical Institute"; break;
-                case "0x00922189": return "Suzhou Quick Laser Technology"; break;
-                case "0x00950701": return "ULVAC Korea, Ltd."; break;
-                case "0x00952358": return "TROY ENTERPRISE CO., LTD"; break;
-                case "0x00972430": return "Moore Nanotechnology Systems, LLC"; break;
-                case "0x00991000": return "Shenzhen SuperFar lntelligent Control Technology Co.,LTD."; break;
-                case "0x00998877": return "DATASCHALT engineering GmbH"; break;
-                case "0x00999999": return "Smartind Technologies Co., Ltd."; break;
-                case "0x009CFBF1": return "MESOMATIC GmbH & Co. KG"; break;
-
-                case "0x00A0415E": return "Opsens Solutions Inc."; break;
-                case "0x00A12000": return "Universitat Politecnica de Valencia, Instituto Universitario de Automática e Informática Industrial"; break;
-                case "0x00A1234F": return "Shanghai Maritime University, Logistics Engineering College"; break;
-                case "0x00A1BEEF": return "F&S PROZESSAUTOMATION GmbH"; break;
-                case "0x00A21234": return "EMP Designs Ltd"; break;
-                case "0x00A24273": return "ASYS Automatic Systems Co., Ltd."; break;
-                case "0x00A54321": return "NEW SOLUTION S.A."; break;
-                case "0x00A55A5A": return "Hikrobot Technology Co., Ltd."; break;
-                case "0x00A5C000": return "ASC GmbH"; break;
-                case "0x00A5DFF4": return "Kenotom P.C."; break;
-                case "0x00A5E15A": return "ASELSAN A.S."; break;
-                case "0x00A70EA7": return "Basemap Inc., DBA Automaton"; break;
-                case "0x00AA0001": return "Inventec Appliances (Shanghai) Co., Ltd."; break;
-                case "0x00AA1314": return "HENAN XINZHILIN ELECTROMECHANICAL DEVICE CO.,LTD"; break;
-                case "0x00AA55A5": return "Bitvis AS"; break;
-                case "0x00AA55AA": return "Shenzhen Sipake Electric Co., Ltd."; break;
-                case "0x00AAA111": return "Amada Miyachi America, Inc."; break;
-                case "0x00AAA555": return "EMOTIONTEK Co., Ltd."; break;
-                case "0x00AAAAAA": return "Altera Corporation"; break;
-                case "0x00AAAABB": return "TDS Technology (S) Pte Ltd."; break;
-                case "0x00AAABBB": return "CRRC QINGDAO SIFANG ROLLING STOCK RESEARCH INSTITUTE Co., Ltd."; break;
-                case "0x00AAFFEE": return "High Q Laser GmbH"; break;
-                case "0x00ABA1EC": return "abatec group ag"; break;
-                case "0x00ABAB00": return "Pearls of Life AB"; break;
-                case "0x00ABF159": return "Promotion Comercio e Serviço Ltda"; break;
-                case "0x00ACCE55": return "enders GmbH"; break;
-                case "0x00ACEACE": return "HANYANG ROBOTICS CO.,LTD"; break;
-                case "0x00ADCAFE": return "Analog Devices, Inc."; break;
-                case "0x00AE4B4B": return "KK Wind Solutions A/S"; break;
-                case "0x00AE86FD": return "HOFO Automation Co., Ltd."; break;
-                case "0x00AEA000": return "AEA Srl"; break;
-                case "0x00AF2497": return "Yeungnam University, College of Mechanical and IT Engineering, Department of Information and Communication Engineering, Advanced Networking Technology Lab."; break;
-
-                case "0x00B071C5": return "PAL Robotics S.L."; break;
-                case "0x00B100D5": return "King’s College London, Faculty of Life Sciences & Medicine, School of Biomedical Engineering & Imaging Sciences"; break;
-                case "0x00BADA55": return "NEWTEC A/S"; break;
-                case "0x00BADBEE": return "4NXT S.r.l."; break;
-                case "0x00BADFAB": return "Nexter Systems S.A."; break;
-                case "0x00BAFF1E": return "Memjet Technology Ltd"; break;
-                case "0x00BBBBBB": return "BLUESINK Co., Ltd"; break;
-                case "0x00BEE000": return "m-Bee GmbH"; break;
-                case "0x00C007D9": return "Guangdong Coordy Numerical Control Technology Co.,Ltd."; break;
-                case "0x00C0FFEE": return "Moog Animatics"; break;
-                case "0x00CC00AA": return "Saenggaksaemteo Co."; break;
-                case "0x00CC1982": return "Comtrol Corporation"; break;
-                case "0x00CCCCCC": return "Largan Precision Co.,Ltd."; break;
-                case "0x00CE7C21": return "China Electronics Technology Group Corporation, No. 21 Research Institute"; break;
-                case "0x00CECECE": return "Canon Electronics Inc."; break;
-                case "0x00D02379": return "REXA Inc."; break;
-                case "0x00D56130": return "Löwenstein Medical GmbH & Co. KG"; break;
-                case "0x00D87688": return "Robo Biz Core Co., Ltd"; break;
-                case "0x00DA4E00": return "DAVE Srl"; break;
-                case "0x00DAD001": return "Studio elektronike Rijeka d.o.o."; break;
-                case "0x00DAEAC0": return "DAEATI Co., Ltd."; break;
-                case "0x00DDDDDD": return "DAINCUBE Corp."; break;
-                case "0x00DEADBF": return "Shanghai xPartner Robotics Co.,Ltd."; break;
-                case "0x00DEDBEF": return "Dexterity, Inc."; break;
-                case "0x00E05DA6": return "Detlef Fink Elektronik-& Softwareentwicklung"; break;
-                case "0x00E11FE1": return "Elife International S.r.l."; break;
-                case "0x00E50E50": return "ESO, European Southern Observatory"; break;
-                case "0x00E57AB1": return "Estabili Tecnologia"; break;
-                case "0x00E5CA18": return "Weld Tooling Corporation (dba BUG-O Systems)"; break;
-                case "0x00EC1608": return "Tongtai Machine & Tool Co., Ltd."; break;
-                case "0x00EC1991": return "PROMAX srl"; break;
-                case "0x00EC2018": return "PRODRIVES & MOTIONS CO., LTD."; break;
-                case "0x00EC4800": return "Hitex (UK) Ltd."; break;
-                case "0x00ECADC0": return "Encoder Products Company"; break;
-                case "0x00ECADE1": return "Mecademic Inc."; break;
-                case "0x00ECEEDA": return "Exceed Automation, LLC"; break;
-                case "0x00EDA168": return "Endex Automation Technology Co., Ltd."; break;
-                case "0x00EDC0DE": return "STÖGRA Antriebstechnik GmbH"; break;
-                case "0x00EE00AA": return "ENTEC Electric & Electronic CO., LTD."; break;
-                case "0x00EE1000": return "Euto Energy Elektronik San. ve Tic. Ltd. Sti."; break;
-                case "0x00EECCAA": return "Beijing Sevenstar Flow Co., Ltd."; break;
-                case "0x00EEE669": return "Henan Mechanical and Electrical Vocational College"; break;
-                case "0x00EEEEEE": return "Eonyk AG"; break;
-
-                case "0x00F0AE1B": return "NTCSOFT Co., Ltd."; break;
-                case "0x00F1CA42": return "Meccanica 42 S.r.l."; break;
-                case "0x00F1F1F1": return "Williams Grand Prix Engineering Limited"; break;
-                case "0x00F2020F": return "MİLTEKSAN CNC Teknoloji ve Kontrol Sistemleri Sanayi A.Ş."; break;
-                case "0x00F2F2F2": return "spectral process Ingenieurbüro"; break;
-                case "0x00F5CB27": return "Alpha Project Co.,Ltd."; break;
-                case "0x00F8F8F8": return "Suzhou Otronic Medical Technology Co., Ltd."; break;
-                case "0x00FA1337": return "British Columbia Institute of Technology"; break;
-                case "0x00FA140A": return "KOYO ELECTRONICS INDUSTRIES CO., LTD."; break;
-                case "0x00FA3C77": return "DNV Electronics, LLC"; break;
-                case "0x00FABADA": return "GTD Sistemas de Información SA"; break;
-                case "0x00FDC42D": return "MECOS AG"; break;
-                case "0x00FE0001": return "Kemppi Oy"; break;
-                case "0x00FEDABC": return "Mouvent AG"; break;
-                case "0x00FEDCBA": return "E-TEAM di Righini Bruno & C. S.a.s."; break;
-                case "0x00FF00AA": return "Dongguan Precision Intelligent Technology Co., Ltd."; break;
-                case "0x00FF00FF": return "TDK-Lambda Ltd."; break;
-                case "0x00FFAABB": return "YOSIO ELECTRONIC COMPANY"; break;
-                case "0x00FFFAAA": return "Xiamen Zhengai Technology Co., Ltd."; break;
-                case "0x00FFFFFF": return "Chongqing Huashu Robotics Co.,Ltd."; break;
-
-                case "0x01000001": return "Arlington Laboratory Corporation"; break;
-                case "0x01000002": return "Beckhoff Automation GmbH & Co. KG"; break;
-                case "0x01000056": return "SICK AG"; break;
-                case "0x01000083": return "Omron Robotics and Safety Technologies, Inc."; break;
-                case "0x01000089": return "Parker Hannifin Manufacturing S.r.l."; break;
-                case "0x010000E8": return "Balluff GmbH"; break;
-                case "0x010000F9": return "Nidec ACIM Germany GmbH"; break;
-                case "0x010000FB": return "maxon precision motors, inc."; break;
-                case "0x01000230": return "Weidmüller Interface (Shanghai) Co.,Ltd."; break;
-                case "0x01000331": return "SHANGHAI SANY SCIENCE & TECHNOLOGY CO., LTD"; break;
-                case "0x0100034E": return "Infineon Technologies Americas Corporation"; break;
-                case "0x0100050C": return "ABB Engineering (Shanghai) Ltd."; break;
-                case "0x01000734": return "MULTIVAC Sepp Haggenmüller SE & Co. KG"; break;
-                case "0x01000766": return "Renesas Electronics Korea Co., Ltd."; break;
-                case "0x010007D5": return "Bimba Manufacturing Company"; break;
-                case "0x010007EC": return "SCREEN Holdings Co., Ltd."; break;
-                case "0x0100083E": return "Frencken America Inc."; break;
-                case "0x01000844": return "KLA-Tencor Corporation"; break;
-                case "0x01000876": return "EDAC Electronics Technology (Hangzhou) Co., Ltd."; break;
-                case "0x0100090C": return "CORE CORPORATION"; break;
-                case "0x0100091C": return "Drobak Unlimited Co."; break;
-                case "0x01001946": return "AMADA MIYACHI EUROPE GmbH"; break;
-                case "0x01003610": return "eProLinkTek Co., Ltd."; break;
-                case "0x01007170": return "Hyundai Heavy Industries Holdings Co. Ltd."; break;
-                case "0x01007680": return "HUNAN SUPER INFORMATION CO., LTD"; break;
-                case "0x0100ADDA": return "Fraunhofer-Institut für Lasertechnik (ILT)"; break;
-                case "0x01053258": return "Shenzhen Encom Electric Technologies Co., Ltd."; break;
-                case "0x01681168": return "Kinco Electric (Shenzhen) Ltd."; break;
-                case "0x012EBC73": return "TIME GROUP Inc."; break;
-                case "0x01ABCDEF": return "Ma.Vi. srl"; break;
-
-                case "0x02000089": return "Parker Hannifin Manufacturing Germany GmbH & Co KG"; break;
-                case "0x0200008D": return "Danfoss Drives A/S"; break;
-                case "0x02000331": return "SHANGHAI SANY SCIENCE & TECHNOLOGY CO., LTD"; break;
-                case "0x0200034E": return "Infineon Technologies China Co., Ltd."; break;
-                case "0x0200ADDA": return "Fraunhofer-Institut für Lasertechnik (ILT)"; break;
-                case "0x0300008D": return "Danfoss S.r.l."; break;
-                case "0x04000089": return "Parker Hannifin Ltd."; break;
-                case "0x04210909": return "Longxin Zhijian Co. Ltd."; break;
-                case "0x04533417": return "MEYSAR MAKINA ELEKTRONIK ENERJI YAZILIM SAN. TIC. LTD. STI"; break;
-                case "0x05000089": return "Parker Hannifin Corporation"; break;
-                case "0x0505ABCD": return "A.L.L. Lasersysteme GmbH"; break;
-                case "0x0512FDFD": return "Suzhou GFD Automation Technology Co., Ltd"; break;
-
-                case "0x06402200": return "L-3 Communications, Communication Systems - West"; break;
-                case "0x06958326": return "BNT"; break;
-                case "0x07770777": return "Japan Radio Co., Ltd."; break;
-                case "0x0800005A": return "Schneider Electric SE"; break;
-                case "0x08000089": return "Parker Hannifin Manufacturing Germany GmbH & Co. KG"; break;
-                case "0x09000089": return "Parker Hannifin Corporation"; break;
-                case "0x0A5D0000": return "Advanced Systems Development BVBA"; break;
-                case "0x0ADAFFFF": return "DSP Automation"; break;
-                case "0x0C044BAC": return "Compac Sorting Equipment Ltd."; break;
-                case "0x0FA00000": return "FASTECH Co., Ltd."; break;
-                case "0x0FFF8888": return "GSK CNC EQUIPMENT CO., LTD."; break;
-
-                case "0x10000000": return "SONOTRONIC Nagel GmbH"; break;
-                case "0x10000001": return "XI’AN MOSVO ELECTRONICS TECHNOLOGY CO.,LTD"; break;
-                case "0x10000004": return "ED Co., Ltd"; break;
-                case "0x10000031": return "SHANGHAI SANY SCIENCE & TECHNOLOGY CO., LTD"; break;
-                case "0x10000331": return "SHANGHAI SANY SCIENCE & TECHNOLOGY CO., LTD"; break;
-                case "0x12345678": return "GA Drilling, Ltd."; break;
-                case "0x17072003": return "METTEM-Specautomatic Ltd."; break;
-                case "0x19491001": return "Tsinghua University, Department of Electronic Engineering"; break;
-                case "0x19821130": return "Control Z Corporation"; break;
-                case "0x19861230": return "Shanghai Damon Logistics Technology Co.,LTD"; break;
-                case "0x1BA90762": return "iba AG"; break;
-
-                case "0x20041961": return "Hengstler GmbH"; break;
-                case "0x20422B4C": return "Lenord, Bauer & Co. GmbH"; break;
-                case "0x20494154": return "Universität Bremen, Institut für Automatisierungstechnik (IAT)"; break;
-                case "0x22222222": return "Shanghai Cohere Electronics Technology Co., Ltd."; break;
-                case "0x23091861": return "Robert Bosch GmbH"; break;
-                case "0x26262626": return "APDISAR (Association pour la Promotion et le Développement de l’Ecole D’Ingénieurs ESISAR)"; break;
-                case "0x26376345": return "Convex Co., Ltd."; break;
-                case "0x2E000000": return "X2E GmbH"; break;
-                case "0x30000331": return "SHANGHAI SANY SCIENCE & TECHNOLOGY CO., LTD"; break;
-                case "0x31313131": return "Sany Intelligent Control Equipment"; break;
-                case "0x31393633": return "Technische Universität Darmstadt, Institut für Elektromechanische Konstruktionen"; break;
-                case "0x314D4B54": return "MKT Systemtechnik GmbH & Co. KG"; break;
-                case "0x33333333": return "The ITAYA Engineering Ltd."; break;
-                case "0x35409865": return "Korea Electronics Technology Institute"; break;
-
-                case "0x40000331": return "SHANGHAI SANY SCIENCE & TECHNOLOGY CO., LTD"; break;
-                case "0x40524F54": return "Red one technologies"; break;
-                case "0x414D4154": return "Applied Materials Inc."; break;
-                case "0x41524341": return "ARCA TECNOLOGIE srl"; break;
-                case "0x4156414C": return "AVAL DATA CORPORATION"; break;
-                case "0x42000000": return "Trust Automation Inc."; break;
-                case "0x43544C42": return "Central South University of Forestry and Technology, College of Computer Science and Information Technology"; break;
-                case "0x44454B31": return "DEK Printing Machines Ltd."; break;
-                case "0x454C4F56": return "ELOVIS GmbH"; break;
-                case "0x454D5245": return "EKTECH Elektronik"; break;
-                case "0x46485320": return "SHF Communication Technologies AG"; break;
-                case "0x464D5331": return "FMS (Flexible Manufacturing System)"; break;
-                case "0x474F5353": return "Marcus Goßner SYSTEM SOLUTIONS"; break;
-                case "0x47535953": return "Grossenbacher Systeme AG"; break;
-                case "0x482A0000": return "Hstar Technologies Corp."; break;
-                case "0x48455673": return "University of Applied Sciences Western Switzerland, Institute of Systems Engineering"; break;
-                case "0x4C4E5449": return "NTI AG - LinMot"; break;
-                case "0x4C524358": return "Lam Research Corporation"; break;
-                case "0x4D4C5431": return "MLT Micro Laser Technology GmbH"; break;
-
-                case "0x50005000": return "Technische Universität Braunschweig"; break;
-                case "0x50414E43": return "Power Automation GmbH"; break;
-                case "0x52414649": return "RAFI GmbH & Co. KG"; break;
-                case "0x53545A53": return "Steinbeis-Transferzentrum Systemtechnik"; break;
-                case "0x5445434E": return "Tecan Schweiz AG"; break;
-                case "0x54455753": return "TEWS Elektronik GmbH & Co. KG"; break;
-                case "0x54494158": return "Timax Electronics & Machinery Ltd."; break;
-                case "0x55555555": return "OLYMPUS CORPORATION"; break;
-                case "0x5555AAAA": return "SIASUN Robot & Automation Co., Ltd."; break;
-                case "0x55AA55AA": return "Green Field Control System (I) Pvt. Ltd."; break;
-                case "0x55AA55BB": return "JT3, LLC"; break;
-                case "0x56475454": return "Volvo Group"; break;
-
-                case "0x6167656D": return "megatec electronic GmbH"; break;
-                case "0x65547241": return "Arte Motion S.p.A."; break;
-                case "0x66666666": return "Chinese Academy of Sciences, Institute of Optics and Electronics (IOE)"; break;
-                case "0x66668888": return "Shenzhen Just Motion Control Electromechanics Co.,Ltd"; break;
-                case "0x7061756C": return "PAUL Maschinenfabrik GmbH & Co.KG"; break;
-                case "0x77776968": return "Mesacon Messelektronik GmbH Dresden"; break;
-                case "0x77778888": return "Shanghai Tech Full Electric Co., Ltd."; break;
-                case "0x81696189": return "Shandong University, School of Electrical Engineering"; break;
-                case "0x88888888": return "ScandiNova Systems AB"; break;
-                case "0x89898989": return "Woojin Plaimm Co., Ltd"; break;
-                case "0x90646350": return "ROBOCUBETECH Co., Ltd"; break;
-                case "0x99998888": return "Shanghai STEP Electric Corporation"; break;
-
-                case "0xAAAA5555": return "Sunin Technology Inc."; break;
-                case "0xAAAAAAAA": return "COMIZOA Co., Ltd."; break;
-                case "0xAAAABBBB": return "Ruchservomotor Ltd."; break;
-                case "0xAAAAFFFF": return "Dalian Jafeng Electronics Co., Ltd."; break;
-                case "0xADD1DA7A": return "ADDI-DATA GmbH"; break;
-                case "0xB0500001": return "Husky Injection Molding Systems Ltd."; break;
-                case "0xBCDA0001": return "JINOID CO., LTD."; break;
-                case "0xBE78EC01": return "Bertec Corporation"; break;
-                case "0xC0DECAFE": return "Innovasic Inc."; break;
-                case "0xD4C3B2A1": return "PULOON Technology Inc."; break;
-                case "0xDEADBEEF": return "Albert Handtmann Maschinenfabrik GmbH & Co. KG"; break;
-
-
-                default: return "???"; break;
+                case "0x00000001":
+                    return "EtherCAT Technology Group";
+                    break;
+                case "0x00000002":
+                    return "Beckhoff Automation GmbH & Co. KG";
+                    break;
+                case "0x00000003":
+                    return "Scuola Superiore S. Anna";
+                    break;
+                case "0x00000004":
+                    return "HMS Technology Center Ravensburg GmbH";
+                    break;
+                case "0x00000005":
+                    return "Vector Informatik GmbH";
+                    break;
+                case "0x00000006":
+                    return "KNESTEL Technologie & Elektronik GmbH";
+                    break;
+                case "0x00000007":
+                    return "Janz Tec AG";
+                    break;
+                case "0x00000009":
+                    return "A&C Institute of Shenyang University of Technology";
+                    break;
+                case "0x0000000A":
+                    return "CMZ Sistemi Elettronici";
+                    break;
+                case "0x0000000B":
+                    return "JSL Technology Co.,Ltd";
+                    break;
+                case "0x0000000C":
+                    return "comemso GmbH";
+                    break;
+                case "0x0000000D":
+                    return "Softing Industrial Automation GmbH";
+                    break;
+                case "0x0000000E":
+                    return "MicroControl GmbH & Co. KG";
+                    break;
+                case "0x0000000F":
+                    return "ESR Pollmeier GmbH";
+                    break;
+
+                case "0x00000010":
+                    return "Beihang University, School of Mechanical Engineering & Automation";
+                    break;
+                case "0x00000011":
+                    return "GKG Precision Machine Co., Ltd.";
+                    break;
+                case "0x00000012":
+                    return "Inatech Co., Ltd.";
+                    break;
+                case "0x00000013":
+                    return "Fritz Kübler GmbH";
+                    break;
+                case "0x00000014":
+                    return "KEB Automation KG";
+                    break;
+                case "0x00000015":
+                    return "AJINEXTEK Co. Ltd.";
+                    break;
+                case "0x00000016":
+                    return "KEBA Industrial Automation Germany GmbH";
+                    break;
+                case "0x00000017":
+                    return "esd electronics gmbh";
+                    break;
+                case "0x00000018":
+                    return "M2I Corporation";
+                    break;
+                case "0x00000019":
+                    return "NSD Corporation";
+                    break;
+                case "0x0000001A":
+                    return "Shanghai ECAT Science and Technology Co.,Ltd";
+                    break;
+                case "0x0000001B":
+                    return "HMS Industrial Networks AB";
+                    break;
+                case "0x0000001C":
+                    return "epis Automation GmbH & Co. KG";
+                    break;
+                case "0x0000001D":
+                    return "Festo SE & Co. KG";
+                    break;
+                case "0x0000001E":
+                    return "Shanghai MicroPort Medical (Group) Co., Ltd.";
+                    break;
+
+                case "0x00000020":
+                    return "DST Robot Co. Ltd.";
+                    break;
+                case "0x00000021":
+                    return "WAGO GmbH & Co. KG";
+                    break;
+                case "0x00000022":
+                    return "Wuhan Farley Laserlab Cutting Welding System Engineering Co., Ltd.";
+                    break;
+                case "0x00000023":
+                    return "ACTi Corporation";
+                    break;
+                case "0x00000024":
+                    return "Bosch Rexroth AG";
+                    break;
+                case "0x00000025":
+                    return "Inexbot NanJing Technology Co., Ltd.";
+                    break;
+                case "0x00000026":
+                    return "Hongke Technology Co., Ltd.";
+                    break;
+                case "0x00000027":
+                    return "Selcom Group S.p.A.";
+                    break;
+                case "0x00000028":
+                    return "Moog GmbH";
+                    break;
+                case "0x00000029":
+                    return "INTEC - Motion Systems GmbH";
+                    break;
+                case "0x0000002A":
+                    return "HIGHYAG Lasertechnologie GmbH";
+                    break;
+                case "0x0000002B":
+                    return "Doosan Robotics Inc.";
+                    break;
+                case "0x0000002C":
+                    return "Probot Automation GmbH";
+                    break;
+                case "0x0000002D":
+                    return "Beijing NiMotion Control Technology Co., Ltd.";
+                    break;
+                case "0x0000002E":
+                    return "Dinkle Enterprise Co. Ltd.";
+                    break;
+                case "0x0000002F":
+                    return "Guangzhou Kossi Intelligent Technology Co., Ltd.";
+                    break;
+                case "0x00000030":
+                    return "Epec Oy";
+                    break;
+                case "0x00000031":
+                    return "Chengdu EVControl Technology Co., Ltd.";
+                    break;
+                case "0x00000032":
+                    return "Robotek Otomasyon Teknolojileri San. Tic. Ltd. Sti.";
+                    break;
+                case "0x00000033":
+                    return "Shenzhen Liwi Automation Co., Ltd.";
+                    break;
+                case "0x00000034":
+                    return "port industrial automation GmbH";
+                    break;
+                case "0x00000035":
+                    return "Weissler Information Technology GmbH";
+                    break;
+                case "0x00000036":
+                    return "FAS Electronics (Fujian) Co.,LTD.";
+                    break;
+                case "0x00000037":
+                    return "Guangzhou Honest Automation Co., Ltd.";
+                    break;
+                case "0x00000038":
+                    return "InCAT";
+                    break;
+                case "0x00000039":
+                    return "Bürkert Werke GmbH";
+                    break;
+                case "0x0000003A":
+                    return "Adtec Plasma Technology Co. Ltd.";
+                    break;
+                case "0x0000003B":
+                    return "Lenze SE";
+                    break;
+                case "0x0000003C":
+                    return "Shanghai 3cRobot Co.,Ltd.";
+                    break;
+                case "0x0000003D":
+                    return "Tianjin Fuyun Tianyi Technology Co., Ltd.";
+                    break;
+                case "0x0000003E":
+                    return "MH Robot & Automation Co., Ltd.";
+                    break;
+                case "0x0000003F":
+                    return "Weihai IDENCODER Electronic Technology Co.,Ltd";
+                    break;
+                case "0x00000040":
+                    return "Temposonics GmbH & Co. KG";
+                    break;
+                case "0x00000041":
+                    return "HIOKI E.E. Corporation";
+                    break;
+                case "0x00000042":
+                    return "TIGRIS Electronic GmbH";
+                    break;
+                case "0x00000043":
+                    return "Hangzhou Muxun Technology Co., Ltd.";
+                    break;
+                case "0x00000044":
+                    return "Hilscher GmbH";
+                    break;
+                case "0x00000045":
+                    return "MINTROBOT Co., Ltd.";
+                    break;
+                case "0x00000046":
+                    return "Bosch Rexroth (Xi’an) Electric Drives and Controls Co., Ltd.";
+                    break;
+                case "0x00000047":
+                    return "WIKA Alexander Wiegand SE & Co. KG";
+                    break;
+                case "0x00000048":
+                    return "Handtmann e-solutions GmbH & Co. KG";
+                    break;
+                case "0x00000049":
+                    return "Industrial Software Co.";
+                    break;
+                case "0x0000004A":
+                    return "Henschel-Robotics GmbH";
+                    break;
+                case "0x0000004B":
+                    return "Ever Elettronica srl";
+                    break;
+                case "0x0000004C":
+                    return "Smart Motion Control Co., Ltd.";
+                    break;
+                case "0x0000004D":
+                    return "Monolithic Power Systems Inc. (dba Monolithic Motion Solutions)";
+                    break;
+                case "0x0000004E":
+                    return "Xeryon bvba";
+                    break;
+                case "0x0000004F":
+                    return "Murrelektronik GmbH";
+                    break;
+
+                case "0x00000050":
+                    return "Orion Technology Co., Ltd.";
+                    break;
+                case "0x00000051":
+                    return "PowerTech Converter GmbH";
+                    break;
+                case "0x00000052":
+                    return "Beijing Jingwei New Technology Textile Machinery CO., LTD.";
+                    break;
+                case "0x00000053":
+                    return "Delta Farm Co., Ltd.";
+                    break;
+                case "0x00000057":
+                    return "Komax AG";
+                    break;
+                case "0x00000058":
+                    return "Shanghai Fangling Software Co., Ltd.";
+                    break;
+                case "0x00000059":
+                    return "SEW-EURODRIVE GmbH & Co KG";
+                    break;
+                case "0x0000005A":
+                    return "Shenzhen Yoda Motion Control Technology Co., Ltd.";
+                    break;
+                case "0x0000005D":
+                    return "Schleicher Electronic Berlin GmbH";
+                    break;
+                case "0x00000060":
+                    return "INCAA Computers BV";
+                    break;
+                case "0x00000062":
+                    return "Bachmann electronic GmbH";
+                    break;
+                case "0x00000066":
+                    return "ROFIN-SINAR Laser GmbH";
+                    break;
+                case "0x00000067":
+                    return "MAC Valves, Inc.";
+                    break;
+                case "0x00000068":
+                    return "Fagor Automation Sociedad Cooperativa";
+                    break;
+                case "0x0000006A":
+                    return "KOLLMORGEN Corporation";
+                    break;
+                case "0x0000006B":
+                    return "Woodward Kempen GmbH";
+                    break;
+                case "0x0000006C":
+                    return "Bernecker + Rainer Industrie-Elektronik Ges.m.b.H";
+                    break;
+                case "0x00000070":
+                    return "MIRAPRO Co., Ltd.";
+                    break;
+                case "0x00000072":
+                    return "INAMCT CO.,LTD.";
+                    break;
+                case "0x00000077":
+                    return "SLC Sautter Lift Components GmbH & Co. KG";
+                    break;
+                case "0x00000079":
+                    return "ETLsoft Kft.";
+                    break;
+                case "0x0000007A":
+                    return "SIBONAC Laser Technologies Co.,Ltd.";
+                    break;
+                case "0x0000007B":
+                    return "TÜV SÜD Rail GmbH";
+                    break;
+                case "0x00000080":
+                    return "YDIIT Co., Ltd.";
+                    break;
+                case "0x00000081":
+                    return "AUBO (BEIJING) ROBOTICS TECHNOLOGY CO., LTD";
+                    break;
+                case "0x00000082":
+                    return "Infranor SAS";
+                    break;
+                case "0x00000083":
+                    return "OMRON Corporation";
+                    break;
+                case "0x00000084":
+                    return "Phoenix Contact GmbH & Co. KG";
+                    break;
+                case "0x00000087":
+                    return "Boneng Transmission Co. Ltd.";
+                    break;
+                case "0x00000088":
+                    return "THINKVO Automation Equipment Co.,Ltd.";
+                    break;
+                case "0x00000089":
+                    return "Shenyang Jinchi Chuangxin Technology Co.,LTD";
+                    break;
+                case "0x0000008A":
+                    return "System Ceramics S.p.A.";
+                    break;
+                case "0x0000008E":
+                    return "Lazer Safe Pty Ltd";
+                    break;
+                case "0x00000090":
+                    return "Vacon Oy";
+                    break;
+                case "0x00000093":
+                    return "Gefran S.P.A.";
+                    break;
+                case "0x00000097":
+                    return "Camozzi Automation S.p.A.";
+                    break;
+                case "0x00000099":
+                    return "SHENZHEN CO-TRUST TECHNOLOGY CO., LTD.";
+                    break;
+                case "0x0000009A":
+                    return "Elmo Motion Control Ltd.";
+                    break;
+                case "0x0000009B":
+                    return "Hope Win Industrial Co.,Ltd.";
+                    break;
+                case "0x0000009C":
+                    return "Hans Turck GmbH & Co. KG";
+                    break;
+                case "0x0000009F":
+                    return "Konsept Elektronik Otomasyon ve Yazilim";
+                    break;
+
+                case "0x000000A0":
+                    return "Sontheim Industrie Elektronik GmbH";
+                    break;
+                case "0x000000A2":
+                    return "HORIBA STEC, Co., Ltd.";
+                    break;
+                case "0x000000A3":
+                    return "HORIBA Instruments Incorporated";
+                    break;
+                case "0x000000A4":
+                    return "HORIBA Precision Instruments (Beijing) Co,.Ltd.";
+                    break;
+                case "0x000000A5":
+                    return "Hirschmann Automation and Control GmbH";
+                    break;
+                case "0x000000A7":
+                    return "Wieland Electric GmbH";
+                    break;
+                case "0x000000AA":
+                    return "Beijing A&E Technologies Co., Ltd.";
+                    break;
+                case "0x000000AB":
+                    return "Copley Controls, a Division of Analogic Corporation";
+                    break;
+                case "0x000000AC":
+                    return "Atlas Copco IAS GmbH";
+                    break;
+                case "0x000000AD":
+                    return "Pepperl+Fuchs SE";
+                    break;
+                case "0x000000AF":
+                    return "Johannes Hübner Fabrik elektrischer Maschinen GmbH";
+                    break;
+                case "0x000000B1":
+                    return "Bristol Industrial & Research Associates Ltd (Biral)";
+                    break;
+                case "0x000000B3":
+                    return "Jetter AG";
+                    break;
+                case "0x000000B4":
+                    return "Rob Surgical Systems S.L.";
+                    break;
+                case "0x000000B7":
+                    return "ABB Oy Drives";
+                    break;
+                case "0x000000B9":
+                    return "STÖBER ANTRIEBSTECHNIK GmbH & Co. KG";
+                    break;
+                case "0x000000BB":
+                    return "Shanghai Baobin Robot Automation Technology CO., LTD.";
+                    break;
+                case "0x000000BC":
+                    return "AEC S.r.l.";
+                    break;
+                case "0x000000BD":
+                    return "ADVANCED Motion Controls";
+                    break;
+                case "0x000000BE":
+                    return "Bloom Energy (India) Private Limited";
+                    break;
+
+                case "0x000000C0":
+                    return "Technofusion Co.,Ltd.";
+                    break;
+                case "0x000000C5":
+                    return "Comdel, Inc.";
+                    break;
+                case "0x000000C6":
+                    return "Mitrol S.r.l.";
+                    break;
+                case "0x000000CC":
+                    return "DENSAN CO., LTD.";
+                    break;
+                case "0x000000CD":
+                    return "Wipotec GmbH";
+                    break;
+                case "0x000000CE":
+                    return "Mitsubishi Electric India Pvt. Ltd.";
+                    break;
+                case "0x000000D5":
+                    return "Bonfiglioli Vectron MDS GmbH";
+                    break;
+                case "0x000000D6":
+                    return "HENSOLDT Optronics GmbH";
+                    break;
+                case "0x000000D9":
+                    return "Phase Motion Control SpA";
+                    break;
+                case "0x000000DA":
+                    return "Diener Automation GmbH & Co. KG";
+                    break;
+                case "0x000000DB":
+                    return "Dorabot Inc.";
+                    break;
+                case "0x000000DD":
+                    return "Samsung Electro-Mechanics Co., Ltd.";
+                    break;
+                case "0x000000DE":
+                    return "Dave Engineering LLC";
+                    break;
+                case "0x000000E2":
+                    return "plating electronic GmbH";
+                    break;
+                case "0x000000E3":
+                    return "CHONGQING PULSE ROBOT CONTROL SYSTEM CO., LTD.";
+                    break;
+                case "0x000000E4":
+                    return "Metronix Messgeräte und Elektronik GmbH";
+                    break;
+                case "0x000000E9":
+                    return "Ascon S.p.A.";
+                    break;
+                case "0x000000EA":
+                    return "ESAB-ATAS GmbH";
+                    break;
+                case "0x000000EB":
+                    return "Elektrobit Automotive GmbH";
+                    break;
+                case "0x000000EC":
+                    return "Baumer IVO GmbH & Co. KG";
+                    break;
+                case "0x000000ED":
+                    return "E.D. Elettronica Dedicata S.r.l.";
+                    break;
+                case "0x000000EE":
+                    return "Ingenieurbüro Dr. Tammo Winkler";
+                    break;
+                case "0x000000EF":
+                    return "Elcis Encoder S.r.l.";
+                    break;
+                case "0x000000F1":
+                    return "McLaren Group Limited";
+                    break;
+                case "0x000000F2":
+                    return "Guangdong University of Technology";
+                    break;
+                case "0x000000F4":
+                    return "Atos SpA";
+                    break;
+                case "0x000000F5":
+                    return "Giant Magellan Telescope Corporation";
+                    break;
+                case "0x000000F8":
+                    return "Shanghai Micron Automation Co. Ltd.";
+                    break;
+                case "0x000000F9":
+                    return "Nidec Control Techniques Ltd.";
+                    break;
+                case "0x000000FB":
+                    return "maxon motor ag";
+                    break;
+                case "0x000000FC":
+                    return "Yacoub Automation GmbH";
+                    break;
+                case "0x000000FE":
+                    return "Precitec GmbH & Co. KG";
+                    break;
+                case "0x000000FF":
+                    return "South China University of Technology";
+                    break;
+
+                case "0x00000100":
+                    return "Easydur Italiana di Renato Affri";
+                    break;
+                case "0x00000101":
+                    return "ISAC Srl.";
+                    break;
+                case "0x00000104":
+                    return "LMD GmbH & Co. KG aA";
+                    break;
+                case "0x00000105":
+                    return "Microcyber Corporation";
+                    break;
+                case "0x0000010A":
+                    return "WITTENSTEIN cyber motor GmbH";
+                    break;
+                case "0x0000010B":
+                    return "WITTENSTEIN motion control GmbH";
+                    break;
+                case "0x0000010D":
+                    return "TWK-Elektronik GmbH";
+                    break;
+                case "0x0000010F":
+                    return "PSA Elettronica di F. Grifa";
+                    break;
+                case "0x00000110":
+                    return "Maxphotonics Co.,Ltd.";
+                    break;
+                case "0x00000111":
+                    return "HEITEC AG";
+                    break;
+                case "0x00000113":
+                    return "Soft Service Co., Ltd.";
+                    break;
+                case "0x00000114":
+                    return "SMC Corporation";
+                    break;
+                case "0x00000116":
+                    return "Eckelmann AG";
+                    break;
+                case "0x00000117":
+                    return "JVL Industri Elektronik A/S";
+                    break;
+                case "0x00000118":
+                    return "Hangzhou Liwei Technology Co. LTD.";
+                    break;
+                case "0x0000011C":
+                    return "ATESTEO GmbH";
+                    break;
+                case "0x0000011D":
+                    return "Hottinger Brüel & Kjaer GmbH";
+                    break;
+                case "0x00000121":
+                    return "Leuze electronic GmbH + Co. KG";
+                    break;
+                case "0x00000123":
+                    return "WEG Equipamentos Elétricos S.A.";
+                    break;
+                case "0x00000126":
+                    return "JUMO GmbH & Co. KG";
+                    break;
+                case "0x00000128":
+                    return "Han's Smart Control Technology Co., Ltd.";
+                    break;
+                case "0x00000129":
+                    return "HSD S.p.A";
+                    break;
+                case "0x0000012B":
+                    return "Digital Electronics Corporation";
+                    break;
+                case "0x0000012E":
+                    return "Lika Electronic Srl";
+                    break;
+                case "0x0000012F":
+                    return "CSM GmbH";
+                    break;
+                case "0x00000135":
+                    return "DUOmetric AG";
+                    break;
+                case "0x00000137":
+                    return "Fenwal Controls of Japan,Ltd.";
+                    break;
+                case "0x00000142":
+                    return "SCAIME S.A.S.";
+                    break;
+                case "0x00000144":
+                    return "TECNOLOGIX Srl";
+                    break;
+                case "0x00000146":
+                    return "LPKF SolarQuipment GmbH";
+                    break;
+                case "0x00000147":
+                    return "Dr. Fritz Faulhaber GmbH & Co. KG";
+                    break;
+                case "0x00000149":
+                    return "Fraunhofer-Institut für Produktionsanlagen und Konstruktionstechnik IPK";
+                    break;
+                case "0x0000014A":
+                    return "imc Messysteme GmbH";
+                    break;
+                case "0x0000014F":
+                    return "TMG Technologie und Engineering GmbH";
+                    break;
+
+                case "0x00000151":
+                    return "Zaklad Produkcji Urzadzen Automatyki Sp. z o.o.";
+                    break;
+                case "0x00000152":
+                    return "Eckelmann FCS GmbH";
+                    break;
+                case "0x00000155":
+                    return "Bluechips Microhouse Co., Ltd.";
+                    break;
+                case "0x0000015A":
+                    return "Baumüller Nürnberg GmbH";
+                    break;
+                case "0x0000015B":
+                    return "ENGEL Elektroantriebe GmbH";
+                    break;
+                case "0x0000015D":
+                    return "OSRAM GmbH";
+                    break;
+                case "0x00000160":
+                    return "Seltek Ltd.";
+                    break;
+                case "0x00000163":
+                    return "AeroLas GmbH";
+                    break;
+                case "0x00000166":
+                    return "Metso Automation Oy";
+                    break;
+                case "0x00000168":
+                    return "Shanghai AMP&MOONS' Automation Co., Ltd.";
+                    break;
+                case "0x00000169":
+                    return "RINCO ULTRASONICS AG";
+                    break;
+                case "0x0000016D":
+                    return "COMSOFT GmbH";
+                    break;
+                case "0x00000170":
+                    return "Woodward, Inc.";
+                    break;
+                case "0x00000171":
+                    return "Prima Electro S.p.A.";
+                    break;
+                case "0x00000172":
+                    return "Fraunhofer-Institut für Produktionsanlagen und Konstruktionstechnik IPK";
+                    break;
+                case "0x00000173":
+                    return "Korea Aerospace University";
+                    break;
+                case "0x00000175":
+                    return "Massachusetts Institute of Technology (MIT)";
+                    break;
+                case "0x00000178":
+                    return "Foshan Korter Automatic Precision Measurement & Control Technology Co., Ltd.";
+                    break;
+                case "0x0000017A":
+                    return "Pneumax S.p.A.";
+                    break;
+                case "0x0000017F":
+                    return "R.T.A. S.r.l.";
+                    break;
+                case "0x00000181":
+                    return "FEV Software and Testing Solutions GmbH";
+                    break;
+                case "0x00000184":
+                    return "BEI Sensors SAS";
+                    break;
+                case "0x00000186":
+                    return "Zhejiang University of Technology, College of Information Engineering";
+                    break;
+                case "0x00000188":
+                    return "Flexiv Robotics Ltd.";
+                    break;
+                case "0x00000189":
+                    return "Pilz GmbH & Co. KG";
+                    break;
+                case "0x0000018A":
+                    return "ASA-RT srl";
+                    break;
+                case "0x0000018C":
+                    return "University of Patras";
+                    break;
+                case "0x00000190":
+                    return "Promess Incorporated";
+                    break;
+                case "0x00000191":
+                    return "PROMESS Gesellschaft für Montage- und Prüfsysteme mbH";
+                    break;
+                case "0x00000192":
+                    return "Matsusada Precision Inc.";
+                    break;
+                case "0x00000194":
+                    return "Leine & Linde AB";
+                    break;
+                case "0x00000195":
+                    return "SIKO GmbH";
+                    break;
+                case "0x00000196":
+                    return "Ningbo Taicen Electronic-Test Technology Co., Ltd.";
+                    break;
+                case "0x00000198":
+                    return "Automation Modules, Inc.";
+                    break;
+                case "0x0000019B":
+                    return "SP.EL. srl";
+                    break;
+                case "0x0000019D":
+                    return "Deutschmann Automation GmbH & Co. KG";
+                    break;
+                case "0x0000019E":
+                    return "Golden A/S";
+                    break;
+
+                case "0x000001A1":
+                    return "Brunner Elektronik AG";
+                    break;
+                case "0x000001A2":
+                    return "Heckner Electronics GmbH";
+                    break;
+                case "0x000001A3":
+                    return "TECHNOSOFT S.A.";
+                    break;
+                case "0x000001A4":
+                    return "Kongsberg Maritime AS";
+                    break;
+                case "0x000001A6":
+                    return "REO AG";
+                    break;
+                case "0x000001AC":
+                    return "Kyushu Institute of Technology, Ochi & Kurosaki Lab, School of Computer Science and Systems Engineering";
+                    break;
+                case "0x000001AF":
+                    return "Yanfeng Automotive Interior Systems Co. Ltd.";
+                    break;
+                case "0x000001B0":
+                    return "ABB AB, Jokab Safety";
+                    break;
+                case "0x000001B2":
+                    return "AVENTICS GmbH";
+                    break;
+                case "0x000001B3":
+                    return "ASCO Numatics GmbH";
+                    break;
+                case "0x000001B4":
+                    return "Peyer Engineering";
+                    break;
+                case "0x000001B5":
+                    return "Robox S.P.A.";
+                    break;
+                case "0x000001B8":
+                    return "PMB Elektronik GmbH";
+                    break;
+                case "0x000001B9":
+                    return "Sanyo Denki Co., Ltd.";
+                    break;
+                case "0x000001BA":
+                    return "ZHONGSHAN MLTOR CNC TECHNOLOGY CO., LTD.";
+                    break;
+                case "0x000001BB":
+                    return "Sciemetric Instruments ULC";
+                    break;
+                case "0x000001BC":
+                    return "Eurotherm Limited";
+                    break;
+                case "0x000001BD":
+                    return "Eurotherm Automation SAS";
+                    break;
+                case "0x000001BE":
+                    return "PRIMES GmbH";
+                    break;
+                case "0x000001C0":
+                    return "Kobe Steel, Ltd.";
+                    break;
+                case "0x000001C4":
+                    return "Regatron AG";
+                    break;
+                case "0x000001C7":
+                    return "Eaton Industries GmbH";
+                    break;
+                case "0x000001DD":
+                    return "Delta Electronics, Inc.";
+                    break;
+                case "0x000001DF":
+                    return "Xeikon N.V. - Xeikon Manufacturing and R&D Center";
+                    break;
+                case "0x000001E1":
+                    return "ASCO L.P.";
+                    break;
+                case "0x000001EB":
+                    return "AMKmotion GmbH + Co KG";
+                    break;
+                case "0x000001EC":
+                    return "Plus Electric Co.,Ltd.";
+                    break;
+                case "0x000001EE":
+                    return "ADTECH (SHENZHEN) CNC TECHNOLOGY CO., LTD.";
+                    break;
+                case "0x000001F4":
+                    return "Robatech AG";
+                    break;
+                case "0x000001F7":
+                    return "Industrial Technology Research Institute (ITRI)";
+                    break;
+                case "0x000001F8":
+                    return "Hunan Lianghu Electromechanical Technology Co., Ltd.";
+                    break;
+                case "0x000001F9":
+                    return "National Instruments Corporation";
+                    break;
+                case "0x000001FC":
+                    return "Fernsteuergeräte Kurt Oelsch GmbH";
+                    break;
+                case "0x000001FD":
+                    return "INA - Drives & Mechatronics GmbH & Co. KG";
+                    break;
+                case "0x000001FE":
+                    return "PRÜFTECHNIK NDT GmbH";
+                    break;
+                case "0x000001FF":
+                    return "Zhejiang Qixing Electron Co., Ltd.";
+                    break;
+
+                case "0x00000205":
+                    return "BDF DIGITAL S.p.A.";
+                    break;
+                case "0x00000207":
+                    return "esitron-electronic GmbH";
+                    break;
+                case "0x0000020C":
+                    return "ITOH DENKI CO.,LTD.";
+                    break;
+                case "0x00000210":
+                    return "iASYS Technology Solution Pvt Ltd.";
+                    break;
+                case "0x00000214":
+                    return "Kniel System-Electronic GmbH";
+                    break;
+                case "0x00000218":
+                    return "GERMAN POWER GmbH";
+                    break;
+                case "0x00000219":
+                    return "Real Time Automation, Inc.";
+                    break;
+                case "0x0000021B":
+                    return "Swift Engineering, Inc.";
+                    break;
+                case "0x0000021F":
+                    return "Wachendorff Automation GmbH & Co. KG";
+                    break;
+                case "0x00000222":
+                    return "IBH-Tec GmbH";
+                    break;
+                case "0x00000223":
+                    return "Helmholz GmbH & Co. KG";
+                    break;
+                case "0x00000225":
+                    return "Pantec Engineering AG";
+                    break;
+                case "0x0000022B":
+                    return "YASKAWA Europe GmbH";
+                    break;
+                case "0x0000022F":
+                    return "TOKYO KEIKI INC.";
+                    break;
+                case "0x00000230":
+                    return "Weidmüller Interface GmbH & Co. KG";
+                    break;
+                case "0x00000233":
+                    return "Guangdong Xi'an Jiaotong University Academy";
+                    break;
+                case "0x00000234":
+                    return "AStepTech (Shenzhen) CNC Co., Ltd.";
+                    break;
+                case "0x0000023A":
+                    return "ABB Automation Products GmbH";
+                    break;
+                case "0x0000023B":
+                    return "Berghof Automation GmbH";
+                    break;
+                case "0x0000023C":
+                    return "NS System Co., Ltd.";
+                    break;
+                case "0x0000023D":
+                    return "Sensor-Technik Wiedemann GmbH";
+                    break;
+                case "0x00000240":
+                    return "Spezialantriebstechnik GmbH";
+                    break;
+                case "0x00000242":
+                    return "Yuanda Robotics GmbH";
+                    break;
+                case "0x00000246":
+                    return "MKP Co., Ltd.";
+                    break;
+                case "0x00000247":
+                    return "Harmonic Drive LLC";
+                    break;
+                case "0x0000024B":
+                    return "Dongguan Kaifull Electronics Technology Co., Ltd.";
+                    break;
+                case "0x0000024F":
+                    return "Stotz Feinmesstechnik GmbH";
+                    break;
+                case "0x00000250":
+                    return "Litens Automotive Partnership";
+                    break;
+                case "0x00000252":
+                    return "Hilscher North America, Inc.";
+                    break;
+                case "0x00000255":
+                    return "The Chinese University of Hong Kong, T Stone Robotics Institute";
+                    break;
+                case "0x00000256":
+                    return "Chengdu CRP Automation Control Technology Co., Ltd.";
+                    break;
+                case "0x00000257":
+                    return "Dunkermotoren GmbH";
+                    break;
+                case "0x0000025E":
+                    return "Fuji Electric Co., Ltd.";
+                    break;
+                case "0x00000260":
+                    return "TRUMPF Hüttinger GmbH + Co. KG";
+                    break;
+                case "0x00000265":
+                    return "Aros Electronics AB";
+                    break;
+                case "0x00000268":
+                    return "Ho Chi Minh University of Technology, Faculty of Mechanical Engineering";
+                    break;
+                case "0x0000026C":
+                    return "Nanotec Electronic GmbH & Co. KG";
+                    break;
+                case "0x00000270":
+                    return "ME-Meßsysteme GmbH";
+                    break;
+                case "0x00000275":
+                    return "Interroll Engineering GmbH";
+                    break;
+                case "0x00000276":
+                    return "Interroll Innovation GmbH";
+                    break;
+                case "0x00000279":
+                    return "ISH Ingenieursozietät GmbH";
+                    break;
+                case "0x0000027A":
+                    return "Moog Unna GmbH";
+                    break;
+                case "0x0000027D":
+                    return "ebm-papst St. Georgen GmbH & Co. KG";
+                    break;
+                case "0x00000280":
+                    return "MKPRECISION";
+                    break;
+                case "0x00000283":
+                    return "Roche Diagnostics AG";
+                    break;
+                case "0x00000284":
+                    return "Toshiba Schneider Inverter Corporation";
+                    break;
+                case "0x00000285":
+                    return "Bihl-Wiedemann GmbH";
+                    break;
+                case "0x00000286":
+                    return "TRINAMIC Motion Control GmbH & Co. KG";
+                    break;
+                case "0x00000289":
+                    return "HDT Srl";
+                    break;
+                case "0x00000291":
+                    return "Terzo Power Systems, LLC";
+                    break;
+                case "0x00000292":
+                    return "Horner APG LLC";
+                    break;
+                case "0x00000296":
+                    return "Performance Motion Devices, Inc.";
+                    break;
+                case "0x00000297":
+                    return "UNIVER S.p.A.";
+                    break;
+                case "0x0000029A":
+                    return "C.L.GERHARTL Smart Systems GmbH";
+                    break;
+                case "0x0000029C":
+                    return "INGENIA-CAT, S.L.";
+                    break;
+                case "0x0000029D":
+                    return "CREVIS Co., Ltd.";
+                    break;
+
+                case "0x000002AA":
+                    return "WalthMac Measurement & Control Technology Co., Ltd.";
+                    break;
+                case "0x000002AD":
+                    return "NIMAK GmbH";
+                    break;
+                case "0x000002B4":
+                    return "ELAP S.R.L.";
+                    break;
+                case "0x000002B8":
+                    return "Gripping Power, Inc.";
+                    break;
+                case "0x000002B9":
+                    return "Advanced Energy Industries, Inc.";
+                    break;
+                case "0x000002BA":
+                    return "PBA Systems Pte Ltd";
+                    break;
+                case "0x000002BE":
+                    return "ORIENTAL MOTOR CO., LTD.";
+                    break;
+                case "0x000002C0":
+                    return "Glentek, Inc.";
+                    break;
+                case "0x000002C1":
+                    return "Fronius International GmbH";
+                    break;
+                case "0x000002CE":
+                    return "SHANGHAI GEMPLE M&E CO.,LTD";
+                    break;
+                case "0x000002D0":
+                    return "THK Co., Ltd.";
+                    break;
+                case "0x000002D1":
+                    return "SAMICK THK CO.,LTD.";
+                    break;
+                case "0x000002D3":
+                    return "Joint Peer Systec Corp.";
+                    break;
+                case "0x000002D8":
+                    return "halstrup-walcher GmbH";
+                    break;
+                case "0x000002DE":
+                    return "Trio Motion Technology Ltd.";
+                    break;
+                case "0x000002E1":
+                    return "Servotronix Motion Control Ltd.";
+                    break;
+                case "0x000002EA":
+                    return "Suzhou NODKA Automation Technology Co., Ltd.";
+                    break;
+                case "0x000002EB":
+                    return "Analytica GmbH";
+                    break;
+                case "0x000002EE":
+                    return "Metal Work S.p.A";
+                    break;
+                case "0x000002FE":
+                    return "Shanghai Chaifu Robot Co., Ltd.";
+                    break;
+
+                case "0x00000300":
+                    return "Korea Textile Machinery Research Institute (KOTMI)";
+                    break;
+                case "0x00000302":
+                    return "Digitronic Automationsanlagen GmbH";
+                    break;
+                case "0x00000303":
+                    return "Dental Manufacturing Unit GmbH";
+                    break;
+                case "0x00000309":
+                    return "Seowoo Electron CO., LTD.";
+                    break;
+                case "0x0000030C":
+                    return "LAM Technologies S.a.S.";
+                    break;
+                case "0x0000030E":
+                    return "IEP Ingenieurbüro für Echtzeitprogrammierung GmbH";
+                    break;
+                case "0x00000311":
+                    return "Kontron Electronics AG";
+                    break;
+                case "0x00000312":
+                    return "A-KYUNG Motion Inc.";
+                    break;
+                case "0x00000314":
+                    return "PI Electronics (H.K.) Ltd.";
+                    break;
+                case "0x00000317":
+                    return "TOFLO CORPORATION";
+                    break;
+                case "0x00000318":
+                    return "AXIS CORPORATION";
+                    break;
+                case "0x00000319":
+                    return "emotas embedded communication GmbH";
+                    break;
+                case "0x0000031D":
+                    return "Cognex Corporation";
+                    break;
+                case "0x00000321":
+                    return "CODESYS GmbH";
+                    break;
+                case "0x00000325":
+                    return "SiboTech Automation Co., Ltd.";
+                    break;
+                case "0x00000326":
+                    return "Intelligent Platforms LLC";
+                    break;
+                case "0x00000327":
+                    return "ECSPRIME Co., Ltd.";
+                    break;
+                case "0x00000331":
+                    return "SHANGHAI SANY SCIENCE & TECHNOLOGY CO., LTD";
+                    break;
+                case "0x00000333":
+                    return "HIKARI Co.,Ltd.";
+                    break;
+                case "0x00000334":
+                    return "CYBELEC S.A.";
+                    break;
+                case "0x00000337":
+                    return "KOSTAL Industrie Elektrik GmbH";
+                    break;
+                case "0x0000033D":
+                    return "RS Automation Co., Ltd.";
+                    break;
+                case "0x00000340":
+                    return "Satelcom Telekomünikasyon, Bilgi ve Iletisim Teknolojileri Ithalat ve Ihracat Sanayi A.S.";
+                    break;
+                case "0x00000343":
+                    return "K.C.Tech CO.,LTD.";
+                    break;
+                case "0x00000344":
+                    return "Exlar Corporation";
+                    break;
+                case "0x0000034A":
+                    return "Drägerwerk AG & Co. KGaA";
+                    break;
+                case "0x0000034D":
+                    return "Schaefer Elektronik GmbH";
+                    break;
+                case "0x0000034E":
+                    return "Infineon Technologies AG";
+                    break;
+
+                case "0x00000355":
+                    return "AIDIN ROBOTICS, INC";
+                    break;
+                case "0x00000358":
+                    return "Shenzhen Rmotion Technology Co,Ltd.";
+                    break;
+                case "0x00000367":
+                    return "Novatech-Group Ltd.";
+                    break;
+                case "0x00000368":
+                    return "Tianjin Geneuo Technology Co.,Ltd.";
+                    break;
+                case "0x00000369":
+                    return "Kinestas d.o.o.";
+                    break;
+                case "0x00000373":
+                    return "TAIAN TECHNOLOGY(WUXI)CO.,LTD.";
+                    break;
+                case "0x0000037F":
+                    return "XMOS Semiconductor";
+                    break;
+                case "0x00000384":
+                    return "MKS Denmark ApS";
+                    break;
+                case "0x0000038B":
+                    return "PLASUS GmbH";
+                    break;
+                case "0x0000038C":
+                    return "Promicon Elektronik GmbH + Co. KG";
+                    break;
+                case "0x00000397":
+                    return "Hein Lanz GmbH";
+                    break;
+                case "0x0000039D":
+                    return "dieEntwickler Elektronik GmbH";
+                    break;
+                case "0x000003AA":
+                    return "LARsys-Automation GmbH";
+                    break;
+                case "0x000003AD":
+                    return "Procon Electronics Pty Ltd";
+                    break;
+                case "0x000003AE":
+                    return "HanYang System";
+                    break;
+                case "0x000003B0":
+                    return "J. Schneider Elektrotechnik GmbH";
+                    break;
+                case "0x000003B8":
+                    return "Unitronics LTD";
+                    break;
+                case "0x000003CC":
+                    return "Motovario S.p.A.";
+                    break;
+                case "0x000003D0":
+                    return "Wuxi Pneumatic Technical Research Institute Co., Ltd.";
+                    break;
+                case "0x000003DB":
+                    return "Baldor UK Ltd";
+                    break;
+                case "0x000003DC":
+                    return "Wuxi Lingke Automation Technology Co., Ltd.";
+                    break;
+                case "0x000003E1":
+                    return "Lite-On Technology Corporation";
+                    break;
+                case "0x000003EB":
+                    return "Stahl GmbH";
+                    break;
+                case "0x000003F3":
+                    return "CoreTigo Ltd.";
+                    break;
+                case "0x000003F5":
+                    return "Chieftek Precision Co., Ltd.";
+                    break;
+                case "0x000003FF":
+                    return "MEXICAN REPS OPERATION S DE RL DE CV";
+                    break;
+
+                case "0x00000400":
+                    return "Fenac Mühendislik San. ve Tic. Ltd. Sti.";
+                    break;
+                case "0x00000404":
+                    return "Applied Motion Products, Inc.";
+                    break;
+                case "0x0000040C":
+                    return "WITZ Corporation";
+                    break;
+                case "0x00000413":
+                    return "Shenzhen X-TEC Technology Co., Ltd.";
+                    break;
+                case "0x00000418":
+                    return "Zume, Inc.";
+                    break;
+                case "0x0000041B":
+                    return "Shenzhen Zmotion Technology Co., Ltd.";
+                    break;
+                case "0x00000428":
+                    return "TOKKYOKIKI CORPORATION";
+                    break;
+                case "0x0000042B":
+                    return "TeMec Drive Srl";
+                    break;
+                case "0x00000432":
+                    return "Peter Huber Kältemaschinenbau AG";
+                    break;
+                case "0x00000434":
+                    return "Peter Mess- und Automatisierungstechnik";
+                    break;
+                case "0x00000441":
+                    return "Langer & Laumann Ing.-Büro GmbH";
+                    break;
+                case "0x00000444":
+                    return "Ilkotek Otomasyon";
+                    break;
+                case "0x00000456":
+                    return "Philips Medical Systems Technologies Ltd.";
+                    break;
+                case "0x00000471":
+                    return "FURONTEER, INC.";
+                    break;
+                case "0x00000482":
+                    return "KYOCERA Corporation";
+                    break;
+                case "0x00000489":
+                    return "Infinity Sales, Inc.";
+                    break;
+                case "0x000004A2":
+                    return "UniSwarm SASU";
+                    break;
+                case "0x000004B3":
+                    return "Pivotal Systems Corporation";
+                    break;
+                case "0x000004B5":
+                    return "Randy Nürnberger Software und Mikroelektronik";
+                    break;
+                case "0x000004BD":
+                    return "AMETEK Inc. Haydon Kerk Pittman Division";
+                    break;
+                case "0x000004C1":
+                    return "IVEK Corporation";
+                    break;
+                case "0x000004C6":
+                    return "MIDDEX-ELECTRONIC GMBH";
+                    break;
+                case "0x000004CD":
+                    return "WEETECH GmbH";
+                    break;
+                case "0x000004D2":
+                    return "Noda Radio Frequency Technologies Co., Ltd.";
+                    break;
+                case "0x000004D8":
+                    return "Microchip Technology Inc.";
+                    break;
+                case "0x000004F8":
+                    return "Duplomatic MS S.p.A";
+                    break;
+                case "0x000004F9":
+                    return "PHYTEC America, LLC";
+                    break;
+
+                case "0x00000500":
+                    return "Speciaal Machinefabriek Ketels v.o.f.";
+                    break;
+                case "0x00000501":
+                    return "Beck IPC GmbH";
+                    break;
+                case "0x00000502":
+                    return "ETAS GmbH";
+                    break;
+                case "0x00000504":
+                    return "PHYTEC Messtechnik GmbH";
+                    break;
+                case "0x00000505":
+                    return "ANCA Motion Pty. Ltd";
+                    break;
+                case "0x00000506":
+                    return "Fachhochschule Köln";
+                    break;
+                case "0x00000507":
+                    return "IPG Automotive GmbH";
+                    break;
+                case "0x00000508":
+                    return "Nuvation Research Corporation";
+                    break;
+                case "0x00000509":
+                    return "TR-Electronic GmbH";
+                    break;
+                case "0x0000050A":
+                    return "Gantner Instruments GmbH";
+                    break;
+                case "0x0000050B":
+                    return "MKS Instruments Inc.";
+                    break;
+                case "0x0000050C":
+                    return "ABB AB";
+                    break;
+                case "0x0000050D":
+                    return "Unitro-Fleischmann";
+                    break;
+                case "0x0000050E":
+                    return "zub machine control AG";
+                    break;
+                case "0x0000050F":
+                    return "dSPACE GmbH";
+                    break;
+
+                case "0x00000510":
+                    return "Shenzhen ProU software Ltd.";
+                    break;
+                case "0x00000511":
+                    return "Samsung Heavy Industries";
+                    break;
+                case "0x00000512":
+                    return "BCE Elektronik GmbH";
+                    break;
+                case "0x00000513":
+                    return "Jäger Computergesteuerte Messtechnik GmbH";
+                    break;
+                case "0x00000514":
+                    return "avateramedical Mechatronics GmbH";
+                    break;
+                case "0x00000515":
+                    return "Justek Inc.";
+                    break;
+                case "0x00000516":
+                    return "Baumer Thalheim GmbH & Co. KG";
+                    break;
+                case "0x00000517":
+                    return "Elin EBG Traction GmbH";
+                    break;
+                case "0x00000518":
+                    return "Meka Robotics";
+                    break;
+                case "0x00000519":
+                    return "Altera Japan Ltd.";
+                    break;
+                case "0x0000051A":
+                    return "EBV Elektronik GmbH & Co KG";
+                    break;
+                case "0x0000051B":
+                    return "Ingenieurgemeinschaft IgH";
+                    break;
+                case "0x0000051C":
+                    return "IAV GmbH";
+                    break;
+                case "0x0000051D":
+                    return "Hitachi Industrial Equipment Systems";
+                    break;
+                case "0x0000051E":
+                    return "TenAsys Corp.";
+                    break;
+                case "0x0000051F":
+                    return "PONDis AG";
+                    break;
+
+                case "0x00000520":
+                    return "Moog Italiana S.r.l.";
+                    break;
+                case "0x00000521":
+                    return "Walt Disney Imagineering";
+                    break;
+                case "0x00000522":
+                    return "Wallner Automation";
+                    break;
+                case "0x00000523":
+                    return "AVL List GmbH";
+                    break;
+                case "0x00000524":
+                    return "RITTER-Elektronik GmbH";
+                    break;
+                case "0x00000527":
+                    return "ZwickRoell GmbH & Co. KG";
+                    break;
+                case "0x00000528":
+                    return "dresden elektronik ingenieurtechnik gmbh";
+                    break;
+                case "0x00000529":
+                    return "Tokyo Keiso Co., Ltd.";
+                    break;
+                case "0x0000052C":
+                    return "Philips Healthcare (CT Division)";
+                    break;
+                case "0x0000052D":
+                    return "Chess B.V.";
+                    break;
+                case "0x0000052E":
+                    return "NCT kft";
+                    break;
+                case "0x0000052F":
+                    return "Anywire Corporation";
+                    break;
+
+                case "0x00000530":
+                    return "Shadow Robot Company Ltd.";
+                    break;
+                case "0x00000531":
+                    return "FeCon GmbH";
+                    break;
+                case "0x00000532":
+                    return "FH Südwestfalen, Fachbereich Elektrische Energietechnik";
+                    break;
+                case "0x00000533":
+                    return "add2 Ldt";
+                    break;
+                case "0x00000534":
+                    return "ARM Automation, Inc.";
+                    break;
+                case "0x00000537":
+                    return "KNAPP AG";
+                    break;
+                case "0x00000538":
+                    return "Getriebebau NORD GmbH & Co. KG";
+                    break;
+                case "0x00000539":
+                    return "Yaskawa Electric Corporation";
+                    break;
+                case "0x0000053A":
+                    return "OKI IDS Co., Ltd.";
+                    break;
+                case "0x0000053B":
+                    return "Takasaki Kyoudou Computing Center Co.";
+                    break;
+                case "0x0000053C":
+                    return "NITTETSU ELEX Co., Ltd.";
+                    break;
+                case "0x0000053D":
+                    return "WACOH-TECH Inc.";
+                    break;
+                case "0x0000053E":
+                    return "Unjo AB";
+                    break;
+                case "0x0000053F":
+                    return "Airbus Defence and Space GmbH";
+                    break;
+
+                case "0x00000540":
+                    return "ACS Motion Control Ltd.";
+                    break;
+                case "0x00000541":
+                    return "KEYENCE Corporation";
+                    break;
+                case "0x00000542":
+                    return "MEFI s.r.o.";
+                    break;
+                case "0x00000543":
+                    return "m-u-t AG Messgeräte für Medizin- und Umwelttechnik";
+                    break;
+                case "0x00000544":
+                    return "Universität Stuttgart, Institut ISW";
+                    break;
+                case "0x00000545":
+                    return "ELSENA, Inc.";
+                    break;
+                case "0x00000546":
+                    return "BE Semiconductor Industries N.V.";
+                    break;
+                case "0x00000547":
+                    return "Hauni LNI Electronics S.A.";
+                    break;
+                case "0x00000548":
+                    return "ETEL S.A.";
+                    break;
+                case "0x00000549":
+                    return "VAT Vakuumventile AG";
+                    break;
+                case "0x0000054A":
+                    return "LayTec AG";
+                    break;
+                case "0x0000054B":
+                    return "NUM AG";
+                    break;
+                case "0x0000054C":
+                    return "Hauni Maschinenbau GmbH";
+                    break;
+                case "0x0000054D":
+                    return "Exatronic, Engenharia Electrónica, Lda";
+                    break;
+                case "0x0000054E":
+                    return "Chinese Academy of Sciences, Institute of Intelligent Machines";
+                    break;
+                case "0x0000054F":
+                    return "Eindhoven University of Technology";
+                    break;
+
+                case "0x00000550":
+                    return "Scansonic MI GmbH";
+                    break;
+                case "0x00000551":
+                    return "Shanghai Sodick Software Co., Ltd.";
+                    break;
+                case "0x00000552":
+                    return "CHUO ELECTRONICS CO., LTD";
+                    break;
+                case "0x00000553":
+                    return "Agie Charmilles SA";
+                    break;
+                case "0x00000554":
+                    return "miControl GmbH";
+                    break;
+                case "0x00000555":
+                    return "Haute Ecoled'Ingénierie et de Gestion du Canton de Vaud";
+                    break;
+                case "0x00000556":
+                    return "Wuxi Xinje Electric Co., Ltd.";
+                    break;
+                case "0x00000557":
+                    return "Jenny Science AG";
+                    break;
+                case "0x00000558":
+                    return "Industrial Control Communications, Inc.";
+                    break;
+                case "0x0000055A":
+                    return "CKD ELEKTROTECHNIKA, a.s.";
+                    break;
+                case "0x0000055B":
+                    return "QEM S.r.l.";
+                    break;
+                case "0x0000055C":
+                    return "Simatex AG";
+                    break;
+                case "0x0000055D":
+                    return "Kithara Software GmbH";
+                    break;
+                case "0x0000055E":
+                    return "GE Energy Power Conversion GmbH";
+                    break;
+                case "0x0000055F":
+                    return "ARA apparatenfabriek b.v.";
+                    break;
+
+                case "0x00000560":
+                    return "Tata Consultancy Services Ltd.";
+                    break;
+                case "0x00000561":
+                    return "Harmonic Drive Systems Inc.";
+                    break;
+                case "0x00000562":
+                    return "Tiab Limited";
+                    break;
+                case "0x00000563":
+                    return "RKC INSTRUMENT INC.";
+                    break;
+                case "0x00000564":
+                    return "Switched Reluctance Drives Ltd.";
+                    break;
+                case "0x00000566":
+                    return "Avnet Electronics Marketing";
+                    break;
+                case "0x00000567":
+                    return "ABB AB";
+                    break;
+                case "0x00000568":
+                    return "Yamaha Motor Co., Ltd.";
+                    break;
+                case "0x00000569":
+                    return "KUNBUS GmbH";
+                    break;
+                case "0x0000056A":
+                    return "ACD Antriebstechnik GmbH";
+                    break;
+                case "0x0000056B":
+                    return "Bronkhorst High-Tech B.V.";
+                    break;
+                case "0x0000056C":
+                    return "K.MECS Co., Ltd.";
+                    break;
+                case "0x0000056D":
+                    return "Ampegon AG";
+                    break;
+                case "0x0000056E":
+                    return "UFG Elettronica s.r.l.";
+                    break;
+                case "0x0000056F":
+                    return "Xilinx Inc.";
+                    break;
+
+                case "0x00000570":
+                    return "Hitachi Energy Sweden AB";
+                    break;
+                case "0x00000571":
+                    return "Servoland Corporation";
+                    break;
+                case "0x00000572":
+                    return "Hivertec, Inc.";
+                    break;
+                case "0x00000573":
+                    return "Mesa Electronics";
+                    break;
+                case "0x00000574":
+                    return "OMICRON electronics GmbH";
+                    break;
+                case "0x00000575":
+                    return "Fike Europe B.v.b.a.";
+                    break;
+                case "0x00000576":
+                    return "ROPEX Industrie-Elektronik GmbH";
+                    break;
+                case "0x00000577":
+                    return "TLU - Thüringer Leistungselektronik Union GmbH";
+                    break;
+                case "0x00000579":
+                    return "Prodrive Technologies B.V.";
+                    break;
+                case "0x0000057A":
+                    return "miho Inspektionssysteme GmbH";
+                    break;
+                case "0x0000057B":
+                    return "Tokyo Electron Device Limited";
+                    break;
+                case "0x0000057C":
+                    return "LINTEC CO., LTD.";
+                    break;
+                case "0x0000057D":
+                    return "Emhart Glass Vision GmbH";
+                    break;
+                case "0x0000057E":
+                    return "Seiko Epson Corporation";
+                    break;
+                case "0x0000057F":
+                    return "ZINSER GmbH";
+                    break;
+
+                case "0x00000580":
+                    return "abk-technology GmbH";
+                    break;
+                case "0x00000581":
+                    return "SUS Corporation";
+                    break;
+                case "0x00000582":
+                    return "TRsystems GmbH";
+                    break;
+                case "0x00000583":
+                    return "Harmonic Drive SE";
+                    break;
+                case "0x00000584":
+                    return "Stäubli Faverges SCA";
+                    break;
+                case "0x00000585":
+                    return "ScienLab electronic systems GmbH";
+                    break;
+                case "0x00000586":
+                    return "DETO drive systems GmbH";
+                    break;
+                case "0x00000587":
+                    return "FUJISOFT Incorporated";
+                    break;
+                case "0x00000588":
+                    return "IAI Corporation";
+                    break;
+                case "0x00000589":
+                    return "PromAvtomatika";
+                    break;
+                case "0x0000058A":
+                    return "Kistler Instrumente AG";
+                    break;
+                case "0x0000058B":
+                    return "LAUDA DR. R. WOBSER GmbH & Co. KG";
+                    break;
+                case "0x0000058C":
+                    return "Schweitzer Engineering Laboratories, Inc.";
+                    break;
+                case "0x0000058D":
+                    return "Vital Systems Inc.";
+                    break;
+                case "0x0000058E":
+                    return "MuTracx International B.V.";
+                    break;
+                case "0x0000058F":
+                    return "Algo System Co., Ltd.";
+                    break;
+
+                case "0x00000590":
+                    return "Mühlbauer GmbH & Co. KG";
+                    break;
+                case "0x00000591":
+                    return "DETO drive systems GmbH";
+                    break;
+                case "0x00000592":
+                    return "Sealevel Systems, Inc.";
+                    break;
+                case "0x00000593":
+                    return "igm Robotersysteme AG";
+                    break;
+                case "0x00000594":
+                    return "WITTENSTEIN electronics GmbH";
+                    break;
+                case "0x00000595":
+                    return "ZBE Inc.";
+                    break;
+                case "0x00000597":
+                    return "Fraunhofer IOSB-INA Kompetenzzentrum Industrial Automation";
+                    break;
+                case "0x00000598":
+                    return "SKF Canada Limited";
+                    break;
+                case "0x00000599":
+                    return "Galil Motion Control Inc.";
+                    break;
+                case "0x0000059A":
+                    return "IHI Corporation";
+                    break;
+                case "0x0000059B":
+                    return "wenglor sensoric gmbh";
+                    break;
+                case "0x0000059C":
+                    return "Ingeteam Power Technology S.A.";
+                    break;
+                case "0x0000059D":
+                    return "Texas Instruments Incorporated";
+                    break;
+                case "0x0000059E":
+                    return "Micro-Vu Corporation";
+                    break;
+                case "0x0000059F":
+                    return "oehri electronic ag";
+                    break;
+
+                case "0x000005A0":
+                    return "Triphase N.V.";
+                    break;
+                case "0x000005A1":
+                    return "Glass Soft - Robótica & Sistemas Lda.";
+                    break;
+                case "0x000005A2":
+                    return "Cambridge Medical Robotics Limited";
+                    break;
+                case "0x000005A3":
+                    return "China Machinery International Engineering Design & Research Institute CO.,LTD.";
+                    break;
+                case "0x000005A4":
+                    return "Kastanienbaum GmbH";
+                    break;
+                case "0x000005A5":
+                    return "HANYOUNG NUX CO., LTD";
+                    break;
+                case "0x000005A6":
+                    return "SLE quality engineering GmbH & Co. KG";
+                    break;
+                case "0x000005A7":
+                    return "Omicron NanoTechnology GmbH";
+                    break;
+                case "0x000005A8":
+                    return "Micromeritics Instrument Corporation";
+                    break;
+                case "0x000005A9":
+                    return "TRUMPF Laser- und Systemtechnik GmbH";
+                    break;
+                case "0x000005AB":
+                    return "Beratron GmbH";
+                    break;
+                case "0x000005AA":
+                    return "HORIBA Europe GmbH";
+                    break;
+                case "0x000005AC":
+                    return "Heinz Siegfried AG";
+                    break;
+                case "0x000005AD":
+                    return "Cebora S.p.A.";
+                    break;
+                case "0x000005AE":
+                    return "W.E.ST Elektronik GmbH";
+                    break;
+                case "0x000005AF":
+                    return "ABB gomtec GmbH";
+                    break;
+
+                case "0x000005B0":
+                    return "SIEB & MEYER AG";
+                    break;
+                case "0x000005B1":
+                    return "Harbin Robotics Technology Co., Ltd.";
+                    break;
+                case "0x000005B2":
+                    return "Protechna Herbst GmbH & Co. KG";
+                    break;
+                case "0x000005B3":
+                    return "TAEHA Mechatronics Co., Ltd.";
+                    break;
+                case "0x000005B4":
+                    return "WITTMANN Technology GmbH";
+                    break;
+                case "0x000005B5":
+                    return "iotec GmbH";
+                    break;
+                case "0x000005B6":
+                    return "Prodel Technologies";
+                    break;
+                case "0x000005B7":
+                    return "The Leland Stanford Junior University, Department of Bioengineering";
+                    break;
+                case "0x000005B8":
+                    return "Tarasheh System Pishro .co. Ltd";
+                    break;
+                case "0x000005B9":
+                    return "CS-Lab s.c. Janusz Wawak, Andrzej Rogozynski, Szymon Paprocki";
+                    break;
+                case "0x000005BA":
+                    return "Elitron IPM s.r.l.";
+                    break;
+                case "0x000005BB":
+                    return "KORYO ELECTRONICS CO.,LTD.";
+                    break;
+                case "0x000005BC":
+                    return "Shihlin Electric & Engineering Corporation";
+                    break;
+                case "0x000005BD":
+                    return "Kookmin University, Graduate School of Automotive Engineering";
+                    break;
+                case "0x000005BE":
+                    return "Techmation Co., Ltd.";
+                    break;
+                case "0x000005BF":
+                    return "ZAPI S.p.A.";
+                    break;
+
+                case "0x000005C0":
+                    return "Claus Pribbernow Mikrosystementwicklung eProcessorSolutions";
+                    break;
+                case "0x000005C1":
+                    return "Pragati Automation PVT. Limited";
+                    break;
+                case "0x000005C2":
+                    return "Siemens Industry Software B.V.";
+                    break;
+                case "0x000005C3":
+                    return "MicroNova AG";
+                    break;
+                case "0x000005C4":
+                    return "Xi'An Aerospace Precision Electromechanical Institute";
+                    break;
+                case "0x000005C5":
+                    return "Dr. Mergenthaler GmbH & Co. KG";
+                    break;
+                case "0x000005C6":
+                    return "China National Machinery Industry Corporation";
+                    break;
+                case "0x000005C7":
+                    return "Berufliches Schulzentrum Hof, Staatliche Fachschule für Technik";
+                    break;
+                case "0x000005C8":
+                    return "NDR Co., Ltd";
+                    break;
+                case "0x000005C9":
+                    return "'NPK MSA' LLC";
+                    break;
+                case "0x000005CA":
+                    return "Southeast University, School of Mechanical Engineering";
+                    break;
+                case "0x000005CB":
+                    return "Shanghai Baosight Software Co., Ltd.";
+                    break;
+                case "0x000005CC":
+                    return "Hakko Electronics Co., Ltd.";
+                    break;
+                case "0x000005CD":
+                    return "GMK electronic design GmbH";
+                    break;
+                case "0x000005CE":
+                    return "SIMTEC Elektronik GmbH";
+                    break;
+
+                case "0x000005D0":
+                    return "TEConcept GmbH";
+                    break;
+                case "0x000005D1":
+                    return "ESS Co., Ltd.";
+                    break;
+                case "0x000005D3":
+                    return "MABI AG - Robotic";
+                    break;
+                case "0x000005D4":
+                    return "OptoForce Ltd.";
+                    break;
+                case "0x000005D5":
+                    return "TOSHIBA MITSUBISHI-ELECTRIC INDUSTRIAL SYSTEMS CORPORATION";
+                    break;
+                case "0x000005D6":
+                    return "WITTENSTEIN ternary Co.,Ltd.";
+                    break;
+                case "0x000005D7":
+                    return "Shanghai Friendess Electronic Technology Co., Ltd.";
+                    break;
+                case "0x000005D8":
+                    return "Aversan Inc.";
+                    break;
+                case "0x000005DA":
+                    return "Lorch Schweißtechnik GmbH";
+                    break;
+                case "0x000005D9":
+                    return "LOTES (GuangZhou) CO., LTD.";
+                    break;
+                case "0x000005DB":
+                    return "Sungkyunkwan University, School of Mechanical Engineering";
+                    break;
+                case "0x000005DC":
+                    return "Tsinghua University, Graduate School at Shenzhen";
+                    break;
+                case "0x000005DD":
+                    return "Universidad de los Andes, Faculty of Engineering";
+                    break;
+                case "0x000005DE":
+                    return "PFU LIMITED";
+                    break;
+                case "0x000005DF":
+                    return "Slovak University of Technology in Bratislava, Faculty of Electrical Engineering and Information Technology";
+                    break;
+
+                case "0x000005E0":
+                    return "Esomatec GmbH";
+                    break;
+                case "0x000005E1":
+                    return "LS ELECTRIC Co., Ltd.";
+                    break;
+                case "0x000005E2":
+                    return "StateCore B.V.";
+                    break;
+                case "0x000005E3":
+                    return "KJ-Infinity Enterprises Inc.";
+                    break;
+                case "0x000005E4":
+                    return "Center of Human-centered Interaction for Coexistence (CHIC)";
+                    break;
+                case "0x000005E5":
+                    return "Littelfuse Selco A/S";
+                    break;
+                case "0x000005E6":
+                    return "ITR GmbH Informationstechnologie Rauch";
+                    break;
+                case "0x000005E8":
+                    return "University of Massachusetts at Amherst, Computer Science Department, Laboratory for Perceptual Robotics";
+                    break;
+                case "0x000005E9":
+                    return "Pfeiffer Vacuum SAS";
+                    break;
+                case "0x000005EA":
+                    return "AXOR INDUSTRIES s.n.c.";
+                    break;
+                case "0x000005EB":
+                    return "QuadRep Electronics (Taiwan) Ltd.";
+                    break;
+                case "0x000005EC":
+                    return "Herrmann Ultraschalltechnik GmbH & Co. KG";
+                    break;
+                case "0x000005ED":
+                    return "Precizika Metrology, UAB";
+                    break;
+                case "0x000005EE":
+                    return "Shanghai ReCAT Automation Control Technology Co., Ltd.";
+                    break;
+                case "0x000005EF":
+                    return "U&R GmbH Hardware- und Systemdesign";
+                    break;
+
+                case "0x000005F0":
+                    return "XiaMen MicroControl Technology Co., Ltd.";
+                    break;
+                case "0x000005F1":
+                    return "The Oilgear Company";
+                    break;
+                case "0x000005F2":
+                    return "MIE ELECTRONICS CO.,LTD. iSPC";
+                    break;
+                case "0x000005F3":
+                    return "in-tech GmbH";
+                    break;
+                case "0x000005F5":
+                    return "Starflight Electronics";
+                    break;
+                case "0x000005F6":
+                    return "ZIEHL-ABEGG SE";
+                    break;
+                case "0x000005F7":
+                    return "Ackermann Automation GmbH";
+                    break;
+                case "0x000005F8":
+                    return "Helios Technologies, Inc.";
+                    break;
+                case "0x000005F9":
+                    return "Italsensor s.r.l.";
+                    break;
+                case "0x000005FA":
+                    return "Sartorius Mechatronics C&D GmbH & Co. KG";
+                    break;
+                case "0x000005FB":
+                    return "Evergrid Solutions & Systems";
+                    break;
+                case "0x000005FC":
+                    return "Germanjet Company Limited";
+                    break;
+                case "0x000005FD":
+                    return "Mapacode Inc.";
+                    break;
+                case "0x000005FE":
+                    return "BIBA - Bremer Institut für Produktion und Logistik GmbH";
+                    break;
+                case "0x000005FF":
+                    return "The University of Texas at Austin";
+                    break;
+
+                case "0x00000600":
+                    return "OKI Nextech Co.,Ltd.";
+                    break;
+                case "0x00000601":
+                    return "Condalo GmbH";
+                    break;
+                case "0x00000602":
+                    return "Brooks Instrument, LLC";
+                    break;
+                case "0x00000603":
+                    return "FLORIDA INSTITUTE FOR HUMAN & MACHINE COGNITION";
+                    break;
+                case "0x00000604":
+                    return "Leica Geosystems AG";
+                    break;
+                case "0x00000605":
+                    return "Nabtesco Corporation";
+                    break;
+                case "0x00000606":
+                    return "BP&M Representações e Consultoria LTDA";
+                    break;
+                case "0x00000607":
+                    return "MICRO-EPSILON Optronic GmbH";
+                    break;
+                case "0x00000608":
+                    return "Diamond Technologies, Inc.";
+                    break;
+                case "0x0000060A":
+                    return "ESTUN AUTOMATION CO.,LTD";
+                    break;
+                case "0x0000060B":
+                    return "IMS Messsysteme GmbH";
+                    break;
+                case "0x0000060C":
+                    return "M-System Co., Ltd.";
+                    break;
+                case "0x0000060D":
+                    return "Ferrotec (USA) Corporation - Temescal Division";
+                    break;
+                case "0x0000060E":
+                    return "SICK IVP AB";
+                    break;
+                case "0x0000060F":
+                    return "Oregon State University, School of Mechanical, Industrial and Manufacturing Engineering";
+                    break;
+
+                case "0x00000610":
+                    return "SINFONIA TECHNOLOGY CO., LTD.";
+                    break;
+                case "0x00000611":
+                    return "Pfeiffer Vacuum GmbH";
+                    break;
+                case "0x00000612":
+                    return "Froude Hofmann Limited";
+                    break;
+                case "0x00000613":
+                    return "SABO Elektronik GmbH";
+                    break;
+                case "0x00000615":
+                    return "Bystronic Laser AG";
+                    break;
+                case "0x00000616":
+                    return "INVT Industrial Technology (Shanghai) Co., Ltd.";
+                    break;
+                case "0x00000618":
+                    return "LumaSense Technologies GmbH";
+                    break;
+                case "0x00000619":
+                    return "BBH Products GmbH";
+                    break;
+                case "0x0000061A":
+                    return "Hecht Automatisierungs-Systeme GmbH";
+                    break;
+                case "0x0000061B":
+                    return "Xelmo AB";
+                    break;
+                case "0x0000061C":
+                    return "Carl Zeiss Industrielle Messtechnik GmbH";
+                    break;
+                case "0x0000061D":
+                    return "University of Genova, Faculty of Engineering";
+                    break;
+                case "0x0000061E":
+                    return "JOT Automation Oy";
+                    break;
+                case "0x0000061F":
+                    return "Sankyo Seisakusho Co.";
+                    break;
+
+                case "0x00000620":
+                    return "ATV-Elektronik Ges.m.b.H.";
+                    break;
+                case "0x00000621":
+                    return "Panasonic Industrial Devices SUNX Co., Ltd.";
+                    break;
+                case "0x00000622":
+                    return "ifm electronic gmbh";
+                    break;
+                case "0x00000623":
+                    return "Fisher Technical Services Inc.";
+                    break;
+                case "0x00000624":
+                    return "SCLE SFE";
+                    break;
+                case "0x00000625":
+                    return "HIGEN Motor Co., Ltd.";
+                    break;
+                case "0x00000626":
+                    return "Baumer hhs GmbH";
+                    break;
+                case "0x00000627":
+                    return "Moog Inc.";
+                    break;
+                case "0x00000628":
+                    return "XIOS Hogeschool Limburg, Department N-Technology";
+                    break;
+                case "0x00000629":
+                    return "Azbil Corporation";
+                    break;
+                case "0x0000062A":
+                    return "Delta Tau Data Systems, Inc.";
+                    break;
+                case "0x0000062B":
+                    return "Heraeus Electro-Nite International N.V.";
+                    break;
+                case "0x0000062C":
+                    return "ESW GmbH";
+                    break;
+                case "0x0000062D":
+                    return "CG Drives & Automation AB";
+                    break;
+                case "0x0000062E":
+                    return "ProCom GmbH";
+                    break;
+                case "0x0000062F":
+                    return "GE Grid Solutions SAS";
+                    break;
+
+                case "0x00000630":
+                    return "Robot Makers GmbH";
+                    break;
+                case "0x00000631":
+                    return "Brooks Automation, Inc";
+                    break;
+                case "0x00000632":
+                    return "Hitachi Metals Ltd.";
+                    break;
+                case "0x00000633":
+                    return "Interroll Automation GmbH";
+                    break;
+                case "0x00000634":
+                    return "CKD Corporation";
+                    break;
+                case "0x00000635":
+                    return "STIWA Automation GmbH";
+                    break;
+                case "0x00000636":
+                    return "T.P.A. S.p.A";
+                    break;
+                case "0x00000637":
+                    return "Guodian Nanjing Automation Co., Ltd.";
+                    break;
+                case "0x00000638":
+                    return "Prosoft-Systems Ltd.";
+                    break;
+                case "0x00000639":
+                    return "Polytype SA";
+                    break;
+                case "0x0000063A":
+                    return "SENSODRIVE GmbH";
+                    break;
+                case "0x0000063B":
+                    return "Delta Computer Systems, Inc.";
+                    break;
+                case "0x0000063C":
+                    return "Friedrich Lütze GmbH";
+                    break;
+                case "0x0000063D":
+                    return "Compressor Controls Corporation";
+                    break;
+                case "0x0000063E":
+                    return "Diamond Light Source Limited";
+                    break;
+                case "0x0000063F":
+                    return "Beckman Coulter, Inc.";
+                    break;
+
+                case "0x00000640":
+                    return "Allied Motion Technologies, Inc.";
+                    break;
+                case "0x00000641":
+                    return "Nor-Cal Products, Inc.";
+                    break;
+                case "0x00000642":
+                    return "AUTOMATA GmbH & Co. KG";
+                    break;
+                case "0x00000643":
+                    return "Fraunhofer Institut für Werkstoff- und Strahlentechnik IWS";
+                    break;
+                case "0x00000644":
+                    return "INFICON AG";
+                    break;
+                case "0x00000645":
+                    return "Hexagon Metrology GmbH";
+                    break;
+                case "0x00000646":
+                    return "Shimadzu Corporation";
+                    break;
+                case "0x00000647":
+                    return "Dasa Control Systems AB";
+                    break;
+                case "0x00000648":
+                    return "SHOEI Electric Co.,Ltd.";
+                    break;
+                case "0x00000649":
+                    return "Progressio, LLC";
+                    break;
+                case "0x0000064A":
+                    return "MACCON GmbH";
+                    break;
+                case "0x0000064B":
+                    return "Moog Ireland, Ltd.";
+                    break;
+                case "0x0000064C":
+                    return "ESPERA-WERKE GMBH";
+                    break;
+                case "0x0000064D":
+                    return "Automation W+R GmbH";
+                    break;
+                case "0x0000064E":
+                    return "Oceaneering Space Systems";
+                    break;
+                case "0x0000064F":
+                    return "EOStech S.r.l.";
+                    break;
+
+                case "0x00000650":
+                    return "Lycée Jean-Baptiste de Baudre";
+                    break;
+                case "0x00000651":
+                    return "University of Banja Luka";
+                    break;
+                case "0x00000652":
+                    return "Eding CNC";
+                    break;
+                case "0x00000653":
+                    return "Zühlke Engineering AG";
+                    break;
+                case "0x00000654":
+                    return "Addiva Consulting AB";
+                    break;
+                case "0x00000655":
+                    return "Pteris Global Limited";
+                    break;
+                case "0x00000656":
+                    return "Chaos Technology";
+                    break;
+                case "0x00000657":
+                    return "Tokyo Institute of Technology, Hirose Fukushima Lab.";
+                    break;
+                case "0x00000658":
+                    return "Seichter GmbH";
+                    break;
+                case "0x00000659":
+                    return "Motion Control Systems, Inc.";
+                    break;
+                case "0x0000065A":
+                    return "Moog B.V. in the Netherlands";
+                    break;
+                case "0x0000065B":
+                    return "Kinlo Technology & System (Shenzhen) Co.,Ltd.";
+                    break;
+                case "0x0000065C":
+                    return "CellSystems, LLC";
+                    break;
+                case "0x0000065D":
+                    return "Shinano Kenshi Co., Ltd.";
+                    break;
+                case "0x0000065E":
+                    return "MICRO-EPSILON MESSTECHNIK GmbH & Co. KG";
+                    break;
+                case "0x0000065F":
+                    return "Viable Bytes, Inc.";
+                    break;
+
+                case "0x00000660":
+                    return "Kontron Europe GmbH";
+                    break;
+                case "0x00000661":
+                    return "IKERLAN, S. Coop.";
+                    break;
+                case "0x00000662":
+                    return "hmk Daten-System-Technik GmbH";
+                    break;
+                case "0x00000664":
+                    return "Istituto Italiano di Tecnologia (IIT)";
+                    break;
+                case "0x00000663":
+                    return "Qingdao INCMAN Robot Co., Ltd.";
+                    break;
+                case "0x00000665":
+                    return "Kashiyama Industries, Ltd.";
+                    break;
+                case "0x00000666":
+                    return "TG Drives s.r.o.";
+                    break;
+                case "0x00000667":
+                    return "Watlow Electric Manufacturing Company";
+                    break;
+                case "0x00000668":
+                    return "synertronixx GmbH";
+                    break;
+                case "0x00000669":
+                    return "batalpha Bobach GmbH";
+                    break;
+                case "0x0000066A":
+                    return "Edwards Limited";
+                    break;
+                case "0x0000066B":
+                    return "ENGEL AUSTRIA GmbH";
+                    break;
+                case "0x0000066C":
+                    return "Fujikin Incorporated";
+                    break;
+                case "0x0000066D":
+                    return "COMET Technologies USA, Inc.";
+                    break;
+                case "0x0000066E":
+                    return "Schleuniger AG";
+                    break;
+                case "0x0000066F":
+                    return "Panasonic Industry Co., Ltd.";
+                    break;
+
+                case "0x00000670":
+                    return "TangShan Kaiyuan Welding Automation Technology Institute Co., Ltd.";
+                    break;
+                case "0x00000671":
+                    return "Solectrix GmbH";
+                    break;
+                case "0x00000672":
+                    return "St. Cloud State University, Electrical and Computer Engineering Department";
+                    break;
+                case "0x00000673":
+                    return "JLG AUTOMATION BVBA";
+                    break;
+                case "0x00000674":
+                    return "Burckhardt Compression AG";
+                    break;
+                case "0x00000675":
+                    return "Rong Shun Xuan Corp.";
+                    break;
+                case "0x00000676":
+                    return "Balluff STM GmbH";
+                    break;
+                case "0x00000677":
+                    return "Endress+Hauser Flowtec AG";
+                    break;
+                case "0x00000678":
+                    return "Motor Power Company S.r.l.";
+                    break;
+                case "0x0000067A":
+                    return "EBI Electric Inc.";
+                    break;
+                case "0x0000067B":
+                    return "Hochschule Luzern - Technik & Architektur";
+                    break;
+                case "0x0000067C":
+                    return "GE Global Research";
+                    break;
+                case "0x0000067D":
+                    return "Katholieke Universiteit Leuven, Department of Mechanical Engineering";
+                    break;
+                case "0x0000067E":
+                    return "centrotherm international AG";
+                    break;
+                case "0x0000067F":
+                    return "Bundesamt für Wehrtechnik und Beschaffung, Dienststelle WTD 81";
+                    break;
+
+                case "0x00000680":
+                    return "DAIHEN Corporation";
+                    break;
+                case "0x00000681":
+                    return "HCL Technologies Ltd.";
+                    break;
+                case "0x00000682":
+                    return "3T B.V.";
+                    break;
+                case "0x00000683":
+                    return "Eindhoven University of Technology";
+                    break;
+                case "0x00000684":
+                    return "INNOVENT e.V.";
+                    break;
+                case "0x00000685":
+                    return "Surrey Satellite Technology Limited";
+                    break;
+                case "0x00000686":
+                    return "AMETEK Programmable Power, Inc.";
+                    break;
+                case "0x00000687":
+                    return "engleder embedded";
+                    break;
+                case "0x00000688":
+                    return "Pusan National University";
+                    break;
+                case "0x00000689":
+                    return "ETH Zürich, Institute of Robotics and Intelligent Systems";
+                    break;
+                case "0x0000068A":
+                    return "Assystem Germany GmbH";
+                    break;
+                case "0x0000068B":
+                    return "HORIBA, Ltd.";
+                    break;
+                case "0x0000068C":
+                    return "Changwon National University, College of Engineering, Department of Electrical Engineering";
+                    break;
+                case "0x0000068D":
+                    return "Penko Engineering B.V.";
+                    break;
+                case "0x0000068E":
+                    return "Fujitsu Semiconductor Europe GmbH";
+                    break;
+
+                case "0x00000690":
+                    return "Mirle Automation Corporation";
+                    break;
+                case "0x00000691":
+                    return "FANUC CORPORATION";
+                    break;
+                case "0x00000692":
+                    return "KSE GmbH";
+                    break;
+                case "0x00000693":
+                    return "EUCHNER GmbH + Co. KG";
+                    break;
+                case "0x00000694":
+                    return "benjamin GmbH";
+                    break;
+                case "0x00000695":
+                    return "Han's Laser Technology Co.,Ltd.";
+                    break;
+                case "0x00000696":
+                    return "Guangdong University of Technology, Faculty of Automation";
+                    break;
+                case "0x00000699":
+                    return "Instituto Federal de Santa Catarina";
+                    break;
+                case "0x0000069A":
+                    return "InstruTech Inc.";
+                    break;
+                case "0x0000069B":
+                    return "KTL Corporation";
+                    break;
+                case "0x0000069C":
+                    return "Hochschule Pforzheim, Fakultät für Technik";
+                    break;
+                case "0x0000069D":
+                    return "EWM HIGHTEC WELDING GmbH";
+                    break;
+                case "0x0000069E":
+                    return "Jilin Yongda Group Company Ltd.";
+                    break;
+                case "0x0000069F":
+                    return "Arrow Central Europe GmbH";
+                    break;
+
+                case "0x000006A0":
+                    return "Phoseon Technology";
+                    break;
+                case "0x000006A1":
+                    return "item Industrietechnik GmbH";
+                    break;
+                case "0x000006A2":
+                    return "Shanghai Inno-drive Electric Co., Ltd.";
+                    break;
+                case "0x000006A3":
+                    return "Wuhan University of Technology, School of Automation";
+                    break;
+                case "0x000006A4":
+                    return "Advanet Inc.";
+                    break;
+                case "0x000006A5":
+                    return "Wandercraft SAS";
+                    break;
+                case "0x000006A6":
+                    return "Changzhou Xiangyun Monitoring Software Co., Ltd.";
+                    break;
+                case "0x000006A7":
+                    return "SANTEST CO., LTD.";
+                    break;
+                case "0x000006A8":
+                    return "EnTeSys GmbH";
+                    break;
+                case "0x000006A9":
+                    return "LOT Vacuum Co., Ltd.";
+                    break;
+                case "0x000006AA":
+                    return "ASM America Inc.";
+                    break;
+                case "0x000006AB":
+                    return "Taiwan Pulse Motion Co. Ltd.";
+                    break;
+                case "0x000006AC":
+                    return "CNi Informatica S.r.l.";
+                    break;
+                case "0x000006AD":
+                    return "enfas GmbH";
+                    break;
+                case "0x000006AE":
+                    return "Shenzhen Megmeet Drive Technology Co., Ltd.";
+                    break;
+                case "0x000006AF":
+                    return "Danish Aerospace Company";
+                    break;
+
+                case "0x000006B0":
+                    return "Panasonic Production Engineering Co., Ltd.";
+                    break;
+                case "0x000006B1":
+                    return "ARADEX AG";
+                    break;
+                case "0x000006B2":
+                    return "TOYOGIKEN CO.,LTD.";
+                    break;
+                case "0x000006B3":
+                    return "ZAO Trascon Technology";
+                    break;
+                case "0x000006B4":
+                    return "AREM PRO, s.r.o.";
+                    break;
+                case "0x000006B5":
+                    return "Googol Technology (HK) Ltd.";
+                    break;
+                case "0x000006B6":
+                    return "Vecna Technologies, Inc.";
+                    break;
+                case "0x000006B7":
+                    return "Technische Universität Dresden, Fakultät Elektrotechnik und Informationstechnik";
+                    break;
+                case "0x000006B8":
+                    return "Axxon Computer Corporation";
+                    break;
+                case "0x000006B9":
+                    return "Beijing Motrotech Technology Co., Ltd.";
+                    break;
+                case "0x000006BA":
+                    return "Wöhner GmbH & Co. KG";
+                    break;
+                case "0x000006BB":
+                    return "Hangzhou Tongling Automation Co., Ltd.";
+                    break;
+                case "0x000006BC":
+                    return "Audix Corporation";
+                    break;
+                case "0x000006BD":
+                    return "Technische Universität Wien, Fakultät für Elektrotechnik und Informationstechnik";
+                    break;
+                case "0x000006BE":
+                    return "AREVA NP";
+                    break;
+                case "0x000006BF":
+                    return "TAURUS instruments GmbH";
+                    break;
+
+                case "0x000006C0":
+                    return "Aveox Inc.";
+                    break;
+                case "0x000006C1":
+                    return "ASML Netherlands B.V.";
+                    break;
+                case "0x000006C2":
+                    return "HaslerRail AG";
+                    break;
+                case "0x000006C3":
+                    return "Intek Technology Co., Ltd.";
+                    break;
+                case "0x000006C4":
+                    return "National Computer System Engineering Research Institute of China";
+                    break;
+                case "0x000006C5":
+                    return "Crouzet Automatismes";
+                    break;
+                case "0x000006C7":
+                    return "Joshua 1 Systems Inc.";
+                    break;
+                case "0x000006C8":
+                    return "Artech Electronics Co., Ltd.";
+                    break;
+                case "0x000006CA":
+                    return "FUJI MACHINERY CO.,LTD.";
+                    break;
+                case "0x000006CB":
+                    return "FoShan Logen Robotics Co., Ltd.";
+                    break;
+                case "0x000006CC":
+                    return "DVDB-electronics bvba";
+                    break;
+                case "0x000006CD":
+                    return "Tool Express-Service Schraubertechnik GmbH (TESS GmbH)";
+                    break;
+                case "0x000006CE":
+                    return "King Giants Precision Industry Co., Ltd.";
+                    break;
+                case "0x000006CF":
+                    return "PANAX SYSTEM Co., Ltd.";
+                    break;
+
+                case "0x000006D0":
+                    return "Hitachi Europe GmbH";
+                    break;
+                case "0x000006D1":
+                    return "ZDAUTO AZDAUTO Automation Technology Co., Ltd. utomation Technology Co., Ltd.";
+                    break;
+                case "0x000006D2":
+                    return "Temis S.r.l.";
+                    break;
+                case "0x000006D3":
+                    return "DAIKIN INDUSTRIES, LTD., Oil Hydraulics Division";
+                    break;
+                case "0x000006D4":
+                    return "Avalue Technology Inc.";
+                    break;
+                case "0x000006D5":
+                    return "LDZ Technology Co., Ltd.";
+                    break;
+                case "0x000006D6":
+                    return "Eletech S.r.l.";
+                    break;
+                case "0x000006D9":
+                    return "Portwell, Inc.";
+                    break;
+                case "0x000006DA":
+                    return "Shenzhen Sine Electric Co., Ltd";
+                    break;
+                case "0x000006DB":
+                    return "HIMA Paul Hildebrandt GmbH";
+                    break;
+                case "0x000006DC":
+                    return "Covidien LP";
+                    break;
+                case "0x000006DD":
+                    return "Weintek Labs., Inc.";
+                    break;
+                case "0x000006DE":
+                    return "MITWELL Inc.";
+                    break;
+                case "0x000006DF":
+                    return "DORNA Technology Co., Ltd.";
+                    break;
+
+                case "0x000006E0":
+                    return "A M Consulting";
+                    break;
+                case "0x000006E1":
+                    return "GENESI ELETTRONICA Srl";
+                    break;
+                case "0x000006E2":
+                    return "Molex Canada Limited";
+                    break;
+                case "0x000006E3":
+                    return "Vanguard Systems Inc.";
+                    break;
+                case "0x000006E4":
+                    return "Shenzhen UniMAT Automation Technology Co., Ltd.";
+                    break;
+                case "0x000006E5":
+                    return "ifatos GmbH & Co. KG";
+                    break;
+                case "0x000006E6":
+                    return "Ingeniería UNO S.L";
+                    break;
+                case "0x000006E7":
+                    return "Daekhon Corporation";
+                    break;
+                case "0x000006EA":
+                    return "Marubeni Information Systems Co., Ltd.";
+                    break;
+                case "0x000006EB":
+                    return "YDK Co., Ltd.";
+                    break;
+                case "0x000006EC":
+                    return "E-T-A Elektrotechnische Apparate GmbH";
+                    break;
+                case "0x000006EE":
+                    return "Justech Precision Industry Co., Ltd.";
+                    break;
+
+                case "0x000006F0":
+                    return "VOLLMER WERKE Maschinenfabrik GmbH";
+                    break;
+                case "0x000006F1":
+                    return "Technische Hochschule Nürnberg Georg Simon Ohm";
+                    break;
+                case "0x000006F2":
+                    return "Gene Automation Technology Ltd.";
+                    break;
+                case "0x000006F3":
+                    return "Weihai Zheng Qi Mechatronics Technology Ltd.";
+                    break;
+                case "0x000006F5":
+                    return "Gopher Inc.";
+                    break;
+                case "0x000006F6":
+                    return "IntervalZero, Inc.";
+                    break;
+                case "0x000006F7":
+                    return "AXONIM LLC";
+                    break;
+                case "0x000006F8":
+                    return "University of Seoul, College of Engineering, Department of Mechanical and Information Engineering";
+                    break;
+                case "0x000006F9":
+                    return "Professional Computer Technology Limited";
+                    break;
+                case "0x000006FA":
+                    return "Ninna Solutions Co,.Ltd";
+                    break;
+                case "0x000006FC":
+                    return "Shenyang CASNC Technology Co., Ltd.";
+                    break;
+                case "0x000006FD":
+                    return "IWAKI CO., LTD.";
+                    break;
+                case "0x000006FE":
+                    return "TRP Engineering College, Department of Electronics & Communication Engineering (ECE)";
+                    break;
+                case "0x000006FF":
+                    return "EPI elettronica s.a.s.";
+                    break;
+
+                case "0x00000700":
+                    return "Institut de RadioAstronomie Millimétrique";
+                    break;
+                case "0x00000701":
+                    return "Technische Universität Graz, Fakultät für Maschinenbau und Wirtschaftswissenschaften";
+                    break;
+                case "0x00000702":
+                    return "pro-beam AG & Co. KGaA";
+                    break;
+                case "0x00000703":
+                    return "Servotechnica ZAO";
+                    break;
+                case "0x00000704":
+                    return "Hanwha Precision Machinery CO., LTD.";
+                    break;
+                case "0x00000705":
+                    return "G&S Intelligent Technology Co., Ltd.";
+                    break;
+                case "0x00000706":
+                    return "Schaeffler Engineering";
+                    break;
+                case "0x00000707":
+                    return "University of the Basque Country, Faculty of Engineering, Department of Electronics and Telecommunications";
+                    break;
+                case "0x00000708":
+                    return "ARGES GmbH";
+                    break;
+                case "0x00000709":
+                    return "Control Chief Corporation";
+                    break;
+                case "0x0000070A":
+                    return "konplan systemhaus ag";
+                    break;
+                case "0x0000070B":
+                    return "embeX GmbH";
+                    break;
+                case "0x0000070C":
+                    return "COSMOTECHS Co., Ltd";
+                    break;
+                case "0x0000070D":
+                    return "Dynamic Systems Inc.";
+                    break;
+                case "0x0000070E":
+                    return "SEMIKRON Elektronik GmbH & Co. KG";
+                    break;
+                case "0x0000070F":
+                    return "Wuxi Ivoyage Control Technology CO.,LTD";
+                    break;
+
+                case "0x00000710":
+                    return "CAF Signalling S.L.";
+                    break;
+                case "0x00000711":
+                    return "SMART Electronic Development GmbH";
+                    break;
+                case "0x00000712":
+                    return "Yokogawa Electric Corporation";
+                    break;
+                case "0x00000713":
+                    return "Norwegian University of Science and Technoloogy,";
+                    break;
+
+                case "0x00000714":
+                    return "Robostar Co., Ltd";
+                    break;
+                case "0x00000715":
+                    return "TRUMPF Werkzeugmaschinen SE + Co. KG";
+                    break;
+                case "0x00000716":
+                    return "High Performance Motion System Development Co., Ltd.";
+                    break;
+                case "0x00000717":
+                    return "Kozaka Electronic Design Inc.";
+                    break;
+                case "0x00000718":
+                    return "Aeronautical Systems Engineering Inc.";
+                    break;
+                case "0x00000719":
+                    return "Agile Planet, Inc.";
+                    break;
+                case "0x0000071A":
+                    return "Hon Hai Precision Industry Co., Ltd.";
+                    break;
+                case "0x0000071B":
+                    return "Systeme + Steuerungen GmbH";
+                    break;
+                case "0x0000071C":
+                    return "Huron Net Works, Inc.";
+                    break;
+                case "0x0000071D":
+                    return "University of Applied Sciences of Southern Switzerland, Department of Innovative Technologies (DTI)";
+                    break;
+
+                case "0x0000071E":
+                    return "MAKO Surgical Corp.";
+                    break;
+                case "0x0000071F":
+                    return "Rainer Thomas Messtechnik GmbH";
+                    break;
+
+                case "0x00000720":
+                    return "ELTEK spol. s r.o.";
+                    break;
+                case "0x00000721":
+                    return "Vecow Co., Ltd.";
+                    break;
+                case "0x00000722":
+                    return "M&P Motion Control and Power Electronics GmbH";
+                    break;
+                case "0x00000723":
+                    return "Leybold GmbH";
+                    break;
+                case "0x00000725":
+                    return "Panasonic Industrial Devices Sales Company of America";
+                    break;
+                case "0x00000726":
+                    return "Eilersen Electric Digital Systems A/S";
+                    break;
+                case "0x00000727":
+                    return "Inter Factory Partners Co., LTD.";
+                    break;
+                case "0x00000728":
+                    return "Power Instrument Co., Ltd.";
+                    break;
+                case "0x00000729":
+                    return "Cosworth Group Holdings Ltd";
+                    break;
+                case "0x0000072A":
+                    return "South China University of Technology, School of Mechanical & Automotive Engineering";
+                    break;
+                case "0x0000072B":
+                    return "WARWICK INSTRUMENTS LTD.";
+                    break;
+                case "0x0000072C":
+                    return "Shenzhen INVT Co., Ltd.";
+                    break;
+                case "0x0000072D":
+                    return "WIEDEG Elektronik GmbH";
+                    break;
+                case "0x0000072E":
+                    return "NKE corporation";
+                    break;
+                case "0x0000072F":
+                    return "Universidad Politécnica de Madrid";
+                    break;
+
+                case "0x00000730":
+                    return "Bot & Dolly";
+                    break;
+                case "0x00000731":
+                    return "RECIF Technologies";
+                    break;
+                case "0x00000732":
+                    return "ATI Industrial Automation";
+                    break;
+                case "0x00000733":
+                    return "ADVANTEST CORPORATION";
+                    break;
+                case "0x00000734":
+                    return "MULTIVAC Sepp Haggenmüller SE & Co. KG";
+                    break;
+                case "0x00000735":
+                    return "ROLAND ELECTRONIC GmbH";
+                    break;
+                case "0x00000736":
+                    return "CONTEC Co., Ltd.";
+                    break;
+                case "0x00000737":
+                    return "Alizem Inc.";
+                    break;
+                case "0x00000738":
+                    return "Chyng Hong Electronic Co., Ltd.";
+                    break;
+                case "0x00000739":
+                    return "Yaskawa America Inc.";
+                    break;
+                case "0x0000073A":
+                    return "Georg Schlegel GmbH & Co. KG";
+                    break;
+                case "0x0000073B":
+                    return "Faraday Technology Corporation";
+                    break;
+                case "0x0000073C":
+                    return "SIPRO S.r.l.";
+                    break;
+                case "0x0000073D":
+                    return "University of Twente, Faculty of Engineering Technology (CTW)";
+                    break;
+                case "0x0000073E":
+                    return "Aalborg University";
+                    break;
+                case "0x0000073F":
+                    return "S-SYS bvba";
+                    break;
+
+                case "0x00000740":
+                    return "Ningbo Mingpu Automation Technology Co.";
+                    break;
+                case "0x00000741":
+                    return "elrest Automationssysteme GmbH";
+                    break;
+                case "0x00000742":
+                    return "Kyosan Electric Manufacturing Co., Ltd.";
+                    break;
+                case "0x00000743":
+                    return "Custom Machines";
+                    break;
+                case "0x00000744":
+                    return "KFM Regelungstechnik GmbH";
+                    break;
+                case "0x00000745":
+                    return "ISHIDA CO., LTD.";
+                    break;
+                case "0x00000746":
+                    return "Beijing University of Technology";
+                    break;
+                case "0x00000748":
+                    return "Tsino-dynatron Electrical Technology Beijing Co., Ltd.";
+                    break;
+                case "0x00000749":
+                    return "PENTA TRADING Spol. S.r.o.";
+                    break;
+                case "0x0000074A":
+                    return "University of Electronic Science and Technology of China, School of Optoelectronic Information";
+                    break;
+                case "0x0000074B":
+                    return "Altus Sistemas de Informática S/A";
+                    break;
+                case "0x0000074C":
+                    return "Sanming University, Sanming Mechanical CAD Engineering Research Center";
+                    break;
+                case "0x0000074E":
+                    return "JENOPTIK Industrial Metrology Germany GmbH";
+                    break;
+                case "0x0000074F":
+                    return "Beijing KND CNC Technique Co., Ltd.";
+                    break;
+
+                case "0x00000750":
+                    return "JW Shannon Engineers";
+                    break;
+                case "0x00000751":
+                    return "A2V Mécatronique SAS";
+                    break;
+                case "0x00000752":
+                    return "NEXCOM International Co., Ltd.";
+                    break;
+                case "0x00000753":
+                    return "Jiangyin Huafeng Printing Machinery Co., Ltd.";
+                    break;
+                case "0x00000754":
+                    return "Lectra SA";
+                    break;
+                case "0x00000755":
+                    return "Beijer Electronics Products AB";
+                    break;
+                case "0x00000756":
+                    return "C J Hartman Elektronik AB";
+                    break;
+                case "0x00000757":
+                    return "Hurco Automation Ltd.";
+                    break;
+                case "0x00000759":
+                    return "Autonics Corporation";
+                    break;
+                case "0x0000075A":
+                    return "Brom Mechatronica B.V.";
+                    break;
+                case "0x0000075B":
+                    return "Vrije Universiteit Brussel, Faculty of Engineering";
+                    break;
+                case "0x0000075C":
+                    return "Alluris GmbH & Co. KG";
+                    break;
+                case "0x0000075D":
+                    return "Hochschule Offenburg, Fakultät Elektrotechnik und Informationstechnik";
+                    break;
+                case "0x0000075E":
+                    return "Instron - Division of ITW Ltd.";
+                    break;
+                case "0x0000075F":
+                    return "Heidolph Elektro GmbH & Co. KG";
+                    break;
+
+                case "0x00000760":
+                    return "GE Transportation";
+                    break;
+                case "0x00000761":
+                    return "MÄX GmbH";
+                    break;
+                case "0x00000762":
+                    return "Durst Phototechnik Digital Technology GmbH";
+                    break;
+                case "0x00000763":
+                    return "Omsk State Technical University, Department of „Electricity industry“";
+                    break;
+                case "0x00000764":
+                    return "Embedded-Bonjour GmbH";
+                    break;
+                case "0x00000765":
+                    return "Mettler-Toledo Garvens GmbH";
+                    break;
+                case "0x00000766":
+                    return "Renesas Electronics Corp.";
+                    break;
+                case "0x00000767":
+                    return "Conductix-Wampfler Automation GmbH";
+                    break;
+                case "0x00000768":
+                    return "EURA DRIVES ELECTRIC CO. LTD";
+                    break;
+                case "0x00000769":
+                    return "EUTRON S.p.A.";
+                    break;
+                case "0x0000076A":
+                    return "FLANDERS Inc.";
+                    break;
+                case "0x0000076B":
+                    return "Digital Dynamics, Inc.";
+                    break;
+                case "0x0000076C":
+                    return "GE Medical Systems Europe";
+                    break;
+                case "0x0000076D":
+                    return "Physik Instumente GmbH & Co. KG";
+                    break;
+                case "0x0000076E":
+                    return "Hypertherm Inc.";
+                    break;
+                case "0x0000076F":
+                    return "HRID d.o.o.";
+                    break;
+
+                case "0x00000770":
+                    return "Aotai Electric Co., LTD";
+                    break;
+                case "0x00000771":
+                    return "Control Concepts Inc.";
+                    break;
+                case "0x00000772":
+                    return "JoveTech Co., Ltd.";
+                    break;
+                case "0x00000773":
+                    return "POHANG UNIVERSITY OF SCIENCE AND TECHNOLOGY, Department of Electrical Engineering";
+                    break;
+                case "0x00000774":
+                    return "CycloMedia Technology B.V.";
+                    break;
+                case "0x00000775":
+                    return "SUN-TECTRO LTD.";
+                    break;
+                case "0x00000776":
+                    return "Shanghai Jiao Tong University, School of Electronic Information and Electrical Engineering";
+                    break;
+                case "0x00000777":
+                    return "koenig-pa GmbH";
+                    break;
+                case "0x00000778":
+                    return "Anton Paar TriTec SA";
+                    break;
+                case "0x00000779":
+                    return "V TEX Corporation";
+                    break;
+                case "0x0000077A":
+                    return "Edge Technologies";
+                    break;
+                case "0x0000077B":
+                    return "EBARA CORPORATION";
+                    break;
+                case "0x0000077C":
+                    return "University at Buffalo";
+                    break;
+                case "0x0000077D":
+                    return "Aurotek Corporation";
+                    break;
+                case "0x0000077E":
+                    return "Blubit d.o.o.";
+                    break;
+                case "0x0000077F":
+                    return "Toplens Hangzhou, Inc.";
+                    break;
+
+                case "0x00000780":
+                    return "National Chung Cheng University";
+                    break;
+                case "0x00000781":
+                    return "Hexagon Technology Center GmbH";
+                    break;
+                case "0x00000782":
+                    return "Graph-Tech AG";
+                    break;
+                case "0x00000783":
+                    return "Lanthan GmbH & Co. KG";
+                    break;
+                case "0x00000784":
+                    return "Nucleus GmbH";
+                    break;
+                case "0x00000785":
+                    return "STRATEC CONTROL-SYSTEMS GmbH";
+                    break;
+                case "0x00000786":
+                    return "Universität Wien, Fakultät für Physik, Isotopenforschung";
+                    break;
+                case "0x00000787":
+                    return "inno-spec GmbH";
+                    break;
+                case "0x00000788":
+                    return "ThyssenKrupp Presta AG";
+                    break;
+                case "0x0000078A":
+                    return "DENSO WAVE INCORPORATED";
+                    break;
+                case "0x0000078B":
+                    return "EuroSoft S.r.l.";
+                    break;
+                case "0x0000078C":
+                    return "University of British Columbia, Faculty of Applied Science, Department of Mechanical Engineering";
+                    break;
+                case "0x0000078D":
+                    return "REnergy Electric Tianjin Ltd.";
+                    break;
+                case "0x0000078E":
+                    return "NewYoungSystem Co., Ltd.";
+                    break;
+                case "0x0000078F":
+                    return "ESA S.p.A.";
+                    break;
+
+                case "0x00000790":
+                    return "University of Reading, School of Systems Engineering";
+                    break;
+                case "0x00000791":
+                    return "KOGANEI CORPORATION";
+                    break;
+                case "0x00000792":
+                    return "MAZeT GmbH";
+                    break;
+                case "0x00000793":
+                    return "The University of Nottingham, Faculty of Engineering, Electrical Systems and Optics Research Division";
+                    break;
+                case "0x00000794":
+                    return "Quanta Storage Inc.";
+                    break;
+                case "0x00000795":
+                    return "Azbil Taishin Co., Ltd.";
+                    break;
+                case "0x00000796":
+                    return "Relitech B.V.";
+                    break;
+                case "0x00000797":
+                    return "DHPC Technologies, Inc.";
+                    break;
+                case "0x00000798":
+                    return "Jordan Valley Semiconductors Ltd.";
+                    break;
+                case "0x00000799":
+                    return "MicroCreate System Co., Ltd.";
+                    break;
+                case "0x0000079A":
+                    return "AB&T S.r.l.";
+                    break;
+                case "0x0000079B":
+                    return "Medic LLC";
+                    break;
+                case "0x0000079C":
+                    return "T3LAB - Technology Transfer Team";
+                    break;
+                case "0x0000079D":
+                    return "Coptonix GmbH";
+                    break;
+                case "0x0000079E":
+                    return "KARL MAYER STOLL Textilmaschinenfabrik GmbH";
+                    break;
+                case "0x0000079F":
+                    return "inoson GmbH";
+                    break;
+
+                case "0x000007A0":
+                    return "GE Power & Water Distributed Power";
+                    break;
+                case "0x000007A1":
+                    return "Shanghai Yuanzhi Robot Co., Ltd.";
+                    break;
+                case "0x000007A2":
+                    return "OYO ELECTRIC CO., LTD.";
+                    break;
+                case "0x000007A3":
+                    return "Solwit SA";
+                    break;
+                case "0x000007A4":
+                    return "Jabil Inc.";
+                    break;
+                case "0x000007A5":
+                    return "Renesas Semiconductor Package & Test Solutions Co., Ltd.";
+                    break;
+                case "0x000007A6":
+                    return "Technische Universität Berlin, Fakultät Verkehrs- und Maschinensysteme";
+                    break;
+                case "0x000007A7":
+                    return "Mettler-Toledo (Changzhou) Precision Instrument Ltd.";
+                    break;
+                case "0x000007A8":
+                    return "Sentronic International Corp.";
+                    break;
+                case "0x000007A9":
+                    return "LEAS (Laboratoire d'électronique Angelidis et Sarrault)";
+                    break;
+                case "0x000007AA":
+                    return "MAPNA Electric & Control, Engineering & Manufacturing Co.";
+                    break;
+                case "0x000007AB":
+                    return "NetTechnix E&P GmbH";
+                    break;
+                case "0x000007AC":
+                    return "Excelpoint Systems (H.K.) Limited";
+                    break;
+                case "0x000007AD":
+                    return "Integrated Dynamics Engineering GmbH";
+                    break;
+                case "0x000007AE":
+                    return "Toho Technology Corporation";
+                    break;
+                case "0x000007AF":
+                    return "Salvagnini Italia S.p.A.";
+                    break;
+
+                case "0x000007B0":
+                    return "Shanghai Triowin Automation Machinery Co., Ltd.";
+                    break;
+                case "0x000007B1":
+                    return "Hytec Electronics Ltd.";
+                    break;
+                case "0x000007B2":
+                    return "Xi’an Xiangxun Technology Co., Ltd.";
+                    break;
+                case "0x000007B3":
+                    return "Schmidiger GmbH";
+                    break;
+                case "0x000007B4":
+                    return "MASTER LTD.";
+                    break;
+                case "0x000007B5":
+                    return "Korea University, College of Engineering";
+                    break;
+                case "0x000007B6":
+                    return "H. Kufferath GmbH";
+                    break;
+                case "0x000007B7":
+                    return "EFTEC Engineering GmbH";
+                    break;
+                case "0x000007B9":
+                    return "DFC Design, s.r.o.";
+                    break;
+                case "0x000007BA":
+                    return "FUKUDA CO., LTD.";
+                    break;
+                case "0x000007BB":
+                    return "Fachhochschule Flensburg";
+                    break;
+                case "0x000007BC":
+                    return "Karlsruher Institut für Technologie, IAR, H²T";
+                    break;
+                case "0x000007BD":
+                    return "Burnon International Ltd.";
+                    break;
+                case "0x000007BE":
+                    return "Nuova Fima S.P.A.";
+                    break;
+                case "0x000007BF":
+                    return "Yuban & Co.";
+                    break;
+
+                case "0x000007C2":
+                    return "Ricoh Industry Co., Ltd.";
+                    break;
+                case "0x000007C3":
+                    return "RDC Semiconductor Co., Ltd.";
+                    break;
+                case "0x000007C4":
+                    return "SETEX Schermuly textile computer GmbH";
+                    break;
+                case "0x000007C5":
+                    return "elowerk GmbH & Co. KG";
+                    break;
+                case "0x000007C6":
+                    return "iThemba Laboratory for Accelerator Based Sciences (iThemba LABS)";
+                    break;
+                case "0x000007C8":
+                    return "CNCSAZAN";
+                    break;
+                case "0x000007C9":
+                    return "ShiningView Electronic Technology (Shanghai) Co., Ltd.";
+                    break;
+                case "0x000007CA":
+                    return "Mikysek Engineering";
+                    break;
+                case "0x000007CB":
+                    return "VICTRON TECHNOLOGY CO., LTD.";
+                    break;
+                case "0x000007CD":
+                    return "Michigan Scientific Corporation";
+                    break;
+                case "0x000007CE":
+                    return "ADFweb.com s.r.l.";
+                    break;
+                case "0x000007CF":
+                    return "Nortion Servo Technology (Beijing) Co., Ltd.";
+                    break;
+
+                case "0x000007D0":
+                    return "AKKA DNO GmbH";
+                    break;
+                case "0x000007D1":
+                    return "Zhejiang Synmot Electrical Technology Co., Ltd.";
+                    break;
+                case "0x000007D2":
+                    return "HK-MnS Co., Ltd.";
+                    break;
+                case "0x000007D3":
+                    return "Tattile S.r.l.";
+                    break;
+                case "0x000007D4":
+                    return "ELFIN Pracownia Elektroniki";
+                    break;
+                case "0x000007D5":
+                    return "Bimba Manufacturing Company";
+                    break;
+                case "0x000007D6":
+                    return "Winsonic Electronics Co., Ltd.";
+                    break;
+                case "0x000007D7":
+                    return "DIMETIX AG";
+                    break;
+                case "0x000007D8":
+                    return "GENETEC CORPORATION";
+                    break;
+                case "0x000007D9":
+                    return "Tianjin Hengxin Chuangyuan Science & Technology Co., Ltd.";
+                    break;
+                case "0x000007DA":
+                    return "SFA Engineering Corp.";
+                    break;
+                case "0x000007DB":
+                    return "Opticon Inc.";
+                    break;
+                case "0x000007DC":
+                    return "NPN Co., Ltd.";
+                    break;
+                case "0x000007DD":
+                    return "Wuhan Maxsine Electric Co., Ltd.";
+                    break;
+                case "0x000007DF":
+                    return "Concept Overdrive Inc.";
+                    break;
+
+                case "0x000007E0":
+                    return "HETRONIK GmbH";
+                    break;
+                case "0x000007E2":
+                    return "JBT Corporation";
+                    break;
+                case "0x000007E3":
+                    return "Technische Universität Dresden, Fakultät Elektrotechnik und Informationstechnik";
+                    break;
+                case "0x000007E4":
+                    return "DAJO Solutions Ltd.";
+                    break;
+                case "0x000007E5":
+                    return "Criterion NDT, Inc.";
+                    break;
+                case "0x000007E6":
+                    return "Quanzhou Sangchuan Electric Equipment Co., Ltd.";
+                    break;
+                case "0x000007E7":
+                    return "DATA TECNO Co. Ltd.";
+                    break;
+                case "0x000007E8":
+                    return "Rainbow Springs Pvt Ltd.";
+                    break;
+                case "0x000007E9":
+                    return "Renu Electronics Pvt. Ltd.";
+                    break;
+                case "0x000007EA":
+                    return "Max-Planck-Institut für biologische Kybernetik; Wahrnehmung, Kognition und Handlung";
+                    break;
+                case "0x000007EB":
+                    return "Intelligent Automation Equipment (Zhuhai) Co., Ltd.";
+                    break;
+                case "0x000007EC":
+                    return "SCREEN Holdings Co., Ltd.";
+                    break;
+                case "0x000007ED":
+                    return "Sysmex Corporation";
+                    break;
+                case "0x000007EE":
+                    return "ASM Japan K.K.";
+                    break;
+                case "0x000007EF":
+                    return "IMAGO Technologies GmbH";
+                    break;
+
+                case "0x000007F0":
+                    return "Happiest Minds Technologies Private Limited";
+                    break;
+                case "0x000007F1":
+                    return "Open Control System Technology Co. Ltd.";
+                    break;
+                case "0x000007F2":
+                    return "University of Seoul, College of Engineering";
+                    break;
+                case "0x000007F3":
+                    return "ULVAC, Inc.";
+                    break;
+                case "0x000007F4":
+                    return "Meliora Scientific Inc.";
+                    break;
+                case "0x000007F5":
+                    return "Toshiba Corporation";
+                    break;
+                case "0x000007F6":
+                    return "Schnell Spa";
+                    break;
+                case "0x000007F7":
+                    return "Industrial Technology Research Institute (ITRI)";
+                    break;
+                case "0x000007F8":
+                    return "4PICO BV";
+                    break;
+                case "0x000007F9":
+                    return "AVL SET GmbH";
+                    break;
+                case "0x000007FA":
+                    return "CHANGNAM I.N.T. LTD.";
+                    break;
+                case "0x000007FB":
+                    return "Shanghai Ruking Technology Co., Ltd.";
+                    break;
+                case "0x000007FC":
+                    return "META Srl";
+                    break;
+                case "0x000007FD":
+                    return "GHM Messtechnik GmbH";
+                    break;
+                case "0x000007FF":
+                    return "Xihua University";
+                    break;
+
+                case "0x00000800":
+                    return "Stratus Automation Sdn. Bhd.";
+                    break;
+                case "0x00000801":
+                    return "OTSL Inc.";
+                    break;
+                case "0x00000802":
+                    return "Aromasoft Corp.";
+                    break;
+                case "0x00000803":
+                    return "Bobst S.A.";
+                    break;
+                case "0x00000804":
+                    return "Beijing Powerbeck Automation Technology CO., LTD.";
+                    break;
+                case "0x00000805":
+                    return "TESSERA TECHNOLOGY INC.";
+                    break;
+                case "0x00000806":
+                    return "JWiesemann.com - Dr. Joachim Wiesemann";
+                    break;
+                case "0x00000807":
+                    return "Istanbul Ulasim San Tic. A.S.";
+                    break;
+                case "0x00000808":
+                    return "ProPhotonix (Irl) Ltd.";
+                    break;
+                case "0x00000809":
+                    return "B.I.N.S.S Datennetze und Gefahrenmeldesysteme GmbH Berlin";
+                    break;
+                case "0x0000080A":
+                    return "University 'Stefan cel Mare' Suceava, Electrical Engineering and Computer Science";
+                    break;
+                case "0x0000080B":
+                    return "Modrol Electric CO., Ltd.";
+                    break;
+                case "0x0000080C":
+                    return "OBS Korea Co.,Ltd";
+                    break;
+                case "0x0000080D":
+                    return "Shanghai Jiao Tong University, School of Mechanical Engineering";
+                    break;
+                case "0x0000080E":
+                    return "TEAM ELECTRONICS GmbH";
+                    break;
+                case "0x0000080F":
+                    return "Southwest University of Science and Technology (SWUST) National University Science Park";
+                    break;
+
+                case "0x00000810":
+                    return "TDK-Lambda Americas Inc.";
+                    break;
+                case "0x00000811":
+                    return "Ta Liang Technology Co. Ltd.";
+                    break;
+                case "0x00000812":
+                    return "CCS Inc.";
+                    break;
+                case "0x00000813":
+                    return "adaptronic Prüftechnik GmbH";
+                    break;
+                case "0x00000814":
+                    return "TOHO Electronics Inc.";
+                    break;
+                case "0x00000815":
+                    return "VMek Group LLC (dba VMek Sorting Technology)";
+                    break;
+                case "0x00000816":
+                    return "CKD Nikki Denso Co., Ltd.";
+                    break;
+                case "0x00000817":
+                    return "Systematic Consulting Group, Inc.";
+                    break;
+                case "0x00000818":
+                    return "PERITEC Corporation";
+                    break;
+                case "0x00000819":
+                    return "Bachmann Technology GmbH & Co. KG";
+                    break;
+                case "0x0000081A":
+                    return "BMK electronic solutions GmbH & Co. KG";
+                    break;
+                case "0x0000081B":
+                    return "TECO Electric & Machinery Co., Ltd.";
+                    break;
+                case "0x0000081C":
+                    return "Mechtronic Industries Ltd.";
+                    break;
+                case "0x0000081D":
+                    return "Mernok Elektronik (Pty) Ltd.";
+                    break;
+                case "0x0000081E":
+                    return "Universität Bremen, Institut für elektrische Antriebe, Leistungselektronik und Bauelemente";
+                    break;
+                case "0x0000081F":
+                    return "Hydro-Québec Research Institute";
+                    break;
+
+                case "0x00000820":
+                    return "GEMTEC Laseroptische Systeme GmbH";
+                    break;
+                case "0x00000821":
+                    return "SINTEF Raufoss Manufacturing AS";
+                    break;
+                case "0x00000822":
+                    return "Advanced Manufacturing Engineering Technologies Inc.";
+                    break;
+                case "0x00000823":
+                    return "Levitronix GmbH";
+                    break;
+                case "0x00000825":
+                    return "Dipl.-Ing. Carsten Spieß Softwareentwicklung";
+                    break;
+                case "0x00000826":
+                    return "Reivax S/A Automação e Controle";
+                    break;
+                case "0x00000827":
+                    return "Lappeenranta University of Technology (LUT), School of Energy Systems, Electrical Engineering";
+                    break;
+                case "0x00000828":
+                    return "TOTANI CORPORATION";
+                    break;
+                case "0x00000829":
+                    return "SERAD S.A.S.";
+                    break;
+                case "0x0000082A":
+                    return "ITW Dynatec GmbH";
+                    break;
+                case "0x0000082B":
+                    return "Hochschule Emden/Leer, Fachbereich Technik";
+                    break;
+                case "0x0000082C":
+                    return "JFControl Co., Ltd.";
+                    break;
+                case "0x0000082D":
+                    return "SAEL srl";
+                    break;
+                case "0x0000082E":
+                    return "Beckman Coulter Biomedical GmbH";
+                    break;
+                case "0x0000082F":
+                    return "Walter Maschinenbau GmbH";
+                    break;
+
+                case "0x00000830":
+                    return "Alterface s.a.";
+                    break;
+                case "0x00000831":
+                    return "Lectronix, Inc.";
+                    break;
+                case "0x00000832":
+                    return "HOKUYO AUTOMATIC CO., LTD.";
+                    break;
+                case "0x00000833":
+                    return "Shanghai Empower Technologies Co., Ltd.";
+                    break;
+                case "0x00000834":
+                    return "Thyracont Vacuum Instruments GmbH";
+                    break;
+                case "0x00000835":
+                    return "OMAX Corporation";
+                    break;
+                case "0x00000836":
+                    return "TOX® PRESSOTECHNIK GmbH & Co. KG";
+                    break;
+                case "0x00000837":
+                    return "National Chiao Tung University, College of Electrical and Computer Engineering, Department of Electrical Engineering";
+                    break;
+                case "0x00000838":
+                    return "Inspiro BV";
+                    break;
+                case "0x00000839":
+                    return "Maxcess International";
+                    break;
+                case "0x0000083A":
+                    return "Chell Instruments Ltd.";
+                    break;
+                case "0x0000083B":
+                    return "FUJI CORPORATION";
+                    break;
+                case "0x0000083C":
+                    return "NIDEC SANKYO CORPORATION";
+                    break;
+                case "0x0000083D":
+                    return "Shizuoka Oki Electric Co., Ltd.";
+                    break;
+                case "0x0000083E":
+                    return "Frencken America Inc.";
+                    break;
+                case "0x0000083F":
+                    return "Granite Devices Oy";
+                    break;
+
+                case "0x00000840":
+                    return "SANEZOO EUROPE s.r.o.";
+                    break;
+                case "0x00000842":
+                    return "AGILiCOM SARL";
+                    break;
+                case "0x00000843":
+                    return "Philips Technologie GmbH, Photonics Aachen";
+                    break;
+                case "0x00000844":
+                    return "KLA Corporation";
+                    break;
+                case "0x00000845":
+                    return "Meidensha Corporation";
+                    break;
+                case "0x00000849":
+                    return "Rolls-Royce Nuclear Services";
+                    break;
+                case "0x0000084A":
+                    return "University of West Bohemia, Faculty of Applied Sciences";
+                    break;
+                case "0x0000084B":
+                    return "Korea Electrotechnology Research Institute (KERI)";
+                    break;
+                case "0x0000084C":
+                    return "MPI Corporation";
+                    break;
+                case "0x0000084D":
+                    return "Röders GmbH";
+                    break;
+                case "0x0000084E":
+                    return "Melec Inc.";
+                    break;
+                case "0x0000084F":
+                    return "Mianyang Weibo Electronic Co., Ltd.";
+                    break;
+
+                case "0x00000851":
+                    return "Wuhan Huazhong Numerical Control Co., Ltd.";
+                    break;
+                case "0x00000852":
+                    return "Datalogic Automation S.r.l.";
+                    break;
+                case "0x00000853":
+                    return "Tri-Tek Corp.";
+                    break;
+                case "0x00000855":
+                    return "YUHENG OPTICS CO.,LTD (Changchun)";
+                    break;
+                case "0x00000856":
+                    return "ETH-messtechnik gmbh";
+                    break;
+                case "0x00000857":
+                    return "JTEKT CORPORATION";
+                    break;
+                case "0x00000858":
+                    return "ergo: elektronik GmbH";
+                    break;
+                case "0x00000859":
+                    return "Engineerdream Co., Ltd.";
+                    break;
+                case "0x0000085A":
+                    return "Samsung Electronics Co. Ltd.";
+                    break;
+                case "0x0000085B":
+                    return "KSJ Co. Ltd.";
+                    break;
+                case "0x0000085C":
+                    return "Messer Cutting Systems GmbH";
+                    break;
+                case "0x0000085D":
+                    return "Krones AG";
+                    break;
+                case "0x0000085F":
+                    return "Northwestern Polytechnical University, School of Power&Energy, Department of Power Control and Test";
+                    break;
+
+                case "0x00000860":
+                    return "Blackbird Robotersysteme GmbH";
+                    break;
+                case "0x00000861":
+                    return "Mitsuba Corporation";
+                    break;
+                case "0x00000863":
+                    return "Foshan Shunde Gatherwin Information Technology Co., Ltd.";
+                    break;
+                case "0x00000864":
+                    return "duagon Germany GmbH";
+                    break;
+                case "0x00000865":
+                    return "Thermo Fisher Scientific Oy";
+                    break;
+                case "0x00000866":
+                    return "Pyramid Technical Consultants";
+                    break;
+                case "0x00000867":
+                    return "Verity Instruments, Inc.";
+                    break;
+                case "0x00000868":
+                    return "KAI PLUS TECHNOLOGY CO., LTD.";
+                    break;
+                case "0x00000869":
+                    return "Texas A&M University at Qatar, Electrical & Computer Engineering";
+                    break;
+                case "0x0000086A":
+                    return "FPT Motorenforschung AG";
+                    break;
+                case "0x0000086B":
+                    return "Industries Machinex Inc.";
+                    break;
+                case "0x0000086C":
+                    return "Shanghai Rising Digital Co.,Ltd.";
+                    break;
+                case "0x0000086D":
+                    return "SICK OPTEX CO., LTD.";
+                    break;
+                case "0x0000086E":
+                    return "Laserline GmbH";
+                    break;
+                case "0x0000086F":
+                    return "Xpress Precision Engineering B.V.";
+                    break;
+
+                case "0x00000870":
+                    return "ELECTRA S.p.A.";
+                    break;
+                case "0x00000871":
+                    return "Magnescale Co., Ltd.";
+                    break;
+                case "0x00000872":
+                    return "Hitachi Kokusai Electric Inc.";
+                    break;
+                case "0x00000873":
+                    return "Hangzhou Jingwei Automation Co., Ltd.";
+                    break;
+                case "0x00000874":
+                    return "Shanghai LYNUC CNC Technology Co., Ltd.";
+                    break;
+                case "0x00000875":
+                    return "ATLAS ELEKTRONIK GmbH";
+                    break;
+                case "0x00000876":
+                    return "EDAC Electronics Technology (Hangzhou) Co., Ltd.";
+                    break;
+                case "0x00000877":
+                    return "MYCOM, INC.";
+                    break;
+                case "0x00000878":
+                    return "ElectroCraft, Inc.";
+                    break;
+                case "0x00000879":
+                    return "Foxconn Technology Group";
+                    break;
+                case "0x0000087A":
+                    return "Qinhuangdao Boostsolar Photovoltatic Equipment Co.,Ltd.";
+                    break;
+                case "0x0000087B":
+                    return "Chinese Academy of Sciences, Shenyang Institute of Automation (SIA)";
+                    break;
+                case "0x0000087C":
+                    return "Deere & Company";
+                    break;
+                case "0x0000087D":
+                    return "Leibniz Universität Hannover, Institut für Mechatronische Systeme (IMES)";
+                    break;
+                case "0x0000087F":
+                    return "ELTRO Gesellschaft für Elektrotechnik mbH";
+                    break;
+
+                case "0x00000880":
+                    return "UK Grid Solutions Limited";
+                    break;
+                case "0x00000881":
+                    return "Control Gaging, Inc.";
+                    break;
+                case "0x00000882":
+                    return "Trilix Engineering AG";
+                    break;
+                case "0x00000883":
+                    return "HFE professionelle Studiotechnik GmbH";
+                    break;
+                case "0x00000884":
+                    return "HMT Co., Ltd.";
+                    break;
+                case "0x00000885":
+                    return "SCHNIER Elektrostatik GmbH";
+                    break;
+                case "0x00000886":
+                    return "Wuhan HuaGong Laser Engineering Co.,Ltd.";
+                    break;
+                case "0x00000888":
+                    return "Zhejiang Keqiang Intelligent Control System Co., Ltd.";
+                    break;
+                case "0x00000889":
+                    return "Impedans Ltd.";
+                    break;
+                case "0x0000088A":
+                    return "Chinese Academy of Sciences, Institute of Automation";
+                    break;
+                case "0x0000088B":
+                    return "GCCAlliance Inc.";
+                    break;
+                case "0x0000088C":
+                    return "Interface Corporation";
+                    break;
+                case "0x0000088D":
+                    return "NEC Platforms, Inc.";
+                    break;
+                case "0x0000088E":
+                    return "Shenyang Piotech Co., Ltd.";
+                    break;
+                case "0x0000088F":
+                    return "TQ-Systems GmbH";
+                    break;
+
+                case "0x00000890":
+                    return "Shanghai Panelmate Electronics Co., Ltd.";
+                    break;
+                case "0x00000891":
+                    return "Haute Ecole Arc Ingénierie";
+                    break;
+                case "0x00000892":
+                    return "Korea Institute of Industrial Technology - KITECH";
+                    break;
+                case "0x00000893":
+                    return "CETA Testsysteme GmbH";
+                    break;
+                case "0x00000895":
+                    return "STEP Corporation";
+                    break;
+                case "0x00000896":
+                    return "Dalian Guangyang Science & Technology Group Co., Ltd.";
+                    break;
+                case "0x00000897":
+                    return "Hermes Microvision, Inc.";
+                    break;
+                case "0x00000898":
+                    return "Kawasaki Heavy Industries, Ltd., Robot Division";
+                    break;
+                case "0x00000899":
+                    return "ELCO Industry Automation AG";
+                    break;
+                case "0x0000089A":
+                    return "Neuromeka";
+                    break;
+                case "0x0000089D":
+                    return "SEMES Co., Ltd.";
+                    break;
+                case "0x0000089E":
+                    return "FEV SA";
+                    break;
+                case "0x0000089F":
+                    return "Plasmart Inc.";
+                    break;
+
+                case "0x000008A0":
+                    return "DRESCHER Industrieelektronik GmbH";
+                    break;
+                case "0x000008A1":
+                    return "MK · SYSTEM CO.,LTD";
+                    break;
+                case "0x000008A2":
+                    return "bebro electronic GmbH";
+                    break;
+                case "0x000008A3":
+                    return "MC-monitoring SA";
+                    break;
+                case "0x000008A4":
+                    return "Variable Message Signs";
+                    break;
+                case "0x000008A5":
+                    return "Dukane Corporation - Intelligent Assembly Solutions";
+                    break;
+                case "0x000008A6":
+                    return "Mecatronix GmbH";
+                    break;
+                case "0x000008A7":
+                    return "Prima Power Laserdyne LLC";
+                    break;
+                case "0x000008A8":
+                    return "ISOCOMP srl";
+                    break;
+                case "0x000008A9":
+                    return "Shinko Shoji Co.,Ltd.";
+                    break;
+                case "0x000008AA":
+                    return "ASEC International Corporation";
+                    break;
+                case "0x000008AB":
+                    return "RTC Electronics Ltd.";
+                    break;
+                case "0x000008AC":
+                    return "Entegris, Inc.";
+                    break;
+                case "0x000008AD":
+                    return "ASEM S.r.l.";
+                    break;
+                case "0x000008AE":
+                    return "Beijing Agie Charmilles Industrial Electronics Co., Ltd.";
+                    break;
+                case "0x000008AF":
+                    return "Zhengzhou Changhe Electronic Engineering Co., Ltd.";
+                    break;
+
+                case "0x000008B0":
+                    return "Leister Technologies AG";
+                    break;
+                case "0x000008B2":
+                    return "SAGINOMIYA SEISAKUSHO, INC.";
+                    break;
+                case "0x000008B3":
+                    return "LNC Technology Co., Ltd.";
+                    break;
+                case "0x000008B4":
+                    return "Guangdong ELESY Electric CO., LTD.";
+                    break;
+                case "0x000008B5":
+                    return "Newtouch Electronics (Shanghai) Co.,Ltd.";
+                    break;
+                case "0x000008B6":
+                    return "TOYO AUTOMATION CO., LTD.";
+                    break;
+                case "0x000008B7":
+                    return "Université de Bretagne-Sud";
+                    break;
+                case "0x000008B8":
+                    return "Shenzhen Zhiyou Battery Integration Technology Co., Ltd.";
+                    break;
+                case "0x000008B9":
+                    return "Malema Engineering Corporation";
+                    break;
+                case "0x000008BB":
+                    return "Ricoh Industrial Solutions Inc.";
+                    break;
+                case "0x000008BC":
+                    return "Tri-City X-ray, LLC";
+                    break;
+                case "0x000008BD":
+                    return "Rutronik Elektronische Bauelemente GmbH";
+                    break;
+                case "0x000008BE":
+                    return "SANEI HYTECHS VIETNAM Co.,Ltd.";
+                    break;
+                case "0x000008BF":
+                    return "Delixi (Hangzhou) Inverter Co.,LTD.";
+                    break;
+
+                case "0x000008C0":
+                    return "RITZ Co., Ltd.";
+                    break;
+                case "0x000008C1":
+                    return "Ricoh Company, Ltd.";
+                    break;
+                case "0x000008C2":
+                    return "TAE Antriebstechnik GmbH";
+                    break;
+                case "0x000008C3":
+                    return "Fontys University of Applied Sciences";
+                    break;
+                case "0x000008C4":
+                    return "Hangzhou Riding Control Technology Co., Ltd.";
+                    break;
+                case "0x000008C5":
+                    return "Atlas Copco Industrial Technique AB";
+                    break;
+                case "0x000008C6":
+                    return "Mindtribe Product Engineering, Inc.";
+                    break;
+                case "0x000008C7":
+                    return "Centre de recherche industrielle du Québec (CRIQ)";
+                    break;
+                case "0x000008C8":
+                    return "Elster GmbH";
+                    break;
+                case "0x000008C9":
+                    return "Panasonic Industrial Devices Systems and Technology Co., Ltd.";
+                    break;
+                case "0x000008CA":
+                    return "STV Electronic GmbH & Co. KG";
+                    break;
+                case "0x000008CB":
+                    return "Hentschel System GmbH";
+                    break;
+                case "0x000008CC":
+                    return "Gree Electric Appliances, Inc. of Zhuhai";
+                    break;
+                case "0x000008CD":
+                    return "Futurestar Corp.";
+                    break;
+                case "0x000008CE":
+                    return "PARA-ENT CO.,LTD.";
+                    break;
+                case "0x000008CF":
+                    return "SIASUN CO., LTD.";
+                    break;
+
+                case "0x000008D0":
+                    return "WFE Technology Corporation";
+                    break;
+                case "0x000008D1":
+                    return "driveXpert GmbH";
+                    break;
+                case "0x000008D2":
+                    return "Universität zu Lübeck, Institut für Medizinische Elektrotechnik";
+                    break;
+                case "0x000008D4":
+                    return "Branson Ultrasonics Corporation";
+                    break;
+                case "0x000008D5":
+                    return "Rolls-Royce@NTU Corporate Lab";
+                    break;
+                case "0x000008D6":
+                    return "Guilin Stars Science and Technology CO., LTD.";
+                    break;
+                case "0x000008D7":
+                    return "Ace Designers Limited";
+                    break;
+                case "0x000008D8":
+                    return "Biochar Now LLC";
+                    break;
+                case "0x000008D9":
+                    return "Varian Medical Systems Inc.";
+                    break;
+                case "0x000008DA":
+                    return "DAMEDICS GmbH";
+                    break;
+                case "0x000008DB":
+                    return "EnergopromAvtomatizaciya LLC";
+                    break;
+                case "0x000008DC":
+                    return "MicroSure B.V.";
+                    break;
+                case "0x000008DE":
+                    return "Finisar SHG Inc.";
+                    break;
+                case "0x000008DF":
+                    return "PLANET Technology Corporation";
+                    break;
+
+                case "0x000008E0":
+                    return "PEES Components GmbH";
+                    break;
+                case "0x000008E1":
+                    return "Belden Deutschland GmbH";
+                    break;
+                case "0x000008E2":
+                    return "NACHI-FUJIKOSHI CORP.";
+                    break;
+                case "0x000008E3":
+                    return "K. A. Schmersal GmbH & Co. KG";
+                    break;
+                case "0x000008E4":
+                    return "Radic Technologies, Inc.";
+                    break;
+                case "0x000008E5":
+                    return "Weightpack S.r.l.";
+                    break;
+                case "0x000008E6":
+                    return "BS2 MULTIDATA GmbH";
+                    break;
+                case "0x000008E7":
+                    return "Sumitomo Heavy Industries, Ltd.";
+                    break;
+                case "0x000008E8":
+                    return "Micro-Controle Spectra-Physics S.A.";
+                    break;
+                case "0x000008E9":
+                    return "Apptronik Inc.";
+                    break;
+                case "0x000008EA":
+                    return "Dr.-Ing. S. Haußmann Industrieelektronik";
+                    break;
+                case "0x000008EB":
+                    return "Great River Electronics, Inc.";
+                    break;
+                case "0x000008EC":
+                    return "Eltra S.p.a. Unipersonale";
+                    break;
+                case "0x000008ED":
+                    return "SINOBONDER Co., Ltd.";
+                    break;
+                case "0x000008EE":
+                    return "ROBOTOUS Co., Ltd.";
+                    break;
+                case "0x000008EF":
+                    return "Tianjin Sentinel Electronics Co.,Ltd.";
+                    break;
+
+                case "0x000008F0":
+                    return "IZOVAC LTD";
+                    break;
+                case "0x000008F1":
+                    return "Technical University of Kosice, Faculty of Electrical Engineering and Informatics";
+                    break;
+                case "0x000008F2":
+                    return "SANMEI ELECTRONICS Co., Ltd.";
+                    break;
+                case "0x000008F3":
+                    return "EA Elektro-Automatik GmbH & Co. KG";
+                    break;
+                case "0x000008F4":
+                    return "Dynamic Motion Italia S.r.l.";
+                    break;
+                case "0x000008F5":
+                    return "OOO PKF «Ersted»";
+                    break;
+                case "0x000008F6":
+                    return "SHANGHAI MAIHONG ELECTRONIC TECHNOLOGY CO.LTD";
+                    break;
+                case "0x000008F7":
+                    return "China Electronics Harvest Technology Co.,Ltd.";
+                    break;
+                case "0x000008F8":
+                    return "Advanced Scientific Technology & Management Research Institute of Kyoto (ASTEM RI)";
+                    break;
+                case "0x000008F9":
+                    return "Mini Motor srl";
+                    break;
+                case "0x000008FA":
+                    return "BitifEye Digital Test Solutions GmbH";
+                    break;
+                case "0x000008FB":
+                    return "IBIS Computer Pty Ltd";
+                    break;
+                case "0x000008FC":
+                    return "Hanbit Micro Inc.";
+                    break;
+                case "0x000008FD":
+                    return "TATEYAMA KAGAKU MODULE TECHNOLOGY CO., LTD.";
+                    break;
+                case "0x000008FF":
+                    return "Aone Co.,Ltd";
+                    break;
+
+                case "0x00000900":
+                    return "Shanghai Capital Numerical Control Co., Ltd.";
+                    break;
+                case "0x00000901":
+                    return "Bose Corporation";
+                    break;
+                case "0x00000902":
+                    return "Flow Devices and Systems, Inc.";
+                    break;
+                case "0x00000904":
+                    return "Anritsu Engineering Co., Ltd.";
+                    break;
+                case "0x00000905":
+                    return "NUTPOR BREADS, UNIPESSOAL LDA.";
+                    break;
+                case "0x00000906":
+                    return "Emerson SolaHD (a division of Appleton GRP LLC dba Appleton Group)";
+                    break;
+                case "0x00000907":
+                    return "modusoft GmbH";
+                    break;
+                case "0x00000908":
+                    return "Sichuan MK Servo Technology";
+                    break;
+                case "0x00000909":
+                    return "Intron Technology (China) Co. Ltd.";
+                    break;
+                case "0x0000090A":
+                    return "Jimei University, College of Information Engineering";
+                    break;
+                case "0x0000090C":
+                    return "CORE CORPORATION";
+                    break;
+                case "0x0000090D":
+                    return "H.I.B Systemtechnik GmbH";
+                    break;
+                case "0x0000090E":
+                    return "Nova Fabrica Ltd.";
+                    break;
+                case "0x0000090F":
+                    return "ROTA TEKNIK MAKINA SAN. ve TIC. A.S.";
+                    break;
+
+                case "0x00000910":
+                    return "Bird Technologies Group, Inc.";
+                    break;
+                case "0x00000911":
+                    return "SHENZHEN VMMORE CTRL&TECH CO., LTD";
+                    break;
+                case "0x00000912":
+                    return "Leibniz Universität Hannover, Fakultät für Elektrotechnik und Informatik";
+                    break;
+                case "0x00000913":
+                    return "Motion Control Products Ltd.";
+                    break;
+                case "0x00000914":
+                    return "Saft S.A.S.";
+                    break;
+                case "0x00000915":
+                    return "Star Denshi Co.,Ltd.";
+                    break;
+                case "0x00000916":
+                    return "MARPOSS S.p.A.";
+                    break;
+                case "0x00000917":
+                    return "China Orient Institute of Noise & Vibration";
+                    break;
+                case "0x00000918":
+                    return "Cosys Inc.";
+                    break;
+                case "0x00000919":
+                    return "Shenzhen Vector Automation Technology Co., Lt";
+                    break;
+                case "0x0000091B":
+                    return "INTRAVIS GmbH";
+                    break;
+                case "0x0000091C":
+                    return "Drobak Unlimited Co.";
+                    break;
+                case "0x0000091D":
+                    return "Technische Hochschule Nürnberg Georg Simon Ohm";
+                    break;
+                case "0x0000091E":
+                    return "Zenitron Corporation";
+                    break;
+                case "0x0000091F":
+                    return "Wuhan Endeavor Intelligent Machine Co., Ltd.";
+                    break;
+
+                case "0x00000920":
+                    return "LEADJECK AUTOMATION CO., LTD.";
+                    break;
+                case "0x00000922":
+                    return "Fujian Raynen Technology Co., Ltd.";
+                    break;
+                case "0x00000923":
+                    return "Demcon Advanced Mechatronics B.V.";
+                    break;
+                case "0x00000924":
+                    return "serva transport systems GmbH";
+                    break;
+                case "0x00000925":
+                    return "Shenyang Neusoft Medical Systems Co., Ltd.";
+                    break;
+                case "0x00000926":
+                    return "Ruhr-Universität Bochum";
+                    break;
+                case "0x00000927":
+                    return "Banner Engineering Corporation";
+                    break;
+                case "0x00000929":
+                    return "Guangdong Topstar Technology Co., Ltd.";
+                    break;
+                case "0x0000092A":
+                    return "Evinsys LLC";
+                    break;
+                case "0x0000092B":
+                    return "Shenzhen Huacheng Industrial Control Co., Ltd.";
+                    break;
+                case "0x0000092C":
+                    return "Mondragon Unibertsitatea";
+                    break;
+                case "0x0000092D":
+                    return "Katholieke Hogeschool Vives (VIVES)";
+                    break;
+                case "0x0000092E":
+                    return "Ekso Bionics Inc.";
+                    break;
+                case "0x0000092F":
+                    return "Kaufman & Robinson Inc.";
+                    break;
+
+                case "0x00000930":
+                    return "KSM-ELECTRONIC GmbH";
+                    break;
+                case "0x00000932":
+                    return "Technical & Try Co.,Ltd";
+                    break;
+                case "0x00000935":
+                    return "MAXCOM Co.,Ltd.";
+                    break;
+                case "0x00000936":
+                    return "National NC System Engineering Research Center";
+                    break;
+                case "0x00000937":
+                    return "Ryoei Technica Corporation";
+                    break;
+                case "0x00000938":
+                    return "Schaeffler Technologies AG & Co. KG";
+                    break;
+                case "0x00000939":
+                    return "NTS-Group";
+                    break;
+                case "0x0000093A":
+                    return "Alicat Scientific, Inc.";
+                    break;
+                case "0x0000093B":
+                    return "Tekt Industries Pty. Ltd.";
+                    break;
+                case "0x0000093C":
+                    return "Xi’an Aerospace Automation Co., Ltd";
+                    break;
+                case "0x0000093D":
+                    return "Gal";
+                    break;
+                case "0x0000093E":
+                    return "TOA Electronics Inc. Hamatou Company";
+                    break;
+
+                case "0x00000940":
+                    return "Friedrich-Alexander-Universität Erlangen-Nürnberg, Technische Fakultät";
+                    break;
+                case "0x00000941":
+                    return "Sirius Electronic Systems s.r.l.";
+                    break;
+                case "0x00000942":
+                    return "Chengdu InPlus Technology Co., Ltd.";
+                    break;
+                case "0x00000943":
+                    return "MicroStep spol s.r.o.";
+                    break;
+                case "0x00000944":
+                    return "Murata Machinery, Ltd.";
+                    break;
+                case "0x00000946":
+                    return "Cabinplant A/S";
+                    break;
+                case "0x00000948":
+                    return "FRANKA EMIKA GmbH";
+                    break;
+                case "0x0000094A":
+                    return "Smart Move GmbH";
+                    break;
+                case "0x0000094B":
+                    return "Ampere Inc.";
+                    break;
+                case "0x0000094C":
+                    return "Stichting Moving Bird (dba Project March)";
+                    break;
+                case "0x0000094D":
+                    return "Imkon Endustriyel Otomasyon Sistemleri";
+                    break;
+                case "0x0000094E":
+                    return "Tangshan Baichuan Intelligent Machine Co Ltd.";
+                    break;
+                case "0x0000094F":
+                    return "Christian-Albrechts-Universität zu Kiel";
+                    break;
+
+                case "0x00000950":
+                    return "University of Lorraine, IUT Nancy-Brabois";
+                    break;
+                case "0x00000951":
+                    return "Fraunhofer-Institut für Optronik, Systemtechnik und Bildauswertung IOSB";
+                    break;
+                case "0x00000952":
+                    return "IP-Automatika Kft.";
+                    break;
+                case "0x00000953":
+                    return "EMKO Elektronik San. ve Tic. A.S.";
+                    break;
+                case "0x00000954":
+                    return "FINE Inc.";
+                    break;
+                case "0x00000955":
+                    return "Science and Technology Facilities Council, UK Astronomy Technology Centre (UK ATC)";
+                    break;
+                case "0x00000956":
+                    return "ITmems s.r.l.";
+                    break;
+                case "0x00000957":
+                    return "LumaSense Technologies, Inc.";
+                    break;
+                case "0x00000958":
+                    return "ACUTRONIC Switzerland Ltd.";
+                    break;
+                case "0x00000959":
+                    return "DieBie EngineeringTSC";
+                    break;
+                case "0x0000095A":
+                    return "Procept Pty Ltd";
+                    break;
+                case "0x0000095B":
+                    return "New Power Plasma Co., Ltd";
+                    break;
+                case "0x0000095C":
+                    return "Advanced Mining Technology Center (AMTC)";
+                    break;
+                case "0x0000095D":
+                    return "ASM Technology Singapore Pte Ltd.";
+                    break;
+                case "0x0000095E":
+                    return "Weigl GmbH & Co KG";
+                    break;
+                case "0x0000095F":
+                    return "Wagner International AG";
+                    break;
+
+                case "0x00000960":
+                    return "Liebherr-Components Biberach GmbH";
+                    break;
+                case "0x00000961":
+                    return "Mechatronics Labs S.r.l.";
+                    break;
+                case "0x00000962":
+                    return "JIANGSU TORSUNG M&E CO.,LTD";
+                    break;
+                case "0x00000963":
+                    return "Technické služby BAHOZA s.r.o.";
+                    break;
+                case "0x00000964":
+                    return "Siec Badawcza Lukasiewicz - Instytut Tele- i Radiotechniczny";
+                    break;
+                case "0x00000965":
+                    return "Beijing Institute of Technology (BIT), School of Mechatronical Engineering";
+                    break;
+                case "0x00000966":
+                    return "ElastiSense ApS";
+                    break;
+                case "0x00000967":
+                    return "North China University of Technology, Beijing Key Laboratory of Fieldbus and Automation";
+                    break;
+                case "0x00000968":
+                    return "Nidec Corporation";
+                    break;
+                case "0x00000969":
+                    return "Hangzhou Zhishan Intelligent Control Technology Co. Ltd.";
+                    break;
+                case "0x0000096A":
+                    return "Interface Devices Ltd.";
+                    break;
+                case "0x0000096B":
+                    return "Nikon Corporation";
+                    break;
+                case "0x0000096C":
+                    return "FUJITSU COMPONENT LIMITED";
+                    break;
+                case "0x0000096D":
+                    return "Jiaxing Dealour Electric Technology Co.,Ltd.";
+                    break;
+                case "0x0000096E":
+                    return "ETH Zürich, Department of Mechanical and Process Engineering (D-MAVT), Institute of Robotics and Intelligent Systems (IRIS), Robotic Systems Lab (RSL)";
+                    break;
+                case "0x0000096F":
+                    return "SURUGA Production Platform Co., Ltd.";
+                    break;
+
+                case "0x00000970":
+                    return "Advanio Technology Co., Ltd.";
+                    break;
+                case "0x00000971":
+                    return "EMBL Hamburg";
+                    break;
+                case "0x00000972":
+                    return "Erle Robotics S.L.";
+                    break;
+                case "0x00000973":
+                    return "SURUGA SEIKI CO., LTD.";
+                    break;
+                case "0x00000974":
+                    return "EVA Robotics Pty Ltd";
+                    break;
+                case "0x00000975":
+                    return "Beijing Etechwin Electric Co., Ltd.";
+                    break;
+                case "0x00000976":
+                    return "KE Elektronik GmbH";
+                    break;
+                case "0x00000977":
+                    return "ACCREA Bartlomiej Stanczyk";
+                    break;
+                case "0x00000978":
+                    return "SCHUNK GmbH & Co. KG";
+                    break;
+                case "0x00000979":
+                    return "Sciaky, Inc.";
+                    break;
+                case "0x0000097A":
+                    return "Tokyo Robotics Inc.";
+                    break;
+                case "0x0000097C":
+                    return "embeddeers GmbH";
+                    break;
+                case "0x0000097D":
+                    return "GAMACO s.r.l.";
+                    break;
+                case "0x0000097E":
+                    return "NPP VIUS, LLC";
+                    break;
+                case "0x0000097F":
+                    return "ISG Industrielle Steuerungstechnik GmbH";
+                    break;
+
+                case "0x00000980":
+                    return "FUJI ELECTRONICS CO.,LTD.";
+                    break;
+                case "0x00000981":
+                    return "SHENZHEN MINGSU AUTOMATION EQUIPMENT CO., LTD";
+                    break;
+                case "0x00000982":
+                    return "Jiangsu Ysphotech Technology Co.,LTD";
+                    break;
+                case "0x00000983":
+                    return "Beijing JCZ Technology Co., Ltd.";
+                    break;
+                case "0x00000984":
+                    return "DMG MORI CO., LTD.";
+                    break;
+                case "0x00000985":
+                    return "TELSONIC AG";
+                    break;
+                case "0x00000986":
+                    return "Tolomatic Inc.";
+                    break;
+                case "0x00000987":
+                    return "NCWorks";
+                    break;
+                case "0x00000988":
+                    return "Van Mierlo Ingenieursbureau BV";
+                    break;
+                case "0x00000989":
+                    return "Control Technology Corporation";
+                    break;
+                case "0x0000098A":
+                    return "TEAC Corporation";
+                    break;
+                case "0x0000098D":
+                    return "Crossworks Inc.";
+                    break;
+                case "0x0000098E":
+                    return "Agility Robotics";
+                    break;
+                case "0x0000098F":
+                    return "ShenZhen Double CNC Tech Co., Ltd.";
+                    break;
+
+                case "0x00000991":
+                    return "TSC Inc.";
+                    break;
+                case "0x00000992":
+                    return "TE Connectivity Germany GmbH";
+                    break;
+                case "0x00000993":
+                    return "Galli Brasil Comercio de Aparelhos Eletronicos Ltda.";
+                    break;
+                case "0x00000994":
+                    return "Shenzhen YAKO Automation Technology Co.,Ltd";
+                    break;
+                case "0x00000995":
+                    return "PRETTL Electronics India Pvt. Ltd.";
+                    break;
+                case "0x00000997":
+                    return "Kehua Data Co., Ltd";
+                    break;
+                case "0x00000998":
+                    return "Mayser GmbH & Co. KG";
+                    break;
+                case "0x00000999":
+                    return "HAITIAN Plastics Machinery Group Co., Ltd";
+                    break;
+                case "0x0000099A":
+                    return "Waco Giken Co., Ltd.";
+                    break;
+                case "0x0000099B":
+                    return "Mike & Weingartner GmbH";
+                    break;
+                case "0x0000099C":
+                    return "Ionicon Analytik Gesellschaft m.b.H.";
+                    break;
+                case "0x0000099D":
+                    return "INESC TEC - Instituto de Engenharia de Sistemas e Computadores Tecnologia e Ciência";
+                    break;
+                case "0x0000099E":
+                    return "4automation";
+                    break;
+                case "0x0000099F":
+                    return "Moog India Technology Center Pvt Ltd";
+                    break;
+
+                case "0x000009A0":
+                    return "University of Cape Town, Department of Electrical Engineering";
+                    break;
+                case "0x000009A1":
+                    return "Auris Health, Inc.";
+                    break;
+                case "0x000009A3":
+                    return "Technische Universität Ilmenau, Fakultät für Maschinenbau, Fachgebiet Mechatronik";
+                    break;
+                case "0x000009A4":
+                    return "HIT SPECIAL ROBOT CO.,LTD";
+                    break;
+                case "0x000009A5":
+                    return "SmartDV Technologies India Private Limited";
+                    break;
+                case "0x000009A6":
+                    return "Visitech AS";
+                    break;
+                case "0x000009A7":
+                    return "Solartron Metrology Ltd.";
+                    break;
+                case "0x000009A8":
+                    return "NKSystem K.K.";
+                    break;
+                case "0x000009A9":
+                    return "INTRONIX spol. s.r.o.";
+                    break;
+                case "0x000009AA":
+                    return "NetModule AG";
+                    break;
+                case "0x000009AB":
+                    return "BZ Robot INC.";
+                    break;
+                case "0x000009AC":
+                    return "PUES Corporation";
+                    break;
+                case "0x000009AD":
+                    return "S.H.S. s.r.l.";
+                    break;
+                case "0x000009AE":
+                    return "Manter International B.V.";
+                    break;
+                case "0x000009AF":
+                    return "Delft University of Technology, Faculty of Aerospace Engineering";
+                    break;
+
+                case "0x000009B0":
+                    return "GAMADE s.n.c. di Westfal Michèle & C.";
+                    break;
+                case "0x000009B1":
+                    return "ima-tec GmbH";
+                    break;
+                case "0x000009B2":
+                    return "Evest Corporation";
+                    break;
+                case "0x000009B3":
+                    return "SHINKO TECHNOS CO.,LTD.";
+                    break;
+                case "0x000009B4":
+                    return "Sichuan University, School of Manufacturing Science and Engineering";
+                    break;
+                case "0x000009B5":
+                    return "FLC Zbigniew Huber";
+                    break;
+                case "0x000009B6":
+                    return "Taizhou Topcut-Bullmer Mechanical and Electrical Technology Co., Ltd.";
+                    break;
+                case "0x000009B7":
+                    return "Shiratech Embedded Ltd.";
+                    break;
+                case "0x000009B9":
+                    return "Eastern Logic Inc.";
+                    break;
+                case "0x000009BA":
+                    return "WEBER Schraubautomaten GmbH";
+                    break;
+                case "0x000009BB":
+                    return "Power Solution Network";
+                    break;
+                case "0x000009BC":
+                    return "Advanced Thermal Sciences Corporation";
+                    break;
+                case "0x000009BE":
+                    return "KITZ SCT Corporation";
+                    break;
+                case "0x000009BF":
+                    return "Motorcon Inc.";
+                    break;
+
+                case "0x000009C0":
+                    return "clownfish information technology GmbH";
+                    break;
+                case "0x000009C1":
+                    return "RABE Engineering";
+                    break;
+                case "0x000009C2":
+                    return "Ghost Robotics LLC";
+                    break;
+                case "0x000009C3":
+                    return "Technische Universität Graz";
+                    break;
+                case "0x000009C5":
+                    return "Socionext Inc.";
+                    break;
+                case "0x000009C6":
+                    return "Shenzhen Best Motion Technology Limited";
+                    break;
+                case "0x000009C7":
+                    return "ESCAD Automation GmbH";
+                    break;
+                case "0x000009C8":
+                    return "Université Laval";
+                    break;
+                case "0x000009CA":
+                    return "AKKA GmbH & Co. KGaA";
+                    break;
+                case "0x000009CB":
+                    return "AMS - Gesellschaft für Automatisierungs- und Meß-Systemtechnik GmbH";
+                    break;
+                case "0x000009CC":
+                    return "Techno-Holon Corporation";
+                    break;
+                case "0x000009CD":
+                    return "J. Zimmer Maschinenbau GmbH";
+                    break;
+                case "0x000009CE":
+                    return "e.sigma Technology GmbH";
+                    break;
+                case "0x000009CF":
+                    return "OMRON AUTOMATION SYSTEM (HANGZHOU) CO.,LTD.";
+                    break;
+
+                case "0x000009D0":
+                    return "SOF-TEK Integrators, Inc.";
+                    break;
+                case "0x000009D1":
+                    return "Contrinex SA";
+                    break;
+                case "0x000009D2":
+                    return "SISE SAS";
+                    break;
+                case "0x000009D3":
+                    return "Christ Electronic Systems GmbH";
+                    break;
+                case "0x000009D4":
+                    return "Hosta Motion Control Co., LTD";
+                    break;
+                case "0x000009D5":
+                    return "Spintrol Limited Corp.";
+                    break;
+                case "0x000009D6":
+                    return "T.E.M.A. spa";
+                    break;
+                case "0x000009D7":
+                    return "Ingenieurbüro Für IC-Technologie Franz Sprenger";
+                    break;
+                case "0x000009D8":
+                    return "OPTO4L GmbH";
+                    break;
+                case "0x000009D9":
+                    return "QuEST Global Services Pte. Ltd.";
+                    break;
+                case "0x000009DB":
+                    return "ZIS Industrietechnik GmbH";
+                    break;
+                case "0x000009DC":
+                    return "LOVATO Electric S.p.A";
+                    break;
+                case "0x000009DD":
+                    return "E2M Technologies B.V.";
+                    break;
+                case "0x000009DE":
+                    return "Zefatek Co., Ltd.";
+                    break;
+                case "0x000009DF":
+                    return "Birket Engineering, Inc.";
+                    break;
+
+                case "0x000009E0":
+                    return "JD Co., Ltd.";
+                    break;
+                case "0x000009E1":
+                    return "Institut Clément Ader (ICA)";
+                    break;
+                case "0x000009E2":
+                    return "OKANO CABLE CO., LTD";
+                    break;
+                case "0x000009E3":
+                    return "Shenzhen OUR New Medical Technologies Development Co., Ltd.";
+                    break;
+                case "0x000009E4":
+                    return "J. Schmalz GmbH";
+                    break;
+                case "0x000009E5":
+                    return "Fives OTO S.p.a.";
+                    break;
+                case "0x000009E6":
+                    return "INNOCONTACT CO.,LTD.";
+                    break;
+                case "0x000009E7":
+                    return "silex technology, Inc.";
+                    break;
+                case "0x000009E8":
+                    return "ShinMaywa Industries, LTD.";
+                    break;
+                case "0x000009E9":
+                    return "ib prozessleittechnik GmbH & Co. KG";
+                    break;
+                case "0x000009EA":
+                    return "EJTECH Inc.";
+                    break;
+                case "0x000009EB":
+                    return "Shenzhen Hymson Laser Technologies Co.,Ltd.";
+                    break;
+                case "0x000009EC":
+                    return "FlashCut CNC";
+                    break;
+                case "0x000009ED":
+                    return "CTB Co., Ltd.";
+                    break;
+                case "0x000009EE":
+                    return "Alexander Binzel Schweisstechnik GmbH & Co. KG";
+                    break;
+                case "0x000009EF":
+                    return "SAWAMURA DENKI IND.CO.,LTD.";
+                    break;
+
+                case "0x000009F0":
+                    return "Robowell Korea Co.";
+                    break;
+                case "0x000009F1":
+                    return "MUSE Robotics Inc.";
+                    break;
+                case "0x000009F2":
+                    return "Shenzhen WELLAUTO Technology CO., LTD.";
+                    break;
+                case "0x000009F3":
+                    return "Primagest Inc.";
+                    break;
+                case "0x000009F4":
+                    return "Aignep S.p.A.";
+                    break;
+                case "0x000009F5":
+                    return "Pusan National University";
+                    break;
+                case "0x000009F6":
+                    return "KUMOH MACH. & ELEC. CO., LTD.";
+                    break;
+                case "0x000009F7":
+                    return "Chinese Academy of Sciences, Institute of Modern Physics (IMP)";
+                    break;
+                case "0x000009F8":
+                    return "Houston Mechatronics, Inc.";
+                    break;
+                case "0x000009F9":
+                    return "IAR Systems AB";
+                    break;
+                case "0x000009FA":
+                    return "KOSHIDA KOREA CORPORATION";
+                    break;
+                case "0x000009FB":
+                    return "Advanced Micro-Fabrication Equipment Inc.";
+                    break;
+                case "0x000009FC":
+                    return "STEPHANIX S.A.";
+                    break;
+                case "0x000009FD":
+                    return "CPI Technologies, Inc";
+                    break;
+                case "0x000009FE":
+                    return "Harris Corporation";
+                    break;
+                case "0x000009FF":
+                    return "Suzhou AGIOE Equipment Co. Ltd.";
+                    break;
+
+                case "0x00000A00":
+                    return "OPTOELECTRONICS CO., LTD.";
+                    break;
+                case "0x00000A01":
+                    return "Hitachi Energy Switzerland Ltd., Semiconductors";
+                    break;
+                case "0x00000A02":
+                    return "FMS Force Measuring Systems AG";
+                    break;
+                case "0x00000A03":
+                    return "Kulicke & Soffa Pte Ltd";
+                    break;
+                case "0x00000A04":
+                    return "HEXMOTO Controls Pvt. Ltd";
+                    break;
+                case "0x00000A05":
+                    return "Esautomotion s.r.l";
+                    break;
+                case "0x00000A06":
+                    return "Canon ANELVA Corporation";
+                    break;
+                case "0x00000A07":
+                    return "Glowbuzzer Ltd";
+                    break;
+                case "0x00000A08":
+                    return "Technische Universität München, Fakultät für Maschinenwesen";
+                    break;
+                case "0x00000A09":
+                    return "Beijing iTegva Technology Co., Ltd.";
+                    break;
+                case "0x00000A0A":
+                    return "Zhejiang Wolong Servo Technology Co., Ltd.";
+                    break;
+                case "0x00000A0B":
+                    return "SINOMACH Intelligence Technology Research Institute Co., Ltd.";
+                    break;
+                case "0x00000A0C":
+                    return "Pusan National University, Department of Electronics Engineering, Embedded Control System Lab.";
+                    break;
+                case "0x00000A0D":
+                    return "CRRC ZHUZHOU INSTITUTE CO.,LTD.";
+                    break;
+                case "0x00000A0E":
+                    return "FATEK Automation Corporation";
+                    break;
+                case "0x00000A0F":
+                    return "Racelogic Limited";
+                    break;
+
+                case "0x00000A10":
+                    return "GRITEC AG";
+                    break;
+                case "0x00000A11":
+                    return "Synhelion Germany GmbH";
+                    break;
+                case "0x00000A12":
+                    return "National Technical University of Athens, School of Mechanical Engineering";
+                    break;
+                case "0x00000A13":
+                    return "Changzhou GS Technology Co., Ltd.";
+                    break;
+                case "0x00000A14":
+                    return "isel facility GmbH";
+                    break;
+                case "0x00000A15":
+                    return "inotech Meter Calibration Systems GmbH";
+                    break;
+                case "0x00000A16":
+                    return "HYUNDAI WIA CORP.";
+                    break;
+                case "0x00000A17":
+                    return "DARPAMotion Ltd.";
+                    break;
+                case "0x00000A18":
+                    return "MICRO TREND AUTOMATION CO.,LTD";
+                    break;
+                case "0x00000A19":
+                    return "Suzhou Xiling Control Technology Co., Ltd.";
+                    break;
+                case "0x00000A1A":
+                    return "UCAM Pvt. Ltd.";
+                    break;
+                case "0x00000A1B":
+                    return "Thomas More Mechelen-Antwerpen vzw, Campus De Nayer, Department Technology & IT, EmSys Research Group";
+                    break;
+                case "0x00000A1C":
+                    return "Planar Motor Incorporated";
+                    break;
+                case "0x00000A1D":
+                    return "DYNAX Corporation";
+                    break;
+                case "0x00000A1E":
+                    return "Mitsubishi Electric Corporation";
+                    break;
+                case "0x00000A1F":
+                    return "Neways Technologies B.V.";
+                    break;
+
+                case "0x00000A20":
+                    return "By Three projects Co.,Ltd.";
+                    break;
+                case "0x00000A21":
+                    return "FMI Industrial Automation B.V.";
+                    break;
+                case "0x00000A22":
+                    return "elecgator bvba";
+                    break;
+                case "0x00000A23":
+                    return "EPA GmbH";
+                    break;
+                case "0x00000A24":
+                    return "TESEC Corporation";
+                    break;
+                case "0x00000A25":
+                    return "FUJITSU GENERAL ELECTRONICS LIMITED";
+                    break;
+                case "0x00000A26":
+                    return "HOERBIGER Automatisierungstechnik GmbH";
+                    break;
+                case "0x00000A27":
+                    return "RRRobotica Srl";
+                    break;
+                case "0x00000A29":
+                    return "Servo Industrial Systems Co., Ltd.";
+                    break;
+                case "0x00000A2A":
+                    return "Guangzhou Hongsen Servo Motor Co., Ltd.";
+                    break;
+                case "0x00000A2C":
+                    return "U-System Co. Ltd.";
+                    break;
+                case "0x00000A2D":
+                    return "Sarissa GmbH";
+                    break;
+                case "0x00000A2E":
+                    return "Zitte Corporation";
+                    break;
+                case "0x00000A2F":
+                    return "EOPTIS S.r.l.";
+                    break;
+
+                case "0x00000A30":
+                    return "Aerotech, Inc.";
+                    break;
+                case "0x00000A31":
+                    return "Cognizant Technology Solutions India Private Limited";
+                    break;
+                case "0x00000A32":
+                    return "eSSys Co., Ltd.";
+                    break;
+                case "0x00000A33":
+                    return "Alltec GmbH";
+                    break;
+                case "0x00000A34":
+                    return "TDG Co.,Ltd.";
+                    break;
+                case "0x00000A35":
+                    return "STAR SEIKI CO., LTD.";
+                    break;
+                case "0x00000A36":
+                    return "SYNTEC TECHNOLOGY CO., LTD.";
+                    break;
+                case "0x00000A38":
+                    return "COWIN.FA CO., Ltd.";
+                    break;
+                case "0x00000A39":
+                    return "Rokae (Beijing) Robotics Technology Co.,Ltd.";
+                    break;
+                case "0x00000A3A":
+                    return "JASA Packaging Systems BV";
+                    break;
+                case "0x00000A3B":
+                    return "Tecnos G.A. Srl";
+                    break;
+                case "0x00000A3C":
+                    return "NIPPON SYSTEMWARE CO.,LTD.";
+                    break;
+                case "0x00000A3D":
+                    return "SPG Co., Ltd.";
+                    break;
+                case "0x00000A3E":
+                    return "ISIT";
+                    break;
+                case "0x00000A3F":
+                    return "Mirae Corporation";
+                    break;
+
+                case "0x00000A40":
+                    return "STANLEY Engineered Fastening";
+                    break;
+                case "0x00000A41":
+                    return "Beijing Does Robotics Co., Ltd.";
+                    break;
+                case "0x00000A42":
+                    return "Amazipoint Technology Ltd.";
+                    break;
+                case "0x00000A43":
+                    return "Arbite Robotics";
+                    break;
+                case "0x00000A44":
+                    return "Lodz University of Technology, Faculty of Electrical, Electronic, Computer and Control Engineering";
+                    break;
+                case "0x00000A45":
+                    return "Libertron Co., Ltd.";
+                    break;
+                case "0x00000A46":
+                    return "Performance Controls, Inc.";
+                    break;
+                case "0x00000A47":
+                    return "Kwangwoon University, College of Electronics and Information Engineering, School of Robotics";
+                    break;
+                case "0x00000A48":
+                    return "SCANLAB GmbH";
+                    break;
+                case "0x00000A49":
+                    return "Global Electronics Corporation";
+                    break;
+                case "0x00000A4A":
+                    return "Embaix Consulting Dipl.-Ing Cord Elias";
+                    break;
+                case "0x00000A4B":
+                    return "Wuxi Chihai Intelligent Technology Co., Ltd.";
+                    break;
+                case "0x00000A4C":
+                    return "PAC TECH CO., LTD.";
+                    break;
+                case "0x00000A4D":
+                    return "Tietech Co., Ltd.";
+                    break;
+                case "0x00000A4E":
+                    return "Hauch & Bach ApS";
+                    break;
+                case "0x00000A4F":
+                    return "OOO Vnedrencheskaya Firma Elna";
+                    break;
+
+                case "0x00000A50":
+                    return "Shenzhen RuiDa Technology Co., Ltd.";
+                    break;
+                case "0x00000A51":
+                    return "PTM mechatronics GmbH";
+                    break;
+                case "0x00000A52":
+                    return "Schildknecht AG";
+                    break;
+                case "0x00000A53":
+                    return "Shanghai Weihong Electronic Technology Co.,Ltd.";
+                    break;
+                case "0x00000A54":
+                    return "OOO Compel";
+                    break;
+                case "0x00000A55":
+                    return "Zixel sas di Beschin Augusto & C.";
+                    break;
+                case "0x00000A57":
+                    return "Bender Robotics s.r.o.";
+                    break;
+                case "0x00000A58":
+                    return "Power Standards Lab Inc.";
+                    break;
+                case "0x00000A59":
+                    return "École Polytechnique de Montréal, Electrical Engineering Department";
+                    break;
+                case "0x00000A5A":
+                    return "Novanta IMS";
+                    break;
+                case "0x00000A5B":
+                    return "Winservo (Xiamen) Electrical Technology Co., Ltd.";
+                    break;
+                case "0x00000A5C":
+                    return "Weber Ultrasonics AG";
+                    break;
+                case "0x00000A5D":
+                    return "NIDEC COPAL ELECTRONICS CORP.";
+                    break;
+                case "0x00000A5E":
+                    return "Mattson Thermal Products GmbH";
+                    break;
+                case "0x00000A5F":
+                    return "ReACT Technologies Inc.";
+                    break;
+
+                case "0x00000A60":
+                    return "MILLAN Automation SAS";
+                    break;
+                case "0x00000A61":
+                    return "ANDRITZ HYDRO GmbH";
+                    break;
+                case "0x00000A62":
+                    return "Shenzhen Yuejiang Technology Co., Ltd.";
+                    break;
+                case "0x00000A63":
+                    return "Fineline Limited";
+                    break;
+                case "0x00000A64":
+                    return "OEMB SA";
+                    break;
+                case "0x00000A65":
+                    return "Philoptics Co., Ltd.";
+                    break;
+                case "0x00000A66":
+                    return "Vetaphone A/S";
+                    break;
+                case "0x00000A67":
+                    return "Herkules-Resotec Elektronik GmbH";
+                    break;
+                case "0x00000A68":
+                    return "ArtifactNoise, LLP";
+                    break;
+                case "0x00000A69":
+                    return "DEPRAG SCHULZ GMBH & CO.";
+                    break;
+                case "0x00000A6A":
+                    return "Kinema AST S.r.l";
+                    break;
+                case "0x00000A6B":
+                    return "ASAHI SURGICAL ROBOTICS CO.,LTD.";
+                    break;
+                case "0x00000A6C":
+                    return "LLC 'Plasmatic RnD'";
+                    break;
+                case "0x00000A6D":
+                    return "Shanghai Tongyi Automation Technology Co., Ltd.";
+                    break;
+                case "0x00000A6F":
+                    return "Plasmatreat GmbH";
+                    break;
+
+                case "0x00000A70":
+                    return "Balt-System Ltd.";
+                    break;
+                case "0x00000A71":
+                    return "Jack Sewing Machine Co., Ltd.";
+                    break;
+                case "0x00000A72":
+                    return "Okura Yusoki Co., Ltd.";
+                    break;
+                case "0x00000A73":
+                    return "CB7 Systems LLC";
+                    break;
+                case "0x00000A74":
+                    return "Orotig S.r.l.";
+                    break;
+                case "0x00000A75":
+                    return "SCHMIDT Technology GmbH";
+                    break;
+                case "0x00000A76":
+                    return "Ingenieurbüro Holtgrewe";
+                    break;
+                case "0x00000A77":
+                    return "SWIGRO Additive Manufacturing Inc.";
+                    break;
+                case "0x00000A78":
+                    return "SPI Developments Ltd.";
+                    break;
+                case "0x00000A79":
+                    return "Shenzhen Xinchuan Electric Technology Co., Ltd.";
+                    break;
+                case "0x00000A7A":
+                    return "Saab AB";
+                    break;
+                case "0x00000A7B":
+                    return "Beckman Coulter K.K.";
+                    break;
+                case "0x00000A7D":
+                    return "Crosscut Prototypes, LLC";
+                    break;
+                case "0x00000A7E":
+                    return "Goertek Inc.";
+                    break;
+                case "0x00000A7F":
+                    return "SHINKAWA LTD.";
+                    break;
+
+                case "0x00000A80":
+                    return "adphos Innovative Technologies GmbH";
+                    break;
+                case "0x00000A81":
+                    return "University of Stavanger, Faculty of Science and Technology";
+                    break;
+                case "0x00000A82":
+                    return "RealSYS";
+                    break;
+                case "0x00000A83":
+                    return "MTS Systems Corporation";
+                    break;
+                case "0x00000A84":
+                    return "ZUKEN ELMIC, Inc.";
+                    break;
+                case "0x00000A85":
+                    return "'Power Supply Systems' Limited";
+                    break;
+                case "0x00000A86":
+                    return "Nanjing Control Intelligent Technology Co.,Ltd.";
+                    break;
+                case "0x00000A87":
+                    return "Laser Institute of Shandong Academy of Sciences";
+                    break;
+                case "0x00000A88":
+                    return "Shenzhen Ruitech Mechanical and Electrical Technology Co.,Ltd.";
+                    break;
+                case "0x00000A89":
+                    return "Shenzhen Hengyu Controller Technology Co., Ltd.";
+                    break;
+                case "0x00000A8A":
+                    return "BE.services GmbH";
+                    break;
+                case "0x00000A8B":
+                    return "Enertronica Santerno S.p.A.";
+                    break;
+                case "0x00000A8C":
+                    return "O-DEAR INTERNATIONAL CORP.";
+                    break;
+                case "0x00000A8D":
+                    return "Scanivalve Corp.";
+                    break;
+                case "0x00000A8E":
+                    return "SMARTMOTION Co., Ltd.";
+                    break;
+                case "0x00000A8F":
+                    return "TOYO SYSTEM Co., Ltd.";
+                    break;
+
+                case "0x00000A90":
+                    return "Rheinmetall Electronics GmbH";
+                    break;
+                case "0x00000A91":
+                    return "Vishay Nobel AB";
+                    break;
+                case "0x00000A92":
+                    return "DMM Technology Corp.";
+                    break;
+                case "0x00000A93":
+                    return "Crossmuller Pty Ltd";
+                    break;
+                case "0x00000A94":
+                    return "ibg Prüfcomputer GmbH";
+                    break;
+                case "0x00000A95":
+                    return "NSK Ltd.";
+                    break;
+                case "0x00000A96":
+                    return "ELEDUS s.r.o.";
+                    break;
+                case "0x00000A97":
+                    return "Baldwin Technology GmbH";
+                    break;
+                case "0x00000A98":
+                    return "Blum-Novotest GmbH";
+                    break;
+                case "0x00000A99":
+                    return "KROHNE Messtechnik GmbH";
+                    break;
+                case "0x00000A9B":
+                    return "Shenzhen ECON Technology Co.,Ltd.";
+                    break;
+                case "0x00000A9C":
+                    return "National Institute of Advanced Industrial Science and Technology (AIST), Intelligent Systems Research Institute (ISRI)";
+                    break;
+                case "0x00000A9E":
+                    return "ZELTWANGER Leaktesting & Automation GmbH";
+                    break;
+                case "0x00000A9F":
+                    return "CoSynth GmbH & Co. KG";
+                    break;
+
+                case "0x00000AA0":
+                    return "Technical Development Corporation";
+                    break;
+                case "0x00000AA1":
+                    return "AREVO INC.";
+                    break;
+                case "0x00000AA2":
+                    return "MTT Corporation";
+                    break;
+                case "0x00000AA3":
+                    return "MTT Corporation";
+                    break;
+                case "0x00000AA4":
+                    return "Mackware GmbH";
+                    break;
+                case "0x00000AA5":
+                    return "Reno Sub-Systems Inc.";
+                    break;
+                case "0x00000AA6":
+                    return "BARBERAN S.A.";
+                    break;
+                case "0x00000AA7":
+                    return "Stratasys, Ltd.";
+                    break;
+                case "0x00000AA8":
+                    return "DEPUSH Technology Co.,Ltd.";
+                    break;
+                case "0x00000AA9":
+                    return "Justus-Liebig-Universität Gießen, I. Physikalisches Institut, Arbeitsgruppe Atom- und Molekülphysik";
+                    break;
+                case "0x00000AAA":
+                    return "Think Surgical, Inc.";
+                    break;
+                case "0x00000AAC":
+                    return "Unipulse Corporation";
+                    break;
+                case "0x00000AAD":
+                    return "Foshan City Coyo Precision Machinery Manufacturing Co. Ltd";
+                    break;
+                case "0x00000AAE":
+                    return "Teknix Argentina SRL";
+                    break;
+                case "0x00000AAF":
+                    return "TDK Corporation";
+                    break;
+
+                case "0x00000AB0":
+                    return "HYUNDAI MOVEX";
+                    break;
+                case "0x00000AB1":
+                    return "The Charles Stark Draper Laboratory, Inc.";
+                    break;
+                case "0x00000AB2":
+                    return "Technische Universität Berlin, Fakultät Elektrotechnik und Informatik, Fachgebiet Telekommunikationsnetze";
+                    break;
+                case "0x00000AB3":
+                    return "Star Asia Trading Pte. Ltd.";
+                    break;
+                case "0x00000AB4":
+                    return "Changzhou Fulling Motor Co., Ltd.";
+                    break;
+                case "0x00000AB5":
+                    return "Shenzhen Qinglan Automation Technology Co.,Ltd";
+                    break;
+                case "0x00000AB6":
+                    return "Beijing Hollysys Electric Technology Co., Ltd.";
+                    break;
+                case "0x00000AB7":
+                    return "ANTRIMON Group AG";
+                    break;
+                case "0x00000AB8":
+                    return "Technische Universität Dresden (TU Dresden), Fakultät Maschinenwesen, Institut für Werkzeugmaschinen und Steuerungstechnik";
+                    break;
+                case "0x00000AB9":
+                    return "MikroElektronika d.o.o.";
+                    break;
+                case "0x00000ABA":
+                    return "Sasken Technologies Limited";
+                    break;
+                case "0x00000ABB":
+                    return "ABB AS Corporate Research";
+                    break;
+                case "0x00000ABD":
+                    return "STIGAL";
+                    break;
+                case "0x00000ABE":
+                    return "TnS Co., Ltd";
+                    break;
+                case "0x00000ABF":
+                    return "PAIX Co.,Ltd";
+                    break;
+
+                case "0x00000AC0":
+                    return "Senfit Ltd.";
+                    break;
+                case "0x00000AC1":
+                    return "Promaster Technology Corporation";
+                    break;
+                case "0x00000AC2":
+                    return "CRSC Urban Rail Transit Technology Co.,Ltd";
+                    break;
+                case "0x00000AC3":
+                    return "Anthony Best Dynamics Ltd.";
+                    break;
+                case "0x00000AC4":
+                    return "TVM Signalling and Transportation Systems Pvt. Ltd";
+                    break;
+                case "0x00000AC5":
+                    return "neuroConn GmbH";
+                    break;
+                case "0x00000AC6":
+                    return "Servelec Technologies Pty Ltd";
+                    break;
+                case "0x00000AC7":
+                    return "Stereotaxis, Inc.";
+                    break;
+                case "0x00000AC8":
+                    return "National Formosa University, College of Engineering";
+                    break;
+                case "0x00000AC9":
+                    return "Alma Mater Studiorum - Università di Bologna, Department of Electrical, Electronic and Information Engineering “Guglielmo Marconi”, Laboratory of Automation and Robotics";
+                    break;
+                case "0x00000ACA":
+                    return "Centroid Corporation";
+                    break;
+                case "0x00000ACC":
+                    return "Nidec Motor Corporation";
+                    break;
+                case "0x00000ACD":
+                    return "NAVER LABS Corp.";
+                    break;
+                case "0x00000ACE":
+                    return "Hitachi Industry & Control Solutions, Ltd.";
+                    break;
+                case "0x00000ACF":
+                    return "Thermo Fisher Scientific Messtechnik GmbH";
+                    break;
+
+                case "0x00000AD0":
+                    return "JSC 'T-Platforms'";
+                    break;
+                case "0x00000AD1":
+                    return "Halodi Robotics AS";
+                    break;
+                case "0x00000AD2":
+                    return "Skala Sp. z o.o.";
+                    break;
+                case "0x00000AD3":
+                    return "Jin Solution Co., Ltd.";
+                    break;
+                case "0x00000AD4":
+                    return "KingSemi Co.,Ltd";
+                    break;
+                case "0x00000AD5":
+                    return "VA Laserautomation GmbH";
+                    break;
+                case "0x00000AD6":
+                    return "Kleintges Elektrogerätebau GmbH";
+                    break;
+                case "0x00000AD7":
+                    return "Logosol, Inc.";
+                    break;
+                case "0x00000AD8":
+                    return "REJ Co., Ltd.";
+                    break;
+                case "0x00000AD9":
+                    return "TCK Inc.";
+                    break;
+                case "0x00000ADA":
+                    return "Axetris AG";
+                    break;
+                case "0x00000ADB":
+                    return "Replicant Automation FZE";
+                    break;
+                case "0x00000ADC":
+                    return "AIRTEC Pneumatic GmbH";
+                    break;
+                case "0x00000ADD":
+                    return "Equip-Test Kft.";
+                    break;
+                case "0x00000ADE":
+                    return "ChromaTan Corporation";
+                    break;
+                case "0x00000ADF":
+                    return "Ford Motor Company Limited";
+                    break;
+
+                case "0x00000AE0":
+                    return "thyssenkrupp Marine Systems GmbH";
+                    break;
+                case "0x00000AE1":
+                    return "GEFAZ mbH";
+                    break;
+                case "0x00000AE3":
+                    return "L&T Technology Services Limited";
+                    break;
+                case "0x00000AE5":
+                    return "The Cyber University of Korea, Department of Mechanical and Control Engineering";
+                    break;
+                case "0x00000AE6":
+                    return "SCHOBER Elektronik GmbH";
+                    break;
+                case "0x00000AE7":
+                    return "Simulation and Control Technologies, Inc";
+                    break;
+                case "0x00000AE8":
+                    return "Guangdong Sumida Automation Co.,Ltd.";
+                    break;
+                case "0x00000AE9":
+                    return "GEMSS Medical Systems Co.,Ltd.";
+                    break;
+                case "0x00000AEA":
+                    return "Shanghai Electric Power T&D Group";
+                    break;
+                case "0x00000AEB":
+                    return "Shandong University, School of Control Science and Engineering";
+                    break;
+                case "0x00000AEC":
+                    return "Fiessler Elektronik GmbH & Co. KG";
+                    break;
+                case "0x00000AED":
+                    return "Cencorp Automation Technology Co, Ltd.";
+                    break;
+                case "0x00000AEE":
+                    return "Venture International Pte Ltd";
+                    break;
+                case "0x00000AEF":
+                    return "EcoTronic GmbH";
+                    break;
+
+                case "0x00000AF0":
+                    return "Shenzhen Donglaier Smart Technology Co., Ltd.";
+                    break;
+                case "0x00000AF1":
+                    return "Domino UK Limited";
+                    break;
+                case "0x00000AF3":
+                    return "Elekta Solutions AB";
+                    break;
+                case "0x00000AF4":
+                    return "Logic Fruit Technologies Pvt. Ltd.";
+                    break;
+                case "0x00000AF5":
+                    return "ecocoach AG";
+                    break;
+                case "0x00000AF6":
+                    return "SIOS Meßtechnik GmbH";
+                    break;
+                case "0x00000AF7":
+                    return "Jabil Circuit Magyarország Kft.";
+                    break;
+                case "0x00000AF8":
+                    return "seven dreamers laundroid, inc.";
+                    break;
+                case "0x00000AF9":
+                    return "VR Group, a.s.";
+                    break;
+                case "0x00000AFA":
+                    return "Afag Automation AG";
+                    break;
+                case "0x00000AFB":
+                    return "Miyagi Nikon Precision Co., Ltd.";
+                    break;
+                case "0x00000AFC":
+                    return "AutomationWare S.r.l.";
+                    break;
+                case "0x00000AFD":
+                    return "Isar Aerospace Technologies GmbH";
+                    break;
+                case "0x00000AFE":
+                    return "GTSystem GmbH";
+                    break;
+                case "0x00000AFF":
+                    return "Technische Universität München, Department of Physics";
+                    break;
+
+                case "0x00000B00":
+                    return "S+S Regeltechnik GmbH";
+                    break;
+                case "0x00000B01":
+                    return "Osaka University, Graduate School of Engineering Science";
+                    break;
+                case "0x00000B02":
+                    return "Vögtlin Instruments GmbH";
+                    break;
+                case "0x00000B03":
+                    return "TOHAN DENSHI KIKI CO.,LTD.";
+                    break;
+                case "0x00000B04":
+                    return "Shinwa Industries, Inc.";
+                    break;
+                case "0x00000B05":
+                    return "Suzhou Linkhou Robot Co.,Ltd";
+                    break;
+                case "0x00000B06":
+                    return "DMC, Inc.";
+                    break;
+                case "0x00000B07":
+                    return "Nippon Pulse Motor Co., Ltd.";
+                    break;
+                case "0x00000B08":
+                    return "LANG GmbH & Co. KG";
+                    break;
+                case "0x00000B09":
+                    return "STICHT Technologie GmbH";
+                    break;
+                case "0x00000B0A":
+                    return "HIMS Co., Ltd.";
+                    break;
+                case "0x00000B0B":
+                    return "WITRON Logistik + Informatik GmbH";
+                    break;
+                case "0x00000B0C":
+                    return "Vistec Electron Beam GmbH";
+                    break;
+                case "0x00000B0D":
+                    return "General Atomics";
+                    break;
+                case "0x00000B0E":
+                    return "Teubner Industrie-Elektronik GmbH";
+                    break;
+                case "0x00000B0F":
+                    return "DEWETRON GmbH";
+                    break;
+
+                case "0x00000B10":
+                    return "Philip Morris Products SA";
+                    break;
+                case "0x00000B11":
+                    return "Nihon Protech Software Co., Ltd.";
+                    break;
+                case "0x00000B13":
+                    return "Industrial Indexing Systems, Inc.";
+                    break;
+                case "0x00000B14":
+                    return "AKIM METAL Sanayi Ve Ticaret Anonim Sirketi";
+                    break;
+                case "0x00000B15":
+                    return "MEODAT Messtechnik, Ortung und Datenverarbeitung GmbH";
+                    break;
+                case "0x00000B17":
+                    return "Goyo Electronics Co.,Ltd.";
+                    break;
+                case "0x00000B18":
+                    return "Shanghai Golytec Automation Co., Ltd.";
+                    break;
+                case "0x00000B19":
+                    return "Redcur GmbH";
+                    break;
+                case "0x00000B1A":
+                    return "Room3327, Inc.";
+                    break;
+                case "0x00000B1C":
+                    return "Love Electronics Ltd";
+                    break;
+                case "0x00000B1D":
+                    return "Fontys University of Applied Sciences, School of Information & Communication Technology";
+                    break;
+                case "0x00000B1E":
+                    return "Hocoma AG";
+                    break;
+                case "0x00000B1F":
+                    return "Sensor Instruments Entwicklungs- und Vertriebs GmbH";
+                    break;
+
+                case "0x00000B20":
+                    return "Reboocon Bionics B.V.";
+                    break;
+                case "0x00000B21":
+                    return "Olympus NDT Canada, a subsidiary of Olympus Scientific Solutions Americas";
+                    break;
+                case "0x00000B22":
+                    return "Photon Control Inc.";
+                    break;
+                case "0x00000B23":
+                    return "NK Labs, LLC";
+                    break;
+                case "0x00000B24":
+                    return "Excelpoint Systems (India) Pvt Ltd";
+                    break;
+                case "0x00000B25":
+                    return "'Gheorghe Asachi' Technical University of Iasi, Faculty of Automatic Control and Computer Engineering";
+                    break;
+                case "0x00000B26":
+                    return "Manroland Sheetfed GmbH";
+                    break;
+                case "0x00000B27":
+                    return "OPTEX FA CO., LTD.";
+                    break;
+                case "0x00000B28":
+                    return "SMAC Corporation";
+                    break;
+                case "0x00000B29":
+                    return "Toshiba Infrastructure Systems & Solutions Corporation";
+                    break;
+                case "0x00000B2A":
+                    return "SAITEL S.r.l.";
+                    break;
+                case "0x00000B2B":
+                    return "Hebi Haichang Special Equipment Co.,Ltd.";
+                    break;
+                case "0x00000B2C":
+                    return "Salunda Ltd";
+                    break;
+                case "0x00000B2D":
+                    return "Higerman CNC Technology (SZ) Limited";
+                    break;
+                case "0x00000B2E":
+                    return "IPG Laser GmbH";
+                    break;
+                case "0x00000B2F":
+                    return "RTSoft, AO";
+                    break;
+
+                case "0x00000B30":
+                    return "Dalian Hi-Sensor Technology Co., Ltd.";
+                    break;
+                case "0x00000B31":
+                    return "alpiscan srls";
+                    break;
+                case "0x00000B32":
+                    return "DYNAMIC OPTICS s.r.l.";
+                    break;
+                case "0x00000B33":
+                    return "OOO “ITS-Sibir”";
+                    break;
+                case "0x00000B34":
+                    return "SUMITOMO RIKO Company Limited";
+                    break;
+                case "0x00000B35":
+                    return "Tianjin Automa Technology Co. Ltd.";
+                    break;
+                case "0x00000B37":
+                    return "Human Automation Co., Ltd.";
+                    break;
+                case "0x00000B38":
+                    return "Aplex Technology Inc.";
+                    break;
+                case "0x00000B39":
+                    return "Shanghai Jesee Auto System Co., Ltd";
+                    break;
+                case "0x00000B3A":
+                    return "Kunming Unionscience Technology Co.,Ltd";
+                    break;
+                case "0x00000B3B":
+                    return "Fitz-Thors Engineering, Inc.";
+                    break;
+                case "0x00000B3C":
+                    return "ACTIA Automotive SA";
+                    break;
+                case "0x00000B3D":
+                    return "Kunshan SVL Electric Co.,Ltd";
+                    break;
+                case "0x00000B3E":
+                    return "SilCore Technology";
+                    break;
+                case "0x00000B3F":
+                    return "SHENZHEN QITAI TECHNOLOGY CO.LTD";
+                    break;
+
+                case "0x00000B40":
+                    return "A. Sturzenegger Elektronik GmbH";
+                    break;
+                case "0x00000B41":
+                    return "ZEUS CO., LTD.";
+                    break;
+                case "0x00000B42":
+                    return "BETAMONT s.r.o.";
+                    break;
+                case "0x00000B43":
+                    return "Strategy Automation S.r.l.";
+                    break;
+                case "0x00000B44":
+                    return "Fachhochschule Nordwestschweiz, Hochschule für Technik, Institut für Automation";
+                    break;
+                case "0x00000B45":
+                    return "SMS group GmbH";
+                    break;
+                case "0x00000B46":
+                    return "TRUMPF Schweiz AG";
+                    break;
+                case "0x00000B47":
+                    return "Fraunhofer-Institut für Silicatforschung";
+                    break;
+                case "0x00000B48":
+                    return "The University of Tokyo, Graduate School of Information Science and Technology";
+                    break;
+                case "0x00000B49":
+                    return "Indian Institute of Science, Interdisciplinary Centre for Energy Research";
+                    break;
+                case "0x00000B4A":
+                    return "Overlay Technology OÜ";
+                    break;
+                case "0x00000B4B":
+                    return "CK Automation, LLC";
+                    break;
+                case "0x00000B4D":
+                    return "OOO 'Kompex-T'";
+                    break;
+                case "0x00000B4E":
+                    return "Ostbayerische Technische Hochschule Regensburg, Fakultät Maschinenbau";
+                    break;
+                case "0x00000B4F":
+                    return "Hefei Eagle Automation Engineering Technology Co., Ltd.";
+                    break;
+
+                case "0x00000B50":
+                    return "Vertiv Tech Co., Ltd";
+                    break;
+                case "0x00000B51":
+                    return "Sanying MotionControl Instruments Ltd.";
+                    break;
+                case "0x00000B52":
+                    return "Jiangsu Saiyang Mechanical & Electrical Technology Co., Ltd.";
+                    break;
+                case "0x00000B53":
+                    return "Robosoft NV";
+                    break;
+                case "0x00000B54":
+                    return "MotionBank";
+                    break;
+                case "0x00000B55":
+                    return "South China University of Technology, School of Automation Science & Engineering";
+                    break;
+                case "0x00000B56":
+                    return "Oetiker Schweiz AG";
+                    break;
+                case "0x00000B57":
+                    return "Chiang Mai University, Faculty of Engineering";
+                    break;
+                case "0x00000B58":
+                    return "Shenzhen FOXON Automation Technology Co., Ltd.";
+                    break;
+                case "0x00000B59":
+                    return "Heinmade BV";
+                    break;
+                case "0x00000B5A":
+                    return "ING-AUTOMATION";
+                    break;
+                case "0x00000B5B":
+                    return "Vanteon Corporation";
+                    break;
+                case "0x00000B5C":
+                    return "Solvine, Inc.";
+                    break;
+                case "0x00000B5D":
+                    return "SHINWA Controls Co., Ltd.";
+                    break;
+                case "0x00000B5E":
+                    return "Sierra CP Engineering Ltd.";
+                    break;
+                case "0x00000B5F":
+                    return "Rope Robotics ApS";
+                    break;
+
+                case "0x00000B60":
+                    return "Hefei Sineva Intelligent Machine Co.,Ltd";
+                    break;
+                case "0x00000B61":
+                    return "Shenzhen Porcheson Technology Co., Ltd";
+                    break;
+                case "0x00000B62":
+                    return "Greenlight Innovation Inc.";
+                    break;
+                case "0x00000B63":
+                    return "PCB Piezotronics, Inc.";
+                    break;
+                case "0x00000B64":
+                    return "microGauge AG";
+                    break;
+                case "0x00000B65":
+                    return "EL Klaszter Iroda Kft.";
+                    break;
+                case "0x00000B66":
+                    return "A.B.Esse Spa";
+                    break;
+                case "0x00000B67":
+                    return "Corindus, Inc.";
+                    break;
+                case "0x00000B68":
+                    return "Celeroton AG";
+                    break;
+                case "0x00000B69":
+                    return "SAMHYUN Co. Ltd.";
+                    break;
+                case "0x00000B6A":
+                    return "Ecole Polytechnique Fédérale de Lausanne, School of Basic Sciences";
+                    break;
+                case "0x00000B6B":
+                    return "AVIC-XINHANG YUBEI STEERING SYSTEM (XINXIANG) CO.,LTD";
+                    break;
+                case "0x00000B6C":
+                    return "Creative Conners, Inc.";
+                    break;
+                case "0x00000B6D":
+                    return "Mamezou Co.,Ltd.";
+                    break;
+                case "0x00000B6E":
+                    return "Raith B.V.";
+                    break;
+                case "0x00000B6F":
+                    return "Soft Harmony";
+                    break;
+
+                case "0x00000B70":
+                    return "Elektrik Üretim A.S.";
+                    break;
+                case "0x00000B71":
+                    return "Delft University of Technology, Electronic and Mechanical Support Division (DEMO)";
+                    break;
+                case "0x00000B72":
+                    return "machineering GmbH & Co. KG";
+                    break;
+                case "0x00000B73":
+                    return "GRAPHIMECC S.r.l.";
+                    break;
+                case "0x00000B74":
+                    return "TOPTICA Projects GmbH";
+                    break;
+                case "0x00000B75":
+                    return "Enlaica Co., Ltd.";
+                    break;
+                case "0x00000B76":
+                    return "SYSTEC Corporation";
+                    break;
+                case "0x00000B77":
+                    return "Sherpa Inc.";
+                    break;
+                case "0x00000B78":
+                    return "Sioux Embedded Systems B.V.";
+                    break;
+                case "0x00000B79":
+                    return "UNISEM Co., Ltd.";
+                    break;
+                case "0x00000B7A":
+                    return "William Petersen Elektronik A/S";
+                    break;
+                case "0x00000B7B":
+                    return "Shanghai Velle Automobile Air Conditioner Co., Ltd.";
+                    break;
+                case "0x00000B7C":
+                    return "Vision Tech Co.";
+                    break;
+                case "0x00000B7D":
+                    return "Technische Universität Wien, Fakultät für Elektrotechnik und Informationstechnik";
+                    break;
+                case "0x00000B7E":
+                    return "Universität Augsburg, Fakultät für Angewandte Informatik";
+                    break;
+                case "0x00000B7F":
+                    return "Tecnomotion Srl";
+                    break;
+
+                case "0x00000B80":
+                    return "Microservo Co., Ltd.";
+                    break;
+                case "0x00000B81":
+                    return "Micro CleanRoom Technology GmbH";
+                    break;
+                case "0x00000B82":
+                    return "Global Motion & Systems Inc.";
+                    break;
+                case "0x00000B83":
+                    return "L3 Datron Advanced Technologies";
+                    break;
+                case "0x00000B84":
+                    return "NTN Technical Service Corporation";
+                    break;
+                case "0x00000B85":
+                    return "Chugoku Electric Manufacturing Co.,Inc.";
+                    break;
+                case "0x00000B86":
+                    return "European Spallation Source ERIC, Integrated Control System Division";
+                    break;
+                case "0x00000B87":
+                    return "MARS CO., LTD.";
+                    break;
+                case "0x00000B88":
+                    return "SCOPX LABS";
+                    break;
+                case "0x00000B89":
+                    return "Laser Mechanisms, Inc.";
+                    break;
+                case "0x00000B8A":
+                    return "TechnoPro, Inc.";
+                    break;
+                case "0x00000B8B":
+                    return "Advanced Micro Controls, Inc.";
+                    break;
+                case "0x00000B8C":
+                    return "Intelligence Technology of CEC Co., Ltd";
+                    break;
+                case "0x00000B8D":
+                    return "Applied Dynamics International, Inc.";
+                    break;
+                case "0x00000B8E":
+                    return "Conch Electronic Co.,Ltd.";
+                    break;
+                case "0x00000B8F":
+                    return "Shenzhen Lisan M&E Co., Ltd.";
+                    break;
+
+                case "0x00000B90":
+                    return "FOXIDE LLC";
+                    break;
+                case "0x00000B91":
+                    return "C2P Inc.";
+                    break;
+                case "0x00000B92":
+                    return "SonMicroSystem Co.";
+                    break;
+                case "0x00000B94":
+                    return "HUST Automation System Co., Ltd.";
+                    break;
+                case "0x00000B95":
+                    return "ASIX Electronics Corporation";
+                    break;
+                case "0x00000B97":
+                    return "Laboratoire d'Analyse et d'Architecture des Systèmes (LAAS-CNRS)";
+                    break;
+                case "0x00000B98":
+                    return "KM DIGITECH CO., LTD.";
+                    break;
+                case "0x00000B99":
+                    return "Sens4 A/S";
+                    break;
+                case "0x00000B9A":
+                    return "Nidec Research and Development Center, Taiwan";
+                    break;
+                case "0x00000B9D":
+                    return "Cajo Technologies Oy";
+                    break;
+                case "0x00000B9E":
+                    return "VAS HIGH TECHNOLOGY SOLUTION CORPORATION";
+                    break;
+                case "0x00000B9F":
+                    return "Beijing Chymotion Control Technology Co. Ltd";
+                    break;
+
+                case "0x00000BA0":
+                    return "MarquipWardUnited";
+                    break;
+                case "0x00000BA1":
+                    return "Komax Singapore Pte Ltd";
+                    break;
+                case "0x00000BA2":
+                    return "Persimmon Technologies Corporation";
+                    break;
+                case "0x00000BA3":
+                    return "Tohoku University, New Industry Creation Hatchery Center (NICHe), Fluctuation Free Facility (FFF)";
+                    break;
+                case "0x00000BA4":
+                    return "Rheinische Fachhochschule Köln gGmbH, Ingenieurwesen";
+                    break;
+                case "0x00000BA5":
+                    return "Luminize";
+                    break;
+                case "0x00000BA6":
+                    return "v6e Limited";
+                    break;
+                case "0x00000BA7":
+                    return "ECA ROBOTICS SASU";
+                    break;
+                case "0x00000BA8":
+                    return "Sphere Fluidics Limited";
+                    break;
+                case "0x00000BA9":
+                    return "WELCON Systems Inc.";
+                    break;
+                case "0x00000BAA":
+                    return "Exor International S.p.A";
+                    break;
+                case "0x00000BAB":
+                    return "Dekimo Turnhout";
+                    break;
+                case "0x00000BAC":
+                    return "Lavender CE Pty Ltd";
+                    break;
+                case "0x00000BAD":
+                    return "Science in Motion Technology Corporation, Ltd.";
+                    break;
+                case "0x00000BAE":
+                    return "IST Ingenieurbüro für Sensortechnik GmbH";
+                    break;
+                case "0x00000BAF":
+                    return "maku engineering GmbH";
+                    break;
+
+                case "0x00000BB0":
+                    return "Geoservices Equipements SAS";
+                    break;
+                case "0x00000BB1":
+                    return "NEST Electronics GmbH";
+                    break;
+                case "0x00000BB2":
+                    return "MR Shim GmbH";
+                    break;
+                case "0x00000BB4":
+                    return "Zettaone Technologies India Pvt Ltd";
+                    break;
+                case "0x00000BB6":
+                    return "Universität Augsburg, Fakultät für angewandte Informatik, Institut für Informatik";
+                    break;
+                case "0x00000BB7":
+                    return "SCHUNK Electronic Solutions GmbH";
+                    break;
+                case "0x00000BB8":
+                    return "KOORD Sàrl";
+                    break;
+                case "0x00000BB9":
+                    return "regenHU Ltd.";
+                    break;
+                case "0x00000BBA":
+                    return "VONSCH spol. s r.o.";
+                    break;
+                case "0x00000BBC":
+                    return "Bore Automation Tech. Co., Ltd.";
+                    break;
+                case "0x00000BBD":
+                    return "Board Planning Co., Ltd.";
+                    break;
+                case "0x00000BBE":
+                    return "Kamp & Kötter GmbH";
+                    break;
+                case "0x00000BBF":
+                    return "IOTech Systems Limited";
+                    break;
+
+                case "0x00000BC0":
+                    return "Altinay Robot Technologies Inc.";
+                    break;
+                case "0x00000BC1":
+                    return "Lorenz Messtechnik GmbH";
+                    break;
+                case "0x00000BC2":
+                    return "LJ Welding Automation";
+                    break;
+                case "0x00000BC3":
+                    return "DMP Electronics Inc.";
+                    break;
+                case "0x00000BC4":
+                    return "Dima Motor Tec. Co., Ltd.";
+                    break;
+                case "0x00000BC5":
+                    return "Fraunhofer-Institut für Produktionstechnik und Automatisierung";
+                    break;
+                case "0x00000BC6":
+                    return "Schneider Electric (China) Co., Ltd.";
+                    break;
+                case "0x00000BC7":
+                    return "Suzhou DaFang Special Vehicle Co., Ltd";
+                    break;
+                case "0x00000BC8":
+                    return "Shenzhen OUYE Intelligent Technology Co., Ltd";
+                    break;
+                case "0x00000BC9":
+                    return "HBH Microwave GmbH";
+                    break;
+                case "0x00000BCA":
+                    return "MTA B.V.";
+                    break;
+                case "0x00000BCB":
+                    return "SYSTEM ARTWARE, Inc.";
+                    break;
+                case "0x00000BCC":
+                    return "ProDSP Technologies Zrt.";
+                    break;
+                case "0x00000BCD":
+                    return "Hypersen Technologies Co., Ltd";
+                    break;
+                case "0x00000BCE":
+                    return "Pyramid Vacuum LLC";
+                    break;
+                case "0x00000BCF":
+                    return "Hanbaek Tech Co., Ltd.";
+                    break;
+
+                case "0x00000BD0":
+                    return "SC3 Automation Inc.";
+                    break;
+                case "0x00000BD1":
+                    return "Fachhochschule Nordwestschweiz, Hochschule für Technik, Institut für Sensorik und Elektronik";
+                    break;
+                case "0x00000BD2":
+                    return "innofas GmbH";
+                    break;
+                case "0x00000BD3":
+                    return "Adamant Namiki Precision Jewel Co., Ltd.";
+                    break;
+                case "0x00000BD4":
+                    return "YUNNAN KSEC INTELLIGENT EQUIPMENT CO.,LTD.";
+                    break;
+                case "0x00000BD6":
+                    return "Industrial Solutions Zuid-Oost B.V. (Actemium Electronics)";
+                    break;
+                case "0x00000BD7":
+                    return "BETONMAC S.A.";
+                    break;
+                case "0x00000BD8":
+                    return "Manufacturing Objects";
+                    break;
+                case "0x00000BD9":
+                    return "Chen Yuan International Co., Ltd.";
+                    break;
+                case "0x00000BDB":
+                    return "Griffin Technology Co., Ltd.";
+                    break;
+                case "0x00000BDC":
+                    return "RORZE CORPORATION";
+                    break;
+                case "0x00000BDD":
+                    return "Bruker Daltonik GmbH";
+                    break;
+                case "0x00000BDE":
+                    return "Logos01 Srl";
+                    break;
+                case "0x00000BDF":
+                    return "Coaters Paradise GmbH";
+                    break;
+
+                case "0x00000BE0":
+                    return "Hahn-Schickard-Gesellschaft für angewandte Forschung e.V.";
+                    break;
+                case "0x00000BE2":
+                    return "R&D Company 'Vector' LLC";
+                    break;
+                case "0x00000BE3":
+                    return "ReeR SpA";
+                    break;
+                case "0x00000BE4":
+                    return "HP Scitex Ltd.";
+                    break;
+                case "0x00000BE5":
+                    return "Hitachi Automotive Systems Americas, Inc.";
+                    break;
+                case "0x00000BE6":
+                    return "Zhejiang Eternal Automation Sci-Tec Co.,Ltd";
+                    break;
+                case "0x00000BE7":
+                    return "Shenzhen Siron Electrical Co.,Ltd.";
+                    break;
+                case "0x00000BE8":
+                    return "ARUP Laboratories";
+                    break;
+                case "0x00000BE9":
+                    return "LETech Co.,Ltd.";
+                    break;
+                case "0x00000BEA":
+                    return "Bangkok University, School of Engineering, Robotics Laboratory";
+                    break;
+                case "0x00000BEB":
+                    return "Kontron Electronics GmbH";
+                    break;
+                case "0x00000BEC":
+                    return "Shanghai Junqian Sensing Technology Co., Ltd.";
+                    break;
+                case "0x00000BEE":
+                    return "VI.BE.MAC s.p.a.";
+                    break;
+                case "0x00000BEF":
+                    return "EMG Automation GmbH";
+                    break;
+
+                case "0x00000BF0":
+                    return "American Controls & Automation, Inc.";
+                    break;
+                case "0x00000BF1":
+                    return "Ascale Enterprise Co., Ltd.";
+                    break;
+                case "0x00000BF2":
+                    return "University of Applied Sciences and Arts Western Switzerland (HES-SO Fribourg)";
+                    break;
+                case "0x00000BF3":
+                    return "Lantronix, Inc.";
+                    break;
+                case "0x00000BF4":
+                    return "Technische Hochschule Rosenheim";
+                    break;
+                case "0x00000BF5":
+                    return "LEIFERT INDUCTION GmbH";
+                    break;
+                case "0x00000BF6":
+                    return "Automation of Things Europe GmbH";
+                    break;
+                case "0x00000BF7":
+                    return "SAMWON ACT Co.,Ltd";
+                    break;
+                case "0x00000BF8":
+                    return "Wenling Yuhai Electromechanical CO.,LTD";
+                    break;
+                case "0x00000BF9":
+                    return "Faraday Motion Controls Ltd.";
+                    break;
+                case "0x00000BFA":
+                    return "Nikon Systems Inc.";
+                    break;
+                case "0x00000BFB":
+                    return "Sanitas EG S.r.l.";
+                    break;
+                case "0x00000BFC":
+                    return "Videojet Technologies Inc.";
+                    break;
+                case "0x00000BFD":
+                    return "ABB Automation GmbH";
+                    break;
+                case "0x00000BFE":
+                    return "WARDJet LLC";
+                    break;
+                case "0x00000BFF":
+                    return "Ichor Systems, Inc.";
+                    break;
+
+                case "0x00000C00":
+                    return "UTAREX Co., Ltd.";
+                    break;
+                case "0x00000C01":
+                    return "GAON SOLUTION Ltd.";
+                    break;
+                case "0x00000C02":
+                    return "Highlight Tech Corp.";
+                    break;
+                case "0x00000C03":
+                    return "PO OWEN LLC";
+                    break;
+                case "0x00000C04":
+                    return "RFPT Co., Ltd.";
+                    break;
+                case "0x00000C05":
+                    return "Roboteq, Inc.";
+                    break;
+                case "0x00000C06":
+                    return "Norgren Manufacturing Co., Ltd.";
+                    break;
+                case "0x00000C07":
+                    return "FarmWise Labs, Inc.";
+                    break;
+                case "0x00000C08":
+                    return "AŽD Praha s.r.o.";
+                    break;
+                case "0x00000C0A":
+                    return "Can Man AG";
+                    break;
+                case "0x00000C0B":
+                    return "Plustherm Point AG";
+                    break;
+                case "0x00000C0C":
+                    return "MinebeaMitsumi Inc.";
+                    break;
+                case "0x00000C0D":
+                    return "System Level Solutions (India) Pvt. Ltd.";
+                    break;
+                case "0x00000C0E":
+                    return "EverMAX s.r.o.";
+                    break;
+                case "0x00000C0F":
+                    return "Maruyama Manufacturing Corporation (DBA Maruyama Chillers Corporation)";
+                    break;
+
+                case "0x00000C10":
+                    return "Han's Laser (Singapore) Pte Ltd";
+                    break;
+                case "0x00000C11":
+                    return "Cordova Industrial Integradores S.A. de C.V.";
+                    break;
+                case "0x00000C12":
+                    return "NAMOO Co., Ltd.";
+                    break;
+                case "0x00000C13":
+                    return "Blu Technology di Ing Carlo Mauri";
+                    break;
+                case "0x00000C14":
+                    return "isel Germany AG";
+                    break;
+                case "0x00000C15":
+                    return "UNITEK Industrie Elektronik GmbH";
+                    break;
+                case "0x00000C16":
+                    return "Tohan-Engineering Corporation";
+                    break;
+                case "0x00000C17":
+                    return "Machine Prognostics AS";
+                    break;
+                case "0x00000C18":
+                    return "Avestron Inc.";
+                    break;
+                case "0x00000C19":
+                    return "AP Systems Co., Ltd.";
+                    break;
+                case "0x00000C1A":
+                    return "TIAN JIN SUNKE DIGITAL CONTROL TECHNOLOGY CO.,LTD";
+                    break;
+                case "0x00000C1B":
+                    return "Robotech Co., Ltd.";
+                    break;
+                case "0x00000C1C":
+                    return "AccuteX Technologies Co., Ltd.";
+                    break;
+                case "0x00000C1D":
+                    return "Coherent Mainz (DILAS Diodenlaser GmbH)";
+                    break;
+                case "0x00000C1E":
+                    return "Daxta Equipamentos Eletrônicos Indústria e Comércio Ltda";
+                    break;
+
+                case "0x00000C20":
+                    return "ADG Automatisierung Dresden GmbH";
+                    break;
+                case "0x00000C21":
+                    return "WHITEvoid GmbH";
+                    break;
+                case "0x00000C22":
+                    return "BAS BV";
+                    break;
+                case "0x00000C23":
+                    return "RS Elektroniksysteme GmbH";
+                    break;
+                case "0x00000C25":
+                    return "HORIBA FuelCon GmbH";
+                    break;
+                case "0x00000C26":
+                    return "miCos Iberia S.L.";
+                    break;
+                case "0x00000C27":
+                    return "Slovak Academy of Sciences, Institute of Electrical Engineering";
+                    break;
+                case "0x00000C28":
+                    return "Roketsan A.S.";
+                    break;
+                case "0x00000C29":
+                    return "Bescom Global Co., Ltd.";
+                    break;
+                case "0x00000C2A":
+                    return "Magnet-Schultz GmbH & Co. KG";
+                    break;
+                case "0x00000C2B":
+                    return "NEWSUBSTANCE Limited";
+                    break;
+                case "0x00000C2C":
+                    return "JingQi (Tianjin) Technology Co., Ltd.";
+                    break;
+                case "0x00000C2D":
+                    return "TSK Prüfsysteme GmbH";
+                    break;
+                case "0x00000C2E":
+                    return "Airity Technologies, Inc.";
+                    break;
+                case "0x00000C2F":
+                    return "EEP Elektro Elektronik Pranjic GmbH";
+                    break;
+
+                case "0x00000C30":
+                    return "MovekoTech Oy";
+                    break;
+                case "0x00000C31":
+                    return "Federal State Institution 'Scientific Research Institute for System Analysis of the Russian Academy of Sciences'";
+                    break;
+                case "0x00000C32":
+                    return "Nearfield Instruments B.V.";
+                    break;
+                case "0x00000C33":
+                    return "TÜBITAK BILGEM, National Research Institute of Electronics and Cryptology (UEKAE)";
+                    break;
+                case "0x00000C34":
+                    return "Siemens Energy Global GmbH & Co. KG";
+                    break;
+                case "0x00000C35":
+                    return "progress Maschinen & Automation AG";
+                    break;
+                case "0x00000C36":
+                    return "Heliotis AG";
+                    break;
+                case "0x00000C37":
+                    return "Strong Plus Technology GmbH";
+                    break;
+                case "0x00000C38":
+                    return "LS Energy Solutions LLC";
+                    break;
+                case "0x00000C39":
+                    return "Yaskawa Controls Co., Ltd.";
+                    break;
+                case "0x00000C3A":
+                    return "NOVUSS-Automation GmbH";
+                    break;
+                case "0x00000C3C":
+                    return "Sanwa Engineering Corp.";
+                    break;
+                case "0x00000C3D":
+                    return "WIBOND Informationssysteme GmbH";
+                    break;
+                case "0x00000C3E":
+                    return "MSP, a division of TSI Inc.";
+                    break;
+                case "0x00000C3F":
+                    return "Wuxi Xinchang Electronic Technology Co., Ltd.";
+                    break;
+
+                case "0x00000C40":
+                    return "NDK Semiconductor Co., Ltd.";
+                    break;
+                case "0x00000C41":
+                    return "MS Ultraschall Technologie GmbH";
+                    break;
+                case "0x00000C42":
+                    return "Korea University of Technology and Education (KOREATECH)";
+                    break;
+                case "0x00000C43":
+                    return "Accelerated Software Engineering Ltd.";
+                    break;
+                case "0x00000C44":
+                    return "Shenzhen Instar Electromechanical Technology Development Co., Ltd.";
+                    break;
+                case "0x00000C45":
+                    return "Redler Technologies Ltd.";
+                    break;
+                case "0x00000C46":
+                    return "NPOOO 'Sital'";
+                    break;
+                case "0x00000C47":
+                    return "Eaton Corporation";
+                    break;
+                case "0x00000C48":
+                    return "Techservo (Shenzhen) Co., Ltd.";
+                    break;
+                case "0x00000C49":
+                    return "Fabmatics GmbH";
+                    break;
+                case "0x00000C4A":
+                    return "Sasaki Sekkei Co., Ltd.";
+                    break;
+                case "0x00000C4B":
+                    return "Löhnert Elektronik GmbH";
+                    break;
+                case "0x00000C4C":
+                    return "Vendée Concept SA";
+                    break;
+                case "0x00000C4D":
+                    return "Nobleo Technology Holding BV";
+                    break;
+                case "0x00000C4E":
+                    return "ECI Technology, Inc.";
+                    break;
+                case "0x00000C4F":
+                    return "Linus G Productions GmbH";
+                    break;
+
+                case "0x00000C50":
+                    return "PCB Elektronik San. Ve Tic. Ltd. Sti.";
+                    break;
+                case "0x00000C51":
+                    return "Omron Scientific Technologies, Inc.";
+                    break;
+                case "0x00000C52":
+                    return "Engineered Arts Limited";
+                    break;
+                case "0x00000C53":
+                    return "NASA Jet Propulsion Laboratory";
+                    break;
+                case "0x00000C54":
+                    return "Accelovant Technologies Corporation";
+                    break;
+                case "0x00000C55":
+                    return "Hirata Corporation";
+                    break;
+                case "0x00000C56":
+                    return "Fujian Nebula Electronics Co.,Ltd.";
+                    break;
+                case "0x00000C58":
+                    return "CYSCO Co., Ltd.";
+                    break;
+                case "0x00000C59":
+                    return "Esko-Graphics Kongsberg AS";
+                    break;
+                case "0x00000C5A":
+                    return "WOT Co.,Ltd.";
+                    break;
+                case "0x00000C5C":
+                    return "SHENZHEN SENMUN ELECTRICAL CO.,LTD";
+                    break;
+                case "0x00000C5D":
+                    return "Izhprest Ltd.";
+                    break;
+                case "0x00000C5E":
+                    return "HAWE Hydraulik SE";
+                    break;
+                case "0x00000C5F":
+                    return "Finetech GmbH & Co. KG";
+                    break;
+
+                case "0x00000C60":
+                    return "Mitutoyo Corporation";
+                    break;
+                case "0x00000C61":
+                    return "Cremer Speciaalmachines B.V.";
+                    break;
+                case "0x00000C62":
+                    return "Astec Co., Ltd.";
+                    break;
+                case "0x00000C64":
+                    return "ELNA LTD.";
+                    break;
+                case "0x00000C65":
+                    return "Janasi Industries Ltd.";
+                    break;
+                case "0x00000C66":
+                    return "Universidad de La Frontera, Facultad de Ingeniería y Ciencias, Centro de Modelación y Computación Científica (CEMCC)";
+                    break;
+                case "0x00000C67":
+                    return "KALEJA GmbH";
+                    break;
+                case "0x00000C68":
+                    return "Caldwell Machines & Tools (CMT Engineering)";
+                    break;
+                case "0x00000C69":
+                    return "ILJIN Global Holdings Co., Ltd.";
+                    break;
+                case "0x00000C6A":
+                    return "Proteus Vietnam Limited";
+                    break;
+                case "0x00000C6C":
+                    return "JUKI CORPORATION";
+                    break;
+                case "0x00000C6D":
+                    return "MT Drive & Control (Shenzhen) Co.,Ltd";
+                    break;
+                case "0x00000C6E":
+                    return "ShenZhen HongChuangXing Motion Technology Co.,Ltd";
+                    break;
+                case "0x00000C6F":
+                    return "isMedia Co., Ltd.";
+                    break;
+
+                case "0x00000C70":
+                    return "Shenzhen Yangshun Tongda Digital Technology Co., Ltd.";
+                    break;
+                case "0x00000C71":
+                    return "MVTECH Co.,Ltd.";
+                    break;
+                case "0x00000C72":
+                    return "Kane Terry Partridge dba Open Designer";
+                    break;
+                case "0x00000C73":
+                    return "EK-Electronics GmbH";
+                    break;
+                case "0x00000C74":
+                    return "Jiann Sheng Machinery & Electric Industrial Co., Ltd";
+                    break;
+                case "0x00000C75":
+                    return "Gable Systems B.V.";
+                    break;
+                case "0x00000C76":
+                    return "Constructions-3D SAS";
+                    break;
+                case "0x00000C77":
+                    return "MIP robotics";
+                    break;
+                case "0x00000C78":
+                    return "YouTool Automation Co., Ltd.";
+                    break;
+                case "0x00000C79":
+                    return "Nanjing WEILAN Intelligent Technologies Co., Ltd.";
+                    break;
+                case "0x00000C7A":
+                    return "ABB S.p.A.";
+                    break;
+                case "0x00000C7B":
+                    return "Typhoon HIL Inc.";
+                    break;
+                case "0x00000C7C":
+                    return "BLUTek Inc.";
+                    break;
+                case "0x00000C7D":
+                    return "University of Engineering and Technology, Lahore, Al-Khwarizmi Institute of Computer Science, Human-Centered Robotics Lab";
+                    break;
+                case "0x00000C7E":
+                    return "Technische Universität München, Fakultät für Informatik, Lehrstuhl für Robotik, Künstliche Intelligenz und Echtzeitsysteme (Informatik 6)";
+                    break;
+                case "0x00000C7F":
+                    return "Northrop Grumman Sperry Marine B.V., German Branch";
+                    break;
+
+                case "0x00000C80":
+                    return "Technical University of Munich, Department of Electrical and Computer Engineering, Institute for Cognitive Systems (ICS)";
+                    break;
+                case "0x00000C81":
+                    return "TNO";
+                    break;
+                case "0x00000C82":
+                    return "IK Electronic Manufacturing Services S.L.U";
+                    break;
+                case "0x00000C83":
+                    return "Ningbo Schleicher Technology Group Co., Ltd.";
+                    break;
+                case "0x00000C84":
+                    return "TOWA Corporation";
+                    break;
+                case "0x00000C85":
+                    return "Amacker Automation";
+                    break;
+                case "0x00000C86":
+                    return "Hardt B.V.";
+                    break;
+                case "0x00000C87":
+                    return "Anurichip System Inc.";
+                    break;
+                case "0x00000C88":
+                    return "MESCO Engineering GmbH";
+                    break;
+                case "0x00000C89":
+                    return "Oki Electric Industry Co., Ltd.";
+                    break;
+                case "0x00000C8A":
+                    return "Motorsports Electronics, LLC";
+                    break;
+                case "0x00000C8B":
+                    return "PPT Co., Ltd.";
+                    break;
+                case "0x00000C8C":
+                    return "KYEONGIN TECH Co., Ltd.";
+                    break;
+                case "0x00000C8D":
+                    return "SAS GYS";
+                    break;
+                case "0x00000C8E":
+                    return "Cyber Surgery S.L.";
+                    break;
+                case "0x00000C8F":
+                    return "CASTEK Mechatron Ind Co., Ltd.";
+                    break;
+
+                case "0x00000C90":
+                    return "ERMAKSAN MAKINA SANAYI VE TICARET A.S.";
+                    break;
+                case "0x00000C91":
+                    return "Elbit Systems Land Ltd.";
+                    break;
+                case "0x00000C93":
+                    return "Javox Solutions GmbH";
+                    break;
+                case "0x00000C94":
+                    return "Resilient Power Systems, Inc.";
+                    break;
+                case "0x00000C95":
+                    return "CMRO Engineering";
+                    break;
+                case "0x00000C96":
+                    return "Teknic, Inc.";
+                    break;
+                case "0x00000C97":
+                    return "Lug Healthcare Technology S.L.";
+                    break;
+                case "0x00000C98":
+                    return "Michael Koch GmbH";
+                    break;
+                case "0x00000C99":
+                    return "UEC Scientific Instrument Co., Ltd.";
+                    break;
+                case "0x00000C9A":
+                    return "WEISS GmbH";
+                    break;
+                case "0x00000C9B":
+                    return "NITTOSEIKO CO., LTD.";
+                    break;
+                case "0x00000C9C":
+                    return "WANTS Inc.";
+                    break;
+                case "0x00000C9D":
+                    return "Tecnosens S.p.A.";
+                    break;
+                case "0x00000C9F":
+                    return "Print Web International, Inc.";
+                    break;
+
+                case "0x00000CA0":
+                    return "FAIR Innovation(Suzhou) Robot System Co.,Ltd.";
+                    break;
+                case "0x00000CA1":
+                    return "OptiViz Technology, Inc.";
+                    break;
+                case "0x00000CA2":
+                    return "Shanghai YISU Information Technologies Co.,Ltd.";
+                    break;
+                case "0x00000CA3":
+                    return "Re S.p.A. Controlli Industriali";
+                    break;
+                case "0x00000CA4":
+                    return "Canon Medical Systems Corporation";
+                    break;
+                case "0x00000CA5":
+                    return "Suzhou Geyuan Electric Co., Ltd.";
+                    break;
+                case "0x00000CA6":
+                    return "Shenzhen MICFIND Drive Technology Co., Ltd.";
+                    break;
+                case "0x00000CA7":
+                    return "SECOM SRL";
+                    break;
+                case "0x00000CA8":
+                    return "Panasonic Smart Factory Solutions Co., Ltd.";
+                    break;
+                case "0x00000CA9":
+                    return "BeiJing Agile Robots Technology Co.,Ltd.";
+                    break;
+                case "0x00000CAB":
+                    return "Taiwan Innovative Space, Inc.";
+                    break;
+                case "0x00000CAC":
+                    return "ABB Technikerschule";
+                    break;
+                case "0x00000CAD":
+                    return "NOMOS Srl Tecnologie del Software";
+                    break;
+                case "0x00000CAF":
+                    return "JSCC AUTOMATION (XIAMEN) LTD.";
+                    break;
+
+                case "0x00000CB0":
+                    return "GMVT GmbH";
+                    break;
+                case "0x00000CB1":
+                    return "Swisslog AG";
+                    break;
+                case "0x00000CB2":
+                    return "Therm-x of California Inc.";
+                    break;
+                case "0x00000CB3":
+                    return "CogniMade s.r.l.";
+                    break;
+                case "0x00000CB4":
+                    return "SERT METAL SAS";
+                    break;
+                case "0x00000CB5":
+                    return "Kardanan Shargh Co.";
+                    break;
+                case "0x00000CB6":
+                    return "MPEX ROBOTICS KFT.";
+                    break;
+                case "0x00000CB7":
+                    return "Critical Link LLC";
+                    break;
+                case "0x00000CB8":
+                    return "Flokontrol Endüstriyel Otomasyon San. ve Tic. Koll. Sti.";
+                    break;
+                case "0x00000CB9":
+                    return "Nidec Avtron Automation Corporation";
+                    break;
+                case "0x00000CBA":
+                    return "Alphasystem Co.,Ltd.";
+                    break;
+                case "0x00000CBB":
+                    return "Carendes BVBA";
+                    break;
+                case "0x00000CBC":
+                    return "Eltorque AS";
+                    break;
+                case "0x00000CBD":
+                    return "University of Alberta, Faculty of Engineering";
+                    break;
+                case "0x00000CBE":
+                    return "TOSIL Systems Private Limited";
+                    break;
+                case "0x00000CBF":
+                    return "DELTA I/O CO.,LTD";
+                    break;
+
+                case "0x00000CC0":
+                    return "Sipronika d.o.o.";
+                    break;
+                case "0x00000CC1":
+                    return "TESA SARL";
+                    break;
+                case "0x00000CC2":
+                    return "NXP B.V.";
+                    break;
+                case "0x00000CC3":
+                    return "HERMOS AG";
+                    break;
+                case "0x00000CC4":
+                    return "Svaya Robotics Pvt. Ltd.";
+                    break;
+                case "0x00000CC5":
+                    return "ARRIVAL LTD.";
+                    break;
+                case "0x00000CC6":
+                    return "Mold-Masters (2007) Limited";
+                    break;
+                case "0x00000CC8":
+                    return "Hypex, d.o.o.";
+                    break;
+                case "0x00000CC9":
+                    return "Sansei Technologies, Inc.";
+                    break;
+                case "0x00000CCA":
+                    return "Shanghai United Imaging Healthcare Co., Ltd.";
+                    break;
+                case "0x00000CCB":
+                    return "Seoul National University";
+                    break;
+                case "0x00000CCC":
+                    return "3C MACHINERY CO.,LTD.";
+                    break;
+                case "0x00000CCD":
+                    return "CHINO CORPORATION";
+                    break;
+                case "0x00000CCE":
+                    return "WUHAN MOTUS TECH CO.,LTD.";
+                    break;
+                case "0x00000CCF":
+                    return "TPC Mechatronics Corp.";
+                    break;
+
+                case "0x00000CD0":
+                    return "Philips Medical Systems DMC GmbH";
+                    break;
+                case "0x00000CD1":
+                    return "TAZMO Co., Ltd.";
+                    break;
+                case "0x00000CD2":
+                    return "Robo-Technology GmbH";
+                    break;
+                case "0x00000CD3":
+                    return "Vivo Surgical Private Limited";
+                    break;
+                case "0x00000CD4":
+                    return "Defence Research and Development Organisation, Research & Development Establishment (Engineers)";
+                    break;
+                case "0x00000CD5":
+                    return "Jiangsu Shenzhou Semiconductor Technology Co., Ltd.";
+                    break;
+                case "0x00000CD6":
+                    return "GrainSoft";
+                    break;
+                case "0x00000CD7":
+                    return "MECCAD Sàrl";
+                    break;
+                case "0x00000CD9":
+                    return "National Formosa University, Department of Aeronautical Engineering, Innovative Design and Energy Application Lab. (IDEALab)";
+                    break;
+                case "0x00000CDA":
+                    return "TOS Inc.";
+                    break;
+                case "0x00000CDB":
+                    return "GTM Testing and Metrology GmbH";
+                    break;
+                case "0x00000CDC":
+                    return "První Signální, a.s.";
+                    break;
+                case "0x00000CDD":
+                    return "Georgia Institute of Technology, ECE Department, Center for Distributed Energy (CDE)";
+                    break;
+                case "0x00000CDE":
+                    return "Plexim GmbH";
+                    break;
+                case "0x00000CDF":
+                    return "Automation Industrial, Inc.";
+                    break;
+
+                case "0x00000CE0":
+                    return "Regloplas AG";
+                    break;
+                case "0x00000CE1":
+                    return "Azureus Solutions Ltd";
+                    break;
+                case "0x00000CE2":
+                    return "Safran Electronics & Defense SAS";
+                    break;
+                case "0x00000CE3":
+                    return "Sogeti Nederland B.V.";
+                    break;
+                case "0x00000CE4":
+                    return "AKRYVIA SAS";
+                    break;
+                case "0x00000CE5":
+                    return "FIRSTEC CO.,LTD.";
+                    break;
+                case "0x00000CE6":
+                    return "M.D. Micro Detectors S.p.A.";
+                    break;
+                case "0x00000CE7":
+                    return "Dataletics GmbH";
+                    break;
+                case "0x00000CE8":
+                    return "Korea Institute of Machinery & Materials, Advanced Manufacturing Systems Research Division, Department of Ultra-Precision Machines and Systems";
+                    break;
+                case "0x00000CE9":
+                    return "AEG Identifikationssysteme GmbH";
+                    break;
+                case "0x00000CEA":
+                    return "CEA LIST";
+                    break;
+                case "0x00000CEB":
+                    return "Shenyang Siasun Digital Drive Co., Ltd.";
+                    break;
+                case "0x00000CEC":
+                    return "TissUse GmbH";
+                    break;
+                case "0x00000CED":
+                    return "LithExx-Systems GmbH";
+                    break;
+                case "0x00000CEE":
+                    return "AICRA s.r.o.";
+                    break;
+                case "0x00000CEF":
+                    return "JANOME Corporation";
+                    break;
+
+                case "0x00000CF0":
+                    return "Cambridge Filter Corporation";
+                    break;
+                case "0x00000CF2":
+                    return "Celox Photonics Technology Inc.";
+                    break;
+                case "0x00000CF3":
+                    return "swissQprint AG";
+                    break;
+                case "0x00000CF4":
+                    return "COMFILE Technology INC.";
+                    break;
+                case "0x00000CF5":
+                    return "Chengdu Vantron Technology Co., Ltd.";
+                    break;
+                case "0x00000CF6":
+                    return "Duale Hochschule Baden-Württemberg Mannheim, Fakultät Technik, Studiengang Elektrotechnik";
+                    break;
+                case "0x00000CF7":
+                    return "Tesollo Inc.";
+                    break;
+                case "0x00000CF8":
+                    return "Roundpeg Technologies GmbH";
+                    break;
+                case "0x00000CF9":
+                    return "Tianjin Research Institute of Electric Science Co.,Ltd.";
+                    break;
+                case "0x00000CFB":
+                    return "Chicago Flyhouse, Inc.";
+                    break;
+                case "0x00000CFC":
+                    return "Vectis Drive Inc.";
+                    break;
+                case "0x00000CFD":
+                    return "IMSTec GmbH";
+                    break;
+                case "0x00000CFE":
+                    return "Leibniz Universität Hannover, Fakultät für Elektrotechnik und Informatik, Institut für Antriebssysteme und Leistungselektronik";
+                    break;
+                case "0x00000CFF":
+                    return "Coretronic Corporation";
+                    break;
+
+                case "0x00000D00":
+                    return "SOTHIS CIC TECH (Shanghai) Co., Ltd";
+                    break;
+                case "0x00000D01":
+                    return "The Manufacturing Technology Centre Limited";
+                    break;
+                case "0x00000D02":
+                    return "Tramper Technology B.V.";
+                    break;
+                case "0x00000D03":
+                    return "Reaction Dynamics Lab Inc.";
+                    break;
+                case "0x00000D04":
+                    return "Aeoon Technologies GmbH";
+                    break;
+                case "0x00000D05":
+                    return "John Deere GmbH & Co. KG, John Deere Werk Mannheim";
+                    break;
+                case "0x00000D06":
+                    return "Co.fin Elettronica s.r.l.";
+                    break;
+                case "0x00000D07":
+                    return "CISWORKS GmbH & Co. KG";
+                    break;
+                case "0x00000D09":
+                    return "Lucas-Nülle GmbH";
+                    break;
+                case "0x00000D0A":
+                    return "Battelle Memorial Institute";
+                    break;
+                case "0x00000D0B":
+                    return "Fine Logic Co., Ltd.";
+                    break;
+                case "0x00000D0C":
+                    return "PACK'R SAS";
+                    break;
+                case "0x00000D0D":
+                    return "HP Indigo Ltd.";
+                    break;
+                case "0x00000D0E":
+                    return "EMBEDDED SYSTEMS INC. dba ESI MOTION";
+                    break;
+                case "0x00000D0F":
+                    return "DEIF A/S";
+                    break;
+
+                case "0x00000D10":
+                    return "CEDRAT TECHNOLOGIES SA";
+                    break;
+                case "0x00000D12":
+                    return "Givi Misure S.r.l. a socio unico";
+                    break;
+                case "0x00000D13":
+                    return "ZETES Industries S.A.";
+                    break;
+                case "0x00000D14":
+                    return "Ideaflex sp. z o.o.";
+                    break;
+                case "0x00000D15":
+                    return "Emsiso d.o.o.";
+                    break;
+                case "0x00000D16":
+                    return "SysTec Systemtechnik und Industrieautomation GmbH";
+                    break;
+                case "0x00000D17":
+                    return "Soehnle Industrial Solutions GmbH";
+                    break;
+                case "0x00000D18":
+                    return "Unizen Technologies Pvt. Ltd.";
+                    break;
+                case "0x00000D19":
+                    return "White Oaks Engineering, LLC";
+                    break;
+                case "0x00000D1A":
+                    return "Beijing BiTa Technical Services Co., Ltd.";
+                    break;
+                case "0x00000D1B":
+                    return "Nordmann GmbH & Co. KG";
+                    break;
+                case "0x00000D1C":
+                    return "Seven Metal Corp.";
+                    break;
+                case "0x00000D1D":
+                    return "Festo Korea Co., Ltd.";
+                    break;
+                case "0x00000D1E":
+                    return "Hyperspectral Sciences, Inc.";
+                    break;
+                case "0x00000D1F":
+                    return "AA EDM Corporation";
+                    break;
+
+                case "0x00000D20":
+                    return "Corelase Oy";
+                    break;
+                case "0x00000D21":
+                    return "CETHIK Group Co., Ltd";
+                    break;
+                case "0x00000D22":
+                    return "LIVSMED, Inc.";
+                    break;
+                case "0x00000D23":
+                    return "Hochschule München";
+                    break;
+                case "0x00000D24":
+                    return "WSA:Automation";
+                    break;
+                case "0x00000D26":
+                    return "Universität Stuttgart, Fakultät Konstruktions-, Produktions- und Fahrzeugtechnik, Institut für Systemdynamik";
+                    break;
+                case "0x00000D27":
+                    return "AXIOS 3D® Services GmbH";
+                    break;
+                case "0x00000D28":
+                    return "CASCINATION AG";
+                    break;
+                case "0x00000D29":
+                    return "Kontinent ETS LLC";
+                    break;
+                case "0x00000D2B":
+                    return "STXI Motion Ltd.";
+                    break;
+                case "0x00000D2C":
+                    return "RFHIC Corporation";
+                    break;
+                case "0x00000D2D":
+                    return "Technische Universität Wien, Fakultät für Maschinenwesen und Betriebswissenschaften, Institut für Fertigungstechnik und Photonische Technologien";
+                    break;
+                case "0x00000D2E":
+                    return "RT Corporation";
+                    break;
+                case "0x00000D2F":
+                    return "Automation Controls Group, a Division of Milwaukee Electronics Corporation";
+                    break;
+
+                case "0x00000D30":
+                    return "AIRS Medical Inc.";
+                    break;
+                case "0x00000D31":
+                    return "Cardinal Scale Manufacturing Company";
+                    break;
+                case "0x00000D32":
+                    return "Mehta Cad Cam Systems Pvt. Ltd.";
+                    break;
+                case "0x00000D33":
+                    return "TWERD Power Electronics";
+                    break;
+                case "0x00000D34":
+                    return "Canon Nanotechnologies Inc.";
+                    break;
+                case "0x00000D35":
+                    return "Karlsruher Institut für Technologie, Fakultät für Elektrotechnik und Informationstechnik, Institut für Elektroenergiesysteme und Hochspannungstechnik";
+                    break;
+                case "0x00000D36":
+                    return "Beijing Grand Hitek Co., Ltd.";
+                    break;
+                case "0x00000D38":
+                    return "Y2 Corporation";
+                    break;
+                case "0x00000D39":
+                    return "Posts and Telecommunications Institute of Technology, Ho Chi Minh City (PTIT-HCM), Electronics 2 Department, Automatic Control Division";
+                    break;
+                case "0x00000D3A":
+                    return "RoPeM Solution Co., Ltd.";
+                    break;
+                case "0x00000D3B":
+                    return "SEPION TECHNOLOGY INC.";
+                    break;
+                case "0x00000D3C":
+                    return "TRUMPF Lasersystems for Semiconductor Manufacturing GmbH";
+                    break;
+                case "0x00000D3D":
+                    return "Sagentia Limited";
+                    break;
+                case "0x00000D3F":
+                    return "ColorPartner GmbH";
+                    break;
+
+                case "0x00000D40":
+                    return "Dongguan embedfire Electronic Technology Co., Ltd.";
+                    break;
+                case "0x00000D41":
+                    return "Cell-Vit Co., Ltd.";
+                    break;
+                case "0x00000D42":
+                    return "East China University of Science and Technology, School of Chemistry and Molecular Engineering, Nanopore Single Molecule Detection Laboratory";
+                    break;
+                case "0x00000D43":
+                    return "Vanwyk Systems B.V.";
+                    break;
+                case "0x00000D44":
+                    return "NGK INSULATORS, LTD.";
+                    break;
+                case "0x00000D45":
+                    return "NIHON KOSHUHA Co., Ltd.";
+                    break;
+                case "0x00000D46":
+                    return "HEMERIA SAS";
+                    break;
+                case "0x00000D47":
+                    return "Qmax Systems India Pvt. Ltd.";
+                    break;
+                case "0x00000D48":
+                    return "TENDLY ENTERPRISES CO., LTD.";
+                    break;
+                case "0x00000D49":
+                    return "Chenghuan Technology (Shenzhen) Co., Ltd.";
+                    break;
+                case "0x00000D4A":
+                    return "Shanghai Weihong Automation Technology Co., Ltd.";
+                    break;
+                case "0x00000D4B":
+                    return "Uster Technologies (China) Co., Ltd.";
+                    break;
+                case "0x00000D4C":
+                    return "MGI Tech Co., Ltd.";
+                    break;
+                case "0x00000D4D":
+                    return "KELI MOTOR GROUP CO., LTD.";
+                    break;
+                case "0x00000D4E":
+                    return "Carlo Gavazzi Ltd. (Malta)";
+                    break;
+
+                case "0x00000D50":
+                    return "Optiflux NV";
+                    break;
+                case "0x00000D51":
+                    return "Mistral Solutions Pvt. Ltd.";
+                    break;
+                case "0x00000D52":
+                    return "Fraunhofer-Institut für Windenergiesysteme IWES";
+                    break;
+                case "0x00000D53":
+                    return "Enekom Enerji Bilisim ve Muhendislik San Tic A.S.";
+                    break;
+                case "0x00000D54":
+                    return "MASEP Medical Science & Technology Development (Shenzhen) Co., Ltd.";
+                    break;
+                case "0x00000D55":
+                    return "Shenzhen Soogeen Electronics Co., LTD.";
+                    break;
+                case "0x00000D56":
+                    return "UJin Technology, Inc.";
+                    break;
+                case "0x00000D57":
+                    return "TOSEI SYSTEMS CO., LTD.";
+                    break;
+                case "0x00000D58":
+                    return "TAIYO, LTD.";
+                    break;
+                case "0x00000D59":
+                    return "Alloc Corporation";
+                    break;
+                case "0x00000D5A":
+                    return "WaferPath, Inc.";
+                    break;
+                case "0x00000D5B":
+                    return "Genesis Dimensions LLC";
+                    break;
+                case "0x00000D5C":
+                    return "Zhuhai Tai-Action Electronics Co., Ltd.";
+                    break;
+                case "0x00000D5D":
+                    return "JSC Diakont";
+                    break;
+                case "0x00000D5E":
+                    return "SCHNEKON Automation (Shanghai) Co.,Ltd.";
+                    break;
+                case "0x00000D5F":
+                    return "NSI-MI Technologies LLC";
+                    break;
+
+                case "0x00000D60":
+                    return "JD Squared, Inc.";
+                    break;
+                case "0x00000D61":
+                    return "Sanctuary Cognitive Systems Corporation";
+                    break;
+                case "0x00000D62":
+                    return "NICEMACH CO., LTD.";
+                    break;
+                case "0x00000D63":
+                    return "ERTURK MAKINE SAN TIC. LTD. STI";
+                    break;
+                case "0x00000D64":
+                    return "Surgnova Healthcare Technologies (Beijing) Co., Ltd.";
+                    break;
+                case "0x00000D65":
+                    return "soniKKs® Ultrasonics Technology GmbH";
+                    break;
+                case "0x00000D66":
+                    return "NBB Controls + Components GmbH";
+                    break;
+                case "0x00000D68":
+                    return "OOO 'NPP Mera'";
+                    break;
+                case "0x00000D69":
+                    return "Poulten Selfe & Lee Ltd";
+                    break;
+                case "0x00000D6A":
+                    return "Monolithic Power Systems, Inc.";
+                    break;
+                case "0x00000D6B":
+                    return "UK Atomic Energy Authority, RACE";
+                    break;
+                case "0x00000D6C":
+                    return "PULS GmbH";
+                    break;
+                case "0x00000D6D":
+                    return "FUGEN CO., LTD";
+                    break;
+                case "0x00000D6E":
+                    return "coboworx GmbH";
+                    break;
+                case "0x00000D6F":
+                    return "A&D Company, Limited";
+                    break;
+
+                case "0x00000D70":
+                    return "JOOWON TECHNOLOGY Co., Ltd.";
+                    break;
+                case "0x00000D71":
+                    return "ODC Co., Ltd.";
+                    break;
+                case "0x00000D72":
+                    return "Asyril SA";
+                    break;
+                case "0x00000D73":
+                    return "Robotics Robotics (Shenzhen) Ltd.";
+                    break;
+                case "0x00000D74":
+                    return "Automated Precision Inc.";
+                    break;
+                case "0x00000D75":
+                    return "Özyegin University, Faculty of Engineering, Department of Mechanical Engineering, Robotics Laboratory";
+                    break;
+                case "0x00000D76":
+                    return "Fujikura Ltd.";
+                    break;
+                case "0x00000D77":
+                    return "Relativity Space, Inc.";
+                    break;
+                case "0x00000D78":
+                    return "Hangzhou Core Control Robotics CO.,LTD";
+                    break;
+                case "0x00000D79":
+                    return "Beijing Shangcon Intelligent Technology Co., Ltd.";
+                    break;
+                case "0x00000D7A":
+                    return "Panasonic Advanced Technology Development Co.,Ltd.";
+                    break;
+                case "0x00000D7B":
+                    return "Philips Electronics Nederland B.V., Philips Engineering Solutions";
+                    break;
+                case "0x00000D7C":
+                    return "Emoco Labs AB";
+                    break;
+                case "0x00000D7D":
+                    return "Otto Heuss GmbH";
+                    break;
+                case "0x00000D7F":
+                    return "PRAUCON";
+                    break;
+
+                case "0x00000D80":
+                    return "Ashby Microsystems Ltd";
+                    break;
+                case "0x00000D81":
+                    return "Suzhou Veichi Electric Co., Ltd";
+                    break;
+                case "0x00000D82":
+                    return "SCAME SISTEMI S.R.L.";
+                    break;
+                case "0x00000D83":
+                    return "J.M. Voith SE & Co KG";
+                    break;
+                case "0x00000D84":
+                    return "Sier Motor (Dongguan) Co., Ltd.";
+                    break;
+                case "0x00000D85":
+                    return "Shanghai Wingbow Precision Technology Co.,Ltd.";
+                    break;
+                case "0x00000D86":
+                    return "Mertech Elektronik Arge Sanayi ve Ticaret Anonim Sirketi";
+                    break;
+                case "0x00000D87":
+                    return "Summa nv";
+                    break;
+                case "0x00000D88":
+                    return "Bucher Hydraulics AG Frutigen";
+                    break;
+                case "0x00000D89":
+                    return "Pulse Structural Monitoring Ltd";
+                    break;
+                case "0x00000D8A":
+                    return "Sanovo Technology Netherlands B.V.";
+                    break;
+                case "0x00000D8B":
+                    return "ACCRETECH POWERTRO SYSTEM CO., LTD.";
+                    break;
+                case "0x00000D8C":
+                    return "TOYOTA INDUSTRIES CORPORATION";
+                    break;
+                case "0x00000D8D":
+                    return "KOEM CO., LTD.";
+                    break;
+                case "0x00000D8E":
+                    return "Beijing NAURA Microelectronics Equipment Co., Ltd.";
+                    break;
+                case "0x00000D8F":
+                    return "NEXT Prototypes e.V.";
+                    break;
+
+                case "0x00000D90":
+                    return "Ningbo Advance Automation Technology Co.,Ltd.";
+                    break;
+                case "0x00000D91":
+                    return "TRUMPF Laser GmbH";
+                    break;
+                case "0x00000D92":
+                    return "Asensus Surgical, Inc.";
+                    break;
+                case "0x00000D93":
+                    return "Exluce Inc.";
+                    break;
+                case "0x00000D94":
+                    return "Computer Gesteuerte Systeme GmbH";
+                    break;
+                case "0x00000D95":
+                    return "ALSTOM Belgium SA";
+                    break;
+                case "0x00000D96":
+                    return "HG-Tronik";
+                    break;
+                case "0x00000D97":
+                    return "HAFNER Pneumatika Kft.";
+                    break;
+                case "0x00000D98":
+                    return "Intigia S.L.";
+                    break;
+                case "0x00000D99":
+                    return "Next Generation Rail Technologies S.L.";
+                    break;
+                case "0x00000D9A":
+                    return "APEX Semiconductors (USA) Co., Ltd.";
+                    break;
+                case "0x00000D9B":
+                    return "True Velocity Ammunition, LLC";
+                    break;
+                case "0x00000D9C":
+                    return "Anderson Electric Controls, Inc.";
+                    break;
+                case "0x00000D9E":
+                    return "Exonetik Inc.";
+                    break;
+                case "0x00000D9F":
+                    return "R&D Test Systems A/S";
+                    break;
+
+                case "0x00000DA0":
+                    return "SDP (Shanghai) Industrial Corporation Ltd.";
+                    break;
+                case "0x00000DA1":
+                    return "NOVASEN Co., Ltd.";
+                    break;
+                case "0x00000DA2":
+                    return "RTDS Technologies Inc.";
+                    break;
+                case "0x00000DA3":
+                    return "CPI Vertex Antennentechnik GmbH";
+                    break;
+                case "0x00000DA4":
+                    return "Eindhoven Medical Robotics B.V.";
+                    break;
+                case "0x00000DA5":
+                    return "QEI Corporation";
+                    break;
+                case "0x00000DA6":
+                    return "Reliste Ges.m.b.H.";
+                    break;
+                case "0x00000DA8":
+                    return "PostProcess Technologies, Inc.";
+                    break;
+                case "0x00000DA9":
+                    return "SEcontrol Automation (Shanghai) Co., Ltd.";
+                    break;
+                case "0x00000DAA":
+                    return "Phoenix Contact Asia-Pacific (Nanjing) Co., Ltd.";
+                    break;
+                case "0x00000DAB":
+                    return "Heal Force Huayao Biological Technology (Shanghai) Co., Ltd";
+                    break;
+                case "0x00000DAC":
+                    return "Spellman High Voltage Electronics Ltd.";
+                    break;
+                case "0x00000DAD":
+                    return "Wipro GE Healthcare Private Limited";
+                    break;
+                case "0x00000DAE":
+                    return "KOFLOC Corp.";
+                    break;
+                case "0x00000DAF":
+                    return "Niryo SAS";
+                    break;
+
+                case "0x00000DB0":
+                    return "Friedrich Maschinen- und Werkzeugbau GmbH";
+                    break;
+                case "0x00000DB1":
+                    return "Togatec Sàrl";
+                    break;
+                case "0x00000DB2":
+                    return "EDAG Engineering GmbH";
+                    break;
+                case "0x00000DB3":
+                    return "Arius Technology Inc.";
+                    break;
+                case "0x00000DB4":
+                    return "ROKKO SYSTEMS PTE LTD";
+                    break;
+                case "0x00000DB5":
+                    return "Novotechnik Messwertaufnehmer OHG";
+                    break;
+                case "0x00000DB6":
+                    return "Shanghai Chenzhu Instrument Co.,LTD";
+                    break;
+                case "0x00000DB7":
+                    return "Yantai Free Intelligent Equipment Co.,Ltd.";
+                    break;
+                case "0x00000DB8":
+                    return "The University of Newcastle, College of Engineering Science and Environment, School of Engineering";
+                    break;
+                case "0x00000DB9":
+                    return "California Polytechnic State University, College of Engineering, Computer Engineering Department";
+                    break;
+                case "0x00000DBA":
+                    return "PRACTEK Technology Co., Ltd.";
+                    break;
+                case "0x00000DBC":
+                    return "Ningbo Longtai Medical Technology Co., Ltd.";
+                    break;
+                case "0x00000DBE":
+                    return "TechMagic, Inc.";
+                    break;
+                case "0x00000DBF":
+                    return "Bagtech International Pty Ltd";
+                    break;
+
+                case "0x00000DC0":
+                    return "DCO Systems Ltd";
+                    break;
+                case "0x00000DC1":
+                    return "Shenzhen Pengxing Intelligence Research Co., Ltd.";
+                    break;
+                case "0x00000DC2":
+                    return "Sunny Instruments Singapore Pte Ltd";
+                    break;
+                case "0x00000DC3":
+                    return "Tokyo Denki University, School of Science and Technology for Future Life, Department of Robotics and Mechatronics";
+                    break;
+                case "0x00000DC4":
+                    return "RMD Engineering Inc.";
+                    break;
+                case "0x00000DC5":
+                    return "Ganzhou Zhongke TOYODA Intelligent Equipment Technology Co., Ltd.";
+                    break;
+                case "0x00000DC6":
+                    return "&Feurer Automation AG";
+                    break;
+                case "0x00000DC8":
+                    return "PLC2 Design GmbH";
+                    break;
+                case "0x00000DC9":
+                    return "Elesa S.p.A.";
+                    break;
+                case "0x00000DCA":
+                    return "SHENYANG KING CAREER TECHNOLOGY CO.,LTD.";
+                    break;
+                case "0x00000DCB":
+                    return "NexCOBOT Taiwan Co., Ltd.";
+                    break;
+                case "0x00000DCC":
+                    return "HOERBIGER Flow Control GmbH";
+                    break;
+                case "0x00000DCE":
+                    return "KRONO-SAFE, SAS";
+                    break;
+                case "0x00000DCF":
+                    return "Merz Maschinenfabrik GmbH";
+                    break;
+
+                case "0x00000DD0":
+                    return "EKS InTec GmbH";
+                    break;
+                case "0x00000DD1":
+                    return "HiSilicon (Shanghai) Technologies Co., Ltd.";
+                    break;
+                case "0x00000DD2":
+                    return "Jiangsu JITRI Sioux Technologies Co.,Ltd.";
+                    break;
+                case "0x00000DD3":
+                    return "ConTeK, spol. s.r.o.";
+                    break;
+                case "0x00000DD4":
+                    return "Dr. Hubert GmbH";
+                    break;
+                case "0x00000DD5":
+                    return "DELTATEC s.a.";
+                    break;
+                case "0x00000DD6":
+                    return "ShangHai LeiTong Technology Center Co., Ltd.";
+                    break;
+                case "0x00000DD7":
+                    return "Shanghai Xinrui Drive Technology Co., Ltd.";
+                    break;
+                case "0x00000DD8":
+                    return "Macnica Galaxy International Limited";
+                    break;
+                case "0x00000DDA":
+                    return "PICODE Corp.";
+                    break;
+                case "0x00000DDB":
+                    return "VGD Engineering Ltd.";
+                    break;
+                case "0x00000DDC":
+                    return "WIRobotics Inc.";
+                    break;
+                case "0x00000DDD":
+                    return "Xingyu Electron (NINGBO) Co.,Ltd.";
+                    break;
+                case "0x00000DDE":
+                    return "Yamaki Electric Corporation";
+                    break;
+                case "0x00000DDF":
+                    return "MST Co., Ltd.";
+                    break;
+
+                case "0x00000DE0":
+                    return "Brinkmann Electronic Berlin GmbH";
+                    break;
+                case "0x00000DE1":
+                    return "Mazor Robotics Ltd.";
+                    break;
+                case "0x00000DE2":
+                    return "Center for Power Electronics and Drives";
+                    break;
+                case "0x00000DE3":
+                    return "SINTEF Energi AS";
+                    break;
+                case "0x00000DE4":
+                    return "Suzhou ST-Intelligence Technology Co., Ltd.";
+                    break;
+                case "0x00000DE5":
+                    return "GEFASOFT Automatisierung und Software GmbH Regensburg";
+                    break;
+                case "0x00000DE6":
+                    return "Shenzhen AS-AI Technology Co., Ltd.";
+                    break;
+                case "0x00000DE7":
+                    return "Shenzhen Beilai Technology Co.,Ltd";
+                    break;
+                case "0x00000DE8":
+                    return "PETER HIRT GmbH";
+                    break;
+                case "0x00000DE9":
+                    return "ADTEC Technology Inc.";
+                    break;
+                case "0x00000DEA":
+                    return "SEMICS Inc.";
+                    break;
+                case "0x00000DEB":
+                    return "Digitronik Labs Inc.";
+                    break;
+                case "0x00000DEC":
+                    return "University of Denver, Ritchie School of Engineering and Computer Science, Department of Mechanical and Materials Engineering, Robotics, Locomotion, and Control Lab";
+                    break;
+                case "0x00000DED":
+                    return "Capto UG (haftungsbeschränkt)";
+                    break;
+                case "0x00000DEE":
+                    return "DST Dräxlmaier Systemtechnik GmbH";
+                    break;
+                case "0x00000DEF":
+                    return "Rototest International AB";
+                    break;
+
+                case "0x00000DF0":
+                    return "Shenzhen DH-Robotics Technology Co.,Ltd.";
+                    break;
+                case "0x00000DF1":
+                    return "Centre Suisse d'Electronique et de Microtechnique";
+                    break;
+                case "0x00000DF2":
+                    return "DIGALOG Industrie-Mikroelektronik GmbH";
+                    break;
+                case "0x00000DF3":
+                    return "Gevasol Feedback Technologies Ltd.";
+                    break;
+                case "0x00000DF4":
+                    return "Jiangsu Gtake Electric Co., Ltd.";
+                    break;
+                case "0x00000DF5":
+                    return "Thermo Fisher Scientific Inc.";
+                    break;
+                case "0x00000DF6":
+                    return "Stony MicroWorks LTD";
+                    break;
+                case "0x00000DF8":
+                    return "Shanghai Tayor Heavy Industry(Group) Co., Ltd.";
+                    break;
+                case "0x00000DF9":
+                    return "Heartland.Data Inc.";
+                    break;
+                case "0x00000DFA":
+                    return "FLSmidth Pfister GmbH";
+                    break;
+                case "0x00000DFB":
+                    return "Viscom AG";
+                    break;
+                case "0x00000DFC":
+                    return "Toyo Label Co., Ltd.";
+                    break;
+                case "0x00000DFD":
+                    return "Harbin Intelligent Surgery Equipment Co.,Ltd.";
+                    break;
+                case "0x00000DFE":
+                    return "TGA Industries Limited";
+                    break;
+
+                case "0x00000E00":
+                    return "Phase 1 Engineering, LLC";
+                    break;
+                case "0x00000E01":
+                    return "EGON HARIG GmbH";
+                    break;
+                case "0x00000E02":
+                    return "I.A.S.G. Kereskedelmi és Szolgáltató Kft.";
+                    break;
+                case "0x00000E03":
+                    return "MONS University, Faculty of Engineering, Department of Electromagnetism and Telecommunications";
+                    break;
+                case "0x00000E88":
+                    return "Four Technos Co., Ltd.";
+                    break;
+                case "0x00000EC5":
+                    return "E.C.S. Sistemi Elettronici S.p.A";
+                    break;
+                case "0x00000ECD":
+                    return "Dürr Systems AG";
+                    break;
+                case "0x00000EED":
+                    return "Eagle Wing Design";
+                    break;
+                case "0x00000EEE":
+                    return "Espotel Oy";
+                    break;
+                case "0x00000EFA":
+                    return "Foshan Zhiang Technology Co., Ltd.";
+                    break;
+                case "0x00000EFF":
+                    return "FUZHOU FU CHANG WECON ELECTRONIC TECHNOLOGY CO., LTD";
+                    break;
+                case "0x00000F0B":
+                    return "Distalmotion SA";
+                    break;
+                case "0x00000F1A":
+                    return "FIAtec GmbH";
+                    break;
+                case "0x00000F71":
+                    return "JAY Electronique S.A.S.";
+                    break;
+                case "0x00000FA0":
+                    return "KOCH Pac-Systeme GmbH";
+                    break;
+                case "0x00000FAE":
+                    return "Arrow (China) Electronics Trading Co. Ltd., Shenzhen Branch";
+                    break;
+                case "0x00000FCA":
+                    return "Flowsoft Co., Ltd.";
+                    break;
+                case "0x00000FCE":
+                    return "KIKUSUI ELECTRONICS CORP.";
+                    break;
+                case "0x00000FEE":
+                    return "Camera Positioning Systems Inc";
+                    break;
+                case "0x00000FFA":
+                    return "PineSolution Co., Ltd.";
+                    break;
+                case "0x00000FFE":
+                    return "Atel Corp.";
+                    break;
+                case "0x00000FFF":
+                    return "ZEROSYSTEM CO,LTD";
+                    break;
+
+                case "0x00001000":
+                    return "Motiv Robotics, Inc.";
+                    break;
+                case "0x00001001":
+                    return "Ray-Links (Beijing) Technologies Co., Ltd.";
+                    break;
+                case "0x00001008":
+                    return "Rheinmetall Canada Inc.";
+                    break;
+                case "0x00001009":
+                    return "Smart Buildings BVBA";
+                    break;
+                case "0x00001010":
+                    return "NEXTW Technology CO., LTD.";
+                    break;
+                case "0x00001018":
+                    return "GZ Photonics Technology Co., Ltd.";
+                    break;
+                case "0x00001024":
+                    return "Jcast Networks Korea, Inc.";
+                    break;
+                case "0x0000102B":
+                    return "Matrox Electronic Systems Ltd.";
+                    break;
+                case "0x0000103B":
+                    return "VELTRU AG";
+                    break;
+                case "0x00001048":
+                    return "Shibaura Machine Co., Ltd.";
+                    break;
+                case "0x000010FA":
+                    return "Beijing BBF Servo Technology Co.,Ltd.";
+                    break;
+                case "0x00001110":
+                    return "A-KYUNG Motion Inc.";
+                    break;
+                case "0x00001111":
+                    return "MLS Lanny GmbH";
+                    break;
+                case "0x00001122":
+                    return "CanTops";
+                    break;
+                case "0x00001132":
+                    return "FERAG AG";
+                    break;
+                case "0x0000115C":
+                    return "YASKAWA Europe GmbH";
+                    break;
+                case "0x0000115F":
+                    return "K-TRONIC S.r.l";
+                    break;
+                case "0x00001191":
+                    return "Techno Create, Inc.";
+                    break;
+                case "0x00001204":
+                    return "EAST Group Co., Ltd.";
+                    break;
+                case "0x00001219":
+                    return "Contexa SA";
+                    break;
+                case "0x000012A5":
+                    return "i2A Systems Co., Ltd.";
+                    break;
+                case "0x000012AD":
+                    return "VIVAVIS AG";
+                    break;
+                case "0x00001337":
+                    return "rt-labs AB";
+                    break;
+                case "0x00001357":
+                    return "Cosmo Instruments Co.,Ltd.";
+                    break;
+                case "0x000013FE":
+                    return "Advantech Co., Ltd.";
+                    break;
+                case "0x00001430":
+                    return "ChengDu HiCNC Equipment Co., Ltd.";
+                    break;
+                case "0x0000144A":
+                    return "ADLINK TECHNOLOGY INC.";
+                    break;
+                case "0x0000147A":
+                    return "eubus GmbH";
+                    break;
+                case "0x000014FF":
+                    return "Precise Automation, Inc.";
+                    break;
+
+                case "0x00001502":
+                    return "Unico Inc.";
+                    break;
+                case "0x0000150E":
+                    return "Ono Sokki Co. Ltd.";
+                    break;
+                case "0x00001521":
+                    return "CHIKO AIRTEC CO., LTD.";
+                    break;
+                case "0x00001582":
+                    return "TRsystems GmbH";
+                    break;
+                case "0x00001600":
+                    return "Helmholtz-Zentrum Dresden-Rossendorf e.V.";
+                    break;
+                case "0x00001616":
+                    return "DLR Deutsches Zentrum für Luft- und Raumfahrt e.V.";
+                    break;
+                case "0x00001619":
+                    return "Kyoto Denkiki Co.,Ltd.";
+                    break;
+                case "0x0000166D":
+                    return "YXLON International GmbH";
+                    break;
+                case "0x00001688":
+                    return "Shanghai Allinmodule Intelligence Co., Ltd";
+                    break;
+                case "0x00001701":
+                    return "PLR Prüftechnik Linke & Rühe GmbH";
+                    break;
+                case "0x00001729":
+                    return "TOSHIBA MACHINE (CHENNAI) PVT. LTD.";
+                    break;
+                case "0x0000177A":
+                    return "NanJing Aegis-Iron Technology Co., Ltd.";
+                    break;
+                case "0x00001799":
+                    return "K-one Co., Ltd.";
+                    break;
+                case "0x0000179A":
+                    return "Haute Ecole d'Ingénierie et de Gestion du Canton de Vaud du Canton de Vaud";
+                    break;
+                case "0x00001800":
+                    return "TAMAGAWA SEIKI CO.,LTD.";
+                    break;
+                case "0x00001809":
+                    return "LLC «DOMINANTA-STAGE»";
+                    break;
+                case "0x00001810":
+                    return "L & S Electric, Inc.";
+                    break;
+                case "0x00001818":
+                    return "Fujian Huafeng New Materials Co. Ltd.";
+                    break;
+                case "0x00001848":
+                    return "Keysight Technologies Deutschland GmbH";
+                    break;
+                case "0x00001899":
+                    return "Hagenuk Marinekommunikation GmbH";
+                    break;
+                case "0x00001919":
+                    return "SACMI IMOLA S.C.";
+                    break;
+                case "0x00001946":
+                    return "AMADA Co., Ltd.";
+                    break;
+                case "0x00001962":
+                    return "Tomsk State University of Control Systems and Radioelectronics, Institute of Innovations";
+                    break;
+                case "0x00001980":
+                    return "HANMI Semiconductor Co., Ltd.";
+                    break;
+                case "0x00001984":
+                    return "LAUMAS Elettronica s.r.l.";
+                    break;
+                case "0x00001987":
+                    return "DINA Elektronik GmbH";
+                    break;
+                case "0x00001991":
+                    return "Shenzhen Samkoon Technology Co., Ltd.";
+                    break;
+                case "0x00001993":
+                    return "PushCorp, Inc.";
+                    break;
+                case "0x00001997":
+                    return "MEDICAL TECHNOLOGIES Ltd";
+                    break;
+
+                case "0x00001A05":
+                    return "SYN-TEK Automation Co., Ltd.";
+                    break;
+                case "0x00001A21":
+                    return "BySTORM & CO. srl";
+                    break;
+                case "0x00001A85":
+                    return "Michel Van de Wiele NV";
+                    break;
+                case "0x00001A90":
+                    return "IPETRONIK GmbH & Co. KG";
+                    break;
+                case "0x00001B2C":
+                    return "Opal-RT Technologies, Inc.";
+                    break;
+                case "0x00001B66":
+                    return "Sennheiser electronic GmbH & Co. KG";
+                    break;
+
+                case "0x00002000":
+                    return "Motiv Space Systems, Inc.";
+                    break;
+                case "0x00002001":
+                    return "Nextec Technologies 2001 Ltd.";
+                    break;
+                case "0x00002010":
+                    return "Shenzhen Xhorse Electronics Co., Ltd.";
+                    break;
+                case "0x00002018":
+                    return "Thermo Fisher Scientific (Bremen) GmbH";
+                    break;
+                case "0x00002019":
+                    return "Komito Bleu BVBA";
+                    break;
+                case "0x000021DE":
+                    return "Rüthi Electronic AG";
+                    break;
+                case "0x00002055":
+                    return "Bristol Robotics Laboratory";
+                    break;
+                case "0x0000205E":
+                    return "HyVISION SYSTEM Inc.";
+                    break;
+                case "0x00002103":
+                    return "ASE Co., Ltd.";
+                    break;
+                case "0x00002186":
+                    return "Sobal Corporation";
+                    break;
+                case "0x000021C1":
+                    return "ATSENSE INC.";
+                    break;
+                case "0x000022CD":
+                    return "Kinova Inc.";
+                    break;
+                case "0x000022D2":
+                    return "Synapticon GmbH";
+                    break;
+                case "0x00002304":
+                    return "DANIELI AUTOMATION SPA";
+                    break;
+                case "0x00002380":
+                    return "Nanjing SCIYON Automation Group Co., Ltd.";
+                    break;
+                case "0x00002501":
+                    return "EO Technics Co., Ltd.";
+                    break;
+                case "0x00002518":
+                    return "KUBO Technologies LLC";
+                    break;
+                case "0x00002631":
+                    return "MICROPAP ENGINEERING SL";
+                    break;
+                case "0x0000266D":
+                    return "Comet AG";
+                    break;
+                case "0x00002727":
+                    return "Altra Industrial Motion do Brasil Equipamentos Industriais LTDA";
+                    break;
+                case "0x0000276A":
+                    return "Shenzhen SuperFar lntelligent Control Technology Co.,LTD.";
+                    break;
+                case "0x000027AB":
+                    return "Rollmann Elektronik";
+                    break;
+                case "0x00002838":
+                    return "burster präzisionsmesstechnik gmbh & co kg";
+                    break;
+                case "0x00002888":
+                    return "TCOS System Sdn Bhd";
+                    break;
+                case "0x00002939":
+                    return "Zaber Technologies Inc.";
+                    break;
+                case "0x00002AA8":
+                    return "NiniX Technologies NV";
+                    break;
+                case "0x00002ECC":
+                    return "PSK Inc.";
+                    break;
+
+                case "0x000030E0":
+                    return "DotLine GmbH";
+                    break;
+                case "0x000031CF":
+                    return "Schleißheimer Soft- und Hardwareentwicklung GmbH";
+                    break;
+                case "0x00003333":
+                    return "Protokit Robotics Pty Ltd";
+                    break;
+                case "0x00003388":
+                    return "MEIJI ELECTRIC INDUSTRIES CO., LTD.";
+                    break;
+                case "0x000033AA":
+                    return "Sanlab Yazilim Arastirma Gelistirme Enerji Mühendislik San. ve Tic. Ltd. Sti";
+                    break;
+                case "0x000033C3":
+                    return "MatrixGroup (CMS) Pty Ltd";
+                    break;
+                case "0x00003443":
+                    return "4C Electronics Limited";
+                    break;
+                case "0x00003508":
+                    return "PURPOSE CO., LTD";
+                    break;
+                case "0x00003610":
+                    return "eProLinkTek Co., Ltd.";
+                    break;
+                case "0x00003777":
+                    return "UBI, Inc.";
+                    break;
+
+                case "0x00004000":
+                    return "Automotive Parts and Accessory Systems (APAS) R&D Centre";
+                    break;
+                case "0x00004100":
+                    return "Fusion Information Technology Co., Ltd.";
+                    break;
+                case "0x00004123":
+                    return "University of Basel, Faculty of Medicine";
+                    break;
+                case "0x00004150":
+                    return "Korea Advanced Institute of Science and Technology, College of Engineering, Department of Mechanical Engineering, Robotics & Artificial Intelligence Lab";
+                    break;
+                case "0x00004154":
+                    return "acontis technologies GmbH";
+                    break;
+                case "0x00004301":
+                    return "Ocean Optics, Inc.";
+                    break;
+                case "0x00004321":
+                    return "Leadshine Technology Co., Ltd.";
+                    break;
+                case "0x0000434D":
+                    return "Columbus McKinnon Corporation";
+                    break;
+                case "0x00004351":
+                    return "OPCsoft Co., Ltd.";
+                    break;
+                case "0x00004441":
+                    return "Myostat Motion Control Inc.";
+                    break;
+                case "0x00004553":
+                    return "Energy Support Corporation";
+                    break;
+                case "0x00004567":
+                    return "Shanghai University";
+                    break;
+                case "0x00004604":
+                    return "Budker Institute of Nuclear Physics of Siberian Branch Russian Academy of Sciences (BINP SB RAS)";
+                    break;
+                case "0x00004654":
+                    return "FUKOKU TOKAI Co., Ltd.";
+                    break;
+                case "0x00004685":
+                    return "Sandensha Co., Ltd.";
+                    break;
+                case "0x00004711":
+                    return "FRABA B.V.";
+                    break;
+                case "0x00004752":
+                    return "Generic Robotics Limited";
+                    break;
+                case "0x00004957":
+                    return "INTERWORKS Co., Ltd.";
+                    break;
+                case "0x00004B41":
+                    return "Kratzer Automation AG";
+                    break;
+                case "0x00004D43":
+                    return "SKS Control OY";
+                    break;
+                case "0x00004D50":
+                    return "Max-Planck-Institut für extraterestrische Physik";
+                    break;
+                case "0x00004D63":
+                    return "MAGICS Instruments NV";
+                    break;
+
+                case "0x00005050":
+                    return "TSUZUKI DENKI CO., LTD";
+                    break;
+                case "0x00005053":
+                    return "PRESTOSOLUTION Ltd.";
+                    break;
+                case "0x00005071":
+                    return "COTS Technology Co., Ltd.";
+                    break;
+                case "0x00005100":
+                    return "WOORI Technology Inc.";
+                    break;
+                case "0x00005146":
+                    return "Ningbo Qifan Automation Technology Co., LTD";
+                    break;
+                case "0x00005244":
+                    return "Desird Tasarim Arge Uygulama Elektronik Destek Ithalat Ihracat San. ve Tic. Ltd. Sti.";
+                    break;
+                case "0x00005257":
+                    return "Rösch & Walter Industrie-Elektronik GmbH";
+                    break;
+                case "0x00005341":
+                    return "SOHOAID Corporation";
+                    break;
+                case "0x00005368":
+                    return "WUHAN SHARE AUTOMATION TECHNOLOGY CO.,LTD";
+                    break;
+                case "0x00005549":
+                    return "Genius Technology Co., Ltd.";
+                    break;
+                case "0x00005858":
+                    return "Shenyang REDTECH Electric Co., Ltd.";
+                    break;
+                case "0x00005995":
+                    return "Kristl, Seibt & Co GmbH";
+                    break;
+                case "0x00005F0A":
+                    return "Technische Universität Darmstadt, Fachgebiet Elektrotechnik und Informationstechnik";
+                    break;
+                case "0x00005F5F":
+                    return "Maurizio Ferraris (dba Studio Ferraris)";
+                    break;
+
+                case "0x00006084":
+                    return "Gerber Technology Inc.";
+                    break;
+                case "0x000060C8":
+                    return "KUKA Deutschland GmbH";
+                    break;
+                case "0x000060CB":
+                    return "Hitachi Zosen Corporation, Precision Machinery Headquarters, Electronic Control Business Unit";
+                    break;
+                case "0x00006100":
+                    return "Kurvatur A/S";
+                    break;
+                case "0x00006145":
+                    return "Shenzhen Huanan Numerical Control System Co., Ltd.";
+                    break;
+                case "0x00006339":
+                    return "SINTOKOGIO, LTD.";
+                    break;
+                case "0x00006432":
+                    return "Beijing Jingwei Hirain Technologies Co.,Ltd.";
+                    break;
+                case "0x00006482":
+                    return "YUSHIN PRECISION EQUIPMENT CO., LTD.";
+                    break;
+                case "0x00006500":
+                    return "Triductor Technology(Suzhou), Inc";
+                    break;
+                case "0x00006666":
+                    return "Qingdao Technological University, College of Mechanical Engineering";
+                    break;
+                case "0x00006688":
+                    return "Gsolar Power Co., Ltd.";
+                    break;
+                case "0x00006741":
+                    return "NIPPON SIGNAL CO.,LTD.";
+                    break;
+                case "0x00006789":
+                    return "University of Electronic Science and Technology of China";
+                    break;
+                case "0x00006888":
+                    return "Shenzhen Hayhon Equipment Technologies Co., LTD";
+                    break;
+                case "0x00006889":
+                    return "JKControl Co., Ltd.";
+                    break;
+                case "0x00006A64":
+                    return "Beijing Jingdiao Co., Ltd.";
+                    break;
+                case "0x00006A6B":
+                    return "JK Robots Co., Ltd.";
+                    break;
+                case "0x00006C78":
+                    return "N.A.T. GmbH";
+                    break;
+
+                case "0x00007071":
+                    return "Thermal Dynamics Oy";
+                    break;
+                case "0x00007073":
+                    return "Mahr GmbH";
+                    break;
+                case "0x00007170":
+                    return "Hyundai Robotics Co., Ltd.";
+                    break;
+                case "0x00007203":
+                    return "TOYOTA MOTOR CORPORATION";
+                    break;
+                case "0x00007217":
+                    return "YunKe Intelligent Servo Control Technology Co.,Ltd.";
+                    break;
+                case "0x00007220":
+                    return "Shenyang Machine Tool(Group) Research & Design Institute Co,Ltd. Shanghai Branch";
+                    break;
+                case "0x00007595":
+                    return "LS Mecapion Co., Ltd.";
+                    break;
+                case "0x00007604":
+                    return "ONTEC CO., LTD";
+                    break;
+                case "0x00007680":
+                    return "HUNAN SUPER INFORMATION CO., LTD";
+                    break;
+                case "0x00007684":
+                    return "LOGTICS Inc.";
+                    break;
+                case "0x00007715":
+                    return "Foxnum Technology Co., Ltd.";
+                    break;
+                case "0x00007716":
+                    return "Kyoei Electronics Co., Ltd.";
+                    break;
+                case "0x00007777":
+                    return "Sheltronics Control Systems Private Limited";
+                    break;
+                case "0x00007880":
+                    return "NISSIN SYSTEMS Co., Ltd.";
+                    break;
+                case "0x00007978":
+                    return "Junchuang (Xiamen) Automation Technology Co., Ltd.";
+                    break;
+                case "0x00007A17":
+                    return "Tait Towers Manufacturing, LLC";
+                    break;
+                case "0x00007EC5":
+                    return "tec5 AG";
+                    break;
+
+                case "0x00008027":
+                    return "Tech Mahindra Ltd.";
+                    break;
+                case "0x00008086":
+                    return "Intel Corporation";
+                    break;
+                case "0x00008281":
+                    return "China Electric Power Research Institute (CEPRI)";
+                    break;
+                case "0x00008421":
+                    return "Raonwoori Technology";
+                    break;
+                case "0x00008484":
+                    return "PHOENIX CONTACT Power Supplies GmbH";
+                    break;
+                case "0x00008562":
+                    return "Brother Industries Ltd.";
+                    break;
+                case "0x00008632":
+                    return "Shenzhen Anicetech Automation Company Limited";
+                    break;
+                case "0x00008800":
+                    return "Akribis Systems Pte Ltd";
+                    break;
+                case "0x00008818":
+                    return "Shenyang Machine Tool(Group) Research & Design Institute, Shanghai Branch";
+                    break;
+                case "0x00008866":
+                    return "Shanghai DOYEE CNC Technology Co., Ltd.";
+                    break;
+                case "0x00008888":
+                    return "Changzhou Lead-Motion Intelligent Technology Co., Ltd.";
+                    break;
+                case "0x000088F6":
+                    return "Harbin Institute of Technology ShenZhen Graduate School";
+                    break;
+                case "0x000088FA":
+                    return "SIGMATEK GmbH & Co. KG";
+                    break;
+                case "0x00008900":
+                    return "Genesis Systems, IPG Photonics Company";
+                    break;
+                case "0x00008909":
+                    return "AIXTRON SE";
+                    break;
+                case "0x00008A8C":
+                    return "Zhejiang Sci-Tech University, School of Mechanical Engineering and Automation";
+                    break;
+
+                case "0x00009300":
+                    return "Shotover Camera Systems LP";
+                    break;
+                case "0x00009320":
+                    return "Saurer AG, Zweigniederlassung Arbon";
+                    break;
+                case "0x00009403":
+                    return "Vosch Electronic AG";
+                    break;
+                case "0x00009434":
+                    return "Shenzhen Han's Motor S&T Co., Ltd.";
+                    break;
+                case "0x00009450":
+                    return "Zünd Systemtechnik AG";
+                    break;
+                case "0x00009555":
+                    return "Soft Servo Systems, Inc.";
+                    break;
+                case "0x0000962F":
+                    return "Sun Fuel Technologies, Inc.";
+                    break;
+                case "0x00009638":
+                    return "Sungrow Power Supply Co., Ltd.";
+                    break;
+                case "0x00009863":
+                    return "ViE Technologies Sdn. Bhd.";
+                    break;
+                case "0x00009999":
+                    return "Amoy Dynamics (Xiamen) Co., Ltd.";
+                    break;
+                case "0x00009A9A":
+                    return "Xi'an Jiaotong University, School of Electronic and Information Engineering";
+                    break;
+
+                case "0x0000A007":
+                    return "Shenzhen Han's Scanner S&T Co., Ltd.";
+                    break;
+                case "0x0000A0B6":
+                    return "Sanritz Automation Co., Ltd.";
+                    break;
+                case "0x0000A0FB":
+                    return "Toray Engineering D Solutions Co., Ltd.";
+                    break;
+                case "0x0000A1AA":
+                    return "Shanghai AIM Intelligence Technologies Co., Ltd.";
+                    break;
+                case "0x0000A2A2":
+                    return "MDSI Ventures LLC";
+                    break;
+                case "0x0000A600":
+                    return "ASIX s.r.o.";
+                    break;
+                case "0x0000A75E":
+                    return "ATSE. LLC";
+                    break;
+                case "0x0000A8A8":
+                    return "Zhejiang CHINT Electrics Co., Ltd.";
+                    break;
+                case "0x0000A8AA":
+                    return "FUDA Intelligent Systems";
+                    break;
+                case "0x0000AA00":
+                    return "HATATECH CO., LTD.";
+                    break;
+                case "0x0000AA77":
+                    return "Muscle Corporation";
+                    break;
+                case "0x0000AAAA":
+                    return "HIWIN MIKROSYSTEM CORP.";
+                    break;
+                case "0x0000AABB":
+                    return "GuangZhou Ronsuo Electronic Technology Co.,Ltd";
+                    break;
+                case "0x0000AACC":
+                    return "Mega-Fabs Motion Systems Ltd. (A Hiwin Company)";
+                    break;
+                case "0x0000AAEC":
+                    return "AXIMETRIX Automation Inc.";
+                    break;
+                case "0x0000AB57":
+                    return "RMIT University, School of Electrical and Computer Engineering";
+                    break;
+                case "0x0000ABAB":
+                    return "Beijing Juntai Tiancheng Technology Co., Ltd.";
+                    break;
+                case "0x0000ABBA":
+                    return "Triamec Motion AG";
+                    break;
+                case "0x0000ABCD":
+                    return "SoftEnergy Controls Inc";
+                    break;
+                case "0x0000AC00":
+                    return "ifm software gmbh";
+                    break;
+                case "0x0000ACC0":
+                    return "Accutron Ltd";
+                    break;
+                case "0x0000ACDC":
+                    return "Warp9 Tech Design Inc.";
+                    break;
+                case "0x0000AD84":
+                    return "Topcon Precision Agriculture";
+                    break;
+                case "0x0000ADDA":
+                    return "Fraunhofer-Institut für Lasertechnik (ILT)";
+                    break;
+                case "0x0000ADE5":
+                    return "ADVES GmbH & Co. KG";
+                    break;
+                case "0x0000AED0":
+                    return "ANEDO Ltd.";
+                    break;
+                case "0x0000AF1E":
+                    return "Alpine Racing Ltd";
+                    break;
+                case "0x0000AFEC":
+                    return "Galaxy Far East Corp.";
+                    break;
+                case "0x0000AFFE":
+                    return "YASKAWA Europe GmbH";
+                    break;
+                case "0x0000B02A":
+                    return "Orsys Orth System GmbH";
+                    break;
+                case "0x0000B07A":
+                    return "Bota Systems AG";
+                    break;
+                case "0x0000B0CE":
+                    return "Viveris Technologies";
+                    break;
+                case "0x0000B7A8":
+                    return "Heinzinger electronic GmbH";
+                    break;
+                case "0x0000BB80":
+                    return "Sensa automatisering BV";
+                    break;
+                case "0x0000BBAA":
+                    return "B. Braun Avitum AG";
+                    break;
+                case "0x0000BC00":
+                    return "Brainchild Electronic Co., Ltd.";
+                    break;
+                case "0x0000BE7A":
+                    return "BETA Dyn GmbH & Co. KG";
+                    break;
+                case "0x0000BEBE":
+                    return "G.D SpA";
+                    break;
+                case "0x0000BEEF":
+                    return "National Radio Astronomy Observatory";
+                    break;
+                case "0x0000C00F":
+                    return "ControlWorks, Inc.";
+                    break;
+                case "0x0000C0DE":
+                    return "Riedl GmbH";
+                    break;
+                case "0x0000C15A":
+                    return "CISA Intelligent Systems & Automation S.L.";
+                    break;
+                case "0x0000C918":
+                    return "Jiangsu CPTEK Servo Technology Co.Ltd.";
+                    break;
+                case "0x0000CAFE":
+                    return "SOTEC Software Entwicklungs GmbH + Co. Mikrocomputertechnik KG";
+                    break;
+                case "0x0000CEBA":
+                    return "KEBA Industrial Automation GmbH";
+                    break;
+                case "0x0000D00F":
+                    return "FRAKO Kondensatoren- und Anlagenbau GmbH";
+                    break;
+                case "0x0000DAB0":
+                    return "DABO Corporation";
+                    break;
+                case "0x0000DE88":
+                    return "Dalian University of Technology";
+                    break;
+                case "0x0000DEDA":
+                    return "Potomac Electric Corporation";
+                    break;
+                case "0x0000E0EE":
+                    return "Marel Hf.";
+                    break;
+                case "0x0000E5AB":
+                    return "ESAB Welding & Cutting GmbH";
+                    break;
+                case "0x0000EAEA":
+                    return "meastream GmbH";
+                    break;
+                case "0x0000ECA7":
+                    return "Emmission";
+                    break;
+                case "0x0000EEEE":
+                    return "Willow Garage, Inc.";
+                    break;
+                case "0x0000EF56":
+                    return "TA Instruments - Waters LLC";
+                    break;
+                case "0x0000EFFE":
+                    return "Shanghai Passiontech Information Technology Co., Ltd.";
+                    break;
+                case "0x0000F00D":
+                    return "Hyphen Technologies, Inc.";
+                    break;
+                case "0x0000F0CA":
+                    return "Imagos S.a.s di Renato Andreola e C.";
+                    break;
+                case "0x0000F1F1":
+                    return "Red Bull Technology Ltd.";
+                    break;
+                case "0x0000F4F4":
+                    return "fos4X GmbH";
+                    break;
+                case "0x0000F666":
+                    return "National Yunlin University of Science and Technology";
+                    break;
+                case "0x0000F888":
+                    return "GMT GLOBAL INC.";
+                    break;
+                case "0x0000FAB9":
+                    return "Fab-9 Corporation";
+                    break;
+                case "0x0000FACE":
+                    return "Korea Institute of Robot and Convergence (KIRO)";
+                    break;
+                case "0x0000FE09":
+                    return "Interroll Trommelmotoren GmbH";
+                    break;
+                case "0x0000FEDC":
+                    return "Silica, Avnet EMG GmbH";
+                    break;
+                case "0x0000FF66":
+                    return "Harbin Institute of Technology";
+                    break;
+                case "0x0000FFFE":
+                    return "UENO SEIKI Co.,LTD.";
+                    break;
+                case "0x0000FFAA":
+                    return "RB3D";
+                    break;
+                case "0x0000FFF1":
+                    return "BTHL Equipment (Beijing) Co., Ltd.";
+                    break;
+                case "0x0000FFFF":
+                    return "Robotiq Inc.";
+                    break;
+
+                case "0x00010000":
+                    return "Zhejiang Alpha Automotive Technology Co., Ltd.";
+                    break;
+                case "0x00010001":
+                    return "Hitachi Terminal Mechatronics, Corp.";
+                    break;
+                case "0x00010101":
+                    return "Glidewell Laboratories";
+                    break;
+                case "0x00010151":
+                    return "Beijing SaintWise Intelligent Technology Development co.LTD";
+                    break;
+                case "0x00010203":
+                    return "Jiangsu Kaiserdrive Intelligent Technology Co., Ltd.";
+                    break;
+                case "0x00010502":
+                    return "Beijing Sunwise Space Technology Co., Ltd.";
+                    break;
+                case "0x00010608":
+                    return "Shenzhen Jiayu Mechatronic Co., Ltd.";
+                    break;
+                case "0x00010780":
+                    return "Servotecnica SpA";
+                    break;
+                case "0x00010816":
+                    return "İleri Denetleyici Teknolojiler Mekatronik San. ve Tic. Ltd. Şti.";
+                    break;
+                case "0x00011107":
+                    return "Utthunga Technologies Pvt. Ltd.";
+                    break;
+                case "0x00011111":
+                    return "Beijing University of Posts and Telecommunications, School of Automation";
+                    break;
+                case "0x00011211":
+                    return "BeiJing ETOUCH Technology CO.,LTD.";
+                    break;
+                case "0x000116C7":
+                    return "Zhejiang Hechuan Technology Co.,Ltd.";
+                    break;
+                case "0x00012550":
+                    return "KERAjet S.A.";
+                    break;
+                case "0x00012555":
+                    return "PROAUT TECHNOLOGY GmbH";
+                    break;
+                case "0x00013930":
+                    return "DANAM SYSTEMS INC.";
+                    break;
+                case "0x000144AB":
+                    return "Carl Zeiss Optotechnik GmbH";
+                    break;
+                case "0x00015422":
+                    return "ALPHA MOTION CO., LTD.";
+                    break;
+                case "0x00018843":
+                    return "M8M Private Limited";
+                    break;
+                case "0x0001DA7A":
+                    return "MonoDAQ d.o.o.";
+                    break;
+                case "0x0001F001":
+                    return "EN Technologies Inc.";
+                    break;
+                case "0x00020608":
+                    return "Harbin Yiao Information Technology Co., Ltd.";
+                    break;
+                case "0x00023155":
+                    return "Carl Zeiss SMT GmbH";
+                    break;
+                case "0x00028DEC":
+                    return "Sichuan Dongfang Electric Autocontrol Engineering Co., Ltd.";
+                    break;
+                case "0x00030004":
+                    return "XP Power LLC";
+                    break;
+                case "0x00030205":
+                    return "Levitection Ltd.";
+                    break;
+                case "0x0003030D":
+                    return "Sioux CCM B.V.";
+                    break;
+                case "0x00033332":
+                    return "Motion Tech Automation, LLC";
+                    break;
+                case "0x00033333":
+                    return "Lion Precision";
+                    break;
+                case "0x00039055":
+                    return "Sipartek di Marcello Ferri";
+                    break;
+                case "0x00040411":
+                    return "Narranz Soluciones SL";
+                    break;
+                case "0x00040716":
+                    return "SYSWORK CO.,LTD.";
+                    break;
+                case "0x00041415":
+                    return "Harmuth Elektronik GmbH";
+                    break;
+                case "0x00048186":
+                    return "Intra Corporation";
+                    break;
+                case "0x00050903":
+                    return "Guangdong OPPO Mobile Telecommunications Corp.,Ltd.";
+                    break;
+                case "0x00051C4B":
+                    return "SICK, Inc.";
+                    break;
+                case "0x00053258":
+                    return "Shenzhen Encom Electric Technologies Co., Ltd.";
+                    break;
+                case "0x0005AE41":
+                    return "Saeki Partners KlG";
+                    break;
+                case "0x00060688":
+                    return "China Wide Prevention Telecom Technology Co.,Ltd.";
+                    break;
+                case "0x00064541":
+                    return "R&D Robotics";
+                    break;
+                case "0x00066570":
+                    return "LG Electronics Inc.";
+                    break;
+                case "0x00070707":
+                    return "Sodick America Corp.";
+                    break;
+                case "0x00073188":
+                    return "Hunan Matrix Electronic Technology Co., Ltd.";
+                    break;
+                case "0x00074074":
+                    return "Roll-2-Roll Technologies LLC";
+                    break;
+                case "0x00074076":
+                    return "SIC! Software GmbH";
+                    break;
+                case "0x00074855":
+                    return "LÄPPLE AG";
+                    break;
+                case "0x00075500":
+                    return "ShenZhen Tongchuan Technology Co.,Ltd";
+                    break;
+                case "0x00076761":
+                    return "ITK Engineering GmbH";
+                    break;
+                case "0x00077054":
+                    return "ColubrisMX, Inc.";
+                    break;
+                case "0x00077777":
+                    return "Shanghai Sinyo Electronics Co.,Ltd.";
+                    break;
+                case "0x00080301":
+                    return "CK Precision Instrument";
+                    break;
+                case "0x00080A0C":
+                    return "Xi'an Puyuan Industrial Technology Co., Ltd.";
+                    break;
+                case "0x00088326":
+                    return "Willig Embedded Software";
+                    break;
+                case "0x00088888":
+                    return "Alexan Tech. Inc.";
+                    break;
+                case "0x00090130":
+                    return "Exvision Corporation";
+                    break;
+                case "0x00090588":
+                    return "Guangzhou YanWei Electronic Technology Co., Ltd.";
+                    break;
+                case "0x00090606":
+                    return "Tex Computer SRL";
+                    break;
+                case "0x00090802":
+                    return "Suzhou EastTech Electronics Co.,Ltd";
+                    break;
+                case "0x00090909":
+                    return "AONE TECHNOLOGY CO.,LTD.";
+                    break;
+                case "0x00099099":
+                    return "Nanjing Daqo Electrical Institute Co., Ltd.";
+                    break;
+
+                case "0x000A05E5":
+                    return "KOSES Co.,Ltd";
+                    break;
+                case "0x000A4D7A":
+                    return "Warsaw University of Technology, Faculty of Electrical Engineering";
+                    break;
+                case "0x000A7B00":
+                    return "Cornelius Consult";
+                    break;
+                case "0x000AAAAA":
+                    return "Shandong SIASUN Industrial Software Research Institute Co.,Ltd.";
+                    break;
+                case "0x000AAAEC":
+                    return "AITEC Corporation";
+                    break;
+                case "0x000AB1DE":
+                    return "The Dude Abides LLC dba Lensrentals.com";
+                    break;
+                case "0x000ABCDE":
+                    return "ASU PRO LLC";
+                    break;
+                case "0x000ADC05":
+                    return "adcos GmbH";
+                    break;
+                case "0x000B00B0":
+                    return "Institute of Physics of the Czech Academy of Sciences";
+                    break;
+                case "0x000BE11A":
+                    return "Quality Firmware and Processes Solutions, LLC";
+                    break;
+                case "0x000C0815":
+                    return "CGX Intelligent Manufacturing (Wuxi) Co., Ltd.";
+                    break;
+                case "0x000C0C0C":
+                    return "YES ENERGY srl";
+                    break;
+                case "0x000C1984":
+                    return "Chroma ATE Inc.";
+                    break;
+                case "0x000D0B0C":
+                    return "WUHAN DBLC SCIENCE & TECHNOLOGY CO.,LTD.";
+                    break;
+                case "0x000E1048":
+                    return "Toshiba Transport Engineering Inc.";
+                    break;
+                case "0x000F1016":
+                    return "OPVengineering GmbH";
+                    break;
+
+                case "0x00100000":
+                    return "Shenzhen Inovance Technology Co., Ltd.";
+                    break;
+                case "0x00100006":
+                    return "Shenzhen Veinar Technology Co., Ltd.";
+                    break;
+                case "0x00100100":
+                    return "Cyberlogix Ltd";
+                    break;
+                case "0x00101998":
+                    return "Fundação Amazônica de Amparo à Pesquisa e Desenvolvimento Tecnológico Desembargador Paulo dos Anjos";
+                    break;
+                case "0x00102030":
+                    return "SERWIS CNC Mariusz Mareczko";
+                    break;
+                case "0x00104104":
+                    return "SBS Science & Technology Co., Ltd.";
+                    break;
+                case "0x00105041":
+                    return "Inovance Technology Europe GmbH";
+                    break;
+                case "0x00111111":
+                    return "Zhejiang Feida Environmental Science & Technology Co., Ltd.";
+                    break;
+                case "0x00111713":
+                    return "Robotic Systems Integration, Inc.";
+                    break;
+                case "0x00112233":
+                    return "YoungTek Electronics Corp.";
+                    break;
+                case "0x00112299":
+                    return "MELSİS Elektrik Elektronik Yazılım Donanım Ltd. Şti.";
+                    break;
+                case "0x00113322":
+                    return "SS Innovations China Co., Ltd.";
+                    break;
+                case "0x00116688":
+                    return "REYA ELECTRIC CO.,LTD.";
+                    break;
+                case "0x00120187":
+                    return "Beijing Institute of Technology, School of Mechatronical Engineering";
+                    break;
+                case "0x00120331":
+                    return "UBTECH Robotics Corp.";
+                    break;
+                case "0x00123456":
+                    return "ERAETECH Co., Ltd.";
+                    break;
+                case "0x001234CC":
+                    return "Compucare India Pvt. Ltd.";
+                    break;
+                case "0x00123ABC":
+                    return "Microtech Laboratory Inc.";
+                    break;
+                case "0x00124000":
+                    return "Automatisation JRT Inc.";
+                    break;
+                case "0x00124816":
+                    return "Easy Etudes et applications système SA";
+                    break;
+                case "0x00126815":
+                    return "EQ GLOBAL Inc.";
+                    break;
+                case "0x00130268":
+                    return "Eule Industrial Robotics GmbH & Co. KG";
+                    break;
+                case "0x00132333":
+                    return "Sudhir Srivastava Innovations Pvt. Ltd.";
+                    break;
+                case "0x00136013":
+                    return "Beijing RichAuto S&T Co., Ltd";
+                    break;
+                case "0x00141003":
+                    return "ULVAC AUTOMATION TAIWAN Inc.";
+                    break;
+                case "0x00141209":
+                    return "EIKO SOKKI Co. Ltd.";
+                    break;
+                case "0x00147852":
+                    return "Wuxi Lead Intelligent Equipment CO.,LTD.";
+                    break;
+                case "0x00150306":
+                    return "Shenyang XBANG Technology Co., Ltd.";
+                    break;
+                case "0x0015E65E":
+                    return "iseg Spezialelektronik GmbH";
+                    break;
+                case "0x00161718":
+                    return "Guangzhou Start To Sail Industrial Robot Co.,Ltd.";
+                    break;
+                case "0x00168888":
+                    return "WU-YANG Technology Co., Ltd.";
+                    break;
+                case "0x00170815":
+                    return "MUHA INC";
+                    break;
+                case "0x00171010":
+                    return "NIIC (SUZHOU) TECHNOLOGY CO., LTD.";
+                    break;
+                case "0x00178200":
+                    return "SmartRay GmbH";
+                    break;
+                case "0x00180201":
+                    return "KOMOTEK Co., Ltd.";
+                    break;
+                case "0x00180522":
+                    return "Shenzhen iManifold Robot Technology Co., Ltd.";
+                    break;
+                case "0x00180613":
+                    return "Shenzhen Shenzhixin Technology Co., Ltd.";
+                    break;
+                case "0x00181818":
+                    return "Ningbo Yunsheng Co., Ltd.";
+                    break;
+                case "0x001897EC":
+                    return "Loop Technology Ltd";
+                    break;
+                case "0x00190050":
+                    return "Kayser-Threde GmbH";
+                    break;
+                case "0x00190556":
+                    return "AXYZ Automation Inc.";
+                    break;
+                case "0x00190683":
+                    return "Ege Robotics CNC Makine Elektronik Otomasyon Medikal";
+                    break;
+                case "0x001918EE":
+                    return "Tallinn University of Technology (TUT), Faculty of Information Technology";
+                    break;
+                case "0x001919EE":
+                    return "Tallinn University of Technology (TUT), Faculty of Information Technology";
+                    break;
+                case "0x00198452":
+                    return "NIHON SEIGYO CO.,LTD.";
+                    break;
+
+                case "0x00200000":
+                    return "Shenzhen Farwide Electric Co.,Ltd.";
+                    break;
+                case "0x00200924":
+                    return "ARUM DENTISTRY Co., Ltd.";
+                    break;
+                case "0x00201111":
+                    return "Glass Expansion Pty Ltd";
+                    break;
+                case "0x00201811":
+                    return "Guangzhou ZHIYUAN Electronics Co., Ltd.";
+                    break;
+                case "0x00201812":
+                    return "FoShan Syckin Intelligent Technology Co., Ltd";
+                    break;
+                case "0x00201911":
+                    return "Shenzhen Han's Robot Co., Ltd";
+                    break;
+                case "0x00202009":
+                    return "Tismo Technology Solutions (P) Ltd";
+                    break;
+                case "0x00202288":
+                    return "Jiangsu DINGS' Intelligent Control Technology Co., Ltd";
+                    break;
+                case "0x00203040":
+                    return "meerecompany Inc.";
+                    break;
+                case "0x00220110":
+                    return "Research and Production Plant «EKRA»";
+                    break;
+                case "0x00223344":
+                    return "FPT Software Ltd.";
+                    break;
+                case "0x00228100":
+                    return "eMotion Co., Ltd.";
+                    break;
+                case "0x00231970":
+                    return "HRK-BRK SRLS";
+                    break;
+                case "0x0023EFAB":
+                    return "Shenzhen ROBOTMETA Technology Co., Ltd.";
+                    break;
+                case "0x00250001":
+                    return "Nanjing Chenguang Group Co., Ltd.";
+                    break;
+                case "0x00250002":
+                    return "Jiangsu Jinling Institute of Intelligent Manufacturing Co.,Ltd.";
+                    break;
+                case "0x00250993":
+                    return "Manner Sensortelemetrie GmbH";
+                    break;
+                case "0x00252525":
+                    return "EODIGITEK Co.,Ltd";
+                    break;
+                case "0x00255210":
+                    return "SMART TESTSOLUTIONS GmbH";
+                    break;
+                case "0x00260954":
+                    return "Meinhard Koppitz, Elektronikentwicklung";
+                    break;
+                case "0x00270919":
+                    return "GUREN Design & Engineering";
+                    break;
+                case "0x00289117":
+                    return "SHENZHEN JINGFENG MEDICAL TECHNOLOGY CO., LTD.";
+                    break;
+                case "0x00290968":
+                    return "RUAG Defence Deutschland GmbH";
+                    break;
+
+                case "0x00300354":
+                    return "Jiangsu Donghua Testing Technology Co., Ltd.";
+                    break;
+                case "0x00308012":
+                    return "Creasoft SL";
+                    break;
+                case "0x0030DB07":
+                    return "Modbot, Inc.";
+                    break;
+                case "0x00310713":
+                    return "Sruhad Technologies Pvt Ltd";
+                    break;
+                case "0x003111C0":
+                    return "RJG Inc.";
+                    break;
+                case "0x00314000":
+                    return "Balance Systems S.r.l.";
+                    break;
+                case "0x00314159":
+                    return "Weka Robotics Limited";
+                    break;
+                case "0x0031636F":
+                    return "T1 Co., LTD.";
+                    break;
+                case "0x00323232":
+                    return "STMicroelectronics International NV";
+                    break;
+                case "0x00334658":
+                    return "CaTs³ Limited";
+                    break;
+                case "0x00335160":
+                    return "Precision Technology Corporation";
+                    break;
+                case "0x00335233":
+                    return "Shanghai HOCH Laser Technology Co., Ltd.";
+                    break;
+                case "0x00340702":
+                    return "Shanghai Rui Fast Automation Equipment Co.,Ltd.";
+                    break;
+                case "0x00345588":
+                    return "UTECHZONE CO., LTD.";
+                    break;
+                case "0x00345678":
+                    return "ABB Beijing Drive Systems Co., Ltd.";
+                    break;
+                case "0x00345869":
+                    return "APE Technology Co., Ltd.";
+                    break;
+                case "0x00351090":
+                    return "Zhejiang Dafeng Industry Co., Ltd.";
+                    break;
+                case "0x00361300":
+                    return "Egle Systems S.L.";
+                    break;
+                case "0x00369369":
+                    return "Honeywell Technology Solutions Lab Private Limited";
+                    break;
+                case "0x003C6F3A":
+                    return "NeoHealthTechnology, LTD.";
+                    break;
+
+                case "0x00404040":
+                    return "ViewMove Technologies Inc.";
+                    break;
+                case "0x004083A9":
+                    return "Deutsches Elektronen-Synchrotron (DESY)";
+                    break;
+                case "0x00414141":
+                    return "Bruker Technologies Ltd.";
+                    break;
+                case "0x0041444C":
+                    return "ADL Analoge und Digitale Leistungselektronik GmbH";
+                    break;
+                case "0x0041444D":
+                    return "Adullam Tech Co., Ltd.";
+                    break;
+                case "0x00414458":
+                    return "ADX Systems SA";
+                    break;
+                case "0x00414853":
+                    return "Riole Eletrônica Ltda";
+                    break;
+                case "0x00414C54":
+                    return "ALTIMA Corp.";
+                    break;
+                case "0x00414E59":
+                    return "ANYbotics AG";
+                    break;
+                case "0x00415041":
+                    return "APA Sp. z o.o.";
+                    break;
+                case "0x00415049":
+                    return "Teledyne API";
+                    break;
+                case "0x0041504C":
+                    return "APL Automobil-Prüftechnik Landau GmbH";
+                    break;
+                case "0x00415450":
+                    return "Atonarp Inc.";
+                    break;
+                case "0x00416C78":
+                    return "AiLux S.r.l.";
+                    break;
+                case "0x00418108":
+                    return "Shanghai Xiangshi Intelligent Technology Co.,Ltd.";
+                    break;
+                case "0x00424345":
+                    return "Seren Industrial Power Systems, Inc.";
+                    break;
+                case "0x00424D54":
+                    return "Burghart Messtechnik GmbH";
+                    break;
+                case "0x00425343":
+                    return "L3 Commercial Training Solutions (Aerosim Technologies, INC)";
+                    break;
+                case "0x00434954":
+                    return "Chiba Institute of Technology (CIT)";
+                    break;
+                case "0x00434D45":
+                    return "Cambridge Micro Engineering Limited";
+                    break;
+                case "0x00434D4E":
+                    return "CIMON CO.,LTD.";
+                    break;
+                case "0x00442656":
+                    return "D&V Electronics Ltd.";
+                    break;
+                case "0x00444444":
+                    return "Eltech Ltd.";
+                    break;
+                case "0x00444543":
+                    return "Nanjing DECOWELL Automation Co., Ltd";
+                    break;
+                case "0x00444949":
+                    return "DISTek Integration, Inc.";
+                    break;
+                case "0x00444950":
+                    return "Astrodyne TDI";
+                    break;
+                case "0x00444D54":
+                    return "Dematic Corp.";
+                    break;
+                case "0x00445341":
+                    return "DS AUTOMOTION GmbH";
+                    break;
+                case "0x00445345":
+                    return "Daewoo Shipbuilding & Marine Engineering Co., Ltd.";
+                    break;
+                case "0x00445653":
+                    return "Shenzhen DVS Mechatronics Co., Ltd.";
+                    break;
+                case "0x00448976":
+                    return "Busch Manufacturing Korea, Ltd.";
+                    break;
+                case "0x00454854":
+                    return "Eagle Harbor Technologies Inc.";
+                    break;
+                case "0x00455354":
+                    return "Steinbeis Embedded Systems Technologies GmbH";
+                    break;
+                case "0x00455443":
+                    return "Electronic Theatre Controls, Inc.";
+                    break;
+                case "0x00455453":
+                    return "ITMO University, Department of Control Systems and Industrial Robotics, Chair of Electrical Engineering and Precision Electromechanical Systems";
+                    break;
+                case "0x0045564F":
+                    return "Evolution Measurement Ltd.";
+                    break;
+                case "0x00456789":
+                    return "SKY TECHNOLOGY DEVELOPMENT CO.,LTD. CHINESE ACADEMY OF SCIENCES";
+                    break;
+                case "0x00456E76":
+                    return "Envision Energy (Jiangsu) CO., LTD.";
+                    break;
+                case "0x00465554":
+                    return "Future Electronics Inc.";
+                    break;
+                case "0x004711BB":
+                    return "Moehwald GmbH";
+                    break;
+                case "0x0047494E":
+                    return "Ginolis Oy";
+                    break;
+                case "0x00474E44":
+                    return "Shanghai GND eTech Co., Ltd.";
+                    break;
+                case "0x00475349":
+                    return "GSI GeoSolutions International Ltd";
+                    break;
+                case "0x00475354":
+                    return "Global Standard Technology Co., Ltd.";
+                    break;
+                case "0x00481417":
+                    return "Innodelec Sàrl";
+                    break;
+                case "0x0048414D":
+                    return "Hamilton Bonaduz AG";
+                    break;
+                case "0x00484D30":
+                    return "Hexagon Metrology S.p.A.";
+                    break;
+                case "0x00485247":
+                    return "Neura Robotics GmbH";
+                    break;
+                case "0x00485349":
+                    return "Headspring Inc.";
+                    break;
+                case "0x0048554B":
+                    return "Kendrion Kuhnke Automation GmbH";
+                    break;
+                case "0x00485645":
+                    return "High Voltage Engineering Europa B.V.";
+                    break;
+                case "0x00485653":
+                    return "HV Sistemas S.L.";
+                    break;
+                case "0x00485749":
+                    return "Halleck-Willard Incorporated";
+                    break;
+                case "0x00490628":
+                    return "KYOWA ELECTRONIC INSTRUMENTS CO., LTD.";
+                    break;
+                case "0x00491617":
+                    return "FST Co., Ltd.";
+                    break;
+                case "0x00494253":
+                    return "IBS Precision Engineering BV";
+                    break;
+                case "0x00494256":
+                    return "IBV - Echtzeit- und Embedded GmbH & Co. KG";
+                    break;
+                case "0x00494350":
+                    return "ICP DAS Co.,Ltd.";
+                    break;
+                case "0x00494458":
+                    return "IDX Co. Ltd.";
+                    break;
+                case "0x00495253":
+                    return "IRS Systementwicklung GmbH";
+                    break;
+                case "0x00495254":
+                    return "IRT SA";
+                    break;
+                case "0x00499816":
+                    return "Seoul Precision Machines Co., Ltd.";
+                    break;
+                case "0x004A4154":
+                    return "Jenaer Antriebstechnik GmbH";
+                    break;
+                case "0x004A542E":
+                    return "JT Corp.";
+                    break;
+                case "0x004B4544":
+                    return "Kinetic Engineering Design Ltd";
+                    break;
+                case "0x004B4657":
+                    return "Hangzhou ConfirmWare Technology Co., Ltd.";
+                    break;
+                case "0x004B465A":
+                    return "Deutsches Krebsforschungszentrum (DKFZ)";
+                    break;
+                case "0x004B4743":
+                    return "Keisokugiken Corporation";
+                    break;
+                case "0x004B494D":
+                    return "PRESYS Co., Ltd.";
+                    break;
+                case "0x004B5243":
+                    return "KAWADA ROBOTICS CORPORATION";
+                    break;
+                case "0x004B6561":
+                    return "RobCo GmbH";
+                    break;
+                case "0x004C434D":
+                    return "Linz Center of Mechatronics GmbH";
+                    break;
+                case "0x004C4F43":
+                    return "Locomotec GmbH´";
+                    break;
+                case "0x004C545A":
+                    return "Lithoz GmbH";
+                    break;
+                case "0x004C5552":
+                    return "University of Oviedo, Electrical, Electronic, Computer and Systems Engineering Department";
+                    break;
+                case "0x004D4153":
+                    return "AGEMA Germany GmbH";
+                    break;
+                case "0x004D4159":
+                    return "Chr. Mayr GmbH + Co. KG";
+                    break;
+                case "0x004d4448":
+                    return "Heidelberger Druckmaschinen AG";
+                    break;
+                case "0x004D4543":
+                    return "Mecalc PTY Limited";
+                    break;
+                case "0x004D4945":
+                    return "SuperVac Maschinenbau GmbH";
+                    break;
+                case "0x004D5249":
+                    return "Volga State University of Technology, Faculty of Information Technologies and Computer Engineering";
+                    break;
+                case "0x004D544E":
+                    return "MOTEON GmbH";
+                    break;
+                case "0x004E4154":
+                    return "NARAE NANOTECH Corporation";
+                    break;
+                case "0x004E4355":
+                    return "Nicolaus Copernicus University in Torun (NCU), Faculty of Physics, Astronomy and Informatics";
+                    break;
+                case "0x004E454D":
+                    return "NEMONOS GmbH";
+                    break;
+                case "0x004E5854":
+                    return "NEXTY Electronics Corporation";
+                    break;
+                case "0x004F5053":
+                    return "Opsens Inc.";
+                    break;
+                case "0x004F524D":
+                    return "ORMEC Systems Corp.";
+                    break;
+
+                case "0x00502654":
+                    return "POSCO ENGINEERING Co., Ltd.";
+                    break;
+                case "0x00504155":
+                    return "ONA Electroerosión S.A.";
+                    break;
+                case "0x0050434B":
+                    return "PC Krause and Associates, Inc.";
+                    break;
+                case "0x00504D43":
+                    return "Ningbo Physis Technology Co.,Ltd.";
+                    break;
+                case "0x0050524F":
+                    return "PROTEC Co.,Ltd.";
+                    break;
+                case "0x00505344":
+                    return "Panasonic System Design Co., Ltd.";
+                    break;
+                case "0x00505347":
+                    return "PowerSparks GmbH";
+                    break;
+                case "0x00505349":
+                    return "Paul Scherrer Institut";
+                    break;
+                case "0x0050535A":
+                    return "Packsize Technologies AB";
+                    break;
+                case "0x00505450":
+                    return "PT Photonic Tools GmbH";
+                    break;
+                case "0x00509188":
+                    return "Ching Hung Machinery & Electric Industrial Co., Ltd.";
+                    break;
+                case "0x00515151":
+                    return "Shanghai VolBoff Electron Science & Technology Co., Ltd.";
+                    break;
+                case "0x00518888":
+                    return "Shanghai Rock Technology Co., Ltd.";
+                    break;
+                case "0x00522543":
+                    return "Shanghai JiQi Robot Technology Co., Ltd.";
+                    break;
+                case "0x00524254":
+                    return "Daegu Gyeongbuk Institute of Science & Technology, Robotics System Research Division";
+                    break;
+                case "0x0052454E":
+                    return "Renishaw plc";
+                    break;
+                case "0x00524D54":
+                    return "Rheonik Messtechnik GmbH";
+                    break;
+                case "0x00528785":
+                    return "Suzhou Lingchen Acquisition Computer Co., Ltd.";
+                    break;
+                case "0x00532579":
+                    return "NANORAY Co., Ltd.";
+                    break;
+                case "0x00534543":
+                    return "Samsung Electronics Co. Ltd.";
+                    break;
+                case "0x00534549":
+                    return "Sumitomo Electric Industries, Ltd.";
+                    break;
+                case "0x00534649":
+                    return "Starfire Industries, LLC";
+                    break;
+                case "0x00534652":
+                    return "SFERA S.r.l.";
+                    break;
+                case "0x00534743":
+                    return "Skyloom Global Corp.";
+                    break;
+                case "0x00534745":
+                    return "SG Electronic Systems SRLS";
+                    break;
+                case "0x00534C4E":
+                    return "SLN Technologies Pvt. Ltd.";
+                    break;
+                case "0x00534E50":
+                    return "Marmatek Mühendislik Endüstriyel Test Ölçüm ve Otomasyon San. ve Tic. Ltd. Sti.";
+                    break;
+                case "0x00535349":
+                    return "SSI CO.,LTD.";
+                    break;
+                case "0x0053554E":
+                    return "SUNSAY GENERIC CO., LTD.";
+                    break;
+                case "0x00536D61":
+                    return "SmarAct GmbH";
+                    break;
+                case "0x00544544":
+                    return "Tokyo Electron Kyushu Limited";
+                    break;
+                case "0x0054454B":
+                    return "Toray Engineering Co., Ltd.";
+                    break;
+                case "0x0054454C":
+                    return "Tokyo Electron Limited";
+                    break;
+                case "0x0054454D":
+                    return "Tem-Tech Lab.";
+                    break;
+                case "0x00544855":
+                    return "Technische Hochschule Ulm, Fakultät für Mechatronik und Medizintechnik";
+                    break;
+                case "0x00544D45":
+                    return "TOMEN ELECTRONICS CORPORATION";
+                    break;
+                case "0x00544E47":
+                    return "Technolution B.V.";
+                    break;
+                case "0x00544E4D":
+                    return "STE Trekwerk B.V.";
+                    break;
+                case "0x00544E5A":
+                    return "TEAM NEW ZEALAND AC35 CHALLENGE LIMITED (dba Emirates Team New Zealand)";
+                    break;
+                case "0x00545145":
+                    return "TRONTEQ Electronic GbR";
+                    break;
+                case "0x00545249":
+                    return "Techman Robot Inc.";
+                    break;
+                case "0x00545454":
+                    return "Sakarya University, Faculty of Computer and Information Sciences, Computer Engineering Department";
+                    break;
+                case "0x00546936":
+                    return "JS Automation Corp.";
+                    break;
+                case "0x00554549":
+                    return "United Electronic Industries, Inc. (UEIDAQ)";
+                    break;
+                case "0x00554C54":
+                    return "Ultimaker B.V.";
+                    break;
+                case "0x00555555":
+                    return "Jiangxi Fashion Technology Co., Ltd.";
+                    break;
+                case "0x0055555A":
+                    return "Korea Institute of Machinery & Materials, Advanced Manufacturing Systems Research Division";
+                    break;
+                case "0x0055555B":
+                    return "Korea Institute of Machinery & Materials, Nano-Convergence Manufacturing Systems Research Division, Department of Printed Electronics";
+                    break;
+                case "0x00555888":
+                    return "Zhejiang Shuanghuan Driveline Co., Ltd.";
+                    break;
+                case "0x00556666":
+                    return "ShenZhen V&T Technologies Co., Ltd.";
+                    break;
+                case "0x0055AA88":
+                    return "Dongguan Strong Intelligent Equipment Co., LTD";
+                    break;
+                case "0x00564343":
+                    return "Volvo Car Group";
+                    break;
+                case "0x00564D49":
+                    return "VMI Holland B.V.";
+                    break;
+                case "0x00565203":
+                    return "Shenzhen DOHHO Electric Co., Ltd.";
+                    break;
+                case "0x00568568":
+                    return "Karma Technology Ltd.";
+                    break;
+                case "0x00574154":
+                    return "watttron GmbH";
+                    break;
+                case "0x00574654":
+                    return "Weatherford Oil Tool GmbH";
+                    break;
+                case "0x00574954":
+                    return "Witium Co., Ltd.";
+                    break;
+                case "0x00577800":
+                    return "Inca Digital Printers Limited";
+                    break;
+                case "0x00578485":
+                    return "Cerebrus Corporation";
+                    break;
+                case "0x00584D4D":
+                    return "Xiamen Micromatch Electronic Information Technology Co.,Ltd.";
+                    break;
+                case "0x00594188":
+                    return "Shenzhen TianAn Sensor Technology Co.,Ltd";
+                    break;
+                case "0x005A5A5A":
+                    return "Hangzhou Zhenzheng Robot Technology Co.,LTD";
+                    break;
+                case "0x005A7967":
+                    return "Zygo Corporation";
+                    break;
+                case "0x005E5E5E":
+                    return "Ser.mac srl";
+                    break;
+                case "0x005EA71E":
+                    return "Tethers Unlimited, Inc.";
+                    break;
+
+                case "0x00600613":
+                    return "Google Inc.";
+                    break;
+                case "0x00616978":
+                    return "aixcon PowerSystems GmbH";
+                    break;
+                case "0x00616C6C":
+                    return "Allestec Corporation";
+                    break;
+                case "0x00618618":
+                    return "Panasonic Software Development Center Dalian Co., Ltd.";
+                    break;
+                case "0x00618913":
+                    return "TECHEST Co.,Ltd.";
+                    break;
+                case "0x0062696F":
+                    return "Harmonic Bionics, Inc.";
+                    break;
+                case "0x0062AE2D":
+                    return "Redstone Aerospace Corporation";
+                    break;
+                case "0x00640627":
+                    return "MORNSUN Guangzhou Science & Technology Co., Ltd.";
+                    break;
+                case "0x00643000":
+                    return "Maple Electronics";
+                    break;
+                case "0x00654321":
+                    return "YUCHANG TECH Co., Ltd.";
+                    break;
+                case "0x00660066":
+                    return "Ningbo Zhafir Plastics Machinery Co., LTD.";
+                    break;
+                case "0x00666666":
+                    return "Changzhou MVision IT Technology Co., Ltd.";
+                    break;
+                case "0x00666888":
+                    return "Hunan Sharing Intelligent Machines Co., Ltd.";
+                    break;
+                case "0x00666999":
+                    return "Shenzhen Diju Intelligent Technology Co., Ltd.";
+                    break;
+                case "0x00667675":
+                    return "Bilko Computer Control & Automation Co.";
+                    break;
+                case "0x00681168":
+                    return "Kinco Electric (Shenzhen) Ltd.";
+                    break;
+                case "0x00686868":
+                    return "Chengdu GUNT Weida CNC Technology Co., Ltd.";
+                    break;
+                case "0x00688165":
+                    return "EFORT Intelligent Equipment Co., Ltd.";
+                    break;
+                case "0x00688191":
+                    return "Shanghai Fuxu Tech Co., Ltd.";
+                    break;
+                case "0x00688888":
+                    return "GUILIN WINDCON CO.,LTD";
+                    break;
+                case "0x00690069":
+                    return "SHENZHEN HENGKETONG ROBOT CO., LTD";
+                    break;
+                case "0x00696969":
+                    return "Mianyang Fude Robot Co., Ltd.";
+                    break;
+                case "0x006AFE96":
+                    return "ShuraCore LLC";
+                    break;
+                case "0x006B4F53":
+                    return "Kjellberg Finsterwalde Plasma und Maschinen GmbH";
+                    break;
+                case "0x006C6267":
+                    return "SHODENSHA Co., Ltd.";
+                    break;
+                case "0x006D7361":
+                    return "Hefei MacroSilicon Technology Co.,Ltd";
+                    break;
+                case "0x006E542D":
+                    return "Genesis Robotics and Motion Technologies Canada, ULC";
+                    break;
+
+                case "0x00700100":
+                    return "Cyber Control Systems LLC";
+                    break;
+                case "0x00706E74":
+                    return "PONUTech";
+                    break;
+                case "0x007207EC":
+                    return "Trotec Laser GmbH";
+                    break;
+                case "0x00730220":
+                    return "PLASOURCE Co., Ltd.";
+                    break;
+                case "0x00746563":
+                    return "tecVenture UG (haftungsbeschränkt)";
+                    break;
+                case "0x00746568":
+                    return "MechAdept Limited";
+                    break;
+                case "0x00746C65":
+                    return "BST GmbH";
+                    break;
+                case "0x00750608":
+                    return "ZHITENG (Shenzhen) Motion Technology Co., Ltd.";
+                    break;
+                case "0x00756500":
+                    return "Zhuhai Motion Control Motor Co., Ltd.";
+                    break;
+                case "0x00770712":
+                    return "Rainbow Co.";
+                    break;
+                case "0x0077696E":
+                    return "krtkl inc.";
+                    break;
+                case "0x00777700":
+                    return "SENTROL Co., Ltd.";
+                    break;
+                case "0x00777777":
+                    return "HangZhou Dianzi University, School of Mechanical Engineering";
+                    break;
+                case "0x00779999":
+                    return "PHUC SON TECHNOLOGY CO., LTD.";
+                    break;
+                case "0x00782782":
+                    return "Hangzhou Bergerda Automation Technology Co., Ltd.";
+                    break;
+                case "0x00789456":
+                    return "Devol Advanced Automation, Inc.";
+                    break;
+                case "0x00796866":
+                    return "Chengdu Yanxing Automation Engineering Co., Ltd.";
+                    break;
+                case "0x0079796D":
+                    return "METIS Co., Ltd.";
+                    break;
+                case "0x00799245":
+                    return "Goldlücke GmbH";
+                    break;
+                case "0x007AFE76":
+                    return "Promwad Soft LLC";
+                    break;
+                case "0x00800188":
+                    return "NIDEC READ CORPORATION";
+                    break;
+                case "0x00811791":
+                    return "Microtime Computer Inc.";
+                    break;
+                case "0x00811811":
+                    return "EGICON S.R.L.";
+                    break;
+                case "0x00828845":
+                    return "AL. Robot Co., Inc.";
+                    break;
+                case "0x00830517":
+                    return "Korea Institute of Science and Technology (KIST)";
+                    break;
+                case "0x00830518":
+                    return "Korea Institute of Science and Technology (KIST)";
+                    break;
+                case "0x00831219":
+                    return "Chengdu Sino-Tech Smart Energy Co., Ltd.";
+                    break;
+                case "0x00836699":
+                    return "Hunan Aicortech Intelligent Technology Co.,Ltd.";
+                    break;
+                case "0x00850104":
+                    return "Shenzhen Veichi Electric Co., Ltd";
+                    break;
+                case "0x00860816":
+                    return "Sichuan Odot Automation System Co.,Ltd.";
+                    break;
+                case "0x00868686":
+                    return "Changzhou Baolong Motor Co., Ltd.";
+                    break;
+                case "0x00871217":
+                    return "Rocket Lab Kft.";
+                    break;
+                case "0x00875111":
+                    return "Protech Systems Co., Ltd.";
+                    break;
+                case "0x00876543":
+                    return "KONE Oyj";
+                    break;
+                case "0x00880088":
+                    return "Atop Technologies, Inc.";
+                    break;
+                case "0x00884443":
+                    return "Nanjing Solidot Electronic Technology Co., Ltd.";
+                    break;
+                case "0x00886688":
+                    return "Simplo Technology CO., LTD.";
+                    break;
+                case "0x00888880":
+                    return "NINGBO EST TECHNOLOGY CO., LTD";
+                    break;
+                case "0x00888882":
+                    return "Hitachi High-Technologies Corporation";
+                    break;
+                case "0x00889606":
+                    return "Dongguan Avatar System Automation Equipment Co., Ltd.";
+                    break;
+                case "0x00889999":
+                    return "Hangzhou Wahaha Group Co., LTD., Mechanical and Electrical Institute";
+                    break;
+                case "0x00922189":
+                    return "Suzhou Quick Laser Technology";
+                    break;
+                case "0x00950701":
+                    return "ULVAC Korea, Ltd.";
+                    break;
+                case "0x00952358":
+                    return "TROY ENTERPRISE CO., LTD";
+                    break;
+                case "0x00972430":
+                    return "Moore Nanotechnology Systems, LLC";
+                    break;
+                case "0x00991000":
+                    return "Shenzhen SuperFar lntelligent Control Technology Co.,LTD.";
+                    break;
+                case "0x00998877":
+                    return "DATASCHALT engineering GmbH";
+                    break;
+                case "0x00999999":
+                    return "Smartind Technologies Co., Ltd.";
+                    break;
+                case "0x009CFBF1":
+                    return "MESOMATIC GmbH & Co. KG";
+                    break;
+
+                case "0x00A0415E":
+                    return "Opsens Solutions Inc.";
+                    break;
+                case "0x00A12000":
+                    return "Universitat Politecnica de Valencia, Instituto Universitario de Automática e Informática Industrial";
+                    break;
+                case "0x00A1234F":
+                    return "Shanghai Maritime University, Logistics Engineering College";
+                    break;
+                case "0x00A1BEEF":
+                    return "F&S PROZESSAUTOMATION GmbH";
+                    break;
+                case "0x00A21234":
+                    return "EMP Designs Ltd";
+                    break;
+                case "0x00A24273":
+                    return "ASYS Automatic Systems Co., Ltd.";
+                    break;
+                case "0x00A54321":
+                    return "NEW SOLUTION S.A.";
+                    break;
+                case "0x00A55A5A":
+                    return "Hikrobot Technology Co., Ltd.";
+                    break;
+                case "0x00A5C000":
+                    return "ASC GmbH";
+                    break;
+                case "0x00A5DFF4":
+                    return "Kenotom P.C.";
+                    break;
+                case "0x00A5E15A":
+                    return "ASELSAN A.S.";
+                    break;
+                case "0x00A70EA7":
+                    return "Basemap Inc., DBA Automaton";
+                    break;
+                case "0x00AA0001":
+                    return "Inventec Appliances (Shanghai) Co., Ltd.";
+                    break;
+                case "0x00AA1314":
+                    return "HENAN XINZHILIN ELECTROMECHANICAL DEVICE CO.,LTD";
+                    break;
+                case "0x00AA55A5":
+                    return "Bitvis AS";
+                    break;
+                case "0x00AA55AA":
+                    return "Shenzhen Sipake Electric Co., Ltd.";
+                    break;
+                case "0x00AAA111":
+                    return "Amada Miyachi America, Inc.";
+                    break;
+                case "0x00AAA555":
+                    return "EMOTIONTEK Co., Ltd.";
+                    break;
+                case "0x00AAAAAA":
+                    return "Altera Corporation";
+                    break;
+                case "0x00AAAABB":
+                    return "TDS Technology (S) Pte Ltd.";
+                    break;
+                case "0x00AAABBB":
+                    return "CRRC QINGDAO SIFANG ROLLING STOCK RESEARCH INSTITUTE Co., Ltd.";
+                    break;
+                case "0x00AAFFEE":
+                    return "High Q Laser GmbH";
+                    break;
+                case "0x00ABA1EC":
+                    return "abatec group ag";
+                    break;
+                case "0x00ABAB00":
+                    return "Pearls of Life AB";
+                    break;
+                case "0x00ABF159":
+                    return "Promotion Comercio e Serviço Ltda";
+                    break;
+                case "0x00ACCE55":
+                    return "enders GmbH";
+                    break;
+                case "0x00ACEACE":
+                    return "HANYANG ROBOTICS CO.,LTD";
+                    break;
+                case "0x00ADCAFE":
+                    return "Analog Devices, Inc.";
+                    break;
+                case "0x00AE4B4B":
+                    return "KK Wind Solutions A/S";
+                    break;
+                case "0x00AE86FD":
+                    return "HOFO Automation Co., Ltd.";
+                    break;
+                case "0x00AEA000":
+                    return "AEA Srl";
+                    break;
+                case "0x00AF2497":
+                    return "Yeungnam University, College of Mechanical and IT Engineering, Department of Information and Communication Engineering, Advanced Networking Technology Lab.";
+                    break;
+
+                case "0x00B071C5":
+                    return "PAL Robotics S.L.";
+                    break;
+                case "0x00B100D5":
+                    return "King’s College London, Faculty of Life Sciences & Medicine, School of Biomedical Engineering & Imaging Sciences";
+                    break;
+                case "0x00BADA55":
+                    return "NEWTEC A/S";
+                    break;
+                case "0x00BADBEE":
+                    return "4NXT S.r.l.";
+                    break;
+                case "0x00BADFAB":
+                    return "Nexter Systems S.A.";
+                    break;
+                case "0x00BAFF1E":
+                    return "Memjet Technology Ltd";
+                    break;
+                case "0x00BBBBBB":
+                    return "BLUESINK Co., Ltd";
+                    break;
+                case "0x00BEE000":
+                    return "m-Bee GmbH";
+                    break;
+                case "0x00C007D9":
+                    return "Guangdong Coordy Numerical Control Technology Co.,Ltd.";
+                    break;
+                case "0x00C0FFEE":
+                    return "Moog Animatics";
+                    break;
+                case "0x00CC00AA":
+                    return "Saenggaksaemteo Co.";
+                    break;
+                case "0x00CC1982":
+                    return "Comtrol Corporation";
+                    break;
+                case "0x00CCCCCC":
+                    return "Largan Precision Co.,Ltd.";
+                    break;
+                case "0x00CE7C21":
+                    return "China Electronics Technology Group Corporation, No. 21 Research Institute";
+                    break;
+                case "0x00CECECE":
+                    return "Canon Electronics Inc.";
+                    break;
+                case "0x00D02379":
+                    return "REXA Inc.";
+                    break;
+                case "0x00D56130":
+                    return "Löwenstein Medical GmbH & Co. KG";
+                    break;
+                case "0x00D87688":
+                    return "Robo Biz Core Co., Ltd";
+                    break;
+                case "0x00DA4E00":
+                    return "DAVE Srl";
+                    break;
+                case "0x00DAD001":
+                    return "Studio elektronike Rijeka d.o.o.";
+                    break;
+                case "0x00DAEAC0":
+                    return "DAEATI Co., Ltd.";
+                    break;
+                case "0x00DDDDDD":
+                    return "DAINCUBE Corp.";
+                    break;
+                case "0x00DEADBF":
+                    return "Shanghai xPartner Robotics Co.,Ltd.";
+                    break;
+                case "0x00DEDBEF":
+                    return "Dexterity, Inc.";
+                    break;
+                case "0x00E05DA6":
+                    return "Detlef Fink Elektronik-& Softwareentwicklung";
+                    break;
+                case "0x00E11FE1":
+                    return "Elife International S.r.l.";
+                    break;
+                case "0x00E50E50":
+                    return "ESO, European Southern Observatory";
+                    break;
+                case "0x00E57AB1":
+                    return "Estabili Tecnologia";
+                    break;
+                case "0x00E5CA18":
+                    return "Weld Tooling Corporation (dba BUG-O Systems)";
+                    break;
+                case "0x00EC1608":
+                    return "Tongtai Machine & Tool Co., Ltd.";
+                    break;
+                case "0x00EC1991":
+                    return "PROMAX srl";
+                    break;
+                case "0x00EC2018":
+                    return "PRODRIVES & MOTIONS CO., LTD.";
+                    break;
+                case "0x00EC4800":
+                    return "Hitex (UK) Ltd.";
+                    break;
+                case "0x00ECADC0":
+                    return "Encoder Products Company";
+                    break;
+                case "0x00ECADE1":
+                    return "Mecademic Inc.";
+                    break;
+                case "0x00ECEEDA":
+                    return "Exceed Automation, LLC";
+                    break;
+                case "0x00EDA168":
+                    return "Endex Automation Technology Co., Ltd.";
+                    break;
+                case "0x00EDC0DE":
+                    return "STÖGRA Antriebstechnik GmbH";
+                    break;
+                case "0x00EE00AA":
+                    return "ENTEC Electric & Electronic CO., LTD.";
+                    break;
+                case "0x00EE1000":
+                    return "Euto Energy Elektronik San. ve Tic. Ltd. Sti.";
+                    break;
+                case "0x00EECCAA":
+                    return "Beijing Sevenstar Flow Co., Ltd.";
+                    break;
+                case "0x00EEE669":
+                    return "Henan Mechanical and Electrical Vocational College";
+                    break;
+                case "0x00EEEEEE":
+                    return "Eonyk AG";
+                    break;
+
+                case "0x00F0AE1B":
+                    return "NTCSOFT Co., Ltd.";
+                    break;
+                case "0x00F1CA42":
+                    return "Meccanica 42 S.r.l.";
+                    break;
+                case "0x00F1F1F1":
+                    return "Williams Grand Prix Engineering Limited";
+                    break;
+                case "0x00F2020F":
+                    return "MİLTEKSAN CNC Teknoloji ve Kontrol Sistemleri Sanayi A.Ş.";
+                    break;
+                case "0x00F2F2F2":
+                    return "spectral process Ingenieurbüro";
+                    break;
+                case "0x00F5CB27":
+                    return "Alpha Project Co.,Ltd.";
+                    break;
+                case "0x00F8F8F8":
+                    return "Suzhou Otronic Medical Technology Co., Ltd.";
+                    break;
+                case "0x00FA1337":
+                    return "British Columbia Institute of Technology";
+                    break;
+                case "0x00FA140A":
+                    return "KOYO ELECTRONICS INDUSTRIES CO., LTD.";
+                    break;
+                case "0x00FA3C77":
+                    return "DNV Electronics, LLC";
+                    break;
+                case "0x00FABADA":
+                    return "GTD Sistemas de Información SA";
+                    break;
+                case "0x00FDC42D":
+                    return "MECOS AG";
+                    break;
+                case "0x00FE0001":
+                    return "Kemppi Oy";
+                    break;
+                case "0x00FEDABC":
+                    return "Mouvent AG";
+                    break;
+                case "0x00FEDCBA":
+                    return "E-TEAM di Righini Bruno & C. S.a.s.";
+                    break;
+                case "0x00FF00AA":
+                    return "Dongguan Precision Intelligent Technology Co., Ltd.";
+                    break;
+                case "0x00FF00FF":
+                    return "TDK-Lambda Ltd.";
+                    break;
+                case "0x00FFAABB":
+                    return "YOSIO ELECTRONIC COMPANY";
+                    break;
+                case "0x00FFFAAA":
+                    return "Xiamen Zhengai Technology Co., Ltd.";
+                    break;
+                case "0x00FFFFFF":
+                    return "Chongqing Huashu Robotics Co.,Ltd.";
+                    break;
+
+                case "0x01000001":
+                    return "Arlington Laboratory Corporation";
+                    break;
+                case "0x01000002":
+                    return "Beckhoff Automation GmbH & Co. KG";
+                    break;
+                case "0x01000056":
+                    return "SICK AG";
+                    break;
+                case "0x01000083":
+                    return "Omron Robotics and Safety Technologies, Inc.";
+                    break;
+                case "0x01000089":
+                    return "Parker Hannifin Manufacturing S.r.l.";
+                    break;
+                case "0x010000E8":
+                    return "Balluff GmbH";
+                    break;
+                case "0x010000F9":
+                    return "Nidec ACIM Germany GmbH";
+                    break;
+                case "0x010000FB":
+                    return "maxon precision motors, inc.";
+                    break;
+                case "0x01000230":
+                    return "Weidmüller Interface (Shanghai) Co.,Ltd.";
+                    break;
+                case "0x01000331":
+                    return "SHANGHAI SANY SCIENCE & TECHNOLOGY CO., LTD";
+                    break;
+                case "0x0100034E":
+                    return "Infineon Technologies Americas Corporation";
+                    break;
+                case "0x0100050C":
+                    return "ABB Engineering (Shanghai) Ltd.";
+                    break;
+                case "0x01000734":
+                    return "MULTIVAC Sepp Haggenmüller SE & Co. KG";
+                    break;
+                case "0x01000766":
+                    return "Renesas Electronics Korea Co., Ltd.";
+                    break;
+                case "0x010007D5":
+                    return "Bimba Manufacturing Company";
+                    break;
+                case "0x010007EC":
+                    return "SCREEN Holdings Co., Ltd.";
+                    break;
+                case "0x0100083E":
+                    return "Frencken America Inc.";
+                    break;
+                case "0x01000844":
+                    return "KLA-Tencor Corporation";
+                    break;
+                case "0x01000876":
+                    return "EDAC Electronics Technology (Hangzhou) Co., Ltd.";
+                    break;
+                case "0x0100090C":
+                    return "CORE CORPORATION";
+                    break;
+                case "0x0100091C":
+                    return "Drobak Unlimited Co.";
+                    break;
+                case "0x01001946":
+                    return "AMADA MIYACHI EUROPE GmbH";
+                    break;
+                case "0x01003610":
+                    return "eProLinkTek Co., Ltd.";
+                    break;
+                case "0x01007170":
+                    return "Hyundai Heavy Industries Holdings Co. Ltd.";
+                    break;
+                case "0x01007680":
+                    return "HUNAN SUPER INFORMATION CO., LTD";
+                    break;
+                case "0x0100ADDA":
+                    return "Fraunhofer-Institut für Lasertechnik (ILT)";
+                    break;
+                case "0x01053258":
+                    return "Shenzhen Encom Electric Technologies Co., Ltd.";
+                    break;
+                case "0x01681168":
+                    return "Kinco Electric (Shenzhen) Ltd.";
+                    break;
+                case "0x012EBC73":
+                    return "TIME GROUP Inc.";
+                    break;
+                case "0x01ABCDEF":
+                    return "Ma.Vi. srl";
+                    break;
+
+                case "0x02000089":
+                    return "Parker Hannifin Manufacturing Germany GmbH & Co KG";
+                    break;
+                case "0x0200008D":
+                    return "Danfoss Drives A/S";
+                    break;
+                case "0x02000331":
+                    return "SHANGHAI SANY SCIENCE & TECHNOLOGY CO., LTD";
+                    break;
+                case "0x0200034E":
+                    return "Infineon Technologies China Co., Ltd.";
+                    break;
+                case "0x0200ADDA":
+                    return "Fraunhofer-Institut für Lasertechnik (ILT)";
+                    break;
+                case "0x0300008D":
+                    return "Danfoss S.r.l.";
+                    break;
+                case "0x04000089":
+                    return "Parker Hannifin Ltd.";
+                    break;
+                case "0x04210909":
+                    return "Longxin Zhijian Co. Ltd.";
+                    break;
+                case "0x04533417":
+                    return "MEYSAR MAKINA ELEKTRONIK ENERJI YAZILIM SAN. TIC. LTD. STI";
+                    break;
+                case "0x05000089":
+                    return "Parker Hannifin Corporation";
+                    break;
+                case "0x0505ABCD":
+                    return "A.L.L. Lasersysteme GmbH";
+                    break;
+                case "0x0512FDFD":
+                    return "Suzhou GFD Automation Technology Co., Ltd";
+                    break;
+
+                case "0x06402200":
+                    return "L-3 Communications, Communication Systems - West";
+                    break;
+                case "0x06958326":
+                    return "BNT";
+                    break;
+                case "0x07770777":
+                    return "Japan Radio Co., Ltd.";
+                    break;
+                case "0x0800005A":
+                    return "Schneider Electric SE";
+                    break;
+                case "0x08000089":
+                    return "Parker Hannifin Manufacturing Germany GmbH & Co. KG";
+                    break;
+                case "0x09000089":
+                    return "Parker Hannifin Corporation";
+                    break;
+                case "0x0A5D0000":
+                    return "Advanced Systems Development BVBA";
+                    break;
+                case "0x0ADAFFFF":
+                    return "DSP Automation";
+                    break;
+                case "0x0C044BAC":
+                    return "Compac Sorting Equipment Ltd.";
+                    break;
+                case "0x0FA00000":
+                    return "FASTECH Co., Ltd.";
+                    break;
+                case "0x0FFF8888":
+                    return "GSK CNC EQUIPMENT CO., LTD.";
+                    break;
+
+                case "0x10000000":
+                    return "SONOTRONIC Nagel GmbH";
+                    break;
+                case "0x10000001":
+                    return "XI’AN MOSVO ELECTRONICS TECHNOLOGY CO.,LTD";
+                    break;
+                case "0x10000004":
+                    return "ED Co., Ltd";
+                    break;
+                case "0x10000031":
+                    return "SHANGHAI SANY SCIENCE & TECHNOLOGY CO., LTD";
+                    break;
+                case "0x10000331":
+                    return "SHANGHAI SANY SCIENCE & TECHNOLOGY CO., LTD";
+                    break;
+                case "0x12345678":
+                    return "GA Drilling, Ltd.";
+                    break;
+                case "0x17072003":
+                    return "METTEM-Specautomatic Ltd.";
+                    break;
+                case "0x19491001":
+                    return "Tsinghua University, Department of Electronic Engineering";
+                    break;
+                case "0x19821130":
+                    return "Control Z Corporation";
+                    break;
+                case "0x19861230":
+                    return "Shanghai Damon Logistics Technology Co.,LTD";
+                    break;
+                case "0x1BA90762":
+                    return "iba AG";
+                    break;
+
+                case "0x20041961":
+                    return "Hengstler GmbH";
+                    break;
+                case "0x20422B4C":
+                    return "Lenord, Bauer & Co. GmbH";
+                    break;
+                case "0x20494154":
+                    return "Universität Bremen, Institut für Automatisierungstechnik (IAT)";
+                    break;
+                case "0x22222222":
+                    return "Shanghai Cohere Electronics Technology Co., Ltd.";
+                    break;
+                case "0x23091861":
+                    return "Robert Bosch GmbH";
+                    break;
+                case "0x26262626":
+                    return "APDISAR (Association pour la Promotion et le Développement de l’Ecole D’Ingénieurs ESISAR)";
+                    break;
+                case "0x26376345":
+                    return "Convex Co., Ltd.";
+                    break;
+                case "0x2E000000":
+                    return "X2E GmbH";
+                    break;
+                case "0x30000331":
+                    return "SHANGHAI SANY SCIENCE & TECHNOLOGY CO., LTD";
+                    break;
+                case "0x31313131":
+                    return "Sany Intelligent Control Equipment";
+                    break;
+                case "0x31393633":
+                    return "Technische Universität Darmstadt, Institut für Elektromechanische Konstruktionen";
+                    break;
+                case "0x314D4B54":
+                    return "MKT Systemtechnik GmbH & Co. KG";
+                    break;
+                case "0x33333333":
+                    return "The ITAYA Engineering Ltd.";
+                    break;
+                case "0x35409865":
+                    return "Korea Electronics Technology Institute";
+                    break;
+
+                case "0x40000331":
+                    return "SHANGHAI SANY SCIENCE & TECHNOLOGY CO., LTD";
+                    break;
+                case "0x40524F54":
+                    return "Red one technologies";
+                    break;
+                case "0x414D4154":
+                    return "Applied Materials Inc.";
+                    break;
+                case "0x41524341":
+                    return "ARCA TECNOLOGIE srl";
+                    break;
+                case "0x4156414C":
+                    return "AVAL DATA CORPORATION";
+                    break;
+                case "0x42000000":
+                    return "Trust Automation Inc.";
+                    break;
+                case "0x43544C42":
+                    return "Central South University of Forestry and Technology, College of Computer Science and Information Technology";
+                    break;
+                case "0x44454B31":
+                    return "DEK Printing Machines Ltd.";
+                    break;
+                case "0x454C4F56":
+                    return "ELOVIS GmbH";
+                    break;
+                case "0x454D5245":
+                    return "EKTECH Elektronik";
+                    break;
+                case "0x46485320":
+                    return "SHF Communication Technologies AG";
+                    break;
+                case "0x464D5331":
+                    return "FMS (Flexible Manufacturing System)";
+                    break;
+                case "0x474F5353":
+                    return "Marcus Goßner SYSTEM SOLUTIONS";
+                    break;
+                case "0x47535953":
+                    return "Grossenbacher Systeme AG";
+                    break;
+                case "0x482A0000":
+                    return "Hstar Technologies Corp.";
+                    break;
+                case "0x48455673":
+                    return "University of Applied Sciences Western Switzerland, Institute of Systems Engineering";
+                    break;
+                case "0x4C4E5449":
+                    return "NTI AG - LinMot";
+                    break;
+                case "0x4C524358":
+                    return "Lam Research Corporation";
+                    break;
+                case "0x4D4C5431":
+                    return "MLT Micro Laser Technology GmbH";
+                    break;
+
+                case "0x50005000":
+                    return "Technische Universität Braunschweig";
+                    break;
+                case "0x50414E43":
+                    return "Power Automation GmbH";
+                    break;
+                case "0x52414649":
+                    return "RAFI GmbH & Co. KG";
+                    break;
+                case "0x53545A53":
+                    return "Steinbeis-Transferzentrum Systemtechnik";
+                    break;
+                case "0x5445434E":
+                    return "Tecan Schweiz AG";
+                    break;
+                case "0x54455753":
+                    return "TEWS Elektronik GmbH & Co. KG";
+                    break;
+                case "0x54494158":
+                    return "Timax Electronics & Machinery Ltd.";
+                    break;
+                case "0x55555555":
+                    return "OLYMPUS CORPORATION";
+                    break;
+                case "0x5555AAAA":
+                    return "SIASUN Robot & Automation Co., Ltd.";
+                    break;
+                case "0x55AA55AA":
+                    return "Green Field Control System (I) Pvt. Ltd.";
+                    break;
+                case "0x55AA55BB":
+                    return "JT3, LLC";
+                    break;
+                case "0x56475454":
+                    return "Volvo Group";
+                    break;
+
+                case "0x6167656D":
+                    return "megatec electronic GmbH";
+                    break;
+                case "0x65547241":
+                    return "Arte Motion S.p.A.";
+                    break;
+                case "0x66666666":
+                    return "Chinese Academy of Sciences, Institute of Optics and Electronics (IOE)";
+                    break;
+                case "0x66668888":
+                    return "Shenzhen Just Motion Control Electromechanics Co.,Ltd";
+                    break;
+                case "0x7061756C":
+                    return "PAUL Maschinenfabrik GmbH & Co.KG";
+                    break;
+                case "0x77776968":
+                    return "Mesacon Messelektronik GmbH Dresden";
+                    break;
+                case "0x77778888":
+                    return "Shanghai Tech Full Electric Co., Ltd.";
+                    break;
+                case "0x81696189":
+                    return "Shandong University, School of Electrical Engineering";
+                    break;
+                case "0x88888888":
+                    return "ScandiNova Systems AB";
+                    break;
+                case "0x89898989":
+                    return "Woojin Plaimm Co., Ltd";
+                    break;
+                case "0x90646350":
+                    return "ROBOCUBETECH Co., Ltd";
+                    break;
+                case "0x99998888":
+                    return "Shanghai STEP Electric Corporation";
+                    break;
+
+                case "0xAAAA5555":
+                    return "Sunin Technology Inc.";
+                    break;
+                case "0xAAAAAAAA":
+                    return "COMIZOA Co., Ltd.";
+                    break;
+                case "0xAAAABBBB":
+                    return "Ruchservomotor Ltd.";
+                    break;
+                case "0xAAAAFFFF":
+                    return "Dalian Jafeng Electronics Co., Ltd.";
+                    break;
+                case "0xADD1DA7A":
+                    return "ADDI-DATA GmbH";
+                    break;
+                case "0xB0500001":
+                    return "Husky Injection Molding Systems Ltd.";
+                    break;
+                case "0xBCDA0001":
+                    return "JINOID CO., LTD.";
+                    break;
+                case "0xBE78EC01":
+                    return "Bertec Corporation";
+                    break;
+                case "0xC0DECAFE":
+                    return "Innovasic Inc.";
+                    break;
+                case "0xD4C3B2A1":
+                    return "PULOON Technology Inc.";
+                    break;
+                case "0xDEADBEEF":
+                    return "Albert Handtmann Maschinenfabrik GmbH & Co. KG";
+                    break;
+
+                default:
+                    return "???";
+                    break;
             }
         }
     }

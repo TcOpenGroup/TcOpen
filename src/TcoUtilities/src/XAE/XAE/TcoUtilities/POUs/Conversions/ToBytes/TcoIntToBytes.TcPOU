@@ -1,37 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="TcoIntToBytes" Id="{c53bc4a9-5a07-0cd2-3f0c-ee57b6c451d7}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION TcoIntToBytes 
+    <Declaration><![CDATA[FUNCTION TcoIntToBytes
 VAR_INPUT
-	inFormat : eTcoDataFormat;
-	inValue : INT;
+    inFormat : eTcoDataFormat;
+    inValue : INT;
 END_VAR
 VAR_IN_OUT
-    outByte0: BYTE;
-    outByte1: BYTE;
+    outByte0 : BYTE;
+    outByte1 : BYTE;
 END_VAR
 VAR
-	_b0: BYTE;
-	_b1: BYTE;
-
-	_tmpINT : INT; 
-END_VAR
-
-]]></Declaration>
+    _b0 : BYTE;
+    _b1 : BYTE;
+    _tmpINT : INT;
+END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[_tmpINT:=inValue;
+      <ST><![CDATA[_tmpINT := inValue;
+_b1 := UDINT_TO_BYTE(_tmpINT MOD 256);
+_tmpINT := SHR(_tmpINT, 8);
+_b0 := UDINT_TO_BYTE(_tmpINT MOD 256);
+_tmpINT := SHR(_tmpINT, 8);
 
-_b1:=UDINT_TO_BYTE(_tmpINT MOD 256);
-_tmpINT:=SHR(_tmpINT,8);
-_b0:=UDINT_TO_BYTE(_tmpINT MOD 256);
-_tmpINT:=SHR(_tmpINT,8);
-
-IF inFormat=eTcoDataFormat.LittleEndian THEN
-	outByte0 := _b1;
-	outByte1 := _b0;	
-ELSIF inFormat=eTcoDataFormat.BigEndian THEN
-	outByte0 := _b0;
-	outByte1 := _b1;	
+IF inFormat = eTcoDataFormat.LittleEndian THEN
+    outByte0 := _b1;
+    outByte1 := _b0;
+ELSIF inFormat = eTcoDataFormat.BigEndian THEN
+    outByte0 := _b0;
+    outByte1 := _b1;
 END_IF]]></ST>
     </Implementation>
   </POU>

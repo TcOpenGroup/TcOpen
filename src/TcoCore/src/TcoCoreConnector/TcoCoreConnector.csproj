@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Library</OutputType>
@@ -12,11 +12,15 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <PackageTags>TwinCAT3 Beckhoff</PackageTags>
-    <PackageReleaseNotes>Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
+    <PackageReleaseNotes
+    >Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
     <PackageProjectUrl>http://docs.tcopengroup.org/</PackageProjectUrl>
-    <PackageIconUrl>https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
+    <PackageIconUrl
+    >https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net48|AnyCPU'">
+  <PropertyGroup
+    Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net48|AnyCPU'"
+  >
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
     <DefineConstants>TRACE;PLC_DOCU</DefineConstants>
@@ -28,23 +32,51 @@
     <DefineConstants>PLC_DOCU</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="2.0.0" />
-    <PackageReference Include="Inxton.vortex.compiler.console" Version="2.0.0" />
-  </ItemGroup>
-    <ItemGroup>    
-    <Content Include="_meta\TcoCore.library" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="_meta\TcoCore.json" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />          
-    <Content Include="_meta\version.info" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />   
+    <PackageReference
+      Include="Inxton.Package.Vortex.Essentials"
+      Version="2.0.0"
+    />
+    <PackageReference
+      Include="Inxton.vortex.compiler.console"
+      Version="2.0.0"
+    />
   </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\..\..\TcOpen.Inxton\src\Application\TcOpen.Inxton.App.csproj" />
-      <ProjectReference Include="..\..\..\TcOpen.Inxton\src\TcOpen.Inxton\TcOpen.Inxton.csproj" />
+    <Content
+      Include="_meta\TcoCore.library"
+      IncludeInPackage="true"
+      Pack="true"
+      PackagePath="lib"
+      CopyToOutputDirectory="PreserveNewest"
+    />
+    <Content
+      Include="_meta\TcoCore.json"
+      IncludeInPackage="true"
+      Pack="true"
+      PackagePath="lib"
+      CopyToOutputDirectory="PreserveNewest"
+    />
+    <Content
+      Include="_meta\version.info"
+      IncludeInPackage="true"
+      Pack="true"
+      PackagePath="lib"
+      CopyToOutputDirectory="PreserveNewest"
+    />
+  </ItemGroup>
+    <ItemGroup>
+      <ProjectReference
+      Include="..\..\..\TcOpen.Inxton\src\Application\TcOpen.Inxton.App.csproj"
+    />
+      <ProjectReference
+      Include="..\..\..\TcOpen.Inxton\src\TcOpen.Inxton\TcOpen.Inxton.csproj"
+    />
     </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Localizations.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Localizations.resx</DependentUpon>     
+      <DependentUpon>Localizations.resx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -10,18 +10,24 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <IncludeAssets
+      >runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="coverlet.collector" Version="1.3.0">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <IncludeAssets
+      >runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\TcoData\src\Repository\InMemory\TcOpen.Inxton.Data.InMemory.csproj" />
-    <ProjectReference Include="..\..\src\TcOpen.Inxton.Local.Security.Blazor\TcOpen.Inxton.Local.Security.Blazor.csproj" />
+    <ProjectReference
+      Include="..\..\..\TcoData\src\Repository\InMemory\TcOpen.Inxton.Data.InMemory.csproj"
+    />
+    <ProjectReference
+      Include="..\..\src\TcOpen.Inxton.Local.Security.Blazor\TcOpen.Inxton.Local.Security.Blazor.csproj"
+    />
   </ItemGroup>
 
 </Project>

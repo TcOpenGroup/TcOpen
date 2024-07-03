@@ -18,25 +18,21 @@ VAR
     _axisRef : REFERENCE TO TcoAxisRef;
     {attribute 'hide'}
     _mcReadStatus : Tc2_MC2.MC_ReadStatus;
-
-
     _override : LREAL := 100.0;
-	{attribute 'hide'}
-	_overrideInternal : LREAL :=100.0;
-	{attribute addProperty Name "<#Axis status#>"}
+    {attribute 'hide'}
+    _overrideInternal : LREAL := 100.0;
+    {attribute addProperty Name "<#Axis status#>"}
     {attribute clr [ReadOnly()]}
     _axisStatus : TcoAxisStatus;
-	{attribute addProperty Name "<#Axis config#>"}
+    {attribute addProperty Name "<#Axis config#>"}
     _config : TcoAxisConfig;
-	
-	_reduceMovementsInServiceMode:REAL;
-
+    _reduceMovementsInServiceMode : REAL;
 END_VAR
 VAR
     {attribute addProperty Name "<#Movement state#>"}
     {attribute clr [ReadOnly()]}
-    _movementState : TcoMovementState(THIS^,TcoCore.eRestoreMode.None);
-	{attribute addProperty Name "<#Power#>"}
+    _movementState : TcoMovementState(THIS^, TcoCore.eRestoreMode.None);
+    {attribute addProperty Name "<#Power#>"}
     _power : Power(THIS^);
     {attribute addProperty Name "<#Reset#>"}
     _resetTask : ResetTask(THIS^);
@@ -48,7 +44,7 @@ VAR
     _homeTask : HomeTask(THIS^);
     {attribute addProperty Name "<#Jogging#>"}
     _jog : Jog(THIS^);
-	{attribute addProperty Name "<#Force/Torque#>"}
+    {attribute addProperty Name "<#Force/Torque#>"}
     _torqueTask : SetTorqueTask(THIS^);
     {attribute addProperty Name "<#Move velocity#>"}
     _moveVelocityTask : MoveVelocityTask(THIS^);
@@ -63,10 +59,9 @@ VAR
     {attribute addProperty Name "<#Move modulo#>"}
     _moveModuloTask : MoveModuloTask(THIS^);
 END_VAR
-
 VAR
-	{attribute 'hide'}
-	_sb : TcoCore.StringBuilder;
+    {attribute 'hide'}
+    _sb : TcoCore.StringBuilder;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF NOT __ISVALIDREF(inoAxisRef) THEN
@@ -75,18 +70,19 @@ END_VAR]]></Declaration>
 END_IF
 
 _axisRef REF= inoAxisRef;
-
-
-
 _mcReadStatus(Axis := _axisRef, Enable := TRUE);
 UpdateAxisStatus();
+_overrideInternal := _override;
 
-_overrideInternal:=_override;
-IF _config.OverrideInService>0.0 AND _config.OverrideInService<=100.0 AND THIS^.IsService THEN
-	_overrideInternal:=_config.OverrideInService;
-	Messenger.Notify(_sb.Clear().Append('<#Drive in override mode (Reduced velocity) due service mode! Limited to #>').Append(LREAL_TO_STRING(_overrideInternal)).Append(' %').ToString()); 
+IF _config.OverrideInService > 0.0 AND _config.OverrideInService <= 100.0 AND THIS^.IsService THEN
+    _overrideInternal := _config.OverrideInService;
+
+    Messenger.Notify(_sb.Clear()
+            .Append('<#Drive in override mode (Reduced velocity) due service mode! Limited to #>')
+            .Append(LREAL_TO_STRING(_overrideInternal))
+            .Append(' %')
+            .ToString());
 END_IF
-
 
 _power(inEnable := inEnable,
     inEnablePositive := inEnablePositive,
@@ -95,7 +91,6 @@ _power(inEnable := inEnable,
     inIsServiceMode := THIS^.IsService);
 
 _resetTask();
-
 _soEResetTask();
 _setPositionTask();
 _homeTask();
@@ -106,11 +101,17 @@ _haltTask();
 _moveRelativeTask();
 _moveAbsoluteTask();
 _moveModuloTask();
-_torqueTask(inIsServiceMode:= THIS^.IsService);
+_torqueTask(inIsServiceMode := THIS^.IsService);
 
-IF(_axisStatus.Error) THEN Messenger.Error(_sb.Clear().Append('<#Drive error no #>').Append(UDINT_TO_STRING(_axisStatus.ErrorId)).Append(' |[[0]AdvancedDiagnosticMessage]|').Append('.').Append('For details see the service mode').ToString()); END_IF;
-
-]]></ST>
+IF (_axisStatus.Error) THEN
+    Messenger.Error(_sb.Clear()
+            .Append('<#Drive error no #>')
+            .Append(UDINT_TO_STRING(_axisStatus.ErrorId))
+            .Append(' |[[0]AdvancedDiagnosticMessage]|')
+            .Append('.')
+            .Append('For details see the service mode')
+            .ToString());
+END_IF;]]></ST>
     </Implementation>
     <Folder Name="Axis" Id="{d7605e2c-2fb5-0437-2ec5-266a0c7dda7d}" />
     <Folder Name="Motion" Id="{9515ec36-620f-055e-2ead-75815f8c7157}" />
@@ -136,21 +137,19 @@ AxisStatus REF= _axisStatus;]]></ST>
       </Get>
     </Property>
     <Method Name="ClearError" Id="{3a97540c-f593-0f1c-0120-f708057a61f1}">
-      <Declaration><![CDATA[METHOD INTERNAL ClearError
-]]></Declaration>
+      <Declaration><![CDATA[METHOD INTERNAL ClearError]]></Declaration>
       <Implementation>
         <ST><![CDATA[_axisStatus.Error := FALSE;
-_axisStatus.ErrorId := 0;
-]]></ST>
+_axisStatus.ErrorId := 0;]]></ST>
       </Implementation>
     </Method>
     <Property Name="Config" Id="{63b6b9a6-8b9d-049b-2280-e62b368686bb}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Gets the configuration of the Axis. 					
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Gets the configuration of the Axis.
+        </summary>
+    </docu>
 ~*)
 PROPERTY Config : REFERENCE TO TcoAxisConfig]]></Declaration>
       <Get Name="Get" Id="{1bc6eedd-47d4-0d02-3e47-a9ba103b31fe}">
@@ -172,12 +171,10 @@ PROPERTY Config : REFERENCE TO TcoAxisConfig]]></Declaration>
     <Method Name="FB_init" Id="{aaf4eeef-09a9-063d-0c3a-bfe454d50e66}">
       <Declaration><![CDATA[METHOD FB_init : BOOL
 VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-  	ParentObject : ITcoObject;	
-END_VAR
-
-]]></Declaration>
+    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+    ParentObject : ITcoObject;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
@@ -227,8 +224,7 @@ END_VAR]]></Declaration>
     <Method Name="HomeAbort" Id="{4537a791-8855-025c-060e-2c790ee5df28}" FolderPath="Motion\">
       <Declaration><![CDATA[METHOD PUBLIC HomeAbort
 VAR_INPUT
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_homeTask.Abort();]]></ST>
       </Implementation>
@@ -245,10 +241,9 @@ END_VAR
     <Method Name="InPosition" Id="{6abc727c-3362-0aa9-376e-13b2f183c2e4}" FolderPath="Axis\">
       <Declaration><![CDATA[METHOD PUBLIC InPosition : BOOL
 VAR_INPUT
-inRequiredPos : LREAL;
-inWindow : LREAL;
-END_VAR
-]]></Declaration>
+    inRequiredPos : LREAL;
+    inWindow : LREAL;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[InPosition := ABS(_axisStatus.ActPos - inRequiredPos) < inWindow;]]></ST>
       </Implementation>
@@ -283,8 +278,7 @@ END_VAR
     <Method Name="MoveAbosluteAbort" Id="{22adef0b-334f-070f-2eed-960e4031a590}" FolderPath="Motion\">
       <Declaration><![CDATA[METHOD PUBLIC MoveAbosluteAbort
 VAR_INPUT
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_moveAbsoluteTask.Abort();]]></ST>
       </Implementation>
@@ -396,13 +390,12 @@ END_VAR]]></Declaration>
       </Get>
     </Property>
     <Property Name="Override" Id="{7e6937a0-4ba3-05b0-2930-caf46da04f03}" FolderPath="Axis\">
-      <Declaration><![CDATA[
-(*~
-		<docu>
-			<summary>
-			Velocity override in % FOR all movement commands. (0 ≤ Override ≤ 100.0)	 
-			</summary>				
-		</docu>
+      <Declaration><![CDATA[(*~
+        <docu>
+            <summary>
+            Velocity override in % FOR all movement commands. (0 ≤ Override ≤ 100.0)
+            </summary>
+        </docu>
 ~*)
 PROPERTY Override : LREAL]]></Declaration>
       <Get Name="Get" Id="{b2639d12-3057-054a-1e0b-10829b617131}">
@@ -435,31 +428,32 @@ PROPERTY Override : LREAL]]></Declaration>
     </Property>
     <Method Name="Restore" Id="{cb4df5d0-872f-0def-03a7-f8bfc3720272}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.	
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+        </summary>
+    </docu>
 ~*)
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF __ISVALIDREF(_axisRef) THEN
-	IF NOT inEnable THEN
-		_Power(inEnable := FALSE);
-	END_IF
+    IF NOT inEnable THEN
+        _Power(inEnable := FALSE);
+    END_IF
+
     _mcReadStatus(Axis := _axisRef, Enable := FALSE);
 END_IF
 
-IF NOT (_override>0.0 AND _override<=100.0)  THEN
-	_override := 100;
+IF NOT (_override > 0.0 AND _override <= 100.0) THEN
+    _override := 100;
 END_IF
+
 RestoreTasks();
 _resetTask.Restore();]]></ST>
       </Implementation>
     </Method>
     <Method Name="RestoreTasks" Id="{dc495f00-8846-0615-3d49-5c05e9d2b4aa}">
-      <Declaration><![CDATA[METHOD INTERNAL RestoreTasks 
-]]></Declaration>
+      <Declaration><![CDATA[METHOD INTERNAL RestoreTasks]]></Declaration>
       <Implementation>
         <ST><![CDATA[//_resetTask.Restore();
 _soEResetTask.Restore();
@@ -477,12 +471,12 @@ _torqueTask.Restore();]]></ST>
     </Method>
     <Method Name="ServiceMode" Id="{f2dcab5e-74c4-0882-12e2-82e083006063}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-		    Custom service (manual, maintenance) logic.
-			This method must be implemented in derived class.
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Custom service (manual, maintenance) logic.
+            This method must be implemented in derived class.
+        </summary>
+    </docu>
 ~*)
 METHOD PROTECTED ServiceMode]]></Declaration>
       <Implementation>
@@ -492,15 +486,14 @@ METHOD PROTECTED ServiceMode]]></Declaration>
     <Method Name="SetErrorID" Id="{62d8002b-9fbc-0ce4-2890-bac65d445995}">
       <Declaration><![CDATA[METHOD INTERNAL SetErrorID
 VAR_INPUT
-	inErrorId : UDINT;
-END_VAR
-]]></Declaration>
+    inErrorId : UDINT;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_axisStatus.Error := TRUE;
+
 IF inErrorId <> 0 THEN
-	_axisStatus.ErrorId := inErrorId;
-END_IF
-]]></ST>
+    _axisStatus.ErrorId := inErrorId;
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetPosition" Id="{e0b984cb-4674-021d-1559-4672196bcb8d}" FolderPath="Axis\">
@@ -525,24 +518,22 @@ END_VAR]]></Declaration>
     <Method Name="SetTorque" Id="{a5a969d5-5c13-0a76-173a-6e38461490a0}" FolderPath="Motion\">
       <Declaration><![CDATA[METHOD SetTorque : ITcoTaskStatus
 VAR_INPUT
-   	inTorque : LREAL;
-	inRelative : BOOL;
+    inTorque : LREAL;
+    inRelative : BOOL;
     inVelocityLimitHigh : LREAL;
     inVelocityLimitLow : LREAL;
-    inContinuousUpdate: BOOL:=TRUE;
+    inContinuousUpdate : BOOL := TRUE;
     inTorqueRamp : LREAL;
     inTorqueOptions : Tc2_MC2.ST_TorqueControlOptions;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SetTorque := THIS^._torqueTask.InvokeWithParams(
-	inTorque:=inTorque , 
-	inRelative:=inRelative , 
-	inVelocityLimitHigh:=inVelocityLimitHigh , 
-	inVelocityLimitLow:= inVelocityLimitLow, 
-	inContinuousUpdate:= inContinuousUpdate , 
-	inTorqueRamp:= inTorqueRamp , 
-	inTorqueOptions:= inTorqueOptions);
-	]]></ST>
+        <ST><![CDATA[SetTorque := THIS^._torqueTask.InvokeWithParams(inTorque := inTorque,
+    inRelative := inRelative,
+    inVelocityLimitHigh := inVelocityLimitHigh,
+    inVelocityLimitLow := inVelocityLimitLow,
+    inContinuousUpdate := inContinuousUpdate,
+    inTorqueRamp := inTorqueRamp,
+    inTorqueOptions := inTorqueOptions);]]></ST>
       </Implementation>
     </Method>
     <Property Name="SetTorqueTask" Id="{690cf8bc-ff65-0398-22a3-b3cc663a8c89}" FolderPath="Motion\">

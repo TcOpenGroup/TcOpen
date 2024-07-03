@@ -3,34 +3,31 @@
   <POU Name="TcoQlSetCommandTask" Id="{d98c79d9-a8e3-0ee9-2151-213862bbf5d2}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoQlSetCommandTask EXTENDS TcoQlSeriesSupplyTask
 VAR
-	_command:TcoQlSeriesSupply_SetControl_v_1_x_x;
-
-END_VAR
-]]></Declaration>
+    _command : TcoQlSeriesSupply_SetControl_v_1_x_x;
+END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[SUPER^(inoConfig:=inoConfig,inoStatus:=inoStatus);]]></ST>
+      <ST><![CDATA[SUPER^(inoConfig := inoConfig, inoStatus := inoStatus);]]></ST>
     </Implementation>
     <Method Name="Restore" Id="{0057f43e-d449-071b-33fe-e154bdf4f389}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
-			<para>
-				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
-			</para>
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+            <para>
+                See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+            </para>
+        </summary>
+    </docu>
 ~*)
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.Restore();
-]]></ST>
+        <ST><![CDATA[SUPER^.Restore();]]></ST>
       </Implementation>
     </Method>
     <Method Name="WithParams" Id="{ca3b81ee-b772-00dd-13b7-6d078aa4bf4a}">
-      <Declaration><![CDATA[METHOD  WithParams : REFERENCE TO TcoQlSetCommandTask
+      <Declaration><![CDATA[METHOD WithParams : REFERENCE TO TcoQlSetCommandTask
 VAR_INPUT
-	inCommand:TcoQlSeriesSupply_SetControl_v_1_x_x;
+    inCommand : TcoQlSeriesSupply_SetControl_v_1_x_x;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^._command := inCommand;

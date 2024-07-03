@@ -36,17 +36,12 @@ namespace TcOpen.Inxton.Local.Security
             }
         }
 
-        private UserAccessor()
-        {
-        }
+        private UserAccessor() { }
 
         string displayUserName;
         public string DisplayUserName
         {
-            get
-            {
-                return displayUserName;
-            }
+            get { return displayUserName; }
             set
             {
                 if (displayUserName == value)
@@ -61,10 +56,7 @@ namespace TcOpen.Inxton.Local.Security
         string displayUserLevel;
         public string DisplayUserLevel
         {
-            get
-            {
-                return displayUserLevel;
-            }
+            get { return displayUserLevel; }
             set
             {
                 if (displayUserLevel == value)
@@ -81,7 +73,7 @@ namespace TcOpen.Inxton.Local.Security
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         #endregion
     }

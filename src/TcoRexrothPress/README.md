@@ -15,6 +15,7 @@ The package consists of a PLC library providing control logic and its .NET twin 
 - ### PLC enviroment
 
 ---
+
 **_Preconditions:_**
 
 The **`gsdml`** file(s) included in this package is(are) copied into the subfolder ..\Config\Io\EtherCAT\ of the TwinCAT3 instalation folder, before opening Visual Studio. It is possible use alredy predefined device stored in `Press (IndraDrive MPC20 (1 CCD Master +0 CCD Slaves)).xti` file (Here is predefined whole structure for SOE comunication). Boot files are stored in `TcOpen\src\TcoRexrothPress\src\TcoRexrothPressConnector\ddf\`
@@ -22,10 +23,10 @@ The **`gsdml`** file(s) included in this package is(are) copied into the subfold
 ---
 
 ---
+
 **_Note:_**
 
-Configuration and comisionig of SFK(Smart Function Kit) is possible provide via built in webserver. [SFK Webserver]    (<https://192.168.0.1/#/dashboard>) provided by [Rexroth](https://www.boschrexroth.com/en/dc/). Ip address might be different!
-
+Configuration and comisionig of SFK(Smart Function Kit) is possible provide via built in webserver. [SFK Webserver] (<https://192.168.0.1/#/dashboard>) provided by [Rexroth](https://www.boschrexroth.com/en/dc/). Ip address might be different!
 
 ---
 
@@ -56,19 +57,19 @@ Here you can find all documenatation such as required structure on bus, availabl
 
 #### 4. Using the **`gsdml`** file mentioned, add Ethercat slave device, then rescan devices on Ecat bus and use cofiguration described in rexroth documentiation. You can also use predefined template in `xti` file and add it into topology directly
 
-#### 7. Link all items of the structure **`GVL_xLinker.RexrothPress`**. You can also link ads information for Ecat diagnostic  purposes such as the items **`AdsAddr`** and **`State`**. If **`AdsAddr`** is empty you diagnostic is irelevant
+#### 7. Link all items of the structure **`GVL_xLinker.RexrothPress`**. You can also link ads information for Ecat diagnostic purposes such as the items **`AdsAddr`** and **`State`**. If **`AdsAddr`** is empty you diagnostic is irelevant
 
 #### 8. Create the Function Block that extends the **`TcoCore.TcoContext`** function block
 
-#### 9. Inside the declaration part of the function block created, add an instance of the **`TcoRexrothPress.TcoSmartFunctionKit_v_4_x_x`** function block with the initialization according to the example  
+#### 9. Inside the declaration part of the function block created, add an instance of the **`TcoRexrothPress.TcoSmartFunctionKit_v_4_x_x`** function block with the initialization according to the example
 
-````csharp
+```csharp
 FUNCTION_BLOCK myVeryFirstTcoContext EXTENDS TcoCore.TcoContext
 VAR
         {attribute addProperty Name "<#My very first SFK#>"}
         sfk : TcoRexrothPress.TcoSmartFunctionKit_v_4_x_x (THIS^);
 END_VAR
-````
+```
 
 #### 10. Add the **`Main`** method to the function block created in the step 8, and insert the **`TcoRexrothPress.TcoSmartFunctionKit_v_4_x_x`** instance call with passing the mapped hardware structure
 
@@ -140,7 +141,7 @@ myVeryFirstTcoContextInstance.Run();
 
 #### 4. After starting the application and expanding the view, final view should look as follows
 
-- ####  Collapsed view
+- #### Collapsed view
 
 ![Collapsed](assets/readme/Screenshot%20sfk%20collapsed.png)
 
@@ -150,8 +151,9 @@ myVeryFirstTcoContextInstance.Run();
 
 - #### Has error view
 
-    When you click on Health indicator ,diaagnostic information is shown.
-![jog](assets/readme/Screenshot%20sfk%20jog.png)
+      When you click on Health indicator ,diaagnostic information is shown.
+
+  ![jog](assets/readme/Screenshot%20sfk%20jog.png)
 
 - #### Error information view
 
@@ -169,19 +171,20 @@ All available commands and properiate parameters (are shown/ hide automaticaly) 
 
     ![software manual](assets/readme/sfk_soft_manual.png)
 
-  - GetResult Command - this command provide  last results via REST api.
+  - GetResult Command - this command provide last results via REST api.
 
-    ---
+    ***
+
     **_Note:_**
 
     There is neccessary to define a specific `IP address`.
 
-    ---
+    ***
 
     ![Results](assets/readme/Screenshot%20sfk%20results.png)
 
-  - Save last Curve Command - this remote tas provide us last curve results and measures da via REST api. All this data are exported to defined location and organize into directories splitted by yyyyMMdd. File format is  `json`. Name of this exported file is in format `SERIALNUMBER_CURVEID_yyyyMMddHHmmss.json`
-    
+  - Save last Curve Command - this remote tas provide us last curve results and measures da via REST api. All this data are exported to defined location and organize into directories splitted by yyyyMMdd. File format is `json`. Name of this exported file is in format `SERIALNUMBER_CURVEID_yyyyMMddHHmmss.json`
+
     ![json](assets/readme/Screenshot%20json.png)
 
 ```json
@@ -219,9 +222,9 @@ All available commands and properiate parameters (are shown/ hide automaticaly) 
                 "visible": true,
                 "position": 1
             },
-            
-           
-            //some data are skiped due size!!! 
+
+
+            //some data are skiped due size!!!
 
 
 
@@ -245,24 +248,25 @@ All available commands and properiate parameters (are shown/ hide automaticaly) 
     "__v": 1
 }
 ```
+
 - ### Example in sequence
 
 ```pascal
 
 IF (Step(1000, TRUE, 'SFK RESTORE')) THEN
-    //-------------------------------------    
+    //-------------------------------------
 		THIS^.ParentSequence.Station.Components.Sfk.Restore();
-		StepCompleteWhen(TRUE);	
+		StepCompleteWhen(TRUE);
     //-------------------------------------
 END_IF
 
 done:=false;
 IF (Step(2000, TRUE, 'SFK STOP MOVEMENT')) THEN
     //-------------------------------------
-		THIS^.ParentSequence.Station.Components.Sfk.Request.Command:=eTcoSmartFunctionKitCommand.StopMovement; 
+		THIS^.ParentSequence.Station.Components.Sfk.Request.Command:=eTcoSmartFunctionKitCommand.StopMovement;
 		done:=THIS^.ParentSequence.Station.Components.Sfk.RunCommand().Done;
-		
-		StepCompleteWhen(done);	
+
+		StepCompleteWhen(done);
 		IF done THEN
 			THIS^.ParentSequence.Station.Components.Sfk.Restore();
 		END_IF
@@ -271,9 +275,9 @@ END_IF
 
 IF (Step(3000, TRUE, 'SFK RESET')) THEN
     //-------------------------------------
-		THIS^.ParentSequence.Station.Components.Sfk.Request.Command:=eTcoSmartFunctionKitCommand.ClearError; 
-		done:=THIS^.ParentSequence.Station.Components.Sfk.RunCommand().Done ;	
-		StepCompleteWhen(done);	
+		THIS^.ParentSequence.Station.Components.Sfk.Request.Command:=eTcoSmartFunctionKitCommand.ClearError;
+		done:=THIS^.ParentSequence.Station.Components.Sfk.RunCommand().Done ;
+		StepCompleteWhen(done);
 		IF done THEN
 			THIS^.ParentSequence.Station.Components.Sfk.Restore();
 		END_IF
@@ -281,11 +285,11 @@ IF (Step(3000, TRUE, 'SFK RESET')) THEN
 END_IF
 IF (Step(4000, TRUE, 'SFK HOME')) THEN
     //-------------------------------------
-		THIS^.ParentSequence.Station.Components.Sfk.Request.Command:=eTcoSmartFunctionKitCommand.StartHoming; 
-		done := THIS^.ParentSequence.Station.Components.Sfk.RunCommand().Done ;	
-		
-		StepCompleteWhen(done);	
-		
+		THIS^.ParentSequence.Station.Components.Sfk.Request.Command:=eTcoSmartFunctionKitCommand.StartHoming;
+		done := THIS^.ParentSequence.Station.Components.Sfk.RunCommand().Done ;
+
+		StepCompleteWhen(done);
+
 		IF done THEN
 			THIS^.ParentSequence.Station.Components.Sfk.Restore();
 		END_IF
@@ -296,10 +300,10 @@ IF (Step(5000, TRUE, 'SFK SET PROGRAM')) THEN
     //-------------------------------------
 		THIS^.ParentSequence.Station.Components.Sfk.Request.Command:=eTcoSmartFunctionKitCommand.SetProgramActive;
 		THIS^.ParentSequence.Station.Components.Sfk.Request.ProgramId:=4;
- 
-		done:=THIS^.ParentSequence.Station.Components.Sfk.RunCommand().Done ;	
-		
-		StepCompleteWhen(done);	
+
+		done:=THIS^.ParentSequence.Station.Components.Sfk.RunCommand().Done ;
+
+		StepCompleteWhen(done);
 		IF done THEN
 			THIS^.ParentSequence.Station.Components.Sfk.Restore();
 		END_IF
@@ -310,13 +314,13 @@ IF (Step(6000, TRUE, 'SFK START PROGRAM')) THEN
 		THIS^.ParentSequence.Station.Components.Sfk.Request.Command:=eTcoSmartFunctionKitCommand.StartProgram;
 		_counterData:=_counterData+1;
 		fillChar:='00000000000';
-		
-	
+
+
 		_counterDataString:=DINT_TO_STRING(_counterData);
 		THIS^.ParentSequence.Station.Components.Sfk.Request.SerialNumber:=Tc2_Standard.MID(STR:=fillChar , LEN:=11- Tc2_Standard.LEN(_counterDataString), POS:=1 );
- 
-		done:=THIS^.ParentSequence.Station.Components.Sfk.RunCommand().Done ;	
-		StepCompleteWhen(done);	
+
+		done:=THIS^.ParentSequence.Station.Components.Sfk.RunCommand().Done ;
+		StepCompleteWhen(done);
 		IF done THEN
 			THIS^.ParentSequence.Station.Components.Sfk.Restore();
 		END_IF
@@ -327,14 +331,14 @@ END_IF
 IF (Step(7000, TRUE, 'EXPORT CURVE')) THEN
     //-------------------------------------
 
-		StepCompleteWhen(THIS^.ParentSequence.Station.Components.Sfk.ExportLastCurve().Done );	
+		StepCompleteWhen(THIS^.ParentSequence.Station.Components.Sfk.ExportLastCurve().Done );
     //-------------------------------------
 END_IF
 
 IF (Step(10000, TRUE, 'PARALELL TASK DONE')) THEN
     //-------------------------------------
     _task.DoneWhen(TRUE );
-    //-------------------------------------	
+    //-------------------------------------
 END_IF
 
 ```

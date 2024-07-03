@@ -16,13 +16,11 @@ VAR
     _MC_ReadParameter : MC_ReadParameter;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[SUPER^(	inEnable 			:=	inEnable,
-		inEnablePositive	:=	inEnablePositive,
-		inEnableNegative	:=	inEnableNegative,
-		inCalibrationCam	:=	inCalibrationCam,
-		inoAxisRef			:=	inoAxisRef);
-		
-]]></ST>
+      <ST><![CDATA[SUPER^(inEnable := inEnable,
+    inEnablePositive := inEnablePositive,
+    inEnableNegative := inEnableNegative,
+    inCalibrationCam := inCalibrationCam,
+    inoAxisRef := inoAxisRef);]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

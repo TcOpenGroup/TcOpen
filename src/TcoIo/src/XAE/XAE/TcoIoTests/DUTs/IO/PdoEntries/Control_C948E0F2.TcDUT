@@ -6,16 +6,14 @@
 {attribute addProperty Id "EnableBOOL1ResetBOOL1Reduce_torqueBOOL1"}
 {attribute addProperty CRC "3376996594"}
 {attribute addProperty Size "3"}
-TYPE Control_C948E0F2 :
-STRUCT
-	{attribute addProperty Name "Enable"}
-	Enable : BOOL;
-	{attribute addProperty Name "Reset"}
-	Reset : BOOL;
-	{attribute addProperty Name "Reduce_torque"}
-	Reduce_torque : BOOL;
+TYPE Control_C948E0F2 : STRUCT
+    {attribute addProperty Name "Enable"}
+    Enable : BOOL;
+    {attribute addProperty Name "Reset"}
+    Reset : BOOL;
+    {attribute addProperty Name "Reduce_torque"}
+    Reduce_torque : BOOL;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

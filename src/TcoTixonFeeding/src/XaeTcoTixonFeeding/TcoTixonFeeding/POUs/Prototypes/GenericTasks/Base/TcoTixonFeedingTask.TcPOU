@@ -1,27 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="TcoTixonFeedingTask" Id="{3c2fc736-bc66-08d9-20ec-4296aae9c0c4}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC ABSTRACT TcoTixonFeedingTask EXTENDS TcoCore.TcoTask 
-
+    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC ABSTRACT TcoTixonFeedingTask EXTENDS TcoCore.TcoTask
 VAR
-	_errorMessage:TcoCore.TcoMessenger(THIS^);
-    {attribute 'hide'} 
-	_progress : INT := 0;
-    {attribute 'hide'} 
-	_infoTimer :  TON;
-	_infoTime:TIME;
-    {attribute 'hide'} 
-	_errorTimer :  TON;
-	_errorTime:	TIME;
-	{attribute 'hide'} 
-	_timer :  TON;
-    {attribute 'hide'} 
-	_varInfo : __SYSTEM.VAR_INFO;
-    {attribute 'hide'} 
-	_sb : TcoCore.StringBuilder;
-	{attribute 'hide'} 
-	_autoRestore : BOOL;
-
+    _errorMessage : TcoCore.TcoMessenger(THIS^);
+    {attribute 'hide'}
+    _progress : INT := 0;
+    {attribute 'hide'}
+    _infoTimer : TON;
+    _infoTime : TIME;
+    {attribute 'hide'}
+    _errorTimer : TON;
+    _errorTime : TIME;
+    {attribute 'hide'}
+    _timer : TON;
+    {attribute 'hide'}
+    _varInfo : __SYSTEM.VAR_INFO;
+    {attribute 'hide'}
+    _sb : TcoCore.StringBuilder;
+    {attribute 'hide'}
+    _autoRestore : BOOL;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -30,34 +28,31 @@ END_VAR]]></Declaration>
       <Declaration><![CDATA[PROPERTY PUBLIC AutoRestore : BOOL]]></Declaration>
       <Get Name="Get" Id="{efd33750-311a-075a-3a08-942e3ab53a2c}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[AutoRestore:=_autoRestore;
-]]></ST>
+          <ST><![CDATA[AutoRestore := _autoRestore;]]></ST>
         </Implementation>
       </Get>
       <Set Name="Set" Id="{df96d8c9-1856-0e3a-2f28-997fd0542776}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[_autoRestore:=AutoRestore;]]></ST>
+          <ST><![CDATA[_autoRestore := AutoRestore;]]></ST>
         </Implementation>
       </Set>
     </Property>
     <Method Name="CallTimers" Id="{ecb7089a-a7b9-01c1-1e99-ab26e8329008}">
       <Declaration><![CDATA[METHOD CallTimers
 VAR_INPUT
-	inValue : BOOL;
-END_VAR
-]]></Declaration>
+    inValue : BOOL;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF THIS^.ErrorTime <> T#0S OR NOT inValue THEN  
-_errorTimer(IN := inValue, PT := THIS^.ErrorTime);
+        <ST><![CDATA[IF THIS^.ErrorTime <> T#0S OR NOT inValue THEN
+    _errorTimer(IN := inValue, PT := THIS^.ErrorTime);
 END_IF;
-IF THIS^.InfoTime <>T#0S OR NOT inValue THEN  
-_infoTimer(IN := inValue, PT := THIS^.InfoTime);
+
+IF THIS^.InfoTime <> T#0S OR NOT inValue THEN
+    _infoTimer(IN := inValue, PT := THIS^.InfoTime);
 END_IF;]]></ST>
       </Implementation>
     </Method>
@@ -65,44 +60,42 @@ END_IF;]]></ST>
       <Declaration><![CDATA[PROPERTY PUBLIC ErrorTime : REFERENCE TO TIME]]></Declaration>
       <Get Name="Get" Id="{50db764d-a7e6-07f2-3b4c-3620466826ea}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[ErrorTime REF=_errorTime;]]></ST>
+          <ST><![CDATA[ErrorTime REF= _errorTime;]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Property Name="InfoTime" Id="{2c67b3aa-4958-0588-0780-e699e5aa3de9}">
-      <Declaration><![CDATA[PROPERTY InfoTime :REFERENCE TO TIME]]></Declaration>
+      <Declaration><![CDATA[PROPERTY InfoTime : REFERENCE TO TIME]]></Declaration>
       <Get Name="Get" Id="{0fcfb362-3ecc-0c97-0b84-c5e2d531cd4c}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[InfoTime REF=_infoTime;]]></ST>
+          <ST><![CDATA[InfoTime REF= _infoTime;]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Method Name="Restore" Id="{ad9a6d70-9aaa-0604-0057-a45c21976679}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
-			<para>
-				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
-			</para>
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+            <para>
+                See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+            </para>
+        </summary>
+    </docu>
 ~*)
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.Restore();
 _progress := 0;
-_timer(In:=FALSE);
+_timer(In := FALSE);
 CallTimers(FALSE);
 Messenger.UnPin();
 _errorMessage.UnPin();
-_autoRestore:=false;]]></ST>
+_autoRestore := false;]]></ST>
       </Implementation>
     </Method>
   </POU>

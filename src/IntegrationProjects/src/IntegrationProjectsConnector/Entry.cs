@@ -11,7 +11,7 @@ namespace IntegrationProjects
     {
         static readonly string AmsId = Environment.GetEnvironmentVariable("Tc3Target");
 
-        public static IntegrationProjects.IntegrationProjectsTwinController IntegrationProjectsPlc 
-            = new IntegrationProjectsTwinController(Tc3ConnectorAdapter.Create(AmsId, 851, true));
+        public static IntegrationProjects.IntegrationProjectsTwinController IntegrationProjectsPlc =
+            new IntegrationProjectsTwinController(Tc3ConnectorAdapter.Create(AmsId, 851, true));
     }
 }

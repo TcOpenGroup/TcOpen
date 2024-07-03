@@ -2,7 +2,7 @@
 
 namespace Grafana.Backend.Model
 {
-    public interface IObservedValue<T> 
+    public interface IObservedValue<T>
     {
         dynamic _recordId { get; set; }
         string _EntityId { get; set; }

@@ -5,59 +5,50 @@
 {attribute clr [ExcludeFromApiDocumentation()]}
 FUNCTION_BLOCK ABSTRACT _internals_TcoContext EXTENDS TcoContext
 VAR
-	_probeCurrentCycleCount  : ULINT;	
-	_probeRunRequiredCycles : ULINT;
-	_testId : ULINT;
-	_testDoneCounter : ULINT;
-	_plcCycleCounter : ULINT;
+    _probeCurrentCycleCount : ULINT;
+    _probeRunRequiredCycles : ULINT;
+    _testId : ULINT;
+    _testDoneCounter : ULINT;
+    _plcCycleCounter : ULINT;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="_Close" Id="{e2e1d492-d989-0bc8-0108-b8347f5c2d4e}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD PROTECTED FINAL _Close
-
-]]></Declaration>
+METHOD PROTECTED FINAL _Close]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^.Close();]]></ST>
       </Implementation>
     </Method>
     <Method Name="_GetSynchParams" Id="{e3cf5488-c586-0883-2979-a24e3d4feb8c}">
-      <Declaration><![CDATA[METHOD _GetSynchParams : RtcSynchParams
-]]></Declaration>
+      <Declaration><![CDATA[METHOD _GetSynchParams : RtcSynchParams]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_GetSynchParams := RtcPrg._RtcSynchParams;
-]]></ST>
+        <ST><![CDATA[_GetSynchParams := RtcPrg._RtcSynchParams;]]></ST>
       </Implementation>
     </Method>
     <Method Name="_Open" Id="{d83dfe53-3a8f-0733-3457-8d9db7cfe99c}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD PROTECTED FINAL _Open
-]]></Declaration>
+METHOD PROTECTED FINAL _Open]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^.Open();]]></ST>
       </Implementation>
     </Method>
     <Method Name="_rtcUpdate" Id="{cb574abf-9f5d-03d2-0459-a21349c4ee2b}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD PROTECTED FINAL _rtcUpdate
-
-]]></Declaration>
+METHOD PROTECTED FINAL _rtcUpdate]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^._rtc.UpdateInternal();]]></ST>
       </Implementation>
     </Method>
     <Method Name="ClearPlcCycleCounter" Id="{c583d8a3-29fc-0453-3825-9f103d525599}">
-      <Declaration><![CDATA[METHOD ClearPlcCycleCounter
-]]></Declaration>
+      <Declaration><![CDATA[METHOD ClearPlcCycleCounter]]></Declaration>
       <Implementation>
         <ST><![CDATA[_plcCycleCounter := 0;]]></ST>
       </Implementation>
     </Method>
     <Method Name="ClearTestDoneCounter" Id="{28fd480f-5bde-063d-3077-fc93368b2e04}">
-      <Declaration><![CDATA[METHOD ClearTestDoneCounter
-]]></Declaration>
+      <Declaration><![CDATA[METHOD ClearTestDoneCounter]]></Declaration>
       <Implementation>
         <ST><![CDATA[_testDoneCounter := 0;]]></ST>
       </Implementation>
@@ -65,28 +56,27 @@ METHOD PROTECTED FINAL _rtcUpdate
     <Method Name="ProbeDoneWhen" Id="{a83a1f55-5d29-0fd3-0d4c-5249b5104c8a}">
       <Declaration><![CDATA[METHOD ProbeDoneWhen
 VAR_INPUT
-	inCondition : BOOL;
+    inCondition : BOOL;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF inCondition THEN
     _testDoneCounter := _testDoneCounter + 1;
     _probeRunRequiredCycles := 0;
     _probeCurrentCycleCount := 0;
-	{warning disable C0195}
+    {warning disable C0195}
     _testId := -1;
-	{warning enable C0195}
+    {warning enable C0195}
 END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="ProbeRun" Id="{98c82b04-49c1-0249-2482-4f11240daf4e}">
-      <Declaration><![CDATA[METHOD ProbeRun
-]]></Declaration>
+      <Declaration><![CDATA[METHOD ProbeRun]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF(_probeCurrentCycleCount < _probeRunRequiredCycles) THEN 
-	_plcCycleCounter := _plcCycleCounter + 1;
-	SUPER^.Run();	
-	_probeCurrentCycleCount := _probeCurrentCycleCount + 1;
-END_IF;	]]></ST>
+        <ST><![CDATA[IF (_probeCurrentCycleCount < _probeRunRequiredCycles) THEN
+    _plcCycleCounter := _plcCycleCounter + 1;
+    SUPER^.Run();
+    _probeCurrentCycleCount := _probeCurrentCycleCount + 1;
+END_IF;]]></ST>
       </Implementation>
     </Method>
   </POU>

@@ -3,7 +3,5 @@
 namespace Grafana.Backend.Queries
 {
     [AttributeUsage(AttributeTargets.Class)]
-    internal class QueryTemplateAttribute : Attribute
-    {
-    }
+    internal class QueryTemplateAttribute : Attribute { }
 }

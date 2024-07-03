@@ -3,33 +3,26 @@
   <DUT Name="TcoCarouselStatus" Id="{4316a880-846c-01e4-2862-91b4a4f0fbb9}">
     <Declaration><![CDATA[(*~
 <docu>
-	<summary>
-		`TcCarousel` status structure.								
-	</summary>				
-</docu>	
+    <summary>
+        `TcCarousel` status structure.
+    </summary>
+</docu>
 ~*)
-TYPE
-    TcoCarouselStatus :
-    STRUCT
-      	ActionDescription : STRING(100);	
-        {attribute addProperty Name "<#In position#>"}
-        InPosition : BOOL;
-        {attribute addProperty Name "<#In precise position#>"}
-        InPrecisePosition : BOOL;
-        {attribute addProperty Name "<#Turn safety condition#>"}
-        TurnSafetyCondition : BOOL;
-        {attribute addProperty Name "<#Current position#>"}
-		CurrentPosition : UINT;
-        {attribute addProperty Name "<#Expected next position#>"}
-		ExpectedNextPosition : UINT;
-		{attribute addProperty Name "<#Positions#>" }
-		Positions : ARRAY[0..20] OF UINT;
-
-	
-		
-		
-    END_STRUCT
-END_TYPE
-]]></Declaration>
+TYPE TcoCarouselStatus : STRUCT
+    ActionDescription : STRING(100);
+    {attribute addProperty Name "<#In position#>"}
+    InPosition : BOOL;
+    {attribute addProperty Name "<#In precise position#>"}
+    InPrecisePosition : BOOL;
+    {attribute addProperty Name "<#Turn safety condition#>"}
+    TurnSafetyCondition : BOOL;
+    {attribute addProperty Name "<#Current position#>"}
+    CurrentPosition : UINT;
+    {attribute addProperty Name "<#Expected next position#>"}
+    ExpectedNextPosition : UINT;
+    {attribute addProperty Name "<#Positions#>" }
+    Positions : ARRAY[0..20] OF UINT;
+END_STRUCT
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

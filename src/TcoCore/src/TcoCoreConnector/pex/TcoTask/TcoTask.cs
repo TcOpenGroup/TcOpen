@@ -11,10 +11,7 @@ namespace TcoCore
 {
     public partial class TcoTask : ICommand, IDecorateLog, IsTask
     {
-
         private Func<object> _logPayloadDecoration;
-
-
 
         ICodeProvider codeProvider;
 
@@ -29,6 +26,7 @@ namespace TcoCore
         {
             return this._isServiceable.Cyclic;
         }
+
         private bool CanRestoreTask()
         {
             return this._isServiceable.Cyclic;
@@ -39,8 +37,24 @@ namespace TcoCore
             this._enabled.Subscribe(ValidateCanExecute);
             this._isServiceable.Subscribe(ValidateCanExecute);
             CanExecuteChanged += TcoTask_CanExecuteChanged;
-            Abort = new RelayCommand(AbortTask, x => CanAbortTask(), () => TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' aborted. {{@sender}}", LogInfo.Create(this)));
-            Restore = new RelayCommand(RestoreTask, x => CanRestoreTask(), () => TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' restored. {{@sender}}", LogInfo.Create(this)));
+            Abort = new RelayCommand(
+                AbortTask,
+                x => CanAbortTask(),
+                () =>
+                    TcoAppDomain.Current.Logger.Information(
+                        $"Task '{LogInfo.NameOrSymbol(this)}' aborted. {{@sender}}",
+                        LogInfo.Create(this)
+                    )
+            );
+            Restore = new RelayCommand(
+                RestoreTask,
+                x => CanRestoreTask(),
+                () =>
+                    TcoAppDomain.Current.Logger.Information(
+                        $"Task '{LogInfo.NameOrSymbol(this)}' restored. {{@sender}}",
+                        LogInfo.Create(this)
+                    )
+            );
             this._isServiceable.Subscribe(ValidateCanExecuteAbortRestore);
         }
 
@@ -53,6 +67,7 @@ namespace TcoCore
         {
             InitCommands();
         }
+
         private void RestoreTask(object obj)
         {
             this._restoreRequest.Synchron = true;
@@ -78,11 +93,14 @@ namespace TcoCore
         /// <returns>Boolean result of the query.</returns>
         public bool CanExecute(object parameter)
         {
-            var isEnabled = this._enabled.CyclicReading ? this._enabled.Cyclic : this._enabled.Synchron;
-            var isServiceable = this._isServiceable.CyclicReading ? this._isServiceable.Cyclic : this._isServiceable.Synchron;
+            var isEnabled = this._enabled.CyclicReading
+                ? this._enabled.Cyclic
+                : this._enabled.Synchron;
+            var isServiceable = this._isServiceable.CyclicReading
+                ? this._isServiceable.Cyclic
+                : this._isServiceable.Synchron;
 
             return isEnabled && isServiceable;
-                
         }
 
         public string Roles { get; set; }
@@ -94,18 +112,18 @@ namespace TcoCore
         /// </summary>
         /// <param name="parameter"></param>
         public void Execute(object parameter = null)
-        {            
+        {
             if (CanExecute(new object()))
             {
-                if(!string.IsNullOrEmpty(Roles))
+                if (!string.IsNullOrEmpty(Roles))
                 {
-                    if(!TcoAppDomain.Current.AuthenticationService.HasAuthorization(Roles))
+                    if (!TcoAppDomain.Current.AuthenticationService.HasAuthorization(Roles))
                     {
                         return;
                     }
                 }
 
-                if(ExecuteDialog != null && !ExecuteDialog())
+                if (ExecuteDialog != null && !ExecuteDialog())
                 {
                     return;
                 }
@@ -118,7 +136,10 @@ namespace TcoCore
 
                 this._invokeRequest.Synchron = true;
 
-                TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' invoked. {{@sender}}", LogInfo.Create(this));
+                TcoAppDomain.Current.Logger.Information(
+                    $"Task '{LogInfo.NameOrSymbol(this)}' invoked. {{@sender}}",
+                    LogInfo.Create(this)
+                );
 
                 RecordTaskAction?.Invoke(this.CodeProvider);
             }
@@ -138,7 +159,7 @@ namespace TcoCore
         /// <summary>
         /// Gets swift code provider for this task.
         /// </summary>
-        public virtual ICodeProvider CodeProvider 
+        public virtual ICodeProvider CodeProvider
         {
             get
             {
@@ -149,19 +170,22 @@ namespace TcoCore
 
                 return codeProvider;
             }
-
-            set => codeProvider = value; 
+            set => codeProvider = value;
         }
-        
+
         /// <summary>
-        /// Gets or sets log payload decoration function. 
+        /// Gets or sets log payload decoration function.
         /// The return object will can be added to provide additional information about this task execution.
         /// <note:important>
         /// There must be an implementation that calls and adds the result object into the log message payload.
         /// an example of the implementation can be found here <see cref="LogInfo.Create(IVortexElement)"/> (TcoCore.Logging.LogInfo.Create).
         /// </important>
         /// </summary>
-        public Func<object> LogPayloadDecoration { get => _logPayloadDecoration; set => _logPayloadDecoration = value; }
+        public Func<object> LogPayloadDecoration
+        {
+            get => _logPayloadDecoration;
+            set => _logPayloadDecoration = value;
+        }
 
         /// <summary>
         /// Gets command that restores this task.
@@ -173,6 +197,4 @@ namespace TcoCore
         /// </summary>
         public RecordTaskActionDelegate RecordTaskAction { get; set; }
     }
-
-    
 }

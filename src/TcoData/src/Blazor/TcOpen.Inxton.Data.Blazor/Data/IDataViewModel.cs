@@ -10,11 +10,10 @@ namespace TcoData
 {
     public interface IDataViewModel : FunctionAvailabilityBlazor
     {
-
         TcoDataExchange DataExchange { get; }
         Task FillObservableRecordsAsync();
         List<ValueChangeItem> Changes { get; }
-        List<IBrowsableDataObject> ObservableRecords { get;}
+        List<IBrowsableDataObject> ObservableRecords { get; }
         int Limit { get; set; }
         int Page { get; set; }
         string FilterById { get; set; }
@@ -35,7 +34,6 @@ namespace TcoData
         void SendToPlc();
         void LoadFromPlc();
         void FillObservableRecords();
-
     }
 
     public interface FunctionAvailabilityBlazor

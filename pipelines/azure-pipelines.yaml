@@ -1,23 +1,23 @@
 resources:
-- repo: self
+  - repo: self
 queue:
   name: selfhosted@mua
 
 steps:
-- powershell : > 
-    ./pipelines/runbuild.ps1 -properties @{     
-     "publishNugets"=$false;
-     "updateAssemblyInfo" = $true;
-     "isTestingEnabled" = $true
-     }   
-  displayName: 'Psake build'
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '$(Pipeline.Workspace)'
-    artifact: 'PublishArtifacts'
-    publishLocation: 'pipeline'
-- task: PublishTestResults@2
-  inputs:
-    testResultsFormat: 'NUnit'
-    testResultsFiles: '**/*TEST*.xml'
-    testRunTitle: 'TcoUnitTests'
+  - powershell: >
+      ./pipelines/runbuild.ps1 -properties @{
+       "publishNugets"=$false;
+       "updateAssemblyInfo" = $true;
+       "isTestingEnabled" = $true
+       }
+    displayName: "Psake build"
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: "$(Pipeline.Workspace)"
+      artifact: "PublishArtifacts"
+      publishLocation: "pipeline"
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: "NUnit"
+      testResultsFiles: "**/*TEST*.xml"
+      testRunTitle: "TcoUnitTests"

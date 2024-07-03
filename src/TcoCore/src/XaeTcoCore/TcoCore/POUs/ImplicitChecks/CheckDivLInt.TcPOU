@@ -4,15 +4,15 @@
     <Declaration><![CDATA[// Implicitly generated code : DO NOT EDIT
 FUNCTION CheckDivLInt : LINT
 VAR_INPUT
-	divisor:LINT;
+    divisor : LINT;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[// Implicitly generated code : Only an Implementation suggestion
 {noflow}
 IF divisor = 0 THEN
-	CheckDivLInt:=1;
+    CheckDivLInt := 1;
 ELSE
-	CheckDivLInt:=divisor;
+    CheckDivLInt := divisor;
 END_IF;
 {flow}]]></ST>
     </Implementation>

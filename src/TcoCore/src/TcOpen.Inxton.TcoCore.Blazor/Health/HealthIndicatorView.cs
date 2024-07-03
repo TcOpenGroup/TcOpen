@@ -13,8 +13,8 @@ namespace TcoCore
             SetTimer();
         }
 
-
         private System.Timers.Timer messageUpdateTimer;
+
         private void SetTimer()
         {
             if (messageUpdateTimer == null)
@@ -25,6 +25,7 @@ namespace TcoCore
                 messageUpdateTimer.Enabled = true;
             }
         }
+
         private void MessageUpdateTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             Component?.UpdateHealthInfo();

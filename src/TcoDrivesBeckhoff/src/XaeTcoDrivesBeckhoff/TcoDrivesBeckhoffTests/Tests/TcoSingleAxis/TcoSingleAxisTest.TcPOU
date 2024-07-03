@@ -5,7 +5,7 @@
 VAR
     _serviceModeCount : ULINT;
     _serviceModeOverride : LREAL;
-	inoPosition: TcoSingleAxisPositionsRootContainer(THIS^);
+    inoPosition : TcoSingleAxisPositionsRootContainer(THIS^);
 END_VAR
 VAR
     _MC_ReadDriveAddress : MC_ReadDriveAddress;
@@ -17,14 +17,12 @@ VAR
     _MC_ReadParameter : MC_ReadParameter;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[SUPER^(	inEnable 			:=	inEnable,
-		inEnablePositive	:=	inEnablePositive,
-		inEnableNegative	:=	inEnableNegative,
-		inCalibrationCam	:=	inCalibrationCam,
-		refAxis			:=	refAxis,
-		inoPositions:=inoPosition);
-		
-]]></ST>
+      <ST><![CDATA[SUPER^(inEnable := inEnable,
+    inEnablePositive := inEnablePositive,
+    inEnableNegative := inEnableNegative,
+    inCalibrationCam := inCalibrationCam,
+    refAxis := refAxis,
+    inoPositions := inoPosition);]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

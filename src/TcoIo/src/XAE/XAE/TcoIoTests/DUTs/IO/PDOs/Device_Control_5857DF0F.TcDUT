@@ -6,16 +6,14 @@
 {attribute addProperty Id "Switch_Count_StoreAT %Q*BOOL1HL_SwapAT %Q*BOOL1Default_Modul_ControlAT %Q*BOOL1"}
 {attribute addProperty CRC "1482153743"}
 {attribute addProperty Size "3"}
-TYPE Device_Control_5857DF0F EXTENDS TcoIo.OutputBase_10CEE7DE :
-STRUCT
-	{attribute addProperty Name "Switch_Count_Store"}
-	Switch_Count_Store AT %Q* : BOOL;
-	{attribute addProperty Name "HL_Swap"}
-	HL_Swap AT %Q* : BOOL;
-	{attribute addProperty Name "Default_Modul_Control"}
-	Default_Modul_Control AT %Q* : BOOL;
+TYPE Device_Control_5857DF0F EXTENDS TcoIo.OutputBase_10CEE7DE : STRUCT
+    {attribute addProperty Name "Switch_Count_Store"}
+    Switch_Count_Store AT %Q* : BOOL;
+    {attribute addProperty Name "HL_Swap"}
+    HL_Swap AT %Q* : BOOL;
+    {attribute addProperty Name "Default_Modul_Control"}
+    Default_Modul_Control AT %Q* : BOOL;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -1,12 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <DUT Name="TcoDatamanResultsControl_v_5_x_x" Id="{71ac6516-8a2f-4944-806f-469cb653cd56}">
-    <Declaration><![CDATA[TYPE TcoDatamanResultsControl_v_5_x_x :
-STRUCT
-	EnableResultBuffering AT %Q*:  BOOL;
-	ResultsAcknowledge AT %Q*: BOOL;
+    <Declaration><![CDATA[TYPE TcoDatamanResultsControl_v_5_x_x : STRUCT
+    EnableResultBuffering AT %Q* : BOOL;
+    ResultsAcknowledge AT %Q* : BOOL;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

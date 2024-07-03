@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace TcoCore
 {
     public partial class PlainTcoLogItem
-    {              
+    {
         /// <summary>
         /// Gets category of this message.
         /// </summary>
@@ -21,8 +21,6 @@ namespace TcoCore
             }
         }
 
-       
-
         string parentsObjectSymbol;
 
         /// <summary>
@@ -30,7 +28,8 @@ namespace TcoCore
         /// </summary>
         public string ParentsObjectSymbol
         {
-            get => parentsObjectSymbol; internal set
+            get => parentsObjectSymbol;
+            internal set
             {
                 if (parentsObjectSymbol == value)
                 {
@@ -38,7 +37,10 @@ namespace TcoCore
                 }
 
                 parentsObjectSymbol = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ParentsObjectSymbol)));
+                PropertyChanged?.Invoke(
+                    this,
+                    new PropertyChangedEventArgs(nameof(ParentsObjectSymbol))
+                );
             }
         }
 
@@ -50,7 +52,8 @@ namespace TcoCore
         /// </summary>
         public string ParentsHumanReadable
         {
-            get => parentsHumanReadable; set
+            get => parentsHumanReadable;
+            set
             {
                 if (parentsHumanReadable == value)
                 {
@@ -58,14 +61,16 @@ namespace TcoCore
                 }
 
                 parentsHumanReadable = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ParentsHumanReadable)));
+                PropertyChanged?.Invoke(
+                    this,
+                    new PropertyChangedEventArgs(nameof(ParentsHumanReadable))
+                );
             }
         }
 
         public string Raw
         {
             get => raw;
-
             set
             {
                 if (raw == value)
@@ -85,6 +90,6 @@ namespace TcoCore
         public override string ToString()
         {
             return $"{this.TimeStamp} : '{this.Text}' | {this.CategoryAsEnum} ({this.ParentsObjectSymbol})";
-        }        
+        }
     }
 }

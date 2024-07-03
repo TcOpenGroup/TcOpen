@@ -1,62 +1,57 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="ExampleDimensionsInspectors" Id="{5a368506-a378-05ee-0f7a-1980d3c20bc5}">
-    <Declaration><![CDATA[TYPE
-    ExampleDimensionsInspectors EXTENDS TcoCore.TcoStruct :
-    STRUCT
-		{attribute addProperty Name "Dimension X inspection"}
-        DimX_Inspector : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
-		{attribute addProperty Name "Dimension Y inspection"}
-        DimY_Inspector : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
-		{attribute addProperty Name "Dimension ZZ inspection"}
-        DimZ_Inspector : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
-		{attribute addProperty Name "Dimension Z inspection name is TOOOOOOOO LONG"}
-        DimCustom_Inspector : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
-		{attribute addProperty Name "Dimension inspection 1"}
-        Dim_Inspector_1 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
-		{attribute addProperty Name "Dimension inspection 2"}
-        Dim_Inspector_2 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
-		{attribute addProperty Name "Dimension inspection 3"}
-		Dim_Inspector_3 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
-		{attribute addProperty Name "Dimension inspection 4"}
-        Dim_Inspector_4 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
-		{attribute addProperty Name "Dimension inspection 5"}
-        Dim_Inspector_5 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
-		{attribute addProperty Name "Dimension inspection 6"}
-        Dim_Inspector_6 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
-		{attribute addProperty Name "Dimension inspection 7"}
-        Dim_Inspector_7 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
-		{attribute addProperty Name "Dimension inspection 8"}
-        Dim_Inspector_8 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
-		{attribute addProperty Name "Dimension inspection 9"}
-        Dim_Inspector_9 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
-		{attribute addProperty Name "Dimension inspection 10"}
-        Dim_Inspector_10 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
-		
-		
-		{attribute addProperty Name "Dimension inspection 11"}
-        Dim_Inspector_11 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
-		{attribute addProperty Name "Dimension inspection 12"}
-        Dim_Inspector_12 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
-		{attribute addProperty Name "Dimension inspection 13"}
-		Dim_Inspector_13 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
-		{attribute addProperty Name "Dimension inspection 14"}
-        Dim_Inspector_14 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
-		{attribute addProperty Name "Dimension inspection 15"}
-        Dim_Inspector_15 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
-		{attribute addProperty Name "Dimension inspection 16"}
-        Dim_Inspector_16 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
-		{attribute addProperty Name "Dimension inspection 17"}
-        Dim_Inspector_17 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
-		{attribute addProperty Name "Dimension inspection 18"}
-        Dim_Inspector_18 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
-		{attribute addProperty Name "Dimension inspection 19"}
-        Dim_Inspector_19 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
-		{attribute addProperty Name "Dimension inspection 20"}
-        Dim_Inspector_20 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
-		//Inspectors : ARRAY[0..20] OF TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
-    END_STRUCT
-END_TYPE
-]]></Declaration>
+    <Declaration><![CDATA[TYPE ExampleDimensionsInspectors EXTENDS TcoCore.TcoStruct : STRUCT
+    {attribute addProperty Name "Dimension X inspection"}
+    DimX_Inspector : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+    {attribute addProperty Name "Dimension Y inspection"}
+    DimY_Inspector : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+    {attribute addProperty Name "Dimension ZZ inspection"}
+    DimZ_Inspector : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+    {attribute addProperty Name "Dimension Z inspection name is TOOOOOOOO LONG"}
+    DimCustom_Inspector : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+    {attribute addProperty Name "Dimension inspection 1"}
+    Dim_Inspector_1 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+    {attribute addProperty Name "Dimension inspection 2"}
+    Dim_Inspector_2 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+    {attribute addProperty Name "Dimension inspection 3"}
+    Dim_Inspector_3 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+    {attribute addProperty Name "Dimension inspection 4"}
+    Dim_Inspector_4 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+    {attribute addProperty Name "Dimension inspection 5"}
+    Dim_Inspector_5 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+    {attribute addProperty Name "Dimension inspection 6"}
+    Dim_Inspector_6 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+    {attribute addProperty Name "Dimension inspection 7"}
+    Dim_Inspector_7 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+    {attribute addProperty Name "Dimension inspection 8"}
+    Dim_Inspector_8 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+    {attribute addProperty Name "Dimension inspection 9"}
+    Dim_Inspector_9 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+    {attribute addProperty Name "Dimension inspection 10"}
+    Dim_Inspector_10 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+    {attribute addProperty Name "Dimension inspection 11"}
+    Dim_Inspector_11 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+    {attribute addProperty Name "Dimension inspection 12"}
+    Dim_Inspector_12 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+    {attribute addProperty Name "Dimension inspection 13"}
+    Dim_Inspector_13 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+    {attribute addProperty Name "Dimension inspection 14"}
+    Dim_Inspector_14 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+    {attribute addProperty Name "Dimension inspection 15"}
+    Dim_Inspector_15 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+    {attribute addProperty Name "Dimension inspection 16"}
+    Dim_Inspector_16 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+    {attribute addProperty Name "Dimension inspection 17"}
+    Dim_Inspector_17 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+    {attribute addProperty Name "Dimension inspection 18"}
+    Dim_Inspector_18 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+    {attribute addProperty Name "Dimension inspection 19"}
+    Dim_Inspector_19 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+    {attribute addProperty Name "Dimension inspection 20"}
+    Dim_Inspector_20 : TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+//Inspectors : ARRAY[0..20] OF TcoInspectors.TcoAnalogueInspector(THISSTRUCT);
+END_STRUCT
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

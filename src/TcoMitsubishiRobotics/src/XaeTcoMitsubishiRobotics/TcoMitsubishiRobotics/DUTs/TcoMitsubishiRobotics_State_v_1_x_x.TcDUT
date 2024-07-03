@@ -1,171 +1,119 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoMitsubishiRobotics_State_v_1_x_x" Id="{dc02a9b3-072b-0f06-0fd3-bbab25b73e27}">
-    <Declaration><![CDATA[TYPE TcoMitsubishiRobotics_State_v_1_x_x : 
-STRUCT
-
-	{attribute addProperty Name "<#Operation rights#>"}
-	OperationEnable:BOOL;
-	{attribute addProperty Name "<#Automatic operation enabled#>"}
-	AutoEnable:BOOL;
-	{attribute addProperty Name "<#Start#>"}
-	Start:BOOL;	
-	{attribute addProperty Name "<#Stop#>"}
-	Stop:BOOL;
-	{attribute addProperty Name "<#Program reset#>"}
-	ProgramReset:BOOL;
-	{attribute addProperty Name "<#Error Reset#>"}
-	ErrorReset:BOOL;
-	{attribute addProperty Name "<#Cycle Stop#>"}
-	CycleStop:BOOL;	
-	{attribute addProperty Name "<#Servo Off#>"}
-	ServoOff:BOOL;
-	{attribute addProperty Name "<#Servo On#>"}
-	ServoOn:BOOL;	
-
-	{attribute addProperty Name "<#High level rrror#>"}
-	HighLevelError:BOOL;	
-	
-	{attribute addProperty Name "<#Low level error#>"}
-	LowLevelError:BOOL;	
-	
-	
-	{attribute addProperty Name "<#Warning level error (caution)#>"}
-	CautionLevelError:BOOL;	
-	
-	
-	{attribute addProperty Name "<#Emergency stop#>"}
-	EmergencyError:BOOL;	
-	
-	
-	{attribute addProperty Name "<#Rc Ready#>"}
-	RcReady:BOOL;	
-	
-	{attribute addProperty Name "<#Battery Low#>"}
-	BatteryLow : BOOL;
-
-
-
-	
-
-	
-	{attribute addProperty Name "<#In area 1#>"}
-	InArea_1 : BOOL;
-
-	{attribute addProperty Name "<#In area 2#>"}
-	InArea_2 : BOOL;
-
-	{attribute addProperty Name "<#In area 3#>"}
-	InArea_3 : BOOL;
-
-	{attribute addProperty Name "<#In area 4#>"}
-	InArea_4 : BOOL;
-
-
-	{attribute addProperty Name "<#In position 1#>"}
-	InPosition_1 : BOOL;
-
-	{attribute addProperty Name "<#In position 2#>"}
-	InPosition_2 : BOOL;
-
-	{attribute addProperty Name "<#In position 3#>"}
-	InPosition_3 : BOOL;
-
-	{attribute addProperty Name "<#In position 4#>"}
-	InPosition_4 : BOOL;
-
-
-	
-	{attribute addProperty Name "<#Zones#>"}
-	Zone : BYTE;
-
-	{attribute addProperty Name "<#In position#>"}
-	InPosition : BYTE;
-
-
-	
-	{attribute addProperty Name "<#Tool 1 retract#>"}
-	Tool_1_Retract : BOOL;
-
-	{attribute addProperty Name "<#Tool 1 extend#>"}
-	Tool_1_Extend : BOOL;
-
-	{attribute addProperty Name "<#Tool 2 retract#>"}
-	Tool_2_Retract : BOOL;
-
-	{attribute addProperty Name "<#Tool 2 extend#>"}
-	Tool_2_Extend : BOOL;
-
-	{attribute addProperty Name "<#Tool 3 retract#>"}
-	Tool_3_Retract : BOOL;
-
-	{attribute addProperty Name "<#Tool 3 extend#>"}
-	Tool_3_Extend : BOOL;
-
-	{attribute addProperty Name "<#Tool 4 retract#>"}
-	Tool_4_Retract : BOOL;
-
-	{attribute addProperty Name "<#Tool 4 extend#>"}
-	Tool_4_Extend : BOOL;
-
-
-	
-	//{attribute addProperty Name "<#Auto stop 1#>"}
-//	AutoStop_1 : BOOL;
+    <Declaration><![CDATA[TYPE TcoMitsubishiRobotics_State_v_1_x_x : STRUCT
+    {attribute addProperty Name "<#Operation rights#>"}
+    OperationEnable : BOOL;
+    {attribute addProperty Name "<#Automatic operation enabled#>"}
+    AutoEnable : BOOL;
+    {attribute addProperty Name "<#Start#>"}
+    Start : BOOL;
+    {attribute addProperty Name "<#Stop#>"}
+    Stop : BOOL;
+    {attribute addProperty Name "<#Program reset#>"}
+    ProgramReset : BOOL;
+    {attribute addProperty Name "<#Error Reset#>"}
+    ErrorReset : BOOL;
+    {attribute addProperty Name "<#Cycle Stop#>"}
+    CycleStop : BOOL;
+    {attribute addProperty Name "<#Servo Off#>"}
+    ServoOff : BOOL;
+    {attribute addProperty Name "<#Servo On#>"}
+    ServoOn : BOOL;
+    {attribute addProperty Name "<#High level rrror#>"}
+    HighLevelError : BOOL;
+    {attribute addProperty Name "<#Low level error#>"}
+    LowLevelError : BOOL;
+    {attribute addProperty Name "<#Warning level error (caution)#>"}
+    CautionLevelError : BOOL;
+    {attribute addProperty Name "<#Emergency stop#>"}
+    EmergencyError : BOOL;
+    {attribute addProperty Name "<#Rc Ready#>"}
+    RcReady : BOOL;
+    {attribute addProperty Name "<#Battery Low#>"}
+    BatteryLow : BOOL;
+    {attribute addProperty Name "<#In area 1#>"}
+    InArea_1 : BOOL;
+    {attribute addProperty Name "<#In area 2#>"}
+    InArea_2 : BOOL;
+    {attribute addProperty Name "<#In area 3#>"}
+    InArea_3 : BOOL;
+    {attribute addProperty Name "<#In area 4#>"}
+    InArea_4 : BOOL;
+    {attribute addProperty Name "<#In position 1#>"}
+    InPosition_1 : BOOL;
+    {attribute addProperty Name "<#In position 2#>"}
+    InPosition_2 : BOOL;
+    {attribute addProperty Name "<#In position 3#>"}
+    InPosition_3 : BOOL;
+    {attribute addProperty Name "<#In position 4#>"}
+    InPosition_4 : BOOL;
+    {attribute addProperty Name "<#Zones#>"}
+    Zone : BYTE;
+    {attribute addProperty Name "<#In position#>"}
+    InPosition : BYTE;
+    {attribute addProperty Name "<#Tool 1 retract#>"}
+    Tool_1_Retract : BOOL;
+    {attribute addProperty Name "<#Tool 1 extend#>"}
+    Tool_1_Extend : BOOL;
+    {attribute addProperty Name "<#Tool 2 retract#>"}
+    Tool_2_Retract : BOOL;
+    {attribute addProperty Name "<#Tool 2 extend#>"}
+    Tool_2_Extend : BOOL;
+    {attribute addProperty Name "<#Tool 3 retract#>"}
+    Tool_3_Retract : BOOL;
+    {attribute addProperty Name "<#Tool 3 extend#>"}
+    Tool_3_Extend : BOOL;
+    {attribute addProperty Name "<#Tool 4 retract#>"}
+    Tool_4_Retract : BOOL;
+    {attribute addProperty Name "<#Tool 4 extend#>"}
+    Tool_4_Extend : BOOL;
+    //{attribute addProperty Name "<#Auto stop 1#>"}
+    //	AutoStop_1 : BOOL;
+    //
+    //	{attribute addProperty Name "<#Auto stop 2#>"}
+    //	AutoStop_2 : BOOL;
+    //
+    //	{attribute addProperty Name "<#Emergency stop 1#>"}
+    //	EmergencyStop_1 : BOOL;
+    //
+    //	{attribute addProperty Name "<#Emergency stop 2#>"}
+    //	EmergencyStop_2 : BOOL;
+    //
+    //	{attribute addProperty Name "<#General stop 1#>"}
+    //	GeneralStop_1 : BOOL;
+    //
+    //	{attribute addProperty Name "<#General stop 2#>"}
+    //	GeneralStop_2 : BOOL;
+    //
+    //	{attribute addProperty Name "<#Enable 1#>"}
+    //	Enable_1 : BOOL;
+    //
+    //	{attribute addProperty Name "<#Enable 2#>"}
+    //	Enable_2 : BOOL;
+    //
+    {attribute addProperty Name "<#Action number#>"}
+    ActionNo : BYTE;
+    {attribute addProperty Name "<#Global speed#>"}
+    GlobalSpeed : BYTE;
+    {attribute addProperty Name "<#Tool number#>"}
+    ToolNo : BYTE;
+    {attribute addProperty Name "<#Workobject number#>"}
+    WorkobjectNo : BYTE;
+    {attribute addProperty Name "<#PointNumber#>"}
+    PointNo : BYTE;
+    {attribute addProperty Name "<#User specific speed 1#>"}
+    UserSpecSpeed1 : DINT;
+    {attribute addProperty Name "<#User specific speed 2#>"}
+    UserSpecSpeed2 : DINT;
+    {attribute  addProperty Name "<#Coordinates#>"}
+    Coordinates : TcoAbstractions.TcoRoboticsCoordinates;
+//	{attribute addProperty Name "<#Actual coordinates world#>"}
+//	CoordinatesWorld :TcoAbstractions.TcoRoboticsCoordinates;
 //
-//	{attribute addProperty Name "<#Auto stop 2#>"}
-//	AutoStop_2 : BOOL;
-//
-//	{attribute addProperty Name "<#Emergency stop 1#>"}
-//	EmergencyStop_1 : BOOL;
-//
-//	{attribute addProperty Name "<#Emergency stop 2#>"}
-//	EmergencyStop_2 : BOOL;
-//
-//	{attribute addProperty Name "<#General stop 1#>"}
-//	GeneralStop_1 : BOOL;
-//
-//	{attribute addProperty Name "<#General stop 2#>"}
-//	GeneralStop_2 : BOOL;
-//
-//	{attribute addProperty Name "<#Enable 1#>"}
-//	Enable_1 : BOOL;
-//
-//	{attribute addProperty Name "<#Enable 2#>"}
-//	Enable_2 : BOOL;
-//
-
-	{attribute addProperty Name "<#Action number#>"}
-	ActionNo : BYTE;
-
-	{attribute addProperty Name "<#Global speed#>"}
-	GlobalSpeed : BYTE;
-
-	{attribute addProperty Name "<#Tool number#>"}
-	ToolNo : BYTE; 
-
-	{attribute addProperty Name "<#Workobject number#>"}
-	WorkobjectNo : BYTE;
-
-	{attribute addProperty Name "<#PointNumber#>"}
-	PointNo : BYTE;
-
-	{attribute addProperty Name "<#User specific speed 1#>"}
-	UserSpecSpeed1 : DINT;
-
-	{attribute addProperty Name "<#User specific speed 2#>"}
-	UserSpecSpeed2 : DINT;
-	
-	{attribute  addProperty Name "<#Coordinates#>"}     
-	Coordinates : TcoAbstractions.TcoRoboticsCoordinates; 		
-	
-//	{attribute addProperty Name "<#Actual coordinates world#>"}     	
-//	CoordinatesWorld :TcoAbstractions.TcoRoboticsCoordinates; 		
-//
-//	{attribute addProperty Name "<#Actual coordinates workobject tool#>"}     	
-//	CoordinatesWobjTool : TcoAbstractions.TcoRoboticsCoordinates; 		
+//	{attribute addProperty Name "<#Actual coordinates workobject tool#>"}
+//	CoordinatesWobjTool : TcoAbstractions.TcoRoboticsCoordinates;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

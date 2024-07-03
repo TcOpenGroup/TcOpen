@@ -2,10 +2,8 @@
 {
     public class TcoDataExchangeDisplayViewModel : TcoDataExchangeViewModel
     {
-        public TcoDataExchangeDisplayViewModel() : base()
-        {
-            
-        }
+        public TcoDataExchangeDisplayViewModel()
+            : base() { }
 
         protected override void UpdateAvailability()
         {
@@ -20,5 +18,5 @@
             ((FunctionAvailability)this.DataViewModel).StartCreateNewCommandAvailable = false;
             ((FunctionAvailability)this.DataViewModel).UpdateCommandAvailable = false;
         }
-    }    
+    }
 }

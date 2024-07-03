@@ -10,7 +10,8 @@ namespace TcOpen.Inxton.Data
     /// Base class for data repositories.
     /// </summary>
     /// <typeparam name="T">Type of data object.</typeparam>
-    public abstract class RepositoryBase<T> : IRepository<T>, IRepository where T : IBrowsableDataObject
+    public abstract class RepositoryBase<T> : IRepository<T>, IRepository
+        where T : IBrowsableDataObject
     {
         #region On CRUD delegates
         /// <summary>
@@ -21,7 +22,8 @@ namespace TcOpen.Inxton.Data
             get => onCreate;
             set
             {
-                if (onCreate != null && value != null) throw new DelegateAlreadySetException();
+                if (onCreate != null && value != null)
+                    throw new DelegateAlreadySetException();
                 onCreate = value;
             }
         }
@@ -35,7 +37,8 @@ namespace TcOpen.Inxton.Data
             get => onRead;
             set
             {
-                if (onRead != null && value != null) throw new DelegateAlreadySetException();
+                if (onRead != null && value != null)
+                    throw new DelegateAlreadySetException();
                 onRead = value;
             }
         }
@@ -49,7 +52,8 @@ namespace TcOpen.Inxton.Data
             get => onUpdate;
             set
             {
-                if (onUpdate != null && value != null) throw new DelegateAlreadySetException();
+                if (onUpdate != null && value != null)
+                    throw new DelegateAlreadySetException();
                 onUpdate = value;
             }
         }
@@ -63,7 +67,8 @@ namespace TcOpen.Inxton.Data
             get => onDelete;
             set
             {
-                if (onDelete != null && value != null) throw new DelegateAlreadySetException();
+                if (onDelete != null && value != null)
+                    throw new DelegateAlreadySetException();
                 onDelete = value;
             }
         }
@@ -79,7 +84,8 @@ namespace TcOpen.Inxton.Data
             get => onCreateDone;
             set
             {
-                if (onCreateDone != null && value != null) throw new DelegateAlreadySetException();
+                if (onCreateDone != null && value != null)
+                    throw new DelegateAlreadySetException();
                 onCreateDone = value;
             }
         }
@@ -93,7 +99,8 @@ namespace TcOpen.Inxton.Data
             get => onReadDone;
             set
             {
-                if (onReadDone != null && value != null) throw new DelegateAlreadySetException();
+                if (onReadDone != null && value != null)
+                    throw new DelegateAlreadySetException();
                 onReadDone = value;
             }
         }
@@ -107,7 +114,8 @@ namespace TcOpen.Inxton.Data
             get => onUpdateDone;
             set
             {
-                if (onUpdateDone != null && value != null) throw new DelegateAlreadySetException();
+                if (onUpdateDone != null && value != null)
+                    throw new DelegateAlreadySetException();
                 onUpdateDone = value;
             }
         }
@@ -121,7 +129,8 @@ namespace TcOpen.Inxton.Data
             get => onDeleteDone;
             set
             {
-                if (onDeleteDone != null && value != null) throw new DelegateAlreadySetException();
+                if (onDeleteDone != null && value != null)
+                    throw new DelegateAlreadySetException();
                 onDeleteDone = value;
             }
         }
@@ -137,7 +146,8 @@ namespace TcOpen.Inxton.Data
             get => onCreateFailed;
             set
             {
-                if (onCreateFailed != null && value != null) throw new DelegateAlreadySetException();
+                if (onCreateFailed != null && value != null)
+                    throw new DelegateAlreadySetException();
                 onCreateFailed = value;
             }
         }
@@ -151,7 +161,8 @@ namespace TcOpen.Inxton.Data
             get => onReadFailed;
             set
             {
-                if (onReadFailed != null && value != null) throw new DelegateAlreadySetException();
+                if (onReadFailed != null && value != null)
+                    throw new DelegateAlreadySetException();
                 onReadFailed = value;
             }
         }
@@ -165,7 +176,8 @@ namespace TcOpen.Inxton.Data
             get => onUpdateFailed;
             set
             {
-                if (onUpdateFailed != null && value != null) throw new DelegateAlreadySetException();
+                if (onUpdateFailed != null && value != null)
+                    throw new DelegateAlreadySetException();
                 onUpdateFailed = value;
             }
         }
@@ -179,7 +191,8 @@ namespace TcOpen.Inxton.Data
             get => onDeleteFailed;
             set
             {
-                if (onDeleteFailed != null) throw new DelegateAlreadySetException();
+                if (onDeleteFailed != null)
+                    throw new DelegateAlreadySetException();
                 onDeleteFailed = value;
             }
         }
@@ -189,15 +202,15 @@ namespace TcOpen.Inxton.Data
         /// <summary>
         /// Gets or set validation delegate for updating data in this repository.
         /// </summary>
-        /// <remarks>			
+        /// <remarks>
         ///		<note type = "warning" >
         ///           Validation condition is executed only upon update from the user interface.
         ///           Direct call of <see cref="Update(string, T)"/> does not validate the data.
         ///           The data are also not validate when called from TcoCore.TcoRemoteTask/>
         ///		</note>
         /// </remarks>
-        /// <example>      
-        ///       repository.OnRecordUpdateValidation = (data) => 
+        /// <example>
+        ///       repository.OnRecordUpdateValidation = (data) =>
         ///       {
         ///           return new DataValidation[]
         ///               {
@@ -206,12 +219,8 @@ namespace TcOpen.Inxton.Data
         ///               };
         ///        };
         /// </example>
-        public ValidateDataDelegate<T> OnRecordUpdateValidation
-        {
-            get;
-            set;
-
-        } = (data) => new DataItemValidation[] { };
+        public ValidateDataDelegate<T> OnRecordUpdateValidation { get; set; } =
+            (data) => new DataItemValidation[] { };
 
         /// <summary>
         /// Creates a new record/document in the repository. (Concrete implementation of given repository type)
@@ -258,7 +267,12 @@ namespace TcOpen.Inxton.Data
         /// <param name="limit">Limit of documents to retrieve.</param>
         /// <param name="skip">Number of documents to be skipped.</param>
         /// <returns></returns>
-        protected abstract IEnumerable<T> GetRecordsNvi(string identifierContent, int limit, int skip, eSearchMode searchMode);
+        protected abstract IEnumerable<T> GetRecordsNvi(
+            string identifierContent,
+            int limit,
+            int skip,
+            eSearchMode searchMode
+        );
 
         /// <summary>
         /// Counts records that contain given string in the id. (Concrete implementation of given repository type)
@@ -270,15 +284,18 @@ namespace TcOpen.Inxton.Data
         /// <summary>
         /// Gets the number of records/documents in the repository.
         /// </summary>
-        public long Count { get { return this.CountNvi; } }
+        public long Count
+        {
+            get { return this.CountNvi; }
+        }
 
         /// <summary>
         /// Gets the count of the records/documents that contain given string in the identifier.
         /// </summary>
         /// <param name="identifierContent">String required to be contained in the identifier of the records/documents.</param>
         /// <returns></returns>
-        public long FilteredCount(string identifierContent, eSearchMode searchMode) => FilteredCountNvi(identifierContent, searchMode);
-
+        public long FilteredCount(string identifierContent, eSearchMode searchMode) =>
+            FilteredCountNvi(identifierContent, searchMode);
 
         private volatile object mutex = new object();
 
@@ -301,7 +318,6 @@ namespace TcOpen.Inxton.Data
             {
                 if (data != null)
                 {
-
                     if (string.IsNullOrEmpty(identifier))
                     {
                         identifier = DataHelpers.CreateUid().ToString();
@@ -361,9 +377,11 @@ namespace TcOpen.Inxton.Data
                     OnUpdate?.Invoke(identifier, data);
                     if (data._EntityId != identifier)
                     {
-                        var idMismatchEx = new IdentifierValueMismatchedException($"Record identifier '[_data._Id]' '{data._EntityId}' has different value than " +
-                            $"requested identifier for update '{identifier}'\n" +
-                            $"Value passed as 'identifier' must be the same as the value contained in the '_id' member of the data object.");
+                        var idMismatchEx = new IdentifierValueMismatchedException(
+                            $"Record identifier '[_data._Id]' '{data._EntityId}' has different value than "
+                                + $"requested identifier for update '{identifier}'\n"
+                                + $"Value passed as 'identifier' must be the same as the value contained in the '_id' member of the data object."
+                        );
                         OnUpdateFailed?.Invoke(identifier, data, idMismatchEx);
                         throw idMismatchEx;
                     }
@@ -416,7 +434,12 @@ namespace TcOpen.Inxton.Data
         /// <summary>
         /// Gets <see cref="IEnumerable{T}"/> of repository entries that match the identifier.
         /// </summary>
-        public IEnumerable<T> GetRecords(string identifier, int limit = 10, int skip = 0, eSearchMode searchMode = eSearchMode.Exact)
+        public IEnumerable<T> GetRecords(
+            string identifier,
+            int limit = 10,
+            int skip = 0,
+            eSearchMode searchMode = eSearchMode.Exact
+        )
         {
             try
             {
@@ -439,42 +462,37 @@ namespace TcOpen.Inxton.Data
         /// <summary>
         /// When you try to set a delegate that has already been set elsewhere this exception will occur.
         /// Investigate what was the purpose of the delegate you want to override, and make sure that you don't need
-        /// the functionality anymore. 
+        /// the functionality anymore.
         /// If you need the functionality, be sure to include it in the new delegate.
         /// </summary>
-        public DelegateAlreadySetException() : base(TrimMultiline(
-            @"The delegate you're trying can only be set once.
+        public DelegateAlreadySetException()
+            : base(
+                TrimMultiline(
+                    @"The delegate you're trying can only be set once.
             If you want to re-init the delegate set it to first to null then asign a new delegate.
-            *TcoApplications rely on this delegates to update the _Created and _Modified values.*"))
-        {
-        }
+            *TcoApplications rely on this delegates to update the _Created and _Modified values.*"
+                )
+            ) { }
 
-        private static string TrimMultiline(string multiline) => string.Join(
-                             "\n",
-                             multiline.Split('\n').Select(s => s.Trim()));
+        private static string TrimMultiline(string multiline) =>
+            string.Join("\n", multiline.Split('\n').Select(s => s.Trim()));
     }
+
     public class RepositoryNotInitializedException : Exception
     {
         /// <summary>Initializes a new instance of the <see cref="RepositoryNotInitializedException" /> class.</summary>
-        public RepositoryNotInitializedException()
-        {
-
-        }
+        public RepositoryNotInitializedException() { }
 
         /// <summary>Initializes a new instance of the <see cref="RepositoryNotInitializedException" /> class with a specified error message.</summary>
         /// <param name="message">The message that describes the error. </param>
-        public RepositoryNotInitializedException(string message) : base(message)
-        {
-
-        }
+        public RepositoryNotInitializedException(string message)
+            : base(message) { }
 
         /// <summary>Initializes a new instance of the <see cref="RepositoryNotInitializedException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</summary>
         /// <param name="message">The error message that explains the reason for the exception. </param>
         /// <param name="innerException">The exception that is the cause of the current exception, or a null reference (<see langword="Nothing" /> in Visual Basic) if no inner exception is specified. </param>
-        public RepositoryNotInitializedException(string message, Exception innerException) : base(message, innerException)
-        {
-
-        }
+        public RepositoryNotInitializedException(string message, Exception innerException)
+            : base(message, innerException) { }
 
         /// <summary>Initializes a new instance of the <see cref="RepositoryNotInitializedException" /> class with serialized data.</summary>
         /// <param name="info">The <see cref="System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown. </param>
@@ -482,10 +500,10 @@ namespace TcOpen.Inxton.Data
         /// <exception cref="System.ArgumentNullException">The <paramref name="info" /> parameter is <see langword="null" />. </exception>
         /// <exception cref="System.Runtime.Serialization.SerializationException">The class name is <see langword="null" /> or <see cref="System.Exception.HResult" /> is zero (0). </exception>
         [SecuritySafeCritical]
-        protected RepositoryNotInitializedException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-
-        }
-
+        protected RepositoryNotInitializedException(
+            SerializationInfo info,
+            StreamingContext context
+        )
+            : base(info, context) { }
     }
 }

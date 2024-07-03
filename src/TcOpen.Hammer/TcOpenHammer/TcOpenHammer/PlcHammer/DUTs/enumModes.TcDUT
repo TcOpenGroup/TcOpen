@@ -3,14 +3,12 @@
   <DUT Name="enumModes" Id="{8efca0cd-cd4e-030e-09f6-37703da5ce65}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE enumModes :
-(
-	Idle := 0,
-	Automat := 1000,
-	Ground := 2000,
-	Service := 3000
+TYPE enumModes : (
+    Idle := 0,
+    Automat := 1000,
+    Ground := 2000,
+    Service := 3000
 );
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

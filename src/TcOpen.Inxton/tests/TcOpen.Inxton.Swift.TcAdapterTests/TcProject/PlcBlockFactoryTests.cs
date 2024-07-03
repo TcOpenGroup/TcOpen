@@ -1,12 +1,12 @@
-﻿using NUnit.Framework;
-using TcOpen.Inxton.Swift.TcAdapter.TcProject;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
-using System.Reflection;
+using NUnit.Framework;
+using TcOpen.Inxton.Swift.TcAdapter.TcProject;
 
 namespace TcOpen.Inxton.Swift.TcAdapter.TcProject.Tests
 {
@@ -27,22 +27,30 @@ namespace TcOpen.Inxton.Swift.TcAdapter.TcProject.Tests
         {
             var blockName = "my_sequencer";
             var mainMethodImplementation = "IF TRUE THEN; END_IF;";
-            var actual = PlcBlockHelpers.CreateSequencerPlcBlock(blockName, mainMethodImplementation);
+            var actual = PlcBlockHelpers.CreateSequencerPlcBlock(
+                blockName,
+                mainMethodImplementation
+            );
 
-            Assert.AreEqual($"FUNCTION_BLOCK {blockName} EXTENDS TcoCore.TcoSequencer", actual.POU.Declaration);
-            Assert.AreEqual($"{mainMethodImplementation}", 
-                actual.POU.Method.Where(p => p.Name == "Main").FirstOrDefault().Implementation.ST);
-            
-            
+            Assert.AreEqual(
+                $"FUNCTION_BLOCK {blockName} EXTENDS TcoCore.TcoSequencer",
+                actual.POU.Declaration
+            );
+            Assert.AreEqual(
+                $"{mainMethodImplementation}",
+                actual.POU.Method.Where(p => p.Name == "Main").FirstOrDefault().Implementation.ST
+            );
         }
 
         [Test()]
         public void EmitPlcBlockFileTest()
         {
-
             var blockName = "my_sequencer";
             var mainMethodImplementation = "IF TRUE THEN; END_IF;";
-            var block = PlcBlockHelpers.CreateSequencerPlcBlock(blockName, mainMethodImplementation);
+            var block = PlcBlockHelpers.CreateSequencerPlcBlock(
+                blockName,
+                mainMethodImplementation
+            );
             var outputFile = Path.Combine(outputFiles, $"{blockName}.TcPOU");
             if (File.Exists(outputFile))
             {

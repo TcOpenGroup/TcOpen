@@ -3,14 +3,13 @@
   <POU Name="tcc" Id="{e080c9bb-bd0c-0413-089e-5010da0ed8e6}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK tcc EXTENDS TcoCore.TcoContext
 VAR
-	{attribute addProperty Name "Device 1 (EtherCAT)"}
-	Device_1 : TcoIo.TcoEthercatMasterDevice(THIS^);
-	{attribute addProperty Name "Device 2 (EtherCAT)"}
-	Device_2 : TcoIo.TcoEthercatMasterDevice(THIS^);
-	{attribute addProperty Name "EtherCAT component"}
-	EcatComponent : TestEcatComponent(THIS^);
-END_VAR
-]]></Declaration>
+    {attribute addProperty Name "Device 1 (EtherCAT)"}
+    Device_1 : TcoIo.TcoEthercatMasterDevice(THIS^);
+    {attribute addProperty Name "Device 2 (EtherCAT)"}
+    Device_2 : TcoIo.TcoEthercatMasterDevice(THIS^);
+    {attribute addProperty Name "EtherCAT component"}
+    EcatComponent : TestEcatComponent(THIS^);
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
@@ -18,46 +17,40 @@ END_VAR
       <Declaration><![CDATA[{attribute 'hide'}
 METHOD FB_init : BOOL
 VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-END_VAR
-]]></Declaration>
+    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="Main" Id="{cae54242-7157-0c7b-3a57-550e091f822a}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Main method of the TcoContext. This is the entry point of any control logic that belongs to this context. 
-			The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
-			This method is abstract, and it must be overridden in derived block.
-		</summary>
-	</docu>
+    <docu>
+        <summary>
+            Main method of the TcoContext. This is the entry point of any control logic that belongs to this context.
+            The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
+            This method is abstract, and it must be overridden in derived block.
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED  Main
+METHOD PROTECTED Main
 VAR
-	ams: AMSADDR;
+    ams : AMSADDR;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[
-Device_1(	SyncUnits		:= ADR(		GVL_iXlinker.Device_1_EtherCAT.SyncUnits),
-			SyncUnitsSize	:= SIZEOF(	GVL_iXlinker.Device_1_EtherCAT.SyncUnits),
-			Inputs			:=			GVL_iXlinker.Device_1_EtherCAT.Inputs,
-			InfoData		:=			GVL_iXlinker.Device_1_EtherCAT.InfoData);	
+        <ST><![CDATA[Device_1(SyncUnits := ADR(GVL_iXlinker.Device_1_EtherCAT.SyncUnits),
+    SyncUnitsSize := SIZEOF(GVL_iXlinker.Device_1_EtherCAT.SyncUnits),
+    Inputs := GVL_iXlinker.Device_1_EtherCAT.Inputs,
+    InfoData := GVL_iXlinker.Device_1_EtherCAT.InfoData);
 
-			
-Device_2(	SyncUnits		:= ADR(		GVL_iXlinker.Device_2_EtherCAT.SyncUnits),
-			SyncUnitsSize	:= SIZEOF(	GVL_iXlinker.Device_2_EtherCAT.SyncUnits),
-			Inputs			:=			GVL_iXlinker.Device_2_EtherCAT.Inputs,
-			InfoData		:=			GVL_iXlinker.Device_2_EtherCAT.InfoData);	
-	
-		
-EcatComponent(AdsAddr:=ams);
-EcatComponent.Service();
+Device_2(SyncUnits := ADR(GVL_iXlinker.Device_2_EtherCAT.SyncUnits),
+    SyncUnitsSize := SIZEOF(GVL_iXlinker.Device_2_EtherCAT.SyncUnits),
+    Inputs := GVL_iXlinker.Device_2_EtherCAT.Inputs,
+    InfoData := GVL_iXlinker.Device_2_EtherCAT.InfoData);
 
-]]></ST>
+EcatComponent(AdsAddr := ams);
+EcatComponent.Service();]]></ST>
       </Implementation>
     </Method>
   </POU>

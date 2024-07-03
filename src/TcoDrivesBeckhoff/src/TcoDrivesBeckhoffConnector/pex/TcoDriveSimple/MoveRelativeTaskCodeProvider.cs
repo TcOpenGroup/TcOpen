@@ -7,7 +7,6 @@ namespace TcoDrivesBeckhoff
 {
     public class MoveRelativeTaskCodeProvider : ICodeProvider
     {
-
         public MoveRelativeTaskCodeProvider(IVortexObject origin)
         {
             Origin = origin;
@@ -25,8 +24,6 @@ namespace TcoDrivesBeckhoff
                                                          inAcceleration := {task._acceleration.Synchron},
                                                          inDeceleration := {task._deceleration.Synchron},
                                                          inJerk := {task._jerk.Synchron}).Done";
-
         }
     }
 }
-

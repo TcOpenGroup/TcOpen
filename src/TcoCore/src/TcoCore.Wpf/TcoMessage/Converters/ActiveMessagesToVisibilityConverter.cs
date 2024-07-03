@@ -20,13 +20,18 @@ namespace TcoCore
             }
             catch (Exception)
             {
-                //Swallow                
+                //Swallow
             }
 
             return Visibility.Hidden;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }

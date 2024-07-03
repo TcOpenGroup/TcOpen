@@ -8,7 +8,7 @@ using Vortex.Connector;
 
 namespace TcoCore
 {
-   public partial class TcoInputDialog : IsDialog
+    public partial class TcoInputDialog : IsDialog
     {
         public new void ShowAgainIfInvoked()
         {

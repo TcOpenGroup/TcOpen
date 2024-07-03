@@ -10,7 +10,7 @@
 
 Don't forget to call `SUPER^()` in the body of the `DataManager` function block!
 
-- Create a variable called `_data` with type `Station001_ProductionData`. 
+- Create a variable called `_data` with type `Station001_ProductionData`.
 
 You will get an error if there's no variable called `_data` and if the type of the variable doesn't extend 'TcoData.Entity'.
 
@@ -32,12 +32,11 @@ _dataManager();
 - In `Station001_AutomatMode` I added a property `Station` which will provide an access to the `Station001` function block.
 
 - In the automat mode, step `850` fill the structure with data and create a record in a database.
-Note that I create a record with the same `Identifier` as `JigId`. If you create a record with different `Identifier` you must keep that in mind when you are retrieving the value from the db.
-
+  Note that I create a record with the same `Identifier` as `JigId`. If you create a record with different `Identifier` you must keep that in mind when you are retrieving the value from the db.
 
 ```
-IF(Step(850, 
-		TRUE, 
+IF(Step(850,
+		TRUE,
 		'SAVE DATA')) THEN
 //--------------------------------------------
 	Station.ProductionData.Result := THIS^.Context.StartCycleCount MOD 2 = 0;
@@ -48,20 +47,18 @@ IF(Step(850,
 		Station.ProductionData.Errors := 'something went wrong';
 	END_IF
 	StepCompleteWhen(Station.DataManager.Create(Identifier := Station.ProductionData.JigId).Done);
-//--------------------------------------------	
-END_IF; 
+//--------------------------------------------
+END_IF;
 
 ```
 
 Now it's important to run the Inxton builder, since this implementation of `DataManager` works only with Inxton.
 
-
 We're done with the PLC part, now it's time to do some plumbing on the C# side.
-
 
 ## PC part
 
-- First of all we have to connect `DataManager` with some repository (a database). 
+- First of all we have to connect `DataManager` with some repository (a database).
 
 Do it at the startup of the application, since it's not necessary to do it more than once. I initialized `DataManager in `App.xaml.cs` like this
 
@@ -71,19 +68,21 @@ Do it at the startup of the application, since it's not necessary to do it more 
 	var collectionName = "HammerCollection";
 	var mongoSettings = new MongoDbRepositorySettings<PlainStation001_ProductionData>(mongoUri,databaseName,collectionName);
 	var repository = new MongoDbRepository<PlainStation001_ProductionData>(mongoSettings);
-	Entry.PlcHammer.TECH_MAIN._app._station001._dataManager.InitializeRepository(repository); 
+	Entry.PlcHammer.TECH_MAIN._app._station001._dataManager.InitializeRepository(repository);
 ```
 
-It's important not to forget the prefix `Plain` ! 
+It's important not to forget the prefix `Plain` !
 
-If the type of the structure I'd like to save is called 'Station001_ProductionData' the type that will be in database (so called DTO-data transfer object or POCO - plain old  CLR object) is of type `Plain`+`NameOfMyStructure`.
+If the type of the structure I'd like to save is called 'Station001_ProductionData' the type that will be in database (so called DTO-data transfer object or POCO - plain old CLR object) is of type `Plain`+`NameOfMyStructure`.
 
-- Now that repo is connected to repository and PLC, we can use the default dataview. 
+- Now that repo is connected to repository and PLC, we can use the default dataview.
 
 In `MainWindow.xaml` I added a new tab with the `DataView` and set the `DataContext` to the data manager instance.
 
 ```xml
-	<vortex:DataView DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._dataManager}" />
+<vortex:DataView
+  DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._dataManager}"
+/>
 ```
 
 Note that the namespace must exist in the root tag.
@@ -100,11 +99,10 @@ Note that the namespace must exist in the root tag.
 
 ## Start MongDB
 
-Now start MongoDB. Please note taht you `--dbpath`  and the version can vary, so change it according to your mongo install.
-
+Now start MongoDB. Please note taht you `--dbpath` and the version can vary, so change it according to your mongo install.
 
 ```
-"C:\Program Files\MongoDB\Server\4.4\bin\mongod.exe"  --dbpath C:\DATA\DB446\ 
+"C:\Program Files\MongoDB\Server\4.4\bin\mongod.exe"  --dbpath C:\DATA\DB446\
 ```
 
 ## We're done!

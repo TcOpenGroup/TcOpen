@@ -7,12 +7,11 @@ END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
-	{attribute addProperty Name "<#Pick Position#>"}
-	PickPosition:TcoDrivesBeckhoff.TcoMultiAxisMoveParam;
-	{attribute addProperty Name "<#Place  Position#>"}
-	PlacePosition:TcoDrivesBeckhoff.TcoMultiAxisMoveParam;
-END_VAR
-]]></Declaration>
+    {attribute addProperty Name "<#Pick Position#>"}
+    PickPosition : TcoDrivesBeckhoff.TcoMultiAxisMoveParam;
+    {attribute addProperty Name "<#Place  Position#>"}
+    PlacePosition : TcoDrivesBeckhoff.TcoMultiAxisMoveParam;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>

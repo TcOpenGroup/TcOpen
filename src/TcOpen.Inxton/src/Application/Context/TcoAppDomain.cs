@@ -17,10 +17,7 @@ namespace TcOpen.Inxton
         /// <summary>
         /// Prevents creating of the instance from outside of this class.
         /// </summary>
-        private TcoAppDomain()
-        {
-            
-        }
+        private TcoAppDomain() { }
 
         private static volatile object mutex = new object();
         private static TcoAppDomain _current;
@@ -56,8 +53,10 @@ namespace TcOpen.Inxton
         /// <summary>
         /// Gets dispatcher for this application.
         /// </summary>
-        public IDispatcher Dispatcher { get { return Threading.Dispatcher.Get; } } 
-
+        public IDispatcher Dispatcher
+        {
+            get { return Threading.Dispatcher.Get; }
+        }
 
         /// <summary>
         /// Gets application builder.
@@ -66,6 +65,6 @@ namespace TcOpen.Inxton
 
         public IAuthenticationService AuthenticationService { get; internal set; }
 
-        public Action LoginAction { get; internal set; } = () => {  };
+        public Action LoginAction { get; internal set; } = () => { };
     }
 }

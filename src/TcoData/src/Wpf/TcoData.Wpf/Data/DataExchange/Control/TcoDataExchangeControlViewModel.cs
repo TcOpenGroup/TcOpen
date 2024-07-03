@@ -2,10 +2,8 @@
 {
     public class TcoDataExchangeControlViewModel : TcoDataExchangeViewModel
     {
-        public TcoDataExchangeControlViewModel() : base()
-        {
-           
-        }
+        public TcoDataExchangeControlViewModel()
+            : base() { }
 
         protected override void UpdateAvailability()
         {

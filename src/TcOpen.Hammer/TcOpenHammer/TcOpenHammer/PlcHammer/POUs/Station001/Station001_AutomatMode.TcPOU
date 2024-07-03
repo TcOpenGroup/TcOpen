@@ -4,40 +4,36 @@
     <Declaration><![CDATA[FUNCTION_BLOCK Station001_AutomatMode EXTENDS TcoCore.TcoSequencer
 VAR
     _partPassedChecks : BOOL;
-    _groupInspection   : TcoInspectors.TcoInspectionGroup(THIS^);
-    _dialog           : TcoCore.TcoDialog(THIS^);
+    _groupInspection : TcoInspectors.TcoInspectionGroup(THIS^);
+    _dialog : TcoCore.TcoDialog(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Main" Id="{23a4d6b9-ff67-49ed-9234-9ae3533ee54f}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Main method of the sequener. Custom code needs to be placed here. The sequencer is executed by call of InstanceName.Run() method.
-			This method is abstract, and it must be overridden in derived block.
-		</summary>
-	</docu>
+    <docu>
+        <summary>
+            Main method of the sequener. Custom code needs to be placed here. The sequencer is executed by call of InstanceName.Run() method.
+            This method is abstract, and it must be overridden in derived block.
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED  Main : BOOL
+METHOD PROTECTED Main : BOOL
 VAR CONSTANT
-	HORIZONTAL_AXIS_HOME_POSITION : LREAL := 100.0;	
+    HORIZONTAL_AXIS_HOME_POSITION : LREAL := 100.0;
 END_VAR
 VAR_INST
-	_id : STRING;	
+    _id : STRING;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF (Step(0, TRUE, 'DIALOG - DO WE CONTINUE')) THEN
     //--------------------------------------------
-    IF(_dialog.Show()
-			.WithOk()
-			.WithCaption('What`s next?')
-			.WithText('To continue click OK?').Answer = TcoCore.eDialogAnswer.OK) THEN
-			CompleteStep();
-	END_IF;			
-    //--------------------------------------------	
+    IF (_dialog.Show().WithOk().WithCaption('What`s next?').WithText('To continue click OK?').Answer = TcoCore.eDialogAnswer.OK) THEN
+        CompleteStep();
+    END_IF;
+    //--------------------------------------------
 END_IF;
-
 
 IF (Step(10, TRUE, 'MOVE HORIZONTAL TO LOAD')) THEN
     //--------------------------------------------
@@ -47,31 +43,35 @@ IF (Step(10, TRUE, 'MOVE HORIZONTAL TO LOAD')) THEN
                 THIS^.Station.TechnologicalDataManager._data.AxisAcc,
                 THIS^.Station.TechnologicalDataManager._data.AxisDcc,
                 THIS^.Station.TechnologicalDataManager._data.AxisJerk).Done);
-    //--------------------------------------------	
+    //--------------------------------------------
 END_IF;
 
 IF (Step(25, TRUE, 'LOAD TECHNOLOGICAL SETTINGS')) THEN
     //--------------------------------------------
-	
-    IF(NOT Station.TechnologicalDataManager.Messenger.OnCondition(Station.TechnologicalDataManager._data._EntityId = '').Error('Technological settings not selected.').Pin().Pinned) THEN;	
-		StepCompleteWhen(Station.TechnologicalDataManager.Read(Identifier := Station.TechnologicalDataManager._data._EntityId).Done);
-	END_IF;	
-    //--------------------------------------------	
+    IF (NOT Station.TechnologicalDataManager.Messenger.OnCondition(Station.TechnologicalDataManager._data._EntityId = '')
+        .Error('Technological settings not selected.')
+        .Pin().Pinned) THEN
+        ;
+        StepCompleteWhen(Station.TechnologicalDataManager.Read(Identifier := Station.TechnologicalDataManager._data._EntityId).Done);
+    END_IF;
+    //--------------------------------------------
 END_IF;
 
 IF (Step(50, TRUE, 'LOAD RECIPE SETTINGS')) THEN
-    //--------------------------------------------	
-	IF(NOT Station.ProcessRecepie.Messenger.OnCondition(Station.ProcessRecepie._data._EntityId = '').Error('Process settings not selected.').Pin().Pinned) THEN	
-		StepCompleteWhen(Station.ProcessRecepie.Read(Identifier := Station.ProcessRecepie._data._EntityId).Done);
-		Station.ProductionData := Station.ProcessRecepie._data;
-	END_IF	
-    //--------------------------------------------	
+    //--------------------------------------------
+    IF (NOT Station.ProcessRecepie.Messenger.OnCondition(Station.ProcessRecepie._data._EntityId = '').Error('Process settings not selected.').Pin()
+        .Pinned) THEN
+        StepCompleteWhen(Station.ProcessRecepie.Read(Identifier := Station.ProcessRecepie._data._EntityId).Done);
+        Station.ProductionData := Station.ProcessRecepie._data;
+    END_IF
+
+    //--------------------------------------------
 END_IF;
 
 IF (Step(100, TRUE, 'MOVE VERTICAL AXIS DOWN')) THEN
     //--------------------------------------------
     StepCompleteWhen(Station.Components.VerticalAxis.MoveToWork().Done);
-    //--------------------------------------------	
+    //--------------------------------------------
 END_IF;
 
 IF (Step(150, TRUE, 'GENERATE SIMULATED VALUES')) THEN
@@ -80,127 +80,122 @@ IF (Step(150, TRUE, 'GENERATE SIMULATED VALUES')) THEN
         inMaxValue := Station.ProductionData.DimX.Data.RequiredMax - 50,
         inoutValue := Station.Components._dimX);
 
-    Station.Components._dimYsim(inMinValue := Station.ProductionData.DimY.Data.RequiredMin + 50 ,
-        inMaxValue := Station.ProductionData.DimY.Data.RequiredMax -50,
+    Station.Components._dimYsim(inMinValue := Station.ProductionData.DimY.Data.RequiredMin + 50,
+        inMaxValue := Station.ProductionData.DimY.Data.RequiredMax - 50,
         inoutValue := Station.Components._dimY);
 
-    Station.Components._dimZsim(inMinValue := Station.ProductionData.DimZ.Data.RequiredMin  + 50 ,
-        inMaxValue := Station.ProductionData.DimZ.Data.RequiredMax -50 ,
+    Station.Components._dimZsim(inMinValue := Station.ProductionData.DimZ.Data.RequiredMin + 50,
+        inMaxValue := Station.ProductionData.DimZ.Data.RequiredMax - 50,
         inoutValue := Station.Components._dimZ);
 
     StepCompleteWhen(TRUE);
-    //--------------------------------------------	
+    //--------------------------------------------
 END_IF;
 
 IF (Step(200, TRUE, 'CHECK DIMENSIONS')) THEN
     //--------------------------------------------
-	_groupInspection.WithCoordinator(THIS^)
-				   .Act()
-				   .Inspect(Station.ProcessTraceabilty._data.DimX.Inspect(Station.Components._dimX))
-				   .Inspect(Station.ProcessTraceabilty._data.DimY.Inspect(Station.Components._dimY))
-				   .Inspect(Station.ProcessTraceabilty._data.DimZ.Inspect(Station.Components._dimZ))
-				   .UpdateComprehensiveResult(Station.ProcessTraceabilty._data.Result)
-				   .OnFail()
-				   .Dialog(200);		   						   
-    //--------------------------------------------	
+    _groupInspection.WithCoordinator(THIS^)
+        .Act()
+        .Inspect(Station.ProcessTraceabilty._data.DimX.Inspect(Station.Components._dimX))
+        .Inspect(Station.ProcessTraceabilty._data.DimY.Inspect(Station.Components._dimY))
+        .Inspect(Station.ProcessTraceabilty._data.DimZ.Inspect(Station.Components._dimZ))
+        .UpdateComprehensiveResult(Station.ProcessTraceabilty._data.Result)
+        .OnFail().Dialog(200);
+    //--------------------------------------------
 END_IF;
 
 IF (Step(300, TRUE, 'CLOSE GRIPPER')) THEN
     //--------------------------------------------
     StepCompleteWhen(Station.Components.Gripper.MoveToWork().Done);
-    //--------------------------------------------	
+    //--------------------------------------------
 END_IF;
 
 IF (Step(400, TRUE, 'MOVE VERTICAL AXIS UP')) THEN
     //--------------------------------------------
     StepCompleteWhen(Station.Components.VerticalAxis.MoveToHome().Done);
-    //--------------------------------------------	
+    //--------------------------------------------
 END_IF;
 
 IF (Step(425, _partPassedChecks, 'MOVE HORIZONTAL AXIS TO UNLOAD POSITION (PASSED CONVEYOR)')) THEN
-    //--------------------------------------------   
+    //--------------------------------------------
     StepCompleteWhen(Station.Components.HorizontalNcAxis.DriveRef
             .MoveAbsolute(THIS^.Station.TechnologicalDataManager._data.PassedPartsHorizontalPosition,
                 THIS^.Station.TechnologicalDataManager._data.AxisSpeed,
                 THIS^.Station.TechnologicalDataManager._data.AxisAcc,
                 THIS^.Station.TechnologicalDataManager._data.AxisDcc,
                 THIS^.Station.TechnologicalDataManager._data.AxisJerk).Done);
-    //--------------------------------------------	
+    //--------------------------------------------
 END_IF;
 
 IF (Step(450, NOT _partPassedChecks, 'MOVE HORIZONTAL AXIS TO UNLOAD POSITION (FAILED CONVEYOR)')) THEN
-    //--------------------------------------------   
+    //--------------------------------------------
     StepCompleteWhen(Station.Components.HorizontalNcAxis.DriveRef
             .MoveAbsolute(THIS^.Station.TechnologicalDataManager._data.FailedPartsHorizontalPosition,
                 THIS^.Station.TechnologicalDataManager._data.AxisSpeed,
                 THIS^.Station.TechnologicalDataManager._data.AxisAcc,
                 THIS^.Station.TechnologicalDataManager._data.AxisDcc,
                 THIS^.Station.TechnologicalDataManager._data.AxisJerk).Done);
-    //--------------------------------------------	
+    //--------------------------------------------
 END_IF;
 
 IF (Step(500, TRUE, 'MOVE VERTICAL AXIS TO UNLOAD POSITION')) THEN
     //--------------------------------------------
     StepCompleteWhen(Station.Components.VerticalAxis.MoveToWork().Done);
-    //--------------------------------------------	
+    //--------------------------------------------
 END_IF;
 
 IF (Step(600, TRUE, 'OPEN GRIPPER')) THEN
     //--------------------------------------------
     StepCompleteWhen(Station.Components.Gripper.MoveToHome().Done);
-    //--------------------------------------------	
+    //--------------------------------------------
 END_IF;
 
 IF (Step(700, TRUE, 'MOVE VERTICAL UP')) THEN
     //--------------------------------------------
     StepCompleteWhen(Station.Components.VerticalAxis.MoveToHome().Done);
-    //--------------------------------------------	
+    //--------------------------------------------
 END_IF;
 
 IF (Step(800, TRUE, 'MOVE HORIZONTAL TO LOAD - ASYNC')) THEN
     //--------------------------------------------
-    Station.Components.HorizontalNCAxis.DriveRef.MoveAbsolute
-		(THIS^.Station.TechnologicalDataManager._data.LoadPartsHorizontalPosition,
+    Station.Components.HorizontalNCAxis.DriveRef.MoveAbsolute(THIS^.Station.TechnologicalDataManager._data.LoadPartsHorizontalPosition,
         THIS^.Station.TechnologicalDataManager._data.AxisSpeed,
         THIS^.Station.TechnologicalDataManager._data.AxisAcc,
         THIS^.Station.TechnologicalDataManager._data.AxisDcc,
         THIS^.Station.TechnologicalDataManager._data.AxisJerk);
 
     StepCompleteWhen(TRUE);
-    //--------------------------------------------	
+    //--------------------------------------------
 END_IF;
 
 IF (Step(840, TRUE, 'CHECK THAT THE HORIZONTAL AXIS IS IN POSITION')) THEN
-    //-------------------------------------------- 
-	_id := ULINT_TO_STRING(THIS^.Context.RealTimeClock.TickClock());   
+    //--------------------------------------------
+    _id := ULINT_TO_STRING(THIS^.Context.RealTimeClock.TickClock());
     StepCompleteWhen(TRUE);
-    //--------------------------------------------	
+    //--------------------------------------------
 END_IF;
 
 IF (Step(850, TRUE, 'SAVE DATA')) THEN
-    //--------------------------------------------		
+    //--------------------------------------------
     StepCompleteWhen(Station.ProcessTraceabilty.Create(Identifier := _id).Done);
-    //--------------------------------------------	
+    //--------------------------------------------
 END_IF;
 
-
 IF (Step(900, TRUE, 'CHECK THAT THE HORIZONTAL AXIS IS IN POSITION')) THEN
-    //--------------------------------------------    
+    //--------------------------------------------
     StepCompleteWhen(Station.Components.HorizontalNcAxis.DriveRef.MoveAbsoluteTask.Done);
-    //--------------------------------------------	
+    //--------------------------------------------
 END_IF;
 
 IF (Step(THIS^.RESTORE_STEP_ID, TRUE, 'MOVE VERTICAL AXIS UP')) THEN
     //--------------------------------------------
     StepCompleteWhen(Station.Components.VerticalAxis.MoveToHome().Done);
-    //--------------------------------------------	
+    //--------------------------------------------
 END_IF;
-
 
 IF (Step(37000, TRUE, 'MOVE HORIZONTAL AXIS TO BASE POSITION & OPEN GRIPPER')) THEN
     //--------------------------------------------
-    IF (Station.Components.HorizontalNcAxis.DriveRef.MoveAbsolute
-	   (THIS^.Station.TechnologicalDataManager._data.LoadPartsHorizontalPosition,
+    IF (Station.Components.HorizontalNcAxis.DriveRef.MoveAbsolute(THIS^.Station.TechnologicalDataManager._data.LoadPartsHorizontalPosition,
         THIS^.Station.TechnologicalDataManager._data.AxisSpeed,
         THIS^.Station.TechnologicalDataManager._data.AxisAcc,
         THIS^.Station.TechnologicalDataManager._data.AxisDcc,
@@ -208,27 +203,26 @@ IF (Step(37000, TRUE, 'MOVE HORIZONTAL AXIS TO BASE POSITION & OPEN GRIPPER')) T
         Station.Components.Gripper.MoveToHome().Done) THEN
         CompleteStep();
     END_IF;
-    //--------------------------------------------	
+    //--------------------------------------------
 END_IF;
 
 IF (Step(1000, TRUE, 'SEUQNCE COMPLETE')) THEN
     //--------------------------------------------
     CompleteSequence();
-    //--------------------------------------------	
+    //--------------------------------------------
 END_IF;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStepCompleted" Id="{b6a6d72b-d655-4530-b29e-871f3f3cc5a1}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			This method is executed upon step completion.
-			This method can be overridden in derived block by custom logic.
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            This method is executed upon step completion.
+            This method can be overridden in derived block by custom logic.
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnStepCompleted
-]]></Declaration>
+METHOD PROTECTED OnStepCompleted]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
@@ -238,11 +232,10 @@ METHOD PROTECTED OnStepCompleted
       <Get Name="Get" Id="{7cd5bca0-b7ed-4ffe-b2ac-032230b5f82a}">
         <Declaration><![CDATA[VAR
     _station : POINTER TO Station001;
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[IF __QUERYPOINTER(Parent,_station) THEN // Check if _Parent is Station001
-	Station REF= _station^;              // If the check is successful dereference a pointer. simlar to THIS^ or SUPER^
+          <ST><![CDATA[IF __QUERYPOINTER(Parent, _station) THEN // Check if _Parent is Station001
+    Station REF= _station^; // If the check is successful dereference a pointer. simlar to THIS^ or SUPER^
 END_IF]]></ST>
         </Implementation>
       </Get>

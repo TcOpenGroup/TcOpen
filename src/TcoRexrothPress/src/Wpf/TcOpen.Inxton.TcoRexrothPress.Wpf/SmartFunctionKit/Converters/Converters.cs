@@ -10,7 +10,8 @@ namespace TcoRexrothPress.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            eTcoSmartFunctionKitCommand_v_4_x_x command = (eTcoSmartFunctionKitCommand_v_4_x_x)Enum.ToObject(typeof(eTcoSmartFunctionKitCommand_v_4_x_x), value);
+            eTcoSmartFunctionKitCommand_v_4_x_x command = (eTcoSmartFunctionKitCommand_v_4_x_x)
+                Enum.ToObject(typeof(eTcoSmartFunctionKitCommand_v_4_x_x), value);
 
             switch (command)
             {
@@ -35,7 +36,12 @@ namespace TcoRexrothPress.Converters
             }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }
@@ -45,11 +51,15 @@ namespace TcoRexrothPress.Converters
             return this;
         }
     }
-    public class TcoSmartFunctionKitVisibilityStartProgramConverter : MarkupExtension, IValueConverter
+
+    public class TcoSmartFunctionKitVisibilityStartProgramConverter
+        : MarkupExtension,
+            IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            eTcoSmartFunctionKitCommand_v_4_x_x command = (eTcoSmartFunctionKitCommand_v_4_x_x)Enum.ToObject(typeof(eTcoSmartFunctionKitCommand_v_4_x_x), value);
+            eTcoSmartFunctionKitCommand_v_4_x_x command = (eTcoSmartFunctionKitCommand_v_4_x_x)
+                Enum.ToObject(typeof(eTcoSmartFunctionKitCommand_v_4_x_x), value);
 
             switch (command)
             {
@@ -74,7 +84,12 @@ namespace TcoRexrothPress.Converters
             }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }
@@ -85,11 +100,14 @@ namespace TcoRexrothPress.Converters
         }
     }
 
-    public class TcoSmartFunctionKitVisibilityJogTaraPositioningConverter : MarkupExtension, IValueConverter
+    public class TcoSmartFunctionKitVisibilityJogTaraPositioningConverter
+        : MarkupExtension,
+            IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            eTcoSmartFunctionKitCommand_v_4_x_x command = (eTcoSmartFunctionKitCommand_v_4_x_x)Enum.ToObject(typeof(eTcoSmartFunctionKitCommand_v_4_x_x), value);
+            eTcoSmartFunctionKitCommand_v_4_x_x command = (eTcoSmartFunctionKitCommand_v_4_x_x)
+                Enum.ToObject(typeof(eTcoSmartFunctionKitCommand_v_4_x_x), value);
 
             switch (command)
             {
@@ -111,11 +129,15 @@ namespace TcoRexrothPress.Converters
 
                 default:
                     return Visibility.Collapsed;
-   
             }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }
@@ -130,7 +152,8 @@ namespace TcoRexrothPress.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            eTcoSmartFunctionKitCommand_v_4_x_x command = (eTcoSmartFunctionKitCommand_v_4_x_x)Enum.ToObject(typeof(eTcoSmartFunctionKitCommand_v_4_x_x), value);
+            eTcoSmartFunctionKitCommand_v_4_x_x command = (eTcoSmartFunctionKitCommand_v_4_x_x)
+                Enum.ToObject(typeof(eTcoSmartFunctionKitCommand_v_4_x_x), value);
 
             switch (command)
             {
@@ -152,11 +175,15 @@ namespace TcoRexrothPress.Converters
 
                 default:
                     return Visibility.Collapsed;
-            
             }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }
@@ -166,6 +193,4 @@ namespace TcoRexrothPress.Converters
             return this;
         }
     }
-
-    
 }

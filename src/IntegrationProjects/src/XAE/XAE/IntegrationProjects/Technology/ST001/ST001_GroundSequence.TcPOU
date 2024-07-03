@@ -3,76 +3,61 @@
   <POU Name="ST001_GroundSequence" Id="{fcb49bae-82b8-093d-2760-50a07f62e629}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ST001_GroundSequence EXTENDS TcoCore.TcoSequencer
 VAR_IN_OUT
-	inoComponents : ST001_ComponentsHandler;
-END_VAR
-]]></Declaration>
+    inoComponents : ST001_ComponentsHandler;
+END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
-]]></ST>
+      <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Main" Id="{3f8b8b23-1fad-0d3c-365d-2d658e454451}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Main method of the sequener. Custom code needs to be placed here. The sequencer is executed by call of InstanceName.Run() method.
-			This method is abstract, and it must be overridden in derived block.
-		</summary>
-	</docu>
+    <docu>
+        <summary>
+            Main method of the sequener. Custom code needs to be placed here. The sequencer is executed by call of InstanceName.Run() method.
+            This method is abstract, and it must be overridden in derived block.
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED  Main : BOOL
-]]></Declaration>
+METHOD PROTECTED Main : BOOL]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF(NOT __ISVALIDREF(inoComponents)) THEN
-	Messenger.Programming('Invalid reference to inoComponents');
-	RETURN;
+        <ST><![CDATA[IF (NOT __ISVALIDREF(inoComponents)) THEN
+    Messenger.Programming('Invalid reference to inoComponents');
+    RETURN;
 END_IF
 
-
-IF(Step(inStepID  			:= 100,
-	    inEnabled 			:= TRUE,
-	    inStepDescription 	:= '<#PRESS IN BASE POSITION#>')) 
-THEN
-//---------------------------------------
-	IF(inoComponents.Press.MoveToHome().Done) THEN
-		THIS^.CompleteStep();		
-	END_IF;
-//---------------------------------------
+IF (Step(inStepID := 100, inEnabled := TRUE, inStepDescription := '<#PRESS IN BASE POSITION#>')) THEN
+    //---------------------------------------
+    IF (inoComponents.Press.MoveToHome().Done) THEN
+        THIS^.CompleteStep();
+    END_IF;
+    //---------------------------------------
 END_IF;
 
-IF(Step(inStepID  			:= 200,
-	    inEnabled 			:= TRUE,
-	    inStepDescription 	:= '<#CHECK PART REMOVAL FROM THE FIXTURE#>')) 
-THEN
-//---------------------------------------
-	IF(inoComponents.PartPresent.IsFalse) THEN
-		THIS^.CompleteStep();
-	ELSE
-		Messenger.Notify('<#Remove part from the fixture please#>');	
-	END_IF;
-//---------------------------------------
+IF (Step(inStepID := 200, inEnabled := TRUE, inStepDescription := '<#CHECK PART REMOVAL FROM THE FIXTURE#>')) THEN
+    //---------------------------------------
+    IF (inoComponents.PartPresent.IsFalse) THEN
+        THIS^.CompleteStep();
+    ELSE
+        Messenger.Notify('<#Remove part from the fixture please#>');
+    END_IF;
+    //---------------------------------------
 END_IF;
 
-IF(Step(inStepID  			:= MaxStepID - 1,
-	    inEnabled 			:= TRUE,
-	    inStepDescription 	:= '<#GROUND POSITION COMPLETED#>')) 
-THEN
-//---------------------------------------
-	Messenger.Notify('<#Ground position completed; you can start automat sequence.#>');	
-//---------------------------------------
-END_IF;
-]]></ST>
+IF (Step(inStepID := MaxStepID - 1, inEnabled := TRUE, inStepDescription := '<#GROUND POSITION COMPLETED#>')) THEN
+    //---------------------------------------
+    Messenger.Notify('<#Ground position completed; you can start automat sequence.#>');
+    //---------------------------------------
+END_IF;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStateChange" Id="{559e69e8-ed95-025a-1834-eae44dd3ecae}">
       <Declaration><![CDATA[METHOD PROTECTED OnStateChange
 VAR_INPUT
-	PreviousState	: INT;
-	NewState 		: INT;
-END_VAR
-]]></Declaration>
+    PreviousState : INT;
+    NewState : INT;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF(NOT __ISVALIDREF(inoComponents)) THEN
-	RETURN;
+        <ST><![CDATA[IF (NOT __ISVALIDREF(inoComponents)) THEN
+    RETURN;
 END_IF
 
 inoComponents.Press.Restore();]]></ST>

@@ -18,16 +18,26 @@ namespace TcoIo.Converters
             else
             {
                 ResourceDictionary ColorResorce = new ResourceDictionary();
-                ColorResorce.Source = new Uri("/TcOpen.Inxton.TcoIo.Wpf;component/diagnostics/ethercat/colors/colors.xaml", UriKind.RelativeOrAbsolute);
+                ColorResorce.Source = new Uri(
+                    "/TcOpen.Inxton.TcoIo.Wpf;component/diagnostics/ethercat/colors/colors.xaml",
+                    UriKind.RelativeOrAbsolute
+                );
                 return new SolidColorBrush((Color)ColorResorce["InxtonGrayLightColor"]);
             }
 
             //return new SolidColorBrush(Colors.Transparent);
         }
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }
+
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
             return this;

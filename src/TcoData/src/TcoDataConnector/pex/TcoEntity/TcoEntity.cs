@@ -19,5 +19,4 @@ namespace TcoData
 
         public List<ValueChangeItem> Changes { get; set; }
     }
-
 }

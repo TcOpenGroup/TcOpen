@@ -4,16 +4,21 @@
     <IsPackable>false</IsPackable>
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
     <FileVersion>0.1.0.0</FileVersion>
-    <InformationalVersion>0.1.0-alpha.53+Branch.dev.Sha.6662dd7e1d36d938cbbe3105fbe0c73e099111d0</InformationalVersion>
+    <InformationalVersion
+    >0.1.0-alpha.53+Branch.dev.Sha.6662dd7e1d36d938cbbe3105fbe0c73e099111d0</InformationalVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="nunit" Version="3.13.2" />
     <PackageReference Include="JunitXml.TestLogger" Version="2.1.10" />
 	<PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />   
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Tc.Prober\src\Tc.Prober\Tc.Prober.csproj" />
-    <ProjectReference Include="..\TcoPneumaticsTestsConnector\TcoPneumaticsTestsConnector.csproj" />
+    <ProjectReference
+      Include="..\..\..\Tc.Prober\src\Tc.Prober\Tc.Prober.csproj"
+    />
+    <ProjectReference
+      Include="..\TcoPneumaticsTestsConnector\TcoPneumaticsTestsConnector.csproj"
+    />
   </ItemGroup>
 </Project>

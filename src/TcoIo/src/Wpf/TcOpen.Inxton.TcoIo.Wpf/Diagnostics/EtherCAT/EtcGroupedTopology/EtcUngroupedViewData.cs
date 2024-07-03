@@ -9,7 +9,6 @@ namespace TcoIo
 {
     public class EtcUngroupedViewData : INotifyPropertyChanged
     {
-
         private IVortexObject dataContext;
 
         public IVortexObject DataContext
@@ -28,9 +27,9 @@ namespace TcoIo
         private bool groupedView;
         public bool GroupedView
         {
-            get{ return groupedView;}
-            set 
-            { 
+            get { return groupedView; }
+            set
+            {
                 groupedView = value;
                 NotifyPropertyChanged(nameof(GroupedView));
             }
@@ -81,7 +80,7 @@ namespace TcoIo
         public Type UserView
         {
             get { return userView; }
-            set 
+            set
             {
                 if (value != null)
                 {
@@ -91,8 +90,14 @@ namespace TcoIo
             }
         }
 
-
-        public EtcUngroupedViewData(IVortexObject _dataContext, bool _groupedView, string _firstTopologyElementName, string _lastTopologyElementName, bool _excludeSlavesConnectedToJunctionBox, Type _userView)
+        public EtcUngroupedViewData(
+            IVortexObject _dataContext,
+            bool _groupedView,
+            string _firstTopologyElementName,
+            string _lastTopologyElementName,
+            bool _excludeSlavesConnectedToJunctionBox,
+            Type _userView
+        )
         {
             DataContext = _dataContext;
             GroupedView = _groupedView;
@@ -101,7 +106,6 @@ namespace TcoIo
             ExcludeSlavesConnectedToJunctionBox = _excludeSlavesConnectedToJunctionBox;
             UserView = _userView;
         }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -114,4 +118,3 @@ namespace TcoIo
         }
     }
 }
-

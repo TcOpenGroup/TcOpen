@@ -1,19 +1,20 @@
 <Window
-    x:Class="Sandbox.TcoData.Wpf.MainWindow"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Sandbox.TcoData.Wpf"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vortex="http://vortex.mts/xaml"
-      Width="800"
-    Height="450"
-    mc:Ignorable="d"
-    Title="MainWindow">
+  x:Class="Sandbox.TcoData.Wpf.MainWindow"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:Sandbox.TcoData.Wpf"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:vortex="http://vortex.mts/xaml"
+  Width="800"
+  Height="450"
+  mc:Ignorable="d"
+  Title="MainWindow"
+>
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
-    <TabControl >
+    <TabControl>
         <TabItem Header="Data">
             <Grid>
                 <Grid.RowDefinitions>
@@ -24,13 +25,19 @@
 
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <vortex:RenderableContentControl DataContext="{Binding Plc.MAIN.sandbox.DataManager}" PresentationType="Control">
+                    <vortex:RenderableContentControl
+            DataContext="{Binding Plc.MAIN.sandbox.DataManager}"
+            PresentationType="Control"
+          >
                         <vortex:RenderableContentControl.RootContainer>
                             <Grid />
                         </vortex:RenderableContentControl.RootContainer>
                     </vortex:RenderableContentControl>
                 </Grid>
-                <vortex:TcoDataExchangeSimpleSelectorView  Grid.Row="1" DataContext="{Binding Plc.MAIN.sandbox.DataManager}"></vortex:TcoDataExchangeSimpleSelectorView>
+                <vortex:TcoDataExchangeSimpleSelectorView
+          Grid.Row="1"
+          DataContext="{Binding Plc.MAIN.sandbox.DataManager}"
+        />
                 <!--<UniformGrid
                     Grid.Row="1"
                     Columns="2"
@@ -40,9 +47,12 @@
                         <vortex:ObservableContentControl DataContext="{Binding SelectedItem, ElementName=dynamicTreeView}" PresentationType="Base-Control" />
                     </ScrollViewer>
                 </UniformGrid>-->
-                <Button Grid.Row="2" Click="Button_Click">ExternalInvokeTest</Button>
+                <Button
+          Grid.Row="2"
+          Click="Button_Click"
+        >ExternalInvokeTest</Button>
             </Grid>
-         
+
         </TabItem>
         <TabItem Header="DataFragmented">
             <Grid>
@@ -54,13 +64,19 @@
 
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <vortex:RenderableContentControl DataContext="{Binding Plc.MAIN.sandbox.DataManagerFragmented}" PresentationType="Control">
+                    <vortex:RenderableContentControl
+            DataContext="{Binding Plc.MAIN.sandbox.DataManagerFragmented}"
+            PresentationType="Control"
+          >
                         <vortex:RenderableContentControl.RootContainer>
                             <Grid />
                         </vortex:RenderableContentControl.RootContainer>
                     </vortex:RenderableContentControl>
                 </Grid>
-                <vortex:TcoDataExchangeSimpleSelectorView  Grid.Row="1" DataContext="{Binding Plc.MAIN.sandbox.DataManagerFragmented}"></vortex:TcoDataExchangeSimpleSelectorView>
+                <vortex:TcoDataExchangeSimpleSelectorView
+          Grid.Row="1"
+          DataContext="{Binding Plc.MAIN.sandbox.DataManagerFragmented}"
+        />
                 <!--<UniformGrid
                     Grid.Row="1"
                     Columns="2"
@@ -85,13 +101,16 @@
 
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <vortex:RenderableContentControl DataContext="{Binding Plc.MAIN.sandbox.DataManagerPlc1}" PresentationType="Control">
+                    <vortex:RenderableContentControl
+            DataContext="{Binding Plc.MAIN.sandbox.DataManagerPlc1}"
+            PresentationType="Control"
+          >
                         <vortex:RenderableContentControl.RootContainer>
                             <Grid />
                         </vortex:RenderableContentControl.RootContainer>
                     </vortex:RenderableContentControl>
                 </Grid>
-          
+
             </Grid>
 
         </TabItem>
@@ -105,7 +124,10 @@
 
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <vortex:RenderableContentControl DataContext="{Binding Plc.MAIN.sandbox.DataManagerPlc2}" PresentationType="Control">
+                    <vortex:RenderableContentControl
+            DataContext="{Binding Plc.MAIN.sandbox.DataManagerPlc2}"
+            PresentationType="Control"
+          >
                         <vortex:RenderableContentControl.RootContainer>
                             <Grid />
                         </vortex:RenderableContentControl.RootContainer>
@@ -116,7 +138,10 @@
 
         </TabItem>
         <TabItem Header="Diagnostics">
-            <vortex:RenderableContentControl DataContext="{Binding Plc.MAIN.sandbox}" PresentationType="Diagnostics" />
+            <vortex:RenderableContentControl
+        DataContext="{Binding Plc.MAIN.sandbox}"
+        PresentationType="Diagnostics"
+      />
         </TabItem>
     </TabControl>
 </Window>

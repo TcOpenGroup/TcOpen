@@ -8,12 +8,10 @@ using Vortex.Presentation;
 
 namespace TcoCore
 {
-    public abstract class  TcoDialogBaseViewModel : RenderableViewModelBase, ICloseable
+    public abstract class TcoDialogBaseViewModel : RenderableViewModelBase, ICloseable
     {
-        public TcoDialogBaseViewModel() : base()
-        {
-            
-        }
+        public TcoDialogBaseViewModel()
+            : base() { }
 
         public void Close(object sender, EventArgs e)
         {

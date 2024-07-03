@@ -1,15 +1,18 @@
 ﻿<UserControl
-    x:Class="TcoCore.TcoRemoteTaskView"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:TcoCore"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    ToolTip="{Binding TcoRemoteTask.AttributeToolTip}">
+  x:Class="TcoCore.TcoRemoteTaskView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:TcoCore"
+  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  mc:Ignorable="d"
+  ToolTip="{Binding TcoRemoteTask.AttributeToolTip}"
+>
     <UserControl.Resources>
-        <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <local:BooleanToVisibilityConverter
+      x:Key="BooleanToVisibilityConverter"
+    />
     </UserControl.Resources>
     <d:UserControl.DataContext>
         <local:TcoRemoteTaskViewModel />
@@ -20,42 +23,43 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Button
-            Background="{Binding TcoRemoteTask._taskState.Cyclic, Converter={local:TaskStateToBackgroundBrushConverter}}"
-            Command="{Binding TcoRemoteTask}"
-            Content="{Binding TcoRemoteTask, Converter={local:NameOrSymbolConverter}}"
-            Foreground="{Binding TcoRemoteTask._taskState.Cyclic, Converter={local:TaskStateToForegroundBrushConverter}}"
-            Style="{StaticResource MaterialDesignRaisedButton}" />
+      Background="{Binding TcoRemoteTask._taskState.Cyclic, Converter={local:TaskStateToBackgroundBrushConverter}}"
+      Command="{Binding TcoRemoteTask}"
+      Content="{Binding TcoRemoteTask, Converter={local:NameOrSymbolConverter}}"
+      Foreground="{Binding TcoRemoteTask._taskState.Cyclic, Converter={local:TaskStateToForegroundBrushConverter}}"
+      Style="{StaticResource MaterialDesignRaisedButton}"
+    />
         <Button
-            HorizontalAlignment="Right"
-            Background="Transparent"
-            Command="{Binding TcoRemoteTask.Abort}"
-            Padding="10,0,10,0"
-            Style="{StaticResource MaterialDesignToolButton}"
-            Visibility="{Binding TcoRemoteTask._taskState.Cyclic, Converter={local:VisibleOnTaskState}, ConverterParameter=Requested-Busy}">
+      HorizontalAlignment="Right"
+      Background="Transparent"
+      Command="{Binding TcoRemoteTask.Abort}"
+      Padding="10,0,10,0"
+      Style="{StaticResource MaterialDesignToolButton}"
+      Visibility="{Binding TcoRemoteTask._taskState.Cyclic, Converter={local:VisibleOnTaskState}, ConverterParameter=Requested-Busy}"
+    >
             <materialDesign:PackIcon Kind="CancelCircle" Padding="14" />
         </Button>
         <Button
-            HorizontalAlignment="Right"
-            Background="Transparent"
-            Command="{Binding TcoRemoteTask.Restore}"
-            Padding="10,0,10,0"
-            Style="{StaticResource MaterialDesignToolButton}"
-            Visibility="{Binding TcoTcoRemoteTaskTask._taskState.Cyclic, Converter={local:TaskErrorStateToVisibilityConverter}}">
+      HorizontalAlignment="Right"
+      Background="Transparent"
+      Command="{Binding TcoRemoteTask.Restore}"
+      Padding="10,0,10,0"
+      Style="{StaticResource MaterialDesignToolButton}"
+      Visibility="{Binding TcoTcoRemoteTaskTask._taskState.Cyclic, Converter={local:TaskErrorStateToVisibilityConverter}}"
+    >
             <materialDesign:PackIcon Kind="Error" Padding="14" />
             <Button.ToolTip>
-                <ScrollViewer
-            Grid.Row="1"
-            MaxHeight="50"
-            Margin="5,2">
+                <ScrollViewer Grid.Row="1" MaxHeight="50" Margin="5,2">
                     <TextBlock
-                FontSize="12"
-                Text="{Binding TcoRemoteTask.RemoteExceptionDetails}"
-                TextWrapping="WrapWithOverflow"
-                Visibility="{Binding TcoRemoteTask._hasException.Cyclic, Converter={local:BoolToVisibilityConverter}}" />
+            FontSize="12"
+            Text="{Binding TcoRemoteTask.RemoteExceptionDetails}"
+            TextWrapping="WrapWithOverflow"
+            Visibility="{Binding TcoRemoteTask._hasException.Cyclic, Converter={local:BoolToVisibilityConverter}}"
+          />
                 </ScrollViewer>
             </Button.ToolTip>
         </Button>
 
-       
+
     </Grid>
 </UserControl>

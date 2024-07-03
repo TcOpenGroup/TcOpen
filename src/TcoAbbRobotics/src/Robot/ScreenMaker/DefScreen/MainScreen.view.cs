@@ -14,162 +14,162 @@ using System;
 
 namespace IRC5_def_screen
 {
-    
-    
+
+
     public class MainScreen : ABB.Robotics.ScreenMaker.Windows.Forms.ScreenForm
     {
-        
+
         private ABB.Robotics.Tps.Windows.Forms.TabControl neviem;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.TabPage tabPage1;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.PictureBox pictureBox6;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.PictureBox pictureBox1;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.PictureBox pictureBox2;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.PictureBox pictureBox4;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.GroupBox groupBox1;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.TpsLabel tpsLabel11;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.TpsLabel tpsLabel12;
-        
+
         private ABB.Robotics.ScreenMaker.Windows.Forms.RapidExecutionStatus rapidExecutionStatus1;
-        
+
         private ABB.Robotics.ScreenMaker.Windows.Forms.ControllerModeStatus controllerModeStatus1;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.GroupBox groupBox3;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.BarGraph barGraph5;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.BarGraph barGraph4;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.BarGraph barGraph3;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.BarGraph barGraph2;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.BarGraph barGraph1;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.TpsLabel tpsLabel4;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.TpsLabel tpsLabel3;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.TpsLabel tpsLabel5;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.TpsLabel go_GlobalSpeed;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.TpsLabel tpsLabel6;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.PictureBox pictureBox7;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.GroupBox groupBox4;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.PictureBox pictureBox3;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.GroupBox groupBox2;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.TpsLabel tpsLabel1;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.TpsLabel tpsLabel2;
-        
+
         private ABB.Robotics.ScreenMaker.Windows.Forms.RapidExecutionStatus rapidExecutionStatus2;
-        
+
         private ABB.Robotics.ScreenMaker.Windows.Forms.ControllerModeStatus controllerModeStatus2;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.PictureBox pictureBox5;
-        
+
         private ABB.Robotics.ScreenMaker.Windows.Forms.RunRoutineButton runRoutineButton1;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.GroupBox groupBox5;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.Led led6;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.Led led7;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.TabPage ToolPage;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.GroupBox groupBox7;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.TpsLabel tpsLabel16;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.TpsLabel tpsLabel17;
-        
+
         private ABB.Robotics.ScreenMaker.Windows.Forms.RapidExecutionStatus rapidExecutionStatus4;
-        
+
         private ABB.Robotics.ScreenMaker.Windows.Forms.ControllerModeStatus controllerModeStatus4;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.PictureBox pictureBox13;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.PictureBox pictureBox12;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.PictureBox pictureBox11;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.TpsLabel tpsLabel8;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.BarGraph barGraph7;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.BarGraph barGraph8;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.BarGraph barGraph9;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.BarGraph barGraph10;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.BarGraph barGraph13;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.BarGraph barGraph15;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.TpsLabel tpsLabel9;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.TpsLabel tpsLabel10;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.TpsLabel tpsLabel13;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.TpsLabel tpsLabel18;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.TpsLabel tpsLabel20;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.TpsLabel tpsLabel15;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.BarGraph barGraph12;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.BarGraph barGraph11;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.TpsLabel tpsLabel14;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.Switch switch1;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.Button button2;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.Button button1;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.Switch switch5;
-        
+
         private ABB.Robotics.ScreenMaker.Windows.Forms.ConditionalTrigger trigermanual;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.GroupBox groupBox6;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.BarGraph barGraph6;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.TpsLabel tpsLabel7;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.TpsLabel tpsLabel21;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.BarGraph barGraph16;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.TpsLabel tpsLabel19;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.BarGraph barGraph14;
-        
+
         private ABB.Robotics.Tps.Windows.Forms.TabPage tabPage2;
-        
+
         public MainScreen()
         {
             this.InitializeComponent();
         }
-        
+
         #region Windows Form Designer generated code
         private void InitializeComponent()
         {
@@ -267,9 +267,9 @@ namespace IRC5_def_screen
             ((System.ComponentModel.ISupportInitialize)(this.trigermanual)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.SuspendLayout();
-            // 
+            //
             // neviem
-            // 
+            //
             this.neviem.AutoScroll = false;
             this.neviem.BackColor = System.Drawing.Color.White;
             this.neviem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -282,9 +282,9 @@ namespace IRC5_def_screen
             this.neviem.TabPages.Add(this.tabPage1);
             this.neviem.TabPages.Add(this.tabPage2);
             this.neviem.TabPages.Add(this.ToolPage);
-            // 
+            //
             // tabPage1
-            // 
+            //
             this.tabPage1.Controls.Add(this.groupBox6);
             this.tabPage1.Controls.Add(this.led7);
             this.tabPage1.Controls.Add(this.led6);
@@ -301,9 +301,9 @@ namespace IRC5_def_screen
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Size = new System.Drawing.Size(637, 348);
             this.tabPage1.Text = "Main";
-            // 
+            //
             // led7
-            // 
+            //
             this.led7.DataBindings.Add(new System.Windows.Forms.Binding("Value", new ABB.Robotics.ScreenMaker.Windows.Forms.SingleBindingSource(new ABB.Robotics.DataBinding.SignalObject("do_MotorOff")), "Value", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.led7.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font12b;
             this.led7.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -311,9 +311,9 @@ namespace IRC5_def_screen
             this.led7.Name = "led7";
             this.led7.Size = new System.Drawing.Size(126, 43);
             this.led7.Text = "Motor OFF";
-            // 
+            //
             // led6
-            // 
+            //
             this.led6.DataBindings.Add(new System.Windows.Forms.Binding("Value", new ABB.Robotics.ScreenMaker.Windows.Forms.SingleBindingSource(new ABB.Robotics.DataBinding.SignalObject("do_MotorOn")), "Value", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.led6.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font12b;
             this.led6.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -321,9 +321,9 @@ namespace IRC5_def_screen
             this.led6.Name = "led6";
             this.led6.Size = new System.Drawing.Size(126, 43);
             this.led6.Text = "Motor ON";
-            // 
+            //
             // runRoutineButton1
-            // 
+            //
             this.runRoutineButton1.BackColor = System.Drawing.Color.Silver;
             this.runRoutineButton1.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font12b;
             this.runRoutineButton1.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -333,9 +333,9 @@ namespace IRC5_def_screen
             this.runRoutineButton1.Size = new System.Drawing.Size(126, 38);
             this.runRoutineButton1.Text = "RESET";
             this.runRoutineButton1.TextAlign = ABB.Robotics.Tps.Windows.Forms.ContentAlignmentABB.MiddleCenter;
-            // 
+            //
             // groupBox4
-            // 
+            //
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox4.AutoScroll = false;
             this.groupBox4.AutoScrollMargin = new System.Drawing.Size(0, 0);
@@ -364,9 +364,9 @@ namespace IRC5_def_screen
             this.groupBox4.Tag = null;
             this.groupBox4.Title = "Output Signals";
             this.groupBox4.VerticalAlign = ABB.Robotics.Tps.Windows.Forms.VerAlign.Center;
-            // 
+            //
             // tpsLabel8
-            // 
+            //
             this.tpsLabel8.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font10b;
             this.tpsLabel8.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tpsLabel8.Location = new System.Drawing.Point(68, 178);
@@ -374,9 +374,9 @@ namespace IRC5_def_screen
             this.tpsLabel8.Name = "tpsLabel8";
             this.tpsLabel8.Size = new System.Drawing.Size(127, 31);
             this.tpsLabel8.Title = "go_InPosition";
-            // 
+            //
             // barGraph7
-            // 
+            //
             this.barGraph7.BarColor = System.Drawing.Color.DimGray;
             this.barGraph7.DataBindings.Add(new System.Windows.Forms.Binding("Value", new ABB.Robotics.ScreenMaker.Windows.Forms.SingleBindingSource(new ABB.Robotics.DataBinding.SignalObject("go_InPosition")), "Value", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.barGraph7.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font11b;
@@ -390,9 +390,9 @@ namespace IRC5_def_screen
             this.barGraph7.Name = "barGraph7";
             this.barGraph7.Size = new System.Drawing.Size(40, 25);
             this.barGraph7.ValuePlacement = ABB.Robotics.Tps.Windows.Forms.BarValuePlacement.BarEnd;
-            // 
+            //
             // barGraph8
-            // 
+            //
             this.barGraph8.BarColor = System.Drawing.Color.DimGray;
             this.barGraph8.DataBindings.Add(new System.Windows.Forms.Binding("Value", new ABB.Robotics.ScreenMaker.Windows.Forms.SingleBindingSource(new ABB.Robotics.DataBinding.SignalObject("go_PointNo")), "Value", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.barGraph8.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font11b;
@@ -406,9 +406,9 @@ namespace IRC5_def_screen
             this.barGraph8.Name = "barGraph8";
             this.barGraph8.Size = new System.Drawing.Size(40, 25);
             this.barGraph8.ValuePlacement = ABB.Robotics.Tps.Windows.Forms.BarValuePlacement.BarEnd;
-            // 
+            //
             // barGraph9
-            // 
+            //
             this.barGraph9.BarColor = System.Drawing.Color.DimGray;
             this.barGraph9.DataBindings.Add(new System.Windows.Forms.Binding("Value", new ABB.Robotics.ScreenMaker.Windows.Forms.SingleBindingSource(new ABB.Robotics.DataBinding.SignalObject("go_WorkobjectNo")), "Value", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.barGraph9.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font11b;
@@ -422,9 +422,9 @@ namespace IRC5_def_screen
             this.barGraph9.Name = "barGraph9";
             this.barGraph9.Size = new System.Drawing.Size(40, 25);
             this.barGraph9.ValuePlacement = ABB.Robotics.Tps.Windows.Forms.BarValuePlacement.BarEnd;
-            // 
+            //
             // barGraph10
-            // 
+            //
             this.barGraph10.BarColor = System.Drawing.Color.DimGray;
             this.barGraph10.DataBindings.Add(new System.Windows.Forms.Binding("Value", new ABB.Robotics.ScreenMaker.Windows.Forms.SingleBindingSource(new ABB.Robotics.DataBinding.SignalObject("go_ToolNo")), "Value", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.barGraph10.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font11b;
@@ -443,9 +443,9 @@ namespace IRC5_def_screen
                         0,
                         0});
             this.barGraph10.ValuePlacement = ABB.Robotics.Tps.Windows.Forms.BarValuePlacement.BarEnd;
-            // 
+            //
             // barGraph13
-            // 
+            //
             this.barGraph13.BarColor = System.Drawing.Color.DimGray;
             this.barGraph13.DataBindings.Add(new System.Windows.Forms.Binding("Value", new ABB.Robotics.ScreenMaker.Windows.Forms.SingleBindingSource(new ABB.Robotics.DataBinding.SignalObject("go_GlobalSpeed")), "Value", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.barGraph13.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font11b;
@@ -459,9 +459,9 @@ namespace IRC5_def_screen
             this.barGraph13.Name = "barGraph13";
             this.barGraph13.Size = new System.Drawing.Size(40, 25);
             this.barGraph13.ValuePlacement = ABB.Robotics.Tps.Windows.Forms.BarValuePlacement.BarEnd;
-            // 
+            //
             // barGraph15
-            // 
+            //
             this.barGraph15.BarColor = System.Drawing.Color.DimGray;
             this.barGraph15.DataBindings.Add(new System.Windows.Forms.Binding("Value", new ABB.Robotics.ScreenMaker.Windows.Forms.SingleBindingSource(new ABB.Robotics.DataBinding.SignalObject("go_ActionNo")), "Value", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.barGraph15.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font11b;
@@ -480,9 +480,9 @@ namespace IRC5_def_screen
                         0,
                         0});
             this.barGraph15.ValuePlacement = ABB.Robotics.Tps.Windows.Forms.BarValuePlacement.BarEnd;
-            // 
+            //
             // tpsLabel9
-            // 
+            //
             this.tpsLabel9.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font10b;
             this.tpsLabel9.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tpsLabel9.Location = new System.Drawing.Point(68, 150);
@@ -490,9 +490,9 @@ namespace IRC5_def_screen
             this.tpsLabel9.Name = "tpsLabel9";
             this.tpsLabel9.Size = new System.Drawing.Size(127, 31);
             this.tpsLabel9.Title = "go_PointNo";
-            // 
+            //
             // tpsLabel10
-            // 
+            //
             this.tpsLabel10.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font10b;
             this.tpsLabel10.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tpsLabel10.Location = new System.Drawing.Point(68, 119);
@@ -500,9 +500,9 @@ namespace IRC5_def_screen
             this.tpsLabel10.Name = "tpsLabel10";
             this.tpsLabel10.Size = new System.Drawing.Size(144, 33);
             this.tpsLabel10.Title = "go_WorkobjectNo";
-            // 
+            //
             // tpsLabel13
-            // 
+            //
             this.tpsLabel13.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font10b;
             this.tpsLabel13.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tpsLabel13.Location = new System.Drawing.Point(68, 90);
@@ -510,9 +510,9 @@ namespace IRC5_def_screen
             this.tpsLabel13.Name = "tpsLabel13";
             this.tpsLabel13.Size = new System.Drawing.Size(127, 31);
             this.tpsLabel13.Title = "go_ToolNo";
-            // 
+            //
             // tpsLabel18
-            // 
+            //
             this.tpsLabel18.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font10b;
             this.tpsLabel18.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tpsLabel18.Location = new System.Drawing.Point(68, 59);
@@ -520,9 +520,9 @@ namespace IRC5_def_screen
             this.tpsLabel18.Name = "tpsLabel18";
             this.tpsLabel18.Size = new System.Drawing.Size(127, 31);
             this.tpsLabel18.Title = "go_GlobalSpeed";
-            // 
+            //
             // tpsLabel20
-            // 
+            //
             this.tpsLabel20.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font10b;
             this.tpsLabel20.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tpsLabel20.Location = new System.Drawing.Point(68, 27);
@@ -530,9 +530,9 @@ namespace IRC5_def_screen
             this.tpsLabel20.Name = "tpsLabel20";
             this.tpsLabel20.Size = new System.Drawing.Size(98, 31);
             this.tpsLabel20.Title = "go_ActionNo";
-            // 
+            //
             // groupBox3
-            // 
+            //
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox3.AutoScroll = false;
             this.groupBox3.AutoScrollMargin = new System.Drawing.Size(0, 0);
@@ -562,9 +562,9 @@ namespace IRC5_def_screen
             this.groupBox3.Tag = null;
             this.groupBox3.Title = "Input Signals";
             this.groupBox3.VerticalAlign = ABB.Robotics.Tps.Windows.Forms.VerAlign.Center;
-            // 
+            //
             // tpsLabel15
-            // 
+            //
             this.tpsLabel15.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font10b;
             this.tpsLabel15.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tpsLabel15.Location = new System.Drawing.Point(64, 178);
@@ -572,9 +572,9 @@ namespace IRC5_def_screen
             this.tpsLabel15.Name = "tpsLabel15";
             this.tpsLabel15.Size = new System.Drawing.Size(127, 31);
             this.tpsLabel15.Title = "gi_InPosition";
-            // 
+            //
             // barGraph12
-            // 
+            //
             this.barGraph12.BarColor = System.Drawing.Color.DimGray;
             this.barGraph12.DataBindings.Add(new System.Windows.Forms.Binding("Value", new ABB.Robotics.ScreenMaker.Windows.Forms.SingleBindingSource(new ABB.Robotics.DataBinding.SignalObject("gi_InPosition")), "Value", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.barGraph12.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font11b;
@@ -588,9 +588,9 @@ namespace IRC5_def_screen
             this.barGraph12.Name = "barGraph12";
             this.barGraph12.Size = new System.Drawing.Size(40, 25);
             this.barGraph12.ValuePlacement = ABB.Robotics.Tps.Windows.Forms.BarValuePlacement.BarEnd;
-            // 
+            //
             // barGraph5
-            // 
+            //
             this.barGraph5.BarColor = System.Drawing.Color.DimGray;
             this.barGraph5.DataBindings.Add(new System.Windows.Forms.Binding("Value", new ABB.Robotics.ScreenMaker.Windows.Forms.SingleBindingSource(new ABB.Robotics.DataBinding.SignalObject("gi_PointNo")), "Value", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.barGraph5.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font11b;
@@ -604,9 +604,9 @@ namespace IRC5_def_screen
             this.barGraph5.Name = "barGraph5";
             this.barGraph5.Size = new System.Drawing.Size(40, 25);
             this.barGraph5.ValuePlacement = ABB.Robotics.Tps.Windows.Forms.BarValuePlacement.BarEnd;
-            // 
+            //
             // barGraph4
-            // 
+            //
             this.barGraph4.BarColor = System.Drawing.Color.DimGray;
             this.barGraph4.DataBindings.Add(new System.Windows.Forms.Binding("Value", new ABB.Robotics.ScreenMaker.Windows.Forms.SingleBindingSource(new ABB.Robotics.DataBinding.SignalObject("gi_WorkobjectNo")), "Value", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.barGraph4.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font11b;
@@ -620,9 +620,9 @@ namespace IRC5_def_screen
             this.barGraph4.Name = "barGraph4";
             this.barGraph4.Size = new System.Drawing.Size(40, 25);
             this.barGraph4.ValuePlacement = ABB.Robotics.Tps.Windows.Forms.BarValuePlacement.BarEnd;
-            // 
+            //
             // barGraph3
-            // 
+            //
             this.barGraph3.BarColor = System.Drawing.Color.DimGray;
             this.barGraph3.DataBindings.Add(new System.Windows.Forms.Binding("Value", new ABB.Robotics.ScreenMaker.Windows.Forms.SingleBindingSource(new ABB.Robotics.DataBinding.SignalObject("gi_ToolNo")), "Value", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.barGraph3.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font11b;
@@ -641,9 +641,9 @@ namespace IRC5_def_screen
                         0,
                         0});
             this.barGraph3.ValuePlacement = ABB.Robotics.Tps.Windows.Forms.BarValuePlacement.BarEnd;
-            // 
+            //
             // barGraph2
-            // 
+            //
             this.barGraph2.BarColor = System.Drawing.Color.DimGray;
             this.barGraph2.DataBindings.Add(new System.Windows.Forms.Binding("Value", new ABB.Robotics.ScreenMaker.Windows.Forms.SingleBindingSource(new ABB.Robotics.DataBinding.SignalObject("gi_GlobalSpeed")), "Value", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.barGraph2.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font11b;
@@ -657,9 +657,9 @@ namespace IRC5_def_screen
             this.barGraph2.Name = "barGraph2";
             this.barGraph2.Size = new System.Drawing.Size(40, 25);
             this.barGraph2.ValuePlacement = ABB.Robotics.Tps.Windows.Forms.BarValuePlacement.BarEnd;
-            // 
+            //
             // barGraph1
-            // 
+            //
             this.barGraph1.BarColor = System.Drawing.Color.DimGray;
             this.barGraph1.DataBindings.Add(new System.Windows.Forms.Binding("Value", new ABB.Robotics.ScreenMaker.Windows.Forms.SingleBindingSource(new ABB.Robotics.DataBinding.SignalObject("gi_ActionNo")), "Value", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.barGraph1.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font11b;
@@ -678,9 +678,9 @@ namespace IRC5_def_screen
                         0,
                         0});
             this.barGraph1.ValuePlacement = ABB.Robotics.Tps.Windows.Forms.BarValuePlacement.BarEnd;
-            // 
+            //
             // tpsLabel4
-            // 
+            //
             this.tpsLabel4.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font10b;
             this.tpsLabel4.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tpsLabel4.Location = new System.Drawing.Point(64, 150);
@@ -688,9 +688,9 @@ namespace IRC5_def_screen
             this.tpsLabel4.Name = "tpsLabel4";
             this.tpsLabel4.Size = new System.Drawing.Size(127, 31);
             this.tpsLabel4.Title = "gi_PointNo";
-            // 
+            //
             // tpsLabel3
-            // 
+            //
             this.tpsLabel3.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font10b;
             this.tpsLabel3.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tpsLabel3.Location = new System.Drawing.Point(64, 119);
@@ -698,9 +698,9 @@ namespace IRC5_def_screen
             this.tpsLabel3.Name = "tpsLabel3";
             this.tpsLabel3.Size = new System.Drawing.Size(127, 33);
             this.tpsLabel3.Title = "gi_WorkobjectNo";
-            // 
+            //
             // tpsLabel5
-            // 
+            //
             this.tpsLabel5.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font10b;
             this.tpsLabel5.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tpsLabel5.Location = new System.Drawing.Point(64, 90);
@@ -708,9 +708,9 @@ namespace IRC5_def_screen
             this.tpsLabel5.Name = "tpsLabel5";
             this.tpsLabel5.Size = new System.Drawing.Size(127, 31);
             this.tpsLabel5.Title = "gi_ToolNo";
-            // 
+            //
             // go_GlobalSpeed
-            // 
+            //
             this.go_GlobalSpeed.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font10b;
             this.go_GlobalSpeed.ForeColor = System.Drawing.SystemColors.ControlText;
             this.go_GlobalSpeed.Location = new System.Drawing.Point(64, 59);
@@ -718,9 +718,9 @@ namespace IRC5_def_screen
             this.go_GlobalSpeed.Name = "go_GlobalSpeed";
             this.go_GlobalSpeed.Size = new System.Drawing.Size(127, 31);
             this.go_GlobalSpeed.Title = "gi_GlobalSpeed";
-            // 
+            //
             // tpsLabel6
-            // 
+            //
             this.tpsLabel6.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font10b;
             this.tpsLabel6.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tpsLabel6.Location = new System.Drawing.Point(61, 27);
@@ -728,9 +728,9 @@ namespace IRC5_def_screen
             this.tpsLabel6.Name = "tpsLabel6";
             this.tpsLabel6.Size = new System.Drawing.Size(98, 31);
             this.tpsLabel6.Title = "gi_ActionNo";
-            // 
+            //
             // pictureBox7
-            // 
+            //
             this.pictureBox7.AllowMultipleStates = true;
             this.pictureBox7.BaseValue = 2;
             this.pictureBox7.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font12b;
@@ -741,9 +741,9 @@ namespace IRC5_def_screen
             this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             stateObject1.Add("Image", ((System.Drawing.Bitmap)(resources.GetObject("pictureBox7.UndefinedState"))));
             this.pictureBox7.UndefinedState = stateObject1;
-            // 
+            //
             // groupBox1
-            // 
+            //
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox1.AutoScroll = false;
             this.groupBox1.AutoScrollMargin = new System.Drawing.Size(0, 0);
@@ -761,9 +761,9 @@ namespace IRC5_def_screen
             this.groupBox1.Tag = null;
             this.groupBox1.Title = "";
             this.groupBox1.VerticalAlign = ABB.Robotics.Tps.Windows.Forms.VerAlign.Center;
-            // 
+            //
             // tpsLabel11
-            // 
+            //
             this.tpsLabel11.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font9b;
             this.tpsLabel11.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tpsLabel11.Location = new System.Drawing.Point(3, 3);
@@ -771,9 +771,9 @@ namespace IRC5_def_screen
             this.tpsLabel11.Name = "tpsLabel11";
             this.tpsLabel11.Size = new System.Drawing.Size(110, 24);
             this.tpsLabel11.Title = "Controller Mode";
-            // 
+            //
             // tpsLabel12
-            // 
+            //
             this.tpsLabel12.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font9b;
             this.tpsLabel12.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tpsLabel12.Location = new System.Drawing.Point(119, 3);
@@ -781,25 +781,25 @@ namespace IRC5_def_screen
             this.tpsLabel12.Name = "tpsLabel12";
             this.tpsLabel12.Size = new System.Drawing.Size(108, 24);
             this.tpsLabel12.Title = "Rapid Execution";
-            // 
+            //
             // rapidExecutionStatus1
-            // 
+            //
             this.rapidExecutionStatus1.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font12b;
             this.rapidExecutionStatus1.Location = new System.Drawing.Point(144, 24);
             this.rapidExecutionStatus1.Name = "rapidExecutionStatus1";
             this.rapidExecutionStatus1.Size = new System.Drawing.Size(50, 50);
             this.rapidExecutionStatus1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            // 
+            //
             // controllerModeStatus1
-            // 
+            //
             this.controllerModeStatus1.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font12b;
             this.controllerModeStatus1.Location = new System.Drawing.Point(31, 24);
             this.controllerModeStatus1.Name = "controllerModeStatus1";
             this.controllerModeStatus1.Size = new System.Drawing.Size(50, 50);
             this.controllerModeStatus1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            // 
+            //
             // pictureBox4
-            // 
+            //
             this.pictureBox4.AllowMultipleStates = true;
             this.pictureBox4.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font12b;
             this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
@@ -809,9 +809,9 @@ namespace IRC5_def_screen
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             stateObject2.Add("Image", ((System.Drawing.Bitmap)(resources.GetObject("pictureBox4.UndefinedState"))));
             this.pictureBox4.UndefinedState = stateObject2;
-            // 
+            //
             // pictureBox6
-            // 
+            //
             this.pictureBox6.AllowMultipleStates = true;
             this.pictureBox6.BaseValue = 2;
             this.pictureBox6.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font12b;
@@ -822,16 +822,16 @@ namespace IRC5_def_screen
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             stateObject3.Add("Image", ((System.Drawing.Bitmap)(resources.GetObject("pictureBox6.UndefinedState"))));
             this.pictureBox6.UndefinedState = stateObject3;
-            // 
+            //
             // pictureBox1
-            // 
+            //
             this.pictureBox1.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font12b;
             this.pictureBox1.Location = new System.Drawing.Point(-1, 165);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(605, 163);
-            // 
+            //
             // tabPage2
-            // 
+            //
             this.tabPage2.Controls.Add(this.groupBox5);
             this.tabPage2.Controls.Add(this.groupBox2);
             this.tabPage2.Controls.Add(this.pictureBox5);
@@ -843,9 +843,9 @@ namespace IRC5_def_screen
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Size = new System.Drawing.Size(637, 348);
             this.tabPage2.Text = "Background";
-            // 
+            //
             // groupBox5
-            // 
+            //
             this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox5.AutoScroll = false;
             this.groupBox5.AutoScrollMargin = new System.Drawing.Size(0, 0);
@@ -861,9 +861,9 @@ namespace IRC5_def_screen
             this.groupBox5.Tag = null;
             this.groupBox5.Title = "Background Signals";
             this.groupBox5.VerticalAlign = ABB.Robotics.Tps.Windows.Forms.VerAlign.Center;
-            // 
+            //
             // barGraph11
-            // 
+            //
             this.barGraph11.BarColor = System.Drawing.Color.DimGray;
             this.barGraph11.DataBindings.Add(new System.Windows.Forms.Binding("Value", new ABB.Robotics.ScreenMaker.Windows.Forms.SingleBindingSource(new ABB.Robotics.DataBinding.SignalObject("go_EventID")), "Value", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.barGraph11.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font11b;
@@ -877,9 +877,9 @@ namespace IRC5_def_screen
             this.barGraph11.Name = "barGraph11";
             this.barGraph11.Size = new System.Drawing.Size(75, 25);
             this.barGraph11.ValuePlacement = ABB.Robotics.Tps.Windows.Forms.BarValuePlacement.BarEnd;
-            // 
+            //
             // tpsLabel14
-            // 
+            //
             this.tpsLabel14.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font10b;
             this.tpsLabel14.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tpsLabel14.Location = new System.Drawing.Point(93, 32);
@@ -887,9 +887,9 @@ namespace IRC5_def_screen
             this.tpsLabel14.Name = "tpsLabel14";
             this.tpsLabel14.Size = new System.Drawing.Size(114, 31);
             this.tpsLabel14.Title = "go_EventID";
-            // 
+            //
             // groupBox2
-            // 
+            //
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox2.AutoScroll = false;
             this.groupBox2.AutoScrollMargin = new System.Drawing.Size(0, 0);
@@ -907,9 +907,9 @@ namespace IRC5_def_screen
             this.groupBox2.Tag = null;
             this.groupBox2.Title = "";
             this.groupBox2.VerticalAlign = ABB.Robotics.Tps.Windows.Forms.VerAlign.Center;
-            // 
+            //
             // tpsLabel1
-            // 
+            //
             this.tpsLabel1.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font9b;
             this.tpsLabel1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tpsLabel1.Location = new System.Drawing.Point(3, 3);
@@ -917,9 +917,9 @@ namespace IRC5_def_screen
             this.tpsLabel1.Name = "tpsLabel1";
             this.tpsLabel1.Size = new System.Drawing.Size(110, 24);
             this.tpsLabel1.Title = "Controller Mode";
-            // 
+            //
             // tpsLabel2
-            // 
+            //
             this.tpsLabel2.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font9b;
             this.tpsLabel2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tpsLabel2.Location = new System.Drawing.Point(119, 3);
@@ -927,25 +927,25 @@ namespace IRC5_def_screen
             this.tpsLabel2.Name = "tpsLabel2";
             this.tpsLabel2.Size = new System.Drawing.Size(108, 24);
             this.tpsLabel2.Title = "Rapid Execution";
-            // 
+            //
             // rapidExecutionStatus2
-            // 
+            //
             this.rapidExecutionStatus2.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font12b;
             this.rapidExecutionStatus2.Location = new System.Drawing.Point(144, 24);
             this.rapidExecutionStatus2.Name = "rapidExecutionStatus2";
             this.rapidExecutionStatus2.Size = new System.Drawing.Size(50, 50);
             this.rapidExecutionStatus2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            // 
+            //
             // controllerModeStatus2
-            // 
+            //
             this.controllerModeStatus2.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font12b;
             this.controllerModeStatus2.Location = new System.Drawing.Point(31, 24);
             this.controllerModeStatus2.Name = "controllerModeStatus2";
             this.controllerModeStatus2.Size = new System.Drawing.Size(50, 50);
             this.controllerModeStatus2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            // 
+            //
             // pictureBox5
-            // 
+            //
             this.pictureBox5.AllowMultipleStates = true;
             this.pictureBox5.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font12b;
             this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
@@ -955,9 +955,9 @@ namespace IRC5_def_screen
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             stateObject4.Add("Image", ((System.Drawing.Bitmap)(resources.GetObject("pictureBox5.UndefinedState"))));
             this.pictureBox5.UndefinedState = stateObject4;
-            // 
+            //
             // pictureBox3
-            // 
+            //
             this.pictureBox3.AllowMultipleStates = true;
             this.pictureBox3.BaseValue = 2;
             this.pictureBox3.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font12b;
@@ -968,16 +968,16 @@ namespace IRC5_def_screen
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             stateObject5.Add("Image", ((System.Drawing.Bitmap)(resources.GetObject("pictureBox3.UndefinedState"))));
             this.pictureBox3.UndefinedState = stateObject5;
-            // 
+            //
             // pictureBox2
-            // 
+            //
             this.pictureBox2.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font12b;
             this.pictureBox2.Location = new System.Drawing.Point(-1, 0);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(578, 233);
-            // 
+            //
             // ToolPage
-            // 
+            //
             this.ToolPage.Controls.Add(this.switch1);
             this.ToolPage.Controls.Add(this.button2);
             this.ToolPage.Controls.Add(this.button1);
@@ -992,9 +992,9 @@ namespace IRC5_def_screen
             this.ToolPage.Name = "ToolPage";
             this.ToolPage.Size = new System.Drawing.Size(637, 348);
             this.ToolPage.Text = "Tool";
-            // 
+            //
             // switch1
-            // 
+            //
             this.switch1.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font12b;
             this.switch1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.switch1.Location = new System.Drawing.Point(112, 152);
@@ -1004,9 +1004,9 @@ namespace IRC5_def_screen
             this.switch1.OnValue = 0;
             this.switch1.Size = new System.Drawing.Size(192, 26);
             this.switch1.Text = "di_37B3_A44_OUT";
-            // 
+            //
             // button2
-            // 
+            //
             this.button2.BackColor = System.Drawing.Color.White;
             this.button2.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", new ABB.Robotics.ScreenMaker.Windows.Forms.ApplicationVariableBindingSource("allowTool"), "Value", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.button2.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font12b;
@@ -1016,9 +1016,9 @@ namespace IRC5_def_screen
             this.button2.Size = new System.Drawing.Size(88, 42);
             this.button2.Text = "Open A44";
             this.button2.TextAlign = ABB.Robotics.Tps.Windows.Forms.ContentAlignmentABB.MiddleCenter;
-            // 
+            //
             // button1
-            // 
+            //
             this.button1.BackColor = System.Drawing.Color.White;
             this.button1.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", new ABB.Robotics.ScreenMaker.Windows.Forms.ApplicationVariableBindingSource("allowTool"), "Value", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.button1.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font12b;
@@ -1028,9 +1028,9 @@ namespace IRC5_def_screen
             this.button1.Size = new System.Drawing.Size(88, 42);
             this.button1.Text = "Close A44";
             this.button1.TextAlign = ABB.Robotics.Tps.Windows.Forms.ContentAlignmentABB.MiddleCenter;
-            // 
+            //
             // switch5
-            // 
+            //
             this.switch5.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font12b;
             this.switch5.ForeColor = System.Drawing.SystemColors.ControlText;
             this.switch5.Location = new System.Drawing.Point(112, 102);
@@ -1040,9 +1040,9 @@ namespace IRC5_def_screen
             this.switch5.OnValue = 0;
             this.switch5.Size = new System.Drawing.Size(192, 26);
             this.switch5.Text = "di_36B3_A44_IN";
-            // 
+            //
             // groupBox7
-            // 
+            //
             this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox7.AutoScroll = false;
             this.groupBox7.AutoScrollMargin = new System.Drawing.Size(0, 0);
@@ -1060,9 +1060,9 @@ namespace IRC5_def_screen
             this.groupBox7.Tag = null;
             this.groupBox7.Title = "";
             this.groupBox7.VerticalAlign = ABB.Robotics.Tps.Windows.Forms.VerAlign.Center;
-            // 
+            //
             // tpsLabel16
-            // 
+            //
             this.tpsLabel16.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font9b;
             this.tpsLabel16.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tpsLabel16.Location = new System.Drawing.Point(3, 3);
@@ -1070,9 +1070,9 @@ namespace IRC5_def_screen
             this.tpsLabel16.Name = "tpsLabel16";
             this.tpsLabel16.Size = new System.Drawing.Size(110, 24);
             this.tpsLabel16.Title = "Controller Mode";
-            // 
+            //
             // tpsLabel17
-            // 
+            //
             this.tpsLabel17.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font9b;
             this.tpsLabel17.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tpsLabel17.Location = new System.Drawing.Point(119, 3);
@@ -1080,25 +1080,25 @@ namespace IRC5_def_screen
             this.tpsLabel17.Name = "tpsLabel17";
             this.tpsLabel17.Size = new System.Drawing.Size(108, 24);
             this.tpsLabel17.Title = "Rapid Execution";
-            // 
+            //
             // rapidExecutionStatus4
-            // 
+            //
             this.rapidExecutionStatus4.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font12b;
             this.rapidExecutionStatus4.Location = new System.Drawing.Point(144, 24);
             this.rapidExecutionStatus4.Name = "rapidExecutionStatus4";
             this.rapidExecutionStatus4.Size = new System.Drawing.Size(50, 50);
             this.rapidExecutionStatus4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            // 
+            //
             // controllerModeStatus4
-            // 
+            //
             this.controllerModeStatus4.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font12b;
             this.controllerModeStatus4.Location = new System.Drawing.Point(31, 24);
             this.controllerModeStatus4.Name = "controllerModeStatus4";
             this.controllerModeStatus4.Size = new System.Drawing.Size(50, 50);
             this.controllerModeStatus4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            // 
+            //
             // pictureBox13
-            // 
+            //
             this.pictureBox13.AllowMultipleStates = true;
             this.pictureBox13.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font12b;
             this.pictureBox13.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox13.Image")));
@@ -1108,9 +1108,9 @@ namespace IRC5_def_screen
             this.pictureBox13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             stateObject6.Add("Image", ((System.Drawing.Bitmap)(resources.GetObject("pictureBox13.UndefinedState"))));
             this.pictureBox13.UndefinedState = stateObject6;
-            // 
+            //
             // pictureBox12
-            // 
+            //
             this.pictureBox12.AllowMultipleStates = true;
             this.pictureBox12.BaseValue = 2;
             this.pictureBox12.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font12b;
@@ -1121,23 +1121,23 @@ namespace IRC5_def_screen
             this.pictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             stateObject7.Add("Image", ((System.Drawing.Bitmap)(resources.GetObject("pictureBox12.UndefinedState"))));
             this.pictureBox12.UndefinedState = stateObject7;
-            // 
+            //
             // pictureBox11
-            // 
+            //
             this.pictureBox11.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font12b;
             this.pictureBox11.Location = new System.Drawing.Point(0, 0);
             this.pictureBox11.Name = "pictureBox11";
             this.pictureBox11.Size = new System.Drawing.Size(637, 348);
-            // 
+            //
             // trigermanual
-            // 
+            //
             this.trigermanual.Condition = ABB.Robotics.ScreenMaker.Windows.Forms.ConditionalTrigger.Conditions.AND;
             this.trigermanual.DataBindings.Add(new System.Windows.Forms.Binding("LHS", new ABB.Robotics.ScreenMaker.Windows.Forms.SingleBindingSource(new ABB.Robotics.DataBinding.SignalObject("MAN1")), "Value", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.trigermanual.DataBindings.Add(new System.Windows.Forms.Binding("Value", new ABB.Robotics.ScreenMaker.Windows.Forms.ApplicationVariableBindingSource("allowTool"), "Value", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.trigermanual.DataBindings.Add(new System.Windows.Forms.Binding("RHS", new ABB.Robotics.ScreenMaker.Windows.Forms.SingleBindingSource(new ABB.Robotics.DataBinding.SignalObject("CH1")), "Value", true, System.Windows.Forms.DataSourceUpdateMode.Never));
-            // 
+            //
             // groupBox6
-            // 
+            //
             this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox6.AutoScroll = false;
             this.groupBox6.AutoScrollMargin = new System.Drawing.Size(0, 0);
@@ -1153,9 +1153,9 @@ namespace IRC5_def_screen
             this.groupBox6.Tag = null;
             this.groupBox6.Title = "PLC mode";
             this.groupBox6.VerticalAlign = ABB.Robotics.Tps.Windows.Forms.VerAlign.Center;
-            // 
+            //
             // barGraph6
-            // 
+            //
             this.barGraph6.BarColor = System.Drawing.Color.DimGray;
             this.barGraph6.DataBindings.Add(new System.Windows.Forms.Binding("Value", new ABB.Robotics.ScreenMaker.Windows.Forms.SingleBindingSource(new ABB.Robotics.DataBinding.SignalObject("gi_MasterMode")), "Value", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.barGraph6.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font11b;
@@ -1174,9 +1174,9 @@ namespace IRC5_def_screen
                         0,
                         0});
             this.barGraph6.ValuePlacement = ABB.Robotics.Tps.Windows.Forms.BarValuePlacement.BarEnd;
-            // 
+            //
             // tpsLabel7
-            // 
+            //
             this.tpsLabel7.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font10b;
             this.tpsLabel7.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tpsLabel7.Location = new System.Drawing.Point(50, 16);
@@ -1184,9 +1184,9 @@ namespace IRC5_def_screen
             this.tpsLabel7.Name = "tpsLabel7";
             this.tpsLabel7.Size = new System.Drawing.Size(114, 31);
             this.tpsLabel7.Title = "gi_MasterMode";
-            // 
+            //
             // tpsLabel19
-            // 
+            //
             this.tpsLabel19.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font10b;
             this.tpsLabel19.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tpsLabel19.Location = new System.Drawing.Point(64, 208);
@@ -1194,9 +1194,9 @@ namespace IRC5_def_screen
             this.tpsLabel19.Name = "tpsLabel19";
             this.tpsLabel19.Size = new System.Drawing.Size(127, 31);
             this.tpsLabel19.Title = "gi_Zones";
-            // 
+            //
             // barGraph14
-            // 
+            //
             this.barGraph14.BarColor = System.Drawing.Color.DimGray;
             this.barGraph14.DataBindings.Add(new System.Windows.Forms.Binding("Value", new ABB.Robotics.ScreenMaker.Windows.Forms.SingleBindingSource(new ABB.Robotics.DataBinding.SignalObject("gi_Zones")), "Value", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.barGraph14.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font11b;
@@ -1210,9 +1210,9 @@ namespace IRC5_def_screen
             this.barGraph14.Name = "barGraph14";
             this.barGraph14.Size = new System.Drawing.Size(40, 25);
             this.barGraph14.ValuePlacement = ABB.Robotics.Tps.Windows.Forms.BarValuePlacement.BarEnd;
-            // 
+            //
             // tpsLabel21
-            // 
+            //
             this.tpsLabel21.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font10b;
             this.tpsLabel21.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tpsLabel21.Location = new System.Drawing.Point(68, 208);
@@ -1220,9 +1220,9 @@ namespace IRC5_def_screen
             this.tpsLabel21.Name = "tpsLabel21";
             this.tpsLabel21.Size = new System.Drawing.Size(127, 31);
             this.tpsLabel21.Title = "go_Zones";
-            // 
+            //
             // barGraph16
-            // 
+            //
             this.barGraph16.BarColor = System.Drawing.Color.DimGray;
             this.barGraph16.DataBindings.Add(new System.Windows.Forms.Binding("Value", new ABB.Robotics.ScreenMaker.Windows.Forms.SingleBindingSource(new ABB.Robotics.DataBinding.SignalObject("go_Zones")), "Value", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.barGraph16.Font = ABB.Robotics.Tps.Windows.Forms.TpsFont.Font11b;
@@ -1236,9 +1236,9 @@ namespace IRC5_def_screen
             this.barGraph16.Name = "barGraph16";
             this.barGraph16.Size = new System.Drawing.Size(40, 25);
             this.barGraph16.ValuePlacement = ABB.Robotics.Tps.Windows.Forms.BarValuePlacement.BarEnd;
-            // 
+            //
             // MainScreen
-            // 
+            //
             this.BackColor = System.Drawing.SystemColors.Control;
             this.Controls.Add(this.neviem);
             this.Text = "Visualization";

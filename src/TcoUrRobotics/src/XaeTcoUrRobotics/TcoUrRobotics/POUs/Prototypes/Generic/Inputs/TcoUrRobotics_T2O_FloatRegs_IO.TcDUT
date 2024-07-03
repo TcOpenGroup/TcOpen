@@ -1,12 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoUrRobotics_T2O_FloatRegs_IO" Id="{88fc9a0b-04b6-0f9d-3c2b-b45bc5455100}">
-    <Declaration><![CDATA[TYPE
-    TcoUrRobotics_T2O_FloatRegs_IO :
-    STRUCT
-        bArray AT %I* : ARRAY[0..95] OF BYTE;
-    END_STRUCT
-END_TYPE
-]]></Declaration>
+    <Declaration><![CDATA[TYPE TcoUrRobotics_T2O_FloatRegs_IO : STRUCT
+    bArray AT %I* : ARRAY[0..95] OF BYTE;
+END_STRUCT
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

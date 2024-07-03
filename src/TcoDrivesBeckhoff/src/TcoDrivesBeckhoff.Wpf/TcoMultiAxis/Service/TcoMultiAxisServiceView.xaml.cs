@@ -19,7 +19,6 @@ using TcOpen.Inxton.Wpf;
 
 namespace TcoDrivesBeckhoff
 {
-
     public partial class TcoMultiAxisServiceView : UserControl
     {
         public TcoMultiAxisServiceView()
@@ -31,11 +30,5 @@ namespace TcoDrivesBeckhoff
 
             InitializeComponent();
         }
-
-
-       
-
     }
-
-
 }

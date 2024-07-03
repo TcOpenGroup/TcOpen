@@ -3,12 +3,10 @@
   <DUT Name="eSetPositionMode" Id="{c73fdd70-cdaa-0b16-2d39-943a01c717ca}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE eSetPositionMode :
-(
-	Absolute	:=	0,
-	Relative	:=	1
+TYPE eSetPositionMode : (
+    Absolute := 0,
+    Relative := 1
 );
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

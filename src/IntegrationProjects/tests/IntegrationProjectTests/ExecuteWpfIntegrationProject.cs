@@ -1,11 +1,11 @@
+using System.Reflection;
 using FlaUI.UIA3;
 using NUnit.Framework;
-using System.Reflection;
 
 namespace IntegrationProjectTests
 {
     public class ExecuteWpfIntegrationProject
-    {       
+    {
         [Test]
         [Timeout(15000)]
         public void OpenApplicationTest()

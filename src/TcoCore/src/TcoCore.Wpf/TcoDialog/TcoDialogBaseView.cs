@@ -11,15 +11,16 @@ namespace TcoCore
     public partial class TcoDialogBaseView : Window
     {
         public TcoDialogBaseView()
-        {           
+        {
             this.DataContextChanged += TcoDialogBaseView_DataContextChanged;
             this.MouseLeftButtonDown += OnMouseLeftButtonDown;
             this.PreviewTouchDown += Window_TouchDown;
         }
 
-       
-
-        private void TcoDialogBaseView_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
+        private void TcoDialogBaseView_DataContextChanged(
+            object sender,
+            System.Windows.DependencyPropertyChangedEventArgs e
+        )
         {
             var context = this.DataContext as TcoDialogBaseViewModel;
             if (context != null)

@@ -1,8 +1,8 @@
-using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
 using TcOpen.Inxton.Security;
 
 namespace TcOpen.Inxton.Local.Security.Blazor
@@ -15,12 +15,14 @@ namespace TcOpen.Inxton.Local.Security.Blazor
             {
                 Role = role;
             }
+
             public Role Role { get; set; }
             public bool IsSelected { get; set; }
         }
 
         [Inject]
         private RoleGroupManager _roleGroupManager { get; set; }
+
         [Inject]
         private BlazorAlertManager _alertManager { get; set; }
 
@@ -32,21 +34,37 @@ namespace TcOpen.Inxton.Local.Security.Blazor
 
         public void AssignRoles()
         {
-            _roleGroupManager.AddRolesToGroup(SelectedGroupN.Name, AvailableRoles.Where(x => x.IsSelected == true).Select(x => x.Role.Name));
+            _roleGroupManager.AddRolesToGroup(
+                SelectedGroupN.Name,
+                AvailableRoles.Where(x => x.IsSelected == true).Select(x => x.Role.Name)
+            );
             GroupClicked(SelectedGroupN);
         }
 
         public void ReturnRoles()
         {
-            _roleGroupManager.RemoveRolesFromGroup(SelectedGroupN.Name, AssignedRoles.Where(x => x.IsSelected == true).Select(x => x.Role.Name));
+            _roleGroupManager.RemoveRolesFromGroup(
+                SelectedGroupN.Name,
+                AssignedRoles.Where(x => x.IsSelected == true).Select(x => x.Role.Name)
+            );
             GroupClicked(SelectedGroupN);
         }
 
         public void GroupClicked(GroupData group)
         {
             SelectedGroupN = group;
-            AssignedRoles = _roleGroupManager.GetRolesFromGroup(group.Name).Select(x => new RoleData(_roleGroupManager.inAppRoleCollection.Where(x1 => x1.Name == x).FirstOrDefault())).ToList();
-            AvailableRoles = _roleGroupManager.inAppRoleCollection.Where(x => !AssignedRoles.Select(x => x.Role.Name).Contains(x.Name)).Select(x => new RoleData(x)).ToList();
+            AssignedRoles = _roleGroupManager
+                .GetRolesFromGroup(group.Name)
+                .Select(x => new RoleData(
+                    _roleGroupManager.inAppRoleCollection.Where(x1 => x1.Name == x).FirstOrDefault()
+                ))
+                .ToList();
+            AvailableRoles = _roleGroupManager
+                .inAppRoleCollection.Where(x =>
+                    !AssignedRoles.Select(x => x.Role.Name).Contains(x.Name)
+                )
+                .Select(x => new RoleData(x))
+                .ToList();
             StateHasChanged();
         }
 
@@ -57,7 +75,7 @@ namespace TcOpen.Inxton.Local.Security.Blazor
 
         public void CreateGroup()
         {
-            if(newGroupName == null || newGroupName == "")
+            if (newGroupName == null || newGroupName == "")
             {
                 _alertManager.addAlert("warning", "Wrong group name!");
                 return;

@@ -3,10 +3,9 @@
   <DUT Name="eTcoTaskTests" Id="{f67fe522-53fe-0e0a-32b0-2b622a8ec704}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE eTcoTaskTests :
-(
-	CallTasksBodiesOnly	:= 100,
-	RestoreTasks,
+TYPE eTcoTaskTests : (
+    CallTasksBodiesOnly := 100,
+    RestoreTasks,
     TaskInvokeAndWaitForDone := 300,
     TaskInvokeAfterDoneWithNoEmptyCycles,
     TaskInvokeAfterDoneWithOneEmptyCycle,
@@ -22,18 +21,16 @@ TYPE eTcoTaskTests :
     IdentitiesTest,
     CheckAutoRestoreProperties,
     AutoRestoreOnStateChange,
-    InvokeDisabledTask:=320,
+    InvokeDisabledTask := 320,
     DisableExecutingTask,
     InvokeTaskThenDisable,
     DisableTaskInErrorStateEnableAndTriggerAgain,
-    ElapsedTypeMeasurement:=330,
-	TaskExecutingWithDoneAndErrorStatement := 340,
-	TaskExecutingWithErrorAndDoneStatement := 350,
-	TaskExecuteMethodNotCalled := 360,
-	TaskExecuteMethodCalled := 370
-	
+    ElapsedTypeMeasurement := 330,
+    TaskExecutingWithDoneAndErrorStatement := 340,
+    TaskExecutingWithErrorAndDoneStatement := 350,
+    TaskExecuteMethodNotCalled := 360,
+    TaskExecuteMethodCalled := 370
 );
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

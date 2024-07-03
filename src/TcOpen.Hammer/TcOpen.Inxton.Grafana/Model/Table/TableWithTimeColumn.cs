@@ -1,13 +1,14 @@
-﻿using Grafana.Backend.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Grafana.Backend.Model;
 
 namespace TcOpenHammer.Grafana.API.Transformation
 {
     public class TableWithTimeColumn<T> : Table<T>
     {
-        public TableWithTimeColumn(IEnumerable<T> source) : base(source)
+        public TableWithTimeColumn(IEnumerable<T> source)
+            : base(source)
         {
             var dateString = DateTime.Now.ToString();
             Columns = Columns.Prepend(TimeColumn);

@@ -3,39 +3,38 @@
   <POU Name="TcoLoggerTestContext" Id="{ce23ff7a-efb3-08f3-330f-5b5da7b34243}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoLoggerTestContext EXTENDS TcoCore._internals_TcoContext
 VAR
-	_sut : TcoLoggerTest(THIS^);
-	_msg : TcoCore.TcoMessage;  
-    _multiplesCount : INT;	
-END_VAR
-]]></Declaration>
+    _sut : TcoLoggerTest(THIS^);
+    _msg : TcoCore.TcoMessage;
+    _multiplesCount : INT;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Main" Id="{0678b4d1-dbb5-0762-1a80-d32d3160bf40}">
       <Declaration><![CDATA[METHOD PROTECTED Main
-VAR 
-	_index : INT;
-	_sb : TcoCore.StringBuilder;
+VAR
+    _index : INT;
+    _sb : TcoCore.StringBuilder;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[CASE _testId OF     
+        <ST><![CDATA[CASE _testId OF
     eTcoLoggerTests.PushMessage:
-		_logger.PushMessage(_msg);
-		_msg.Identity := THIS^.Identity;
-	eTcoLoggerTests.PushMessageMultiple:
-	FOR _index := 0 TO 1000 DO
-		_msg.Text :=_sb.Clear().Append('multiples').Append(':').Append(INT_TO_STRING(_index)).ToString();
-		_msg.Identity := THIS^.Identity;
-		_logger.PushMessage(_msg);
-	END_FOR		
-	eTcoLoggerTests.PushMessageMultipleInMoreCycles:
-	FOR _index := 0 TO _multiplesCount - 1 DO		
-		_msg.Text :=_sb.Clear().Append('multiples').Append(':').Append(INT_TO_STRING(_index)).ToString();
-		_msg.Identity := THIS^.Identity;
-		_logger.PushMessage(_msg);
-	END_FOR		
-	eTcoLoggerTests.SimplePush :
-		_logger.Push(_msg.Text, _msg.Category); 		
+        _logger.PushMessage(_msg);
+        _msg.Identity := THIS^.Identity;
+    eTcoLoggerTests.PushMessageMultiple:
+        FOR _index := 0 TO 1000 DO
+            _msg.Text := _sb.Clear().Append('multiples').Append(':').Append(INT_TO_STRING(_index)).ToString();
+            _msg.Identity := THIS^.Identity;
+            _logger.PushMessage(_msg);
+        END_FOR
+    eTcoLoggerTests.PushMessageMultipleInMoreCycles:
+        FOR _index := 0 TO _multiplesCount - 1 DO
+            _msg.Text := _sb.Clear().Append('multiples').Append(':').Append(INT_TO_STRING(_index)).ToString();
+            _msg.Identity := THIS^.Identity;
+            _logger.PushMessage(_msg);
+        END_FOR
+    eTcoLoggerTests.SimplePush:
+        _logger.Push(_msg.Text, _msg.Category);
 END_CASE
 
 _sut();]]></ST>

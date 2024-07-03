@@ -7,14 +7,14 @@ namespace TcoCore
 {
     public class TcoContextTreeViewModel : RenderableViewModel
     {
-        public TcoContextTreeViewModel()
-        {
-            
-        }
-       
+        public TcoContextTreeViewModel() { }
+
         public TcoContext TcoContext { get; private set; }
 
-        public override object Model { get => TcoContext; set { TcoContext  = value as TcoContext; } }
-      
+        public override object Model
+        {
+            get => TcoContext;
+            set { TcoContext = value as TcoContext; }
+        }
     }
 }

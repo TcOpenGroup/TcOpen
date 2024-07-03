@@ -1,11 +1,11 @@
-﻿using MaterialDesignColors;
-using MaterialDesignThemes.Wpf;
-using Serilog;
-using System;
+﻿using System;
 using System.Globalization;
 using System.Threading;
 using System.Windows;
 using System.Windows.Media;
+using MaterialDesignColors;
+using MaterialDesignThemes.Wpf;
+using Serilog;
 using TcoCoreExamples;
 using TcOpen.Inxton;
 using TcOpen.Inxton.TcoCore.Wpf;
@@ -20,18 +20,16 @@ namespace TcoCore.Sandbox.Wpf
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-         
             Color primaryColor = SwatchHelper.Lookup[MaterialDesignColor.DeepPurple];
             Color accentColor = SwatchHelper.Lookup[MaterialDesignColor.Lime];
             ITheme theme = Theme.Create(new MaterialDesignLightTheme(), primaryColor, accentColor);
             Resources.SetTheme(theme);
 
-
-
-
             base.OnStartup(e);
         }
-        public App() : base()
+
+        public App()
+            : base()
         {
             CultureInfo ci = new CultureInfo("sk-SK");
             Thread.CurrentThread.CurrentCulture = ci;
@@ -39,30 +37,48 @@ namespace TcoCore.Sandbox.Wpf
             PlcTcoCoreExamples.Connector.ReadWriteCycleDelay = 250;
             PlcTcoCoreExamples.Connector.BuildAndStart();
 
-            TcOpen.Inxton.TcoAppDomain.Current.Builder
-            .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter(new LoggerConfiguration()
-                                                    .WriteTo.Console(restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Verbose)
-                                                    .WriteTo.Notepad()
-                                                    .MinimumLevel.Verbose()))
-            .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get)
-            .SetPlcDialogs(DialogProxyServiceWpf.Create(new[] { PlcTcoCoreExamples.EXAMPLES_PRG._diaglogsContext}));
+            TcOpen
+                .Inxton.TcoAppDomain.Current.Builder.SetUpLogger(
+                    new TcOpen.Inxton.Logging.SerilogAdapter(
+                        new LoggerConfiguration()
+                            .WriteTo.Console(
+                                restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Verbose
+                            )
+                            .WriteTo.Notepad()
+                            .MinimumLevel.Verbose()
+                    )
+                )
+                .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get)
+                .SetPlcDialogs(
+                    DialogProxyServiceWpf.Create(
+                        new[] { PlcTcoCoreExamples.EXAMPLES_PRG._diaglogsContext }
+                    )
+                );
 
-            
-            PlcTcoCoreExamples.MANIPULATOR._context._logger.StartLoggingMessages(eMessageCategory.All);
-            PlcTcoCoreExamples.EXAMPLES_PRG._context._logger.StartLoggingMessages(eMessageCategory.All);
+            PlcTcoCoreExamples.MANIPULATOR._context._logger.StartLoggingMessages(
+                eMessageCategory.All
+            );
+            PlcTcoCoreExamples.EXAMPLES_PRG._context._logger.StartLoggingMessages(
+                eMessageCategory.All
+            );
             PlcTcoCoreExamples.MAIN._station001._logger.StartLoggingMessages(eMessageCategory.All);
-            PlcTcoCoreExamples.EXAMPLES_PRG._loggerContext._loggerUsage._logger.StartLoggingMessages(eMessageCategory.All);
-            PlcTcoCoreExamples.MAIN._station001._components._wrappedComponent2.SearchComponentsDepth = 1;
+            PlcTcoCoreExamples.EXAMPLES_PRG._loggerContext._loggerUsage._logger.StartLoggingMessages(
+                eMessageCategory.All
+            );
+            PlcTcoCoreExamples
+                .MAIN
+                ._station001
+                ._components
+                ._wrappedComponent2
+                .SearchComponentsDepth = 1;
             PlcTcoCoreExamples.MAIN._station001._components._di.IsExpanded = false;
-            
         }
 
-        
         private static string AMS_ID = Environment.GetEnvironmentVariable("Tc3Target");
         private static volatile object mutex = new object();
 
-        public static TcoCoreExamplesTwinController _plc;        
-        
+        public static TcoCoreExamplesTwinController _plc;
+
         /// <summary>
         /// Gets Plc twin for this application.
         /// </summary>
@@ -93,11 +109,16 @@ namespace TcoCore.Sandbox.Wpf
         {
             if (!IsInDesign)
             {
-                return new TcoCoreExamplesTwinController(Tc3ConnectorAdapter.Create( 853, true));
+                return new TcoCoreExamplesTwinController(Tc3ConnectorAdapter.Create(853, true));
             }
             else
             {
-                return new TcoCoreExamplesTwinController(new Vortex.Connector.ConnectorAdapter(typeof(Vortex.Connector.DummyConnectorFactory)), new object[] { string.Empty });
+                return new TcoCoreExamplesTwinController(
+                    new Vortex.Connector.ConnectorAdapter(
+                        typeof(Vortex.Connector.DummyConnectorFactory)
+                    ),
+                    new object[] { string.Empty }
+                );
             }
         }
 
@@ -108,7 +129,9 @@ namespace TcoCore.Sandbox.Wpf
         {
             get
             {
-                return System.ComponentModel.DesignerProperties.GetIsInDesignMode(new DependencyObject());
+                return System.ComponentModel.DesignerProperties.GetIsInDesignMode(
+                    new DependencyObject()
+                );
             }
         }
     }

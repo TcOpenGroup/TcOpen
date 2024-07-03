@@ -1,15 +1,15 @@
-﻿using Novell.Directory.Ldap;
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading;
+using Novell.Directory.Ldap;
 using TcOpen.Inxton.Security;
 
 namespace TcOpen.Inxton.Local.Security.LDAP
 {
     /// <summary>
     /// Service for Security manager to authenicate via LDAP.
-    /// This service is intendted to be used when your whole user management is delegated to another service 
-    /// like Active Directory, Azure Activy Directory or other LDAP based system.    /// 
+    /// This service is intendted to be used when your whole user management is delegated to another service
+    /// like Active Directory, Azure Activy Directory or other LDAP based system.    ///
     /// Usage:
     /// <code>
     ///  SecurityManager.Create(new LdapService(new LdapConfig(
@@ -47,13 +47,17 @@ namespace TcOpen.Inxton.Local.Security.LDAP
 
         public IUser AuthenticateUser(string username, string password)
         {
-            using (var ldapConnection = new LdapConnection() { SecureSocketLayer = LdapConfig.UseSsl })
+            using (
+                var ldapConnection = new LdapConnection() { SecureSocketLayer = LdapConfig.UseSsl }
+            )
             {
                 ConnectAndBind(ldapConnection, username, password);
                 if (ldapConnection.Connected && ldapConnection.Bound)
                 {
                     //over here is user authorized. All I have to do is to create an IUser from the DB
-                    var user = TryToCreateActiveDirectoryUser(username, ldapConnection) ?? CreateUserOnBound(username, ldapConnection);
+                    var user =
+                        TryToCreateActiveDirectoryUser(username, ldapConnection)
+                        ?? CreateUserOnBound(username, ldapConnection);
                     ldapConnection.Disconnect();
                     SetPrincipal(user);
                     OnUserAuthenticateSuccess(username);
@@ -67,7 +71,12 @@ namespace TcOpen.Inxton.Local.Security.LDAP
                 }
             }
         }
-        private void ConnectAndBind(ILdapConnection ldapConnection, string username, string password)
+
+        private void ConnectAndBind(
+            ILdapConnection ldapConnection,
+            string username,
+            string password
+        )
         {
             try
             {
@@ -77,9 +86,13 @@ namespace TcOpen.Inxton.Local.Security.LDAP
             catch (LdapException e)
             {
                 OnUserAuthenticateFailed(username);
-                throw new UnauthorizedAccessException("Cannot connect or bind, verify LDAP credentials,host,port.", e);
+                throw new UnauthorizedAccessException(
+                    "Cannot connect or bind, verify LDAP credentials,host,port.",
+                    e
+                );
             }
         }
+
         private IUser TryToCreateActiveDirectoryUser(string username, LdapConnection ldapConnection)
         {
             try
@@ -96,12 +109,27 @@ namespace TcOpen.Inxton.Local.Security.LDAP
         private LdapEntry SearchForUserEntry(string username, ILdapConnection ldapConnection)
         {
             var filter = $"{FILTER_ATTRIBUTE_EMAIL}={username}";
-            var filterAttrs = new string[] { FILTER_ATTRIBUTE_USERNAME, EMAIL_ATTRIBUTE, NAME_ATTRIBUTE, GIVEN_NAME_ATTRIBUTE, LAST_NAME_ATTRIBUTE, MEMBER_OF_ATTRIBUTE };
-            var entities = ldapConnection.Search(LdapConfig.SearchBase, LdapConnection.SCOPE_SUB, $"({filter})", filterAttrs, false);
-            entities.HasMore();// Documentation claims LdapConnection.Search is synchronous, but it isn't.  https://github.com/dsbenghe/Novell.Directory.Ldap.NETStandard/issues/55
+            var filterAttrs = new string[]
+            {
+                FILTER_ATTRIBUTE_USERNAME,
+                EMAIL_ATTRIBUTE,
+                NAME_ATTRIBUTE,
+                GIVEN_NAME_ATTRIBUTE,
+                LAST_NAME_ATTRIBUTE,
+                MEMBER_OF_ATTRIBUTE
+            };
+            var entities = ldapConnection.Search(
+                LdapConfig.SearchBase,
+                LdapConnection.SCOPE_SUB,
+                $"({filter})",
+                filterAttrs,
+                false
+            );
+            entities.HasMore(); // Documentation claims LdapConnection.Search is synchronous, but it isn't.  https://github.com/dsbenghe/Novell.Directory.Ldap.NETStandard/issues/55
             if (entities.Count != 1)
             {
-                var errMsg = $"LDAP entities.Count == {entities.Count}. <> 1 !!! Filter: \n {filter} \n {string.Join(" ", filterAttrs)}";
+                var errMsg =
+                    $"LDAP entities.Count == {entities.Count}. <> 1 !!! Filter: \n {filter} \n {string.Join(" ", filterAttrs)}";
                 throw new Exception(errMsg);
             }
             return entities.Next();
@@ -109,22 +137,37 @@ namespace TcOpen.Inxton.Local.Security.LDAP
 
         private IUser CreateUserFromEntity(LdapEntry userEntry)
         {
-            var memberOf = userEntry.getAttribute(MEMBER_OF_ATTRIBUTE)?.StringValueArray.SelectMany(x => x.Split(';').Select(y => y.Split(',').First().Split('=').Last())).ToArray();
+            var memberOf = userEntry
+                .getAttribute(MEMBER_OF_ATTRIBUTE)
+                ?.StringValueArray.SelectMany(x =>
+                    x.Split(';').Select(y => y.Split(',').First().Split('=').Last())
+                )
+                .ToArray();
             var username = userEntry.getAttribute(FILTER_ATTRIBUTE_USERNAME)?.StringValue;
             var email = userEntry.getAttribute(EMAIL_ATTRIBUTE)?.StringValue;
             return new LdapUser { UserName = username, Roles = memberOf };
         }
+
         private void SetPrincipal(IUser ldapUser)
         {
-            AppIdentity.AppPrincipal customPrincipal = (Thread.CurrentPrincipal as AppIdentity.AppPrincipal) ?? throw new ArgumentException();
+            AppIdentity.AppPrincipal customPrincipal =
+                (Thread.CurrentPrincipal as AppIdentity.AppPrincipal)
+                ?? throw new ArgumentException();
             //Authenticate the user
-            customPrincipal.Identity = new AppIdentity(ldapUser.UserName, ldapUser.Email, ldapUser.Roles, ldapUser.CanUserChangePassword, ldapUser.Level);
+            customPrincipal.Identity = new AppIdentity(
+                ldapUser.UserName,
+                ldapUser.Email,
+                ldapUser.Roles,
+                ldapUser.CanUserChangePassword,
+                ldapUser.Level
+            );
             UserAccessor.Instance.Identity = customPrincipal.Identity;
         }
 
         public void DeAuthenticateCurrentUser()
         {
-            AppIdentity.AppPrincipal customPrincipal = Thread.CurrentPrincipal as AppIdentity.AppPrincipal;
+            AppIdentity.AppPrincipal customPrincipal =
+                Thread.CurrentPrincipal as AppIdentity.AppPrincipal;
             if (customPrincipal != null)
             {
                 var userName = customPrincipal.Identity.Name;
@@ -134,12 +177,16 @@ namespace TcOpen.Inxton.Local.Security.LDAP
                 OnDeAuthenticated?.Invoke(userName);
             }
         }
-        public string CalculateHash(string clearTextPassword, string salt)
-            => throw new NotImplementedException();
 
+        public string CalculateHash(string clearTextPassword, string salt) =>
+            throw new NotImplementedException();
 
-        public void ChangePassword(string userName, string password, string newPassword1, string newPassword2)
-            => throw new NotImplementedException();
+        public void ChangePassword(
+            string userName,
+            string password,
+            string newPassword1,
+            string newPassword2
+        ) => throw new NotImplementedException();
 
         public bool HasAuthorization(string roles, Action notAuthorizedAction = null)
         {
@@ -154,6 +201,4 @@ namespace TcOpen.Inxton.Local.Security.LDAP
         const string LAST_NAME_ATTRIBUTE = "sn";
         const string MEMBER_OF_ATTRIBUTE = "memberOf";
     }
-
-
 }

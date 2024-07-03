@@ -1,4 +1,3 @@
-using TcoInspectors;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -6,10 +5,11 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using TcoInspectors;
 using TcoInspectorsTests;
-using Vortex.Adapters.Connector.Tc3.Adapter;
 using TcOpen.Inxton.Local.Security;
 using TcOpen.Inxton.TcoCore.Wpf;
+using Vortex.Adapters.Connector.Tc3.Adapter;
 
 namespace Sandbox.TcoInspectors.Wpf
 {
@@ -20,14 +20,11 @@ namespace Sandbox.TcoInspectors.Wpf
     {
         public App()
         {
-                       
-            
-
             Plc.Connector.BuildAndStart().ReadWriteCycleDelay = 75;
 
             #region DialogProxyServiceInitialization
-            TcOpen.Inxton.TcoAppDomain.Current.Builder
-          
+            TcOpen
+                .Inxton.TcoAppDomain.Current.Builder
             #endregion
                 .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter())
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get)
@@ -71,11 +68,18 @@ namespace Sandbox.TcoInspectors.Wpf
         {
             if (!IsInDesign)
             {
-                return new TcoInspectorsTestsTwinController(Tc3ConnectorAdapter.Create(AMS_ID, 852, true));
+                return new TcoInspectorsTestsTwinController(
+                    Tc3ConnectorAdapter.Create(AMS_ID, 852, true)
+                );
             }
             else
             {
-                return new TcoInspectorsTestsTwinController(new Vortex.Connector.ConnectorAdapter(typeof(Vortex.Connector.DummyConnectorFactory)), new object[] { string.Empty });
+                return new TcoInspectorsTestsTwinController(
+                    new Vortex.Connector.ConnectorAdapter(
+                        typeof(Vortex.Connector.DummyConnectorFactory)
+                    ),
+                    new object[] { string.Empty }
+                );
             }
         }
 
@@ -86,7 +90,9 @@ namespace Sandbox.TcoInspectors.Wpf
         {
             get
             {
-                return System.ComponentModel.DesignerProperties.GetIsInDesignMode(new DependencyObject());
+                return System.ComponentModel.DesignerProperties.GetIsInDesignMode(
+                    new DependencyObject()
+                );
             }
         }
     }

@@ -17,11 +17,15 @@
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="4.6.1" />
   </ItemGroup>
-  
+
   <ItemGroup>
-   
-    <ProjectReference Include="..\..\src\TcoAimTtiPowerSupply.Wpf\TcOpen.Inxton.TcoAimTtiPowerSupply.Wpf.csproj" />
-    <ProjectReference Include="..\TcoAimTtiPowerSupplyTestsConnector\TcoAimTtiPowerSupplyTestsConnector.csproj" />
+
+    <ProjectReference
+      Include="..\..\src\TcoAimTtiPowerSupply.Wpf\TcOpen.Inxton.TcoAimTtiPowerSupply.Wpf.csproj"
+    />
+    <ProjectReference
+      Include="..\TcoAimTtiPowerSupplyTestsConnector\TcoAimTtiPowerSupplyTestsConnector.csproj"
+    />
 
   </ItemGroup>
 

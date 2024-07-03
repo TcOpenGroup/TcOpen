@@ -1,15 +1,13 @@
-﻿using NUnit.Framework;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media;
+using NUnit.Framework;
 using TcoCore.Wpf;
 
 namespace TcoCoreUnitTests
 {
-
     [Apartment(System.Threading.ApartmentState.STA)]
     public class TcoColorTest
     {
-
         [Test]
         public void If_color_is_not_found_fallback_to_default()
         {
@@ -26,7 +24,10 @@ namespace TcoCoreUnitTests
             //Arrange
             var app = new Application();
             var primaryColor = FromHex("#FF0047");
-            Application.Current.Resources.Add("PrimaryHueLightBrush", new SolidColorBrush(FromHex("#FF0047")));
+            Application.Current.Resources.Add(
+                "PrimaryHueLightBrush",
+                new SolidColorBrush(FromHex("#FF0047"))
+            );
             //Act
             var primary = TcoColors.Primary as SolidColorBrush;
             //Assert

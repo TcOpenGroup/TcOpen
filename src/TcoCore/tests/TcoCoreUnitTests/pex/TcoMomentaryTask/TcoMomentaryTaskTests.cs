@@ -1,19 +1,18 @@
-﻿using NUnit.Framework;
-using TcoCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TcOpen.Inxton;
+using NUnit.Framework;
+using TcoCore;
 using TcoCore.Logging;
+using TcOpen.Inxton;
 
 namespace TcoCore.PexTests
 {
     [TestFixture()]
     public class TcoMomentaryTaskTests
     {
-
         private TcOpen.Inxton.Logging.DummyLoggerAdapter _logger;
 
         [OneTimeSetUp]
@@ -73,7 +72,7 @@ namespace TcoCore.PexTests
             task.Execute(new object());
 
             Assert.AreEqual(false, task._setOnRequest.Synchron);
-            Assert.IsTrue(_logger.IsLastMessageEmpty());          
+            Assert.IsTrue(_logger.IsLastMessageEmpty());
         }
 
         [Test()]
@@ -137,7 +136,9 @@ namespace TcoCore.PexTests
         public void CodeProvider_get_default_when_null()
         {
             var task = new TcoMomentaryTask();
-            Assert.IsInstanceOf<TcoCore.Swift.TcoMomentaryTaskDefaultCodeProvider>(task.CodeProvider);
+            Assert.IsInstanceOf<TcoCore.Swift.TcoMomentaryTaskDefaultCodeProvider>(
+                task.CodeProvider
+            );
         }
 
         [Test()]

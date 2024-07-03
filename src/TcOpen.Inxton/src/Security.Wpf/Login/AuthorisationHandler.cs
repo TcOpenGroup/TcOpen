@@ -11,7 +11,7 @@ using System.Windows.Threading;
 namespace TcOpen.Inxton.Local.Security.Wpf
 {
     public class AuthorizationHandler
-    {                 
+    {
         public static void SecurityExceptionHandler(FirstChanceExceptionEventArgs e)
         {
             ShowLoginWindow(e);
@@ -21,12 +21,15 @@ namespace TcOpen.Inxton.Local.Security.Wpf
         {
             try
             {
-                Dispatcher.CurrentDispatcher.Invoke(() => {
+                Dispatcher.CurrentDispatcher.Invoke(() =>
+                {
                     if (e.Exception is SecurityException)
                     {
                         var secException = e.Exception as SecurityException;
 
-                        var loginWindow = new LoginWindow($"We are sorry you need to authenticate to go ahead.");
+                        var loginWindow = new LoginWindow(
+                            $"We are sorry you need to authenticate to go ahead."
+                        );
                         loginWindow.ShowDialog();
                     }
 
@@ -39,14 +42,12 @@ namespace TcOpen.Inxton.Local.Security.Wpf
             }
             catch (TargetInvocationException)
             {
-
                 // Ignore
             }
             catch
             {
                 throw;
             }
-            
         }
     }
 }

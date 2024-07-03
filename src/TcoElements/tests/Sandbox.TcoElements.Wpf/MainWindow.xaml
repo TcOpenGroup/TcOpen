@@ -1,61 +1,92 @@
 <Window
-    x:Class="Sandbox.TcoElements.Wpf.MainWindow"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Sandbox.TcoElements.Wpf"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vortex="http://vortex.mts/xaml" xmlns:inxton="http://inxton.mts/xaml"
-    Title="MainWindow"
-    Width="800"
-    Height="450"
-    mc:Ignorable="d">
+  x:Class="Sandbox.TcoElements.Wpf.MainWindow"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:Sandbox.TcoElements.Wpf"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:vortex="http://vortex.mts/xaml"
+  xmlns:inxton="http://inxton.mts/xaml"
+  Title="MainWindow"
+  Width="800"
+  Height="450"
+  mc:Ignorable="d"
+>
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
     <TabControl>
-        <TabItem DataContext="{Binding TcoElementsTestsPlc.MAIN._tcoElementsSandbox}" Header="Elements">
+        <TabItem
+      DataContext="{Binding TcoElementsTestsPlc.MAIN._tcoElementsSandbox}"
+      Header="Elements"
+    >
             <ScrollViewer>
                 <TabControl>
-                
+
                 <TabItem Header="Service">
                         <StackPanel>
-                            <vortex:RenderableContentControl PresentationType="Service"></vortex:RenderableContentControl>
-                            <vortex:RenderableContentControl DataContext="{Binding _carousel}" PresentationType="Base"></vortex:RenderableContentControl>
-                            <vortex:RenderableContentControl DataContext="{Binding codedPosition}" PresentationType="Control"></vortex:RenderableContentControl>
+                            <vortex:RenderableContentControl
+                PresentationType="Service"
+              />
+                            <vortex:RenderableContentControl
+                DataContext="{Binding _carousel}"
+                PresentationType="Base"
+              />
+                            <vortex:RenderableContentControl
+                DataContext="{Binding codedPosition}"
+                PresentationType="Control"
+              />
                         </StackPanel>
-             
+
                 </TabItem>
                 <TabItem Header="Base">
-                    <vortex:RenderableContentControl PresentationType="Base"></vortex:RenderableContentControl>
+                    <vortex:RenderableContentControl PresentationType="Base" />
                 </TabItem>
                 <TabItem Header="Diagnostics">
-                    <vortex:RenderableContentControl PresentationType="Diagnostics"></vortex:RenderableContentControl>
+                    <vortex:RenderableContentControl
+              PresentationType="Diagnostics"
+            />
                 </TabItem>
             </TabControl>
             </ScrollViewer>
         </TabItem>
-        <TabItem DataContext="{Binding TcoElementsTestsPlc.MAIN._tcoElementsSandbox}" Header="Diagnostic">
+        <TabItem
+      DataContext="{Binding TcoElementsTestsPlc.MAIN._tcoElementsSandbox}"
+      Header="Diagnostic"
+    >
             <ScrollViewer>
-                <vortex:RenderableContentControl DataContext="{Binding }" PresentationType="Diagnostics"></vortex:RenderableContentControl>
+                <vortex:RenderableContentControl
+          DataContext="{Binding }"
+          PresentationType="Diagnostics"
+        />
 
             </ScrollViewer>
         </TabItem>
-        <TabItem DataContext="{Binding TcoElementsTestsPlc.MAIN}" Header="VariableTree">
+        <TabItem
+      DataContext="{Binding TcoElementsTestsPlc.MAIN}"
+      Header="VariableTree"
+    >
             <ScrollViewer>
-                <vortex:DynamicTreeView DataContext="{Binding}"></vortex:DynamicTreeView>
+                <vortex:DynamicTreeView DataContext="{Binding}" />
             </ScrollViewer>
         </TabItem>
         <TabItem DataContext="{Binding TcoElementsTestsPlc.IO}" Header="IO">
             <ScrollViewer>
-                <vortex:DynamicTreeView></vortex:DynamicTreeView>
+                <vortex:DynamicTreeView />
             </ScrollViewer>
         </TabItem>
-        <TabItem DataContext="{Binding TcoElementsTestsPlc}" Header="ComponentSpotView">
+        <TabItem
+      DataContext="{Binding TcoElementsTestsPlc}"
+      Header="ComponentSpotView"
+    >
             <Canvas>
-                <vortex:TcoComponentSpotView DataContext="{Binding MAIN._tcoElementsSandbox._di}" Canvas.Left="216" Canvas.Top="127"/>
+                <vortex:TcoComponentSpotView
+          DataContext="{Binding MAIN._tcoElementsSandbox._di}"
+          Canvas.Left="216"
+          Canvas.Top="127"
+        />
             </Canvas>
         </TabItem>
-       
+
     </TabControl>
 </Window>

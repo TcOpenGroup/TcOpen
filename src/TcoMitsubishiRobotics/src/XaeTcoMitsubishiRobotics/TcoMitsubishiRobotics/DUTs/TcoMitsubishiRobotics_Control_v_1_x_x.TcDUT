@@ -1,97 +1,68 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoMitsubishiRobotics_Control_v_1_x_x" Id="{a4b9a87d-81d2-0a65-37b7-800b619c3176}">
-    <Declaration><![CDATA[TYPE TcoMitsubishiRobotics_Control_v_1_x_x : 
-STRUCT	
-	
-	{attribute addProperty Name "<#Operation enablre (rights)#>"}
-	OperationEnable:BOOL;
-	{attribute addProperty Name "<#Automatic operation enabled#>"}
-	AutoEnable:BOOL;
-	{attribute addProperty Name "<#Start#>"}
-	Start:BOOL;	
-	{attribute addProperty Name "<#Stop#>"}
-	Stop:BOOL;
-	{attribute addProperty Name "<#Program reset#>"}
-	ProgramReset:BOOL;
-	{attribute addProperty Name "<#Error Reset#>"}
-	ErrorReset:BOOL;
-	{attribute addProperty Name "<#Cycle Stop#>"}
-	CycleStop:BOOL;	
-	{attribute addProperty Name "<#Servo Off#>"}
-	ServoOff:BOOL;
-	{attribute addProperty Name "<#Servo On#>"}
-	ServoOn:BOOL;	
-
-	{attribute addProperty Name "<#General Purpose reset#>"}
-	GeneralPurposeReset:BOOL;	
-	
-	
-	{attribute addProperty Name "<#Overide specification#>"}
-	OverideSpecifications:BOOL;	
-	
-	{attribute addProperty Name "<#Master mode#>"}
-	MasterMode : BYTE;
-	
-	{attribute addProperty Name "<#Tool 1 retract#>"}
-	Tool_1_Retract : BOOL;
-
-	{attribute addProperty Name "<#Tool 1 extend#>"}
-	Tool_1_Extend : BOOL;
-
-	{attribute addProperty Name "<#Tool 2 retract#>"}
-	Tool_2_Retract : BOOL;
-
-	{attribute addProperty Name "<#Tool 2 extend#>"}
-	Tool_2_Extend : BOOL;
-
-	{attribute addProperty Name "<#Tool 3 retract#>"}
-	Tool_3_Retract : BOOL;
-
-	{attribute addProperty Name "<#Tool 3 extend#>"}
-	Tool_3_Extend : BOOL;
-
-	{attribute addProperty Name "<#Tool 4 retract#>"}
-	Tool_4_Retract : BOOL;
-
-	{attribute addProperty Name "<#Tool 4 extend#>"}
-	Tool_4_Extend : BOOL;
-
-	{attribute addProperty Name "<#Zones#>"}
-	Zone : BYTE;
-
-	{attribute addProperty Name "<#In position#>"}
-	InPosition : BYTE;
-
-	{attribute addProperty Name "<#Action number#>"}
-	ActionNo : BYTE; 
-
-	{attribute addProperty Name "<#Global robot speed#>"}
-	GlobalSpeed : BYTE; 
-
-	{attribute addProperty Name "<#Tool number#>"}
-	ToolNo : BYTE; 	
-
-	{attribute addProperty Name "<#Workobject number#>"}
-	WorkobjectNo : BYTE; 
-
-	{attribute addProperty Name "<#Point number#>"}
-	PointNo : BYTE; 		
-
-	{attribute addProperty Name "<#User specific speed 1#>"}
-	UserSpecSpeed1 : REAL; 
-
-	{attribute addProperty Name "<#User specific speed 2#>"}
-	UserSpecSpeed2 : REAL; 
-
-	
-
-
-	{attribute  addProperty Name "<#Coordinates#>"}     
-	Coordinates : TcoAbstractions.TcoRoboticsCoordinates; 		
-	
+    <Declaration><![CDATA[TYPE TcoMitsubishiRobotics_Control_v_1_x_x : STRUCT
+    {attribute addProperty Name "<#Operation enablre (rights)#>"}
+    OperationEnable : BOOL;
+    {attribute addProperty Name "<#Automatic operation enabled#>"}
+    AutoEnable : BOOL;
+    {attribute addProperty Name "<#Start#>"}
+    Start : BOOL;
+    {attribute addProperty Name "<#Stop#>"}
+    Stop : BOOL;
+    {attribute addProperty Name "<#Program reset#>"}
+    ProgramReset : BOOL;
+    {attribute addProperty Name "<#Error Reset#>"}
+    ErrorReset : BOOL;
+    {attribute addProperty Name "<#Cycle Stop#>"}
+    CycleStop : BOOL;
+    {attribute addProperty Name "<#Servo Off#>"}
+    ServoOff : BOOL;
+    {attribute addProperty Name "<#Servo On#>"}
+    ServoOn : BOOL;
+    {attribute addProperty Name "<#General Purpose reset#>"}
+    GeneralPurposeReset : BOOL;
+    {attribute addProperty Name "<#Overide specification#>"}
+    OverideSpecifications : BOOL;
+    {attribute addProperty Name "<#Master mode#>"}
+    MasterMode : BYTE;
+    {attribute addProperty Name "<#Tool 1 retract#>"}
+    Tool_1_Retract : BOOL;
+    {attribute addProperty Name "<#Tool 1 extend#>"}
+    Tool_1_Extend : BOOL;
+    {attribute addProperty Name "<#Tool 2 retract#>"}
+    Tool_2_Retract : BOOL;
+    {attribute addProperty Name "<#Tool 2 extend#>"}
+    Tool_2_Extend : BOOL;
+    {attribute addProperty Name "<#Tool 3 retract#>"}
+    Tool_3_Retract : BOOL;
+    {attribute addProperty Name "<#Tool 3 extend#>"}
+    Tool_3_Extend : BOOL;
+    {attribute addProperty Name "<#Tool 4 retract#>"}
+    Tool_4_Retract : BOOL;
+    {attribute addProperty Name "<#Tool 4 extend#>"}
+    Tool_4_Extend : BOOL;
+    {attribute addProperty Name "<#Zones#>"}
+    Zone : BYTE;
+    {attribute addProperty Name "<#In position#>"}
+    InPosition : BYTE;
+    {attribute addProperty Name "<#Action number#>"}
+    ActionNo : BYTE;
+    {attribute addProperty Name "<#Global robot speed#>"}
+    GlobalSpeed : BYTE;
+    {attribute addProperty Name "<#Tool number#>"}
+    ToolNo : BYTE;
+    {attribute addProperty Name "<#Workobject number#>"}
+    WorkobjectNo : BYTE;
+    {attribute addProperty Name "<#Point number#>"}
+    PointNo : BYTE;
+    {attribute addProperty Name "<#User specific speed 1#>"}
+    UserSpecSpeed1 : REAL;
+    {attribute addProperty Name "<#User specific speed 2#>"}
+    UserSpecSpeed2 : REAL;
+    {attribute  addProperty Name "<#Coordinates#>"}
+    Coordinates : TcoAbstractions.TcoRoboticsCoordinates;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

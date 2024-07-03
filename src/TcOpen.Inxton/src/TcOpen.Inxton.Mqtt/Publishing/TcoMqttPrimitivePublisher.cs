@@ -7,13 +7,10 @@ namespace TcOpen.Inxton.Mqtt
     {
         public ValueChangedEventHandlerDelegate PrimitiveSubscribeDelegate { get; set; }
 
-        public TcoMqttPrimitivePublisher(IMqttClient Client) : base(Client)
-        {
-        }
+        public TcoMqttPrimitivePublisher(IMqttClient Client)
+            : base(Client) { }
 
-        public TcoMqttPrimitivePublisher(IMqttClient Client, IPayloadSerializer<T> Serializer) : base(Client, Serializer)
-        {
-        }
+        public TcoMqttPrimitivePublisher(IMqttClient Client, IPayloadSerializer<T> Serializer)
+            : base(Client, Serializer) { }
     }
-
 }

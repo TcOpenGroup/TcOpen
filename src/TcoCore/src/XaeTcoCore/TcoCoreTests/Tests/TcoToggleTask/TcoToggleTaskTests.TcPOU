@@ -3,31 +3,29 @@
   <POU Name="TcoToggleTaskTests" Id="{772d1beb-fd7c-03c3-2489-a6c5d7a9708c}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoToggleTaskTests EXTENDS TcoCore.TcoToggleTask
 VAR
-	_isOn							:	BOOL;	
-	_isOff							:	BOOL;	
-	_isEnabled						:	BOOL;	
-	_isToggleRequestTrue			:	BOOL;		
-	_counterValue					:	ULINT;
-	_counterValuePV					:	ULINT;
-	_toggleCounter					:	ULINT;
-	_runCounter						:	ULINT;
-	_onFtrigCounter					:	ULINT;	
-	_onRtrigCounter					:	ULINT;	
-	_onCounter						:	ULINT;
-	_offCounter						:	ULINT;
-	_onStateChangeCounter			:	ULINT;
-	_taskOnCounter					:	ULINT;
-	_taskOffCounter					:	ULINT;
-	_stateChangedCounter			:	ULINT;
-
-	_previousState					:	BOOL;
-	_myIdentity						:	ULINT;
-	_myContextIdentity				:	ULINT;
-	_myContextStartCount 			:	ULINT;
-	_myContextEndCount				:	ULINT;	
-	_myParentIdentity				:	ULINT;
-END_VAR
-]]></Declaration>
+    _isOn : BOOL;
+    _isOff : BOOL;
+    _isEnabled : BOOL;
+    _isToggleRequestTrue : BOOL;
+    _counterValue : ULINT;
+    _counterValuePV : ULINT;
+    _toggleCounter : ULINT;
+    _runCounter : ULINT;
+    _onFtrigCounter : ULINT;
+    _onRtrigCounter : ULINT;
+    _onCounter : ULINT;
+    _offCounter : ULINT;
+    _onStateChangeCounter : ULINT;
+    _taskOnCounter : ULINT;
+    _taskOffCounter : ULINT;
+    _stateChangedCounter : ULINT;
+    _previousState : BOOL;
+    _myIdentity : ULINT;
+    _myContextIdentity : ULINT;
+    _myContextStartCount : ULINT;
+    _myContextEndCount : ULINT;
+    _myParentIdentity : ULINT;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[ExecutionBody();]]></ST>
     </Implementation>
@@ -48,14 +46,13 @@ END_VAR
 METHOD INTERNAL ExecutionBody]]></Declaration>
       <Implementation>
         <ST><![CDATA[Run();
-
-_runCounter := _runCounter + 1;	
+_runCounter := _runCounter + 1;
 
 IF _previousState <> THIS^.State THEN
-	_stateChangedCounter := _stateChangedCounter + 1;
-END_IF; 
-_previousState	:=	THIS^.State;
-]]></ST>
+    _stateChangedCounter := _stateChangedCounter + 1;
+END_IF;
+
+_previousState := THIS^.State;]]></ST>
       </Implementation>
     </Method>
     <Method Name="GetMessage" Id="{e7526a03-c3c0-0e86-2c05-862603a5c6c5}">
@@ -68,51 +65,46 @@ METHOD INTERNAL GetMessage : STRING]]></Declaration>
     <Method Name="Main" Id="{244a78f8-0b46-0493-2393-a6c8a05c4da0}">
       <Declaration><![CDATA[METHOD PROTECTED Main
 VAR
-	
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnFtrig" Id="{81f92352-91b8-0d38-1074-6f2338d59118}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when toggle task changes its state from '''TRUE''' to '''FALSE'''.
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when toggle task changes its state from '''TRUE''' to '''FALSE'''.
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnFtrig
-]]></Declaration>
+METHOD PROTECTED OnFtrig]]></Declaration>
       <Implementation>
         <ST><![CDATA[_onFtrigCounter := _onFtrigCounter + 1;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnRtrig" Id="{75c359b2-0c9e-0c8b-05e1-282cf5bcb466}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when toggle task changes its state from '''FALSE''' to '''TRUE'''.
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when toggle task changes its state from '''FALSE''' to '''TRUE'''.
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnRtrig
-]]></Declaration>
+METHOD PROTECTED OnRtrig]]></Declaration>
       <Implementation>
         <ST><![CDATA[_onRtrigCounter := _onRtrigCounter + 1;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStateChange" Id="{7374d645-e61b-0291-1c70-20fd2c77b62a}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when toggle task changes its state .
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when toggle task changes its state .
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnStateChange
-]]></Declaration>
+METHOD PROTECTED OnStateChange]]></Declaration>
       <Implementation>
         <ST><![CDATA[_onStateChangeCounter := _onStateChangeCounter + 1;]]></ST>
       </Implementation>
@@ -121,45 +113,38 @@ METHOD PROTECTED OnStateChange
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL PostMessage
 VAR_INPUT
-	Message	:	STRING;
+    Message : STRING;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.Messenger.Post(Message ,eMessageCategory.Error);]]></ST>
+        <ST><![CDATA[THIS^.Messenger.Post(Message, eMessageCategory.Error);]]></ST>
       </Implementation>
     </Method>
     <Method Name="ReadOutIdentities" Id="{d29521d2-6f84-0538-2f15-11e2cb62edda}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL ReadOutIdentities]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_myIdentity			:=	THIS^.Identity;
- 
-_myContextIdentity	:=	THIS^.Context.Identity;
-		
-_myContextStartCount :=	THIS^.Context.StartCycleCount;
- 
-_myContextEndCount	:=	THIS^.Context.EndCycleCount;
- 
-_myParentIdentity	:=	THIS^.Parent.Identity;
-
-]]></ST>
+        <ST><![CDATA[_myIdentity := THIS^.Identity;
+_myContextIdentity := THIS^.Context.Identity;
+_myContextStartCount := THIS^.Context.StartCycleCount;
+_myContextEndCount := THIS^.Context.EndCycleCount;
+_myParentIdentity := THIS^.Parent.Identity;]]></ST>
       </Implementation>
     </Method>
     <Method Name="ReadOutState" Id="{08e54675-4b27-0c1a-21b6-6bada9936a11}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL ReadOutState]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_isOn				    :=	THIS^.IsOn;	
-_isOff				   	:=	THIS^.IsOff;	
-_isEnabled				:=	THIS^.Enabled;
-_isToggleRequestTrue	:=	THIS^._toggleRequest;
-]]></ST>
+        <ST><![CDATA[_isOn := THIS^.IsOn;
+_isOff := THIS^.IsOff;
+_isEnabled := THIS^.Enabled;
+_isToggleRequestTrue := THIS^._toggleRequest;]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetPreviousState" Id="{dd0bedf4-4080-099f-0411-61a004a324a0}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL SetPreviousState
 VAR_INPUT
-	inValue : BOOL;
+    inValue : BOOL;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^._previousState := inValue;]]></ST>
@@ -169,7 +154,7 @@ END_VAR]]></Declaration>
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL SetState
 VAR_INPUT
-	inState	:	BOOL;
+    inState : BOOL;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^._state := inState;]]></ST>
@@ -184,38 +169,32 @@ METHOD INTERNAL SetToggleRequest]]></Declaration>
     </Method>
     <Method Name="TaskOff" Id="{7c9900ff-df50-0145-2e9c-02b73c53bfbb}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when toggle task is in ```Off``` state .
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when toggle task is in ```Off``` state .
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED TaskOff
-]]></Declaration>
+METHOD PROTECTED TaskOff]]></Declaration>
       <Implementation>
         <ST><![CDATA[_taskOffCounter := _taskOffCounter + 1;
-
 _counterValue := _counterValue - 1;
-_CounterValuePV := _counterValue;
-]]></ST>
+_CounterValuePV := _counterValue;]]></ST>
       </Implementation>
     </Method>
     <Method Name="TaskOn" Id="{7b97312c-442f-0516-281c-cfac93831dd7}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when toggle task is in  ```On``` state .
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when toggle task is in  ```On``` state .
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED TaskOn
-]]></Declaration>
+METHOD PROTECTED TaskOn]]></Declaration>
       <Implementation>
         <ST><![CDATA[_taskOnCounter := _taskOnCounter + 1;
-
 _counterValue := _counterValue + 1;
-_CounterValuePV := _counterValue;
-]]></ST>
+_CounterValuePV := _counterValue;]]></ST>
       </Implementation>
     </Method>
     <Method Name="TriggerOff" Id="{c9e02822-ae4f-075b-0744-a39394f45bb6}">

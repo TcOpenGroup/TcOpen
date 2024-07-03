@@ -6,20 +6,18 @@
 {attribute addProperty Id "SlaveCountAT %I*UINT2DevStateAT %I*UINT2Frm0StateAT %I*UINT2Frm0WcStateAT %I*UINT2Frm0InputToggleAT %I*UINT2"}
 {attribute addProperty CRC "2791287972"}
 {attribute addProperty Size "10"}
-TYPE Inputs_A65FACA4 :
-STRUCT
-	{attribute addProperty Name "SlaveCount"}
-	SlaveCount AT %I* : UINT;
-	{attribute addProperty Name "DevState"}
-	DevState AT %I* : UINT;
-	{attribute addProperty Name "Frm0State"}
-	Frm0State AT %I* : UINT;
-	{attribute addProperty Name "Frm0WcState"}
-	Frm0WcState AT %I* : UINT;
-	{attribute addProperty Name "Frm0InputToggle"}
-	Frm0InputToggle AT %I* : UINT;
+TYPE Inputs_A65FACA4 : STRUCT
+    {attribute addProperty Name "SlaveCount"}
+    SlaveCount AT %I* : UINT;
+    {attribute addProperty Name "DevState"}
+    DevState AT %I* : UINT;
+    {attribute addProperty Name "Frm0State"}
+    Frm0State AT %I* : UINT;
+    {attribute addProperty Name "Frm0WcState"}
+    Frm0WcState AT %I* : UINT;
+    {attribute addProperty Name "Frm0InputToggle"}
+    Frm0InputToggle AT %I* : UINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

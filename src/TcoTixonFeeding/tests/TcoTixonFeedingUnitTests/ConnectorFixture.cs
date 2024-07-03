@@ -24,15 +24,18 @@ namespace TcoTixonFeedingUnitTests
                 }
                 return _connector;
             }
-
         }
 
         public static void StartConnector()
         {
-            var adapter = Vortex.Adapters.Connector.Tc3.Adapter.Tc3ConnectorAdapter.Create(TestSetupFixture.TargetAmsId, TestSetupFixture.TargetAmsPort, true);
+            var adapter = Vortex.Adapters.Connector.Tc3.Adapter.Tc3ConnectorAdapter.Create(
+                TestSetupFixture.TargetAmsId,
+                TestSetupFixture.TargetAmsPort,
+                true
+            );
             _connector = new TcoTixonFeedingTests.TcoTixonFeedingTestsTwinController(adapter);
             _connector.Connector.ReadWriteCycleDelay = 100;
-            _connector.Connector.BuildAndStart();                        
+            _connector.Connector.BuildAndStart();
         }
     }
 }

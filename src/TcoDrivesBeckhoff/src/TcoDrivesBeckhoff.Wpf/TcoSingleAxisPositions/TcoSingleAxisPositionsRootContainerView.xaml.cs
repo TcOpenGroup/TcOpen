@@ -17,7 +17,6 @@ using System.Windows.Shapes;
 
 namespace TcoDrivesBeckhoff
 {
-
     public partial class TcoSingleAxisPositionsRootContainerView : UserControl
     {
         public TcoSingleAxisPositionsRootContainerView()
@@ -25,6 +24,4 @@ namespace TcoDrivesBeckhoff
             InitializeComponent();
         }
     }
-    
-
 }

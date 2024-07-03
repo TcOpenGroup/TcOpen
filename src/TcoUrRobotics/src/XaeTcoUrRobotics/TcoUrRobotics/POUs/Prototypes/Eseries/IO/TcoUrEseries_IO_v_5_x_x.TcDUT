@@ -1,17 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoUrEseries_IO_v_5_x_x" Id="{4c851940-ef1d-0a11-32ea-0de9b12b8434}">
-    <Declaration><![CDATA[TYPE TcoUrEseries_IO_v_5_x_x :
-STRUCT
-	PnIoBoxState AT %I*	:	UINT;
-	PnIoBoxDiag AT %I*	:	UINT;
-	PnIoBoxCtrl AT %Q*	:	UINT;
-	{attribute addProperty Name "<#IN#>"}
-	In : TcoUrEseries_Inputs_v_5_x_x;
-	{attribute addProperty Name "<#OUT#>"}
-	Out : TcoUrEseries_Outputs_v_5_x_x;
+    <Declaration><![CDATA[TYPE TcoUrEseries_IO_v_5_x_x : STRUCT
+    PnIoBoxState AT %I* : UINT;
+    PnIoBoxDiag AT %I* : UINT;
+    PnIoBoxCtrl AT %Q* : UINT;
+    {attribute addProperty Name "<#IN#>"}
+    In : TcoUrEseries_Inputs_v_5_x_x;
+    {attribute addProperty Name "<#OUT#>"}
+    Out : TcoUrEseries_Outputs_v_5_x_x;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

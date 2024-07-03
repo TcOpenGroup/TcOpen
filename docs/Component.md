@@ -1,6 +1,6 @@
 # Components
 
-This document describes the format and practices for writing components in TcOpen. These are universal rules to observe. Each rule knows exception when there is a reasonable argument behind it. 
+This document describes the format and practices for writing components in TcOpen. These are universal rules to observe. Each rule knows exception when there is a reasonable argument behind it.
 
 ## General rules
 
@@ -10,7 +10,6 @@ This document describes the format and practices for writing components in TcOpe
 - Components accept I/O variables via `FB_body` parameter transfer (`INPUT`, `OUTPUT`, `VAR_IN_OUT`).
 - All `VAR_IN_OUT` or `REFERENCE TO` parameters, whenever used in methods or properties, must be checked for the valid reference with `__ISVALIDREFENCE`.
 - The `FB_body` must be called before any other call that uses the component.
-
 
 #### I/O variables naming
 
@@ -23,9 +22,9 @@ The TcOpen does not use Hungarian prefixes, with few exceptions. FB_body paramet
 - Config structure can contain arbitrary data relative to the configuration of the component (timeouts, parameters, etc.).
 - Config type must be STRUCT.
 - Config data structure must be named in the following format `{ComponentName}Config` (e.g. `TcoCylinderConfig`)
-- Config structure must be accessible via `Config` property that returns `REFERENCE TO {ComponentName}Config`.  - The backing field of the Config property must be named `_config` (for easy identification in the higher-level applications).
+- Config structure must be accessible via `Config` property that returns `REFERENCE TO {ComponentName}Config`. - The backing field of the Config property must be named `_config` (for easy identification in the higher-level applications).
 - Config structure can contain multiple nested and complex structures when it is necessary to organize better the information. Nested structures must be STRUCTs and must be named in the following format `{ComponentName}Config{Specifier}`.
-- Wherever possible the data must be initialized to default values (e.g., timeouts, speeds etc.). The default settings should not prevent the component from functioning unless there is a specific requirement to provide parameters relative to the component model or a particular hardware configuration (drive model, gearing ratio, etc.).  
+- Wherever possible the data must be initialized to default values (e.g., timeouts, speeds etc.). The default settings should not prevent the component from functioning unless there is a specific requirement to provide parameters relative to the component model or a particular hardware configuration (drive model, gearing ratio, etc.).
 - Each data member of the Config structure must be documented in the code, with an example. Whenever possible, a link to more detailed documentation must also be provided in the in-code documentation.
 - Property `Config` can be mutable (can have setter) when it is expected an external provision of configuration at runtime.
 
@@ -34,14 +33,14 @@ The TcOpen does not use Hungarian prefixes, with few exceptions. FB_body paramet
 - Status structure can contain arbitrary data relative to the state of the component.
 - Status type must be STRUCT.
 - Status data structure must be named in the following format `{ComponentName}Status` (e.g. `TcoCylinderStatus`)
-- Config structure must be accessible via `Status` property that returns `REFERENCE TO {ComponentName}Status`.  - The backing field of the Status property must be named `_status` (for easy identification in the higher-level applications).
-- Status structure can contain multiple nested and complex structures when it is necessary to organize the information. Nested structures must be STRUCTs and must be named in the following format `{ComponentName}State{Specifier}`.  
+- Config structure must be accessible via `Status` property that returns `REFERENCE TO {ComponentName}Status`. - The backing field of the Status property must be named `_status` (for easy identification in the higher-level applications).
+- Status structure can contain multiple nested and complex structures when it is necessary to organize the information. Nested structures must be STRUCTs and must be named in the following format `{ComponentName}State{Specifier}`.
 - Each data member of the Config structure must be documented in the code, with an example. Whenever possible, a link to more detailed documentation must also be provided in the in-code documentation.
 - Property `Status` must be immutable (cannot have setter).
 
 ### Operations
 
-Operations are methods that execute tasks of the component. All operations must be placed  into `Operations` folder of the component. Each operation method must return `ITcoTaskStatus` that is typically an `ITcoTask` implementation. Operation name typically starts with a descriptive verb that explains the operation (e.g., MoveHome, MoveRelative, etc.).
+Operations are methods that execute tasks of the component. All operations must be placed into `Operations` folder of the component. Each operation method must return `ITcoTaskStatus` that is typically an `ITcoTask` implementation. Operation name typically starts with a descriptive verb that explains the operation (e.g., MoveHome, MoveRelative, etc.).
 
 ### Tasks
 
@@ -67,9 +66,10 @@ Each component must inherit from `TcoCore.TcoComponent`, which is an abstract bl
 ## Example implementation
 
 ### Pneumatic cyclinder
+
 ![example-cyclinder-structure](example_cyclinder.PNG)
 
-~~~iecst
+```iecst
 // Each component must be extended by TcoCore.TcoComponent.
 ~~~iecst
 FUNCTION_BLOCK ExampleCylinder EXTENDS TcoCore.TcoComponent
@@ -108,18 +108,17 @@ VAR_IN_OUT
 		<docu>
 			<summary>
 				Move to working position signal.
-			</summary>	
+			</summary>
 		</docu>
 	~*)
 	{attribute addProperty Name "<#Move to work position actuator#>"}
 	inoToWorkPos : BOOL;
 END_VAR
-~~~
+```
 
-
-~~~iecst
+```iecst
 // Declatation of `Signal interceptors`
-VAR    
+VAR
 	_atHomePosSignalInfo : TcoCore.TcoSignalInfo;
     _atWorkPosSignalInfo : TcoCore.TcoSignalInfo;
     _toHomePosSignalInfo : TcoCore.TcoSignalInfo;
@@ -141,9 +140,9 @@ VAR
     _config : TcoCylinderConfig;
 	_status : TcoCylinderStatus;
 END_VAR
-~~~
+```
 
-~~~iecst
+```iecst
 // Updates I/O
 UpdateIO();
 
@@ -156,7 +155,7 @@ UpdateIO();
     the same code twice but encapsulate it into derived task.
 
     Second implmentation of `Stop` task is simplified use of TcoTask, where we just enclose the logic
-    of the task into `IF` statement. When Execute() method returns `true` we run the logic in the 
+    of the task into `IF` statement. When Execute() method returns `true` we run the logic in the
     statement. Execute() method is fired by Invoke() method of the same task.
 
     Additionaly you can disable a taks when there are mutually exclusive action that cannot be performed at the same time.
@@ -173,7 +172,7 @@ _moveHomeDefault(PositionSensor := _atHomePos,
 
 // Disables mutually exclusive actions
 _moveHomeDefault.Enabled := NOT _moveWorkDefault.Busy;
-	
+
 _moveWorkDefault(PositionSensor := _atWorkPos,
     MoveToPositionSignal := _toWorkPos,
     InverseSignal := _toHomePos,
@@ -200,45 +199,42 @@ ELSIF(_moveWorkDefault.Busy) THEN
 	_status.ActionDescription := 'Moving to work position';
 ELSIF(_stopDefault.Busy) THEN
 	_status.ActionDescription := 'Stopping pressure';
-ELSE	
+ELSE
 	_status.ActionDescription := 'Idle';
 END_IF
 
 UpdateIO();
-~~~
-
+```
 
 // Method that expose the execution of a task. Task can be executed in fire-and-forget way or we can wait for `TcoCore.ITcoTaskStatus.Done` for the task to end.
-~~~iecst
+
+```iecst
 (*~
 	<docu>
 		<summary>
-			Starts movement into home position. 		
-		</summary>			
-	</docu>	
+			Starts movement into home position.
+		</summary>
+	</docu>
 ~*)
 METHOD MoveToHome : TcoCore.ITcoTaskStatus
 //---------------------------------------------
-IF(MoveHomeTask <> 0) THEN 
+IF(MoveHomeTask <> 0) THEN
 	MoveToHome := MoveHomeTask.Invoke();
-END_IF;	
-~~~
-
+END_IF;
+```
 
 You may notice that the I/O variables are passed as an IN_OUT, in this example. In order to avoid the need to check the validity of the references in various places in the component we have a backing variable. This variable is used inside the component and it is always valid since it is the 'value variable' and not a reference. In the following method we do two things. First we update backing variables when the IN_OUT variable is valid; we also intercept what I/O varible is being passed into the component. Although intercepting finds its use in more advanced scenarios, it can be used in the most basic setup, when the I/O varibles copy the structure/topology of physical hardware, the specific I/O terminal-pin can identified from the HMI or other higher level programs.
 
-~~~iecst
+```iecst
 METHOD PRIVATE UpdateIO
 //----------------------------------------------------------------------------------------------------------------
 IF(__ISVALIDREF(inoAtHomePos)) THEN _atHomePos := inoAtHomePos; _atHomePosSignalInfo := THIS^.GetSignalInfo(SIZEOF(inoAtHomePos), ADR(inoAtHomePos)); END_IF;
 IF(__ISVALIDREF(inoAtWorkPos)) THEN _atWorkPos := inoAtWorkPos; _atWorkPosSignalInfo := THIS^.GetSignalInfo(SIZEOF(inoAtWorkPos), ADR(inoAtWorkPos)); END_IF;
 IF(__ISVALIDREF(inoToHomePos)) THEN inoToHomePos := _toHomePos; _toHomePosSignalInfo := THIS^.GetSignalInfo(SIZEOF(inoToHomePos), ADR(inoToHomePos)); END_IF;
 IF(__ISVALIDREF(inoToWorkPos)) THEN inoToWorkPos := _toWorkPos; _toWorkPosSignalInfo := THIS^.GetSignalInfo(SIZEOF(inoToWorkPos), ADR(inoToWorkPos)); END_IF;
-~~~
+```
 
-
-
-~~~iecst
+```iecst
 FUNCTION_BLOCK ExampleCylinderContext EXTENDS TcoCore.TcoContext
 VAR
 	_exampleCylinder : ExampleCylinder(THIS^);
@@ -251,7 +247,7 @@ END_VAR
 (*~
 	<docu>
 		<summary>
-			Main method of the TcoContext. This is the entry point of any control logic that belongs to this context. 
+			Main method of the TcoContext. This is the entry point of any control logic that belongs to this context.
 			The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
 			This method is abstract, and it must be overridden in derived block.
 		</summary>
@@ -264,12 +260,12 @@ VAR_INST
 END_VAR
 //------------------------------------------------------------------
 _exampleCylinder(
-	inoAtHomePos:= _atHome, 
-	inoAtWorkPos:= _atWork, 
-	inoToHomePos:= _toHome, 
+	inoAtHomePos:= _atHome,
+	inoAtWorkPos:= _atWork,
+	inoToHomePos:= _toHome,
 	inoToWorkPos:= _toWork);
-	
-	
+
+
 CASE _state OF
 	0:
 		IF(_exampleCylinder.MoveToHome().Done) THEN
@@ -280,4 +276,4 @@ CASE _state OF
 			_state := 0;
 		END_IF
 END_CASE
-~~~		
+```

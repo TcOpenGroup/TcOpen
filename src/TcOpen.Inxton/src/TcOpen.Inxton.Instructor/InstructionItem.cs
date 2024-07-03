@@ -5,7 +5,6 @@ namespace TcOpen.Inxton.Instructor
 {
     public class InstructionItem : INotifyPropertyChanged
     {
-
         string key;
 
         /// <summary>
@@ -13,10 +12,7 @@ namespace TcOpen.Inxton.Instructor
         /// </summary>
         public string Key
         {
-            get
-            {
-                return key;
-            }
+            get { return key; }
             set
             {
                 if (key == value)
@@ -36,10 +32,7 @@ namespace TcOpen.Inxton.Instructor
         /// </summary>
         public string Description
         {
-            get
-            {
-                return description;
-            }
+            get { return description; }
             set
             {
                 if (description == value)
@@ -59,10 +52,7 @@ namespace TcOpen.Inxton.Instructor
         /// </summary>
         public string ContentSource
         {
-            get
-            {
-                return contentSource;
-            }
+            get { return contentSource; }
             set
             {
                 if (contentSource == value)
@@ -74,6 +64,7 @@ namespace TcOpen.Inxton.Instructor
                 NotifyPropertyChange(nameof(ContentSource));
             }
         }
+
         /// <summary>
         /// Step HMI message
         /// </summary>
@@ -83,10 +74,7 @@ namespace TcOpen.Inxton.Instructor
 
         public enumInstructionItemStatus Status
         {
-            get
-            {
-                return status;
-            }
+            get { return status; }
             set
             {
                 if (status == value)
@@ -99,14 +87,11 @@ namespace TcOpen.Inxton.Instructor
             }
         }
 
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void NotifyPropertyChange(string propertyName)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-
     }
 }

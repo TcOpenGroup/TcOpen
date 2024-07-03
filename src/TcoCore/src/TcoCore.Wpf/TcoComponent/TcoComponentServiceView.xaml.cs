@@ -26,6 +26,4 @@ namespace TcoCore
             InitializeComponent();
         }
     }
-
-   
 }

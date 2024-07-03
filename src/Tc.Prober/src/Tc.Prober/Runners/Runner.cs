@@ -1,16 +1,16 @@
 ﻿namespace Tc.Prober.Recorder
 {
-    using System;    
+    using System;
     using System.Diagnostics;
-    using System.IO;    
-    using System.Runtime.CompilerServices;    
+    using System.IO;
+    using System.Runtime.CompilerServices;
     using Vortex.Connector;
 
     /// <summary>
     /// Series of extension methods that are able to run the test with recording ability.
     /// </summary>
     public static class Runner
-    {       
+    {
         /// <summary>
         /// Gets or sets the directory where the recodings are strored.
         /// </summary>
@@ -39,13 +39,12 @@
         {
             return Path.Combine(RecordingsShell, $"{CallerMethodName(level)}.json");
         }
-    
 
         private static string GetAutoName()
         {
             return Path.Combine(RecordingsShell, $"{CallerMethodName(3)}.json");
         }
-        
+
         /// <summary>
         /// Runs test with recording/replaying.
         /// </summary>
@@ -58,16 +57,16 @@
         /// <param name="recorder">Instance of the recorder/player.</param>
         /// <param name="recordingFileName">Name of the recording file</param>
         /// <returns>Last result of the <see cref="action"/></returns>
-        public static T Run<T>(this IVortexElement sut, 
-                                   Func<T> action,
-                                   Func<bool> done,                                   
-                                   Action openCycle = null,
-                                   Action closeCycle = null,                                   
-                                   IRecorder recorder = null,
-                                   string recordingFileName = null
-                                   )
-                            
-        {                               
+        public static T Run<T>(
+            this IVortexElement sut,
+            Func<T> action,
+            Func<bool> done,
+            Action openCycle = null,
+            Action closeCycle = null,
+            IRecorder recorder = null,
+            string recordingFileName = null
+        )
+        {
             T retVal = default(T);
 
             recorder?.Begin(recordingFileName);
@@ -87,7 +86,5 @@
 
             return retVal;
         }
-
-        
     }
 }

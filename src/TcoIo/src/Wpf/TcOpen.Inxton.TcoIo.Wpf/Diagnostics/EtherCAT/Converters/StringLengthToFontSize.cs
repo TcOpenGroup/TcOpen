@@ -15,7 +15,10 @@ namespace TcoIo.Converters
             TextBlock origTextBlock = value as TextBlock;
             TextBlock defTextBlock = new TextBlock();
             string sWidthFromParameter = parameter?.ToString();
-            bool parameterIsNumber = double.TryParse(sWidthFromParameter, out double widthFromParameter);
+            bool parameterIsNumber = double.TryParse(
+                sWidthFromParameter,
+                out double widthFromParameter
+            );
             bool maxWidthIsNumber = false;
             double widthFromMaxWidth = 0;
             if (!parameterIsNumber || widthFromParameter <= 0)
@@ -30,7 +33,7 @@ namespace TcoIo.Converters
                 widthDefined = true;
                 width = widthFromParameter;
             }
-            else if(maxWidthIsNumber && widthFromMaxWidth > 0)
+            else if (maxWidthIsNumber && widthFromMaxWidth > 0)
             {
                 widthDefined = true;
                 width = widthFromMaxWidth;
@@ -39,8 +42,8 @@ namespace TcoIo.Converters
             {
                 double origFontSize = origTextBlock.FontSize;
                 Size size = MeasureString(origTextBlock);
-                
-                if (size.Width> width)
+
+                if (size.Width > width)
                 {
                     double fontSize = width / size.Width * origFontSize;
                     //just to check the final dims after font change during debug
@@ -60,10 +63,17 @@ namespace TcoIo.Converters
                 return defTextBlock.FontSize;
             }
         }
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }
+
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
             return this;
@@ -71,16 +81,21 @@ namespace TcoIo.Converters
 
         private Size MeasureString(TextBlock textBlock)
         {
-
             var formattedText = new FormattedText(
                 textBlock.Text,
                 CultureInfo.CurrentCulture,
                 FlowDirection.LeftToRight,
-                new Typeface(textBlock.FontFamily, textBlock.FontStyle, textBlock.FontWeight, textBlock.FontStretch),
+                new Typeface(
+                    textBlock.FontFamily,
+                    textBlock.FontStyle,
+                    textBlock.FontWeight,
+                    textBlock.FontStretch
+                ),
                 textBlock.FontSize,
                 Brushes.Black,
                 new NumberSubstitution(),
-                1);
+                1
+            );
 
             return new Size(formattedText.Width, formattedText.Height);
         }

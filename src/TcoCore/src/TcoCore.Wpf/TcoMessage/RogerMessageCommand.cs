@@ -5,7 +5,10 @@
     using System.Windows.Input;
     using System.Windows.Markup;
 
-    public class RogerMessageCommand : MarkupExtension, ICommand, TcOpen.Inxton.Abstractions.Input.ITcoCommand
+    public class RogerMessageCommand
+        : MarkupExtension,
+            ICommand,
+            TcOpen.Inxton.Abstractions.Input.ITcoCommand
     {
         public RogerMessageCommand(TcoMessage message)
         {
@@ -25,8 +28,8 @@
 
         public void Execute(object parameter)
         {
-            if(_message != null)
-            { 
+            if (_message != null)
+            {
                 _message.Pinned.Cyclic = false;
             }
         }

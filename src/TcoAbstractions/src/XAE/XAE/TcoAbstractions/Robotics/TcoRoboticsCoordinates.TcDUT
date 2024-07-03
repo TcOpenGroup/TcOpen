@@ -1,22 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoRoboticsCoordinates" Id="{159a1772-c202-4c6a-86fc-cc6cc9f7cdce}">
-    <Declaration><![CDATA[TYPE TcoRoboticsCoordinates :
-STRUCT
-	{attribute  addProperty Name "<#Coordinate X#>"}     
-	X : REAL;
-	{attribute  addProperty Name "<#Coordinate Y#>"}     
-	Y : REAL;
-	{attribute  addProperty Name "<#Coordinate Z#>"}     
-	Z : REAL;
-	{attribute  addProperty Name "<#Coordinate Rx#>"}     
-	Rx : REAL;
-	{attribute  addProperty Name "<#Coordinate Ry#>"}     
-	Ry : REAL;
-	{attribute  addProperty Name "<#Coordinate Rz#>"}     
-	Rz : REAL;	
+    <Declaration><![CDATA[TYPE TcoRoboticsCoordinates : STRUCT
+    {attribute  addProperty Name "<#Coordinate X#>"}
+    X : REAL;
+    {attribute  addProperty Name "<#Coordinate Y#>"}
+    Y : REAL;
+    {attribute  addProperty Name "<#Coordinate Z#>"}
+    Z : REAL;
+    {attribute  addProperty Name "<#Coordinate Rx#>"}
+    Rx : REAL;
+    {attribute  addProperty Name "<#Coordinate Ry#>"}
+    Ry : REAL;
+    {attribute  addProperty Name "<#Coordinate Rz#>"}
+    Rz : REAL;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

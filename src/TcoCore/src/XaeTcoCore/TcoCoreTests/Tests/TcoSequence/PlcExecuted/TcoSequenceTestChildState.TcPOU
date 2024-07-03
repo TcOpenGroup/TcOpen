@@ -3,35 +3,33 @@
   <POU Name="TcoSequenceTestChildState" Id="{c732740a-c3d3-0a45-32ab-d6759ebf7cd7}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoSequenceTestChildState EXTENDS TcoCore.TcoState
 VAR
-	_requestedState : UINT;
-	_requestedStateCount :ULINT;
-	_restoreCount :ULINT;
-END_VAR
-]]></Declaration>
+    _requestedState : UINT;
+    _requestedStateCount : ULINT;
+    _restoreCount : ULINT;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="OnStateChange" Id="{20cacacd-9b7f-0c6f-262e-75334e647cb0}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			This method is called on each change of the <c>State</c>. This method could be overloaded and custom code should be placed here.	
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            This method is called on each change of the <c>State</c>. This method could be overloaded and custom code should be placed here.
+        </summary>
+    </docu>
 ~*)
 METHOD PROTECTED OnStateChange
 VAR_INPUT
-	PreviousState	: INT;
-	NewState 		: INT;
-END_VAR
-]]></Declaration>
+    PreviousState : INT;
+    NewState : INT;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NewState =  _requestedState THEN
-	_requestedStateCount := _requestedStateCount + 1;
+        <ST><![CDATA[IF NewState = _requestedState THEN
+    _requestedStateCount := _requestedStateCount + 1;
 END_IF
 
-IF NewState =  -1 THEN
-	_restoreCount := _restoreCount + 1;
+IF NewState = -1 THEN
+    _restoreCount := _restoreCount + 1;
 END_IF]]></ST>
       </Implementation>
     </Method>

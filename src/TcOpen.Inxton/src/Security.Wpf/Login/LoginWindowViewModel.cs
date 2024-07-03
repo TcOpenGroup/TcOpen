@@ -1,7 +1,7 @@
-﻿using Microsoft.Xaml.Behaviors;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Xaml.Behaviors;
 using TcOpen.Inxton.Input;
 using Vortex.Presentation;
 
@@ -11,7 +11,7 @@ namespace TcOpen.Inxton.Local.Security.Wpf
     {
         public LoginWindowViewModel()
         {
-            if(System.ComponentModel.DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+            if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(new DependencyObject()))
             {
                 SecurityManager.CreateDefault();
             }
@@ -20,26 +20,64 @@ namespace TcOpen.Inxton.Local.Security.Wpf
             LogoutCommand = new RelayCommand(a => Logout());
             CancelCommand = new RelayCommand(a => CloseTrigger = true);
             ChangePasswordCommand = new RelayCommand(a => ChangePassword(a));
-            ChangeAuthorizationTokenCommand = new RelayCommand(a => ChangeAuthorizationToken(),
-                                                               x => SecurityManager.Manager.Service.ExternalAuthorization != null);
+            ChangeAuthorizationTokenCommand = new RelayCommand(
+                a => ChangeAuthorizationToken(),
+                x => SecurityManager.Manager.Service.ExternalAuthorization != null
+            );
         }
 
         private void ChangeAuthorizationToken()
         {
-            var answer = MessageBox.Show("Would you like to change your authorization token?", "Authorization token change.", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var answer = MessageBox.Show(
+                "Would you like to change your authorization token?",
+                "Authorization token change.",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
             if (answer == MessageBoxResult.Yes)
             {
-                Security.SecurityManager.Manager.Service.ExternalAuthorization.WillChangeToken = true;
-                MessageBox.Show("Read your authorization token and press OK", "Authorization token change.", MessageBoxButton.OK, MessageBoxImage.Information);
-                Security.SecurityManager.Manager.Service.ExternalAuthorization.WillChangeToken = false;
+                Security.SecurityManager.Manager.Service.ExternalAuthorization.WillChangeToken =
+                    true;
+                MessageBox.Show(
+                    "Read your authorization token and press OK",
+                    "Authorization token change.",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information
+                );
+                Security.SecurityManager.Manager.Service.ExternalAuthorization.WillChangeToken =
+                    false;
 
-                if (!string.IsNullOrEmpty(Security.SecurityManager.Manager.Service.ExternalAuthorization.AuthorizationErrorMessage))
+                if (
+                    !string.IsNullOrEmpty(
+                        Security
+                            .SecurityManager
+                            .Manager
+                            .Service
+                            .ExternalAuthorization
+                            .AuthorizationErrorMessage
+                    )
+                )
                 {
-                    MessageBox.Show(Security.SecurityManager.Manager.Service.ExternalAuthorization.AuthorizationErrorMessage, "Authorization error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(
+                        Security
+                            .SecurityManager
+                            .Manager
+                            .Service
+                            .ExternalAuthorization
+                            .AuthorizationErrorMessage,
+                        "Authorization error",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error
+                    );
                 }
                 else
                 {
-                    MessageBox.Show("Authorization token changed successfully.", "Authorization", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show(
+                        "Authorization token changed successfully.",
+                        "Authorization",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Information
+                    );
                 }
             }
         }
@@ -47,10 +85,7 @@ namespace TcOpen.Inxton.Local.Security.Wpf
         string userName;
         public string UserName
         {
-            get
-            {
-                return userName;
-            }
+            get { return userName; }
             set
             {
                 if (userName == value)
@@ -65,10 +100,7 @@ namespace TcOpen.Inxton.Local.Security.Wpf
         PasswordBox password;
         public PasswordBox Password
         {
-            get
-            {
-                return password;
-            }
+            get { return password; }
             set
             {
                 if (password == value)
@@ -83,10 +115,7 @@ namespace TcOpen.Inxton.Local.Security.Wpf
         string status;
         public string Status
         {
-            get
-            {
-                return status;
-            }
+            get { return status; }
             set
             {
                 if (status == value)
@@ -98,13 +127,9 @@ namespace TcOpen.Inxton.Local.Security.Wpf
             }
         }
 
-
         public bool CanUserChangePassword
         {
-            get
-            {
-                return SecurityManager.Manager.Principal.Identity.CanUserChangePassword;
-            }
+            get { return SecurityManager.Manager.Principal.Identity.CanUserChangePassword; }
         }
 
         private void ChangePassword(object args)
@@ -112,15 +137,18 @@ namespace TcOpen.Inxton.Local.Security.Wpf
             try
             {
                 var a = args as PwdsChange;
-                SecurityManager.Manager.Service.ChangePassword(SecurityManager.Manager.Principal.Identity.Name, a.OldPwd.Password, a.Pb1.Password, a.Pb2.Password);
+                SecurityManager.Manager.Service.ChangePassword(
+                    SecurityManager.Manager.Principal.Identity.Name,
+                    a.OldPwd.Password,
+                    a.Pb1.Password,
+                    a.Pb2.Password
+                );
                 CloseTrigger = true;
             }
             catch (Exception ex)
             {
-
                 Status = $"Password change failed: {ex.Message}";
             }
-
         }
 
         private void Login(string userName, object pwd)
@@ -128,14 +156,16 @@ namespace TcOpen.Inxton.Local.Security.Wpf
             try
             {
                 Status = string.Empty;
-                SecurityManager.Manager.Service.AuthenticateUser(userName, ((PasswordBox)pwd).Password);
+                SecurityManager.Manager.Service.AuthenticateUser(
+                    userName,
+                    ((PasswordBox)pwd).Password
+                );
                 CloseTrigger = true;
             }
             catch (Exception ex)
             {
                 Status = "Authorization failed.";
             }
-
         }
 
         private void Logout()
@@ -188,9 +218,17 @@ namespace TcOpen.Inxton.Local.Security.Wpf
         }
 
         public static readonly DependencyProperty CloseTriggerProperty =
-            DependencyProperty.Register("CloseTrigger", typeof(bool), typeof(HideWindowBehavior), new PropertyMetadata(false, OnCloseTriggerChanged));
+            DependencyProperty.Register(
+                "CloseTrigger",
+                typeof(bool),
+                typeof(HideWindowBehavior),
+                new PropertyMetadata(false, OnCloseTriggerChanged)
+            );
 
-        private static void OnCloseTriggerChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnCloseTriggerChanged(
+            DependencyObject d,
+            DependencyPropertyChangedEventArgs e
+        )
         {
             var behavior = d as HideWindowBehavior;
 

@@ -2,126 +2,123 @@
 <TcPlcObject Version="1.1.0.1">
   <POU Name="TcoDo" Id="{341408c1-4744-05c5-33ae-8d463304678a}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-				Generic component for discrete control of an output.												
-		</summary>				
-	</docu>	
+    <docu>
+        <summary>
+                Generic component for discrete control of an output.
+        </summary>
+    </docu>
 ~*)
 FUNCTION_BLOCK TcoDo EXTENDS TcoCore.TcoComponent
 VAR_IN_OUT
-	(*~
-	<docu>
-		<summary>
-			Controlled signal. Typically an `%Q*` variable. 												
-		</summary>				
-	</docu>	
-	~*)
-	inoSignal : BOOL;
+    (*~
+    <docu>
+        <summary>
+            Controlled signal. Typically an `%Q*` variable.
+        </summary>
+    </docu>
+    ~*)
+    inoSignal : BOOL;
 END_VAR
-
 VAR
-	(*~
-	<docu>
-		<summary>
-			Backing variable for signal; this variable is used directly by the component. It updates `inoSingal` in FB body call. 												
-		</summary>				
-	</docu>	
-	~*)
-	_signal : BOOL;
+    (*~
+    <docu>
+        <summary>
+            Backing variable for signal; this variable is used directly by the component. It updates `inoSingal` in FB body call.
+        </summary>
+    </docu>
+    ~*)
+    _signal : BOOL;
 END_VAR
-
 VAR
-	{attribute addProperty Name "<#Signal#>"}
-	_signalInfo : TcoCore.TcoSignalInfo;
-	{attribute addProperty Name "<#On#>"}
-	{attribute addProperty ToolTip "<#Sets the output#>"}
-	_setTask	 : TcoCore.TcoTask(THIS^);
-	{attribute addProperty ToolTip "<#Resets the output#>"}
-	{attribute addProperty Name "<#Off#>"}
-	_resetTask	 : TcoCore.TcoTask(THIS^);
-END_VAR
-]]></Declaration>
+    {attribute addProperty Name "<#Signal#>"}
+    _signalInfo : TcoCore.TcoSignalInfo;
+    {attribute addProperty Name "<#On#>"}
+    {attribute addProperty ToolTip "<#Sets the output#>"}
+    _setTask : TcoCore.TcoTask(THIS^);
+    {attribute addProperty ToolTip "<#Resets the output#>"}
+    {attribute addProperty Name "<#Off#>"}
+    _resetTask : TcoCore.TcoTask(THIS^);
+END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF(__ISVALIDREF(inoSignal)) THEN
-	_signalInfo.GetSignalInfo(SIZEOF(inoSignal), ADR(inoSignal));
-	inoSignal := _signal;		 
-END_IF;	
-	
-IF(_setTask.Execute())THEN
-	_setTask.DoneWhen(Set());
+      <ST><![CDATA[IF (__ISVALIDREF(inoSignal)) THEN
+    _signalInfo.GetSignalInfo(SIZEOF(inoSignal), ADR(inoSignal));
+    inoSignal := _signal;
+END_IF;
+
+IF (_setTask.Execute()) THEN
+    _setTask.DoneWhen(Set());
 END_IF
 
-IF(_resetTask.Execute())THEN
-	_resetTask.DoneWhen(Reset());
+IF (_resetTask.Execute()) THEN
+    _resetTask.DoneWhen(Reset());
 END_IF]]></ST>
     </Implementation>
     <Method Name="FB_init" Id="{a01138bd-6a18-00d6-25eb-548da5b88284}">
       <Declaration><![CDATA[METHOD FB_init : BOOL
 VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	ParentObject : ITcoObject;
-END_VAR
-
-]]></Declaration>
+    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+    ParentObject : ITcoObject;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Property Name="IsFalse" Id="{d5bea039-acef-0074-1616-6c33cc603fc7}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Gets 'true' when monitor signal is 'off/false/logical 0'.
-			Generates message when the returning 'false'.											
-		</summary>				
-	</docu>	
-~*)	
+    <docu>
+        <summary>
+            Gets 'true' when monitor signal is 'off/false/logical 0'.
+            Generates message when the returning 'false'.
+        </summary>
+    </docu>
+~*)
 {attribute 'monitoring' := 'variable'}
 PROPERTY IsFalse : BOOL]]></Declaration>
       <Get Name="Get" Id="{5f6441c9-f185-0b8b-3e9a-b2ab65a4cef7}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[IsFalse := NOT _signal;
-IF(NOT IsFalse) THEN Messenger.Info('<#Expecting `negative` signal#>'); END_IF;]]></ST>
+
+IF (NOT IsFalse) THEN
+    Messenger.Info('<#Expecting `negative` signal#>');
+END_IF;]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Property Name="IsTrue" Id="{58d089fa-c3d4-0d4a-37da-e80914eba98d}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Gets 'true' when monitor signal is 'on/true/logical 1'.
-			Generates message when the returning 'false'.											
-		</summary>				
-	</docu>	
-~*)	
+    <docu>
+        <summary>
+            Gets 'true' when monitor signal is 'on/true/logical 1'.
+            Generates message when the returning 'false'.
+        </summary>
+    </docu>
+~*)
 {attribute 'monitoring' := 'variable'}
 PROPERTY IsTrue : BOOL]]></Declaration>
       <Get Name="Get" Id="{bdd1ceb5-16d6-0f60-0347-350ed09e9b2a}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[IsTrue := _signal;
-IF(NOT IsTrue) THEN Messenger.Info('<#Expecting `positive` signal#>'); END_IF;
-]]></ST>
+
+IF (NOT IsTrue) THEN
+    Messenger.Info('<#Expecting `positive` signal#>');
+END_IF;]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Method Name="Reset" Id="{10c27afa-d2ad-00b1-0026-ed3422714d87}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Sets controlled signal into 'off/false/logical 0'.														
-		</summary>				
-	</docu>	
-~*)	
-METHOD Reset : BOOL
-]]></Declaration>
+    <docu>
+        <summary>
+            Sets controlled signal into 'off/false/logical 0'.
+        </summary>
+    </docu>
+~*)
+METHOD Reset : BOOL]]></Declaration>
       <Implementation>
         <ST><![CDATA[Messenger.Trace('<#Reseting signal (off/false)#>');
 _signal := FALSE;
@@ -130,46 +127,40 @@ Reset := TRUE;]]></ST>
     </Method>
     <Method Name="Restore" Id="{b5a894ca-07f9-06f1-12dc-a95162a7e7ed}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.	
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+        </summary>
+    </docu>
 ~*)
-METHOD  Restore : ITcoRestorable
-
-
-]]></Declaration>
+METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[// No implementation needed for this componet.]]></ST>
       </Implementation>
     </Method>
     <Method Name="ServiceMode" Id="{aa545b93-61f0-0d31-1a63-c80d6e224683}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-		    Custom service (manual, maintenance) logic.
-			This method must be implemented in derived class.
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Custom service (manual, maintenance) logic.
+            This method must be implemented in derived class.
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED  ServiceMode
-]]></Declaration>
+METHOD PROTECTED ServiceMode]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="Set" Id="{1eb9432e-d3d2-0c1f-025e-a7065bcf3393}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Sets controlled signal into 'on/true/logical 1'.														
-		</summary>				
-	</docu>	
-~*)	
-METHOD PUBLIC Set : BOOL
-
-]]></Declaration>
+    <docu>
+        <summary>
+            Sets controlled signal into 'on/true/logical 1'.
+        </summary>
+    </docu>
+~*)
+METHOD PUBLIC Set : BOOL]]></Declaration>
       <Implementation>
         <ST><![CDATA[Messenger.Trace('<#Setting signal (on/true)#>');
 _signal := TRUE;
@@ -180,10 +171,9 @@ Set := TRUE;]]></ST>
       <Declaration><![CDATA[PROPERTY PUBLIC Signal : Bool]]></Declaration>
       <Get Name="Get" Id="{888aeecd-313a-0b7d-253b-ed34a0221e2a}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Signal :=  _signal;]]></ST>
+          <ST><![CDATA[Signal := _signal;]]></ST>
         </Implementation>
       </Get>
     </Property>

@@ -6,5 +6,5 @@
   "packNugets" = $true;
   "publishNugets" = $true
   "nugetToken" = ([System.Environment]::GetEnvironmentVariable('gh-packages'));
-  "nugetSource" = ([System.Environment]::GetEnvironmentVariable('tc-open-gh-packages'));  
+  "nugetSource" = ([System.Environment]::GetEnvironmentVariable('tc-open-gh-packages'));
   }

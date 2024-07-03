@@ -6,16 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Microsoft.Win32;
+using TcOpen.Inxton.TcoDrivesBeckhoff.Wpf.Properties;
 using Vortex.Connector;
 using Vortex.Presentation.Wpf;
 using RelayCommand = TcOpen.Inxton.Input.RelayCommand;
 
-using TcOpen.Inxton.TcoDrivesBeckhoff.Wpf.Properties;
-using Microsoft.Win32;
-
 namespace TcoDrivesBeckhoff
 {
-
     public class TcoSingleAxisServiceViewModel : RenderableViewModel
     {
         private TcoMultiAxisMoveParam selectedItem;
@@ -29,17 +27,26 @@ namespace TcoDrivesBeckhoff
             LoadPositionsCommand = new RelayCommand(a => this.LoadPositions());
             SavePositionsCommand = new RelayCommand(a => SavePositions());
             FillDefaultParamsCommand = new RelayCommand(a => FillDefaultParams());
-
         }
 
         private void DeleteDataSet()
         {
             if (string.IsNullOrEmpty(this.Component.SetId))
             {
-                MessageBox.Show(strings.ResourceManager.GetString("SelectSetId"), strings.ResourceManager.GetString("Attention"), MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(
+                    strings.ResourceManager.GetString("SelectSetId"),
+                    strings.ResourceManager.GetString("Attention"),
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information
+                );
                 return;
             }
-            var answer = MessageBox.Show($"{strings.ResourceManager.GetString("AskDelete")}  {this.Component.SetId.ToUpper()}?", strings.ResourceManager.GetString("Attention"), MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var answer = MessageBox.Show(
+                $"{strings.ResourceManager.GetString("AskDelete")}  {this.Component.SetId.ToUpper()}?",
+                strings.ResourceManager.GetString("Attention"),
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
             if (answer == MessageBoxResult.Yes)
             {
                 if (Component.RepositoryHandler != null)
@@ -53,10 +60,20 @@ namespace TcoDrivesBeckhoff
         {
             if (string.IsNullOrEmpty(this.Component.NewSetId))
             {
-                MessageBox.Show(strings.ResourceManager.GetString("SetNewName"), strings.ResourceManager.GetString("Attention"), MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(
+                    strings.ResourceManager.GetString("SetNewName"),
+                    strings.ResourceManager.GetString("Attention"),
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information
+                );
                 return;
             }
-            var answer = MessageBox.Show($"{strings.ResourceManager.GetString("AskCreate")}  {this.Component.NewSetId.ToUpper()}?", strings.ResourceManager.GetString("Attention"), MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var answer = MessageBox.Show(
+                $"{strings.ResourceManager.GetString("AskCreate")}  {this.Component.NewSetId.ToUpper()}?",
+                strings.ResourceManager.GetString("Attention"),
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
             if (answer == MessageBoxResult.Yes)
             {
                 if (Component.RepositoryHandler != null)
@@ -64,10 +81,10 @@ namespace TcoDrivesBeckhoff
                 else
                     strings.ResourceManager.GetString("DefineRepository");
             }
-
         }
 
-        public PlainTcoSingleAxisMoveParam DefaultValues { get; set; } = new PlainTcoSingleAxisMoveParam();
+        public PlainTcoSingleAxisMoveParam DefaultValues { get; set; } =
+            new PlainTcoSingleAxisMoveParam();
 
         private void FillDefaultParams()
         {
@@ -77,19 +94,27 @@ namespace TcoDrivesBeckhoff
                 item.Axis1.Acceleration.Cyclic = DefaultValues.Acceleration;
                 item.Axis1.Deceleration.Cyclic = DefaultValues.Deceleration;
                 item.Axis1.Jerk.Cyclic = DefaultValues.Jerk;
-
             }
-
         }
 
         private void SavePositions()
         {
             if (string.IsNullOrEmpty(this.Component.SetId))
             {
-                MessageBox.Show(strings.ResourceManager.GetString("SelectSetId"), strings.ResourceManager.GetString("Attention"), MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(
+                    strings.ResourceManager.GetString("SelectSetId"),
+                    strings.ResourceManager.GetString("Attention"),
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information
+                );
                 return;
             }
-            var answer = MessageBox.Show($"{strings.ResourceManager.GetString("AskSave")}  {this.Component.SetId.ToUpper()}?", strings.ResourceManager.GetString("Attention"), MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var answer = MessageBox.Show(
+                $"{strings.ResourceManager.GetString("AskSave")}  {this.Component.SetId.ToUpper()}?",
+                strings.ResourceManager.GetString("Attention"),
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
             if (answer == MessageBoxResult.Yes)
             {
                 if (Component.RepositoryHandler != null)
@@ -98,20 +123,23 @@ namespace TcoDrivesBeckhoff
                     if (Component.ExportAfterSaving)
                     {
                         ExportPositions();
-
                     }
                 }
                 else
                     strings.ResourceManager.GetString("DefineRepository");
             }
-
         }
 
         private void ExportPositions()
         {
             if (string.IsNullOrEmpty(this.Component.SetId))
             {
-                MessageBox.Show(strings.ResourceManager.GetString("SelectSetId"), strings.ResourceManager.GetString("Attention"), MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(
+                    strings.ResourceManager.GetString("SelectSetId"),
+                    strings.ResourceManager.GetString("Attention"),
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information
+                );
                 return;
             }
 
@@ -125,7 +153,6 @@ namespace TcoDrivesBeckhoff
                     sfd.DefaultExt = "json";
                     sfd.ShowDialog();
 
-
                     using (var sw = new System.IO.StreamWriter(sfd.FileName))
                     {
                         sw.Write(exports);
@@ -138,18 +165,26 @@ namespace TcoDrivesBeckhoff
             }
             else
                 strings.ResourceManager.GetString("DefineRepository");
-
-
         }
 
         private void LoadPositions()
         {
             if (string.IsNullOrEmpty(this.Component.SetId))
             {
-                MessageBox.Show(strings.ResourceManager.GetString("SelectSetId"), strings.ResourceManager.GetString("Attention"), MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(
+                    strings.ResourceManager.GetString("SelectSetId"),
+                    strings.ResourceManager.GetString("Attention"),
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information
+                );
                 return;
             }
-            var answer = MessageBox.Show($"{strings.ResourceManager.GetString("AskLoad")}  {this.Component.SetId.ToUpper()}?", strings.ResourceManager.GetString("Attention"), MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var answer = MessageBox.Show(
+                $"{strings.ResourceManager.GetString("AskLoad")}  {this.Component.SetId.ToUpper()}?",
+                strings.ResourceManager.GetString("Attention"),
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
             if (answer == MessageBoxResult.Yes)
             {
                 if (Component.RepositoryHandler != null)
@@ -163,22 +198,41 @@ namespace TcoDrivesBeckhoff
         {
             if (SelectedItem == null)
             {
-                MessageBox.Show(strings.ResourceManager.GetString("SelectFirst"), strings.ResourceManager.GetString("Attention"), MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(
+                    strings.ResourceManager.GetString("SelectFirst"),
+                    strings.ResourceManager.GetString("Attention"),
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information
+                );
                 return;
             }
-            var answer = MessageBox.Show($"{strings.ResourceManager.GetString("AskMovePos")}  {this.SelectedItem.HumanReadable.ToUpper()}?", strings.ResourceManager.GetString("Attention"), MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var answer = MessageBox.Show(
+                $"{strings.ResourceManager.GetString("AskMovePos")}  {this.SelectedItem.HumanReadable.ToUpper()}?",
+                strings.ResourceManager.GetString("Attention"),
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
             if (answer == MessageBoxResult.Yes)
-
             {
                 //restore before movements if necessary
                 Component._restoreTask._invokeRequest.Synchron = true;
 
-                this.Component._axis._moveAbsoluteTask._position.Synchron       = SelectedItem.Axis1.Position.Synchron;
-                this.Component._axis._moveAbsoluteTask._velocity.Synchron       = SelectedItem.Axis1.Velocity.Synchron;
-                this.Component._axis._moveAbsoluteTask._acceleration.Synchron   = SelectedItem.Axis1.Acceleration.Synchron;
-                this.Component._axis._moveAbsoluteTask._deceleration.Synchron   = SelectedItem.Axis1.Deceleration.Synchron;
-
-
+                this.Component._axis._moveAbsoluteTask._position.Synchron = SelectedItem
+                    .Axis1
+                    .Position
+                    .Synchron;
+                this.Component._axis._moveAbsoluteTask._velocity.Synchron = SelectedItem
+                    .Axis1
+                    .Velocity
+                    .Synchron;
+                this.Component._axis._moveAbsoluteTask._acceleration.Synchron = SelectedItem
+                    .Axis1
+                    .Acceleration
+                    .Synchron;
+                this.Component._axis._moveAbsoluteTask._deceleration.Synchron = SelectedItem
+                    .Axis1
+                    .Deceleration
+                    .Synchron;
 
                 Component._axis._moveAbsoluteTask._invokeRequest.Synchron = true;
             }
@@ -186,12 +240,18 @@ namespace TcoDrivesBeckhoff
 
         private void TeachPosition()
         {
-            var answer = MessageBox.Show($"{strings.ResourceManager.GetString("AskTeachPos")}'{SelectedItem.HumanReadable.ToUpper()}?", strings.ResourceManager.GetString("Attention"), MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var answer = MessageBox.Show(
+                $"{strings.ResourceManager.GetString("AskTeachPos")}'{SelectedItem.HumanReadable.ToUpper()}?",
+                strings.ResourceManager.GetString("Attention"),
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
             if (answer == MessageBoxResult.Yes)
             {
-                this.SelectedItem.Axis1.Position.Synchron = Math.Round(this.Component._axis._axisStatus.ActPos.Synchron, 3);
-             
-
+                this.SelectedItem.Axis1.Position.Synchron = Math.Round(
+                    this.Component._axis._axisStatus.ActPos.Synchron,
+                    3
+                );
             }
         }
 
@@ -199,7 +259,7 @@ namespace TcoDrivesBeckhoff
 
         public TcoMultiAxisMoveParam SelectedItem
         {
-            get => selectedItem; 
+            get => selectedItem;
             set
             {
                 if (selectedItem == value)
@@ -211,7 +271,11 @@ namespace TcoDrivesBeckhoff
             }
         }
 
-        public override object Model { get => this.Component; set { this.Component = value as TcoSingleAxis; } }
+        public override object Model
+        {
+            get => this.Component;
+            set { this.Component = value as TcoSingleAxis; }
+        }
 
         public RelayCommand TeachPositionCommand { get; private set; }
         public RelayCommand MoveToPositionCommand { get; private set; }
@@ -223,6 +287,5 @@ namespace TcoDrivesBeckhoff
         public RelayCommand RefreshPositionsCommand { get; private set; }
     }
 
-    public class TcoSingleAxisViewModel : TcoSingleAxisServiceViewModel
-    { }
+    public class TcoSingleAxisViewModel : TcoSingleAxisServiceViewModel { }
 }

@@ -4,11 +4,11 @@ branches:
   main:
     regex: ^master$|^main$
     mode: ContinuousDelivery
-    tag: ''
+    tag: ""
     increment: Patch
     prevent-increment-of-merged-branch-version: true
     track-merge-target: false
-    source-branches: [ 'develop', 'release' ]
+    source-branches: ["develop", "release"]
     tracks-release-branches: false
     is-release-branch: false
     is-mainline: true
@@ -32,19 +32,19 @@ branches:
     increment: None
     prevent-increment-of-merged-branch-version: true
     track-merge-target: false
-    source-branches: [ 'develop', 'main', 'support', 'release' ]
+    source-branches: ["develop", "main", "support", "release"]
     tracks-release-branches: false
     is-release-branch: true
     is-mainline: false
-    pre-release-weight: 30000 
+    pre-release-weight: 30000
   support:
     regex: ^support[/-]
     mode: ContinuousDelivery
-    tag: ''
+    tag: ""
     increment: Patch
     prevent-increment-of-merged-branch-version: true
     track-merge-target: false
-    source-branches: [ 'main' ]
+    source-branches: ["main"]
     tracks-release-branches: false
     is-release-branch: false
     is-mainline: true

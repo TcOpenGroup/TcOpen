@@ -9,24 +9,22 @@
 {attribute addProperty Id "FB_PositionAT %I*FB_Position_3FA094ED4DRV_StatuswordAT %I*DRV_Statusword_9B36FDFC2DRV_Following_error_actual_valueAT %I*DRV_Following_error_actual_value_5AA320BF4DRV_ControlwordAT %Q*DRV_Controlword_F3F147212DRV_Target_positionAT %Q*DRV_Target_position_05240F144WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_433F077712"}
 {attribute addProperty CRC "9264282"}
 {attribute addProperty Size "30"}
-TYPE EL7211_008D5C9A EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
-STRUCT
-	{attribute addProperty Name "FB_Position"}
-	FB_Position : FB_Position_3FA094ED;
-	{attribute addProperty Name "DRV_Statusword"}
-	DRV_Statusword : DRV_Statusword_9B36FDFC;
-	{attribute addProperty Name "DRV_Following_error_actual_value"}
-	DRV_Following_error_actual_value : DRV_Following_error_actual_value_5AA320BF;
-	{attribute addProperty Name "DRV_Controlword"}
-	DRV_Controlword : DRV_Controlword_F3F14721;
-	{attribute addProperty Name "DRV_Target_position"}
-	DRV_Target_position : DRV_Target_position_05240F14;
-	{attribute addProperty Name "WcState"}
-	WcState : TcoIo.WcState_9091E0EB;
-	{attribute addProperty Name "InfoData"}
-	InfoData : InfoData_433F0777;
+TYPE EL7211_008D5C9A EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 : STRUCT
+    {attribute addProperty Name "FB_Position"}
+    FB_Position : FB_Position_3FA094ED;
+    {attribute addProperty Name "DRV_Statusword"}
+    DRV_Statusword : DRV_Statusword_9B36FDFC;
+    {attribute addProperty Name "DRV_Following_error_actual_value"}
+    DRV_Following_error_actual_value : DRV_Following_error_actual_value_5AA320BF;
+    {attribute addProperty Name "DRV_Controlword"}
+    DRV_Controlword : DRV_Controlword_F3F14721;
+    {attribute addProperty Name "DRV_Target_position"}
+    DRV_Target_position : DRV_Target_position_05240F14;
+    {attribute addProperty Name "WcState"}
+    WcState : TcoIo.WcState_9091E0EB;
+    {attribute addProperty Name "InfoData"}
+    InfoData : InfoData_433F0777;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -1,84 +1,78 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="StartMotorsTask" Id="{82b5b806-f334-0474-3c3e-370545568773}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK StartMotorsTask EXTENDS TcoKukaRoboticsTask
-]]></Declaration>
+    <Declaration><![CDATA[FUNCTION_BLOCK StartMotorsTask EXTENDS TcoKukaRoboticsTask]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
+      <ST><![CDATA[IF Execute() THEN
+    _blink(inOnTime := T#500MS, inOffTime := T#500MS);
 
-IF Execute() THEN
-	 _blink(inOnTime:=T#500MS,inOffTime:=T#500MS);
+    IF _progress = 0 THEN
+        IF NOT __ISVALIDREF(inoControl) THEN
+            _varInfo := __VARINFO(inoControl);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSIF NOT __ISVALIDREF(inoConfig) THEN
+            _varInfo := __VARINFO(inoConfig);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSIF NOT __ISVALIDREF(inoStatus) THEN
+            _varInfo := __VARINFO(inoStatus);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSE
+            _progress := _progress + 1;
+        END_IF
+    END_IF
 
-  	IF _progress = 0 THEN
-		IF NOT __ISVALIDREF(inoControl) THEN
-			_varInfo :=__VARINFO(inoControl);
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSIF NOT __ISVALIDREF(inoConfig) THEN                                                  
-			_varInfo :=__VARINFO(inoConfig);                                                    
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSIF NOT __ISVALIDREF(inoStatus) THEN                                                  
-			_varInfo :=__VARINFO(inoStatus);                                                    
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSE
+    //	IF _progress = 1 THEN
+    //		inoControl.ActivateInterface:=TRUE;
+    //		_varInfo :=__VARINFO( inoStatus.State.InterfaceActivated);
+    //		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.InterfaceActivated).Warning(_sb.Clear().Append('<#Waiting for signal#>').Append(_varInfo.Symbol).ToString());
+    //		IF  inoStatus.State.InterfaceActivated THEN
+    //			_progress := _progress + 1;
+    //		END_IF;
+    //	END_IF;
+    IF _progress = 1 THEN
+        _varInfo := __VARINFO(inoStatus.State.UserSafetySwitchClosed);
 
-			_progress := _progress + 1;
+        THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.UserSafetySwitchClosed)
+            .Warning(_sb.Clear().Append('<#Waiting for signal#>').Append(_varInfo.Symbol).ToString());
 
-		END_IF
+        IF inoStatus.State.UserSafetySwitchClosed THEN
+            _progress := _progress + 1;
+        END_IF;
+    END_IF;
 
-	END_IF
+    IF _progress = 2 THEN
+        _varInfo := __VARINFO(inoStatus.State.AlarmStopActive);
 
-//	IF _progress = 1 THEN
-	
-//		inoControl.ActivateInterface:=TRUE;
-//		_varInfo :=__VARINFO( inoStatus.State.InterfaceActivated);                                                
-//		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.InterfaceActivated).Warning(_sb.Clear().Append('<#Waiting for signal#>').Append(_varInfo.Symbol).ToString());
-//		IF  inoStatus.State.InterfaceActivated THEN
-//			_progress := _progress + 1;
-//		END_IF;
-//	END_IF;
-	
-	IF _progress = 1 THEN
-	
-		_varInfo :=__VARINFO( inoStatus.State.UserSafetySwitchClosed);                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.UserSafetySwitchClosed).Warning(_sb.Clear().Append('<#Waiting for signal#>').Append(_varInfo.Symbol).ToString());
-		IF  inoStatus.State.UserSafetySwitchClosed THEN
-			_progress := _progress + 1;
-		END_IF;
-	END_IF;
-	IF _progress = 2 THEN
-	
-		_varInfo :=__VARINFO( inoStatus.State.AlarmStopActive);                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.AlarmStopActive).Warning(_sb.Clear().Append('<#Waiting for signal#>').Append(_varInfo.Symbol).ToString());
-		IF  inoStatus.State.AlarmStopActive THEN
-			_progress := _progress + 1;
-		END_IF;
-	END_IF;
+        THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.AlarmStopActive)
+            .Warning(_sb.Clear().Append('<#Waiting for signal#>').Append(_varInfo.Symbol).ToString());
 
-	IF _progress = 3 THEN	
+        IF inoStatus.State.AlarmStopActive THEN
+            _progress := _progress + 1;
+        END_IF;
+    END_IF;
 
-		_varInfo :=__VARINFO( inoStatus.State.DrivesReady);                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.DrivesReady).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
-				
-		inoControl.DrivesOff:=TRUE;
-		inoControl.DrivesOn:=_blink.outQ;	
-		IF inoStatus.State.DrivesReady  THEN
-			 inoControl.DrivesOn:=FALSE;
-			_progress := _progress + 1;
-		END_IF
-	END_IF;		
-	
-	
-	
-	
-    DoneWhen(inoStatus.State.DrivesReady  );
+    IF _progress = 3 THEN
+        _varInfo := __VARINFO(inoStatus.State.DrivesReady);
+
+        THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.DrivesReady)
+            .Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
+
+        inoControl.DrivesOff := TRUE;
+        inoControl.DrivesOn := _blink.outQ;
+
+        IF inoStatus.State.DrivesReady THEN
+            inoControl.DrivesOn := FALSE;
+            _progress := _progress + 1;
+        END_IF
+    END_IF;
+
+    DoneWhen(inoStatus.State.DrivesReady);
     CallTimers(TRUE);
-	
-	THIS^.ThrowWhen(_errorTimer.Q );
-	
+    THIS^.ThrowWhen(_errorTimer.Q);
 END_IF
 
-IF  THIS^.Error AND NOT _errorMessage.Pinned THEN
-	THIS^.Restore();
+IF THIS^.Error AND NOT _errorMessage.Pinned THEN
+    THIS^.Restore();
 END_IF]]></ST>
     </Implementation>
     <Method Name="FB_init" Id="{8ea2ee3b-2ea3-03f4-18cd-5ef92ac9118f}">
@@ -86,7 +80,7 @@ END_IF]]></ST>
 VAR_INPUT
     bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
     bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
-    ParentObject : ITcoObject;	
+    ParentObject : ITcoObject;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
@@ -94,66 +88,71 @@ END_VAR]]></Declaration>
     </Method>
     <Method Name="OnAbort" Id="{760b5db2-46fa-05b5-0b50-0b0bd963f14a}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task is aborted.
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task is aborted.
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnAbort
-]]></Declaration>
+METHOD PROTECTED OnAbort]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Start motors  was aborted.#>'; END_IF;
-]]></ST>
+        <ST><![CDATA[IF __ISVALIDREF(inoStatus) THEN
+    THIS^.inoStatus.ActionDescription := '<#Start motors  was aborted.#>';
+END_IF;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnDone" Id="{4eb70401-b374-0f95-01c4-4acb3764ba2f}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task reaches the ```Done``` state .
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task reaches the ```Done``` state .
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnDone
-]]></Declaration>
+METHOD PROTECTED OnDone]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Start motors  finished successfully.#>'; END_IF;
-_progress:=0;
+        <ST><![CDATA[IF __ISVALIDREF(inoStatus) THEN
+    THIS^.inoStatus.ActionDescription := '<#Start motors  finished successfully.#>';
+END_IF;
 
-
-]]></ST>
+_progress := 0;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnError" Id="{059b6921-aeaf-099b-1d1b-853256381463}">
       <Declaration><![CDATA[METHOD PROTECTED OnError
 VAR
-	description: STRING;
+    description : STRING;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[description := '<#Start motors finished with error.#>'; 
-IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := description; END_IF;
+        <ST><![CDATA[description := '<#Start motors finished with error.#>';
+
+IF __ISVALIDREF(inoStatus) THEN
+    THIS^.inoStatus.ActionDescription := description;
+END_IF;
+
 THIS^._errorMessage.Error(_sb.Clear().Append(description).Append(' To restore acknowledge this alarm.').ToString()).Pin();]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStart" Id="{6963d8fb-cd81-02a8-0f73-6e5b0ebe2b5b}">
-      <Declaration><![CDATA[METHOD PROTECTED OnStart 
-]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED OnStart]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN  THIS^.inoStatus.ActionDescription := '<#Start motors started.#>'; END_IF; 
+        <ST><![CDATA[IF __ISVALIDREF(inoStatus) THEN
+    THIS^.inoStatus.ActionDescription := '<#Start motors started.#>';
+END_IF;
+
 CallTimers(FALSE);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{6b2ff21e-e007-0b52-26f7-614909d1adc0}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
-			<para>
-				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
-			</para>
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+            <para>
+                See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+            </para>
+        </summary>
+    </docu>
 ~*)
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>

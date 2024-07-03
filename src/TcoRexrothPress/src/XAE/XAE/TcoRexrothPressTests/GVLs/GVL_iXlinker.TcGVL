@@ -3,13 +3,12 @@
   <GVL Name="GVL_iXlinker" Id="{af6f2f73-d87c-0ca9-39f9-59fddbb8b757}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
-		{attribute addProperty Name "Press IO"}
-		RexrothPress:TcoSmartFunctionKitIO_v_4_x_x;
-		{attribute addProperty Name "AdsAddr"}
-		AdsAddr AT %I* : TcoAmsAddr;
-		{attribute addProperty Name "State"}
-		State AT %I* : UINT;
-
+    {attribute addProperty Name "Press IO"}
+    RexrothPress : TcoSmartFunctionKitIO_v_4_x_x;
+    {attribute addProperty Name "AdsAddr"}
+    AdsAddr AT %I* : TcoAmsAddr;
+    {attribute addProperty Name "State"}
+    State AT %I* : UINT;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

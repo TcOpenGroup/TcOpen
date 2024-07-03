@@ -6,10 +6,19 @@ namespace TcOpen.Inxton.Local.Security
 {
     internal class DummyAuthenticationService : IAuthenticationService
     {
-        public IRepository<UserData> UserRepository => throw new AuthenticationServiceNotActiveException();
+        public IRepository<UserData> UserRepository =>
+            throw new AuthenticationServiceNotActiveException();
 
-        public OnTimedLogoutRequestDelegate OnTimedLogoutRequest { get => throw new AuthenticationServiceNotActiveException(); set => throw new AuthenticationServiceNotActiveException(); }
-        public IExternalAuthorization ExternalAuthorization { get => throw new AuthenticationServiceNotActiveException(); set => throw new AuthenticationServiceNotActiveException(); }
+        public OnTimedLogoutRequestDelegate OnTimedLogoutRequest
+        {
+            get => throw new AuthenticationServiceNotActiveException();
+            set => throw new AuthenticationServiceNotActiveException();
+        }
+        public IExternalAuthorization ExternalAuthorization
+        {
+            get => throw new AuthenticationServiceNotActiveException();
+            set => throw new AuthenticationServiceNotActiveException();
+        }
 
         public event OnUserAuthentication OnUserAuthenticateSuccess;
         public event OnUserAuthentication OnUserAuthenticateFailed;
@@ -26,7 +35,12 @@ namespace TcOpen.Inxton.Local.Security
             throw new AuthenticationServiceNotActiveException();
         }
 
-        public void ChangePassword(string userName, string password, string newPassword1, string newPassword2)
+        public void ChangePassword(
+            string userName,
+            string password,
+            string newPassword1,
+            string newPassword2
+        )
         {
             throw new AuthenticationServiceNotActiveException();
         }

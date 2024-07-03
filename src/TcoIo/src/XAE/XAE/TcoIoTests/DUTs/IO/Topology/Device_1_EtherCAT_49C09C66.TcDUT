@@ -7,22 +7,20 @@
 {attribute addProperty CRC "1237359718"}
 {attribute addProperty Size "304"}
 {attribute addProperty Name "Device 1 (EtherCAT)"}
-TYPE Device_1_EtherCAT_49C09C66 EXTENDS TcoIo.EtcMasterBase_62654B43 :
-STRUCT
-	{attribute addProperty Name "Term 1 (EK1200)"}
-	{attribute addProperty PreviousPort "Device 1 (EtherCAT) : Master"}
-	{attribute addProperty SyncUnit "default"}
-	Term_1_EK1200 : Term_1_EK1200_B38DC9A8;
-	{attribute addProperty Name "SyncUnits"}
-	SyncUnits : SyncUnits_C3A34B50;
-	{attribute addProperty Name "Inputs"}
-	Inputs : TcoIo.Inputs_A65FACA4;
-	{attribute addProperty Name "Outputs"}
-	Outputs : TcoIo.Outputs_23C0ED1D;
-	{attribute addProperty Name "InfoData"}
-	InfoData : TcoIo.InfoData_84133AC9;
+TYPE Device_1_EtherCAT_49C09C66 EXTENDS TcoIo.EtcMasterBase_62654B43 : STRUCT
+    {attribute addProperty Name "Term 1 (EK1200)"}
+    {attribute addProperty PreviousPort "Device 1 (EtherCAT) : Master"}
+    {attribute addProperty SyncUnit "default"}
+    Term_1_EK1200 : Term_1_EK1200_B38DC9A8;
+    {attribute addProperty Name "SyncUnits"}
+    SyncUnits : SyncUnits_C3A34B50;
+    {attribute addProperty Name "Inputs"}
+    Inputs : TcoIo.Inputs_A65FACA4;
+    {attribute addProperty Name "Outputs"}
+    Outputs : TcoIo.Outputs_23C0ED1D;
+    {attribute addProperty Name "InfoData"}
+    InfoData : TcoIo.InfoData_84133AC9;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -3,15 +3,13 @@
   <DUT Name="eTcoInsightUserDataSize_v_5_x_x" Id="{c7ab4747-f00f-0ea2-3382-d4860f943c64}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE eTcoInsightUserDataSize_v_5_x_x :
-(
-	USER_DATA_16B := 16,
-	USER_DATA_32B := 32,
-	USER_DATA_64B := 64,
-	USER_DATA_128B := 128,
-	USER_DATA_250B := 254	
+TYPE eTcoInsightUserDataSize_v_5_x_x : (
+    USER_DATA_16B := 16,
+    USER_DATA_32B := 32,
+    USER_DATA_64B := 64,
+    USER_DATA_128B := 128,
+    USER_DATA_250B := 254
 );
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

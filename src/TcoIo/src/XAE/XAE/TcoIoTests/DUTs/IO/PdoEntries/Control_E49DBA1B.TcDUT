@@ -6,18 +6,16 @@
 {attribute addProperty Id "Disable_autorangeBOOL1Start_conversionBOOL1ModeBYTE1RangeSINT1"}
 {attribute addProperty CRC "3835542043"}
 {attribute addProperty Size "4"}
-TYPE Control_E49DBA1B :
-STRUCT
-	{attribute addProperty Name "Disable_autorange"}
-	Disable_autorange : BOOL;
-	{attribute addProperty Name "Start_conversion"}
-	Start_conversion : BOOL;
-	{attribute addProperty Name "Mode"}
-	Mode : BYTE;
-	{attribute addProperty Name "Range"}
-	Range : SINT;
+TYPE Control_E49DBA1B : STRUCT
+    {attribute addProperty Name "Disable_autorange"}
+    Disable_autorange : BOOL;
+    {attribute addProperty Name "Start_conversion"}
+    Start_conversion : BOOL;
+    {attribute addProperty Name "Mode"}
+    Mode : BYTE;
+    {attribute addProperty Name "Range"}
+    Range : SINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

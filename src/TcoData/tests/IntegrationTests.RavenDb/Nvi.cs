@@ -14,9 +14,9 @@ namespace IntegrationTests.RavenDb
         public dynamic _recordId { get; set; }
 
         public DateTime _Created { get; set; }
-        
+
         public string _EntityId { get; set; }
-        
+
         public DateTime _Modified { get; set; }
     }
 }

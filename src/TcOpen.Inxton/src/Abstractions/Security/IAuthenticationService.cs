@@ -18,8 +18,8 @@ namespace TcOpen.Inxton.Security
         /// <summary>
         /// De-authenticates current user.
         /// </summary>
-        void DeAuthenticateCurrentUser(); 
-        
+        void DeAuthenticateCurrentUser();
+
         /// <summary>
         /// Calculates hash of the password
         /// </summary>
@@ -35,15 +35,20 @@ namespace TcOpen.Inxton.Security
         /// <param name="password">Old password</param>
         /// <param name="newPassword1">New password</param>
         /// <param name="newPassword2">New password</param>
-        void ChangePassword(string userName, string password, string newPassword1, string newPassword2);
-        
+        void ChangePassword(
+            string userName,
+            string password,
+            string newPassword1,
+            string newPassword2
+        );
+
         /// <summary>
         /// Occurs when the uses is successfully authenticated.
         /// </summary>
         event OnUserAuthentication OnUserAuthenticateSuccess;
 
         /// <summary>
-        /// Occurs when user authentication fails. 
+        /// Occurs when user authentication fails.
         /// </summary>
         event OnUserAuthentication OnUserAuthenticateFailed;
 
@@ -58,7 +63,7 @@ namespace TcOpen.Inxton.Security
         event OnUserAuthentication OnDeAuthenticated;
 
         /// <summary>
-        /// Delegate is used to prevent/allow automatic user logout. 
+        /// Delegate is used to prevent/allow automatic user logout.
         /// </summary>
         OnTimedLogoutRequestDelegate OnTimedLogoutRequest { get; set; }
 

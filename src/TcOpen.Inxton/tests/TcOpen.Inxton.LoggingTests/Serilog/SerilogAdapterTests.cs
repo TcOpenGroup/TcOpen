@@ -3,10 +3,8 @@ using TcOpen.Inxton.Logging;
 
 namespace TcOpen.Inxton.Logging.SerilogTests
 {
-
     [TestFixture()]
     public class SerilogAdapterTests
-
     {
         [Test()]
         public void SerilogLoggerTest()
@@ -17,23 +15,24 @@ namespace TcOpen.Inxton.Logging.SerilogTests
         [Test()]
         public void SerilogLoggerTest1()
         {
-            var actual = new SerilogAdapter(new Serilog.LoggerConfiguration().WriteTo.MockConsole());
-        
-        }   
+            var actual = new SerilogAdapter(
+                new Serilog.LoggerConfiguration().WriteTo.MockConsole()
+            );
+        }
 
         [Test()]
         public void DebugTest()
         {
             //-- Arrange
             var expectedLevel = "Debug";
-            var expected = "This is debug message. MessagePayload { SomeString = \"some payload\" }";
-            var actor = new SerilogAdapter(new Serilog.LoggerConfiguration()
-                                                .WriteTo.MockConsole()
-                                                .MinimumLevel.Debug());            
+            var expected =
+                "This is debug message. MessagePayload { SomeString = \"some payload\" }";
+            var actor = new SerilogAdapter(
+                new Serilog.LoggerConfiguration().WriteTo.MockConsole().MinimumLevel.Debug()
+            );
 
             //-- Act
             actor.Debug<object>(expected, new MessagePayload() { SomeString = "some payload" });
-            
 
             //-- Assert
             Assert.AreEqual($"{expectedLevel}:{expected}", MockSink.LastLogEntry);
@@ -44,14 +43,14 @@ namespace TcOpen.Inxton.Logging.SerilogTests
         {
             //-- Arrange
             var expectedLevel = "Verbose";
-            var expected = "This is verbose message. MessagePayload { SomeString = \"some payload\" }";
-            var actor = new SerilogAdapter(new Serilog.LoggerConfiguration()
-                                                .WriteTo.MockConsole()
-                                                .MinimumLevel.Verbose());
+            var expected =
+                "This is verbose message. MessagePayload { SomeString = \"some payload\" }";
+            var actor = new SerilogAdapter(
+                new Serilog.LoggerConfiguration().WriteTo.MockConsole().MinimumLevel.Verbose()
+            );
 
             //-- Act
             actor.Verbose(expected, new MessagePayload() { SomeString = "some payload" });
-
 
             //-- Assert
             Assert.AreEqual($"{expectedLevel}:{expected}", MockSink.LastLogEntry);
@@ -62,14 +61,14 @@ namespace TcOpen.Inxton.Logging.SerilogTests
         {
             //-- Arrange
             var expectedLevel = "Information";
-            var expected = "This is information message. MessagePayload { SomeString = \"some payload\" }";
-            var actor = new SerilogAdapter(new Serilog.LoggerConfiguration()
-                                                .WriteTo.MockConsole()
-                                                .MinimumLevel.Information());
+            var expected =
+                "This is information message. MessagePayload { SomeString = \"some payload\" }";
+            var actor = new SerilogAdapter(
+                new Serilog.LoggerConfiguration().WriteTo.MockConsole().MinimumLevel.Information()
+            );
 
             //-- Act
             actor.Information(expected, new MessagePayload() { SomeString = "some payload" });
-
 
             //-- Assert
             Assert.AreEqual($"{expectedLevel}:{expected}", MockSink.LastLogEntry);
@@ -80,14 +79,14 @@ namespace TcOpen.Inxton.Logging.SerilogTests
         {
             //-- Arrange
             var expectedLevel = "Warning";
-            var expected = "This is warning message. MessagePayload { SomeString = \"some payload\" }";
-            var actor = new SerilogAdapter(new Serilog.LoggerConfiguration()
-                                                .WriteTo.MockConsole()
-                                                .MinimumLevel.Warning());
+            var expected =
+                "This is warning message. MessagePayload { SomeString = \"some payload\" }";
+            var actor = new SerilogAdapter(
+                new Serilog.LoggerConfiguration().WriteTo.MockConsole().MinimumLevel.Warning()
+            );
 
             //-- Act
             actor.Warning(expected, new MessagePayload() { SomeString = "some payload" });
-
 
             //-- Assert
             Assert.AreEqual($"{expectedLevel}:{expected}", MockSink.LastLogEntry);
@@ -98,14 +97,14 @@ namespace TcOpen.Inxton.Logging.SerilogTests
         {
             //-- Arrange
             var expectedLevel = "Error";
-            var expected = "This is error message. MessagePayload { SomeString = \"some payload\" }";
-            var actor = new SerilogAdapter(new Serilog.LoggerConfiguration()
-                                                .WriteTo.MockConsole()
-                                                .MinimumLevel.Error());
+            var expected =
+                "This is error message. MessagePayload { SomeString = \"some payload\" }";
+            var actor = new SerilogAdapter(
+                new Serilog.LoggerConfiguration().WriteTo.MockConsole().MinimumLevel.Error()
+            );
 
             //-- Act
             actor.Error(expected, new MessagePayload() { SomeString = "some payload" });
-
 
             //-- Assert
             Assert.AreEqual($"{expectedLevel}:{expected}", MockSink.LastLogEntry);
@@ -116,14 +115,14 @@ namespace TcOpen.Inxton.Logging.SerilogTests
         {
             //-- Arrange
             var expectedLevel = "Fatal";
-            var expected = "This is fatal message. MessagePayload { SomeString = \"some payload\" }";
-            var actor = new SerilogAdapter(new Serilog.LoggerConfiguration()
-                                                .WriteTo.MockConsole()
-                                                .MinimumLevel.Fatal());
+            var expected =
+                "This is fatal message. MessagePayload { SomeString = \"some payload\" }";
+            var actor = new SerilogAdapter(
+                new Serilog.LoggerConfiguration().WriteTo.MockConsole().MinimumLevel.Fatal()
+            );
 
             //-- Act
             actor.Fatal(expected, new MessagePayload() { SomeString = "some payload" });
-
 
             //-- Assert
             Assert.AreEqual($"{expectedLevel}:{expected}", MockSink.LastLogEntry);

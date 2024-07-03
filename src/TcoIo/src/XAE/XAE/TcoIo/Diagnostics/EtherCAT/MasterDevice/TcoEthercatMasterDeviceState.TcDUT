@@ -2,34 +2,33 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <DUT Name="TcoEthercatMasterDeviceState" Id="{92429542-54c7-06b4-1934-f53e4acc78dd}">
     <Declaration><![CDATA[TYPE TcoEthercatMasterDeviceState : STRUCT
-	{attribute addProperty Name "Link error"}	
+    {attribute addProperty Name "Link error"}
     LinkError : BOOL;
-	{attribute addProperty Name "I/O locked after link error (I/O reset required)"}	
+    {attribute addProperty Name "I/O locked after link error (I/O reset required)"}
     IOLockedAfterLinkError : BOOL;
-	{attribute addProperty Name "Link error (redundancy adapter)"}	
+    {attribute addProperty Name "Link error (redundancy adapter)"}
     LinkErrorRedundancyAdapter : BOOL;
-	{attribute addProperty Name "Missing one frame (redundancy mode)"}	
+    {attribute addProperty Name "Missing one frame (redundancy mode)"}
     MissingOneFrame : BOOL;
-	{attribute addProperty Name "Out of send resources (I/O reset required)"}	
+    {attribute addProperty Name "Out of send resources (I/O reset required)"}
     OutOfSendResources : BOOL;
-	{attribute addProperty Name "Watchdog triggered"}	
+    {attribute addProperty Name "Watchdog triggered"}
     WatchdogTriggered : BOOL;
-	{attribute addProperty Name "Ethernet driver (miniport) not found"}	
+    {attribute addProperty Name "Ethernet driver (miniport) not found"}
     EthernetDriverNotFound : BOOL;
-	{attribute addProperty Name "I/O reset active"}	
+    {attribute addProperty Name "I/O reset active"}
     IOResetActive : BOOL;
-	{attribute addProperty Name "At least one slave in 'INIT' state"}	
+    {attribute addProperty Name "At least one slave in 'INIT' state"}
     AtLeastOneDeviceInInitState : BOOL;
-	{attribute addProperty Name "At least one slave in 'PREOP' state"}	
+    {attribute addProperty Name "At least one slave in 'PREOP' state"}
     AtLeastOneDeviceInPreOpState : BOOL;
-	{attribute addProperty Name "At least one slave in 'SAFEOP' state"}	
+    {attribute addProperty Name "At least one slave in 'SAFEOP' state"}
     AtLeastOneDeviceInSafeOpState : BOOL;
-	{attribute addProperty Name "At least one device indicates an error state"}	
+    {attribute addProperty Name "At least one device indicates an error state"}
     AtLeastOneDeviceIndicatesAnErrorState : BOOL;
-	{attribute addProperty Name "DC not in sync"}	
+    {attribute addProperty Name "DC not in sync"}
     DcNotInSync : BOOL;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

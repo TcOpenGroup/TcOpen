@@ -33,8 +33,8 @@ MODULE mts_function
     PERS num nCamOffsX;
     PERS num nCamOffsY;
     PERS num nCamAngleRz;
-    
-    
+
+
 
     PROC Initialization()
         !set off all signal for procesing
@@ -137,9 +137,9 @@ MODULE mts_function
         IF InGlobalSpeed=0 THEN
             SpeedRefresh 100;
         ELSE
-           SpeedRefresh InGlobalSpeed; 
+           SpeedRefresh InGlobalSpeed;
         ENDIF
-        
+
         GlobalSpeed:=InGlobalSpeed;
     ENDPROC
 
@@ -150,14 +150,14 @@ MODULE mts_function
 
     FUNC tooldata SetActualTool(num RequiredToolNo)
         VAR tooldata LocalTool;
-        
+
         ActualToolNumber:=RequiredToolNo;
         RETURN LocalTool;
     ENDFUNC
 
     FUNC wobjdata SetActualWorkobject(num RequiredWorkobjectNo)
         VAR wobjdata LocalWorkobject;
-        
+
         ActualWobjNumber:=RequiredWorkobjectNo;
         RETURN LocalWorkobject;
     ENDFUNC

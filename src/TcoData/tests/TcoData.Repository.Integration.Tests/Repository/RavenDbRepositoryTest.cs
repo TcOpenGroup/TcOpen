@@ -26,15 +26,34 @@ namespace TcoDataUnitTests
             {
                 //var parameters = new RavenDbTestRepositorySettings<DataTestObject>();
                 //var parametersAltered = new RavenDbTestRepositorySettings<DataTestObjectAlteredStructure>();
-                var parameters = new RavenDbRepositorySettings<DataTestObject>(new string[] { "http://localhost:8080" }, "TestDataBase", "", "credentials");
-                var parametersAltered = new RavenDbRepositorySettings<DataTestObjectAlteredStructure>(new string[] { "http://localhost:8080" }, "TestDataBase", "", "");
+                var parameters = new RavenDbRepositorySettings<DataTestObject>(
+                    new string[] { "http://localhost:8080" },
+                    "TestDataBase",
+                    "",
+                    "credentials"
+                );
+                var parametersAltered =
+                    new RavenDbRepositorySettings<DataTestObjectAlteredStructure>(
+                        new string[] { "http://localhost:8080" },
+                        "TestDataBase",
+                        "",
+                        ""
+                    );
 
                 this.repository = new RavenDbRepository<DataTestObject>(parameters);
-                this.repository_altered_structure = new RavenDbRepository<DataTestObjectAlteredStructure>(parametersAltered);
+                this.repository_altered_structure =
+                    new RavenDbRepository<DataTestObjectAlteredStructure>(parametersAltered);
             }
 
-            this.repository.OnCreate = (id, data) => { data._Created = DateTimeProviders.DateTimeProvider.Now; data._Modified = DateTimeProviders.DateTimeProvider.Now; };
-            this.repository.OnUpdate = (id, data) => { data._Modified = DateTimeProviders.DateTimeProvider.Now; };
+            this.repository.OnCreate = (id, data) =>
+            {
+                data._Created = DateTimeProviders.DateTimeProvider.Now;
+                data._Modified = DateTimeProviders.DateTimeProvider.Now;
+            };
+            this.repository.OnUpdate = (id, data) =>
+            {
+                data._Modified = DateTimeProviders.DateTimeProvider.Now;
+            };
 
             CleanDatabase();
         }

@@ -1,9 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="TcoParentedStructure" Id="{905698ef-b82b-088e-0a1f-f46c1566a649}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcoParentedStructure EXTENDS TcoObject
-
-]]></Declaration>
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoParentedStructure EXTENDS TcoObject]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
@@ -11,21 +9,15 @@
       <Declaration><![CDATA[{attribute 'hide'}
 METHOD FB_init : BOOL
 VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	ParentObject : ITcoObject;	
-	ParentStruct : REFERENCE TO TcoStruct;
-END_VAR
-
-
-]]></Declaration>
+    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+    ParentObject : ITcoObject;
+    ParentStruct : REFERENCE TO TcoStruct;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_Identity := ADR(THIS^);
 _ParentObject := ParentObject;
-_ParentStruct REF= ParentStruct;
-
-
-]]></ST>
+_ParentStruct REF= ParentStruct;]]></ST>
       </Implementation>
     </Method>
   </POU>

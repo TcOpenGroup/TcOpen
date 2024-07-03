@@ -7,18 +7,16 @@
 {attribute addProperty CRC "1909101754"}
 {attribute addProperty Size "136"}
 {attribute addProperty Name "R8_A3 (EK1122)"}
-TYPE R8_A3_EK1122_71CA94BA EXTENDS EK1122_1FC0878B :
-STRUCT
-	{attribute addProperty Name "VI-10 (AES-D-BC-ECAT)"}
-	{attribute addProperty PreviousPort "R8_A3 (EK1122) : D"}
-	{attribute addProperty SyncUnit "default"}
-	VI_10_AES_D_BC_ECAT_x : AES_A3B07071;
-	{attribute addProperty Name "VI-9 (AES-D-BC-ECAT)"}
-	{attribute addProperty PreviousPort "R8_A3 (EK1122) : B"}
-	{attribute addProperty SyncUnit "default"}
-	VI_9_AES_D_BC_ECAT_x : AES_A3B07071;
+TYPE R8_A3_EK1122_71CA94BA EXTENDS EK1122_1FC0878B : STRUCT
+    {attribute addProperty Name "VI-10 (AES-D-BC-ECAT)"}
+    {attribute addProperty PreviousPort "R8_A3 (EK1122) : D"}
+    {attribute addProperty SyncUnit "default"}
+    VI_10_AES_D_BC_ECAT_x : AES_A3B07071;
+    {attribute addProperty Name "VI-9 (AES-D-BC-ECAT)"}
+    {attribute addProperty PreviousPort "R8_A3 (EK1122) : B"}
+    {attribute addProperty SyncUnit "default"}
+    VI_9_AES_D_BC_ECAT_x : AES_A3B07071;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -5,9 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TcoCore
-{  
-    public class TcoRemoteTaskServiceViewModel : TcoRemoteTaskViewModel
-    {
-    }
-
+{
+    public class TcoRemoteTaskServiceViewModel : TcoRemoteTaskViewModel { }
 }

@@ -1,14 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <DUT Name="TcoMessageDigest" Id="{518a3e34-b85a-0b77-0bb0-128a52748c59}">
-    <Declaration><![CDATA[TYPE TcoMessageDigest :
-STRUCT
-	Digest : DWORD;
-	Cycle  : ULINT;
-	Count  : ULINT;
-	Category  : eMessageCategory;
+    <Declaration><![CDATA[TYPE TcoMessageDigest : STRUCT
+    Digest : DWORD;
+    Cycle : ULINT;
+    Count : ULINT;
+    Category : eMessageCategory;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -6,14 +6,12 @@
 {attribute addProperty Id "AdsAddrAT %I*TcoIo.TcoAmsAddr0StateAT %I*UINT2"}
 {attribute addProperty CRC "600549431"}
 {attribute addProperty Size "2"}
-TYPE InfoData_23CBA837 :
-STRUCT
-	{attribute addProperty Name "AdsAddr"}
-	AdsAddr AT %I* : TcoAmsAddr;
-	{attribute addProperty Name "State"}
-	State AT %I* : UINT;
+TYPE InfoData_23CBA837 : STRUCT
+    {attribute addProperty Name "AdsAddr"}
+    AdsAddr AT %I* : TcoAmsAddr;
+    {attribute addProperty Name "State"}
+    State AT %I* : UINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

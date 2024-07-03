@@ -1,7 +1,8 @@
 ﻿namespace TcOpen.Inxton.Local.Security.Wpf
 {
-    public enum  MessageType
+    public enum MessageType
     {
-        YesNo,Ok
+        YesNo,
+        Ok
     }
 }

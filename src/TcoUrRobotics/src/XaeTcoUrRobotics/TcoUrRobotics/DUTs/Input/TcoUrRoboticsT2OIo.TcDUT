@@ -1,34 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoUrRoboticsT2OIo" Id="{fc8c96ee-3faf-0759-317e-75116a103e00}">
-    <Declaration><![CDATA[TYPE TcoUrRoboticsT2OIo :
-STRUCT
-	{attribute addProperty Name "<#Standard digital inputs#>"}
-	StandardDigitalInputs : USINT;
-	{attribute addProperty Name "<#Configurable digital inputs#>"}
-	ConfigurableDigitalInputs : USINT;
-	{attribute addProperty Name "<#Standard digital outputs#>"}
-	StandardDigitalOutputs : USINT;
-	{attribute addProperty Name "<#Configurable digital outputs#>"}
-	ConfigurableDigitalOutputs : USINT;
-	{attribute addProperty Name "<#Analog I/O types#>"}
-	AnalogIoTypes : USINT;
-	{attribute addProperty Name "<#Standard analog input [A or V]#>"}
-	StandardAnalogInput : ARRAY[0..1] OF REAL;
-	{attribute addProperty Name "<#Standard analog output [A or V]#>"}
-	StandardAnalogOutput : ARRAY[0..1] OF REAL;
-	{attribute addProperty Name "<#I/O current [A]#>"}
-	Current : REAL;
-	{attribute addProperty Name "<#Euromap67 input bits#>"}
-	Euromap67InputBits : ARRAY[0..31] OF BOOL;
-	{attribute addProperty Name "<#Euromap67 output bits#>"}
-	Euromap67OutputBits : ARRAY[0..31] OF BOOL;
-	{attribute addProperty Name "<#Euromap67 24V voltage#>"}
-	Euromap6724Voltage : REAL;
-	{attribute addProperty Name "<#Euromap67 24V current#>"}
-	Euromap6724VCurrent : REAL;
+    <Declaration><![CDATA[TYPE TcoUrRoboticsT2OIo : STRUCT
+    {attribute addProperty Name "<#Standard digital inputs#>"}
+    StandardDigitalInputs : USINT;
+    {attribute addProperty Name "<#Configurable digital inputs#>"}
+    ConfigurableDigitalInputs : USINT;
+    {attribute addProperty Name "<#Standard digital outputs#>"}
+    StandardDigitalOutputs : USINT;
+    {attribute addProperty Name "<#Configurable digital outputs#>"}
+    ConfigurableDigitalOutputs : USINT;
+    {attribute addProperty Name "<#Analog I/O types#>"}
+    AnalogIoTypes : USINT;
+    {attribute addProperty Name "<#Standard analog input [A or V]#>"}
+    StandardAnalogInput : ARRAY[0..1] OF REAL;
+    {attribute addProperty Name "<#Standard analog output [A or V]#>"}
+    StandardAnalogOutput : ARRAY[0..1] OF REAL;
+    {attribute addProperty Name "<#I/O current [A]#>"}
+    Current : REAL;
+    {attribute addProperty Name "<#Euromap67 input bits#>"}
+    Euromap67InputBits : ARRAY[0..31] OF BOOL;
+    {attribute addProperty Name "<#Euromap67 output bits#>"}
+    Euromap67OutputBits : ARRAY[0..31] OF BOOL;
+    {attribute addProperty Name "<#Euromap67 24V voltage#>"}
+    Euromap6724Voltage : REAL;
+    {attribute addProperty Name "<#Euromap67 24V current#>"}
+    Euromap6724VCurrent : REAL;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

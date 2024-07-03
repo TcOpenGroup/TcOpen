@@ -19,7 +19,6 @@ using TcOpen.Inxton.Wpf;
 
 namespace TcoTixonFeeding
 {
-
     public partial class TcoTixonPickVibroBasic_v_1_x_xServiceView : UserControl
     {
         public TcoTixonPickVibroBasic_v_1_x_xServiceView()
@@ -31,12 +30,5 @@ namespace TcoTixonFeeding
 
             InitializeComponent();
         }
-
-
-       
-
     }
-
-  
-
 }

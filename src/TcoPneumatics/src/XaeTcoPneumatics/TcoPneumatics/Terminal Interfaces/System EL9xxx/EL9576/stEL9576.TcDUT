@@ -2,11 +2,9 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
   <DUT Name="stEL9576" Id="{3f662b74-2f63-4648-9b5f-3f1e403de529}">
     <Declaration><![CDATA[{attribute 'pack_mode' := '1'}
-TYPE stEL9576 :
-STRUCT
-	BCT_Inputs AT %I* : stEL9576_Status; 
+TYPE stEL9576 : STRUCT
+    BCT_Inputs AT %I* : stEL9576_Status;
 END_STRUCT
-END_TYPE;
-]]></Declaration>
+END_TYPE;]]></Declaration>
   </DUT>
 </TcPlcObject>

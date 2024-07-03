@@ -7,7 +7,7 @@ namespace TcoCore
     public partial class TcoRemoteTask : INotifyPropertyChanged
     {
         internal Action DeferredAction { get; private set; }
-        
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
@@ -43,10 +43,11 @@ namespace TcoCore
         /// <param name="deferredAction">Action to be executed on this <see cref="TcoRemoteTask"/> call.</param>
         public void InitializeExclusively(Action deferredAction)
         {
-
             if (defferedActionCount > 0)
             {
-                throw new MultipleRemoteCallInitializationException("There was an attempt to initialize exclusive RPC call more than once in this application.");
+                throw new MultipleRemoteCallInitializationException(
+                    "There was an attempt to initialize exclusive RPC call more than once in this application."
+                );
             }
 
             DeferredAction = deferredAction;
@@ -62,10 +63,11 @@ namespace TcoCore
         /// <param name="deferredAction">Action to be executed on this <see cref="RemoteTask"/> call.</param>
         public void InitializeExclusively(Func<bool> deferredAction)
         {
-
             if (defferedActionCount > 0)
             {
-                throw new MultipleRemoteCallInitializationException("There was an attempt to initialize exclusive RPC call more than once in this application.");
+                throw new MultipleRemoteCallInitializationException(
+                    "There was an attempt to initialize exclusive RPC call more than once in this application."
+                );
             }
 
             DeferredAction = new Action(() => deferredAction());
@@ -86,19 +88,27 @@ namespace TcoCore
 
         private bool IsRunning = false;
 
-        private async void ExecuteAsync(Vortex.Connector.IValueTag sender, Vortex.Connector.ValueTypes.ValueChangedEventArgs args)
+        private async void ExecuteAsync(
+            Vortex.Connector.IValueTag sender,
+            Vortex.Connector.ValueTypes.ValueChangedEventArgs args
+        )
         {
             (this as IVortexObject).Read();
 
-            if (this._startSignature.LastValue != string.Empty &&
-                !IsRunning &&
-                this._startSignature.LastValue != this._doneSignarure.LastValue)
+            if (
+                this._startSignature.LastValue != string.Empty
+                && !IsRunning
+                && this._startSignature.LastValue != this._doneSignarure.LastValue
+            )
             {
                 try
                 {
                     IsRunning = true;
                     RemoteExecutionException = null;
-                    await System.Threading.Tasks.Task.Run(() => { DeferredAction.Invoke(); });
+                    await System.Threading.Tasks.Task.Run(() =>
+                    {
+                        DeferredAction.Invoke();
+                    });
                 }
                 catch (Exception ex)
                 {
@@ -106,7 +116,10 @@ namespace TcoCore
                     this._exceptionMessage.Synchron = ex.Message;
                     RemoteExecutionException = ex;
                     RemoteExceptionDetails = ex.ToString();
-                    TcOpen.Inxton.TcoAppDomain.Current.Logger.Error($"Remote execution failure '{ex.ToString()}'", Logging.LogInfo.Create(this));
+                    TcOpen.Inxton.TcoAppDomain.Current.Logger.Error(
+                        $"Remote execution failure '{ex.ToString()}'",
+                        Logging.LogInfo.Create(this)
+                    );
                     return;
                 }
                 finally
@@ -125,10 +138,7 @@ namespace TcoCore
         /// </summary>
         public Exception RemoteExecutionException
         {
-            get
-            {
-                return remoteExecutionException;
-            }
+            get { return remoteExecutionException; }
             private set
             {
                 if (remoteExecutionException == value)
@@ -137,7 +147,10 @@ namespace TcoCore
                 }
 
                 remoteExecutionException = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RemoteExecutionException)));
+                PropertyChanged?.Invoke(
+                    this,
+                    new PropertyChangedEventArgs(nameof(RemoteExecutionException))
+                );
             }
         }
 
@@ -148,18 +161,21 @@ namespace TcoCore
         /// </summary>
         public string RemoteExceptionDetails
         {
-            get => remoteExceptionDetails; 
+            get => remoteExceptionDetails;
             private set
             {
                 remoteExceptionDetails = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RemoteExceptionDetails)));
+                PropertyChanged?.Invoke(
+                    this,
+                    new PropertyChangedEventArgs(nameof(RemoteExceptionDetails))
+                );
             }
         }
 
         /// <summary>
-        /// Resets the resets this instance of <see cref="RemoteTask"/>.        
+        /// Resets the resets this instance of <see cref="RemoteTask"/>.
         /// </summary>
-        /// <note>If the procedure is being called from the PLC once the <see cref="Reset"/> method is called the execution of this 
+        /// <note>If the procedure is being called from the PLC once the <see cref="Reset"/> method is called the execution of this
         /// <see cref="RemoteTask"/> will start again.</note>
         public void ResetExecution()
         {

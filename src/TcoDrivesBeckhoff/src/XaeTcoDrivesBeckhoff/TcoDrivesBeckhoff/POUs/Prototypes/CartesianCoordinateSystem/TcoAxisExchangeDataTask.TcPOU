@@ -2,28 +2,26 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="TcoAxisExchangeDataTask" Id="{70b5fecb-d418-0a63-1b9f-b3b6f1baa87a}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			TcoAxisExchangeDataTask task is a remote task  <see cref="PlcDocu.TcoCore.RemoteTask"/> with a paramater. 	
-		</summary>	
-		<param name="_identifier">The Identifier, ID  of an entity on which a CRUD operation should be executed</param>
-		<remarks>Inxton is required for this feature to work</remarks>		
-	</docu>	
+    <docu>
+        <summary>
+            TcoAxisExchangeDataTask task is a remote task  <see cref="PlcDocu.TcoCore.RemoteTask"/> with a paramater.
+        </summary>
+        <param name="_identifier">The Identifier, ID  of an entity on which a CRUD operation should be executed</param>
+        <remarks>Inxton is required for this feature to work</remarks>
+    </docu>
 ~*)
 FUNCTION_BLOCK TcoAxisExchangeDataTask EXTENDS TcoCore.TcoRemoteTask
 VAR
-	(*~
-	<docu>
-		<summary>
-			The Identifier, ID  of an entity on which a CRUD operation should be executed. 	
-		</summary>						
-	</docu>	
-	~*)
+    (*~
+    <docu>
+        <summary>
+            The Identifier, ID  of an entity on which a CRUD operation should be executed.
+        </summary>
+    </docu>
+    ~*)
     _identifier : STRING(255);
-
-	_doesNotExist :BOOL;	
-	_exchangeSuccessfuly: BOOL;
-
+    _doesNotExist : BOOL;
+    _exchangeSuccessfuly : BOOL;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[SUPER^();]]></ST>
@@ -32,10 +30,9 @@ END_VAR]]></Declaration>
       <Declaration><![CDATA[PROPERTY PUBLIC DoesNotExist : bool]]></Declaration>
       <Get Name="Get" Id="{c8e4cee1-9159-0576-0009-d3984172f572}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[DoesNotExist:=_doesNotExist;]]></ST>
+          <ST><![CDATA[DoesNotExist := _doesNotExist;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -43,54 +40,49 @@ END_VAR
       <Declaration><![CDATA[PROPERTY ReadSuccessfuly : bool]]></Declaration>
       <Get Name="Get" Id="{22aa8aab-5593-06bd-0cf4-911d4b855aec}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[ReadSuccessfuly:=_exchangeSuccessfuly;]]></ST>
+          <ST><![CDATA[ReadSuccessfuly := _exchangeSuccessfuly;]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Method Name="Restore" Id="{c3411037-c1a6-0f43-1be4-9b3d98b2d53c}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
-			<para>
-				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
-			</para>
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+            <para>
+                See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+            </para>
+        </summary>
+    </docu>
 ~*)
 METHOD Restore : ITcoRestorable
 VAR
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_doesNotExist:=FALSE;
+        <ST><![CDATA[_doesNotExist := FALSE;
 //_identifier:='';
-_exchangeSuccessfuly:=FALSE;
-SUPER^.Restore();
-]]></ST>
+_exchangeSuccessfuly := FALSE;
+SUPER^.Restore();]]></ST>
       </Implementation>
     </Method>
     <Method Name="WithId" Id="{7131bbd6-0b83-0114-15d0-afa3b79f5b85}">
-      <Declaration><![CDATA[
-METHOD WithId : REFERENCE TO TcoAxisExchangeDataTask
+      <Declaration><![CDATA[METHOD WithId : REFERENCE TO TcoAxisExchangeDataTask
 VAR_INPUT
-	(*~
-	<docu>
-		<summary>
-			The Identifier, ID  of an entity on which a CRUD operation should be executed. 	
-		</summary>						
-	</docu>	
-	~*)
-	inIdentifier : STRING(254);
-END_VAR
-]]></Declaration>
+    (*~
+    <docu>
+        <summary>
+            The Identifier, ID  of an entity on which a CRUD operation should be executed.
+        </summary>
+    </docu>
+    ~*)
+    inIdentifier : STRING(254);
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^._identifier := inIdentifier;
 WithId REF= THIS^;
-THIS^.Messenger.Build().Append('<#Loading/saving data item with id:#> ').Append(_identifier).As().AsTrace();	
-]]></ST>
+THIS^.Messenger.Build().Append('<#Loading/saving data item with id:#> ').Append(_identifier).As().AsTrace();]]></ST>
       </Implementation>
     </Method>
   </POU>

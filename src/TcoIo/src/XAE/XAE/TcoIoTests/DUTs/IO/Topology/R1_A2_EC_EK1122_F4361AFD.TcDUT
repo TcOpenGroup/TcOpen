@@ -7,22 +7,20 @@
 {attribute addProperty CRC "4097186557"}
 {attribute addProperty Size "87"}
 {attribute addProperty Name "R1_A2_EC (EK1122)"}
-TYPE R1_A2_EC_EK1122_F4361AFD EXTENDS EK1122_1FC0878B :
-STRUCT
-	{attribute addProperty Name "Servo_A10_1 (AX5106-0000-0203)"}
-	{attribute addProperty PreviousPort "R1_A2_EC (EK1122) : D"}
-	{attribute addProperty SyncUnit "default"}
-	Servo_A10_1_AX5106_0000_0203 : AX5106_1BD22F51;
-	{attribute addProperty Name "Servo_A10_2 (AX5106-0000-0203)"}
-	{attribute addProperty PreviousPort "Servo_A10_1 (AX5106-0000-0203) : B"}
-	{attribute addProperty SyncUnit "default"}
-	Servo_A10_2_AX5106_0000_0203 : AX5106_1BD22F51;
-	{attribute addProperty Name "Servo_A10_3 (AX5106-0000-0203)"}
-	{attribute addProperty PreviousPort "Servo_A10_2 (AX5106-0000-0203) : B"}
-	{attribute addProperty SyncUnit "default"}
-	Servo_A10_3_AX5106_0000_0203 : AX5106_1BD22F51;
+TYPE R1_A2_EC_EK1122_F4361AFD EXTENDS EK1122_1FC0878B : STRUCT
+    {attribute addProperty Name "Servo_A10_1 (AX5106-0000-0203)"}
+    {attribute addProperty PreviousPort "R1_A2_EC (EK1122) : D"}
+    {attribute addProperty SyncUnit "default"}
+    Servo_A10_1_AX5106_0000_0203 : AX5106_1BD22F51;
+    {attribute addProperty Name "Servo_A10_2 (AX5106-0000-0203)"}
+    {attribute addProperty PreviousPort "Servo_A10_1 (AX5106-0000-0203) : B"}
+    {attribute addProperty SyncUnit "default"}
+    Servo_A10_2_AX5106_0000_0203 : AX5106_1BD22F51;
+    {attribute addProperty Name "Servo_A10_3 (AX5106-0000-0203)"}
+    {attribute addProperty PreviousPort "Servo_A10_2 (AX5106-0000-0203) : B"}
+    {attribute addProperty SyncUnit "default"}
+    Servo_A10_3_AX5106_0000_0203 : AX5106_1BD22F51;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

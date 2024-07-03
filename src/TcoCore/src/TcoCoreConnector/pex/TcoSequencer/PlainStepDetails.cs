@@ -3,8 +3,11 @@
 namespace TcoCore
 {
     public partial class PlainStepDetails
-    {        
-        public eStepStatus StatusAsEnum { get { return (eStepStatus)this.Status; } }
+    {
+        public eStepStatus StatusAsEnum
+        {
+            get { return (eStepStatus)this.Status; }
+        }
 
         bool isActive;
         public bool IsActive

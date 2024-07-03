@@ -7,38 +7,36 @@
 {attribute addProperty CRC "3012413864"}
 {attribute addProperty Size "248"}
 {attribute addProperty Name "Term 1 (EK1200)"}
-TYPE Term_1_EK1200_B38DC9A8 EXTENDS EK1200_013D0B49 :
-STRUCT
-	{attribute addProperty Name "Term 2 (EL6002)"}
-	{attribute addProperty PreviousPort "Term 1 (EK1200) : B"}
-	{attribute addProperty SyncUnit "default"}
-	Term_2_EL6002 : EL6002_CD897635;
-	{attribute addProperty Name "Term 3 (EL1809)"}
-	{attribute addProperty PreviousPort "Term 2 (EL6002) : B"}
-	{attribute addProperty SyncUnit "default"}
-	Term_3_EL1809 : EL1809_32157CFD;
-	{attribute addProperty Name "Term 4 (EL2809)"}
-	{attribute addProperty PreviousPort "Term 3 (EL1809) : B"}
-	{attribute addProperty SyncUnit "default"}
-	Term_4_EL2809 : EL2809_2B6483BD;
-	{attribute addProperty Name "Term 5 (EL4004)"}
-	{attribute addProperty PreviousPort "Term 4 (EL2809) : B"}
-	{attribute addProperty SyncUnit "default"}
-	Term_5_EL4004 : EL4004_E203F875;
-	{attribute addProperty Name "Term 6 (EL2809)"}
-	{attribute addProperty PreviousPort "Term 5 (EL4004) : B"}
-	{attribute addProperty SyncUnit "default"}
-	Term_6_EL2809 : EL2809_2B6483BD;
-	{attribute addProperty Name "Term 7 (EL6001)"}
-	{attribute addProperty PreviousPort "Term 6 (EL2809) : B"}
-	{attribute addProperty SyncUnit "default"}
-	Term_7_EL6001 : EL6001_0DE01E7E;
-	{attribute addProperty Name "Term 8 (EL9011)"}
-	{attribute addProperty PreviousPort "Term 7 (EL6001) : B"}
-	{attribute addProperty SyncUnit "default"}
-	Term_8_EL9011 : EL9011_D65D3D32;
+TYPE Term_1_EK1200_B38DC9A8 EXTENDS EK1200_013D0B49 : STRUCT
+    {attribute addProperty Name "Term 2 (EL6002)"}
+    {attribute addProperty PreviousPort "Term 1 (EK1200) : B"}
+    {attribute addProperty SyncUnit "default"}
+    Term_2_EL6002 : EL6002_CD897635;
+    {attribute addProperty Name "Term 3 (EL1809)"}
+    {attribute addProperty PreviousPort "Term 2 (EL6002) : B"}
+    {attribute addProperty SyncUnit "default"}
+    Term_3_EL1809 : EL1809_32157CFD;
+    {attribute addProperty Name "Term 4 (EL2809)"}
+    {attribute addProperty PreviousPort "Term 3 (EL1809) : B"}
+    {attribute addProperty SyncUnit "default"}
+    Term_4_EL2809 : EL2809_2B6483BD;
+    {attribute addProperty Name "Term 5 (EL4004)"}
+    {attribute addProperty PreviousPort "Term 4 (EL2809) : B"}
+    {attribute addProperty SyncUnit "default"}
+    Term_5_EL4004 : EL4004_E203F875;
+    {attribute addProperty Name "Term 6 (EL2809)"}
+    {attribute addProperty PreviousPort "Term 5 (EL4004) : B"}
+    {attribute addProperty SyncUnit "default"}
+    Term_6_EL2809 : EL2809_2B6483BD;
+    {attribute addProperty Name "Term 7 (EL6001)"}
+    {attribute addProperty PreviousPort "Term 6 (EL2809) : B"}
+    {attribute addProperty SyncUnit "default"}
+    Term_7_EL6001 : EL6001_0DE01E7E;
+    {attribute addProperty Name "Term 8 (EL9011)"}
+    {attribute addProperty PreviousPort "Term 7 (EL6001) : B"}
+    {attribute addProperty SyncUnit "default"}
+    Term_8_EL9011 : EL9011_D65D3D32;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

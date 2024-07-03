@@ -10,15 +10,14 @@ using Vortex.Connector;
 namespace TcoInspectors
 {
     public partial class TcoInspectorDialog : IsDialog
+    {
+        public new void ShowAgainIfInvoked()
         {
-            public new void ShowAgainIfInvoked()
+            this.Read();
+            if (this._isInvoked.LastValue)
             {
-                this.Read();
-                if (this._isInvoked.LastValue)
-                {
-                    this._restoreRequest.Synchron = true;
-                }
+                this._restoreRequest.Synchron = true;
             }
         }
-    
+    }
 }

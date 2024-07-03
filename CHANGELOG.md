@@ -1,7 +1,8 @@
 # This doument is not being maintaned!!!
-# IMPORTANT from 0.7.0-alpha.863 we will maintain release logs in Releases [here](https://github.com/TcOpenGroup/TcOpen/releases)
-# Please make sure you create commits with proper descripions and document your changes in respective PRs.
 
+# IMPORTANT from 0.7.0-alpha.863 we will maintain release logs in Releases [here](https://github.com/TcOpenGroup/TcOpen/releases)
+
+# Please make sure you create commits with proper descripions and document your changes in respective PRs.
 
 # v0.7.x
 
@@ -11,10 +12,10 @@ Added posibility to provide authentication token via serial interface.
 
 Usage
 
-~~~C#
+```C#
 SecurityProvider.Get.AuthenticationService;
 authService.ExternalAuthorization = ExternalTokenAuthorization.CreateComReader("COM3");
-~~~
+```
 
 ## TcoIo
 
@@ -25,6 +26,7 @@ Added TcoIo library for details see [here](https://github.com/TcOpenGroup/TcOpen
 ## TcoCore
 
 ### Changes
+
 - WPF Update MaterialDesign 4.4.0
 - TcoTask now accesses the PLC data via cyclic or lastvalue instead of synchron due to performance degradation.
 - Clears sequencers cycle timer on `Restore`
@@ -34,21 +36,21 @@ Added TcoIo library for details see [here](https://github.com/TcOpenGroup/TcOpen
 - WPF `ViewModelizer` simple mechanism to create ViewModel when required for the view, the call must be placed in the view like this:
 - ViewModelizer simple mechanism to create ViewModel when required for the view, the call must be placed in the view like this:
 
-~~~
+```
 protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
 {
        base.OnPropertyChanged(e);
 
        if (e.Property == DataContextProperty)
-       {                
+       {
            this.DataContext = this.DataContext.ViewModelizeDataContext<TcoTaskViewModel, TcoTask>();
        }
 }
-~~~
+```
 
 ### Breaking
-- `GetSignal` is now an FB the symbol is retrieved only when the pointer changes (performance issue)
 
+- `GetSignal` is now an FB the symbol is retrieved only when the pointer changes (performance issue)
 
 ## TcOpen.Inxton.Local.Security
 
@@ -68,42 +70,40 @@ protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
 
 ## TcoCore
 
-### TcoObject.FB_init 
+### TcoObject.FB_init
 
 **FB_init when object is in another FUNCTION_BLOCK**
 (**No change just reminder**)
 
-~~~
+```
 FUNCTION_BLOCK myFunctionBlock : EXTENDS TcoCore.TcoObject
-VAR    
-    myObject : SomeTcoObject(THIS^); 
-END_VAR    
-~~~
+VAR
+    myObject : SomeTcoObject(THIS^);
+END_VAR
+```
 
 ### TcoStruct initialization
 
 `TcoStruct` has been added to allow structure and inner objects to access `TcoContext` and take advantage of the framework features.
 
-~~~
+```
 Data : ExampleInspectorsStruct := (Parent := THIS^);
-~~~
+```
 
 **IMPORTANT!!!** The compiler will not warn you about missing parent assignment. Missing parent assignment may result in invalid pointer/reference exceptions.
 
 **FB_init when object is in another STRUCTURE**
 
-~~~
+```
 TYPE
     MyStructure EXTENDS TcoCore.TcoStruct :
     STRUCT
-        // Before not possible         
+        // Before not possible
         // Now
         myObject : TcoObject(THISSTRUCT);
     END_STRUCT
 END_TYPE
-~~~
-
-
+```
 
 ## Enchancements
 
@@ -112,5 +112,5 @@ END_TYPE
 - [Dialogs](https://docs.tcopengroup.org/articles/TcOpenFramework/TcoCore/TcoDialogs.html)
 
 ### TcoInspectors
--  [Introduction](https://docs.tcopengroup.org/articles/TcOpenFramework/TcoInspectors/Introduction.html)
 
+- [Introduction](https://docs.tcopengroup.org/articles/TcOpenFramework/TcoInspectors/Introduction.html)

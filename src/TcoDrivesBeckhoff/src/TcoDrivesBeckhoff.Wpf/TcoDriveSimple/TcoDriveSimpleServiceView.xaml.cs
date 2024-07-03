@@ -17,7 +17,6 @@ using System.Windows.Shapes;
 
 namespace TcoDrivesBeckhoff
 {
-
     public partial class TcoDriveSimpleServiceView : UserControl
     {
         public TcoDriveSimpleServiceView()
@@ -28,15 +27,14 @@ namespace TcoDrivesBeckhoff
 
     public class ErrorIdToDescriptionConverter : MarkupExtension, IValueConverter
     {
-
-     
-
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             try
             {
                 uint errorId = (uint)value;
-                return NcErrors.Errors.ContainsKey(errorId) ? NcErrors.Errors[errorId] : "No error description available.";
+                return NcErrors.Errors.ContainsKey(errorId)
+                    ? NcErrors.Errors[errorId]
+                    : "No error description available.";
             }
             catch (Exception)
             {
@@ -47,7 +45,12 @@ namespace TcoDrivesBeckhoff
             return string.Empty;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }

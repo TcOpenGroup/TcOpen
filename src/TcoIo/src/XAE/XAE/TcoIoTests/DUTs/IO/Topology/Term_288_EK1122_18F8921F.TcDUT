@@ -7,22 +7,20 @@
 {attribute addProperty CRC "418943519"}
 {attribute addProperty Size "153"}
 {attribute addProperty Name "Term 288 (EK1122)"}
-TYPE Term_288_EK1122_18F8921F EXTENDS EK1122_1FC0878B :
-STRUCT
-	{attribute addProperty Name "Term 289 (EK1100)"}
-	{attribute addProperty PreviousPort "Term 288 (EK1122) : D"}
-	{attribute addProperty SyncUnit "default"}
-	Term_289_EK1100 : Term_289_EK1100_9C677E50;
-	{attribute addProperty Name "Term 294 (EK1100)"}
-	{attribute addProperty PreviousPort "Term 289 (EK1100) : C"}
-	{attribute addProperty SyncUnit "default"}
-	Term_294_EK1100 : Term_294_EK1100_DFE2A59E;
-	{attribute addProperty Name "Term 307 (EK1100)"}
-	{attribute addProperty PreviousPort "Term 294 (EK1100) : C"}
-	{attribute addProperty SyncUnit "default"}
-	Term_307_EK1100 : Term_307_EK1100_EB8FAA41;
+TYPE Term_288_EK1122_18F8921F EXTENDS EK1122_1FC0878B : STRUCT
+    {attribute addProperty Name "Term 289 (EK1100)"}
+    {attribute addProperty PreviousPort "Term 288 (EK1122) : D"}
+    {attribute addProperty SyncUnit "default"}
+    Term_289_EK1100 : Term_289_EK1100_9C677E50;
+    {attribute addProperty Name "Term 294 (EK1100)"}
+    {attribute addProperty PreviousPort "Term 289 (EK1100) : C"}
+    {attribute addProperty SyncUnit "default"}
+    Term_294_EK1100 : Term_294_EK1100_DFE2A59E;
+    {attribute addProperty Name "Term 307 (EK1100)"}
+    {attribute addProperty PreviousPort "Term 294 (EK1100) : C"}
+    {attribute addProperty SyncUnit "default"}
+    Term_307_EK1100 : Term_307_EK1100_EB8FAA41;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

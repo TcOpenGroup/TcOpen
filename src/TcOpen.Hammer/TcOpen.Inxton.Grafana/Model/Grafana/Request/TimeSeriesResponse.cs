@@ -2,7 +2,6 @@ using System.Collections.Generic;
 
 namespace Grafana.Backend.Model
 {
-
     /// Represents a individual metric's values in the response to /query.
     /// From the SimpleJson plugin docs:
     ///   {
@@ -12,8 +11,10 @@ namespace Grafana.Backend.Model
     ///       [365,1450754220000]
     ///     ]
     ///   }
-    public sealed class TimeSeriesResponse : IQueryResponse {
-    public string Target { get; set; }
-    public IEnumerable<IEnumerable<double>> DataPoints { get; set; } = new List<IEnumerable<double>>();
-  }
+    public sealed class TimeSeriesResponse : IQueryResponse
+    {
+        public string Target { get; set; }
+        public IEnumerable<IEnumerable<double>> DataPoints { get; set; } =
+            new List<IEnumerable<double>>();
+    }
 }

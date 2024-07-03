@@ -43,8 +43,8 @@ VAR
     _dummyPreconditionOK : BOOL;
 END_VAR
 VAR
-	{attribute 'hide'}
-	_sb : TcoCore.StringBuilder;
+    {attribute 'hide'}
+    _sb : TcoCore.StringBuilder;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF NOT __ISVALIDREF(_axisRef) THEN
@@ -60,14 +60,15 @@ IF THIS^.Ready OR THIS^.Done THEN
 END_IF
 
 IF Execute() THEN
-
     _dummyPreconditionOK := TRUE;
 
     IF NOT DriveRef._movementState.MovePreconditionsOk(THIS^, _dummyPreconditionOK) THEN
         Messenger.Error('To be implemented');
         RETURN;
     END_IF
-	_calibrationCam:=DriveRef.inCalibrationCam;
+
+    _calibrationCam := DriveRef.inCalibrationCam;
+
     _mcHome(Axis := _axisRef,
         Execute := NOT _mcHome.Busy,
         Position := _position,
@@ -88,10 +89,17 @@ IF Execute() THEN
 
     DoneWhen(_mcHome.Done);
     ThrowWhen(_mcHome.Error);
-
 END_IF
-IF(_mcHome.Error) THEN Messenger.Error(_sb.Clear().Append('<#Homing error no #>').Append(UDINT_TO_STRING(_mcHome.ErrorId)).Append(' |[[1]AdvancedDiagnosticMessage]|').Append('.').Append('For details see the service mode').ToString()); END_IF;
-]]></ST>
+
+IF (_mcHome.Error) THEN
+    Messenger.Error(_sb.Clear()
+            .Append('<#Homing error no #>')
+            .Append(UDINT_TO_STRING(_mcHome.ErrorId))
+            .Append(' |[[1]AdvancedDiagnosticMessage]|')
+            .Append('.')
+            .Append('For details see the service mode')
+            .ToString());
+END_IF;]]></ST>
     </Implementation>
     <Property Name="DriveRef" Id="{e8364453-3188-0da4-2572-9954580193ec}">
       <Declaration><![CDATA[PROPERTY DriveRef : REFERENCE TO TcoDriveSimple]]></Declaration>
@@ -111,7 +119,7 @@ END_IF]]></ST>
 VAR_INPUT
     bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
     bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
-    ParentObject : ITcoObject;	
+    ParentObject : ITcoObject;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
@@ -143,11 +151,11 @@ InvokeWithParams := THIS^.Invoke();]]></ST>
     </Method>
     <Method Name="OnAbort" Id="{9ee2033f-4162-05e9-21d9-a85d0b910c5c}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task is aborted.
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task is aborted.
+        </summary>
+    </docu>
 ~*)
 METHOD PROTECTED OnAbort]]></Declaration>
       <Implementation>
@@ -166,14 +174,13 @@ THIS^.DriveRef._movementState.Restore();]]></ST>
     </Method>
     <Method Name="OnDone" Id="{df2a8b79-6c73-032a-2ff4-d5541f41ea17}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task reaches the ```Done``` state .
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task reaches the ```Done``` state .
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnDone
-]]></Declaration>
+METHOD PROTECTED OnDone]]></Declaration>
       <Implementation>
         <ST><![CDATA[_mcHome(Axis := _axisRef, Execute := FALSE);
 THIS^.DriveRef._movementState.Restore();]]></ST>
@@ -181,17 +188,16 @@ THIS^.DriveRef._movementState.Restore();]]></ST>
     </Method>
     <Method Name="OnError" Id="{d07e8610-7368-023b-25df-249562facdb2}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task reaches the ```Error``` state.
-			<para>
-				Do not confuse with <see cref="PlcDocu.TcoCore.TcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
-			</para>
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task reaches the ```Error``` state.
+            <para>
+                Do not confuse with <see cref="PlcDocu.TcoCore.TcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
+            </para>
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnError
-]]></Declaration>
+METHOD PROTECTED OnError]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^.DriveRef._movementState.Restore();
 
@@ -199,13 +205,11 @@ IF NOT _axisRef.Status.Error THEN
     DriveRef.SetErrorID(DriveRef._homeTask._mcHome.ErrorID);
 END_IF
 
-_mcHome(Axis := _axisRef, Execute := FALSE);
-]]></ST>
+_mcHome(Axis := _axisRef, Execute := FALSE);]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStart" Id="{4fd57a3f-d1a4-0154-1f6b-d8022b025929}">
-      <Declaration><![CDATA[METHOD PROTECTED OnStart 
-]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED OnStart]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF NOT Tco_TO_Tc2MC2_HomingMode(_homingMode, _mc_homingMode) THEN
     _message := Tc2_Standard.CONCAT('Unable to cast _homingMode variable of type TcoDrivesBeckhoff.eHomingMode (', TO_STRING(_homingMode));
@@ -257,14 +261,14 @@ _mcHome(Axis := _axisRef, Execute := FALSE);]]></ST>
     </Method>
     <Method Name="Restore" Id="{f2b89535-f59f-07c3-0011-97ecb4188bc9}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
-			<para>
-				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
-			</para>
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+            <para>
+                See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+            </para>
+        </summary>
+    </docu>
 ~*)
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
@@ -273,17 +277,16 @@ METHOD Restore : ITcoRestorable]]></Declaration>
     </Method>
     <Method Name="WhileError" Id="{79cc0927-fae8-0574-05cf-4d461dfcefc6}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes until task is in ```Error``` state .
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes until task is in ```Error``` state .
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED WhileError
-]]></Declaration>
+METHOD PROTECTED WhileError]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
-	DriveRef.SetErrorID(DriveRef._homeTask._mcHome.ErrorID);
+    DriveRef.SetErrorID(DriveRef._homeTask._mcHome.ErrorID);
     _mcHome(Axis := _axisRef, Execute := FALSE);
 END_IF]]></ST>
       </Implementation>

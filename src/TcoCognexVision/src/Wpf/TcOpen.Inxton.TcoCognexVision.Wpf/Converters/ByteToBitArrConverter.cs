@@ -7,7 +7,12 @@ namespace TcoCognexVision.Converters
 {
     public class ByteToBitArrConverter : BaseConverter
     {
-        public override object ToConvert(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object ToConvert(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             if (value is byte)
             {

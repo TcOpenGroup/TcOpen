@@ -14,10 +14,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Repository\InMemory\TcOpen.Inxton.Data.InMemory.csproj" />
-    <ProjectReference Include="..\..\src\Repository\Json\TcOpen.Inxton.Data.Json.csproj" />
-    <ProjectReference Include="..\..\src\Repository\MongoDb\TcOpen.Inxton.MongoDb.csproj" />
-    <ProjectReference Include="..\TcoDataTestsConnector\TcoDataTestsConnector.csproj" />
+    <ProjectReference
+      Include="..\..\src\Repository\InMemory\TcOpen.Inxton.Data.InMemory.csproj"
+    />
+    <ProjectReference
+      Include="..\..\src\Repository\Json\TcOpen.Inxton.Data.Json.csproj"
+    />
+    <ProjectReference
+      Include="..\..\src\Repository\MongoDb\TcOpen.Inxton.MongoDb.csproj"
+    />
+    <ProjectReference
+      Include="..\TcoDataTestsConnector\TcoDataTestsConnector.csproj"
+    />
   </ItemGroup>
 
 </Project>

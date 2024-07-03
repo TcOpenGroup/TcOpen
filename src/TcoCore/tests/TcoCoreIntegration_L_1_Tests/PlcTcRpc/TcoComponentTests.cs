@@ -1,24 +1,19 @@
-using NUnit.Framework;
 using System;
+using System.Linq;
 using System.Threading;
+using NUnit.Framework;
 using TcoCore;
 using TcoCoreTests;
 using TcoCoreUnitTests;
-using System.Linq;
 using Vortex.Connector;
-
 
 namespace TcoCoreUnitTests.PlcTcRpc
 {
-
     public class T09_TcoComponentTests
     {
-
         TcoComponentTest tc = ConnectorFixture.Connector.MAIN._tcoComponentTest;
         TcoTaskTest tt = ConnectorFixture.Connector.MAIN._tcoComponentTest._component._task;
         ushort cycles;
-
-
 
         [OneTimeSetUp]
         public void OneSetup()
@@ -26,12 +21,8 @@ namespace TcoCoreUnitTests.PlcTcRpc
             tc.SingleCycleRun(() => tc.TriggerRestore());
         }
 
-
         [OneTimeTearDown]
-        public void OneTimeTearDown()
-        {
-
-        }
+        public void OneTimeTearDown() { }
 
         [TearDown]
         public void TearDown()
@@ -40,9 +31,7 @@ namespace TcoCoreUnitTests.PlcTcRpc
         }
 
         [SetUp]
-        public void Setup()
-        {
-        }
+        public void Setup() { }
 
         [Test, Order(900)]
         public void T900_NotInServiceMode()
@@ -55,10 +44,13 @@ namespace TcoCoreUnitTests.PlcTcRpc
             ulong serviceModeCount = tc._component._serviceModeCount.Synchron;
 
             //--Act
-            tc.MultipleCycleRun(() =>
-            {
-                tc.PLCinstanceRun();
-            }, cycles);
+            tc.MultipleCycleRun(
+                () =>
+                {
+                    tc.PLCinstanceRun();
+                },
+                cycles
+            );
             tt.ReadOutState();
 
             //--Assert
@@ -81,15 +73,18 @@ namespace TcoCoreUnitTests.PlcTcRpc
             ulong serviceModeCount = tc._component._serviceModeCount.Synchron;
 
             //--Act
-            tc.MultipleCycleRun(() =>
-            {
-                tt.SetInvokeRequest();
-                tt.ReadOutState();
-                Assert.IsTrue(tt._isInvokeRequestTrue.Synchron);
-                tc.PLCinstanceRun();
-                tt.ReadOutState();
-                Assert.IsFalse(tt._isInvokeRequestTrue.Synchron);
-            }, cycles);
+            tc.MultipleCycleRun(
+                () =>
+                {
+                    tt.SetInvokeRequest();
+                    tt.ReadOutState();
+                    Assert.IsTrue(tt._isInvokeRequestTrue.Synchron);
+                    tc.PLCinstanceRun();
+                    tt.ReadOutState();
+                    Assert.IsFalse(tt._isInvokeRequestTrue.Synchron);
+                },
+                cycles
+            );
             tt.ReadOutState();
 
             //--Assert
@@ -112,11 +107,14 @@ namespace TcoCoreUnitTests.PlcTcRpc
             ulong serviceModeCount = tc._component._serviceModeCount.Synchron;
 
             //--Act
-            tc.MultipleCycleRun(() =>
-            {
-                tt.TriggerInvoke();
-                tc.PLCinstanceRun();
-            }, cycles);
+            tc.MultipleCycleRun(
+                () =>
+                {
+                    tt.TriggerInvoke();
+                    tc.PLCinstanceRun();
+                },
+                cycles
+            );
             tt.ReadOutState();
 
             //--Assert
@@ -139,16 +137,19 @@ namespace TcoCoreUnitTests.PlcTcRpc
             ulong serviceModeCount = tc._component._serviceModeCount.Synchron;
 
             //--Act
-            tc.MultipleCycleRun(() =>
-            {
-                tc.Service();
-                tt.SetInvokeRequest();
-                tt.ReadOutState();
-                Assert.IsTrue(tt._isInvokeRequestTrue.Synchron);
-                tc.PLCinstanceRun();
-                tt.ReadOutState();
-                Assert.IsFalse(tt._isInvokeRequestTrue.Synchron);
-            }, cycles);
+            tc.MultipleCycleRun(
+                () =>
+                {
+                    tc.Service();
+                    tt.SetInvokeRequest();
+                    tt.ReadOutState();
+                    Assert.IsTrue(tt._isInvokeRequestTrue.Synchron);
+                    tc.PLCinstanceRun();
+                    tt.ReadOutState();
+                    Assert.IsFalse(tt._isInvokeRequestTrue.Synchron);
+                },
+                cycles
+            );
             tt.ReadOutState();
 
             //--Assert
@@ -160,7 +161,6 @@ namespace TcoCoreUnitTests.PlcTcRpc
             Assert.IsFalse(tt._isDone.Synchron);
             Assert.IsFalse(tt._isError.Synchron);
             Assert.IsTrue(tc.IsService());
-
         }
 
         [Test, Order(904)]
@@ -172,16 +172,19 @@ namespace TcoCoreUnitTests.PlcTcRpc
             ulong serviceModeCount = tc._component._serviceModeCount.Synchron;
 
             //--Act
-            tc.MultipleCycleRun(() =>
-            {
-                tt.SetInvokeRequest();
-                tc.Service();
-                tt.ReadOutState();
-                Assert.IsTrue(tt._isInvokeRequestTrue.Synchron);
-                tc.PLCinstanceRun();
-                tt.ReadOutState();
-                Assert.IsFalse(tt._isInvokeRequestTrue.Synchron);
-            }, cycles);
+            tc.MultipleCycleRun(
+                () =>
+                {
+                    tt.SetInvokeRequest();
+                    tc.Service();
+                    tt.ReadOutState();
+                    Assert.IsTrue(tt._isInvokeRequestTrue.Synchron);
+                    tc.PLCinstanceRun();
+                    tt.ReadOutState();
+                    Assert.IsFalse(tt._isInvokeRequestTrue.Synchron);
+                },
+                cycles
+            );
             tt.ReadOutState();
 
             //--Assert
@@ -193,7 +196,6 @@ namespace TcoCoreUnitTests.PlcTcRpc
             Assert.IsFalse(tt._isDone.Synchron);
             Assert.IsFalse(tt._isError.Synchron);
             Assert.IsTrue(tc.IsService());
-
         }
 
         [Test, Order(905)]
@@ -205,12 +207,15 @@ namespace TcoCoreUnitTests.PlcTcRpc
             ulong serviceModeCount = tc._component._serviceModeCount.Synchron;
 
             //--Act
-            tc.MultipleCycleRun(() =>
-            {
-                tc.Service();
-                tt.TriggerInvoke();
-                tc.PLCinstanceRun();
-            }, cycles);
+            tc.MultipleCycleRun(
+                () =>
+                {
+                    tc.Service();
+                    tt.TriggerInvoke();
+                    tc.PLCinstanceRun();
+                },
+                cycles
+            );
             tt.ReadOutState();
 
             //--Assert
@@ -222,7 +227,6 @@ namespace TcoCoreUnitTests.PlcTcRpc
             Assert.IsFalse(tt._isDone.Synchron);
             Assert.IsFalse(tt._isError.Synchron);
             Assert.IsTrue(tc.IsService());
-
         }
 
         [Test, Order(906)]
@@ -234,12 +238,15 @@ namespace TcoCoreUnitTests.PlcTcRpc
             ulong serviceModeCount = tc._component._serviceModeCount.Synchron;
 
             //--Act
-            tc.MultipleCycleRun(() =>
-            {
-                tt.TriggerInvoke();
-                tc.Service();
-                tc.PLCinstanceRun();
-            }, cycles);
+            tc.MultipleCycleRun(
+                () =>
+                {
+                    tt.TriggerInvoke();
+                    tc.Service();
+                    tc.PLCinstanceRun();
+                },
+                cycles
+            );
             tt.ReadOutState();
 
             //--Assert
@@ -262,26 +269,32 @@ namespace TcoCoreUnitTests.PlcTcRpc
             ulong serviceModeCount = tc._component._serviceModeCount.Synchron;
             ushort cc = 0;
             //--Act
-            tc.MultipleCycleRun(() =>
-            {
-                if (cc <= cycles / 2)
+            tc.MultipleCycleRun(
+                () =>
                 {
-                    tc.Service();
-                }
-                cc++;
-                tt.SetInvokeRequest();
-                tt.ReadOutState();
-                Assert.IsTrue(tt._isInvokeRequestTrue.Synchron);
-                tc.PLCinstanceRun();
-                tt.ReadOutState();
-                Assert.IsFalse(tt._isInvokeRequestTrue.Synchron);
-            }, cycles);
+                    if (cc <= cycles / 2)
+                    {
+                        tc.Service();
+                    }
+                    cc++;
+                    tt.SetInvokeRequest();
+                    tt.ReadOutState();
+                    Assert.IsTrue(tt._isInvokeRequestTrue.Synchron);
+                    tc.PLCinstanceRun();
+                    tt.ReadOutState();
+                    Assert.IsFalse(tt._isInvokeRequestTrue.Synchron);
+                },
+                cycles
+            );
             tt.ReadOutState();
 
             //--Assert
             Assert.AreEqual(startcycle + cycles, tc._startCycleCount.Synchron);
             Assert.AreEqual(endcycle + cycles, tc._endCycleCount.Synchron);
-            Assert.AreEqual(serviceModeCount + (ushort)(cycles / 2 +1), tc._component._serviceModeCount.Synchron);
+            Assert.AreEqual(
+                serviceModeCount + (ushort)(cycles / 2 + 1),
+                tc._component._serviceModeCount.Synchron
+            );
             Assert.IsFalse(tt._isReady.Synchron);
             Assert.IsTrue(tt._isBusy.Synchron);
             Assert.IsFalse(tt._isDone.Synchron);
@@ -298,29 +311,33 @@ namespace TcoCoreUnitTests.PlcTcRpc
             ulong serviceModeCount = tc._component._serviceModeCount.Synchron;
             ushort cc = 0;
             //--Act
-            tc.MultipleCycleRun(() =>
-            {
-                if (cc <= cycles / 2)
+            tc.MultipleCycleRun(
+                () =>
                 {
-                    tc.Service();
-                }
-                cc++;
-                tt.TriggerInvoke();
-                tc.PLCinstanceRun();
-            }, cycles);
+                    if (cc <= cycles / 2)
+                    {
+                        tc.Service();
+                    }
+                    cc++;
+                    tt.TriggerInvoke();
+                    tc.PLCinstanceRun();
+                },
+                cycles
+            );
             tt.ReadOutState();
 
             //--Assert
             Assert.AreEqual(startcycle + cycles, tc._startCycleCount.Synchron);
             Assert.AreEqual(endcycle + cycles, tc._endCycleCount.Synchron);
-            Assert.AreEqual(serviceModeCount + (ushort)(cycles / 2 + 1), tc._component._serviceModeCount.Synchron);
+            Assert.AreEqual(
+                serviceModeCount + (ushort)(cycles / 2 + 1),
+                tc._component._serviceModeCount.Synchron
+            );
             Assert.IsFalse(tt._isReady.Synchron);
             Assert.IsTrue(tt._isBusy.Synchron);
             Assert.IsFalse(tt._isDone.Synchron);
             Assert.IsFalse(tt._isError.Synchron);
             Assert.IsFalse(tc.IsService());
         }
-
-
     }
 }

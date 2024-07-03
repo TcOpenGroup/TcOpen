@@ -10,7 +10,5 @@ namespace TcoCoreTests
     {
         void ContextOpen();
         void ContextClose();
-
     }
-
 }

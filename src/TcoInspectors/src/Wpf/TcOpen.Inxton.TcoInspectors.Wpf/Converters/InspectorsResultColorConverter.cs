@@ -36,18 +36,21 @@ namespace TcOpen.Inxton.TcoInspectors.Wpf
                     default:
                         break;
                 }
-
             }
             catch (Exception)
             {
-
                 // swallow
             }
 
             return Brushes.Gray;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }

@@ -11,7 +11,7 @@ namespace TcOpen.Inxton.Local.Security
     ///         {
     ///             //execute the code if the user has the rights.
     ///         }
-    ///         else 
+    ///         else
     ///         {
     ///             // show a message that user doesn't have a privilage to do so.
     ///         }
@@ -19,19 +19,28 @@ namespace TcOpen.Inxton.Local.Security
     /// </summary>
     public static class AuthorizationChecker
     {
-
         private static bool IsAuthorized(string roles)
         {
-            return roles.Split('|')
-                        .Where(p => p != string.Empty)
-                        .Select(p => p.ToLower())
-                        .Intersect((SecurityManager.Manager.Principal.Identity as AppIdentity).Roles.Select(role => role.ToLower()))
-                        .Any() ? true : false;
+            return roles
+                .Split('|')
+                .Where(p => p != string.Empty)
+                .Select(p => p.ToLower())
+                .Intersect(
+                    (SecurityManager.Manager.Principal.Identity as AppIdentity).Roles.Select(role =>
+                        role.ToLower()
+                    )
+                )
+                .Any()
+                ? true
+                : false;
         }
 
         public static bool HasAuthorization(string roles, Action notAuthorizedAction = null)
         {
-            notAuthorizedAction = notAuthorizedAction == null ? TcOpen.Inxton.TcoAppDomain.Current.LoginAction : notAuthorizedAction;
+            notAuthorizedAction =
+                notAuthorizedAction == null
+                    ? TcOpen.Inxton.TcoAppDomain.Current.LoginAction
+                    : notAuthorizedAction;
 
             if (!IsAuthorized(roles) && notAuthorizedAction != null)
             {
@@ -43,7 +52,6 @@ namespace TcOpen.Inxton.Local.Security
                 {
                     //++ Ignore
                 }
-                
             }
 
             return IsAuthorized(roles);

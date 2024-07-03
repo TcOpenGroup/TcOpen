@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 namespace TcOpen.Inxton.Abstractions.Input
 {
     public interface ITcoCommand
-
     {
         bool CanExecute(object parameter);
-        void Execute(object parameter);        
+        void Execute(object parameter);
     }
 }

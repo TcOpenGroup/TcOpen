@@ -5,50 +5,44 @@
 VAR
     _sut_A : TcoSequenceTestType(THIS^, eRestoreMode.AutoRestoreMembers);
     _sut_N : TcoSequenceTestType(THIS^, eRestoreMode.None);
-
     _elapsedTimeETA : TIME;
     _elapsedTime : TIME;
     _runElapsedTimer : BOOL;
     _elapsedTimeTimer : Tc2_Standard.TON;
-
-	_runOneStep							:	BOOL;
-	_runAllSteps						:	BOOL;
-	_finishStep							:	BOOL;
-	_stepId								:	INT;
-	_enabled							:	BOOL;
-	_stepDescription					:	STRING(254);	
-	_currentStepId						:	INT;
-	_currentStepDescription				:	STRING(254);
+    _runOneStep : BOOL;
+    _runAllSteps : BOOL;
+    _finishStep : BOOL;
+    _stepId : INT;
+    _enabled : BOOL;
+    _stepDescription : STRING(254);
+    _currentStepId : INT;
+    _currentStepDescription : STRING(254);
     _totalStepNumber : UINT;
-	_reqStep : INT;
+    _reqStep : INT;
     _reqStepNotExists : INT;
-
     _done : BOOL;
     _arranged : BOOL;
-	_startCycles			:	ULINT;
-	_endCycles				:	ULINT;	
-	_myIdentity				:	ULINT;	
-	_initReqStepCycle		:	UINT;
-	_cycles					:	UINT;
-	_cyclicCycles :	UINT;
-    _stepInEvents :	UINT;
-
-	//eTcoSequenceTests.FreshStateEntry:
-	FreshStateEntry_counter : INT;
-	FreshStateEntry_enter_and_leave_must_be_true : BOOL;
-	FreshStateEntry_enter_and_two_cycles_on_first_must_be_true : BOOL;
-	FreshStateEntry_enter_and_two_cycles_on_second_must_be_false : BOOL;
-	FreshStateEntry_on_multiple_calls_but_not_first_must_be_false : BOOL;	
-	FreshStateEntry_on_request_step_single_call_must_be_true : BOOL;	
+    _startCycles : ULINT;
+    _endCycles : ULINT;
+    _myIdentity : ULINT;
+    _initReqStepCycle : UINT;
+    _cycles : UINT;
+    _cyclicCycles : UINT;
+    _stepInEvents : UINT;
+    //eTcoSequenceTests.FreshStateEntry:
+    FreshStateEntry_counter : INT;
+    FreshStateEntry_enter_and_leave_must_be_true : BOOL;
+    FreshStateEntry_enter_and_two_cycles_on_first_must_be_true : BOOL;
+    FreshStateEntry_enter_and_two_cycles_on_second_must_be_false : BOOL;
+    FreshStateEntry_on_multiple_calls_but_not_first_must_be_false : BOOL;
+    FreshStateEntry_on_request_step_single_call_must_be_true : BOOL;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
-]]></ST>
+      <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="_ClearPlcCycleCounter" Id="{24e04400-21af-0e40-1dc6-243e032ffa21}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD _ClearPlcCycleCounter
-]]></Declaration>
+METHOD _ClearPlcCycleCounter]]></Declaration>
       <Implementation>
         <ST><![CDATA[ClearPlcCycleCounter();]]></ST>
       </Implementation>
@@ -56,29 +50,28 @@ METHOD _ClearPlcCycleCounter
     <Method Name="Main" Id="{06e1f7c7-c7b2-044c-3ea8-d39a941ddbe3}">
       <Declaration><![CDATA[METHOD PROTECTED Main
 VAR
-	i:INT;
-END_VAR
-]]></Declaration>
+    i : INT;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_elapsedTimeTimer(IN := _runElapsedTimer, PT := _elapsedTimeETA);
 
 CASE _testId OF
-	eTcoSequenceTests.Initialize:
-		_sut_A.Restore();
-		_sut_N.Restore();
-		FreshStateEntry_counter := 0;		
-		FreshStateEntry_enter_and_leave_must_be_true := FALSE;
-		FreshStateEntry_enter_and_two_cycles_on_first_must_be_true := FALSE;
-		FreshStateEntry_enter_and_two_cycles_on_second_must_be_false := TRUE;
-		FreshStateEntry_on_multiple_calls_but_not_first_must_be_false := TRUE;	
-    {region "CallSequencerBodiesOnly"}
+    eTcoSequenceTests.Initialize:
+        _sut_A.Restore();
+        _sut_N.Restore();
+        FreshStateEntry_counter := 0;
+        FreshStateEntry_enter_and_leave_must_be_true := FALSE;
+        FreshStateEntry_enter_and_two_cycles_on_first_must_be_true := FALSE;
+        FreshStateEntry_enter_and_two_cycles_on_second_must_be_false := TRUE;
+        FreshStateEntry_on_multiple_calls_but_not_first_must_be_false := TRUE;
+        {region "CallSequencerBodiesOnly"}
     eTcoSequenceTests.CallSequencerBodiesOnly:
         _sut_A.TcoSequencerTest := eTcoSequenceTests.CallSequencerBodiesOnly;
         _sut_N.TcoSequencerTest := eTcoSequenceTests.CallSequencerBodiesOnly;
         _sut_A._RunExecutionSubstitute();
         _sut_N._RunExecutionSubstitute();
-    {endregion}
-    {region "RestoreSequencers"}
+        {endregion}
+        {region "RestoreSequencers"}
     eTcoSequenceTests.RestoreSequencers:
         IF NOT _arranged THEN
             _sut_A.Restore();
@@ -97,8 +90,8 @@ CASE _testId OF
         END_IF
 
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T500_NumberOfStepsCount"}
+        {endregion}
+        {region "T500_NumberOfStepsCount"}
     eTcoSequenceTests.NumberOfStepsCount:
         IF NOT _arranged THEN
             _sut_A.SetCyclicMode(); //Set sequencer into the cyclic mode
@@ -137,8 +130,8 @@ CASE _testId OF
         IF _done THEN
             ProbeDoneWhen(_done);
         END_IF
-    {endregion}
-    {region "T501_ExecutionInOnePLCcycle"}
+        {endregion}
+        {region "T501_ExecutionInOnePLCcycle"}
     eTcoSequenceTests.ExecutionInOnePLCcycle:
         _sut_A.TcoSequencerTest := eTcoSequenceTests.ExecutionInOnePLCcycle;
         _sut_N.TcoSequencerTest := eTcoSequenceTests.ExecutionInOnePLCcycle;
@@ -150,8 +143,8 @@ CASE _testId OF
         _sut_N._RunExecutionSubstitute();
         _done := TRUE;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T502_OnStepCompleted"}
+        {endregion}
+        {region "T502_OnStepCompleted"}
     eTcoSequenceTests.OnStepCompleted:
         _sut_A.TcoSequencerTest := eTcoSequenceTests.OnStepCompleted;
         _sut_N.TcoSequencerTest := eTcoSequenceTests.OnStepCompleted;
@@ -163,8 +156,8 @@ CASE _testId OF
         _sut_N.SaveNumberOfStepsInSequence();
         _done := TRUE;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T503_OnSequenceCompleted"}
+        {endregion}
+        {region "T503_OnSequenceCompleted"}
     eTcoSequenceTests.OnSequenceCompleted:
         _sut_A.TcoSequencerTest := eTcoSequenceTests.OnSequenceCompleted;
         _sut_N.TcoSequencerTest := eTcoSequenceTests.OnSequenceCompleted;
@@ -174,8 +167,8 @@ CASE _testId OF
         _sut_N._RunExecutionSubstitute();
         _done := TRUE;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T504_RestoreChildBetweenSteps"}
+        {endregion}
+        {region "T504_RestoreChildBetweenSteps"}
     eTcoSequenceTests.RestoreChildBetweenSteps:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.RestoreChildBetweenSteps;
@@ -190,8 +183,8 @@ CASE _testId OF
         _sut_N._RunExecutionSubstitute();
         _done := TRUE;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T505_OnStateChangeWithRestoreCallInside"}
+        {endregion}
+        {region "T505_OnStateChangeWithRestoreCallInside"}
     eTcoSequenceTests.OnStateChangeWithRestoreCallInside:
         IF NOT _arranged THEN
             _sut_A.SetCyclicMode(); //Set sequencer into the cyclic mode
@@ -233,8 +226,8 @@ CASE _testId OF
             _sut_N.CallRestoreInOnStateChange := FALSE;
             ProbeDoneWhen(_done);
         END_IF
-    {endregion}
-    {region "T506_MinStepId"}
+        {endregion}
+        {region "T506_MinStepId"}
     eTcoSequenceTests.MinStepId:
         IF NOT _arranged THEN
             _sut_A.SetCyclicMode(); //Set sequencer into the cyclic mode
@@ -263,8 +256,8 @@ CASE _testId OF
 
         _done := TRUE;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T507_MaxStepId"}
+        {endregion}
+        {region "T507_MaxStepId"}
     eTcoSequenceTests.MaxStepId:
         IF NOT _arranged THEN
             _sut_A.SetCyclicMode(); //Set sequencer into the cyclic mode
@@ -293,8 +286,8 @@ CASE _testId OF
 
         _done := TRUE;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T508_RequestStepToFirstStepWithStepId0"}
+        {endregion}
+        {region "T508_RequestStepToFirstStepWithStepId0"}
     eTcoSequenceTests.RequestStepToFirstStepWithStepId0:
         IF NOT _arranged THEN
             _sut_A.SetCyclicMode(); //Set sequencer into the cyclic mode
@@ -326,8 +319,8 @@ CASE _testId OF
 
         _done := _plcCycleCounter > 1;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T509_RequestStep"}
+        {endregion}
+        {region "T509_RequestStep"}
     eTcoSequenceTests.RequestStep:
         IF NOT _arranged THEN
             _sut_A.SetCyclicMode(); //Set sequencer into the cyclic mode
@@ -352,8 +345,8 @@ CASE _testId OF
 
         _done := _plcCycleCounter >= 3;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T510_CheckStepIdUniqueness"}
+        {endregion}
+        {region "T510_CheckStepIdUniqueness"}
     eTcoSequenceTests.CheckStepIdUniqueness:
         IF NOT _arranged THEN
             _sut_A.SetCyclicMode(); //Set sequencer into the cyclic mode
@@ -390,8 +383,8 @@ CASE _testId OF
 
         _done := _plcCycleCounter >= 2;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T512_RestoreAlreadyCheckedSequence"}
+        {endregion}
+        {region "T512_RestoreAlreadyCheckedSequence"}
     eTcoSequenceTests.RestoreAlreadyCheckedSequence:
         _sut_A.Restore();
         _sut_N.Restore();
@@ -399,8 +392,8 @@ CASE _testId OF
         _sut_N.SaveNumberOfStepsInSequence();
         _done := TRUE;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T513_CheckStepIdUniqueness"}
+        {endregion}
+        {region "T513_CheckStepIdUniqueness"}
     eTcoSequenceTests.NotUniqueStepId:
         IF NOT _arranged THEN
             _sut_A.Enabled := TRUE;
@@ -420,13 +413,13 @@ CASE _testId OF
             _sut_A.SaveNumberOfStepsInSequence();
             _sut_N.SaveNumberOfStepsInSequence();
             _plcCycleCounter := 0;
-			_sut_A._messenger.Clear();
-			_sut_N._messenger.Clear();
+            _sut_A._messenger.Clear();
+            _sut_N._messenger.Clear();
             _arranged := TRUE;
             RETURN;
         END_IF
 
-        IF NOT _done THEN								 
+        IF NOT _done THEN
             _sut_A._RunExecutionSubstitute();
             _sut_N._RunExecutionSubstitute();
             _sut_A.SaveNumberOfStepsInSequence();
@@ -437,8 +430,8 @@ CASE _testId OF
         IF _done THEN
             ProbeDoneWhen(_done);
         END_IF
-    {endregion}
-    {region "T516_AfterErrorRestore"}
+        {endregion}
+        {region "T516_AfterErrorRestore"}
     eTcoSequenceTests.AfterErrorRestore:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.AfterErrorRestore;
@@ -461,8 +454,8 @@ CASE _testId OF
         IF _done THEN
             ProbeDoneWhen(_done);
         END_IF
-    {endregion}
-    {region "T520_ChangeStepIdDuringExecution"}
+        {endregion}
+        {region "T520_ChangeStepIdDuringExecution"}
     eTcoSequenceTests.ChangeStepIdDuringExecution:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.ChangeStepIdDuringExecution;
@@ -495,8 +488,8 @@ CASE _testId OF
 
         _done := _plcCycleCounter >= 3;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T524_CommentOutPartOfRunningSequencer"}
+        {endregion}
+        {region "T524_CommentOutPartOfRunningSequencer"}
     eTcoSequenceTests.CommentOutPartOfRunningSequencer:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.CommentOutPartOfRunningSequencer;
@@ -538,8 +531,8 @@ CASE _testId OF
 
         _done := _plcCycleCounter >= 3;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T526_UncommentPartOfRunningSequencer"}
+        {endregion}
+        {region "T526_UncommentPartOfRunningSequencer"}
     eTcoSequenceTests.UncommentPartOfRunningSequencer:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.UncommentPartOfRunningSequencer;
@@ -572,8 +565,8 @@ CASE _testId OF
 
         _done := _plcCycleCounter >= 2;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T530_OpenCloseSequence"}
+        {endregion}
+        {region "T530_OpenCloseSequence"}
     eTcoSequenceTests.OpenCloseSequence:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.OpenCloseSequence;
@@ -605,13 +598,15 @@ CASE _testId OF
                 IF _sut_N._Step(0, TRUE, 'Step 0') THEN
                     _sut_N._StepCompleteWhen(TRUE);
                 END_IF
-				_sut_A.SequencerClose();
+
+                _sut_A.SequencerClose();
                 _sut_N.SequencerClose();
             END_IF
 
             IF _plcCycleCounter = 2 THEN
-				_sut_A.SequencerOpen();
+                _sut_A.SequencerOpen();
                 _sut_N.SequencerOpen();
+
                 FOR i := 1 TO _totalStepNumber DO
                     _sut_A._Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
                     _sut_N._Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i)));
@@ -620,77 +615,67 @@ CASE _testId OF
                 _sut_A.SequencerClose();
                 _sut_N.SequencerClose();
             END_IF
-		END_IF;		 
-		
+        END_IF;
+
         _done := _plcCycleCounter >= 2;
-        ProbeDoneWhen(_done);			  
-
-//            IF _plcCycleCounter = 3 THEN
-//                _sut_A.SequencerOpen();
-//                _sut_N.SequencerOpen();
-//			    _sut_A.SequencerClose();
-//                _sut_N.SequencerClose();
-//            END_IF
-
-//            IF _plcCycleCounter = 4 THEN
-//				_sut_A.SequencerOpen();
-//                _sut_N.SequencerOpen();
-//                IF _sut_A._Step(0, TRUE, 'Step 0') THEN
-//                    _sut_A._StepCompleteWhen(TRUE);
-//                END_IF
-
-//                IF _sut_N._Step(0, TRUE, 'Step 0') THEN
-//                    _sut_N._StepCompleteWhen(TRUE);
-//                END_IF
-//				_sut_A.SequencerClose();
-//                _sut_N.SequencerClose();	 
-//            END_IF
-
-//            IF _plcCycleCounter = 5 THEN
-//				_sut_A.SequencerOpen();
-//                _sut_N.SequencerOpen();
-//                FOR i := 1 TO _totalStepNumber DO
-//                    IF _sut_A._Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
-//                        _sut_A._StepCompleteWhen(TRUE);
-//                    END_IF
-
-//                    IF _sut_N._Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
-//                        _sut_N._StepCompleteWhen(TRUE);
-//                    END_IF
-//                END_FOR
-//				_sut_A.SequencerClose();
-//                _sut_N.SequencerClose();	 
-//            END_IF
-
-//            IF _plcCycleCounter = 6 THEN
-//                _sut_A._SequenceComplete();
-//                _sut_N._SequenceComplete();
-//                _sut_A.SequencerClose();
-//                _sut_N.SequencerClose();
-//            END_IF
-
-//            IF _plcCycleCounter = 7 THEN
-//                _sut_A.SequencerOpen();
-//                _sut_N.SequencerOpen();
-//            END_IF
-
-//            IF _plcCycleCounter = 8 THEN
-//                _sut_A.SequencerClose();
-//                _sut_N.SequencerClose();
-//            END_IF
-
-//            IF _plcCycleCounter = 9 THEN
-//                _sut_A.SequencerOpen();
-//                _sut_N.SequencerOpen();
-//                _sut_A._Step(0, TRUE, 'Step 0');
-//                _sut_N._Step(0, TRUE, 'Step 0');
-//                _sut_A.SequencerClose();
-//                _sut_N.SequencerClose();
-//            END_IF
-//        END_IF
-
-//        _done := _plcCycleCounter >= 9;
-//        ProbeDoneWhen(_done);
+        ProbeDoneWhen(_done);
+        //            IF _plcCycleCounter = 3 THEN
+        //                _sut_A.SequencerOpen();
+        //                _sut_N.SequencerOpen();
+        //			    _sut_A.SequencerClose();
+        //                _sut_N.SequencerClose();
+        //            END_IF
+        //            IF _plcCycleCounter = 4 THEN
+        //				_sut_A.SequencerOpen();
+        //                _sut_N.SequencerOpen();
+        //                IF _sut_A._Step(0, TRUE, 'Step 0') THEN
+        //                    _sut_A._StepCompleteWhen(TRUE);
+        //                END_IF
+        //                IF _sut_N._Step(0, TRUE, 'Step 0') THEN
+        //                    _sut_N._StepCompleteWhen(TRUE);
+        //                END_IF
+        //				_sut_A.SequencerClose();
+        //                _sut_N.SequencerClose();
+        //            END_IF
+        //            IF _plcCycleCounter = 5 THEN
+        //				_sut_A.SequencerOpen();
+        //                _sut_N.SequencerOpen();
+        //                FOR i := 1 TO _totalStepNumber DO
+        //                    IF _sut_A._Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
+        //                        _sut_A._StepCompleteWhen(TRUE);
+        //                    END_IF
+        //                    IF _sut_N._Step(i, TRUE, CONCAT('Step ', INT_TO_STRING(i))) THEN
+        //                        _sut_N._StepCompleteWhen(TRUE);
+        //                    END_IF
+        //                END_FOR
+        //				_sut_A.SequencerClose();
+        //                _sut_N.SequencerClose();
+        //            END_IF
+        //            IF _plcCycleCounter = 6 THEN
+        //                _sut_A._SequenceComplete();
+        //                _sut_N._SequenceComplete();
+        //                _sut_A.SequencerClose();
+        //                _sut_N.SequencerClose();
+        //            END_IF
+        //            IF _plcCycleCounter = 7 THEN
+        //                _sut_A.SequencerOpen();
+        //                _sut_N.SequencerOpen();
+        //            END_IF
+        //            IF _plcCycleCounter = 8 THEN
+        //                _sut_A.SequencerClose();
+        //                _sut_N.SequencerClose();
+        //            END_IF
+        //            IF _plcCycleCounter = 9 THEN
+        //                _sut_A.SequencerOpen();
+        //                _sut_N.SequencerOpen();
+        //                _sut_A._Step(0, TRUE, 'Step 0');
+        //                _sut_N._Step(0, TRUE, 'Step 0');
+        //                _sut_A.SequencerClose();
+        //                _sut_N.SequencerClose();
+        //            END_IF
+        //        END_IF
+        //        _done := _plcCycleCounter >= 9;
+    //        ProbeDoneWhen(_done);
     {endregion}
     {region "T541_RequestStepFromLowerToHigher"}
     eTcoSequenceTests.RequestStepFromLowerToHigher:
@@ -729,8 +714,8 @@ CASE _testId OF
 
         _done := _plcCycleCounter >= 2;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T542_RequestStepFromHigherToLower"}
+        {endregion}
+        {region "T542_RequestStepFromHigherToLower"}
     eTcoSequenceTests.RequestStepFromHigherToLower:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.RequestStepFromHigherToLower;
@@ -767,8 +752,8 @@ CASE _testId OF
 
         _done := _plcCycleCounter >= 2;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T544_RequestStepToNotExistingStep"}
+        {endregion}
+        {region "T544_RequestStepToNotExistingStep"}
     eTcoSequenceTests.RequestStepToNotExistingStep:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.RequestStepToNotExistingStep;
@@ -820,8 +805,8 @@ CASE _testId OF
 
         _done := _plcCycleCounter >= 4;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T547_RequestStepWhilePreviousRequestStepHasNotBeenYetProcessed"}
+        {endregion}
+        {region "T547_RequestStepWhilePreviousRequestStepHasNotBeenYetProcessed"}
     eTcoSequenceTests.RequestStepWhilePreviousRequestStepHasNotBeenYetProcessed:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.RequestStepWhilePreviousRequestStepHasNotBeenYetProcessed;
@@ -858,8 +843,8 @@ CASE _testId OF
 
         _done := TRUE;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T551_DisableStepEnabledAndActiveInPreviousPLCcycle"}
+        {endregion}
+        {region "T551_DisableStepEnabledAndActiveInPreviousPLCcycle"}
     eTcoSequenceTests.DisableStepEnabledAndActiveInPreviousPLCcycle:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.DisableStepEnabledAndActiveInPreviousPLCcycle;
@@ -963,8 +948,8 @@ CASE _testId OF
 
         _done := _plcCycleCounter >= 3;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T560_RequestStepCallingCyclically"}
+        {endregion}
+        {region "T560_RequestStepCallingCyclically"}
     eTcoSequenceTests.RequestStepCallingCyclically:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.RequestStepCallingCyclically;
@@ -1055,8 +1040,8 @@ CASE _testId OF
         _sut_N.SaveNumberOfStepsInSequence();
         _done := _plcCycleCounter >= _cycles + 4;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T570_SetStepMode"}
+        {endregion}
+        {region "T570_SetStepMode"}
     eTcoSequenceTests.SetStepMode:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.SetStepMode;
@@ -1137,8 +1122,8 @@ CASE _testId OF
 
         _done := _plcCycleCounter >= 4;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T580_StepMode"}
+        {endregion}
+        {region "T580_StepMode"}
     eTcoSequenceTests.StepMode:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.StepMode;
@@ -1171,8 +1156,8 @@ CASE _testId OF
 
         _done := _plcCycleCounter >= _totalStepNumber + 1;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T582_InvalidMode"}
+        {endregion}
+        {region "T582_InvalidMode"}
     eTcoSequenceTests.InvalidMode:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.SetStepMode;
@@ -1239,8 +1224,8 @@ CASE _testId OF
 
         _done := _plcCycleCounter >= 3;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T582_StepInError"}
+        {endregion}
+        {region "T582_StepInError"}
     eTcoSequenceTests.StepInError:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.StepInError;
@@ -1307,8 +1292,8 @@ CASE _testId OF
 
         _done := _plcCycleCounter >= 3;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T590_CheckStepIdUniquenessStepMode"}
+        {endregion}
+        {region "T590_CheckStepIdUniquenessStepMode"}
     eTcoSequenceTests.CheckStepIdUniquenessStepMode:
         IF NOT _arranged THEN
             _sut_A.SetStepMode(); //Set sequencer into the step mode
@@ -1366,8 +1351,8 @@ CASE _testId OF
         END_IF
 
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T594_NotUniqueStepIdInStepMode"}
+        {endregion}
+        {region "T594_NotUniqueStepIdInStepMode"}
     eTcoSequenceTests.NotUniqueStepIdInStepMode:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.NotUniqueStepIdInStepMode;
@@ -1409,8 +1394,8 @@ CASE _testId OF
         IF _done THEN
             ProbeDoneWhen(_done);
         END_IF
-    {endregion}
-    {region "T597_AfterErrorResetInStepMode"}
+        {endregion}
+        {region "T597_AfterErrorResetInStepMode"}
     eTcoSequenceTests.AfterErrorResetInStepMode:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.AfterErrorRestore;
@@ -1440,8 +1425,8 @@ CASE _testId OF
         IF _done THEN
             ProbeDoneWhen(_done);
         END_IF
-    {endregion}
-    {region "T601_InvalidModeDetailed"}
+        {endregion}
+        {region "T601_InvalidModeDetailed"}
     eTcoSequenceTests.InvalidModeDetailed:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.InvalidModeDetailed;
@@ -1493,8 +1478,8 @@ CASE _testId OF
         IF _done THEN
             ProbeDoneWhen(_done);
         END_IF
-    {endregion}
-    {region "T604_StepInErrorDetailed"}
+        {endregion}
+        {region "T604_StepInErrorDetailed"}
     eTcoSequenceTests.StepInErrorDetailed:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.StepInErrorDetailed;
@@ -1546,8 +1531,8 @@ CASE _testId OF
         IF _done THEN
             ProbeDoneWhen(_done);
         END_IF
-    {endregion}
-    {region "T611_StepModeStepIn"}
+        {endregion}
+        {region "T611_StepModeStepIn"}
     eTcoSequenceTests.StepModeStepIn:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.StepModeStepIn;
@@ -1594,8 +1579,8 @@ CASE _testId OF
         IF _done THEN
             ProbeDoneWhen(_done);
         END_IF
-    {endregion}
-    {region "T612_StepModeChangeStepIdDuringExecution"}
+        {endregion}
+        {region "T612_StepModeChangeStepIdDuringExecution"}
     eTcoSequenceTests.StepModeChangeStepIdDuringExecution:
         IF NOT _done AND _plcCycleCounter <= 2 THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.StepModeChangeStepIdDuringExecution;
@@ -1628,8 +1613,8 @@ CASE _testId OF
         IF _done THEN
             ProbeDoneWhen(_done);
         END_IF
-    {endregion}
-    {region "T615_StepModeChangeStepOrder"}
+        {endregion}
+        {region "T615_StepModeChangeStepOrder"}
     eTcoSequenceTests.StepModeChangeStepOrder:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.StepModeChangeStepOrder;
@@ -1692,8 +1677,8 @@ CASE _testId OF
         IF _done THEN
             ProbeDoneWhen(_done);
         END_IF
-    {endregion}
-    {region "T618_StepModeCommentOutPartOfRunningSequencer"}
+        {endregion}
+        {region "T618_StepModeCommentOutPartOfRunningSequencer"}
     eTcoSequenceTests.StepModeCommentOutPartOfRunningSequencer:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.StepModeCommentOutPartOfRunningSequencer;
@@ -1735,8 +1720,8 @@ CASE _testId OF
 
         _done := _plcCycleCounter >= 3;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T621_StepModeUncommentPartOfRunningSequencer"}
+        {endregion}
+        {region "T621_StepModeUncommentPartOfRunningSequencer"}
     eTcoSequenceTests.StepModeUncommentPartOfRunningSequencer:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.StepModeUncommentPartOfRunningSequencer;
@@ -1769,8 +1754,8 @@ CASE _testId OF
 
         _done := _plcCycleCounter >= 2;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T631_StepModeRequestStepFromLowerToHigher"}
+        {endregion}
+        {region "T631_StepModeRequestStepFromLowerToHigher"}
     eTcoSequenceTests.StepModeRequestStepFromLowerToHigher:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.StepModeRequestStepFromLowerToHigher;
@@ -1807,8 +1792,8 @@ CASE _testId OF
 
         _done := _plcCycleCounter >= 2;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T633_StepModeRequestStepFromHigherToLower"}
+        {endregion}
+        {region "T633_StepModeRequestStepFromHigherToLower"}
     eTcoSequenceTests.StepModeRequestStepFromHigherToLower:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.StepModeRequestStepFromHigherToLower;
@@ -1845,8 +1830,8 @@ CASE _testId OF
 
         _done := _plcCycleCounter >= _reqStep + 7;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T635_StepModeRequestStepToNotExistingStep"}
+        {endregion}
+        {region "T635_StepModeRequestStepToNotExistingStep"}
     eTcoSequenceTests.StepModeRequestStepToNotExistingStep:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.RequestStepToNotExistingStep;
@@ -1898,8 +1883,8 @@ CASE _testId OF
 
         _done := _plcCycleCounter >= 4;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T640_StepModeRequestStepWhilePreviousRequestStepHasnotBeenYetProcessed"}
+        {endregion}
+        {region "T640_StepModeRequestStepWhilePreviousRequestStepHasnotBeenYetProcessed"}
     eTcoSequenceTests.StepModeRequestStepWhilePreviousRequestStepHasnotBeenYetProcessed:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.StepModeRequestStepWhilePreviousRequestStepHasnotBeenYetProcessed;
@@ -1936,8 +1921,8 @@ CASE _testId OF
 
         _done := TRUE;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T641_StepModeDisabledStep"}
+        {endregion}
+        {region "T641_StepModeDisabledStep"}
     eTcoSequenceTests.StepModeDisabledStep:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.StepModeDisabledStep;
@@ -1968,8 +1953,8 @@ CASE _testId OF
 
         _done := _plcCycleCounter >= 6;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T670_StepModeStepForwardBackward"}
+        {endregion}
+        {region "T670_StepModeStepForwardBackward"}
     eTcoSequenceTests.StepModeStepForwardBackward:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.StepModeStepForwardBackward;
@@ -2000,8 +1985,8 @@ CASE _testId OF
 
         _done := _plcCycleCounter >= 9;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T681_StepModeStepInDetailed"}
+        {endregion}
+        {region "T681_StepModeStepInDetailed"}
     eTcoSequenceTests.StepModeStepInDetailed:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.StepModeStepInDetailed;
@@ -2031,8 +2016,8 @@ CASE _testId OF
         END_IF
 
         _done := _plcCycleCounter >= 5;
-        ProbeDoneWhen(_done);		 
-    {region "T691_SwitchStepModeOnDuringStepExecution"}
+        ProbeDoneWhen(_done);
+        {region "T691_SwitchStepModeOnDuringStepExecution"}
     eTcoSequenceTests.SwitchStepModeOnDuringStepExecution:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.SwitchStepModeOnDuringStepExecution;
@@ -2063,8 +2048,8 @@ CASE _testId OF
 
         _done := _plcCycleCounter >= 10;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T693_SwitchStepModeStepForwardFromRunningStep"}
+        {endregion}
+        {region "T693_SwitchStepModeStepForwardFromRunningStep"}
     eTcoSequenceTests.StepModeStepForwardFromRunningStep:
         _sut_A.TcoSequencerTest := eTcoSequenceTests.StepModeStepForwardFromRunningStep;
         _sut_N.TcoSequencerTest := eTcoSequenceTests.StepModeStepForwardFromRunningStep;
@@ -2080,8 +2065,8 @@ CASE _testId OF
 
         _done := _plcCycleCounter >= 20;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T695_SwitchStepModeStepBackwardFromRunningStep"}
+        {endregion}
+        {region "T695_SwitchStepModeStepBackwardFromRunningStep"}
     eTcoSequenceTests.StepModeStepBackwardFromRunningStep:
         _sut_A.TcoSequencerTest := eTcoSequenceTests.StepModeStepBackwardFromRunningStep;
         _sut_N.TcoSequencerTest := eTcoSequenceTests.StepModeStepBackwardFromRunningStep;
@@ -2097,8 +2082,8 @@ CASE _testId OF
 
         _done := _plcCycleCounter >= 20;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T696_SwitchStepModeStepOffFromReadyToRun"}
+        {endregion}
+        {region "T696_SwitchStepModeStepOffFromReadyToRun"}
     eTcoSequenceTests.SwitchStepModeStepOffFromReadyToRun:
         _sut_A.TcoSequencerTest := eTcoSequenceTests.SwitchStepModeStepOffFromReadyToRun;
         _sut_N.TcoSequencerTest := eTcoSequenceTests.SwitchStepModeStepOffFromReadyToRun;
@@ -2114,8 +2099,8 @@ CASE _testId OF
 
         _done := _plcCycleCounter >= 10;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T697_SwitchStepModeStepOnFromRunning"}
+        {endregion}
+        {region "T697_SwitchStepModeStepOnFromRunning"}
     eTcoSequenceTests.SwitchStepModeStepOnFromRunning:
         _sut_A.TcoSequencerTest := eTcoSequenceTests.SwitchStepModeStepOnFromRunning;
         _sut_N.TcoSequencerTest := eTcoSequenceTests.SwitchStepModeStepOnFromRunning;
@@ -2131,8 +2116,8 @@ CASE _testId OF
 
         _done := _plcCycleCounter >= 10;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T698_SwitchStepModeStepOffFromRunning"}
+        {endregion}
+        {region "T698_SwitchStepModeStepOffFromRunning"}
     eTcoSequenceTests.SwitchStepModeStepOffFromRunning:
         _sut_A.TcoSequencerTest := eTcoSequenceTests.SwitchStepModeStepOffFromRunning;
         _sut_N.TcoSequencerTest := eTcoSequenceTests.SwitchStepModeStepOffFromRunning;
@@ -2148,8 +2133,8 @@ CASE _testId OF
 
         _done := _plcCycleCounter >= 10;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T699_OnStateChangeWhenChangingModes"}
+        {endregion}
+        {region "T699_OnStateChangeWhenChangingModes"}
     eTcoSequenceTests.OnStateChangeWhenChangingModes:
         IF NOT _arranged THEN
             _sut_A.TcoSequencerTest := eTcoSequenceTests.OnStateChangeWhenChangingModes;
@@ -2186,75 +2171,76 @@ CASE _testId OF
 
         _done := _plcCycleCounter >= 2 * _cyclicCycles + _stepInEvents + 1;
         ProbeDoneWhen(_done);
-{endregion}
-	 eTcoSequenceTests.MissedSequenceOpening:
-	    _sut_A.Restore();
-	 	THIS^._Open();
-	 	_sut_A.Step(10, TRUE, '');
-		THIS^._Close();
-		THIS^.ProbeDoneWhen(TRUE);
-	 eTcoSequenceTests.MissedSequenceClosing:
-	 	_sut_A.Restore();
-	 	THIS^._Open();
-	    _sut_A.Open();
-	 	_sut_A.Step(10, TRUE, '');
-		THIS^._Close();
-		_sut_A.Messenger.Clear();
-		THIS^._Open();
-		 _sut_A.Open();
-		_sut_A.Step(10, TRUE, '');
-		THIS^.ProbeDoneWhen(TRUE);
-	eTcoSequenceTests.FreshStateEntry:
-		
-		THIS^._sut_A.Open();
-		IF(_sut_A.Step(10, TRUE, 'ENTER AND LEAVE')) THEN
-			THIS^.FreshStateEntry_enter_and_leave_must_be_true := _sut_A.IsFreshState;
-			_sut_A.CompleteStep(); 			 
-		END_IF;
-		
-		IF(_sut_A.Step(20, TRUE, 'ENTER MULTIPLE CYCLES')) THEN 
-			IF(FreshStateEntry_counter = 0) THEN
-				THIS^.FreshStateEntry_enter_and_two_cycles_on_first_must_be_true := _sut_A.IsFreshState;
-			END_IF;				
-			THIS^.FreshStateEntry_enter_and_two_cycles_on_second_must_be_false := _sut_A.IsFreshState;
-			_sut_A.StepCompleteWhen(FreshStateEntry_counter = 1);
-			FreshStateEntry_counter := FreshStateEntry_counter + 1;
-		END_IF;
-		
-		IF(_sut_A.Step(40, TRUE, 'ENTER MULTIPLE CYCLES')) THEN 						
-			FreshStateEntry_on_multiple_calls_but_not_first_must_be_false := _sut_A.IsFreshState;											
-			FreshStateEntry_counter := FreshStateEntry_counter + 1;
-			_sut_A.StepCompleteWhen(FreshStateEntry_counter = 100);
-		END_IF;
-		
-		IF(_sut_A.Step(50, TRUE, 'ENTER MULTIPLE CYCLES')) THEN
-			FreshStateEntry_on_request_step_single_call_must_be_true :=	_sut_A.IsFreshState;		 			
-			_sut_A.CompleteStep();
-			IF(FreshStateEntry_counter = 0) THEN
-				_sut_A.RequestStep(70);
-			END_IF
-		END_IF;
-		
-		IF(_sut_A.Step(60, TRUE, 'ENTER MULTIPLE CYCLES')) THEN					 			
-			_sut_A.RequestStep(50);
-			FreshStateEntry_counter := 0;
-		END_IF;
-		
-		IF(_sut_A.Step(70, TRUE, 'ENTER MULTIPLE CYCLES')) THEN					 			
-			THIS^.ProbeDoneWhen(TRUE);
-		END_IF;
-		
-		THIS^._sut_A.Close();
+        {endregion}
+    eTcoSequenceTests.MissedSequenceOpening:
+        _sut_A.Restore();
+        THIS^._Open();
+        _sut_A.Step(10, TRUE, '');
+        THIS^._Close();
+        THIS^.ProbeDoneWhen(TRUE);
+    eTcoSequenceTests.MissedSequenceClosing:
+        _sut_A.Restore();
+        THIS^._Open();
+        _sut_A.Open();
+        _sut_A.Step(10, TRUE, '');
+        THIS^._Close();
+        _sut_A.Messenger.Clear();
+        THIS^._Open();
+        _sut_A.Open();
+        _sut_A.Step(10, TRUE, '');
+        THIS^.ProbeDoneWhen(TRUE);
+    eTcoSequenceTests.FreshStateEntry:
+        THIS^._sut_A.Open();
+
+        IF (_sut_A.Step(10, TRUE, 'ENTER AND LEAVE')) THEN
+            THIS^.FreshStateEntry_enter_and_leave_must_be_true := _sut_A.IsFreshState;
+            _sut_A.CompleteStep();
+        END_IF;
+
+        IF (_sut_A.Step(20, TRUE, 'ENTER MULTIPLE CYCLES')) THEN
+            IF (FreshStateEntry_counter = 0) THEN
+                THIS^.FreshStateEntry_enter_and_two_cycles_on_first_must_be_true := _sut_A.IsFreshState;
+            END_IF;
+
+            THIS^.FreshStateEntry_enter_and_two_cycles_on_second_must_be_false := _sut_A.IsFreshState;
+            _sut_A.StepCompleteWhen(FreshStateEntry_counter = 1);
+            FreshStateEntry_counter := FreshStateEntry_counter + 1;
+        END_IF;
+
+        IF (_sut_A.Step(40, TRUE, 'ENTER MULTIPLE CYCLES')) THEN
+            FreshStateEntry_on_multiple_calls_but_not_first_must_be_false := _sut_A.IsFreshState;
+            FreshStateEntry_counter := FreshStateEntry_counter + 1;
+            _sut_A.StepCompleteWhen(FreshStateEntry_counter = 100);
+        END_IF;
+
+        IF (_sut_A.Step(50, TRUE, 'ENTER MULTIPLE CYCLES')) THEN
+            FreshStateEntry_on_request_step_single_call_must_be_true := _sut_A.IsFreshState;
+            _sut_A.CompleteStep();
+
+            IF (FreshStateEntry_counter = 0) THEN
+                _sut_A.RequestStep(70);
+            END_IF
+        END_IF;
+
+        IF (_sut_A.Step(60, TRUE, 'ENTER MULTIPLE CYCLES')) THEN
+            _sut_A.RequestStep(50);
+            FreshStateEntry_counter := 0;
+        END_IF;
+
+        IF (_sut_A.Step(70, TRUE, 'ENTER MULTIPLE CYCLES')) THEN
+            THIS^.ProbeDoneWhen(TRUE);
+        END_IF;
+
+        THIS^._sut_A.Close();
 END_CASE]]></ST>
       </Implementation>
     </Method>
     <Method Name="ReadOutCycleCounters" Id="{d4aea31d-39d8-0427-14ad-84c644f2dd25}">
       <Declaration><![CDATA[METHOD INTERNAL ReadOutCycleCounters]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_startCycles		:=		THIS^.StartCycleCount;
-_endCycles			:=		THIS^.EndCycleCount;
-
-_myIdentity			:= 		THIS^.Identity;]]></ST>
+        <ST><![CDATA[_startCycles := THIS^.StartCycleCount;
+_endCycles := THIS^.EndCycleCount;
+_myIdentity := THIS^.Identity;]]></ST>
       </Implementation>
     </Method>
   </POU>

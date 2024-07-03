@@ -1,18 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <DUT Name="Example2WrappedComponents" Id="{3bae7a5d-0577-0db9-29dd-558f5e549ace}">
-    <Declaration><![CDATA[TYPE Example2WrappedComponents EXTENDS TcoCore.TcoStruct:
-STRUCT
-		{attribute addProperty Name "Pneumatic cyclinder"}
-		piston : fbPiston(THISSTRUCT);
-     	digitalInput : TcoDi(THISSTRUCT); 
-     	digitaOutput : TcoDo(THISSTRUCT);
-	
-		dummy1Task : TcoCore.TcoTask(THISSTRUCT);
-		dummy2Task : TcoCore.TcoTask(THISSTRUCT);
-		Setpoint:INT;
+    <Declaration><![CDATA[TYPE Example2WrappedComponents EXTENDS TcoCore.TcoStruct : STRUCT
+    {attribute addProperty Name "Pneumatic cyclinder"}
+    piston : fbPiston(THISSTRUCT);
+    digitalInput : TcoDi(THISSTRUCT);
+    digitaOutput : TcoDo(THISSTRUCT);
+    dummy1Task : TcoCore.TcoTask(THISSTRUCT);
+    dummy2Task : TcoCore.TcoTask(THISSTRUCT);
+    Setpoint : INT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

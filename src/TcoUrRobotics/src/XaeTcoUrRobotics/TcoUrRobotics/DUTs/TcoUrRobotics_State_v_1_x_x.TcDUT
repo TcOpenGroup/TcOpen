@@ -1,101 +1,64 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoUrRobotics_State_v_1_x_x" Id="{63d91a0d-d92d-05f1-2020-555a4196bb80}">
-    <Declaration><![CDATA[TYPE TcoUrRobotics_State_v_1_x_x : 
-STRUCT
-	{attribute addProperty Name "<#Robot Mode#>"}
-	RobotMode : eTcoUrRoboticsRobotMode;
-
-		
-	{attribute addProperty Name "<#In area 1#>"}
-	InArea_1 : BOOL;
-
-	{attribute addProperty Name "<#In area 2#>"}
-	InArea_2 : BOOL;
-
-	{attribute addProperty Name "<#In area 3#>"}
-	InArea_3 : BOOL;
-
-	{attribute addProperty Name "<#In area 4#>"}
-	InArea_4 : BOOL;
-
-
-	{attribute addProperty Name "<#In position 1#>"}
-	InPosition_1 : BOOL;
-
-	{attribute addProperty Name "<#In position 2#>"}
-	InPosition_2 : BOOL;
-
-	{attribute addProperty Name "<#In position 3#>"}
-	InPosition_3 : BOOL;
-
-	{attribute addProperty Name "<#In position 4#>"}
-	InPosition_4 : BOOL;
-
-
-	
-	{attribute addProperty Name "<#Zones#>"}
-	Zone : DINT;
-
-	{attribute addProperty Name "<#In position#>"}
-	InPosition : DINT;
-
-
-	
-	{attribute addProperty Name "<#Tool 1 retract#>"}
-	Tool_1_Retract : BOOL;
-
-	{attribute addProperty Name "<#Tool 1 extend#>"}
-	Tool_1_Extend : BOOL;
-
-	{attribute addProperty Name "<#Tool 2 retract#>"}
-	Tool_2_Retract : BOOL;
-
-	{attribute addProperty Name "<#Tool 2 extend#>"}
-	Tool_2_Extend : BOOL;
-
-	{attribute addProperty Name "<#Tool 3 retract#>"}
-	Tool_3_Retract : BOOL;
-
-	{attribute addProperty Name "<#Tool 3 extend#>"}
-	Tool_3_Extend : BOOL;
-
-	{attribute addProperty Name "<#Tool 4 retract#>"}
-	Tool_4_Retract : BOOL;
-
-	{attribute addProperty Name "<#Tool 4 extend#>"}
-	Tool_4_Extend : BOOL;
-	
-
-	{attribute addProperty Name "<#Action number#>"}
-	ActionNo : DINT;
-
-	{attribute addProperty Name "<#Global speed#>"}
-	GlobalSpeed : DINT;
-
-	{attribute addProperty Name "<#Tool number#>"}
-	ToolNo : DINT; 
-
-	{attribute addProperty Name "<#Workobject number#>"}
-	WorkobjectNo : DINT;
-
-	{attribute addProperty Name "<#PointNumber#>"}
-	PointNo : DINT;
-
-	{attribute addProperty Name "<#User specific speed 1#>"}
-	UserSpecSpeed1 : REAL;
-
-	{attribute addProperty Name "<#User specific speed 2#>"}
-	UserSpecSpeed2 : REAL;
-	
-	{attribute  addProperty Name "<#Coordinates#>"}     
-	Coordinates : TcoAbstractions.TcoRoboticsCoordinates; 		
-	
-	{attribute  addProperty Name "<#UR Specific#>"}     
-	Inputs:TcoUrRoboticsInputData;
-
+    <Declaration><![CDATA[TYPE TcoUrRobotics_State_v_1_x_x : STRUCT
+    {attribute addProperty Name "<#Robot Mode#>"}
+    RobotMode : eTcoUrRoboticsRobotMode;
+    {attribute addProperty Name "<#In area 1#>"}
+    InArea_1 : BOOL;
+    {attribute addProperty Name "<#In area 2#>"}
+    InArea_2 : BOOL;
+    {attribute addProperty Name "<#In area 3#>"}
+    InArea_3 : BOOL;
+    {attribute addProperty Name "<#In area 4#>"}
+    InArea_4 : BOOL;
+    {attribute addProperty Name "<#In position 1#>"}
+    InPosition_1 : BOOL;
+    {attribute addProperty Name "<#In position 2#>"}
+    InPosition_2 : BOOL;
+    {attribute addProperty Name "<#In position 3#>"}
+    InPosition_3 : BOOL;
+    {attribute addProperty Name "<#In position 4#>"}
+    InPosition_4 : BOOL;
+    {attribute addProperty Name "<#Zones#>"}
+    Zone : DINT;
+    {attribute addProperty Name "<#In position#>"}
+    InPosition : DINT;
+    {attribute addProperty Name "<#Tool 1 retract#>"}
+    Tool_1_Retract : BOOL;
+    {attribute addProperty Name "<#Tool 1 extend#>"}
+    Tool_1_Extend : BOOL;
+    {attribute addProperty Name "<#Tool 2 retract#>"}
+    Tool_2_Retract : BOOL;
+    {attribute addProperty Name "<#Tool 2 extend#>"}
+    Tool_2_Extend : BOOL;
+    {attribute addProperty Name "<#Tool 3 retract#>"}
+    Tool_3_Retract : BOOL;
+    {attribute addProperty Name "<#Tool 3 extend#>"}
+    Tool_3_Extend : BOOL;
+    {attribute addProperty Name "<#Tool 4 retract#>"}
+    Tool_4_Retract : BOOL;
+    {attribute addProperty Name "<#Tool 4 extend#>"}
+    Tool_4_Extend : BOOL;
+    {attribute addProperty Name "<#Action number#>"}
+    ActionNo : DINT;
+    {attribute addProperty Name "<#Global speed#>"}
+    GlobalSpeed : DINT;
+    {attribute addProperty Name "<#Tool number#>"}
+    ToolNo : DINT;
+    {attribute addProperty Name "<#Workobject number#>"}
+    WorkobjectNo : DINT;
+    {attribute addProperty Name "<#PointNumber#>"}
+    PointNo : DINT;
+    {attribute addProperty Name "<#User specific speed 1#>"}
+    UserSpecSpeed1 : REAL;
+    {attribute addProperty Name "<#User specific speed 2#>"}
+    UserSpecSpeed2 : REAL;
+    {attribute  addProperty Name "<#Coordinates#>"}
+    Coordinates : TcoAbstractions.TcoRoboticsCoordinates;
+    {attribute  addProperty Name "<#UR Specific#>"}
+    Inputs : TcoUrRoboticsInputData;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

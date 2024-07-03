@@ -12,7 +12,8 @@ namespace TcoIo
         static string TargetAmsId = Environment.GetEnvironmentVariable("Tc3Target");
         static int TargetAmsPort = 851;
 
-        public static TcoIo.TcoIoTwinController TcoIoPlc 
-            = new TcoIoTwinController(Tc3ConnectorAdapter.Create(TargetAmsId, TargetAmsPort, true));
+        public static TcoIo.TcoIoTwinController TcoIoPlc = new TcoIoTwinController(
+            Tc3ConnectorAdapter.Create(TargetAmsId, TargetAmsPort, true)
+        );
     }
 }

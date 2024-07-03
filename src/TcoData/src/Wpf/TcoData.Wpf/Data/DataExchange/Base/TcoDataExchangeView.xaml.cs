@@ -23,18 +23,24 @@ namespace TcoData
     {
         public TcoDataExchangeView()
         {
-            InitializeComponent();            
+            InitializeComponent();
             this.DataContextChanged += TcoDataExchangeView_DataContextChanged;
         }
-        
-        private void TcoDataExchangeView_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {         
-            if (!(this.DataContext is TcoDataExchangeViewModel) && this.DataContext is TcoDataExchange)
+
+        private void TcoDataExchangeView_DataContextChanged(
+            object sender,
+            DependencyPropertyChangedEventArgs e
+        )
+        {
+            if (
+                !(this.DataContext is TcoDataExchangeViewModel)
+                && this.DataContext is TcoDataExchange
+            )
             {
                 this.DataContext = new TcoDataExchangeViewModel() { Model = this.DataContext };
             }
         }
-       
+
         public ObservableCollection<DataGridColumn> DataListColumns
         {
             get => this.DataView.DataListColumns;
@@ -42,20 +48,15 @@ namespace TcoData
         }
     }
 
-
     public class TcoDataExchangeControlView : TcoDataExchangeView
     {
-        public TcoDataExchangeControlView() : base()
-        {
-
-        }
+        public TcoDataExchangeControlView()
+            : base() { }
     }
 
     public class TcoDataExchangeDisplayView : TcoDataExchangeView
     {
-        public TcoDataExchangeDisplayView() : base()
-        {
-
-        }
+        public TcoDataExchangeDisplayView()
+            : base() { }
     }
 }

@@ -6,18 +6,16 @@
 {attribute addProperty Id "Enable_latch_CBOOL1Enable_latch_extern_on_positive_edgeBOOL1Set_counterBOOL1Enable_latch_extern_on_negative_edgeBOOL1"}
 {attribute addProperty CRC "1861404112"}
 {attribute addProperty Size "4"}
-TYPE Control_6EF2C5D0 :
-STRUCT
-	{attribute addProperty Name "Enable_latch_C"}
-	Enable_latch_C : BOOL;
-	{attribute addProperty Name "Enable_latch_extern_on_positive_edge"}
-	Enable_latch_extern_on_positive_edge : BOOL;
-	{attribute addProperty Name "Set_counter"}
-	Set_counter : BOOL;
-	{attribute addProperty Name "Enable_latch_extern_on_negative_edge"}
-	Enable_latch_extern_on_negative_edge : BOOL;
+TYPE Control_6EF2C5D0 : STRUCT
+    {attribute addProperty Name "Enable_latch_C"}
+    Enable_latch_C : BOOL;
+    {attribute addProperty Name "Enable_latch_extern_on_positive_edge"}
+    Enable_latch_extern_on_positive_edge : BOOL;
+    {attribute addProperty Name "Set_counter"}
+    Set_counter : BOOL;
+    {attribute addProperty Name "Enable_latch_extern_on_negative_edge"}
+    Enable_latch_extern_on_negative_edge : BOOL;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

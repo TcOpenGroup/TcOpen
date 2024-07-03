@@ -6,15 +6,15 @@
     <Property Name="Mode" Id="{6738db06-52ab-091d-3ef3-c978ac45906e}">
       <Declaration><![CDATA[(*~
 	<docu>
-		<summary>			
+		<summary>
 			Gets or sets sequencer mode.
-			<remarks>			
+			<remarks>
 				<para>
 					See <see cref="TcoCore.eSequencerMode"/> for detailed description.
 				</para>
-			</remarks>		
-		</summary>			
-	</docu>	
+			</remarks>
+		</summary>
+	</docu>
 ~*)
 PROPERTY PUBLIC Mode : eSequencerMode
 ]]></Declaration>
@@ -30,8 +30,8 @@ PROPERTY PUBLIC Mode : eSequencerMode
 	<docu>
 		<summary>
 			This method triggers StepBackward task, that decrements current step (variable: <c> TcoSequencer._theOrderOfTheCurrentlyExecutedStep</c> ), in case the sequencer is in step mode, and the current step is greather than zero.
-		</summary>			
-	</docu>	
+		</summary>
+	</docu>
 ~*)
 METHOD PUBLIC FINAL StepBackward
 ]]></Declaration>
@@ -40,10 +40,10 @@ METHOD PUBLIC FINAL StepBackward
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			This method triggers StepForward task, that increment current step (variable: <c>TcoSequencer._theOrderOfTheCurrentlyExecutedStep</c> ), 
+			This method triggers StepForward task, that increment current step (variable: <c>TcoSequencer._theOrderOfTheCurrentlyExecutedStep</c> ),
 			in case the sequencer is in step mode, and the current step is lower than number of steps in th sequence (variable: <c>TcoSequencer._numberOfStepsInSequence</c> ).
-		</summary>			
-	</docu>	
+		</summary>
+	</docu>
 ~*)
 METHOD PUBLIC FINAL StepForward
 
@@ -53,10 +53,10 @@ METHOD PUBLIC FINAL StepForward
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Triggers StepIn task, that changes the current step status from ReadyToRun to Running. 
+			Triggers StepIn task, that changes the current step status from ReadyToRun to Running.
 			This causes starting the execution of the body of the current step.
-		</summary>			
-	</docu>	
+		</summary>
+	</docu>
 ~*)
 METHOD PUBLIC FINAL StepIn
 ]]></Declaration>

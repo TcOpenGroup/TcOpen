@@ -37,7 +37,6 @@ namespace TcoDrivesBeckhoff
             InitializeComponent();
         }
 
-
         //protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         //{
         //    base.OnPropertyChanged(e);
@@ -48,9 +47,5 @@ namespace TcoDrivesBeckhoff
 
         //    }
         //}
-
-
     }
-
-
 }

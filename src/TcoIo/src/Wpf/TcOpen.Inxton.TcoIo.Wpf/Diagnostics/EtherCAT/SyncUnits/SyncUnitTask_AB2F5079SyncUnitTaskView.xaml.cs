@@ -8,10 +8,8 @@ using Vortex.Connector.ValueTypes;
 
 namespace TcoIo
 {
-
     public partial class SyncUnitTask_AB2F5079SyncUnitTaskView : UserControl, INotifyPropertyChanged
     {
-
         private bool syncUnitHasError;
 
         public bool SyncUnitHasError
@@ -36,7 +34,6 @@ namespace TcoIo
             }
         }
 
-
         private Brush syncUnitForegroundColor;
 
         public Brush SyncUnitForegroundColor
@@ -49,14 +46,16 @@ namespace TcoIo
             }
         }
 
-
         public SyncUnitTask_AB2F5079SyncUnitTaskView()
         {
             InitializeComponent();
             DataContextChanged += SyncUnitTask_AB2F5079SyncUnitTaskView_DataContextChanged;
         }
 
-        private void SyncUnitTask_AB2F5079SyncUnitTaskView_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void SyncUnitTask_AB2F5079SyncUnitTaskView_DataContextChanged(
+            object sender,
+            DependencyPropertyChangedEventArgs e
+        )
         {
             IVortexObject dataContext = this.DataContext as IVortexObject;
             if (dataContext != null)
@@ -79,12 +78,19 @@ namespace TcoIo
         {
             TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() =>
             {
-            SyncUnitTask_AB2F5079 dt = this.DataContext as SyncUnitTask_AB2F5079;
-            if (dt != null)
-            {
-                    SyncUnitHasError = dt.InfoData.ObjectId.Synchron != 0 && dt.InfoData.SlaveCount.Synchron > 0 && dt.InfoData.State.Synchron != 8;
-                    SyncUnitBackgroundColor = new SyncUnitErrorToBackground().Convert(SyncUnitHasError, null, null, null) as Brush;
-                    SyncUnitForegroundColor = new SyncUnitErrorToForeground().Convert(SyncUnitHasError, null, null, null) as Brush;
+                SyncUnitTask_AB2F5079 dt = this.DataContext as SyncUnitTask_AB2F5079;
+                if (dt != null)
+                {
+                    SyncUnitHasError =
+                        dt.InfoData.ObjectId.Synchron != 0
+                        && dt.InfoData.SlaveCount.Synchron > 0
+                        && dt.InfoData.State.Synchron != 8;
+                    SyncUnitBackgroundColor =
+                        new SyncUnitErrorToBackground().Convert(SyncUnitHasError, null, null, null)
+                        as Brush;
+                    SyncUnitForegroundColor =
+                        new SyncUnitErrorToForeground().Convert(SyncUnitHasError, null, null, null)
+                        as Brush;
                     stackPanel.Background = SyncUnitBackgroundColor;
                     groupBoxHeader.Foreground = SyncUnitForegroundColor;
                     WcState.Foreground = SyncUnitForegroundColor;

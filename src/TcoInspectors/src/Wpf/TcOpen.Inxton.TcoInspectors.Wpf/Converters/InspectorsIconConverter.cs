@@ -15,8 +15,6 @@ namespace TcOpen.Inxton.TcoInspectors.Wpf
             {
                 var result = (eInspectorResult)Enum.ToObject(typeof(eInspectorResult), value);
 
-
-
                 switch (result)
                 {
                     case eInspectorResult.NoAction:
@@ -36,18 +34,21 @@ namespace TcOpen.Inxton.TcoInspectors.Wpf
                     default:
                         break;
                 }
-
             }
             catch (Exception)
             {
-
                 // swallow
             }
 
             return Brushes.Gray;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }
@@ -57,5 +58,4 @@ namespace TcOpen.Inxton.TcoInspectors.Wpf
             return this;
         }
     }
-    
 }

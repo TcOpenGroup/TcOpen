@@ -1,82 +1,73 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoAxisStatus" Id="{c9948914-0a5b-070a-3459-93facb493fe6}">
-    <Declaration><![CDATA[TYPE TcoAxisStatus :
-STRUCT
-	{attribute addProperty Name "<#Actual position#>"}
-    ActPos               : LREAL; (* Actual position (absolut value from NC) *)
-	{attribute addProperty Name "<#Actual modulo position#>"}
-    ModuloActPos         : LREAL; (* Actual modulo position *)
-	{attribute addProperty Name "<#Actual modulo turns#>"}
-    ModuloActTurns       : DINT; (* Actual modulo turns *)
-	{attribute addProperty Name "<#Actual velocity#>"}
-    ActVelo              : LREAL; (* Actual velocity *)
-	{attribute addProperty Name "<#Actual acceleration#>"}
-	ActAcc               : LREAL;
-	{attribute addProperty Name "<#Actual torque#>"}
-	ActTorque            : LREAL;
-	{attribute addProperty Name "<#Command number#>"}
- 	CmdNo                : WORD; (* Continuous actual command number *)
-	{attribute addProperty Name "<#Command state#>"}
-    CmdState             : WORD; (* Command state *)
-	{attribute addProperty Name "<#Motion state#>"}
-    MotionState          : eAxisStates; (* motion state in the PLCopen state diagram *)
-	{attribute addProperty Name "<#Error#>"}
-    Error                : BOOL;  (* axis error state *)
-	{attribute addProperty Name "<#Error id#>"}
-    ErrorId              : UDINT; (* axis error code *)
-
+    <Declaration><![CDATA[TYPE TcoAxisStatus : STRUCT
+    {attribute addProperty Name "<#Actual position#>"}
+    ActPos : LREAL; (* Actual position (absolut value from NC) *)
+    {attribute addProperty Name "<#Actual modulo position#>"}
+    ModuloActPos : LREAL; (* Actual modulo position *)
+    {attribute addProperty Name "<#Actual modulo turns#>"}
+    ModuloActTurns : DINT; (* Actual modulo turns *)
+    {attribute addProperty Name "<#Actual velocity#>"}
+    ActVelo : LREAL; (* Actual velocity *)
+    {attribute addProperty Name "<#Actual acceleration#>"}
+    ActAcc : LREAL;
+    {attribute addProperty Name "<#Actual torque#>"}
+    ActTorque : LREAL;
+    {attribute addProperty Name "<#Command number#>"}
+    CmdNo : WORD; (* Continuous actual command number *)
+    {attribute addProperty Name "<#Command state#>"}
+    CmdState : WORD; (* Command state *)
+    {attribute addProperty Name "<#Motion state#>"}
+    MotionState : eAxisStates; (* motion state in the PLCopen state diagram *)
+    {attribute addProperty Name "<#Error#>"}
+    Error : BOOL; (* axis error state *)
+    {attribute addProperty Name "<#Error id#>"}
+    ErrorId : UDINT; (* axis error code *)
     (* PLCopen motion control statemachine states: *)
-    ErrorStop            : BOOL;
-    Disabled             : BOOL;
-    Stopping             : BOOL;
-    StandStill           : BOOL;
-    DiscreteMotion       : BOOL;
-    ContinuousMotion     : BOOL; 
-    SynchronizedMotion   : BOOL;
-    Homing               : BOOL;
-
+    ErrorStop : BOOL;
+    Disabled : BOOL;
+    Stopping : BOOL;
+    StandStill : BOOL;
+    DiscreteMotion : BOOL;
+    ContinuousMotion : BOOL;
+    SynchronizedMotion : BOOL;
+    Homing : BOOL;
     (* additional status - (PLCopen definition)*)
-    ConstantVelocity     : BOOL; 
-    Accelerating         : BOOL;
-    Decelerating         : BOOL;
-
+    ConstantVelocity : BOOL;
+    Accelerating : BOOL;
+    Decelerating : BOOL;
     (* Axis.NcToPlc.StateDWord *)
-    Operational          : BOOL; 
-    ControlLoopClosed    : BOOL; (* operational and position control active *)
-    HasJob               : BOOL; 
-    HasBeenStopped       : BOOL; 
-    NewTargetPosition    : BOOL; (* new target position commanded during move *)
-    InPositionArea       : BOOL; 
-    InTargetPosition     : BOOL; 
-
-    Homed                : BOOL; 
-    HomingBusy           : BOOL; 
+    Operational : BOOL;
+    ControlLoopClosed : BOOL; (* operational and position control active *)
+    HasJob : BOOL;
+    HasBeenStopped : BOOL;
+    NewTargetPosition : BOOL; (* new target position commanded during move *)
+    InPositionArea : BOOL;
+    InTargetPosition : BOOL;
+    Homed : BOOL;
+    HomingBusy : BOOL;
     MotionCommandsLocked : BOOL; (* stop 'n hold *)
     SoftLimitMinExceeded : BOOL; (* reverse soft travel limit exceeded *)
     SoftLimitMaxExceeded : BOOL; (* forward soft travel limit exceeded *)
-
-    Moving               : BOOL; 
-    PositiveDirection    : BOOL; 
-    NegativeDirection    : BOOL; 
-    NotMoving            : BOOL; 
-    Compensating         : BOOL; (* superposition - overlayed motion *)
-
-    ExtSetPointGenEnabled: BOOL; 
-    ExternalLatchValid   : BOOL; 
-    CamDataQueued        : BOOL; 
-    CamTableQueued       : BOOL; 
-    CamScalingPending    : BOOL; 
-    CmdBuffered          : BOOL; 
-    PTPmode              : BOOL; 
-    DriveDeviceError     : BOOL; 
-    IoDataInvalid        : BOOL; 
-
+    Moving : BOOL;
+    PositiveDirection : BOOL;
+    NegativeDirection : BOOL;
+    NotMoving : BOOL;
+    Compensating : BOOL; (* superposition - overlayed motion *)
+    ExtSetPointGenEnabled : BOOL;
+    ExternalLatchValid : BOOL;
+    CamDataQueued : BOOL;
+    CamTableQueued : BOOL;
+    CamScalingPending : BOOL;
+    CmdBuffered : BOOL;
+    PTPmode : BOOL;
+    DriveDeviceError : BOOL;
+    IoDataInvalid : BOOL;
     (* Axis.NcToPlc.CoupleState *)
-    Coupled              : BOOL;
-
+    Coupled : BOOL;
     (* axis operation mode feedback from NcToPlc *)
-    OpMode               : TcoAxisOpModes;
+    OpMode : TcoAxisOpModes;
 END_STRUCT
 END_TYPE]]></Declaration>
   </DUT>

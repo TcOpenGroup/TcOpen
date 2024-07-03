@@ -1,36 +1,62 @@
 <UserControl
-    x:Class="TcoCoreExamples.TcoDiServiceView"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:tcoCore1="clr-namespace:TcoCore;assembly=TcOpen.Inxton.TcoCore.Wpf"
-    xmlns:vortex="http://vortex.mts/xaml" xmlns:tcocoreexamples="clr-namespace:TcoCoreExamples;assembly=TcoCoreExamplesConnector" 
-    mc:Ignorable="d"
-    d:DesignWidth="800">
+  x:Class="TcoCoreExamples.TcoDiServiceView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:tcoCore1="clr-namespace:TcoCore;assembly=TcOpen.Inxton.TcoCore.Wpf"
+  xmlns:vortex="http://vortex.mts/xaml"
+  xmlns:tcocoreexamples="clr-namespace:TcoCoreExamples;assembly=TcoCoreExamplesConnector"
+  mc:Ignorable="d"
+  d:DesignWidth="800"
+>
     <d:UserControl.DataContext>
         <tcocoreexamples:TcoDi />
     </d:UserControl.DataContext>
     <UserControl.Resources>
         <ItemsPanelTemplate x:Key="HorizontalWraped">
-            <WrapPanel Background="Transparent" Width="{Binding (FrameworkElement.ActualWidth) , RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}" MinWidth="{Binding ItemWidth , RelativeSource={RelativeSource Self}}" ItemHeight="{Binding (ListView.View).ItemHeight , RelativeSource={RelativeSource AncestorType=ListView}}" ItemWidth="{Binding (ListView.View).ItemWidth , RelativeSource={RelativeSource AncestorType=ListView}}" />
+            <WrapPanel
+        Background="Transparent"
+        Width="{Binding (FrameworkElement.ActualWidth) , RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+        MinWidth="{Binding ItemWidth , RelativeSource={RelativeSource Self}}"
+        ItemHeight="{Binding (ListView.View).ItemHeight , RelativeSource={RelativeSource AncestorType=ListView}}"
+        ItemWidth="{Binding (ListView.View).ItemWidth , RelativeSource={RelativeSource AncestorType=ListView}}"
+      />
         </ItemsPanelTemplate>
     </UserControl.Resources>
     <vortex:TcoComponentView>
         <vortex:TcoComponentView.ComponentHeader>
-            <Border DataContext="{Binding Model}"
-                        Grid.Column="1"
-                        Margin="5,0,5,0"
-                        Background="{Binding _signal.Cyclic, Converter={tcoCore1:SignalToBrushConverter}}"
-                        CornerRadius="2" />
+            <Border
+        DataContext="{Binding Model}"
+        Grid.Column="1"
+        Margin="5,0,5,0"
+        Background="{Binding _signal.Cyclic, Converter={tcoCore1:SignalToBrushConverter}}"
+        CornerRadius="2"
+      />
         </vortex:TcoComponentView.ComponentHeader>
         <vortex:TcoComponentView.ComponentDetails>
             <WrapPanel DataContext="{Binding Model}">
-                <tcoCore1:TcoSignalInfoView Grid.Column="1" DataContext="{Binding _signalInfo}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                <tcoCore1:TcoSignalInfoView
+          Grid.Column="1"
+          DataContext="{Binding _signalInfo}"
+          HorizontalAlignment="Stretch"
+          VerticalAlignment="Center"
+        />
 
-                <ItemsControl ItemsPanel="{StaticResource HorizontalWraped}" Margin="10,10,0,0">
-                    <vortex:RenderableContentControl DataContext="{Binding _isFalseTask}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-                    <vortex:RenderableContentControl DataContext="{Binding _isTrueTask}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                <ItemsControl
+          ItemsPanel="{StaticResource HorizontalWraped}"
+          Margin="10,10,0,0"
+        >
+                    <vortex:RenderableContentControl
+            DataContext="{Binding _isFalseTask}"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Center"
+          />
+                    <vortex:RenderableContentControl
+            DataContext="{Binding _isTrueTask}"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Center"
+          />
                 </ItemsControl>
             </WrapPanel>
         </vortex:TcoComponentView.ComponentDetails>

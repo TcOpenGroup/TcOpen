@@ -1,220 +1,296 @@
 ﻿<UserControl
-    x:Class="TcoData.DataView"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:p="clr-namespace:TcOpen.Inxton.Data.Wpf.Properties"
-    xmlns:vortex="http://vortex.mts/xaml"
-    xmlns:System="clr-namespace:System;assembly=mscorlib"
-    xmlns:data="clr-namespace:TcOpen.Inxton.Data;assembly=TcOpen.Inxton.Abstractions"
-    xmlns:wpf="clr-namespace:TcoData"
-    x:Name="DataRoot"
-    d:DesignHeight="1080"
-    d:DesignWidth="1920"
-    Background="{DynamicResource Surface}"
-    IsVisibleChanged="UserControl_IsVisibleChanged"
-    mc:Ignorable="d">
-    
+  x:Class="TcoData.DataView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:p="clr-namespace:TcOpen.Inxton.Data.Wpf.Properties"
+  xmlns:vortex="http://vortex.mts/xaml"
+  xmlns:System="clr-namespace:System;assembly=mscorlib"
+  xmlns:data="clr-namespace:TcOpen.Inxton.Data;assembly=TcOpen.Inxton.Abstractions"
+  xmlns:wpf="clr-namespace:TcoData"
+  x:Name="DataRoot"
+  d:DesignHeight="1080"
+  d:DesignWidth="1920"
+  Background="{DynamicResource Surface}"
+  IsVisibleChanged="UserControl_IsVisibleChanged"
+  mc:Ignorable="d"
+>
+
     <Grid x:Name="RootContainer">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TabControl>
             <TabItem Header="Data">
                 <Grid Name="ResizableGrid">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
-                        <RowDefinition  MaxHeight="{Binding ElementName=RootContainer, Path=ActualHeight, Converter={wpf:PercentageConverter}, ConverterParameter=0.5}" />
+                        <RowDefinition
+              MaxHeight="{Binding ElementName=RootContainer, Path=ActualHeight, Converter={wpf:PercentageConverter}, ConverterParameter=0.5}"
+            />
 
                         <RowDefinition x:Name="GridSplitterRow" Height="Auto" />
                         <RowDefinition />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <GridSplitter
-                        Grid.Row="2"
-                        Height="15"
-                        Margin="0,5,0,5"
-                        Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Display}"
-                        HorizontalAlignment="Stretch" />
-                    <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <ItemsControl Margin="5" HorizontalContentAlignment="Center" Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Display}">
+            Grid.Row="2"
+            Height="15"
+            Margin="0,5,0,5"
+            Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Display}"
+            HorizontalAlignment="Stretch"
+          />
+                    <Grid
+            Grid.Row="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+          >
+                        <ItemsControl
+              Margin="5"
+              HorizontalContentAlignment="Center"
+              Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Display}"
+            >
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <WrapPanel Background="Transparent" Width="{Binding (FrameworkElement.ActualWidth) , RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}" MinWidth="{Binding ItemWidth , RelativeSource={RelativeSource Self}}" ItemHeight="{Binding (ListView.View).ItemHeight , RelativeSource={RelativeSource AncestorType=ListView}}" ItemWidth="{Binding (ListView.View).ItemWidth , RelativeSource={RelativeSource AncestorType=ListView}}" />
+                                    <WrapPanel
+                    Background="Transparent"
+                    Width="{Binding (FrameworkElement.ActualWidth) , RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                    MinWidth="{Binding ItemWidth , RelativeSource={RelativeSource Self}}"
+                    ItemHeight="{Binding (ListView.View).ItemHeight , RelativeSource={RelativeSource AncestorType=ListView}}"
+                    ItemWidth="{Binding (ListView.View).ItemWidth , RelativeSource={RelativeSource AncestorType=ListView}}"
+                  />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
 
                             <WrapPanel
-                                    Margin="10,0"
-                                    x:Name="dropdown"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    Orientation="Horizontal">
+                Margin="10,0"
+                x:Name="dropdown"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Orientation="Horizontal"
+              >
 
                                 <TextBlock
-                                        VerticalAlignment="Center"
-                                        Text="{x:Static p:strings.PerPage}" />
+                  VerticalAlignment="Center"
+                  Text="{x:Static p:strings.PerPage}"
+                />
                                 <ComboBox
-                                         Margin="10,0"
-                                        MinWidth="50"
-                                        x:Name="PerPageFilterComboBox"
-                                        VerticalAlignment="Center"
-                                        Background="{Binding ElementName=DataGrid, Path=Background}"
-                                        ItemsSource="{Binding PerPageFilter}"
-                                        SelectedItem="{Binding Limit, Mode=TwoWay}" />
+                  Margin="10,0"
+                  MinWidth="50"
+                  x:Name="PerPageFilterComboBox"
+                  VerticalAlignment="Center"
+                  Background="{Binding ElementName=DataGrid, Path=Background}"
+                  ItemsSource="{Binding PerPageFilter}"
+                  SelectedItem="{Binding Limit, Mode=TwoWay}"
+                />
                             </WrapPanel>
 
                             <WrapPanel
-                                    Margin="10,0"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    Orientation="Horizontal">
-                                <Button Command="{Binding PageDownCommand}" Content="&lt;&lt;"  Margin=" 5,0"/>
-                                <Button Command="{Binding FindByCriteriaCommand}" Content="{x:Static p:strings.Documents}" Margin=" 5,0" />
-                                <Button Command="{Binding PageUpCommand}" Content="&gt;&gt;"  Margin=" 5,0"/>
+                Margin="10,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Orientation="Horizontal"
+              >
+                                <Button
+                  Command="{Binding PageDownCommand}"
+                  Content="&lt;&lt;"
+                  Margin=" 5,0"
+                />
+                                <Button
+                  Command="{Binding FindByCriteriaCommand}"
+                  Content="{x:Static p:strings.Documents}"
+                  Margin=" 5,0"
+                />
+                                <Button
+                  Command="{Binding PageUpCommand}"
+                  Content="&gt;&gt;"
+                  Margin=" 5,0"
+                />
                             </WrapPanel>
 
 
                             <WrapPanel
-                                Margin="10,0"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Right"
-                                Orientation="Horizontal">
+                Margin="10,0"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                Orientation="Horizontal"
+              >
                                 <WrapPanel.Resources>
-                                    <ObjectDataProvider x:Key="searchModeFromEnum" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+                                    <ObjectDataProvider
+                    x:Key="searchModeFromEnum"
+                    MethodName="GetValues"
+                    ObjectType="{x:Type System:Enum}"
+                  >
                                         <ObjectDataProvider.MethodParameters>
-                                            <x:Type TypeName="data:eSearchMode"/>
+                                            <x:Type
+                        TypeName="data:eSearchMode"
+                      />
                                         </ObjectDataProvider.MethodParameters>
                                     </ObjectDataProvider>
 
                                 </WrapPanel.Resources>
-                                <TextBlock Style="{DynamicResource MaterialDesignCaptionTextBlock}" Margin="10,0,0,0" VerticalAlignment="Center" Text="{x:Static p:strings.Criteria}"></TextBlock>
-                                <ComboBox 
-                                    MinWidth="100"
-                                    Margin="10,0"
-                                    Background="{Binding ElementName=DataGrid, Path=Background}"
-                                    ItemsSource="{Binding Source={StaticResource searchModeFromEnum}}"
-                                    SelectedItem="{Binding SearchMode, Mode=TwoWay}"/>
-                              
+                                <TextBlock
+                  Style="{DynamicResource MaterialDesignCaptionTextBlock}"
+                  Margin="10,0,0,0"
+                  VerticalAlignment="Center"
+                  Text="{x:Static p:strings.Criteria}"
+                />
+                                <ComboBox
+                  MinWidth="100"
+                  Margin="10,0"
+                  Background="{Binding ElementName=DataGrid, Path=Background}"
+                  ItemsSource="{Binding Source={StaticResource searchModeFromEnum}}"
+                  SelectedItem="{Binding SearchMode, Mode=TwoWay}"
+                />
+
                             </WrapPanel>
 
                             <WrapPanel
-                                Margin="10,0"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Right"
-                                Orientation="Horizontal">
+                Margin="10,0"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                Orientation="Horizontal"
+              >
 
                                 <TextBox
-                                    x:Name="FilterField"                                        
-                                    Height="{Binding ActualHeight, ElementName=PerPageFilterComboBox}"
-                                    MinWidth="200"
-                                    Margin="0"
-                                    VerticalContentAlignment="Center"                                        
-                                    BorderBrush="{DynamicResource MaterialDesignDarkSeparatorBackground}"
-                                    Text="{Binding FilterByID}" />
+                  x:Name="FilterField"
+                  Height="{Binding ActualHeight, ElementName=PerPageFilterComboBox}"
+                  MinWidth="200"
+                  Margin="0"
+                  VerticalContentAlignment="Center"
+                  BorderBrush="{DynamicResource MaterialDesignDarkSeparatorBackground}"
+                  Text="{Binding FilterByID}"
+                />
                                 <Button
-                                    Height="{Binding ActualHeight, ElementName=PerPageFilterComboBox}"
-                                    Margin="2,0"
-                                    Command="{Binding FindByCriteriaCommand}"
-                                    Content="🔍"/>
+                  Height="{Binding ActualHeight, ElementName=PerPageFilterComboBox}"
+                  Margin="2,0"
+                  Command="{Binding FindByCriteriaCommand}"
+                  Content="🔍"
+                />
                             </WrapPanel>
 
                         </ItemsControl>
                     </Grid>
-                    <Grid Grid.Row="1" Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Display}">
+                    <Grid
+            Grid.Row="1"
+            Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Display}"
+          >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1787*" />
                             <ColumnDefinition Width="127*" />
                         </Grid.ColumnDefinitions>
                         <DataGrid
-                            x:Name="DataGrid"
-                            Grid.Row="0"
-                            Grid.ColumnSpan="2"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            AutoGenerateColumns="False"
-                            CanUserAddRows="False"
-                            IsReadOnly="True"
-                            ItemsSource="{Binding ObservableRecords, Mode=OneWay}"
-                            SelectedIndex="0"
-                            SelectedItem="{Binding SelectedRecord}"
-                            SelectionUnit="FullRow">
+              x:Name="DataGrid"
+              Grid.Row="0"
+              Grid.ColumnSpan="2"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch"
+              AutoGenerateColumns="False"
+              CanUserAddRows="False"
+              IsReadOnly="True"
+              ItemsSource="{Binding ObservableRecords, Mode=OneWay}"
+              SelectedIndex="0"
+              SelectedItem="{Binding SelectedRecord}"
+              SelectionUnit="FullRow"
+            >
                             <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding _EntityId}" Header="ID" />
+                                <DataGridTextColumn
+                  Binding="{Binding _EntityId}"
+                  Header="ID"
+                />
                                 <!--<DataGridTextColumn Binding="{Binding _Created, Converter={wpf:HumanizeDateConverter}}" Header="{x:Static p:strings.Created}" />
                                 <DataGridTextColumn
                                     Width="*"
                                     Binding="{Binding _Modified, Converter={wpf:HumanizeDateConverter}}"
                                     Header="{x:Static p:strings.Modified}" />-->
 
-                                <DataGridTextColumn
-                                    Width="*"
-                                    Header="" />
+                                <DataGridTextColumn Width="*" Header="" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
 
                     <Grid
-                        Grid.Row="3"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch">
-                        <Grid Visibility="{Binding SelectedRecord, Converter={wpf:NullToVisibilityConverter}}">
+            Grid.Row="3"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+          >
+                        <Grid
+              Visibility="{Binding SelectedRecord, Converter={wpf:NullToVisibilityConverter}}"
+            >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <GroupBox
-                                Grid.Row="1"
-                                Padding="10"
-                                Header="{Binding DataExchange._data._EntityId.Shadow}">
+                Grid.Row="1"
+                Padding="10"
+                Header="{Binding DataExchange._data._EntityId.Shadow}"
+              >
                                 <ContentControl
-                                    x:Name="EditData"
-                                    Margin="10"
-                                    IsVisibleChanged="ControlDataVisibilityChanged"                                    
-                                    Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Edit}"
-                                    Grid.IsSharedSizeScope="True">
+                  x:Name="EditData"
+                  Margin="10"
+                  IsVisibleChanged="ControlDataVisibilityChanged"
+                  Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Edit}"
+                  Grid.IsSharedSizeScope="True"
+                >
                                 </ContentControl>
                             </GroupBox>
                             <GroupBox
-                                Grid.Row="1"
-                                Padding="10"
-                                Header="{Binding DataExchange._data._EntityId.Shadow}"
-                                IsVisibleChanged="DisplayDataVisibilityChanged"
-                                Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Display}">
-                                <ContentControl x:Name="DisplayData" Grid.IsSharedSizeScope="True"/>
+                Grid.Row="1"
+                Padding="10"
+                Header="{Binding DataExchange._data._EntityId.Shadow}"
+                IsVisibleChanged="DisplayDataVisibilityChanged"
+                Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Display}"
+              >
+                                <ContentControl
+                  x:Name="DisplayData"
+                  Grid.IsSharedSizeScope="True"
+                />
                             </GroupBox>
                         </Grid>
-                        <Grid Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=NewCopy}">
+                        <Grid
+              Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=NewCopy}"
+            >
                             <Grid.RowDefinitions>
                                 <RowDefinition />
                                 <RowDefinition />
                             </Grid.RowDefinitions>
-                            <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <WrapPanel
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+              >
                                 <Label Content="{x:Static p:strings.Name}" />
                                 <TextBox
-                                    MinWidth="250"
-                                    HorizontalContentAlignment="Center"
-                                    VerticalContentAlignment="Center"
-                                    AutomationProperties.AutomationId="NewRecordIdentifierTextBox"
-                                    Text="{Binding RecordIdentifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                  MinWidth="250"
+                  HorizontalContentAlignment="Center"
+                  VerticalContentAlignment="Center"
+                  AutomationProperties.AutomationId="NewRecordIdentifierTextBox"
+                  Text="{Binding RecordIdentifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                />
                             </WrapPanel>
                             <WrapPanel
-                                Grid.Row="1"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center">
+                Grid.Row="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+              >
                                 <Button
-                                    AutomationProperties.AutomationId="CreateCopyButton"
-                                    Command="{Binding CreateCopyOfExistingCommand}"
-                                    Content="{x:Static p:strings.CreateCopy}"
-                                    Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Copy}" />
+                  AutomationProperties.AutomationId="CreateCopyButton"
+                  Command="{Binding CreateCopyOfExistingCommand}"
+                  Content="{x:Static p:strings.CreateCopy}"
+                  Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=Copy}"
+                />
                                 <Button
-                                    Command="{Binding CreateNewCommand}"
-                                    Content="{x:Static p:strings.OK}"
-                                    Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=New}" />
+                  Command="{Binding CreateNewCommand}"
+                  Content="{x:Static p:strings.OK}"
+                  Visibility="{Binding Mode, Mode=OneWay, Converter={wpf:ModeConverter}, ConverterParameter=New}"
+                />
 
-                                <Button Command="{Binding CancelCreateNewCommand}" Content="{x:Static p:strings.Cancel}" />
+                                <Button
+                  Command="{Binding CancelCreateNewCommand}"
+                  Content="{x:Static p:strings.Cancel}"
+                />
                             </WrapPanel>
                         </Grid>
                     </Grid>
@@ -225,93 +301,130 @@
                             <RowDefinition Height="50*" />
                         </Grid.RowDefinitions>
                         <Border Grid.Row="0">
-                            <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <WrapPanel
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+              >
                                 <Button
-                                        Margin="2,0"
-                                        Command="{Binding StartCreateNewCommand}"
-                                        Content="{x:Static p:strings.New}"
-                                        Visibility="{Binding StartCreateNewCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                  Margin="2,0"
+                  Command="{Binding StartCreateNewCommand}"
+                  Content="{x:Static p:strings.New}"
+                  Visibility="{Binding StartCreateNewCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}"
+                />
                                 <Button
-                                        Margin="2,0"
-                                        Command="{Binding StartCreateCopyOfExisting}"
-                                        Content="{x:Static p:strings.Copy}"
-                                        Visibility="{Binding StartCreateCopyOfExistingAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                  Margin="2,0"
+                  Command="{Binding StartCreateCopyOfExisting}"
+                  Content="{x:Static p:strings.Copy}"
+                  Visibility="{Binding StartCreateCopyOfExistingAvailable, Converter={StaticResource BooleanToVisibilityConverter}}"
+                />
                                 <Button
-                                        Margin="2,0"
-                                        Command="{Binding UpdateCommand}"
-                                        Content="{x:Static p:strings.Update}"
-                                        Visibility="{Binding UpdateCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                  Margin="2,0"
+                  Command="{Binding UpdateCommand}"
+                  Content="{x:Static p:strings.Update}"
+                  Visibility="{Binding UpdateCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}"
+                />
 
 
                                 <Button
-                                        Margin="2,0"
-                                        Click="Button_Click"
-                                        Command="{Binding EditCommand}"
-                                        Content="{x:Static p:strings.Edit}"
-                                        Visibility="{Binding EditCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                  Margin="2,0"
+                  Click="Button_Click"
+                  Command="{Binding EditCommand}"
+                  Content="{x:Static p:strings.Edit}"
+                  Visibility="{Binding EditCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}"
+                />
 
                                 <Button
-                                        Margin="2,0"
-                                        Command="{Binding SendToPlcCommand}"
-                                        Content="{x:Static p:strings.SendToPlc}"
-                                        Visibility="{Binding SendToPlcCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                  Margin="2,0"
+                  Command="{Binding SendToPlcCommand}"
+                  Content="{x:Static p:strings.SendToPlc}"
+                  Visibility="{Binding SendToPlcCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}"
+                />
                                 <Button
-                                        Margin="2,0"
-                                        Command="{Binding LoadFromPlcCommand}"
-                                        Content="{x:Static p:strings.FromPlc}"
-                                        Visibility="{Binding LoadFromPlcCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                  Margin="2,0"
+                  Command="{Binding LoadFromPlcCommand}"
+                  Content="{x:Static p:strings.FromPlc}"
+                  Visibility="{Binding LoadFromPlcCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}"
+                />
 
 
                                 <Button
-                                        Margin="2,0"
-                                        Command="{Binding ImportCommand}"
-                                        Content="Import"
-                                        Visibility="{Binding ImportCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                  Margin="2,0"
+                  Command="{Binding ImportCommand}"
+                  Content="Import"
+                  Visibility="{Binding ImportCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}"
+                />
                                 <Button
-                                        Margin="2,0"
-                                        Command="{Binding ExportCommand}"
-                                        Content="Export"
-                                        Visibility="{Binding ExportCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                  Margin="2,0"
+                  Command="{Binding ExportCommand}"
+                  Content="Export"
+                  Visibility="{Binding ExportCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}"
+                />
 
                                 <Button
-                                        Margin="2,0"
-                                        Command="{Binding CancelEditCommand}"
-                                        Content="{x:Static p:strings.Cancel}"
-                                        Visibility="{Binding CancelEditCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                  Margin="2,0"
+                  Command="{Binding CancelEditCommand}"
+                  Content="{x:Static p:strings.Cancel}"
+                  Visibility="{Binding CancelEditCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}"
+                />
                                 <Button
-                                        Margin="2,0"
-                                        Command="{Binding DeleteCommand}"
-                                        Content="{x:Static p:strings.Delete}"
-                                        Visibility="{Binding DeleteCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                  Margin="2,0"
+                  Command="{Binding DeleteCommand}"
+                  Content="{x:Static p:strings.Delete}"
+                  Visibility="{Binding DeleteCommandAvailable, Converter={StaticResource BooleanToVisibilityConverter}}"
+                />
                             </WrapPanel>
                         </Border>
-        
+
 
                     </Grid>
                 </Grid>
             </TabItem>
-            <TabItem Header="Tracker" Visibility="{Binding SelectedRecord, Converter={wpf:NullToVisibilityConverter}}">
+            <TabItem
+        Header="Tracker"
+        Visibility="{Binding SelectedRecord, Converter={wpf:NullToVisibilityConverter}}"
+      >
                 <DataGrid
-                    AutoGenerateColumns="False"
-                    CanUserAddRows="False"
-                    CanUserDeleteRows="False"
-                    CanUserSortColumns="True"
-                    IsReadOnly="True"
-                    ItemsSource="{Binding Changes}">
+          AutoGenerateColumns="False"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          CanUserSortColumns="True"
+          IsReadOnly="True"
+          ItemsSource="{Binding Changes}"
+        >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding DateTime}" Header="{x:Static p:strings.Timestamp}" />
-                        <DataGridTextColumn Binding="{Binding UserName}" Header="{x:Static p:strings.UserName}" />
-                        <DataGridTextColumn Binding="{Binding ValueTag.HumanReadable}" Header="{x:Static p:strings.DataItemName}" />
-                        <DataGridTextColumn Binding="{Binding OldValue}" Header="{x:Static p:strings.OldValue}" />
-                        <DataGridTextColumn Binding="{Binding NewValue}" Header="{x:Static p:strings.NewValue}" />
-                        <DataGridTextColumn Binding="{Binding ValueTag.Symbol}" Header="{x:Static p:strings.Symbol}" />
+                        <DataGridTextColumn
+              Binding="{Binding DateTime}"
+              Header="{x:Static p:strings.Timestamp}"
+            />
+                        <DataGridTextColumn
+              Binding="{Binding UserName}"
+              Header="{x:Static p:strings.UserName}"
+            />
+                        <DataGridTextColumn
+              Binding="{Binding ValueTag.HumanReadable}"
+              Header="{x:Static p:strings.DataItemName}"
+            />
+                        <DataGridTextColumn
+              Binding="{Binding OldValue}"
+              Header="{x:Static p:strings.OldValue}"
+            />
+                        <DataGridTextColumn
+              Binding="{Binding NewValue}"
+              Header="{x:Static p:strings.NewValue}"
+            />
+                        <DataGridTextColumn
+              Binding="{Binding ValueTag.Symbol}"
+              Header="{x:Static p:strings.Symbol}"
+            />
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
         </TabControl>
         <vortex:HelpProviderView Grid.Row="1">
             <vortex:HelpProviderView.DataContext>
-                <vortex:HelpProviderViewModel ComponentName="(TcOpen)DataView" />
+                <vortex:HelpProviderViewModel
+          ComponentName="(TcOpen)DataView"
+        />
             </vortex:HelpProviderView.DataContext>
         </vortex:HelpProviderView>
     </Grid>

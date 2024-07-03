@@ -13,6 +13,8 @@ namespace TcoIoTests
 
         static int TargetAmsPort = 852;
 
-        public static TcoIoTestsTwinController TcoIoTests = new TcoIoTestsTwinController(Tc3ConnectorAdapter.Create(TargetAmsId, TargetAmsPort, true));
+        public static TcoIoTestsTwinController TcoIoTests = new TcoIoTestsTwinController(
+            Tc3ConnectorAdapter.Create(TargetAmsId, TargetAmsPort, true)
+        );
     }
 }

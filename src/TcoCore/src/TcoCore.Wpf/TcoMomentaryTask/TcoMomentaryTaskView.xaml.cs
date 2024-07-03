@@ -22,7 +22,6 @@ namespace TcoCore
     /// </summary>
     public partial class TcoMomentaryTaskView : UserControl
     {
-
         public TcoMomentaryTaskView()
         {
             InitializeComponent();
