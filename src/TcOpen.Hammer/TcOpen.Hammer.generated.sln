@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlcHammer.Hmi", "HMI\PlcHammer.Hmi.csproj", "{E79AC191-C0F4-42CB-98C5-159EC20F2761}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQTTTestClient", "MQTTTestClient\MQTTTestClient.csproj", "{2431AB6A-B062-4601-B918-C7306F269B3A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlcHammer.Hmi.Blazor", "PlcHammer.Hmi.Blazor\PlcHammer.Hmi.Blazor.csproj", "{A7709482-C104-4D15-B914-12F7A1328A25}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlcHammerConnector", "PlcHammerConnector\PlcHammerConnector.csproj", "{15836DF7-B079-4B7F-AA27-955C6A2A208A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TcOpenHammer.Grafana.API", "TcOpen.Inxton.Grafana\TcOpenHammer.Grafana.API.csproj", "{C75E3AB3-7596-4022-B93D-0D9747C438B1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E79AC191-C0F4-42CB-98C5-159EC20F2761}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E79AC191-C0F4-42CB-98C5-159EC20F2761}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E79AC191-C0F4-42CB-98C5-159EC20F2761}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E79AC191-C0F4-42CB-98C5-159EC20F2761}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2431AB6A-B062-4601-B918-C7306F269B3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2431AB6A-B062-4601-B918-C7306F269B3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2431AB6A-B062-4601-B918-C7306F269B3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2431AB6A-B062-4601-B918-C7306F269B3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7709482-C104-4D15-B914-12F7A1328A25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7709482-C104-4D15-B914-12F7A1328A25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7709482-C104-4D15-B914-12F7A1328A25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7709482-C104-4D15-B914-12F7A1328A25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15836DF7-B079-4B7F-AA27-955C6A2A208A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15836DF7-B079-4B7F-AA27-955C6A2A208A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15836DF7-B079-4B7F-AA27-955C6A2A208A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15836DF7-B079-4B7F-AA27-955C6A2A208A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C75E3AB3-7596-4022-B93D-0D9747C438B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C75E3AB3-7596-4022-B93D-0D9747C438B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C75E3AB3-7596-4022-B93D-0D9747C438B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C75E3AB3-7596-4022-B93D-0D9747C438B1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AC3FED0A-4815-40C2-A253-05088711D685}
+	EndGlobalSection
+EndGlobal
