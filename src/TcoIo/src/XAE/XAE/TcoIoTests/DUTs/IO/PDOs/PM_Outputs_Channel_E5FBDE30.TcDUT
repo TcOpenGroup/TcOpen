@@ -6,7 +6,8 @@
 {attribute addProperty Id "IndexAT %Q*USINT1"}
 {attribute addProperty CRC "3858488880"}
 {attribute addProperty Size "1"}
-TYPE PM_Outputs_Channel_E5FBDE30 EXTENDS TcoIo.OutputBase_10CEE7DE : STRUCT
+TYPE PM_Outputs_Channel_E5FBDE30 EXTENDS TcoIo.OutputBase_10CEE7DE : 
+STRUCT
     {attribute addProperty Name "Index"}
     Index AT %Q* : USINT;
 END_STRUCT

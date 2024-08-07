@@ -9,7 +9,8 @@
 {attribute addProperty Id "MTO_Inputs_Channel_1AT %I*MTO_Inputs_Channel_53C09E8B6MTO_Inputs_Channel_2AT %I*MTO_Inputs_Channel_53C09E8B6MTO_Inputs_Channel_3AT %I*MTO_Inputs_Channel_53C09E8B6MTO_Inputs_Channel_4AT %I*MTO_Inputs_Channel_53C09E8B6MTO_Inputs_Channel_5AT %I*MTO_Inputs_Channel_53C09E8B6MTO_Inputs_Channel_6AT %I*MTO_Inputs_Channel_53C09E8B6MTO_Inputs_Channel_7AT %I*MTO_Inputs_Channel_53C09E8B6MTO_Inputs_Channel_8AT %I*MTO_Inputs_Channel_53C09E8B6MTO_Outputs_10x_Channel_1AT %Q*MTO_Outputs_10x_Channel_A3C0C02256MTO_Outputs_10x_Channel_2AT %Q*MTO_Outputs_10x_Channel_A3C0C02256MTO_Outputs_10x_Channel_3AT %Q*MTO_Outputs_10x_Channel_A3C0C02256MTO_Outputs_10x_Channel_4AT %Q*MTO_Outputs_10x_Channel_A3C0C02256MTO_Outputs_10x_Channel_5AT %Q*MTO_Outputs_10x_Channel_A3C0C02256MTO_Outputs_10x_Channel_6AT %Q*MTO_Outputs_10x_Channel_A3C0C02256MTO_Outputs_10x_Channel_7AT %Q*MTO_Outputs_10x_Channel_A3C0C02256MTO_Outputs_10x_Channel_8AT %Q*MTO_Outputs_10x_Channel_A3C0C02256WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_B84DBEC510"}
 {attribute addProperty CRC "3820118266"}
 {attribute addProperty Size "508"}
-TYPE EL2258_E3B260FA EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 : STRUCT
+TYPE EL2258_E3B260FA EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 : 
+STRUCT
     {attribute addProperty Name "MTO_Inputs_Channel_1"}
     MTO_Inputs_Channel_1 : MTO_Inputs_Channel_53C09E8B;
     {attribute addProperty Name "MTO_Inputs_Channel_2"}

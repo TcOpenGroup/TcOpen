@@ -6,7 +6,8 @@
 {attribute addProperty Id "digital_Data_OAT %Q*ARRAY[0..27] OF USINT28"}
 {attribute addProperty CRC "3096397179"}
 {attribute addProperty Size "28"}
-TYPE Outputs_79BC345B EXTENDS TcoIo.OutputBase_10CEE7DE : STRUCT
+TYPE Outputs_79BC345B EXTENDS TcoIo.OutputBase_10CEE7DE : 
+STRUCT
     {attribute addProperty Name "digital_Data_O"}
     digital_Data_O AT %Q* : ARRAY[0..27] OF USINT;
 END_STRUCT

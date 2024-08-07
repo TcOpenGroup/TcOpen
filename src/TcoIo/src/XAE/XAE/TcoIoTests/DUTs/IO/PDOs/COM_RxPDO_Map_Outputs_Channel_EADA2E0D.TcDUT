@@ -6,7 +6,8 @@
 {attribute addProperty Id "CtrlAT %Q*Ctrl_1EFB4D3B5Data_OutAT %Q*ARRAY[0..21] OF USINT22"}
 {attribute addProperty CRC "3494673196"}
 {attribute addProperty Size "27"}
-TYPE COM_RxPDO_Map_Outputs_Channel_EADA2E0D EXTENDS TcoIo.OutputBase_10CEE7DE : STRUCT
+TYPE COM_RxPDO_Map_Outputs_Channel_EADA2E0D EXTENDS TcoIo.OutputBase_10CEE7DE : 
+STRUCT
     {attribute addProperty Name "Ctrl"}
     Ctrl AT %Q* : Ctrl_1EFB4D3B;
     {attribute addProperty Name "Data_Out"}

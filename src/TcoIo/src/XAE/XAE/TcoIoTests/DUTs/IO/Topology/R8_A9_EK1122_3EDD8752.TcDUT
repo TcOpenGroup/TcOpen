@@ -7,7 +7,8 @@
 {attribute addProperty CRC "1054705490"}
 {attribute addProperty Size "1096"}
 {attribute addProperty Name "R8_A9 (EK1122)"}
-TYPE R8_A9_EK1122_3EDD8752 EXTENDS EK1122_1FC0878B : STRUCT
+TYPE R8_A9_EK1122_3EDD8752 EXTENDS EK1122_1FC0878B : 
+STRUCT
     {attribute addProperty Name "RC30_1 (EK1100)"}
     {attribute addProperty PreviousPort "R8_A9 (EK1122) : D"}
     {attribute addProperty SyncUnit "default"}

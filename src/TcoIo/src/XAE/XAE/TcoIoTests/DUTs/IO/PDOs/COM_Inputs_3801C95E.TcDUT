@@ -6,7 +6,8 @@
 {attribute addProperty Id "StatusAT %I*Status_3D84275F8Data_InAT %I*ARRAY[0..21] OF USINT22"}
 {attribute addProperty CRC "1334739266"}
 {attribute addProperty Size "30"}
-TYPE COM_Inputs_3801C95E EXTENDS TcoIo.InputBase_8311D824 : STRUCT
+TYPE COM_Inputs_3801C95E EXTENDS TcoIo.InputBase_8311D824 : 
+STRUCT
     {attribute addProperty Name "Status"}
     Status AT %I* : Status_3D84275F;
     {attribute addProperty Name "Data_In"}

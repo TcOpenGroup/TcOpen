@@ -9,7 +9,8 @@
 {attribute addProperty Id "InfoDataAT %I*InfoData_8F85596B2"}
 {attribute addProperty CRC "2699822940"}
 {attribute addProperty Size "2"}
-TYPE EL6631_A0EC075C EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 : STRUCT
+TYPE EL6631_A0EC075C EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 : 
+STRUCT
     {attribute addProperty Name "InfoData"}
     InfoData : InfoData_8F85596B;
 END_STRUCT

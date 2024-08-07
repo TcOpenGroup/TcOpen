@@ -15,7 +15,8 @@
 
     </docu>
 ~*)
-TYPE ABSTRACT TcoStruct : STRUCT
+TYPE ABSTRACT TcoStruct : 
+STRUCT
     {attribute 'hide'}
     {attribute clr [ReadOnly()]}
     Parent : ITcoObject;

@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoUrCb3_Inputs_v_3_x_x" Id="{26a40705-e58d-0fc2-3d98-35d604caf658}">
-    <Declaration><![CDATA[TYPE TcoUrCb3_Inputs_v_3_x_x : STRUCT
+    <Declaration><![CDATA[TYPE TcoUrCb3_Inputs_v_3_x_x : 
+STRUCT
     {attribute addProperty Name "<#State#>"}
     State : TcoUrRobotics_T2O_State_IO;
     {attribute addProperty Name "<#IO#>"}

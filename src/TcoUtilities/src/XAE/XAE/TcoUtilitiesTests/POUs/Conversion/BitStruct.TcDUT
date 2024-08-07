@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="BitStruct" Id="{87e02438-32aa-0583-2163-80d88d401a23}">
-    <Declaration><![CDATA[TYPE BitStruct : STRUCT
+    <Declaration><![CDATA[TYPE BitStruct : 
+STRUCT
     bBit0 : BIT;
     bBit1 : BIT;
     bBit2 : BIT;

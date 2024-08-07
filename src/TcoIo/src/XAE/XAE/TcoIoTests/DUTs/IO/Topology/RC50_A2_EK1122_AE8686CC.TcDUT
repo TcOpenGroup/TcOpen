@@ -7,7 +7,8 @@
 {attribute addProperty CRC "2928051916"}
 {attribute addProperty Size "73"}
 {attribute addProperty Name "RC50_A2 (EK1122)"}
-TYPE RC50_A2_EK1122_AE8686CC EXTENDS EK1122_1FC0878B : STRUCT
+TYPE RC50_A2_EK1122_AE8686CC EXTENDS EK1122_1FC0878B : 
+STRUCT
     {attribute addProperty Name "RC50_VI (AES-D-BC-ECAT)"}
     {attribute addProperty PreviousPort "RC50_A2 (EK1122) : D"}
     {attribute addProperty SyncUnit "C50"}

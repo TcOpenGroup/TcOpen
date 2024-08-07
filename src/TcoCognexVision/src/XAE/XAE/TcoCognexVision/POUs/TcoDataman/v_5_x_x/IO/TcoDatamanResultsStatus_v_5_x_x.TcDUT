@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <DUT Name="TcoDatamanResultsStatus_v_5_x_x" Id="{af59c109-c71c-4a20-b5ce-79be06027ed4}">
-    <Declaration><![CDATA[TYPE TcoDatamanResultsStatus_v_5_x_x : STRUCT
+    <Declaration><![CDATA[TYPE TcoDatamanResultsStatus_v_5_x_x : 
+STRUCT
     Decoding AT %I* : BOOL;
     DecodeComplete AT %I* : BOOL;
     ResultsBufferOverrun AT %I* : BOOL;

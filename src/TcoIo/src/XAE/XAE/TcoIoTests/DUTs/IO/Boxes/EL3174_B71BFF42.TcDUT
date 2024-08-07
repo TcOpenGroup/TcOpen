@@ -9,7 +9,8 @@
 {attribute addProperty Id "AI_Standard_Channel_1AT %I*AI_Standard_Channel_A8DF64E310AI_Standard_Channel_2AT %I*AI_Standard_Channel_A8DF64E310AI_Standard_Channel_3AT %I*AI_Standard_Channel_A8DF64E310AI_Standard_Channel_4AT %I*AI_Standard_Channel_A8DF64E310WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_23CBA8372"}
 {attribute addProperty CRC "3072065346"}
 {attribute addProperty Size "44"}
-TYPE EL3174_B71BFF42 EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 : STRUCT
+TYPE EL3174_B71BFF42 EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 : 
+STRUCT
     {attribute addProperty Name "AI_Standard_Channel_1"}
     AI_Standard_Channel_1 : AI_Standard_Channel_A8DF64E3;
     {attribute addProperty Name "AI_Standard_Channel_2"}

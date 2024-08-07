@@ -7,7 +7,8 @@
 {attribute addProperty CRC "1999773031"}
 {attribute addProperty Size "73"}
 {attribute addProperty Name "RC20_A2 (EK1122)"}
-TYPE RC20_A2_EK1122_77321D67 EXTENDS EK1122_1FC0878B : STRUCT
+TYPE RC20_A2_EK1122_77321D67 EXTENDS EK1122_1FC0878B : 
+STRUCT
     {attribute addProperty Name "RC20_VI (AES-D-BC-ECAT)"}
     {attribute addProperty PreviousPort "RC20_A2 (EK1122) : D"}
     {attribute addProperty SyncUnit "C20"}

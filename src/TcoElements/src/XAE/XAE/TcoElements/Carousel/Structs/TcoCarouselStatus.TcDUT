@@ -8,7 +8,8 @@
     </summary>
 </docu>
 ~*)
-TYPE TcoCarouselStatus : STRUCT
+TYPE TcoCarouselStatus : 
+STRUCT
     ActionDescription : STRING(100);
     {attribute addProperty Name "<#In position#>"}
     InPosition : BOOL;

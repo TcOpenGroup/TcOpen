@@ -7,7 +7,8 @@
 {attribute addProperty CRC "2551976673"}
 {attribute addProperty Size "136"}
 {attribute addProperty Name "R1_A3_EC (EK1122)"}
-TYPE R1_A3_EC_EK1122_981C12E1 EXTENDS EK1122_1FC0878B : STRUCT
+TYPE R1_A3_EC_EK1122_981C12E1 EXTENDS EK1122_1FC0878B : 
+STRUCT
     {attribute addProperty Name "VI-2 (AES-D-BC-ECAT)"}
     {attribute addProperty PreviousPort "R1_A3_EC (EK1122) : D"}
     {attribute addProperty SyncUnit "default"}

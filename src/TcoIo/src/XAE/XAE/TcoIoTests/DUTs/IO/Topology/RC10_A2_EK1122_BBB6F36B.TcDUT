@@ -7,7 +7,8 @@
 {attribute addProperty CRC "3149329259"}
 {attribute addProperty Size "73"}
 {attribute addProperty Name "RC10_A2 (EK1122)"}
-TYPE RC10_A2_EK1122_BBB6F36B EXTENDS EK1122_1FC0878B : STRUCT
+TYPE RC10_A2_EK1122_BBB6F36B EXTENDS EK1122_1FC0878B : 
+STRUCT
     {attribute addProperty Name "RC10_VI (AES-D-BC-ECAT)"}
     {attribute addProperty PreviousPort "RC10_A2 (EK1122) : D"}
     {attribute addProperty SyncUnit "C10"}

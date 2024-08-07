@@ -6,7 +6,8 @@
 {attribute addProperty Id "U3_SamplesAT %I*U3_Samples_2549228720"}
 {attribute addProperty CRC "1711951775"}
 {attribute addProperty Size "20"}
-TYPE L3_Voltage_Samples_660A4F9F EXTENDS TcoIo.InputBase_8311D824 : STRUCT
+TYPE L3_Voltage_Samples_660A4F9F EXTENDS TcoIo.InputBase_8311D824 : 
+STRUCT
     {attribute addProperty Name "U3_Samples"}
     U3_Samples AT %I* : U3_Samples_25492287;
 END_STRUCT

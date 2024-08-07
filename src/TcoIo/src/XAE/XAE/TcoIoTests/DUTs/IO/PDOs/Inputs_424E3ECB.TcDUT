@@ -6,7 +6,8 @@
 {attribute addProperty Id "StatuswordAT %I*UINT2Mode_Of_Operation_displayAT %I*USINT1Position_Actual_ValueAT %I*DINT4Error_RegisterAT %I*USINT1"}
 {attribute addProperty CRC "1112424139"}
 {attribute addProperty Size "8"}
-TYPE Inputs_424E3ECB EXTENDS TcoIo.InputBase_8311D824 : STRUCT
+TYPE Inputs_424E3ECB EXTENDS TcoIo.InputBase_8311D824 : 
+STRUCT
     {attribute addProperty Name "Statusword"}
     Statusword AT %I* : UINT;
     {attribute addProperty Name "Mode_Of_Operation_display"}

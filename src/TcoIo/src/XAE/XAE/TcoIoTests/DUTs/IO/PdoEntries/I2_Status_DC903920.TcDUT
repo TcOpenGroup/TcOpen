@@ -6,7 +6,8 @@
 {attribute addProperty Id "UnderrangeBOOL1OverrangeBOOL1Limit_xBYTE1ErrorBOOL1Sync_errorBOOL1TxPDO_StateBOOL1TxPDO_ToggleBOOL1"}
 {attribute addProperty CRC "3700439328"}
 {attribute addProperty Size "7"}
-TYPE I2_Status_DC903920 : STRUCT
+TYPE I2_Status_DC903920 : 
+STRUCT
     {attribute addProperty Name "Underrange"}
     Underrange : BOOL;
     {attribute addProperty Name "Overrange"}

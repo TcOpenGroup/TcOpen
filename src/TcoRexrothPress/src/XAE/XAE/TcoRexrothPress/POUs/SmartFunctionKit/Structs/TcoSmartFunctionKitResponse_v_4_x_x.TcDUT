@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <DUT Name="TcoSmartFunctionKitResponse_v_4_x_x" Id="{c056394b-7bb2-43c5-b5ef-f1b8ce1f9bca}">
-    <Declaration><![CDATA[TYPE TcoSmartFunctionKitResponse_v_4_x_x : STRUCT
+    <Declaration><![CDATA[TYPE TcoSmartFunctionKitResponse_v_4_x_x : 
+STRUCT
     AxisInReference : BOOL;
     ProgramActive : BOOL;
     LastPressingOk : BOOL;

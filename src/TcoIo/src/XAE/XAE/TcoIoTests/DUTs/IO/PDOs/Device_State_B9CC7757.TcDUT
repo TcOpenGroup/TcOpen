@@ -6,7 +6,8 @@
 {attribute addProperty Id "CouplerStateAT %I*UDINT4"}
 {attribute addProperty CRC "3117184855"}
 {attribute addProperty Size "4"}
-TYPE Device_State_B9CC7757 EXTENDS TcoIo.InputBase_8311D824 : STRUCT
+TYPE Device_State_B9CC7757 EXTENDS TcoIo.InputBase_8311D824 : 
+STRUCT
     {attribute addProperty Name "CouplerState"}
     CouplerState AT %I* : UDINT;
 END_STRUCT

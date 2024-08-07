@@ -11,7 +11,8 @@
 {attribute 'qlik_entity:Checks'}
 {attribute 'qlik_ref_value_field:CheckName = AttributeHumanReadable'}
 {attribute 'qlik_ref_value_field:StationName = AttributeQlikGroup'}
-TYPE TcoInspectorData : STRUCT
+TYPE TcoInspectorData : 
+STRUCT
     (*~
         <docu>
         <summary>

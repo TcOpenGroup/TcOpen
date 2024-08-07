@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoTixonPickVibro_Status_v_1_x_x" Id="{64c7d329-7f1f-07d3-0c7c-204fad6f1457}">
-    <Declaration><![CDATA[TYPE TcoTixonPickVibro_Status_v_1_x_x EXTENDS TcoTixonGenericStatus : STRUCT
+    <Declaration><![CDATA[TYPE TcoTixonPickVibro_Status_v_1_x_x EXTENDS TcoTixonGenericStatus : 
+STRUCT
     {attribute addProperty Name "<#Separator in work position#> - i6"}
     SeparatorWorkPos : BOOL;
     {attribute addProperty Name "<#In Pick Zone#>"}

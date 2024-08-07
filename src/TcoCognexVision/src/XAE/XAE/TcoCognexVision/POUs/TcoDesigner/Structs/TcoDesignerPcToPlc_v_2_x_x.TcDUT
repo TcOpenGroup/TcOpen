@@ -2,7 +2,8 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoDesignerPcToPlc_v_2_x_x" Id="{0fb0ed22-9d97-09a7-2a72-f2d06e10fe82}">
     <Declaration><![CDATA[{attribute wpf [Container(Layout.Stack)]}
-TYPE TcoDesignerPcToPlc_v_2_x_x : STRUCT
+TYPE TcoDesignerPcToPlc_v_2_x_x : 
+STRUCT
     {attribute wpf [Container(Layout.Stack,"State")]}
     {attribute addProperty Name "<#SystemOnline#>"}
     SystemOnline : BOOL; //indication that designer PC app and inspection are running

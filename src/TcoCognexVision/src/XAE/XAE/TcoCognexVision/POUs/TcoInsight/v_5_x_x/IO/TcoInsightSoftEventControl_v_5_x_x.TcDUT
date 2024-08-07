@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <DUT Name="TcoInsightSoftEventControl_v_5_x_x" Id="{7792c4e9-0f72-01e8-0d88-da5811ee8506}">
-    <Declaration><![CDATA[TYPE TcoInsightSoftEventControl_v_5_x_x : STRUCT
+    <Declaration><![CDATA[TYPE TcoInsightSoftEventControl_v_5_x_x : 
+STRUCT
     TriggerSoftEventAcknowledge AT %I* : ARRAY[0..7] OF BOOL;
     TriggerSoftEvent AT %Q* : ARRAY[0..7] OF BOOL;
 END_STRUCT

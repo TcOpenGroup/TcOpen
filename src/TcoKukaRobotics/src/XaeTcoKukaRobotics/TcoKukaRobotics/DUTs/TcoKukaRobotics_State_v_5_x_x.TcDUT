@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoKukaRobotics_State_v_5_x_x" Id="{c1fb33fa-983f-0e55-1f2b-6d3ec61b8080}">
-    <Declaration><![CDATA[TYPE TcoKukaRobotics_State_v_5_x_x : STRUCT
+    <Declaration><![CDATA[TYPE TcoKukaRobotics_State_v_5_x_x : 
+STRUCT
     {attribute addProperty Name "<#ControlReady [RC_RDY1]#>"}
     RcReady : BOOL;
     {attribute addProperty Name "<#AlarmStopActive [ALARM_STOP]#>"}

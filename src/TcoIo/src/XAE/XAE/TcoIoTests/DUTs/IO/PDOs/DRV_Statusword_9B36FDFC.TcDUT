@@ -6,7 +6,8 @@
 {attribute addProperty Id "StatuswordAT %I*UINT2"}
 {attribute addProperty CRC "2604072444"}
 {attribute addProperty Size "2"}
-TYPE DRV_Statusword_9B36FDFC EXTENDS TcoIo.InputBase_8311D824 : STRUCT
+TYPE DRV_Statusword_9B36FDFC EXTENDS TcoIo.InputBase_8311D824 : 
+STRUCT
     {attribute addProperty Name "Statusword"}
     Statusword AT %I* : UINT;
 END_STRUCT

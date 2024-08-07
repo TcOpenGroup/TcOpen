@@ -7,7 +7,8 @@
 {attribute addProperty CRC "915297406"}
 {attribute addProperty Size "623"}
 {attribute addProperty Name "Device 3 (EtherCAT)"}
-TYPE Device_3_EtherCAT_368E547E EXTENDS TcoIo.EtcMasterBase_62654B43 : STRUCT
+TYPE Device_3_EtherCAT_368E547E EXTENDS TcoIo.EtcMasterBase_62654B43 : 
+STRUCT
     {attribute addProperty Name "Term 146 (EK1100)"}
     {attribute addProperty PreviousPort "Device 3 (EtherCAT) : Master"}
     {attribute addProperty SyncUnit "default"}

@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoDesignerConfig_v_2_x_x" Id="{4f6ae74c-559c-0efb-3bb5-ac863ea95856}">
-    <Declaration><![CDATA[TYPE TcoDesignerConfig_v_2_x_x : STRUCT
+    <Declaration><![CDATA[TYPE TcoDesignerConfig_v_2_x_x : 
+STRUCT
     TriggerTimemout : TIME := T#15S;
     ConnectionTimemout : TIME := T#10S;
     InfoTime : TIME := T#2S;

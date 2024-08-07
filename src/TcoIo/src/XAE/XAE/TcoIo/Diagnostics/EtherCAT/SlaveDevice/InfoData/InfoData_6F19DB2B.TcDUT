@@ -6,7 +6,8 @@
 {attribute addProperty Id "StateAT %I*UINT2"}
 {attribute addProperty CRC "1863965483"}
 {attribute addProperty Size "2"}
-TYPE InfoData_6F19DB2B : STRUCT
+TYPE InfoData_6F19DB2B : 
+STRUCT
     {attribute addProperty Name "State"}
     State AT %I* : UINT;
 END_STRUCT

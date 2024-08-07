@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <DUT Name="Station001_ProductionData" Id="{148e1532-fd36-4606-a278-36ddc44c44a7}">
-    <Declaration><![CDATA[TYPE Station001_ProductionData EXTENDS TcoData.TcoEntity : STRUCT
+    <Declaration><![CDATA[TYPE Station001_ProductionData EXTENDS TcoData.TcoEntity : 
+STRUCT
     {attribute clr [Container(Layout.Stack)]}
     Result : TcoComprehensiveResult;
     RecipeName : STRING;

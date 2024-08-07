@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoAxisConfig" Id="{29e23d81-fe4f-0e35-0162-67c8db271545}">
-    <Declaration><![CDATA[TYPE TcoAxisConfig : STRUCT
+    <Declaration><![CDATA[TYPE TcoAxisConfig : 
+STRUCT
     {attribute addProperty Name "<#Hide Power Tab#>"}
     HidePower : BOOL;
     {attribute addProperty Name "<#Hide Reset Tab#>"}

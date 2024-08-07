@@ -6,7 +6,8 @@
 {attribute addProperty Id "Analog_outputAT %Q*INT2"}
 {attribute addProperty CRC "3128867708"}
 {attribute addProperty Size "2"}
-TYPE AO_Output_Channel_BA7EBB7C EXTENDS TcoIo.OutputBase_10CEE7DE : STRUCT
+TYPE AO_Output_Channel_BA7EBB7C EXTENDS TcoIo.OutputBase_10CEE7DE : 
+STRUCT
     {attribute addProperty Name "Analog_output"}
     Analog_output AT %Q* : INT;
 END_STRUCT

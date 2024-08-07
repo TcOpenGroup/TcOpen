@@ -9,7 +9,8 @@
 {attribute addProperty Id "DCM_Status_Channel_1AT %I*DCM_Status_Channel_36ED096F11DCM_Synchron_info_data_Channel_1AT %I*DCM_Synchron_info_data_Channel_6FB37C884DCM_Status_Channel_2AT %I*DCM_Status_Channel_36ED096F11DCM_Synchron_info_data_Channel_2AT %I*DCM_Synchron_info_data_Channel_6FB37C884DCM_Control_Channel_1AT %Q*DCM_Control_Channel_5A8B50163DCM_Velocity_Channel_1AT %Q*DCM_Velocity_Channel_A47A3F412DCM_Control_Channel_2AT %Q*DCM_Control_Channel_5A8B50163DCM_Velocity_Channel_2AT %Q*DCM_Velocity_Channel_A47A3F412WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_F38373C94"}
 {attribute addProperty CRC "3753033431"}
 {attribute addProperty Size "46"}
-TYPE EL7332_DFB2BED7 EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 : STRUCT
+TYPE EL7332_DFB2BED7 EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 : 
+STRUCT
     {attribute addProperty Name "DCM_Status_Channel_1"}
     DCM_Status_Channel_1 : DCM_Status_Channel_36ED096F;
     {attribute addProperty Name "DCM_Synchron_info_data_Channel_1"}

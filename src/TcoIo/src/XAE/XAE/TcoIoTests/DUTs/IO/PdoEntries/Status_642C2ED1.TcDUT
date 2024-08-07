@@ -6,7 +6,8 @@
 {attribute addProperty Id "Output_short_circuitBOOL1Output_buffer_overflowBOOL1Output_stateBOOL1Input_cycle_counterBYTE1Output_order_feedbackUSINT1Events_in_output_bufferUSINT1"}
 {attribute addProperty CRC "1680617169"}
 {attribute addProperty Size "6"}
-TYPE Status_642C2ED1 : STRUCT
+TYPE Status_642C2ED1 : 
+STRUCT
     {attribute addProperty Name "Output_short_circuit"}
     Output_short_circuit : BOOL;
     {attribute addProperty Name "Output_buffer_overflow"}

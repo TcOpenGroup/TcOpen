@@ -9,7 +9,8 @@
 {attribute addProperty Id "InAT %I*In_389F2F151OutAT %Q*Out_81AAEF2D0WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_23CBA8372"}
 {attribute addProperty CRC "3728297693"}
 {attribute addProperty Size "5"}
-TYPE Flexi_Soft_EtherCAT_Gateway_DE394EDD EXTENDS TcoIo.EtcSlaveBoxBase_77A0E4A7 : STRUCT
+TYPE Flexi_Soft_EtherCAT_Gateway_DE394EDD EXTENDS TcoIo.EtcSlaveBoxBase_77A0E4A7 : 
+STRUCT
     {attribute addProperty Name "In"}
     In : In_389F2F15;
     {attribute addProperty Name "Out"}

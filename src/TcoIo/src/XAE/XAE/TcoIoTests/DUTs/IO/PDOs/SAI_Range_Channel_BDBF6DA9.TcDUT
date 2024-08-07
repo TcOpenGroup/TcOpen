@@ -6,7 +6,8 @@
 {attribute addProperty Id "SettingsAT %I*Settings_24C049402"}
 {attribute addProperty CRC "3183439273"}
 {attribute addProperty Size "2"}
-TYPE SAI_Range_Channel_BDBF6DA9 EXTENDS TcoIo.InputBase_8311D824 : STRUCT
+TYPE SAI_Range_Channel_BDBF6DA9 EXTENDS TcoIo.InputBase_8311D824 : 
+STRUCT
     {attribute addProperty Name "Settings"}
     Settings AT %I* : Settings_24C04940;
 END_STRUCT

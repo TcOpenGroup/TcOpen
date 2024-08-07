@@ -2,7 +2,8 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
   <DUT Name="stEL3152_ChannelStatus" Id="{893884d2-b629-45c0-b0af-31b5dc7dbc34}">
     <Declaration><![CDATA[{attribute 'pack_mode' := '1'}
-TYPE stEL3152_ChannelStatus : STRUCT
+TYPE stEL3152_ChannelStatus : 
+STRUCT
     Underrange : BIT;
     Overrange : BIT;
     LT_Lim1 : BIT; // Less Than Limit 1

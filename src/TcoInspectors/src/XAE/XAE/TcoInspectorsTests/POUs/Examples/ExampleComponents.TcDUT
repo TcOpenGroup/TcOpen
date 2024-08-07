@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <DUT Name="ExampleComponents" Id="{2b6326a9-8e03-0647-2962-aa10edbd1fa1}">
-    <Declaration><![CDATA[TYPE ExampleComponents EXTENDS TcoCore.TcoStruct : STRUCT
+    <Declaration><![CDATA[TYPE ExampleComponents EXTENDS TcoCore.TcoStruct : 
+STRUCT
     DmcReader : STRING;
     BoltPresenceSensor : BOOL;
     DimX_Sensor : LREAL;

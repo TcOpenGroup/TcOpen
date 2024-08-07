@@ -7,7 +7,8 @@
 {attribute addProperty CRC "583861787"}
 {attribute addProperty Size "1497"}
 {attribute addProperty Name "Device 2 (EtherCAT)"}
-TYPE Device_2_EtherCAT_22CD061B EXTENDS TcoIo.EtcMasterBase_62654B43 : STRUCT
+TYPE Device_2_EtherCAT_22CD061B EXTENDS TcoIo.EtcMasterBase_62654B43 : 
+STRUCT
     {attribute addProperty Name "Term 9 (EK1100)"}
     {attribute addProperty PreviousPort "Device 2 (EtherCAT) : Master"}
     {attribute addProperty SyncUnit "default"}

@@ -8,7 +8,8 @@
     </summary>
 </docu>
 ~*)
-TYPE TcoCarouselConfig : STRUCT
+TYPE TcoCarouselConfig : 
+STRUCT
     Direction : eTcoCarouselDirection;
     InfoTime : TIME := T#2S;
     ErrorTime : TIME := T#5S;

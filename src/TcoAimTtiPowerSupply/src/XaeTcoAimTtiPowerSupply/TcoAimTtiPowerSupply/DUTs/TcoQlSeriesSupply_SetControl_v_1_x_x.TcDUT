@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoQlSeriesSupply_SetControl_v_1_x_x" Id="{5b7e996b-7820-07af-3dc8-3af852db01ee}">
-    <Declaration><![CDATA[TYPE TcoQlSeriesSupply_SetControl_v_1_x_x : STRUCT
+    <Declaration><![CDATA[TYPE TcoQlSeriesSupply_SetControl_v_1_x_x : 
+STRUCT
     Command : eTcoQWlSeriesSupplySetCommands_v_1_x_x;
     {attribute addProperty Name "<#NRF#>"}
     NrfValue : REAL; //A number in any format. e.g. 12, 12·00, 1·2 e1 and 120 e-1 are all accepted as the

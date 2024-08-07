@@ -6,7 +6,8 @@
 {attribute addProperty Id "ControlAT %Q*Control_C948E0F23"}
 {attribute addProperty CRC "1519079446"}
 {attribute addProperty Size "3"}
-TYPE DCM_Control_Channel_5A8B5016 EXTENDS TcoIo.OutputBase_10CEE7DE : STRUCT
+TYPE DCM_Control_Channel_5A8B5016 EXTENDS TcoIo.OutputBase_10CEE7DE : 
+STRUCT
     {attribute addProperty Name "Control"}
     Control AT %Q* : Control_C948E0F2;
 END_STRUCT

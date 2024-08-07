@@ -6,7 +6,8 @@
 {attribute addProperty Id "LowUDINT4HiUDINT4"}
 {attribute addProperty CRC "48284104"}
 {attribute addProperty Size "8"}
-TYPE StartTimeNextLatch_02E0C1C8 : STRUCT
+TYPE StartTimeNextLatch_02E0C1C8 : 
+STRUCT
     {attribute addProperty Name "Low"}
     Low : UDINT;
     {attribute addProperty Name "Hi"}

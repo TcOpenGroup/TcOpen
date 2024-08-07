@@ -7,7 +7,8 @@
 {attribute addProperty CRC "645804740"}
 {attribute addProperty Size "73"}
 {attribute addProperty Name "RC70_A2 (EK1122)"}
-TYPE RC70_A2_EK1122_267E32C4 EXTENDS EK1122_1FC0878B : STRUCT
+TYPE RC70_A2_EK1122_267E32C4 EXTENDS EK1122_1FC0878B : 
+STRUCT
     {attribute addProperty Name "RC70_VI (AES-D-BC-ECAT)"}
     {attribute addProperty PreviousPort "RC70_A2 (EK1122) : D"}
     {attribute addProperty SyncUnit "C70"}

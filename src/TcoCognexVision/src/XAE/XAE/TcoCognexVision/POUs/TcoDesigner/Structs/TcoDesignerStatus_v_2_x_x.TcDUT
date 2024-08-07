@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoDesignerStatus_v_2_x_x" Id="{af134ce8-1cf8-0b32-2428-f70bb92a837d}">
-    <Declaration><![CDATA[TYPE TcoDesignerStatus_v_2_x_x : STRUCT
+    <Declaration><![CDATA[TYPE TcoDesignerStatus_v_2_x_x : 
+STRUCT
     ActionDescription : STRING(100);
     ClientConnected : BOOL;
     {attribute wpf [Container(Layout.Stack,"PcToPlc")]}

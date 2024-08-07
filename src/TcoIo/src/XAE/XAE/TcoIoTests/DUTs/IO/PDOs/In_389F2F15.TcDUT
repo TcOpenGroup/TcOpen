@@ -6,7 +6,8 @@
 {attribute addProperty Id "DiagAT %I*USINT1In_Dataset1AT %I*ARRAY [0..9] OF BYTE0In_Dataset2AT %I*ARRAY [0..9] OF BYTE0In_Dataset3AT %I*ARRAY [0..9] OF BYTE0In_Dataset4AT %I*ARRAY [0..9] OF BYTE0In_Dataset5AT %I*ARRAY [0..9] OF BYTE0"}
 {attribute addProperty CRC "949956373"}
 {attribute addProperty Size "1"}
-TYPE In_389F2F15 EXTENDS TcoIo.InputBase_8311D824 : STRUCT
+TYPE In_389F2F15 EXTENDS TcoIo.InputBase_8311D824 : 
+STRUCT
     {attribute addProperty Name "Diag"}
     Diag AT %I* : USINT;
     {attribute addProperty Name "In_Dataset1"}

@@ -3,7 +3,8 @@
   <POU Name="StrucuredContext" Id="{cdced5f6-42a4-0b44-152c-1ab0e5e1a0ae}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK StrucuredContext EXTENDS TcoCore.TcoContext
 VAR
-    _structuredData : StructuredData := (Parent := THIS^);
+    _structuredData : 
+STRUCTuredData := (Parent := THIS^);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>

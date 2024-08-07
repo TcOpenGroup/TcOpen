@@ -7,7 +7,8 @@
 {attribute addProperty CRC "3284966580"}
 {attribute addProperty Size "123"}
 {attribute addProperty Name "RP30_A2 (EK1122)"}
-TYPE RP30_A2_EK1122_C3CC9CB4 EXTENDS EK1122_1FC0878B : STRUCT
+TYPE RP30_A2_EK1122_C3CC9CB4 EXTENDS EK1122_1FC0878B : 
+STRUCT
     {attribute addProperty Name "RP30-VI (AES-D-BC-ECAT)"}
     {attribute addProperty PreviousPort "RP30_A2 (EK1122) : D"}
     {attribute addProperty SyncUnit "P30"}

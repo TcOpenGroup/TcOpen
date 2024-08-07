@@ -6,7 +6,8 @@
 {attribute addProperty Id "OutputAT %Q*BOOL1"}
 {attribute addProperty CRC "1120571895"}
 {attribute addProperty Size "1"}
-TYPE Channel_42CA91F7 EXTENDS TcoIo.OutputBase_10CEE7DE : STRUCT
+TYPE Channel_42CA91F7 EXTENDS TcoIo.OutputBase_10CEE7DE : 
+STRUCT
     {attribute addProperty Name "Output"}
     Output AT %Q* : BOOL;
 END_STRUCT

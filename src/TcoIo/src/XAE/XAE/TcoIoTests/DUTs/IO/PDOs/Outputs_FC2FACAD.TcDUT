@@ -6,7 +6,8 @@
 {attribute addProperty Id "digital_Data_OAT %Q*ARRAY[0..31] OF USINT32"}
 {attribute addProperty CRC "2024821696"}
 {attribute addProperty Size "32"}
-TYPE Outputs_FC2FACAD EXTENDS TcoIo.OutputBase_10CEE7DE : STRUCT
+TYPE Outputs_FC2FACAD EXTENDS TcoIo.OutputBase_10CEE7DE : 
+STRUCT
     {attribute addProperty Name "digital_Data_O"}
     digital_Data_O AT %Q* : ARRAY[0..31] OF USINT;
 END_STRUCT

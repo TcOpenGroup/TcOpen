@@ -7,7 +7,8 @@
 {attribute addProperty CRC "1249953653"}
 {attribute addProperty Size "23"}
 {attribute addProperty Name "EK1200"}
-TYPE EK1200_4A80C775 EXTENDS EK1200_013D0B49 : STRUCT
+TYPE EK1200_4A80C775 EXTENDS EK1200_013D0B49 : 
+STRUCT
     {attribute addProperty Name "IA1"}
     {attribute addProperty PreviousPort "EK1200 : B"}
     {attribute addProperty SyncUnit "default"}

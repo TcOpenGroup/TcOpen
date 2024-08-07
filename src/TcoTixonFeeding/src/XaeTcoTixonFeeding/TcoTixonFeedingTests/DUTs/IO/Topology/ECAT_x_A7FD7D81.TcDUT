@@ -7,7 +7,8 @@
 {attribute addProperty CRC "2818407809"}
 {attribute addProperty Size "79"}
 {attribute addProperty Name "ECAT"}
-TYPE ECAT_x_A7FD7D81 EXTENDS TcoIo.EtcMasterBase_62654B43 : STRUCT
+TYPE ECAT_x_A7FD7D81 EXTENDS TcoIo.EtcMasterBase_62654B43 : 
+STRUCT
     {attribute addProperty Name "EK1200"}
     {attribute addProperty PreviousPort "ECAT : Master"}
     {attribute addProperty SyncUnit "default"}

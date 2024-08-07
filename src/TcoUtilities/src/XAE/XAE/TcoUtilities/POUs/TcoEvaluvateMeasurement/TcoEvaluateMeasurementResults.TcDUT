@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
   <DUT Name="TcoEvaluateMeasurementResults" Id="{a0daa1d8-5432-0dff-2035-6c88435cf77d}">
-    <Declaration><![CDATA[TYPE TcoEvaluateMeasurementResults : STRUCT
+    <Declaration><![CDATA[TYPE TcoEvaluateMeasurementResults : 
+STRUCT
     RisingPeaks : ARRAY[0..100] OF TcoEvaluateMeasurementDataItem;
     RisingPeaksFound : INT;
     FallingPeaks : ARRAY[0..100] OF TcoEvaluateMeasurementDataItem;

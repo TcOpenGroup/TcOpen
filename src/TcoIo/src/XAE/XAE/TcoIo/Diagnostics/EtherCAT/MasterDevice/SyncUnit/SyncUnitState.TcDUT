@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <DUT Name="SyncUnitState" Id="{f65c9979-9d1a-0362-0ba8-b91ebc60f323}">
-    <Declaration><![CDATA[TYPE SyncUnitState : STRUCT
+    <Declaration><![CDATA[TYPE SyncUnitState : 
+STRUCT
     {attribute addProperty Name "At least one slave in 'INIT' state"}
     AtLeastOneSlaveInInitState : BOOL;
     {attribute addProperty Name "At least one slave in 'PREOP' state"}

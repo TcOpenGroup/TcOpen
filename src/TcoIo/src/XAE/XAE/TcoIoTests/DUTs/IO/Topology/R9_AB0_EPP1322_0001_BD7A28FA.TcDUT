@@ -7,7 +7,8 @@
 {attribute addProperty CRC "3178899706"}
 {attribute addProperty Size "48"}
 {attribute addProperty Name "R9_AB0 (EPP1322-0001)"}
-TYPE R9_AB0_EPP1322_0001_BD7A28FA EXTENDS EPP1322_1FC0878B : STRUCT
+TYPE R9_AB0_EPP1322_0001_BD7A28FA EXTENDS EPP1322_1FC0878B : 
+STRUCT
     {attribute addProperty Name "R9_AB1 (EPP1008-0001)"}
     {attribute addProperty PreviousPort "R9_AB0 (EPP1322-0001) : D"}
     {attribute addProperty SyncUnit "default"}

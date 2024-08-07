@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoRoboticsBasicCoordinates" Id="{78657219-302a-02f5-3d19-b2c89c9dc730}">
-    <Declaration><![CDATA[TYPE TcoRoboticsBasicCoordinates : STRUCT
+    <Declaration><![CDATA[TYPE TcoRoboticsBasicCoordinates : 
+STRUCT
     {attribute  addProperty Name "<#Coordinate X#>"}
     X : REAL;
     {attribute  addProperty Name "<#Coordinate Y#>"}

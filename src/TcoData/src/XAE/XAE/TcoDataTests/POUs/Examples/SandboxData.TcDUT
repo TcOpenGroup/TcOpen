@@ -3,7 +3,8 @@
   <DUT Name="SandboxData" Id="{db6560ed-fb2a-0049-1f52-f29952b65ec0}">
     <Declaration><![CDATA[//<SandboxData>
 // DATA STRUCTURE ELIGIBLE FOR USE WITH TcoDataExchange.
-TYPE SandboxData EXTENDS TcoData.TcoEntity : STRUCT
+TYPE SandboxData EXTENDS TcoData.TcoEntity : 
+STRUCT
     sampleData : SampleDataStructure;
     someInteger : INT;
     someString : STRING;

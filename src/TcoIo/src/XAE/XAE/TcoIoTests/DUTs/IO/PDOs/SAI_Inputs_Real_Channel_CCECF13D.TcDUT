@@ -6,7 +6,8 @@
 {attribute addProperty Id "ValueAT %I*REAL4"}
 {attribute addProperty CRC "3438080317"}
 {attribute addProperty Size "4"}
-TYPE SAI_Inputs_Real_Channel_CCECF13D EXTENDS TcoIo.InputBase_8311D824 : STRUCT
+TYPE SAI_Inputs_Real_Channel_CCECF13D EXTENDS TcoIo.InputBase_8311D824 : 
+STRUCT
     {attribute addProperty Name "Value"}
     Value AT %I* : REAL;
 END_STRUCT

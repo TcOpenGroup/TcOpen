@@ -6,7 +6,8 @@
 {attribute addProperty Id "ModeBYTE1RangeSINT1"}
 {attribute addProperty CRC "616581440"}
 {attribute addProperty Size "2"}
-TYPE Settings_24C04940 : STRUCT
+TYPE Settings_24C04940 : 
+STRUCT
     {attribute addProperty Name "Mode"}
     Mode : BYTE;
     {attribute addProperty Name "Range"}

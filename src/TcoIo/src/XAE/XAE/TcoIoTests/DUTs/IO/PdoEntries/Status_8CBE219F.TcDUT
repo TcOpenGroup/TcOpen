@@ -6,7 +6,8 @@
 {attribute addProperty Id "Latch_C_validBOOL1Latch_extern_validBOOL1Set_counter_doneBOOL1Counter_underflowBOOL1Counter_overflowBOOL1Extrapolation_stallBOOL1Status_of_input_ABOOL1Status_of_input_BBOOL1Status_of_input_CBOOL1Status_of_extern_latchBOOL1Sync_errorBOOL1TxPDO_ToggleBOOL1"}
 {attribute addProperty CRC "2361270687"}
 {attribute addProperty Size "12"}
-TYPE Status_8CBE219F : STRUCT
+TYPE Status_8CBE219F : 
+STRUCT
     {attribute addProperty Name "Latch_C_valid"}
     Latch_C_valid : BOOL;
     {attribute addProperty Name "Latch_extern_valid"}

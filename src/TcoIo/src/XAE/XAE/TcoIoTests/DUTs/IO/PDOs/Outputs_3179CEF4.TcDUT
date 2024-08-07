@@ -6,7 +6,8 @@
 {attribute addProperty Id "ControlwordAT %Q*UINT2Mode_Of_OperationAT %Q*USINT1IP_Data_RecordAT %Q*DINT4Homing_MethodAT %Q*SINT1"}
 {attribute addProperty CRC "830066420"}
 {attribute addProperty Size "8"}
-TYPE Outputs_3179CEF4 EXTENDS TcoIo.OutputBase_10CEE7DE : STRUCT
+TYPE Outputs_3179CEF4 EXTENDS TcoIo.OutputBase_10CEE7DE : 
+STRUCT
     {attribute addProperty Name "Controlword"}
     Controlword AT %Q* : UINT;
     {attribute addProperty Name "Mode_Of_Operation"}

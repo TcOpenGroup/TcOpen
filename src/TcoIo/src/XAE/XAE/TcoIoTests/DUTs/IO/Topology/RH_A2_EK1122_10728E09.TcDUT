@@ -7,7 +7,8 @@
 {attribute addProperty CRC "275942921"}
 {attribute addProperty Size "74"}
 {attribute addProperty Name "RH_A2 (EK1122)"}
-TYPE RH_A2_EK1122_10728E09 EXTENDS EK1122_1FC0878B : STRUCT
+TYPE RH_A2_EK1122_10728E09 EXTENDS EK1122_1FC0878B : 
+STRUCT
     {attribute addProperty Name "RH_SAFETY (Flexi Gateway GETC1)"}
     {attribute addProperty PreviousPort "RH_A2 (EK1122) : D"}
     {attribute addProperty SyncUnit "RH"}

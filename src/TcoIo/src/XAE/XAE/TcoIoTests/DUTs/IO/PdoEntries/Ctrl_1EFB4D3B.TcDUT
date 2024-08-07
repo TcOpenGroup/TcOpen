@@ -6,7 +6,8 @@
 {attribute addProperty Id "Transmit_requestBOOL1Receive_acceptedBOOL1Init_requestBOOL1Send_continuousBOOL1Output_lengthUSINT1"}
 {attribute addProperty CRC "519785787"}
 {attribute addProperty Size "5"}
-TYPE Ctrl_1EFB4D3B : STRUCT
+TYPE Ctrl_1EFB4D3B : 
+STRUCT
     {attribute addProperty Name "Transmit_request"}
     Transmit_request : BOOL;
     {attribute addProperty Name "Receive_accepted"}

@@ -7,7 +7,8 @@
 {attribute addProperty CRC "3692323253"}
 {attribute addProperty Size "258"}
 {attribute addProperty Name "RC80_2 (EK1100)"}
-TYPE RC80_2_EK1100_DC1461B5 EXTENDS EK1100_1FC0878B : STRUCT
+TYPE RC80_2_EK1100_DC1461B5 EXTENDS EK1100_1FC0878B : 
+STRUCT
     {attribute addProperty Name "RC80_B1 (EL7041-1000)"}
     {attribute addProperty PreviousPort "RC80_2 (EK1100) : B"}
     {attribute addProperty SyncUnit "C80"}

@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoUrRobotics_O2TReg" Id="{d91d16a9-0914-0e27-0155-707ccea2a3e0}">
-    <Declaration><![CDATA[TYPE TcoUrRobotics_O2TReg : STRUCT
+    <Declaration><![CDATA[TYPE TcoUrRobotics_O2TReg : 
+STRUCT
     {attribute addProperty Name "<#Bit registers#>"}
     Bits : ARRAY[0..31] OF BOOL;
     {attribute addProperty Name "<#Int registers#>"}

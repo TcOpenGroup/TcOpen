@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoKrc4_IO_v_5_x_x" Id="{a959940f-68ff-0922-2b75-acf3bc5a30c8}">
-    <Declaration><![CDATA[TYPE TcoKrc4_IO_v_5_x_x : STRUCT
+    <Declaration><![CDATA[TYPE TcoKrc4_IO_v_5_x_x : 
+STRUCT
     PnIoBoxState AT %I* : UINT;
     PnIoBoxDiag AT %I* : UINT;
     PnIoBoxCtrl AT %Q* : UINT;

@@ -6,7 +6,8 @@
 {attribute addProperty Id "IO_1_8AT %I*BYTE1IO_9_10AT %I*BYTE1ValveExtSupplyDiag_1_6AT %I*BYTE1SupplyAT %I*BYTE1CommonValveAT %I*BOOL1ConfigDiagnosisLAT %I*BYTE1Switch_Count_StoredAT %I*BOOL1Heardbeat_xAT %I*BOOL1ConfigDiagnosisHAT %I*BYTE1"}
 {attribute addProperty CRC "943879672"}
 {attribute addProperty Size "9"}
-TYPE Device_State_384275F8 EXTENDS TcoIo.InputBase_8311D824 : STRUCT
+TYPE Device_State_384275F8 EXTENDS TcoIo.InputBase_8311D824 : 
+STRUCT
     {attribute addProperty Name "IO_1_8"}
     IO_1_8 AT %I* : BYTE;
     {attribute addProperty Name "IO_9_10"}

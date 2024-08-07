@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoTixonVibro_Control_v_1_x_x" Id="{11d73fd2-fa46-05ef-0665-c673170a87de}">
-    <Declaration><![CDATA[TYPE TcoTixonVibro_Control_v_1_x_x EXTENDS TcoTixonGenericControl : STRUCT
+    <Declaration><![CDATA[TYPE TcoTixonVibro_Control_v_1_x_x EXTENDS TcoTixonGenericControl : 
+STRUCT
     {attribute addProperty Name "<#Shot component#> - q7"}
     ShotComponent : BOOL;
 END_STRUCT

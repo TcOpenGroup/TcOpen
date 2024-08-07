@@ -7,7 +7,8 @@
 {attribute addProperty CRC "3059036929"}
 {attribute addProperty Size "142"}
 {attribute addProperty Name "Term 11 (EK1100)"}
-TYPE Term_11_EK1100_B6553301 EXTENDS EK1100_1FC0878B : STRUCT
+TYPE Term_11_EK1100_B6553301 EXTENDS EK1100_1FC0878B : 
+STRUCT
     {attribute addProperty Name "Term 12 (EL3174-0002)"}
     {attribute addProperty PreviousPort "Term 11 (EK1100) : B"}
     {attribute addProperty SyncUnit "Row_1"}

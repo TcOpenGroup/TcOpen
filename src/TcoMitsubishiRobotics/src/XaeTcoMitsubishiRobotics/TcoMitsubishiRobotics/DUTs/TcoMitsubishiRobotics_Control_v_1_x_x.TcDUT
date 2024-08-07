@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoMitsubishiRobotics_Control_v_1_x_x" Id="{a4b9a87d-81d2-0a65-37b7-800b619c3176}">
-    <Declaration><![CDATA[TYPE TcoMitsubishiRobotics_Control_v_1_x_x : STRUCT
+    <Declaration><![CDATA[TYPE TcoMitsubishiRobotics_Control_v_1_x_x : 
+STRUCT
     {attribute addProperty Name "<#Operation enablre (rights)#>"}
     OperationEnable : BOOL;
     {attribute addProperty Name "<#Automatic operation enabled#>"}

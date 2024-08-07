@@ -9,7 +9,8 @@
 {attribute addProperty Id "Channel_1AT %Q*Channel_42CA91F71Channel_2AT %Q*Channel_42CA91F71Channel_3AT %Q*Channel_42CA91F71Channel_4AT %Q*Channel_42CA91F71Channel_5AT %Q*Channel_42CA91F71Channel_6AT %Q*Channel_42CA91F71Channel_7AT %Q*Channel_42CA91F71Channel_8AT %Q*Channel_42CA91F71WcStateAT %I*WcState_0B2B16F91InfoDataAT %I*InfoData_6F19DB2B2"}
 {attribute addProperty CRC "3800066965"}
 {attribute addProperty Size "11"}
-TYPE EL2788_E2806B95 EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 : STRUCT
+TYPE EL2788_E2806B95 EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 : 
+STRUCT
     {attribute addProperty Name "Channel_1"}
     Channel_1 : Channel_42CA91F7;
     {attribute addProperty Name "Channel_2"}

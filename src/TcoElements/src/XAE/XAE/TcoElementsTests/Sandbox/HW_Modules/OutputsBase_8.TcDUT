@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <DUT Name="OutputsBase_8" Id="{d3b3ffa4-52d2-0b7a-2edc-7232c00b22b7}">
-    <Declaration><![CDATA[TYPE OutputsBase_8 : STRUCT
+    <Declaration><![CDATA[TYPE OutputsBase_8 : 
+STRUCT
     {attribute addProperty Name "1"}
     _1 AT %Q* : BOOL;
     {attribute addProperty Name "2"}

@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoUrRoboticsT2OSafety" Id="{68714ce7-ccc9-0187-0a5b-bd47c376ae8d}">
-    <Declaration><![CDATA[TYPE TcoUrRoboticsT2OSafety : STRUCT
+    <Declaration><![CDATA[TYPE TcoUrRoboticsT2OSafety : 
+STRUCT
     {attribute addProperty Name "<#Safety mode#>"}
     SafetyMode : USINT;
     {attribute addProperty Name "<#NO: Is normal mode#>"}

@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoAxisStatus" Id="{c9948914-0a5b-070a-3459-93facb493fe6}">
-    <Declaration><![CDATA[TYPE TcoAxisStatus : STRUCT
+    <Declaration><![CDATA[TYPE TcoAxisStatus : 
+STRUCT
     {attribute addProperty Name "<#Actual position#>"}
     ActPos : LREAL; (* Actual position (absolut value from NC) *)
     {attribute addProperty Name "<#Actual modulo position#>"}

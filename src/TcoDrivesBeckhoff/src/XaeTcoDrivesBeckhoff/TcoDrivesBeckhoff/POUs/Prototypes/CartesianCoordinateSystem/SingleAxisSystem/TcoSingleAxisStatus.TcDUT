@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoSingleAxisStatus" Id="{5493e8b0-d51f-066f-314f-f045b4055cb4}">
-    <Declaration><![CDATA[TYPE TcoSingleAxisStatus : STRUCT
+    <Declaration><![CDATA[TYPE TcoSingleAxisStatus : 
+STRUCT
     ActionDescription : STRING(100);
 END_STRUCT
 END_TYPE]]></Declaration>

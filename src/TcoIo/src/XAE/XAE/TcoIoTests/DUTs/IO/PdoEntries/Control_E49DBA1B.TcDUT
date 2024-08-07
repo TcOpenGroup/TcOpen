@@ -6,7 +6,8 @@
 {attribute addProperty Id "Disable_autorangeBOOL1Start_conversionBOOL1ModeBYTE1RangeSINT1"}
 {attribute addProperty CRC "3835542043"}
 {attribute addProperty Size "4"}
-TYPE Control_E49DBA1B : STRUCT
+TYPE Control_E49DBA1B : 
+STRUCT
     {attribute addProperty Name "Disable_autorange"}
     Disable_autorange : BOOL;
     {attribute addProperty Name "Start_conversion"}

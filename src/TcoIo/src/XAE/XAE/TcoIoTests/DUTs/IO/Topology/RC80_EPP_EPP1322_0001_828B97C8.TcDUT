@@ -7,7 +7,8 @@
 {attribute addProperty CRC "2190186440"}
 {attribute addProperty Size "120"}
 {attribute addProperty Name "RC80_EPP (EPP1322-0001)"}
-TYPE RC80_EPP_EPP1322_0001_828B97C8 EXTENDS EPP1322_1FC0878B : STRUCT
+TYPE RC80_EPP_EPP1322_0001_828B97C8 EXTENDS EPP1322_1FC0878B : 
+STRUCT
     {attribute addProperty Name "RC80_AB1 (EPP1008-0001)"}
     {attribute addProperty PreviousPort "RC80_EPP (EPP1322-0001) : D"}
     {attribute addProperty SyncUnit "C80"}

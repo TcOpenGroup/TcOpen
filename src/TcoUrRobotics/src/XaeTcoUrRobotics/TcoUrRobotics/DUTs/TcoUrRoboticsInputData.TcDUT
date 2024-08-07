@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoUrRoboticsInputData" Id="{622cb0fc-d86d-0d2e-1908-f7e4214b0b5b}">
-    <Declaration><![CDATA[TYPE TcoUrRoboticsInputData : STRUCT
+    <Declaration><![CDATA[TYPE TcoUrRoboticsInputData : 
+STRUCT
     {attribute addProperty Name "<#Robot#>"}
     Robot : TcoUrRoboticsT2ORobot;
     {attribute addProperty Name "<#State#>"}

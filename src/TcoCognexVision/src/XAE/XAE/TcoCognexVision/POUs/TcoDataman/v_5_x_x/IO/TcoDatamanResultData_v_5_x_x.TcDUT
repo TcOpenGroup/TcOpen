@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <DUT Name="TcoDatamanResultData_v_5_x_x" Id="{f7879786-b132-47dc-823e-6e5cb4dcf1f1}">
-    <Declaration><![CDATA[TYPE TcoDatamanResultData_v_5_x_x : STRUCT
+    <Declaration><![CDATA[TYPE TcoDatamanResultData_v_5_x_x : 
+STRUCT
     ResultID AT %I* : UINT;
     ResultCode AT %I* : UINT;
     ResultExtended AT %I* : UINT;

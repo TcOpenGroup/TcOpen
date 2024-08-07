@@ -6,7 +6,8 @@
 {attribute addProperty CRC "1693886662"}
 {attribute addProperty SizeInBites "8"}
 {attribute addProperty SizeInBytes "1"}
-TYPE WcState_64F6A8C6 : STRUCT
+TYPE WcState_64F6A8C6 : 
+STRUCT
     {attribute addProperty Name "WcState"}
     WcState AT %I* : BOOL;
 END_STRUCT
