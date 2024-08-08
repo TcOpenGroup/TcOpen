@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
   <DUT Name="stEL3058_ChannelStatus" Id="{8af472bd-80ee-4601-a380-2d8076409a00}">
-    <Declaration><![CDATA[TYPE stEL3058_ChannelStatus : 
+    <Declaration><![CDATA[TYPE stEL3058_ChannelStatus :
 STRUCT
     Underrange : BIT;
     Overrange : BIT;

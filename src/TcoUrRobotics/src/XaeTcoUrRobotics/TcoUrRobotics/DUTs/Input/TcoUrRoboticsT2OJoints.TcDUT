@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoUrRoboticsT2OJoints" Id="{fd379598-8f09-0e71-2c5f-5e86a3786e48}">
-    <Declaration><![CDATA[TYPE TcoUrRoboticsT2OJoints : 
+    <Declaration><![CDATA[TYPE TcoUrRoboticsT2OJoints :
 STRUCT
     {attribute addProperty Name "<#Joint position [rad]#>"}
     JointPosition : ARRAY[0..5] OF REAL;

@@ -6,7 +6,7 @@
 {attribute addProperty Id "ControlAT %Q*Control_6EF2C5D04Set_counter_valueAT %Q*UINT2"}
 {attribute addProperty CRC "568512845"}
 {attribute addProperty Size "6"}
-TYPE ENC_Control_compact_21E2D14D EXTENDS TcoIo.OutputBase_10CEE7DE : 
+TYPE ENC_Control_compact_21E2D14D EXTENDS TcoIo.OutputBase_10CEE7DE :
 STRUCT
     {attribute addProperty Name "Control"}
     Control AT %Q* : Control_6EF2C5D0;

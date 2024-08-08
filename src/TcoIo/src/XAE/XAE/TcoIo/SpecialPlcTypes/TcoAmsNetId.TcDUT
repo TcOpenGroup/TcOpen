@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <DUT Name="TcoAmsNetId" Id="{193bb840-765a-0364-1ffe-3137d8ebf5ac}">
-    <Declaration><![CDATA[TYPE TcoAmsNetId : 
+    <Declaration><![CDATA[TYPE TcoAmsNetId :
 STRUCT
     netId : ARRAY[0..5] OF BYTE;
 END_STRUCT

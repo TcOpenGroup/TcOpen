@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoTixonGenericControl" Id="{793867f9-8255-082a-1b3c-92fbb08ea703}">
-    <Declaration><![CDATA[TYPE TcoTixonGenericControl : 
+    <Declaration><![CDATA[TYPE TcoTixonGenericControl :
 STRUCT
     {attribute addProperty Name "<#Feeding A #> - q1"}
     FeedingA : BOOL;

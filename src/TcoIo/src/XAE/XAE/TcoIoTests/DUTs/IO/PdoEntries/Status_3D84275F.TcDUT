@@ -6,7 +6,7 @@
 {attribute addProperty Id "Transmit_acceptedBOOL1Receive_requestBOOL1Init_acceptedBOOL1Buffer_fullBOOL1Parity_errorBOOL1Framing_errorBOOL1Overrun_errorBOOL1Input_lengthUSINT1"}
 {attribute addProperty CRC "1032071007"}
 {attribute addProperty Size "8"}
-TYPE Status_3D84275F : 
+TYPE Status_3D84275F :
 STRUCT
     {attribute addProperty Name "Transmit_accepted"}
     Transmit_accepted : BOOL;

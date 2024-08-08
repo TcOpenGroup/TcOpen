@@ -3,7 +3,7 @@
   <DUT Name="TcoEvaluateMeasurementConfig" Id="{db3730ff-3360-0177-3d04-45649e94a02c}">
     <Declaration><![CDATA[{attribute wpf [Container(Layout.Stack)]}
 {attribute wpf [Group(Layout.GroupBox)]}
-TYPE TcoEvaluateMeasurementConfig : 
+TYPE TcoEvaluateMeasurementConfig :
 STRUCT
     {attribute wpf [Container(Layout.Stack, "FILTER")]}
     FilterValue : INT;

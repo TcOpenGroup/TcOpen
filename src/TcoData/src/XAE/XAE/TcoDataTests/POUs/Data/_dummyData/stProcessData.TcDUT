@@ -2,7 +2,7 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="stProcessData" Id="{c526ee09-51fa-4750-a7bd-5ca62f4bed32}">
     <Declaration><![CDATA[{attribute wpf [Container(Layout.Tabs)]}
-TYPE stProcessData EXTENDS TcoData.TcoEntity : 
+TYPE stProcessData EXTENDS TcoData.TcoEntity :
 STRUCT
     {attribute wpf [Container(Layout.Stack)]}
     {attribute addProperty Name "Entity header"}

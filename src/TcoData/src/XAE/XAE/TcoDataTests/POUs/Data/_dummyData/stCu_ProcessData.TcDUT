@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <DUT Name="stCu_ProcessData" Id="{c4d175d0-d947-48c0-b915-c3fe6d62b327}">
-    <Declaration><![CDATA[TYPE stCu_ProcessData EXTENDS stCu_ProcessDataBase : 
+    <Declaration><![CDATA[TYPE stCu_ProcessData EXTENDS stCu_ProcessDataBase :
 STRUCT
     {attribute addProperty Name "A_Check_1"}
     A_Check_1 : fbAnalogueValueData;

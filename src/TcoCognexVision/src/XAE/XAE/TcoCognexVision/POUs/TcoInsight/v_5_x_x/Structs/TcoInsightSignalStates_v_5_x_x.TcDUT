@@ -2,7 +2,7 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoInsightSignalStates_v_5_x_x" Id="{8a5f3434-e1e5-079a-059f-4302c50f0240}">
     <Declaration><![CDATA[{attribute addProperty Name "Signal states"}
-TYPE TcoInsightSignalStates_v_5_x_x : 
+TYPE TcoInsightSignalStates_v_5_x_x :
 STRUCT
     {attribute wpf [Container(Layout.Stack,"Acquisition control")]}
     {attribute wpf [Group(Layout.GroupBox)]}

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoQlSeriesSupply_GetControl_v_1_x_x" Id="{236035d4-2579-0570-309f-b3163ca775c4}">
-    <Declaration><![CDATA[TYPE TcoQlSeriesSupply_GetControl_v_1_x_x : 
+    <Declaration><![CDATA[TYPE TcoQlSeriesSupply_GetControl_v_1_x_x :
 STRUCT
     Command : eTcoQWlSeriesSupplyGetCommands_v_1_x_x;
     {attribute addProperty Name "<#Nvalue#>"}

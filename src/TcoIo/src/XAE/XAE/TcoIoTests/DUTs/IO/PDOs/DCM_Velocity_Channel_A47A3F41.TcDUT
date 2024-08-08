@@ -6,7 +6,7 @@
 {attribute addProperty Id "VelocityAT %Q*INT2"}
 {attribute addProperty CRC "2759475009"}
 {attribute addProperty Size "2"}
-TYPE DCM_Velocity_Channel_A47A3F41 EXTENDS TcoIo.OutputBase_10CEE7DE : 
+TYPE DCM_Velocity_Channel_A47A3F41 EXTENDS TcoIo.OutputBase_10CEE7DE :
 STRUCT
     {attribute addProperty Name "Velocity"}
     Velocity AT %Q* : INT;

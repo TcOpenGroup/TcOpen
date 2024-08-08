@@ -9,7 +9,7 @@
 {attribute addProperty Id "COM_TxPDO_Map_Inputs_Channel_1AT %I*COM_TxPDO_Map_Inputs_Channel_3801C95E30COM_TxPDO_Map_Inputs_Channel_2AT %I*COM_TxPDO_Map_Inputs_Channel_3801C95E30COM_RxPDO_Map_Outputs_Channel_1AT %Q*COM_RxPDO_Map_Outputs_Channel_EADA2E0D27COM_RxPDO_Map_Outputs_Channel_2AT %Q*COM_RxPDO_Map_Outputs_Channel_EADA2E0D27WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_23CBA8372"}
 {attribute addProperty CRC "3448337973"}
 {attribute addProperty Size "118"}
-TYPE EL6002_CD897635 EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 : 
+TYPE EL6002_CD897635 EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
 STRUCT
     {attribute addProperty Name "COM_TxPDO_Map_Inputs_Channel_1"}
     COM_TxPDO_Map_Inputs_Channel_1 : COM_TxPDO_Map_Inputs_Channel_3801C95E;

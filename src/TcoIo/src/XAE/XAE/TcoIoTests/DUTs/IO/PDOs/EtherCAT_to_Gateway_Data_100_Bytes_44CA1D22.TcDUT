@@ -6,7 +6,7 @@
 {attribute addProperty Id "_100_Bytes_Output_Data_1_4AT %Q*ARRAY [0..9] OF BYTE0_100_Bytes_Output_Data_2_4AT %Q*ARRAY [0..29] OF BYTE0_100_Bytes_Output_Data_3_4AT %Q*ARRAY [0..29] OF BYTE0_100_Bytes_Output_Data_4_4AT %Q*ARRAY [0..29] OF BYTE0"}
 {attribute addProperty CRC "1154096418"}
 {attribute addProperty Size "0"}
-TYPE EtherCAT_to_Gateway_Data_100_Bytes_44CA1D22 EXTENDS TcoIo.OutputBase_10CEE7DE : 
+TYPE EtherCAT_to_Gateway_Data_100_Bytes_44CA1D22 EXTENDS TcoIo.OutputBase_10CEE7DE :
 STRUCT
     {attribute addProperty Name "_100_Bytes_Output_Data_1_4"}
     _100_Bytes_Output_Data_1_4 AT %Q* : ARRAY[0..9] OF BYTE;

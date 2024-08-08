@@ -6,7 +6,7 @@
 {attribute addProperty Id "Ready_to_enableBOOL1ReadyBOOL1WarningBOOL1ErrorBOOL1Moving_positiveBOOL1Moving_negativeBOOL1Torque_reducedBOOL1Digital_input_1BOOL1Digital_input_2BOOL1Sync_errorBOOL1TxPDO_ToggleBOOL1"}
 {attribute addProperty CRC "3061405765"}
 {attribute addProperty Size "11"}
-TYPE Status_B6795845 : 
+TYPE Status_B6795845 :
 STRUCT
     {attribute addProperty Name "Ready_to_enable"}
     Ready_to_enable : BOOL;

@@ -6,7 +6,7 @@
 {attribute addProperty Id "Switch_Count_StoreAT %Q*BOOL1HL_SwapAT %Q*BOOL1Default_Modul_ControlAT %Q*BOOL1"}
 {attribute addProperty CRC "1482153743"}
 {attribute addProperty Size "3"}
-TYPE Device_Control_5857DF0F EXTENDS TcoIo.OutputBase_10CEE7DE : 
+TYPE Device_Control_5857DF0F EXTENDS TcoIo.OutputBase_10CEE7DE :
 STRUCT
     {attribute addProperty Name "Switch_Count_Store"}
     Switch_Count_Store AT %Q* : BOOL;

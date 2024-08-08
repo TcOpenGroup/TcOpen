@@ -6,7 +6,7 @@
 {attribute addProperty Id "ControlwordAT %Q*UINT2"}
 {attribute addProperty CRC "4092675873"}
 {attribute addProperty Size "2"}
-TYPE DRV_Controlword_F3F14721 EXTENDS TcoIo.OutputBase_10CEE7DE : 
+TYPE DRV_Controlword_F3F14721 EXTENDS TcoIo.OutputBase_10CEE7DE :
 STRUCT
     {attribute addProperty Name "Controlword"}
     Controlword AT %Q* : UINT;

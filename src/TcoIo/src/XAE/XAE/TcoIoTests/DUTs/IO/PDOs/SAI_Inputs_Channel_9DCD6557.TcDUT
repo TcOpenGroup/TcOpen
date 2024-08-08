@@ -6,7 +6,7 @@
 {attribute addProperty Id "StatusAT %I*Status_439F40C310ValueAT %I*DINT4"}
 {attribute addProperty CRC "2647483735"}
 {attribute addProperty Size "14"}
-TYPE SAI_Inputs_Channel_9DCD6557 EXTENDS TcoIo.InputBase_8311D824 : 
+TYPE SAI_Inputs_Channel_9DCD6557 EXTENDS TcoIo.InputBase_8311D824 :
 STRUCT
     {attribute addProperty Name "Status"}
     Status AT %I* : Status_439F40C3;

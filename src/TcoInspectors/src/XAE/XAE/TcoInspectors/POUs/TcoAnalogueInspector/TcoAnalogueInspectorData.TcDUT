@@ -7,7 +7,7 @@
 {attribute 'qlik_ref_value_field:CheckName = AttributeHumanReadable'}
 {attribute 'qlik_ref_value_field:StationName = AttributeQlikGroup'}
 {attribute 'qlik_value_field:CheckType = Analogue'}
-TYPE TcoAnalogueInspectorData EXTENDS TcoInspectorData : 
+TYPE TcoAnalogueInspectorData EXTENDS TcoInspectorData :
 STRUCT
     (*~
         <docu>

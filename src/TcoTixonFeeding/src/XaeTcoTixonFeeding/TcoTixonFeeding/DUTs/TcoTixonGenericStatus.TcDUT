@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoTixonGenericStatus" Id="{d9929613-41ac-0d2a-1266-eaf6e670b6d8}">
-    <Declaration><![CDATA[TYPE TcoTixonGenericStatus : 
+    <Declaration><![CDATA[TYPE TcoTixonGenericStatus :
 STRUCT
     ActionDescription : STRING(100);
     {attribute addProperty Name "<#Component is ready#>"}

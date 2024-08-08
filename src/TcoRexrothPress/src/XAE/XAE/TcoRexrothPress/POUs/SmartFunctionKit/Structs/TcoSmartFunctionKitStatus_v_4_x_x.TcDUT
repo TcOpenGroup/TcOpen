@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <DUT Name="TcoSmartFunctionKitStatus_v_4_x_x" Id="{b670224a-a0c6-4af9-849f-e8cab4f5328e}">
-    <Declaration><![CDATA[TYPE TcoSmartFunctionKitStatus_v_4_x_x : 
+    <Declaration><![CDATA[TYPE TcoSmartFunctionKitStatus_v_4_x_x :
 STRUCT
     ActionDescription : STRING(100);
     ResponseStatus : TcoSmartFunctionKitResponse_v_4_x_x;

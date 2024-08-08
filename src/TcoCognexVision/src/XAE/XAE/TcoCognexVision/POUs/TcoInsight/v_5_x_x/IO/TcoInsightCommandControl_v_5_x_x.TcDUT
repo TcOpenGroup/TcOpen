@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <DUT Name="TcoInsightCommandControl_v_5_x_x" Id="{c61b9e66-a143-0653-0650-6fb98a4d9c64}">
-    <Declaration><![CDATA[TYPE TcoInsightCommandControl_v_5_x_x : 
+    <Declaration><![CDATA[TYPE TcoInsightCommandControl_v_5_x_x :
 STRUCT
     CurrentJobID AT %I* : UINT;
     Command AT %Q* : UINT;

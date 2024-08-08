@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <DUT Name="StructuredData" Id="{b59be22d-326c-052c-2b31-a218d8f837c3}">
-    <Declaration><![CDATA[TYPE StructuredData EXTENDS TcoCore.TcoStruct : 
+    <Declaration><![CDATA[TYPE StructuredData EXTENDS TcoCore.TcoStruct :
 STRUCT
-    _o1 : 
+    _o1 :
 STRUCTuredObject(THISSTRUCT);
 END_STRUCT
 END_TYPE]]></Declaration>

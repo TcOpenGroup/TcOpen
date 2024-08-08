@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoUrCb3_Outputs_v_3_x_x" Id="{3c55fecb-0b12-0baf-2e2b-4b75d91af754}">
-    <Declaration><![CDATA[TYPE TcoUrCb3_Outputs_v_3_x_x : 
+    <Declaration><![CDATA[TYPE TcoUrCb3_Outputs_v_3_x_x :
 STRUCT
     {attribute addProperty Name "<#RobotIO#>"}
     RobotIO : TcoUrRobotics_O2T_Robot_IO;

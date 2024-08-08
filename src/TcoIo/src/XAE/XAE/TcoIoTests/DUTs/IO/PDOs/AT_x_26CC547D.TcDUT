@@ -6,7 +6,7 @@
 {attribute addProperty Id "Drive_status_wordAT %I*UINT2Position_feedback_value_1AT %I*DINT4"}
 {attribute addProperty CRC "650925181"}
 {attribute addProperty Size "6"}
-TYPE AT_x_26CC547D EXTENDS TcoIo.InputBase_8311D824 : 
+TYPE AT_x_26CC547D EXTENDS TcoIo.InputBase_8311D824 :
 STRUCT
     {attribute addProperty Name "Drive_status_word"}
     Drive_status_word AT %I* : UINT;

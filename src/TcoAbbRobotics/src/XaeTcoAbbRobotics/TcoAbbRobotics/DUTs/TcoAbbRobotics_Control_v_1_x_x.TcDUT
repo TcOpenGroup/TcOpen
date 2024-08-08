@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoAbbRobotics_Control_v_1_x_x" Id="{96f9f606-cede-444d-b6e8-91d0339d4204}">
-    <Declaration><![CDATA[TYPE TcoAbbRobotics_Control_v_1_x_x : 
+    <Declaration><![CDATA[TYPE TcoAbbRobotics_Control_v_1_x_x :
 STRUCT
     {attribute addProperty Name "<#Interuption actually running instruction#>"}
     Interupt : BOOL;

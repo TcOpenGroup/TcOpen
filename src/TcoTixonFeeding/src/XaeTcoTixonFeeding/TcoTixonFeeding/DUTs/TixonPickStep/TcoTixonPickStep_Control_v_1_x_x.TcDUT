@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoTixonPickStep_Control_v_1_x_x" Id="{f7e0b219-a242-0146-3a74-d187ed005bcf}">
-    <Declaration><![CDATA[TYPE TcoTixonPickStep_Control_v_1_x_x EXTENDS TcoTixonGenericControl : 
+    <Declaration><![CDATA[TYPE TcoTixonPickStep_Control_v_1_x_x EXTENDS TcoTixonGenericControl :
 STRUCT
     {attribute addProperty Name "<#Stepper valve#> - q7"}
     StepperValve : BOOL;

@@ -6,7 +6,7 @@
 {attribute addProperty Id "StartTimeNextLatchAT %I*StartTimeNextLatch_02E0C1C88"}
 {attribute addProperty CRC "1841615510"}
 {attribute addProperty Size "8"}
-TYPE AI_NextSync1Time_6DC4D296 EXTENDS TcoIo.InputBase_8311D824 : 
+TYPE AI_NextSync1Time_6DC4D296 EXTENDS TcoIo.InputBase_8311D824 :
 STRUCT
     {attribute addProperty Name "StartTimeNextLatch"}
     StartTimeNextLatch AT %I* : StartTimeNextLatch_02E0C1C8;

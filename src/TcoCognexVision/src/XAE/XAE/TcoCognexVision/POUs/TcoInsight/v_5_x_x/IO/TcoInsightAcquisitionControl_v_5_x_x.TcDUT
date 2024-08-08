@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <DUT Name="TcoInsightAcquisitionControl_v_5_x_x" Id="{1768b1d4-1d86-032c-38d5-fb5c1542f51f}">
-    <Declaration><![CDATA[TYPE TcoInsightAcquisitionControl_v_5_x_x : 
+    <Declaration><![CDATA[TYPE TcoInsightAcquisitionControl_v_5_x_x :
 STRUCT
     AcquisitionTriggerEnable AT %Q* : BOOL;
     AcquisitionTrigger AT %Q* : BOOL;

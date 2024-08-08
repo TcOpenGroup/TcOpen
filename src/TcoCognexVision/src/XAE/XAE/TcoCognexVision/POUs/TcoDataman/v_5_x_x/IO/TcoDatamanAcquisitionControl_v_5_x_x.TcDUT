@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <DUT Name="TcoDatamanAcquisitionControl_v_5_x_x" Id="{7d3c6ca4-dd5c-405c-8b2a-6e42aecdfe2c}">
-    <Declaration><![CDATA[TYPE TcoDatamanAcquisitionControl_v_5_x_x : 
+    <Declaration><![CDATA[TYPE TcoDatamanAcquisitionControl_v_5_x_x :
 STRUCT
     TriggerEnable AT %Q* : BOOL;
     Trigger AT %Q* : BOOL;

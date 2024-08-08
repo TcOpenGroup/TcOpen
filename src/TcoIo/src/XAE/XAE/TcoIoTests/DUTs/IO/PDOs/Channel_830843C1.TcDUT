@@ -6,7 +6,7 @@
 {attribute addProperty Id "InputAT %I*BOOL1"}
 {attribute addProperty CRC "2198356929"}
 {attribute addProperty Size "1"}
-TYPE Channel_830843C1 EXTENDS TcoIo.InputBase_8311D824 : 
+TYPE Channel_830843C1 EXTENDS TcoIo.InputBase_8311D824 :
 STRUCT
     {attribute addProperty Name "Input"}
     Input AT %I* : BOOL;

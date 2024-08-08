@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <DUT Name="TcoAmsAddr" Id="{8e2bce8c-c380-0a15-1e45-9f0f577c1d6f}">
-    <Declaration><![CDATA[TYPE TcoAmsAddr : 
+    <Declaration><![CDATA[TYPE TcoAmsAddr :
 STRUCT
     netId : ARRAY[0..5] OF BYTE;
     port : WORD;

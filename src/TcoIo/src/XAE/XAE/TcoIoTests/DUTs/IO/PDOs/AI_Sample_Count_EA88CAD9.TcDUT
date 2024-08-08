@@ -6,7 +6,7 @@
 {attribute addProperty Id "Sample_CountAT %I*UINT2"}
 {attribute addProperty CRC "3934833369"}
 {attribute addProperty Size "2"}
-TYPE AI_Sample_Count_EA88CAD9 EXTENDS TcoIo.InputBase_8311D824 : 
+TYPE AI_Sample_Count_EA88CAD9 EXTENDS TcoIo.InputBase_8311D824 :
 STRUCT
     {attribute addProperty Name "Sample_Count"}
     Sample_Count AT %I* : UINT;

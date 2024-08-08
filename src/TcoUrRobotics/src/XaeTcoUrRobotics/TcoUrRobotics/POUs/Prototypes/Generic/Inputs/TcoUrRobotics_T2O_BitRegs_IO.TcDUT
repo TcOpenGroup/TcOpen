@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoUrRobotics_T2O_BitRegs_IO" Id="{1df4fb15-c339-0f7b-1cbc-c02b1c445054}">
-    <Declaration><![CDATA[TYPE TcoUrRobotics_T2O_BitRegs_IO : 
+    <Declaration><![CDATA[TYPE TcoUrRobotics_T2O_BitRegs_IO :
 STRUCT
     bArray AT %I* : ARRAY[0..7] OF BYTE;
 END_STRUCT

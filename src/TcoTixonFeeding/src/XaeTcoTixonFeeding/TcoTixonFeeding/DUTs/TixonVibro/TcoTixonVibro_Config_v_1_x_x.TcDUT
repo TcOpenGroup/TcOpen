@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoTixonVibro_Config_v_1_x_x" Id="{f7712a39-f283-0b3f-25ec-9def733dd6e4}">
-    <Declaration><![CDATA[TYPE TcoTixonVibro_Config_v_1_x_x EXTENDS TcoTixonGenericConfig : 
+    <Declaration><![CDATA[TYPE TcoTixonVibro_Config_v_1_x_x EXTENDS TcoTixonGenericConfig :
 STRUCT
     {attribute addProperty Name "<#Error time separator #> - T_SEP_ERROR"}
     ErrorTimeSeparator : TIME := T#0S;

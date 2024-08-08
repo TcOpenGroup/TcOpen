@@ -6,7 +6,7 @@
 {attribute addProperty Id "digital_Data_IAT %I*ARRAY[0..27] OF USINT28"}
 {attribute addProperty CRC "2446583242"}
 {attribute addProperty Size "28"}
-TYPE Inputs_03C60166 EXTENDS TcoIo.InputBase_8311D824 : 
+TYPE Inputs_03C60166 EXTENDS TcoIo.InputBase_8311D824 :
 STRUCT
     {attribute addProperty Name "digital_Data_I"}
     digital_Data_I AT %I* : ARRAY[0..27] OF USINT;

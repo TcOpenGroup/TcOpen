@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoQlSeriesSupply_Config_v_1_x_x" Id="{56710dec-3679-0057-0877-f1de0cbea9ba}">
-    <Declaration><![CDATA[TYPE TcoQlSeriesSupply_Config_v_1_x_x : 
+    <Declaration><![CDATA[TYPE TcoQlSeriesSupply_Config_v_1_x_x :
 STRUCT
     InfoTime : TIME := T#2S;
     ErrorTime : TIME := T#0S;

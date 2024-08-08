@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoTixonGenericConfig" Id="{0af0be9b-2260-0ba2-24e4-cd4df2fb3f48}">
-    <Declaration><![CDATA[TYPE TcoTixonGenericConfig : 
+    <Declaration><![CDATA[TYPE TcoTixonGenericConfig :
 STRUCT
     {attribute addProperty Name "<#Blink period#> - T_BLINK"}
     BlinkTime : TIME := T#500MS;

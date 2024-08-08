@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoTixonPickStep_Config_v_1_x_x" Id="{0a520f1f-6072-0fe5-120d-c312befa1216}">
-    <Declaration><![CDATA[TYPE TcoTixonPickStep_Config_v_1_x_x EXTENDS TcoTixonGenericPickConfig : 
+    <Declaration><![CDATA[TYPE TcoTixonPickStep_Config_v_1_x_x EXTENDS TcoTixonGenericPickConfig :
 STRUCT
     {attribute addProperty Name "<#Time when stepper in work #> - T_STEP_WORK"}
     SteperInWorkTime : TIME := T#1S;

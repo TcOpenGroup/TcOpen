@@ -3,7 +3,7 @@
   <DUT Name="TcoDigitalInspectorData" Id="{cd575c1e-dcb1-0a06-301a-c160533158aa}">
     <Declaration><![CDATA[{attribute addProperty Name "LogicCheckerData"}
 {attribute 'qlik_value_field:CheckType = Logic'}
-TYPE TcoDigitalInspectorData EXTENDS TcoInspectorData : 
+TYPE TcoDigitalInspectorData EXTENDS TcoInspectorData :
 STRUCT
     (*~
         <docu>

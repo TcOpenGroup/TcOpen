@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoUrRoboticsT2OTool" Id="{ca4244df-d10b-035a-2fe0-4e3e1488d3b9}">
-    <Declaration><![CDATA[TYPE TcoUrRoboticsT2OTool : 
+    <Declaration><![CDATA[TYPE TcoUrRoboticsT2OTool :
 STRUCT
     {attribute addProperty Name "<#Tool mode#>"}
     ToolMode : USINT;

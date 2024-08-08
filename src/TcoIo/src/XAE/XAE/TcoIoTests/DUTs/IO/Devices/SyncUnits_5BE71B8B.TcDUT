@@ -6,7 +6,7 @@
 {attribute addProperty Id "_defaultAT %I*SyncUnitTasks_5FDC977018N10AT %I*SyncUnitTasks_5FDC977018S10AT %I*SyncUnitTasks_5FDC977018P10AT %I*SyncUnitTasks_5FDC977018P20AT %I*SyncUnitTasks_5FDC977018P30AT %I*SyncUnitTasks_5FDC977018C10AT %I*SyncUnitTasks_5FDC977018C20AT %I*SyncUnitTasks_5FDC977018C30AT %I*SyncUnitTasks_5FDC977018C40AT %I*SyncUnitTasks_5FDC977018C50AT %I*SyncUnitTasks_5FDC977018C60AT %I*SyncUnitTasks_5FDC977018C70AT %I*SyncUnitTasks_5FDC977018C80AT %I*SyncUnitTasks_5FDC977018R10AT %I*SyncUnitTasks_5FDC977018RHAT %I*SyncUnitTasks_5FDC977018"}
 {attribute addProperty CRC "1541872523"}
 {attribute addProperty Size "288"}
-TYPE SyncUnits_5BE71B8B EXTENDS TcoIo.SyncUnitsBase_AD6C35CE : 
+TYPE SyncUnits_5BE71B8B EXTENDS TcoIo.SyncUnitsBase_AD6C35CE :
 STRUCT
     {attribute addProperty Name "_default"}
     _default : SyncUnitTasks_5FDC9770;

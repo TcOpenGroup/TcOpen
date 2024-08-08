@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <DUT Name="EL2008_Data" Id="{67a1eaf0-2e72-05d8-0208-3d8fcfba7cf9}">
-    <Declaration><![CDATA[TYPE EL2008_Data : 
+    <Declaration><![CDATA[TYPE EL2008_Data :
 STRUCT
     {attribute addProperty Name "1"}
     _1 AT %Q* : BOOL;

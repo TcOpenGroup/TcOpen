@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoUrRoboticsT2OIo" Id="{fc8c96ee-3faf-0759-317e-75116a103e00}">
-    <Declaration><![CDATA[TYPE TcoUrRoboticsT2OIo : 
+    <Declaration><![CDATA[TYPE TcoUrRoboticsT2OIo :
 STRUCT
     {attribute addProperty Name "<#Standard digital inputs#>"}
     StandardDigitalInputs : USINT;

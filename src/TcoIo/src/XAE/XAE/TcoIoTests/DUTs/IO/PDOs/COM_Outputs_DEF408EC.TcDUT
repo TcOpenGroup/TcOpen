@@ -6,7 +6,7 @@
 {attribute addProperty Id "CtrlAT %Q*Ctrl_71604E865Data_OutAT %Q*ARRAY[0..21] OF USINT22"}
 {attribute addProperty CRC "2695605661"}
 {attribute addProperty Size "27"}
-TYPE COM_Outputs_DEF408EC EXTENDS TcoIo.OutputBase_10CEE7DE : 
+TYPE COM_Outputs_DEF408EC EXTENDS TcoIo.OutputBase_10CEE7DE :
 STRUCT
     {attribute addProperty Name "Ctrl"}
     Ctrl AT %Q* : Ctrl_71604E86;

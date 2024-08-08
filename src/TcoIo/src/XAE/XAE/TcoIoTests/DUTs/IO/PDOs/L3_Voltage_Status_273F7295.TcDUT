@@ -6,7 +6,7 @@
 {attribute addProperty Id "U3_StatusAT %I*U3_Status_DC9039207"}
 {attribute addProperty CRC "658469525"}
 {attribute addProperty Size "7"}
-TYPE L3_Voltage_Status_273F7295 EXTENDS TcoIo.InputBase_8311D824 : 
+TYPE L3_Voltage_Status_273F7295 EXTENDS TcoIo.InputBase_8311D824 :
 STRUCT
     {attribute addProperty Name "U3_Status"}
     U3_Status AT %I* : U3_Status_DC903920;

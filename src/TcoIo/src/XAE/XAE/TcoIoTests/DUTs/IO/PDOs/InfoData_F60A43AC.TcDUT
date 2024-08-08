@@ -6,7 +6,7 @@
 {attribute addProperty Id "AdsAddrAT %I*TcoIo.TcoAmsAddr0DcOutputShiftAT %I*DINT4DcInputShiftAT %I*DINT4Chn0AT %I*USINT1StateAT %I*UINT2"}
 {attribute addProperty CRC "4127867820"}
 {attribute addProperty Size "11"}
-TYPE InfoData_F60A43AC EXTENDS TcoIo.InputBase_8311D824 : 
+TYPE InfoData_F60A43AC EXTENDS TcoIo.InputBase_8311D824 :
 STRUCT
     {attribute addProperty Name "AdsAddr"}
     AdsAddr AT %I* : TcoIo.TcoAmsAddr;

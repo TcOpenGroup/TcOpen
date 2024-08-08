@@ -6,7 +6,7 @@
 {attribute addProperty Id "Pdo_EntryAT %I*ARRAY[0..131] OF USINT132"}
 {attribute addProperty CRC "2170192396"}
 {attribute addProperty Size "132"}
-TYPE DI_TxPDO_Map_DF955083 EXTENDS TcoIo.InputBase_8311D824 : 
+TYPE DI_TxPDO_Map_DF955083 EXTENDS TcoIo.InputBase_8311D824 :
 STRUCT
     {attribute addProperty Name "Pdo_Entry"}
     Pdo_Entry AT %I* : ARRAY[0..131] OF USINT;

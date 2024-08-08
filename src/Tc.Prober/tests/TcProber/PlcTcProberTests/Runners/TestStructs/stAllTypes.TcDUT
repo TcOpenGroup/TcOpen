@@ -3,7 +3,7 @@
   <DUT Name="stAllTypes" Id="{2ccd18ff-a7bc-483b-ac31-d6a6de7b72fa}">
     <Declaration><![CDATA[{attribute addProperty Interpolated "|[[2]AttributeName]|-|[[1]AttributeName]|-|[AttributeName]||[BOOL_val.AttributeName]|"}
 {attribute addProperty Name "ALL BASE TYPES"}
-TYPE stAllTypes : 
+TYPE stAllTypes :
 STRUCT
     {attribute addProperty Name "BOOL"}
     BOOL_val : BOOL;

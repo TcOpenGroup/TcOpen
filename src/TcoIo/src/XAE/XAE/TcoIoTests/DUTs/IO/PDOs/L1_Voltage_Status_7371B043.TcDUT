@@ -6,7 +6,7 @@
 {attribute addProperty Id "U1_StatusAT %I*U1_Status_DC9039207"}
 {attribute addProperty CRC "1936830531"}
 {attribute addProperty Size "7"}
-TYPE L1_Voltage_Status_7371B043 EXTENDS TcoIo.InputBase_8311D824 : 
+TYPE L1_Voltage_Status_7371B043 EXTENDS TcoIo.InputBase_8311D824 :
 STRUCT
     {attribute addProperty Name "U1_Status"}
     U1_Status AT %I* : U1_Status_DC903920;

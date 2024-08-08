@@ -243,7 +243,7 @@ npm run build
   - added tag-keys + tag-values api
   - added adHocFilters parameter to query body
 
-  1.3.5
+    1.3.5
 
 - Fix for dropdowns in query editor to allow writing template variables (broke due to change in Grafana).
 
@@ -256,15 +256,15 @@ npm run build
 
 - Adds support for basic authentication
 
-1.2.4
+  1.2.4
 
 - Add support returning sets in the search endpoint
 
-1.2.3
+  1.2.3
 
 - Allow nested templates in find metric query. #23
 
-1.2.2
+  1.2.2
 
 - Dont execute hidden queries
 - Template support for metrics queries

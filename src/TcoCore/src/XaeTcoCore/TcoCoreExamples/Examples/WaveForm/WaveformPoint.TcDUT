@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <DUT Name="WaveformPoint" Id="{370468da-dde9-00a0-0adf-567af530300a}">
-    <Declaration><![CDATA[TYPE WaveformPoint : 
+    <Declaration><![CDATA[TYPE WaveformPoint :
 STRUCT
     TransitionType : eTransitionType;
     TargetValue : LREAL; //Value to be reached in "Duration" PLC cycles

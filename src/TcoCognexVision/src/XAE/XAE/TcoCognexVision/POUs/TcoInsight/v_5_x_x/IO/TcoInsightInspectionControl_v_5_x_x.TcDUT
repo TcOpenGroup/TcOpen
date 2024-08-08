@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <DUT Name="TcoInsightInspectionControl_v_5_x_x" Id="{3444326b-467a-0f66-257c-8286be44d747}">
-    <Declaration><![CDATA[TYPE TcoInsightInspectionControl_v_5_x_x : 
+    <Declaration><![CDATA[TYPE TcoInsightInspectionControl_v_5_x_x :
 STRUCT
     EnableResultsBuffering AT %Q* : BOOL;
     AcknowledgeInspectionResults AT %Q* : BOOL;

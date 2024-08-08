@@ -9,7 +9,7 @@
 {attribute addProperty Id "AI_StandardAT %I*AI_Standard_Channel_4A3944819WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_23CBA8372"}
 {attribute addProperty CRC "2051625512"}
 {attribute addProperty Size "13"}
-TYPE EL3011_7A495228 EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 : 
+TYPE EL3011_7A495228 EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
 STRUCT
     {attribute addProperty Name "AI_Standard"}
     AI_Standard : AI_Standard_Channel_4A394481;

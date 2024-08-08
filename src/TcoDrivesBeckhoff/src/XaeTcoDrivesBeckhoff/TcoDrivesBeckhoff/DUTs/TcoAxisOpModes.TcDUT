@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoAxisOpModes" Id="{6b6d9718-936e-0b8c-15b6-437db36c4d7e}">
-    <Declaration><![CDATA[TYPE TcoAxisOpModes : 
+    <Declaration><![CDATA[TYPE TcoAxisOpModes :
 STRUCT
     PositionAreaMonitoring : BOOL; (* bit 0 - OpModeDWord *)
     TargetPositionMonitoring : BOOL; (* bit 1 - OpModeDWord *)

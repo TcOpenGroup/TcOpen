@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoQlSeriesSupply_Status_v_1_x_x" Id="{f00768af-16ab-0d87-2aa7-e9ce54739eb7}">
-    <Declaration><![CDATA[TYPE TcoQlSeriesSupply_Status_v_1_x_x : 
+    <Declaration><![CDATA[TYPE TcoQlSeriesSupply_Status_v_1_x_x :
 STRUCT
     ActionDescription : STRING(100);
     State : TcoQlSeriesSupply_State_v_1_x_x;

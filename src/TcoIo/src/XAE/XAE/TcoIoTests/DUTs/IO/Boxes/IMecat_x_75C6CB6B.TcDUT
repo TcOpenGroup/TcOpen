@@ -9,7 +9,7 @@
 {attribute addProperty Id "DI_TxPDO_MapAT %I*DI_TxPDO_Map_DF955083132DO_RxPDO_MapAT %Q*DO_RxPDO_Map_8BCFF4C934WcStateAT %I*WcState_9091E0EB2InfoDataAT %I*InfoData_23CBA8372"}
 {attribute addProperty CRC "1975962475"}
 {attribute addProperty Size "170"}
-TYPE IMecat_x_75C6CB6B EXTENDS TcoIo.EtcSlaveBoxBase_77A0E4A7 : 
+TYPE IMecat_x_75C6CB6B EXTENDS TcoIo.EtcSlaveBoxBase_77A0E4A7 :
 STRUCT
     {attribute addProperty Name "DI_TxPDO_Map"}
     DI_TxPDO_Map : DI_TxPDO_Map_DF955083;

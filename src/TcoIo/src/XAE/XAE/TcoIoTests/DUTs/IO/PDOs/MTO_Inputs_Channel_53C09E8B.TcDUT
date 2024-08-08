@@ -6,7 +6,7 @@
 {attribute addProperty Id "StatusAT %I*Status_642C2ED16"}
 {attribute addProperty CRC "1405132427"}
 {attribute addProperty Size "6"}
-TYPE MTO_Inputs_Channel_53C09E8B EXTENDS TcoIo.InputBase_8311D824 : 
+TYPE MTO_Inputs_Channel_53C09E8B EXTENDS TcoIo.InputBase_8311D824 :
 STRUCT
     {attribute addProperty Name "Status"}
     Status AT %I* : Status_642C2ED1;

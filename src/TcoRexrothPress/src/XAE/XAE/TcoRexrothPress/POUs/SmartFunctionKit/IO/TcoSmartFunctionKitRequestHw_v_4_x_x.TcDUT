@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <DUT Name="TcoSmartFunctionKitRequestHw_v_4_x_x" Id="{cd6bbd64-1cfc-0edb-06c9-2cb022502d39}">
-    <Declaration><![CDATA[TYPE TcoSmartFunctionKitRequestHw_v_4_x_x : 
+    <Declaration><![CDATA[TYPE TcoSmartFunctionKitRequestHw_v_4_x_x :
 STRUCT
     Handle AT %Q* : WORD;
     Command AT %Q* : WORD;

@@ -6,7 +6,7 @@
 {attribute addProperty Id "I2_SamplesAT %I*I2_Samples_2549228720"}
 {attribute addProperty CRC "2864058222"}
 {attribute addProperty Size "20"}
-TYPE L2_Current_Samples_AAB60F6E EXTENDS TcoIo.InputBase_8311D824 : 
+TYPE L2_Current_Samples_AAB60F6E EXTENDS TcoIo.InputBase_8311D824 :
 STRUCT
     {attribute addProperty Name "I2_Samples"}
     I2_Samples AT %I* : I2_Samples_25492287;

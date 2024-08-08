@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <DUT Name="TcoComprehensiveResult" Id="{a33ed128-190c-09d3-3fba-9a17f28b94b9}">
-    <Declaration><![CDATA[TYPE TcoComprehensiveResult : 
+    <Declaration><![CDATA[TYPE TcoComprehensiveResult :
 STRUCT
     Result : eOverallResult;
     Failures : STRING(255);

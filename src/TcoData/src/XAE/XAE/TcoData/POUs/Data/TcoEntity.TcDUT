@@ -17,7 +17,7 @@
         </example>
     </docu>
 ~*)
-TYPE TcoEntity EXTENDS TcoCore.TcoStruct : 
+TYPE TcoEntity EXTENDS TcoCore.TcoStruct :
 STRUCT
     {attribute wpf [Container(Layout.Stack)]}
     {attribute addProperty Name "<#ID#>"}

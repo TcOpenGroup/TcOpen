@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoQlSeriesSupply_State_v_1_x_x" Id="{be010f51-dfa2-07f9-2749-d5929471a7c0}">
-    <Declaration><![CDATA[TYPE TcoQlSeriesSupply_State_v_1_x_x : 
+    <Declaration><![CDATA[TYPE TcoQlSeriesSupply_State_v_1_x_x :
 STRUCT
     {attribute addProperty Name "<#Raw Response#>"}
     Resposne : STRING(255);

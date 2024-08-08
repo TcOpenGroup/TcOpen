@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoKukaRobotics_Config_v_5_x_x" Id="{eb448ab9-0eb5-0254-0c19-49c5799973df}">
-    <Declaration><![CDATA[TYPE TcoKukaRobotics_Config_v_5_x_x : 
+    <Declaration><![CDATA[TYPE TcoKukaRobotics_Config_v_5_x_x :
 STRUCT
     InfoTime : TIME := T#2S;
     ErrorTime : TIME := T#0S;

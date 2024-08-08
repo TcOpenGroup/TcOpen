@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <DUT Name="stAnalogueProcessData" Id="{4e8eaf20-b62b-4a8a-a572-e7b3b1744995}">
-    <Declaration><![CDATA[TYPE stAnalogueProcessData : 
+    <Declaration><![CDATA[TYPE stAnalogueProcessData :
 STRUCT
     FailureDescription : STRING;
     Minimum : REAL;

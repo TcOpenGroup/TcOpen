@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoDatamanStatus_v_5_x_x" Id="{0627f38a-6166-047e-097c-aa383868e19b}">
-    <Declaration><![CDATA[TYPE TcoDatamanStatus_v_5_x_x : 
+    <Declaration><![CDATA[TYPE TcoDatamanStatus_v_5_x_x :
 STRUCT
     ActionDescription : STRING(100);
     ResultString : STRING;

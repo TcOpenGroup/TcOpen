@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <DUT Name="TcoEthercatMasterDeviceState" Id="{92429542-54c7-06b4-1934-f53e4acc78dd}">
-    <Declaration><![CDATA[TYPE TcoEthercatMasterDeviceState : 
+    <Declaration><![CDATA[TYPE TcoEthercatMasterDeviceState :
 STRUCT
     {attribute addProperty Name "Link error"}
     LinkError : BOOL;

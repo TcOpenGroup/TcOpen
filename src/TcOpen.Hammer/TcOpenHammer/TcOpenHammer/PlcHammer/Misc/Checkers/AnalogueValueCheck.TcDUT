@@ -3,7 +3,7 @@
   <DUT Name="AnalogueValueCheck" Id="{8bc9a1cc-e7b2-03ba-27dc-1235f51a4314}">
     <Declaration><![CDATA[{attribute wpf [Container(Layout.Wrap)]}
 {attribute wpf [Group(Layout.GroupBox)]}
-TYPE AnalogueValueCheck : 
+TYPE AnalogueValueCheck :
 STRUCT
     Mininum : REAL;
     {attribute clr [RenderIgnore("ShadowControl", "ShadowControlSlim")]}

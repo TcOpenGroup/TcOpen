@@ -6,7 +6,7 @@
 {attribute addProperty Id "TxPDO_ToggleAT %I*BOOL1CurrentAT %I*DINT4VoltageAT %I*DINT4Active_powerAT %I*DINT4IndexAT %I*USINT1Variant_valueAT %I*DINT4"}
 {attribute addProperty CRC "797343878"}
 {attribute addProperty Size "18"}
-TYPE PM_Inputs_Channel_2F868086 EXTENDS TcoIo.InputBase_8311D824 : 
+TYPE PM_Inputs_Channel_2F868086 EXTENDS TcoIo.InputBase_8311D824 :
 STRUCT
     {attribute addProperty Name "TxPDO_Toggle"}
     TxPDO_Toggle AT %I* : BOOL;
