@@ -3,7 +3,8 @@
   <DUT Name="eTcoDesignerTriggerType" Id="{aa527af0-ae4d-012b-3a7b-f57805b5b49a}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE eTcoDesignerTriggerType : (
+TYPE eTcoDesignerTriggerType : 
+(
     Trigger := 0,
     TriggerFast := 1,
     TriggerWithTimeout := 2

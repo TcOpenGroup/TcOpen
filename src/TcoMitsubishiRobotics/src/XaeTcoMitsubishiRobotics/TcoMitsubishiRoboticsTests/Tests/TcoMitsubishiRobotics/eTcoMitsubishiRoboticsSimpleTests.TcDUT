@@ -3,7 +3,8 @@
   <DUT Name="eTcoMitsubishiRoboticsSimpleTests" Id="{175cfec2-27d0-0a24-0958-a7809ba4f177}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE eTcoMitsubishiRoboticsSimpleTests : (
+TYPE eTcoMitsubishiRoboticsSimpleTests : 
+(
     Restore := 1,
     CleanUp,
     Message,

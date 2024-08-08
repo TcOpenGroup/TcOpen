@@ -3,7 +3,8 @@
   <DUT Name="eTcoBlinkerTestList" Id="{666028e8-d485-0792-3707-49b6de06b629}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE eTcoBlinkerTestList : (
+TYPE eTcoBlinkerTestList : 
+(
     None := 0,
     Init := 10,
     TcoBlinker := 20

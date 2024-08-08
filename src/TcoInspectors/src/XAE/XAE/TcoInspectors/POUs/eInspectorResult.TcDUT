@@ -3,7 +3,8 @@
   <DUT Name="eInspectorResult" Id="{0144af4b-8ed9-0285-0c54-d5d7e851b8e5}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE eInspectorResult : (
+TYPE eInspectorResult : 
+(
     NoAction := 0,
     Running := 10,
     Passed := 20,

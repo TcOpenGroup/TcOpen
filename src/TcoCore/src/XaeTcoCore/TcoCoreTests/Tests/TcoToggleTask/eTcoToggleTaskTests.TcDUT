@@ -3,7 +3,8 @@
   <DUT Name="eTcoToggleTaskTests" Id="{9d986438-740b-0107-34c5-afef7aa116f2}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE eTcoToggleTaskTests : (
+TYPE eTcoToggleTaskTests : 
+(
     Reinit := 1001,
     CleanUp := 1002,
     Message := 1003,

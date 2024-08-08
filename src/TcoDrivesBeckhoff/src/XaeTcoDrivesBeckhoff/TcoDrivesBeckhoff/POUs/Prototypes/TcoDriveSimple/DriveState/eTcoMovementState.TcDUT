@@ -3,7 +3,8 @@
   <DUT Name="eTcoMovementState" Id="{fd9a8ecc-fa4e-00fb-3cda-a4e9f92a4140}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE eTcoMovementState : (
+TYPE eTcoMovementState : 
+(
     WaitingForMovementTask := 0,
     Reset,
     Power,

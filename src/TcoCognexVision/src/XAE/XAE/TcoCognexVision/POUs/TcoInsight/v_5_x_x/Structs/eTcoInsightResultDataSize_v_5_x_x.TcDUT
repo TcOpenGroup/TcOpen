@@ -3,7 +3,8 @@
   <DUT Name="eTcoInsightResultDataSize_v_5_x_x" Id="{4cada00b-b161-0cce-0e1f-2ac5c50c3739}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE eTcoInsightResultDataSize_v_5_x_x : (
+TYPE eTcoInsightResultDataSize_v_5_x_x : 
+(
     RESULT_DATA_16B := 16,
     RESULT_DATA_32B := 32,
     RESULT_DATA_64B := 64,

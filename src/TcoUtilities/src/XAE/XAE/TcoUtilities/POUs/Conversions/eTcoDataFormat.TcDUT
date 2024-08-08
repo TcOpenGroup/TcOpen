@@ -3,7 +3,8 @@
   <DUT Name="eTcoDataFormat" Id="{697416c3-29f9-06b9-3dba-e9f385a30caa}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE eTcoDataFormat : (
+TYPE eTcoDataFormat : 
+(
     LittleEndian := 1,
     BigEndian := 2
 );

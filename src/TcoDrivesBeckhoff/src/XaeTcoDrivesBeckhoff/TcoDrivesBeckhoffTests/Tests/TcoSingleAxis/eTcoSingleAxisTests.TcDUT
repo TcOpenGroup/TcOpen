@@ -3,7 +3,8 @@
   <DUT Name="eTcoSingleAxisTests" Id="{1a5cfe5e-4556-06f7-0a0e-1558f0fb2af2}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE eTcoSingleAxisTests : (
+TYPE eTcoSingleAxisTests : 
+(
     Restore := 1,
     CleanUp,
     Message,

@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
-  <DUT Name="eTcoQWlSeriesSupplyGetCommands_v_1_x_x" Id="{174d7279-a678-4166-9c67-51a2e3a4f60d}">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <DUT Name="eTcoQWlSeriesSupplyGetCommands_v_1_x_x" Id="{37cbd9b5-7ed4-094d-1620-16399029a500}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE eTcoQWlSeriesSupplyGetCommands_v_1_x_x : (
+TYPE eTcoQWlSeriesSupplyGetCommands_v_1_x_x : 
+(
     //Instrument Specific Commands
     V := 1,
     I := 2,

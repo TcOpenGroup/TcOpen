@@ -3,7 +3,8 @@
   <DUT Name="eTcoSequenceTests" Id="{356ff7e4-1bcd-00cf-14e6-e8790979daff}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE eTcoSequenceTests : (
+TYPE eTcoSequenceTests : 
+(
     none := -1,
     Initialize := 10,
     CallSequencerBodiesOnly := 100,

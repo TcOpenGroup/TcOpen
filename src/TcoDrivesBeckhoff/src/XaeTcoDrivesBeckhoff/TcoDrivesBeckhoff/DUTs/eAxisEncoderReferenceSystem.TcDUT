@@ -3,7 +3,8 @@
   <DUT Name="eAxisEncoderReferenceSystem" Id="{543afd1e-053b-015c-0673-561c0638b6eb}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE eAxisEncoderReferenceSystem : (
+TYPE eAxisEncoderReferenceSystem : 
+(
     INCREMENTAL := 0,
     ABSOLUTE := 1,
     ABSOLUTE_MODULO := 2,

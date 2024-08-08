@@ -3,7 +3,8 @@
   <DUT Name="eTcoEvaluateMeasurementTestList" Id="{c374f53a-e5f0-01ae-3015-c7586dedc47c}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE eTcoEvaluateMeasurementTestList : (
+TYPE eTcoEvaluateMeasurementTestList : 
+(
     None := 0,
     Init := 10,
     Evaluate := 20

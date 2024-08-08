@@ -3,7 +3,8 @@
   <DUT Name="eTcoRoboticsStopType" Id="{91ea8bd6-7351-4932-acb5-9f53f4835f9e}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE eTcoRoboticsStopType : (
+TYPE eTcoRoboticsStopType : 
+(
     Soft := 10,
     Quick := 20
 );

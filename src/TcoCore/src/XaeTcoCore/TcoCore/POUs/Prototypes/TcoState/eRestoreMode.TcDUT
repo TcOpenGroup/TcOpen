@@ -3,7 +3,8 @@
   <DUT Name="eRestoreMode" Id="{8301561c-4174-07b5-10c0-66adbcb58c64}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE eRestoreMode : (
+TYPE eRestoreMode : 
+(
     None := 0,
     (*~
     <docu>

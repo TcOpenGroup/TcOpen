@@ -3,7 +3,8 @@
   <DUT Name="eExamplesStates" Id="{304d5eef-a5cc-0d16-2fcf-66f39e987a74}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE eExamplesStates : (
+TYPE eExamplesStates : 
+(
     Initialize_1 := 1,
     Initialize_2 := 5,
     Create := 10,
