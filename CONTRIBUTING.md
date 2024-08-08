@@ -11,11 +11,35 @@ When contributing to this repository, please first discuss the change you wish t
 - Additions or changes to the code should contain in-code documentation.
 - Addition or changes should contain tests.
 
+## Pre-Commit hooks
+
+Make sure you have python installed [download here](https://www.python.org/downloads/).
+
+Install pre-commit running the following line in you command prompt:
+
+```
+pip install pre-commit
+```
+
+Install `csharpier` by running the following line:
+
+```
+dotnet tool install -g csharpier
+```
+
+Make sure you have STweep installed [see bellow](#code-format).
+
+**Prior to publishing your code for rewiew please run**
+
+```
+   pre-commit run --all-files
+```
+
 ## Code format
 
 TcOpen is powered by STweep for TwinCAT a source code formatter for Structured Text.
 
-When contributing to TcOpen please use this set of settings for STweep: [TCOpen.zip](https://github.com/Barteling/TcOpen/files/6455049/TCOpen.zip)
+When contributing to TcOpen please use the set of settings for STweep located in main directory of the repository `TCOpen.STweep`.
 
 STweep is free of charge for active contributers to this project.
 
