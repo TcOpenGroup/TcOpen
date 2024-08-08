@@ -71,7 +71,8 @@ namespace TcoCore
 
                 sw.Stop();
                 updateRate = (updateRate + sw.ElapsedMilliseconds) / ++updateCount;
-                messageUpdateTimer.Interval = updateRate <= 300 ? 300 : (updateRate * 1.5) + 100;
+                messageUpdateTimer.Interval = updateRate <= 300 ? 300 : 
+(updateRate * 1.5) + 100;
             }
         }
 

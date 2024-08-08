@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.56" TcVersionFixed="true">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.59">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{18071995-0000-0000-0000-000000000035}" TcBaseType="true" HideType="true">UINTARR2</Name>
@@ -2821,7 +2821,7 @@ External Setpoint Generation:
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
 						<Context>
-							<Id NeedCalleeCall="true">0</Id>
+							<Id>0</Id>
 							<Name>PlcTask</Name>
 							<ManualConfig>
 								<OTCID>#x02010030</OTCID>
@@ -3148,7 +3148,7 @@ External Setpoint Generation:
 					</UnrestoredVarLinks>
 					<Contexts>
 						<Context>
-							<Id NeedCalleeCall="true">0</Id>
+							<Id>0</Id>
 							<Name>PlcTask1</Name>
 							<ManualConfig>
 								<OTCID>#x02010060</OTCID>
@@ -6488,7 +6488,10 @@ Bit 8 - 15 : reserved]]></Comment>
 				</Image>
 				<Box Id="11" Disabled="true" BoxType="9121">
 					<Name>robot1</Name>
-					<Comment><![CDATA[GSDML Name: GSDML-V2.33-ABB-Robotics-Robot-Device-20180814.xml
+					<Comment><![CDATA[
+The GSDML is not available!
+
+GSDML Name: GSDML-V2.33-ABB-Robotics-Robot-Device-20180814.xml
 Path: $(TWINCAT3DIR)Config\Io\Profinet\
 VendorName: ABB Robotics
 OrderNumber: 888-3
@@ -7421,7 +7424,10 @@ Submodule Info: DO 64 bytes
 				</Box>
 				<Box Id="21" BoxType="9121">
 					<Name>robot2</Name>
-					<Comment><![CDATA[GSDML Name: GSDML-V2.43-ABB-Robotics-OmniCore-20230327.xml
+					<Comment><![CDATA[
+The GSDML is not available!
+
+GSDML Name: GSDML-V2.43-ABB-Robotics-OmniCore-20230327.xml
 Path: $(TWINCAT3DIR)Config\Io\Profinet\
 VendorName: ABB Robotics
 OrderNumber: 3020-x

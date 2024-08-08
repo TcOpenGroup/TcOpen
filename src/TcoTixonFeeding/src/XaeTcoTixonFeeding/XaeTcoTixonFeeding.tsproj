@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.56" TcVersionFixed="true">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.59">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{132E66EA-9D48-518D-E919-C407F4B9DB22}" Namespace="TcoIo" AutoDeleteType="true">TcoAmsNetId</Name>
@@ -2107,7 +2107,7 @@ Bit 8 - 15 : reserved]]></Comment>
 				</Box>
 				<EtherCAT DcSyncMode="3" EnableVirtualSwitch="true" MaxSwitchPorts="2" MaxSwitchFrames="120" MaxSwitchMACs="100"/>
 			</Device>
-			<Device Id="2" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="192.168.4.1.3.1" RemoteName="ECAT" InfoImageId="7">
+			<Device Id="2" Disabled="true" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="192.168.4.1.3.1" RemoteName="ECAT" InfoImageId="7">
 				<Name>ECAT</Name>
 				<AddressInfo>
 					<Ccat>
@@ -2248,8 +2248,6 @@ Bit 8 - 15 : reserved]]></Comment>
 		</Io>
 	</Project>
 	<Mappings>
-		<MappingInfo Identifier="{00000000-2041-0850-4020-500860000403}" Id="#x02030010"/>
-		<MappingInfo Identifier="{00000000-2041-0850-4020-500871000403}" Id="#x02030020"/>
 		<OwnerA Name="TIPC^TcoTixonFeedingTests^TcoTixonFeedingTests Instance">
 			<OwnerB Name="TIID^ECAT">
 				<Link VarA="PlcTask1 Inputs^GVL_iXlinker.ECAT_x.InfoData.AmsNetId" VarB="InfoData^AmsNetId"/>

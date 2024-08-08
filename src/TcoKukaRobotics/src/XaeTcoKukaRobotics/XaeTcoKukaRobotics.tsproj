@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.56" TcVersionFixed="true">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.59">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{41ED9519-F005-F75E-C949-7BAD9F19538C}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..63] OF BYTE</Name>
@@ -210,7 +210,7 @@
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
 						<Context>
-							<Id NeedCalleeCall="true">0</Id>
+							<Id>0</Id>
 							<Name>PlcTask</Name>
 							<ManualConfig>
 								<OTCID>#x02010030</OTCID>
@@ -289,7 +289,7 @@
 					</UnrestoredVarLinks>
 					<Contexts>
 						<Context>
-							<Id NeedCalleeCall="true">0</Id>
+							<Id>0</Id>
 							<Name>PlcTask1</Name>
 							<ManualConfig>
 								<OTCID>#x02010060</OTCID>
@@ -1699,7 +1699,7 @@ Bit 8 - 15 : reserved]]></Comment>
 				</Box>
 				<EtherCAT DcSyncMode="3" EnableVirtualSwitch="true" MaxSwitchPorts="2" MaxSwitchFrames="120" MaxSwitchMACs="100"/>
 			</Device>
-			<Device Id="2" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="192.168.4.1.3.1" RemoteName="Device 2 (EtherCAT)" InfoImageId="7">
+			<Device Id="2" Disabled="true" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="192.168.4.1.3.1" RemoteName="Device 2 (EtherCAT)" InfoImageId="7">
 				<Name>Device 2 (EtherCAT)</Name>
 				<AddressInfo>
 					<Ccat>
@@ -3621,15 +3621,18 @@ Bit 8 - 15 : reserved]]></Comment>
 				</Box>
 				<EtherCAT/>
 			</Device>
-			<Device Id="3" DevType="119" AmsPort="28675" AmsNetId="192.168.4.1.4.1" RemoteName="Device 3 (EL6631)">
+			<Device Id="3" Disabled="true" DevType="119" AmsPort="28675" AmsNetId="192.168.4.1.4.1" RemoteName="Device 3 (EL6631)">
 				<Name>Device 3 (EL6631)</Name>
-				<DevData>000000001600000000000000a08601005465726d2031332028454c36363331290000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000001056fc1bc040000000000000000000000000000000000000000000000000000000000000000000000000000000000</DevData>
-				<Image Id="8" AddrType="4" ImageType="3" SizeIn="70" SizeOut="76">
+				<DevData>000000001600000000000000000000005465726d2031332028454c36363331290000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000001056fc1bc040000000000000000000000000000000000000000000000000000000000000000000000000000000000</DevData>
+				<Image Id="8" AddrType="4" ImageType="3" SizeIn="4" SizeOut="8">
 					<Name>Image</Name>
 				</Image>
 				<Box Id="20" BoxType="9121">
 					<Name>krc4</Name>
-					<Comment><![CDATA[GSDML Name: GSDML-V2.33-KUKA-KRC4-ProfiNet_4.1-20170630.xml
+					<Comment><![CDATA[
+The GSDML is not available!
+
+GSDML Name: GSDML-V2.33-KUKA-KRC4-ProfiNet_4.1-20170630.xml
 Path: $(TWINCAT3DIR)Config\Io\Profinet\
 VendorName: KUKA Roboter GmbH
 OrderNumber: 0x300
@@ -4723,7 +4726,6 @@ Submodule Info: 512 digital in- and outputs
 		</Io>
 	</Project>
 	<Mappings>
-		<MappingInfo Identifier="{00000000-2041-0850-4020-500880000403}" Id="#x02030010"/>
 		<OwnerA Name="TIPC^TcoKukaRoboticsTests^TcoKukaRoboticsTests Instance">
 			<OwnerB Name="TIID^Device 3 (EL6631)^krc4">
 				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[0]" VarB="API^Term 6 (512 digital in- and outputs)^Subterm 10 (512 digital in- and outputs)^Inputs^8 digital inputs[0]"/>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
   <POU Name="TcoCarousel" Id="{08546f33-5a42-0181-2c44-3eb6520f87c1}" SpecialFunc="None">
     <Declaration><![CDATA[{attribute addProperty _turnTableName "<#Turn#>"}
 {attribute addProperty _restoreName "<#Restore#>"}
@@ -304,7 +304,7 @@ ELSIF (_turnTask.Busy OR _startTurn OR _enableTurn) AND inoDisableCondition AND 
 END_IF]]></ST>
       </Implementation>
     </Method>
-    <Method Name="SuspendExpression" Id="{d8fc797a-9968-0ca9-180a-dcf844ea4441}">
+    <Method Name="SuspendExpression" Id="{434c1ae5-4f8d-04e3-36eb-feb9584bd1bb}">
       <Declaration><![CDATA[METHOD SuspendExpression : BOOL
 VAR_INPUT
     inDisableCondition : BOOL;

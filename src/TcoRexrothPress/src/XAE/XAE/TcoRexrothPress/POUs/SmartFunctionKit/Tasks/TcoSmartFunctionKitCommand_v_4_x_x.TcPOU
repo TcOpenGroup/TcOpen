@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
   <POU Name="TcoSmartFunctionKitCommand_v_4_x_x" Id="{0bac0d38-9946-403e-9f84-cb0e24249424}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoSmartFunctionKitCommand_v_4_x_x EXTENDS TcoCore.TcoTask
 VAR_INPUT
@@ -106,7 +106,7 @@ END_VAR]]></Declaration>
     THIS^.ThrowWhen(_errorTimer.Q);
 END_IF]]></ST>
     </Implementation>
-    <Method Name="CallTimers" Id="{4e136eea-8011-4eb1-a214-7e83460ce816}">
+    <Method Name="CallTimers" Id="{240c2b6f-2925-03b6-20a2-3516e5a0a0d4}">
       <Declaration><![CDATA[METHOD CallTimers
 VAR_INPUT
     inValue : BOOL;
@@ -118,7 +118,7 @@ END_VAR]]></Declaration>
 END_IF;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="FB_init" Id="{837d94d9-3cf2-434b-b695-2876b8579b83}">
+    <Method Name="FB_init" Id="{859cc853-ddfc-018e-0826-39222d4a92c3}">
       <Declaration><![CDATA[{attribute 'hide'}
 METHOD PUBLIC FB_init : BOOL
 VAR_INPUT
@@ -145,7 +145,7 @@ METHOD PROTECTED OnAbort]]></Declaration>
 END_IF;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="OnDone" Id="{2629bb32-4b20-4156-8ecc-087d2d6d0d85}">
+    <Method Name="OnDone" Id="{210913c6-ccab-0f8d-0074-418aee93c60c}">
       <Declaration><![CDATA[(*~
     <docu>
         <summary>

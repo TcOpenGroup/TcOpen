@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
-  <POU Name="TcoDo" Id="{a94c677a-ea37-0c4d-2eda-a26d576606a9}" SpecialFunc="None">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <POU Name="TcoDo" Id="{de8ef058-faec-0831-0021-5122e2bb13ce}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
     <docu>
         <summary>
@@ -53,7 +53,7 @@ IF (_resetTask.Execute()) THEN
     _resetTask.DoneWhen(Reset());
 END_IF]]></ST>
     </Implementation>
-    <Method Name="FB_init" Id="{3d495706-c76b-095e-389f-7ba6c1dae3a7}">
+    <Method Name="FB_init" Id="{811343f3-2a93-003e-12ec-2b2a1981e09b}">
       <Declaration><![CDATA[METHOD FB_init : BOOL
 VAR_INPUT
     bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
@@ -64,7 +64,7 @@ END_VAR]]></Declaration>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Property Name="IsFalse" Id="{48e6cf82-019c-09fc-0b62-4318a8025ee4}">
+    <Property Name="IsFalse" Id="{5ae304fd-f132-0a43-2c66-591f5135f758}">
       <Declaration><![CDATA[(*~
     <docu>
         <summary>
@@ -75,7 +75,7 @@ END_VAR]]></Declaration>
 ~*)
 {attribute 'monitoring' := 'variable'}
 PROPERTY IsFalse : BOOL]]></Declaration>
-      <Get Name="Get" Id="{c23c2e72-5cf6-0203-23ee-9d8001c6afd4}">
+      <Get Name="Get" Id="{400d1fb3-5c3c-01ee-077f-21d8673a42c2}">
         <Declaration><![CDATA[VAR
 END_VAR]]></Declaration>
         <Implementation>
@@ -87,7 +87,7 @@ END_IF;]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <Property Name="IsTrue" Id="{c588e641-6ea7-04c2-2aae-c7227089c8ae}">
+    <Property Name="IsTrue" Id="{eef61f3c-d22d-0f31-228a-45fda64c672d}">
       <Declaration><![CDATA[(*~
     <docu>
         <summary>
@@ -98,7 +98,7 @@ END_IF;]]></ST>
 ~*)
 {attribute 'monitoring' := 'variable'}
 PROPERTY IsTrue : BOOL]]></Declaration>
-      <Get Name="Get" Id="{2089a10e-bba5-06e8-1e33-1a25b4fcfa09}">
+      <Get Name="Get" Id="{46eab3e6-f27e-0b15-1296-8ee19e11f405}">
         <Declaration><![CDATA[VAR
 END_VAR]]></Declaration>
         <Implementation>
@@ -110,7 +110,7 @@ END_IF;]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <Method Name="Reset" Id="{8d9a1541-7fde-0939-1d52-c21f46132ca4}">
+    <Method Name="Reset" Id="{2d444a59-c799-0c56-31dc-6732b6de483d}">
       <Declaration><![CDATA[(*~
     <docu>
         <summary>
@@ -125,7 +125,7 @@ _signal := FALSE;
 Reset := TRUE;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Restore" Id="{28f0fb71-aa8a-0f79-0fa8-867a06c586ce}">
+    <Method Name="Restore" Id="{44dd5552-d6b8-0eda-31af-7b77aeedbfd7}">
       <Declaration><![CDATA[(*~
     <docu>
         <summary>
@@ -138,7 +138,7 @@ METHOD Restore : ITcoRestorable]]></Declaration>
         <ST><![CDATA[// No implementation needed for this componet.]]></ST>
       </Implementation>
     </Method>
-    <Method Name="ServiceMode" Id="{370c3428-cc83-04b9-0717-e7260a4027a0}">
+    <Method Name="ServiceMode" Id="{b5e5dc66-b55d-0f87-13e2-586d099704d1}">
       <Declaration><![CDATA[(*~
     <docu>
         <summary>
@@ -152,7 +152,7 @@ METHOD PROTECTED ServiceMode]]></Declaration>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Set" Id="{83e12c95-7ea1-0597-1f2a-882d3fad52b0}">
+    <Method Name="Set" Id="{aee7d6fa-47e6-02dd-180d-ca7ac2f2755d}">
       <Declaration><![CDATA[(*~
     <docu>
         <summary>
@@ -167,9 +167,9 @@ _signal := TRUE;
 Set := TRUE;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Signal" Id="{21741c7b-be57-0224-394d-8eba10f7fef5}">
+    <Property Name="Signal" Id="{e967eb63-8435-0412-3145-1e7065c48823}">
       <Declaration><![CDATA[PROPERTY PUBLIC Signal : Bool]]></Declaration>
-      <Get Name="Get" Id="{15d28176-9c49-02f5-384f-c21fc4407f09}">
+      <Get Name="Get" Id="{ec79e3cd-e930-07f1-08dd-2faed0e1dd7f}">
         <Declaration><![CDATA[VAR
 END_VAR]]></Declaration>
         <Implementation>

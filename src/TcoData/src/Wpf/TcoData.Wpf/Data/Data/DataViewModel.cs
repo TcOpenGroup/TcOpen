@@ -851,7 +851,8 @@ namespace TcoData
         {
             return (value is double)
                 ? (double)value
-                : (value is IConvertible)
+                : 
+(value is IConvertible)
                     ? (value as IConvertible).ToDouble(null)
                     : double.Parse(value.ToString());
         }

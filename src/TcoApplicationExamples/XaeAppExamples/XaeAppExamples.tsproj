@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.56" TcVersionFixed="true">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.59">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{37DF1FA7-25A9-2180-5625-C9B3B7C20643}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..15] OF BOOL</Name>
@@ -24,7 +24,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{B8CE161A-872B-4092-B0F7-49898E4206A5}" Name="PlcAppExamples" PrjFilePath="PlcAppExamples\PlcAppExamples.plcproj" TmcFilePath="PlcAppExamples\PlcAppExamples.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PlcAppExamples\PlcAppExamples.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PlcAppExamples\PlcAppExamples.tmc" TmcHash="{C4DB650F-F776-FCAE-91C0-1DA5DB23C2A4}">
 					<Name>PlcAppExamples Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -43,7 +43,7 @@
 					</Vars>
 					<Contexts>
 						<Context>
-							<Id NeedCalleeCall="true">0</Id>
+							<Id>0</Id>
 							<Name>PlcTask</Name>
 							<ManualConfig>
 								<OTCID>#x02010030</OTCID>

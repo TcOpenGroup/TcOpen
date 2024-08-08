@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
   <POU Name="TcoSmartFunctionKit_v_4_x_x" Id="{1cad81cc-b410-0eea-0591-9e151b6f9de3}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoSmartFunctionKit_v_4_x_x EXTENDS TcoIo.TcoEcatComponent
 VAR_IN_OUT
@@ -185,7 +185,7 @@ tmpDWORD := tmpDWORD + b3;
 _BYTES_TO_DWORD := tmpDWORD;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Config" Id="{d097aa82-3255-4848-8d04-863bfbd6ce53}">
+    <Property Name="Config" Id="{3cf3c9b6-d7b8-0538-01a2-a1f5a96f75fd}">
       <Declaration><![CDATA[(*~
     <docu>
         <summary>
@@ -194,7 +194,7 @@ _BYTES_TO_DWORD := tmpDWORD;]]></ST>
     </docu>
 ~*)
 PROPERTY Config : REFERENCE TO TcoSmartFunctionKitConfig_v_4_x_x]]></Declaration>
-      <Get Name="Get" Id="{f0a60fa8-c67f-4d62-a6b9-546c59aac019}">
+      <Get Name="Get" Id="{aff8dbfb-e4eb-0c0f-0fff-5c0b2e915f71}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
           <ST><![CDATA[Config REF= _config;]]></ST>
@@ -368,7 +368,7 @@ METHOD PROTECTED ServiceMode]]></Declaration>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Status" Id="{9f04587f-2cd5-4ce7-965a-55ffcb50b2dd}">
+    <Property Name="Status" Id="{99b7a6f4-cbe9-0f1b-0222-894c764bfb9b}">
       <Declaration><![CDATA[(*~
     <docu>
         <summary>
@@ -377,7 +377,7 @@ METHOD PROTECTED ServiceMode]]></Declaration>
     </docu>
 ~*)
 PROPERTY Status : REFERENCE TO TcoSmartFunctionKitStatus_v_4_x_x]]></Declaration>
-      <Get Name="Get" Id="{a5b8a1d1-9db9-4d07-bddd-cbac49d95ee9}">
+      <Get Name="Get" Id="{3a69fd95-d865-09fb-0d4b-a9a198640de6}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
           <ST><![CDATA[Status REF= _status;]]></ST>
