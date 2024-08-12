@@ -3,20 +3,19 @@
   <DUT Name="TcoInsightInspectionStatus_v_5_x_x" Id="{b8101f3b-0439-07ec-3a78-91f6a6254a61}">
     <Declaration><![CDATA[TYPE TcoInsightInspectionStatus_v_5_x_x :
 STRUCT
-	SystemBusy AT %I* : BOOL;
-	InspectionCompleted AT %I* : BOOL;
-	ResultsBufferOverrun AT %I* : BOOL;
-	ResultsValid AT %I* : BOOL;	
-	CommandExecuting AT %I* : BOOL;
-	CommandComplete AT %I* : BOOL;
-	CommandFailed AT %I* : BOOL;
-	ExtendedUserDataSetAcknowledge AT %I* : BOOL;
-	OverallJobPassFail AT %I* : BOOL;
-	TestRunReady AT %I* : BOOL;
-	Error AT %I* : BOOL;
-	ErrorCode AT %I* : UINT;
+    SystemBusy AT %I* : BOOL;
+    InspectionCompleted AT %I* : BOOL;
+    ResultsBufferOverrun AT %I* : BOOL;
+    ResultsValid AT %I* : BOOL;
+    CommandExecuting AT %I* : BOOL;
+    CommandComplete AT %I* : BOOL;
+    CommandFailed AT %I* : BOOL;
+    ExtendedUserDataSetAcknowledge AT %I* : BOOL;
+    OverallJobPassFail AT %I* : BOOL;
+    TestRunReady AT %I* : BOOL;
+    Error AT %I* : BOOL;
+    ErrorCode AT %I* : UINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

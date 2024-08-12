@@ -8,14 +8,13 @@
 {attribute addProperty Size "56"}
 TYPE MTO_Outputs_10x_Channel_A3C0C022 EXTENDS TcoIo.OutputBase_10CEE7DE :
 STRUCT
-	{attribute addProperty Name "Ctrl"}
-	Ctrl AT %Q* : Ctrl_77460BD3;
-	{attribute addProperty Name "Outputs"}
-	Outputs AT %Q* : Outputs_A910484D;
-	{attribute addProperty Name "Output_event_time"}
-	Output_event_time AT %Q* : ARRAY[0..9] OF UDINT;
+    {attribute addProperty Name "Ctrl"}
+    Ctrl AT %Q* : Ctrl_77460BD3;
+    {attribute addProperty Name "Outputs"}
+    Outputs AT %Q* : Outputs_A910484D;
+    {attribute addProperty Name "Output_event_time"}
+    Output_event_time AT %Q* : ARRAY[0..9] OF UDINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

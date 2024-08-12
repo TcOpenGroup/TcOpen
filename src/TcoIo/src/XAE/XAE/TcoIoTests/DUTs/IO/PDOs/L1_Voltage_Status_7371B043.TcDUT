@@ -8,10 +8,9 @@
 {attribute addProperty Size "7"}
 TYPE L1_Voltage_Status_7371B043 EXTENDS TcoIo.InputBase_8311D824 :
 STRUCT
-	{attribute addProperty Name "U1_Status"}
-	U1_Status AT %I* : U1_Status_DC903920;
+    {attribute addProperty Name "U1_Status"}
+    U1_Status AT %I* : U1_Status_DC903920;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -3,9 +3,8 @@
   <DUT Name="TcoOmnicore_Inputs_v_1_x_x" Id="{836289e2-aa24-036a-3f09-664edf124071}">
     <Declaration><![CDATA[TYPE TcoOmnicore_Inputs_v_1_x_x :
 STRUCT
-	Inputs AT %I* : ARRAY[0..63] OF BYTE;
+    Inputs AT %I* : ARRAY[0..63] OF BYTE;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -8,8 +8,9 @@ namespace TcoRexrothPressTests
         static string TargetAmsId = "39.254.143.177.1.1"; //Environment.GetEnvironmentVariable("Tc3Target");
         static int TargetAmsPort = 852;
 
-       
-        public static TcoRexrothPressTestsTwinController TcoRexrothPressTestsPlc
-            = new TcoRexrothPressTestsTwinController(Tc3ConnectorAdapter.Create(TargetAmsId, TargetAmsPort, true));
+        public static TcoRexrothPressTestsTwinController TcoRexrothPressTestsPlc =
+            new TcoRexrothPressTestsTwinController(
+                Tc3ConnectorAdapter.Create(TargetAmsId, TargetAmsPort, true)
+            );
     }
 }

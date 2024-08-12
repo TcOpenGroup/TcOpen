@@ -18,7 +18,4 @@ namespace Grafana.Backend.Model
             Value = value;
         }
     }
-
- 
-
 }

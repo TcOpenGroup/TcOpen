@@ -4,8 +4,6 @@ namespace TcoCore
 {
     public class ExcludeFromApiDocumentationAttribute : Attribute
     {
-        public ExcludeFromApiDocumentationAttribute()
-        {
-        }
+        public ExcludeFromApiDocumentationAttribute() { }
     }
 }

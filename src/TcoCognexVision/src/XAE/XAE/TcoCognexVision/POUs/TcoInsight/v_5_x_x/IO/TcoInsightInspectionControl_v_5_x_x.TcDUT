@@ -3,13 +3,12 @@
   <DUT Name="TcoInsightInspectionControl_v_5_x_x" Id="{3444326b-467a-0f66-257c-8286be44d747}">
     <Declaration><![CDATA[TYPE TcoInsightInspectionControl_v_5_x_x :
 STRUCT
-	EnableResultsBuffering AT %Q* : BOOL;
-	AcknowledgeInspectionResults AT %Q* : BOOL;
-	ExtendedUserDataSet AT %Q* : BOOL;
-	ExecuteCommand AT %Q* : BOOL;
-	ClearError AT %Q* : BOOL;
+    EnableResultsBuffering AT %Q* : BOOL;
+    AcknowledgeInspectionResults AT %Q* : BOOL;
+    ExtendedUserDataSet AT %Q* : BOOL;
+    ExecuteCommand AT %Q* : BOOL;
+    ClearError AT %Q* : BOOL;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -1,12 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>    
+  <PropertyGroup>
     <TargetFrameworks>net48;net5.0</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-	<IsPackable>false</IsPackable>	  
+	<IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\TcoElementsConnector\TcoElementsConnector.csproj" />
+    <ProjectReference
+      Include="..\..\src\TcoElementsConnector\TcoElementsConnector.csproj"
+    />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Localizations.Designer.cs">
@@ -23,7 +25,9 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+		<AssemblyAttribute
+      Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute"
+    >
 			<_Parameter1>Sandbox.TcoElements.Wpf</_Parameter1>
 		</AssemblyAttribute>
 	</ItemGroup>

@@ -26,8 +26,8 @@ namespace TcoCore
         {
             this._Close();
             return true;
-        }  
-        
+        }
+
         /// <summary>
         /// Executes context cycle given number of times. Optionally can provide <see cref="_testId"/> for test code isolation.
         /// In the plc you must ensure cyclical call of <see cref="TcoCore.TcoContext.PlcTcoContext.ProbeRun"/> method.
@@ -41,13 +41,18 @@ namespace TcoCore
             _probeRunRequiredCycles.Synchron = counts;
             _probeCurrentCycleCount.Synchron = 0;
 
-            Task.Run(() => { while (_probeCurrentCycleCount.Synchron < _probeRunRequiredCycles.Synchron) System.Threading.Thread.Sleep(5); }).Wait();            
+            Task.Run(() =>
+                {
+                    while (_probeCurrentCycleCount.Synchron < _probeRunRequiredCycles.Synchron)
+                        System.Threading.Thread.Sleep(5);
+                })
+                .Wait();
         }
 
         /// <summary>
         /// Executes context cycle until end condition is met. Optionally can provide <see cref="_testId"/> for test code isolation.
         /// In the plc you must ensure cyclical call of <see cref="TcoCore.TcoContext.PlcTcoContext.ProbeRun"/> method.
-        /// </summary>       
+        /// </summary>
         /// <param name="testId">Test Id</param>
         /// <param name="endCondition">Evaluates end condition for the test.</param>
         public void ExecuteProbeRun(ulong testId, Func<bool> endCondition)
@@ -57,17 +62,23 @@ namespace TcoCore
             _probeRunRequiredCycles.Synchron = ulong.MaxValue;
             _probeCurrentCycleCount.Synchron = 0;
 
-            Task.Run(() => { while (!endCondition()); System.Threading.Thread.Sleep(5); }).Wait();
+            Task.Run(() =>
+                {
+                    while (!endCondition())
+                        ;
+                    System.Threading.Thread.Sleep(5);
+                })
+                .Wait();
 
             _probeRunRequiredCycles.Synchron = 0;
             _testId.Synchron = 0;
         }
 
         /// <summary>
-        /// Executes context cycle until `ProbeDoneWhen` method in the PLC is executed. 
+        /// Executes context cycle until `ProbeDoneWhen` method in the PLC is executed.
         /// In the plc you must ensure cyclical call of <see cref="TcoCore.TcoContext.PlcTcoContext.ProbeRun"/> method.
-        /// </summary>       
-        /// <param name="testId">Test Id</param>       
+        /// </summary>
+        /// <param name="testId">Test Id</param>
         public void ExecuteProbeRun(ulong testId)
         {
             _probeCurrentCycleCount.Synchron = ulong.MaxValue;
@@ -75,7 +86,13 @@ namespace TcoCore
             _probeRunRequiredCycles.Synchron = ulong.MaxValue;
             _probeCurrentCycleCount.Synchron = 0;
 
-            Task.Run(() => { while (_probeRunRequiredCycles.Synchron != 0) ; System.Threading.Thread.Sleep(5); }).Wait();
+            Task.Run(() =>
+                {
+                    while (_probeRunRequiredCycles.Synchron != 0)
+                        ;
+                    System.Threading.Thread.Sleep(5);
+                })
+                .Wait();
 
             _probeRunRequiredCycles.Synchron = 0;
             _testId.Synchron = 0;

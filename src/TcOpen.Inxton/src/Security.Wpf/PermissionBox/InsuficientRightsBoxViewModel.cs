@@ -7,14 +7,13 @@ using System.Threading.Tasks;
 using System.Windows;
 using TcOpen.Inxton.Input;
 
-
 namespace TcOpen.Inxton.Local.Security.Wpf
 {
     public class InsufficientRightsBoxViewModel : INotifyPropertyChanged
     {
         public InsufficientRightsBoxViewModel()
         {
-            OpenLoginWindowCommand = new RelayCommand(a => OpenLoginWindow(), b => true);           
+            OpenLoginWindowCommand = new RelayCommand(a => OpenLoginWindow(), b => true);
         }
 
         FrameworkElement protectedContent;
@@ -29,16 +28,16 @@ namespace TcOpen.Inxton.Local.Security.Wpf
                 }
 
                 protectedContent = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ProtectedContent)));
+                PropertyChanged?.Invoke(
+                    this,
+                    new PropertyChangedEventArgs(nameof(ProtectedContent))
+                );
             }
         }
 
         public UserAccessor UserInfo
         {
-            get
-            {
-                return UserAccessor.Instance;
-            }
+            get { return UserAccessor.Instance; }
         }
 
         public RelayCommand OpenLoginWindowCommand { get; private set; }
@@ -49,6 +48,6 @@ namespace TcOpen.Inxton.Local.Security.Wpf
         {
             var loginWindow = new LoginWindow();
             loginWindow.ShowDialog();
-        }       
+        }
     }
 }

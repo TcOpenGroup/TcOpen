@@ -2,10 +2,9 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <DUT Name="TcoInsightUser_v_5_x_x" Id="{d8203cf1-3a7d-0888-1a2a-30401669a5c3}">
     <Declaration><![CDATA[TYPE TcoInsightUser_v_5_x_x :
-STRUCT	
-	UserData : ARRAY[0..TcoVisionParams.MAX_BYTE_ARRAY] OF BYTE;
+STRUCT
+    UserData : ARRAY[0..TcoVisionParams.MAX_BYTE_ARRAY] OF BYTE;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

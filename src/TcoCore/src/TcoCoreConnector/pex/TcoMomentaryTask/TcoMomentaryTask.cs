@@ -16,7 +16,7 @@ namespace TcoCore
         {
             this._enabled.Subscribe(ValidateCanExecute);
             this._isServiceable.Subscribe(ValidateCanExecute);
-            CanExecuteChanged += TcoToggleTask_CanExecuteChanged;          
+            CanExecuteChanged += TcoToggleTask_CanExecuteChanged;
         }
 
         private void TcoToggleTask_CanExecuteChanged(object sender, EventArgs e)
@@ -34,7 +34,7 @@ namespace TcoCore
         private Func<object> _logPayloadDecoration;
 
         /// <summary>
-        /// Gets or sets log payload decoration function. 
+        /// Gets or sets log payload decoration function.
         /// The return object will can be added to provide additional information about this task execution.
         /// <note:important>
         /// There must be an implementation that calls and adds the result object into the log message payload.
@@ -42,7 +42,11 @@ namespace TcoCore
         /// How to create a payload decorator see in <see cref="TcoSequencer.PexConstructor(IVortexObject, string, string)"/>
         /// </important>
         /// </summary>
-        public Func<object> LogPayloadDecoration { get => _logPayloadDecoration; set => _logPayloadDecoration = value; }
+        public Func<object> LogPayloadDecoration
+        {
+            get => _logPayloadDecoration;
+            set => _logPayloadDecoration = value;
+        }
 
         /// <summary>
         /// Gets swift code provider for this task.
@@ -58,7 +62,6 @@ namespace TcoCore
 
                 return codeProvider;
             }
-
             protected set => codeProvider = value;
         }
 
@@ -76,24 +79,25 @@ namespace TcoCore
         {
             return this._enabled.Synchron && this._isServiceable.Synchron;
         }
+
         /// <summary>
         /// The calling of the execute method does not have effect on this particular task type.
         /// </summary>
         /// <param name="parameter"></param>
-        public void Execute(object parameter)
-        {
-
-        }
+        public void Execute(object parameter) { }
 
         /// <summary>
         /// Stops momentary task execution.
-        /// </summary>        
+        /// </summary>
         public void Stop()
         {
             if (CanExecute(null))
             {
                 _setOnRequest.Synchron = false;
-                TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' stopped. {{@sender}}", LogInfo.Create(this));
+                TcoAppDomain.Current.Logger.Information(
+                    $"Task '{LogInfo.NameOrSymbol(this)}' stopped. {{@sender}}",
+                    LogInfo.Create(this)
+                );
                 RecordTaskAction?.Invoke(this.CodeProvider, false);
             }
         }
@@ -103,11 +107,13 @@ namespace TcoCore
         /// </summary>
         public void Start()
         {
-
-            if(CanExecute(null))
-            { 
+            if (CanExecute(null))
+            {
                 _setOnRequest.Synchron = true;
-                TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' invoked. {{@sender}}", LogInfo.Create(this));
+                TcoAppDomain.Current.Logger.Information(
+                    $"Task '{LogInfo.NameOrSymbol(this)}' invoked. {{@sender}}",
+                    LogInfo.Create(this)
+                );
                 RecordTaskAction?.Invoke(this.CodeProvider, true);
             }
         }

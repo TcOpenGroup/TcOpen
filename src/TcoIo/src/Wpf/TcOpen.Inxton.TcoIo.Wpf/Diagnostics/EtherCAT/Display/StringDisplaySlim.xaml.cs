@@ -11,14 +11,22 @@ namespace TcoIo.Diagnostics.EtherCAT.Display
 {
     public partial class StringDisplaySlim : INotifyPropertyChanged
     {
-        public static readonly DependencyProperty DescriptionProperty = DependencyProperty.Register("Description", typeof(string), typeof(StringDisplaySlim), new PropertyMetadata(OnDescriptionChangedCallBack));
+        public static readonly DependencyProperty DescriptionProperty = DependencyProperty.Register(
+            "Description",
+            typeof(string),
+            typeof(StringDisplaySlim),
+            new PropertyMetadata(OnDescriptionChangedCallBack)
+        );
         public string Description
         {
             get { return (string)GetValue(DescriptionProperty); }
             set { SetValue(DescriptionProperty, value); }
         }
 
-        private static void OnDescriptionChangedCallBack(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        private static void OnDescriptionChangedCallBack(
+            DependencyObject sender,
+            DependencyPropertyChangedEventArgs e
+        )
         {
             StringDisplaySlim c = sender as StringDisplaySlim;
             if (c != null)
@@ -32,9 +40,12 @@ namespace TcoIo.Diagnostics.EtherCAT.Display
         {
             OnPropertyChanged("Description");
         }
+
         private void DescriptionChange(object sender, DependencyPropertyChangedEventArgs e)
         {
-            Binding binding = tbDescription.GetBindingExpression(TextBox.TextProperty).ParentBinding;
+            Binding binding = tbDescription
+                .GetBindingExpression(TextBox.TextProperty)
+                .ParentBinding;
             string formatString = Description as string;
             if (!string.IsNullOrEmpty(formatString))
             {
@@ -73,10 +84,11 @@ namespace TcoIo.Diagnostics.EtherCAT.Display
             InitializeComponent();
             DataContextChanged += DataContextChange;
         }
+
         private void DataContextChange(object sender, DependencyPropertyChangedEventArgs e)
         {
             Binding binding = tbValue.GetBindingExpression(TextBox.TextProperty).ParentBinding;
-            
+
             string formatString = DataContext as string;
             if (!string.IsNullOrEmpty(formatString))
             {
@@ -124,18 +136,21 @@ namespace TcoIo.Diagnostics.EtherCAT.Display
             }
         }
 
- 
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         private void tbDescription_TargetUpdated(object sender, DataTransferEventArgs e)
         {
             UpdateDesriptionFontSize();
         }
+
         private void UpdateDesriptionFontSize()
         {
-            tbDescription.FontSize = TextBlockUtils.UpdateFontSizeToFitTheTextBoxMaxWidth(tbDescription);
+            tbDescription.FontSize = TextBlockUtils.UpdateFontSizeToFitTheTextBoxMaxWidth(
+                tbDescription
+            );
         }
     }
 }

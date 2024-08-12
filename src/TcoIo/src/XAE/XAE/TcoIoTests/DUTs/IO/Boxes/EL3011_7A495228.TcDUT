@@ -11,14 +11,13 @@
 {attribute addProperty Size "13"}
 TYPE EL3011_7A495228 EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
 STRUCT
-	{attribute addProperty Name "AI_Standard"}
-	AI_Standard : AI_Standard_Channel_4A394481;
-	{attribute addProperty Name "WcState"}
-	WcState : TcoIo.WcState_9091E0EB;
-	{attribute addProperty Name "InfoData"}
-	InfoData : TcoIo.InfoData_23CBA837;
+    {attribute addProperty Name "AI_Standard"}
+    AI_Standard : AI_Standard_Channel_4A394481;
+    {attribute addProperty Name "WcState"}
+    WcState : TcoIo.WcState_9091E0EB;
+    {attribute addProperty Name "InfoData"}
+    InfoData : TcoIo.InfoData_23CBA837;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

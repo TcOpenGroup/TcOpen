@@ -5,14 +5,13 @@
 {attribute 'strict'}
 TYPE eAxisEncoderReferenceSystem :
 (
-	INCREMENTAL := 0,
-	ABSOLUTE := 1,
-	ABSOLUTE_MODULO := 2,
-	ABSOLUTE_MULTITURN := 3,
-	INCREMENTAL_SINGLETURN_ABSOLUTE := 4,
-	ABSOLUTE_SINGLETURN := 5
+    INCREMENTAL := 0,
+    ABSOLUTE := 1,
+    ABSOLUTE_MODULO := 2,
+    ABSOLUTE_MULTITURN := 3,
+    INCREMENTAL_SINGLETURN_ABSOLUTE := 4,
+    ABSOLUTE_SINGLETURN := 5
 );
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

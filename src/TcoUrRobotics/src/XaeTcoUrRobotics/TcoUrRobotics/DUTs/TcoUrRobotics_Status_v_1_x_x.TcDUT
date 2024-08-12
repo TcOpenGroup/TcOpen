@@ -3,13 +3,9 @@
   <DUT Name="TcoUrRobotics_Status_v_1_x_x" Id="{e0165681-b349-01ba-02f1-bc7f8e208916}">
     <Declaration><![CDATA[TYPE TcoUrRobotics_Status_v_1_x_x :
 STRUCT
-	ActionDescription : STRING(100);	
-	State:TcoUrRobotics_State_v_1_x_x;
-
-
-
+    ActionDescription : STRING(100);
+    State : TcoUrRobotics_State_v_1_x_x;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

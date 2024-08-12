@@ -1,6 +1,6 @@
-using Microsoft.JSInterop;
 using System;
 using System.Threading.Tasks;
+using Microsoft.JSInterop;
 
 namespace TcOpen.Inxton.Blazor
 {
@@ -17,8 +17,15 @@ namespace TcOpen.Inxton.Blazor
 
         public ExampleJsInterop(IJSRuntime jsRuntime)
         {
-            moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
-               "import", "./_content/TcOpen.Inxton.Blazor/exampleJsInterop.js").AsTask());
+            moduleTask = new(
+                () =>
+                    jsRuntime
+                        .InvokeAsync<IJSObjectReference>(
+                            "import",
+                            "./_content/TcOpen.Inxton.Blazor/exampleJsInterop.js"
+                        )
+                        .AsTask()
+            );
         }
 
         public async ValueTask<string> Prompt(string message)

@@ -9,12 +9,11 @@
 {attribute addProperty Name "R8_A2 (EK1122)"}
 TYPE R8_A2_EK1122_E74C4B62 EXTENDS EK1122_1FC0878B :
 STRUCT
-	{attribute addProperty Name "R8_AB0 (EPP1322-0001)"}
-	{attribute addProperty PreviousPort "R8_A2 (EK1122) : D"}
-	{attribute addProperty SyncUnit "default"}
-	R8_AB0_EPP1322_0001 : R8_AB0_EPP1322_0001_1BB6BCA8;
+    {attribute addProperty Name "R8_AB0 (EPP1322-0001)"}
+    {attribute addProperty PreviousPort "R8_A2 (EK1122) : D"}
+    {attribute addProperty SyncUnit "default"}
+    R8_AB0_EPP1322_0001 : R8_AB0_EPP1322_0001_1BB6BCA8;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

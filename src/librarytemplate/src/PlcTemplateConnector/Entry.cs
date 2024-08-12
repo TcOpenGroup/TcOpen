@@ -11,7 +11,7 @@ namespace PlcTemplate
     {
         const string AmdId = "172.20.10.2.1.1";
 
-        public static PlcTemplate.PlcTemplateTwinController PlcTemplatePlc 
-            = new PlcTemplateTwinController(Tc3ConnectorAdapter.Create(AmdId, 851, true));
+        public static PlcTemplate.PlcTemplateTwinController PlcTemplatePlc =
+            new PlcTemplateTwinController(Tc3ConnectorAdapter.Create(AmdId, 851, true));
     }
 }

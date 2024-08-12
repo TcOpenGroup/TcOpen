@@ -5,7 +5,7 @@
 VAR
     _serviceModeCount : ULINT;
     _serviceModeOverride : LREAL;
-	inoPosition: TcoMultiAxisPositionsRootContainer(THIS^);
+    inoPosition : TcoMultiAxisPositionsRootContainer(THIS^);
 END_VAR
 VAR
     _MC_ReadDriveAddress : MC_ReadDriveAddress;
@@ -17,29 +17,27 @@ VAR
     _MC_ReadParameter : MC_ReadParameter;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[SUPER^(	inEnableAxis1 			:=	inEnableAxis1,
-		inEnablePositiveAxis1	:=	inEnablePositiveAxis1,
-		inEnableNegativeAxis1	:=	inEnableNegativeAxis1,
-		inCalibrationCamAxis1	:=	inCalibrationCamAxis1,
-		refAxis1			:=	refAxis1,
-		inEnableAxis2 			:=	inEnableAxis2,
-		inEnablePositiveAxis2	:=	inEnablePositiveAxis2,
-		inEnableNegativeAxis2	:=	inEnableNegativeAxis2,
-		inCalibrationCamAxis2	:=	inCalibrationCamAxis2,
-		refAxis2			:=	refAxis2,
-		inEnableAxis3 			:=	inEnableAxis3,
-		inEnablePositiveAxis3	:=	inEnablePositiveAxis3,
-		inEnableNegativeAxis3	:=	inEnableNegativeAxis3,
-		inCalibrationCamAxis3	:=	inCalibrationCamAxis3,
-		refAxis3			:=	refAxis3,
-		inEnableAxis3 			:=	inEnableAxis4,
-		inEnablePositiveAxis4	:=	inEnablePositiveAxis4,
-		inEnableNegativeAxis4	:=	inEnableNegativeAxis4,
-		inCalibrationCamAxis4	:=	inCalibrationCamAxis4,
-		refAxis4			:=	refAxis4,
-		inoPositions:=inoPosition);
-		
-]]></ST>
+      <ST><![CDATA[SUPER^(inEnableAxis1 := inEnableAxis1,
+    inEnablePositiveAxis1 := inEnablePositiveAxis1,
+    inEnableNegativeAxis1 := inEnableNegativeAxis1,
+    inCalibrationCamAxis1 := inCalibrationCamAxis1,
+    refAxis1 := refAxis1,
+    inEnableAxis2 := inEnableAxis2,
+    inEnablePositiveAxis2 := inEnablePositiveAxis2,
+    inEnableNegativeAxis2 := inEnableNegativeAxis2,
+    inCalibrationCamAxis2 := inCalibrationCamAxis2,
+    refAxis2 := refAxis2,
+    inEnableAxis3 := inEnableAxis3,
+    inEnablePositiveAxis3 := inEnablePositiveAxis3,
+    inEnableNegativeAxis3 := inEnableNegativeAxis3,
+    inCalibrationCamAxis3 := inCalibrationCamAxis3,
+    refAxis3 := refAxis3,
+    inEnableAxis3 := inEnableAxis4,
+    inEnablePositiveAxis4 := inEnablePositiveAxis4,
+    inEnableNegativeAxis4 := inEnableNegativeAxis4,
+    inCalibrationCamAxis4 := inCalibrationCamAxis4,
+    refAxis4 := refAxis4,
+    inoPositions := inoPosition);]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

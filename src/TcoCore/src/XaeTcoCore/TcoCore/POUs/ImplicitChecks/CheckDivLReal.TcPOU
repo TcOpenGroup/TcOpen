@@ -4,15 +4,15 @@
     <Declaration><![CDATA[// Implicitly generated code : DO NOT EDIT
 FUNCTION CheckDivLReal : LREAL
 VAR_INPUT
-	divisor:LREAL;
+    divisor : LREAL;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[// Implicitly generated code : Only an Implementation suggestion
 {noflow}
 IF divisor = 0 THEN
-	CheckDivLReal:=1;
+    CheckDivLReal := 1;
 ELSE
-	CheckDivLReal:=divisor;
+    CheckDivLReal := divisor;
 END_IF;
 {flow}
 ]]></ST>

@@ -11,22 +11,21 @@
 {attribute addProperty Size "43"}
 TYPE EL7041_86DE63E7 EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
 STRUCT
-	{attribute addProperty Name "ENC_Status_compact"}
-	ENC_Status_compact : ENC_Status_compact_4D066E1A;
-	{attribute addProperty Name "STM_Status"}
-	STM_Status : STM_Status_36ED096F;
-	{attribute addProperty Name "ENC_Control_compact"}
-	ENC_Control_compact : ENC_Control_compact_21E2D14D;
-	{attribute addProperty Name "STM_Control"}
-	STM_Control : STM_Control_5A8B5016;
-	{attribute addProperty Name "STM_Velocity"}
-	STM_Velocity : STM_Velocity_A47A3F41;
-	{attribute addProperty Name "WcState"}
-	WcState : TcoIo.WcState_9091E0EB;
-	{attribute addProperty Name "InfoData"}
-	InfoData : InfoData_D50C8545;
+    {attribute addProperty Name "ENC_Status_compact"}
+    ENC_Status_compact : ENC_Status_compact_4D066E1A;
+    {attribute addProperty Name "STM_Status"}
+    STM_Status : STM_Status_36ED096F;
+    {attribute addProperty Name "ENC_Control_compact"}
+    ENC_Control_compact : ENC_Control_compact_21E2D14D;
+    {attribute addProperty Name "STM_Control"}
+    STM_Control : STM_Control_5A8B5016;
+    {attribute addProperty Name "STM_Velocity"}
+    STM_Velocity : STM_Velocity_A47A3F41;
+    {attribute addProperty Name "WcState"}
+    WcState : TcoIo.WcState_9091E0EB;
+    {attribute addProperty Name "InfoData"}
+    InfoData : InfoData_D50C8545;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -3,12 +3,11 @@
   <DUT Name="WaveformPoint" Id="{370468da-dde9-00a0-0adf-567af530300a}">
     <Declaration><![CDATA[TYPE WaveformPoint :
 STRUCT
-	TransitionType		:	eTransitionType;	
-	TargetValue			:	LREAL;				//Value to be reached in "Duration" PLC cycles
-	Duration			:	UINT;				//Number of PLC cycles during which the "TargetValue" must be reached
-	Shape				:	LREAL;				//Define curve shape
+    TransitionType : eTransitionType;
+    TargetValue : LREAL; //Value to be reached in "Duration" PLC cycles
+    Duration : UINT; //Number of PLC cycles during which the "TargetValue" must be reached
+    Shape : LREAL; //Define curve shape
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -14,7 +14,7 @@ namespace TcoCore
         {
             try
             {
-               return (byte)value > 1 ? "!" : string.Empty;                
+                return (byte)value > 1 ? "!" : string.Empty;
             }
             catch
             {
@@ -24,7 +24,12 @@ namespace TcoCore
             return Brushes.Gray;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }

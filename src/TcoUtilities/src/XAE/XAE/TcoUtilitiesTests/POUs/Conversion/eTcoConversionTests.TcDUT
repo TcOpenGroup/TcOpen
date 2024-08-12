@@ -5,14 +5,13 @@
 {attribute 'strict'}
 TYPE eTcoConversionTests :
 (
-	None := 0,
-	Init := 10,
-	TcoBytesToReal := 20,
-	TcoRealToBytes := 30,
-	TcoBytesToRealPlcArrange := 40,
-	TcoRealToBytesPlcArrange := 50
+    None := 0,
+    Init := 10,
+    TcoBytesToReal := 20,
+    TcoRealToBytes := 30,
+    TcoBytesToRealPlcArrange := 40,
+    TcoRealToBytesPlcArrange := 50
 );
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

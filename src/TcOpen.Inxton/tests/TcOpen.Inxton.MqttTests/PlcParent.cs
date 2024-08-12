@@ -1,39 +1,29 @@
 ﻿using Vortex.Connector;
-namespace TcOpen.Inxton.MqttTests
 
+namespace TcOpen.Inxton.MqttTests
 {
 #pragma warning disable SA1402, CS1591, CS0108, CS0067
     public partial class PlcParent : Vortex.Connector.IVortexObject
     {
-        public string Symbol
-        {
-            get;
-            protected set;
-        }
+        public string Symbol { get; protected set; }
 
         public string HumanReadable
         {
-            get
-            {
-                return _humanReadable;
-            }
-
-            protected set
-            {
-                _humanReadable = value;
-            }
+            get { return _humanReadable; }
+            protected set { _humanReadable = value; }
         }
 
         protected string _humanReadable;
 
+        partial void PexPreConstructor(
+            Vortex.Connector.IVortexObject parent,
+            string readableTail,
+            string symbolTail
+        );
 
-        partial void PexPreConstructor(Vortex.Connector.IVortexObject parent, string readableTail, string symbolTail);
         partial void PexPreConstructorParameterless();
-        private System.Collections.Generic.List<Vortex.Connector.IVortexObject> @Children
-        {
-            get;
-            set;
-        }
+
+        private System.Collections.Generic.List<Vortex.Connector.IVortexObject> @Children { get; set; }
 
         public System.Collections.Generic.IEnumerable<Vortex.Connector.IVortexObject> @GetChildren()
         {
@@ -45,11 +35,7 @@ namespace TcOpen.Inxton.MqttTests
             this.@Children.Add(vortexObject);
         }
 
-        private System.Collections.Generic.List<Vortex.Connector.IVortexElement> Kids
-        {
-            get;
-            set;
-        }
+        private System.Collections.Generic.List<Vortex.Connector.IVortexElement> Kids { get; set; }
 
         public System.Collections.Generic.IEnumerable<Vortex.Connector.IVortexElement> GetKids()
         {
@@ -61,24 +47,22 @@ namespace TcOpen.Inxton.MqttTests
             this.Kids.Add(vortexElement);
         }
 
-        partial void PexConstructor(Vortex.Connector.IVortexObject parent, string readableTail, string symbolTail);
+        partial void PexConstructor(
+            Vortex.Connector.IVortexObject parent,
+            string readableTail,
+            string symbolTail
+        );
+
         partial void PexConstructorParameterless();
-        protected Vortex.Connector.IVortexObject @Parent
-        {
-            get;
-            set;
-        }
+
+        protected Vortex.Connector.IVortexObject @Parent { get; set; }
 
         public Vortex.Connector.IVortexObject GetParent()
         {
             return this.@Parent;
         }
 
-        private System.Collections.Generic.List<Vortex.Connector.IValueTag> @ValueTags
-        {
-            get;
-            set;
-        }
+        private System.Collections.Generic.List<Vortex.Connector.IValueTag> @ValueTags { get; set; }
 
         public System.Collections.Generic.IEnumerable<Vortex.Connector.IValueTag> GetValueTags()
         {
@@ -90,18 +74,12 @@ namespace TcOpen.Inxton.MqttTests
             this.@ValueTags.Add(valueTag);
         }
 
-        public Vortex.Connector.IConnector @Connector
-        {
-            get;
-            set;
-        }
+        public Vortex.Connector.IConnector @Connector { get; set; }
 
         public Vortex.Connector.IConnector GetConnector()
         {
             return this.@Connector;
         }
-
-
 
         public void FlushShadowToOnline()
         {
@@ -113,13 +91,7 @@ namespace TcOpen.Inxton.MqttTests
             this.Read();
         }
 
-
-
-        protected System.String @SymbolTail
-        {
-            get;
-            set;
-        }
+        protected System.String @SymbolTail { get; set; }
 
         public System.String GetSymbolTail()
         {
@@ -128,24 +100,17 @@ namespace TcOpen.Inxton.MqttTests
 
         public System.String AttributeName
         {
-            get
-            {
-                return _AttributeName;
-            }
-
-            set
-            {
-                _AttributeName = value;
-            }
+            get { return _AttributeName; }
+            set { _AttributeName = value; }
         }
 
-        private System.String _AttributeName
-        {
-            get;
-            set;
-        }
+        private System.String _AttributeName { get; set; }
 
-        public PlcParent(Vortex.Connector.IConnector connector, string readableTail, string symbolTail)
+        public PlcParent(
+            Vortex.Connector.IConnector connector,
+            string readableTail,
+            string symbolTail
+        )
         {
             this.@SymbolTail = symbolTail;
             this.@Connector = connector;
@@ -168,8 +133,4 @@ namespace TcOpen.Inxton.MqttTests
             PexConstructorParameterless();
         }
     }
-
-
-
-
 }

@@ -27,11 +27,11 @@ namespace TcoCore
                     case eTaskState.Ready:
                     case eTaskState.Requested:
                     case eTaskState.Done:
-                        return TcoColors.OnPrimary;                                            
+                        return TcoColors.OnPrimary;
                     case eTaskState.Busy:
                         return TcoColors.OnAccent;
                     case eTaskState.Error:
-                        return TcoColors.OnError;                                           
+                        return TcoColors.OnError;
                     default:
                         return Brushes.Transparent;
                 }
@@ -44,7 +44,12 @@ namespace TcoCore
             return 0;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }

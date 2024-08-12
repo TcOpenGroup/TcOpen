@@ -9,13 +9,18 @@ namespace TcoCore
     /// <summary>
     /// Will convert boolean values to Brush which represent whether signal is on, or off
     /// Using the MaterialDesignXaml toolkit http://materialdesigninxaml.net/  and it's color palette
-    /// 
+    ///
     /// Signal On is the Accent color from the palette, signal off si Dark color.
     /// https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/blob/master/MainDemo.Wpf/Palette.xaml
     /// </summary>
     public class SignalToBrushConverter : BaseConverter
     {
-        public override object ToConvert(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object ToConvert(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             try
             {

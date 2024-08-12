@@ -12,11 +12,10 @@ namespace TcOpen.Inxton.Local.Security.Wpf
         {
             //if (! DesignerProperties.GetIsInDesignMode(this))
             //{
-                this.DataContext = new UserManagementViewModel();
+            this.DataContext = new UserManagementViewModel();
             //}
 
             InitializeComponent();
         }
- 
     }
 }

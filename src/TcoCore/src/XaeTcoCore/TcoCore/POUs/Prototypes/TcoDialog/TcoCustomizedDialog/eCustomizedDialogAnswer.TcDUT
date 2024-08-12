@@ -3,17 +3,15 @@
   <DUT Name="eCustomizedDialogAnswer" Id="{d8ccb112-c774-059b-10fc-addce03e14ac}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE
-    eCustomizedDialogAnswer :
-    (
-        NoAnswer := 0,
-        Option1 := 10,
-        Option2 := 20,
-        Option3 := 30,
-        Option4 := 40,
-		Invoked := 50
-    );
-END_TYPE
-]]></Declaration>
+TYPE eCustomizedDialogAnswer :
+(
+    NoAnswer := 0,
+    Option1 := 10,
+    Option2 := 20,
+    Option3 := 30,
+    Option4 := 40,
+    Invoked := 50
+);
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -1,16 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <DUT Name="TcoSmartFunctionKitConfig_v_4_x_x" Id="{e14a5d54-2aa1-4e00-8fb0-64bc9475e2ad}">
-    <Declaration><![CDATA[TYPE
-    TcoSmartFunctionKitConfig_v_4_x_x :
-    STRUCT
-        DataFormat : eTcoDataFormat := TcoUtilities.eTcoDataFormat.BigEndian;
-        InfoTime : TIME := T#2S;
-        ErrorTime : TIME := T#5S;
-		IpAddress : STRING;
-		CurveExportLocation : STRING;
-    END_STRUCT
-END_TYPE
-]]></Declaration>
+    <Declaration><![CDATA[TYPE TcoSmartFunctionKitConfig_v_4_x_x :
+STRUCT
+    DataFormat : eTcoDataFormat := TcoUtilities.eTcoDataFormat.BigEndian;
+    InfoTime : TIME := T#2S;
+    ErrorTime : TIME := T#5S;
+    IpAddress : STRING;
+    CurveExportLocation : STRING;
+END_STRUCT
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

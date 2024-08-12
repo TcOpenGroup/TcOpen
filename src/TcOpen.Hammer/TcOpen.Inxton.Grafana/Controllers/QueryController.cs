@@ -1,13 +1,13 @@
-﻿using TcOpenHammer.Grafana.API.Transformation;
-using Grafana.Backend.Model;
-using Grafana.Backend.Queries;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Grafana.Backend.Model;
+using Grafana.Backend.Queries;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using TcOpenHammer.Grafana.API.Transformation;
 
 namespace TcOpenHammer.Grafana.API.Controllers
 {
@@ -37,7 +37,9 @@ namespace TcOpenHammer.Grafana.API.Controllers
             if (string.IsNullOrEmpty(queryName))
             {
                 _logger.LogWarning("Query name is empty");
-                return BadRequest("You have to specify the name of the query - don't leave at \"select metric\" ");
+                return BadRequest(
+                    "You have to specify the name of the query - don't leave at \"select metric\" "
+                );
             }
 
             try
@@ -45,7 +47,9 @@ namespace TcOpenHammer.Grafana.API.Controllers
                 var sw = new Stopwatch();
                 _logger.LogInformation($"Executed {queryName}");
                 sw.Start();
-                var result = GrafanResult(await Task.Run(() => queryService.ExecuteQueries(request)));
+                var result = GrafanResult(
+                    await Task.Run(() => queryService.ExecuteQueries(request))
+                );
                 sw.Stop();
                 _logger.LogInformation($"OK [{sw.ElapsedMilliseconds} ms] \t {queryName}");
                 return result;
@@ -57,11 +61,10 @@ namespace TcOpenHammer.Grafana.API.Controllers
             }
         }
 
-        private static IActionResult GrafanResult(IEnumerable<ITable> table)
-            => new JsonResult(new List<GrafanaResponse>(ResponseFromTables(table)));
+        private static IActionResult GrafanResult(IEnumerable<ITable> table) =>
+            new JsonResult(new List<GrafanaResponse>(ResponseFromTables(table)));
 
-        private static IEnumerable<GrafanaResponse> ResponseFromTables(IEnumerable<ITable> table)
-            => table.Select(t => new GrafanaResponse(t));
-
+        private static IEnumerable<GrafanaResponse> ResponseFromTables(IEnumerable<ITable> table) =>
+            table.Select(t => new GrafanaResponse(t));
     }
 }

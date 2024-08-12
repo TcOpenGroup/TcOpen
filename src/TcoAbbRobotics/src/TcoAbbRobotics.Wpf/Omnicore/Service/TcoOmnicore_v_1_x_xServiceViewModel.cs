@@ -9,20 +9,14 @@ using System.Windows;
 using Vortex.Connector;
 using Vortex.Presentation.Wpf;
 
-
 namespace TcoAbbRobotics
 {
-    public class TcoOmnicore_v_1_x_xServiceViewModel : TcoAbbRoboticsBaseServiceViewModel<TcoOmnicore_v_1_x_x>
+    public class TcoOmnicore_v_1_x_xServiceViewModel
+        : TcoAbbRoboticsBaseServiceViewModel<TcoOmnicore_v_1_x_x>
     {
-
-        public TcoOmnicore_v_1_x_xServiceViewModel():base()
-        {
-           
-
-        }
-      
+        public TcoOmnicore_v_1_x_xServiceViewModel()
+            : base() { }
     }
 
-    public class TcoOmnicore_v_1_x_xViewModel : TcoOmnicore_v_1_x_xServiceViewModel
-    { }
+    public class TcoOmnicore_v_1_x_xViewModel : TcoOmnicore_v_1_x_xServiceViewModel { }
 }

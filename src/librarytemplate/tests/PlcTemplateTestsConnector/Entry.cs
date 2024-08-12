@@ -11,7 +11,7 @@ namespace PlcTemplateTests
     {
         const string AmdId = "172.20.10.2.1.1";
 
-        public static PlcTemplateTestsTwinController PlcTemplateTests 
-            = new PlcTemplateTestsTwinController(Tc3ConnectorAdapter.Create(AmdId, 852, true));
+        public static PlcTemplateTestsTwinController PlcTemplateTests =
+            new PlcTemplateTestsTwinController(Tc3ConnectorAdapter.Create(AmdId, 852, true));
     }
 }

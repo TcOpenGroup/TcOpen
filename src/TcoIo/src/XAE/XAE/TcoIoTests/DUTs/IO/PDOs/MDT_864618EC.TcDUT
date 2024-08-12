@@ -8,12 +8,11 @@
 {attribute addProperty Size "6"}
 TYPE MDT_864618EC EXTENDS TcoIo.OutputBase_10CEE7DE :
 STRUCT
-	{attribute addProperty Name "Master_control_word"}
-	Master_control_word AT %Q* : UINT;
-	{attribute addProperty Name "Position_command_value"}
-	Position_command_value AT %Q* : DINT;
+    {attribute addProperty Name "Master_control_word"}
+    Master_control_word AT %Q* : UINT;
+    {attribute addProperty Name "Position_command_value"}
+    Position_command_value AT %Q* : DINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

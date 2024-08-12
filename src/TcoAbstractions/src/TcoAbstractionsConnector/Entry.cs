@@ -11,7 +11,7 @@ namespace TcoAbstractions
     {
         const string AmdId = "172.20.10.2.1.1";
 
-        public static TcoAbstractions.TcoAbstractionsTwinController TcoAbstractionsPlc 
-            = new TcoAbstractionsTwinController(Tc3ConnectorAdapter.Create(AmdId, 851, true));
+        public static TcoAbstractions.TcoAbstractionsTwinController TcoAbstractionsPlc =
+            new TcoAbstractionsTwinController(Tc3ConnectorAdapter.Create(AmdId, 851, true));
     }
 }

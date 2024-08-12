@@ -15,23 +15,21 @@
             _logger = configuration.CreateLogger();
         }
 
-
         /// <summary>
         /// Creates new instance of Serilog logger with default configuration:
         /// Write logs to Console (ConsoleSink)
         /// </summary>
-        public SerilogAdapter(Serilog.Events.LogEventLevel minLevel = Serilog.Events.LogEventLevel.Information)
+        public SerilogAdapter(
+            Serilog.Events.LogEventLevel minLevel = Serilog.Events.LogEventLevel.Information
+        )
         {
-            _logger = new LoggerConfiguration( )
-                                    .WriteTo
-                                        .Console(restrictedToMinimumLevel: minLevel)                                   
-                                    .Enrich
-                                        .FromLogContext()
-                                    .CreateLogger();
+            _logger = new LoggerConfiguration()
+                .WriteTo.Console(restrictedToMinimumLevel: minLevel)
+                .Enrich.FromLogContext()
+                .CreateLogger();
         }
 
         private readonly Serilog.ILogger _logger;
-              
 
         public void Debug<T>(string stringTemplate, T payload = default)
         {
@@ -62,5 +60,5 @@
         {
             _logger.Fatal<T>(stringTemplate, payload);
         }
-    }    
+    }
 }

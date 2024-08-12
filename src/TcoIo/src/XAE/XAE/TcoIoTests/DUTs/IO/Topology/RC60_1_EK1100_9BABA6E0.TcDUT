@@ -9,40 +9,39 @@
 {attribute addProperty Name "RC60_1 (EK1100)"}
 TYPE RC60_1_EK1100_9BABA6E0 EXTENDS EK1100_1FC0878B :
 STRUCT
-	{attribute addProperty Name "RC60_A2 (EK1122)"}
-	{attribute addProperty PreviousPort "RC60_1 (EK1100) : B"}
-	{attribute addProperty SyncUnit "default"}
-	RC60_A2_EK1122 : RC60_A2_EK1122_620268C0;
-	{attribute addProperty Name "RC60_A3 (EK1122)"}
-	{attribute addProperty PreviousPort "RC60_A2 (EK1122) : C"}
-	{attribute addProperty SyncUnit "default"}
-	RC60_A3_EK1122 : RC60_A3_EK1122_0BEA55B5;
-	{attribute addProperty Name "RC60_A5 (EL1809)"}
-	{attribute addProperty PreviousPort "RC60_A3 (EK1122) : C"}
-	{attribute addProperty SyncUnit "C60"}
-	RC60_A5_EL1809 : EL1809_32157CFD;
-	{attribute addProperty Name "RC60_A6 (EL1809)"}
-	{attribute addProperty PreviousPort "RC60_A5 (EL1809) : B"}
-	{attribute addProperty SyncUnit "C60"}
-	RC60_A6_EL1809 : EL1809_32157CFD;
-	{attribute addProperty Name "RC60_A7 (EL2809)"}
-	{attribute addProperty PreviousPort "RC60_A6 (EL1809) : B"}
-	{attribute addProperty SyncUnit "C60"}
-	RC60_A7_EL2809 : EL2809_2B6483BD;
-	{attribute addProperty Name "RC60_A8 (EL2809)"}
-	{attribute addProperty PreviousPort "RC60_A7 (EL2809) : B"}
-	{attribute addProperty SyncUnit "C60"}
-	RC60_A8_EL2809 : EL2809_2B6483BD;
-	{attribute addProperty Name "RC60_A9 (EL2809)"}
-	{attribute addProperty PreviousPort "RC60_A8 (EL2809) : B"}
-	{attribute addProperty SyncUnit "C60"}
-	RC60_A9_EL2809 : EL2809_2B6483BD;
-	{attribute addProperty Name "RC60_1_EndTerminal (EL9010)"}
-	{attribute addProperty PreviousPort "RC60_A9 (EL2809) : B"}
-	{attribute addProperty SyncUnit "default"}
-	RC60_1_EndTerminal_EL9010 : EL9010_D29C2085;
+    {attribute addProperty Name "RC60_A2 (EK1122)"}
+    {attribute addProperty PreviousPort "RC60_1 (EK1100) : B"}
+    {attribute addProperty SyncUnit "default"}
+    RC60_A2_EK1122 : RC60_A2_EK1122_620268C0;
+    {attribute addProperty Name "RC60_A3 (EK1122)"}
+    {attribute addProperty PreviousPort "RC60_A2 (EK1122) : C"}
+    {attribute addProperty SyncUnit "default"}
+    RC60_A3_EK1122 : RC60_A3_EK1122_0BEA55B5;
+    {attribute addProperty Name "RC60_A5 (EL1809)"}
+    {attribute addProperty PreviousPort "RC60_A3 (EK1122) : C"}
+    {attribute addProperty SyncUnit "C60"}
+    RC60_A5_EL1809 : EL1809_32157CFD;
+    {attribute addProperty Name "RC60_A6 (EL1809)"}
+    {attribute addProperty PreviousPort "RC60_A5 (EL1809) : B"}
+    {attribute addProperty SyncUnit "C60"}
+    RC60_A6_EL1809 : EL1809_32157CFD;
+    {attribute addProperty Name "RC60_A7 (EL2809)"}
+    {attribute addProperty PreviousPort "RC60_A6 (EL1809) : B"}
+    {attribute addProperty SyncUnit "C60"}
+    RC60_A7_EL2809 : EL2809_2B6483BD;
+    {attribute addProperty Name "RC60_A8 (EL2809)"}
+    {attribute addProperty PreviousPort "RC60_A7 (EL2809) : B"}
+    {attribute addProperty SyncUnit "C60"}
+    RC60_A8_EL2809 : EL2809_2B6483BD;
+    {attribute addProperty Name "RC60_A9 (EL2809)"}
+    {attribute addProperty PreviousPort "RC60_A8 (EL2809) : B"}
+    {attribute addProperty SyncUnit "C60"}
+    RC60_A9_EL2809 : EL2809_2B6483BD;
+    {attribute addProperty Name "RC60_1_EndTerminal (EL9010)"}
+    {attribute addProperty PreviousPort "RC60_A9 (EL2809) : B"}
+    {attribute addProperty SyncUnit "default"}
+    RC60_1_EndTerminal_EL9010 : EL9010_D29C2085;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

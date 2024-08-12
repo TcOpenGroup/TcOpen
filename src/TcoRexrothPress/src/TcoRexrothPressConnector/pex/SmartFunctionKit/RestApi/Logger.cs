@@ -21,7 +21,6 @@ namespace TcoRexrothPressConnector.SmartfunctionKit.RestApi
             System.Diagnostics.Debug.WriteLine(s);
         }
 
-
         public void Log(TraceLevel level, string s)
         {
             System.Diagnostics.Debug.WriteLine(s);

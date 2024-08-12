@@ -3,87 +3,70 @@
   <POU Name="TcoElementsSandbox" Id="{c46022e7-7bf1-0c54-0deb-015ecc103f2a}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoElementsSandbox EXTENDS TcoCore.TcoContext
 VAR
-	{attribute addProperty Name "Digital input"}
-	_di : TcoElements.TcoDi(THIS^);
-	{attribute addProperty Name "Digital output"}
-	_do : TcoElements.TcoDo(THIS^);
-	_diSignal : BOOL;
-	_doSignal : BOOL;
-	
-	{attribute addProperty Name "Analogue input"}
-	_ai : TcoElements.TcoAi(THIS^);
-	
-	
-	{attribute addProperty Name "Analogue input Any"}
-	_aiAnyType : TcoElements.TcoAiAny(THIS^);
-	{attribute addProperty Name "Analogue output"}
-	_ao : TcoElements.TcoAo(THIS^);
-	_aiSignal : DINT;
-	_aoSignal : DINT;
-	
-	{attribute addProperty Name "Carousel"}
-	_carousel : TcoElements.TcoCarousel(THIS^);
-	codedPosition: WORD;
-	{attribute addProperty Name "Disable signal 1"}
-	_disableSignal1: BOOL;
-	{attribute addProperty Name "Disable signal 2"}
-	_disableSignal2: BOOL;
+    {attribute addProperty Name "Digital input"}
+    _di : TcoElements.TcoDi(THIS^);
+    {attribute addProperty Name "Digital output"}
+    _do : TcoElements.TcoDo(THIS^);
+    _diSignal : BOOL;
+    _doSignal : BOOL;
+    {attribute addProperty Name "Analogue input"}
+    _ai : TcoElements.TcoAi(THIS^);
+    {attribute addProperty Name "Analogue input Any"}
+    _aiAnyType : TcoElements.TcoAiAny(THIS^);
+    {attribute addProperty Name "Analogue output"}
+    _ao : TcoElements.TcoAo(THIS^);
+    _aiSignal : DINT;
+    _aoSignal : DINT;
+    {attribute addProperty Name "Carousel"}
+    _carousel : TcoElements.TcoCarousel(THIS^);
+    codedPosition : WORD;
+    {attribute addProperty Name "Disable signal 1"}
+    _disableSignal1 : BOOL;
+    {attribute addProperty Name "Disable signal 2"}
+    _disableSignal2 : BOOL;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Main" Id="{48365b4b-e057-0c37-2f7e-00090af8dacd}">
-      <Declaration><![CDATA[METHOD PROTECTED Main 
-
+      <Declaration><![CDATA[METHOD PROTECTED Main
 VAR
-	_signalInfo : TcoCore.TcoSignalInfo;
+    _signalInfo : TcoCore.TcoSignalInfo;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_di.Service();
 _do.Service();
 _di(inoSignal := IO.A1._1);
 _do(inoSignal := IO.A2._1);
-
 _Ai.Service();
 _aiAnyType.Service();
 _Ao.Service();
-
 _Ai(inoSignal := IO.A3._2);
 _signalInfo.GetSignalInfo(SIZEOF(IO.A3._1), ADR(IO.A3._1));
-_aiAnyType(inSignal := IO.A3._1,inSignalInfo:=_signalInfo);
-
+_aiAnyType(inSignal := IO.A3._1, inSignalInfo := _signalInfo);
 _Ao(inoSignal := IO.A4._1);
-
 _ai.Config.RawLow := 0;
 _ai.Config.RawHigh := 65536;
-
 _ai.Config.RealLow := 0.0;
 _ai.Config.RealHigh := 100.0;
+_carousel.Config.ErrorTime := T#10S;
+_carousel.Config.InfoTime := T#2S;
+_carousel.Config.Direction := eTcoCarouselDirection.Cw;
+_carousel.Config.NumberOfPositions := 8;
+_carousel.Config.Offset := 1;
 
-_carousel.Config.ErrorTime:=T#10S;
-_carousel.Config.InfoTime:=T#2S;
-_carousel.Config.Direction:=eTcoCarouselDirection.Cw;
-_carousel.Config.NumberOfPositions:=8;
-_carousel.Config.Offset:=1;
+_carousel(inoInPosition := IO.A1._1,
+    inoInPrecisePosition := IO.A1._2,
+    inoEnableTurn := IO.A2._1,
+    inoStartTurn := IO.A2._2,
+    inSafetyCondition := IO.A2._3,
+    inBasePositionNumber := codedPosition);
 
-_carousel(
-	inoInPosition:=IO.A1._1 , 
-	inoInPrecisePosition:=IO.A1._2 , 
-	inoEnableTurn:= IO.A2._1, 
-	inoStartTurn:= IO.A2._2, 
-	inSafetyCondition:=IO.A2._3 , 
-	inBasePositionNumber:=codedPosition );
-
-_carousel.Suspend(inoDisableCondition:= _disableSignal1 ,Invert:=FALSE); //this might be signal from Light Curtain (safety is inerupted)
-_carousel.Suspend(inoDisableCondition:=_disableSignal2 ,Invert:=TRUE);
-_carousel.Suspend(inoDisableCondition:=_disableSignal2 ,Invert:=TRUE);
-_carousel.SuspendExpression (inDisableCondition:=_disableSignal2 ,inMessage:='SOME BLOCKIKG ACTIVE');
-
-
-	
-_carousel.Service();
-
-]]></ST>
+_carousel.Suspend(inoDisableCondition := _disableSignal1, Invert := FALSE); //this might be signal from Light Curtain (safety is inerupted)
+_carousel.Suspend(inoDisableCondition := _disableSignal2, Invert := TRUE);
+_carousel.Suspend(inoDisableCondition := _disableSignal2, Invert := TRUE);
+_carousel.SuspendExpression(inDisableCondition := _disableSignal2, inMessage := 'SOME BLOCKIKG ACTIVE');
+_carousel.Service();]]></ST>
       </Implementation>
     </Method>
   </POU>

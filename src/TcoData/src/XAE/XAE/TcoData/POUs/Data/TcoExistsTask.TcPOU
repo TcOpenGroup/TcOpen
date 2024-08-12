@@ -3,7 +3,7 @@
   <POU Name="TcoExistsTask" Id="{ec29d82c-42e7-05da-1463-9c768d234341}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoExistsTask EXTENDS TcoDataTask
 VAR
-	_exists : BOOL;
+    _exists : BOOL;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[SUPER^();]]></ST>
@@ -13,8 +13,7 @@ END_VAR]]></Declaration>
 PROPERTY Exists : BOOL]]></Declaration>
       <Get Name="Get" Id="{376ffdd7-7453-0cd0-1692-fe1d9365ec51}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[Exists := _exists;]]></ST>
         </Implementation>

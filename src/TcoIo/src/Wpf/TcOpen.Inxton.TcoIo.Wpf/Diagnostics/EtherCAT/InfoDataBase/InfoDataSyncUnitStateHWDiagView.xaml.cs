@@ -8,13 +8,12 @@ using System.Windows.Data;
 using System.Windows.Markup;
 using System.Windows.Media;
 
-
 namespace TcoIo
 {
     /// <summary>
     /// Interaction logic for fbSampleComponentView.xaml
     /// </summary>
-    public partial class InfoDataSyncUnitStateHWDiagView : UserControl/*, INotifyPropertyChanged*/
+    public partial class InfoDataSyncUnitStateHWDiagView : UserControl /*, INotifyPropertyChanged*/
     {
         public InfoDataSyncUnitStateHWDiagView()
         {
@@ -194,10 +193,4 @@ namespace TcoIo
     //        return this;
     //    }
     //}
-
-
 }
-
-
-
-

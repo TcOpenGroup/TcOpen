@@ -11,7 +11,7 @@ namespace TcoUtilitiesTests
     {
         private static string AmdId = Environment.GetEnvironmentVariable("Tc3Target");
 
-        public static TcoUtilitiesTestsTwinController TcoUtilitiesTests 
-            = new TcoUtilitiesTestsTwinController(Tc3ConnectorAdapter.Create(AmdId, 852, true));
+        public static TcoUtilitiesTestsTwinController TcoUtilitiesTests =
+            new TcoUtilitiesTestsTwinController(Tc3ConnectorAdapter.Create(AmdId, 852, true));
     }
 }

@@ -3,34 +3,33 @@
   <DUT Name="SyncUnitState" Id="{f65c9979-9d1a-0362-0ba8-b91ebc60f323}">
     <Declaration><![CDATA[TYPE SyncUnitState :
 STRUCT
-	{attribute addProperty Name "At least one slave in 'INIT' state"}	
+    {attribute addProperty Name "At least one slave in 'INIT' state"}
     AtLeastOneSlaveInInitState : BOOL;
-	{attribute addProperty Name "At least one slave in 'PREOP' state"}	
+    {attribute addProperty Name "At least one slave in 'PREOP' state"}
     AtLeastOneSlaveInPreopState : BOOL;
-	{attribute addProperty Name "At least one slave in 'BOOT' state"}	
+    {attribute addProperty Name "At least one slave in 'BOOT' state"}
     AtLeastOneSlaveInBootState : BOOL;
-	{attribute addProperty Name "At least one slave in 'SAFEOP' state"}	
+    {attribute addProperty Name "At least one slave in 'SAFEOP' state"}
     AtLeastOneSlaveInSafeOpState : BOOL;
-	{attribute addProperty Name "At least one slave in 'OP' state"}	
+    {attribute addProperty Name "At least one slave in 'OP' state"}
     AtLeastOneSlaveInOpState : BOOL;
-	{attribute addProperty Name "At least one slave signals error"}	
+    {attribute addProperty Name "At least one slave signals error"}
     AtLeastOneSlaveSignalsError : BOOL;
-	{attribute addProperty Name "Invalid vendorId, productCode... read"}	
+    {attribute addProperty Name "Invalid vendorId, productCode... read"}
     InvalidVendoridOrProductcodeRead : BOOL;
-	{attribute addProperty Name "Initialization error occurred"}	
+    {attribute addProperty Name "Initialization error occurred"}
     InitializationErrorOccurred : BOOL;
-	{attribute addProperty Name "At least one slave disabled"}	
+    {attribute addProperty Name "At least one slave disabled"}
     AtLeastOneSlaveDisabled : BOOL;
-	{attribute addProperty Name "At least one slave not present"}	
+    {attribute addProperty Name "At least one slave not present"}
     AtLeastOneSlaveNotPresent : BOOL;
-	{attribute addProperty Name "At least one slave signals link error"}	
+    {attribute addProperty Name "At least one slave signals link error"}
     AtLeastOneSlaveSignalsLinkError : BOOL;
-	{attribute addProperty Name "At least one slave signals missing link"}	
+    {attribute addProperty Name "At least one slave signals missing link"}
     AtLeastOneSlaveSignalsMissingLink : BOOL;
-	{attribute addProperty Name "At least one slave signals unexpected link"}	
-    AtLeastOneSlaveSignalsUnexpectedLink : BOOL;	
+    {attribute addProperty Name "At least one slave signals unexpected link"}
+    AtLeastOneSlaveSignalsUnexpectedLink : BOOL;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

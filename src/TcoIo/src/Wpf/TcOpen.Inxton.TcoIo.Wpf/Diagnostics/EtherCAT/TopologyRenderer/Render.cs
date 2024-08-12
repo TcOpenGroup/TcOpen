@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using TcoIo.Topology;
 using System.Windows.Media;
-using System.Collections.ObjectModel;
+using TcoIo.Topology;
 
 namespace TcoIo
 {
@@ -19,12 +19,17 @@ namespace TcoIo
             TopologyObject firstTopologyObject = null;
             for (int i = 0; i <= maxrow; i++)
             {
-                GridLength RowHeight = new GridLength(DimsDef.masterHeightWithBorders, GridUnitType.Pixel);
-                hardwareGrid.RowDefinitions.Add(new RowDefinition() { Height = RowHeight});
+                GridLength RowHeight = new GridLength(
+                    DimsDef.masterHeightWithBorders,
+                    GridUnitType.Pixel
+                );
+                hardwareGrid.RowDefinitions.Add(new RowDefinition() { Height = RowHeight });
             }
             for (int i = 0; i <= maxcolumn; i++)
             {
-                hardwareGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
+                hardwareGrid.ColumnDefinitions.Add(
+                    new ColumnDefinition() { Width = GridLength.Auto }
+                );
             }
 
             foreach (TopologyObject topologyObject in topologyObjects)
@@ -35,15 +40,22 @@ namespace TcoIo
                 Grid.SetRow(hardware, topologyObject.Row);
                 gridRow = Math.Max(gridRow, topologyObject.Row);
                 gridColumn = Math.Max(gridColumn, topologyObject.Column);
-                firstTopologyObject = firstTopologyObject == null ? topologyObject : firstTopologyObject;
+                firstTopologyObject =
+                    firstTopologyObject == null ? topologyObject : firstTopologyObject;
             }
             if (!hardwareGrid.Children.Contains(wiringGrid))
             {
                 hardwareGrid.Children.Add(wiringGrid);
-                if (hardwareGrid.RowDefinitions.Count > 0 && hardwareGrid.ColumnDefinitions.Count > 0)
+                if (
+                    hardwareGrid.RowDefinitions.Count > 0
+                    && hardwareGrid.ColumnDefinitions.Count > 0
+                )
                 {
                     wiringGrid.SetValue(Grid.RowSpanProperty, hardwareGrid.RowDefinitions.Count);
-                    wiringGrid.SetValue(Grid.ColumnSpanProperty, hardwareGrid.ColumnDefinitions.Count);
+                    wiringGrid.SetValue(
+                        Grid.ColumnSpanProperty,
+                        hardwareGrid.ColumnDefinitions.Count
+                    );
                 }
             }
 
@@ -98,12 +110,14 @@ namespace TcoIo
             (grid.LayoutTransform as ScaleTransform).ScaleX = zoom;
             (grid.LayoutTransform as ScaleTransform).ScaleY = zoom;
 
-            RefreshButton.Click += RefreshButton_Click; ;
+            RefreshButton.Click += RefreshButton_Click;
+            ;
 
             //hardwareGrid.Children.Add(RefreshButton);
             ////////////////////////////////////////////
             return hardwareGrid;
         }
+
         ////////////////////////////////////////////
         ///Temporary event just for debugging
         ////////////////////////////////////////////
@@ -122,6 +136,5 @@ namespace TcoIo
             RenderCompleteTopology();
         }
         ////////////////////////////////////////////
-
     }
 }

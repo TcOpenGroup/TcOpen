@@ -14,8 +14,7 @@ namespace TcoElements
     /// <summary>
     /// Interaction logic for TcoCarouselServiceView.xaml
     /// </summary>
-    public partial class TcoCarouselView
-        : UserControl
+    public partial class TcoCarouselView : UserControl
     {
         public TcoCarouselView()
         {
@@ -33,14 +32,13 @@ namespace TcoElements
 
             if (e.Property == DataContextProperty)
             {
-                this.DataContext = this.DataContext.ViewModelizeDataContext<GenericViewModel, TcoCarousel>();
+                this.DataContext = this.DataContext.ViewModelizeDataContext<
+                    GenericViewModel,
+                    TcoCarousel
+                >();
             }
         }
     }
-
-
-
- 
 
     public class TableIsInPositionConverter : MarkupExtension, IValueConverter
     {
@@ -50,7 +48,12 @@ namespace TcoElements
             return turnAllowed ? TcoColors.Notification : TcoColors.Warning;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }
@@ -61,13 +64,10 @@ namespace TcoElements
         }
     }
 
-  
-       
     public class CarouselTurnSignConverter : MarkupExtension, IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-
             var rotationDirection = (eTcoCarouselDirection)((short)value);
 
             switch (rotationDirection)
@@ -81,7 +81,12 @@ namespace TcoElements
             }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }

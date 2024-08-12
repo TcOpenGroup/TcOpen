@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net48;net5.0</TargetFrameworks>
@@ -7,8 +7,12 @@
 	  <UserSecretsId>e1f20d88-54cd-4e1c-a06a-6310136c3433</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\TcoInspectors\src\TcoInspectorsConnector\TcoInspectorsConnector.csproj" />
-    <ProjectReference Include="..\..\src\TcoCognexVisionConnector\TcoCognexVisionConnector.csproj" />
+    <ProjectReference
+      Include="..\..\..\TcoInspectors\src\TcoInspectorsConnector\TcoInspectorsConnector.csproj"
+    />
+    <ProjectReference
+      Include="..\..\src\TcoCognexVisionConnector\TcoCognexVisionConnector.csproj"
+    />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Localizations.Designer.cs">

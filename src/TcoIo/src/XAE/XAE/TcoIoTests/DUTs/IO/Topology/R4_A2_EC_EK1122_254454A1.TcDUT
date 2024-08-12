@@ -9,16 +9,15 @@
 {attribute addProperty Name "R4_A2_EC (EK1122)"}
 TYPE R4_A2_EC_EK1122_254454A1 EXTENDS EK1122_1FC0878B :
 STRUCT
-	{attribute addProperty Name "R4_FESTO (CMMP-AS V4p0 CiA402)"}
-	{attribute addProperty PreviousPort "R4_A2_EC (EK1122) : D"}
-	{attribute addProperty SyncUnit "default"}
-	R4_FESTO_CMMP_AS_V4p0_CiA402 : CMMP_93B92D52;
-	{attribute addProperty Name "RH (EK1100)"}
-	{attribute addProperty PreviousPort "R4_A2_EC (EK1122) : B"}
-	{attribute addProperty SyncUnit "default"}
-	RH_EK1100 : RH_EK1100_A5940DFE;
+    {attribute addProperty Name "R4_FESTO (CMMP-AS V4p0 CiA402)"}
+    {attribute addProperty PreviousPort "R4_A2_EC (EK1122) : D"}
+    {attribute addProperty SyncUnit "default"}
+    R4_FESTO_CMMP_AS_V4p0_CiA402 : CMMP_93B92D52;
+    {attribute addProperty Name "RH (EK1100)"}
+    {attribute addProperty PreviousPort "R4_A2_EC (EK1122) : B"}
+    {attribute addProperty SyncUnit "default"}
+    RH_EK1100 : RH_EK1100_A5940DFE;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

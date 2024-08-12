@@ -10,7 +10,9 @@ namespace TcOpen.Inxton.Wpf
 {
     public static class ViewModelizer
     {
-        public static object ViewModelizeDataContext<VM, M>(this object currentContext) where VM : RenderableViewModel, new() where M : IVortexObject
+        public static object ViewModelizeDataContext<VM, M>(this object currentContext)
+            where VM : RenderableViewModel, new()
+            where M : IVortexObject
         {
             if (!(currentContext is VM))
             {

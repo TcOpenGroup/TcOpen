@@ -2,14 +2,13 @@
 <TcPlcObject Version="1.1.0.1">
   <POU Name="TcoDialogBase" Id="{b361351b-637d-0485-12e4-25b8c4bb42be}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Base block for interactive dialogs.		    			 					
- 		</summary>					
-	</docu>	
+    <docu>
+        <summary>
+            Base block for interactive dialogs.
+         </summary>
+    </docu>
 ~*)
-FUNCTION_BLOCK ABSTRACT TcoDialogBase EXTENDS TcoRemoteTask
-]]></Declaration>
+FUNCTION_BLOCK ABSTRACT TcoDialogBase EXTENDS TcoRemoteTask]]></Declaration>
     <Implementation>
       <ST><![CDATA[SUPER^();]]></ST>
     </Implementation>
@@ -17,17 +16,16 @@ FUNCTION_BLOCK ABSTRACT TcoDialogBase EXTENDS TcoRemoteTask
       <Declaration><![CDATA[{attribute 'hide'}
 METHOD PUBLIC FB_init : BOOL
 VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	ParentObject : ITcoObject;
-END_VAR
-]]></Declaration>
+    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+    ParentObject : ITcoObject;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStart" Id="{05c1ce12-e48b-0c1d-3ab0-55659aef6070}">
-      <Declaration><![CDATA[METHOD PROTECTED OnStart ]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED OnStart]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.OnStart();]]></ST>
       </Implementation>

@@ -9,24 +9,23 @@
 {attribute addProperty Name "R8_A8 (EK1122)"}
 TYPE R8_A8_EK1122_2533F93A EXTENDS EK1122_1FC0878B :
 STRUCT
-	{attribute addProperty Name "RC10_1 (EK1100)"}
-	{attribute addProperty PreviousPort "R8_A8 (EK1122) : D"}
-	{attribute addProperty SyncUnit "default"}
-	RC10_1_EK1100 : RC10_1_EK1100_40BAEC0F;
-	{attribute addProperty Name "RC10_2 (EK1100)"}
-	{attribute addProperty PreviousPort "RC10_1 (EK1100) : C"}
-	{attribute addProperty SyncUnit "default"}
-	RC10_2_EK1100 : RC10_2_EK1100_27865421;
-	{attribute addProperty Name "RC20_1 (EK1100)"}
-	{attribute addProperty PreviousPort "R8_A8 (EK1122) : B"}
-	{attribute addProperty SyncUnit "default"}
-	RC20_1_EK1100 : RC20_1_EK1100_F221D0A9;
-	{attribute addProperty Name "RC20_2 (EK1100)"}
-	{attribute addProperty PreviousPort "RC20_1 (EK1100) : C"}
-	{attribute addProperty SyncUnit "default"}
-	RC20_2_EK1100 : RC20_2_EK1100_5EABB509;
+    {attribute addProperty Name "RC10_1 (EK1100)"}
+    {attribute addProperty PreviousPort "R8_A8 (EK1122) : D"}
+    {attribute addProperty SyncUnit "default"}
+    RC10_1_EK1100 : RC10_1_EK1100_40BAEC0F;
+    {attribute addProperty Name "RC10_2 (EK1100)"}
+    {attribute addProperty PreviousPort "RC10_1 (EK1100) : C"}
+    {attribute addProperty SyncUnit "default"}
+    RC10_2_EK1100 : RC10_2_EK1100_27865421;
+    {attribute addProperty Name "RC20_1 (EK1100)"}
+    {attribute addProperty PreviousPort "R8_A8 (EK1122) : B"}
+    {attribute addProperty SyncUnit "default"}
+    RC20_1_EK1100 : RC20_1_EK1100_F221D0A9;
+    {attribute addProperty Name "RC20_2 (EK1100)"}
+    {attribute addProperty PreviousPort "RC20_1 (EK1100) : C"}
+    {attribute addProperty SyncUnit "default"}
+    RC20_2_EK1100 : RC20_2_EK1100_5EABB509;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -14,9 +14,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Application\TcOpen.Inxton.App.csproj" />
-    <ProjectReference Include="..\..\..\TcoCore\src\TcoCoreConnector\TcoCoreConnector.csproj" />
-    <ProjectReference Include="..\..\..\TcoCore\tests\TcoCoreTestsConnector\TcoCoreTestsConnector.csproj" />
+    <ProjectReference
+      Include="..\..\src\Application\TcOpen.Inxton.App.csproj"
+    />
+    <ProjectReference
+      Include="..\..\..\TcoCore\src\TcoCoreConnector\TcoCoreConnector.csproj"
+    />
+    <ProjectReference
+      Include="..\..\..\TcoCore\tests\TcoCoreTestsConnector\TcoCoreTestsConnector.csproj"
+    />
   </ItemGroup>
 
 </Project>

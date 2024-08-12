@@ -9,28 +9,27 @@
 {attribute addProperty Name "Term 9 (EK1100)"}
 TYPE Term_9_EK1100_91BFEC25 EXTENDS EK1100_1FC0878B :
 STRUCT
-	{attribute addProperty Name "Term 10 (EK1122)"}
-	{attribute addProperty PreviousPort "Term 9 (EK1100) : B"}
-	{attribute addProperty SyncUnit "default"}
-	Term_10_EK1122 : Term_10_EK1122_3D069EC1;
-	{attribute addProperty Name "Term 34 (EL3403)"}
-	{attribute addProperty PreviousPort "Term 10 (EK1122) : C"}
-	{attribute addProperty SyncUnit "Row_0"}
-	Term_34_EL3403 : EL3403_812980A6;
-	{attribute addProperty Name "Term 35 (EL6001)"}
-	{attribute addProperty PreviousPort "Term 34 (EL3403) : B"}
-	{attribute addProperty SyncUnit "Row_0"}
-	Term_35_EL6001 : EL6001_0DE01E7E;
-	{attribute addProperty Name "Term 36 (EL3024)"}
-	{attribute addProperty PreviousPort "Term 35 (EL6001) : B"}
-	{attribute addProperty SyncUnit "Row_0"}
-	Term_36_EL3024 : EL3024_C6E76B5A;
-	{attribute addProperty Name "Term 33 (EL9011)"}
-	{attribute addProperty PreviousPort "Term 36 (EL3024) : B"}
-	{attribute addProperty SyncUnit "default"}
-	Term_33_EL9011 : EL9011_D65D3D32;
+    {attribute addProperty Name "Term 10 (EK1122)"}
+    {attribute addProperty PreviousPort "Term 9 (EK1100) : B"}
+    {attribute addProperty SyncUnit "default"}
+    Term_10_EK1122 : Term_10_EK1122_3D069EC1;
+    {attribute addProperty Name "Term 34 (EL3403)"}
+    {attribute addProperty PreviousPort "Term 10 (EK1122) : C"}
+    {attribute addProperty SyncUnit "Row_0"}
+    Term_34_EL3403 : EL3403_812980A6;
+    {attribute addProperty Name "Term 35 (EL6001)"}
+    {attribute addProperty PreviousPort "Term 34 (EL3403) : B"}
+    {attribute addProperty SyncUnit "Row_0"}
+    Term_35_EL6001 : EL6001_0DE01E7E;
+    {attribute addProperty Name "Term 36 (EL3024)"}
+    {attribute addProperty PreviousPort "Term 35 (EL6001) : B"}
+    {attribute addProperty SyncUnit "Row_0"}
+    Term_36_EL3024 : EL3024_C6E76B5A;
+    {attribute addProperty Name "Term 33 (EL9011)"}
+    {attribute addProperty PreviousPort "Term 36 (EL3024) : B"}
+    {attribute addProperty SyncUnit "default"}
+    Term_33_EL9011 : EL9011_D65D3D32;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

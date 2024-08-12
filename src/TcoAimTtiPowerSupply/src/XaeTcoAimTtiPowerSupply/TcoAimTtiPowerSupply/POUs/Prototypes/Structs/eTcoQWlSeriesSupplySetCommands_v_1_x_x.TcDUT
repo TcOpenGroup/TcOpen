@@ -3,51 +3,48 @@
   <DUT Name="eTcoQWlSeriesSupplySetCommands_v_1_x_x" Id="{ac49b7f2-e50b-03fe-0420-7109eaf26b7f}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE
-    eTcoQWlSeriesSupplySetCommands_v_1_x_x :
-    (
-        //Instrument Specific Commands
-        V := 1,
-        V_Verif := 2,
-        OVP := 3,
-        I := 4,
-        OCP := 5,
-        RANGE := 6,
-        DELTAV := 7,
-        DELTAI := 8,
-        INCV := 9,
-        INCV_Verif := 10,
-        DECV := 11,
-        DECV_Verif := 12,
-        INCI := 13,
-        DECI := 14,
-        OP := 15,
-        OPALL := 16,
-        SENSE := 17,
-        MODE := 18,
-        TRIPRST := 19,
-        LSE := 21,
-        SAV := 22,
-        RCL := 23,
-        //System and Status Commands
-        RST := 24,
-        CLS := 25,
-        ESE := 26,
-        OPC := 27,
-        PRE := 28,
-        SRE := 29,
-        WAI := 30,
-        //Interface Management Commands
-        IFLOCK := 31,
-        IFUNLOCK := 32,
-        LOCAL := 33,
-        NETCONFIG := 34,
-        IPADDR := 35,
-        NETMASK := 36,
-		TRG:=37 
-
-    );
-END_TYPE
-]]></Declaration>
+TYPE eTcoQWlSeriesSupplySetCommands_v_1_x_x :
+(
+    //Instrument Specific Commands
+    V := 1,
+    V_Verif := 2,
+    OVP := 3,
+    I := 4,
+    OCP := 5,
+    RANGE := 6,
+    DELTAV := 7,
+    DELTAI := 8,
+    INCV := 9,
+    INCV_Verif := 10,
+    DECV := 11,
+    DECV_Verif := 12,
+    INCI := 13,
+    DECI := 14,
+    OP := 15,
+    OPALL := 16,
+    SENSE := 17,
+    MODE := 18,
+    TRIPRST := 19,
+    LSE := 21,
+    SAV := 22,
+    RCL := 23,
+    //System and Status Commands
+    RST := 24,
+    CLS := 25,
+    ESE := 26,
+    OPC := 27,
+    PRE := 28,
+    SRE := 29,
+    WAI := 30,
+    //Interface Management Commands
+    IFLOCK := 31,
+    IFUNLOCK := 32,
+    LOCAL := 33,
+    NETCONFIG := 34,
+    IPADDR := 35,
+    NETMASK := 36,
+    TRG := 37
+);
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

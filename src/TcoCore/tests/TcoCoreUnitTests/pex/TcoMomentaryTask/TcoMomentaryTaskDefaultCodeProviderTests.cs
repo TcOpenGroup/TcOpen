@@ -1,10 +1,10 @@
-﻿using NUnit.Framework;
-using TcoCore.Swift;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NUnit.Framework;
+using TcoCore.Swift;
 
 namespace TcoCore.Swift.Tests
 {
@@ -14,7 +14,9 @@ namespace TcoCore.Swift.Tests
         [Test()]
         public void task_on_test()
         {
-            var momentaryTask = new TcoMomentaryTaskDefaultCodeProvider(new TcoMomentaryTask(new MockRootObject(), "MomentaryTask", "_momentaryTask"));
+            var momentaryTask = new TcoMomentaryTaskDefaultCodeProvider(
+                new TcoMomentaryTask(new MockRootObject(), "MomentaryTask", "_momentaryTask")
+            );
             var expected = "_momentaryTask.On()";
             var actual = momentaryTask.Code(true);
 
@@ -24,7 +26,9 @@ namespace TcoCore.Swift.Tests
         [Test()]
         public void task_off_test()
         {
-            var momentaryTask = new TcoMomentaryTaskDefaultCodeProvider(new TcoMomentaryTask(new MockRootObject(), "MomentaryTask", "_momentaryTask"));
+            var momentaryTask = new TcoMomentaryTaskDefaultCodeProvider(
+                new TcoMomentaryTask(new MockRootObject(), "MomentaryTask", "_momentaryTask")
+            );
             var expected = "_momentaryTask.Off()";
             var actual = momentaryTask.Code(false);
 

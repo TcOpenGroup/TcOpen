@@ -10,8 +10,6 @@ using Vortex.Connector.ValueTypes;
 
 namespace TcoIo
 {
-
-
     public partial class EtcMasterBase_62654B43TopologyDeviceView : UserControl
     {
         private IVortexObject device;
@@ -22,11 +20,19 @@ namespace TcoIo
             DataContextChanged += EtcMasterBase_62654B43TopologyDeviceView_DataContextChanged;
         }
 
-        private void EtcMasterBase_62654B43TopologyDeviceView_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void EtcMasterBase_62654B43TopologyDeviceView_DataContextChanged(
+            object sender,
+            DependencyPropertyChangedEventArgs e
+        )
         {
-            if (this.DataContext != null && (this.DataContext as EtcMasterBase_62654B43TopologyDeviceViewModel) != null)
+            if (
+                this.DataContext != null
+                && (this.DataContext as EtcMasterBase_62654B43TopologyDeviceViewModel) != null
+            )
             {
-                device = (this.DataContext as EtcMasterBase_62654B43TopologyDeviceViewModel).Device as IVortexObject;
+                device =
+                    (this.DataContext as EtcMasterBase_62654B43TopologyDeviceViewModel).Device
+                    as IVortexObject;
                 SubscribeToSyncUnits(device);
                 UpdateSyncUnitsState(device);
             }
@@ -36,24 +42,40 @@ namespace TcoIo
         {
             if (device != null)
             {
-                IVortexElement su = device.GetKids().Where(i => i.AttributeName.Contains("SyncUnits")).FirstOrDefault() as IVortexElement;
-                if(su != null)
+                IVortexElement su =
+                    device
+                        .GetKids()
+                        .Where(i => i.AttributeName.Contains("SyncUnits"))
+                        .FirstOrDefault() as IVortexElement;
+                if (su != null)
                 {
-                    IEnumerable<IVortexElement> SyncUnits = (su as IVortexObject).GetKids() as IEnumerable<IVortexElement>;
-                    foreach (IVortexElement SyncUnit  in SyncUnits)
+                    IEnumerable<IVortexElement> SyncUnits =
+                        (su as IVortexObject).GetKids() as IEnumerable<IVortexElement>;
+                    foreach (IVortexElement SyncUnit in SyncUnits)
                     {
-                        IEnumerable<IVortexElement> SyncUnitTasks = (SyncUnit as IVortexObject).GetKids() as IEnumerable<IVortexElement>;
+                        IEnumerable<IVortexElement> SyncUnitTasks =
+                            (SyncUnit as IVortexObject).GetKids() as IEnumerable<IVortexElement>;
                         foreach (IVortexElement SyncUnitTask in SyncUnitTasks)
                         {
-                            IVortexObject InfoData = (SyncUnitTask as IVortexObject).GetKids().Where(i => i.AttributeName.Contains("InfoData")).FirstOrDefault() as IVortexObject;
-                            if(InfoData != null)
+                            IVortexObject InfoData =
+                                (SyncUnitTask as IVortexObject)
+                                    .GetKids()
+                                    .Where(i => i.AttributeName.Contains("InfoData"))
+                                    .FirstOrDefault() as IVortexObject;
+                            if (InfoData != null)
                             {
-                                IVortexElement State = InfoData.GetKids().Where(i => i.AttributeName.Contains("State")).FirstOrDefault() as IVortexElement;
+                                IVortexElement State =
+                                    InfoData
+                                        .GetKids()
+                                        .Where(i => i.AttributeName.Contains("State"))
+                                        .FirstOrDefault() as IVortexElement;
 
                                 if (State != null)
                                 {
                                     IValueTag StateTag = State as IValueTag;
-                                    StateTag.Subscribe((sender, arg) => UpdateSyncUnitsState(device));
+                                    StateTag.Subscribe(
+                                        (sender, arg) => UpdateSyncUnitsState(device)
+                                    );
                                 }
                             }
                         }
@@ -67,41 +89,70 @@ namespace TcoIo
             bool someSyncUnitHasError = SyncUnitsStateCalc(device);
             TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() =>
             {
-                Brush DeviceBackgroundColor = new SyncUnitErrorToBackground().Convert(someSyncUnitHasError, null, null, null) as Brush;
-                Brush DeviceForegroundColor = new SyncUnitErrorToForeground().Convert(someSyncUnitHasError, null, null, null) as Brush;
+                Brush DeviceBackgroundColor =
+                    new SyncUnitErrorToBackground().Convert(someSyncUnitHasError, null, null, null)
+                    as Brush;
+                Brush DeviceForegroundColor =
+                    new SyncUnitErrorToForeground().Convert(someSyncUnitHasError, null, null, null)
+                    as Brush;
                 border.Background = DeviceBackgroundColor;
                 userControl.Foreground = DeviceForegroundColor;
             });
         }
-
 
         public bool SyncUnitsStateCalc(IVortexObject vortexObject)
         {
             bool noSyncUnitHasError = false;
             if (vortexObject != null)
             {
-                IVortexElement su = vortexObject.GetKids().Where(i => i.AttributeName.Contains("SyncUnits")).FirstOrDefault() as IVortexElement;
+                IVortexElement su =
+                    vortexObject
+                        .GetKids()
+                        .Where(i => i.AttributeName.Contains("SyncUnits"))
+                        .FirstOrDefault() as IVortexElement;
                 if (su != null)
                 {
-                    IEnumerable<IVortexElement> SyncUnits = (su as IVortexObject).GetKids() as IEnumerable<IVortexElement>;
+                    IEnumerable<IVortexElement> SyncUnits =
+                        (su as IVortexObject).GetKids() as IEnumerable<IVortexElement>;
                     foreach (IVortexElement SyncUnit in SyncUnits)
                     {
-                        IEnumerable<IVortexElement> SyncUnitTasks = (SyncUnit as IVortexObject).GetKids() as IEnumerable<IVortexElement>;
+                        IEnumerable<IVortexElement> SyncUnitTasks =
+                            (SyncUnit as IVortexObject).GetKids() as IEnumerable<IVortexElement>;
                         foreach (IVortexElement SyncUnitTask in SyncUnitTasks)
                         {
-                            IVortexObject InfoData = (SyncUnitTask as IVortexObject).GetKids().Where(i => i.AttributeName.Contains("InfoData")).FirstOrDefault() as IVortexObject;
+                            IVortexObject InfoData =
+                                (SyncUnitTask as IVortexObject)
+                                    .GetKids()
+                                    .Where(i => i.AttributeName.Contains("InfoData"))
+                                    .FirstOrDefault() as IVortexObject;
                             if (InfoData != null)
                             {
-                                IVortexElement ObjectId = InfoData.GetKids().Where(i => i.AttributeName.Contains("ObjectId")).FirstOrDefault() as IVortexElement;
-                                IVortexElement State = InfoData.GetKids().Where(i => i.AttributeName.Contains("State")).FirstOrDefault() as IVortexElement;
-                                IVortexElement SlaveCount = InfoData.GetKids().Where(i => i.AttributeName.Contains("SlaveCount")).FirstOrDefault() as IVortexElement;
+                                IVortexElement ObjectId =
+                                    InfoData
+                                        .GetKids()
+                                        .Where(i => i.AttributeName.Contains("ObjectId"))
+                                        .FirstOrDefault() as IVortexElement;
+                                IVortexElement State =
+                                    InfoData
+                                        .GetKids()
+                                        .Where(i => i.AttributeName.Contains("State"))
+                                        .FirstOrDefault() as IVortexElement;
+                                IVortexElement SlaveCount =
+                                    InfoData
+                                        .GetKids()
+                                        .Where(i => i.AttributeName.Contains("SlaveCount"))
+                                        .FirstOrDefault() as IVortexElement;
 
                                 if (ObjectId != null && State != null && SlaveCount != null)
                                 {
                                     OnlinerDWord ObjectIdTag = ObjectId as OnlinerDWord;
                                     OnlinerUInt StateTag = State as OnlinerUInt;
                                     OnlinerUInt SlaveCountTag = SlaveCount as OnlinerUInt;
-                                    if(ObjectIdTag.Synchron != 0 && SlaveCountTag.Synchron > 0 && StateTag.Synchron != 8)
+                                    if (
+                                        ObjectIdTag.Synchron != 0
+                                        && SlaveCountTag.Synchron > 0
+                                        && StateTag.Synchron != 8
+                                    )
                                     {
                                         noSyncUnitHasError = true;
                                         break;
@@ -109,7 +160,8 @@ namespace TcoIo
                                 }
                             }
                         }
-                        if (noSyncUnitHasError) break;
+                        if (noSyncUnitHasError)
+                            break;
                     }
                 }
             }

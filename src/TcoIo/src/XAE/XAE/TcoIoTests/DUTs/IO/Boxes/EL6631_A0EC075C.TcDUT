@@ -11,10 +11,9 @@
 {attribute addProperty Size "2"}
 TYPE EL6631_A0EC075C EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
 STRUCT
-	{attribute addProperty Name "InfoData"}
-	InfoData : InfoData_8F85596B;
+    {attribute addProperty Name "InfoData"}
+    InfoData : InfoData_8F85596B;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

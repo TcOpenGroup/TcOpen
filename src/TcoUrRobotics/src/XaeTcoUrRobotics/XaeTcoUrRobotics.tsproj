@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.44">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.59">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{A6CC6AFE-FE37-C02D-2C0C-FB1479660FEB}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..31] OF BYTE</Name>
@@ -327,7 +327,7 @@
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
 						<Context>
-							<Id NeedCalleeCall="true">0</Id>
+							<Id>0</Id>
 							<Name>PlcTask</Name>
 							<ManualConfig>
 								<OTCID>#x02010030</OTCID>
@@ -634,7 +634,7 @@
 					</UnrestoredVarLinks>
 					<Contexts>
 						<Context>
-							<Id NeedCalleeCall="true">0</Id>
+							<Id>0</Id>
 							<Name>PlcTask1</Name>
 							<ManualConfig>
 								<OTCID>#x02010060</OTCID>
@@ -2044,7 +2044,7 @@ Bit 8 - 15 : reserved]]></Comment>
 				</Box>
 				<EtherCAT DcSyncMode="3" EnableVirtualSwitch="true" MaxSwitchPorts="2" MaxSwitchFrames="120" MaxSwitchMACs="100"/>
 			</Device>
-			<Device Id="2" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="192.168.4.1.3.1" RemoteName="Device 2 (EtherCAT)" InfoImageId="7">
+			<Device Id="2" Disabled="true" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="192.168.4.1.3.1" RemoteName="Device 2 (EtherCAT)" InfoImageId="7">
 				<Name>Device 2 (EtherCAT)</Name>
 				<AddressInfo>
 					<Ccat>
@@ -3908,15 +3908,18 @@ Bit 8 - 15 : reserved]]></Comment>
 				</Box>
 				<EtherCAT/>
 			</Device>
-			<Device Id="5" DevType="113" AmsPort="28677" AmsNetId="192.168.4.1.6.1" RemoteName="Device 5 (Profinet Controller)">
+			<Device Id="5" Disabled="true" DevType="113" AmsPort="28677" AmsNetId="192.168.4.1.6.1" RemoteName="Device 5 (Profinet Controller)">
 				<Name>Device 5 (Profinet Controller)</Name>
-				<DevData>000000000000000000000000a08601005c4445564943455c7b45414643393630312d453041302d343533322d394635392d3933384541464141344437447d000000000000000001000104a8c000ffffff0001056fc1bd040000000000000000000000000000000000000000000000000000000000000000000000000000000000</DevData>
-				<Image Id="10" AddrType="1" ImageType="3" SizeIn="228" SizeOut="490">
+				<DevData>000000000000000000000000000000005c4445564943455c7b45414643393630312d453041302d343533322d394635392d3933384541464141344437447d000000000000000001000104a8c000ffffff0001056fc1bd040000000000000000000000000000000000000000000000000000000000000000000000000000000000</DevData>
+				<Image Id="10" AddrType="1" ImageType="3" SizeIn="2" SizeOut="6">
 					<Name>Image</Name>
 				</Image>
 				<Box Id="11" BoxType="9121">
 					<Name>ur-op-80r</Name>
-					<Comment><![CDATA[GSDML Name: GSDML-V2.42-UR-PROFIsafe-20220517.xml
+					<Comment><![CDATA[
+The GSDML is not available!
+
+GSDML Name: GSDML-V2.42-UR-PROFIsafe-20220517.xml
 Path: $(TWINCAT3DIR)Config\Io\Profinet\
 VendorName: Universal Robots A/S
 OrderNumber: 0000201
@@ -4367,8 +4370,6 @@ Submodule Info: Write General Purpose Registers 2
 		</Io>
 	</Project>
 	<Mappings>
-		<MappingInfo Identifier="{00000000-2041-0850-4020-500860000403}" Id="#x02030010"/>
-		<MappingInfo Identifier="{00000000-2041-0850-4020-5008A0000403}" Id="#x02030020"/>
 		<OwnerA Name="TIPC^TcoUrRoboticsTests^TcoUrRoboticsTests Instance">
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^Term 1 (EK1200)^Term 13 (EL2809)">
 				<Link VarA="PlcTask1 Outputs^GVL.A2[0]" VarB="Channel 1^Output"/>

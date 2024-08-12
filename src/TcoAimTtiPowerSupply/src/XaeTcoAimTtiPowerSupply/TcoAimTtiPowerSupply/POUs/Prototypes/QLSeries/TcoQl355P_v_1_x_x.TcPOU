@@ -7,55 +7,34 @@ END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
-    
-
-	{attribute addProperty Name "<#Status#>"}
+    {attribute addProperty Name "<#Status#>"}
     _status : TcoQlSeriesSupply_Status_v_1_x_x;
-	{attribute addProperty Name "<#Config#>"}
+    {attribute addProperty Name "<#Config#>"}
     _config : TcoQlSeriesSupply_Config_v_1_x_x;
-
-
-	_someTaskIsActive: BOOL;
-
-	
+    _someTaskIsActive : BOOL;
 END_VAR
 VAR
-	{attribute addProperty Name "<#Get Command#>"}
+    {attribute addProperty Name "<#Get Command#>"}
     _getCommandTask : TcoQlGetCommandTask(THIS^);
-		
-	{attribute addProperty Name "<#Set Command#>"}
+    {attribute addProperty Name "<#Set Command#>"}
     _setCommandTask : TcoQlSetCommandTask(THIS^);
-
-	
     {attribute addProperty Name "<#Restore#>"}
     _restoreTask : TcoCore.TcoTask(THIS^);
-	
-
-  
-   
-
-  
-
 END_VAR
-
 VAR
-	{attribute 'hide'}
-	_sb : TcoCore.StringBuilder;
+    {attribute 'hide'}
+    _sb : TcoCore.StringBuilder;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
-_getCommandTask(inoConfig:=_config,inoStatus:=_status);
-_setCommandTask(inoConfig:=_config,inoStatus:=_status);
-
-
-
+      <ST><![CDATA[_getCommandTask(inoConfig := _config, inoStatus := _status);
+_setCommandTask(inoConfig := _config, inoStatus := _status);
 //*************RESTORE********************
-
 _restoreTask.Enabled := TRUE;
+
 IF _restoreTask.Execute() THEN
-	Restore();
-	_restoreTask.DoneWhen(TRUE);
-	_status.ActionDescription:='Restored';
+    Restore();
+    _restoreTask.DoneWhen(TRUE);
+    _status.ActionDescription := 'Restored';
 END_IF
 //****************************************
 ]]></ST>
@@ -67,11 +46,11 @@ END_IF
     <Folder Name="Task" Id="{1344c1b8-175a-02e2-1845-1a8160c3a7e2}" />
     <Property Name="Config" Id="{0d394bbf-cc1c-00b2-245b-f6a4450329ff}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Gets the configuration of the IRC 5. 					
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Gets the configuration of the IRC 5.
+        </summary>
+    </docu>
 ~*)
 PROPERTY Config : REFERENCE TO TcoQlSeriesSupply_Config_v_1_x_x]]></Declaration>
       <Get Name="Get" Id="{33cb4413-958b-0fea-2390-664c9ed1d18d}">
@@ -84,12 +63,10 @@ PROPERTY Config : REFERENCE TO TcoQlSeriesSupply_Config_v_1_x_x]]></Declaration>
     <Method Name="FB_init" Id="{4b8fcfca-d923-0cb6-3a56-bb8a33d6e82e}">
       <Declaration><![CDATA[METHOD FB_init : BOOL
 VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-  	ParentObject : ITcoObject;	
-END_VAR
-
-]]></Declaration>
+    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+    ParentObject : ITcoObject;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
@@ -97,11 +74,10 @@ END_VAR
     <Method Name="GetCommand" Id="{35ec3a2d-8699-088d-10ef-6b2159e77b4c}" FolderPath="Operations\Generic\">
       <Declaration><![CDATA[METHOD PUBLIC GetCommand : TcoCore.ITcoTaskStatus
 VAR_INPUT
-	inCommand:TcoQlSeriesSupply_getControl_v_1_x_x;
-END_VAR
-]]></Declaration>
+    inCommand : TcoQlSeriesSupply_getControl_v_1_x_x;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[GetCommand:=  _getCommandTask.WithParams(inCommand).Invoke();]]></ST>
+        <ST><![CDATA[GetCommand := _getCommandTask.WithParams(inCommand).Invoke();]]></ST>
       </Implementation>
     </Method>
     <Property Name="GetCommandTask" Id="{e346ab33-8a9a-0ff9-2fb2-e1ab6d055417}" FolderPath="Task\">
@@ -116,162 +92,159 @@ END_VAR
     <Method Name="GetCurrent" Id="{ba6c7d04-667c-0e95-3448-f9bb8eda89bb}" FolderPath="Operations\Common\">
       <Declaration><![CDATA[METHOD PUBLIC GetCurrent : TcoCore.ITcoTaskStatus
 VAR_INPUT
-	(*~
-	<docu>
-		<summary>
-			The number of the output or status register to which the command relates.
-			Note that on single output supplies <N>=1 always.
-			Note also that <N>= 3 refers to the AUX output. The AUX output has limited remote control functionality. 
-			For clarity, the commands where <N>= 3 can be used are explicitly commented; elsewhere only <N>= 1 or <N>= 2 can be used.	
-		</summary>			
-	</docu>	
-	~*)
-	inNValue:USINT;
+    (*~
+    <docu>
+        <summary>
+            The number of the output or status register to which the command relates.
+            Note that on single output supplies <N>=1 always.
+            Note also that <N>= 3 refers to the AUX output. The AUX output has limited remote control functionality.
+            For clarity, the commands where <N>= 3 can be used are explicitly commented; elsewhere only <N>= 1 or <N>= 2 can be used.
+        </summary>
+    </docu>
+    ~*)
+    inNValue : USINT;
 END_VAR
 VAR_OUTPUT
-	outCurrent:REAL;
+    outCurrent : REAL;
 END_VAR
 VAR
-	command: TcoQlSeriesSupply_GetControl_v_1_x_x;
+    command : TcoQlSeriesSupply_GetControl_v_1_x_x;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[outCurrent:=0;
-command.Command:=eTcoQWlSeriesSupplyGetCommands_v_1_x_x.i;
-command.NValue:=inNValue;
-GetCurrent:=GetCommand(inCommand:=command);
+        <ST><![CDATA[outCurrent := 0;
+command.Command := eTcoQWlSeriesSupplyGetCommands_v_1_x_x.i;
+command.NValue := inNValue;
+GetCurrent := GetCommand(inCommand := command);
+
 IF GetCurrent.Done THEN
-	outCurrent:=Status.State.Nr2Value;
-END_IF
-]]></ST>
+    outCurrent := Status.State.Nr2Value;
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="GetOutputIsOff" Id="{e968a5b2-fa28-0d5c-3b64-b5eefa949a1a}" FolderPath="Operations\Common\">
       <Declaration><![CDATA[METHOD PUBLIC GetOutputIsOff : TcoCore.ITcoTaskStatus
 VAR_INPUT
-	(*~
-	<docu>
-		<summary>
-			The number of the output or status register to which the command relates.
-			Note that on single output supplies <N>=1 always.
-			Note also that <N>= 3 refers to the AUX output. The AUX output has limited remote control functionality. 
-			For clarity, the commands where <N>= 3 can be used are explicitly commented; elsewhere only <N>= 1 or <N>= 2 can be used.	
-		</summary>			
-	</docu>	
-	~*)
-	inNValue:USINT;
+    (*~
+    <docu>
+        <summary>
+            The number of the output or status register to which the command relates.
+            Note that on single output supplies <N>=1 always.
+            Note also that <N>= 3 refers to the AUX output. The AUX output has limited remote control functionality.
+            For clarity, the commands where <N>= 3 can be used are explicitly commented; elsewhere only <N>= 1 or <N>= 2 can be used.
+        </summary>
+    </docu>
+    ~*)
+    inNValue : USINT;
 END_VAR
 VAR_OUTPUT
-	outIsOff:BOOL;
+    outIsOff : BOOL;
 END_VAR
 VAR
-	command: TcoQlSeriesSupply_GetControl_v_1_x_x;
+    command : TcoQlSeriesSupply_GetControl_v_1_x_x;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[outIsOff:=FALSE;
-command.Command:=eTcoQWlSeriesSupplyGetCommands_v_1_x_x.OP;
-command.NValue:=inNValue;
-GetOutputIsOff:=GetCommand(inCommand:=command);
+        <ST><![CDATA[outIsOff := FALSE;
+command.Command := eTcoQWlSeriesSupplyGetCommands_v_1_x_x.OP;
+command.NValue := inNValue;
+GetOutputIsOff := GetCommand(inCommand := command);
+
 IF GetOutputIsOff.Done THEN
-	outIsOff:=Status.State.Nr2Value=0;
-END_IF
-]]></ST>
+    outIsOff := Status.State.Nr2Value = 0;
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="GetOutputIsOn" Id="{64b4ff7a-12c4-0470-0a9e-d7c6710f1cdf}" FolderPath="Operations\Common\">
       <Declaration><![CDATA[METHOD PUBLIC GetOutputIsOn : TcoCore.ITcoTaskStatus
 VAR_INPUT
-		(*~
-	<docu>
-		<summary>
-			The number of the output or status register to which the command relates.
-			Note that on single output supplies <N>=1 always.
-			Note also that <N>= 3 refers to the AUX output. The AUX output has limited remote control functionality. 
-			For clarity, the commands where <N>= 3 can be used are explicitly commented; elsewhere only <N>= 1 or <N>= 2 can be used.	
-		</summary>			
-	</docu>	
-	~*)
-	inNValue:USINT;
+    (*~
+    <docu>
+        <summary>
+            The number of the output or status register to which the command relates.
+            Note that on single output supplies <N>=1 always.
+            Note also that <N>= 3 refers to the AUX output. The AUX output has limited remote control functionality.
+            For clarity, the commands where <N>= 3 can be used are explicitly commented; elsewhere only <N>= 1 or <N>= 2 can be used.
+        </summary>
+    </docu>
+    ~*)
+    inNValue : USINT;
 END_VAR
 VAR_OUTPUT
-	outIsOn:BOOL;
+    outIsOn : BOOL;
 END_VAR
 VAR
-	command: TcoQlSeriesSupply_GetControl_v_1_x_x;
+    command : TcoQlSeriesSupply_GetControl_v_1_x_x;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[outIsOn:=FALSE;
-command.Command:=eTcoQWlSeriesSupplyGetCommands_v_1_x_x.OP;
-command.NValue:=inNValue;
-GetOutputIsOn:=GetCommand(inCommand:=command);
+        <ST><![CDATA[outIsOn := FALSE;
+command.Command := eTcoQWlSeriesSupplyGetCommands_v_1_x_x.OP;
+command.NValue := inNValue;
+GetOutputIsOn := GetCommand(inCommand := command);
+
 IF GetOutputIsOn.Done THEN
-	outIsOn:=Status.State.Nr2Value=1;
-END_IF
-]]></ST>
+    outIsOn := Status.State.Nr2Value = 1;
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="GetVoltage" Id="{7c7e5362-3d05-026d-0323-0042ae5c5c29}" FolderPath="Operations\Common\">
       <Declaration><![CDATA[METHOD PUBLIC GetVoltage : TcoCore.ITcoTaskStatus
 VAR_INPUT
-		(*~
-	<docu>
-		<summary>
-			The number of the output or status register to which the command relates.
-			Note that on single output supplies <N>=1 always.
-			Note also that <N>= 3 refers to the AUX output. The AUX output has limited remote control functionality. 
-			For clarity, the commands where <N>= 3 can be used are explicitly commented; elsewhere only <N>= 1 or <N>= 2 can be used.	
-		</summary>			
-	</docu>	
-	~*)
-	inNValue:USINT;
+    (*~
+    <docu>
+        <summary>
+            The number of the output or status register to which the command relates.
+            Note that on single output supplies <N>=1 always.
+            Note also that <N>= 3 refers to the AUX output. The AUX output has limited remote control functionality.
+            For clarity, the commands where <N>= 3 can be used are explicitly commented; elsewhere only <N>= 1 or <N>= 2 can be used.
+        </summary>
+    </docu>
+    ~*)
+    inNValue : USINT;
 END_VAR
 VAR_OUTPUT
-	outVoltage:REAL;
+    outVoltage : REAL;
 END_VAR
 VAR
-	command: TcoQlSeriesSupply_GetControl_v_1_x_x;
+    command : TcoQlSeriesSupply_GetControl_v_1_x_x;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[outVoltage:=0;
-command.Command:=eTcoQWlSeriesSupplyGetCommands_v_1_x_x.V;
-command.NValue:=inNValue;
-GetVoltage:=GetCommand(inCommand:=command);
+        <ST><![CDATA[outVoltage := 0;
+command.Command := eTcoQWlSeriesSupplyGetCommands_v_1_x_x.V;
+command.NValue := inNValue;
+GetVoltage := GetCommand(inCommand := command);
+
 IF GetVoltage.Done THEN
-	outVoltage:=Status.State.Nr2Value;
+    outVoltage := Status.State.Nr2Value;
 END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{1ec27197-5427-0672-1611-f2acf08d391e}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.	
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+        </summary>
+    </docu>
 ~*)
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
-        <ST><![CDATA[RestoreTasks();
-
-]]></ST>
+        <ST><![CDATA[RestoreTasks();]]></ST>
       </Implementation>
     </Method>
     <Method Name="RestoreTasks" Id="{c3387e7c-355a-01ce-0d66-89c8a763a695}">
-      <Declaration><![CDATA[METHOD INTERNAL RestoreTasks 
-]]></Declaration>
+      <Declaration><![CDATA[METHOD INTERNAL RestoreTasks]]></Declaration>
       <Implementation>
         <ST><![CDATA[_getCommandTask.Restore();
-_setCommandTask.Restore();
-]]></ST>
+_setCommandTask.Restore();]]></ST>
       </Implementation>
     </Method>
     <Method Name="ServiceMode" Id="{cd2e86cc-91dc-0db1-0291-9006d9ac836e}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-		    Custom service (manual, maintenance) logic.
-			This method must be implemented in derived class.
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Custom service (manual, maintenance) logic.
+            This method must be implemented in derived class.
+        </summary>
+    </docu>
 ~*)
 METHOD PROTECTED ServiceMode]]></Declaration>
       <Implementation>
@@ -281,11 +254,10 @@ METHOD PROTECTED ServiceMode]]></Declaration>
     <Method Name="SetCommand" Id="{e62ff0aa-6a20-0e6f-0576-73a9ca2a0ac5}" FolderPath="Operations\Generic\">
       <Declaration><![CDATA[METHOD PUBLIC SetCommand : TcoCore.ITcoTaskStatus
 VAR_INPUT
-	inCommand:TcoQlSeriesSupply_SetControl_v_1_x_x;
-END_VAR
-]]></Declaration>
+    inCommand : TcoQlSeriesSupply_SetControl_v_1_x_x;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SetCommand:=  _setCommandTask.WithParams(inCommand).Invoke();]]></ST>
+        <ST><![CDATA[SetCommand := _setCommandTask.WithParams(inCommand).Invoke();]]></ST>
       </Implementation>
     </Method>
     <Property Name="SetCommandTask" Id="{21ce3437-63d3-0c82-3862-eb42ebd61b67}" FolderPath="Task\">
@@ -300,116 +272,112 @@ END_VAR
     <Method Name="SetCurrent" Id="{f95506f9-9fc9-0eaf-3be0-a3ceb792c9b3}" FolderPath="Operations\Common\">
       <Declaration><![CDATA[METHOD PUBLIC SetCurrent : TcoCore.ITcoTaskStatus
 VAR_INPUT
-	inCurrent:REAL;
-		(*~
-	<docu>
-		<summary>
-			The number of the output or status register to which the command relates.
-			Note that on single output supplies <N>=1 always.
-			Note also that <N>= 3 refers to the AUX output. The AUX output has limited remote control functionality. 
-			For clarity, the commands where <N>= 3 can be used are explicitly commented; elsewhere only <N>= 1 or <N>= 2 can be used.	
-		</summary>			
-	</docu>	
-	~*)
-	inNValue:USINT;	
+    inCurrent : REAL;
+    (*~
+    <docu>
+        <summary>
+            The number of the output or status register to which the command relates.
+            Note that on single output supplies <N>=1 always.
+            Note also that <N>= 3 refers to the AUX output. The AUX output has limited remote control functionality.
+            For clarity, the commands where <N>= 3 can be used are explicitly commented; elsewhere only <N>= 1 or <N>= 2 can be used.
+        </summary>
+    </docu>
+    ~*)
+    inNValue : USINT;
 END_VAR
 VAR
-	command: TcoQlSeriesSupply_SetControl_v_1_x_x;
+    command : TcoQlSeriesSupply_SetControl_v_1_x_x;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[command.Command:=eTcoQWlSeriesSupplySetCommands_v_1_x_x.I;
-command.NValue:=inNValue;
-command.NrfValue:=inCurrent;
-SetCurrent:=SetCommand(inCommand:=command);
-]]></ST>
+        <ST><![CDATA[command.Command := eTcoQWlSeriesSupplySetCommands_v_1_x_x.I;
+command.NValue := inNValue;
+command.NrfValue := inCurrent;
+SetCurrent := SetCommand(inCommand := command);]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetOutputOff" Id="{b26455cd-694a-0b9b-0807-30e3d64e4b48}" FolderPath="Operations\Common\">
       <Declaration><![CDATA[METHOD PUBLIC SetOutputOff : TcoCore.ITcoTaskStatus
 VAR_INPUT
-		(*~
-	<docu>
-		<summary>
-			The number of the output or status register to which the command relates.
-			Note that on single output supplies <N>=1 always.
-			Note also that <N>= 3 refers to the AUX output. The AUX output has limited remote control functionality. 
-			For clarity, the commands where <N>= 3 can be used are explicitly commented; elsewhere only <N>= 1 or <N>= 2 can be used.	
-		</summary>			
-	</docu>	
-	~*)
-	inNValue:USINT;
+    (*~
+    <docu>
+        <summary>
+            The number of the output or status register to which the command relates.
+            Note that on single output supplies <N>=1 always.
+            Note also that <N>= 3 refers to the AUX output. The AUX output has limited remote control functionality.
+            For clarity, the commands where <N>= 3 can be used are explicitly commented; elsewhere only <N>= 1 or <N>= 2 can be used.
+        </summary>
+    </docu>
+    ~*)
+    inNValue : USINT;
 END_VAR
 VAR
-	command: TcoQlSeriesSupply_SetControl_v_1_x_x;
+    command : TcoQlSeriesSupply_SetControl_v_1_x_x;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[command.Command:=eTcoQWlSeriesSupplySetCommands_v_1_x_x.OP;
-command.NValue:=inNValue;
-command.NrfValue:=0;
-SetOutputOff:=SetCommand(inCommand:=command);
-]]></ST>
+        <ST><![CDATA[command.Command := eTcoQWlSeriesSupplySetCommands_v_1_x_x.OP;
+command.NValue := inNValue;
+command.NrfValue := 0;
+SetOutputOff := SetCommand(inCommand := command);]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetOutputOn" Id="{c3d7ecf8-26aa-0520-3c5f-0ce370da2941}" FolderPath="Operations\Common\">
       <Declaration><![CDATA[METHOD PUBLIC SetOutputOn : TcoCore.ITcoTaskStatus
 VAR_INPUT
-		(*~
-	<docu>
-		<summary>
-			The number of the output or status register to which the command relates.
-			Note that on single output supplies <N>=1 always.
-			Note also that <N>= 3 refers to the AUX output. The AUX output has limited remote control functionality. 
-			For clarity, the commands where <N>= 3 can be used are explicitly commented; elsewhere only <N>= 1 or <N>= 2 can be used.	
-		</summary>			
-	</docu>	
-	~*)
-	inNValue:USINT;
+    (*~
+    <docu>
+        <summary>
+            The number of the output or status register to which the command relates.
+            Note that on single output supplies <N>=1 always.
+            Note also that <N>= 3 refers to the AUX output. The AUX output has limited remote control functionality.
+            For clarity, the commands where <N>= 3 can be used are explicitly commented; elsewhere only <N>= 1 or <N>= 2 can be used.
+        </summary>
+    </docu>
+    ~*)
+    inNValue : USINT;
 END_VAR
 VAR
-	command: TcoQlSeriesSupply_SetControl_v_1_x_x;
+    command : TcoQlSeriesSupply_SetControl_v_1_x_x;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[command.Command:=eTcoQWlSeriesSupplySetCommands_v_1_x_x.OP;
-command.NValue:=inNValue;
-command.NrfValue:=1;
-SetOutputOn:=SetCommand(inCommand:=command);
-]]></ST>
+        <ST><![CDATA[command.Command := eTcoQWlSeriesSupplySetCommands_v_1_x_x.OP;
+command.NValue := inNValue;
+command.NrfValue := 1;
+SetOutputOn := SetCommand(inCommand := command);]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetVoltage" Id="{74d1228e-8c5e-04da-1b2b-c71026f5b0d6}" FolderPath="Operations\Common\">
       <Declaration><![CDATA[METHOD PUBLIC SetVoltage : TcoCore.ITcoTaskStatus
 VAR_INPUT
-	inVoltage:REAL;
-	(*~
-	<docu>
-		<summary>
-			The number of the output or status register to which the command relates.
-			Note that on single output supplies <N>=1 always.
-			Note also that <N>= 3 refers to the AUX output. The AUX output has limited remote control functionality. 
-			For clarity, the commands where <N>= 3 can be used are explicitly commented; elsewhere only <N>= 1 or <N>= 2 can be used.	
-		</summary>			
-	</docu>	
-	~*)
-	inNValue:USINT;
+    inVoltage : REAL;
+    (*~
+    <docu>
+        <summary>
+            The number of the output or status register to which the command relates.
+            Note that on single output supplies <N>=1 always.
+            Note also that <N>= 3 refers to the AUX output. The AUX output has limited remote control functionality.
+            For clarity, the commands where <N>= 3 can be used are explicitly commented; elsewhere only <N>= 1 or <N>= 2 can be used.
+        </summary>
+    </docu>
+    ~*)
+    inNValue : USINT;
 END_VAR
 VAR
-	command: TcoQlSeriesSupply_SetControl_v_1_x_x;
+    command : TcoQlSeriesSupply_SetControl_v_1_x_x;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[command.Command:=eTcoQWlSeriesSupplySetCommands_v_1_x_x.V;
-command.NValue:=inNValue;
-command.NrfValue:=inVoltage;
-SetVoltage:=SetCommand(inCommand:=command);
-]]></ST>
+        <ST><![CDATA[command.Command := eTcoQWlSeriesSupplySetCommands_v_1_x_x.V;
+command.NValue := inNValue;
+command.NrfValue := inVoltage;
+SetVoltage := SetCommand(inCommand := command);]]></ST>
       </Implementation>
     </Method>
     <Property Name="Status" Id="{a9200237-e208-0004-1b98-3d6bca21b7ff}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Gets the status of the components. 					
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Gets the status of the components.
+        </summary>
+    </docu>
 ~*)
 PROPERTY Status : REFERENCE TO TcoQlSeriesSupply_Status_v_1_x_x]]></Declaration>
       <Get Name="Get" Id="{62c3e7b1-5416-07c9-1a04-46747a4aecb4}">

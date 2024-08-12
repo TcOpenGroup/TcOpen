@@ -3,10 +3,8 @@
   <POU Name="MAIN" Id="{18959407-38bc-0c60-272f-7f97dd416956}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	_tcc : tcc;
-
-END_VAR
-]]></Declaration>
+    _tcc : tcc;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[_tcc.Run();]]></ST>
     </Implementation>

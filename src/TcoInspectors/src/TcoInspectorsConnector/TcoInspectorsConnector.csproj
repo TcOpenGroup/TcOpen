@@ -11,9 +11,11 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <PackageTags>TwinCAT3 Beckhoff</PackageTags>
-    <PackageReleaseNotes>Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
+    <PackageReleaseNotes
+    >Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
     <PackageProjectUrl>http://docs.tcopengroup.org/</PackageProjectUrl>
-    <PackageIconUrl>https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>   
+    <PackageIconUrl
+    >https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
 	  <!--Set to TRUE or remove this attribute if you want to crate a package of this project-->
 	  <IsPackable>true</IsPackable>
   </PropertyGroup>
@@ -27,13 +29,33 @@
 		<DefineConstants>PLC_DOCU</DefineConstants>
 	</PropertyGroup>
   <ItemGroup>
-    <Content Include="_meta\TcoInspectors.library" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="_meta\TcoInspectors.json" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="_meta\version.info" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
+    <Content
+      Include="_meta\TcoInspectors.library"
+      IncludeInPackage="true"
+      Pack="true"
+      PackagePath="lib"
+      CopyToOutputDirectory="PreserveNewest"
+    />
+    <Content
+      Include="_meta\TcoInspectors.json"
+      IncludeInPackage="true"
+      Pack="true"
+      PackagePath="lib"
+      CopyToOutputDirectory="PreserveNewest"
+    />
+    <Content
+      Include="_meta\version.info"
+      IncludeInPackage="true"
+      Pack="true"
+      PackagePath="lib"
+      CopyToOutputDirectory="PreserveNewest"
+    />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\TcoCore\src\TcoCoreConnector\TcoCoreConnector.csproj" />
+    <ProjectReference
+      Include="..\..\..\TcoCore\src\TcoCoreConnector\TcoCoreConnector.csproj"
+    />
   </ItemGroup>
 
   <ItemGroup>

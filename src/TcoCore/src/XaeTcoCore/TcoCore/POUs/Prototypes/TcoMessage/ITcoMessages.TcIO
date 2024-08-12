@@ -12,8 +12,8 @@
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Adds message of 'debug' category to the message queue.				 
-			</summary>		
+				Adds message of 'debug' category to the message queue.
+			</summary>
 		</docu>
 ~*)
 METHOD PUBLIC Debug : ITcoMessageProperties
@@ -21,8 +21,8 @@ VAR_INPUT
 	(*~
 		<docu>
 			<summary>
-				Arbitrary message string.			 
-			</summary>			
+				Arbitrary message string.
+			</summary>
 		</docu>
 	~*)
 	Message : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
@@ -34,8 +34,8 @@ END_VAR
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Adds message of 'error' category to the message queue.				 
-			</summary>						
+				Adds message of 'error' category to the message queue.
+			</summary>
 		</docu>
 ~*)
 METHOD PUBLIC Error : ITcoMessageProperties
@@ -43,8 +43,8 @@ VAR_INPUT
 	(*~
 		<docu>
 			<summary>
-				Arbitrary message string.			 
-			</summary>			
+				Arbitrary message string.
+			</summary>
 		</docu>
 	~*)
 	Message : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
@@ -56,8 +56,8 @@ END_VAR
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Adds message of 'information' category to the message queue.				 
-			</summary>			
+				Adds message of 'information' category to the message queue.
+			</summary>
 		</docu>
 ~*)
 METHOD PUBLIC Info : ITcoMessageProperties
@@ -65,8 +65,8 @@ VAR_INPUT
 	(*~
 		<docu>
 			<summary>
-				Arbitrary message string.			 
-			</summary>			
+				Arbitrary message string.
+			</summary>
 		</docu>
 	~*)
 	Message : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
@@ -78,8 +78,8 @@ END_VAR
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Adds message of 'notification' category to the message queue.				 
-			</summary>				
+				Adds message of 'notification' category to the message queue.
+			</summary>
 		</docu>
 ~*)
 METHOD Notify  : ITcoMessageProperties
@@ -87,8 +87,8 @@ VAR_INPUT
 	(*~
 		<docu>
 			<summary>
-				Arbitrary message string.			 
-			</summary>			
+				Arbitrary message string.
+			</summary>
 		</docu>
 	~*)
 	Message : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
@@ -99,9 +99,9 @@ END_VAR
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Adds message of given category to the message queue.				 
-			</summary>	
-			<returns>Message index.</returns>		
+				Adds message of given category to the message queue.
+			</summary>
+			<returns>Message index.</returns>
 		</docu>
 ~*)
 METHOD PUBLIC Post  : ITcoMessageProperties
@@ -109,19 +109,19 @@ VAR_INPUT
 	(*~
 		<docu>
 			<summary>
-				Arbitrary message string.			 
-			</summary>			
+				Arbitrary message string.
+			</summary>
 		</docu>
 	~*)
 	Message : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
 	(*~
 		<docu>
 			<summary>
-				Message category.			 
-			</summary>			
+				Message category.
+			</summary>
 		</docu>
 	~*)
-	Category : eMessageCategory;	
+	Category : eMessageCategory;
 END_VAR
 
 ]]></Declaration>
@@ -130,8 +130,8 @@ END_VAR
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Adds message of 'programming error' category to the message queue.				 
-			</summary>				
+				Adds message of 'programming error' category to the message queue.
+			</summary>
 		</docu>
 ~*)
 METHOD PUBLIC Programming : ITcoMessageProperties
@@ -139,8 +139,8 @@ VAR_INPUT
 	(*~
 		<docu>
 			<summary>
-				Arbitrary message string.			 
-			</summary>			
+				Arbitrary message string.
+			</summary>
 		</docu>
 	~*)
 	Message : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
@@ -152,8 +152,8 @@ END_VAR
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Adds message of 'trace' category to the message queue.				 
-			</summary>					
+				Adds message of 'trace' category to the message queue.
+			</summary>
 		</docu>
 ~*)
 METHOD PUBLIC Trace : ITcoMessageProperties
@@ -161,8 +161,8 @@ VAR_INPUT
 	(*~
 		<docu>
 			<summary>
-				Arbitrary message string.			 
-			</summary>			
+				Arbitrary message string.
+			</summary>
 		</docu>
 	~*)
 	Message : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
@@ -177,8 +177,8 @@ END_VAR
 			Unpins this messenger.
 		</summary>
 	</docu>
-*) 
-METHOD UnPin 
+*)
+METHOD UnPin
 
 ]]></Declaration>
     </Method>
@@ -186,8 +186,8 @@ METHOD UnPin
       <Declaration><![CDATA[(*~
 		<docu>
 			<summary>
-				Adds message of 'warning' category to the message queue.				 
-			</summary>					
+				Adds message of 'warning' category to the message queue.
+			</summary>
 		</docu>
 ~*)
 METHOD PUBLIC Warning : ITcoMessageProperties
@@ -195,8 +195,8 @@ VAR_INPUT
 	(*~
 		<docu>
 			<summary>
-				Arbitrary message string.			 
-			</summary>			
+				Arbitrary message string.
+			</summary>
 		</docu>
 	~*)
 	Message : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);

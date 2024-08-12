@@ -10,53 +10,65 @@ namespace TcoCore
 {
     public partial class TcoComponent
     {
-        partial void PexConstructor(IVortexObject parent, string readableTail, string symbolTail)
-        {
-            
-        }
+        partial void PexConstructor(
+            IVortexObject parent,
+            string readableTail,
+            string symbolTail
+        ) { }
 
         private IEnumerable<IsTask> _tasks;
         private IEnumerable<TcoObject> _children;
         private IEnumerable<TcoObject> _components;
 
-        public IEnumerable<IsTask> Tasks 
+        public IEnumerable<IsTask> Tasks
         {
-            get { if (_tasks == null) _tasks = this.GetChildren<IsTask>(); return _tasks; }
+            get
+            {
+                if (_tasks == null)
+                    _tasks = this.GetChildren<IsTask>();
+                return _tasks;
+            }
         }
-
 
         public IEnumerable<TcoObject> Children
         {
-            get { if (_children == null) _children = this.GetDescendants<TcoObject>(); return _children; }
+            get
+            {
+                if (_children == null)
+                    _children = this.GetDescendants<TcoObject>();
+                return _children;
+            }
         }
-       
 
         public IEnumerable<TcoObject> Components
         {
-            get { if (_components == null) _components = this.GetDescendants<TcoComponent>(SearchComponentsDepth); return _components; }
-
+            get
+            {
+                if (_components == null)
+                    _components = this.GetDescendants<TcoComponent>(SearchComponentsDepth);
+                return _components;
+            }
         }
 
-        public int SearchComponentsDepth{get; set;} = 2;
+        public int SearchComponentsDepth { get; set; } = 2;
 
-        public bool IsExpanded { get;set;}
+        public bool IsExpanded { get; set; }
 
         public bool HasComponents
         {
-            get {  return Components.Count()>0; }
+            get { return Components.Count() > 0; }
         }
-
-
 
         public object StatusControl
         {
             get
             {
-                object status  = this.GetKids().Where(p => p.Symbol.EndsWith("_status")).FirstOrDefault();
-                return status != null ? status  : new object();
+                object status = this.GetKids()
+                    .Where(p => p.Symbol.EndsWith("_status"))
+                    .FirstOrDefault();
+                return status != null ? status : new object();
             }
         }
-
 
         public bool IsStatusControlRenderable
         {
@@ -67,13 +79,13 @@ namespace TcoCore
             }
         }
 
-
-
         public object ConfigControl
         {
             get
             {
-                object config = this.GetKids().Where(p => p.Symbol.EndsWith("_config")).FirstOrDefault();
+                object config = this.GetKids()
+                    .Where(p => p.Symbol.EndsWith("_config"))
+                    .FirstOrDefault();
                 return config != null ? config : new object();
             }
         }
@@ -90,11 +102,12 @@ namespace TcoCore
         {
             get
             {
-                object control = this.GetKids().Where(p => p.Symbol.EndsWith("_control")).FirstOrDefault();
+                object control = this.GetKids()
+                    .Where(p => p.Symbol.EndsWith("_control"))
+                    .FirstOrDefault();
                 return control != null ? control : new object();
             }
         }
-
 
         public bool IsControlRenderable
         {
@@ -104,7 +117,5 @@ namespace TcoCore
                 return Control is IVortexObject;
             }
         }
-
     }
-
 }

@@ -8,14 +8,9 @@ namespace TcoCognexVision
 {
     public partial class TcoDesigner_v_2_x_xServiceView : UserControl
     {
-
-       
         public TcoDesigner_v_2_x_xServiceView()
         {
             InitializeComponent();
         }
-       
-
-
     }
 }

@@ -3,85 +3,87 @@
   <POU Name="StartAtMainTask" Id="{9f626e70-6917-0906-0392-888f2e17689a}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK StartAtMainTask EXTENDS TcoMitsubishiRoboticsTask]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF Execute() THEN 
-	_blink(inOnTime:=T#500MS,inOffTime:=T#500MS);
+      <ST><![CDATA[IF Execute() THEN
+    _blink(inOnTime := T#500MS, inOffTime := T#500MS);
 
-	IF _progress = 0 THEN
-		IF NOT __ISVALIDREF(inoControl) THEN
-			_varInfo :=__VARINFO(inoControl);
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSIF NOT __ISVALIDREF(inoConfig) THEN                                                  
-			_varInfo :=__VARINFO(inoConfig);                                                    
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSIF NOT __ISVALIDREF(inoStatus) THEN                                                  
-			_varInfo :=__VARINFO(inoStatus);                                                    
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSE
-			_progress := _progress + 1;
-		END_IF
+    IF _progress = 0 THEN
+        IF NOT __ISVALIDREF(inoControl) THEN
+            _varInfo := __VARINFO(inoControl);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSIF NOT __ISVALIDREF(inoConfig) THEN
+            _varInfo := __VARINFO(inoConfig);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSIF NOT __ISVALIDREF(inoStatus) THEN
+            _varInfo := __VARINFO(inoStatus);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSE
+            _progress := _progress + 1;
+        END_IF
+    END_IF
 
-	END_IF
-	
-	IF _progress = 1 THEN
-	
-		inoControl.AutoEnable:=TRUE;
-		_varInfo :=__VARINFO( inoStatus.State.AutoEnable);                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.AutoEnable).Warning(_sb.Clear().Append('<#Waiting for Auto signal! #>').Append(_varInfo.Symbol).ToString());
-		IF  inoStatus.State.AutoEnable THEN
-			_progress := _progress + 1;
-		END_IF;
-	END_IF;
-	
-	IF _progress = 2 THEN
-		inoControl.OperationEnable:=TRUE;
-		_varInfo :=__VARINFO( inoStatus.State.OperationEnable);                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.OperationEnable).Warning(_sb.Clear().Append('<#Waiting for Operation enable signal! #>').Append(_varInfo.Symbol).ToString());
-		IF  inoStatus.State.OperationEnable THEN
-			_progress := _progress + 1;
-		END_IF;
-	END_IF;
-	
+    IF _progress = 1 THEN
+        inoControl.AutoEnable := TRUE;
+        _varInfo := __VARINFO(inoStatus.State.AutoEnable);
 
-	
-	
-	IF _progress =3 THEN	
-		Messenger.Debug('<#Robot Error Reset#>');
-		inoControl.ErrorReset := inoStatus.State.ErrorReset AND _blink.outQ;
-		IF NOT inoStatus.State.ErrorReset THEN
-			inoControl.ErrorReset:=FALSE;
-			_progress := _progress + 1;
-		END_IF
-	END_IF;
-	
-	IF _progress = 4 THEN	
-		Messenger.Debug('<#Robot Emergency Stop Reset#>');
-		inoControl.ErrorReset := inoStatus.State.EmergencyError AND _blink.outQ;
-		IF NOT inoStatus.State.EmergencyError THEN
-			inoControl.ErrorReset:=FALSE;
-			_progress := _progress + 1;
-		END_IF
-	END_IF;
-	IF _progress = 5 THEN
-	
-		inoControl.ProgramReset :=   _blink.outQ;
-		_varInfo :=__VARINFO( inoStatus.State.ProgramReset);                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.ProgramReset).Warning(_sb.Clear().Append('<#Waiting program reset changed! #>').Append(_varInfo.Symbol).ToString());
-				
-		
-		IF inoStatus.State.ProgramReset   THEN
-			inoControl.ProgramReset :=FALSE;
-			    DoneWhen(inoStatus.State.ProgramReset );
+        THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.AutoEnable)
+            .Warning(_sb.Clear().Append('<#Waiting for Auto signal! #>').Append(_varInfo.Symbol).ToString());
 
-		END_IF
-	END_IF
+        IF inoStatus.State.AutoEnable THEN
+            _progress := _progress + 1;
+        END_IF;
+    END_IF;
+
+    IF _progress = 2 THEN
+        inoControl.OperationEnable := TRUE;
+        _varInfo := __VARINFO(inoStatus.State.OperationEnable);
+
+        THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.OperationEnable)
+            .Warning(_sb.Clear().Append('<#Waiting for Operation enable signal! #>').Append(_varInfo.Symbol).ToString());
+
+        IF inoStatus.State.OperationEnable THEN
+            _progress := _progress + 1;
+        END_IF;
+    END_IF;
+
+    IF _progress = 3 THEN
+        Messenger.Debug('<#Robot Error Reset#>');
+        inoControl.ErrorReset := inoStatus.State.ErrorReset AND _blink.outQ;
+
+        IF NOT inoStatus.State.ErrorReset THEN
+            inoControl.ErrorReset := FALSE;
+            _progress := _progress + 1;
+        END_IF
+    END_IF;
+
+    IF _progress = 4 THEN
+        Messenger.Debug('<#Robot Emergency Stop Reset#>');
+        inoControl.ErrorReset := inoStatus.State.EmergencyError AND _blink.outQ;
+
+        IF NOT inoStatus.State.EmergencyError THEN
+            inoControl.ErrorReset := FALSE;
+            _progress := _progress + 1;
+        END_IF
+    END_IF;
+
+    IF _progress = 5 THEN
+        inoControl.ProgramReset := _blink.outQ;
+        _varInfo := __VARINFO(inoStatus.State.ProgramReset);
+
+        THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.ProgramReset)
+            .Warning(_sb.Clear().Append('<#Waiting program reset changed! #>').Append(_varInfo.Symbol).ToString());
+
+        IF inoStatus.State.ProgramReset THEN
+            inoControl.ProgramReset := FALSE;
+            DoneWhen(inoStatus.State.ProgramReset);
+        END_IF
+    END_IF
+
     CallTimers(TRUE);
-	
-	THIS^.ThrowWhen(_errorTimer.Q );
-	
+    THIS^.ThrowWhen(_errorTimer.Q);
 END_IF;
 
-IF  THIS^.Error AND NOT _errorMessage.Pinned THEN
-	THIS^.Restore();
+IF THIS^.Error AND NOT _errorMessage.Pinned THEN
+    THIS^.Restore();
 END_IF]]></ST>
     </Implementation>
     <Method Name="FB_init" Id="{46dce108-63c7-0971-07a8-26936ff0d54d}">
@@ -89,7 +91,7 @@ END_IF]]></ST>
 VAR_INPUT
     bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
     bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
-  	ParentObject : ITcoObject;	
+    ParentObject : ITcoObject;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
@@ -97,81 +99,83 @@ END_VAR]]></Declaration>
     </Method>
     <Method Name="OnAbort" Id="{fdcb8fea-12c7-091b-0d96-a87e947aaccc}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task is aborted.
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task is aborted.
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnAbort
-]]></Declaration>
+METHOD PROTECTED OnAbort]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Start at Main was aborted, while not yet completed!#>';END_IF; 
-
-]]></ST>
+        <ST><![CDATA[IF __ISVALIDREF(inoStatus) THEN
+    THIS^.inoStatus.ActionDescription := '<#Start at Main was aborted, while not yet completed!#>';
+END_IF;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnDone" Id="{d55cd1ac-5d06-0b09-12d7-70759219f1ae}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task reaches the ```Done``` state .
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task reaches the ```Done``` state .
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnDone
-]]></Declaration>
+METHOD PROTECTED OnDone]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN  THIS^.inoStatus.ActionDescription := '<#Start at Main was completed successfully.#>';END_IF; 
-_progress:=0;
-]]></ST>
+        <ST><![CDATA[IF __ISVALIDREF(inoStatus) THEN
+    THIS^.inoStatus.ActionDescription := '<#Start at Main was completed successfully.#>';
+END_IF;
+
+_progress := 0;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnError" Id="{1d43d108-69af-0871-0f73-74bdd96a5cd6}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task reaches the ```Error``` state.
-			<para>
-				Do not confuse with <see cref="PlcDocu.TcoCore.TcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
-			</para>
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task reaches the ```Error``` state.
+            <para>
+                Do not confuse with <see cref="PlcDocu.TcoCore.TcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
+            </para>
+        </summary>
+    </docu>
 ~*)
 METHOD PROTECTED OnError
-
 VAR
-	description: STRING;
+    description : STRING;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[description:= '<#Start at Main finished with error.#>';
-IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := description; END_IF;
+        <ST><![CDATA[description := '<#Start at Main finished with error.#>';
+
+IF __ISVALIDREF(inoStatus) THEN
+    THIS^.inoStatus.ActionDescription := description;
+END_IF;
+
 THIS^._errorMessage.Error(_sb.Clear().Append(description).Append(' To restore acknowledge this alarm.').ToString()).Pin();]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStart" Id="{f1a6edc0-aa90-06d6-2a38-0a8926fcea6d}">
-      <Declaration><![CDATA[METHOD PROTECTED OnStart 
-]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED OnStart]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN  THIS^.inoStatus.ActionDescription := '<#Start at Main started.#>'; END_IF; 
-]]></ST>
+        <ST><![CDATA[IF __ISVALIDREF(inoStatus) THEN
+    THIS^.inoStatus.ActionDescription := '<#Start at Main started.#>';
+END_IF;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{71b9f3a4-9089-0e2d-303a-b64fe1c7d462}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
-			<para>
-				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
-			</para>
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+            <para>
+                See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+            </para>
+        </summary>
+    </docu>
 ~*)
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.Restore();
-]]></ST>
+        <ST><![CDATA[SUPER^.Restore();]]></ST>
       </Implementation>
     </Method>
   </POU>

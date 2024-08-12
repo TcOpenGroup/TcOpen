@@ -8,12 +8,11 @@
 {attribute addProperty Size "9"}
 TYPE SyncUnitTask_AB2F5079 EXTENDS SyncUnitTaskBase_FCD3CBF3 :
 STRUCT
-	{attribute addProperty Name "WcState"}
-	WcState : WcState_0B2B16F9;
-	{attribute addProperty Name "InfoData"}
-	InfoData : InfoData_8649EEEB;
+    {attribute addProperty Name "WcState"}
+    WcState : WcState_0B2B16F9;
+    {attribute addProperty Name "InfoData"}
+    InfoData : InfoData_8649EEEB;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

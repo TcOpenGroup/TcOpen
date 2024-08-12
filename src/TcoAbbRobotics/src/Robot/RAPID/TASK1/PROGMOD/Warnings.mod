@@ -18,7 +18,7 @@ MODULE Warnings
     PERS string sLine2Action:="NESPRAVNE VOLANE CISLO AKCIE (gi_ActionNo).";
     PERS string sLine3Action:="PRIJATE CISLO: ActionNo = ";
     PERS string sLine4Action:="POTREBNY RESET ROBOTA";
-    
+
     PERS string sLine2Zone:="ROBOT SA NACHADZA MIMO DEFINOVANEJ ZONY";
     PERS string sLine3Zone:="PRESUNTE ROBOTA V MANUALNOM REZIME DO pHomePose";
     PERS string sLine4Zone:="PRIJATE CISLO: ActionNo = ";
@@ -73,7 +73,7 @@ MODULE Warnings
             sMsgLine2:=sLine2Action;
             sMsgLine3:=sLine3Action+ValToStr(gi_ActionNo);
             sMsgLine4:=sLine4Action;
-           
+
 
         CASE "ErrZone":
             sMsgLine2:=sLine2Zone;

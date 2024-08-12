@@ -6,7 +6,5 @@ using System.Threading.Tasks;
 
 namespace TcoCoreTests
 {
-    public partial class TcoComponentTest : ITestTcoComponent
-    {
-    }
+    public partial class TcoComponentTest : ITestTcoComponent { }
 }

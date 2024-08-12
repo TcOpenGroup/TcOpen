@@ -19,7 +19,7 @@ private static IMqttClient CreateClientAndConnect()
     Broker.StartAsync(mqttServerOptions);
 
     var c = MqttFactory.CreateMqttClient();
-    var mqttClientOptions = MqttFactory.CreateClientOptionsBuilder().WithTcpServer("broker.emqx.io")                
+    var mqttClientOptions = MqttFactory.CreateClientOptionsBuilder().WithTcpServer("broker.emqx.io")
         .Build();
     c.UseApplicationMessageReceivedHandler(new TcoAppMqttHandler());
     c.ConnectAsync(mqttClientOptions, CancellationToken.None).Wait();
@@ -27,14 +27,13 @@ private static IMqttClient CreateClientAndConnect()
 }
 ```
 
-The most important line here is 
+The most important line here is
 
 ```csharp
  c.UseApplicationMessageReceivedHandler(new TcoAppMqttHandler());
 ```
 
 Without this line you won't be able to use extensions bellow.
-
 
 ## How to publish primitives
 
@@ -57,7 +56,7 @@ Entry.MAIN_TECHNOLOGY._technology
         publishCondition: (lastPublished, toPublish) => toPublish - lastPublished >= 100);
 ```
 
-### How to stop publishing 
+### How to stop publishing
 
 ```csharp
 var handle = Entry.MAIN_TECHNOLOGY._technology._mirrorStartCycle.Subscribe(client, "fun_with_TcOpen_Hammer");
@@ -74,11 +73,10 @@ Entry.MAIN_TECHNOLOGY._technology
     .Subscribe(client, "fun_with_TcOpen_Hammer");
 ```
 
-
-
 ## Publishing and observign complex types
 
 ### Publish
+
 Similar to primitives.
 
 ```csharp
@@ -88,7 +86,6 @@ Entry.MAIN_TECHNOLOGY._technology._ST001
 ```
 
 Complex objects are published every 500ms by default. To change the sample rate use the parameter `sampleRate`
-
 
 ```csharp
 Entry.MAIN_TECHNOLOGY._technology._ST001
@@ -101,10 +98,11 @@ You can also write a condition which will determine wheter to publish or not bas
 ```csharp
 Entry.MAIN_TECHNOLOGY._technology._ST001
     ._components
-    .PublishChanges(client, "fun_with_TcOpen_Hammer", publishCondition: ComponentsCondition); 
+    .PublishChanges(client, "fun_with_TcOpen_Hammer", publishCondition: ComponentsCondition);
 ```
 
-PublishCondition delegate can be  defined as a method. If you're publishing a certain PLC twin, the type of objects inside the will always be a prefixed with "Plain".
+PublishCondition delegate can be defined as a method. If you're publishing a certain PLC twin, the type of objects inside the will always be a prefixed with "Plain".
+
 ```csharp
 private bool ComponentsCondition(object LastPublished, object ToPublish)
 {
@@ -116,7 +114,7 @@ private bool ComponentsCondition(object LastPublished, object ToPublish)
 
 ### Subscribe
 
-When you subscribe to complex type, you need to specify its plain countertype. 
+When you subscribe to complex type, you need to specify its plain countertype.
 If you want to observe changes of type `ST001_ComponentsHandler` you need to subscribe to `PlainST001_ComponentsHandler`.
 
 ```csharp
@@ -124,4 +122,3 @@ Entry.MAIN_TECHNOLOGY._technology._ST001
     ._mqttMirrorComponents
     .Subscribe<PlainST001_ComponentsHandler>(client, "fun_with_TcOpen_HammerX");
 ```
-

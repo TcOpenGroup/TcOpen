@@ -5,6 +5,7 @@ namespace PlcTcProberTestsConnector
 {
     public static class Entry
     {
-        public static PlcTcProberTests.PlcTcProberTestsTwinController Plc { get; } = new PlcTcProberTests.PlcTcProberTestsTwinController(Tc3ConnectorAdapter.Create(851));
+        public static PlcTcProberTests.PlcTcProberTestsTwinController Plc { get; } =
+            new PlcTcProberTests.PlcTcProberTestsTwinController(Tc3ConnectorAdapter.Create(851));
     }
 }

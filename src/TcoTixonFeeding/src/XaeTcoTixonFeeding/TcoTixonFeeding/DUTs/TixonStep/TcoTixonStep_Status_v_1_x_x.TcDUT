@@ -1,20 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoTixonStep_Status_v_1_x_x" Id="{439720c2-6454-0cc7-0c25-8a0c90d18909}">
-    <Declaration><![CDATA[TYPE TcoTixonStep_Status_v_1_x_x EXTENDS TcoTixonGenericStatus:
+    <Declaration><![CDATA[TYPE TcoTixonStep_Status_v_1_x_x EXTENDS TcoTixonGenericStatus :
 STRUCT
-  		{attribute addProperty Name "<#Stepper in home position#> - i6 "}
-        StepperHomePos : BOOL;
-        {attribute addProperty Name "<#Stepper in work position#> - i7"}
-        StepperWorkPos : BOOL;
-		{attribute addProperty Name "<#Component out of box#> - i8"}
-        ComponentOutOfBox : BOOL;
-      	{attribute addProperty Name "<#Separator in work position#> - i9"}
-        SeparatorWorkPos : BOOL;
-
-
+    {attribute addProperty Name "<#Stepper in home position#> - i6 "}
+    StepperHomePos : BOOL;
+    {attribute addProperty Name "<#Stepper in work position#> - i7"}
+    StepperWorkPos : BOOL;
+    {attribute addProperty Name "<#Component out of box#> - i8"}
+    ComponentOutOfBox : BOOL;
+    {attribute addProperty Name "<#Separator in work position#> - i9"}
+    SeparatorWorkPos : BOOL;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

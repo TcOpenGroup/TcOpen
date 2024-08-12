@@ -8,12 +8,11 @@
 {attribute addProperty Size "56"}
 TYPE Module_1_32_Byte_Valve_Unit_0x7F_1A3DA03C :
 STRUCT
-	{attribute addProperty Name "Inputs"}
-	Inputs  : Inputs_03C60166;
-	{attribute addProperty Name "Outputs"}
-	Outputs  : Outputs_79BC345B;
+    {attribute addProperty Name "Inputs"}
+    Inputs : Inputs_03C60166;
+    {attribute addProperty Name "Outputs"}
+    Outputs : Outputs_79BC345B;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

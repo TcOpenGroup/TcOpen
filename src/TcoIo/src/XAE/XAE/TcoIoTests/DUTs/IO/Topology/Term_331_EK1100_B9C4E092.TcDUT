@@ -9,12 +9,11 @@
 {attribute addProperty Name "Term 331 (EK1100)"}
 TYPE Term_331_EK1100_B9C4E092 EXTENDS EK1100_1FC0878B :
 STRUCT
-	{attribute addProperty Name "Term 332 (EL1809)"}
-	{attribute addProperty PreviousPort "Term 331 (EK1100) : B"}
-	{attribute addProperty SyncUnit "default"}
-	Term_332_EL1809 : EL1809_32157CFD;
+    {attribute addProperty Name "Term 332 (EL1809)"}
+    {attribute addProperty PreviousPort "Term 331 (EK1100) : B"}
+    {attribute addProperty SyncUnit "default"}
+    Term_332_EL1809 : EL1809_32157CFD;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

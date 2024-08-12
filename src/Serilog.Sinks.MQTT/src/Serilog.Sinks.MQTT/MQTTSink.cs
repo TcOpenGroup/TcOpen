@@ -1,10 +1,10 @@
-﻿using MQTTnet;
+﻿using System;
+using System.IO;
+using MQTTnet;
 using MQTTnet.Client;
 using MQTTnet.Client.Options;
 using MQTTnet.Protocol;
 using Serilog.Events;
-using System;
-using System.IO;
 
 namespace Serilog.Sinks
 {
@@ -14,7 +14,8 @@ namespace Serilog.Sinks
     public class MQTTSink : Core.ILogEventSink, IDisposable
     {
         private IMqttClient MqttClient { get; } = new MqttFactory().CreateMqttClient();
-        private Formatting.ITextFormatter Formatter { get; } = new Serilog.Formatting.Json.JsonFormatter();
+        private Formatting.ITextFormatter Formatter { get; } =
+            new Serilog.Formatting.Json.JsonFormatter();
         private IMqttClientOptions MqttClientOptions { get; }
 
         /// <summary>
@@ -24,10 +25,12 @@ namespace Serilog.Sinks
         /// <param name="topic">Topic under which the logs are to be published.</param>
         /// <param name="qoS">Quality of service level. <see cref="MqttQualityOfServiceLevel"/></param>
         /// <param name="formatter">Custom log formatter.</param>
-        public MQTTSink(IMqttClientOptions clientOptions,
-                    string topic,
-                    MqttQualityOfServiceLevel qoS = MqttQualityOfServiceLevel.AtMostOnce,
-                    Formatting.ITextFormatter formatter = null)
+        public MQTTSink(
+            IMqttClientOptions clientOptions,
+            string topic,
+            MqttQualityOfServiceLevel qoS = MqttQualityOfServiceLevel.AtMostOnce,
+            Formatting.ITextFormatter formatter = null
+        )
         {
             Topic = topic;
             QoS = qoS;
@@ -48,18 +51,20 @@ namespace Serilog.Sinks
         /// </summary>
         /// <param name="logEvent"></param>
         public async void Emit(LogEvent logEvent)
-        {            
+        {
             var stringWriter = new StringWriter();
             Formatter.Format(logEvent, stringWriter);
 
             var applicationMessage = new MqttApplicationMessageBuilder()
-                            .WithPayload(stringWriter.ToString())
-                            .WithPayloadFormatIndicator(MQTTnet.Protocol.MqttPayloadFormatIndicator.CharacterData)
-                            .WithTopic(Topic)                            
-                            .Build();
-            
+                .WithPayload(stringWriter.ToString())
+                .WithPayloadFormatIndicator(
+                    MQTTnet.Protocol.MqttPayloadFormatIndicator.CharacterData
+                )
+                .WithTopic(Topic)
+                .Build();
+
             applicationMessage.QualityOfServiceLevel = QoS;
-            
+
             await MqttClient.PublishAsync(applicationMessage);
         }
 

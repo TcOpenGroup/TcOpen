@@ -22,7 +22,6 @@ namespace TcoCore
     /// </summary>
     public partial class TcoToggleTaskView : UserControl
     {
-
         public TcoToggleTaskView()
         {
             InitializeComponent();

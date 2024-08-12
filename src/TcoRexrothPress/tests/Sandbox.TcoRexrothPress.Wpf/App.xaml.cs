@@ -1,4 +1,3 @@
-
 using System.Windows;
 using TcoRexrothPressTests;
 
@@ -11,8 +10,10 @@ namespace Sandbox.TcoRexrothPress.Wpf
     {
         public App()
         {
-            TcOpen.Inxton.TcoAppDomain.Current.Builder
-                .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter())
+            TcOpen
+                .Inxton.TcoAppDomain.Current.Builder.SetUpLogger(
+                    new TcOpen.Inxton.Logging.SerilogAdapter()
+                )
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
 
             Entry.TcoRexrothPressTestsPlc.Connector.BuildAndStart().ReadWriteCycleDelay = 75;

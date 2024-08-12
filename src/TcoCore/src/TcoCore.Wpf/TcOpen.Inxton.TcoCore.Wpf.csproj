@@ -11,26 +11,41 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>TwinCAT3 Beckhoff</PackageTags>
-		<PackageReleaseNotes>Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
+		<PackageReleaseNotes
+    >Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
 		<PackageProjectUrl>http://docs.tcopengroup.org/</PackageProjectUrl>
-		<PackageIconUrl>https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
+		<PackageIconUrl
+    >https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
 	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net48|AnyCPU'">
+	<PropertyGroup
+    Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net48|AnyCPU'"
+  >
 		<DebugType>full</DebugType>
 		<DebugSymbols>true</DebugSymbols>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="2.0.0" />
+		<PackageReference
+      Include="Inxton.Package.Vortex.Essentials.Wpf"
+      Version="2.0.0"
+    />
 		<PackageReference Include="MaterialDesignThemes" Version="4.6.1" />
 		<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2365.46" />
 		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\TcOpen.Inxton\src\TcOpen.Inxton.Wpf\TcOpen.Inxton.Wpf.csproj" />
+		<ProjectReference
+      Include="..\..\..\TcOpen.Inxton\src\TcOpen.Inxton.Wpf\TcOpen.Inxton.Wpf.csproj"
+    />
 		<ProjectReference Include="..\TcoCoreConnector\TcoCoreConnector.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<Content Include="VisualStudioToolsManifest.xml" IncludeInPackage="true" Pack="true" PackagePath="tools" CopyToOutputDirectory="PreserveNewest" />
+		<Content
+      Include="VisualStudioToolsManifest.xml"
+      IncludeInPackage="true"
+      Pack="true"
+      PackagePath="tools"
+      CopyToOutputDirectory="PreserveNewest"
+    />
 	</ItemGroup>
 	<ItemGroup>
 	  <None Include="..\..\..\..\.editorconfig" Link=".editorconfig" />

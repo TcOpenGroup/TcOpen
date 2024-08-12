@@ -1,192 +1,190 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
   <POU Name="TcoCarousel" Id="{08546f33-5a42-0181-2c44-3eb6520f87c1}" SpecialFunc="None">
     <Declaration><![CDATA[{attribute addProperty _turnTableName "<#Turn#>"}
 {attribute addProperty _restoreName "<#Restore#>"}
 FUNCTION_BLOCK TcoCarousel EXTENDS TcoCarouselBase
 VAR_INPUT
-		(*~
-		<docu>
-			<summary>
-				This condition prevents the rotation of the table, possibly due to collisions with cylinders, axes, or other objects.
-				Do not use signal from Light Curtain here.
-			</summary>	
-		</docu>
-	~*)
-	inSafetyCondition:BOOL;
-	(*~
-		<docu>
-			<summary>
-				The coded bites are stored in this word, which is valid for the base position of the carousel.
-			</summary>	
-		</docu>
-	~*)
-	inBasePositionNumber:WORD;
-	
+    (*~
+        <docu>
+            <summary>
+                This condition prevents the rotation of the table, possibly due to collisions with cylinders, axes, or other objects.
+                Do not use signal from Light Curtain here.
+            </summary>
+        </docu>
+    ~*)
+    inSafetyCondition : BOOL;
+    (*~
+        <docu>
+            <summary>
+                The coded bites are stored in this word, which is valid for the base position of the carousel.
+            </summary>
+        </docu>
+    ~*)
+    inBasePositionNumber : WORD;
 END_VAR
 VAR
     {attribute addProperty Name "|[[1]Attribute_turnTableName]|"}
     _turnTask : TcoTurnTableTask(THIS^);
-
     {attribute addProperty Name "|[[1]Attribute_restoreName]|"}
     _restoreTask : TcoCore.TcoTask(THIS^);
     {attribute addProperty Name "<#Config#>"}
-	_config : TcoCarouselConfig;
-	{attribute addProperty Name "<#Status#>"}
-	_status : TcoCarouselStatus;
+    _config : TcoCarouselConfig;
+    {attribute addProperty Name "<#Status#>"}
+    _status : TcoCarouselStatus;
 END_VAR
-VAR	
-	increment: INT;
-	_index: INT;	
-	{attribute 'hide'}
-	_positionsIdentifiersClear : ARRAY[0..20] OF UINT;
-
-	_sb : TcoCore.StringBuilder;
-	_basePositionNumber: WORD;
-END_VAR
-
-]]></Declaration>
+VAR
+    increment : INT;
+    _index : INT;
+    {attribute 'hide'}
+    _positionsIdentifiersClear : ARRAY[0..20] OF UINT;
+    _sb : TcoCore.StringBuilder;
+    _basePositionNumber : WORD;
+END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[SUPER^( inoInPosition := inoInPosition, inoInPrecisePosition := inoInPrecisePosition, inoEnableTurn := inoEnableTurn, inoStartTurn := inoStartTurn);
+      <ST><![CDATA[SUPER^(inoInPosition := inoInPosition,
+    inoInPrecisePosition := inoInPrecisePosition,
+    inoEnableTurn := inoEnableTurn,
+    inoStartTurn := inoStartTurn);
 
-_status.CurrentPosition:=	inBasePositionNumber;
-_status.InPosition:=_inPosition;
-_status.InPrecisePosition:=_inPrecisePosition;
-_status.TurnSafetyCondition:=inSafetyCondition;
+_status.CurrentPosition := inBasePositionNumber;
+_status.InPosition := _inPosition;
+_status.InPrecisePosition := _inPrecisePosition;
+_status.TurnSafetyCondition := inSafetyCondition;
 
-
-
-
-IF(_config.NumberOfPositions <= 0) THEN
-	Messenger.Programming('- <#Parameter number of positions is <= 0. The paremeters must be grater than 0.#>'); 
-	RETURN;
+IF (_config.NumberOfPositions <= 0) THEN
+    Messenger.Programming('- <#Parameter number of positions is <= 0. The paremeters must be grater than 0.#>');
+    RETURN;
 END_IF
 
-_status.Positions :=_positionsIdentifiersClear;
+_status.Positions := _positionsIdentifiersClear;
 
-
-IF(_config.OffSet = 0) THEN
-	_config.OffSet := 1;
+IF (_config.OffSet = 0) THEN
+    _config.OffSet := 1;
 END_IF
-
-
-
 // Calc position
+_status.Positions[_config.NumberOfPositions - 1] := 1 + (1 - _config.Offset + _status.CurrentPosition) MOD _config.NumberOfPositions;
 
-
-_status.Positions[_config.NumberOfPositions - 1] := 1+(1 - _config.Offset + _status.CurrentPosition) MOD _config.NumberOfPositions;
-FOR _index := 1 TO UINT_TO_INT(_config.NumberOfPositions) - 1 DO	
-	_status.Positions[UINT_TO_INT(_config.NumberOfPositions) - 1 - _index] := 1 + ((_status.Positions[UINT_TO_INT(_config.NumberOfPositions) - _index]) MOD (_config.NumberOfPositions));			
+FOR _index := 1 TO UINT_TO_INT(_config.NumberOfPositions) - 1 DO
+    _status.Positions[UINT_TO_INT(_config.NumberOfPositions) - 1 - _index] :=
+        1 + ((_status.Positions[UINT_TO_INT(_config.NumberOfPositions) - _index]) MOD (_config.NumberOfPositions));
 END_FOR
-
-
-
-// Disables mutualy exclusive actions		
+// Disables mutualy exclusive actions
 _turnTask.Enabled := NOT _restoreTask.Busy;
-	
-_turnTask(
-	inSafetyCondition:=inSafetyCondition , 
-	inoInPosition:=_inPosition , 
-	inoInPrecisePosition:=_inPrecisePosition , 
-	inoEnableTurn:=_enableTurn , 
-	inoStartTurn:=_startTurn , 
-	inoConfig:=_config , 
-	inoStatus:=_status );
 
+_turnTask(inSafetyCondition := inSafetyCondition,
+    inoInPosition := _inPosition,
+    inoInPrecisePosition := _inPrecisePosition,
+    inoEnableTurn := _enableTurn,
+    inoStartTurn := _startTurn,
+    inoConfig := _config,
+    inoStatus := _status);
 
-_restoreTask.Enabled:=TRUE;
+_restoreTask.Enabled := TRUE;
 
 IF (_restoreTask.Execute()) THEN
- 	Restore();
-
+    Restore();
     _restoreTask.DoneWhen(TRUE);
 END_IF
 
 // For further discussion about Status
-IF(_turnTask.Busy) THEN
-	_status.ActionDescription := 'Roatating table to next position ';
-
-ELSIF(_restoreTask.Busy) THEN
-	_status.ActionDescription := 'Restoring';
-ELSE	
-	_status.ActionDescription := 'Idle';
+IF (_turnTask.Busy) THEN
+    _status.ActionDescription := 'Roatating table to next position ';
+ELSIF (_restoreTask.Busy) THEN
+    _status.ActionDescription := 'Restoring';
+ELSE
+    _status.ActionDescription := 'Idle';
 END_IF
 
-SUPER^(inoInPosition := inoInPosition, inoInPrecisePosition := inoInPrecisePosition, inoEnableTurn := inoEnableTurn, inoStartTurn := inoStartTurn);
-
-]]></ST>
+SUPER^(inoInPosition := inoInPosition,
+    inoInPrecisePosition := inoInPrecisePosition,
+    inoEnableTurn := inoEnableTurn,
+    inoStartTurn := inoStartTurn);]]></ST>
     </Implementation>
     <Folder Name="Tasks" Id="{6b35211f-d209-0c66-09b9-c2b350b3f4dd}" />
     <Method Name="Abort" Id="{0a1b4403-4487-068c-0cfb-398f1c599949}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Aborts the turning when the condition is 'true'.
-		</summary>
-		<remarks>			
-				<note type="warning">
-					The call of this method will be effective only when called AFTER the initialization of the instance of given TcoCarousel.
-				</note>
-		</remarks>	
-	</docu>
+    <docu>
+        <summary>
+            Aborts the turning when the condition is 'true'.
+        </summary>
+        <remarks>
+                <note type="warning">
+                    The call of this method will be effective only when called AFTER the initialization of the instance of given TcoCarousel.
+                </note>
+        </remarks>
+    </docu>
 ~*)
 METHOD Abort : BOOL
 VAR_IN_OUT
-	(*~
-		<docu>
-			<summary>
-				Condition to abort the turning of the carousel.
-			</summary>	
-		</docu>
-	~*)
-	inoDisableCondition : BOOL;
+    (*~
+        <docu>
+            <summary>
+                Condition to abort the turning of the carousel.
+            </summary>
+        </docu>
+    ~*)
+    inoDisableCondition : BOOL;
 END_VAR
 VAR_INPUT
-	(*~
-		<docu>
-			<summary>
-				Condition to abort the movement of the carousel can be inverted by this parameter.
-			</summary>	
-		</docu>
-	~*)
-	Invert:BOOL;
+    (*~
+        <docu>
+            <summary>
+                Condition to abort the movement of the carousel can be inverted by this parameter.
+            </summary>
+        </docu>
+    ~*)
+    Invert : BOOL;
 END_VAR
 VAR
-	_signalInfo : TcoSignalInfo;
+    _signalInfo : TcoSignalInfo;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF ( _turnTask.Busy) AND inoDisableCondition AND NOT Invert THEN
-	_signalInfo.GetSignalInfo(SIZEOF(inoDisableCondition), ADR(inoDisableCondition));
-	Messenger.Build().Append('<#Turning table aborted due to#> : ').Append(_signalInfo.SymbolPath).As().AsError().Pin();
-	_startTurn := FALSE;
-	_enableTurn := FALSE;
-	IF(__ISVALIDREF(THIS^.inoStartTurn)) THEN THIS^.inoStartTurn := FALSE; END_IF;
-	IF(__ISVALIDREF(THIS^.inoEnableTurn)) THEN THIS^.inoEnableTurn := FALSE; END_IF;
-	_turnTask.Abort();
-ELSIF ( _turnTask.Busy) AND inoDisableCondition AND Invert THEN
-	_signalInfo.GetSignalInfo(SIZEOF(inoDisableCondition), ADR(inoDisableCondition));
-	Messenger.Build().Append('<#Turning table aborted due to NOT #> : ').Append(_signalInfo.SymbolPath).As().AsError().Pin();
-	_startTurn := FALSE;
-	_enableTurn := FALSE;
-	IF(__ISVALIDREF(THIS^.inoStartTurn)) THEN THIS^.inoStartTurn := FALSE; END_IF;
-	IF(__ISVALIDREF(THIS^.inoEnableTurn)) THEN THIS^.inoEnableTurn := FALSE; END_IF;
-	_turnTask.Abort();
+        <ST><![CDATA[IF (_turnTask.Busy) AND inoDisableCondition AND NOT Invert THEN
+    _signalInfo.GetSignalInfo(SIZEOF(inoDisableCondition), ADR(inoDisableCondition));
+    Messenger.Build().Append('<#Turning table aborted due to#> : ').Append(_signalInfo.SymbolPath).As().AsError().Pin();
+    _startTurn := FALSE;
+    _enableTurn := FALSE;
+
+    IF (__ISVALIDREF(THIS^.inoStartTurn)) THEN
+        THIS^.inoStartTurn := FALSE;
+    END_IF;
+
+    IF (__ISVALIDREF(THIS^.inoEnableTurn)) THEN
+        THIS^.inoEnableTurn := FALSE;
+    END_IF;
+
+    _turnTask.Abort();
+ELSIF (_turnTask.Busy) AND inoDisableCondition AND Invert THEN
+    _signalInfo.GetSignalInfo(SIZEOF(inoDisableCondition), ADR(inoDisableCondition));
+    Messenger.Build().Append('<#Turning table aborted due to NOT #> : ').Append(_signalInfo.SymbolPath).As().AsError().Pin();
+    _startTurn := FALSE;
+    _enableTurn := FALSE;
+
+    IF (__ISVALIDREF(THIS^.inoStartTurn)) THEN
+        THIS^.inoStartTurn := FALSE;
+    END_IF;
+
+    IF (__ISVALIDREF(THIS^.inoEnableTurn)) THEN
+        THIS^.inoEnableTurn := FALSE;
+    END_IF;
+
+    _turnTask.Abort();
 END_IF]]></ST>
       </Implementation>
     </Method>
     <Property Name="AbortTask" Id="{187b2f91-971c-0c05-29c0-c7be79139d86}" FolderPath="Tasks\">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Gets the `StopTask` task that controls the stopping the turning carousel. 		
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Gets the `StopTask` task that controls the stopping the turning carousel.
+        </summary>
+    </docu>
 ~*)
 PROPERTY AbortTask : TcoCore.ITcoTask]]></Declaration>
       <Get Name="Get" Id="{ea38a74e-156a-0db9-151f-4686c144069c}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[AbortTask := _restoreTask;]]></ST>
         </Implementation>
@@ -196,8 +194,7 @@ END_VAR
       <Declaration><![CDATA[PROPERTY Config : REFERENCE TO TcoCarouselConfig]]></Declaration>
       <Get Name="Get" Id="{fe6068c9-811c-0594-0966-c96d897f0972}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[Config REF= _config;]]></ST>
         </Implementation>
@@ -206,43 +203,35 @@ END_VAR
     <Method Name="GetIdentifierAtPosition" Id="{a30ff657-09ed-0acf-2264-edb25a5f2136}">
       <Declaration><![CDATA[METHOD PUBLIC GetIdentifierAtPosition : UINT
 VAR_INPUT
-	inPosition:UINT;
-END_VAR
-]]></Declaration>
+    inPosition : UINT;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[GetIdentifierAtPosition:=_turnTask.GetIdentifierAtPosition(inPosition:=inPosition,inPositions:=_status.Positions);
-
-]]></ST>
+        <ST><![CDATA[GetIdentifierAtPosition := _turnTask.GetIdentifierAtPosition(inPosition := inPosition, inPositions := _status.Positions);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{40959f14-eeb2-05e2-346e-892b90a3e3bc}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Restore all tasks of this instance into initial state.		 		 		
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Restore all tasks of this instance into initial state.
+        </summary>
+    </docu>
 ~*)
-METHOD  Restore : ITcoRestorable
-
-
-]]></Declaration>
+METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[_turnTask.Restore();
 _restoreTask.Abort();
 _restoreTask.Restore();
 _enableTurn := FALSE;
 _startTurn := FALSE;
-Messenger.UnPin();
-]]></ST>
+Messenger.UnPin();]]></ST>
       </Implementation>
     </Method>
     <Property Name="Status" Id="{fd6ba848-4d23-0a6b-06b7-0ae7491f6a9b}">
       <Declaration><![CDATA[PROPERTY Status : REFERENCE TO TcoCarouselStatus]]></Declaration>
       <Get Name="Get" Id="{fb0b7151-5f31-0781-1f98-5fc89c7e9b1e}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[Status REF= _status;]]></ST>
         </Implementation>
@@ -250,91 +239,105 @@ END_VAR
     </Property>
     <Method Name="Suspend" Id="{428eefcf-d4f3-0be0-068c-3806f8e653f5}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Suspend the turning to next position when the condition is 'true'. Task is still bussy
-		</summary>
-		<remarks>			
-				<note type="warning">
-					The call of this method will be effective only when called AFTER the initialization of the instance of given TcoCarousel.
-				</note>
-		</remarks>	
-	</docu>
+    <docu>
+        <summary>
+            Suspend the turning to next position when the condition is 'true'. Task is still bussy
+        </summary>
+        <remarks>
+                <note type="warning">
+                    The call of this method will be effective only when called AFTER the initialization of the instance of given TcoCarousel.
+                </note>
+        </remarks>
+    </docu>
 ~*)
 METHOD Suspend : BOOL
 VAR_IN_OUT
-	(*~
-		<docu>
-			<summary>
-				Condition to suspend the movement of the carousel.
-			</summary>	
-		</docu>
-	~*)
-	inoDisableCondition : BOOL;
+    (*~
+        <docu>
+            <summary>
+                Condition to suspend the movement of the carousel.
+            </summary>
+        </docu>
+    ~*)
+    inoDisableCondition : BOOL;
 END_VAR
 VAR_INPUT
-	(*~
-		<docu>
-			<summary>
-				Condition to suspend the movement of the carousel can be inverted by this parameter.
-			</summary>	
-		</docu>
-	~*)
-	Invert:BOOL;
+    (*~
+        <docu>
+            <summary>
+                Condition to suspend the movement of the carousel can be inverted by this parameter.
+            </summary>
+        </docu>
+    ~*)
+    Invert : BOOL;
 END_VAR
 VAR
-	_signalInfo : TcoSignalInfo;
+    _signalInfo : TcoSignalInfo;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[
-IF (_turnTask.Busy OR _startTurn OR _enableTurn ) AND inoDisableCondition AND NOT Invert THEN
-	_signalInfo.GetSignalInfo(SIZEOF(inoDisableCondition), ADR(inoDisableCondition));
-	Messenger.Warning(_sb.Clear().Append('<#Turning table is suspended due to#> : ').Append(_signalInfo.SymbolPath).ToString());
-	_startTurn := FALSE;
-	_enableTurn := FALSE;
-	IF(__ISVALIDREF(THIS^.inoStartTurn)) THEN THIS^.inoStartTurn := FALSE; END_IF;
-	IF(__ISVALIDREF(THIS^.inoEnableTurn)) THEN THIS^.inoEnableTurn := FALSE; END_IF;
-ELSIF (_turnTask.Busy OR _startTurn OR _enableTurn ) AND inoDisableCondition AND  Invert THEN
-	_signalInfo.GetSignalInfo(SIZEOF(inoDisableCondition), ADR(inoDisableCondition));
-	Messenger.Warning(_sb.Clear().Append('<#Turning table is suspended due to NOT #> : ').Append(_signalInfo.SymbolPath).ToString());
-	_startTurn := FALSE;
-	_enableTurn := FALSE;
-	IF(__ISVALIDREF(THIS^.inoStartTurn)) THEN THIS^.inoStartTurn := FALSE; END_IF;
-	IF(__ISVALIDREF(THIS^.inoEnableTurn)) THEN THIS^.inoEnableTurn := FALSE; END_IF;
+        <ST><![CDATA[IF (_turnTask.Busy OR _startTurn OR _enableTurn) AND inoDisableCondition AND NOT Invert THEN
+    _signalInfo.GetSignalInfo(SIZEOF(inoDisableCondition), ADR(inoDisableCondition));
+    Messenger.Warning(_sb.Clear().Append('<#Turning table is suspended due to#> : ').Append(_signalInfo.SymbolPath).ToString());
+    _startTurn := FALSE;
+    _enableTurn := FALSE;
 
+    IF (__ISVALIDREF(THIS^.inoStartTurn)) THEN
+        THIS^.inoStartTurn := FALSE;
+    END_IF;
+
+    IF (__ISVALIDREF(THIS^.inoEnableTurn)) THEN
+        THIS^.inoEnableTurn := FALSE;
+    END_IF;
+ELSIF (_turnTask.Busy OR _startTurn OR _enableTurn) AND inoDisableCondition AND Invert THEN
+    _signalInfo.GetSignalInfo(SIZEOF(inoDisableCondition), ADR(inoDisableCondition));
+    Messenger.Warning(_sb.Clear().Append('<#Turning table is suspended due to NOT #> : ').Append(_signalInfo.SymbolPath).ToString());
+    _startTurn := FALSE;
+    _enableTurn := FALSE;
+
+    IF (__ISVALIDREF(THIS^.inoStartTurn)) THEN
+        THIS^.inoStartTurn := FALSE;
+    END_IF;
+
+    IF (__ISVALIDREF(THIS^.inoEnableTurn)) THEN
+        THIS^.inoEnableTurn := FALSE;
+    END_IF;
 END_IF]]></ST>
       </Implementation>
     </Method>
-    <Method Name="SuspendExpression" Id="{d8fc797a-9968-0ca9-180a-dcf844ea4441}">
+    <Method Name="SuspendExpression" Id="{434c1ae5-4f8d-04e3-36eb-feb9584bd1bb}">
       <Declaration><![CDATA[METHOD SuspendExpression : BOOL
 VAR_INPUT
-		inDisableCondition : BOOL;
-		inMessage:STRING;
-END_VAR
-]]></Declaration>
+    inDisableCondition : BOOL;
+    inMessage : STRING;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF (_turnTask.Busy OR _startTurn OR _enableTurn ) AND inDisableCondition THEN
-	Messenger.Warning(CONCAT('<#Rotating is suspended due to#> : ' , inMessage));
-	_startTurn := FALSE;
-	_enableTurn := FALSE;
-	IF(__ISVALIDREF(THIS^.inoStartTurn)) THEN THIS^.inoStartTurn := FALSE; END_IF;
-	IF(__ISVALIDREF(THIS^.inoEnableTurn)) THEN THIS^.inoEnableTurn := FALSE; END_IF;
+        <ST><![CDATA[IF (_turnTask.Busy OR _startTurn OR _enableTurn) AND inDisableCondition THEN
+    Messenger.Warning(CONCAT('<#Rotating is suspended due to#> : ', inMessage));
+    _startTurn := FALSE;
+    _enableTurn := FALSE;
+
+    IF (__ISVALIDREF(THIS^.inoStartTurn)) THEN
+        THIS^.inoStartTurn := FALSE;
+    END_IF;
+
+    IF (__ISVALIDREF(THIS^.inoEnableTurn)) THEN
+        THIS^.inoEnableTurn := FALSE;
+    END_IF;
 END_IF;]]></ST>
       </Implementation>
     </Method>
     <Property Name="TurnTask" Id="{edac1389-8e4f-0acd-2642-1f7433525494}" FolderPath="Tasks\">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Gets the `TurnTask` task that controls the moving of the carousel to next position. 		
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Gets the `TurnTask` task that controls the moving of the carousel to next position.
+        </summary>
+    </docu>
 ~*)
 PROPERTY TurnTask : TcoCore.ITcoTask]]></Declaration>
       <Get Name="Get" Id="{a3253a93-d92a-0b0a-0a5d-40bfe54b3888}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[TurnTask := _turnTask;]]></ST>
         </Implementation>

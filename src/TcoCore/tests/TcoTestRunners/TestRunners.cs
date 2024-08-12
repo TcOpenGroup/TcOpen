@@ -11,7 +11,11 @@ namespace TcoTestRunners
             context.ContextClose();
         }
 
-        public static void RunUntilEndConditionIsMet(this ITestContext context, Action action, Func<bool> endCondition)
+        public static void RunUntilEndConditionIsMet(
+            this ITestContext context,
+            Action action,
+            Func<bool> endCondition
+        )
         {
             while (!endCondition())
             {
@@ -32,5 +36,4 @@ namespace TcoTestRunners
             }
         }
     }
-
 }

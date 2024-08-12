@@ -17,10 +17,7 @@ namespace TcOpen.Inxton.Local.Security.Wpf
 
         public UserAccessor UserInfo
         {
-            get
-            {
-                return UserAccessor.Instance;
-            }
+            get { return UserAccessor.Instance; }
         }
 
         public RelayCommand OpenLoginWindowCommand { get; private set; }

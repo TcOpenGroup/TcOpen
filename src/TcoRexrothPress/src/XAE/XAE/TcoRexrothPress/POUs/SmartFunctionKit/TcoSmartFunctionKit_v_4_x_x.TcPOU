@@ -1,129 +1,147 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
   <POU Name="TcoSmartFunctionKit_v_4_x_x" Id="{1cad81cc-b410-0eea-0591-9e151b6f9de3}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK TcoSmartFunctionKit_v_4_x_x  EXTENDS TcoIo.TcoEcatComponent 
+    <Declaration><![CDATA[FUNCTION_BLOCK TcoSmartFunctionKit_v_4_x_x EXTENDS TcoIo.TcoEcatComponent
 VAR_IN_OUT
-	inoIoData : TcoSmartFunctionKitIO_v_4_x_x;
+    inoIoData : TcoSmartFunctionKitIO_v_4_x_x;
 END_VAR
-
 VAR
-	{attribute addProperty Name "<#Config#>"}
+    {attribute addProperty Name "<#Config#>"}
     _config : TcoSmartFunctionKitConfig_v_4_x_x;
-	{attribute addProperty Name "<#Status#>"}
-	_status : TcoSmartFunctionKitStatus_v_4_x_x;
-	
-	
-	_request : TcoSmartFunctionKitRequest_v_4_x_x;
-
-	{attribute addProperty Name "<#Results#>"}
-	_results	: TcoSmartFunctionKitResults_v_4_x_x;
-	converted: DWORD;
-	i: INT;
-	{attribute 'hide'}
-	chars: ARRAY [0..MAX_STRING_LENGTH] OF BYTE;
-	sCharacter : STRING(1) := '1';
+    {attribute addProperty Name "<#Status#>"}
+    _status : TcoSmartFunctionKitStatus_v_4_x_x;
+    _request : TcoSmartFunctionKitRequest_v_4_x_x;
+    {attribute addProperty Name "<#Results#>"}
+    _results : TcoSmartFunctionKitResults_v_4_x_x;
+    converted : DWORD;
+    i : INT;
+    {attribute 'hide'}
+    chars : ARRAY[0..MAX_STRING_LENGTH] OF BYTE;
+    sCharacter : STRING(1) := '1';
 END_VAR
-
 VAR
-	{attribute 'hide'}
+    {attribute 'hide'}
     _taskEnabled : BOOL;
-
-
-	{attribute addProperty Name "<#Run Command#>"}
+    {attribute addProperty Name "<#Run Command#>"}
     _runCommandTask : TcoSmartFunctionKitCommand_v_4_x_x(THIS^);
-
-	
-	{attribute addProperty Name "<#Get last Results#>" }
-	_getResultsTask : TcoCore.TcoRemoteTask(THIS^);
-	
-	{attribute addProperty Name "<#Save last curve#>" }
-	_exportCurveTask : TcoCore.TcoRemoteTask(THIS^);
-
-	{attribute addProperty Name "<#Restore Task#>"}
+    {attribute addProperty Name "<#Get last Results#>" }
+    _getResultsTask : TcoCore.TcoRemoteTask(THIS^);
+    {attribute addProperty Name "<#Save last curve#>" }
+    _exportCurveTask : TcoCore.TcoRemoteTask(THIS^);
+    {attribute addProperty Name "<#Restore Task#>"}
     _restoreTask : TcoCore.TcoTask(THIS^);
 END_VAR
 VAR
-    {attribute 'hide'} 
-	_varInfo : __SYSTEM.VAR_INFO;
-
-    {attribute 'hide'} 
-	_amsId: STRING(23);
-END_VAR
-]]></Declaration>
+    {attribute 'hide'}
+    _varInfo : __SYSTEM.VAR_INFO;
+    {attribute 'hide'}
+    _amsId : STRING(23);
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF InvalidReference() THEN
     RETURN;
 END_IF
 
-
-SUPER^(AdsAddr:=AdsAddr);
-
-
-
+SUPER^(AdsAddr := AdsAddr);
 UpdateResponses();
 
-
-
-
 CASE _request.Command OF
-	eTcoSmartFunctionKitCommand_v_4_x_x.StartProgram:
-	
-		chars:=MAXSTRING_TO_BYTEARR(_request.SerialNumber);
-		FOR i:=LEN(_request.SerialNumber)+1 TO 255 BY 1 DO
-			chars[i] := 0;
-		END_FOR;
-		
-		i:=0;
-		_request.Value1:=THIS^._BYTES_TO_DWORD(Format:=_config.DataFormat,INb0:=chars[i],INb1:=chars[i+1],INb2:=chars[i+2],INb3:=chars[i+3]);
-		i:=4;
-		_request.Value2:=THIS^._BYTES_TO_DWORD(Format:=_config.DataFormat,INb0:=chars[i],INb1:=chars[i+1],INb2:=chars[i+2],INb3:=chars[i+3]);
-		i:=8;
-		_request.Value3:=THIS^._BYTES_TO_DWORD(Format:=_config.DataFormat,INb0:=chars[i],INb1:=chars[i+1],INb2:=chars[i+2],INb3:=chars[i+3]);
-		i:=12;
-		_request.Value4:=THIS^._BYTES_TO_DWORD(Format:=_config.DataFormat,INb0:=chars[i],INb1:=chars[i+1],INb2:=chars[i+2],INb3:=chars[i+3]);
-		i:=16;
-		_request.Value5:=THIS^._BYTES_TO_DWORD(Format:=_config.DataFormat,INb0:=chars[i],INb1:=chars[i+1],INb2:=chars[i+2],INb3:=chars[i+3]);
-		i:=20;
-		_request.Value6:=THIS^._BYTES_TO_DWORD(Format:=_config.DataFormat,INb0:=chars[i],INb1:=chars[i+1],INb2:=chars[i+2],INb3:=chars[i+3]);
-		i:=24;
-		_request.Value7:=THIS^._BYTES_TO_DWORD(Format:=_config.DataFormat,INb0:=chars[i],INb1:=chars[i+1],INb2:=chars[i+2],INb3:=chars[i+3]);
-	
-	eTcoSmartFunctionKitCommand_v_4_x_x.SetProgramActive:
-		_request.Value1:= INT_TO_DWORD(_request.ProgramId*1000);	
-	eTcoSmartFunctionKitCommand_v_4_x_x.Positioning:
-		_request.Value1:= REAL_TO_DWORD(_request.PositionDistanceTara*1000);
-		_request.Value2:= REAL_TO_DWORD(_request.TravelSpeed*1000);	
-		_request.Value3:= REAL_TO_DWORD(_request.Acceleration*1000);
-	eTcoSmartFunctionKitCommand_v_4_x_x.Jog:
-		_request.Value1:= REAL_TO_DWORD(_request.PositionDistanceTara*1000);
-		_request.Value2:= REAL_TO_DWORD(_request.TravelSpeed*1000);	
-		_request.Value3:= REAL_TO_DWORD(_request.Acceleration*1000);
-	eTcoSmartFunctionKitCommand_v_4_x_x.Tare:
-		_request.Value1:= REAL_TO_DWORD(_request.Offset*1000);		
-	
+    eTcoSmartFunctionKitCommand_v_4_x_x.StartProgram:
+        chars := MAXSTRING_TO_BYTEARR(_request.SerialNumber);
+
+        FOR i := LEN(_request.SerialNumber) + 1 TO 255 BY 1 DO
+            chars[i] := 0;
+        END_FOR;
+
+        i := 0;
+
+        _request.Value1 := THIS^._BYTES_TO_DWORD(Format := _config.DataFormat,
+            INb0 := chars[i],
+            INb1 := chars[i + 1],
+            INb2 := chars[i + 2],
+            INb3 := chars[i + 3]);
+
+        i := 4;
+
+        _request.Value2 := THIS^._BYTES_TO_DWORD(Format := _config.DataFormat,
+            INb0 := chars[i],
+            INb1 := chars[i + 1],
+            INb2 := chars[i + 2],
+            INb3 := chars[i + 3]);
+
+        i := 8;
+
+        _request.Value3 := THIS^._BYTES_TO_DWORD(Format := _config.DataFormat,
+            INb0 := chars[i],
+            INb1 := chars[i + 1],
+            INb2 := chars[i + 2],
+            INb3 := chars[i + 3]);
+
+        i := 12;
+
+        _request.Value4 := THIS^._BYTES_TO_DWORD(Format := _config.DataFormat,
+            INb0 := chars[i],
+            INb1 := chars[i + 1],
+            INb2 := chars[i + 2],
+            INb3 := chars[i + 3]);
+
+        i := 16;
+
+        _request.Value5 := THIS^._BYTES_TO_DWORD(Format := _config.DataFormat,
+            INb0 := chars[i],
+            INb1 := chars[i + 1],
+            INb2 := chars[i + 2],
+            INb3 := chars[i + 3]);
+
+        i := 20;
+
+        _request.Value6 := THIS^._BYTES_TO_DWORD(Format := _config.DataFormat,
+            INb0 := chars[i],
+            INb1 := chars[i + 1],
+            INb2 := chars[i + 2],
+            INb3 := chars[i + 3]);
+
+        i := 24;
+
+        _request.Value7 := THIS^._BYTES_TO_DWORD(Format := _config.DataFormat,
+            INb0 := chars[i],
+            INb1 := chars[i + 1],
+            INb2 := chars[i + 2],
+            INb3 := chars[i + 3]);
+    eTcoSmartFunctionKitCommand_v_4_x_x.SetProgramActive:
+        _request.Value1 := INT_TO_DWORD(_request.ProgramId * 1000);
+    eTcoSmartFunctionKitCommand_v_4_x_x.Positioning:
+        _request.Value1 := REAL_TO_DWORD(_request.PositionDistanceTara * 1000);
+        _request.Value2 := REAL_TO_DWORD(_request.TravelSpeed * 1000);
+        _request.Value3 := REAL_TO_DWORD(_request.Acceleration * 1000);
+    eTcoSmartFunctionKitCommand_v_4_x_x.Jog:
+        _request.Value1 := REAL_TO_DWORD(_request.PositionDistanceTara * 1000);
+        _request.Value2 := REAL_TO_DWORD(_request.TravelSpeed * 1000);
+        _request.Value3 := REAL_TO_DWORD(_request.Acceleration * 1000);
+    eTcoSmartFunctionKitCommand_v_4_x_x.Tare:
+        _request.Value1 := REAL_TO_DWORD(_request.Offset * 1000);
 END_CASE
-
-
-
-
 //*************READ***********************
 _taskEnabled := TRUE;
-_taskEnabled := _taskEnabled ;
-_runCommandTask.Enabled :=  _taskEnabled;
-_runCommandTask(inCommand:=_request, inoIoData := THIS^.inoIoData,inoConfig := THIS^._config,inoStatus := THIS^._status,inoResults := THIS^._results);
+_taskEnabled := _taskEnabled;
+_runCommandTask.Enabled := _taskEnabled;
+
+_runCommandTask(inCommand := _request,
+    inoIoData := THIS^.inoIoData,
+    inoConfig := THIS^._config,
+    inoStatus := THIS^._status,
+    inoResults := THIS^._results);
 //****************************************
 //*************RESTORE********************
 _taskEnabled := TRUE;
 _restoreTask.Enabled := _taskEnabled;
+
 IF _restoreTask.Execute() THEN
-	Restore();
+    Restore();
 END_IF
 //****************************************
-
-
 _exportCurveTask();
-_getResultsTask();
-]]></ST>
+_getResultsTask();]]></ST>
     </Implementation>
     <Folder Name="_Internals" Id="{f7465398-dfd5-4304-a9c7-fb9b1c2bdc29}" />
     <Folder Name="Operations" Id="{d9742a61-87e9-44cb-af6c-e10389d60ffe}" />
@@ -131,54 +149,52 @@ _getResultsTask();
     <Method Name="_BYTES_TO_DWORD" Id="{4132e013-4ef8-4489-8380-9cafb65c49c6}" FolderPath="_Internals\">
       <Declaration><![CDATA[METHOD _BYTES_TO_DWORD : DWORD
 VAR_INPUT
-	Format : TcoUtilities.eTcoDataFormat;
-	INb0 : BYTE;
-	INb1 : BYTE;
-	INb2 : BYTE;
-	INb3 : BYTE;
+    Format : TcoUtilities.eTcoDataFormat;
+    INb0 : BYTE;
+    INb1 : BYTE;
+    INb2 : BYTE;
+    INb3 : BYTE;
 END_VAR
 VAR
-    b0: BYTE;
-	b1: BYTE;
-	b2: BYTE;
-    b3: BYTE;
-	tmpDWORD : DWORD;
-END_VAR
- ]]></Declaration>
+    b0 : BYTE;
+    b1 : BYTE;
+    b2 : BYTE;
+    b3 : BYTE;
+    tmpDWORD : DWORD;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF Format=TcoUtilities.eTcoDataFormat.LittleEndian THEN
-	b0 := INb3;
-	b1 := INb2;	
-	b2 := INb1;
-	b3 := INb0;	
-ELSIF Format=TcoUtilities.eTcoDataFormat.BigEndian THEN
-	b0 := INb0;
-	b1 := INb1;	
-	b2 := INb2;
-	b3 := INb3;	
+        <ST><![CDATA[IF Format = TcoUtilities.eTcoDataFormat.LittleEndian THEN
+    b0 := INb3;
+    b1 := INb2;
+    b2 := INb1;
+    b3 := INb0;
+ELSIF Format = TcoUtilities.eTcoDataFormat.BigEndian THEN
+    b0 := INb0;
+    b1 := INb1;
+    b2 := INb2;
+    b3 := INb3;
 END_IF
 
 tmpDWORD := b0;
-tmpDWORD := SHL(tmpDWORD,8);
+tmpDWORD := SHL(tmpDWORD, 8);
 tmpDWORD := tmpDWORD + b1;
-tmpDWORD := SHL(tmpDWORD,8);
+tmpDWORD := SHL(tmpDWORD, 8);
 tmpDWORD := tmpDWORD + b2;
-tmpDWORD := SHL(tmpDWORD,8);
+tmpDWORD := SHL(tmpDWORD, 8);
 tmpDWORD := tmpDWORD + b3;
-
 _BYTES_TO_DWORD := tmpDWORD;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Config" Id="{d097aa82-3255-4848-8d04-863bfbd6ce53}">
+    <Property Name="Config" Id="{3cf3c9b6-d7b8-0538-01a2-a1f5a96f75fd}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Gets the configuration of the SFK. 					
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Gets the configuration of the SFK.
+        </summary>
+    </docu>
 ~*)
 PROPERTY Config : REFERENCE TO TcoSmartFunctionKitConfig_v_4_x_x]]></Declaration>
-      <Get Name="Get" Id="{f0a60fa8-c67f-4d62-a6b9-546c59aac019}">
+      <Get Name="Get" Id="{aff8dbfb-e4eb-0c0f-0fff-5c0b2e915f71}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
           <ST><![CDATA[Config REF= _config;]]></ST>
@@ -187,28 +203,26 @@ PROPERTY Config : REFERENCE TO TcoSmartFunctionKitConfig_v_4_x_x]]></Declaration
     </Property>
     <Method Name="ExportLastCurve" Id="{5122aff6-6516-463d-a3e7-65c79b2aa5d4}" FolderPath="Operations\">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Run specified comand of smart function kit. 		
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Run specified comand of smart function kit.
+        </summary>
+    </docu>
 ~*)
-METHOD ExportLastCurve : TcoCore.ITcoTaskStatus
-]]></Declaration>
+METHOD ExportLastCurve : TcoCore.ITcoTaskStatus]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ExportLastCurve := THIS^._exportCurveTask.Invoke();
-]]></ST>
+        <ST><![CDATA[ExportLastCurve := THIS^._exportCurveTask.Invoke();]]></ST>
       </Implementation>
     </Method>
     <Property Name="ExportLastCurveTask" Id="{9815ed4e-a426-4eec-a4ea-662ac674ca3d}" FolderPath="Tasks\">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Gets the `ReadTask` task that controls the reading sequence. 		
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Gets the `ReadTask` task that controls the reading sequence.
+        </summary>
+    </docu>
 ~*)
-PROPERTY ExportLastCurveTask :  REFERENCE TO TcoCore.TcoRemoteTask]]></Declaration>
+PROPERTY ExportLastCurveTask : REFERENCE TO TcoCore.TcoRemoteTask]]></Declaration>
       <Get Name="Get" Id="{3ec8d6cf-7c93-4031-a527-be3c2b535de7}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
@@ -219,31 +233,29 @@ PROPERTY ExportLastCurveTask :  REFERENCE TO TcoCore.TcoRemoteTask]]></Declarati
     <Method Name="FB_init" Id="{dc37b870-e64a-49d6-9902-223c8cccd396}">
       <Declaration><![CDATA[METHOD FB_init : BOOL
 VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	ParentObject : ITcoObject;
-END_VAR
-]]></Declaration>
+    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+    ParentObject : ITcoObject;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="GetResults" Id="{ed520f73-dba3-4a63-b132-9d5ea7c4e6d8}" FolderPath="Operations\">
-      <Declaration><![CDATA[METHOD GetResults :TcoCore.ITcoTaskStatus
+      <Declaration><![CDATA[METHOD GetResults : TcoCore.ITcoTaskStatus
 VAR_INPUT
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[GetResults:=this^._getResultsTask.Invoke();]]></ST>
+        <ST><![CDATA[GetResults := this^._getResultsTask.Invoke();]]></ST>
       </Implementation>
     </Method>
     <Property Name="GetResultsTask" Id="{750c1c89-019a-4ea6-8e6f-0052a89c15e4}" FolderPath="Tasks\">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Gets the `ReadTask` task that controls the reading sequence. 		
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Gets the `ReadTask` task that controls the reading sequence.
+        </summary>
+    </docu>
 ~*)
 PROPERTY GetResultsTask : REFERENCE TO TcoCore.TcoRemoteTask]]></Declaration>
       <Get Name="Get" Id="{e7ed6d90-0644-4b85-a786-6fa1fbc5a6a1}">
@@ -254,25 +266,24 @@ PROPERTY GetResultsTask : REFERENCE TO TcoCore.TcoRemoteTask]]></Declaration>
       </Get>
     </Property>
     <Method Name="InvalidReference" Id="{3fb9cd7d-6da0-44fd-8dad-f3fee2f03612}" FolderPath="_Internals\">
-      <Declaration><![CDATA[METHOD INTERNAL InvalidReference : BOOL
-]]></Declaration>
+      <Declaration><![CDATA[METHOD INTERNAL InvalidReference : BOOL]]></Declaration>
       <Implementation>
         <ST><![CDATA[InvalidReference := FALSE;
+
 IF NOT __ISVALIDREF(inoIoData) THEN
-	_varInfo :=__VARINFO(inoIoData);
-	Messenger.Error(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString());
+    _varInfo := __VARINFO(inoIoData);
+    Messenger.Error(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString());
     InvalidReference := TRUE;
-END_IF
-]]></ST>
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Property Name="Request" Id="{b7c173f8-ddbf-477d-9012-44c8c5cda31e}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Gets the configuration of the SFK. 					
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Gets the configuration of the SFK.
+        </summary>
+    </docu>
 ~*)
 PROPERTY Request : REFERENCE TO TcoSmartFunctionKitRequest_v_4_x_x]]></Declaration>
       <Get Name="Get" Id="{2ef3cfa6-433e-43c7-ada4-a3bb5479d066}">
@@ -284,62 +295,56 @@ PROPERTY Request : REFERENCE TO TcoSmartFunctionKitRequest_v_4_x_x]]></Declarati
     </Property>
     <Method Name="Restore" Id="{5681afda-7c1a-4157-b799-03f51fb376ba}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.	
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+        </summary>
+    </docu>
 ~*)
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
-        <ST><![CDATA[
-
-IF InvalidReference() THEN
+        <ST><![CDATA[IF InvalidReference() THEN
     RETURN;
 END_IF
+
 _restoreTask.Restore();
 _ecatState.Restore();
 _runCommandTask.Restore();
 _getResultsTask.Restore();
 _exportCurveTask.Restore();
-
-Tc2_System.MEMSET(destAddr:= ADR(THIS^.inoIoData) , fillByte:= 0 , n:= SIZEOF(THIS^.inoIoData));
-
+Tc2_System.MEMSET(destAddr := ADR(THIS^.inoIoData), fillByte := 0, n := SIZEOF(THIS^.inoIoData));
 _status.ActionDescription := '<#Restore executed!#>';
-inoIoData.Request.Command:=0;
-inoIoData.Request.VirtualIo:=0;
-inoIoData.Request.Value1:=0;
-inoIoData.Request.Value2:=0;
-inoIoData.Request.Value3:=0;
-inoIoData.Request.Value4:=0;
-inoIoData.Request.Value5:=0;
-inoIoData.Request.Value6:=0;
-inoIoData.Request.Value7:=0;
-]]></ST>
+inoIoData.Request.Command := 0;
+inoIoData.Request.VirtualIo := 0;
+inoIoData.Request.Value1 := 0;
+inoIoData.Request.Value2 := 0;
+inoIoData.Request.Value3 := 0;
+inoIoData.Request.Value4 := 0;
+inoIoData.Request.Value5 := 0;
+inoIoData.Request.Value6 := 0;
+inoIoData.Request.Value7 := 0;]]></ST>
       </Implementation>
     </Method>
     <Method Name="RunCommand" Id="{1638795e-d470-45f9-bb0d-3f28e4ad36af}" FolderPath="Operations\">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Run specified comand of smart function kit. 		
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Run specified comand of smart function kit.
+        </summary>
+    </docu>
 ~*)
-METHOD RunCommand : TcoCore.ITcoTaskStatus
-]]></Declaration>
+METHOD RunCommand : TcoCore.ITcoTaskStatus]]></Declaration>
       <Implementation>
-        <ST><![CDATA[RunCommand := THIS^._runCommandTask.Invoke();
-]]></ST>
+        <ST><![CDATA[RunCommand := THIS^._runCommandTask.Invoke();]]></ST>
       </Implementation>
     </Method>
     <Property Name="RunCommandTask" Id="{0cfe177f-9f9d-4984-8f43-685d887b5716}" FolderPath="Tasks\">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Gets the `ReadTask` task that controls the reading sequence. 		
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Gets the `ReadTask` task that controls the reading sequence.
+        </summary>
+    </docu>
 ~*)
 PROPERTY RunCommandTask : TcoCore.ITcoTaskStatus]]></Declaration>
       <Get Name="Get" Id="{c6701c52-9c1b-4e28-bc9b-0fa87cc7037d}">
@@ -351,28 +356,28 @@ PROPERTY RunCommandTask : TcoCore.ITcoTaskStatus]]></Declaration>
     </Property>
     <Method Name="ServiceMode" Id="{8d8a05c3-1c62-4521-995f-c6c2d5c0e2f7}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-		    Custom service (manual, maintenance) logic.
-			This method must be implemented in derived class.
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Custom service (manual, maintenance) logic.
+            This method must be implemented in derived class.
+        </summary>
+    </docu>
 ~*)
 METHOD PROTECTED ServiceMode]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Status" Id="{9f04587f-2cd5-4ce7-965a-55ffcb50b2dd}">
+    <Property Name="Status" Id="{99b7a6f4-cbe9-0f1b-0222-894c764bfb9b}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Gets the status of the SFK. 					
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Gets the status of the SFK.
+        </summary>
+    </docu>
 ~*)
 PROPERTY Status : REFERENCE TO TcoSmartFunctionKitStatus_v_4_x_x]]></Declaration>
-      <Get Name="Get" Id="{a5b8a1d1-9db9-4d07-bddd-cbac49d95ee9}">
+      <Get Name="Get" Id="{3a69fd95-d865-09fb-0d4b-a9a198640de6}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
           <ST><![CDATA[Status REF= _status;]]></ST>
@@ -381,48 +386,43 @@ PROPERTY Status : REFERENCE TO TcoSmartFunctionKitStatus_v_4_x_x]]></Declaration
     </Property>
     <Method Name="UpdateResponses" Id="{5993effc-b62e-4060-862b-68edbb196a11}" FolderPath="_Internals\">
       <Declaration><![CDATA[METHOD INTERNAL UpdateResponses
-
 VAR
-	enumVal: eTcoSmartFunctionKitStatusInformation_v_4_x_x;
+    enumVal : eTcoSmartFunctionKitStatusInformation_v_4_x_x;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_status.ResponseStatus.AxisInReference	:=	inoIoData.Response.NotificationStatus.2; 
-_status.ResponseStatus.ProgramActive	:=	inoIoData.Response.NotificationStatus.3; 
-_status.ResponseStatus.LastPressingOk	:=	inoIoData.Response.NotificationStatus.4; 
-_status.ResponseStatus.LastPressingNok	:=	inoIoData.Response.NotificationStatus.5; 
-_status.ResponseStatus.SensorTared	:=	inoIoData.Response.NotificationStatus.6; 
-_status.ResponseStatus.PressReady	:=	inoIoData.Response.NotificationStatus.7; 
-_status.ResponseStatus.Error	:=	inoIoData.Response.NotificationStatus.8; 
-_status.ResponseStatus.Warning	:=	inoIoData.Response.NotificationStatus.9; 
-_status.ResponseStatus.RequestPossible	:=	inoIoData.Response.NotificationStatus.11;
-_status.ResponseStatus.ResponsAvialable	:=	inoIoData.Response.NotificationStatus.12; 
-_status.ResponseStatus.NotificationAvailable	:=	inoIoData.Response.NotificationStatus.13; 
-_status.ResponseStatus.EmergencyOffActive	:=	inoIoData.Response.NotificationStatus.14; 
-_status.ResponseStatus.SafeStandstillActive	:=	inoIoData.Response.NotificationStatus.15; 
-
-_status.NotificationPosition:=DWORD_TO_REAL( inoIoData.Response.NotificationPosition)/10000;
-_status.NotificationVelocity:=DWORD_TO_REAL(inoIoData.Response.NotificationVelocity)/10000;
-_status.NotificationForce:=DWORD_TO_REAL(inoIoData.Response.NotificationForce)/1000;
-_status.NotificationId:= inoIoData.Response.NotificationId;
+        <ST><![CDATA[_status.ResponseStatus.AxisInReference := inoIoData.Response.NotificationStatus.2;
+_status.ResponseStatus.ProgramActive := inoIoData.Response.NotificationStatus.3;
+_status.ResponseStatus.LastPressingOk := inoIoData.Response.NotificationStatus.4;
+_status.ResponseStatus.LastPressingNok := inoIoData.Response.NotificationStatus.5;
+_status.ResponseStatus.SensorTared := inoIoData.Response.NotificationStatus.6;
+_status.ResponseStatus.PressReady := inoIoData.Response.NotificationStatus.7;
+_status.ResponseStatus.Error := inoIoData.Response.NotificationStatus.8;
+_status.ResponseStatus.Warning := inoIoData.Response.NotificationStatus.9;
+_status.ResponseStatus.RequestPossible := inoIoData.Response.NotificationStatus.11;
+_status.ResponseStatus.ResponsAvialable := inoIoData.Response.NotificationStatus.12;
+_status.ResponseStatus.NotificationAvailable := inoIoData.Response.NotificationStatus.13;
+_status.ResponseStatus.EmergencyOffActive := inoIoData.Response.NotificationStatus.14;
+_status.ResponseStatus.SafeStandstillActive := inoIoData.Response.NotificationStatus.15;
+_status.NotificationPosition := DWORD_TO_REAL(inoIoData.Response.NotificationPosition) / 10000;
+_status.NotificationVelocity := DWORD_TO_REAL(inoIoData.Response.NotificationVelocity) / 10000;
+_status.NotificationForce := DWORD_TO_REAL(inoIoData.Response.NotificationForce) / 1000;
+_status.NotificationId := inoIoData.Response.NotificationId;
 
 CASE inoIoData.Response.NotificationId of
-	eTcoSmartFunctionKitStatusInformation_v_4_x_x.ActiveProgramNumber:
-		enumVal:=eTcoSmartFunctionKitStatusInformation_v_4_x_x.ActiveProgramNumber;
-	eTcoSmartFunctionKitStatusInformation_v_4_x_x.CurrentForce:
-		enumVal:=eTcoSmartFunctionKitStatusInformation_v_4_x_x.CurrentForce;
-	eTcoSmartFunctionKitStatusInformation_v_4_x_x.CurrentPosition:
-		enumVal:=eTcoSmartFunctionKitStatusInformation_v_4_x_x.CurrentPosition;
-	eTcoSmartFunctionKitStatusInformation_v_4_x_x.CurrentTravelSpeed:
-		enumVal:=eTcoSmartFunctionKitStatusInformation_v_4_x_x.CurrentTravelSpeed;
-	eTcoSmartFunctionKitStatusInformation_v_4_x_x.RemainingStorageSpaceOnIPC:
-		enumVal:=eTcoSmartFunctionKitStatusInformation_v_4_x_x.RemainingStorageSpaceOnIPC;
-		
+    eTcoSmartFunctionKitStatusInformation_v_4_x_x.ActiveProgramNumber:
+        enumVal := eTcoSmartFunctionKitStatusInformation_v_4_x_x.ActiveProgramNumber;
+    eTcoSmartFunctionKitStatusInformation_v_4_x_x.CurrentForce:
+        enumVal := eTcoSmartFunctionKitStatusInformation_v_4_x_x.CurrentForce;
+    eTcoSmartFunctionKitStatusInformation_v_4_x_x.CurrentPosition:
+        enumVal := eTcoSmartFunctionKitStatusInformation_v_4_x_x.CurrentPosition;
+    eTcoSmartFunctionKitStatusInformation_v_4_x_x.CurrentTravelSpeed:
+        enumVal := eTcoSmartFunctionKitStatusInformation_v_4_x_x.CurrentTravelSpeed;
+    eTcoSmartFunctionKitStatusInformation_v_4_x_x.RemainingStorageSpaceOnIPC:
+        enumVal := eTcoSmartFunctionKitStatusInformation_v_4_x_x.RemainingStorageSpaceOnIPC;
 END_CASE
-_status.NotificationToDisplay :=enumVal;
-_status.DigitalIoMapping:=inoIoData.Response.DigitalIoMapping;
 
-
-]]></ST>
+_status.NotificationToDisplay := enumVal;
+_status.DigitalIoMapping := inoIoData.Response.DigitalIoMapping;]]></ST>
       </Implementation>
     </Method>
   </POU>

@@ -8,10 +8,9 @@
 {attribute addProperty Size "4"}
 TYPE SAI_Range_Control_Channel_F5D9BC22 EXTENDS TcoIo.OutputBase_10CEE7DE :
 STRUCT
-	{attribute addProperty Name "Control"}
-	Control AT %Q* : Control_E49DBA1B;
+    {attribute addProperty Name "Control"}
+    Control AT %Q* : Control_E49DBA1B;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

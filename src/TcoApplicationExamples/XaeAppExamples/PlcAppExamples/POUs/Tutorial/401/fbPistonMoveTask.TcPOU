@@ -4,19 +4,18 @@
     <Declaration><![CDATA[{attribute addProperty Activity "task is running"}
 FUNCTION_BLOCK fbPistonMoveTask EXTENDS TcoCore.TcoTask
 VAR_INPUT
-	PositionSensor : BOOL;
+    PositionSensor : BOOL;
 END_VAR
 VAR_IN_OUT
-	MoveToPositionSignal : BOOL;
-	InverseSignal : BOOL;	
-END_VAR
-]]></Declaration>
+    MoveToPositionSignal : BOOL;
+    InverseSignal : BOOL;
+END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF(THIS^.Execute())THEN
-	THIS^.Messenger.Debug('|[[1]AttributeName]| |[AttributeActivity]|, extremity sensor not reached yet.');
-	InverseSignal := FALSE;
-	MoveToPositionSignal := TRUE;
-	THIS^.DoneWhen(PositionSensor);
+      <ST><![CDATA[IF (THIS^.Execute()) THEN
+    THIS^.Messenger.Debug('|[[1]AttributeName]| |[AttributeActivity]|, extremity sensor not reached yet.');
+    InverseSignal := FALSE;
+    MoveToPositionSignal := TRUE;
+    THIS^.DoneWhen(PositionSensor);
 END_IF]]></ST>
     </Implementation>
   </POU>

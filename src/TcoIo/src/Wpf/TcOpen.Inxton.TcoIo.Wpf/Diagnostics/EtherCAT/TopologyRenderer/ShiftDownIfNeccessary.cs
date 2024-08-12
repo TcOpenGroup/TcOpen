@@ -1,16 +1,16 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Shapes;
+using TcoIo.Converters;
+using TcoIo.Topology;
 using Vortex.Connector;
 using Vortex.Presentation.Wpf;
-using System.Collections.ObjectModel;
-using TcoIo.Topology;
-using System.Windows.Shapes;
-using System.Windows.Media;
-using System.Windows.Data;
-using TcoIo.Converters;
-using System.Windows.Input;
 
 namespace TcoIo
 {
@@ -19,7 +19,11 @@ namespace TcoIo
     /// </summary>
     public partial class TopologyRenderer : UserControl
     {
-        private void ShiftDownIfNeccessary(string port, TopologyObject connectionPartner, int offset)
+        private void ShiftDownIfNeccessary(
+            string port,
+            TopologyObject connectionPartner,
+            int offset
+        )
         {
             if (maxrow >= row)
             {
@@ -40,8 +44,14 @@ namespace TcoIo
                 {
                     if (topologyObj.Row > row)
                     {
-                        maxColumnFromMyRowDown = Math.Max(maxColumnFromMyRowDown, topologyObj.Column);
-                        minColumnFromMyRowDown = Math.Min(minColumnFromMyRowDown, topologyObj.Column);
+                        maxColumnFromMyRowDown = Math.Max(
+                            maxColumnFromMyRowDown,
+                            topologyObj.Column
+                        );
+                        minColumnFromMyRowDown = Math.Min(
+                            minColumnFromMyRowDown,
+                            topologyObj.Column
+                        );
                     }
                     if (topologyObj.Row == row)
                     {
@@ -69,7 +79,12 @@ namespace TcoIo
                     //If there are already any objects right to "me" or at "my" column and lower then "me" or at "my" row at the same time,
                     //but no objects left to "me" and lower then "me or so that's "me" or at "my" row at the same time,
                     //that's "me" who has to be placed into the new added row after all the others.
-                    if (column <= maxColumnInMyRow && column <= minColumnInMyRow && column <= maxColumnFromMyRowDown && column <= minColumnFromMyRowDown)
+                    if (
+                        column <= maxColumnInMyRow
+                        && column <= minColumnInMyRow
+                        && column <= maxColumnFromMyRowDown
+                        && column <= minColumnFromMyRowDown
+                    )
                     {
                         row = maxrow + 1;
                         Pos_Y = MaxPos_Y + DimsDef.slaveHeightWithBorders;
@@ -87,7 +102,8 @@ namespace TcoIo
                             if (topologyObj.Row >= row)
                             {
                                 topologyObj.Row++;
-                                topologyObj.Pos_Y = topologyObj.Pos_Y + DimsDef.slaveHeightWithBorders;
+                                topologyObj.Pos_Y =
+                                    topologyObj.Pos_Y + DimsDef.slaveHeightWithBorders;
                                 maxrow = Math.Max(maxrow, topologyObj.Row);
                                 MaxPos_Y = Math.Max(MaxPos_Y, topologyObj.Pos_Y);
                             }
@@ -102,7 +118,5 @@ namespace TcoIo
             //ShiftDownIfNeccessary(port, 1);
             ShiftDownIfNeccessary(port, connectionPartner, 0);
         }
-
-
     }
 }

@@ -3,24 +3,19 @@
   <DUT Name="TcoSingleAxisConfig" Id="{836ca49c-6280-0fdd-0494-e79df43add58}">
     <Declaration><![CDATA[TYPE TcoSingleAxisConfig :
 STRUCT
-
-   InfoTime : TIME := T#2S;
-   ErrorTime : TIME := T#5S;
-   
-	{attribute addProperty Name "<#Hide Load position Tab#>"}
-	HideLoadPositionTask            : BOOL; 
-	{attribute addProperty Name "<#Hide Save position Tab#>"}
-	HideSavePositionTask            : BOOL; 	
-	{attribute addProperty Name "<#Hide MoveAbsolute Tab#>"}
-	HideMoveAbsoluteTask            : BOOL; 
-	{attribute addProperty Name "<#Hide MoveRelative Tab#>"}
-	HideMoveRelativeTask            : BOOL; 
-	{attribute addProperty Name "<#Hide Position Tab#>"}
-	HidePositionTable            : BOOL; 
-	
-
+    InfoTime : TIME := T#2S;
+    ErrorTime : TIME := T#5S;
+    {attribute addProperty Name "<#Hide Load position Tab#>"}
+    HideLoadPositionTask : BOOL;
+    {attribute addProperty Name "<#Hide Save position Tab#>"}
+    HideSavePositionTask : BOOL;
+    {attribute addProperty Name "<#Hide MoveAbsolute Tab#>"}
+    HideMoveAbsoluteTask : BOOL;
+    {attribute addProperty Name "<#Hide MoveRelative Tab#>"}
+    HideMoveRelativeTask : BOOL;
+    {attribute addProperty Name "<#Hide Position Tab#>"}
+    HidePositionTable : BOOL;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

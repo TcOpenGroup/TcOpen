@@ -12,19 +12,25 @@ namespace TcoDrivesBeckhoff
 {
     public class TcoMultiAxisPositionsRootContainerViewModel : RenderableViewModel
     {
-        public TcoMultiAxisPositionsRootContainerViewModel()
-        {
-
-        }
+        public TcoMultiAxisPositionsRootContainerViewModel() { }
 
         public TcoMultiAxisPositionsRootContainer Component { get; private set; }
 
-        public ObservableCollection<TcoMultiAxisMoveParam> Positions { get { return Extensions.ToObservableCollection<TcoMultiAxisMoveParam>(((IVortexObject)Model).GetChildren().OfType<TcoMultiAxisMoveParam>()); } }
+        public ObservableCollection<TcoMultiAxisMoveParam> Positions
+        {
+            get
+            {
+                return Extensions.ToObservableCollection<TcoMultiAxisMoveParam>(
+                    ((IVortexObject)Model).GetChildren().OfType<TcoMultiAxisMoveParam>()
+                );
+            }
+        }
         public TcoMultiAxisMoveParam SelectedItem { get; set; }
 
-
-        public override object Model { get => this.Component; set { this.Component = value as TcoMultiAxisPositionsRootContainer; } }
+        public override object Model
+        {
+            get => this.Component;
+            set { this.Component = value as TcoMultiAxisPositionsRootContainer; }
+        }
     }
-
-
 }

@@ -1,5 +1,9 @@
-<?xml version="1.0"?>
-<EtherCATInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="EtherCATInfo.xsd" Version="1.2">
+<?xml version="1.0" ?>
+<EtherCATInfo
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="EtherCATInfo.xsd"
+  Version="1.2"
+>
 	<!--
  ================================================================
  Bosch Rexroth AG
@@ -10,23 +14,23 @@
  ================================================================
 
  EtherCAT XML Device Description for Rexroth IndraDrive
- 
+
  ================================================================
- 
+
  File Name   : BoschRexroth_IndraDrive_ECAT_SoE_01V24.xml
  File Version: 1.24
  File Date   : 2018-08-09
- 
+
  ================================================================
 
  ************* File History *************************************
- Date		Version	
+ Date		Version
  2011-04-08 1.00		Initial Release
  2011-08-16	1.01		Entries for MPC17 modified
  2011-11-01	1.02		Entries for MPC08 modified
  2013-04-10 1.03		Entries for MPx18 added
 						Entries for MPM18 added
- 2013-08-06 1.04		Entries for MPC08/17/18 modified 
+ 2013-08-06 1.04		Entries for MPC08/17/18 modified
 						LcID modified
  2014-03-06 1.05		OpMode names changed
  2015-02-26 1.06		SerialNo deleted
@@ -54,9 +58,9 @@
  2018-07-19 1.22		Watchdog Trigger Flag SyncManager 3 removed
  2018-07-30 1.23		Name MPE20/21 changed
  2018-08-09 1.24		Removed IndraControl FM (MPD)
- 
+
  ************* File History End *********************************
- 
+
  ================================================================
 
       DISCLAIMER:
@@ -70,7 +74,8 @@
 	<Vendor>
 		<Id>36</Id>
 		<Name>Bosch Rexroth AG</Name>
-		<ImageData16x14>424de6000000000000007600000028000000100000000e000000010004000000000070000000000000000000000000000000000000000000000000008000008000000080800080000000800080008080000080808000c0c0c0000000ff0000ff000000ffff00ff000000ff00ff00ffff0000ffffff0080000000000000f0f8888888888888f088866666666688f0f88767f7f76788f088886666666888f0f8886fffff6888f0888867f7ff6888f0f8886f7f7f6888f088886666666888f0f8888888888888f08ffffffffffffff0fffffffffffffff09999999ffffffff09999999fffffff8f</ImageData16x14>
+		<ImageData16x14
+    >424de6000000000000007600000028000000100000000e000000010004000000000070000000000000000000000000000000000000000000000000008000008000000080800080000000800080008080000080808000c0c0c0000000ff0000ff000000ffff00ff000000ff00ff00ffff0000ffffff0080000000000000f0f8888888888888f088866666666688f0f88767f7f76788f088886666666888f0f8886fffff6888f0888867f7ff6888f0f8886f7f7f6888f088886666666888f0f8888888888888f08ffffffffffffff0fffffffffffffff09999999ffffffff09999999fffffff8f</ImageData16x14>
 	</Vendor>
 	<Descriptions>
 		<Groups>
@@ -108,7 +113,7 @@
 				<Type>PSB</Type>
 				<Name LcId="1033">IndraDrive Power Supply</Name>
 			</Group>
-			<!-- IndraControl FM 
+			<!-- IndraControl FM
 			<Group SortOrder="558">
 				<Type>ICFM</Type>
 				<Name LcId="1033">IndraControl FM</Name>
@@ -121,7 +126,11 @@
 			<!-- ################################################################### -->
 			<!-- ======================== MPB16/17 (Basic Cs) ====================== -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242804" RevisionNo="#x00000001" TcCfgModeSafeOp="1">IndraDrive MPB16/17</Type>
+				<Type
+          ProductCode="#x00242804"
+          RevisionNo="#x00000001"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPB16/17</Type>
 				<Name LcId="1033"><![CDATA[IndraDrive MPB16/17]]></Name>
 				<Info>
 					<StateMachine>
@@ -141,8 +150,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1100" ControlByte="#x22" Enable="1">Inputs</Sm>
         <!-- Default Werte fuer MDT (S-0-0024) -->
@@ -259,8 +282,14 @@
 			<!-- ============================== MPC17 ============================== -->
 			<!-- 1 Achse -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242806" RevisionNo="#x00000001" TcCfgModeSafeOp="1">IndraDrive MPC17 (1 CCD Master +0 CCD Slaves)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC17 (1 CCD Master +0 CCD Slaves)]]></Name>
+				<Type
+          ProductCode="#x00242806"
+          RevisionNo="#x00000001"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC17 (1 CCD Master +0 CCD Slaves)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC17 (1 CCD Master +0 CCD Slaves)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -285,8 +314,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -374,8 +417,14 @@
 			</Device>
 			<!-- 2 Achsen -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242806" RevisionNo="#x00000001" TcCfgModeSafeOp="1">IndraDrive MPC17 (1 CCD Master +1 CCD Slave)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC17 (1 CCD Master +1 CCD Slave)]]></Name>
+				<Type
+          ProductCode="#x00242806"
+          RevisionNo="#x00000001"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC17 (1 CCD Master +1 CCD Slave)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC17 (1 CCD Master +1 CCD Slave)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -400,8 +449,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -531,8 +594,14 @@
 			</Device>
 			<!-- 3 Achsen -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242806" RevisionNo="#x00000001" TcCfgModeSafeOp="1">IndraDrive MPC17 (1 CCD Master +2 CCD Slaves)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC17 (1 CCD Master +2 CCD Slaves)]]></Name>
+				<Type
+          ProductCode="#x00242806"
+          RevisionNo="#x00000001"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC17 (1 CCD Master +2 CCD Slaves)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC17 (1 CCD Master +2 CCD Slaves)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -557,8 +626,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -736,8 +819,14 @@
 			</Device>
 			<!-- 4 Achsen -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242806" RevisionNo="#x00000001" TcCfgModeSafeOp="1">IndraDrive MPC17 (1 CCD Master +3 CCD Slaves)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC17 (1 CCD Master +3 CCD Slaves)]]></Name>
+				<Type
+          ProductCode="#x00242806"
+          RevisionNo="#x00000001"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC17 (1 CCD Master +3 CCD Slaves)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC17 (1 CCD Master +3 CCD Slaves)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -762,8 +851,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -977,8 +1080,14 @@
 			</Device>
 			<!-- 5 Achsen -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242806" RevisionNo="#x00000001" TcCfgModeSafeOp="1">IndraDrive MPC17 (1 CCD Master +4 CCD Slaves)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC17 (1 CCD Master +4 CCD Slaves)]]></Name>
+				<Type
+          ProductCode="#x00242806"
+          RevisionNo="#x00000001"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC17 (1 CCD Master +4 CCD Slaves)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC17 (1 CCD Master +4 CCD Slaves)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -1003,8 +1112,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -1260,8 +1383,14 @@
 			</Device>
 			<!-- 6 Achsen -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242806" RevisionNo="#x00000001" TcCfgModeSafeOp="1">IndraDrive MPC17 (1 CCD Master +5 CCD Slaves)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC17 (1 CCD Master +5 CCD Slaves)]]></Name>
+				<Type
+          ProductCode="#x00242806"
+          RevisionNo="#x00000001"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC17 (1 CCD Master +5 CCD Slaves)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC17 (1 CCD Master +5 CCD Slaves)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -1286,8 +1415,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -1597,8 +1740,14 @@
 			</Device>
 			<!-- 7 Achsen -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242806" RevisionNo="#x00000001" TcCfgModeSafeOp="1">IndraDrive MPC17 (1 CCD Master +6 CCD Slaves)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC17 (1 CCD Master +6 CCD Slaves)]]></Name>
+				<Type
+          ProductCode="#x00242806"
+          RevisionNo="#x00000001"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC17 (1 CCD Master +6 CCD Slaves)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC17 (1 CCD Master +6 CCD Slaves)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -1623,8 +1772,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -1964,8 +2127,14 @@
 			</Device>
 			<!-- 8 Achsen -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242806" RevisionNo="#x00000001" TcCfgModeSafeOp="1">IndraDrive MPC17 (1 CCD Master +7 CCD Slaves)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC17 (1 CCD Master +7 CCD Slaves)]]></Name>
+				<Type
+          ProductCode="#x00242806"
+          RevisionNo="#x00000001"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC17 (1 CCD Master +7 CCD Slaves)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC17 (1 CCD Master +7 CCD Slaves)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -1990,8 +2159,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -2376,7 +2559,11 @@
 			<!-- ################################################################### -->
 			<!-- ======================== MPB18/19/20 Basic Cs ========================= -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242804" RevisionNo="#x00000002" TcCfgModeSafeOp="1">IndraDrive MPB18/19</Type>
+				<Type
+          ProductCode="#x00242804"
+          RevisionNo="#x00000002"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPB18/19</Type>
 				<Name LcId="1033"><![CDATA[IndraDrive MPB18/19]]></Name>
 				<Info>
 					<StateMachine>
@@ -2396,8 +2583,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1100" ControlByte="#x22" Enable="1">Inputs</Sm>
         <!-- Default Werte fuer MDT (S-0-0024) -->
@@ -2518,8 +2719,12 @@
 			</Device>
 			<!-- ===================== MPM Doppelachsregler ======================= -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242808" RevisionNo="#x00000002" TcCfgModeSafeOp="1">IndraDrive MPM18/19</Type>
-				<HideType RevisionNo="#x00000001"/>
+				<Type
+          ProductCode="#x00242808"
+          RevisionNo="#x00000002"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPM18/19</Type>
+				<HideType RevisionNo="#x00000001" />
 				<Name LcId="1033"><![CDATA[IndraDrive MPM18/19]]></Name>
 				<Info>
 					<StateMachine>
@@ -2545,8 +2750,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -2681,7 +2900,11 @@
 			</Device>
 			<!-- MPM18V02 -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242808" RevisionNo="#x00000001" TcCfgModeSafeOp="1">IndraDrive MPM18</Type>
+				<Type
+          ProductCode="#x00242808"
+          RevisionNo="#x00000001"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPM18</Type>
 				<Name LcId="1033"><![CDATA[IndraDrive MPM18]]></Name>
 				<Info>
 					<StateMachine>
@@ -2707,8 +2930,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -2842,10 +3079,14 @@
 					<Reg0420>1000</Reg0420>
 				</ESC>
 			</Device>
-			
+
 			<!-- MPM20/21 -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242808" RevisionNo="#x00000003" TcCfgModeSafeOp="1">IndraDrive MPM20/21</Type>
+				<Type
+          ProductCode="#x00242808"
+          RevisionNo="#x00000003"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPM20/21</Type>
 				<Name LcId="1033"><![CDATA[IndraDrive MPM20]]></Name>
 				<Info>
 					<StateMachine>
@@ -2871,8 +3112,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -2954,7 +3209,7 @@
 					<!-- EtherNET over EtherCAT -->
 					<EoE MAC="1" IP="1" TimeStamp="0">
 					</EoE>
-					<FoE/>
+					<FoE />
 					<!-- SoE -->
 					<SoE ChannelCount="2" DriveFollowsBit3Support="1">
 						<!-- Die folgenden Parameter werden beim uebergang PreOp->SafeOp geschrieben -->
@@ -3014,7 +3269,11 @@
 			</Device>
 			<!-- ======================== MPE20 (Economy) ========================= -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242807" RevisionNo="#x00000001" TcCfgModeSafeOp="1">IndraDrive MPE20</Type>
+				<Type
+          ProductCode="#x00242807"
+          RevisionNo="#x00000001"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPE20</Type>
 				<Name LcId="1033"><![CDATA[IndraDrive MPE20]]></Name>
 				<Info>
 					<StateMachine>
@@ -3034,8 +3293,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1100" ControlByte="#x22" Enable="1">Inputs</Sm>
         <!-- Default Werte fuer MDT (S-0-0024) -->
@@ -3143,8 +3416,14 @@
 			<!-- ============================== MPC18/19 ============================== -->
 			<!-- 1 Achse -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242806" RevisionNo="#x00000002" TcCfgModeSafeOp="1">IndraDrive MPC18/19 (1 CCD Master +0 CCD Slaves)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC18/19 (1 CCD Master +0 CCD Slaves)]]></Name>
+				<Type
+          ProductCode="#x00242806"
+          RevisionNo="#x00000002"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC18/19 (1 CCD Master +0 CCD Slaves)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC18/19 (1 CCD Master +0 CCD Slaves)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -3169,8 +3448,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -3263,8 +3556,14 @@
 			</Device>
 			<!-- 2 Achsen -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242806" RevisionNo="#x00000002" TcCfgModeSafeOp="1">IndraDrive MPC18/19 (1 CCD Master +1 CCD Slave)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC18/19 (1 CCD Master +1 CCD Slave)]]></Name>
+				<Type
+          ProductCode="#x00242806"
+          RevisionNo="#x00000002"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC18/19 (1 CCD Master +1 CCD Slave)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC18/19 (1 CCD Master +1 CCD Slave)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -3289,8 +3588,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -3425,8 +3738,14 @@
 			</Device>
 			<!-- 3 Achsen -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242806" RevisionNo="#x00000002" TcCfgModeSafeOp="1">IndraDrive MPC18/19 (1 CCD Master +2 CCD Slaves)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC18/19 (1 CCD Master +2 CCD Slaves)]]></Name>
+				<Type
+          ProductCode="#x00242806"
+          RevisionNo="#x00000002"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC18/19 (1 CCD Master +2 CCD Slaves)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC18/19 (1 CCD Master +2 CCD Slaves)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -3451,8 +3770,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -3635,8 +3968,14 @@
 			</Device>
 			<!-- 4 Achsen -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242806" RevisionNo="#x00000002" TcCfgModeSafeOp="1">IndraDrive MPC18/19 (1 CCD Master +3 CCD Slaves)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC18/19 (1 CCD Master +3 CCD Slaves)]]></Name>
+				<Type
+          ProductCode="#x00242806"
+          RevisionNo="#x00000002"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC18/19 (1 CCD Master +3 CCD Slaves)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC18/19 (1 CCD Master +3 CCD Slaves)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -3661,8 +4000,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -3881,8 +4234,14 @@
 			</Device>
 			<!-- 5 Achsen -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242806" RevisionNo="#x00000002" TcCfgModeSafeOp="1">IndraDrive MPC18/19 (1 CCD Master +4 CCD Slaves)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC18/19 (1 CCD Master +4 CCD Slaves)]]></Name>
+				<Type
+          ProductCode="#x00242806"
+          RevisionNo="#x00000002"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC18/19 (1 CCD Master +4 CCD Slaves)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC18/19 (1 CCD Master +4 CCD Slaves)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -3907,8 +4266,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -4169,8 +4542,14 @@
 			</Device>
 			<!-- 6 Achsen -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242806" RevisionNo="#x00000002" TcCfgModeSafeOp="1">IndraDrive MPC18/19 (1 CCD Master +5 CCD Slaves)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC18/19 (1 CCD Master +5 CCD Slaves)]]></Name>
+				<Type
+          ProductCode="#x00242806"
+          RevisionNo="#x00000002"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC18/19 (1 CCD Master +5 CCD Slaves)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC18/19 (1 CCD Master +5 CCD Slaves)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -4195,8 +4574,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -4511,8 +4904,14 @@
 			</Device>
 			<!-- 7 Achsen -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242806" RevisionNo="#x00000002" TcCfgModeSafeOp="1">IndraDrive MPC18/19 (1 CCD Master +6 CCD Slaves)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC18/19 (1 CCD Master +6 CCD Slaves)]]></Name>
+				<Type
+          ProductCode="#x00242806"
+          RevisionNo="#x00000002"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC18/19 (1 CCD Master +6 CCD Slaves)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC18/19 (1 CCD Master +6 CCD Slaves)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -4537,8 +4936,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -4882,8 +5295,14 @@
 			</Device>
 			<!-- 8 Achsen -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242806" RevisionNo="#x00000002" TcCfgModeSafeOp="1">IndraDrive MPC18/19 (1 CCD Master +7 CCD Slaves)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC18/19 (1 CCD Master +7 CCD Slaves)]]></Name>
+				<Type
+          ProductCode="#x00242806"
+          RevisionNo="#x00000002"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC18/19 (1 CCD Master +7 CCD Slaves)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC18/19 (1 CCD Master +7 CCD Slaves)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -4908,8 +5327,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -5294,14 +5727,18 @@
 					<Reg0420>1000</Reg0420>
 				</ESC>
 			</Device>
-						
+
 			<!-- ################################################################### -->
 			<!-- #                              MPx20/21 mit FoE                   # -->
 			<!-- ################################################################### -->
-			
+
 			<!-- ======================== MPB20/21 Basic Cs ========================= -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242804" RevisionNo="#x00000003" TcCfgModeSafeOp="1">IndraDrive MPB20/21</Type>
+				<Type
+          ProductCode="#x00242804"
+          RevisionNo="#x00000003"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPB20/21</Type>
 				<Name LcId="1033"><![CDATA[IndraDrive MPB20/21]]></Name>
 				<Info>
 					<StateMachine>
@@ -5321,8 +5758,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1100" ControlByte="#x22" Enable="1">Inputs</Sm>
         <!-- Default Werte fuer MDT (S-0-0024) -->
@@ -5389,7 +5840,7 @@
 					<!-- EtherNET over EtherCAT -->
 					<EoE MAC="1" IP="1" TimeStamp="0">
 					</EoE>
-					<FoE/>
+					<FoE />
 					<!-- SoE -->
 					<SoE ChannelCount="1" DriveFollowsBit3Support="1">
 						<!-- Die folgenden Parameter werden beim uebergang PreOp->SafeOp geschrieben -->
@@ -5447,12 +5898,16 @@
 					<BootStrap>0018EA00001AEA00</BootStrap>
 				</Eeprom>
 			</Device>
-			
+
 			<!-- ===================== MPM 20/21 mit FoE (Doppelachsregler) ======================= -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242808" RevisionNo="#x00000004" TcCfgModeSafeOp="1">IndraDrive MPM20/21</Type>
-				<HideType RevisionNo="#x00000001"/>
-				<HideType RevisionNo="#x00000003"/>
+				<Type
+          ProductCode="#x00242808"
+          RevisionNo="#x00000004"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPM20/21</Type>
+				<HideType RevisionNo="#x00000001" />
+				<HideType RevisionNo="#x00000003" />
 				<Name LcId="1033"><![CDATA[IndraDrive MPM20/21]]></Name>
 				<Info>
 					<StateMachine>
@@ -5478,8 +5933,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -5561,7 +6030,7 @@
 					<!-- EtherNET over EtherCAT -->
 					<EoE MAC="1" IP="1" TimeStamp="0">
 					</EoE>
-					<FoE/>
+					<FoE />
 					<!-- SoE -->
 					<SoE ChannelCount="2" DriveFollowsBit3Support="1">
 						<!-- Die folgenden Parameter werden beim uebergang PreOp->SafeOp geschrieben -->
@@ -5624,11 +6093,15 @@
 					<BootStrap>0018EA00001AEA00</BootStrap>
 				</Eeprom>
 			</Device>
-			
+
 			<!-- ======================== MPE20 mit FoE (Economy) ========================= -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242807" RevisionNo="#x00000002" TcCfgModeSafeOp="1">IndraDrive MPE20</Type>
-				<HideType RevisionNo="#x00000001"/>
+				<Type
+          ProductCode="#x00242807"
+          RevisionNo="#x00000002"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPE20</Type>
+				<HideType RevisionNo="#x00000001" />
 				<Name LcId="1033"><![CDATA[IndraDrive MPE20]]></Name>
 				<Info>
 					<StateMachine>
@@ -5648,8 +6121,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1100" ControlByte="#x22" Enable="1">Inputs</Sm>
         <!-- Default Werte fuer MDT (S-0-0024) -->
@@ -5716,7 +6203,7 @@
 					<!-- EtherNET over EtherCAT -->
 					<EoE MAC="1" IP="1" TimeStamp="0">
 					</EoE>
-					<FoE/>
+					<FoE />
 					<!-- SoE -->
 					<SoE ChannelCount="1" DriveFollowsBit3Support="1">
 						<!-- Die folgenden Parameter werden beim uebergang PreOp->SafeOp geschrieben -->
@@ -5760,13 +6247,19 @@
 					<BootStrap>0018EA00001AEA00</BootStrap>
 				</Eeprom>
 			</Device>
-			
-			
+
+
 			<!-- ============================== MPC20/21 mit FoE ============================== -->
 			<!-- 1 Achse -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242806" RevisionNo="#x00000003" TcCfgModeSafeOp="1">IndraDrive MPC20/21 (1 CCD Master +0 CCD Slaves)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC20/21 (1 CCD Master +0 CCD Slaves)]]></Name>
+				<Type
+          ProductCode="#x00242806"
+          RevisionNo="#x00000003"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC20/21 (1 CCD Master +0 CCD Slaves)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC20/21 (1 CCD Master +0 CCD Slaves)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -5791,8 +6284,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -5838,7 +6345,7 @@
 					<!-- EtherNET over EtherCAT -->
 					<EoE MAC="1" IP="1" TimeStamp="0">
 					</EoE>
-					<FoE/>
+					<FoE />
 					<!-- SoE -->
 					<SoE ChannelCount="1" DriveFollowsBit3Support="1">
 						<!-- Die folgenden Parameter werden beim uebergang PreOp->SafeOp geschrieben -->
@@ -5891,8 +6398,14 @@
 			</Device>
 			<!-- 2 Achsen -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242806" RevisionNo="#x00000003" TcCfgModeSafeOp="1">IndraDrive MP20/21 (1 CCD Master +1 CCD Slave)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC20/21 (1 CCD Master +1 CCD Slave)]]></Name>
+				<Type
+          ProductCode="#x00242806"
+          RevisionNo="#x00000003"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MP20/21 (1 CCD Master +1 CCD Slave)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC20/21 (1 CCD Master +1 CCD Slave)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -5917,8 +6430,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -6000,7 +6527,7 @@
 					<!-- EtherNET over EtherCAT -->
 					<EoE MAC="1" IP="1" TimeStamp="0">
 					</EoE>
-					<FoE/>
+					<FoE />
 					<!-- SoE -->
 					<SoE ChannelCount="2" DriveFollowsBit3Support="1">
 						<!-- Die folgenden Parameter werden beim uebergang PreOp->SafeOp geschrieben -->
@@ -6059,8 +6586,14 @@
 			</Device>
 			<!-- 3 Achsen -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242806" RevisionNo="#x00000003" TcCfgModeSafeOp="1">IndraDrive MPC20/21 (1 CCD Master +2 CCD Slaves)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC20/21 (1 CCD Master +2 CCD Slaves)]]></Name>
+				<Type
+          ProductCode="#x00242806"
+          RevisionNo="#x00000003"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC20/21 (1 CCD Master +2 CCD Slaves)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC20/21 (1 CCD Master +2 CCD Slaves)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -6085,8 +6618,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -6204,7 +6751,7 @@
 					<!-- EtherNET over EtherCAT -->
 					<EoE MAC="1" IP="1" TimeStamp="0">
 					</EoE>
-					<FoE/>
+					<FoE />
 					<!-- SoE -->
 					<SoE ChannelCount="3" DriveFollowsBit3Support="1">
 						<!-- Die folgenden Parameter werden beim uebergang PreOp->SafeOp geschrieben -->
@@ -6275,8 +6822,14 @@
 			</Device>
 			<!-- 4 Achsen -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242806" RevisionNo="#x00000003" TcCfgModeSafeOp="1">IndraDrive MPC20/21 (1 CCD Master +3 CCD Slaves)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC20/21 (1 CCD Master +3 CCD Slaves)]]></Name>
+				<Type
+          ProductCode="#x00242806"
+          RevisionNo="#x00000003"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC20/21 (1 CCD Master +3 CCD Slaves)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC20/21 (1 CCD Master +3 CCD Slaves)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -6301,8 +6854,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -6456,7 +7023,7 @@
 					<!-- EtherNET over EtherCAT -->
 					<EoE MAC="1" IP="1" TimeStamp="0">
 					</EoE>
-					<FoE/>
+					<FoE />
 					<!-- SoE -->
 					<SoE ChannelCount="4" DriveFollowsBit3Support="1">
 						<!-- Die folgenden Parameter werden beim uebergang PreOp->SafeOp geschrieben -->
@@ -6527,8 +7094,14 @@
 			</Device>
 			<!-- 5 Achsen -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242806" RevisionNo="#x00000003" TcCfgModeSafeOp="1">IndraDrive MPC20/21 (1 CCD Master +4 CCD Slaves)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC20/21 (1 CCD Master +4 CCD Slaves)]]></Name>
+				<Type
+          ProductCode="#x00242806"
+          RevisionNo="#x00000003"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC20/21 (1 CCD Master +4 CCD Slaves)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC20/21 (1 CCD Master +4 CCD Slaves)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -6553,8 +7126,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -6744,7 +7331,7 @@
 					<!-- EtherNET over EtherCAT -->
 					<EoE MAC="1" IP="1" TimeStamp="0">
 					</EoE>
-					<FoE/>
+					<FoE />
 					<!-- SoE -->
 					<SoE ChannelCount="5" DriveFollowsBit3Support="1">
 						<!-- Die folgenden Parameter werden beim uebergang PreOp->SafeOp geschrieben -->
@@ -6821,8 +7408,14 @@
 			</Device>
 			<!-- 6 Achsen -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242806" RevisionNo="#x00000003" TcCfgModeSafeOp="1">IndraDrive MPC20/21 (1 CCD Master +5 CCD Slaves)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC20/21 (1 CCD Master +5 CCD Slaves)]]></Name>
+				<Type
+          ProductCode="#x00242806"
+          RevisionNo="#x00000003"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC20/21 (1 CCD Master +5 CCD Slaves)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC20/21 (1 CCD Master +5 CCD Slaves)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -6847,8 +7440,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -7074,7 +7681,7 @@
 					<!-- EtherNET over EtherCAT -->
 					<EoE MAC="1" IP="1" TimeStamp="0">
 					</EoE>
-					<FoE/>
+					<FoE />
 					<!-- SoE -->
 					<SoE ChannelCount="6" DriveFollowsBit3Support="1">
 						<!-- Die folgenden Parameter werden beim uebergang PreOp->SafeOp geschrieben -->
@@ -7169,8 +7776,14 @@
 			</Device>
 			<!-- 7 Achsen -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242806" RevisionNo="#x00000003" TcCfgModeSafeOp="1">IndraDrive MPC20/21 (1 CCD Master +6 CCD Slaves)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC20/21 (1 CCD Master +6 CCD Slaves)]]></Name>
+				<Type
+          ProductCode="#x00242806"
+          RevisionNo="#x00000003"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC20/21 (1 CCD Master +6 CCD Slaves)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC20/21 (1 CCD Master +6 CCD Slaves)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -7195,8 +7808,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -7458,7 +8085,7 @@
 					<!-- EtherNET over EtherCAT -->
 					<EoE MAC="1" IP="1" TimeStamp="0">
 					</EoE>
-					<FoE/>
+					<FoE />
 					<!-- SoE -->
 					<SoE ChannelCount="7" DriveFollowsBit3Support="1">
 						<!-- Die folgenden Parameter werden beim uebergang PreOp->SafeOp geschrieben -->
@@ -7547,8 +8174,14 @@
 			</Device>
 			<!-- 8 Achsen -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242806" RevisionNo="#x00000003" TcCfgModeSafeOp="1">IndraDrive MPC20/21 (1 CCD Master +7 CCD Slaves)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC20/21 (1 CCD Master +7 CCD Slaves)]]></Name>
+				<Type
+          ProductCode="#x00242806"
+          RevisionNo="#x00000003"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC20/21 (1 CCD Master +7 CCD Slaves)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC20/21 (1 CCD Master +7 CCD Slaves)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -7573,8 +8206,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -7872,7 +8519,7 @@
 					<!-- EtherNET over EtherCAT -->
 					<EoE MAC="1" IP="1" TimeStamp="0">
 					</EoE>
-					<FoE/>
+					<FoE />
 					<!-- SoE -->
 					<SoE ChannelCount="8" DriveFollowsBit3Support="1">
 						<!-- Die folgenden Parameter werden beim uebergang PreOp->SafeOp geschrieben -->
@@ -7965,13 +8612,17 @@
 					<BootStrap>0018EA00001AEA00</BootStrap>
 				</Eeprom>
 			</Device>
-			
+
 			<!-- ################################################################### -->
 			<!-- #                            MPx20 FSoE                           # -->
 			<!-- ################################################################### -->
 			<!-- ======================== MPB (Basic Cs) =========================== -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242804" RevisionNo="#x0000000A" TcCfgModeSafeOp="1">IndraDrive MPB20 FSoE</Type>
+				<Type
+          ProductCode="#x00242804"
+          RevisionNo="#x0000000A"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPB20 FSoE</Type>
 				<Name LcId="1035"><![CDATA[IndraDrive MPB20 FSoE]]></Name>
 				<Comment LcId="1035"><![CDATA[Ich bin ein Komentar]]></Comment>
 				<Info>
@@ -7991,8 +8642,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1100" ControlByte="#x22" Enable="1">Inputs</Sm>
         <!-- Default Werte fuer MDT (S-0-0024) -->
@@ -8105,7 +8770,12 @@
 						<AssignActivate>#x0000</AssignActivate>
 					</OpMode>
 				</Dc>
-				<Slots MaxSlotCount="1" SlotPdoIncrement="#x1000" SlotIndexIncrement="0" IdentifyModuleBy="ModuleIdent">
+				<Slots
+          MaxSlotCount="1"
+          SlotPdoIncrement="#x1000"
+          SlotIndexIncrement="0"
+          IdentifyModuleBy="ModuleIdent"
+        >
 					<Slot MinInstances="0" MaxInstances="1">
 						<!--Safety relevant Objects-->
 						<ModuleIdent Default="1">791</ModuleIdent>
@@ -8124,7 +8794,11 @@
 			</Device>
 			<!-- ===================== MPM20 FSoE (Doppelachsregler) ======================= -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242808" RevisionNo="#x0000000A" TcCfgModeSafeOp="1">IndraDrive MPM20 FSoE</Type>
+				<Type
+          ProductCode="#x00242808"
+          RevisionNo="#x0000000A"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPM20 FSoE</Type>
 				<Name LcId="1033"><![CDATA[IndraDrive MPM20 FSoE]]></Name>
 				<Info>
 					<StateMachine>
@@ -8150,8 +8824,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -8284,7 +8972,12 @@
 						<AssignActivate>#x0000</AssignActivate>
 					</OpMode>
 				</Dc>
-				<Slots MaxSlotCount="2" SlotPdoIncrement="#x1000" SlotIndexIncrement="0" IdentifyModuleBy="ModuleIdent">
+				<Slots
+          MaxSlotCount="2"
+          SlotPdoIncrement="#x1000"
+          SlotIndexIncrement="0"
+          IdentifyModuleBy="ModuleIdent"
+        >
 					<Slot MinInstances="0" MaxInstances="1">
 						<!--Safety relevant Objects 1st Axis-->
 						<ModuleIdent Default="1">791</ModuleIdent>
@@ -8313,7 +9006,11 @@
 			<!-- ===================== MPC20 FSoE (Advanced Steuerteil) ======================= -->
 			<!-- Nur lokale Achse -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242806" RevisionNo="#x0000000A" TcCfgModeSafeOp="1">IndraDrive MPC20 FSoE</Type>
+				<Type
+          ProductCode="#x00242806"
+          RevisionNo="#x0000000A"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC20 FSoE</Type>
 				<Name LcId="1033"><![CDATA[IndraDrive MPC20 FSoE]]></Name>
 				<Info>
 					<StateMachine>
@@ -8339,8 +9036,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -8425,7 +9136,12 @@
 						<AssignActivate>#x0000</AssignActivate>
 					</OpMode>
 				</Dc>
-				<Slots MaxSlotCount="1" SlotPdoIncrement="#x1000" SlotIndexIncrement="0" IdentifyModuleBy="ModuleIdent">
+				<Slots
+          MaxSlotCount="1"
+          SlotPdoIncrement="#x1000"
+          SlotIndexIncrement="0"
+          IdentifyModuleBy="ModuleIdent"
+        >
 					<Slot MinInstances="0" MaxInstances="1">
 						<!--Safety relevant Objects-->
 						<ModuleIdent Default="1">791</ModuleIdent>
@@ -8442,13 +9158,17 @@
 					<Reg0420>1000</Reg0420>
 				</ESC>
 			</Device>
-			
+
 			<!-- ======================== MPx20 FSoE mit FoE  ============================== -->
-			
+
 			<!-- ======================== MPB (Basic Cs) mit FoE =========================== -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242804" RevisionNo="#x0000000B" TcCfgModeSafeOp="1">IndraDrive MPB20 FSoE</Type>
-				<HideType RevisionNo="#x0000000A"/>
+				<Type
+          ProductCode="#x00242804"
+          RevisionNo="#x0000000B"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPB20 FSoE</Type>
+				<HideType RevisionNo="#x0000000A" />
 				<Name LcId="1035"><![CDATA[IndraDrive MPB20 FSoE]]></Name>
 				<Comment LcId="1035"><![CDATA[Ich bin ein Komentar]]></Comment>
 				<Info>
@@ -8468,8 +9188,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1100" ControlByte="#x22" Enable="1">Inputs</Sm>
         <!-- Default Werte fuer MDT (S-0-0024) -->
@@ -8536,7 +9270,7 @@
 					<!-- EtherNET over EtherCAT -->
 					<EoE MAC="1" IP="1" TimeStamp="0">
 					</EoE>
-					<FoE/>
+					<FoE />
 					<!-- SoE -->
 					<SoE ChannelCount="2" DriveFollowsBit3Support="1">
 						<!-- Die folgenden Parameter werden beim uebergang PreOp->SafeOp geschrieben -->
@@ -8583,7 +9317,12 @@
 						<AssignActivate>#x0000</AssignActivate>
 					</OpMode>
 				</Dc>
-				<Slots MaxSlotCount="1" SlotPdoIncrement="#x1000" SlotIndexIncrement="0" IdentifyModuleBy="ModuleIdent">
+				<Slots
+          MaxSlotCount="1"
+          SlotPdoIncrement="#x1000"
+          SlotIndexIncrement="0"
+          IdentifyModuleBy="ModuleIdent"
+        >
 					<Slot MinInstances="0" MaxInstances="1">
 						<!--Safety relevant Objects-->
 						<ModuleIdent Default="1">791</ModuleIdent>
@@ -8605,11 +9344,15 @@
 					<BootStrap>0018EA00001AEA00</BootStrap>
 				</Eeprom>
 			</Device>
-			
+
 			<!-- ===================== MPM20 FSoE mit FoE (Doppelachsregler) ======================= -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242808" RevisionNo="#x0000000B" TcCfgModeSafeOp="1">IndraDrive MPM20 FSoE</Type>
-				<HideType RevisionNo="#x0000000A"/>
+				<Type
+          ProductCode="#x00242808"
+          RevisionNo="#x0000000B"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPM20 FSoE</Type>
+				<HideType RevisionNo="#x0000000A" />
 				<Name LcId="1033"><![CDATA[IndraDrive MPM20 FSoE]]></Name>
 				<Info>
 					<StateMachine>
@@ -8635,8 +9378,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -8718,7 +9475,7 @@
 					<!-- EtherNET over EtherCAT -->
 					<EoE MAC="1" IP="1" TimeStamp="0">
 					</EoE>
-					<FoE/>
+					<FoE />
 					<!-- SoE -->
 					<SoE ChannelCount="4" DriveFollowsBit3Support="1">
 						<!-- Die folgenden Parameter werden beim uebergang PreOp->SafeOp geschrieben -->
@@ -8770,7 +9527,12 @@
 						<AssignActivate>#x0000</AssignActivate>
 					</OpMode>
 				</Dc>
-				<Slots MaxSlotCount="2" SlotPdoIncrement="#x1000" SlotIndexIncrement="0" IdentifyModuleBy="ModuleIdent">
+				<Slots
+          MaxSlotCount="2"
+          SlotPdoIncrement="#x1000"
+          SlotIndexIncrement="0"
+          IdentifyModuleBy="ModuleIdent"
+        >
 					<Slot MinInstances="0" MaxInstances="1">
 						<!--Safety relevant Objects 1st Axis-->
 						<ModuleIdent Default="1">791</ModuleIdent>
@@ -8801,12 +9563,16 @@
 					<BootStrap>0018EA00001AEA00</BootStrap>
 				</Eeprom>
 			</Device>
-			
+
 			<!-- ===================== MPC20 FSoE/FoE (Advanced Steuerteil) ======================= -->
 			<!-- Nur lokale Achse -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242806" RevisionNo="#x0000000B" TcCfgModeSafeOp="1">IndraDrive MPC20 FSoE</Type>
-				<HideType RevisionNo="#x0000000A"/>
+				<Type
+          ProductCode="#x00242806"
+          RevisionNo="#x0000000B"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC20 FSoE</Type>
+				<HideType RevisionNo="#x0000000A" />
 				<Name LcId="1033"><![CDATA[IndraDrive MPC20 FSoE]]></Name>
 				<Info>
 					<StateMachine>
@@ -8832,8 +9598,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -8879,7 +9659,7 @@
 					<!-- EtherNET over EtherCAT -->
 					<EoE MAC="1" IP="1" TimeStamp="0">
 					</EoE>
-					<FoE/>
+					<FoE />
 					<!-- SoE -->
 					<SoE ChannelCount="2" DriveFollowsBit3Support="1">
 						<!-- Die folgenden Parameter werden beim uebergang PreOp->SafeOp geschrieben -->
@@ -8919,7 +9699,12 @@
 						<AssignActivate>#x0000</AssignActivate>
 					</OpMode>
 				</Dc>
-				<Slots MaxSlotCount="1" SlotPdoIncrement="#x1000" SlotIndexIncrement="0" IdentifyModuleBy="ModuleIdent">
+				<Slots
+          MaxSlotCount="1"
+          SlotPdoIncrement="#x1000"
+          SlotIndexIncrement="0"
+          IdentifyModuleBy="ModuleIdent"
+        >
 					<Slot MinInstances="0" MaxInstances="1">
 						<!--Safety relevant Objects-->
 						<ModuleIdent Default="1">791</ModuleIdent>
@@ -8941,16 +9726,20 @@
 					<BootStrap>0018EA00001AEA00</BootStrap>
 				</Eeprom>
 			</Device>
-			
-			
+
+
 			<!-- ################################################################### -->
 			<!-- #                            MPx21 FSoE                           # -->
-			<!-- ################################################################### -->			
-			
+			<!-- ################################################################### -->
+
 			<!-- ======================== MPB (Basic Cs) mit FoE =========================== -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242804" RevisionNo="#x0000000C" TcCfgModeSafeOp="1">IndraDrive MPB21 FSoE</Type>
-				<HideType RevisionNo="#x0000000A"/>
+				<Type
+          ProductCode="#x00242804"
+          RevisionNo="#x0000000C"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPB21 FSoE</Type>
+				<HideType RevisionNo="#x0000000A" />
 				<Name LcId="1035"><![CDATA[IndraDrive MPB21 FSoE]]></Name>
 				<Comment LcId="1035"><![CDATA[Ich bin ein Komentar]]></Comment>
 				<Info>
@@ -8970,8 +9759,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1100" ControlByte="#x22" Enable="1">Inputs</Sm>
         <!-- Default Werte fuer MDT (S-0-0024) -->
@@ -9038,7 +9841,7 @@
 					<!-- EtherNET over EtherCAT -->
 					<EoE MAC="1" IP="1" TimeStamp="0">
 					</EoE>
-					<FoE/>
+					<FoE />
 					<!-- SoE -->
 					<SoE ChannelCount="2" DriveFollowsBit3Support="1">
 						<!-- Die folgenden Parameter werden beim uebergang PreOp->SafeOp geschrieben -->
@@ -9085,7 +9888,12 @@
 						<AssignActivate>#x0000</AssignActivate>
 					</OpMode>
 				</Dc>
-				<Slots MaxSlotCount="1" SlotPdoIncrement="#x1000" SlotIndexIncrement="0" IdentifyModuleBy="ModuleIdent">
+				<Slots
+          MaxSlotCount="1"
+          SlotPdoIncrement="#x1000"
+          SlotIndexIncrement="0"
+          IdentifyModuleBy="ModuleIdent"
+        >
 					<Slot MinInstances="0" MaxInstances="1">
 						<!--Safety relevant Objects-->
 						<ModuleIdent Default="1">791</ModuleIdent>
@@ -9110,7 +9918,11 @@
 			</Device>
 			<!-- ===================== MPM21 FSoE mit FoE (Doppelachsregler) ======================= -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242808" RevisionNo="#x0000000C" TcCfgModeSafeOp="1">IndraDrive MPM21 FSoE</Type>
+				<Type
+          ProductCode="#x00242808"
+          RevisionNo="#x0000000C"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPM21 FSoE</Type>
 				<Name LcId="1033"><![CDATA[IndraDrive MPM21 FSoE]]></Name>
 				<Info>
 					<StateMachine>
@@ -9136,8 +9948,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -9219,7 +10045,7 @@
 					<!-- EtherNET over EtherCAT -->
 					<EoE MAC="1" IP="1" TimeStamp="0">
 					</EoE>
-					<FoE/>
+					<FoE />
 					<!-- SoE -->
 					<SoE ChannelCount="4" DriveFollowsBit3Support="1">
 						<!-- Die folgenden Parameter werden beim uebergang PreOp->SafeOp geschrieben -->
@@ -9271,7 +10097,12 @@
 						<AssignActivate>#x0000</AssignActivate>
 					</OpMode>
 				</Dc>
-				<Slots MaxSlotCount="2" SlotPdoIncrement="#x1000" SlotIndexIncrement="0" IdentifyModuleBy="ModuleIdent">
+				<Slots
+          MaxSlotCount="2"
+          SlotPdoIncrement="#x1000"
+          SlotIndexIncrement="0"
+          IdentifyModuleBy="ModuleIdent"
+        >
 					<Slot MinInstances="0" MaxInstances="1">
 						<!--Safety relevant Objects 1st Axis-->
 						<ModuleIdent Default="1">791</ModuleIdent>
@@ -9307,7 +10138,11 @@
 			<!-- ===================== MPC21 FSoE/FoE (Advanced Steuerteil) ======================= -->
 			<!-- Nur lokale Achse -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242806" RevisionNo="#x0000000C" TcCfgModeSafeOp="1">IndraDrive MPC21 FSoE</Type>
+				<Type
+          ProductCode="#x00242806"
+          RevisionNo="#x0000000C"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC21 FSoE</Type>
 				<Name LcId="1033"><![CDATA[IndraDrive MPC21 FSoE]]></Name>
 				<Info>
 					<StateMachine>
@@ -9333,8 +10168,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -9380,7 +10229,7 @@
 					<!-- EtherNET over EtherCAT -->
 					<EoE MAC="1" IP="1" TimeStamp="0">
 					</EoE>
-					<FoE/>
+					<FoE />
 					<!-- SoE -->
 					<SoE ChannelCount="2" DriveFollowsBit3Support="1">
 						<!-- Die folgenden Parameter werden beim uebergang PreOp->SafeOp geschrieben -->
@@ -9420,7 +10269,12 @@
 						<AssignActivate>#x0000</AssignActivate>
 					</OpMode>
 				</Dc>
-				<Slots MaxSlotCount="1" SlotPdoIncrement="#x1000" SlotIndexIncrement="0" IdentifyModuleBy="ModuleIdent">
+				<Slots
+          MaxSlotCount="1"
+          SlotPdoIncrement="#x1000"
+          SlotIndexIncrement="0"
+          IdentifyModuleBy="ModuleIdent"
+        >
 					<Slot MinInstances="0" MaxInstances="1">
 						<!--Safety relevant Objects-->
 						<ModuleIdent Default="1">791</ModuleIdent>
@@ -9443,18 +10297,22 @@
 					<BootStrap>0018EA00001AEA00</BootStrap>
 				</Eeprom>
 			</Device>
-			
-			
-			
-			
-			
-			
+
+
+
+
+
+
 			<!-- ################################################################### -->
 			<!-- #                              MPx06/07                           # -->
 			<!-- ################################################################### -->
 			<!-- ============================== MPH06 ============================== -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242801" RevisionNo="#x00000001" TcCfgModeSafeOp="1">IndraDrive MPH06/07</Type>
+				<Type
+          ProductCode="#x00242801"
+          RevisionNo="#x00000001"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPH06/07</Type>
 				<Name LcId="1033"><![CDATA[IndraDrive MPH06/07]]></Name>
 				<Info>
 					<StateMachine>
@@ -9474,8 +10332,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1100" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -9566,7 +10438,11 @@
 			</Device>
 			<!-- ============================== MPD06 ============================== -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242802" RevisionNo="#x00000001" TcCfgModeSafeOp="1">IndraDrive MPD06/07</Type>
+				<Type
+          ProductCode="#x00242802"
+          RevisionNo="#x00000001"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPD06/07</Type>
 				<Name LcId="1033"><![CDATA[IndraDrive MPD06/07]]></Name>
 				<Info>
 					<StateMachine>
@@ -9585,8 +10461,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1100" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S16 und S24 (AT- und MDT-Daten) -->
@@ -9715,7 +10605,11 @@
 			</Device>
 			<!-- ==============================  MPB06 ============================== -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242803" RevisionNo="#x00000001" TcCfgModeSafeOp="1">IndraDrive MPB06/07</Type>
+				<Type
+          ProductCode="#x00242803"
+          RevisionNo="#x00000001"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPB06/07</Type>
 				<Name LcId="1033"><![CDATA[IndraDrive MPB06/07]]></Name>
 				<Info>
 					<StateMachine>
@@ -9735,8 +10629,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1100" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -9821,8 +10729,12 @@
 			<!-- ============================== MPC ============================== -->
 			<!-- RevisionNo #x00000002 => ab MPx06V12 -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242805" RevisionNo="#x00000002" TcCfgModeSafeOp="1">IndraDrive MPC06</Type>
-				<HideType RevisionNo="#x00000001"/>
+				<Type
+          ProductCode="#x00242805"
+          RevisionNo="#x00000002"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC06</Type>
+				<HideType RevisionNo="#x00000001" />
 				<Name LcId="1033"><![CDATA[IndraDrive MPC06]]></Name>
 				<Info>
 					<StateMachine>
@@ -9842,8 +10754,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1100" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -9927,7 +10853,11 @@
 			</Device>
 			<!-- RevisionNo #x00000001 -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242805" RevisionNo="#x00000001" TcCfgModeSafeOp="1">IndraDrive MPC06</Type>
+				<Type
+          ProductCode="#x00242805"
+          RevisionNo="#x00000001"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC06</Type>
 				<Name LcId="1033"><![CDATA[IndraDrive MPC06]]></Name>
 				<Info>
 					<StateMachine>
@@ -9947,8 +10877,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1100" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -10032,7 +10976,11 @@
 			</Device>
 			<!-- RevisionNo #x00000003 => MPC07 -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242805" RevisionNo="#x00000003" TcCfgModeSafeOp="1">IndraDrive MPC07</Type>
+				<Type
+          ProductCode="#x00242805"
+          RevisionNo="#x00000003"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC07</Type>
 				<Name LcId="1033"><![CDATA[IndraDrive MPC07]]></Name>
 				<Info>
 					<StateMachine>
@@ -10052,8 +11000,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="162" MaxSize="162" DefaultSize="162" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="162" MaxSize="162" DefaultSize="162" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="162"
+          MaxSize="162"
+          DefaultSize="162"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="162"
+          MaxSize="162"
+          DefaultSize="162"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1100" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -10140,7 +11102,11 @@
 			<!-- ################################################################### -->
 			<!-- ============================== MPH08 ============================== -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242801" RevisionNo="#x00000002" TcCfgModeSafeOp="1">IndraDrive MPH08</Type>
+				<Type
+          ProductCode="#x00242801"
+          RevisionNo="#x00000002"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPH08</Type>
 				<Name LcId="1033"><![CDATA[IndraDrive MPH08]]></Name>
 				<Info>
 					<StateMachine>
@@ -10160,8 +11126,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -10256,7 +11236,11 @@
 			</Device>
 			<!-- ============================== MPD08 ============================== -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242802" RevisionNo="#x00000002" TcCfgModeSafeOp="1">IndraDrive MPD08</Type>
+				<Type
+          ProductCode="#x00242802"
+          RevisionNo="#x00000002"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPD08</Type>
 				<Name LcId="1033"><![CDATA[IndraDrive MPD08]]></Name>
 				<Info>
 					<StateMachine>
@@ -10275,8 +11259,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S16 und S24 (AT- und MDT-Daten) -->
@@ -10409,7 +11407,11 @@
 			</Device>
 			<!-- ==============================  MPB08 ============================== -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242803" RevisionNo="#x00000002" TcCfgModeSafeOp="1">IndraDrive MPB08</Type>
+				<Type
+          ProductCode="#x00242803"
+          RevisionNo="#x00000002"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPB08</Type>
 				<Name LcId="1033"><![CDATA[IndraDrive MPB08]]></Name>
 				<Info>
 					<StateMachine>
@@ -10429,8 +11431,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -10519,8 +11535,14 @@
 			<!-- ============================== MPC08 ============================== -->
 			<!-- 1 Achse -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242805" RevisionNo="#x00000004" TcCfgModeSafeOp="1">IndraDrive MPC08 (1 CCD Master +0 CCD Slaves)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC08 (1 CCD Master +0 CCD Slaves)]]></Name>
+				<Type
+          ProductCode="#x00242805"
+          RevisionNo="#x00000004"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC08 (1 CCD Master +0 CCD Slaves)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC08 (1 CCD Master +0 CCD Slaves)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -10545,8 +11567,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -10634,8 +11670,14 @@
 			</Device>
 			<!-- 2 Achsen -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242805" RevisionNo="#x00000004" TcCfgModeSafeOp="1">IndraDrive MPC08 (1 CCD Master +1 CCD Slave)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC08 (1 CCD Master +1 CCD Slave)]]></Name>
+				<Type
+          ProductCode="#x00242805"
+          RevisionNo="#x00000004"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC08 (1 CCD Master +1 CCD Slave)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC08 (1 CCD Master +1 CCD Slave)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -10660,8 +11702,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -10791,8 +11847,14 @@
 			</Device>
 			<!-- 3 Achsen -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242805" RevisionNo="#x00000004" TcCfgModeSafeOp="1">IndraDrive MPC08 (1 CCD Master +2 CCD Slaves)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC08 (1 CCD Master +2 CCD Slaves)]]></Name>
+				<Type
+          ProductCode="#x00242805"
+          RevisionNo="#x00000004"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC08 (1 CCD Master +2 CCD Slaves)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC08 (1 CCD Master +2 CCD Slaves)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -10817,8 +11879,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -10996,8 +12072,14 @@
 			</Device>
 			<!-- 4 Achsen -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242805" RevisionNo="#x00000004" TcCfgModeSafeOp="1">IndraDrive MPC08 (1 CCD Master +3 CCD Slaves)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC08 (1 CCD Master +3 CCD Slaves)]]></Name>
+				<Type
+          ProductCode="#x00242805"
+          RevisionNo="#x00000004"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC08 (1 CCD Master +3 CCD Slaves)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC08 (1 CCD Master +3 CCD Slaves)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -11022,8 +12104,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -11237,8 +12333,14 @@
 			</Device>
 			<!-- 5 Achsen -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242805" RevisionNo="#x00000004" TcCfgModeSafeOp="1">IndraDrive MPC08 (1 CCD Master +4 CCD Slaves)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC08 (1 CCD Master +4 CCD Slaves)]]></Name>
+				<Type
+          ProductCode="#x00242805"
+          RevisionNo="#x00000004"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC08 (1 CCD Master +4 CCD Slaves)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC08 (1 CCD Master +4 CCD Slaves)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -11263,8 +12365,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -11520,8 +12636,14 @@
 			</Device>
 			<!-- 6 Achsen -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242805" RevisionNo="#x00000004" TcCfgModeSafeOp="1">IndraDrive MPC08 (1 CCD Master +5 CCD Slaves)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC08 (1 CCD Master +5 CCD Slaves)]]></Name>
+				<Type
+          ProductCode="#x00242805"
+          RevisionNo="#x00000004"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC08 (1 CCD Master +5 CCD Slaves)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC08 (1 CCD Master +5 CCD Slaves)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -11546,8 +12668,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -11857,8 +12993,14 @@
 			</Device>
 			<!-- 7 Achsen -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242805" RevisionNo="#x00000004" TcCfgModeSafeOp="1">IndraDrive MPC08 (1 CCD Master +6 CCD Slaves)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC08 (1 CCD Master +6 CCD Slaves)]]></Name>
+				<Type
+          ProductCode="#x00242805"
+          RevisionNo="#x00000004"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC08 (1 CCD Master +6 CCD Slaves)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC08 (1 CCD Master +6 CCD Slaves)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -11883,8 +13025,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -12224,8 +13380,14 @@
 			</Device>
 			<!-- 8 Achsen -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242805" RevisionNo="#x00000004" TcCfgModeSafeOp="1">IndraDrive MPC08 (1 CCD Master +7 CCD Slaves)</Type>
-				<Name LcId="1033"><![CDATA[IndraDrive MPC08 (1 CCD Master +7 CCD Slaves)]]></Name>
+				<Type
+          ProductCode="#x00242805"
+          RevisionNo="#x00000004"
+          TcCfgModeSafeOp="1"
+        >IndraDrive MPC08 (1 CCD Master +7 CCD Slaves)</Type>
+				<Name
+          LcId="1033"
+        ><![CDATA[IndraDrive MPC08 (1 CCD Master +7 CCD Slaves)]]></Name>
 				<Info>
 					<StateMachine>
 						<!-- TimeOut Zeiten bei der Phasenumschaltung -->
@@ -12250,8 +13412,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1400" ControlByte="#x22" Enable="1">Inputs</Sm>
 				<!-- Default Werte fuer S24 MDT -->
@@ -12631,12 +13807,16 @@
 					<Reg0420>1000</Reg0420>
 				</ESC>
 			</Device>
-			
+
 			<!-- ################################################################### -->
 			<!-- #                           PSB Power supply                      # -->
 			<!-- ################################################################### -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242809" RevisionNo="#x00000001" TcCfgModeSafeOp="1">IndraDrive Power supply PSB19</Type>
+				<Type
+          ProductCode="#x00242809"
+          RevisionNo="#x00000001"
+          TcCfgModeSafeOp="1"
+        >IndraDrive Power supply PSB19</Type>
 				<Name LcId="1035"><![CDATA[IndraDrive Power supply PSB19]]></Name>
 				<Info>
 					<StateMachine>
@@ -12656,8 +13836,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1100" ControlByte="#x22" Enable="1">Inputs</Sm>
         <!-- Default Werte fuer MDT (S-0-0024) -->
@@ -12763,10 +13957,14 @@
 					<Reg0420>1000</Reg0420>
 				</ESC>
 			</Device>
-			
+
 			<!-- PSB20 mit FoE -->
 			<Device Physics="YY">
-				<Type ProductCode="#x00242809" RevisionNo="#x00000002" TcCfgModeSafeOp="1">IndraDrive Power supply PSB20/21</Type>
+				<Type
+          ProductCode="#x00242809"
+          RevisionNo="#x00000002"
+          TcCfgModeSafeOp="1"
+        >IndraDrive Power supply PSB20/21</Type>
 				<Name LcId="1035"><![CDATA[IndraDrive Power supply PSB20/21]]></Name>
 				<Info>
 					<StateMachine>
@@ -12786,8 +13984,22 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Fmmu>Outputs</Fmmu>
 				<Fmmu>Inputs</Fmmu>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1800" ControlByte="#x26" Enable="1">MBoxOut</Sm>
-				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1800"
+          ControlByte="#x26"
+          Enable="1"
+        >MBoxOut</Sm>
+				<Sm
+          MinSize="234"
+          MaxSize="234"
+          DefaultSize="234"
+          StartAddress="#x1a00"
+          ControlByte="#x22"
+          Enable="1"
+        >MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1100" ControlByte="#x22" Enable="1">Inputs</Sm>
         <!-- Default Werte fuer MDT (S-0-0024) -->
@@ -12854,7 +14066,7 @@
 					<!-- EtherNET over EtherCAT -->
 					<EoE MAC="1" IP="1" TimeStamp="0">
 					</EoE>
-					<FoE/>
+					<FoE />
 					<!-- SoE -->
 					<SoE>
 						<!-- Die folgenden Parameter werden beim uebergang PreOp->SafeOp geschrieben -->
@@ -12893,11 +14105,11 @@
 					<Reg0400>#x09C2</Reg0400>
 					<Reg0420>1000</Reg0420>
 				</ESC>
-			</Device>			
-			
+			</Device>
+
 			<!-- ################################################################### -->
 			<!-- #                    IndraControl FM                              # -->
-			<!-- ################################################################### 
+			<!-- ###################################################################
 			<Device Physics="YY">
 				<Type ProductCode="#x0024280A" RevisionNo="#x00000001" TcCfgModeSafeOp="1">IndraControl FM MDB20/21</Type>
 				<Name LcId="1033"><![CDATA[IndraControl FM MDB20/21]]></Name>
@@ -12920,7 +14132,7 @@
 				<Sm MinSize="234" MaxSize="234" DefaultSize="234" StartAddress="#x1a00" ControlByte="#x22" Enable="1">MBoxIn</Sm>
 				<Sm StartAddress="#x1000" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm StartAddress="#x1100" ControlByte="#x22" Enable="1">Inputs</Sm>
-				
+
 				<RxPdo Mandatory="1" Sm="2">
 					<Index>#x0018</Index>
 					<Name>MDT</Name>
@@ -12949,7 +14161,7 @@
 					<EoE MAC="1" IP="1" TimeStamp="0">
 					</EoE>
 					<FoE/>
-					
+
 					<SoE ChannelCount="1" DriveFollowsBit3Support="1">
 						<InitCmd Chn="0">
 							<Transition>PS</Transition>
@@ -12996,10 +14208,10 @@
 					<ConfigData>060001EEE80300000100000000</ConfigData>
 					<BootStrap>0018EA00001AEA00</BootStrap>
 				</Eeprom>
-			</Device>			
+			</Device>
 			-->
 		</Devices>
-		
+
 		<!-- ################################################################### -->
 		<!-- #                    Module fuer FSoE                             # -->
 		<!-- ################################################################### -->
@@ -13718,7 +14930,10 @@
 			</Module>
 			<!-- 16Bit Steuer-/Statusword mit Binaer-codierten SMMs SafeHoming Bin-SCA (787 / 788) -->
 			<Module Crc32="#xc76328d9">
-				<Type ModuleIdent="793" ModuleClass="793">FSoE: 2B Bin-SMM, SafeHoming, Bin-SCA (787/788)</Type>
+				<Type
+          ModuleIdent="793"
+          ModuleClass="793"
+        >FSoE: 2B Bin-SMM, SafeHoming, Bin-SCA (787/788)</Type>
 				<Name>2Byte Binary-Coded SMM(787/788)</Name>
 				<!-- Type 6: 2-Byte-SMO-Control word, Binary-coded SMM + SafeHomingProce-dure -->
 				<RxPdo Fixed="true" Sm="2">
@@ -14081,7 +15296,10 @@
 			</Module>
 			<!-- 2B Bin-SMM, SafeHoming, FunctionalInputs (787 / 790) -->
 			<Module Crc32="#x4b4c1c5e">
-				<Type ModuleIdent="794" ModuleClass="794">FSoE: 2B Bin-SMM, SafeHoming, FunctionalInputs (787/790)</Type>
+				<Type
+          ModuleIdent="794"
+          ModuleClass="794"
+        >FSoE: 2B Bin-SMM, SafeHoming, FunctionalInputs (787/790)</Type>
 				<Name>2Byte Binary-Coded SMM(787/790)</Name>
 				<!-- Type 6: 2-Byte-SMO-Control word, Binary-coded SMM + SafeHomingProcedure -->
 				<RxPdo Fixed="true" Sm="2">
@@ -14444,7 +15662,10 @@
 			</Module>
 			<!-- 2B Bit-SMM, SafeHoming, Bit-SCA (786 / 789)  -->
 			<Module Crc32="#x2e74e8fd">
-				<Type ModuleIdent="795" ModuleClass="795">FSoE: 2B Bit-SMM, SafeHoming, Bit-SCA (786/789)</Type>
+				<Type
+          ModuleIdent="795"
+          ModuleClass="795"
+        >FSoE: 2B Bit-SMM, SafeHoming, Bit-SCA (786/789)</Type>
 				<Name>2Byte Bit-Coded SMM(786/789)</Name>
 				<!-- Type 5: 2-Byte-SMO-Control word, Bit-coded SMM + SafeHomingProcedure -->
 				<RxPdo Fixed="true" Sm="2">
@@ -14806,7 +16027,10 @@
 			</Module>
 			<!-- 2B Bit-SMM, SafeHoming (786 / 784) -->
 			<Module Crc32="#x3b565223">
-				<Type ModuleIdent="796" ModuleClass="796">FSoE: 2B Bit-SMM, SafeHoming (786/784)</Type>
+				<Type
+          ModuleIdent="796"
+          ModuleClass="796"
+        >FSoE: 2B Bit-SMM, SafeHoming (786/784)</Type>
 				<Name>2Byte Bit-Coded SMM(786/784)</Name>
 				<!-- Type 5: 2-Byte-SMO-Control word, Bit-coded SMM + SafeHomingProcedure -->
 				<RxPdo Fixed="true" Sm="2">
@@ -15168,7 +16392,10 @@
 			</Module>
 			<!-- 2B Configurable Assemmbly, (802 / 812) -->
 			<Module Crc32="#x50077D0E">
-				<Type ModuleIdent="797" ModuleClass="797">FSoE: 2B Configurable Assembly, (802/812)</Type>
+				<Type
+          ModuleIdent="797"
+          ModuleClass="797"
+        >FSoE: 2B Configurable Assembly, (802/812)</Type>
 				<Name>2Byte Configurable Assembly SMM(802/812)</Name>
 				<!-- Type 22: 2-Byte-SMO-Control word, Configurable Assembly (802) -->
 				<RxPdo Fixed="true" Sm="2">

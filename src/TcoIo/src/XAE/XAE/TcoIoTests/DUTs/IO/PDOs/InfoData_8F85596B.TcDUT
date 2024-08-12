@@ -8,14 +8,13 @@
 {attribute addProperty Size "2"}
 TYPE InfoData_8F85596B EXTENDS TcoIo.InputBase_8311D824 :
 STRUCT
-	{attribute addProperty Name "AdsAddr"}
-	AdsAddr AT %I* : TcoIo.TcoAmsAddr;
-	{attribute addProperty Name "AoeNetId"}
-	AoeNetId AT %I* : TcoIo.TcoAmsNetId;
-	{attribute addProperty Name "State"}
-	State AT %I* : UINT;
+    {attribute addProperty Name "AdsAddr"}
+    AdsAddr AT %I* : TcoIo.TcoAmsAddr;
+    {attribute addProperty Name "AoeNetId"}
+    AoeNetId AT %I* : TcoIo.TcoAmsNetId;
+    {attribute addProperty Name "State"}
+    State AT %I* : UINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

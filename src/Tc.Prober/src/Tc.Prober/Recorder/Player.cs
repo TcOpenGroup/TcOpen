@@ -1,14 +1,14 @@
 ﻿namespace Tc.Prober.Recorder
-{    
+{
     using System.Collections.Generic;
     using Vortex.Connector;
 
-    internal class Player<T, P> : RecorderBase<T, P>, IRecorder where T : IVortexObject, new() where P : IPlain, new()
+    internal class Player<T, P> : RecorderBase<T, P>, IRecorder
+        where T : IVortexObject, new()
+        where P : IPlain, new()
     {
-        public Player(T obj) : base(obj)
-        {
-
-        }
+        public Player(T obj)
+            : base(obj) { }
 
         public IEnumerable<bool> Play(string fileName)
         {
@@ -64,9 +64,6 @@
             this.PlayFrame();
         }
 
-        public void End(string fileName)
-        {
-
-        }
+        public void End(string fileName) { }
     }
 }

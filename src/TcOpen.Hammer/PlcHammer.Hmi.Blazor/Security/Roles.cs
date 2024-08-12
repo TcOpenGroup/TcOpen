@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using TcOpen.Inxton.Local.Security;
 using TcOpen.Inxton.Local.Security.Blazor;
-
 using TcOpen.Inxton.Security;
 
 namespace PlcHammer.Hmi.Blazor.Security
@@ -28,7 +27,9 @@ namespace PlcHammer.Hmi.Blazor.Security
 
         public const string process_settings_access = nameof(process_settings_access);
         public const string process_traceability_access = nameof(process_traceability_access);
-        public const string can_user_open_technological_settings = nameof(can_user_open_technological_settings);
+        public const string can_user_open_technological_settings = nameof(
+            can_user_open_technological_settings
+        );
         public const string ground_position_start = nameof(ground_position_start);
         public const string automat_start = nameof(automat_start);
         public const string station_details = nameof(station_details);

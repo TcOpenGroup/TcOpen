@@ -13,7 +13,11 @@ namespace TcoCoreUnitTests.PlcExecutedTests
         [OneTimeSetUp]
         public void OneTimeSetup()
         {
-            sharedVariable = ConnectorFixture.Connector.MAIN._tcoRemoteTaskTestContext._sharedVariable;
+            sharedVariable = ConnectorFixture
+                .Connector
+                .MAIN
+                ._tcoRemoteTaskTestContext
+                ._sharedVariable;
             tc.ExecuteProbeRun(10, (int)eTcoRemoteTaskTests.RestoreTasks);
         }
 
@@ -36,11 +40,11 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             //Act
             tc.ExecuteProbeRun(
                 (int)eTcoRemoteTaskTests.InvokeInitializedCSharpMethod,
-                () => tc._invokeInitializedCSharpMethodDone.Synchron);
+                () => tc._invokeInitializedCSharpMethodDone.Synchron
+            );
             //Assert
             Assert.AreEqual(1, sharedVariable.Synchron);
         }
-
 
         [Test, Order((int)eTcoRemoteTaskTests.ExceptionInMethodWillResultInException)]
         public void ExceptionInMethodWillResultInException()
@@ -51,12 +55,13 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             //Act
             tc.ExecuteProbeRun(
                 (int)eTcoRemoteTaskTests.ExceptionInMethodWillResultInException,
-                () => tc._exceptionInMethodWillResultInExceptionDone.Synchron);
+                () => tc._exceptionInMethodWillResultInExceptionDone.Synchron
+            );
             //Assert
             Assert.AreEqual(0, sharedVariable.Synchron);
         }
 
-        public void ExceptionMethod() => throw new System.Exception("An exception thrown from tests");
-
+        public void ExceptionMethod() =>
+            throw new System.Exception("An exception thrown from tests");
     }
 }

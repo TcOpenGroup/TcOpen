@@ -25,8 +25,6 @@ namespace TcoInspectors
             InitializeComponent();
         }
 
-
-
         public string PresentationType
         {
             get { return (string)GetValue(PresentationTypeProperty); }
@@ -35,8 +33,11 @@ namespace TcoInspectors
 
         // Using a DependencyProperty as the backing store for PresentationType.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PresentationTypeProperty =
-            DependencyProperty.Register("PresentationType", typeof(string), typeof(GenericTcoInspectorDataView), new PropertyMetadata("Display"));
-
-
+            DependencyProperty.Register(
+                "PresentationType",
+                typeof(string),
+                typeof(GenericTcoInspectorDataView),
+                new PropertyMetadata("Display")
+            );
     }
 }

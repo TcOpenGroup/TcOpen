@@ -4,8 +4,10 @@ namespace TcOpen.Inxton.Data
 {
     public static class DateTimeProviders
     {
-        public static DateTimeProviderBase DateTimeProvider { get; set; } = new StandardDateTimeProvider();
+        public static DateTimeProviderBase DateTimeProvider { get; set; } =
+            new StandardDateTimeProvider();
     }
+
     public class StandardDateTimeProvider : DateTimeProviderBase
     {
         public override DateTime Now => DateTime.Now;

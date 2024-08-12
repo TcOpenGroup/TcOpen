@@ -27,9 +27,11 @@ namespace TcoElements
 
             if (e.Property == DataContextProperty)
             {
-                this.DataContext = this.DataContext.ViewModelizeDataContext<GenericViewModel, TcoDi>();
+                this.DataContext = this.DataContext.ViewModelizeDataContext<
+                    GenericViewModel,
+                    TcoDi
+                >();
             }
         }
     }
-
 }

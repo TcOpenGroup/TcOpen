@@ -1,9 +1,9 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NUnit.Framework;
 using TcOpen.Inxton.Input;
 
 namespace TcOpen.Inxton.InputTests
@@ -22,7 +22,10 @@ namespace TcOpen.Inxton.InputTests
         [TestCase(true)]
         public void CanExecuteTest(bool canExecute)
         {
-            var actual = new RelayCommand(action => Console.WriteLine("can execute test"), (a) => canExecute);
+            var actual = new RelayCommand(
+                action => Console.WriteLine("can execute test"),
+                (a) => canExecute
+            );
             Assert.AreEqual(canExecute, actual.CanExecute(null));
         }
 
@@ -53,7 +56,11 @@ namespace TcOpen.Inxton.InputTests
         {
             var didIdoIt = "No";
             var logActionResult = "";
-            var actual = new RelayCommand(action => didIdoIt = "Yes!", (a) => true, () => logActionResult = "Command has been executed");
+            var actual = new RelayCommand(
+                action => didIdoIt = "Yes!",
+                (a) => true,
+                () => logActionResult = "Command has been executed"
+            );
 
             actual.Execute(null);
 

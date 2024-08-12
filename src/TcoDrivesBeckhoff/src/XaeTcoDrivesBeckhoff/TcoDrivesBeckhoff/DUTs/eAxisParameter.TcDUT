@@ -3,7 +3,8 @@
   <DUT Name="eAxisParameter" Id="{1d6b7c46-a0ee-09d1-3ec3-4cc11cae5ba3}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE eAxisParameter : (
+TYPE eAxisParameter :
+(
     (* PLCopen specific parameters *) (* Index-Group 0x4000 + ID*)
     CommandedPosition := 1, (* lreal *) (* taken from NcToPlc *)
     SWLimitPos, (* lreal *) (* IndexOffset= 16#0001_000E *)

@@ -3,17 +3,16 @@
   <POU Name="TcoTaskPlcTestObject" Id="{e5a083e5-83f5-09f3-0c5b-570a13d7234f}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoTaskPlcTestObject EXTENDS TcoCore.TcoObject
 VAR
-	_myIdentity				:	ULINT;
-	_myContextIdentity		:	ULINT;
-	_myContextStartCount 	:	ULINT;
-	_myContextEndCount		:	ULINT;
-	_myParentIdentity		:	ULINT;
+    _myIdentity : ULINT;
+    _myContextIdentity : ULINT;
+    _myContextStartCount : ULINT;
+    _myContextEndCount : ULINT;
+    _myParentIdentity : ULINT;
     _sut_A : TcoTaskPlcTest(THIS^);
     _sut_B : TcoTaskPlcTest(THIS^);
-	_tSt_A:TcoTaskPlcTestState(THIS^, eRestoreMode.AutoRestoreMembers);
-	_tSt_B:TcoTaskPlcTestState(THIS^, eRestoreMode.None);
-END_VAR
-]]></Declaration>
+    _tSt_A : TcoTaskPlcTestState(THIS^, eRestoreMode.AutoRestoreMembers);
+    _tSt_B : TcoTaskPlcTestState(THIS^, eRestoreMode.None);
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[_sut_A();
 _sut_B();]]></ST>
@@ -29,8 +28,7 @@ _sut_B();]]></ST>
       <Set Name="Set" Id="{4f0cf991-1e06-09c6-24ec-6f9fd9e46e40}">
         <Declaration><![CDATA[]]></Declaration>
         <Implementation>
-          <ST><![CDATA[_sut_A.CounterValue := CounterValue_A;
-]]></ST>
+          <ST><![CDATA[_sut_A.CounterValue := CounterValue_A;]]></ST>
         </Implementation>
       </Set>
     </Property>
@@ -53,16 +51,11 @@ _sut_B();]]></ST>
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL ReadOutIdentities]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_myIdentity			:=	THIS^.Identity;
-
-_myContextIdentity	:=	THIS^.Context.Identity;
-		
-_myContextStartCount :=	THIS^.Context.StartCycleCount;
-
-_myContextEndCount	:=	THIS^.Context.EndCycleCount;
-
-_myParentIdentity	:=	THIS^.Parent.Identity;
-]]></ST>
+        <ST><![CDATA[_myIdentity := THIS^.Identity;
+_myContextIdentity := THIS^.Context.Identity;
+_myContextStartCount := THIS^.Context.StartCycleCount;
+_myContextEndCount := THIS^.Context.EndCycleCount;
+_myParentIdentity := THIS^.Parent.Identity;]]></ST>
       </Implementation>
     </Method>
   </POU>

@@ -8,14 +8,13 @@
 {attribute addProperty Size "3"}
 TYPE Control_C948E0F2 :
 STRUCT
-	{attribute addProperty Name "Enable"}
-	Enable : BOOL;
-	{attribute addProperty Name "Reset"}
-	Reset : BOOL;
-	{attribute addProperty Name "Reduce_torque"}
-	Reduce_torque : BOOL;
+    {attribute addProperty Name "Enable"}
+    Enable : BOOL;
+    {attribute addProperty Name "Reset"}
+    Reset : BOOL;
+    {attribute addProperty Name "Reduce_torque"}
+    Reduce_torque : BOOL;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -2,117 +2,115 @@
 <TcPlcObject Version="1.1.0.1">
   <POU Name="TcoObject" Id="{ead5f617-b47e-4906-ac53-e73d5d26a62b}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Basic construction block from which all blocks of a TcOpen application should derive in order to take advantage of the framework. 
-			This function block is abstract and must be implemented in a derived block.
-			```TcoObject```, must be constructed via ```FB_init(ITcoObject)``` method at instantiation. 
-			```TcoObjects``` that belong to same ```TcoContext``` share the same context. 
-			This is typically achieved by constructing the object with ```FB_init(THIS^)```, where ```THIS^``` is of ```ITcoObject``` (note that ITcoContext also implements ITcoObject).    
-			<note type="warning">
-				Whenever it is required to pass function block parameters of a block type that derives from `TcoObject` it should be passed as **reference**. 
-				This means either via appropriate interface or as `REFERENCE TO` in VAR_INPUT and VAR_OUTPUT sections or as VAR_IN_OUT. 
-				Be aware the VAR_INPUT and VAR_OUTPUT create a copy of the variable.			
-			</note>        			
-			<para>
-				<example>
-				<note type="Example">
-				<para>
-					All the variables _myContext, _ContextTcoObjectA, _ContextTcoObjectB, _ContextChildTcoObject should have all the same value.
-				</para>
-				<para>
-					All the variables _myIdentity, _TcoObjectAidentity, _TcoObjectBidentity, _ChildTcoObjectidentity should have uniques values.
-				</para>
-					<code>
-							//Definition of the myTcoObject 
-							FUNCTION_BLOCK myTcoObject EXTENDS TcoObject
-							VAR
-								  _myChildTcoObject	:	myChildTcoObject(THIS^);
-							END_VAR
-						
-						
-							//Definition of the myTcoContext 
-							FUNCTION_BLOCK myTcoContext EXTENDS TcoContext
-							VAR
-								  _myTcoObjectA		:	myTcoObject(THIS^);					
-								  _myTcoObjectB		:	myTcoObject(_myTcoObjectA.Context); 
-								  _myContext		:	ITcoContext;
-								  _ContextTcoObjectA	:	ITcoContext;
-								  _ContextTcoObjectB	:	ITcoContext;
-								  _ContextChildTcoObject	:	ITcoContext;
-								  _myIdentity		:	ULINT;
-								  _TcoObjectAidentity	: 	ULINT;
-								  _TcoObjectBidentity	: 	ULINT;
-								  _ChildTcoObjectidentity	: 	ULINT;							
-							END_VAR
-						
-							//Plc code of the myTcoContext 
-							_myContext		:= 		THIS^.Context;
-							_ContextTcoObjectA	:=		_myTcoObjectA.Context;
-							_ContextTcoObjectB	:=		_myTcoObjectB.Context;
-							_ContextChildTcoObject	:=		_myTcoObjectB._myChildTcoObject.Context;
-							_myIdentity		:=		THIS^.Identity;
-							_TcoObjectAidentity	:=		_myTcoObjectA.Identity;
-							_TcoObjectBidentity	:=		_myTcoObjectB.Identity;
-							_ChildTcoObjectidentity	:=		_myTcoObjectB._myChildTcoObject.Identity;
-					</code>
-					 <note type="Explanation">
-						<para>
-							The context of the myTcoContext instance is assigned to itself. As the _myTcoObjectA context is assigned to this instance of the myTcoContext, it is assigned to the same context,
-							and the value of the _ContextTcoObjectA will be the same as the value of the _myContext.
-						</para>					
-						<para>
-							The context of the _myTcoObjectB instance is assigned to the _myTcoObjectA, that has already assigned context to this instance of the myTcoContext.
-							So the value of the _ContextTcoObjectB will be the same as the values of the _ContextTcoObjectA and _myContext.
-						</para>					
-						<para>
-							The context of the _myTcoObjectB._myChildTcoObject instance is assigned to the _myTcoObjectB, that has already assigned context to _myTcoObjectA, 
-							that has already assigned its context to this instance of the myTcoContext.
-							So the value of the _ContextChildTcoObject wile be the same as the values _ContextTcoObjectB,_ContextTcoObjectA and _myContext.
-						</para>
-						<para>
-							As the Identities of all objects points to the themselves, all identities will have different values, as all objects are unique.
-						</para>					
-					 </note>
-				 </note>
-				</example>
-			</para>
- 		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Basic construction block from which all blocks of a TcOpen application should derive in order to take advantage of the framework.
+            This function block is abstract and must be implemented in a derived block.
+            ```TcoObject```, must be constructed via ```FB_init(ITcoObject)``` method at instantiation.
+            ```TcoObjects``` that belong to same ```TcoContext``` share the same context.
+            This is typically achieved by constructing the object with ```FB_init(THIS^)```, where ```THIS^``` is of ```ITcoObject``` (note that ITcoContext also implements ITcoObject).
+            <note type="warning">
+                Whenever it is required to pass function block parameters of a block type that derives from `TcoObject` it should be passed as **reference**.
+                This means either via appropriate interface or as `REFERENCE TO` in VAR_INPUT and VAR_OUTPUT sections or as VAR_IN_OUT.
+                Be aware the VAR_INPUT and VAR_OUTPUT create a copy of the variable.
+            </note>
+            <para>
+                <example>
+                <note type="Example">
+                <para>
+                    All the variables _myContext, _ContextTcoObjectA, _ContextTcoObjectB, _ContextChildTcoObject should have all the same value.
+                </para>
+                <para>
+                    All the variables _myIdentity, _TcoObjectAidentity, _TcoObjectBidentity, _ChildTcoObjectidentity should have uniques values.
+                </para>
+                    <code>
+                            //Definition of the myTcoObject
+                            FUNCTION_BLOCK myTcoObject EXTENDS TcoObject
+                            VAR
+                                  _myChildTcoObject	:	myChildTcoObject(THIS^);
+                            END_VAR
+
+
+                            //Definition of the myTcoContext
+                            FUNCTION_BLOCK myTcoContext EXTENDS TcoContext
+                            VAR
+                                  _myTcoObjectA		:	myTcoObject(THIS^);
+                                  _myTcoObjectB		:	myTcoObject(_myTcoObjectA.Context);
+                                  _myContext		:	ITcoContext;
+                                  _ContextTcoObjectA	:	ITcoContext;
+                                  _ContextTcoObjectB	:	ITcoContext;
+                                  _ContextChildTcoObject	:	ITcoContext;
+                                  _myIdentity		:	ULINT;
+                                  _TcoObjectAidentity	: 	ULINT;
+                                  _TcoObjectBidentity	: 	ULINT;
+                                  _ChildTcoObjectidentity	: 	ULINT;
+                            END_VAR
+
+                            //Plc code of the myTcoContext
+                            _myContext		:= 		THIS^.Context;
+                            _ContextTcoObjectA	:=		_myTcoObjectA.Context;
+                            _ContextTcoObjectB	:=		_myTcoObjectB.Context;
+                            _ContextChildTcoObject	:=		_myTcoObjectB._myChildTcoObject.Context;
+                            _myIdentity		:=		THIS^.Identity;
+                            _TcoObjectAidentity	:=		_myTcoObjectA.Identity;
+                            _TcoObjectBidentity	:=		_myTcoObjectB.Identity;
+                            _ChildTcoObjectidentity	:=		_myTcoObjectB._myChildTcoObject.Identity;
+                    </code>
+                     <note type="Explanation">
+                        <para>
+                            The context of the myTcoContext instance is assigned to itself. As the _myTcoObjectA context is assigned to this instance of the myTcoContext, it is assigned to the same context,
+                            and the value of the _ContextTcoObjectA will be the same as the value of the _myContext.
+                        </para>
+                        <para>
+                            The context of the _myTcoObjectB instance is assigned to the _myTcoObjectA, that has already assigned context to this instance of the myTcoContext.
+                            So the value of the _ContextTcoObjectB will be the same as the values of the _ContextTcoObjectA and _myContext.
+                        </para>
+                        <para>
+                            The context of the _myTcoObjectB._myChildTcoObject instance is assigned to the _myTcoObjectB, that has already assigned context to _myTcoObjectA,
+                            that has already assigned its context to this instance of the myTcoContext.
+                            So the value of the _ContextChildTcoObject wile be the same as the values _ContextTcoObjectB,_ContextTcoObjectA and _myContext.
+                        </para>
+                        <para>
+                            As the Identities of all objects points to the themselves, all identities will have different values, as all objects are unique.
+                        </para>
+                     </note>
+                 </note>
+                </example>
+            </para>
+         </summary>
+    </docu>
 ~*)
 {attribute addProperty ToolTip ""}
 {attribute 'no_assign'}
-FUNCTION_BLOCK ABSTRACT TcoObject IMPLEMENTS ITcoObject 
+FUNCTION_BLOCK ABSTRACT TcoObject IMPLEMENTS ITcoObject
 VAR
-	{attribute clr [RenderIgnore()]}
-	{attribute clr [ReadOnly()]}
-	{attribute clr [CompilerOmits("BuilderPlainer", "BuilderShadow")]}
-	_Identity : ULINT;
-	{attribute 'hide'}
-	_ParentObject : ITcoObject;
-	{attribute 'hide'}
-    _ParentStruct : REFERENCE TO TcoStruct;		
-	{attribute clr [RenderIgnore()]}
-	{attribute clr [CompilerOmits("BuilderPlainer", "BuilderShadow")]}
-	_messenger : TcoMessenger(THIS^);
-END_VAR
-]]></Declaration>
+    {attribute clr [RenderIgnore()]}
+    {attribute clr [ReadOnly()]}
+    {attribute clr [CompilerOmits("BuilderPlainer", "BuilderShadow")]}
+    _Identity : ULINT;
+    {attribute 'hide'}
+    _ParentObject : ITcoObject;
+    {attribute 'hide'}
+    _ParentStruct : REFERENCE TO TcoStruct;
+    {attribute clr [RenderIgnore()]}
+    {attribute clr [CompilerOmits("BuilderPlainer", "BuilderShadow")]}
+    _messenger : TcoMessenger(THIS^);
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Property Name="Context" Id="{e9fccf88-109e-4118-831f-0290f859ab39}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Gets the context of the this object. The context is provided by parent object(s).			
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Gets the context of the this object. The context is provided by parent object(s).
+        </summary>
+    </docu>
 ~*)
 PROPERTY PUBLIC Context : ITcoContext]]></Declaration>
       <Get Name="Get" Id="{6c6cf6e8-01f1-4c58-9a7c-25846f41a746}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[Context := THIS^.Parent.Context;]]></ST>
         </Implementation>
@@ -120,83 +118,72 @@ END_VAR
     </Property>
     <Method Name="EqualsTo" Id="{4cbabb6f-bb30-0500-2ad1-c579fa67b5bc}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Compares this object to another object and returns ```true``` when the reference equals. 
-			When overriden in derived class custom comparison of two objects of the same type can be evaluated.						
- 		</summary>			
-		<note>
-			Default implementation compares only if two objects share the same reference. 
-			If you want to compare actual values of the objects you will need to override EqualsTo method, 
-			where you evaluate the values for equality.
-		</note>
-		<example>
-			<code>
-				// EqualsTo method override example of type MyObject
-				METHOD PUBLIC EqualsTo : BOOL
-				VAR_INPUT
-					Object : ITcoObject;
-				END_VAR
-				
-				VAR
-					_object : POINTER TO MyObject;
-				END_VAR
-				//--------------------------------------------
-				IF(__QUERYPOINTER(Object,  _object)) THEN
-					EqualsTo := _object^._SomeNumber = THIS^._SomeNumber AND _object^._SomeString = THIS^._SomeString;
-				END_IF;	
-			</code>
-		</example>
-	</docu>	
+    <docu>
+        <summary>
+            Compares this object to another object and returns ```true``` when the reference equals.
+            When overriden in derived class custom comparison of two objects of the same type can be evaluated.
+         </summary>
+        <note>
+            Default implementation compares only if two objects share the same reference.
+            If you want to compare actual values of the objects you will need to override EqualsTo method,
+            where you evaluate the values for equality.
+        </note>
+        <example>
+            <code>
+                // EqualsTo method override example of type MyObject
+                METHOD PUBLIC EqualsTo : BOOL
+                VAR_INPUT
+                    Object : ITcoObject;
+                END_VAR
+
+                VAR
+                    _object : POINTER TO MyObject;
+                END_VAR
+                //--------------------------------------------
+                IF(__QUERYPOINTER(Object,  _object)) THEN
+                    EqualsTo := _object^._SomeNumber = THIS^._SomeNumber AND _object^._SomeString = THIS^._SomeString;
+                END_IF;
+            </code>
+        </example>
+    </docu>
 ~*)
 METHOD PUBLIC EqualsTo : BOOL
 VAR_INPUT
-	Object : ITcoObject;
-END_VAR
-]]></Declaration>
+    Object : ITcoObject;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF(Object.Identity <> 0) THEN
-	EqualsTo := Object.Identity = THIS^.Identity;
-END_IF
-
-
-]]></ST>
+        <ST><![CDATA[IF (Object.Identity <> 0) THEN
+    EqualsTo := Object.Identity = THIS^.Identity;
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="FB_init" Id="{2172d94e-c218-46fa-950d-f8cdb30a05bd}">
       <Declaration><![CDATA[{attribute 'hide'}
 METHOD FB_init : BOOL
 VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	ParentObject : ITcoObject;	
-END_VAR
-
-
-]]></Declaration>
+    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+    ParentObject : ITcoObject;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_Identity := ADR(THIS^);
-_ParentObject := ParentObject;
-
-
-]]></ST>
+_ParentObject := ParentObject;]]></ST>
       </Implementation>
     </Method>
     <Property Name="Identity" Id="{3abfda68-92f0-402b-a0bc-b8b6f55297fc}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Gets the identity of this <see cref ="PlcDocu.TcoCore.TcoObject()"/>. 
-			This value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
-			This variable is used in the higher level applications.  
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Gets the identity of this <see cref ="PlcDocu.TcoCore.TcoObject()"/>.
+            This value is assigned after download by calling the implicit method <c>FB_init()</c> and cannot be changed during runtime.
+            This variable is used in the higher level applications.
+        </summary>
+    </docu>
 ~*)
 PROPERTY Identity : ULINT]]></Declaration>
       <Get Name="Get" Id="{d5a72207-d08f-4264-ba61-5f9bc3c2c475}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[_Identity := ADR(THIS^);
 Identity := _Identity;]]></ST>
@@ -205,18 +192,17 @@ Identity := _Identity;]]></ST>
     </Property>
     <Property Name="Messenger" Id="{5cb47c0d-a801-0abb-190e-5e933bdfa487}">
       <Declaration><![CDATA[(*~
-		<docu>
-			<summary>
-				Gets messenger of this object.
-				See <see cref="PlcDocu.TcoCore.TcoMessenger()"/> for more details.
-			</summary>			
-		</docu>
+        <docu>
+            <summary>
+                Gets messenger of this object.
+                See <see cref="PlcDocu.TcoCore.TcoMessenger()"/> for more details.
+            </summary>
+        </docu>
 ~*)
 PROPERTY Messenger : ITcoMessenger]]></Declaration>
       <Get Name="Get" Id="{65916f0c-0b34-091f-0006-4929987a0f6b}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[Messenger := THIS^._messenger;]]></ST>
         </Implementation>
@@ -226,18 +212,17 @@ END_VAR
       <Declaration><![CDATA[PROPERTY Parent : ITcoObject]]></Declaration>
       <Get Name="Get" Id="{d088e776-5e4c-0f82-1586-cb416ae29f17}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[IF(_ParentObject <> 0) THEN
-	Parent := _ParentObject;
-	RETURN;
-END_IF;	
+          <ST><![CDATA[IF (_ParentObject <> 0) THEN
+    Parent := _ParentObject;
+    RETURN;
+END_IF;
 
-IF(__ISVALIDREF(_ParentStruct) AND_THEN _ParentStruct.Parent <> 0) THEN
-	Parent := _ParentStruct.Parent;
-	RETURN;
-END_IF;	]]></ST>
+IF (__ISVALIDREF(_ParentStruct) AND_THEN _ParentStruct.Parent <> 0) THEN
+    Parent := _ParentStruct.Parent;
+    RETURN;
+END_IF;]]></ST>
         </Implementation>
       </Get>
     </Property>

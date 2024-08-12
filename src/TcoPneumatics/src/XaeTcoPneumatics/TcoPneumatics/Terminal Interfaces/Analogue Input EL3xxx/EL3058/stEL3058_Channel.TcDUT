@@ -4,10 +4,9 @@
     <Declaration><![CDATA[{attribute 'pack_mode' := '1'}
 TYPE stEL3058_Channel :
 STRUCT
-	Status	AT %I* : stEL3058_ChannelStatus;
-	Value 	AT %I* : WORD;
+    Status AT %I* : stEL3058_ChannelStatus;
+    Value AT %I* : WORD;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

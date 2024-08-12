@@ -9,8 +9,7 @@ namespace TcoElements
     /// <summary>
     /// Interaction logic for TcoCarouselServiceView.xaml
     /// </summary>
-    public partial class TcoCarouselServiceView
-        : UserControl
+    public partial class TcoCarouselServiceView : UserControl
     {
         public TcoCarouselServiceView()
         {
@@ -28,9 +27,11 @@ namespace TcoElements
 
             if (e.Property == DataContextProperty)
             {
-                this.DataContext = this.DataContext.ViewModelizeDataContext<GenericViewModel, TcoCarousel>();
+                this.DataContext = this.DataContext.ViewModelizeDataContext<
+                    GenericViewModel,
+                    TcoCarousel
+                >();
             }
         }
     }
-
 }

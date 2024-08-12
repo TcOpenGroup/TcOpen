@@ -19,12 +19,15 @@ namespace TcOpen.Inxton.Data.Merge
             }
             else if (body is UnaryExpression)
             {
-                propertyInfo = ((MemberExpression)((UnaryExpression)body).Operand).Member as PropertyInfo;
+                propertyInfo =
+                    ((MemberExpression)((UnaryExpression)body).Operand).Member as PropertyInfo;
             }
 
             if (propertyInfo == null)
             {
-                throw new ArgumentException("The lambda expression 'property' should point to a valid Property");
+                throw new ArgumentException(
+                    "The lambda expression 'property' should point to a valid Property"
+                );
             }
 
             var propertyName = propertyInfo.Name;
@@ -43,12 +46,15 @@ namespace TcOpen.Inxton.Data.Merge
             }
             else if (body is UnaryExpression)
             {
-                propertyInfo = ((MemberExpression)((UnaryExpression)body).Operand).Member as PropertyInfo;
+                propertyInfo =
+                    ((MemberExpression)((UnaryExpression)body).Operand).Member as PropertyInfo;
             }
 
             if (propertyInfo == null)
             {
-                throw new ArgumentException("The lambda expression 'property' should point to a valid Property");
+                throw new ArgumentException(
+                    "The lambda expression 'property' should point to a valid Property"
+                );
             }
 
             var propertyName = propertyInfo.Name;
@@ -56,7 +62,10 @@ namespace TcOpen.Inxton.Data.Merge
             return propertyName;
         }
 
-        public static List<string> GetPropertiesNames<T>(T obj, params Expression<Func<T, object>>[] expressions)
+        public static List<string> GetPropertiesNames<T>(
+            T obj,
+            params Expression<Func<T, object>>[] expressions
+        )
         {
             List<string> memberNames = new List<string>();
             foreach (var cExpression in expressions)
@@ -66,7 +75,5 @@ namespace TcOpen.Inxton.Data.Merge
 
             return memberNames;
         }
-
-
     }
 }

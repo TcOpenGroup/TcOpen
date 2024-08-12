@@ -24,15 +24,20 @@ namespace TcoMitsubishiRoboticsUnitTests
                 }
                 return _connector;
             }
-
         }
 
         public static void StartConnector()
         {
-            var adapter = Vortex.Adapters.Connector.Tc3.Adapter.Tc3ConnectorAdapter.Create(TestSetupFixture.TargetAmsId, TestSetupFixture.TargetAmsPort, true);
-            _connector = new TcoMitsubishiRoboticsTests.TcoMitsubishiRoboticsTestsTwinController(adapter);
+            var adapter = Vortex.Adapters.Connector.Tc3.Adapter.Tc3ConnectorAdapter.Create(
+                TestSetupFixture.TargetAmsId,
+                TestSetupFixture.TargetAmsPort,
+                true
+            );
+            _connector = new TcoMitsubishiRoboticsTests.TcoMitsubishiRoboticsTestsTwinController(
+                adapter
+            );
             _connector.Connector.ReadWriteCycleDelay = 100;
-            _connector.Connector.BuildAndStart();                        
+            _connector.Connector.BuildAndStart();
         }
     }
 }

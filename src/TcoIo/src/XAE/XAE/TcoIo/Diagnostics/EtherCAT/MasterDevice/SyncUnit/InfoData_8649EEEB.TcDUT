@@ -8,14 +8,13 @@
 {attribute addProperty Size "8"}
 TYPE InfoData_8649EEEB :
 STRUCT
-	{attribute addProperty Name "ObjectId"}
-	ObjectId AT %I* : DWORD;
-	{attribute addProperty Name "State"}
-	State AT %I* : UINT;
-	{attribute addProperty Name "SlaveCount"}
-	SlaveCount AT %I* : UINT;
+    {attribute addProperty Name "ObjectId"}
+    ObjectId AT %I* : DWORD;
+    {attribute addProperty Name "State"}
+    State AT %I* : UINT;
+    {attribute addProperty Name "SlaveCount"}
+    SlaveCount AT %I* : UINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

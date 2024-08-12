@@ -1,39 +1,60 @@
 <UserControl
-    x:Class="TcoElements.TcoDoServiceView"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:TcoElements="clr-namespace:TcoElements;assembly=TcoElementsConnector"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:TcoElements"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:tcoCore="clr-namespace:TcoCore;assembly=TcOpen.Inxton.TcoCore.Wpf" xmlns:vortex="http://vortex.mts/xaml"
-    d:DesignWidth="800"
-    mc:Ignorable="d">
+  x:Class="TcoElements.TcoDoServiceView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:TcoElements="clr-namespace:TcoElements;assembly=TcoElementsConnector"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:TcoElements"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:tcoCore="clr-namespace:TcoCore;assembly=TcOpen.Inxton.TcoCore.Wpf"
+  xmlns:vortex="http://vortex.mts/xaml"
+  d:DesignWidth="800"
+  mc:Ignorable="d"
+>
     <d:UserControl.DataContext>
-        <TcoElements:TcoDo/>
+        <TcoElements:TcoDo />
     </d:UserControl.DataContext>
     <UserControl.Resources>
         <ItemsPanelTemplate x:Key="HorizontalWraped">
-            <WrapPanel Background="Transparent" Width="{Binding (FrameworkElement.ActualWidth) , RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}" MinWidth="{Binding ItemWidth , RelativeSource={RelativeSource Self}}" ItemHeight="{Binding (ListView.View).ItemHeight , RelativeSource={RelativeSource AncestorType=ListView}}" ItemWidth="{Binding (ListView.View).ItemWidth , RelativeSource={RelativeSource AncestorType=ListView}}" />
+            <WrapPanel
+        Background="Transparent"
+        Width="{Binding (FrameworkElement.ActualWidth) , RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+        MinWidth="{Binding ItemWidth , RelativeSource={RelativeSource Self}}"
+        ItemHeight="{Binding (ListView.View).ItemHeight , RelativeSource={RelativeSource AncestorType=ListView}}"
+        ItemWidth="{Binding (ListView.View).ItemWidth , RelativeSource={RelativeSource AncestorType=ListView}}"
+      />
         </ItemsPanelTemplate>
     </UserControl.Resources>
     <vortex:TcoComponentView>
         <vortex:TcoComponentView.ComponentHeader>
-            <WrapPanel VerticalAlignment="Center" >
-                <vortex:RenderableContentControl DataContext="{Binding Model._setTask}"></vortex:RenderableContentControl>
-                <vortex:RenderableContentControl DataContext="{Binding Model._resetTask}"></vortex:RenderableContentControl>
+            <WrapPanel VerticalAlignment="Center">
+                <vortex:RenderableContentControl
+          DataContext="{Binding Model._setTask}"
+        />
+                <vortex:RenderableContentControl
+          DataContext="{Binding Model._resetTask}"
+        />
 
                 <Border
-                    Margin="5,0,5,0" MinWidth="100"
-                    Background="{Binding Model._signal.Cyclic, Converter={tcoCore:SignalToBrushConverter}}"
-                    CornerRadius="2" />
+          Margin="5,0,5,0"
+          MinWidth="100"
+          Background="{Binding Model._signal.Cyclic, Converter={tcoCore:SignalToBrushConverter}}"
+          CornerRadius="2"
+        />
             </WrapPanel>
         </vortex:TcoComponentView.ComponentHeader>
         <vortex:TcoComponentView.ComponentDetails>
             <WrapPanel DataContext="{Binding Model}">
-                <tcoCore:TcoSignalInfoView Grid.Column="1" DataContext="{Binding _signalInfo}" VerticalAlignment="Center"/>
+                <tcoCore:TcoSignalInfoView
+          Grid.Column="1"
+          DataContext="{Binding _signalInfo}"
+          VerticalAlignment="Center"
+        />
 
-                <ItemsControl ItemsPanel="{StaticResource HorizontalWraped}" Margin="10,10,0,0" >
+                <ItemsControl
+          ItemsPanel="{StaticResource HorizontalWraped}"
+          Margin="10,10,0,0"
+        >
                </ItemsControl>
             </WrapPanel>
 

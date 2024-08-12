@@ -23,6 +23,6 @@ namespace TcoInspectors
         public TcoAnalogueInspectorControlView()
         {
             InitializeComponent();
-        }       
+        }
     }
 }

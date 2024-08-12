@@ -5,14 +5,13 @@
 {attribute 'strict'}
 TYPE eTcoMovementState :
 (
-	WaitingForMovementTask := 0,
-	Reset,
-	Power,
-	ParametersCheck,
-	Movement,
-	Error := 255
+    WaitingForMovementTask := 0,
+    Reset,
+    Power,
+    ParametersCheck,
+    Movement,
+    Error := 255
 );
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

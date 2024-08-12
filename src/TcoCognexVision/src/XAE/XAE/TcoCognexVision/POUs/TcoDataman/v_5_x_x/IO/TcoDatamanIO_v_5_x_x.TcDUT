@@ -3,18 +3,17 @@
   <DUT Name="TcoDatamanIO_v_5_x_x" Id="{15e8d456-5b4f-4523-9246-2822fb48f181}">
     <Declaration><![CDATA[TYPE TcoDatamanIO_v_5_x_x :
 STRUCT
-	PnIoBoxState AT %I*	:	UINT;
-	PnIoBoxDiag AT %I*	:	UINT;
-	PnIoBoxCtrl AT %Q*	:	UINT;
-	AcquisitionControl	:	TcoDatamanAcquisitionControl_v_5_x_x;
-	AcquisitionStatus	:	TcoDatamanAcquisitionStatus_v_5_x_x;
-	ResultsControl		:	TcoDatamanResultsControl_v_5_x_x;
-	ResultsStatus		:	TcoDatamanResultsStatus_v_5_x_x;
-	SoftEventControl	:	TcoDatamanSoftEventControl_v_5_x_x;
-	UserData			:	TcoDatamanUserData_v_5_x_x;
-	ResultData			:	TcoDatamanResultData_v_5_x_x;
+    PnIoBoxState AT %I* : UINT;
+    PnIoBoxDiag AT %I* : UINT;
+    PnIoBoxCtrl AT %Q* : UINT;
+    AcquisitionControl : TcoDatamanAcquisitionControl_v_5_x_x;
+    AcquisitionStatus : TcoDatamanAcquisitionStatus_v_5_x_x;
+    ResultsControl : TcoDatamanResultsControl_v_5_x_x;
+    ResultsStatus : TcoDatamanResultsStatus_v_5_x_x;
+    SoftEventControl : TcoDatamanSoftEventControl_v_5_x_x;
+    UserData : TcoDatamanUserData_v_5_x_x;
+    ResultData : TcoDatamanResultData_v_5_x_x;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

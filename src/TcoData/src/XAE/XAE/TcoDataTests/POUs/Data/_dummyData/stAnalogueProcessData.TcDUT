@@ -3,11 +3,10 @@
   <DUT Name="stAnalogueProcessData" Id="{4e8eaf20-b62b-4a8a-a572-e7b3b1744995}">
     <Declaration><![CDATA[TYPE stAnalogueProcessData :
 STRUCT
-	FailureDescription : STRING;
-	Minimum : REAL;
-	Maximum : REAL;
+    FailureDescription : STRING;
+    Minimum : REAL;
+    Maximum : REAL;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

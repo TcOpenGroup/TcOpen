@@ -6,7 +6,6 @@ using System.Windows.Data;
 using System.Windows.Markup;
 using System.Windows.Media;
 
-
 namespace TcoIo
 {
     public partial class SyncUnitTasksBase_7C8711EBSyncUnitView : UserControl
@@ -16,5 +15,4 @@ namespace TcoIo
             InitializeComponent();
         }
     }
-  
 }

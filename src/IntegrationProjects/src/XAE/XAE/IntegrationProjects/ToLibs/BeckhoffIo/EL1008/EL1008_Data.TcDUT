@@ -3,26 +3,25 @@
   <DUT Name="EL1008_Data" Id="{2965af6a-920a-011e-03a6-3a74a05d15ee}">
     <Declaration><![CDATA[TYPE EL1008_Data :
 STRUCT
-	{attribute addProperty Name "1"}
-	_1 AT %I* : BOOL;
-	{attribute addProperty Name "2"}
-	_2 AT %I* : BOOL;
-	{attribute addProperty Name "3"}
-	_3 AT %I* : BOOL;
-	{attribute addProperty Name "4"}
-	_4 AT %I* : BOOL;
-	{attribute addProperty Name "5"}
-	_5 AT %I* : BOOL;
-	{attribute addProperty Name "6"}
-	_6 AT %I* : BOOL;
-	{attribute addProperty Name "7"}
-	_7 AT %I* : BOOL;
-	{attribute addProperty Name "7"}
-	_8 AT %I* : BOOL; 
-	WcState : WcState;
-	InfoData : InfoData;
+    {attribute addProperty Name "1"}
+    _1 AT %I* : BOOL;
+    {attribute addProperty Name "2"}
+    _2 AT %I* : BOOL;
+    {attribute addProperty Name "3"}
+    _3 AT %I* : BOOL;
+    {attribute addProperty Name "4"}
+    _4 AT %I* : BOOL;
+    {attribute addProperty Name "5"}
+    _5 AT %I* : BOOL;
+    {attribute addProperty Name "6"}
+    _6 AT %I* : BOOL;
+    {attribute addProperty Name "7"}
+    _7 AT %I* : BOOL;
+    {attribute addProperty Name "7"}
+    _8 AT %I* : BOOL;
+    WcState : WcState;
+    InfoData : InfoData;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -1,12 +1,14 @@
 ﻿namespace Tc.Prober.Recorder
 {
-    using Newtonsoft.Json;
-    using System;   
+    using System;
     using System.IO;
-    using System.Linq;    
+    using System.Linq;
+    using Newtonsoft.Json;
     using Vortex.Connector;
 
-    internal class RecorderBase<T, P> where T : IVortexObject, new() where P : IPlain, new()
+    internal class RecorderBase<T, P>
+        where T : IVortexObject, new()
+        where P : IPlain, new()
     {
         public RecorderBase(T obj)
         {
@@ -37,7 +39,8 @@
             var adapter = new ConnectorAdapter(typeof(DummyConnectorFactory));
             var connector = adapter.GetConnector(new object[] { });
 
-            T current = (T)Activator.CreateInstance(typeof(T), connector, string.Empty, string.Empty);
+            T current = (T)
+                Activator.CreateInstance(typeof(T), connector, string.Empty, string.Empty);
             T next = (T)Activator.CreateInstance(typeof(T), connector, string.Empty, string.Empty);
 
             for (int i = 0; i < recording.Frames.LongCount(); i++)
@@ -47,7 +50,6 @@
                 long currentObjectStamp = recording.Frames[i].Stamp;
                 CopyToOnline(current, currentObject);
                 var currentTags = current.RetrieveValueTags().ToArray();
-
 
                 var nextFrame = currentFrame;
                 P nextObject = currentObject;
@@ -64,12 +66,14 @@
                     nextTags = next.RetrieveValueTags().ToArray();
                 }
 
-
                 var isSame = true;
 
                 for (int next_index = 0; next_index < nextTags.LongCount(); next_index++)
                 {
-                    if (((dynamic)nextTags[next_index]).Cyclic != ((dynamic)currentTags[next_index]).Cyclic)
+                    if (
+                        ((dynamic)nextTags[next_index]).Cyclic
+                        != ((dynamic)currentTags[next_index]).Cyclic
+                    )
                     {
                         isSame = false;
                         break;
@@ -111,10 +115,6 @@
             get { return this.recording; }
         }
 
-        protected Recording<P> recording
-        {
-            get;
-            set;
-        } = new Recording<P>();        
+        protected Recording<P> recording { get; set; } = new Recording<P>();
     }
 }

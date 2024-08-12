@@ -8,10 +8,9 @@
 {attribute addProperty Size "4"}
 TYPE Device_State_B9CC7757 EXTENDS TcoIo.InputBase_8311D824 :
 STRUCT
-	{attribute addProperty Name "CouplerState"}
-	CouplerState AT %I* : UDINT;
+    {attribute addProperty Name "CouplerState"}
+    CouplerState AT %I* : UDINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

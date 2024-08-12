@@ -1,5 +1,5 @@
-﻿using PlcAppExamples;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
+using PlcAppExamples;
 using Vortex.Presentation.Wpf;
 
 namespace PlcAppExamples
@@ -14,8 +14,11 @@ namespace PlcAppExamples
 
     public class InvokingTasksViewModel : RenderableViewModel
     {
-
         public InvokingTasks InvokingTasks { get; set; }
-        public override object Model { get => InvokingTasks; set => InvokingTasks = value as InvokingTasks; }
+        public override object Model
+        {
+            get => InvokingTasks;
+            set => InvokingTasks = value as InvokingTasks;
+        }
     }
 }

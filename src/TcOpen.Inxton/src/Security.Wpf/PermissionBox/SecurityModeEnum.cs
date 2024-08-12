@@ -12,6 +12,7 @@
         /// The user control will not be visible when current user lacks permissions.
         /// </summary>
         Invisible,
+
         /// <summary>
         /// The user control will be disabled whe current user lacks permissions.
         /// </summary>
@@ -20,6 +21,5 @@
         ///// Displays a box with information about insufficient right and allows to login new user.
         ///// </summary>
         //InsufficientBox
-
     }
 }

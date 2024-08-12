@@ -1,5 +1,5 @@
-﻿using Grafana.Backend.Model;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Grafana.Backend.Model;
 
 namespace TcOpenHammer.Grafana.API.Transformation
 {

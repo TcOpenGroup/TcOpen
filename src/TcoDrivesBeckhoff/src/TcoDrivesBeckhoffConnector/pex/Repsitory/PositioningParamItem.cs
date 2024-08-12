@@ -2,8 +2,7 @@
 
 namespace TcoDrivesBeckhoff
 {
-    public class PositioningParamItem
-        :  IDataSetItems
+    public class PositioningParamItem : IDataSetItems
     {
         private string key;
 
@@ -21,17 +20,14 @@ namespace TcoDrivesBeckhoff
                 }
 
                 key = value;
-            
             }
         }
-
 
         private string description;
         private PlainTcoMultiAxisMoveParam moveParam;
 
-
         /// <summary>
-        /// gets or sets additional information. 
+        /// gets or sets additional information.
         /// </summary>
         public string Description
         {
@@ -49,15 +45,8 @@ namespace TcoDrivesBeckhoff
 
         public PlainTcoMultiAxisMoveParam MoveParam
         {
-            get => moveParam; set
-            {
-                moveParam = value;
-            }
+            get => moveParam;
+            set { moveParam = value; }
         }
-
-       
-
-
     }
-
 }

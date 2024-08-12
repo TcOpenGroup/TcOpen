@@ -8,18 +8,17 @@
 {attribute addProperty Size "5"}
 TYPE Ctrl_1EFB4D3B :
 STRUCT
-	{attribute addProperty Name "Transmit_request"}
-	Transmit_request : BOOL;
-	{attribute addProperty Name "Receive_accepted"}
-	Receive_accepted : BOOL;
-	{attribute addProperty Name "Init_request"}
-	Init_request : BOOL;
-	{attribute addProperty Name "Send_continuous"}
-	Send_continuous : BOOL;
-	{attribute addProperty Name "Output_length"}
-	Output_length : USINT;
+    {attribute addProperty Name "Transmit_request"}
+    Transmit_request : BOOL;
+    {attribute addProperty Name "Receive_accepted"}
+    Receive_accepted : BOOL;
+    {attribute addProperty Name "Init_request"}
+    Init_request : BOOL;
+    {attribute addProperty Name "Send_continuous"}
+    Send_continuous : BOOL;
+    {attribute addProperty Name "Output_length"}
+    Output_length : USINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

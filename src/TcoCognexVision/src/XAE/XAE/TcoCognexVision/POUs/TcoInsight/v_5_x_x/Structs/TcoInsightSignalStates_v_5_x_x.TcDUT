@@ -4,103 +4,93 @@
     <Declaration><![CDATA[{attribute addProperty Name "Signal states"}
 TYPE TcoInsightSignalStates_v_5_x_x :
 STRUCT
-	{attribute wpf [Container(Layout.Stack,"Acquisition control")]}
-	{attribute wpf [Group(Layout.GroupBox)]}
-	{attribute addProperty Name "<#Acquisition trigger enable#>"}
-	AcquisitionTriggerEnable :  BOOL;
-	{attribute addProperty Name "<#Acquisition trigger#>"}
-	AcquisitionTrigger :  BOOL;
-	{attribute addProperty Name "<#Clear exposure complete#>"}
-	ClearExposureComplete :  BOOL;
-	{attribute addProperty Name "<#Set offline#>"}
-	SetOffline :  BOOL;
-
-	{attribute wpf [Container(Layout.Stack,"Inspection control")]}
-	{attribute wpf [Group(Layout.GroupBox)]}
-	{attribute addProperty Name "<#Enable results buffering#>"}
-	EnableResultsBuffering AT %Q* : BOOL;
-	{attribute addProperty Name "<#Acknowledge inspection results#>"}
-	AcknowledgeInspectionResults AT %Q* : BOOL;
-	{attribute addProperty Name "<#Extended user data set#>"}
-	ExtendedUserDataSet AT %Q* : BOOL;
-	{attribute addProperty Name "<#Execute command#>"}
-	ExecuteCommand AT %Q* : BOOL;
-	{attribute addProperty Name "<#Clear error#>"}
-	ClearError AT %Q* : BOOL;
-
-
-
-	{attribute wpf [Container(Layout.Stack,"Acquisition status")]}
-	{attribute wpf [Group(Layout.GroupBox)]}
-	{attribute addProperty Name "<#Acquisition trigger ready#>"}
-	AcquisitionTriggerReady : BOOL;
-	{attribute addProperty Name "<#Acquisition trigger acknowledge#>"}
-	AcquisitionTriggerAcknowledge : BOOL;
-	{attribute addProperty Name "<#Exposure complete#>"}
-	ExposureComplete : BOOL;
-	{attribute addProperty Name "<#Missed acquisition#>"}
-	MissedAcquisition : BOOL;
-	{attribute addProperty Name "<#Offline reason 0#>"}
-	OfflineReason0 : BOOL;
-	{attribute addProperty Name "<#Offline reason 1#>"}
-	OfflineReason1 : BOOL;
-	{attribute addProperty Name "<#Offline reason 2#>"}
-	OfflineReason2 : BOOL;
-	{attribute addProperty Name "<#Online#>"}
-	Online : BOOL;
-	{attribute addProperty Name "<#Acquisition ID#>"}
-	AcquisitionID : UINT;
-	
-	{attribute wpf [Container(Layout.Stack,"Inspection status")]}
-	{attribute wpf [Group(Layout.GroupBox)]}
-	{attribute addProperty Name "<#System busy#>"}
-	SystemBusy : BOOL;
-	{attribute addProperty Name "<#Inspection completed#>"}
-	InspectionCompleted: BOOL;
-	{attribute addProperty Name "<#Results buffer overrun#>"}
-	ResultsBufferOverrun : BOOL;
-	{attribute addProperty Name "<#Results valid#>"}
-	ResultsValid : BOOL;	
-	{attribute addProperty Name "<#Command executing#>"}
-	CommandExecuting : BOOL;
-	{attribute addProperty Name "<#Command complete#>"}
-	CommandComplete : BOOL;
-	{attribute addProperty Name "<#Command failed#>"}
-	CommandFailed : BOOL;
-	{attribute addProperty Name "<#Extended user data set acknowledge#>"}
-	ExtendedUserDataSetAcknowledge: BOOL;
-	{attribute addProperty Name "<#Overall job pass fail#>"}
-	OverallJobPassFail : BOOL;
-	{attribute addProperty Name "<#Test run ready#>"}
-	TestRunReady : BOOL;
-	{attribute addProperty Name "<#Error#>"}
-	Error : BOOL;
-	{attribute addProperty Name "<#Error code#>"}
-	ErrorCode : UINT;
-
-
-	{attribute wpf [Container(Layout.Stack,"Command control")]}
-	{attribute wpf [Group(Layout.GroupBox)]}
-	{attribute addProperty Name "<#Command#>"}
-	Command : UINT;
-	{attribute addProperty Name "<#Current job ID#>"}
-	CurrentJobID : UINT;
-
-	{attribute wpf [Container(Layout.Stack,"Command control")]}
-	{attribute wpf [Group(Layout.GroupBox)]}
-	{attribute addProperty Name "<#Trigger soft event#>"}
-	TriggerSoftEvent :BYTE;
-	{attribute addProperty Name "<#Trigger soft event acknowledge#>"}
-	TriggerSoftEventAcknowledge : BYTE;
-
-	{attribute wpf [Container(Layout.Stack,"Results data")]}
-	{attribute wpf [Group(Layout.GroupBox)]}
-	{attribute addProperty Name "<#Inspection ID#>"}
-	InspectionID : UINT;
-	{attribute addProperty Name "<#Result code#>"}
-	ResultCode : UINT;
+    {attribute wpf [Container(Layout.Stack,"Acquisition control")]}
+    {attribute wpf [Group(Layout.GroupBox)]}
+    {attribute addProperty Name "<#Acquisition trigger enable#>"}
+    AcquisitionTriggerEnable : BOOL;
+    {attribute addProperty Name "<#Acquisition trigger#>"}
+    AcquisitionTrigger : BOOL;
+    {attribute addProperty Name "<#Clear exposure complete#>"}
+    ClearExposureComplete : BOOL;
+    {attribute addProperty Name "<#Set offline#>"}
+    SetOffline : BOOL;
+    {attribute wpf [Container(Layout.Stack,"Inspection control")]}
+    {attribute wpf [Group(Layout.GroupBox)]}
+    {attribute addProperty Name "<#Enable results buffering#>"}
+    EnableResultsBuffering AT %Q* : BOOL;
+    {attribute addProperty Name "<#Acknowledge inspection results#>"}
+    AcknowledgeInspectionResults AT %Q* : BOOL;
+    {attribute addProperty Name "<#Extended user data set#>"}
+    ExtendedUserDataSet AT %Q* : BOOL;
+    {attribute addProperty Name "<#Execute command#>"}
+    ExecuteCommand AT %Q* : BOOL;
+    {attribute addProperty Name "<#Clear error#>"}
+    ClearError AT %Q* : BOOL;
+    {attribute wpf [Container(Layout.Stack,"Acquisition status")]}
+    {attribute wpf [Group(Layout.GroupBox)]}
+    {attribute addProperty Name "<#Acquisition trigger ready#>"}
+    AcquisitionTriggerReady : BOOL;
+    {attribute addProperty Name "<#Acquisition trigger acknowledge#>"}
+    AcquisitionTriggerAcknowledge : BOOL;
+    {attribute addProperty Name "<#Exposure complete#>"}
+    ExposureComplete : BOOL;
+    {attribute addProperty Name "<#Missed acquisition#>"}
+    MissedAcquisition : BOOL;
+    {attribute addProperty Name "<#Offline reason 0#>"}
+    OfflineReason0 : BOOL;
+    {attribute addProperty Name "<#Offline reason 1#>"}
+    OfflineReason1 : BOOL;
+    {attribute addProperty Name "<#Offline reason 2#>"}
+    OfflineReason2 : BOOL;
+    {attribute addProperty Name "<#Online#>"}
+    Online : BOOL;
+    {attribute addProperty Name "<#Acquisition ID#>"}
+    AcquisitionID : UINT;
+    {attribute wpf [Container(Layout.Stack,"Inspection status")]}
+    {attribute wpf [Group(Layout.GroupBox)]}
+    {attribute addProperty Name "<#System busy#>"}
+    SystemBusy : BOOL;
+    {attribute addProperty Name "<#Inspection completed#>"}
+    InspectionCompleted : BOOL;
+    {attribute addProperty Name "<#Results buffer overrun#>"}
+    ResultsBufferOverrun : BOOL;
+    {attribute addProperty Name "<#Results valid#>"}
+    ResultsValid : BOOL;
+    {attribute addProperty Name "<#Command executing#>"}
+    CommandExecuting : BOOL;
+    {attribute addProperty Name "<#Command complete#>"}
+    CommandComplete : BOOL;
+    {attribute addProperty Name "<#Command failed#>"}
+    CommandFailed : BOOL;
+    {attribute addProperty Name "<#Extended user data set acknowledge#>"}
+    ExtendedUserDataSetAcknowledge : BOOL;
+    {attribute addProperty Name "<#Overall job pass fail#>"}
+    OverallJobPassFail : BOOL;
+    {attribute addProperty Name "<#Test run ready#>"}
+    TestRunReady : BOOL;
+    {attribute addProperty Name "<#Error#>"}
+    Error : BOOL;
+    {attribute addProperty Name "<#Error code#>"}
+    ErrorCode : UINT;
+    {attribute wpf [Container(Layout.Stack,"Command control")]}
+    {attribute wpf [Group(Layout.GroupBox)]}
+    {attribute addProperty Name "<#Command#>"}
+    Command : UINT;
+    {attribute addProperty Name "<#Current job ID#>"}
+    CurrentJobID : UINT;
+    {attribute wpf [Container(Layout.Stack,"Command control")]}
+    {attribute wpf [Group(Layout.GroupBox)]}
+    {attribute addProperty Name "<#Trigger soft event#>"}
+    TriggerSoftEvent : BYTE;
+    {attribute addProperty Name "<#Trigger soft event acknowledge#>"}
+    TriggerSoftEventAcknowledge : BYTE;
+    {attribute wpf [Container(Layout.Stack,"Results data")]}
+    {attribute wpf [Group(Layout.GroupBox)]}
+    {attribute addProperty Name "<#Inspection ID#>"}
+    InspectionID : UINT;
+    {attribute addProperty Name "<#Result code#>"}
+    ResultCode : UINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

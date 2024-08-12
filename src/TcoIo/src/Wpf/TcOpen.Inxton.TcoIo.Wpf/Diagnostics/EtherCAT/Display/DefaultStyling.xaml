@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:Vortex.Presentation.Controls.Wpf.Style">
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:local="clr-namespace:Vortex.Presentation.Controls.Wpf.Style"
+>
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="GroupBox.xaml" />
@@ -10,8 +11,14 @@
     </ResourceDictionary.MergedDictionaries>
 
 
-    <Style BasedOn="{StaticResource GroupBoxDefault}" TargetType="{x:Type GroupBox}" />
-    <Style BasedOn="{StaticResource TextBoxDefault}" TargetType="{x:Type TextBox}" />
+    <Style
+    BasedOn="{StaticResource GroupBoxDefault}"
+    TargetType="{x:Type GroupBox}"
+  />
+    <Style
+    BasedOn="{StaticResource TextBoxDefault}"
+    TargetType="{x:Type TextBox}"
+  />
 
 
 </ResourceDictionary>

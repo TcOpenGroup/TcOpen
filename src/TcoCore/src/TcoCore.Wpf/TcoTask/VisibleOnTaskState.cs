@@ -12,12 +12,20 @@ namespace TcoCore
     /// </summary>
     public class VisibleOnTaskState : BaseConverter
     {
-
-        public override object ToConvert(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object ToConvert(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             try
             {
-                var visibleStates = parameter.ToString().Split('-').Select(x => x.ToLower()).ToList();
+                var visibleStates = parameter
+                    .ToString()
+                    .Split('-')
+                    .Select(x => x.ToLower())
+                    .ToList();
                 var taskState = (eTaskState)((short)value);
                 string enumName = taskState.ToString().ToLower();
                 if (visibleStates.Contains(enumName))

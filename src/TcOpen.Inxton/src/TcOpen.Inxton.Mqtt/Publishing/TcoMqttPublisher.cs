@@ -1,7 +1,7 @@
-﻿using MQTTnet.Client;
-using MQTTnet.Client.Publishing;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using MQTTnet.Client;
+using MQTTnet.Client.Publishing;
 
 namespace TcOpen.Inxton.Mqtt
 {
@@ -11,7 +11,7 @@ namespace TcOpen.Inxton.Mqtt
         public IPayloadSerializer<T> PayloadSerializer { get; }
 
         public CancellationTokenSource CancellationToken { get; }
-                
+
         private T LastPublished;
 
         public TcoMqttPublisher(IMqttClient Client, IPayloadSerializer<T> Serializer)
@@ -21,10 +21,8 @@ namespace TcOpen.Inxton.Mqtt
             CancellationToken = new CancellationTokenSource();
         }
 
-        public TcoMqttPublisher(IMqttClient Client) : this(Client, new JsonStringPayloadSerializer<T>())
-        {
-
-        }
+        public TcoMqttPublisher(IMqttClient Client)
+            : this(Client, new JsonStringPayloadSerializer<T>()) { }
 
         public Task<MqttClientPublishResult> PublishAsync(T data, string topic)
         {
@@ -34,7 +32,11 @@ namespace TcOpen.Inxton.Mqtt
             return publishResult;
         }
 
-        public Task<MqttClientPublishResult> PublishAsync(T data, string topic, PublishConditionDelegate<T> PublishCondition)
+        public Task<MqttClientPublishResult> PublishAsync(
+            T data,
+            string topic,
+            PublishConditionDelegate<T> PublishCondition
+        )
         {
             if (LastPublished == null)
                 return PublishAsync(data, topic);
@@ -46,7 +48,9 @@ namespace TcOpen.Inxton.Mqtt
             }
             else
             {
-                return Task.FromResult(new MqttClientPublishResult() { ReasonString = "PublishCondition was false" });
+                return Task.FromResult(
+                    new MqttClientPublishResult() { ReasonString = "PublishCondition was false" }
+                );
             }
         }
 
@@ -54,7 +58,5 @@ namespace TcOpen.Inxton.Mqtt
         {
             CancellationToken.Cancel();
         }
-
     }
-
 }

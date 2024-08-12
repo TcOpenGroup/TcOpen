@@ -25,25 +25,23 @@ namespace TcOpen.Inxton.Local.Security
         public OnDeleteFailedDelegate OnDeleteFailed { get; set; }
         public ValidateDataDelegate<UserData> OnRecordUpdateValidation { get; set; }
 
-        public void Create(string identifier, UserData data)
-        {
-        }
+        public void Create(string identifier, UserData data) { }
 
-        public void Delete(string identifier)
-        {
-        }
+        public void Delete(string identifier) { }
 
         public bool Exists(string identifier) => false;
 
         public long FilteredCount(string id, eSearchMode searchMode = eSearchMode.Exact) => 0;
 
-        public IEnumerable<UserData> GetRecords(string identifier = "*", int limit = 100, int skip = 0, eSearchMode searchMode = eSearchMode.Exact) => new List<UserData>();
+        public IEnumerable<UserData> GetRecords(
+            string identifier = "*",
+            int limit = 100,
+            int skip = 0,
+            eSearchMode searchMode = eSearchMode.Exact
+        ) => new List<UserData>();
 
         public UserData Read(string identifier) => new UserData();
 
-        public void Update(string identifier, UserData data)
-        {
-
-        }
+        public void Update(string identifier, UserData data) { }
     }
 }

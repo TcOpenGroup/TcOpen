@@ -3,7 +3,7 @@
   <POU Name="MAIN" Id="{9359a558-9122-0f04-2d2f-c4fb3f11651d}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	myVeryFirstTcoContextInstance :	TcoContext;
+    myVeryFirstTcoContextInstance : TcoContext;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[myVeryFirstTcoContextInstance.Run();]]></ST>

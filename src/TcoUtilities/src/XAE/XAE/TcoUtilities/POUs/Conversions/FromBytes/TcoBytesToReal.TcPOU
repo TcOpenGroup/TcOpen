@@ -14,16 +14,13 @@ VAR
     _b1 : BYTE;
     _b2 : BYTE;
     _b3 : BYTE;
-
     _w0 : WORD;
     _w1 : WORD;
-
     _Sign : DINT;
     _Exponent : DINT;
     _Fraction : REAL;
     _retval : LREAL;
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF inFormat = eTcoDataFormat.LittleEndian THEN
     _b0 := inByte3;
@@ -44,7 +41,6 @@ END_IF
 
 _w0 := 256 * _b0 + _b1;
 _w1 := 256 * _b2 + _b3;
-
 _Sign := SHR(_w0, 15);
 _Exponent := SHR(SHL(_w0, 1), 8);
 _Fraction := ANY_TO_REAL((SHR(SHL(_w0, 9), 9) * 65536) + _w1) / 8388608;
@@ -54,8 +50,7 @@ IF (_retval <= -EXPT(2, 128)) OR (_retval >= EXPT(2, 128)) THEN
     _retval := 0;
 END_IF
 
-TcoBytesToReal := _retval;
-]]></ST>
+TcoBytesToReal := _retval;]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

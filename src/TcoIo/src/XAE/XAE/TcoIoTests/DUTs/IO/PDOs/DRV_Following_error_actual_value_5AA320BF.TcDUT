@@ -8,10 +8,9 @@
 {attribute addProperty Size "4"}
 TYPE DRV_Following_error_actual_value_5AA320BF EXTENDS TcoIo.InputBase_8311D824 :
 STRUCT
-	{attribute addProperty Name "Following_error_actual_value"}
-	Following_error_actual_value AT %I* : DINT;
+    {attribute addProperty Name "Following_error_actual_value"}
+    Following_error_actual_value AT %I* : DINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

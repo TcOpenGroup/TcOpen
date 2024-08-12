@@ -3,10 +3,9 @@
   <DUT Name="fbPistonStatus" Id="{73efb0a1-3a61-0f8f-0af2-16afb6e2118b}">
     <Declaration><![CDATA[TYPE fbPistonStatus :
 STRUCT
-	AtHome : TIME;
-	AtWork : TIME;
+    AtHome : TIME;
+    AtWork : TIME;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

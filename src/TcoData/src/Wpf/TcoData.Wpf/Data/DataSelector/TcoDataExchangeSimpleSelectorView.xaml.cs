@@ -16,49 +16,56 @@ namespace TcoData
             this.DataContextChanged += TcoDataExchangeSimpleSelectorView_DataContextChanged;
         }
 
-        private void TcoDataExchangeSimpleSelectorView_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void TcoDataExchangeSimpleSelectorView_DataContextChanged(
+            object sender,
+            DependencyPropertyChangedEventArgs e
+        )
         {
-            if(!(DataContext is TcoDataExchangeSimpleSelectorViewModel) && DataContext is TcoDataExchange)
+            if (
+                !(DataContext is TcoDataExchangeSimpleSelectorViewModel)
+                && DataContext is TcoDataExchange
+            )
             {
-                this.DataContext = new TcoDataExchangeSimpleSelectorViewModel() { Model = DataContext };
-            }
-        }
-       
-        private TcoDataExchangeSimpleSelectorViewModel _context
-        {
-            get
-            {
-                return this.DataContext as TcoDataExchangeSimpleSelectorViewModel;
+                this.DataContext = new TcoDataExchangeSimpleSelectorViewModel()
+                {
+                    Model = DataContext
+                };
             }
         }
 
-        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private TcoDataExchangeSimpleSelectorViewModel _context
+        {
+            get { return this.DataContext as TcoDataExchangeSimpleSelectorViewModel; }
+        }
+
+        private void UserControl_IsVisibleChanged(
+            object sender,
+            DependencyPropertyChangedEventArgs e
+        )
         {
             try
             {
                 if (this.DataContext == null)
                     return;
 
-                if (this.Visibility == Visibility.Visible && _context is TcoDataExchangeSimpleSelectorViewModel)
+                if (
+                    this.Visibility == Visibility.Visible
+                    && _context is TcoDataExchangeSimpleSelectorViewModel
+                )
                 {
                     var maxNumberOfRecipies = 50;
                     var currentLimit = _context.DataViewModel.Limit;
                     _context.DataViewModel.Limit = maxNumberOfRecipies;
                     _context.DataViewModel.FillObservableRecords();
                     _context.DataViewModel.Limit = currentLimit;
-
                 }
             }
             catch (Exception)
             {
-
                 //++ Ignore
-            }         
+            }
         }
 
-        private void FilterField_LostFocus(object sender, RoutedEventArgs e)
-        {
-
-        }
+        private void FilterField_LostFocus(object sender, RoutedEventArgs e) { }
     }
 }

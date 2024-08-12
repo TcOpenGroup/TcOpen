@@ -19,8 +19,8 @@ namespace TcoCore.Swift
         public IVortexObject Origin { get; }
 
         public string Code(params object[] args)
-        {                                  
-            return $"{Origin.Symbol}.Toggle()";                       
+        {
+            return $"{Origin.Symbol}.Toggle()";
         }
     }
 }

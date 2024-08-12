@@ -8,10 +8,9 @@
 {attribute addProperty Size "2"}
 TYPE DRV_Controlword_F3F14721 EXTENDS TcoIo.OutputBase_10CEE7DE :
 STRUCT
-	{attribute addProperty Name "Controlword"}
-	Controlword AT %Q* : UINT;
+    {attribute addProperty Name "Controlword"}
+    Controlword AT %Q* : UINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

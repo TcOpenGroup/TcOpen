@@ -5,12 +5,11 @@
 {attribute 'strict'}
 TYPE enumModes :
 (
-	Idle := 0,
-	Automat := 1000,
-	Ground := 2000,
-	Service := 3000
+    Idle := 0,
+    Automat := 1000,
+    Ground := 2000,
+    Service := 3000
 );
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

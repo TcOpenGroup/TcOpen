@@ -3,47 +3,43 @@
   <POU Name="TcoUdintToBytes" Id="{f3f54dcd-28a4-070e-1c72-3c8f21b7d36b}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION TcoUdintToBytes
 VAR_INPUT
-	inFormat : eTcoDataFormat;
-	inValue : UDINT;
+    inFormat : eTcoDataFormat;
+    inValue : UDINT;
 END_VAR
 VAR_IN_OUT
-    outByte0: BYTE;
-    outByte1: BYTE;
-    outByte2: BYTE;
-    outByte3: BYTE;
+    outByte0 : BYTE;
+    outByte1 : BYTE;
+    outByte2 : BYTE;
+    outByte3 : BYTE;
 END_VAR
 VAR
-	_b0: BYTE;
-	_b1: BYTE;
-	_b2: BYTE;
-    _b3: BYTE;
-
-	_tmpUDINT : UDINT; 
-END_VAR
-
-]]></Declaration>
+    _b0 : BYTE;
+    _b1 : BYTE;
+    _b2 : BYTE;
+    _b3 : BYTE;
+    _tmpUDINT : UDINT;
+END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[_tmpUDINT:=inValue;
+      <ST><![CDATA[_tmpUDINT := inValue;
+_b3 := UDINT_TO_BYTE(_tmpUDINT MOD 256);
+_tmpUDINT := SHR(_tmpUDINT, 8);
+_b2 := UDINT_TO_BYTE(_tmpUDINT MOD 256);
+_tmpUDINT := SHR(_tmpUDINT, 8);
+_b1 := UDINT_TO_BYTE(_tmpUDINT MOD 256);
+_tmpUDINT := SHR(_tmpUDINT, 8);
+_b0 := UDINT_TO_BYTE(_tmpUDINT MOD 256);
+_tmpUDINT := SHR(_tmpUDINT, 8);
 
-_b3:=UDINT_TO_BYTE(_tmpUDINT MOD 256);
-_tmpUDINT:=SHR(_tmpUDINT,8);
-_b2:=UDINT_TO_BYTE(_tmpUDINT MOD 256);
-_tmpUDINT:=SHR(_tmpUDINT,8);
-_b1:=UDINT_TO_BYTE(_tmpUDINT MOD 256);
-_tmpUDINT:=SHR(_tmpUDINT,8);
-_b0:=UDINT_TO_BYTE(_tmpUDINT MOD 256);
-_tmpUDINT:=SHR(_tmpUDINT,8);
-
-IF inFormat=eTcoDataFormat.LittleEndian THEN
-	outByte0 := _b3;
-	outByte1 := _b2;	
-	outByte2 := _b1;
-	outByte3 := _b0;	
-ELSIF inFormat=eTcoDataFormat.BigEndian THEN
-	outByte0 := _b0;
-	outByte1 := _b1;	
-	outByte2 := _b2;
-	outByte3 := _b3;	
+IF inFormat = eTcoDataFormat.LittleEndian THEN
+    outByte0 := _b3;
+    outByte1 := _b2;
+    outByte2 := _b1;
+    outByte3 := _b0;
+ELSIF inFormat = eTcoDataFormat.BigEndian THEN
+    outByte0 := _b0;
+    outByte1 := _b1;
+    outByte2 := _b2;
+    outByte3 := _b3;
 END_IF]]></ST>
     </Implementation>
   </POU>

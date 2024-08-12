@@ -24,17 +24,18 @@ namespace TcoPneumaticsTests
                 }
                 return _connector;
             }
-
         }
 
         public static void StartConnector()
         {
+            var adapter = Vortex.Adapters.Connector.Tc3.Adapter.Tc3ConnectorAdapter.Create(
+                TestSetupFixture.TargetAmsId,
+                TestSetupFixture.TargetAmsPort,
+                true
+            );
 
-            var adapter = Vortex.Adapters.Connector.Tc3.Adapter.Tc3ConnectorAdapter.Create(TestSetupFixture.TargetAmsId, TestSetupFixture.TargetAmsPort, true);
-
-
-            var connectorTask = new System.Threading.Tasks.Task(() => {
-
+            var connectorTask = new System.Threading.Tasks.Task(() =>
+            {
                 _connector = new TcoPneumaticsTests.TcoPneumaticsTestsTwinController(adapter);
 
                 _connector.Connector.ReadWriteCycleDelay = 100;

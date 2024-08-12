@@ -10,7 +10,9 @@ namespace TcoCognexVisionTests
 
         //public static TcoCognexVisionTestsTwinController TcoCognexVisionTestsPlc
         //    = new TcoCognexVisionTestsTwinController(Tc3ConnectorAdapter.Create(TargetAmsId, TargetAmsPort, true));
-        public static TcoCognexVisionTestsTwinController TcoCognexVisionTestsPlc
-            = new TcoCognexVisionTestsTwinController(Tc3ConnectorAdapter.Create(TargetAmsId, TargetAmsPort, true));
+        public static TcoCognexVisionTestsTwinController TcoCognexVisionTestsPlc =
+            new TcoCognexVisionTestsTwinController(
+                Tc3ConnectorAdapter.Create(TargetAmsId, TargetAmsPort, true)
+            );
     }
 }

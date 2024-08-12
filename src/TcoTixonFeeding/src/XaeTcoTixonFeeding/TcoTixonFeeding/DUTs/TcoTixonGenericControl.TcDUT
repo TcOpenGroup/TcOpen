@@ -1,27 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoTixonGenericControl" Id="{793867f9-8255-082a-1b3c-92fbb08ea703}">
-    <Declaration><![CDATA[TYPE TcoTixonGenericControl : 
-STRUCT	
-	
-
-	
-	{attribute addProperty Name "<#Feeding A #> - q1"}
-	FeedingA: BOOL;
-	{attribute addProperty Name "<#Separe component#> - q2"}
-	SepareComponent : BOOL;
-	{attribute addProperty Name "<#Blow A#> - q3"}
-	BlowAValve  : BOOL;
-	{attribute addProperty Name "<#Red led#> - q4"}
-	RedLed : BOOL;
-	{attribute addProperty Name "<#Green led#> - q5"}
-	GreenLed  : BOOL;
-	{attribute addProperty Name "<#Hooper#> - q6"}
-	Hooper  : BOOL;
-
-	
+    <Declaration><![CDATA[TYPE TcoTixonGenericControl :
+STRUCT
+    {attribute addProperty Name "<#Feeding A #> - q1"}
+    FeedingA : BOOL;
+    {attribute addProperty Name "<#Separe component#> - q2"}
+    SepareComponent : BOOL;
+    {attribute addProperty Name "<#Blow A#> - q3"}
+    BlowAValve : BOOL;
+    {attribute addProperty Name "<#Red led#> - q4"}
+    RedLed : BOOL;
+    {attribute addProperty Name "<#Green led#> - q5"}
+    GreenLed : BOOL;
+    {attribute addProperty Name "<#Hooper#> - q6"}
+    Hooper : BOOL;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

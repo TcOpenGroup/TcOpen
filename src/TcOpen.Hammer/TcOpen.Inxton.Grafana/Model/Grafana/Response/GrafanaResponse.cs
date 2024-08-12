@@ -1,6 +1,6 @@
-﻿using TcOpenHammer.Grafana.API.Transformation;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using TcOpenHammer.Grafana.API.Transformation;
 
 namespace Grafana.Backend.Model
 {
@@ -12,10 +12,7 @@ namespace Grafana.Backend.Model
 
         public string Refid { get; set; }
 
-        public GrafanaResponse()
-        {
-
-        }
+        public GrafanaResponse() { }
 
         public GrafanaResponse(ITable table)
         {

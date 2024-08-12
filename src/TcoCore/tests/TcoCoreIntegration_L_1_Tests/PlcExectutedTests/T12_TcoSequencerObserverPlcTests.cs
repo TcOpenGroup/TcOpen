@@ -1,41 +1,26 @@
-using NUnit.Framework;
 using System;
 using System.Threading;
+using NUnit.Framework;
 using TcoCore;
 using TcoCoreTests;
 
 namespace TcoCoreUnitTests.PlcExecutedTests
 {
-
     public class T12_TcoSequencerObserverPlcTests
     {
-
         TcoSequenceObserverTests tc = ConnectorFixture.Connector.MAIN._tcoSequenceObserverTests;
 
         [OneTimeSetUp]
-        public void OneTimeSetUp()
-        {
-
-        }
+        public void OneTimeSetUp() { }
 
         [OneTimeTearDown]
-        public void OneTimeTearDown()
-        {
-
-        }
-
+        public void OneTimeTearDown() { }
 
         [SetUp]
-        public void Setup()
-        {
-
-        }
+        public void Setup() { }
 
         [TearDown]
-        public void TearDown()
-        {
-
-        }
+        public void TearDown() { }
 
         [Test]
         [Order((int)eTcoSequenceObserverTests.RunSequenceWithObserverTest)]
@@ -49,15 +34,18 @@ namespace TcoCoreUnitTests.PlcExecutedTests
 
             for (int i = 0; i < 5; i++)
             {
-                Assert.AreEqual(((i+1) * 100).ToString(), observer._steps[i].Description);
-                Assert.AreEqual(((i+1) * 100), observer._steps[i].ID);
-                if(i < 4)
+                Assert.AreEqual(((i + 1) * 100).ToString(), observer._steps[i].Description);
+                Assert.AreEqual(((i + 1) * 100), observer._steps[i].ID);
+                if (i < 4)
                 {
-                    Assert.AreEqual(new TimeSpan(0,0,0,0,((i+1) * 10)), observer._steps[i].Duration);              
+                    Assert.AreEqual(
+                        new TimeSpan(0, 0, 0, 0, ((i + 1) * 10)),
+                        observer._steps[i].Duration
+                    );
                 }
 
                 //Console.WriteLine(observer._steps[i].Duration);
-            }            
+            }
         }
 
         [Test]

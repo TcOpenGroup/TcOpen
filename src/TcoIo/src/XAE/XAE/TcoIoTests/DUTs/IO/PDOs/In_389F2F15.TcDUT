@@ -8,20 +8,19 @@
 {attribute addProperty Size "1"}
 TYPE In_389F2F15 EXTENDS TcoIo.InputBase_8311D824 :
 STRUCT
-	{attribute addProperty Name "Diag"}
-	Diag AT %I* : USINT;
-	{attribute addProperty Name "In_Dataset1"}
-	In_Dataset1 AT %I* : ARRAY [0..9] OF BYTE;
-	{attribute addProperty Name "In_Dataset2"}
-	In_Dataset2 AT %I* : ARRAY [0..9] OF BYTE;
-	{attribute addProperty Name "In_Dataset3"}
-	In_Dataset3 AT %I* : ARRAY [0..9] OF BYTE;
-	{attribute addProperty Name "In_Dataset4"}
-	In_Dataset4 AT %I* : ARRAY [0..9] OF BYTE;
-	{attribute addProperty Name "In_Dataset5"}
-	In_Dataset5 AT %I* : ARRAY [0..9] OF BYTE;
+    {attribute addProperty Name "Diag"}
+    Diag AT %I* : USINT;
+    {attribute addProperty Name "In_Dataset1"}
+    In_Dataset1 AT %I* : ARRAY[0..9] OF BYTE;
+    {attribute addProperty Name "In_Dataset2"}
+    In_Dataset2 AT %I* : ARRAY[0..9] OF BYTE;
+    {attribute addProperty Name "In_Dataset3"}
+    In_Dataset3 AT %I* : ARRAY[0..9] OF BYTE;
+    {attribute addProperty Name "In_Dataset4"}
+    In_Dataset4 AT %I* : ARRAY[0..9] OF BYTE;
+    {attribute addProperty Name "In_Dataset5"}
+    In_Dataset5 AT %I* : ARRAY[0..9] OF BYTE;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

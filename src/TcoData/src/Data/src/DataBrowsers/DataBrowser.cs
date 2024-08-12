@@ -9,8 +9,9 @@ using Vortex.Connector;
 using Vortex.Connector.ValueTypes;
 
 namespace TcOpen.Inxton.Data
-{   
-    public class DataBrowser<T> : IDataBrowser where T  : IBrowsableDataObject, new()
+{
+    public class DataBrowser<T> : IDataBrowser
+        where T : IBrowsableDataObject, new()
     {
         public DataBrowser(IRepository<T> repository)
         {
@@ -20,17 +21,30 @@ namespace TcOpen.Inxton.Data
 
         public IList<T> Records { get; protected set; }
 
-        protected IRepository<T> Repository { get; set; }        
+        protected IRepository<T> Repository { get; set; }
 
-        public void Filter(string identifier, int limit = 10, int skip = 0, eSearchMode searchMode = eSearchMode.Exact)
+        public void Filter(
+            string identifier,
+            int limit = 10,
+            int skip = 0,
+            eSearchMode searchMode = eSearchMode.Exact
+        )
         {
             Records.Clear();
 
-            foreach (var item in this.Repository.GetRecords(identifier, limit: limit, skip: skip, searchMode))
+            foreach (
+                var item in this.Repository.GetRecords(
+                    identifier,
+                    limit: limit,
+                    skip: skip,
+                    searchMode
+                )
+            )
             {
                 this.Records.Add(item);
             }
         }
+
         public T FindById(string id)
         {
             Records.Clear();
@@ -39,8 +53,8 @@ namespace TcOpen.Inxton.Data
             {
                 Records.Add(record);
             }
-            
-            if(Records.Count > 0)
+
+            if (Records.Count > 0)
             {
                 var found = Records.FirstOrDefault(p => p._EntityId == id);
                 if (found == null)
@@ -48,78 +62,126 @@ namespace TcOpen.Inxton.Data
                 else
                     return found;
             }
-            
-            if(id != "*")
+
+            if (id != "*")
                 throw new UnableToLocateRecordId($"Unable to locate record id '{id}'", null);
 
             return new T();
         }
-        public IEnumerable<T> FindByCreatedRange(DateTime start, DateTime end) { return null; }
-        public IEnumerable<T> FindByModifiedRange(DateTime start, DateTime end) { return null; }
-        public void AddRecord(T data) { Repository.Create((data)._EntityId, data); }
-       
+
+        public IEnumerable<T> FindByCreatedRange(DateTime start, DateTime end)
+        {
+            return null;
+        }
+
+        public IEnumerable<T> FindByModifiedRange(DateTime start, DateTime end)
+        {
+            return null;
+        }
+
+        public void AddRecord(T data)
+        {
+            Repository.Create((data)._EntityId, data);
+        }
+
         public IEnumerable<DataItemValidation> UpdateRecord(T data)
         {
             var validations = this.Repository.OnRecordUpdateValidation(data);
             if (!validations.Any(p => p.Failed))
-            { 
+            {
                 Repository.Update(((IBrowsableDataObject)data)._EntityId, data);
             }
             return validations;
         }
-        public void Delete(T data) { Repository.Delete(((IBrowsableDataObject)data)._EntityId); }
-        public long Count { get { return this.Repository.Count; } }        
+
+        public void Delete(T data)
+        {
+            Repository.Delete(((IBrowsableDataObject)data)._EntityId);
+        }
+
+        public long Count
+        {
+            get { return this.Repository.Count; }
+        }
+
         public long FilteredCount(string id, eSearchMode searchMode = eSearchMode.Exact)
         {
             return this.Repository.FilteredCount(id, searchMode);
         }
+
         object IDataBrowser.FindById(string id)
         {
             return this.FindById(id);
         }
+
         IEnumerable<object> IDataBrowser.FindByCreatedRange(DateTime start, DateTime end)
         {
             return FindByCreatedRange(start, end) as IEnumerable<object>;
         }
+
         IEnumerable<object> IDataBrowser.FindByModifiedRange(DateTime start, DateTime end)
         {
             return FindByModifiedRange(start, end) as IEnumerable<object>;
         }
+
         void IDataBrowser.AddRecord(object data)
         {
             this.AddRecord((T)data);
         }
+
         void IDataBrowser.UpdateRecord(object data)
         {
             this.UpdateRecord((T)data);
         }
+
         void IDataBrowser.Delete(object data)
         {
             this.Delete((T)data);
         }
-        IList<object> IDataBrowser.Records { get { return this.Records.ToList().ConvertAll(p => (object)p); } }
-        long IDataBrowser.Count { get { return this.Count; } }       
+
+        IList<object> IDataBrowser.Records
+        {
+            get { return this.Records.ToList().ConvertAll(p => (object)p); }
+        }
+        long IDataBrowser.Count
+        {
+            get { return this.Count; }
+        }
 
         object IDataBrowser.CreateEmpty()
         {
             return new T();
         }
-        long IDataBrowser.FilteredCount(string id, eSearchMode searchMode = eSearchMode.Exact) { return this.FilteredCount(id, searchMode); }
+
+        long IDataBrowser.FilteredCount(string id, eSearchMode searchMode = eSearchMode.Exact)
+        {
+            return this.FilteredCount(id, searchMode);
+        }
 
         public IQueryable<T> GetRecords(Expression<Func<T, bool>> expression)
         {
             return this.Repository.Queryable.Where(expression);
         }
 
-        public IEnumerable<string> Export(Expression<Func<T, bool>> expression, char separator = ';')
+        public IEnumerable<string> Export(
+            Expression<Func<T, bool>> expression,
+            char separator = ';'
+        )
         {
             var onliner = typeof(T).Name.Replace("Plain", string.Empty);
 
             var adapter = new Vortex.Connector.ConnectorAdapter(typeof(DummyConnectorFactory));
             var dummyConnector = adapter.GetConnector(new object[] { });
 
-            var onlinerType = Assembly.GetAssembly(typeof(T)).GetTypes().FirstOrDefault(p => p.Name == onliner);
-            var prototype = Activator.CreateInstance(onlinerType, new object[] { dummyConnector, string.Empty, string.Empty}) as IVortexObject;
+            var onlinerType = Assembly
+                .GetAssembly(typeof(T))
+                .GetTypes()
+                .FirstOrDefault(p => p.Name == onliner);
+            var prototype =
+                Activator.CreateInstance(
+                    onlinerType,
+                    new object[] { dummyConnector, string.Empty, string.Empty }
+                ) as IVortexObject;
             var exportables = this.Repository.Queryable.Where(expression);
             var itemExport = new StringBuilder();
             var export = new List<string>();
@@ -143,17 +205,16 @@ namespace TcOpen.Inxton.Data
             export.Add(itemExport.ToString());
             itemExport.AppendLine();
 
-
             foreach (var document in exportables)
             {
                 itemExport.Clear();
-                ((dynamic) prototype).CopyPlainToShadow(document);
+                ((dynamic)prototype).CopyPlainToShadow(document);
                 var values = prototype.RetrieveValueTags();
                 foreach (var @value in values)
                 {
-                    var val = (string)(((dynamic) @value).Shadow.ToString());
-                    if(val.Contains(separator))
-                    { 
+                    var val = (string)(((dynamic)@value).Shadow.ToString());
+                    if (val.Contains(separator))
+                    {
                         val = val.Replace(separator, '►');
                     }
 
@@ -161,11 +222,9 @@ namespace TcOpen.Inxton.Data
                 }
 
                 export.Add(itemExport.ToString());
-
             }
 
             return export;
-
         }
 
         private class ImportItems
@@ -174,7 +233,11 @@ namespace TcOpen.Inxton.Data
             internal dynamic Value { get; set; }
         }
 
-        public void Import(IEnumerable<string> records, IVortexObject crudDataObject = null, char separator = ';')
+        public void Import(
+            IEnumerable<string> records,
+            IVortexObject crudDataObject = null,
+            char separator = ';'
+        )
         {
             var documents = records.ToArray();
             var header = documents[0];
@@ -188,23 +251,29 @@ namespace TcOpen.Inxton.Data
             var adapter = new Vortex.Connector.ConnectorAdapter(typeof(DummyConnectorFactory));
             var dummyConnector = adapter.GetConnector(new object[] { });
 
-            var onlinerType = Assembly.GetAssembly(typeof(T)).GetTypes().FirstOrDefault(p => p.Name == onliner);
+            var onlinerType = Assembly
+                .GetAssembly(typeof(T))
+                .GetTypes()
+                .FirstOrDefault(p => p.Name == onliner);
 
             IVortexObject prototype;
 
-            if(crudDataObject == null)
-                prototype = Activator.CreateInstance(onlinerType, new object[] { dummyConnector, string.Empty, string.Empty }) as IVortexObject;
+            if (crudDataObject == null)
+                prototype =
+                    Activator.CreateInstance(
+                        onlinerType,
+                        new object[] { dummyConnector, string.Empty, string.Empty }
+                    ) as IVortexObject;
             else
-                prototype = crudDataObject; 
+                prototype = crudDataObject;
 
             var valueTags = prototype.RetrieveValueTags();
 
             // Get headered dictionary
             foreach (var headerItem in headerItems)
-            {                
-                dictionary.Add(new ImportItems() {Key = headerItem});
+            {
+                dictionary.Add(new ImportItems() { Key = headerItem });
             }
-
 
             // Load values
             for (int i = 2; i < documents.Count(); i++)
@@ -217,23 +286,25 @@ namespace TcOpen.Inxton.Data
 
                 UpdateDocument(dictionary, valueTags, prototype);
             }
-
-            
-           
         }
 
-        private void UpdateDocument(List<ImportItems> dictionary, IEnumerable<IValueTag> valueTags, IVortexObject prototype)
-        {                        
+        private void UpdateDocument(
+            List<ImportItems> dictionary,
+            IEnumerable<IValueTag> valueTags,
+            IVortexObject prototype
+        )
+        {
             string id = dictionary.FirstOrDefault(p => p.Key == "_EntityId").Value;
             var existing = this.Repository.Queryable.Where(p => p._EntityId == id).FirstOrDefault();
-            if(existing != null)
-            { 
+            if (existing != null)
+            {
                 ((dynamic)prototype).CopyPlainToShadow(existing);
             }
 
             ((dynamic)prototype)._EntityId.Shadow = id;
 
-            if(existing != null) ((dynamic)prototype).ChangeTracker.StartObservingChanges();
+            if (existing != null)
+                ((dynamic)prototype).ChangeTracker.StartObservingChanges();
             // Swap values to shadow
             foreach (var item in dictionary)
             {
@@ -241,10 +312,13 @@ namespace TcOpen.Inxton.Data
                 {
                     var tag = valueTags.FirstOrDefault(p => p.Symbol == item.Key);
                     OnlinerBaseType type = tag as OnlinerBaseType;
-                    
+
                     if (type is OnlinerString || type is OnlinerWString)
                     {
-                        ((dynamic) tag).Shadow = (CastValue(type, item.Value) as string)?.Replace('►', ';');
+                        ((dynamic)tag).Shadow = (CastValue(type, item.Value) as string)?.Replace(
+                            '►',
+                            ';'
+                        );
                     }
                     else
                     {
@@ -253,9 +327,9 @@ namespace TcOpen.Inxton.Data
                 }
             }
 
-            if (existing != null) ((dynamic)prototype).ChangeTracker.StopObservingChanges();
-                                                                       
-                        
+            if (existing != null)
+                ((dynamic)prototype).ChangeTracker.StopObservingChanges();
+
             if (existing != null)
             {
                 ((dynamic)prototype).ChangeTracker.Import(existing);
@@ -268,7 +342,7 @@ namespace TcOpen.Inxton.Data
                 ((dynamic)prototype).ChangeTracker.Import(newRecord);
                 ((dynamic)newRecord).CopyShadowToPlain((dynamic)prototype);
                 this.Repository.Create(newRecord._EntityId, newRecord);
-            }            
+            }
         }
 
         private dynamic CastValue(OnlinerBaseType type, string @value)
@@ -276,87 +350,87 @@ namespace TcOpen.Inxton.Data
             switch (type)
             {
                 case OnlinerBool c:
-                    return bool.Parse(@value);                    
+                    return bool.Parse(@value);
                 case OnlinerByte c:
-                    return  byte.Parse(@value);
-                    
+                    return byte.Parse(@value);
+
                 case OnlinerDate c:
-                    return  DateTime.Parse(@value);
-                    
+                    return DateTime.Parse(@value);
+
                 case OnlinerDInt c:
-                    return  int.Parse(@value);
-                    
+                    return int.Parse(@value);
+
                 case OnlinerDWord c:
-                    return  uint.Parse(@value);
-                    
+                    return uint.Parse(@value);
+
                 case OnlinerInt c:
-                    return  short.Parse(@value);
-                    
+                    return short.Parse(@value);
+
                 case OnlinerLInt c:
-                    return  long.Parse(@value);
-                    
+                    return long.Parse(@value);
+
                 case OnlinerLReal c:
-                    return  double.Parse(@value);
-                    
+                    return double.Parse(@value);
+
                 case OnlinerLTime c:
-                    return  TimeSpan.Parse(@value);
-                    
+                    return TimeSpan.Parse(@value);
+
                 case OnlinerLWord c:
-                    return  ulong.Parse(@value);
-                    
+                    return ulong.Parse(@value);
+
                 case OnlinerReal c:
-                    return  float.Parse(@value);
-                    
+                    return float.Parse(@value);
+
                 case OnlinerSInt c:
-                    return  sbyte.Parse(@value);
-                    
+                    return sbyte.Parse(@value);
+
                 case OnlinerString c:
-                    return  @value;
-                    
+                    return @value;
+
                 case OnlinerTime c:
-                    return  TimeSpan.Parse(@value);
-                    
+                    return TimeSpan.Parse(@value);
+
                 case OnlinerTimeOfDay c:
-                    return  TimeSpan.Parse(@value);
+                    return TimeSpan.Parse(@value);
 
                 case OnlinerDateTime c:
                     return DateTime.Parse(@value);
 
                 case OnlinerUDInt c:
-                    return  uint.Parse(@value);
-                    
+                    return uint.Parse(@value);
+
                 case OnlinerUInt c:
-                    return  ushort.Parse(@value);
-                    
+                    return ushort.Parse(@value);
+
                 case OnlinerULInt c:
-                    return  ulong.Parse(@value);
-                    
+                    return ulong.Parse(@value);
+
                 case OnlinerUSInt c:
-                    return  byte.Parse(@value);
-                    
+                    return byte.Parse(@value);
+
                 case OnlinerWord c:
-                    return  ushort.Parse(@value);
-                    
+                    return ushort.Parse(@value);
+
                 case OnlinerWString c:
-                    return  @value;               
+                    return @value;
                 default:
                     throw new Exception($"Unknown type {type.GetType()}");
-                    
             }
         }
     }
 
     public static class DataBrowser
-    {       
-        public static DataBrowser<T> Factory<T>(IRepository<T> repository) where T : IBrowsableDataObject, new()
+    {
+        public static DataBrowser<T> Factory<T>(IRepository<T> repository)
+            where T : IBrowsableDataObject, new()
         {
             return new DataBrowser<T>(repository);
         }
 
-
-        public static DataBrowser<T> Create<T>(IRepository<T> repository) where T : IBrowsableDataObject, new()
+        public static DataBrowser<T> Create<T>(IRepository<T> repository)
+            where T : IBrowsableDataObject, new()
         {
-            return Factory<T>(repository);            
+            return Factory<T>(repository);
         }
     }
 
@@ -370,7 +444,7 @@ namespace TcOpen.Inxton.Data
         void AddRecord(object data);
         void UpdateRecord(object data);
         void Delete(object data);
-        object CreateEmpty();              
+        object CreateEmpty();
         long Count { get; }
         long FilteredCount(string id, eSearchMode searchMode);
     }

@@ -3,9 +3,8 @@
   <DUT Name="TcoInsightUserData_v_5_x_x" Id="{4424139a-d997-0a54-04e1-f7d23d8e6994}">
     <Declaration><![CDATA[TYPE TcoInsightUserData_v_5_x_x :
 STRUCT
-	UserData AT %Q*: ARRAY [0..253]OF BYTE;
+    UserData AT %Q* : ARRAY[0..253] OF BYTE;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

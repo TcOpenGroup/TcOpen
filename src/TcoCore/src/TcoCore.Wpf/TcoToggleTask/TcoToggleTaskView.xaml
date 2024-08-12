@@ -1,12 +1,13 @@
 ﻿<UserControl
-    x:Class="TcoCore.TcoToggleTaskView"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:TcoCore"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+  x:Class="TcoCore.TcoToggleTaskView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:TcoCore"
+  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  mc:Ignorable="d"
+>
     <UserControl.Resources>
     </UserControl.Resources>
     <d:UserControl.DataContext>
@@ -14,11 +15,12 @@
     </d:UserControl.DataContext>
     <Grid>
         <Button
-            Background="{Binding TcoToggleTask._state.Cyclic, Converter={local:TaskStateToBackgroundBrushConverter}}"
-            Foreground="{Binding TcoToggleTask._state.Cyclic, Converter={local:TaskStateToForegroundBrushConverter}}"
-            Style="{StaticResource MaterialDesignRaisedButton}"
-            materialDesign:RippleAssist.IsDisabled="True"
-            Command="{Binding TcoToggleTask}"
-            Content="{Binding Caption}"/>
+      Background="{Binding TcoToggleTask._state.Cyclic, Converter={local:TaskStateToBackgroundBrushConverter}}"
+      Foreground="{Binding TcoToggleTask._state.Cyclic, Converter={local:TaskStateToForegroundBrushConverter}}"
+      Style="{StaticResource MaterialDesignRaisedButton}"
+      materialDesign:RippleAssist.IsDisabled="True"
+      Command="{Binding TcoToggleTask}"
+      Content="{Binding Caption}"
+    />
     </Grid>
 </UserControl>

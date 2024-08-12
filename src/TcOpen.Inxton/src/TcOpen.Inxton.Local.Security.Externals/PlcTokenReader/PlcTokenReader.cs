@@ -11,7 +11,6 @@ namespace TcOpen.Inxton.Local.Security
     /// </summary>
     public class PlcTokenReader : ITokenProvider
     {
-
         private readonly OnlinerString _valueToken;
         private readonly OnlinerBool _tokenPresence;
 
@@ -33,10 +32,9 @@ namespace TcOpen.Inxton.Local.Security
         {
             IncomingTokenAction = tokenReceivedAction;
         }
-                
+
         public Action<string> IncomingTokenAction;
-      
-        
+
         void TagDataChanged(IValueTag sender, ValueChangedEventArgs args)
         {
             try
@@ -60,8 +58,8 @@ namespace TcOpen.Inxton.Local.Security
         {
             try
             {
-                if(_tokenPresence.Synchron == false)
-                { 
+                if (_tokenPresence.Synchron == false)
+                {
                     SecurityManager.Manager.Service.DeAuthenticateCurrentUser();
                 }
             }

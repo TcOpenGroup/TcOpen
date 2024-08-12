@@ -11,20 +11,19 @@
 {attribute addProperty Size "118"}
 TYPE EL6002_CD897635 EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
 STRUCT
-	{attribute addProperty Name "COM_TxPDO_Map_Inputs_Channel_1"}
-	COM_TxPDO_Map_Inputs_Channel_1 : COM_TxPDO_Map_Inputs_Channel_3801C95E;
-	{attribute addProperty Name "COM_TxPDO_Map_Inputs_Channel_2"}
-	COM_TxPDO_Map_Inputs_Channel_2 : COM_TxPDO_Map_Inputs_Channel_3801C95E;
-	{attribute addProperty Name "COM_RxPDO_Map_Outputs_Channel_1"}
-	COM_RxPDO_Map_Outputs_Channel_1 : COM_RxPDO_Map_Outputs_Channel_EADA2E0D;
-	{attribute addProperty Name "COM_RxPDO_Map_Outputs_Channel_2"}
-	COM_RxPDO_Map_Outputs_Channel_2 : COM_RxPDO_Map_Outputs_Channel_EADA2E0D;
-	{attribute addProperty Name "WcState"}
-	WcState : TcoIo.WcState_9091E0EB;
-	{attribute addProperty Name "InfoData"}
-	InfoData : TcoIo.InfoData_23CBA837;
+    {attribute addProperty Name "COM_TxPDO_Map_Inputs_Channel_1"}
+    COM_TxPDO_Map_Inputs_Channel_1 : COM_TxPDO_Map_Inputs_Channel_3801C95E;
+    {attribute addProperty Name "COM_TxPDO_Map_Inputs_Channel_2"}
+    COM_TxPDO_Map_Inputs_Channel_2 : COM_TxPDO_Map_Inputs_Channel_3801C95E;
+    {attribute addProperty Name "COM_RxPDO_Map_Outputs_Channel_1"}
+    COM_RxPDO_Map_Outputs_Channel_1 : COM_RxPDO_Map_Outputs_Channel_EADA2E0D;
+    {attribute addProperty Name "COM_RxPDO_Map_Outputs_Channel_2"}
+    COM_RxPDO_Map_Outputs_Channel_2 : COM_RxPDO_Map_Outputs_Channel_EADA2E0D;
+    {attribute addProperty Name "WcState"}
+    WcState : TcoIo.WcState_9091E0EB;
+    {attribute addProperty Name "InfoData"}
+    InfoData : TcoIo.InfoData_23CBA837;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

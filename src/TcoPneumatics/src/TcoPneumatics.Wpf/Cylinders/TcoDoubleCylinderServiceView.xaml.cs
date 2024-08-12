@@ -16,7 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace TcoPneumatics
-{   
+{
     public partial class TcoDoubleCylinderServiceView : UserControl
     {
         public TcoDoubleCylinderServiceView()

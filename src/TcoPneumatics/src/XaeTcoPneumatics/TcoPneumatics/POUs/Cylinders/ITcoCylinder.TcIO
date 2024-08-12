@@ -31,15 +31,15 @@
 	<docu>
 		<summary>
 			Stops cyclinder movement.
-		 	<remarks>			
+		 	<remarks>
 				<note type="important">
 					This method switched off the signals for the movement of the piston in both direction.
 					However depending on the pnemumatics configuration the movement may contintue if designed in that way.
 					THIS IS NOT A SAFETY FUCTION!
 				</note>
-			</remarks>	 		
-		</summary>			
-	</docu>	
+			</remarks>
+		</summary>
+	</docu>
 ~*)
 METHOD Stop : TcoCore.ITcoTaskStatus
 

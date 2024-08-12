@@ -18,14 +18,18 @@ namespace Serilog.Sinks
         /// <param name="formatter">Custom formatter.</param>
         /// <returns></returns>
         public static LoggerConfiguration MQTT(
-           this LoggerSinkConfiguration sinkConfiguration,
+            this LoggerSinkConfiguration sinkConfiguration,
             IMqttClientOptions clientOptions,
-                    string topic,
-                    MqttQualityOfServiceLevel qoS = MqttQualityOfServiceLevel.AtMostOnce,
-                    LogEventLevel restrictedToMinimumLevel = LogEventLevel.Information,
-                    Formatting.ITextFormatter formatter = null)
+            string topic,
+            MqttQualityOfServiceLevel qoS = MqttQualityOfServiceLevel.AtMostOnce,
+            LogEventLevel restrictedToMinimumLevel = LogEventLevel.Information,
+            Formatting.ITextFormatter formatter = null
+        )
         {
-            return sinkConfiguration.Sink(new MQTTSink(clientOptions, topic, qoS, formatter), restrictedToMinimumLevel);
+            return sinkConfiguration.Sink(
+                new MQTTSink(clientOptions, topic, qoS, formatter),
+                restrictedToMinimumLevel
+            );
         }
     }
 }

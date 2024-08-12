@@ -5,7 +5,6 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-
 namespace TcoIo.Converters
 {
     public class NonEmptyArrayToVisibleConverter : MarkupExtension, IValueConverter
@@ -15,7 +14,12 @@ namespace TcoIo.Converters
             return (value as ICollection).Count > 0 ? Visibility.Visible : Visibility.Collapsed;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }

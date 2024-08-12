@@ -1,13 +1,16 @@
 ﻿namespace Tc.Prober.Recorder
 {
-    using Newtonsoft.Json;
     using System.IO;
     using System.Linq;
+    using Newtonsoft.Json;
     using Vortex.Connector;
 
-    internal class Graver<T, P> : RecorderBase<T, P>, IRecorder where T : IVortexObject, new() where P : IPlain, new()
+    internal class Graver<T, P> : RecorderBase<T, P>, IRecorder
+        where T : IVortexObject, new()
+        where P : IPlain, new()
     {
-        public Graver(T obj, long minUniqueFrames = 10) : base(obj)
+        public Graver(T obj, long minUniqueFrames = 10)
+            : base(obj)
         {
             MinUniqueFrames = minUniqueFrames;
         }
@@ -18,11 +21,12 @@
         {
             var squashedRecording = Squash(this.recording);
 
-
             if (squashedRecording.Frames.LongCount() < MinUniqueFrames)
             {
-                throw new InsufficientNumberOfFramesException($"There is no sufficient number of unique frames recorded ('{squashedRecording.Frames.LongCount()}'). Minimum required number of frames is '{MinUniqueFrames}'. " +
-                                                              $"You can modify the value by setting 'minUniqueFrames' construction parameter.");
+                throw new InsufficientNumberOfFramesException(
+                    $"There is no sufficient number of unique frames recorded ('{squashedRecording.Frames.LongCount()}'). Minimum required number of frames is '{MinUniqueFrames}'. "
+                        + $"You can modify the value by setting 'minUniqueFrames' construction parameter."
+                );
             }
 
             using (StreamWriter sw = new StreamWriter(fileName))
@@ -45,7 +49,9 @@
 
         public void RecordFrame()
         {
-            recording.AddRecordFrame(new RecordFrame<P>() { Object = (P)GetPlainerCopyNow(Object) });
+            recording.AddRecordFrame(
+                new RecordFrame<P>() { Object = (P)GetPlainerCopyNow(Object) }
+            );
         }
 
         public void Begin(string fileName)

@@ -8,10 +8,9 @@
 {attribute addProperty Size "28"}
 TYPE Outputs_79BC345B EXTENDS TcoIo.OutputBase_10CEE7DE :
 STRUCT
-	{attribute addProperty Name "digital_Data_O"}
-	digital_Data_O AT %Q* : ARRAY[0..27] OF USINT;
+    {attribute addProperty Name "digital_Data_O"}
+    digital_Data_O AT %Q* : ARRAY[0..27] OF USINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

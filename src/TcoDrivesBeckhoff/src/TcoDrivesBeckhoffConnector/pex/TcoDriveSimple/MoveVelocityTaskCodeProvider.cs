@@ -7,7 +7,6 @@ namespace TcoDrivesBeckhoff
 {
     public class MoveVelocityTaskCodeProvider : ICodeProvider
     {
-
         public MoveVelocityTaskCodeProvider(IVortexObject origin)
         {
             Origin = origin;
@@ -19,14 +18,12 @@ namespace TcoDrivesBeckhoff
         {
             var task = (Origin as TcoDriveSimple)?._moveVelocityTask;
 
-            return $@"{Origin.Symbol}.MoveVelocity(                                                         
+            return $@"{Origin.Symbol}.MoveVelocity(
                                                          inVelocity := {task._velocity.Synchron},
                                                          inAcceleration := {task._acceleration.Synchron},
                                                          inDeceleration := {task._deceleration.Synchron},
                                                          inJerk := {task._jerk.Synchron},
                                                          inDirection := {task._direction.Synchron}).Done";
-
         }
     }
 }
-

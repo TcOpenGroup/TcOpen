@@ -14,20 +14,33 @@ namespace TcoIo.Converters
             if ((ushort)value != 8)
             {
                 ResourceDictionary ColorResorce = new ResourceDictionary();
-                ColorResorce.Source = new Uri("/TcOpen.Inxton.TcoIo.Wpf;component/diagnostics/ethercat/colors/colors.xaml", UriKind.RelativeOrAbsolute);
+                ColorResorce.Source = new Uri(
+                    "/TcOpen.Inxton.TcoIo.Wpf;component/diagnostics/ethercat/colors/colors.xaml",
+                    UriKind.RelativeOrAbsolute
+                );
                 return new SolidColorBrush((Color)ColorResorce["InxtonLimeColor"]);
             }
             else
             {
                 ResourceDictionary ColorResorce = new ResourceDictionary();
-                ColorResorce.Source = new Uri("/TcOpen.Inxton.TcoIo.Wpf;component/diagnostics/ethercat/colors/colors.xaml", UriKind.RelativeOrAbsolute);
+                ColorResorce.Source = new Uri(
+                    "/TcOpen.Inxton.TcoIo.Wpf;component/diagnostics/ethercat/colors/colors.xaml",
+                    UriKind.RelativeOrAbsolute
+                );
                 return new SolidColorBrush((Color)ColorResorce["InxtonOrangeColor"]);
             }
         }
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }
+
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
             return this;

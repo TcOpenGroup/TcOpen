@@ -6,7 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="2.0.0" />
+    <PackageReference
+      Include="Inxton.Package.Vortex.Essentials"
+      Version="2.0.0"
+    />
     <PackageReference Include="nunit" Version="3.13.2" />
     <PackageReference Include="JunitXml.TestLogger" Version="2.1.10" />
 	<PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
@@ -15,7 +18,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Tc.Prober\Tc.Prober.csproj" />
-    <ProjectReference Include="..\PlcTcProberTestsConnector\PlcTcProberTestsConnector.csproj" />
+    <ProjectReference
+      Include="..\PlcTcProberTestsConnector\PlcTcProberTestsConnector.csproj"
+    />
   </ItemGroup>
 
 </Project>

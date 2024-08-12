@@ -3,9 +3,8 @@
   <DUT Name="InfoData" Id="{ccd79a22-1901-0fd3-3f9a-d4bfd7d3ec29}">
     <Declaration><![CDATA[TYPE InfoData :
 STRUCT
-	State AT %I* : UINT;
+    State AT %I* : UINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

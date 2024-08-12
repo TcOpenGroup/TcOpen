@@ -2,15 +2,15 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
   <POU Name="TcoDigitalInspector" Id="{b1413ab6-cf32-03b8-31af-46a8ec8720ab}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
-	<docu>
-	<summary>
-		Provides a mechanism for inspecting status of discrete signal.	
-	</summary>
-	<example>										
-		[!code-pas[StandardDialog](~/../TcOpen/src/TcoInspectors/src/XAE/XAE/TcoInspectorsTests/POUs/Examples/ExampleContext.TcPOU?name=StandardDialog)]		
-		[!code-csharp[DialogInitialization](~/../TcOpen/src/TcoInspectors/tests/Sandbox.TcoInspectors.Wpf/MainWindowViewModel.cs?name=DialogProxyServiceInitialization)]
-	</example>	
-	</docu>
+    <docu>
+    <summary>
+        Provides a mechanism for inspecting status of discrete signal.
+    </summary>
+    <example>
+        [!code-pas[StandardDialog](~/../TcOpen/src/TcoInspectors/src/XAE/XAE/TcoInspectorsTests/POUs/Examples/ExampleContext.TcPOU?name=StandardDialog)]
+        [!code-csharp[DialogInitialization](~/../TcOpen/src/TcoInspectors/tests/Sandbox.TcoInspectors.Wpf/MainWindowViewModel.cs?name=DialogProxyServiceInitialization)]
+    </example>
+    </docu>
 ~*)
 FUNCTION_BLOCK TcoDigitalInspector EXTENDS TcoInspector IMPLEMENTS ITcoDigitalInspector
 VAR
@@ -21,17 +21,16 @@ END_VAR]]></Declaration>
     </Implementation>
     <Property Name="CommonData" Id="{b45e0a39-37d2-0d84-323d-7324b429b3a2}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Gets common data settings of inspectors.
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Gets common data settings of inspectors.
+        </summary>
+    </docu>
 ~*)
 PROPERTY CommonData : REFERENCE TO TcoInspectorData]]></Declaration>
       <Get Name="Get" Id="{2673f909-9f9c-0376-1ac6-0f51ac4a44b2}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[CommonData REF= _data;]]></ST>
         </Implementation>
@@ -41,15 +40,14 @@ END_VAR
       <Declaration><![CDATA[(*~
 <docu>
 <summary>
-	Gets data of this inspector.
+    Gets data of this inspector.
 </summary>
 </docu>
 ~*)
 PROPERTY Data : REFERENCE TO TcoDigitalInspectorData]]></Declaration>
       <Get Name="Get" Id="{9d81d3dd-148f-0c90-116b-61d78b860286}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[Data REF= _data;]]></ST>
         </Implementation>
@@ -59,35 +57,31 @@ END_VAR
       <Declaration><![CDATA[(*~
 <docu>
 <summary>
-	Inspects the signal and evaluates that it matches the value set in `RequiredStatus`.
+    Inspects the signal and evaluates that it matches the value set in `RequiredStatus`.
 </summary>
 <returns>
-	Returns the interface with information about the state of inspection.
+    Returns the interface with information about the state of inspection.
 </returns>
 </docu>
 ~*)
 METHOD Inspect : IInspector
 VAR_INPUT
     Status : BOOL;
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[Inspect := THIS^;
-
 _inspectorTask.InspectionData REF= _data;
-
 OnEnterInspection();
 
-IF(IsOverinspected())THEN
-	RETURN;
+IF (IsOverinspected()) THEN
+    RETURN;
 END_IF
-
 
 _inspectorTask.Invoke();
 
 IF (_inspectorTask.Execute()) THEN
     IF (_data.IsByPassed) THEN
-        _data.Result    := eInspectorResult.Bypassed;
+        _data.Result := eInspectorResult.Bypassed;
         _data.TimeStamp := Context.RealTimeClock.NowLocal();
         _inspectorTask.DoneWhen(TRUE);
         RETURN;
@@ -96,37 +90,35 @@ IF (_inspectorTask.Execute()) THEN
     _data.Result := eInspectorResult.Running;
     _inspectorTask._failTimer(IN := TRUE, PT := _data.FailTime);
     _inspectorTask._passTimer(IN := Status = _data.RequiredStatus, PT := _data.PassTime);
-    _data.DetectedStatus := Status;    
-  
-    IF(_inspectorTask._failTimer.Q OR _inspectorTask._passTimer.Q) THEN	  
-     		_inspectorTask.DoneWhen(TRUE);
-			OnDone();
-	END_IF;	
+    _data.DetectedStatus := Status;
+
+    IF (_inspectorTask._failTimer.Q OR _inspectorTask._passTimer.Q) THEN
+        _inspectorTask.DoneWhen(TRUE);
+        OnDone();
+    END_IF;
 END_IF;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnDone" Id="{a41dc408-1e34-0f67-0765-b3b3943d0f0d}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task reaches the ```Done``` state .
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task reaches the ```Done``` state .
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnDone
-]]></Declaration>
+METHOD PROTECTED OnDone]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF (_data.Result = eInspectorResult.Failed) THEN
-     _data.DetectedStatus := NOT _data.RequiredStatus;
+    _data.DetectedStatus := NOT _data.RequiredStatus;
 END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="WithCoordinator" Id="{943d74b5-be94-00d9-004e-ca370a1acdd8}">
       <Declaration><![CDATA[METHOD WithCoordinator : ITcoDigitalInspector
 VAR_INPUT
-	inCoordinator : TcoCore.ITcoCoordinator;
-END_VAR
-]]></Declaration>
+    inCoordinator : TcoCore.ITcoCoordinator;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_WithCoordinator(inCoordinator);
 WithCoordinator := THIS^;]]></ST>

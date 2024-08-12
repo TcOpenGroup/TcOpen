@@ -7,9 +7,9 @@
       <Declaration><![CDATA[(*~
 	<docu>
 		<summary>
-			Gets the information about the current step.						
-		</summary>				
-	</docu>	
+			Gets the information about the current step.
+		</summary>
+	</docu>
 ~*)
 PROPERTY CurrentStep : REFERENCE TO StepDetails]]></Declaration>
       <Get Name="Get" Id="{d55c7f61-ec4e-07a2-2f32-e75c01fe1a25}">
@@ -30,8 +30,8 @@ PROPERTY CurrentStep : REFERENCE TO StepDetails]]></Declaration>
 				Ensures calling the Open(), Main() and Close() methods in the desired order.
 				This method is final, so it cannot be overloaded. The InstanceName.Run() needs to be called cyclically inside the appropriate context.
 			</para>
-		</summary>			
-	</docu>	
+		</summary>
+	</docu>
 ~*)
 METHOD PUBLIC FINAL Run]]></Declaration>
     </Method>

@@ -8,5 +8,4 @@
         public string DatabaseName { get; set; }
         public string Station001RecipeHistoryCollection { get; set; }
     }
-
 }

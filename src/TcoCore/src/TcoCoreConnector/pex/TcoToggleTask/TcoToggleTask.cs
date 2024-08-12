@@ -17,7 +17,7 @@ namespace TcoCore
         {
             this._enabled.Subscribe(ValidateCanExecute);
             this._isServiceable.Subscribe(ValidateCanExecute);
-            CanExecuteChanged += TcoToggleTask_CanExecuteChanged;          
+            CanExecuteChanged += TcoToggleTask_CanExecuteChanged;
         }
 
         private ICodeProvider codeProvider;
@@ -25,7 +25,7 @@ namespace TcoCore
         private Func<object> _logPayloadDecoration;
 
         /// <summary>
-        /// Gets or sets log payload decoration function. 
+        /// Gets or sets log payload decoration function.
         /// The return object will can be added to provide additional information about this task execution.
         /// <note:important>
         /// There must be an implementation that calls and adds the result object into the log message payload.
@@ -33,7 +33,11 @@ namespace TcoCore
         /// How to create a payload decorator see in <see cref="TcoSequencer.PexConstructor(IVortexObject, string, string)"/>
         /// </important>
         /// </summary>
-        public Func<object> LogPayloadDecoration { get => _logPayloadDecoration; set => _logPayloadDecoration = value; }
+        public Func<object> LogPayloadDecoration
+        {
+            get => _logPayloadDecoration;
+            set => _logPayloadDecoration = value;
+        }
 
         /// <summary>
         /// Gets swift code provider for this task.
@@ -49,7 +53,6 @@ namespace TcoCore
 
                 return codeProvider;
             }
-
             protected set => codeProvider = value;
         }
 
@@ -84,14 +87,18 @@ namespace TcoCore
         /// <param name="parameter"></param>
         public void Execute(object parameter)
         {
-            if(CanExecute(parameter))
-            { 
+            if (CanExecute(parameter))
+            {
                 var originalState = this._state.Synchron;
-                var changeStateDescription = originalState ? $"{this.AttributeStateOnDesc} -> {this.AttributeStateOffDesc}" 
-                                                           : $"{this.AttributeStateOffDesc} -> {this.AttributeStateOnDesc}";
+                var changeStateDescription = originalState
+                    ? $"{this.AttributeStateOnDesc} -> {this.AttributeStateOffDesc}"
+                    : $"{this.AttributeStateOffDesc} -> {this.AttributeStateOnDesc}";
 
-                this._toggleRequest.Synchron = true;            
-                TcoAppDomain.Current.Logger.Information($"Task '{LogInfo.NameOrSymbol(this)}' toggled '{changeStateDescription}'. {{@sender}}", LogInfo.Create(this));
+                this._toggleRequest.Synchron = true;
+                TcoAppDomain.Current.Logger.Information(
+                    $"Task '{LogInfo.NameOrSymbol(this)}' toggled '{changeStateDescription}'. {{@sender}}",
+                    LogInfo.Create(this)
+                );
 
                 RecordTaskAction?.Invoke(this.CodeProvider);
             }

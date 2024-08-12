@@ -13,58 +13,54 @@ VAR
     _velocity : LREAL;
     _acceleration : LREAL;
     _deceleration : LREAL;
-    _jerk : LREAL;	
+    _jerk : LREAL;
     _inString : STRING;
     _done : BOOL;
     _arranged : BOOL;
-
-	_axisReferenceType : INT;
-
-	_positions: SomeTestPositions(THIS^);
-	_moveParam: TcoSingleAxisMoveParam;
-END_VAR
-]]></Declaration>
+    _axisReferenceType : INT;
+    _positions : SomeTestPositions(THIS^);
+    _moveParam : TcoSingleAxisMoveParam;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Main" Id="{9d72f18c-b94e-0903-30f8-3e611d8283f3}">
-      <Declaration><![CDATA[METHOD PROTECTED Main
-]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED Main]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_sut.Config.ErrorTime:=T#1000MS;
-_sut.Config.InfoTime:=T#1000MS;
+        <ST><![CDATA[_sut.Config.ErrorTime := T#1000MS;
+_sut.Config.InfoTime := T#1000MS;
 
 _sut(inEnable := _enable,
     inEnablePositive := _enablePositive,
     inEnableNegative := _enableNegative,
     inCalibrationCam := _calibrationCam,
     refAxis := GVL.Axis1,
-	inoPositions:=_positions);
+    inoPositions := _positions);
 
 CASE _testId OF
     eTcoSingleAxisTests.Restore:
         _sut.Restore();
     eTcoSingleAxisTests.CleanUp:
         _sut._messenger.Clear();
-    {region "T003_Message"}
+        {region "T003_Message"}
     eTcoSingleAxisTests.Message:
         _sut.Messenger.Error(_inString);
         _done := _plcCycleCounter > 1;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T004_PowerDisable"}
+        {endregion}
+        {region "T004_PowerDisable"}
     eTcoSingleAxisTests.PowerDisable:
         _enable := FALSE;
         _done := _sut.Axis._axisStatus.Disabled; // OR _plcCycleCounter > 1;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T005_PowerEnable"}
+        {endregion}
+        {region "T005_PowerEnable"}
     eTcoSingleAxisTests.PowerEnable:
         _enable := TRUE;
         _done := _sut.Axis._axisStatus.Operational; // OR _plcCycleCounter > 15;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T006_Reset"}
+        {endregion}
+        {region "T006_Reset"}
     eTcoSingleAxisTests.Reset:
         IF NOT _arranged THEN
             _sut.Axis.MoveRelative(inDistance := 500,
@@ -83,8 +79,8 @@ CASE _testId OF
         _sut.Axis.Reset();
         _done := _sut.Axis.ResetTask.Done OR _sut.Axis.ResetTask.Error; // OR _plcCycleCounter > 1;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T007_MoveRelativePositiveWithDisabledPositiveDirection"}
+        {endregion}
+        {region "T007_MoveRelativePositiveWithDisabledPositiveDirection"}
     eTcoSingleAxisTests.MoveRelativePositiveWithDisabledPositiveDirection:
         IF NOT _arranged THEN
             _enable := TRUE;
@@ -106,8 +102,8 @@ CASE _testId OF
 
         _done := _sut.Axis.MoveRelativeTask.Done OR _sut.Axis.MoveRelativeTask.Error; // OR _sut._axisStatus.Error;// OR _plcCycleCounter > 5;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T008_MoveRelativePositiveWithEnabledPositiveDirection"}
+        {endregion}
+        {region "T008_MoveRelativePositiveWithEnabledPositiveDirection"}
     eTcoSingleAxisTests.MoveRelativePositiveWithEnabledPositiveDirection:
         IF NOT _arranged THEN
             _enable := TRUE;
@@ -129,8 +125,8 @@ CASE _testId OF
 
         _done := _sut.Axis.MoveRelativeTask.Done OR _sut.Axis.MoveRelativeTask.Error; // OR  _plcCycleCounter > 1000;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T009_MoveRelativeNegativeWithDisabledNegativeDirection"}
+        {endregion}
+        {region "T009_MoveRelativeNegativeWithDisabledNegativeDirection"}
     eTcoSingleAxisTests.MoveRelativeNegativeWithDisabledNegativeDirection:
         IF NOT _arranged THEN
             _enable := TRUE;
@@ -152,8 +148,8 @@ CASE _testId OF
 
         _done := _sut.Axis.MoveRelativeTask.Done OR _sut.Axis.MoveRelativeTask.Error; // OR _sut._axisStatus.Error;// OR _plcCycleCounter > 5;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T010_MoveRelativeNegativeWithEnabledNegativeDirection"}
+        {endregion}
+        {region "T010_MoveRelativeNegativeWithEnabledNegativeDirection"}
     eTcoSingleAxisTests.MoveRelativeNegativeWithEnabledNegativeDirection:
         IF NOT _arranged THEN
             _enable := TRUE;
@@ -175,8 +171,8 @@ CASE _testId OF
 
         _done := _sut.Axis.MoveRelativeTask.Done OR _sut.Axis.MoveRelativeTask.Error; // OR  _plcCycleCounter > 1000;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T011_HommingDirect"}
+        {endregion}
+        {region "T011_HommingDirect"}
     eTcoSingleAxisTests.HommingDirect:
         IF NOT _arranged THEN
             _enable := TRUE;
@@ -201,8 +197,8 @@ CASE _testId OF
 
         _done := _sut.Axis.HomeTask.Done OR _sut.Axis.HomeTask.Error; //OR _plcCycleCounter > 1000;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T012_MoveVelocityPositiveWithDisabledPositiveDirection"}
+        {endregion}
+        {region "T012_MoveVelocityPositiveWithDisabledPositiveDirection"}
     eTcoSingleAxisTests.MoveVelocityPositiveWithDisabledPositiveDirection:
         IF NOT _arranged THEN
             _enable := TRUE;
@@ -224,8 +220,8 @@ CASE _testId OF
 
         _done := _sut.Axis.MoveVelocityTask.Done OR _sut.Axis.MoveVelocityTask.Error; // OR  _sut._axisStatus.Error;// OR _plcCycleCounter > 5;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T013_MoveVelocityPositiveWithEnabledPositiveDirection"}
+        {endregion}
+        {region "T013_MoveVelocityPositiveWithEnabledPositiveDirection"}
     eTcoSingleAxisTests.MoveVelocityPositiveWithEnabledPositiveDirection:
         IF NOT _arranged THEN
             _enable := TRUE;
@@ -247,8 +243,8 @@ CASE _testId OF
 
         _done := _sut.Axis.MoveVelocityTask.Done OR _sut.Axis.MoveVelocityTask.Error; // OR  _plcCycleCounter > 1000;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T014_Stop"}
+        {endregion}
+        {region "T014_Stop"}
     eTcoSingleAxisTests.Stop:
         IF NOT _arranged THEN
             _enable := TRUE;
@@ -265,8 +261,8 @@ CASE _testId OF
         _sut.Axis.Stop(inDeceleration := _deceleration, inJerk := _jerk);
         _done := _sut.Axis.StopTask.Done OR _sut.Axis.StopTask.Error; // OR  _plcCycleCounter > 1000;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T015_MoveVelocityNegativeWithDisabledNegativeDirection"}
+        {endregion}
+        {region "T015_MoveVelocityNegativeWithDisabledNegativeDirection"}
     eTcoSingleAxisTests.MoveVelocityNegativeWithDisabledNegativeDirection:
         IF NOT _arranged THEN
             _enable := TRUE;
@@ -288,8 +284,8 @@ CASE _testId OF
 
         _done := _sut.Axis.MoveVelocityTask.Done OR _sut.Axis.MoveVelocityTask.Error; // OR  _sut._axisStatus.Error;// OR _plcCycleCounter > 5;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T016_MoveVelocityNegativeWithEnabledNegativeDirection"}
+        {endregion}
+        {region "T016_MoveVelocityNegativeWithEnabledNegativeDirection"}
     eTcoSingleAxisTests.MoveVelocityNegativeWithEnabledNegativeDirection:
         IF NOT _arranged THEN
             _enable := TRUE;
@@ -311,8 +307,8 @@ CASE _testId OF
 
         _done := _sut.Axis.MoveVelocityTask.Done OR _sut.Axis.MoveVelocityTask.Error; // OR  _plcCycleCounter > 1000;
         ProbeDoneWhen(_done);
-    {endregion}
-    {region "T017_MoveAbsoluteDisabled"}
+        {endregion}
+        {region "T017_MoveAbsoluteDisabled"}
     eTcoSingleAxisTests.MoveAbsoluteDisabled:
         IF NOT _arranged THEN
             _enable := FALSE;
@@ -330,8 +326,8 @@ CASE _testId OF
 
         _done := _sut.Axis.MoveAbsoluteTask.Done OR _sut.Axis.MoveAbsoluteTask.Error OR _plcCycleCounter > 10;
         ProbeDoneWhen(_done);
-	{endregion}
-    {region "T018_MoveAbsoluteDisabledPositiveDirection"}
+        {endregion}
+        {region "T018_MoveAbsoluteDisabledPositiveDirection"}
     eTcoSingleAxisTests.MoveAbsoluteDisabledPositiveDirection:
         IF NOT _arranged THEN
             _enable := TRUE;
@@ -349,8 +345,8 @@ CASE _testId OF
 
         _done := _sut.Axis.MoveAbsoluteTask.Done OR _sut.Axis.MoveAbsoluteTask.Error; // OR _sut._axisStatus.Error;// OR _plcCycleCounter > 5;
         ProbeDoneWhen(_done);
-	{endregion}
-    {region "T019_MoveAbsoluteEnabledPositiveDirection"}
+        {endregion}
+        {region "T019_MoveAbsoluteEnabledPositiveDirection"}
     eTcoSingleAxisTests.MoveAbsoluteEnabledPositiveDirection:
         IF NOT _arranged THEN
             _enable := TRUE;
@@ -360,7 +356,7 @@ CASE _testId OF
             RETURN;
         END_IF;
 
-          _sut.Axis.MoveAbsolute(inPosition := _position,
+        _sut.Axis.MoveAbsolute(inPosition := _position,
             inVelocity := _velocity,
             inAcceleration := _acceleration,
             inDeceleration := _deceleration,
@@ -368,8 +364,8 @@ CASE _testId OF
 
         _done := _sut.Axis.MoveAbsoluteTask.Done OR _sut.Axis.MoveAbsoluteTask.Error; // OR _sut._axisStatus.Error;// OR _plcCycleCounter > 5;
         ProbeDoneWhen(_done);
-	{endregion}
-    {region "T020_MoveAbsoluteDisabledNegativeDirection"}
+        {endregion}
+        {region "T020_MoveAbsoluteDisabledNegativeDirection"}
     eTcoSingleAxisTests.MoveAbsoluteDisabledNegativeDirection:
         IF NOT _arranged THEN
             _enable := TRUE;
@@ -379,7 +375,7 @@ CASE _testId OF
             RETURN;
         END_IF;
 
-          _sut.Axis.MoveAbsolute(inPosition := _position,
+        _sut.Axis.MoveAbsolute(inPosition := _position,
             inVelocity := _velocity,
             inAcceleration := _acceleration,
             inDeceleration := _deceleration,
@@ -387,8 +383,8 @@ CASE _testId OF
 
         _done := _sut.Axis.MoveAbsoluteTask.Done OR _sut.Axis.MoveAbsoluteTask.Error; // OR _sut._axisStatus.Error;// OR _plcCycleCounter > 5;
         ProbeDoneWhen(_done);
-	{endregion}
-    {region "T021_MoveAbsoluteEnabledNegativeDirection"}
+        {endregion}
+        {region "T021_MoveAbsoluteEnabledNegativeDirection"}
     eTcoSingleAxisTests.MoveAbsoluteEnabledNegativeDirection:
         IF NOT _arranged THEN
             _enable := TRUE;
@@ -398,7 +394,7 @@ CASE _testId OF
             RETURN;
         END_IF;
 
-          _sut.Axis.MoveAbsolute(inPosition := _position,
+        _sut.Axis.MoveAbsolute(inPosition := _position,
             inVelocity := _velocity,
             inAcceleration := _acceleration,
             inDeceleration := _deceleration,
@@ -406,12 +402,11 @@ CASE _testId OF
 
         _done := _sut.Axis.MoveAbsoluteTask.Done OR _sut.MoveAbsoluteTask.Error; // OR _sut._axisStatus.Error;// OR _plcCycleCounter > 5;
         ProbeDoneWhen(_done);
-	{endregion}
-		
- {region "T022_MoveAbsoluteAxisDisabled"}
+        {endregion}
+        {region "T022_MoveAbsoluteAxisDisabled"}
     eTcoSingleAxisTests.MoveAbsoluteAxisDisabled:
         IF NOT _arranged THEN
-			 _sut.Restore();
+            _sut.Restore();
             _enable := FALSE;
             _enablePositive := FALSE;
             _enableNegative := FALSE;
@@ -419,24 +414,19 @@ CASE _testId OF
             RETURN;
         END_IF;
 
-		_moveParam.Position:= _position;
-		_moveParam.Velocity := _velocity;
-		_moveParam.Acceleration := _acceleration;
-		_moveParam.Deceleration := _deceleration;
-		_moveParam.Jerk :=  _jerk;
+        _moveParam.Position := _position;
+        _moveParam.Velocity := _velocity;
+        _moveParam.Acceleration := _acceleration;
+        _moveParam.Deceleration := _deceleration;
+        _moveParam.Jerk := _jerk;
         _sut.MoveAbsolute(_moveParam);
-			 
-			 
-			 
-
-        _done := _sut.MoveAbsoluteTask.Done OR ( _sut.Axis.MoveAbsoluteTask.Error AND _sut.MoveAbsoluteTask.Error)OR _plcCycleCounter > 10;
+        _done := _sut.MoveAbsoluteTask.Done OR (_sut.Axis.MoveAbsoluteTask.Error AND _sut.MoveAbsoluteTask.Error) OR _plcCycleCounter > 10;
         ProbeDoneWhen(_done);
-	{endregion}
-		 
- 	{region "T023_MoveAbsoluteAxisDisabledPositiveDirection"}
+        {endregion}
+        {region "T023_MoveAbsoluteAxisDisabledPositiveDirection"}
     eTcoSingleAxisTests.MoveAbsoluteAxisDisabledPositiveDirection:
         IF NOT _arranged THEN
-		 	_sut.Restore();
+            _sut.Restore();
             _enable := TRUE;
             _enablePositive := FALSE;
             _enableNegative := TRUE;
@@ -444,20 +434,19 @@ CASE _testId OF
             RETURN;
         END_IF;
 
-        _moveParam.Position:= _position;
-		_moveParam.Velocity := _velocity;
-		_moveParam.Acceleration := _acceleration;
-		_moveParam.Deceleration := _deceleration;
-		_moveParam.Jerk :=  _jerk;
+        _moveParam.Position := _position;
+        _moveParam.Velocity := _velocity;
+        _moveParam.Acceleration := _acceleration;
+        _moveParam.Deceleration := _deceleration;
+        _moveParam.Jerk := _jerk;
         _sut.MoveAbsolute(_moveParam);
-
-        _done := _sut.MoveAbsoluteTask.Done OR (_sut.Axis.MoveAbsoluteTask.Error AND _sut.MoveAbsoluteTask.Error) ; 
+        _done := _sut.MoveAbsoluteTask.Done OR (_sut.Axis.MoveAbsoluteTask.Error AND _sut.MoveAbsoluteTask.Error);
         ProbeDoneWhen(_done);
-	{endregion}
-    {region "T024_MoveAbsoluteAxisEnabledPositiveDirection"}
+        {endregion}
+        {region "T024_MoveAbsoluteAxisEnabledPositiveDirection"}
     eTcoSingleAxisTests.MoveAbsoluteAxisEnabledPositiveDirection:
         IF NOT _arranged THEN
-		 	_sut.Restore();
+            _sut.Restore();
             _enable := TRUE;
             _enablePositive := TRUE;
             _enableNegative := FALSE;
@@ -465,20 +454,19 @@ CASE _testId OF
             RETURN;
         END_IF;
 
-      _moveParam.Position:= _position;
-		_moveParam.Velocity := _velocity;
-		_moveParam.Acceleration := _acceleration;
-		_moveParam.Deceleration := _deceleration;
-		_moveParam.Jerk :=  _jerk;
+        _moveParam.Position := _position;
+        _moveParam.Velocity := _velocity;
+        _moveParam.Acceleration := _acceleration;
+        _moveParam.Deceleration := _deceleration;
+        _moveParam.Jerk := _jerk;
         _sut.MoveAbsolute(_moveParam);
-
-        _done := _sut.MoveAbsoluteTask.Done OR (_sut.Axis.MoveAbsoluteTask.Error AND _sut.MoveAbsoluteTask.Error) ; 
+        _done := _sut.MoveAbsoluteTask.Done OR (_sut.Axis.MoveAbsoluteTask.Error AND _sut.MoveAbsoluteTask.Error);
         ProbeDoneWhen(_done);
-	{endregion}
-    {region "T025_MoveAbsoluteAxisDisabledNegativeDirection"}
+        {endregion}
+        {region "T025_MoveAbsoluteAxisDisabledNegativeDirection"}
     eTcoSingleAxisTests.MoveAbsoluteAxisDisabledNegativeDirection:
         IF NOT _arranged THEN
-			_sut.Restore();
+            _sut.Restore();
             _enable := TRUE;
             _enablePositive := FALSE;
             _enableNegative := FALSE;
@@ -486,20 +474,19 @@ CASE _testId OF
             RETURN;
         END_IF;
 
-    _moveParam.Position:= _position;
-		_moveParam.Velocity := _velocity;
-		_moveParam.Acceleration := _acceleration;
-		_moveParam.Deceleration := _deceleration;
-		_moveParam.Jerk :=  _jerk;
+        _moveParam.Position := _position;
+        _moveParam.Velocity := _velocity;
+        _moveParam.Acceleration := _acceleration;
+        _moveParam.Deceleration := _deceleration;
+        _moveParam.Jerk := _jerk;
         _sut.MoveAbsolute(_moveParam);
-
-        _done := _sut.MoveAbsoluteTask.Done OR (_sut.Axis.MoveAbsoluteTask.Error AND _sut.MoveAbsoluteTask.Error) ; 
+        _done := _sut.MoveAbsoluteTask.Done OR (_sut.Axis.MoveAbsoluteTask.Error AND _sut.MoveAbsoluteTask.Error);
         ProbeDoneWhen(_done);
-	{endregion}
-    {region "T026_MoveAbsoluteAxisEnabledNegativeDirection"}
+        {endregion}
+        {region "T026_MoveAbsoluteAxisEnabledNegativeDirection"}
     eTcoSingleAxisTests.MoveAbsoluteAxisEnabledNegativeDirection:
         IF NOT _arranged THEN
-			_sut.Restore();
+            _sut.Restore();
             _enable := TRUE;
             _enablePositive := FALSE;
             _enableNegative := TRUE;
@@ -507,23 +494,19 @@ CASE _testId OF
             RETURN;
         END_IF;
 
-        _moveParam.Position:= _position;
-		_moveParam.Velocity := _velocity;
-		_moveParam.Acceleration := _acceleration;
-		_moveParam.Deceleration := _deceleration;
-		_moveParam.Jerk :=  _jerk;
+        _moveParam.Position := _position;
+        _moveParam.Velocity := _velocity;
+        _moveParam.Acceleration := _acceleration;
+        _moveParam.Deceleration := _deceleration;
+        _moveParam.Jerk := _jerk;
         _sut.MoveAbsolute(_moveParam);
-
-        _done := _sut.MoveAbsoluteTask.Done OR (_sut.MoveAbsoluteTask.Error AND _sut.MoveAbsoluteTask.Error) ; 
+        _done := _sut.MoveAbsoluteTask.Done OR (_sut.MoveAbsoluteTask.Error AND _sut.MoveAbsoluteTask.Error);
         ProbeDoneWhen(_done);
-	{endregion}
-
-
-
- {region "T027_MoveRelativeAxisDisabled"}
+        {endregion}
+        {region "T027_MoveRelativeAxisDisabled"}
     eTcoSingleAxisTests.MoveRelativeAxisDisabled:
         IF NOT _arranged THEN
-			_sut.Restore();
+            _sut.Restore();
             _enable := FALSE;
             _enablePositive := FALSE;
             _enableNegative := FALSE;
@@ -531,24 +514,19 @@ CASE _testId OF
             RETURN;
         END_IF;
 
-		_moveParam.Position:= _position;
-		_moveParam.Velocity := _velocity;
-		_moveParam.Acceleration := _acceleration;
-		_moveParam.Deceleration := _deceleration;
-		_moveParam.Jerk :=  _jerk;
+        _moveParam.Position := _position;
+        _moveParam.Velocity := _velocity;
+        _moveParam.Acceleration := _acceleration;
+        _moveParam.Deceleration := _deceleration;
+        _moveParam.Jerk := _jerk;
         _sut.MoveRelative(_moveParam);
-			 
-			 
-			 
-
         _done := _sut.MoveRelativeTask.Done OR (_sut.Axis.MoveRelativeTask.Error AND _sut.MoveRelativeTask.Error) OR _plcCycleCounter > 10;
         ProbeDoneWhen(_done);
-	{endregion}
-		 
- 	{region "T028_MoveRelativeAxisDisabledPositiveDirection"}
+        {endregion}
+        {region "T028_MoveRelativeAxisDisabledPositiveDirection"}
     eTcoSingleAxisTests.MoveRelativeAxisDisabledPositiveDirection:
         IF NOT _arranged THEN
-			 _sut.Restore();
+            _sut.Restore();
             _enable := TRUE;
             _enablePositive := FALSE;
             _enableNegative := TRUE;
@@ -556,20 +534,19 @@ CASE _testId OF
             RETURN;
         END_IF;
 
-        _moveParam.Position:= _position;
-		_moveParam.Velocity := _velocity;
-		_moveParam.Acceleration := _acceleration;
-		_moveParam.Deceleration := _deceleration;
-		_moveParam.Jerk :=  _jerk;
+        _moveParam.Position := _position;
+        _moveParam.Velocity := _velocity;
+        _moveParam.Acceleration := _acceleration;
+        _moveParam.Deceleration := _deceleration;
+        _moveParam.Jerk := _jerk;
         _sut.MoveRelative(_moveParam);
-
-        _done := _sut.MoveRelativeTask.Done OR (_sut.Axis.MoveRelativeTask.Error AND _sut.MoveRelativeTask.Error) ; 
+        _done := _sut.MoveRelativeTask.Done OR (_sut.Axis.MoveRelativeTask.Error AND _sut.MoveRelativeTask.Error);
         ProbeDoneWhen(_done);
-	{endregion}
-    {region "T029_MoveRelativeAxisEnabledPositiveDirection"}
+        {endregion}
+        {region "T029_MoveRelativeAxisEnabledPositiveDirection"}
     eTcoSingleAxisTests.MoveRelativeAxisEnabledPositiveDirection:
         IF NOT _arranged THEN
-				  _sut.Restore();
+            _sut.Restore();
             _enable := TRUE;
             _enablePositive := TRUE;
             _enableNegative := FALSE;
@@ -577,20 +554,19 @@ CASE _testId OF
             RETURN;
         END_IF;
 
-      _moveParam.Position:= _position;
-		_moveParam.Velocity := _velocity;
-		_moveParam.Acceleration := _acceleration;
-		_moveParam.Deceleration := _deceleration;
-		_moveParam.Jerk :=  _jerk;
+        _moveParam.Position := _position;
+        _moveParam.Velocity := _velocity;
+        _moveParam.Acceleration := _acceleration;
+        _moveParam.Deceleration := _deceleration;
+        _moveParam.Jerk := _jerk;
         _sut.MoveRelative(_moveParam);
-
-        _done := _sut.MoveRelativeTask.Done OR (_sut.Axis.MoveRelativeTask.Error AND _sut.MoveRelativeTask.Error) ; 
+        _done := _sut.MoveRelativeTask.Done OR (_sut.Axis.MoveRelativeTask.Error AND _sut.MoveRelativeTask.Error);
         ProbeDoneWhen(_done);
-	{endregion}
-    {region "T030_MoveRelativeAxisDisabledNegativeDirection"}
+        {endregion}
+        {region "T030_MoveRelativeAxisDisabledNegativeDirection"}
     eTcoSingleAxisTests.MoveRelativeAxisDisabledNegativeDirection:
         IF NOT _arranged THEN
-				  _sut.Restore();
+            _sut.Restore();
             _enable := TRUE;
             _enablePositive := FALSE;
             _enableNegative := FALSE;
@@ -598,20 +574,19 @@ CASE _testId OF
             RETURN;
         END_IF;
 
-    _moveParam.Position:= _position;
-		_moveParam.Velocity := _velocity;
-		_moveParam.Acceleration := _acceleration;
-		_moveParam.Deceleration := _deceleration;
-		_moveParam.Jerk :=  _jerk;
+        _moveParam.Position := _position;
+        _moveParam.Velocity := _velocity;
+        _moveParam.Acceleration := _acceleration;
+        _moveParam.Deceleration := _deceleration;
+        _moveParam.Jerk := _jerk;
         _sut.MoveRelative(_moveParam);
-
-        _done := _sut.MoveRelativeTask.Done OR (_sut.Axis.MoveRelativeTask.Error AND _sut.MoveRelativeTask.Error) ; 
+        _done := _sut.MoveRelativeTask.Done OR (_sut.Axis.MoveRelativeTask.Error AND _sut.MoveRelativeTask.Error);
         ProbeDoneWhen(_done);
-	{endregion}
-    {region "T031_MoveRelativeAxisEnabledNegativeDirection"}
+        {endregion}
+        {region "T031_MoveRelativeAxisEnabledNegativeDirection"}
     eTcoSingleAxisTests.MoveRelativeAxisEnabledNegativeDirection:
         IF NOT _arranged THEN
-				  _sut.Restore();
+            _sut.Restore();
             _enable := TRUE;
             _enablePositive := FALSE;
             _enableNegative := TRUE;
@@ -619,27 +594,15 @@ CASE _testId OF
             RETURN;
         END_IF;
 
-        _moveParam.Position:= _position;
-		_moveParam.Velocity := _velocity;
-		_moveParam.Acceleration := _acceleration;
-		_moveParam.Deceleration := _deceleration;
-		_moveParam.Jerk :=  _jerk;
+        _moveParam.Position := _position;
+        _moveParam.Velocity := _velocity;
+        _moveParam.Acceleration := _acceleration;
+        _moveParam.Deceleration := _deceleration;
+        _moveParam.Jerk := _jerk;
         _sut.MoveRelative(_moveParam);
-
-        _done := _sut.MoveRelativeTask.Done OR (_sut.MoveRelativeTask.Error AND _sut.MoveRelativeTask.Error) ; 
+        _done := _sut.MoveRelativeTask.Done OR (_sut.MoveRelativeTask.Error AND _sut.MoveRelativeTask.Error);
         ProbeDoneWhen(_done);
-	{endregion}
-
-
-
-
-
-
-
-
-
-
-
+        {endregion}
 END_CASE]]></ST>
       </Implementation>
     </Method>

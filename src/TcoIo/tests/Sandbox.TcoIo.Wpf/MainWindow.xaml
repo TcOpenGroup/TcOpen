@@ -1,126 +1,311 @@
 <Window
-    x:Class="Sandbox.TcoIo.Wpf.MainWindow"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Sandbox.TcoIo.Wpf"
-    xmlns:user="clr-namespace:Sandbox.TcoIo.Wpf.UserViews"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
-    xmlns:vortex="http://vortex.mts/xaml" 
-    xmlns:sim="clr-namespace:Sandbox.TcoIo.Wpf.Simulation"
-    xmlns:wpf="clr-namespace:TcoIo;assembly=TcOpen.Inxton.TcoIo.Wpf"
-    Width="2048"
-    Height="1200"
-    mc:Ignorable="d"
-    Title="MainWindow">
+  x:Class="Sandbox.TcoIo.Wpf.MainWindow"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:Sandbox.TcoIo.Wpf"
+  xmlns:user="clr-namespace:Sandbox.TcoIo.Wpf.UserViews"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:vortex="http://vortex.mts/xaml"
+  xmlns:sim="clr-namespace:Sandbox.TcoIo.Wpf.Simulation"
+  xmlns:wpf="clr-namespace:TcoIo;assembly=TcOpen.Inxton.TcoIo.Wpf"
+  Width="2048"
+  Height="1200"
+  mc:Ignorable="d"
+  Title="MainWindow"
+>
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
     <TabControl>
-        <TabItem Header="EmptyTab" >
+        <TabItem Header="EmptyTab">
         </TabItem>
-        <TabItem Header="Userview" >
-            <Grid ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+        <TabItem Header="Userview">
+            <Grid
+        ScrollViewer.CanContentScroll="True"
+        ScrollViewer.VerticalScrollBarVisibility="Auto"
+        ScrollViewer.HorizontalScrollBarVisibility="Auto"
+      >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                    <wpf:TopologyRenderer Grid.Row="0" Grid.Column="0" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT}" GroupedView="True" GroupName="Device 1 (EtherCAT)" />
-                    <wpf:TopologyRenderer Grid.Row="1" Grid.Column="0" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT}" GroupedView="True" GroupName="Device 2 (EtherCAT)" UserView="{x:Type user:UserViewDevice2}"/>
-                    <wpf:TopologyRenderer Grid.Row="2" Grid.Column="0" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT}" GroupedView="True" GroupName="Device 3 (EtherCAT)" UserView="{x:Type user:UserViewDevice3}"/>
+                    <wpf:TopologyRenderer
+          Grid.Row="0"
+          Grid.Column="0"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT}"
+          GroupedView="True"
+          GroupName="Device 1 (EtherCAT)"
+        />
+                    <wpf:TopologyRenderer
+          Grid.Row="1"
+          Grid.Column="0"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT}"
+          GroupedView="True"
+          GroupName="Device 2 (EtherCAT)"
+          UserView="{x:Type user:UserViewDevice2}"
+        />
+                    <wpf:TopologyRenderer
+          Grid.Row="2"
+          Grid.Column="0"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT}"
+          GroupedView="True"
+          GroupName="Device 3 (EtherCAT)"
+          UserView="{x:Type user:UserViewDevice3}"
+        />
             </Grid>
         </TabItem>
-        <TabItem Header="Topology renderer-complete" >
-            <wpf:TopologyRenderer DataContext="{Binding TcoIoTests.GVL_iXlinker}" />
+        <TabItem Header="Topology renderer-complete">
+            <wpf:TopologyRenderer
+        DataContext="{Binding TcoIoTests.GVL_iXlinker}"
+      />
         </TabItem>
-        <TabItem Header="Simulation" >
+        <TabItem Header="Simulation">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
- 
-                <sim:SimulateState Grid.Column="0" Grid.Row="0" SimulatedState="OP" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT}"/>
-                <sim:SimulateState Grid.Column="0" Grid.Row="1" SimulatedState="INIT" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT}"/>
-                <sim:SimulateState Grid.Column="0" Grid.Row="2" SimulatedState="SlaveSignalsMissingLink" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT}"/>
-                <sim:SimulateState Grid.Column="0" Grid.Row="3" SimulatedState="INIT" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_5_EL4004}"/>
-                <sim:SimulateState Grid.Column="0" Grid.Row="4" SimulatedState="INIT" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT.SyncUnits._default.PlcTask1}"/>
-                <sim:SimulateState Grid.Column="0" Grid.Row="5" SimulatedState="SlaveSignalsMissingLink" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809}"/>
-                <sim:SimulateState Grid.Column="0" Grid.Row="6" SimulatedState="SlaveSignalsMissingLink" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_6_EL2809}"/>
 
-                <sim:SimulateState Grid.Column="1" Grid.Row="0" SimulatedState="OP" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT}"/>
-                <sim:SimulateState Grid.Column="1" Grid.Row="1" SimulatedState="INIT" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT}"/>
-                <sim:SimulateState Grid.Column="1" Grid.Row="2" SimulatedState="SlaveSignalsMissingLink" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT}"/>
-                <sim:SimulateState Grid.Column="1" Grid.Row="3" SimulatedState="INIT" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT.Term_9_EK1100.Term_36_EL3024}"/>
-                <sim:SimulateState Grid.Column="1" Grid.Row="4" SimulatedState="INIT" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT.SyncUnits._default.PlcTask1}"/>
-                <sim:SimulateState Grid.Column="1" Grid.Row="5" SimulatedState="SlaveSignalsMissingLink" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT.Term_9_EK1100.Term_10_EK1122.Term_11_EK1100}"/>
-                <sim:SimulateState Grid.Column="1" Grid.Row="6" SimulatedState="SlaveSignalsMissingLink" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT.Term_9_EK1100.Term_10_EK1122.Term_18_EK1100.Term_22_EL3011}"/>
+                <sim:SimulateState
+          Grid.Column="0"
+          Grid.Row="0"
+          SimulatedState="OP"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT}"
+        />
+                <sim:SimulateState
+          Grid.Column="0"
+          Grid.Row="1"
+          SimulatedState="INIT"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT}"
+        />
+                <sim:SimulateState
+          Grid.Column="0"
+          Grid.Row="2"
+          SimulatedState="SlaveSignalsMissingLink"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT}"
+        />
+                <sim:SimulateState
+          Grid.Column="0"
+          Grid.Row="3"
+          SimulatedState="INIT"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_5_EL4004}"
+        />
+                <sim:SimulateState
+          Grid.Column="0"
+          Grid.Row="4"
+          SimulatedState="INIT"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT.SyncUnits._default.PlcTask1}"
+        />
+                <sim:SimulateState
+          Grid.Column="0"
+          Grid.Row="5"
+          SimulatedState="SlaveSignalsMissingLink"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_3_EL1809}"
+        />
+                <sim:SimulateState
+          Grid.Column="0"
+          Grid.Row="6"
+          SimulatedState="SlaveSignalsMissingLink"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_1_EtherCAT.Term_1_EK1200.Term_6_EL2809}"
+        />
 
-                <sim:SimulateState Grid.Column="2" Grid.Row="0" SimulatedState="OP" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT}"/>
-                <sim:SimulateState Grid.Column="2" Grid.Row="1" SimulatedState="INIT" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT}"/>
-                <sim:SimulateState Grid.Column="2" Grid.Row="2" SimulatedState="SlaveSignalsMissingLink" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT}"/>
-                <sim:SimulateState Grid.Column="2" Grid.Row="3" SimulatedState="INIT" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_150_EL1809}"/>
-                <sim:SimulateState Grid.Column="2" Grid.Row="4" SimulatedState="INIT" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.SyncUnits._default.PlcTask1}"/>
-                <sim:SimulateState Grid.Column="2" Grid.Row="5" SimulatedState="SlaveSignalsMissingLink" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100}"/>
-                <sim:SimulateState Grid.Column="2" Grid.Row="6" SimulatedState="ERROR" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_147_EK1122.Term_178_EK1100.Term_179_EK1122.Term_180_EK1100}"/>
-                <sim:SimulateState Grid.Column="2" Grid.Row="7" SimulatedState="InvalidVendorId" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_147_EK1122.Term_178_EK1100.Term_179_EK1122.Term_180_EK1100}"/>
-                <sim:SimulateState Grid.Column="2" Grid.Row="8" SimulatedState="InitializationError" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_147_EK1122.Term_178_EK1100.Term_179_EK1122.Term_180_EK1100}"/>
-                <sim:SimulateState Grid.Column="2" Grid.Row="9" SimulatedState="SlaveDisabled" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_147_EK1122.Term_178_EK1100.Term_179_EK1122.Term_180_EK1100}"/>
-                <sim:SimulateState Grid.Column="2" Grid.Row="10" SimulatedState="SlaveNotPresent" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_147_EK1122.Term_178_EK1100.Term_179_EK1122.Term_180_EK1100}"/>
-                <sim:SimulateState Grid.Column="2" Grid.Row="11" SimulatedState="SlaveSignalsLinkError" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_147_EK1122.Term_178_EK1100.Term_179_EK1122.Term_180_EK1100}"/>
-                <sim:SimulateState Grid.Column="2" Grid.Row="12" SimulatedState="SlaveSignalsMissingLink" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_147_EK1122.Term_178_EK1100.Term_179_EK1122.Term_180_EK1100}"/>
-                <sim:SimulateState Grid.Column="2" Grid.Row="13" SimulatedState="SlaveSignalsUnexpectedLink" DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_147_EK1122.Term_178_EK1100.Term_179_EK1122.Term_180_EK1100}"/>
+                <sim:SimulateState
+          Grid.Column="1"
+          Grid.Row="0"
+          SimulatedState="OP"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT}"
+        />
+                <sim:SimulateState
+          Grid.Column="1"
+          Grid.Row="1"
+          SimulatedState="INIT"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT}"
+        />
+                <sim:SimulateState
+          Grid.Column="1"
+          Grid.Row="2"
+          SimulatedState="SlaveSignalsMissingLink"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT}"
+        />
+                <sim:SimulateState
+          Grid.Column="1"
+          Grid.Row="3"
+          SimulatedState="INIT"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT.Term_9_EK1100.Term_36_EL3024}"
+        />
+                <sim:SimulateState
+          Grid.Column="1"
+          Grid.Row="4"
+          SimulatedState="INIT"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT.SyncUnits._default.PlcTask1}"
+        />
+                <sim:SimulateState
+          Grid.Column="1"
+          Grid.Row="5"
+          SimulatedState="SlaveSignalsMissingLink"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT.Term_9_EK1100.Term_10_EK1122.Term_11_EK1100}"
+        />
+                <sim:SimulateState
+          Grid.Column="1"
+          Grid.Row="6"
+          SimulatedState="SlaveSignalsMissingLink"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_2_EtherCAT.Term_9_EK1100.Term_10_EK1122.Term_18_EK1100.Term_22_EL3011}"
+        />
+
+                <sim:SimulateState
+          Grid.Column="2"
+          Grid.Row="0"
+          SimulatedState="OP"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT}"
+        />
+                <sim:SimulateState
+          Grid.Column="2"
+          Grid.Row="1"
+          SimulatedState="INIT"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT}"
+        />
+                <sim:SimulateState
+          Grid.Column="2"
+          Grid.Row="2"
+          SimulatedState="SlaveSignalsMissingLink"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT}"
+        />
+                <sim:SimulateState
+          Grid.Column="2"
+          Grid.Row="3"
+          SimulatedState="INIT"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_150_EL1809}"
+        />
+                <sim:SimulateState
+          Grid.Column="2"
+          Grid.Row="4"
+          SimulatedState="INIT"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.SyncUnits._default.PlcTask1}"
+        />
+                <sim:SimulateState
+          Grid.Column="2"
+          Grid.Row="5"
+          SimulatedState="SlaveSignalsMissingLink"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100}"
+        />
+                <sim:SimulateState
+          Grid.Column="2"
+          Grid.Row="6"
+          SimulatedState="ERROR"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_147_EK1122.Term_178_EK1100.Term_179_EK1122.Term_180_EK1100}"
+        />
+                <sim:SimulateState
+          Grid.Column="2"
+          Grid.Row="7"
+          SimulatedState="InvalidVendorId"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_147_EK1122.Term_178_EK1100.Term_179_EK1122.Term_180_EK1100}"
+        />
+                <sim:SimulateState
+          Grid.Column="2"
+          Grid.Row="8"
+          SimulatedState="InitializationError"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_147_EK1122.Term_178_EK1100.Term_179_EK1122.Term_180_EK1100}"
+        />
+                <sim:SimulateState
+          Grid.Column="2"
+          Grid.Row="9"
+          SimulatedState="SlaveDisabled"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_147_EK1122.Term_178_EK1100.Term_179_EK1122.Term_180_EK1100}"
+        />
+                <sim:SimulateState
+          Grid.Column="2"
+          Grid.Row="10"
+          SimulatedState="SlaveNotPresent"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_147_EK1122.Term_178_EK1100.Term_179_EK1122.Term_180_EK1100}"
+        />
+                <sim:SimulateState
+          Grid.Column="2"
+          Grid.Row="11"
+          SimulatedState="SlaveSignalsLinkError"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_147_EK1122.Term_178_EK1100.Term_179_EK1122.Term_180_EK1100}"
+        />
+                <sim:SimulateState
+          Grid.Column="2"
+          Grid.Row="12"
+          SimulatedState="SlaveSignalsMissingLink"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_147_EK1122.Term_178_EK1100.Term_179_EK1122.Term_180_EK1100}"
+        />
+                <sim:SimulateState
+          Grid.Column="2"
+          Grid.Row="13"
+          SimulatedState="SlaveSignalsUnexpectedLink"
+          DataContext="{Binding TcoIoTests.GVL_iXlinker.Device_3_EtherCAT.Term_146_EK1100.Term_147_EK1122.Term_178_EK1100.Term_179_EK1122.Term_180_EK1100}"
+        />
             </Grid>
         </TabItem>
-        <TabItem Header="Diagnostic messages" >
+        <TabItem Header="Diagnostic messages">
             <Grid DataContext="{Binding TcoIoTests.MAIN._tcc, Mode=OneWay}">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <vortex:RenderableContentControl Grid.Row="0"  DataContext="{Binding Device_1}" PresentationType="Service"/>
-                <vortex:RenderableContentControl Grid.Row="1"  DataContext="{Binding Device_2}" PresentationType="Service"/>
+                <vortex:RenderableContentControl
+          Grid.Row="0"
+          DataContext="{Binding Device_1}"
+          PresentationType="Service"
+        />
+                <vortex:RenderableContentControl
+          Grid.Row="1"
+          DataContext="{Binding Device_2}"
+          PresentationType="Service"
+        />
             </Grid>
         </TabItem>
 
-        <TabItem Header="Ecat Compoennt" >
+        <TabItem Header="Ecat Compoennt">
             <Grid DataContext="{Binding TcoIoTests.MAIN._tcc, Mode=OneWay}">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <TabControl>
                     <TabItem Header="SlimDisplay">
-                        <vortex:RenderableContentControl Grid.Row="0"  DataContext="{Binding EcatComponent}" PresentationType="Slim-Display"/>
+                        <vortex:RenderableContentControl
+              Grid.Row="0"
+              DataContext="{Binding EcatComponent}"
+              PresentationType="Slim-Display"
+            />
                     </TabItem>
                     <TabItem Header="General">
                         <UniformGrid Columns="2">
-                            <vortex:RenderableContentControl  DataContext="{Binding EcatComponent}" PresentationType="Service"/>
-                            <vortex:RenderableContentControl  DataContext="{Binding EcatComponent._ecatState}" PresentationType="Service"/>
+                            <vortex:RenderableContentControl
+                DataContext="{Binding EcatComponent}"
+                PresentationType="Service"
+              />
+                            <vortex:RenderableContentControl
+                DataContext="{Binding EcatComponent._ecatState}"
+                PresentationType="Service"
+              />
 
                         </UniformGrid>
                     </TabItem>
@@ -129,4 +314,3 @@
         </TabItem>
     </TabControl>
 </Window>
-

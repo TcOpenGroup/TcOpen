@@ -25,12 +25,14 @@ namespace TcoInspectors
         public TcoInspectorDialogDialogView()
         {
             InitializeComponent();
-        
-            this.DataContextChanged += TcoInspectorDialogView_DataContextChanged;
 
+            this.DataContextChanged += TcoInspectorDialogView_DataContextChanged;
         }
-    
-        private void TcoInspectorDialogView_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
+
+        private void TcoInspectorDialogView_DataContextChanged(
+            object sender,
+            System.Windows.DependencyPropertyChangedEventArgs e
+        )
         {
             context = this.DataContext as TcoInspectorDialogDialogViewModel;
             if (context != null)

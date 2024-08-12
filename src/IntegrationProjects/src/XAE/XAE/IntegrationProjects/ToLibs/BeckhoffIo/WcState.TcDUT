@@ -3,10 +3,9 @@
   <DUT Name="WcState" Id="{17cec864-319a-0250-26fc-c565083022ba}">
     <Declaration><![CDATA[TYPE WcState :
 STRUCT
-	State AT %I* : BOOL;
-	InputToggle AT %I* : BOOL;
+    State AT %I* : BOOL;
+    InputToggle AT %I* : BOOL;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -11,14 +11,21 @@
 		<PackageReference Include="nunit" Version="3.13.2" />
 		<PackageReference Include="JunitXml.TestLogger" Version="2.1.10" />
 	<PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />		
-		<PackageReference Include="RavenDB.TestDriver" Version="5.3.101" /> 
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+		<PackageReference Include="RavenDB.TestDriver" Version="5.3.101" />
   </ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\Repository\MongoDb\TcOpen.Inxton.MongoDb.csproj" />
-		<ProjectReference Include="..\..\src\Repository\RavenDb\TcOpen.Inxton.RavenDb\TcOpen.Inxton.RavenDb.csproj" />
+		<ProjectReference
+      Include="..\..\src\Repository\MongoDb\TcOpen.Inxton.MongoDb.csproj"
+    />
+		<ProjectReference
+      Include="..\..\src\Repository\RavenDb\TcOpen.Inxton.RavenDb\TcOpen.Inxton.RavenDb.csproj"
+    />
 	</ItemGroup>
 
-	<Import Project="..\TcoData.Tests.Shared\TcoData.Tests.Shared.projitems" Label="Shared" />
+	<Import
+    Project="..\TcoData.Tests.Shared\TcoData.Tests.Shared.projitems"
+    Label="Shared"
+  />
 </Project>

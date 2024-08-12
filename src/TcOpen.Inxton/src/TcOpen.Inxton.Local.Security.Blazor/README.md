@@ -21,10 +21,10 @@ Install NuGet package TcOpen.Inxton.Local.Security.Blazor or add reference to th
 
 Add following lines in Startup.cs, in ConfigureServices() method, where you pass instances of created repositories:
 
-~~~bash
+```bash
 BlazorRoleGroupManager roleGroupManager = new BlazorRoleGroupManager(groupRepo);
 services.AddVortexBlazorSecurity(userRepo, roleGroupManager);
-~~~
+```
 
 where userRepo is instance of user repository and must be type `IRepository<UserData>`. And groupRepo of group repository and must be type `IRepository<GroupData>`.
 
@@ -34,15 +34,15 @@ Reference can be added in App.razor as parameter AdditionalAssemblies of Router 
 
 Add following line to Router component:
 
-~~~bash
+```bash
 AdditionalAssemblies="new[] { typeof(BlazorSecurity).Assembly}"
-~~~
+```
 
 Also for correct AuthenticationState handling, you must wrap Router component inside CascadingAuthenticationState component.
 
 Resulted code in App.razor should contains something like example below:
 
-~~~bash
+```bash
 <CascadingAuthenticationState>
     <Router AppAssembly="@typeof(Program).Assembly" PreferExactMatches="@true"
             AdditionalAssemblies="new[] { typeof(BlazorSecurity).Assembly}">
@@ -51,23 +51,23 @@ Resulted code in App.razor should contains something like example below:
     .
     </Router>
 </CascadingAuthenticationState>
-~~~
+```
 
 After that, following URI's should be accessible within Blazor app:
 
-~~~bash
+```bash
 https://localhost:5001/Identity/Account/Register
 https://localhost:5001/Identity/Account/Login
 https://localhost:5001/Identity/Account/Manage
-~~~
+```
 
 This pages contains basic implementation of register, login and manage views. Now you are able to create, login and manage user.
 
 You can use following URL to log out the current user.
 
-~~~bash
+```bash
 https://localhost:5001/Identity/Account/Logout
-~~~
+```
 
 ## SecurityManagementView component
 
@@ -77,9 +77,9 @@ When user is logged in with administrator rights, it is possible to modify all a
 
 Add following line to display security management view, where you can managing users and groups.
 
-~~~bash
+```bash
 <SecurityManagementView />
-~~~
+```
 
 Your application can look like TcHammer example from TcOpen repo.
 
@@ -93,22 +93,22 @@ Library TcOpen.Inxton.Local.Security.Blazor includes alert messaging. It is used
 
 For using them add following line in your main layout of your application.
 
-~~~bash
+```bash
 <AlertDisplay />
-~~~
+```
 
 When you want to use them, you must add following injection line.
 
-~~~bash
+```bash
 [Inject]
 private BlazorAlertManager _alertManager { get; set; }
-~~~
+```
 
 Now you can easily adding new messages. For example following line.
 
-~~~bash
+```bash
 _alertManager.addAlert("success", "Success message.");
-~~~
+```
 
 There are available following style option: info, success and warning.
 

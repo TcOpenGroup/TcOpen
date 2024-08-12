@@ -5,13 +5,12 @@
 {attribute 'strict'}
 TYPE eTypeOfTixon :
 (
-	TixonStep := 0,
-	TixonVibro:=1,
-	TixonPickStep:=2,
-	TixonPickVibro:=3,
-	TixonPickVibroBasic:=4
+    TixonStep := 0,
+    TixonVibro := 1,
+    TixonPickStep := 2,
+    TixonPickVibro := 3,
+    TixonPickVibroBasic := 4
 );
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

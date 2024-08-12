@@ -7,18 +7,15 @@ namespace TcoAbbRobotics
 {
     public class TcoIrc5_v_1_x_xEventsDescriptionConverter : MarkupExtension, IValueConverter
     {
-
-
-
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             try
             {
                 uint errorId = (uint)value;
 
-                return TcoIrc5ControllerEvents_v_1_x_x.Ids.ContainsKey(errorId) ? TcoIrc5ControllerEvents_v_1_x_x.Ids[errorId] : "No error description available.";
-                          
-
+                return TcoIrc5ControllerEvents_v_1_x_x.Ids.ContainsKey(errorId)
+                    ? TcoIrc5ControllerEvents_v_1_x_x.Ids[errorId]
+                    : "No error description available.";
             }
             catch (Exception)
             {
@@ -29,7 +26,12 @@ namespace TcoAbbRobotics
             return string.Empty;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }
@@ -39,6 +41,4 @@ namespace TcoAbbRobotics
             return this;
         }
     }
-
-
 }

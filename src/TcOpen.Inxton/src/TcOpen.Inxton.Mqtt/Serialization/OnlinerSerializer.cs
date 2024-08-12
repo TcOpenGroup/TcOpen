@@ -14,8 +14,9 @@ namespace TcOpen.Inxton.Mqtt
 
         public string Serialize(T value)
         {
-            return JsonConvert.SerializeObject(new PropertyValue<T> { Property = PropertyName, Value = value });
+            return JsonConvert.SerializeObject(
+                new PropertyValue<T> { Property = PropertyName, Value = value }
+            );
         }
     }
-
 }

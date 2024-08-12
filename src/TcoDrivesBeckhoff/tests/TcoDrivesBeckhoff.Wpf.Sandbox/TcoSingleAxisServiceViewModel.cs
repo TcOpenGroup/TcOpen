@@ -14,14 +14,7 @@ namespace TcoDrivesBeckhoff
 {
     public class TcoSingleAxisServiceExtendedViewModel : TcoSingleAxisServiceViewModel
     {
-
-
-        public TcoSingleAxisServiceExtendedViewModel() : base()
-        {
-
-           
-        }
-
+        public TcoSingleAxisServiceExtendedViewModel()
+            : base() { }
     }
-
 }

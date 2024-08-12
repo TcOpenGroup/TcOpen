@@ -7,10 +7,9 @@ END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
-	_price		:	REAL:=	600000;
-	_isAlive	:	BOOL:=	TRUE;
-END_VAR
-]]></Declaration>
+    _price : REAL := 600000;
+    _isAlive : BOOL := TRUE;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
@@ -18,20 +17,19 @@ END_VAR
       <Declaration><![CDATA[PROPERTY IsAlive : Bool]]></Declaration>
       <Get Name="Get" Id="{891b74e2-9b42-04bc-3c2d-547dd654b534}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[IsAlive := _isAlive;]]></ST>
         </Implementation>
       </Get>
       <Set Name="Set" Id="{14ae4f1f-c3df-0612-253a-f3ec69794c5b}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[_isAlive	:= IsAlive;
+          <ST><![CDATA[_isAlive := IsAlive;
+
 IF NOT _isAlive THEN
-	_price := 0 ;
+    _price := 0;
 END_IF]]></ST>
         </Implementation>
       </Set>
@@ -40,28 +38,25 @@ END_IF]]></ST>
       <Declaration><![CDATA[PROPERTY Price : LREAL]]></Declaration>
       <Get Name="Get" Id="{50bf9ead-c98d-096c-31ff-34a444666e78}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[IF _isAlive THEN
-	Price	:= 	_price;
+    Price := _price;
 ELSE
-	_price	:=	0;
-	Price	:= 	_price;
+    _price := 0;
+    Price := _price;
 END_IF]]></ST>
         </Implementation>
       </Get>
       <Set Name="Set" Id="{c2d46adf-e662-01a9-01cf-e937129f35fb}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[IF _isAlive THEN
-	_price	:=	Price;
+    _price := Price;
 ELSE
-	_price	:=	0;
-END_IF
-]]></ST>
+    _price := 0;
+END_IF]]></ST>
         </Implementation>
       </Set>
     </Property>

@@ -3,10 +3,9 @@
   <DUT Name="fbPistonConfig" Id="{a4f9fe85-132f-075a-02f2-cd00eb11bb19}">
     <Declaration><![CDATA[TYPE fbPistonConfig :
 STRUCT
-	MaxTimeToReachHome : TIME;
-	MaxTimeToReachWork : TIME;
+    MaxTimeToReachHome : TIME;
+    MaxTimeToReachWork : TIME;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

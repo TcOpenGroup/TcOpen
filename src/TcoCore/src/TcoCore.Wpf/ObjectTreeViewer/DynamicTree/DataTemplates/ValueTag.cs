@@ -1,9 +1,7 @@
 ﻿namespace Tco.Wpf.DynamicTree.DataTemplates
 {
-    public partial class ValueTag 
+    public partial class ValueTag
     {
-        public ValueTag()
-        {
-        }
+        public ValueTag() { }
     }
 }

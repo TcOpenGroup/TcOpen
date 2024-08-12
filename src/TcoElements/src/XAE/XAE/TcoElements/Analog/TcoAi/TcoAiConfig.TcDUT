@@ -3,66 +3,64 @@
   <DUT Name="TcoAiConfig" Id="{2721b2a7-c7c9-03ad-1a7e-ab7e6e58d9e4}">
     <Declaration><![CDATA[(*~
 <docu>
-	<summary>
-		`TcoAi` settings/config structure.								
-	</summary>				
-</docu>	
+    <summary>
+        `TcoAi` settings/config structure.
+    </summary>
+</docu>
 ~*)
-TYPE
-    TcoAiConfig :
-    STRUCT
-		(*~
-		<docu>
-			<summary>
-				Lowest possible value of the raw input.								
-			</summary>				
-		</docu>	
-		~*)
-        RawLow   : DINT;
-		(*~
-		<docu>
-			<summary>
-				Highest possible value of the raw input.								
-			</summary>				
-		</docu>	
-		~*)
-        RawHigh  : DINT;
-		(*~
-		<docu>
-			<summary>
-				Lowest threshold of scaled value.
-				`RealLow` and `RealHigh` should represent the real range of an continuous input. 								
-			</summary>				
-		</docu>	
-		~*)
-        RealLow  : REAL;
-		(*~
-		<docu>
-			<summary>
-				Highest threshold range of scaled value.
-				`RealLow` and `RealHigh` should represent the real range of an continuous input. 	 								
-			</summary>				
-		</docu>	
-		~*)
-        RealHigh : REAL;
-		(*~
-		<docu>
-			<summary>
-				Allows simple adjustment of the calculated value multiplying the value by factor of `Gain`.								 	 								
-			</summary>				
-		</docu>	
-		~*)
-        Gain     : REAL := 1.0;
-		(*~
-		<docu>
-			<summary>
-				Allows simple adjustment of the calculated value by adding `Offset` value.								 	 								
-			</summary>				
-		</docu>	
-		~*)
-        Offset   : REAL := 0.0;
-    END_STRUCT
-END_TYPE
-]]></Declaration>
+TYPE TcoAiConfig :
+STRUCT
+    (*~
+        <docu>
+            <summary>
+                Lowest possible value of the raw input.
+            </summary>
+        </docu>
+        ~*)
+    RawLow : DINT;
+    (*~
+        <docu>
+            <summary>
+                Highest possible value of the raw input.
+            </summary>
+        </docu>
+        ~*)
+    RawHigh : DINT;
+    (*~
+        <docu>
+            <summary>
+                Lowest threshold of scaled value.
+                `RealLow` and `RealHigh` should represent the real range of an continuous input.
+            </summary>
+        </docu>
+        ~*)
+    RealLow : REAL;
+    (*~
+        <docu>
+            <summary>
+                Highest threshold range of scaled value.
+                `RealLow` and `RealHigh` should represent the real range of an continuous input.
+            </summary>
+        </docu>
+        ~*)
+    RealHigh : REAL;
+    (*~
+        <docu>
+            <summary>
+                Allows simple adjustment of the calculated value multiplying the value by factor of `Gain`.
+            </summary>
+        </docu>
+        ~*)
+    Gain : REAL := 1.0;
+    (*~
+        <docu>
+            <summary>
+                Allows simple adjustment of the calculated value by adding `Offset` value.
+            </summary>
+        </docu>
+        ~*)
+    Offset : REAL := 0.0;
+END_STRUCT
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -8,12 +8,11 @@
 {attribute addProperty Size "64"}
 TYPE Module_1_32_Byte_Valve_Unit_0x7F_85784B27 :
 STRUCT
-	{attribute addProperty Name "Inputs"}
-	Inputs  : Inputs_23559BB0;
-	{attribute addProperty Name "Outputs"}
-	Outputs  : Outputs_FC2FACAD;
+    {attribute addProperty Name "Inputs"}
+    Inputs : Inputs_23559BB0;
+    {attribute addProperty Name "Outputs"}
+    Outputs : Outputs_FC2FACAD;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

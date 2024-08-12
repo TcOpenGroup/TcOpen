@@ -3,14 +3,14 @@
   <GVL Name="GVL" Id="{4558bda2-479a-0ed6-1681-d0c04513f066}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
-	SimpleAxis1	:	TcoDrivesBeckhoff.TcoAxisRef;
-	SimpleAxis2	:	TcoDrivesBeckhoff.TcoAxisRef;
-	SingleAxis	:	TcoDrivesBeckhoff.TcoAxisRef;
-	Axis1	:	TcoDrivesBeckhoff.TcoAxisRef;
-	Axis2	:	TcoDrivesBeckhoff.TcoAxisRef;
-	Axis3	:	TcoDrivesBeckhoff.TcoAxisRef;
-	Axis4	:	TcoDrivesBeckhoff.TcoAxisRef;
-	_calibrationCam AT%I* :BOOL;
+    SimpleAxis1 : TcoDrivesBeckhoff.TcoAxisRef;
+    SimpleAxis2 : TcoDrivesBeckhoff.TcoAxisRef;
+    SingleAxis : TcoDrivesBeckhoff.TcoAxisRef;
+    Axis1 : TcoDrivesBeckhoff.TcoAxisRef;
+    Axis2 : TcoDrivesBeckhoff.TcoAxisRef;
+    Axis3 : TcoDrivesBeckhoff.TcoAxisRef;
+    Axis4 : TcoDrivesBeckhoff.TcoAxisRef;
+    _calibrationCam AT %I* : BOOL;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

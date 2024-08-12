@@ -8,10 +8,9 @@
 {attribute addProperty Size "18"}
 TYPE SyncUnits_C3A34B50 EXTENDS TcoIo.SyncUnitsBase_AD6C35CE :
 STRUCT
-	{attribute addProperty Name "_default"}
-	_default : SyncUnitTasks_5FDC9770;
+    {attribute addProperty Name "_default"}
+    _default : SyncUnitTasks_5FDC9770;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -5,18 +5,21 @@ namespace TcoCore
     public partial class PlainTcoMessage
     {
         internal TcoMessage OnlinerMessage;
+
         internal void SetOnlinerMessage(TcoMessage message)
         {
             OnlinerMessage = message;
         }
-        
+
         string source;
+
         /// <summary>
         /// Gets source object of the message retrieved from the identity of the object that produced this message (typically the symbol of the PLC program).
         /// </summary>
         public string Source
         {
-            get => source; internal set
+            get => source;
+            internal set
             {
                 if (source == value)
                 {
@@ -29,12 +32,14 @@ namespace TcoCore
         }
 
         string location;
+
         /// <summary>
         /// Gets location of the object retrieved from the identity of the object that produced this message (typically human readable path of the object).
         /// </summary>
         public string Location
         {
-            get => location; internal set
+            get => location;
+            internal set
             {
                 if (location == value)
                 {
@@ -63,10 +68,7 @@ namespace TcoCore
         /// </summary>
         public short SubCategory
         {
-            get
-            {
-                return (short)(this.Category % 100);
-            }
+            get { return (short)(this.Category % 100); }
         }
 
         /// <summary>
@@ -85,7 +87,8 @@ namespace TcoCore
         /// </summary>
         public string ParentsObjectSymbol
         {
-            get => parentsObjectSymbol; internal set
+            get => parentsObjectSymbol;
+            internal set
             {
                 if (parentsObjectSymbol == value)
                 {
@@ -93,7 +96,10 @@ namespace TcoCore
                 }
 
                 parentsObjectSymbol = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ParentsObjectSymbol)));
+                PropertyChanged?.Invoke(
+                    this,
+                    new PropertyChangedEventArgs(nameof(ParentsObjectSymbol))
+                );
             }
         }
 
@@ -105,7 +111,8 @@ namespace TcoCore
         /// </summary>
         public string ParentsHumanReadable
         {
-            get => parentsHumanReadable; set
+            get => parentsHumanReadable;
+            set
             {
                 if (parentsHumanReadable == value)
                 {
@@ -113,7 +120,10 @@ namespace TcoCore
                 }
 
                 parentsHumanReadable = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ParentsHumanReadable)));
+                PropertyChanged?.Invoke(
+                    this,
+                    new PropertyChangedEventArgs(nameof(ParentsHumanReadable))
+                );
             }
         }
 
@@ -123,7 +133,6 @@ namespace TcoCore
         public string Raw
         {
             get => raw;
-
             internal set
             {
                 if (raw == value)
@@ -150,7 +159,10 @@ namespace TcoCore
         public override bool Equals(object obj)
         {
             var p = obj as PlainTcoMessage;
-            return p != null && p.Raw == Raw && p.ParentsObjectSymbol == ParentsObjectSymbol && p.Category == Category;
+            return p != null
+                && p.Raw == Raw
+                && p.ParentsObjectSymbol == ParentsObjectSymbol
+                && p.Category == Category;
         }
     }
 }

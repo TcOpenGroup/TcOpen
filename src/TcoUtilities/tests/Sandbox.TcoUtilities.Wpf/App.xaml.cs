@@ -1,4 +1,3 @@
-using TcoUtilities;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -6,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using TcoUtilities;
 
 namespace Sandbox.TcoUtilities.Wpf
 {
@@ -16,10 +16,12 @@ namespace Sandbox.TcoUtilities.Wpf
     {
         public App()
         {
-            TcOpen.Inxton.TcoAppDomain.Current.Builder
-                .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter())
+            TcOpen
+                .Inxton.TcoAppDomain.Current.Builder.SetUpLogger(
+                    new TcOpen.Inxton.Logging.SerilogAdapter()
+                )
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
-            
+
             Entry.TcoUtilitiesPlc.Connector.BuildAndStart().ReadWriteCycleDelay = 75;
         }
     }

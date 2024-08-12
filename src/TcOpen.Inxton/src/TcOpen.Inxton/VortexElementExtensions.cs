@@ -7,8 +7,9 @@ namespace TcOpen.Inxton.VortexElementExtensions
     {
         public static string GetNameOrSymbol(this IVortexElement element)
         {
-            return string.IsNullOrEmpty(element.AttributeName) ? element.GetSymbolTail() : element.AttributeName;
+            return string.IsNullOrEmpty(element.AttributeName)
+                ? element.GetSymbolTail()
+                : element.AttributeName;
         }
-
     }
 }

@@ -5,10 +5,10 @@
 {attribute wpf [Group(Layout.GroupBox)]}
 TYPE AnalogueValueCheck :
 STRUCT
-	Mininum : REAL;
-	{attribute clr [RenderIgnore("ShadowControl", "ShadowControlSlim")]}
-	Measured : REAL;
-	Maximum : REAL;	
+    Mininum : REAL;
+    {attribute clr [RenderIgnore("ShadowControl", "ShadowControlSlim")]}
+    Measured : REAL;
+    Maximum : REAL;
 END_STRUCT
 END_TYPE]]></Declaration>
   </DUT>

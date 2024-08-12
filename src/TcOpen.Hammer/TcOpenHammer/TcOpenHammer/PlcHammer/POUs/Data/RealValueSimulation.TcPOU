@@ -10,7 +10,7 @@ VAR_IN_OUT
     inoutValue : REAL;
 END_VAR
 VAR
-	_dc : LREAL :=5.4;
+    _dc : LREAL := 5.4;
     _min : REAL;
     _max : REAL;
     _p1 : LREAL := 2;
@@ -18,7 +18,7 @@ VAR
     _x0 : LREAL;
     _x1 : LREAL;
     _pm : LREAL;
-	_ex : LREAL;
+    _ex : LREAL;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[_ex := EXPT(10, _dc);
@@ -32,7 +32,6 @@ _min := inMinValue * _ex;
 _max := inMaxValue * _ex;
 _pm := (_max - _min);
 _x1 := _min + (Tc2_Math.LMOD((_x0 * _p1 + _p2), _pm));
-
 inoutValue := Tc2_Math.LTRUNC(_x1 / _ex);]]></ST>
     </Implementation>
     <Property Name="Dc" Id="{d7693bd9-f557-4a6e-8e36-74e7243b7b57}">

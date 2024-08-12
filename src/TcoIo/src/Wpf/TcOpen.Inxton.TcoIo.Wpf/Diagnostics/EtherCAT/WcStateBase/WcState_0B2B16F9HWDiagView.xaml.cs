@@ -17,13 +17,11 @@ using System.Windows.Shapes;
 
 namespace TcoIo
 {
-
     public partial class WcState_0B2B16F9HWDiagView : UserControl
     {
         public WcState_0B2B16F9HWDiagView()
         {
             InitializeComponent();
         }
-
     }
 }

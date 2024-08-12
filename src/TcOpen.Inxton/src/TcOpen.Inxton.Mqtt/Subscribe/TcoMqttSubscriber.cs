@@ -1,8 +1,8 @@
-﻿using MQTTnet.Client;
+﻿using System;
+using System.Threading.Tasks;
+using MQTTnet.Client;
 using MQTTnet.Client.Subscribing;
 using MQTTnet.Client.Unsubscribing;
-using System;
-using System.Threading.Tasks;
 
 namespace TcOpen.Inxton.Mqtt
 {
@@ -11,15 +11,22 @@ namespace TcOpen.Inxton.Mqtt
         public string Topic { get; }
         public IMqttClient Client { get; }
         public TopicHandleRelay<T> MessageReceivedHandler { get; }
-        private TcoAppMqttHandler TcoAppHandler => Client.ApplicationMessageReceivedHandler as TcoAppMqttHandler;
+        private TcoAppMqttHandler TcoAppHandler =>
+            Client.ApplicationMessageReceivedHandler as TcoAppMqttHandler;
 
-        public TcoMqttSubscriber(IMqttClient Client, string topic, IPayloadDeserializer<T> deserializer)
+        public TcoMqttSubscriber(
+            IMqttClient Client,
+            string topic,
+            IPayloadDeserializer<T> deserializer
+        )
         {
             this.Topic = topic;
             this.Client = Client;
             if (TcoAppHandler is null)
-                throw new ArgumentException($"The {nameof(IMqttClient)} needs to call UseApplicationMessageReceivedHandler(new {nameof(TcoAppMqttHandler)}())" +
-                    $"before using {nameof(TcoMqttSubscriber<T>)}");
+                throw new ArgumentException(
+                    $"The {nameof(IMqttClient)} needs to call UseApplicationMessageReceivedHandler(new {nameof(TcoAppMqttHandler)}())"
+                        + $"before using {nameof(TcoMqttSubscriber<T>)}"
+                );
             MessageReceivedHandler = new TopicHandleRelay<T>(topic, deserializer, TcoAppHandler);
         }
 
@@ -39,6 +46,5 @@ namespace TcOpen.Inxton.Mqtt
             MessageReceivedHandler.Unsubscribe();
             return mqttClientUnsubscribeResult;
         }
-
     }
 }

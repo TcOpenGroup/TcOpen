@@ -2,46 +2,44 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="SampleTaskIteration" Id="{450b6b1d-6c8e-0394-0c18-a9bc81860428}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK SampleTaskIteration EXTENDS TcoCore.TcoTask
-VAR	
-	_x : LREAL;
-	_y : LREAL;
-	_d : LREAL;
-	{attribute addProperty Minimum 100}
-	{attribute addProperty Maximum 1000}
-	_iterations : INT;	
-	_currentIteration : INT;	
+VAR
+    _x : LREAL;
+    _y : LREAL;
+    _d : LREAL;
+    {attribute addProperty Minimum 100}
+    {attribute addProperty Maximum 1000}
+    _iterations : INT;
+    _currentIteration : INT;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF(Execute()) THEN
-	_y := SIN(_x);
-	_x := _x + _d;		
-	_currentIteration := _currentIteration + 1;	
-	DoneWhen(_currentIteration >= _iterations);
+      <ST><![CDATA[IF (Execute()) THEN
+    _y := SIN(_x);
+    _x := _x + _d;
+    _currentIteration := _currentIteration + 1;
+    DoneWhen(_currentIteration >= _iterations);
 END_IF]]></ST>
     </Implementation>
     <Method Name="FB_init" Id="{9f55daf9-c2ef-080a-2f0c-777b420fde0d}">
       <Declaration><![CDATA[METHOD FB_init : BOOL
 VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	ParentObject : ITcoObject;
-END_VAR
-
-]]></Declaration>
+    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+    ParentObject : ITcoObject;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{a6c8fd00-dc78-0e65-1145-ff6dfd5c139b}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
-			<para>
-				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
-			</para>
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+            <para>
+                See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+            </para>
+        </summary>
+    </docu>
 ~*)
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>

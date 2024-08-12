@@ -3,96 +3,85 @@
   <POU Name="TcoContextTest" Id="{6642835d-5414-4760-aac1-4c8cef083deb}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoContextTest EXTENDS TcoCore._internals_TcoContext
 VAR
-	_callMyPlcInstance 		:	BOOL := FALSE;
-	_startCycles			:	ULINT;
-	_endCycles				:	ULINT;	
-	_mainCycles				:	ULINT;
-	_tcoObjectTest_A		:	TcoObjectTest(THIS^);
-	_tcoObjectTest_B		:	TcoObjectTest(THIS^);
-	_tcoObjectTest_Misc		:	TcoObjectTest(THIS^);
-	_myIdentity				:	ULINT;	
-	_onEntryCount			:	ULINT;
-	_onExitCount			:	ULINT;
-END_VAR
-]]></Declaration>
+    _callMyPlcInstance : BOOL := FALSE;
+    _startCycles : ULINT;
+    _endCycles : ULINT;
+    _mainCycles : ULINT;
+    _tcoObjectTest_A : TcoObjectTest(THIS^);
+    _tcoObjectTest_B : TcoObjectTest(THIS^);
+    _tcoObjectTest_Misc : TcoObjectTest(THIS^);
+    _myIdentity : ULINT;
+    _onEntryCount : ULINT;
+    _onExitCount : ULINT;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF THIS^._callMyPlcInstance THEN
-	THIS^.Run();
-END_IF
-
-]]></ST>
+    THIS^.Run();
+END_IF]]></ST>
     </Implementation>
     <Method Name="CallMainFromUnitTest" Id="{9c9d295d-40fb-48af-adaf-5d210f5656a3}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL CallMainFromUnitTest
-]]></Declaration>
+METHOD INTERNAL CallMainFromUnitTest]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^.Main();]]></ST>
       </Implementation>
     </Method>
     <Method Name="CallRunFromUnitTest" Id="{06319017-0b6a-4225-bce8-de1fd8b0ed0e}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL CallRunFromUnitTest
-]]></Declaration>
+METHOD INTERNAL CallRunFromUnitTest]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^.Run();]]></ST>
       </Implementation>
     </Method>
     <Method Name="ContextClose" Id="{4adc0216-d7dc-47d4-a216-4cfc4c14ed41}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL ContextClose
-]]></Declaration>
+METHOD INTERNAL ContextClose]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^._Close();]]></ST>
       </Implementation>
     </Method>
     <Method Name="ContextOpen" Id="{65cd14ad-eb62-4d0c-8ca2-8e3c5c9380bf}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD INTERNAL ContextOpen
-]]></Declaration>
+METHOD INTERNAL ContextOpen]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^._Open();]]></ST>
       </Implementation>
     </Method>
     <Method Name="Main" Id="{76d8f63c-d45d-4de4-ad73-4298aca95aa1}">
-      <Declaration><![CDATA[METHOD PROTECTED  Main]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED Main]]></Declaration>
       <Implementation>
         <ST><![CDATA[_mainCycles := _mainCycles + 1;
-
-_myIdentity	:= THIS^.Identity;
-]]></ST>
+_myIdentity := THIS^.Identity;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnEntry" Id="{39b0dbf1-f025-08a9-2dd6-50f0eee94985}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Called on entry into context. When overridden in derived class allows to execute an arbitrary logic prior to opening the context cycle.
-			<remarks>			
-				<note type="important">					
-					The method executes prior to opening the context. The context might not be properly initialized on first call. 
-					Any information contained in the context at this point are from the last execution.
-				</note>
-			</remarks>
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Called on entry into context. When overridden in derived class allows to execute an arbitrary logic prior to opening the context cycle.
+            <remarks>
+                <note type="important">
+                    The method executes prior to opening the context. The context might not be properly initialized on first call.
+                    Any information contained in the context at this point are from the last execution.
+                </note>
+            </remarks>
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnEntry
-]]></Declaration>
+METHOD PROTECTED OnEntry]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_onEntryCount := _onEntryCount + 1; ]]></ST>
+        <ST><![CDATA[_onEntryCount := _onEntryCount + 1;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnExit" Id="{4d6a4e29-82b5-0f04-0eb3-ca65f1c618ae}">
-      <Declaration><![CDATA[
-(*~
-	<docu>
-		<summary>
-			Called upon exit from the context. When overridden in derived class allows to execute an arbitrary logic after closing the context cycle.	
-		</summary>			
-	</docu>	
-~*)METHOD PROTECTED OnExit
-]]></Declaration>
+      <Declaration><![CDATA[(*~
+    <docu>
+        <summary>
+            Called upon exit from the context. When overridden in derived class allows to execute an arbitrary logic after closing the context cycle.
+        </summary>
+    </docu>
+~*)
+METHOD PROTECTED OnExit]]></Declaration>
       <Implementation>
         <ST><![CDATA[_onExitCount := _onExitCount + 1;]]></ST>
       </Implementation>
@@ -101,10 +90,9 @@ METHOD PROTECTED OnEntry
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD INTERNAL ReadOutCycleCounters]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_startCycles		:=		THIS^.StartCycleCount;
-_endCycles			:=		THIS^.EndCycleCount;
-
-_myIdentity			:= 		THIS^.Identity;]]></ST>
+        <ST><![CDATA[_startCycles := THIS^.StartCycleCount;
+_endCycles := THIS^.EndCycleCount;
+_myIdentity := THIS^.Identity;]]></ST>
       </Implementation>
     </Method>
   </POU>

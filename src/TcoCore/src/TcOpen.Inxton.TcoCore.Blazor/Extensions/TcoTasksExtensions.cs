@@ -55,6 +55,7 @@ namespace TcoCore
 
             return false;
         }
+
         public static bool TaskStateToVisibility(this TcoTask task)
         {
             try
@@ -81,7 +82,5 @@ namespace TcoCore
 
             return false;
         }
-
-
     }
 }

@@ -2,15 +2,13 @@
 <TcPlcObject Version="1.1.0.1">
   <DUT Name="F_AnyToUnionValue" Id="{19e9788e-e223-0e11-3cca-450663879b34}">
     <Declaration><![CDATA[// credits Jakob Sagatowski https://github.com/sagatowski & contributors https://github.com/tcunit/TcUnit
-
-TYPE F_AnyToUnionValue :
-UNION
-	_bool : BOOL;
+TYPE F_AnyToUnionValue : UNION
+    _bool : BOOL;
     _bit : BIT;
     _byte : BYTE;
     _dword : DWORD;
     _lword : LWORD;
-    _string :STRING(255);
+    _string : STRING(255);
     _udint : UDINT;
     _uint : UINT;
     _usint : USINT;
@@ -29,7 +27,6 @@ UNION
     _dateandtime : DATE_AND_TIME;
     _timeofday : TIME_OF_DAY;
 END_UNION
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -16,20 +16,30 @@ namespace TcoIo.Converters
             //0x040_ = Slave signals missing link
             //0x080_ = Slave signals unexpected link
             string ret = "";
-            if ((((int)(ushort)value) & 0x0100) != 0) ret = ret + "Slave not present; ";
-            if ((((int)(ushort)value) & 0x0200) != 0) ret = ret + "Slave signals link error; ";
-            if ((((int)(ushort)value) & 0x0400) != 0) ret = ret + "Slave signals missing link ";
-            if ((((int)(ushort)value) & 0x0800) != 0) ret = ret + "Slave signals unexpected link ";
+            if ((((int)(ushort)value) & 0x0100) != 0)
+                ret = ret + "Slave not present; ";
+            if ((((int)(ushort)value) & 0x0200) != 0)
+                ret = ret + "Slave signals link error; ";
+            if ((((int)(ushort)value) & 0x0400) != 0)
+                ret = ret + "Slave signals missing link ";
+            if ((((int)(ushort)value) & 0x0800) != 0)
+                ret = ret + "Slave signals unexpected link ";
             return ret;
         }
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }
+
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
             return this;
         }
     }
-
 }

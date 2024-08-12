@@ -8,12 +8,11 @@
 {attribute addProperty Size "2"}
 TYPE InfoData_23CBA837 :
 STRUCT
-	{attribute addProperty Name "AdsAddr"}
-	AdsAddr AT %I* : TcoAmsAddr;
-	{attribute addProperty Name "State"}
-	State AT %I* : UINT;
+    {attribute addProperty Name "AdsAddr"}
+    AdsAddr AT %I* : TcoAmsAddr;
+    {attribute addProperty Name "State"}
+    State AT %I* : UINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

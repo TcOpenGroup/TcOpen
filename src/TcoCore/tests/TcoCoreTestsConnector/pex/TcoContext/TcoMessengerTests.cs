@@ -17,7 +17,5 @@ namespace TcoCoreTests
         {
             ((TcoMessengerContextTest)Parent).ContextOpen();
         }
-
-        
     }
 }

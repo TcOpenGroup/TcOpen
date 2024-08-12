@@ -8,7 +8,7 @@ using Vortex.Connector;
 namespace TcoCore
 {
     public interface IsTcoObject : IVortexObject
-    {      
+    {
         TcoObjectMessageHandler MessageHandler { get; }
     }
 }

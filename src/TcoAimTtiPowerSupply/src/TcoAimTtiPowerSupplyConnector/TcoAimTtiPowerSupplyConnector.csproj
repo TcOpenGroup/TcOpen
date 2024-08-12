@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Library</OutputType>
@@ -12,11 +12,15 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <PackageTags>TwinCAT3 Beckhoff</PackageTags>
-    <PackageReleaseNotes>Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
+    <PackageReleaseNotes
+    >Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
     <PackageProjectUrl>http://docs.tcopengroup.org/</PackageProjectUrl>
-    <PackageIconUrl>https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
+    <PackageIconUrl
+    >https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net48|AnyCPU'">
+  <PropertyGroup
+    Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net48|AnyCPU'"
+  >
     <DefineConstants>TRACE;PLC_DOCU</DefineConstants>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
@@ -29,16 +33,42 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\TcoAbstractions\src\TcoAbstractionsConnector\TcoAbstractionsConnector.csproj" />
-    <ProjectReference Include="..\..\..\TcoUtilities\src\TcoUtilitiesConnector\TcoUtilitiesConnector.csproj" />
-    <ProjectReference Include="..\..\..\TcoCore\src\TcoCoreConnector\TcoCoreConnector.csproj" />
-    <ProjectReference Include="..\..\..\TcoIo\src\TcoIoConnector\TcoIoConnector.csproj" />
+    <ProjectReference
+      Include="..\..\..\TcoAbstractions\src\TcoAbstractionsConnector\TcoAbstractionsConnector.csproj"
+    />
+    <ProjectReference
+      Include="..\..\..\TcoUtilities\src\TcoUtilitiesConnector\TcoUtilitiesConnector.csproj"
+    />
+    <ProjectReference
+      Include="..\..\..\TcoCore\src\TcoCoreConnector\TcoCoreConnector.csproj"
+    />
+    <ProjectReference
+      Include="..\..\..\TcoIo\src\TcoIoConnector\TcoIoConnector.csproj"
+    />
 
   </ItemGroup>
   <ItemGroup>
-    <Content Include="_meta\TcoAimTtiPowerSupply.library" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="_meta\TcoAimTtiPowerSupply.json" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="_meta\version.info" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
+    <Content
+      Include="_meta\TcoAimTtiPowerSupply.library"
+      IncludeInPackage="true"
+      Pack="true"
+      PackagePath="lib"
+      CopyToOutputDirectory="PreserveNewest"
+    />
+    <Content
+      Include="_meta\TcoAimTtiPowerSupply.json"
+      IncludeInPackage="true"
+      Pack="true"
+      PackagePath="lib"
+      CopyToOutputDirectory="PreserveNewest"
+    />
+    <Content
+      Include="_meta\version.info"
+      IncludeInPackage="true"
+      Pack="true"
+      PackagePath="lib"
+      CopyToOutputDirectory="PreserveNewest"
+    />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Localizations.Designer.cs">

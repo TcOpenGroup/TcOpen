@@ -32,9 +32,9 @@ namespace TcoIoUnitTests
         //[TestCase(50)]
         //[Timeout(1000)]
         //public void WaitForModuloTest(short modulo)
-        //{            
-        //    //-- Act            
-        //    sut.Run(a => sut.WaitForModuloTest(modulo));            
+        //{
+        //    //-- Act
+        //    sut.Run(a => sut.WaitForModuloTest(modulo));
         //}
     }
 }

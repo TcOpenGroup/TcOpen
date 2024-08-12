@@ -1,4 +1,3 @@
-using TcoElements;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -6,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using TcoElements;
 using TcOpen.Inxton.Local.Security;
 
 namespace Sandbox.TcoElements.Wpf
@@ -17,21 +17,26 @@ namespace Sandbox.TcoElements.Wpf
     {
         public App()
         {
-            TcOpen.Inxton.TcoAppDomain.Current.Builder
-                 .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter())
-                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get)
-                 .SetSecurity(TcOpen.Inxton.Local.Security.SecurityManager.CreateDefault());
+            TcOpen
+                .Inxton.TcoAppDomain.Current.Builder.SetUpLogger(
+                    new TcOpen.Inxton.Logging.SerilogAdapter()
+                )
+                .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get)
+                .SetSecurity(TcOpen.Inxton.Local.Security.SecurityManager.CreateDefault());
 
-            if(SecurityManager.Manager.UserRepository.Count == 0)
+            if (SecurityManager.Manager.UserRepository.Count == 0)
             {
-                SecurityManager.Manager.UserRepository.Create("default", new UserData("default", "", new string[] { "Administrator" }));
+                SecurityManager.Manager.UserRepository.Create(
+                    "default",
+                    new UserData("default", "", new string[] { "Administrator" })
+                );
             }
 
             TcoElementsTests.Entry.TcoElementsTests.Connector.ReadWriteCycleDelay = 75;
 
             System.Threading.Thread.Sleep(1000);
 
-            TcoElementsTests.Entry.TcoElementsTests.Connector.BuildAndStart();            
+            TcoElementsTests.Entry.TcoElementsTests.Connector.BuildAndStart();
         }
     }
 }

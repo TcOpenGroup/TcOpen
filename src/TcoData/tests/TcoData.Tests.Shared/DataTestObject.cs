@@ -1,6 +1,6 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using NUnit.Framework;
 using TcOpen.Inxton.Data;
 using Vortex.Connector;
 
@@ -32,14 +32,8 @@ namespace TcoDataUnitTests
         AllTypes allTypes = new AllTypes();
         public AllTypes AllTypes
         {
-            get
-            {
-                return allTypes;
-            }
-            set
-            {
-                allTypes = value;
-            }
+            get { return allTypes; }
+            set { allTypes = value; }
         }
 
         private List<string> _changes = new List<string>();
@@ -52,7 +46,6 @@ namespace TcoDataUnitTests
 
     public class AllTypes : IPlain
     {
-
         public AllTypes()
         {
             BoolMin = false;
@@ -93,7 +86,6 @@ namespace TcoDataUnitTests
 
             DoubleMin = double.MinValue;
             DoubleMax = double.MaxValue;
-
         }
 
         public bool BoolMin { get; set; }
@@ -116,7 +108,6 @@ namespace TcoDataUnitTests
 
         public uint UintMax { get; set; }
         public uint UintMin { get; set; }
-
 
         public long LongMax { get; set; }
         public long LongMin { get; set; }
@@ -149,7 +140,6 @@ namespace TcoDataUnitTests
         }
     }
 
-
     public class DataTestObjectAlteredStructure : IBrowsableDataObject
     {
         public DataTestObjectAlteredStructure()
@@ -178,14 +168,8 @@ namespace TcoDataUnitTests
         AllTypesAlteredStructure allTypes = new AllTypesAlteredStructure();
         public AllTypesAlteredStructure AllTypes
         {
-            get
-            {
-                return allTypes;
-            }
-            set
-            {
-                allTypes = value;
-            }
+            get { return allTypes; }
+            set { allTypes = value; }
         }
 
         private List<string> _changes = new List<string>();
@@ -198,7 +182,6 @@ namespace TcoDataUnitTests
 
     public class AllTypesAlteredStructure : IPlain
     {
-
         public AllTypesAlteredStructure()
         {
             BoolMin = false;
@@ -239,20 +222,13 @@ namespace TcoDataUnitTests
 
             DoubleMin = double.MinValue;
             DoubleMax = double.MaxValue;
-
         }
 
         AllTypes extraElement1 = new AllTypes();
         public AllTypes extraElement
         {
-            get
-            {
-                return extraElement1;
-            }
-            set
-            {
-                extraElement1 = value;
-            }
+            get { return extraElement1; }
+            set { extraElement1 = value; }
         }
 
         public bool BoolMin { get; set; }
@@ -275,7 +251,6 @@ namespace TcoDataUnitTests
 
         public uint UintMax { get; set; }
         public uint UintMin { get; set; }
-
 
         public long LongMax { get; set; }
         public long LongMin { get; set; }

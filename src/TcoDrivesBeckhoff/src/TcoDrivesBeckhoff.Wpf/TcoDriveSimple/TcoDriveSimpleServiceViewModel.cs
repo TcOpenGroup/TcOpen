@@ -7,19 +7,18 @@ using Vortex.Presentation.Wpf;
 
 namespace TcoDrivesBeckhoff
 {
-   
     public class TcoDriveSimpleServiceViewModel : RenderableViewModel
     {
-        public TcoDriveSimpleServiceViewModel()
-        {
-
-        }
+        public TcoDriveSimpleServiceViewModel() { }
 
         public TcoDriveSimple Component { get; private set; }
 
-        public override object Model { get => this.Component; set { this.Component = value as TcoDriveSimple; } }
+        public override object Model
+        {
+            get => this.Component;
+            set { this.Component = value as TcoDriveSimple; }
+        }
     }
 
-    public class TcoDriveSimpleViewModel : TcoDriveSimpleServiceViewModel
-    { }
+    public class TcoDriveSimpleViewModel : TcoDriveSimpleServiceViewModel { }
 }

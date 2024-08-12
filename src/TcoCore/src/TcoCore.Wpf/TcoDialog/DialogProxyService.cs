@@ -17,29 +17,28 @@ namespace TcOpen.Inxton.TcoCore.Wpf
     /// </summary>
     public class DialogProxyServiceWpf : DialogProxyServiceBase
     {
-        protected DialogProxyServiceWpf(IEnumerable<IVortexObject> observedObjects) : base(observedObjects)
+        protected DialogProxyServiceWpf(IEnumerable<IVortexObject> observedObjects)
+            : base(observedObjects)
         {
             LazyRenderer.Get.CreatePresentation("Any", new object()); // I need this to load reference assemblies prior to query View and ViewModels.
         }
 
-        protected async override void Queue(IsDialog dialog)
+        protected override async void Queue(IsDialog dialog)
         {
             dialog.Read();
 
-            await TcoAppDomain.Current.Dispatcher.InvokeAsync(
-                () =>
-                {                                                                                                   
-                    var view = Renderer.Get.GetView("Dialog", dialog.GetType());
-                    var viewInstance = Activator.CreateInstance(view);
-                    var viewModel = Renderer.Get.GetViewModel("Dialog", dialog.GetType(), dialog);
-                    var win = viewInstance as Window;
-                    if (win != null)
-                    {
-                        win.DataContext = viewModel;
-                        win.Show();
-                    }                                        
+            await TcoAppDomain.Current.Dispatcher.InvokeAsync(() =>
+            {
+                var view = Renderer.Get.GetView("Dialog", dialog.GetType());
+                var viewInstance = Activator.CreateInstance(view);
+                var viewModel = Renderer.Get.GetViewModel("Dialog", dialog.GetType(), dialog);
+                var win = viewInstance as Window;
+                if (win != null)
+                {
+                    win.DataContext = viewModel;
+                    win.Show();
                 }
-                );
+            });
         }
 
         /// <summary>
@@ -52,5 +51,5 @@ namespace TcOpen.Inxton.TcoCore.Wpf
             var dialogProxyService = new DialogProxyServiceWpf(observedObjects);
             return dialogProxyService;
         }
-}
+    }
 }

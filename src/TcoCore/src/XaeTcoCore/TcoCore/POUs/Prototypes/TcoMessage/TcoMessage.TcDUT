@@ -2,97 +2,92 @@
 <TcPlcObject Version="1.1.0.1">
   <DUT Name="TcoMessage" Id="{e9b448a7-6b4a-48a3-9608-2d9ae9cca91b}">
     <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Complete message details including time stamp, message text, message category, identity of the message provider, context cycle in which the message was posted.			
-		</summary>				
-	</docu>	
+    <docu>
+        <summary>
+            Complete message details including time stamp, message text, message category, identity of the message provider, context cycle in which the message was posted.
+        </summary>
+    </docu>
 ~*)
 TYPE TcoMessage :
 STRUCT
-(*~
-	<docu>
-		<summary>
-			Time when the message was posted.
-		</summary>				
-	</docu>	
+    (*~
+    <docu>
+        <summary>
+            Time when the message was posted.
+        </summary>
+    </docu>
 ~*)
-	{attribute clr [ReadOnly()]}
-	TimeStamp : DT;
-(*~
-	<docu>
-		<summary>
-			Text of the message.
-		</summary>				
-	</docu>	
+    {attribute clr [ReadOnly()]}
+    TimeStamp : DT;
+    (*~
+    <docu>
+        <summary>
+            Text of the message.
+        </summary>
+    </docu>
 ~*)
-	{attribute clr [ReadOnly()]}		
-	Text : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
-(*~
-	<docu>
-		<summary>
-			Identity of the TcoObject that posted this message. 
-		</summary>				
-	</docu>	
+    {attribute clr [ReadOnly()]}
+    Text : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
+    (*~
+    <docu>
+        <summary>
+            Identity of the TcoObject that posted this message.
+        </summary>
+    </docu>
 ~*)
-	{attribute clr [ReadOnly()]}	
-	Identity : ULINT;	
-(*~
-	<docu>
-		<summary>
-			Message category of this message. See <see cref="TcoCore.eMessageCategory"/> for detailed informations. 
-		</summary>				
-	</docu>	
+    {attribute clr [ReadOnly()]}
+    Identity : ULINT;
+    (*~
+    <docu>
+        <summary>
+            Message category of this message. See <see cref="TcoCore.eMessageCategory"/> for detailed informations.
+        </summary>
+    </docu>
 ~*)
-	Category : eMessageCategory;
-(*~
-	<docu>
-		<summary>
-			Context cycle in which the message was posted.
-		</summary>				
-	</docu>	
+    Category : eMessageCategory;
+    (*~
+    <docu>
+        <summary>
+            Context cycle in which the message was posted.
+        </summary>
+    </docu>
 ~*)
-	{attribute clr [ReadOnly()]}
-	Cycle : ULINT;
-	
-(*~
-	<docu>
-		<summary>
-			Count of messages of the object in the current cycle.
-		</summary>				
-	</docu>	
+    {attribute clr [ReadOnly()]}
+    Cycle : ULINT;
+    (*~
+    <docu>
+        <summary>
+            Count of messages of the object in the current cycle.
+        </summary>
+    </docu>
 ~*)
-	{attribute clr [ReadOnly()]}
-	PerCycleCount : BYTE;
-
-(*~
-	<docu>
-		<summary>			
-			Indicates that the message is expected to be dequeed from the buffer.
-		</summary>				
-	</docu>	
-~*)	
-	ExpectDequeing : BOOL;
-	
-	(*~
-	<docu>
-		<summary>			
-			Indicates that the message must be persisted in the alarm view until acknowledged.
-		</summary>				
-	</docu>	
-	~*)	
-	Pinned : BOOL;
-	
-	(*~
-	<docu>
-		<summary>		
-			Stores message digest of this message text.
-		</summary>				
-	</docu>	
-	~*)
-	MessageDigest : DWORD;
+    {attribute clr [ReadOnly()]}
+    PerCycleCount : BYTE;
+    (*~
+    <docu>
+        <summary>
+            Indicates that the message is expected to be dequeed from the buffer.
+        </summary>
+    </docu>
+~*)
+    ExpectDequeing : BOOL;
+    (*~
+    <docu>
+        <summary>
+            Indicates that the message must be persisted in the alarm view until acknowledged.
+        </summary>
+    </docu>
+    ~*)
+    Pinned : BOOL;
+    (*~
+    <docu>
+        <summary>
+            Stores message digest of this message text.
+        </summary>
+    </docu>
+    ~*)
+    MessageDigest : DWORD;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

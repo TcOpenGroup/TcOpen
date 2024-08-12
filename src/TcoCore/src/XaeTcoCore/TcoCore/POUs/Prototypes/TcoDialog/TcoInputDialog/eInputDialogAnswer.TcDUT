@@ -3,17 +3,15 @@
   <DUT Name="eInputDialogAnswer" Id="{e7e9fdd4-4c32-0955-1739-3d58915dd09a}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE
-    eInputDialogAnswer :
-    (
-        NoAnswer := 0,
-        OK       := 10,
-        Yes      := 20,
-        No       := 30,
-        Cancel   := 40,
-		Invoked	  :=50
-    );
-END_TYPE
-]]></Declaration>
+TYPE eInputDialogAnswer :
+(
+    NoAnswer := 0,
+    OK := 10,
+    Yes := 20,
+    No := 30,
+    Cancel := 40,
+    Invoked := 50
+);
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

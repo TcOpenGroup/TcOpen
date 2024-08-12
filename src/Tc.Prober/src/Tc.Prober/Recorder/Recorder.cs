@@ -1,9 +1,10 @@
 ﻿namespace Tc.Prober.Recorder
 {
-
     using Vortex.Connector;
 
-    public class Recorder<T, P> where T : IVortexObject, new() where P : IPlain, new()
+    public class Recorder<T, P>
+        where T : IVortexObject, new()
+        where P : IPlain, new()
     {
         public Recorder(T obj, RecorderModeEnum mode, long minUniqueFrames = 10)
         {
@@ -23,14 +24,8 @@
             }
         }
 
-        public RecorderModeEnum Mode
-        {
-            get;
-        }
+        public RecorderModeEnum Mode { get; }
 
-        public IRecorder Actor
-        {
-            get;
-        }
+        public IRecorder Actor { get; }
     }
 }

@@ -7,17 +7,15 @@ END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
-	{attribute addProperty Name "<#Recipe#>"}
-	Recipe:STRING;
-	{attribute addProperty Name "<#Qantity#>"}
-	RequiredQuantity:INT;
-	{attribute addProperty Name "<#Timeout#>"}
-	Timeout:DATE_AND_TIME;
-	{attribute addProperty Name "<#Exclude#>"}
-	Exclude:BOOL;
-
-END_VAR
-]]></Declaration>
+    {attribute addProperty Name "<#Recipe#>"}
+    Recipe : STRING;
+    {attribute addProperty Name "<#Qantity#>"}
+    RequiredQuantity : INT;
+    {attribute addProperty Name "<#Timeout#>"}
+    Timeout : DATE_AND_TIME;
+    {attribute addProperty Name "<#Exclude#>"}
+    Exclude : BOOL;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>

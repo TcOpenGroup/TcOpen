@@ -1,28 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="TcoMitsubishiRoboticsTask" Id="{4bc9e5d9-fc9c-073b-37b5-c8567e159965}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC ABSTRACT TcoMitsubishiRoboticsTask EXTENDS TcoCore.TcoTask 
+    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC ABSTRACT TcoMitsubishiRoboticsTask EXTENDS TcoCore.TcoTask
 VAR_IN_OUT
-    inoConfig 	: TcoMitsubishiRobotics_Config_v_1_x_x;
-	inoControl 	: TcoMitsubishiRobotics_Control_v_1_x_x;
-	inoStatus 	: TcoMitsubishiRobotics_Status_v_1_x_x;	
+    inoConfig : TcoMitsubishiRobotics_Config_v_1_x_x;
+    inoControl : TcoMitsubishiRobotics_Control_v_1_x_x;
+    inoStatus : TcoMitsubishiRobotics_Status_v_1_x_x;
 END_VAR
 VAR
-	_errorMessage:TcoCore.TcoMessenger(THIS^);
-    {attribute 'hide'} 
-	_progress : INT := 0;
-    {attribute 'hide'} 
-	_infoTimer :  TON;
-    {attribute 'hide'} 
-	_errorTimer :  TON;
-	{attribute 'hide'} 
-	_timer :  TON;
-    {attribute 'hide'} 
-	_varInfo : __SYSTEM.VAR_INFO;
-    {attribute 'hide'} 
-	_sb : TcoCore.StringBuilder;
-	{attribute 'hide'}
-	_blink:TcoUtilities.TcoBlinker(THIS^);
+    _errorMessage : TcoCore.TcoMessenger(THIS^);
+    {attribute 'hide'}
+    _progress : INT := 0;
+    {attribute 'hide'}
+    _infoTimer : TON;
+    {attribute 'hide'}
+    _errorTimer : TON;
+    {attribute 'hide'}
+    _timer : TON;
+    {attribute 'hide'}
+    _varInfo : __SYSTEM.VAR_INFO;
+    {attribute 'hide'}
+    _sb : TcoCore.StringBuilder;
+    {attribute 'hide'}
+    _blink : TcoUtilities.TcoBlinker(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -30,34 +30,34 @@ END_VAR]]></Declaration>
     <Method Name="CallTimers" Id="{5af2263b-c265-0cfd-3eb1-f886f01e6024}">
       <Declaration><![CDATA[METHOD CallTimers
 VAR_INPUT
-	inValue : BOOL;
-END_VAR
-]]></Declaration>
+    inValue : BOOL;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoConfig) AND THIS^.inoConfig.ErrorTime <> T#0S OR NOT inValue THEN  
-_errorTimer(IN := inValue, PT := THIS^.inoConfig.ErrorTime);
+        <ST><![CDATA[IF __ISVALIDREF(inoConfig) AND THIS^.inoConfig.ErrorTime <> T#0S OR NOT inValue THEN
+    _errorTimer(IN := inValue, PT := THIS^.inoConfig.ErrorTime);
 END_IF;
-IF  __ISVALIDREF(inoConfig) AND THIS^.inoConfig.InfoTime <>T#0S OR NOT inValue THEN  
-_infoTimer(IN := inValue, PT := THIS^.inoConfig.InfoTime);
+
+IF __ISVALIDREF(inoConfig) AND THIS^.inoConfig.InfoTime <> T#0S OR NOT inValue THEN
+    _infoTimer(IN := inValue, PT := THIS^.inoConfig.InfoTime);
 END_IF;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{a070ce04-070e-0cf2-13a0-a92f36f03e25}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
-			<para>
-				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
-			</para>
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+            <para>
+                See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+            </para>
+        </summary>
+    </docu>
 ~*)
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.Restore();
 _progress := 0;
-_timer(In:=FALSE);
+_timer(In := FALSE);
 CallTimers(FALSE);
 Messenger.UnPin();
 _errorMessage.UnPin();]]></ST>

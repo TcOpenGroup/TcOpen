@@ -1,12 +1,12 @@
-using NUnit.Framework;
-using Raven.Embedded;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using NUnit.Framework;
+using Raven.Embedded;
 using TcOpen.Inxton.RavenDb;
 using TcOpen.Inxton.RepositoryDataSet;
-using System.Collections.Generic;
-using System;
 
 namespace TcOpen.Inxton.RepositoryDataSetTests
 {
@@ -17,33 +17,48 @@ namespace TcOpen.Inxton.RepositoryDataSetTests
         [SetUp]
         public void Setup()
         {
-            _productionPlanHandler = RepositoryDataSetHandler<ProductionItem>.CreateSet(new RavenDbRepository<EntitySet<ProductionItem>>
-            (new RavenDbRepositorySettings<EntitySet<ProductionItem>>(new string[] { "http://127.0.0.1:8080" }, "ProductionPlanTest", "", "")));
-            _productionPlanHandler.Repository.OnCreate = (id, data) => { data._Created = DateTime.Now; data._Modified = DateTime.Now; };
-            _productionPlanHandler.Repository.OnUpdate = (id, data) => { data._Modified = DateTime.Now; };
+            _productionPlanHandler = RepositoryDataSetHandler<ProductionItem>.CreateSet(
+                new RavenDbRepository<EntitySet<ProductionItem>>(
+                    new RavenDbRepositorySettings<EntitySet<ProductionItem>>(
+                        new string[] { "http://127.0.0.1:8080" },
+                        "ProductionPlanTest",
+                        "",
+                        ""
+                    )
+                )
+            );
+            _productionPlanHandler.Repository.OnCreate = (id, data) =>
+            {
+                data._Created = DateTime.Now;
+                data._Modified = DateTime.Now;
+            };
+            _productionPlanHandler.Repository.OnUpdate = (id, data) =>
+            {
+                data._Modified = DateTime.Now;
+            };
             //remove all records
-            var records = _productionPlanHandler.Repository.Queryable.Where(p => true).Select(p => p._EntityId).ToList();
+            var records = _productionPlanHandler
+                .Repository.Queryable.Where(p => true)
+                .Select(p => p._EntityId)
+                .ToList();
             records.ForEach(p => _productionPlanHandler.Repository.Delete(p));
-
-
-
-
         }
-
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-
-            EmbeddedServer.Instance.StartServer(new ServerOptions
-            {
-                DataDirectory = Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).Directory.FullName, "tmp", "data"),
-                AcceptEula = true,
-                ServerUrl = "http://127.0.0.1:8080",
-            });
-
-
-
+            EmbeddedServer.Instance.StartServer(
+                new ServerOptions
+                {
+                    DataDirectory = Path.Combine(
+                        new FileInfo(Assembly.GetExecutingAssembly().Location).Directory.FullName,
+                        "tmp",
+                        "data"
+                    ),
+                    AcceptEula = true,
+                    ServerUrl = "http://127.0.0.1:8080",
+                }
+            );
         }
 
         [Test]
@@ -51,90 +66,81 @@ namespace TcOpen.Inxton.RepositoryDataSetTests
         {
             var setId = "testId";
 
-
-
-
             EntitySet<ProductionItem> entitySet = new EntitySet<ProductionItem>();
 
             _productionPlanHandler.Create(setId, entitySet);
 
-
-
-
-            var setIdVerif = _productionPlanHandler.Repository.Queryable.Where(p => true).Select(p => p._EntityId).First();
+            var setIdVerif = _productionPlanHandler
+                .Repository.Queryable.Where(p => true)
+                .Select(p => p._EntityId)
+                .First();
             Assert.AreEqual(1, _productionPlanHandler.Repository.Queryable.Count());
             Assert.AreEqual(setId, setIdVerif);
         }
 
-
         [Test]
         [TestCase(3)]
         [TestCase(5)]
-
         public void create_single_set_data(int noOfTests)
         {
-
-
             foreach (var item in Enumerable.Range(1, noOfTests))
             {
-
                 var setId = "testId" + item.ToString();
-
-
 
                 EntitySet<ProductionItem> entitySet = new EntitySet<ProductionItem>();
 
                 _productionPlanHandler.Create(setId, entitySet);
 
-
-
-
-                var setIdVerif = _productionPlanHandler.Repository.Queryable.Where(p => p._EntityId == setId).Select(p => p._EntityId).First();
+                var setIdVerif = _productionPlanHandler
+                    .Repository.Queryable.Where(p => p._EntityId == setId)
+                    .Select(p => p._EntityId)
+                    .First();
 
                 Assert.AreEqual(setId, setIdVerif);
-
             }
             Assert.AreEqual(noOfTests, _productionPlanHandler.Repository.Queryable.Count());
-
         }
 
         [Test]
         [Repeat(5)]
-
         public void create_single_set_data_many_times()
         {
             var setId = "testId";
-
-
 
             EntitySet<ProductionItem> entitySet = new EntitySet<ProductionItem>();
 
             _productionPlanHandler.Create(setId, entitySet);
 
-
-
-
-            var setIdVerif = _productionPlanHandler.Repository.Queryable.Where(p => true).Select(p => p._EntityId).First();
+            var setIdVerif = _productionPlanHandler
+                .Repository.Queryable.Where(p => true)
+                .Select(p => p._EntityId)
+                .First();
             Assert.AreEqual(1, _productionPlanHandler.Repository.Queryable.Count());
             Assert.AreEqual(setId, setIdVerif);
         }
-
 
         [Test]
         public void update_single_set_data()
         {
             var setId = "testId";
 
-
-
             EntitySet<ProductionItem> entitySet = new EntitySet<ProductionItem>();
 
             _productionPlanHandler.Create(setId, entitySet);
 
-            var created = _productionPlanHandler.Repository.Queryable.Where(p => true).Select(p => p._Created).First();
-            var modified = _productionPlanHandler.Repository.Queryable.Where(p => true).Select(p => p._Modified).First();
+            var created = _productionPlanHandler
+                .Repository.Queryable.Where(p => true)
+                .Select(p => p._Created)
+                .First();
+            var modified = _productionPlanHandler
+                .Repository.Queryable.Where(p => true)
+                .Select(p => p._Modified)
+                .First();
 
-            var collection = _productionPlanHandler.Repository.Queryable.Where(p => true).Select(p => p.Items).First();
+            var collection = _productionPlanHandler
+                .Repository.Queryable.Where(p => true)
+                .Select(p => p.Items)
+                .First();
 
             Assert.AreEqual(0, collection.Count);
 
@@ -142,9 +148,18 @@ namespace TcOpen.Inxton.RepositoryDataSetTests
 
             _productionPlanHandler.Update(setId, entitySet);
 
-            var createdUpdated = _productionPlanHandler.Repository.Queryable.Where(p => true).Select(p => p._Created).First();
-            var modifiedUpdated = _productionPlanHandler.Repository.Queryable.Where(p => true).Select(p => p._Modified).First();
-            var collectionUpdated = _productionPlanHandler.Repository.Queryable.Where(p => true).Select(p => p.Items).First();
+            var createdUpdated = _productionPlanHandler
+                .Repository.Queryable.Where(p => true)
+                .Select(p => p._Created)
+                .First();
+            var modifiedUpdated = _productionPlanHandler
+                .Repository.Queryable.Where(p => true)
+                .Select(p => p._Modified)
+                .First();
+            var collectionUpdated = _productionPlanHandler
+                .Repository.Queryable.Where(p => true)
+                .Select(p => p.Items)
+                .First();
 
             Assert.AreEqual(created, created);
             Assert.AreNotEqual(modified, modifiedUpdated);
@@ -157,16 +172,23 @@ namespace TcOpen.Inxton.RepositoryDataSetTests
         {
             var setId = "testId";
 
-
-
             EntitySet<ProductionItem> entitySet = new EntitySet<ProductionItem>();
 
             _productionPlanHandler.Create(setId, entitySet);
 
-            var created = _productionPlanHandler.Repository.Queryable.Where(p => true).Select(p => p._Created).First();
-            var modified = _productionPlanHandler.Repository.Queryable.Where(p => true).Select(p => p._Modified).First();
+            var created = _productionPlanHandler
+                .Repository.Queryable.Where(p => true)
+                .Select(p => p._Created)
+                .First();
+            var modified = _productionPlanHandler
+                .Repository.Queryable.Where(p => true)
+                .Select(p => p._Modified)
+                .First();
 
-            var collection = _productionPlanHandler.Repository.Queryable.Where(p => true).Select(p => p.Items).First();
+            var collection = _productionPlanHandler
+                .Repository.Queryable.Where(p => true)
+                .Select(p => p.Items)
+                .First();
 
             Assert.AreEqual(0, collection.Count);
 
@@ -174,15 +196,25 @@ namespace TcOpen.Inxton.RepositoryDataSetTests
 
             _productionPlanHandler.Update(setId, entitySet);
 
-            var createdUpdated = _productionPlanHandler.Repository.Queryable.Where(p => true).Select(p => p._Created).First();
-            var modifiedUpdated = _productionPlanHandler.Repository.Queryable.Where(p => true).Select(p => p._Modified).First();
-            var collectionUpdated = _productionPlanHandler.Repository.Queryable.Where(p => true).Select(p => p.Items).First();
+            var createdUpdated = _productionPlanHandler
+                .Repository.Queryable.Where(p => true)
+                .Select(p => p._Created)
+                .First();
+            var modifiedUpdated = _productionPlanHandler
+                .Repository.Queryable.Where(p => true)
+                .Select(p => p._Modified)
+                .First();
+            var collectionUpdated = _productionPlanHandler
+                .Repository.Queryable.Where(p => true)
+                .Select(p => p.Items)
+                .First();
 
             Assert.AreEqual(created, created);
             Assert.AreNotEqual(modified, modifiedUpdated);
             Assert.AreEqual(1, collectionUpdated.Count);
         }
     }
+
     public class ProductionItem : IDataSetItems
     {
         private string key;
@@ -192,11 +224,7 @@ namespace TcOpen.Inxton.RepositoryDataSetTests
         /// </summary>
         public string Key
         {
-            get
-            {
-                return key;
-            }
-
+            get { return key; }
             set
             {
                 if (key == value)
@@ -205,14 +233,13 @@ namespace TcOpen.Inxton.RepositoryDataSetTests
                 }
 
                 key = value;
-
             }
         }
 
         private int reqCount;
 
         /// <summary>
-        /// Gets or sets required Ccounter value 
+        /// Gets or sets required Ccounter value
         /// </summary>
         public int RequiredCount
         {
@@ -225,11 +252,11 @@ namespace TcOpen.Inxton.RepositoryDataSetTests
                 }
 
                 reqCount = value;
-
             }
         }
 
         private int actualCount;
+
         /// <summary>
         /// Gets or sets actual counter value.
         /// </summary>
@@ -249,9 +276,8 @@ namespace TcOpen.Inxton.RepositoryDataSetTests
 
         private string description;
 
-
         /// <summary>
-        /// gets or sets additional information. 
+        /// gets or sets additional information.
         /// </summary>
         public string Description
         {
@@ -264,18 +290,7 @@ namespace TcOpen.Inxton.RepositoryDataSetTests
                 }
 
                 description = value;
-
             }
         }
-
-    
-
-
-
-
-
-
-
-
     }
 }

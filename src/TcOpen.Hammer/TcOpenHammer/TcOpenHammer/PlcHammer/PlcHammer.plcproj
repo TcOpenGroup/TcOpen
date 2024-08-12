@@ -113,6 +113,32 @@
     <PlaceholderReference Include="Tc2_System">
       <DefaultResolution>Tc2_System, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_System</Namespace>
+      <Parameters>
+        <Parameter ListName="PARAM" xmlns="">
+          <Key>TABLE_UPPER_BOUND</Key>
+          <Value>15</Value>
+        </Parameter>
+        <Parameter ListName="PARAM" xmlns="">
+          <Key>STRING_LENGTH_EXP</Key>
+          <Value>255</Value>
+        </Parameter>
+        <Parameter ListName="PARAM" xmlns="">
+          <Key>STRING_LENGTH_ADDRESS</Key>
+          <Value>20</Value>
+        </Parameter>
+        <Parameter ListName="PARAM" xmlns="">
+          <Key>STRING_LENGTH_COMMENT</Key>
+          <Value>255</Value>
+        </Parameter>
+        <Parameter ListName="PARAM" xmlns="">
+          <Key>STRING_LENGTH_OUTSTRING</Key>
+          <Value>255</Value>
+        </Parameter>
+        <Parameter ListName="PARAM" xmlns="">
+          <Key>TABLE_SHOW_VALID_ITEMS</Key>
+          <Value>FALSE</Value>
+        </Parameter>
+      </Parameters>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc3_Module">
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
@@ -139,12 +165,15 @@
       <Namespace>TcoInspectors</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcoIo">
-      <DefaultResolution>TcoIo, 1.19.1.1780 (Vortex.Library)</DefaultResolution>
+      <DefaultResolution>TcoIo, 0.6.0.913 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoIo</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="TcoPneumatics">
       <DefaultResolution>TcoPneumatics, 0.6.0.913 (Vortex.Library)</DefaultResolution>
-      <Namespace>TcoPneumatics</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="TcoUtilities">
+      <DefaultResolution>TcoUtilities, 0.6.0.913 (Vortex.Library)</DefaultResolution>
+      <Namespace>TcoUtilities</Namespace>
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
@@ -169,10 +198,13 @@
       <Resolution>TcoInspectors, 0.6.0.913 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="TcoIo">
-      <Resolution>TcoIo, 1.19.1.1780 (Vortex.Library)</Resolution>
+      <Resolution>TcoIo, 0.6.0.913 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="TcoPneumatics">
       <Resolution>TcoPneumatics, 0.6.0.913 (Vortex.Library)</Resolution>
+    </PlaceholderResolution>
+    <PlaceholderResolution Include="TcoUtilities">
+      <Resolution>TcoUtilities, 0.6.0.913 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>

@@ -8,7 +8,10 @@ namespace TcoInspectors
 {
     public partial class TcoDigitalInspector : IsInspector
     {
-        public eInspectorResult ResultAsEnum { get { return (eInspectorResult)this._data.Result.Synchron; } }
+        public eInspectorResult ResultAsEnum
+        {
+            get { return (eInspectorResult)this._data.Result.Synchron; }
+        }
 
         public IsInspectorData InspectorData => this._data;
     }

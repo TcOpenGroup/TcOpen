@@ -2,7 +2,6 @@ using System;
 
 namespace Grafana.Backend.Model
 {
-
     /// Represents a request to a time range.  As described by the SimpleJson
     /// plugin docs, the following JSON represents this object:
     ///   {
@@ -13,12 +12,14 @@ namespace Grafana.Backend.Model
     ///       "to": "now"
     ///     }
     ///   }
-    public sealed class TimeRange {
-    public DateTimeOffset From { get; set; }
-    public DateTimeOffset To { get; set; }
+    public sealed class TimeRange
+    {
+        public DateTimeOffset From { get; set; }
+        public DateTimeOffset To { get; set; }
 
-    public TimeSpan AsTimeSpan() {
-      return To - From;
+        public TimeSpan AsTimeSpan()
+        {
+            return To - From;
+        }
     }
-  }
 }

@@ -4,12 +4,18 @@
     <TargetFrameworks>net48;net5.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <IsPackable>false</IsPackable>  	
-  </PropertyGroup> 
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Wpf\TcOpen.Inxton.TcoCognexVision.Wpf\TcOpen.Inxton.TcoCognexVision.Wpf.csproj" />
-    <ProjectReference Include="..\TcoCognexVisionTestsConnector\TcoCognexVisionTestsConnector.csproj" />
-    <ProjectReference Include="..\..\..\TcoInspectors\src\Wpf\TcOpen.Inxton.TcoInspectors.Wpf\TcOpen.Inxton.TcoInspectors.Wpf.csproj" />
+    <ProjectReference
+      Include="..\..\src\Wpf\TcOpen.Inxton.TcoCognexVision.Wpf\TcOpen.Inxton.TcoCognexVision.Wpf.csproj"
+    />
+    <ProjectReference
+      Include="..\TcoCognexVisionTestsConnector\TcoCognexVisionTestsConnector.csproj"
+    />
+    <ProjectReference
+      Include="..\..\..\TcoInspectors\src\Wpf\TcOpen.Inxton.TcoInspectors.Wpf\TcOpen.Inxton.TcoInspectors.Wpf.csproj"
+    />
 
   </ItemGroup>
 </Project>

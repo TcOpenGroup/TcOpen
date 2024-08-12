@@ -7,13 +7,13 @@ namespace TcOpen.Inxton.Instructor
     public delegate void ChangeInstructionDelegate(string Key);
 
     public interface IInstructionControlProvider
-    {        
+    {
         IEnumerable<InstructionItem> InstructionSteps { get; }
 
         string ProviderId { get; }
 
-        void UpdateTemplate();        
+        void UpdateTemplate();
 
         ChangeInstructionDelegate ChangeInstruction { get; set; }
-    } 
+    }
 }

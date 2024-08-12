@@ -11,16 +11,15 @@
 {attribute addProperty Size "29"}
 TYPE AX5103_1BD22F51 EXTENDS TcoIo.EtcSlaveBoxBase_77A0E4A7 :
 STRUCT
-	{attribute addProperty Name "AT_x"}
-	AT_x : AT_x_4EC2E768;
-	{attribute addProperty Name "MDT"}
-	MDT : MDT_864618EC;
-	{attribute addProperty Name "WcState"}
-	WcState : TcoIo.WcState_9091E0EB;
-	{attribute addProperty Name "InfoData"}
-	InfoData : InfoData_F60A43AC;
+    {attribute addProperty Name "AT_x"}
+    AT_x : AT_x_4EC2E768;
+    {attribute addProperty Name "MDT"}
+    MDT : MDT_864618EC;
+    {attribute addProperty Name "WcState"}
+    WcState : TcoIo.WcState_9091E0EB;
+    {attribute addProperty Name "InfoData"}
+    InfoData : InfoData_F60A43AC;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

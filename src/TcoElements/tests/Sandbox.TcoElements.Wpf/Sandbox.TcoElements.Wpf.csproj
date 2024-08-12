@@ -5,9 +5,13 @@
     <UseWPF>true</UseWPF>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 	<IsPackable>false</IsPackable>
-  </PropertyGroup> 
+  </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Wpf\TcoElements.Wpf\TcOpen.Inxton.TcoElements.Wpf.csproj" />
-    <ProjectReference Include="..\TcoElementsTestsConnector\TcoElementsTestsConnector.csproj" />
+    <ProjectReference
+      Include="..\..\src\Wpf\TcoElements.Wpf\TcOpen.Inxton.TcoElements.Wpf.csproj"
+    />
+    <ProjectReference
+      Include="..\TcoElementsTestsConnector\TcoElementsTestsConnector.csproj"
+    />
   </ItemGroup>
 </Project>

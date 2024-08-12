@@ -8,10 +8,9 @@
 {attribute addProperty Size "1"}
 TYPE PM_Outputs_Channel_E5FBDE30 EXTENDS TcoIo.OutputBase_10CEE7DE :
 STRUCT
-	{attribute addProperty Name "Index"}
-	Index AT %Q* : USINT;
+    {attribute addProperty Name "Index"}
+    Index AT %Q* : USINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -3,27 +3,30 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-
 namespace TcoIo.Converters.Utilities
 {
     public static class TextBlockUtils
     {
         private static Size MeasureString(TextBlock textBlock)
         {
-
             var formattedText = new FormattedText(
                 textBlock.Text,
                 CultureInfo.CurrentCulture,
                 FlowDirection.LeftToRight,
-                new Typeface(textBlock.FontFamily, textBlock.FontStyle, textBlock.FontWeight, textBlock.FontStretch),
+                new Typeface(
+                    textBlock.FontFamily,
+                    textBlock.FontStyle,
+                    textBlock.FontWeight,
+                    textBlock.FontStretch
+                ),
                 textBlock.FontSize,
                 Brushes.Black,
                 new NumberSubstitution(),
-                1);
+                1
+            );
 
             return new Size(formattedText.Width, formattedText.Height);
         }
-
 
         public static double UpdateFontSizeToFitTheTextBlockMaxWidth(TextBlock textBlock)
         {
@@ -57,16 +60,21 @@ namespace TcoIo.Converters.Utilities
 
         private static Size MeasureString(TextBox textBox)
         {
-
             var formattedText = new FormattedText(
                 textBox.Text,
                 CultureInfo.CurrentCulture,
                 FlowDirection.LeftToRight,
-                new Typeface(textBox.FontFamily, textBox.FontStyle, textBox.FontWeight, textBox.FontStretch),
+                new Typeface(
+                    textBox.FontFamily,
+                    textBox.FontStyle,
+                    textBox.FontWeight,
+                    textBox.FontStretch
+                ),
                 textBox.FontSize,
                 Brushes.Black,
                 new NumberSubstitution(),
-                1);
+                1
+            );
 
             return new Size(formattedText.Width, formattedText.Height);
         }
@@ -82,7 +90,7 @@ namespace TcoIo.Converters.Utilities
 
                 if (size.Width > width)
                 {
-                    double fontSize = (width - 5 ) / size.Width * origFontSize;
+                    double fontSize = (width - 5) / size.Width * origFontSize;
                     //just to check the final dims after font change during debug
                     //TextBox textBox2 = textBox as TextBox;
                     //textBox2.FontSize = fontSize;

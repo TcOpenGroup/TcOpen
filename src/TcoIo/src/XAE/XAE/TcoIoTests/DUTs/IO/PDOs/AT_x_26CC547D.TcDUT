@@ -8,12 +8,11 @@
 {attribute addProperty Size "6"}
 TYPE AT_x_26CC547D EXTENDS TcoIo.InputBase_8311D824 :
 STRUCT
-	{attribute addProperty Name "Drive_status_word"}
-	Drive_status_word AT %I* : UINT;
-	{attribute addProperty Name "Position_feedback_value_1"}
-	Position_feedback_value_1 AT %I* : DINT;
+    {attribute addProperty Name "Drive_status_word"}
+    Drive_status_word AT %I* : UINT;
+    {attribute addProperty Name "Position_feedback_value_1"}
+    Position_feedback_value_1 AT %I* : DINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

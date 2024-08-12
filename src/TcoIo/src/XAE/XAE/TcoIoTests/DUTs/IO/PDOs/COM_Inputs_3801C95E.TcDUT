@@ -8,12 +8,11 @@
 {attribute addProperty Size "30"}
 TYPE COM_Inputs_3801C95E EXTENDS TcoIo.InputBase_8311D824 :
 STRUCT
-	{attribute addProperty Name "Status"}
-	Status AT %I* : Status_3D84275F;
-	{attribute addProperty Name "Data_In"}
-	Data_In AT %I* : ARRAY[0..21] OF USINT;
+    {attribute addProperty Name "Status"}
+    Status AT %I* : Status_3D84275F;
+    {attribute addProperty Name "Data_In"}
+    Data_In AT %I* : ARRAY[0..21] OF USINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

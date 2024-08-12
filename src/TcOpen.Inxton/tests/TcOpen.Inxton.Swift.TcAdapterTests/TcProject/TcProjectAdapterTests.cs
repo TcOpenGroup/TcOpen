@@ -1,12 +1,12 @@
-﻿using NUnit.Framework;
-using TcOpen.Inxton.Swift.TcAdapter.TcProject;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using System.Reflection;
-using System.IO;
+using NUnit.Framework;
+using TcOpen.Inxton.Swift.TcAdapter.TcProject;
 
 namespace TcOpen.Inxton.Swift.TcAdapter.TcProject.Tests
 {
@@ -14,6 +14,7 @@ namespace TcOpen.Inxton.Swift.TcAdapter.TcProject.Tests
     public class TcProjectAdapterTests
     {
         private string outputFiles;
+
         [OneTimeSetUp]
         public void OneTimeSetup()
         {

@@ -2,69 +2,58 @@
 <TcPlcObject Version="1.1.0.1">
   <POU Name="Example2WrappedComponent" Id="{992b16aa-5996-08d3-3377-023b260a31fd}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK Example2WrappedComponent EXTENDS TcoCore.TcoComponent
-
-
 VAR_OUTPUT
 END_VAR
 VAR
-	_config:Example2WrappedComponents_Config;
-	_status:Example2WrappedComponents_Status;
-	_control:Example2WrappedComponents_Control;
-
-    _components:Example2WrappedComponents:= (Parent := THIS^);
-	_resetTask:TcoCore.TcoTask(THIS^);
-	_restoreTask:TcoCore.TcoTask(THIS^);
-	Setpoint:INT;
-	{attribute clr [RenderIgnore()]}
-	SetpointDoNotRender:INT;
-END_VAR
-]]></Declaration>
+    _config : Example2WrappedComponents_Config;
+    _status : Example2WrappedComponents_Status;
+    _control : Example2WrappedComponents_Control;
+    _components : Example2WrappedComponents := (Parent := THIS^);
+    _resetTask : TcoCore.TcoTask(THIS^);
+    _restoreTask : TcoCore.TcoTask(THIS^);
+    Setpoint : INT;
+    {attribute clr [RenderIgnore()]}
+    SetpointDoNotRender : INT;
+END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[_resetTask();
-]]></ST>
+      <ST><![CDATA[_resetTask();]]></ST>
     </Implementation>
     <Property Name="Components" Id="{9fcedbea-fc77-02b2-16ec-9e0bdd9823aa}">
-      <Declaration><![CDATA[PROPERTY Components : REFERENCE TO Example2WrappedComponents
-]]></Declaration>
+      <Declaration><![CDATA[PROPERTY Components : REFERENCE TO Example2WrappedComponents]]></Declaration>
       <Get Name="Get" Id="{61152517-1bed-00a9-06c0-feb792c5dc17}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Components ref=_components;]]></ST>
+          <ST><![CDATA[Components ref= _components;]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Method Name="Restore" Id="{8a94f3f3-c577-000a-1849-760af77ad905}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.	
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+        </summary>
+    </docu>
 ~*)
-METHOD  Restore : ITcoRestorable
-
-
-]]></Declaration>
+METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="ServiceMode" Id="{cf14e6c5-6310-0cb0-0f9b-59e63192d14b}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-		    Custom service (manual, maintenance) logic.
-			This method must be implemented in derived class.
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Custom service (manual, maintenance) logic.
+            This method must be implemented in derived class.
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED  ServiceMode
-]]></Declaration>
+METHOD PROTECTED ServiceMode]]></Declaration>
       <Implementation>
         <ST><![CDATA[_components.piston.Service();
-_components.digitalInput .Service();
+_components.digitalInput.Service();
 _components.digitaOutput.Service();]]></ST>
       </Implementation>
     </Method>

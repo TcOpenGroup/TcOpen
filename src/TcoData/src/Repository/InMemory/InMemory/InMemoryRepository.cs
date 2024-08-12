@@ -11,48 +11,48 @@ namespace TcOpen.Inxton.Data.InMemory
     /// </note>
     /// </summary>
     /// <typeparam name="T">POCO twin type</typeparam>
-    public class InMemoryRepository<T> : RepositoryBase<T> where T : IBrowsableDataObject
+    public class InMemoryRepository<T> : RepositoryBase<T>
+        where T : IBrowsableDataObject
     {
         /// <summary>
         /// Creates new instance of <see cref="InMemoryRepository{T}"/>
         /// </summary>
         /// <param name="parameters">Repository settings</param>
-        public InMemoryRepository(InMemoryRepositorySettings<T> parameters)
-        {
-
-        }
+        public InMemoryRepository(InMemoryRepositorySettings<T> parameters) { }
 
         /// <summary>
         /// Creates new instance of <see cref="InMemoryRepository{T}"/>
         /// </summary>
-        public InMemoryRepository()
-        {
-
-        }
+        public InMemoryRepository() { }
 
         private readonly Dictionary<string, T> _repository = new Dictionary<string, T>();
         internal Dictionary<string, T> Records
         {
             get { return this._repository; }
         }
-      
-        protected override void CreateNvi(string identifier, T data) 
+
+        protected override void CreateNvi(string identifier, T data)
         {
             try
-            {                
+            {
                 if (_repository.Any(p => p.Value.Equals(data)))
                 {
-                    throw new SameObjectReferenceException($"InMemory repository cannot contain two object with the same reference. You must create as new instance of '{nameof(T)}'");
+                    throw new SameObjectReferenceException(
+                        $"InMemory repository cannot contain two object with the same reference. You must create as new instance of '{nameof(T)}'"
+                    );
                 }
-                                
-                _repository.Add(identifier, data);                                                   
+
+                _repository.Add(identifier, data);
             }
             catch (ArgumentException argumentException)
             {
-                throw new DuplicateIdException($"Record with ID {identifier} already exists in this collection.", argumentException);
+                throw new DuplicateIdException(
+                    $"Record with ID {identifier} already exists in this collection.",
+                    argumentException
+                );
             }
-                                              
         }
+
         protected override T ReadNvi(string identifier)
         {
             try
@@ -61,17 +61,18 @@ namespace TcOpen.Inxton.Data.InMemory
             }
             catch (Exception ex)
             {
-
-                throw new UnableToLocateRecordId($"Unable to locate record with ID: {identifier} in {this.GetType()}.", ex);
+                throw new UnableToLocateRecordId(
+                    $"Unable to locate record with ID: {identifier} in {this.GetType()}.",
+                    ex
+                );
             }
-            
         }
-        
+
         protected override void UpdateNvi(string identifier, T data)
         {
             try
             {
-                if(data == null)
+                if (data == null)
                 {
                     throw new Exception("Data object cannot be 'null'");
                 }
@@ -81,11 +82,13 @@ namespace TcOpen.Inxton.Data.InMemory
             }
             catch (Exception ex)
             {
-
-                throw new UnableToUpdateRecord($"Unable to update record ID:{identifier} in {this.GetType()}.", ex);
+                throw new UnableToUpdateRecord(
+                    $"Unable to update record ID:{identifier} in {this.GetType()}.",
+                    ex
+                );
             }
-           
         }
+
         protected override void DeleteNvi(string identifier)
         {
             this._repository.Remove(identifier);
@@ -96,23 +99,34 @@ namespace TcOpen.Inxton.Data.InMemory
             get { return this._repository.Count; }
         }
 
-        protected override IEnumerable<T> GetRecordsNvi(string identifier, int limit, int skip, eSearchMode searchMode)
+        protected override IEnumerable<T> GetRecordsNvi(
+            string identifier,
+            int limit,
+            int skip,
+            eSearchMode searchMode
+        )
         {
-            if(string.IsNullOrEmpty(identifier) || string.IsNullOrWhiteSpace(identifier) || identifier == "*")
+            if (
+                string.IsNullOrEmpty(identifier)
+                || string.IsNullOrWhiteSpace(identifier)
+                || identifier == "*"
+            )
             {
                 return this.Records.Select(p => p.Value);
             }
-            
+
             switch (searchMode)
             {
                 case eSearchMode.StartsWith:
-                    return this.Records.Where(p => p.Key.StartsWith(identifier)).Select(p => p.Value);                    
+                    return this
+                        .Records.Where(p => p.Key.StartsWith(identifier))
+                        .Select(p => p.Value);
                 case eSearchMode.Contains:
                     return this.Records.Where(p => p.Key.Contains(identifier)).Select(p => p.Value);
                 case eSearchMode.Exact:
                 default:
-                    return this.Records.Where(p => p.Key == identifier).Select(p => p.Value);                    
-            }          
+                    return this.Records.Where(p => p.Key == identifier).Select(p => p.Value);
+            }
         }
 
         protected override long FilteredCountNvi(string id, eSearchMode searchMode)
@@ -138,7 +152,10 @@ namespace TcOpen.Inxton.Data.InMemory
         {
             return this.Records.Any(p => p.Key == identifier);
         }
-        
-        public override IQueryable<T> Queryable { get { return this._repository.AsQueryable().Select(p => p.Value); } }
-    }    
+
+        public override IQueryable<T> Queryable
+        {
+            get { return this._repository.AsQueryable().Select(p => p.Value); }
+        }
+    }
 }

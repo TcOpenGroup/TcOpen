@@ -3,49 +3,48 @@
   <POU Name="CylinderMoveTask" Id="{36f82742-ef83-064d-3f82-8df2b1eb7a0b}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK CylinderMoveTask EXTENDS TcoCore.TcoTask
 VAR_INPUT
-	PositionSensor		   : BOOL;
-	MaxTimeToReachPosition : TIME := T#10S;
-	PositionName		   : STRING(25);
+    PositionSensor : BOOL;
+    MaxTimeToReachPosition : TIME := T#10S;
+    PositionName : STRING(25);
 END_VAR
 VAR_IN_OUT
-	MoveToPositionSignal : BOOL;
-	InverseSignal		 : BOOL;	
+    MoveToPositionSignal : BOOL;
+    InverseSignal : BOOL;
 END_VAR
-
 VAR
-	_stringBuilder : TcoCore.StringBuilder;
+    _stringBuilder : TcoCore.StringBuilder;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF (THIS^.Execute()) THEN
-	IF(THIS^.ElapsedTime > MaxTimeToReachPosition) THEN THIS^.Messenger.Warning(_stringBuilder.Clear().Append(PositionName).Append(' sensor not reached yet.').ToString()); END_IF;
-	InverseSignal		 := FALSE;
-	MoveToPositionSignal := TRUE;
-	THIS^.DoneWhen(PositionSensor);
-END_IF
-]]></ST>
+    IF (THIS^.ElapsedTime > MaxTimeToReachPosition) THEN
+        THIS^.Messenger.Warning(_stringBuilder.Clear().Append(PositionName).Append(' sensor not reached yet.').ToString());
+    END_IF;
+
+    InverseSignal := FALSE;
+    MoveToPositionSignal := TRUE;
+    THIS^.DoneWhen(PositionSensor);
+END_IF]]></ST>
     </Implementation>
     <Method Name="FB_init" Id="{cf5faab0-ae9a-0dcc-0a9f-d4a07856e2e1}">
       <Declaration><![CDATA[METHOD PUBLIC FB_init : BOOL
 VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : ITcoObject;
-END_VAR
-]]></Declaration>
+    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+    Parent : ITcoObject;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnAbort" Id="{45e7f28e-39ff-01a9-2b80-1e7ac1ea429e}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task is aborted.
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task is aborted.
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnAbort
-]]></Declaration>
+METHOD PROTECTED OnAbort]]></Declaration>
       <Implementation>
         <ST><![CDATA[MoveToPositionSignal := FALSE;]]></ST>
       </Implementation>

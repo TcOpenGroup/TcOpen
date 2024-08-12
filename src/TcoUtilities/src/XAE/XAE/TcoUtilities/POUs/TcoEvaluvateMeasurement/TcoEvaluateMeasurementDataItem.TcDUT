@@ -1,16 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
   <DUT Name="TcoEvaluateMeasurementDataItem" Id="{fc17fffb-f9fe-0905-1451-a468d6b0bd64}">
-    <Declaration><![CDATA[TYPE
-    TcoEvaluateMeasurementDataItem :
-    STRUCT
-        TimeBase : TIME;
-        Distance : REAL;
-        ProcessValue : REAL;
-        DiscreteValue : REAL;
-
-    END_STRUCT
-END_TYPE
-]]></Declaration>
+    <Declaration><![CDATA[TYPE TcoEvaluateMeasurementDataItem :
+STRUCT
+    TimeBase : TIME;
+    Distance : REAL;
+    ProcessValue : REAL;
+    DiscreteValue : REAL;
+END_STRUCT
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

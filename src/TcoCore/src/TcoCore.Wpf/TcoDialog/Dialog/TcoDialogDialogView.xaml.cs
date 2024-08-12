@@ -22,12 +22,16 @@ namespace TcoCore
     /// </summary>
     public partial class TcoDialogDialogView
     {
-        public TcoDialogDialogView() : base()
+        public TcoDialogDialogView()
+            : base()
         {
-            InitializeComponent();        
+            InitializeComponent();
         }
 
-        private void TcoDialogBaseView_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void TcoDialogBaseView_Closing(
+            object sender,
+            System.ComponentModel.CancelEventArgs e
+        )
         {
             if (webView != null)
             {
@@ -36,5 +40,4 @@ namespace TcoCore
             }
         }
     }
- 
 }

@@ -1,10 +1,10 @@
-﻿using MongoDB.Bson;
-using MongoDB.Driver;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using MongoDB.Bson;
+using MongoDB.Driver;
 using TcOpen.Inxton.Data;
 
 namespace TcOpen.Inxton.Data.MongoDb
@@ -12,74 +12,89 @@ namespace TcOpen.Inxton.Data.MongoDb
     /// <summary>
     /// Provides access to basic operations for MongoDB.
     /// To use this code, mongo database must run somewhere. To start MongoDB locally you can use following code
-    /// 
-    /// Start MongoDB without authentication 
+    ///
+    /// Start MongoDB without authentication
     ///     <code>
-    ///         "C:\Program Files\MongoDB\Server\4.4\bin\mongod.exe"  --dbpath C:\DATA\DB446\ 
+    ///         "C:\Program Files\MongoDB\Server\4.4\bin\mongod.exe"  --dbpath C:\DATA\DB446\
     ///     </code>
-    ///     
-    /// Start MongoDB with authentication. You don't have to use the "--port" attribute or use a different "--dbpath". The only 
+    ///
+    /// Start MongoDB with authentication. You don't have to use the "--port" attribute or use a different "--dbpath". The only
     /// reason why would you want to run authenticated database on a different dbpath and port simultaneously is if they're running
     /// on the same machine.
-    /// 
+    ///
     /// More info about the use credentials <see cref="MongoDbCredentials"/>
-    /// 
+    ///
     ///     <code>
     ///         "C:\Program Files\MongoDB\Server\4.4\bin\mongod.exe"  --dbpath C:\DATA\DB446_AUTH\ --auth --port 27018
     ///     </code>
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class MongoDbFragmentedRepository<T,TFragment> : RepositoryBase<T>
+    public class MongoDbFragmentedRepository<T, TFragment> : RepositoryBase<T>
         where T : IBrowsableDataObject
     {
         private IMongoCollection<T> collection;
         private List<Expression<Func<T, TFragment>>> _fragmentsExpresion;
-        List<(Expression<Func<T, TFragment>> FragmentExpression, TFragment FragmentData)> _updateFragments;
+        List<(
+            Expression<Func<T, TFragment>> FragmentExpression,
+            TFragment FragmentData
+        )> _updateFragments;
         private readonly string location;
+
         /// <summary>
         /// Creates new instance of <see cref="MongoDbRepository{T}"/>.
         /// </summary>
         /// <param name="parameters">Repository settings</param>
         /// <param name="updateFragments">Fragments and data</param>
-        public MongoDbFragmentedRepository(MongoDbRepositorySettings<T> parameters, List<(Expression<Func<T, TFragment>> FragmentExpression, TFragment FragmentData)> updateFragments)
+        public MongoDbFragmentedRepository(
+            MongoDbRepositorySettings<T> parameters,
+            List<(
+                Expression<Func<T, TFragment>> FragmentExpression,
+                TFragment FragmentData
+            )> updateFragments
+        )
         {
             location = parameters.GetConnectionInfo();
             this.collection = parameters.Collection;
             _updateFragments = updateFragments;
-
         }
+
         /// <summary>
         /// Creates new instance of <see cref="MongoDbRepository{T}"/>.
         /// </summary>
         /// <param name="parameters">Repository settings</param>
         /// <param name="fragmentsExpression">Expressions fragments witch will be added into data exchange </param>
-        public MongoDbFragmentedRepository(MongoDbRepositorySettings<T> parameters,List<Expression<Func<T, TFragment>>> fragmentsExpression)
+        public MongoDbFragmentedRepository(
+            MongoDbRepositorySettings<T> parameters,
+            List<Expression<Func<T, TFragment>>> fragmentsExpression
+        )
         {
             location = parameters.GetConnectionInfo();
             this.collection = parameters.Collection;
             _fragmentsExpresion = fragmentsExpression;
-
         }
 
         private bool RecordExists(string identifier)
-        { return collection.Find(p => p._EntityId == identifier).Count() >= 1; }
+        {
+            return collection.Find(p => p._EntityId == identifier).Count() >= 1;
+        }
 
         protected override void CreateNvi(string identifier, T data)
         {
             try
             {
                 var x = System.Threading.Thread.CurrentThread.GetApartmentState();
-              
+
                 if (RecordExists(identifier))
                 {
-                    throw new DuplicateIdException($"Record with ID {identifier} already exists in this collection.",
-                                                   null);
+                    throw new DuplicateIdException(
+                        $"Record with ID {identifier} already exists in this collection.",
+                        null
+                    );
                 }
 
                 data._recordId = ObjectId.GenerateNewId();
 
                 collection.InsertOne(data);
-
             }
             catch (Exception ex)
             {
@@ -87,7 +102,10 @@ namespace TcOpen.Inxton.Data.MongoDb
             }
         }
 
-        protected override void DeleteNvi(string identifier) { collection.DeleteOne(p => p._EntityId == identifier); }
+        protected override void DeleteNvi(string identifier)
+        {
+            collection.DeleteOne(p => p._EntityId == identifier);
+        }
 
         protected override long FilteredCountNvi(string id, eSearchMode searchMode)
         {
@@ -99,10 +117,16 @@ namespace TcOpen.Inxton.Data.MongoDb
             switch (searchMode)
             {
                 case eSearchMode.StartsWith:
-                    filter = Builders<T>.Filter.Regex(p => p._EntityId, new BsonRegularExpression($"^{filterExpresion}", ""));
+                    filter = Builders<T>.Filter.Regex(
+                        p => p._EntityId,
+                        new BsonRegularExpression($"^{filterExpresion}", "")
+                    );
                     break;
                 case eSearchMode.Contains:
-                    filter = Builders<T>.Filter.Regex(p => p._EntityId, new BsonRegularExpression($".*{filterExpresion}", ""));
+                    filter = Builders<T>.Filter.Regex(
+                        p => p._EntityId,
+                        new BsonRegularExpression($".*{filterExpresion}", "")
+                    );
                     break;
                 case eSearchMode.Exact:
                 default:
@@ -112,22 +136,23 @@ namespace TcOpen.Inxton.Data.MongoDb
 
             if (id == "*" || string.IsNullOrWhiteSpace(id))
             {
-#pragma warning disable CS0618 // CountDocuments is very slow compared to Count() even though Count is obsolete. 
-                return collection
-                    .Find(new BsonDocument())
-                    .Count();
+#pragma warning disable CS0618 // CountDocuments is very slow compared to Count() even though Count is obsolete.
+                return collection.Find(new BsonDocument()).Count();
             }
             else
             {
-                return collection
-                    .Find(filter)
-                    .Count();
+                return collection.Find(filter).Count();
             }
         }
-#pragma warning restore CS0618 
+#pragma warning restore CS0618
 
 
-        protected override IEnumerable<T> GetRecordsNvi(string identifier, int limit, int skip, eSearchMode searchMode)
+        protected override IEnumerable<T> GetRecordsNvi(
+            string identifier,
+            int limit,
+            int skip,
+            eSearchMode searchMode
+        )
         {
             var filetered = new List<T>();
             FilterDefinition<T> filter;
@@ -135,20 +160,25 @@ namespace TcOpen.Inxton.Data.MongoDb
             var filterExpresion = ParseIdentifierForRegularExpression(identifier);
 
             switch (searchMode)
-            {             
+            {
                 case eSearchMode.StartsWith:
-                    filter = Builders<T>.Filter.Regex(p => p._EntityId, new BsonRegularExpression($"^{filterExpresion}", ""));
+                    filter = Builders<T>.Filter.Regex(
+                        p => p._EntityId,
+                        new BsonRegularExpression($"^{filterExpresion}", "")
+                    );
                     break;
                 case eSearchMode.Contains:
-                    filter = Builders<T>.Filter.Regex(p => p._EntityId, new BsonRegularExpression($".*{filterExpresion}", ""));
+                    filter = Builders<T>.Filter.Regex(
+                        p => p._EntityId,
+                        new BsonRegularExpression($".*{filterExpresion}", "")
+                    );
                     break;
-                case eSearchMode.Exact:                    
+                case eSearchMode.Exact:
                 default:
                     filter = Builders<T>.Filter.Eq(p => p._EntityId, identifier);
                     break;
             }
 
-            
             if (identifier == "*" || string.IsNullOrWhiteSpace(identifier))
             {
                 return collection
@@ -160,11 +190,7 @@ namespace TcOpen.Inxton.Data.MongoDb
             }
             else
             {
-                return collection
-                    .Find(filter)
-                    .Limit(limit)
-                    .Skip(skip)
-                    .ToList();
+                return collection.Find(filter).Limit(limit).Skip(skip).ToList();
             }
         }
 
@@ -184,7 +210,12 @@ namespace TcOpen.Inxton.Data.MongoDb
 
             foreach (var character in identifier)
             {
-                if (character <= 47 || (character >= 58 && character <= 64) || (character >= 91 && character <= 96) || (character >= 123 && character <= 126))
+                if (
+                    character <= 47
+                    || (character >= 58 && character <= 64)
+                    || (character >= 91 && character <= 96)
+                    || (character >= 123 && character <= 126)
+                )
                 {
                     result += @"\";
                 }
@@ -201,8 +232,10 @@ namespace TcOpen.Inxton.Data.MongoDb
                 var record = collection.Find(p => p._EntityId == identifier).FirstOrDefault();
                 if (record == null)
                 {
-                    throw new UnableToLocateRecordId($"Unable to locate record with ID: {identifier} in {location}.",
-                                                     null);
+                    throw new UnableToLocateRecordId(
+                        $"Unable to locate record with ID: {identifier} in {location}.",
+                        null
+                    );
                 }
 
                 return record;
@@ -221,34 +254,44 @@ namespace TcOpen.Inxton.Data.MongoDb
                 UpdateNvi(identifier, _updateFragments);
             else
                 Replace(identifier, data);
-
-
         }
 
-      
-        protected void UpdateNvi(string identifier, List<Expression<Func<T, TFragment>>> fragmentsExpression, T data )
+        protected void UpdateNvi(
+            string identifier,
+            List<Expression<Func<T, TFragment>>> fragmentsExpression,
+            T data
+        )
         {
             try
             {
                 if (!RecordExists(identifier))
                 {
-                    throw new UnableToLocateRecordId($"Unable to locate record with ID: {identifier} in {location}.",
-                                                     null);
+                    throw new UnableToLocateRecordId(
+                        $"Unable to locate record with ID: {identifier} in {location}.",
+                        null
+                    );
                 }
 
                 var filter = Builders<T>.Filter.Eq("_EntityId", identifier);
-            
 
-                collection.UpdateOne(filter, ConvertExpressionsToUpdateDefinition(fragmentsExpression,data));
-
+                collection.UpdateOne(
+                    filter,
+                    ConvertExpressionsToUpdateDefinition(fragmentsExpression, data)
+                );
             }
             catch (Exception ex)
             {
-                throw new UnableToUpdateRecord($"Unable to update record ID:{identifier} in {location}.", ex);
+                throw new UnableToUpdateRecord(
+                    $"Unable to update record ID:{identifier} in {location}.",
+                    ex
+                );
             }
         }
 
-        static UpdateDefinition<T> ConvertExpressionsToUpdateDefinition(List<Expression<Func<T, TFragment>>> expressions ,T data)
+        static UpdateDefinition<T> ConvertExpressionsToUpdateDefinition(
+            List<Expression<Func<T, TFragment>>> expressions,
+            T data
+        )
         {
             var updateBuilder = Builders<T>.Update;
             var updateDefinitions = new List<UpdateDefinition<T>>();
@@ -259,7 +302,9 @@ namespace TcOpen.Inxton.Data.MongoDb
 
                 if (body == null)
                 {
-                    throw new ArgumentException("Invalid expression format. Expected MemberInitExpression.");
+                    throw new ArgumentException(
+                        "Invalid expression format. Expected MemberInitExpression."
+                    );
                 }
 
                 foreach (var binding in body.Bindings)
@@ -300,53 +345,69 @@ namespace TcOpen.Inxton.Data.MongoDb
             var lambda = Expression.Lambda(expression).Compile();
             return lambda.DynamicInvoke();
         }
-        protected void UpdateNvi(string identifier, List<(Expression<Func<T, TFragment>> FragmentExpression, TFragment FragmentData)> fragments)
+
+        protected void UpdateNvi(
+            string identifier,
+            List<(
+                Expression<Func<T, TFragment>> FragmentExpression,
+                TFragment FragmentData
+            )> fragments
+        )
         {
             try
             {
                 if (!RecordExists(identifier))
                 {
-                    throw new UnableToLocateRecordId($"Unable to locate record with ID: {identifier} in {location}.",
-                                                     null);
+                    throw new UnableToLocateRecordId(
+                        $"Unable to locate record with ID: {identifier} in {location}.",
+                        null
+                    );
                 }
 
                 var filter = Builders<T>.Filter.Eq("_EntityId", identifier);
                 var updateDefinitions = new List<UpdateDefinition<T>>();
 
-
                 foreach (var item in fragments)
                 {
-                    updateDefinitions.Add(Builders<T>.Update.Set(item.FragmentExpression, item.FragmentData));
+                    updateDefinitions.Add(
+                        Builders<T>.Update.Set(item.FragmentExpression, item.FragmentData)
+                    );
                 }
 
-
                 collection.UpdateOne(filter, Builders<T>.Update.Combine(updateDefinitions));
-
             }
             catch (Exception ex)
             {
-                throw new UnableToUpdateRecord($"Unable to update record ID:{identifier} in {location}.", ex);
+                throw new UnableToUpdateRecord(
+                    $"Unable to update record ID:{identifier} in {location}.",
+                    ex
+                );
             }
         }
 
-        protected  void Replace(string identifier, T data)
+        protected void Replace(string identifier, T data)
         {
             try
             {
                 if (!RecordExists(identifier))
                 {
-                    throw new UnableToLocateRecordId($"Unable to locate record with ID: {identifier} in {location}.",
-                                                     null);
+                    throw new UnableToLocateRecordId(
+                        $"Unable to locate record with ID: {identifier} in {location}.",
+                        null
+                    );
                 }
 
                 collection.ReplaceOne(p => p._EntityId == identifier, data);
-
             }
             catch (Exception ex)
             {
-                throw new UnableToUpdateRecord($"Unable to update record ID:{identifier} in {location}.", ex);
+                throw new UnableToUpdateRecord(
+                    $"Unable to update record ID:{identifier} in {location}.",
+                    ex
+                );
             }
         }
+
         protected override bool ExistsNvi(string identifier)
         {
             return RecordExists(identifier);

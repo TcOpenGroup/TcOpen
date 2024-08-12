@@ -16,10 +16,11 @@ namespace TcoIo
         }
 
         // Using a DependencyProperty as the backing store for Group.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty GroupNameProperty =
-            DependencyProperty.Register("GroupName",
-                                        typeof(string),
-                                        typeof(TopologyRenderer),
-                                        new PropertyMetadata("Default group name"));
+        public static readonly DependencyProperty GroupNameProperty = DependencyProperty.Register(
+            "GroupName",
+            typeof(string),
+            typeof(TopologyRenderer),
+            new PropertyMetadata("Default group name")
+        );
     }
 }

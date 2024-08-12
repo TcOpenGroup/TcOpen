@@ -3,11 +3,10 @@
   <DUT Name="TcoInsightResultData_v_5_x_x" Id="{b20a7b56-12b0-0923-1949-76b167f6baca}">
     <Declaration><![CDATA[TYPE TcoInsightResultData_v_5_x_x :
 STRUCT
-	InspectionID 		AT %I* : UINT;
-	ResultCode  		AT %I*: UINT;
-	InspectionResults	AT %I*:	ARRAY [0..245]OF BYTE;
+    InspectionID AT %I* : UINT;
+    ResultCode AT %I* : UINT;
+    InspectionResults AT %I* : ARRAY[0..245] OF BYTE;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

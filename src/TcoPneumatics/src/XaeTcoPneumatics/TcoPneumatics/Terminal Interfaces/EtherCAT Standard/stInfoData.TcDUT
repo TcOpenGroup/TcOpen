@@ -3,10 +3,9 @@
   <DUT Name="stInfoData" Id="{b6a6ce2d-e3fc-4743-987b-cde97d1a7d4e}">
     <Declaration><![CDATA[TYPE stInfoData :
 STRUCT
-	State 		AT %I* : WORD;
-	InfoData 	AT %I* : AMSADDR;
+    State AT %I* : WORD;
+    InfoData AT %I* : AMSADDR;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

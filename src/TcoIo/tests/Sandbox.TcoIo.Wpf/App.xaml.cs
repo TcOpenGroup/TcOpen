@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -17,10 +16,12 @@ namespace Sandbox.TcoIo.Wpf
     {
         public App()
         {
-            TcOpen.Inxton.TcoAppDomain.Current.Builder
-                .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter())
+            TcOpen
+                .Inxton.TcoAppDomain.Current.Builder.SetUpLogger(
+                    new TcOpen.Inxton.Logging.SerilogAdapter()
+                )
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
-            
+
             Entry.TcoIoTests.Connector.BuildAndStart().ReadWriteCycleDelay = 75;
 
             App.Current.Exit += Current_Exit;

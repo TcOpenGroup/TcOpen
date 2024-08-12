@@ -11,9 +11,6 @@ namespace TcoCore
     {
         public string DialogId { get; set; }
 
-        public void ShowAgainIfInvoked()
-        {
-            
-        }
+        public void ShowAgainIfInvoked() { }
     }
 }

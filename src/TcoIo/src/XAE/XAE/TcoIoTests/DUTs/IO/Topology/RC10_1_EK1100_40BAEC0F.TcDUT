@@ -9,40 +9,39 @@
 {attribute addProperty Name "RC10_1 (EK1100)"}
 TYPE RC10_1_EK1100_40BAEC0F EXTENDS EK1100_1FC0878B :
 STRUCT
-	{attribute addProperty Name "RC10_A2 (EK1122)"}
-	{attribute addProperty PreviousPort "RC10_1 (EK1100) : B"}
-	{attribute addProperty SyncUnit "default"}
-	RC10_A2_EK1122 : RC10_A2_EK1122_BBB6F36B;
-	{attribute addProperty Name "RC10_A3 (EK1122)"}
-	{attribute addProperty PreviousPort "RC10_A2 (EK1122) : C"}
-	{attribute addProperty SyncUnit "default"}
-	RC10_A3_EK1122 : RC10_A3_EK1122_A50FC1ED;
-	{attribute addProperty Name "RC10_A5 (EL1809)"}
-	{attribute addProperty PreviousPort "RC10_A3 (EK1122) : C"}
-	{attribute addProperty SyncUnit "C10"}
-	RC10_A5_EL1809 : EL1809_32157CFD;
-	{attribute addProperty Name "RC10_A6 (EL1809)"}
-	{attribute addProperty PreviousPort "RC10_A5 (EL1809) : B"}
-	{attribute addProperty SyncUnit "C10"}
-	RC10_A6_EL1809 : EL1809_32157CFD;
-	{attribute addProperty Name "RC10_A7 (EL2809)"}
-	{attribute addProperty PreviousPort "RC10_A6 (EL1809) : B"}
-	{attribute addProperty SyncUnit "C10"}
-	RC10_A7_EL2809 : EL2809_2B6483BD;
-	{attribute addProperty Name "RC10_A8 (EL2809)"}
-	{attribute addProperty PreviousPort "RC10_A7 (EL2809) : B"}
-	{attribute addProperty SyncUnit "C10"}
-	RC10_A8_EL2809 : EL2809_2B6483BD;
-	{attribute addProperty Name "RC10_A9 (EL2809)"}
-	{attribute addProperty PreviousPort "RC10_A8 (EL2809) : B"}
-	{attribute addProperty SyncUnit "C10"}
-	RC10_A9_EL2809 : EL2809_2B6483BD;
-	{attribute addProperty Name "RC10_1_EndTerminal (EL9011)"}
-	{attribute addProperty PreviousPort "RC10_A9 (EL2809) : B"}
-	{attribute addProperty SyncUnit "default"}
-	RC10_1_EndTerminal_EL9011 : EL9011_D65D3D32;
+    {attribute addProperty Name "RC10_A2 (EK1122)"}
+    {attribute addProperty PreviousPort "RC10_1 (EK1100) : B"}
+    {attribute addProperty SyncUnit "default"}
+    RC10_A2_EK1122 : RC10_A2_EK1122_BBB6F36B;
+    {attribute addProperty Name "RC10_A3 (EK1122)"}
+    {attribute addProperty PreviousPort "RC10_A2 (EK1122) : C"}
+    {attribute addProperty SyncUnit "default"}
+    RC10_A3_EK1122 : RC10_A3_EK1122_A50FC1ED;
+    {attribute addProperty Name "RC10_A5 (EL1809)"}
+    {attribute addProperty PreviousPort "RC10_A3 (EK1122) : C"}
+    {attribute addProperty SyncUnit "C10"}
+    RC10_A5_EL1809 : EL1809_32157CFD;
+    {attribute addProperty Name "RC10_A6 (EL1809)"}
+    {attribute addProperty PreviousPort "RC10_A5 (EL1809) : B"}
+    {attribute addProperty SyncUnit "C10"}
+    RC10_A6_EL1809 : EL1809_32157CFD;
+    {attribute addProperty Name "RC10_A7 (EL2809)"}
+    {attribute addProperty PreviousPort "RC10_A6 (EL1809) : B"}
+    {attribute addProperty SyncUnit "C10"}
+    RC10_A7_EL2809 : EL2809_2B6483BD;
+    {attribute addProperty Name "RC10_A8 (EL2809)"}
+    {attribute addProperty PreviousPort "RC10_A7 (EL2809) : B"}
+    {attribute addProperty SyncUnit "C10"}
+    RC10_A8_EL2809 : EL2809_2B6483BD;
+    {attribute addProperty Name "RC10_A9 (EL2809)"}
+    {attribute addProperty PreviousPort "RC10_A8 (EL2809) : B"}
+    {attribute addProperty SyncUnit "C10"}
+    RC10_A9_EL2809 : EL2809_2B6483BD;
+    {attribute addProperty Name "RC10_1_EndTerminal (EL9011)"}
+    {attribute addProperty PreviousPort "RC10_A9 (EL2809) : B"}
+    {attribute addProperty SyncUnit "default"}
+    RC10_1_EndTerminal_EL9011 : EL9011_D65D3D32;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

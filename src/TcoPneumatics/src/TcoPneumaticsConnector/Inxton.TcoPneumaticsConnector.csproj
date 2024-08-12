@@ -1,25 +1,54 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFramework>net48</TargetFramework>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>    
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Authors>petok</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/PTKu/TcOpen</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="_meta\TcoPneumatics.library" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="_meta\TcoPneumatics.json" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="_meta\TcoPneumatics.library" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="_meta\version.info" IncludeInPackage="true" Pack="true" PackagePath="lib" CopyToOutputDirectory="PreserveNewest" />
+    <Content
+      Include="_meta\TcoPneumatics.library"
+      IncludeInPackage="true"
+      Pack="true"
+      PackagePath="lib"
+      CopyToOutputDirectory="PreserveNewest"
+    />
+    <Content
+      Include="_meta\TcoPneumatics.json"
+      IncludeInPackage="true"
+      Pack="true"
+      PackagePath="lib"
+      CopyToOutputDirectory="PreserveNewest"
+    />
+    <Content
+      Include="_meta\TcoPneumatics.library"
+      IncludeInPackage="true"
+      Pack="true"
+      PackagePath="lib"
+      CopyToOutputDirectory="PreserveNewest"
+    />
+    <Content
+      Include="_meta\version.info"
+      IncludeInPackage="true"
+      Pack="true"
+      PackagePath="lib"
+      CopyToOutputDirectory="PreserveNewest"
+    />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="1.9.1-alpha.37" />
+    <PackageReference
+      Include="Inxton.Package.Vortex.Essentials"
+      Version="1.9.1-alpha.37"
+    />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\TcoCore\src\TcoCoreConnector\TcoCoreConnector.csproj" />
+    <ProjectReference
+      Include="..\..\..\TcoCore\src\TcoCoreConnector\TcoCoreConnector.csproj"
+    />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Localizations.Designer.cs">

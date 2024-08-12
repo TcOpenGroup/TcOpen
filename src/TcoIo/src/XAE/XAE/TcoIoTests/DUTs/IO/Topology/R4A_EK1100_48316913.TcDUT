@@ -9,48 +9,47 @@
 {attribute addProperty Name "R4A (EK1100)"}
 TYPE R4A_EK1100_48316913 EXTENDS EK1100_1FC0878B :
 STRUCT
-	{attribute addProperty Name "A2 (EK1122)"}
-	{attribute addProperty PreviousPort "R4A (EK1100) : B"}
-	{attribute addProperty SyncUnit "default"}
-	A2_EK1122 : A2_EK1122_967E4A9C;
-	{attribute addProperty Name "A3 (EL1809)"}
-	{attribute addProperty PreviousPort "A2 (EK1122) : C"}
-	{attribute addProperty SyncUnit "default"}
-	A3_EL1809 : EL1809_32157CFD;
-	{attribute addProperty Name "A4 (EL1809)"}
-	{attribute addProperty PreviousPort "A3 (EL1809) : B"}
-	{attribute addProperty SyncUnit "default"}
-	A4_EL1809 : EL1809_32157CFD;
-	{attribute addProperty Name "A5 (EL1809)"}
-	{attribute addProperty PreviousPort "A4 (EL1809) : B"}
-	{attribute addProperty SyncUnit "default"}
-	A5_EL1809 : EL1809_32157CFD;
-	{attribute addProperty Name "A6 (EL1809)"}
-	{attribute addProperty PreviousPort "A5 (EL1809) : B"}
-	{attribute addProperty SyncUnit "default"}
-	A6_EL1809 : EL1809_32157CFD;
-	{attribute addProperty Name "A7 (EL3692)"}
-	{attribute addProperty PreviousPort "A6 (EL1809) : B"}
-	{attribute addProperty SyncUnit "default"}
-	A7_EL3692 : EL3692_73B94100;
-	{attribute addProperty Name "A8 (EL3692)"}
-	{attribute addProperty PreviousPort "A7 (EL3692) : B"}
-	{attribute addProperty SyncUnit "default"}
-	A8_EL3692 : EL3692_73B94100;
-	{attribute addProperty Name "A9 (EL2008)"}
-	{attribute addProperty PreviousPort "A8 (EL3692) : B"}
-	{attribute addProperty SyncUnit "default"}
-	A9_EL2008 : EL2008_E2806B95;
-	{attribute addProperty Name "A10 (EL2008)"}
-	{attribute addProperty PreviousPort "A9 (EL2008) : B"}
-	{attribute addProperty SyncUnit "default"}
-	A10_EL2008 : EL2008_E2806B95;
-	{attribute addProperty Name "R4A_EndTerminal (EL9011)"}
-	{attribute addProperty PreviousPort "A10 (EL2008) : B"}
-	{attribute addProperty SyncUnit "default"}
-	R4A_EndTerminal_EL9011 : EL9011_D65D3D32;
+    {attribute addProperty Name "A2 (EK1122)"}
+    {attribute addProperty PreviousPort "R4A (EK1100) : B"}
+    {attribute addProperty SyncUnit "default"}
+    A2_EK1122 : A2_EK1122_967E4A9C;
+    {attribute addProperty Name "A3 (EL1809)"}
+    {attribute addProperty PreviousPort "A2 (EK1122) : C"}
+    {attribute addProperty SyncUnit "default"}
+    A3_EL1809 : EL1809_32157CFD;
+    {attribute addProperty Name "A4 (EL1809)"}
+    {attribute addProperty PreviousPort "A3 (EL1809) : B"}
+    {attribute addProperty SyncUnit "default"}
+    A4_EL1809 : EL1809_32157CFD;
+    {attribute addProperty Name "A5 (EL1809)"}
+    {attribute addProperty PreviousPort "A4 (EL1809) : B"}
+    {attribute addProperty SyncUnit "default"}
+    A5_EL1809 : EL1809_32157CFD;
+    {attribute addProperty Name "A6 (EL1809)"}
+    {attribute addProperty PreviousPort "A5 (EL1809) : B"}
+    {attribute addProperty SyncUnit "default"}
+    A6_EL1809 : EL1809_32157CFD;
+    {attribute addProperty Name "A7 (EL3692)"}
+    {attribute addProperty PreviousPort "A6 (EL1809) : B"}
+    {attribute addProperty SyncUnit "default"}
+    A7_EL3692 : EL3692_73B94100;
+    {attribute addProperty Name "A8 (EL3692)"}
+    {attribute addProperty PreviousPort "A7 (EL3692) : B"}
+    {attribute addProperty SyncUnit "default"}
+    A8_EL3692 : EL3692_73B94100;
+    {attribute addProperty Name "A9 (EL2008)"}
+    {attribute addProperty PreviousPort "A8 (EL3692) : B"}
+    {attribute addProperty SyncUnit "default"}
+    A9_EL2008 : EL2008_E2806B95;
+    {attribute addProperty Name "A10 (EL2008)"}
+    {attribute addProperty PreviousPort "A9 (EL2008) : B"}
+    {attribute addProperty SyncUnit "default"}
+    A10_EL2008 : EL2008_E2806B95;
+    {attribute addProperty Name "R4A_EndTerminal (EL9011)"}
+    {attribute addProperty PreviousPort "A10 (EL2008) : B"}
+    {attribute addProperty SyncUnit "default"}
+    R4A_EndTerminal_EL9011 : EL9011_D65D3D32;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

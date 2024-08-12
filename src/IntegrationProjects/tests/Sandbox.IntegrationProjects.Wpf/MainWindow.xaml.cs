@@ -36,9 +36,9 @@ namespace Sandbox.IntegrationProjects.Wpf
             {
                 var val = (TcoCore.eTaskState)((short)value);
                 switch (val)
-                {                                            
-                    case TcoCore.eTaskState.Requested:                       
-                    case TcoCore.eTaskState.Busy:                        
+                {
+                    case TcoCore.eTaskState.Requested:
+                    case TcoCore.eTaskState.Busy:
                     case TcoCore.eTaskState.Error:
                         return Visibility.Visible;
                     case TcoCore.eTaskState.Done:
@@ -56,7 +56,12 @@ namespace Sandbox.IntegrationProjects.Wpf
             return Visibility.Collapsed;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }

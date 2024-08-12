@@ -4,7 +4,7 @@ param([Parameter(Mandatory=$true)]
 
 $templateDirectory = pwd
 cd ..
-$baseDirectory = (pwd).Path 
+$baseDirectory = (pwd).Path
 cd $templateDirectory
 $libraryDirectory = "$baseDirectory\$libraryName"
 $templateString = "PlcTemplate"
@@ -20,8 +20,8 @@ if($libraryName.Contains(".") -or $libraryName.Contains(" "))
 
 $existingDir = Get-ChildItem $baseDirectory -Directory -Filter $libraryName
 
-if($existingDir.Name -eq $libraryName) 
-{   
+if($existingDir.Name -eq $libraryName)
+{
     Write-Host "Directory '"$libraryName"' already exists."
     return
 }
@@ -29,10 +29,10 @@ if($existingDir.Name -eq $libraryName)
 
 
 #--------------------------------------------------------------------------
-#                       Copy template files 
+#                       Copy template files
 #--------------------------------------------------------------------------
 
-mkdir $libraryDirectory 
+mkdir $libraryDirectory
 
 xcopy $templateDirectory $libraryDirectory /E
 
@@ -41,7 +41,7 @@ xcopy $templateDirectory $libraryDirectory /E
 $files = Get-ChildItem $libraryDirectory -Exclude *bin*, *obj* -Recurse -File
 
 #--------------------------------------------------------------------------
-#                       Replace file content 
+#                       Replace file content
 #--------------------------------------------------------------------------
 
 
@@ -49,7 +49,7 @@ Write-Host 'Replacing file content ' $files.Count
 
 foreach ($file in $files)
 {
-        
+
     if($file.DirectoryName.Contains("\bin\") -or $file.DirectoryName.Contains("\obj\"))
     {
         continue;
@@ -103,6 +103,6 @@ foreach ($directory in $directories)
 #--------------------------------------------------------------------------
 #                       Clean up
 #--------------------------------------------------------------------------
-Remove-Item "$libraryDirectory\scaffoldnewlibrary.ps1" 
-Remove-Item "$libraryDirectory\$libraryName.slnf" 
+Remove-Item "$libraryDirectory\scaffoldnewlibrary.ps1"
+Remove-Item "$libraryDirectory\$libraryName.slnf"
 Write-Host "Scaffold for '" $libraryName "' created in " $templateDirectory\$libraryName

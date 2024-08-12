@@ -3,149 +3,135 @@
   <POU Name="TcoSequenceAutoRestorableTest" Id="{da1e6e89-a289-01aa-206d-d93ce5f0512f}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoSequenceAutoRestorableTest EXTENDS TcoCore._internals_TcoContext
 VAR
-	_callMyPlcInstance	:	BOOL := FALSE;
-	_sequencer : _TcoSequence(THIS^, eRestoreMode.AutoRestoreMembers);
-	_runPLCinstanceOnce : BOOL := FALSE;
-	_runPLCinstanceCyclicaly : BOOL := FALSE;
-	_stepID : INT := 32764;
-	_enabled : BOOL;
-	_stepDescription : STRING := 'Last step sequence message';	
-	_runOneStep : BOOL;
-	_runAllSteps : BOOL;
-	_finishStep : BOOL;
-	_restore : BOOL;
-	_cycleCount : INT;
-	_restoreCycleCount : INT;
-	_init: BOOL;
-	_setCurrentStepPropTestData : TcoCore.StepDetails;
-END_VAR
-]]></Declaration>
+    _callMyPlcInstance : BOOL := FALSE;
+    _sequencer : _TcoSequence(THIS^, eRestoreMode.AutoRestoreMembers);
+    _runPLCinstanceOnce : BOOL := FALSE;
+    _runPLCinstanceCyclicaly : BOOL := FALSE;
+    _stepID : INT := 32764;
+    _enabled : BOOL;
+    _stepDescription : STRING := 'Last step sequence message';
+    _runOneStep : BOOL;
+    _runAllSteps : BOOL;
+    _finishStep : BOOL;
+    _restore : BOOL;
+    _cycleCount : INT;
+    _restoreCycleCount : INT;
+    _init : BOOL;
+    _setCurrentStepPropTestData : TcoCore.StepDetails;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF _callMyPlcInstance THEN
-	IF NOT _init THEN
-		ContextOpen();	
-		ContextClose();	
-		_init := THIS^._rtc.IsValid;
-	END_IF
-	
-	IF _restore THEN
-		ContextOpen();	
-		THIS^._sequencer.Restore();	
-		_restoreCycleCount := _restoreCycleCount + 1;
-		_restore := FALSE;
-		ContextClose();	
-		RETURN;
-	END_IF
-	
-	IF _runPLCinstanceOnce AND NOT _runPLCinstanceCyclicaly THEN
-		ContextOpen();	
-		THIS^.PLCinstanceRun(_stepID , _enabled, _stepDescription);
-		_cycleCount := _cycleCount + 1;
-		_runPLCinstanceOnce := FALSE;
-		ContextClose();	
-	END_IF
-	
-	IF _runPLCinstanceCyclicaly AND NOT _runPLCinstanceOnce THEN
-		ContextOpen();	
-		THIS^.PLCinstanceRun(_stepID , _enabled, _stepDescription);
-		_cycleCount := _cycleCount + 1;
-		ContextClose();	
-	END_IF
-END_IF;	
-]]></ST>
+    IF NOT _init THEN
+        ContextOpen();
+        ContextClose();
+        _init := THIS^._rtc.IsValid;
+    END_IF
+
+    IF _restore THEN
+        ContextOpen();
+        THIS^._sequencer.Restore();
+        _restoreCycleCount := _restoreCycleCount + 1;
+        _restore := FALSE;
+        ContextClose();
+        RETURN;
+    END_IF
+
+    IF _runPLCinstanceOnce AND NOT _runPLCinstanceCyclicaly THEN
+        ContextOpen();
+        THIS^.PLCinstanceRun(_stepID, _enabled, _stepDescription);
+        _cycleCount := _cycleCount + 1;
+        _runPLCinstanceOnce := FALSE;
+        ContextClose();
+    END_IF
+
+    IF _runPLCinstanceCyclicaly AND NOT _runPLCinstanceOnce THEN
+        ContextOpen();
+        THIS^.PLCinstanceRun(_stepID, _enabled, _stepDescription);
+        _cycleCount := _cycleCount + 1;
+        ContextClose();
+    END_IF
+END_IF;]]></ST>
     </Implementation>
     <Method Name="ChildHasAutoRestoreEnabled" Id="{09469517-459e-0a54-3500-4f68e2b134f9}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD ChildHasAutoRestoreEnabled : BOOL;
-]]></Declaration>
+METHOD ChildHasAutoRestoreEnabled : BOOL;]]></Declaration>
       <Implementation>
         <ST><![CDATA[ChildHasAutoRestoreEnabled := _sequencer.ChildHasAutoRestoreEnabled();]]></ST>
       </Implementation>
     </Method>
     <Method Name="ChildIsAutoRestorable" Id="{59881bf6-c411-0622-30ce-413c64f3623c}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD ChildIsAutoRestorable : BOOL;
-]]></Declaration>
+METHOD ChildIsAutoRestorable : BOOL;]]></Declaration>
       <Implementation>
         <ST><![CDATA[ChildIsAutoRestorable := _sequencer.ChildIsAutoRestorable();]]></ST>
       </Implementation>
     </Method>
     <Method Name="CleanupPointers" Id="{19a29486-60c8-0c17-09bc-f75411157235}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD CleanupPointers
-]]></Declaration>
+METHOD CleanupPointers]]></Declaration>
       <Implementation>
         <ST><![CDATA[_sequencer.CleanupPointers();]]></ST>
       </Implementation>
     </Method>
     <Method Name="ClearNumberOfSteps" Id="{84b41c04-39dc-00ea-34ed-b569a001f6d5}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD ClearNumberOfSteps ]]></Declaration>
+METHOD ClearNumberOfSteps]]></Declaration>
       <Implementation>
         <ST><![CDATA[_sequencer.ClearNumberOfSteps();]]></ST>
       </Implementation>
     </Method>
     <Method Name="ContextClose" Id="{c69371ab-2b05-0fd2-37d6-b5b2127462be}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD PROTECTED ContextClose 
-]]></Declaration>
+METHOD PROTECTED ContextClose]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^._Close();]]></ST>
       </Implementation>
     </Method>
     <Method Name="ContextOpen" Id="{817ef04d-0b08-0f01-0ded-bb2d74814989}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD ContextOpen 
-]]></Declaration>
+METHOD ContextOpen]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^._Open();]]></ST>
       </Implementation>
     </Method>
     <Method Name="GetChildState" Id="{a9d53ecc-bb74-0d1c-29a8-98c406a651cf}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD GetChildState : INT
-]]></Declaration>
+METHOD GetChildState : INT]]></Declaration>
       <Implementation>
         <ST><![CDATA[GetChildState := _sequencer.GetChildState();]]></ST>
       </Implementation>
     </Method>
     <Method Name="GetCurrentStepOrder" Id="{bf6c0671-c89e-0807-02ea-3dfbfa2c7dfc}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD GetCurrentStepOrder : UINT
-]]></Declaration>
+METHOD GetCurrentStepOrder : UINT]]></Declaration>
       <Implementation>
         <ST><![CDATA[GetCurrentStepOrder := _sequencer._currentStep.Order;]]></ST>
       </Implementation>
     </Method>
     <Method Name="GetCurrentStepPropTest" Id="{ede823ca-ab35-08ad-2372-794e1981362f}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD GetCurrentStepPropTest
-
-]]></Declaration>
+METHOD GetCurrentStepPropTest]]></Declaration>
       <Implementation>
         <ST><![CDATA[_setCurrentStepPropTestData := THIS^._sequencer.CurrentStep;]]></ST>
       </Implementation>
     </Method>
     <Method Name="GetNumberOfStepsInSequence" Id="{e60e7296-6db8-00c9-0b69-45e219b52b28}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD GetNumberOfStepsInSequence : UINT
-]]></Declaration>
+METHOD GetNumberOfStepsInSequence : UINT]]></Declaration>
       <Implementation>
         <ST><![CDATA[GetNumberOfStepsInSequence := _sequencer._numberOfStepsInSequence;]]></ST>
       </Implementation>
     </Method>
     <Method Name="GetOrderOfTheCurrentlyEvaluatedStep" Id="{0d1e8fea-daab-08c5-2878-ac2770aa9bb2}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD GetOrderOfTheCurrentlyEvaluatedStep : UINT
-]]></Declaration>
+METHOD GetOrderOfTheCurrentlyEvaluatedStep : UINT]]></Declaration>
       <Implementation>
         <ST><![CDATA[GetOrderOfTheCurrentlyEvaluatedStep := _sequencer._theOrderOfTheCurrentlyEvaluatedStep;]]></ST>
       </Implementation>
     </Method>
     <Method Name="GetOrderOfTheCurrentlyExecutedStep" Id="{8ff01e8e-d785-0c66-1af7-8c85b277a841}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD GetOrderOfTheCurrentlyExecutedStep : UINT
-]]></Declaration>
+METHOD GetOrderOfTheCurrentlyExecutedStep : UINT]]></Declaration>
       <Implementation>
         <ST><![CDATA[GetOrderOfTheCurrentlyExecutedStep := _sequencer._theOrderOfTheCurrentlyExecutedStep;]]></ST>
       </Implementation>
@@ -159,56 +145,48 @@ METHOD GetPreviousNumberOfStepsInSequence : UINT]]></Declaration>
     </Method>
     <Method Name="GetRequestStepCycle" Id="{2440d551-76f9-00a9-366a-168689cd3f30}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD GetRequestStepCycle : UINT
-]]></Declaration>
+METHOD GetRequestStepCycle : UINT]]></Declaration>
       <Implementation>
-        <ST><![CDATA[GetRequestStepCycle := _sequencer.RequestStepCycle;
-]]></ST>
+        <ST><![CDATA[GetRequestStepCycle := _sequencer.RequestStepCycle;]]></ST>
       </Implementation>
     </Method>
     <Method Name="GetSequencerErrorId" Id="{f348bc9d-b9e6-0266-190e-287675a7866c}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD GetSequencerErrorId : INT
-]]></Declaration>
+METHOD GetSequencerErrorId : INT]]></Declaration>
       <Implementation>
-        <ST><![CDATA[GetSequencerErrorId := _sequencer.GetSequencerErrorId();
-]]></ST>
+        <ST><![CDATA[GetSequencerErrorId := _sequencer.GetSequencerErrorId();]]></ST>
       </Implementation>
     </Method>
     <Method Name="GetTextOfTheMostImportantMessage" Id="{7ae1dca5-b867-0b6a-17f7-1b54f628395e}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD GetTextOfTheMostImportantMessage : STRING(254)
-]]></Declaration>
+METHOD GetTextOfTheMostImportantMessage : STRING(254)]]></Declaration>
       <Implementation>
         <ST><![CDATA[GetTextOfTheMostImportantMessage := THIS^._sequencer.GetTextOfTheMostImportantMessage();]]></ST>
       </Implementation>
     </Method>
     <Method Name="HasAutoRestoreEnabled" Id="{bcf3f5a8-6e78-032b-219e-d7072589ba60}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD HasAutoRestoreEnabled : BOOL;
-]]></Declaration>
+METHOD HasAutoRestoreEnabled : BOOL;]]></Declaration>
       <Implementation>
         <ST><![CDATA[HasAutoRestoreEnabled := _sequencer.HasAutoRestoreEnabled();]]></ST>
       </Implementation>
     </Method>
     <Method Name="IsAutoRestorable" Id="{8912a703-8973-01a1-1be3-0597339c58bc}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD IsAutoRestorable : BOOL;
-]]></Declaration>
+METHOD IsAutoRestorable : BOOL;]]></Declaration>
       <Implementation>
         <ST><![CDATA[IsAutoRestorable := _sequencer.IsAutoRestorable();]]></ST>
       </Implementation>
     </Method>
     <Method Name="IsFirstStepEntry" Id="{c9a17177-2f8e-0af0-2b90-d89012645be6}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD IsFirstStepEntry : BOOL
-]]></Declaration>
+METHOD IsFirstStepEntry : BOOL]]></Declaration>
       <Implementation>
         <ST><![CDATA[IsFirstStepEntry := THIS^._sequencer.IsFirstStepEntry();]]></ST>
       </Implementation>
     </Method>
     <Method Name="Main" Id="{781f0596-be3d-0794-1f89-6ab5bcb19c7d}">
-      <Declaration><![CDATA[METHOD PROTECTED  Main]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED Main]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
@@ -217,56 +195,55 @@ METHOD IsFirstStepEntry : BOOL
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD PLCinstanceRun
 VAR_INPUT
-	inStepId			:	UINT;
-	inEnabled			:	BOOL;
-	inStepDescription	:	STRING(254);	
-END_VAR
-]]></Declaration>
+    inStepId : UINT;
+    inEnabled : BOOL;
+    inStepDescription : STRING(254);
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^._sequencer.SetTestParams(	_runOneStep , _runAllSteps , _finishStep , inStepId , inEnabled , inStepDescription);
+        <ST><![CDATA[THIS^._sequencer.SetTestParams(_runOneStep,
+    _runAllSteps,
+    _finishStep,
+    inStepId,
+    inEnabled,
+    inStepDescription);
 
-THIS^._sequencer._RunExecutionSubstitute();
-]]></ST>
+THIS^._sequencer._RunExecutionSubstitute();]]></ST>
       </Implementation>
     </Method>
     <Method Name="RequestStep" Id="{6d0ec76f-4ba0-08c9-01cd-cea37080166c}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD RequestStep
 VAR_INPUT
-	inRequestedStepId : INT;
-END_VAR
-]]></Declaration>
+    inRequestedStepId : INT;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_sequencer._RequestStep(inRequestedStepId);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{65dc9fc3-4844-0c49-19d4-5ee8c4258091}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD Restore ]]></Declaration>
+METHOD Restore]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_sequencer.Restore();
-]]></ST>
+        <ST><![CDATA[_sequencer.Restore();]]></ST>
       </Implementation>
     </Method>
     <Method Name="SequenceComplete" Id="{d4e2486d-f3a6-03cb-3df8-571d1b8eb133}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD SequenceComplete ]]></Declaration>
+METHOD SequenceComplete]]></Declaration>
       <Implementation>
         <ST><![CDATA[_sequencer._SequenceComplete();]]></ST>
       </Implementation>
     </Method>
     <Method Name="SequencerClose" Id="{78cd2ee0-9f1b-029a-1354-ff3f09ef71c1}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD SequencerClose ]]></Declaration>
+METHOD SequencerClose]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^._sequencer.SequencerClose();
-]]></ST>
+        <ST><![CDATA[THIS^._sequencer.SequencerClose();]]></ST>
       </Implementation>
     </Method>
     <Method Name="SequencerHasError" Id="{d7ab3537-f6a7-0bc7-33aa-2cb955b12d30}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD SequencerHasError : BOOL
-]]></Declaration>
+METHOD SequencerHasError : BOOL]]></Declaration>
       <Implementation>
         <ST><![CDATA[SequencerHasError := _sequencer.SequencerHasError();]]></ST>
       </Implementation>
@@ -282,9 +259,8 @@ METHOD SequencerOpen]]></Declaration>
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD SetChildState
 VAR_INPUT
-	inState			:	INT;
-END_VAR
-]]></Declaration>
+    inState : INT;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_sequencer.SetChildState(inState);]]></ST>
       </Implementation>
@@ -293,47 +269,39 @@ END_VAR
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD SetCurrentStep
 VAR_INPUT
-	inStepID 			:	INT;
-	inStepDescription	:	STRING(254);
-END_VAR
-]]></Declaration>
+    inStepID : INT;
+    inStepDescription : STRING(254);
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_sequencer.SetCurrentStep(inStepID := inStepID, inStepDescription := inStepDescription);]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetCurrentStepToErrorState" Id="{132d2f99-20d3-0d03-0a4e-5b512182b0f5}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD SetCurrentStepToErrorState : BOOL
-]]></Declaration>
+METHOD SetCurrentStepToErrorState : BOOL]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SetCurrentStepToErrorState := _sequencer.SetCurrentStepToErrorState();
-
-]]></ST>
+        <ST><![CDATA[SetCurrentStepToErrorState := _sequencer.SetCurrentStepToErrorState();]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetCyclicMode" Id="{b5acae6e-eb14-022f-3bb5-cc54e2210820}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD SetCyclicMode : BOOL
-]]></Declaration>
+METHOD SetCyclicMode : BOOL]]></Declaration>
       <Implementation>
         <ST><![CDATA[SetCyclicMode := _sequencer.SetCyclicMode();]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetInvalidMode" Id="{41814ef8-dcc6-006d-27c3-14989b56cc8e}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD SetInvalidMode : BOOL
-]]></Declaration>
+METHOD SetInvalidMode : BOOL]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SetInvalidMode := _sequencer.SetInvalidMode();
-
-]]></ST>
+        <ST><![CDATA[SetInvalidMode := _sequencer.SetInvalidMode();]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetNumberOfSteps" Id="{25bafa5e-ecbf-02be-37c9-f079d9ee1692}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD SetNumberOfSteps : UINT
 VAR_INPUT
-	inNumberOfSteps :UINT;
+    inNumberOfSteps : UINT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_sequencer.SetNumberOfSteps(inNumberOfSteps);
@@ -344,22 +312,18 @@ SetNumberOfSteps := _sequencer._numberOfStepsInSequence;]]></ST>
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD SetRequestStepCycle : UINT
 VAR_INPUT
-	Value : UINT;
-END_VAR
-]]></Declaration>
+    Value : UINT;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_sequencer.RequestStepCycle := Value;
-
-SetRequestStepCycle := _sequencer.RequestStepCycle;
-]]></ST>
+SetRequestStepCycle := _sequencer.RequestStepCycle;]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetSequenceAsChecked" Id="{0d202217-8329-0b24-25cd-e4be9ed0e7da}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD SetSequenceAsChecked : BOOL
 VAR_INPUT
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_sequencer.SetSequenceAsChecked();]]></ST>
       </Implementation>
@@ -368,31 +332,26 @@ END_VAR
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD SetSequenceAsNotChecked : BOOL
 VAR_INPUT
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_sequencer.SetSequenceAsNotChecked();]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetStepMode" Id="{71dd69b4-0c2f-09e2-26dc-070dab20e5e7}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD SetStepMode : BOOL
-]]></Declaration>
+METHOD SetStepMode : BOOL]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SetStepMode := _sequencer.SetStepMode();
-
-]]></ST>
+        <ST><![CDATA[SetStepMode := _sequencer.SetStepMode();]]></ST>
       </Implementation>
     </Method>
     <Method Name="Step" Id="{2c196d81-8e5b-03dc-31bf-3eb26c1a2ad6}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD Step : BOOL
 VAR_INPUT
-	inStepId			:	INT;
-	inEnabled			:	BOOL;
-	inStepDescription	:	STRING(254);		
-END_VAR
-]]></Declaration>
+    inStepId : INT;
+    inEnabled : BOOL;
+    inStepDescription : STRING(254);
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[Step := _sequencer._Step(inStepID := inStepId, inEnabled := inEnabled, inStepDescription := inStepDescription);]]></ST>
       </Implementation>
@@ -401,15 +360,14 @@ END_VAR
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD StepBackward]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_sequencer._StepBackward();
-]]></ST>
+        <ST><![CDATA[_sequencer._StepBackward();]]></ST>
       </Implementation>
     </Method>
     <Method Name="StepCompleteWhen" Id="{d2e36709-8bee-0409-3fd5-61a221ad1f14}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD StepCompleteWhen 
+METHOD StepCompleteWhen
 VAR_INPUT
-	inCondition : BOOL;
+    inCondition : BOOL;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_sequencer._StepCompleteWhen(inCondition);]]></ST>
@@ -419,24 +377,21 @@ END_VAR]]></Declaration>
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD StepForward]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_sequencer._StepForward();
-]]></ST>
+        <ST><![CDATA[_sequencer._StepForward();]]></ST>
       </Implementation>
     </Method>
     <Method Name="StepIn" Id="{8b6aa015-5969-0851-2c25-e56f408a3db8}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD StepIn]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_sequencer._StepIn();
-]]></ST>
+        <ST><![CDATA[_sequencer._StepIn();]]></ST>
       </Implementation>
     </Method>
     <Method Name="UpdateCurrentStepDetails" Id="{9f07f641-bdc9-0a95-0492-e082e9ec9e4f}">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
 METHOD UpdateCurrentStepDetails
 VAR_INPUT
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_sequencer.UpdateCurrentStepDetails();]]></ST>
       </Implementation>

@@ -16,14 +16,19 @@
 
 	<ItemGroup>
 
-	  <ProjectReference Include="..\..\..\TcoData\src\Data\TcOpen.Inxton.Data.csproj" />
-	  <ProjectReference Include="..\..\..\TcoInspectors\src\TcoInspectorsConnector\TcoInspectorsConnector.csproj" />
-	  <ProjectReference Include="..\..\src\TcOpen.Inxton.DataMerge\TcOpen.Inxton.DataMerge.csproj" />
-    <ProjectReference Include="..\..\..\TcoData\src\Repository\RavenDb\TcOpen.Inxton.RavenDb\TcOpen.Inxton.RavenDb.csproj" />
+	  <ProjectReference
+      Include="..\..\..\TcoData\src\Data\TcOpen.Inxton.Data.csproj"
+    />
+	  <ProjectReference
+      Include="..\..\..\TcoInspectors\src\TcoInspectorsConnector\TcoInspectorsConnector.csproj"
+    />
+	  <ProjectReference
+      Include="..\..\src\TcOpen.Inxton.DataMerge\TcOpen.Inxton.DataMerge.csproj"
+    />
+    <ProjectReference
+      Include="..\..\..\TcoData\src\Repository\RavenDb\TcOpen.Inxton.RavenDb\TcOpen.Inxton.RavenDb.csproj"
+    />
 
   </ItemGroup>
 
 </Project>
-
-
-

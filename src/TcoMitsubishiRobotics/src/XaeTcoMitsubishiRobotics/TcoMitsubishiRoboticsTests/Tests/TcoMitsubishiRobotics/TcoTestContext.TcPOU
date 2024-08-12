@@ -13,21 +13,17 @@ VAR
     _velocity : LREAL;
     _acceleration : LREAL;
     _deceleration : LREAL;
-    _jerk : LREAL;	
+    _jerk : LREAL;
     _inString : STRING;
     _done : BOOL;
     _arranged : BOOL;
-
-	_axisReferenceType : INT;
-
-END_VAR
-]]></Declaration>
+    _axisReferenceType : INT;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Main" Id="{d2e2910e-0135-0c8e-3df7-c4910c4c7225}">
-      <Declaration><![CDATA[METHOD PROTECTED Main
-]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED Main]]></Declaration>
       <Implementation>
         <ST><![CDATA[//_sut(inEnable := _enable,
 //    inEnablePositive := _enablePositive,

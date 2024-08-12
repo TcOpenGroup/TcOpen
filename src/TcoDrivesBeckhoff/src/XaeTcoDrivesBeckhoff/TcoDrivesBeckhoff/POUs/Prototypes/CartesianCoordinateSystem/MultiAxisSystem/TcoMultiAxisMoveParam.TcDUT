@@ -3,16 +3,15 @@
   <DUT Name="TcoMultiAxisMoveParam" Id="{543611b0-70c7-0422-2791-9af0943e7b42}">
     <Declaration><![CDATA[TYPE TcoMultiAxisMoveParam :
 STRUCT
-   {attribute addProperty Name "<#Axis 1#>"}
-   Axis1:TcoSingleAxisMoveParam;
-   {attribute addProperty Name "<#Axis 2#>"}
-   Axis2:TcoSingleAxisMoveParam;
-   {attribute addProperty Name "<#Axis 3#>"}
-   Axis3:TcoSingleAxisMoveParam;
-   {attribute addProperty Name "<#Axis 4#>"}
-   Axis4:TcoSingleAxisMoveParam;
+    {attribute addProperty Name "<#Axis 1#>"}
+    Axis1 : TcoSingleAxisMoveParam;
+    {attribute addProperty Name "<#Axis 2#>"}
+    Axis2 : TcoSingleAxisMoveParam;
+    {attribute addProperty Name "<#Axis 3#>"}
+    Axis3 : TcoSingleAxisMoveParam;
+    {attribute addProperty Name "<#Axis 4#>"}
+    Axis4 : TcoSingleAxisMoveParam;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

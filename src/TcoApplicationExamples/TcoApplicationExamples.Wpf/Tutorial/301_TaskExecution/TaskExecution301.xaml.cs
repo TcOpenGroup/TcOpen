@@ -9,7 +9,6 @@ namespace PlcAppExamples
         public TaskExecution301()
         {
             InitializeComponent();
-           
         }
     }
 }

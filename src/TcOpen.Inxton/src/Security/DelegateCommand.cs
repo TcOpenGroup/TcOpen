@@ -17,9 +17,7 @@ namespace TcOpen.Inxton.Local.Security
         public event EventHandler CanExecuteChanged;
 
         public DelegateCommand(Action<object> execute)
-          : this(execute, null)
-        {
-        }
+            : this(execute, null) { }
 
         public DelegateCommand(Action<object> execute, Predicate<object> canExecute)
         {

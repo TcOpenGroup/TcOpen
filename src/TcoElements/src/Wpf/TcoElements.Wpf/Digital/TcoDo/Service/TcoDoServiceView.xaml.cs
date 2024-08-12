@@ -18,7 +18,6 @@ namespace TcoElements
             }
 
             InitializeComponent();
-
         }
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
@@ -27,9 +26,11 @@ namespace TcoElements
 
             if (e.Property == DataContextProperty)
             {
-                this.DataContext = this.DataContext.ViewModelizeDataContext<GenericViewModel, TcoDo>();
+                this.DataContext = this.DataContext.ViewModelizeDataContext<
+                    GenericViewModel,
+                    TcoDo
+                >();
             }
         }
     }
-
 }

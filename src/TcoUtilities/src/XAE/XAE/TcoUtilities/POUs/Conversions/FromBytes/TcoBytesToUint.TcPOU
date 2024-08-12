@@ -3,31 +3,28 @@
   <POU Name="TcoBytesToUint" Id="{8cbd0116-101f-0153-0a95-3037f5d28dae}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION TcoBytesToUint : UINT
 VAR_INPUT
-	inFormat : eTcoDataFormat;
-    inByte0: BYTE;
-    inByte1: BYTE;
+    inFormat : eTcoDataFormat;
+    inByte0 : BYTE;
+    inByte1 : BYTE;
 END_VAR
 VAR
-    _b0: BYTE;
-	_b1: BYTE;
-	_tmpWORD : WORD;
+    _b0 : BYTE;
+    _b1 : BYTE;
+    _tmpWORD : WORD;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF inFormat=eTcoDataFormat.LittleEndian THEN
-	_b0 := inByte1;
-	_b1 := inByte0;	
-ELSIF inFormat=eTcoDataFormat.BigEndian THEN
-	_b0 := inByte0;
-	_b1 := inByte1;	
+      <ST><![CDATA[IF inFormat = eTcoDataFormat.LittleEndian THEN
+    _b0 := inByte1;
+    _b1 := inByte0;
+ELSIF inFormat = eTcoDataFormat.BigEndian THEN
+    _b0 := inByte0;
+    _b1 := inByte1;
 END_IF
 
-
-_tmpWORD:=_b0;
-_tmpWORD:=SHL(_tmpWORD,8);
-_tmpWORD:=_tmpWORD+_b1;
-
-TcoBytesToUint := WORD_TO_UINT(_tmpWORD);
-]]></ST>
+_tmpWORD := _b0;
+_tmpWORD := SHL(_tmpWORD, 8);
+_tmpWORD := _tmpWORD + _b1;
+TcoBytesToUint := WORD_TO_UINT(_tmpWORD);]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

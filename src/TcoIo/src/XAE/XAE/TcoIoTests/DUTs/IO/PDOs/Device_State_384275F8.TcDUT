@@ -8,26 +8,25 @@
 {attribute addProperty Size "9"}
 TYPE Device_State_384275F8 EXTENDS TcoIo.InputBase_8311D824 :
 STRUCT
-	{attribute addProperty Name "IO_1_8"}
-	IO_1_8 AT %I* : BYTE;
-	{attribute addProperty Name "IO_9_10"}
-	IO_9_10 AT %I* : BYTE;
-	{attribute addProperty Name "ValveExtSupplyDiag_1_6"}
-	ValveExtSupplyDiag_1_6 AT %I* : BYTE;
-	{attribute addProperty Name "Supply"}
-	Supply AT %I* : BYTE;
-	{attribute addProperty Name "CommonValve"}
-	CommonValve AT %I* : BOOL;
-	{attribute addProperty Name "ConfigDiagnosisL"}
-	ConfigDiagnosisL AT %I* : BYTE;
-	{attribute addProperty Name "Switch_Count_Stored"}
-	Switch_Count_Stored AT %I* : BOOL;
-	{attribute addProperty Name "Heardbeat_x"}
-	Heardbeat_x AT %I* : BOOL;
-	{attribute addProperty Name "ConfigDiagnosisH"}
-	ConfigDiagnosisH AT %I* : BYTE;
+    {attribute addProperty Name "IO_1_8"}
+    IO_1_8 AT %I* : BYTE;
+    {attribute addProperty Name "IO_9_10"}
+    IO_9_10 AT %I* : BYTE;
+    {attribute addProperty Name "ValveExtSupplyDiag_1_6"}
+    ValveExtSupplyDiag_1_6 AT %I* : BYTE;
+    {attribute addProperty Name "Supply"}
+    Supply AT %I* : BYTE;
+    {attribute addProperty Name "CommonValve"}
+    CommonValve AT %I* : BOOL;
+    {attribute addProperty Name "ConfigDiagnosisL"}
+    ConfigDiagnosisL AT %I* : BYTE;
+    {attribute addProperty Name "Switch_Count_Stored"}
+    Switch_Count_Stored AT %I* : BOOL;
+    {attribute addProperty Name "Heardbeat_x"}
+    Heardbeat_x AT %I* : BOOL;
+    {attribute addProperty Name "ConfigDiagnosisH"}
+    ConfigDiagnosisH AT %I* : BYTE;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

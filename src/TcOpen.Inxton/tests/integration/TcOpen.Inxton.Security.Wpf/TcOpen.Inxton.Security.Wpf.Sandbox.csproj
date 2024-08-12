@@ -5,15 +5,19 @@
 	  <TargetFrameworks>net48;net5.0-windows</TargetFrameworks>
 	  <UseWPF>true</UseWPF>
 	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-  </PropertyGroup>  
+  </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Properties\**" />
     <EmbeddedResource Remove="Properties\**" />
-    <None Remove="Properties\**" />   
+    <None Remove="Properties\**" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\Security.Wpf\TcOpen.Inxton.Local.Security.Wpf.csproj" />
-    <ProjectReference Include="..\..\..\src\TcOpen.Inxton.Local.Security.Externals\TcOpen.Inxton.Local.Security.Readers.csproj" />
+    <ProjectReference
+      Include="..\..\..\src\Security.Wpf\TcOpen.Inxton.Local.Security.Wpf.csproj"
+    />
+    <ProjectReference
+      Include="..\..\..\src\TcOpen.Inxton.Local.Security.Externals\TcOpen.Inxton.Local.Security.Readers.csproj"
+    />
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainWindow.xaml">

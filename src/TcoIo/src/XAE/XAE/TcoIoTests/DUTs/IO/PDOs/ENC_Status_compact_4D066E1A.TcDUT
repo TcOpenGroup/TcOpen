@@ -8,14 +8,13 @@
 {attribute addProperty Size "16"}
 TYPE ENC_Status_compact_4D066E1A EXTENDS TcoIo.InputBase_8311D824 :
 STRUCT
-	{attribute addProperty Name "Status"}
-	Status AT %I* : Status_8CBE219F;
-	{attribute addProperty Name "Counter_value"}
-	Counter_value AT %I* : UINT;
-	{attribute addProperty Name "Latch_value"}
-	Latch_value AT %I* : UINT;
+    {attribute addProperty Name "Status"}
+    Status AT %I* : Status_8CBE219F;
+    {attribute addProperty Name "Counter_value"}
+    Counter_value AT %I* : UINT;
+    {attribute addProperty Name "Latch_value"}
+    Latch_value AT %I* : UINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

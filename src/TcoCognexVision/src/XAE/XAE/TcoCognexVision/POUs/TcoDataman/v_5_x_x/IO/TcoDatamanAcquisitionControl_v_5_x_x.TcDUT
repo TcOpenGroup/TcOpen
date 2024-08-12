@@ -3,10 +3,9 @@
   <DUT Name="TcoDatamanAcquisitionControl_v_5_x_x" Id="{7d3c6ca4-dd5c-405c-8b2a-6e42aecdfe2c}">
     <Declaration><![CDATA[TYPE TcoDatamanAcquisitionControl_v_5_x_x :
 STRUCT
-	TriggerEnable AT %Q*:  BOOL;
-	Trigger AT %Q*:  BOOL;
+    TriggerEnable AT %Q* : BOOL;
+    Trigger AT %Q* : BOOL;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

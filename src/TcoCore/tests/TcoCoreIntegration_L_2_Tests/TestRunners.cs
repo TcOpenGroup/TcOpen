@@ -9,7 +9,6 @@ namespace TcoCoreUnitTests
 {
     public static class TestRunners
     {
-
         //TcoContext
         public static void AddEmptyCycle(this ITestTcoContext context)
         {
@@ -23,10 +22,15 @@ namespace TcoCoreUnitTests
             action();
             context.ContextClose();
         }
-        public static void MultipleCycleRun(this ITestTcoContext context, Action action, ushort cycles)
+
+        public static void MultipleCycleRun(
+            this ITestTcoContext context,
+            Action action,
+            ushort cycles
+        )
         {
             ushort i = 0;
-            while(i < cycles)
+            while (i < cycles)
             {
                 context.ContextOpen();
                 action();
@@ -35,7 +39,11 @@ namespace TcoCoreUnitTests
             }
         }
 
-        public static void RunUntilEndConditionIsMet(this ITestTcoContext context, Action action, Func<bool> endCondition)
+        public static void RunUntilEndConditionIsMet(
+            this ITestTcoContext context,
+            Action action,
+            Func<bool> endCondition
+        )
         {
             while (!endCondition())
             {
@@ -62,14 +70,21 @@ namespace TcoCoreUnitTests
             sequencer.ContextOpen();
             sequencer.ContextClose();
         }
-        public static void SingleCycleRun(this ITestTcoSequencerAutoRestorable sequencer, Action action)
+
+        public static void SingleCycleRun(
+            this ITestTcoSequencerAutoRestorable sequencer,
+            Action action
+        )
         {
             sequencer.ContextOpen();
             action();
             sequencer.ContextClose();
         }
 
-        public static void SequencerSingleCycleRun(this ITestTcoSequencerAutoRestorable sequencer, Action action)
+        public static void SequencerSingleCycleRun(
+            this ITestTcoSequencerAutoRestorable sequencer,
+            Action action
+        )
         {
             sequencer.ContextOpen();
             sequencer.SequencerOpen();
@@ -77,8 +92,12 @@ namespace TcoCoreUnitTests
             sequencer.SequencerClose();
             sequencer.ContextClose();
         }
-        
-        public static void SequencerMultipleCyclesRun(this ITestTcoSequencerAutoRestorable sequencer, Action action, ushort cycles)
+
+        public static void SequencerMultipleCyclesRun(
+            this ITestTcoSequencerAutoRestorable sequencer,
+            Action action,
+            ushort cycles
+        )
         {
             ushort i = 0;
             while (i < cycles)
@@ -92,7 +111,11 @@ namespace TcoCoreUnitTests
             }
         }
 
-        public static void SequencerRunUntilEndConditionIsMet(this ITestTcoSequencerAutoRestorable sequencer, Action action, Func<bool> endCondition)
+        public static void SequencerRunUntilEndConditionIsMet(
+            this ITestTcoSequencerAutoRestorable sequencer,
+            Action action,
+            Func<bool> endCondition
+        )
         {
             while (!endCondition())
             {
@@ -104,7 +127,10 @@ namespace TcoCoreUnitTests
             }
         }
 
-        public static void SequencerRunUntilActionDone(this ITestTcoSequencerAutoRestorable sequencer, Func<bool> action)
+        public static void SequencerRunUntilActionDone(
+            this ITestTcoSequencerAutoRestorable sequencer,
+            Func<bool> action
+        )
         {
             bool actionDone = false;
             while (!actionDone)
@@ -123,14 +149,21 @@ namespace TcoCoreUnitTests
             sequencer.ContextOpen();
             sequencer.ContextClose();
         }
-        public static void SingleCycleRun(this ITestTcoSequencerNonAutoRestorable sequencer, Action action)
+
+        public static void SingleCycleRun(
+            this ITestTcoSequencerNonAutoRestorable sequencer,
+            Action action
+        )
         {
             sequencer.ContextOpen();
             action();
             sequencer.ContextClose();
         }
 
-        public static void SequencerSingleCycleRun(this ITestTcoSequencerNonAutoRestorable sequencer, Action action)
+        public static void SequencerSingleCycleRun(
+            this ITestTcoSequencerNonAutoRestorable sequencer,
+            Action action
+        )
         {
             sequencer.ContextOpen();
             sequencer.SequencerOpen();
@@ -139,7 +172,11 @@ namespace TcoCoreUnitTests
             sequencer.ContextClose();
         }
 
-        public static void SequencerMultipleCyclesRun(this ITestTcoSequencerNonAutoRestorable sequencer, Action action, ushort cycles)
+        public static void SequencerMultipleCyclesRun(
+            this ITestTcoSequencerNonAutoRestorable sequencer,
+            Action action,
+            ushort cycles
+        )
         {
             ushort i = 0;
             while (i < cycles)
@@ -153,7 +190,11 @@ namespace TcoCoreUnitTests
             }
         }
 
-        public static void SequencerRunUntilEndConditionIsMet(this ITestTcoSequencerNonAutoRestorable sequencer, Action action, Func<bool> endCondition)
+        public static void SequencerRunUntilEndConditionIsMet(
+            this ITestTcoSequencerNonAutoRestorable sequencer,
+            Action action,
+            Func<bool> endCondition
+        )
         {
             while (!endCondition())
             {
@@ -165,7 +206,10 @@ namespace TcoCoreUnitTests
             }
         }
 
-        public static void SequencerRunUntilActionDone(this ITestTcoSequencerNonAutoRestorable sequencer, Func<bool> action)
+        public static void SequencerRunUntilActionDone(
+            this ITestTcoSequencerNonAutoRestorable sequencer,
+            Func<bool> action
+        )
         {
             bool actionDone = false;
             while (!actionDone)
@@ -178,9 +222,6 @@ namespace TcoCoreUnitTests
             }
         }
 
-
-
-        
         //TcoMessengerContext
         public static void AddEmptyCycle(this ITestTcoMessengerContext context)
         {
@@ -194,7 +235,12 @@ namespace TcoCoreUnitTests
             action();
             context.ContextClose();
         }
-        public static void MultipleCycleRun(this ITestTcoMessengerContext context, Action action, ushort cycles)
+
+        public static void MultipleCycleRun(
+            this ITestTcoMessengerContext context,
+            Action action,
+            ushort cycles
+        )
         {
             ushort i = 0;
             while (i < cycles)
@@ -206,7 +252,11 @@ namespace TcoCoreUnitTests
             }
         }
 
-        public static void RunUntilEndConditionIsMet(this ITestTcoMessengerContext context, Action action, Func<bool> endCondition)
+        public static void RunUntilEndConditionIsMet(
+            this ITestTcoMessengerContext context,
+            Action action,
+            Func<bool> endCondition
+        )
         {
             while (!endCondition())
             {
@@ -216,7 +266,10 @@ namespace TcoCoreUnitTests
             }
         }
 
-        public static void RunUntilActionDone(this ITestTcoMessengerContext context, Func<bool> action)
+        public static void RunUntilActionDone(
+            this ITestTcoMessengerContext context,
+            Func<bool> action
+        )
         {
             bool actionDone = false;
             while (!actionDone)
@@ -240,7 +293,12 @@ namespace TcoCoreUnitTests
             action();
             context.ContextClose();
         }
-        public static void MultipleCycleRun(this ITestTcoComponent context, Action action, ushort cycles)
+
+        public static void MultipleCycleRun(
+            this ITestTcoComponent context,
+            Action action,
+            ushort cycles
+        )
         {
             ushort i = 0;
             while (i < cycles)
@@ -252,7 +310,11 @@ namespace TcoCoreUnitTests
             }
         }
 
-        public static void RunUntilEndConditionIsMet(this ITestTcoComponent context, Action action, Func<bool> endCondition)
+        public static void RunUntilEndConditionIsMet(
+            this ITestTcoComponent context,
+            Action action,
+            Func<bool> endCondition
+        )
         {
             while (!endCondition())
             {
@@ -272,7 +334,5 @@ namespace TcoCoreUnitTests
                 context.ContextClose();
             }
         }
-
     }
-
 }

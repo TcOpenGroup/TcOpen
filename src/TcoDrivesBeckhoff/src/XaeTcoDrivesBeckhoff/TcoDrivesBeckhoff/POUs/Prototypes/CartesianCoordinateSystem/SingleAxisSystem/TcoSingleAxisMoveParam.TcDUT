@@ -3,7 +3,7 @@
   <DUT Name="TcoSingleAxisMoveParam" Id="{2c49d046-447d-4c53-9394-7968396e8071}">
     <Declaration><![CDATA[TYPE TcoSingleAxisMoveParam :
 STRUCT
-   {attribute addProperty Name "<#Position#>"}
+    {attribute addProperty Name "<#Position#>"}
     Position : LREAL;
     {attribute addProperty Name "<#Velocity#>"}
     Velocity : LREAL;
@@ -14,7 +14,6 @@ STRUCT
     {attribute addProperty Name "<#Jerk#>"}
     Jerk : LREAL;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

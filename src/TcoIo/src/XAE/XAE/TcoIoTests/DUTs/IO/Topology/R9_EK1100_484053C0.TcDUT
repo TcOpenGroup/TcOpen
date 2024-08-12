@@ -9,32 +9,31 @@
 {attribute addProperty Name "R9 (EK1100)"}
 TYPE R9_EK1100_484053C0 EXTENDS EK1100_1FC0878B :
 STRUCT
-	{attribute addProperty Name "R9_A2 (EK1122)"}
-	{attribute addProperty PreviousPort "R9 (EK1100) : B"}
-	{attribute addProperty SyncUnit "default"}
-	R9_A2_EK1122 : R9_A2_EK1122_81F50509;
-	{attribute addProperty Name "R9_A3 (EK1122)"}
-	{attribute addProperty PreviousPort "R9_A2 (EK1122) : C"}
-	{attribute addProperty SyncUnit "default"}
-	R9_A3_EK1122 : R9_A3_EK1122_C18C26F5;
-	{attribute addProperty Name "R9_A5 (EL1809)"}
-	{attribute addProperty PreviousPort "R9_A3 (EK1122) : C"}
-	{attribute addProperty SyncUnit "default"}
-	R9_A5_EL1809 : EL1809_32157CFD;
-	{attribute addProperty Name "R9_A6 (EL2809)"}
-	{attribute addProperty PreviousPort "R9_A5 (EL1809) : B"}
-	{attribute addProperty SyncUnit "default"}
-	R9_A6_EL2809 : EL2809_2B6483BD;
-	{attribute addProperty Name "R9_A7 (EL2809)"}
-	{attribute addProperty PreviousPort "R9_A6 (EL2809) : B"}
-	{attribute addProperty SyncUnit "default"}
-	R9_A7_EL2809 : EL2809_2B6483BD;
-	{attribute addProperty Name "R9_EndTerminal (EL9011)"}
-	{attribute addProperty PreviousPort "R9_A7 (EL2809) : B"}
-	{attribute addProperty SyncUnit "default"}
-	R9_EndTerminal_EL9011 : EL9011_D65D3D32;
+    {attribute addProperty Name "R9_A2 (EK1122)"}
+    {attribute addProperty PreviousPort "R9 (EK1100) : B"}
+    {attribute addProperty SyncUnit "default"}
+    R9_A2_EK1122 : R9_A2_EK1122_81F50509;
+    {attribute addProperty Name "R9_A3 (EK1122)"}
+    {attribute addProperty PreviousPort "R9_A2 (EK1122) : C"}
+    {attribute addProperty SyncUnit "default"}
+    R9_A3_EK1122 : R9_A3_EK1122_C18C26F5;
+    {attribute addProperty Name "R9_A5 (EL1809)"}
+    {attribute addProperty PreviousPort "R9_A3 (EK1122) : C"}
+    {attribute addProperty SyncUnit "default"}
+    R9_A5_EL1809 : EL1809_32157CFD;
+    {attribute addProperty Name "R9_A6 (EL2809)"}
+    {attribute addProperty PreviousPort "R9_A5 (EL1809) : B"}
+    {attribute addProperty SyncUnit "default"}
+    R9_A6_EL2809 : EL2809_2B6483BD;
+    {attribute addProperty Name "R9_A7 (EL2809)"}
+    {attribute addProperty PreviousPort "R9_A6 (EL2809) : B"}
+    {attribute addProperty SyncUnit "default"}
+    R9_A7_EL2809 : EL2809_2B6483BD;
+    {attribute addProperty Name "R9_EndTerminal (EL9011)"}
+    {attribute addProperty PreviousPort "R9_A7 (EL2809) : B"}
+    {attribute addProperty SyncUnit "default"}
+    R9_EndTerminal_EL9011 : EL9011_D65D3D32;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

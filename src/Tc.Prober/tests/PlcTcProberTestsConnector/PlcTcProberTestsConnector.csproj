@@ -3,7 +3,8 @@
     <TargetFramework>net48</TargetFramework>
     <AssemblyVersion>0.3.0.0</AssemblyVersion>
     <FileVersion>0.3.0.0</FileVersion>
-    <InformationalVersion>0.3.0-alpha.1+Branch.develop.Sha.02a3c846fa59432b34737d664bc33a8546fd145a</InformationalVersion>
+    <InformationalVersion
+    >0.3.0-alpha.1+Branch.develop.Sha.02a3c846fa59432b34737d664bc33a8546fd145a</InformationalVersion>
 	<IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
@@ -12,7 +13,10 @@
     <None Remove="_generated\PlcTcProberTests\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="2.0.0" />
+    <PackageReference
+      Include="Inxton.Package.Vortex.Essentials"
+      Version="2.0.0"
+    />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Localizations.Designer.cs">

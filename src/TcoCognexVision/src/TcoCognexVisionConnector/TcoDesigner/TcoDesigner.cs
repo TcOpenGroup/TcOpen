@@ -11,6 +11,5 @@ namespace TcoCognexVisionConnector.TcoDesigner
     {
 
         //public ObservableCollection<TcoMultiAxisMoveParam> Positions { get { return Extensions.ToObservableCollection(((IVortexObject)_positions).GetChildren().OfType<TcoMultiAxisMoveParam>()); } }
-
     }
 }

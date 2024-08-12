@@ -3,12 +3,11 @@
   <DUT Name="RtcSynchParams" Id="{42dc72eb-0de2-035a-36d8-926288be288b}">
     <Declaration><![CDATA[TYPE RtcSynchParams :
 STRUCT
-	synchContextIdentity	:	ULINT;
-	doSynch					:	BOOL;
-	syncAmsId				:	STRING;
-	syncPeriod				:	UINT; 
+    synchContextIdentity : ULINT;
+    doSynch : BOOL;
+    syncAmsId : STRING;
+    syncPeriod : UINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

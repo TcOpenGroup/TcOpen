@@ -5,13 +5,11 @@
 {attribute 'strict'}
 TYPE eTcoMultiAxisSystem :
 (
-	SingleAxisSystem := 1,
-	TwoAxisSystem := 2,
-	ThreeAxisSystem := 3,
-	FourAxissystem := 4
-
+    SingleAxisSystem := 1,
+    TwoAxisSystem := 2,
+    ThreeAxisSystem := 3,
+    FourAxissystem := 4
 );
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

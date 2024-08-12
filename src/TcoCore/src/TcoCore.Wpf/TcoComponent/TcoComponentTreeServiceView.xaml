@@ -1,22 +1,33 @@
-﻿<UserControl x:Name="userControl" x:Class="TcoCore.TcoComponentTreeServiceView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:tcoCore="clr-namespace:TcoCore"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-               xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=PresentationFramework"
-               xmlns:p="clr-namespace:TcOpen.Inxton.TcoCore.Wpf.Properties"
-             xmlns:tcocorelocal="clr-namespace:Tco.Wpf"
-             xmlns:tcocore="clr-namespace:TcoCore;assembly=TcoCoreConnector" xmlns:vortex="http://vortex.mts/xaml"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+﻿<UserControl
+  x:Name="userControl"
+  x:Class="TcoCore.TcoComponentTreeServiceView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:tcoCore="clr-namespace:TcoCore"
+  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+  xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=PresentationFramework"
+  xmlns:p="clr-namespace:TcOpen.Inxton.TcoCore.Wpf.Properties"
+  xmlns:tcocorelocal="clr-namespace:Tco.Wpf"
+  xmlns:tcocore="clr-namespace:TcoCore;assembly=TcoCoreConnector"
+  xmlns:vortex="http://vortex.mts/xaml"
+  mc:Ignorable="d"
+  d:DesignHeight="450"
+  d:DesignWidth="800"
+>
     <d:UserControl.DataContext>
-        <tcocore:TcoComponent></tcocore:TcoComponent>
+        <tcocore:TcoComponent />
     </d:UserControl.DataContext>
     <UserControl.Resources>
         <ItemsPanelTemplate x:Key="HorizontalWraped">
-            <WrapPanel Background="Transparent" Width="{Binding (FrameworkElement.ActualWidth) , RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}" MinWidth="{Binding ItemWidth , RelativeSource={RelativeSource Self}}" ItemHeight="{Binding (ListView.View).ItemHeight , RelativeSource={RelativeSource AncestorType=ListView}}" ItemWidth="{Binding (ListView.View).ItemWidth , RelativeSource={RelativeSource AncestorType=ListView}}" />
+            <WrapPanel
+        Background="Transparent"
+        Width="{Binding (FrameworkElement.ActualWidth) , RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+        MinWidth="{Binding ItemWidth , RelativeSource={RelativeSource Self}}"
+        ItemHeight="{Binding (ListView.View).ItemHeight , RelativeSource={RelativeSource AncestorType=ListView}}"
+        ItemWidth="{Binding (ListView.View).ItemWidth , RelativeSource={RelativeSource AncestorType=ListView}}"
+      />
         </ItemsPanelTemplate>
 
     </UserControl.Resources>
@@ -24,59 +35,83 @@
 
     <StackPanel>
         <StackPanel.Resources>
-            <Style TargetType="{x:Type Expander}" BasedOn="{StaticResource {x:Type Expander}}">
+            <Style
+        TargetType="{x:Type Expander}"
+        BasedOn="{StaticResource {x:Type Expander}}"
+      >
                 <Style.Triggers>
-                    <Trigger Property="componentModel:DesignerProperties.IsInDesignMode" Value="True">
+                    <Trigger
+            Property="componentModel:DesignerProperties.IsInDesignMode"
+            Value="True"
+          >
                         <Setter Property="IsExpanded" Value="True" />
                     </Trigger>
                 </Style.Triggers>
             </Style>
         </StackPanel.Resources>
         <Expander
-                Margin="5,0,5,0"
-                Background="Transparent"
-                materialDesign:ExpanderAssist.HorizontalHeaderPadding="0"
-                materialDesign:ExpanderAssist.VerticalHeaderPadding="0"  >
+      Margin="5,0,5,0"
+      Background="Transparent"
+      materialDesign:ExpanderAssist.HorizontalHeaderPadding="0"
+      materialDesign:ExpanderAssist.VerticalHeaderPadding="0"
+    >
 
             <Expander.Header>
                 <Grid Grid.IsSharedSizeScope="True">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition MinWidth="150" SharedSizeGroup="NameGroup"/>
+                        <ColumnDefinition
+              MinWidth="150"
+              SharedSizeGroup="NameGroup"
+            />
                         <ColumnDefinition />
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
 
                     </Grid.ColumnDefinitions>
                     <TextBlock
-                            Grid.Column="0"
-                            Margin="5,0,5,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Style="{DynamicResource MaterialDesignBody1TextBlock}"
-                            Text="{Binding . , Converter={tcoCore:NameOrSymbolConverter}}"
-                            TextAlignment="Left"
-                            TextWrapping="WrapWithOverflow" />
-                
-                    <tcoCore:HealthIndicatorView  Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" DataContext="{Binding MessageHandler}" />
+            Grid.Column="0"
+            Margin="5,0,5,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Style="{DynamicResource MaterialDesignBody1TextBlock}"
+            Text="{Binding . , Converter={tcoCore:NameOrSymbolConverter}}"
+            TextAlignment="Left"
+            TextWrapping="WrapWithOverflow"
+          />
+
+                    <tcoCore:HealthIndicatorView
+            Grid.Column="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            DataContext="{Binding MessageHandler}"
+          />
                 </Grid>
             </Expander.Header>
             <Grid>
                 <Grid.Resources>
-                    
+
                     <Style TargetType="WrapPanel">
-                        <Setter Property="MinWidth" Value="300"></Setter>
+                        <Setter Property="MinWidth" Value="300" />
 
                     </Style>
                 </Grid.Resources>
                 <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <ItemsControl ItemsPanel="{StaticResource HorizontalWraped}"  HorizontalAlignment="Left" ItemsSource="{Binding Tasks}">
+                    <ItemsControl
+          ItemsPanel="{StaticResource HorizontalWraped}"
+          HorizontalAlignment="Left"
+          ItemsSource="{Binding Tasks}"
+        >
 
                         <ItemsControl.ItemTemplate>
-                            <DataTemplate> 
-                                <vortex:RenderableContentControl MinWidth="150" DataContext="{Binding}" Margin="5"></vortex:RenderableContentControl>
+                            <DataTemplate>
+                                <vortex:RenderableContentControl
+                MinWidth="150"
+                DataContext="{Binding}"
+                Margin="5"
+              />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
@@ -86,36 +121,75 @@
                         <TabItem Header="{x:Static p:strings.General}">
                             <WrapPanel Margin="10">
                                 <WrapPanel.Resources>
-                                    <Style TargetType="GroupBox"  BasedOn="{StaticResource MaterialDesignCardGroupBox}">
-                                        <Setter Property="MinWidth" Value="300"></Setter>
-                                        <Setter Property="Margin" Value="5,0,0,5"></Setter>
-                                        <Setter Property="Padding" Value="10"></Setter>
+                                    <Style
+                    TargetType="GroupBox"
+                    BasedOn="{StaticResource MaterialDesignCardGroupBox}"
+                  >
+                                        <Setter
+                      Property="MinWidth"
+                      Value="300"
+                    />
+                                        <Setter
+                      Property="Margin"
+                      Value="5,0,0,5"
+                    />
+                                        <Setter Property="Padding" Value="10" />
 
 
                                     </Style>
                                 </WrapPanel.Resources>
 
-                                <GroupBox   Header="{x:Static p:strings.Status}" Visibility="{Binding IsStatusControlRenderable,Converter={tcoCore:BooleanToVisibilityConverter}}">
-                                    <vortex:RenderableContentControl  DataContext="{Binding StatusControl}" PresentationType="DisplaySlim"    />
+                                <GroupBox
+                  Header="{x:Static p:strings.Status}"
+                  Visibility="{Binding IsStatusControlRenderable,Converter={tcoCore:BooleanToVisibilityConverter}}"
+                >
+                                    <vortex:RenderableContentControl
+                    DataContext="{Binding StatusControl}"
+                    PresentationType="DisplaySlim"
+                  />
 
                                 </GroupBox>
-                                <GroupBox  Header="{x:Static p:strings.Config}"  Visibility="{Binding IsConfigControlRenderable,Converter={tcoCore:BooleanToVisibilityConverter}}">
-                                    <vortex:RenderableContentControl  DataContext="{Binding ConfigControl }" PresentationType="ControlSlim"    />
+                                <GroupBox
+                  Header="{x:Static p:strings.Config}"
+                  Visibility="{Binding IsConfigControlRenderable,Converter={tcoCore:BooleanToVisibilityConverter}}"
+                >
+                                    <vortex:RenderableContentControl
+                    DataContext="{Binding ConfigControl }"
+                    PresentationType="ControlSlim"
+                  />
 
                                 </GroupBox>
-                                <GroupBox  Header="{x:Static p:strings.Components}"  Visibility="{Binding HasComponents,Converter={tcoCore:BooleanToVisibilityConverter}}">
-                                    <ItemsControl  HorizontalAlignment="Left" ItemsSource="{Binding Components}">
+                                <GroupBox
+                  Header="{x:Static p:strings.Components}"
+                  Visibility="{Binding HasComponents,Converter={tcoCore:BooleanToVisibilityConverter}}"
+                >
+                                    <ItemsControl
+                    HorizontalAlignment="Left"
+                    ItemsSource="{Binding Components}"
+                  >
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <vortex:RenderableContentControl MinWidth="150" DataContext="{Binding}" Margin="5"></vortex:RenderableContentControl>
+                                                <vortex:RenderableContentControl
+                          MinWidth="150"
+                          DataContext="{Binding}"
+                          Margin="5"
+                        />
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
                                 </GroupBox>
 
-                                <GroupBox  Header="{x:Static p:strings.Control}"  Visibility="{Binding IsControlRenderable,Converter={tcoCore:BooleanToVisibilityConverter}}">
+                                <GroupBox
+                  Header="{x:Static p:strings.Control}"
+                  Visibility="{Binding IsControlRenderable,Converter={tcoCore:BooleanToVisibilityConverter}}"
+                >
 
-                                    <vortex:RenderableContentControl MinWidth="150" DataContext="{Binding Control}" PresentationType="ControlSlim" Margin="5"></vortex:RenderableContentControl>
+                                    <vortex:RenderableContentControl
+                    MinWidth="150"
+                    DataContext="{Binding Control}"
+                    PresentationType="ControlSlim"
+                    Margin="5"
+                  />
 
                                 </GroupBox>
 
@@ -124,7 +198,9 @@
 
                         <TabItem Header="{x:Static p:strings.More}">
                             <ScrollViewer MaxHeight="1000">
-                                <tcocorelocal:DynamicTreeView DataContext="{Binding}" ></tcocorelocal:DynamicTreeView>
+                                <tcocorelocal:DynamicTreeView
+                  DataContext="{Binding}"
+                />
                             </ScrollViewer>
                         </TabItem>
                     </TabControl>

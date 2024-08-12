@@ -8,16 +8,15 @@
 {attribute addProperty Size "8"}
 TYPE Inputs_424E3ECB EXTENDS TcoIo.InputBase_8311D824 :
 STRUCT
-	{attribute addProperty Name "Statusword"}
-	Statusword AT %I* : UINT;
-	{attribute addProperty Name "Mode_Of_Operation_display"}
-	Mode_Of_Operation_display AT %I* : USINT;
-	{attribute addProperty Name "Position_Actual_Value"}
-	Position_Actual_Value AT %I* : DINT;
-	{attribute addProperty Name "Error_Register"}
-	Error_Register AT %I* : USINT;
+    {attribute addProperty Name "Statusword"}
+    Statusword AT %I* : UINT;
+    {attribute addProperty Name "Mode_Of_Operation_display"}
+    Mode_Of_Operation_display AT %I* : USINT;
+    {attribute addProperty Name "Position_Actual_Value"}
+    Position_Actual_Value AT %I* : DINT;
+    {attribute addProperty Name "Error_Register"}
+    Error_Register AT %I* : USINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

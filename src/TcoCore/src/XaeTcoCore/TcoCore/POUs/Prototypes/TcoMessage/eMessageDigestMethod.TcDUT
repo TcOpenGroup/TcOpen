@@ -2,53 +2,50 @@
 <TcPlcObject Version="1.1.0.1">
   <DUT Name="eMessageDigestMethod" Id="{2dd6fdc2-bd8a-025a-3bd8-7514543e911e}">
     <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Message digest methods used to create fingerprint of a message.							
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Message digest methods used to create fingerprint of a message.
+        </summary>
+    </docu>
 ~*)
 {attribute 'qualified_only'}
 {attribute 'strict'}
 TYPE eMessageDigestMethod :
-(	
-	(*~
-	<docu>
-		<summary>
-			 Fastest method with highest probability of colisions.							
-		</summary>			
-	</docu>	
-	~*)
-	CRC8 := 8,
-	(*~
-	<docu>
-		<summary>
-			 Moderate speed method with lower probability of colisions.							
-		</summary>			
-	</docu>	
-	~*)
-	CRC16 := 16,
-	(*~
-	<docu>
-		<summary>
-			 Slowest speed method with relatively low probability of colisions.							
-		</summary>			
-	</docu>	
-	~*)
-	CRC32 := 32,
-	
-	(*~
-	<docu>
-		<summary>
-			 Messages are not digested the repeated messages won't be filtered out. 
-			 Use this option on low performance devices. 			
-		</summary>			
-	</docu>	
-	~*)
-	NONE := 32767
-	
+(
+    (*~
+    <docu>
+        <summary>
+             Fastest method with highest probability of colisions.
+        </summary>
+    </docu>
+    ~*)
+    CRC8 := 8,
+    (*~
+    <docu>
+        <summary>
+             Moderate speed method with lower probability of colisions.
+        </summary>
+    </docu>
+    ~*)
+    CRC16 := 16,
+    (*~
+    <docu>
+        <summary>
+             Slowest speed method with relatively low probability of colisions.
+        </summary>
+    </docu>
+    ~*)
+    CRC32 := 32,
+    (*~
+    <docu>
+        <summary>
+             Messages are not digested the repeated messages won't be filtered out.
+             Use this option on low performance devices.
+        </summary>
+    </docu>
+    ~*)
+    NONE := 32767
 );
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

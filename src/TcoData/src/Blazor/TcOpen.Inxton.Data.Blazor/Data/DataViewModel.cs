@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using TcOpen.Inxton.Data;
 using TcOpen.Inxton.Local.Security.Blazor;
 using Vortex.Connector;
@@ -21,20 +21,26 @@ namespace TcoData
         Copy
     }
 
-    public class DataViewModel<T> : IDataViewModel where T : IBrowsableDataObject, new()
+    public class DataViewModel<T> : IDataViewModel
+        where T : IBrowsableDataObject, new()
     {
-        private void LogCommand(string commandName) => TcOpen.Inxton.TcoAppDomain.Current?.Logger?.Information<string>($"{DataExchange.Symbol}.{commandName}");
+        private void LogCommand(string commandName) =>
+            TcOpen.Inxton.TcoAppDomain.Current?.Logger?.Information<string>(
+                $"{DataExchange.Symbol}.{commandName}"
+            );
+
         private BlazorAlertManager _alertManager { get; set; }
 
-        public DataViewModel(IRepository<T> repository, TcoDataExchange dataExchange) : base()
+        public DataViewModel(IRepository<T> repository, TcoDataExchange dataExchange)
+            : base()
         {
             this.DataExchange = dataExchange;
             DataBrowser = CreateBrowsable(repository);
             FillObservableRecords();
         }
 
-        public List<IBrowsableDataObject> ObservableRecords { get; private set; } = new List<IBrowsableDataObject>();
-
+        public List<IBrowsableDataObject> ObservableRecords { get; private set; } =
+            new List<IBrowsableDataObject>();
 
         private DataBrowser<T> CreateBrowsable(IRepository<T> repository)
         {
@@ -44,15 +50,10 @@ namespace TcoData
         public DataBrowser<T> DataBrowser { get; set; }
         public TcoDataExchange DataExchange { get; }
 
-
         IBrowsableDataObject selectedRecord;
         public IBrowsableDataObject SelectedRecord
         {
-            get
-            {
-                return selectedRecord;
-            }
-
+            get { return selectedRecord; }
             set
             {
                 SetRowSelectedButtonState();
@@ -66,68 +67,49 @@ namespace TcoData
                 if (value != null)
                 {
                     ((dynamic)DataExchange)._data.CopyPlainToShadow((dynamic)value);
-                    ((ICrudDataObject)((dynamic)DataExchange)._data).Changes = ((IPlainTcoEntity)selectedRecord).Changes;
+                    ((ICrudDataObject)((dynamic)DataExchange)._data).Changes = (
+                        (IPlainTcoEntity)selectedRecord
+                    ).Changes;
                     Changes = ((ICrudDataObject)((dynamic)DataExchange)._data).Changes;
                 }
 
                 CrudDataObject?.ChangeTracker.StartObservingChanges();
-
-
-
             }
         }
 
         private ICrudDataObject CrudDataObject
         {
-            get
-            {
-                return ((dynamic)(this.DataExchange))._data as ICrudDataObject;
-            }
+            get { return ((dynamic)(this.DataExchange))._data as ICrudDataObject; }
         }
 
         List<ValueChangeItem> changes;
         public List<ValueChangeItem> Changes
         {
-            get
-            {
-                return changes;
-            }
-            set
-            {
-                changes = value;
-            }
+            get { return changes; }
+            set { changes = value; }
         }
-
-
-
 
         private ViewMode mode;
 
         public ViewMode Mode
         {
-            get
-            {
-                return mode;
-            }
+            get { return mode; }
             set { mode = value; }
         }
-       
 
         [Required(ErrorMessage = "The Name field is required")]
-       
         public string RecordIdentifier { get; set; }
-
 
         public int Limit { get; set; } = 10;
         public string FilterById { get; set; } = "";
         public eSearchMode SearchMode { get; set; } = eSearchMode.Exact;
         public long FilteredCount { get; set; }
         public int Page { get; set; } = 0;
+
         public async Task FillObservableRecordsAsync()
         {
             //let another thread to load records, we need main thread to show loading symbol in blazor page
             await Task.Run(() => FillObservableRecords());
-
         }
 
         public void FillObservableRecords()
@@ -140,12 +122,11 @@ namespace TcoData
                 ObservableRecords.Add(item);
             }
             FilteredCount = this.DataBrowser.FilteredCount(this.FilterById, SearchMode);
-
         }
 
         public void StartCreatingNew()
         {
-            this.Mode = ViewMode.New; 
+            this.Mode = ViewMode.New;
             RecordIdentifier = string.Empty;
             ViewModeNewCopy();
             LogCommand("StartCreatingNew");
@@ -158,13 +139,14 @@ namespace TcoData
             try
             {
                 DataBrowser.AddRecord(plainer);
-            } catch (DuplicateIdException)
+            }
+            catch (DuplicateIdException)
             {
                 Mode = ViewMode.Display;
                 SetDefaultButtonState();
                 return "Data with id " + RecordIdentifier + " already exist in database!";
             }
-            
+
             var plain = DataBrowser.FindById(plainer._EntityId);
             ((dynamic)DataExchange)._data.CopyPlainToShadow(plain);
             FillObservableRecords();
@@ -181,7 +163,6 @@ namespace TcoData
             ViewModeEdit();
             LogCommand("StartEdit");
         }
-
 
         public void Update()
         {
@@ -222,7 +203,6 @@ namespace TcoData
 
         public void StartCreatingRecordCopy()
         {
-
             RecordIdentifier = $"Copy of {SelectedRecord._EntityId}";
             this.Mode = ViewMode.Copy;
             ViewModeNewCopy();
@@ -267,12 +247,11 @@ namespace TcoData
             this.Mode = ViewMode.Edit;
             ViewModeEdit();
             LogCommand("LoadFromPlc");
-
         }
 
         public void SendToPlc()
         {
-                ((dynamic)DataExchange)._data.FlushPlainToOnline((dynamic)this.SelectedRecord);
+            ((dynamic)DataExchange)._data.FlushPlainToOnline((dynamic)this.SelectedRecord);
             //}, $"{((dynamic)DataExchange)._data._EntityId}", () => MessageBox.Show($"{strings.LoadToController} '{((dynamic)this.SelectedRecord)._EntityId}'?", "Data", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes);
             LogCommand("SendToPlc");
         }
@@ -326,6 +305,7 @@ namespace TcoData
             CancelDisabled = true;
             DeleteDisabled = false;
         }
+
         private void ViewModeNewCopy()
         {
             NewDisabled = true;
@@ -355,14 +335,15 @@ namespace TcoData
         }
     }
 
-   
-
     public class DataViewModel
     {
-        public static DataViewModel<T> Create<T>(IRepository<T> repository, TcoDataExchange dataExchange) where T : IBrowsableDataObject, new()
+        public static DataViewModel<T> Create<T>(
+            IRepository<T> repository,
+            TcoDataExchange dataExchange
+        )
+            where T : IBrowsableDataObject, new()
         {
             return new DataViewModel<T>(repository, dataExchange);
         }
     }
-
 }

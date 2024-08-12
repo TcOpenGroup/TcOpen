@@ -3,10 +3,9 @@
   <DUT Name="CylinderConfig" Id="{a5fb1882-7d31-063a-23e4-5151e21fced4}">
     <Declaration><![CDATA[TYPE CylinderConfig :
 STRUCT
-	TimeToReachHomePosition : TIME := T#10S;
-	TimeToReachWorkPosition : TIME := T#10S;
+    TimeToReachHomePosition : TIME := T#10S;
+    TimeToReachWorkPosition : TIME := T#10S;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

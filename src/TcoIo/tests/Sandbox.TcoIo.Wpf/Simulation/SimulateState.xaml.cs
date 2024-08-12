@@ -27,7 +27,6 @@ namespace Sandbox.TcoIo.Wpf.Simulation
             InitializeComponent();
         }
 
-
         private void btsSetState_Click(object sender, RoutedEventArgs e)
         {
             UpdateDesc();
@@ -38,11 +37,17 @@ namespace Sandbox.TcoIo.Wpf.Simulation
         {
             if (obj != null)
             {
-                IVortexObject InfoData = obj.GetKids().Where(i => i.AttributeName.Contains("InfoData")).FirstOrDefault() as IVortexObject;
+                IVortexObject InfoData =
+                    obj.GetKids().Where(i => i.AttributeName.Contains("InfoData")).FirstOrDefault()
+                    as IVortexObject;
 
                 if (InfoData != null)
                 {
-                    IVortexElement State = InfoData.GetKids().Where(i => i.AttributeName.Contains("State")).FirstOrDefault() as IVortexElement;
+                    IVortexElement State =
+                        InfoData
+                            .GetKids()
+                            .Where(i => i.AttributeName.Contains("State"))
+                            .FirstOrDefault() as IVortexElement;
                     if (State != null)
                     {
                         try
@@ -68,28 +73,44 @@ namespace Sandbox.TcoIo.Wpf.Simulation
                                     (State as IOnlineUInt).Cyclic = 8;
                                     break;
                                 case etcSlaveState.ERROR:
-                                    (State as IOnlineUInt).Synchron = (ushort)((State as IOnlineUInt).Synchron | 0x0010);
+                                    (State as IOnlineUInt).Synchron = (ushort)(
+                                        (State as IOnlineUInt).Synchron | 0x0010
+                                    );
                                     break;
                                 case etcSlaveState.InvalidVendorId:
-                                    (State as IOnlineUInt).Synchron = (ushort)((State as IOnlineUInt).Synchron | 0x0020);
+                                    (State as IOnlineUInt).Synchron = (ushort)(
+                                        (State as IOnlineUInt).Synchron | 0x0020
+                                    );
                                     break;
                                 case etcSlaveState.InitializationError:
-                                    (State as IOnlineUInt).Synchron = (ushort)((State as IOnlineUInt).Synchron | 0x0040);
+                                    (State as IOnlineUInt).Synchron = (ushort)(
+                                        (State as IOnlineUInt).Synchron | 0x0040
+                                    );
                                     break;
                                 case etcSlaveState.SlaveDisabled:
-                                    (State as IOnlineUInt).Synchron = (ushort)((State as IOnlineUInt).Synchron | 0x0080);
+                                    (State as IOnlineUInt).Synchron = (ushort)(
+                                        (State as IOnlineUInt).Synchron | 0x0080
+                                    );
                                     break;
                                 case etcSlaveState.SlaveNotPresent:
-                                    (State as IOnlineUInt).Synchron = (ushort)((State as IOnlineUInt).Synchron | 0x0100);
+                                    (State as IOnlineUInt).Synchron = (ushort)(
+                                        (State as IOnlineUInt).Synchron | 0x0100
+                                    );
                                     break;
                                 case etcSlaveState.SlaveSignalsLinkError:
-                                    (State as IOnlineUInt).Synchron = (ushort)((State as IOnlineUInt).Synchron | 0x0200);
+                                    (State as IOnlineUInt).Synchron = (ushort)(
+                                        (State as IOnlineUInt).Synchron | 0x0200
+                                    );
                                     break;
                                 case etcSlaveState.SlaveSignalsMissingLink:
-                                    (State as IOnlineUInt).Synchron = (ushort)((State as IOnlineUInt).Synchron | 0x0400);
+                                    (State as IOnlineUInt).Synchron = (ushort)(
+                                        (State as IOnlineUInt).Synchron | 0x0400
+                                    );
                                     break;
                                 case etcSlaveState.SlaveSignalsUnexpectedLink:
-                                    (State as IOnlineUInt).Synchron = (ushort)((State as IOnlineUInt).Synchron | 0x0800);
+                                    (State as IOnlineUInt).Synchron = (ushort)(
+                                        (State as IOnlineUInt).Synchron | 0x0800
+                                    );
                                     break;
                                 default:
                                     break;
@@ -166,7 +187,10 @@ namespace Sandbox.TcoIo.Wpf.Simulation
             }
         }
 
-        private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void UserControl_DataContextChanged(
+            object sender,
+            DependencyPropertyChangedEventArgs e
+        )
         {
             UpdateDesc();
         }
@@ -189,8 +213,6 @@ namespace Sandbox.TcoIo.Wpf.Simulation
             SlaveSignalsUnexpectedLink
         }
 
-
-
         public etcSlaveState SimulatedState
         {
             get { return (etcSlaveState)GetValue(SimulatedStateProperty); }
@@ -199,8 +221,11 @@ namespace Sandbox.TcoIo.Wpf.Simulation
 
         // Using a DependencyProperty as the backing store for SimulatedState.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SimulatedStateProperty =
-            DependencyProperty.Register("SimulatedState", typeof(etcSlaveState), typeof(SimulateState), new PropertyMetadata(etcSlaveState.NONE));
-
-
+            DependencyProperty.Register(
+                "SimulatedState",
+                typeof(etcSlaveState),
+                typeof(SimulateState),
+                new PropertyMetadata(etcSlaveState.NONE)
+            );
     }
 }

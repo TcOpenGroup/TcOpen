@@ -14,8 +14,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\TcoData\src\Repository\RavenDb\TcOpen.Inxton.RavenDb\TcOpen.Inxton.RavenDb.csproj" />
-    <ProjectReference Include="..\..\src\TcOpen.Inxton.RepositoryDataSet\TcOpen.Inxton.RepositoryDataSet.csproj" />
+    <ProjectReference
+      Include="..\..\..\TcoData\src\Repository\RavenDb\TcOpen.Inxton.RavenDb\TcOpen.Inxton.RavenDb.csproj"
+    />
+    <ProjectReference
+      Include="..\..\src\TcOpen.Inxton.RepositoryDataSet\TcOpen.Inxton.RepositoryDataSet.csproj"
+    />
   </ItemGroup>
 
 </Project>

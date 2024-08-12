@@ -4,10 +4,9 @@
     <Declaration><![CDATA[{attribute 'hide'}
 FUNCTION_BLOCK TcoTier EXTENDS TcoObject
 VAR
-	{attribute 'hide'}
-	_nextExpectedCycle : ULINT;
-END_VAR
-]]></Declaration>
+    {attribute 'hide'}
+    _nextExpectedCycle : ULINT;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
@@ -15,21 +14,16 @@ END_VAR
       <Declaration><![CDATA[{attribute 'hide'}
 METHOD FB_init : BOOL
 VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	ParentObject : ITcoObject;	
-END_VAR
-
-
-]]></Declaration>
+    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+    ParentObject : ITcoObject;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="IsNewTier" Id="{2a34a065-ff45-0b48-32a5-c0e71a5c55c9}">
-      <Declaration><![CDATA[METHOD IsNewTier : BOOL
-
-]]></Declaration>
+      <Declaration><![CDATA[METHOD IsNewTier : BOOL]]></Declaration>
       <Implementation>
         <ST><![CDATA[IsNewTier := THIS^.Context.StartCycleCount <> _nextExpectedCycle;
 _nextExpectedCycle := THIS^.Context.StartCycleCount + 1;]]></ST>

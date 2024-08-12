@@ -11,7 +11,7 @@ namespace TcOpen.Inxton.Swift.Wpf
 {
     public class SwiftRecorderViewModel : BindableBase
     {
-        public SwiftRecorderViewModel(IVortexObject treeRootObject) 
+        public SwiftRecorderViewModel(IVortexObject treeRootObject)
         {
             TreeRootObject = treeRootObject;
             StartRecordingCommand = new RelayCommand(a => StartRecording());
@@ -25,6 +25,7 @@ namespace TcOpen.Inxton.Swift.Wpf
         }
 
         private Recorder _recorder;
+
         private void StartRecording()
         {
             _recorder = new Recorder(this.SelectedObject);
@@ -46,7 +47,8 @@ namespace TcOpen.Inxton.Swift.Wpf
         string code;
         public string Code
         {
-            get => code; set
+            get => code;
+            set
             {
                 if (code == value)
                 {
@@ -60,7 +62,8 @@ namespace TcOpen.Inxton.Swift.Wpf
         IVortexObject treeRootObject;
         public IVortexObject TreeRootObject
         {
-            get => treeRootObject; set
+            get => treeRootObject;
+            set
             {
                 if (treeRootObject == value)
                 {
@@ -74,7 +77,7 @@ namespace TcOpen.Inxton.Swift.Wpf
         IVortexObject selectedObject;
         public IVortexObject SelectedObject
         {
-            get => selectedObject; 
+            get => selectedObject;
             set
             {
                 if (selectedObject == value)

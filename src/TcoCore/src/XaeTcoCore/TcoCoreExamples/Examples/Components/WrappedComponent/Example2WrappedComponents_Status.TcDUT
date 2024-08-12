@@ -1,14 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <DUT Name="Example2WrappedComponents_Status" Id="{3620ef04-1004-056c-0ae0-d5bc7f4f04d1}">
-    <Declaration><![CDATA[TYPE Example2WrappedComponents_Status EXTENDS TcoCore.TcoStruct:
+    <Declaration><![CDATA[TYPE Example2WrappedComponents_Status EXTENDS TcoCore.TcoStruct :
 STRUCT
-
-		Feedback1:INT;
-		Feedback2:BOOL;
-		Feedback3:STRING;
+    Feedback1 : INT;
+    Feedback2 : BOOL;
+    Feedback3 : STRING;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

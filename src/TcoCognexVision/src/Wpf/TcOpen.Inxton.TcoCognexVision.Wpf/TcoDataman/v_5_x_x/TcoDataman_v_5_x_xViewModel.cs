@@ -1,9 +1,9 @@
 ﻿using System.Collections.ObjectModel;
-using Vortex.Presentation.Wpf;
-using TcoCognexVision.Converters;
-using Vortex.Connector;
 using System.Text;
+using TcoCognexVision.Converters;
 using TcoCore;
+using Vortex.Connector;
+using Vortex.Presentation.Wpf;
 
 namespace TcoCognexVision
 {
@@ -19,49 +19,67 @@ namespace TcoCognexVision
                 UpdateAndFormatResultData();
             }
         }
-        public ObservableCollection<IndexedData<string>> ResultData { get ; private set; }= new ObservableCollection<IndexedData<string>>();
-        public TcoDataman_v_5_x_xViewModel() : base()
+        public ObservableCollection<IndexedData<string>> ResultData { get; private set; } =
+            new ObservableCollection<IndexedData<string>>();
+
+        public TcoDataman_v_5_x_xViewModel()
+            : base()
         {
             ResultData = new ObservableCollection<IndexedData<string>>();
             //Model = new TcoDataman_v_5_x_x(new EmptyIVortexObject(), "Root", "Root");
-             Model = new TcoDataman_v_5_x_x();
+            Model = new TcoDataman_v_5_x_x();
         }
+
         public TcoDataman_v_5_x_x Component { get; private set; }
-        public override object Model 
-        { 
-            get => Component; 
-            set 
+        public override object Model
+        {
+            get => Component;
+            set
             {
-                Component = value as TcoDataman_v_5_x_x ;
+                Component = value as TcoDataman_v_5_x_x;
                 UpdateAndFormatResultData();
                 Component._results.Length.Subscribe((sender, arg) => UpdateAndFormatResultData());
                 Component._results.Id.Subscribe((sender, arg) => UpdateAndFormatResultData());
             }
         }
+
         private void UpdateAndFormatResultData()
         {
             TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() =>
             {
                 try
                 {
-              
-                     ResultData.Clear();
+                    ResultData.Clear();
 
-                    if (Component != null && Component.GetConnector() != null && Component._results != null)
+                    if (
+                        Component != null
+                        && Component.GetConnector() != null
+                        && Component._results != null
+                    )
                     {
                         Component._results.Read();
                         if (CurrentDisplayFormat == eDisplayFormat.Array_of_decimals)
                         {
                             for (int i = 0; i < Component._results.Length.LastValue; i++)
                             {
-                                ResultData.Add(new IndexedData<string>(i, Component._results.Data[i].LastValue.ToString()));
+                                ResultData.Add(
+                                    new IndexedData<string>(
+                                        i,
+                                        Component._results.Data[i].LastValue.ToString()
+                                    )
+                                );
                             }
                         }
                         else if (CurrentDisplayFormat == eDisplayFormat.Array_of_hexdecimals)
                         {
                             for (int i = 0; i < Component._results.Length.LastValue; i++)
                             {
-                                ResultData.Add(new IndexedData<string>(i, Component._results.Data[i].LastValue.ToString("X")));
+                                ResultData.Add(
+                                    new IndexedData<string>(
+                                        i,
+                                        Component._results.Data[i].LastValue.ToString("X")
+                                    )
+                                );
                             }
                         }
                         else if (CurrentDisplayFormat == eDisplayFormat.String)
@@ -73,7 +91,9 @@ namespace TcoCognexVision
                                 if (_byte >= 32)
                                     _string = Encoding.Default.GetString(new byte[] { _byte });
                                 else
-                                    _string = SpecialAsciiToSignConverters.SpecialAsciiToSign(_byte);
+                                    _string = SpecialAsciiToSignConverters.SpecialAsciiToSign(
+                                        _byte
+                                    );
 
                                 ResultData.Add(new IndexedData<string>(i, _string));
                             }
@@ -82,15 +102,11 @@ namespace TcoCognexVision
                 }
                 catch (System.Exception ex)
                 {
-
                     throw;
                 }
             });
         }
     }
-    public class TcoDataman_v_5_x_xServiceViewModel : TcoDataman_v_5_x_xViewModel
-    {
 
-    }
+    public class TcoDataman_v_5_x_xServiceViewModel : TcoDataman_v_5_x_xViewModel { }
 }
-

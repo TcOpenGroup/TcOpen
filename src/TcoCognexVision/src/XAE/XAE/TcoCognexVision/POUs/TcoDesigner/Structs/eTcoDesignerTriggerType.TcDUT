@@ -5,11 +5,10 @@
 {attribute 'strict'}
 TYPE eTcoDesignerTriggerType :
 (
-	Trigger := 0,
-	TriggerFast:=1,
-	TriggerWithTimeout:=2
+    Trigger := 0,
+    TriggerFast := 1,
+    TriggerWithTimeout := 2
 );
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

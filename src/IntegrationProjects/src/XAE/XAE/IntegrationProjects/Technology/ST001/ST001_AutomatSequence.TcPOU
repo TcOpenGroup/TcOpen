@@ -3,123 +3,96 @@
   <POU Name="ST001_AutomatSequence" Id="{64c860e5-7a30-0da6-3fb2-b6e5c3d92cb4}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ST001_AutomatSequence EXTENDS TcoCore.TcoSequencer
 VAR_IN_OUT
-	inoComponents : ST001_ComponentsHandler;	
+    inoComponents : ST001_ComponentsHandler;
 END_VAR
 VAR
-	_gTimer_1 : Tc2_Standard.TON;
-END_VAR
-]]></Declaration>
+    _gTimer_1 : Tc2_Standard.TON;
+END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
-]]></ST>
+      <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Main" Id="{aa724adc-bfba-05eb-3877-cd9dc146c892}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Main method of the sequener. Custom code needs to be placed here. The sequencer is executed by call of InstanceName.Run() method.
-			This method is abstract, and it must be overridden in derived block.
-		</summary>
-	</docu>
+    <docu>
+        <summary>
+            Main method of the sequener. Custom code needs to be placed here. The sequencer is executed by call of InstanceName.Run() method.
+            This method is abstract, and it must be overridden in derived block.
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED  Main : BOOL
-]]></Declaration>
+METHOD PROTECTED Main : BOOL]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF(NOT __ISVALIDREF(inoComponents)) THEN
-	Messenger.Programming('Invalid reference to inoComponents');
-	RETURN;
+        <ST><![CDATA[IF (NOT __ISVALIDREF(inoComponents)) THEN
+    Messenger.Programming('Invalid reference to inoComponents');
+    RETURN;
 END_IF
 
-
-IF(Step(inStepID  			:= 100,
-	    inEnabled 			:= TRUE,
-	    inStepDescription 	:= '<#LOAD PART INTO FIXTURE#>')) 
-THEN
-//---------------------------------------	    
-	IF(inoComponents.PartPresent.IsTrue) THEN
-		THIS^.CompleteStep();		
-	END_IF;
-//---------------------------------------
+IF (Step(inStepID := 100, inEnabled := TRUE, inStepDescription := '<#LOAD PART INTO FIXTURE#>')) THEN
+    //---------------------------------------
+    IF (inoComponents.PartPresent.IsTrue) THEN
+        THIS^.CompleteStep();
+    END_IF;
+    //---------------------------------------
 END_IF;
 
-IF(Step(inStepID  			:= 200,
-	    inEnabled 			:= TRUE,
-	    inStepDescription 	:= '<#PRESS START BUTTON TO START OPERATIONS#>')) 
-THEN
-//---------------------------------------
-	IF(inoComponents._startButton.IsTrue) THEN
-		THIS^.CompleteStep();		
-	END_IF;
-//---------------------------------------
+IF (Step(inStepID := 200, inEnabled := TRUE, inStepDescription := '<#PRESS START BUTTON TO START OPERATIONS#>')) THEN
+    //---------------------------------------
+    IF (inoComponents._startButton.IsTrue) THEN
+        THIS^.CompleteStep();
+    END_IF;
+    //---------------------------------------
 END_IF;
 
-IF(Step(inStepID  			:= 300,
-	    inEnabled 			:= TRUE,
-	    inStepDescription 	:= '<#PRESSING#>')) 
-THEN
-//---------------------------------------
-	_gTimer_1(IN := inoComponents.Press.MoveToWork().Done, PT := T#500MS);
-	IF(_gTimer_1.Q) THEN
-		THIS^.CompleteStep();		
-	END_IF;
-//---------------------------------------
+IF (Step(inStepID := 300, inEnabled := TRUE, inStepDescription := '<#PRESSING#>')) THEN
+    //---------------------------------------
+    _gTimer_1(IN := inoComponents.Press.MoveToWork().Done, PT := T#500MS);
+
+    IF (_gTimer_1.Q) THEN
+        THIS^.CompleteStep();
+    END_IF;
+    //---------------------------------------
 END_IF;
 
-IF(Step(inStepID  			:= 400,
-	    inEnabled 			:= TRUE,
-	    inStepDescription 	:= '<#MOVING PRESS TO HOME POSITION#>')) 
-THEN
-//---------------------------------------
-	IF(inoComponents.Press.MoveToHome().Done) THEN
-		THIS^.CompleteStep();		
-	END_IF;
-//---------------------------------------
+IF (Step(inStepID := 400, inEnabled := TRUE, inStepDescription := '<#MOVING PRESS TO HOME POSITION#>')) THEN
+    //---------------------------------------
+    IF (inoComponents.Press.MoveToHome().Done) THEN
+        THIS^.CompleteStep();
+    END_IF;
+    //---------------------------------------
 END_IF;
 
-IF(Step(inStepID  			:= 500,
-	    inEnabled 			:= TRUE,
-	    inStepDescription 	:= '<#REMOVE PART FROM THE FIXTURE#>')) 
-THEN
-//---------------------------------------
-	IF(inoComponents.PartPresent.IsFalse) THEN
-		THIS^.CompleteStep();		
-	END_IF;
-//---------------------------------------
+IF (Step(inStepID := 500, inEnabled := TRUE, inStepDescription := '<#REMOVE PART FROM THE FIXTURE#>')) THEN
+    //---------------------------------------
+    IF (inoComponents.PartPresent.IsFalse) THEN
+        THIS^.CompleteStep();
+    END_IF;
+    //---------------------------------------
 END_IF;
 
-IF(Step(inStepID  			:= 600,
-	    inEnabled 			:= TRUE,
-	    inStepDescription 	:= '<#SAVE DATA#>')) 
-THEN
-//---------------------------------------
-	IF(THIS^.Station^.Settings.Create(ULINT_TO_STRING(Context.RealTimeClock.TickClock())).Done) THEN
-		THIS^.CompleteStep();		
-	END_IF;
-//---------------------------------------
+IF (Step(inStepID := 600, inEnabled := TRUE, inStepDescription := '<#SAVE DATA#>')) THEN
+    //---------------------------------------
+    IF (THIS^.Station^.Settings.Create(ULINT_TO_STRING(Context.RealTimeClock.TickClock())).Done) THEN
+        THIS^.CompleteStep();
+    END_IF;
+    //---------------------------------------
 END_IF;
 
-		
-
-IF(Step(inStepID  			:= MaxStepID - 1,
-	    inEnabled 			:= TRUE,
-	    inStepDescription 	:= '<#OPERATIONS COMPLETED#>')) 
-THEN
-//---------------------------------------
-	CompleteSequence();	
-//---------------------------------------
+IF (Step(inStepID := MaxStepID - 1, inEnabled := TRUE, inStepDescription := '<#OPERATIONS COMPLETED#>')) THEN
+    //---------------------------------------
+    CompleteSequence();
+    //---------------------------------------
 END_IF;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStateChange" Id="{15ecf771-6d49-0290-1ff4-87a91e015add}">
       <Declaration><![CDATA[METHOD PROTECTED OnStateChange
 VAR_INPUT
-	PreviousState	: INT;
-	NewState 		: INT;
-END_VAR
-]]></Declaration>
+    PreviousState : INT;
+    NewState : INT;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF(NOT __ISVALIDREF(inoComponents)) THEN
-	RETURN;
+        <ST><![CDATA[IF (NOT __ISVALIDREF(inoComponents)) THEN
+    RETURN;
 END_IF
 
 inoComponents.Press.Restore();
@@ -130,13 +103,12 @@ _gTimer_1(IN := FALSE);]]></ST>
       <Declaration><![CDATA[PROPERTY Station : POINTER TO ST001]]></Declaration>
       <Get Name="Get" Id="{487dd69d-f10f-00a1-304f-4eb3a9eef535}">
         <Declaration><![CDATA[VAR
-	refStation : POINTER TO ST001;
-END_VAR
-]]></Declaration>
+    refStation : POINTER TO ST001;
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[IF(__QUERYPOINTER(Parent,  refStation)) THEN
-	Station := refStation;
-END_IF;	]]></ST>
+          <ST><![CDATA[IF (__QUERYPOINTER(Parent, refStation)) THEN
+    Station := refStation;
+END_IF;]]></ST>
         </Implementation>
       </Get>
     </Property>

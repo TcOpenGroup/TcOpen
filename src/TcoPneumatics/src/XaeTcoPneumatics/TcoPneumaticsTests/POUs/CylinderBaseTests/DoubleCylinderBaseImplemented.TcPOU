@@ -1,25 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
   <POU Name="DoubleCylinderBaseImplemented" Id="{96688d48-3e7e-0014-2727-2445de349ebf}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK DoubleCylinderBaseImplemented  EXTENDS TcoPneumatics.TcoDoubleCylinderBase
-]]></Declaration>
+    <Declaration><![CDATA[FUNCTION_BLOCK DoubleCylinderBaseImplemented EXTENDS TcoPneumatics.TcoDoubleCylinderBase]]></Declaration>
     <Implementation>
-      <ST><![CDATA[SUPER^(inoAtHomePos1 := inoAtHomePos1,inoAtHomePos2 := inoAtHomePos2, inoAtWorkPos1 := inoAtWorkPos1,inoAtWorkPos2 := inoAtWorkPos2, inoToHomePos := inoToHomePos, inoToWorkPos := inoToWorkPos);]]></ST>
+      <ST><![CDATA[SUPER^(inoAtHomePos1 := inoAtHomePos1,
+    inoAtHomePos2 := inoAtHomePos2,
+    inoAtWorkPos1 := inoAtWorkPos1,
+    inoAtWorkPos2 := inoAtWorkPos2,
+    inoToHomePos := inoToHomePos,
+    inoToWorkPos := inoToWorkPos);]]></ST>
     </Implementation>
     <Property Name="MoveHomeTask" Id="{df688880-b7dd-080b-06e9-e459028a2fd8}">
       <Declaration><![CDATA[PROPERTY MoveHomeTask : TcoCore.ITcoTask]]></Declaration>
       <Get Name="Get" Id="{8c28e51f-f44d-0626-3637-c3f7c8f251af}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[]]></ST>
         </Implementation>
       </Get>
       <Set Name="Set" Id="{4e4f657a-f2c6-03cf-0c03-a7cce6b6f8f5}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[]]></ST>
         </Implementation>
@@ -29,16 +31,14 @@ END_VAR
       <Declaration><![CDATA[PROPERTY MoveWorkTask : TcoCore.ITcoTask]]></Declaration>
       <Get Name="Get" Id="{f92b3cdc-9ec0-09d8-025d-bf979f706c25}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[]]></ST>
         </Implementation>
       </Get>
       <Set Name="Set" Id="{594a452f-f1fa-0992-0445-a40e42f2918a}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[]]></ST>
         </Implementation>
@@ -48,16 +48,14 @@ END_VAR
       <Declaration><![CDATA[PROPERTY StopTask : TcoCore.ITcoTask]]></Declaration>
       <Get Name="Get" Id="{044a8542-f139-0d2c-1579-57075c051b03}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[]]></ST>
         </Implementation>
       </Get>
       <Set Name="Set" Id="{2d423797-dc04-08b9-0ab2-8e4de40450af}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[]]></ST>
         </Implementation>

@@ -1,15 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components;
+using TcOpen.Inxton.TcoCore.Blazor;
+using TcOpen.Inxton.VortexElementExtensions;
 using Vortex.Connector;
 using Vortex.Connector.ValueTypes;
-using TcOpen.Inxton.VortexElementExtensions;
-using TcOpen.Inxton.TcoCore.Blazor;
 
 namespace TcoCore
 {
     public partial class TcoTaskView
     {
-
-
         protected override void OnInitialized()
         {
             if (ViewModel == null)
@@ -21,12 +19,14 @@ namespace TcoCore
             IsTaskRunning = ViewModel.Component.GetTaskState();
             ViewModel.Component._taskState.Subscribe(TaskStateChanged);
             ButtonState = ViewModel.Component.StateToButtonClass();
-
-        }        
+        }
 
         public string ButtonState { get; set; } = "btn btn-secondary";
 
-        public string ButtonCaption { get { return ViewModel.Component.GetNameOrSymbol(); } }
+        public string ButtonCaption
+        {
+            get { return ViewModel.Component.GetNameOrSymbol(); }
+        }
 
         public bool IsTaskRunning { get; set; }
 

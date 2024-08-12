@@ -8,42 +8,37 @@ END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
-	//*	{attribute addProperty Name "<#Ecat slave state#>"}
-	_ecatState:TcoEcatSlaveState(THIS^);
-	{attribute 'hide'} 
-	_sb : TcoCore.StringBuilder;
-
-END_VAR
-]]></Declaration>
+    //*	{attribute addProperty Name "<#Ecat slave state#>"}
+    _ecatState : TcoEcatSlaveState(THIS^);
+    {attribute 'hide'}
+    _sb : TcoCore.StringBuilder;
+END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[_ecatState(AdsAddr:=AdsAddr);]]></ST>
+      <ST><![CDATA[_ecatState(AdsAddr := AdsAddr);]]></ST>
     </Implementation>
     <Folder Name="Public" Id="{38e602a5-760f-0e19-1e22-c3acdaaaa854}" />
     <Property Name="EcatState" Id="{0a3da69a-83fa-0ae4-0ad4-970396b43f33}" FolderPath="Public\">
       <Declaration><![CDATA[PROPERTY PUBLIC EcatState : REFERENCE TO TcoEcatSlaveState]]></Declaration>
       <Get Name="Get" Id="{592fa616-451a-073c-2edb-ebfaa10abd18}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[EcatState REF=_ecatState;]]></ST>
+          <ST><![CDATA[EcatState REF= _ecatState;]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Method Name="Restore" Id="{53c9e61d-5af5-072a-2b96-47f256b25f6f}">
-      <Declaration><![CDATA[METHOD Restore  : ITcoRestorable
+      <Declaration><![CDATA[METHOD Restore : ITcoRestorable
 VAR_INPUT
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_ecatState.Restore();]]></ST>
       </Implementation>
     </Method>
     <Method Name="ServiceMode" Id="{7e892b4f-04c3-0d7b-0ebf-779003e20c83}">
-      <Declaration><![CDATA[METHOD PROTECTED  ServiceMode
+      <Declaration><![CDATA[METHOD PROTECTED ServiceMode
 VAR_INPUT
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>

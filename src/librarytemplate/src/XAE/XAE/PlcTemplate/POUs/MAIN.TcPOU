@@ -3,9 +3,8 @@
   <POU Name="MAIN" Id="{55e5d4d9-4607-4a4e-b397-63e624f66e96}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-   _sampleContext : SampleContext;
-END_VAR
-]]></Declaration>
+    _sampleContext : SampleContext;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[_sampleContext.Run();]]></ST>
     </Implementation>

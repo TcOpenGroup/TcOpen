@@ -9,12 +9,11 @@
 {attribute addProperty Name "R7_A2_EC (EK1122)"}
 TYPE R7_A2_EC_EK1122_B7F046E4 EXTENDS EK1122_1FC0878B :
 STRUCT
-	{attribute addProperty Name "VI-6 (AES-D-BC-ECAT)"}
-	{attribute addProperty PreviousPort "R7_A2_EC (EK1122) : D"}
-	{attribute addProperty SyncUnit "default"}
-	VI_6_AES_D_BC_ECAT_x : AES_A3B07071;
+    {attribute addProperty Name "VI-6 (AES-D-BC-ECAT)"}
+    {attribute addProperty PreviousPort "R7_A2_EC (EK1122) : D"}
+    {attribute addProperty SyncUnit "default"}
+    VI_6_AES_D_BC_ECAT_x : AES_A3B07071;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

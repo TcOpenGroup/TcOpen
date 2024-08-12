@@ -12,16 +12,14 @@ END_VAR]]></Declaration>
       <Declaration><![CDATA[PROPERTY IsFreshState : BOOL]]></Declaration>
       <Get Name="Get" Id="{f898c3ff-7f15-0fc2-0e75-e22d323bcf35}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Method Name="MoveNext" Id="{44166f8a-8614-0309-3e0c-75242e506fe1}">
-      <Declaration><![CDATA[METHOD MoveNext : BOOL
-]]></Declaration>
+      <Declaration><![CDATA[METHOD MoveNext : BOOL]]></Declaration>
       <Implementation>
         <ST><![CDATA[_state := _state + 1;]]></ST>
       </Implementation>
@@ -30,15 +28,13 @@ END_VAR
       <Declaration><![CDATA[METHOD Retry : BOOL
 VAR_INPUT
     inFromState : INT;
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_state := inFromState;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Terminate" Id="{1dc80674-a43d-0e17-16c2-90bfdbe85e81}">
-      <Declaration><![CDATA[METHOD Terminate : BOOL
-]]></Declaration>
+      <Declaration><![CDATA[METHOD Terminate : BOOL]]></Declaration>
       <Implementation>
         <ST><![CDATA[_state := 8005;]]></ST>
       </Implementation>

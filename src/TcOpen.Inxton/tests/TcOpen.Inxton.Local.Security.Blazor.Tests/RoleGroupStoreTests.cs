@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using TcOpen.Inxton.Security;
 using Xunit;
 
@@ -56,7 +56,10 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
             //Act
             try
             {
-                result = _fixture.Repository.RoleGroupManager.AddRolesToGroup("", new string[] { "" });
+                result = _fixture.Repository.RoleGroupManager.AddRolesToGroup(
+                    "",
+                    new string[] { "" }
+                );
             }
             catch (Exception)
             {
@@ -149,7 +152,8 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
             bool found = false;
             foreach (GroupData data in groups)
             {
-                if (data.Name == group) found = true;
+                if (data.Name == group)
+                    found = true;
             }
             Assert.True(found);
         }
@@ -200,7 +204,9 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
             var result = _fixture.Repository.RoleGroupManager.CreateRole(expectedRole);
             //Assert
             Assert.True(result.Succeeded);
-            var role = _fixture.Repository.RoleGroupManager.inAppRoleCollection.Find(x => x.Name == expectedRole.Name);
+            var role = _fixture.Repository.RoleGroupManager.inAppRoleCollection.Find(x =>
+                x.Name == expectedRole.Name
+            );
             Assert.Equal(expectedRole, role);
         }
 
@@ -236,7 +242,8 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
             bool found = false;
             foreach (GroupData data in groups)
             {
-                if (data.Name == group) found = true;
+                if (data.Name == group)
+                    found = true;
             }
             Assert.False(found);
         }
@@ -288,7 +295,9 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
         {
             //Arrange
             //Act
-            List<string> result = _fixture.Repository.RoleGroupManager.GetRolesFromGroup("NoExistGroup");
+            List<string> result = _fixture.Repository.RoleGroupManager.GetRolesFromGroup(
+                "NoExistGroup"
+            );
             //Assert
             Assert.Null(result);
         }
@@ -331,7 +340,9 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
         {
             //Arrange
             //Act
-            string result = _fixture.Repository.RoleGroupManager.GetRolesFromGroupString("NoExistGroup");
+            string result = _fixture.Repository.RoleGroupManager.GetRolesFromGroupString(
+                "NoExistGroup"
+            );
             //Assert
             Assert.Null(result);
         }
@@ -364,7 +375,10 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
             var group = "RemoveRolesGroup";
             var expectedRoles = new string[] { "Administrator" };
             //Act
-            var result = _fixture.Repository.RoleGroupManager.RemoveRolesFromGroup(group, expectedRoles);
+            var result = _fixture.Repository.RoleGroupManager.RemoveRolesFromGroup(
+                group,
+                expectedRoles
+            );
             //Assert
             Assert.True(result.Succeeded);
             var roles = _fixture.Repository.RoleGroupManager.GetRolesFromGroup(group);
@@ -376,7 +390,10 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
         {
             //Arrange
             //Act
-            IdentityResult result = _fixture.Repository.RoleGroupManager.RemoveRolesFromGroup("NoExistGroup", new string[] { "NoExistRole" });
+            IdentityResult result = _fixture.Repository.RoleGroupManager.RemoveRolesFromGroup(
+                "NoExistGroup",
+                new string[] { "NoExistRole" }
+            );
             //Assert
             Assert.False(result.Succeeded);
         }
@@ -389,7 +406,10 @@ namespace TcOpen.Inxton.Local.Security.Blazor.Tests
             //Act
             try
             {
-                result = _fixture.Repository.RoleGroupManager.RemoveRolesFromGroup("", new string[] { "" });
+                result = _fixture.Repository.RoleGroupManager.RemoveRolesFromGroup(
+                    "",
+                    new string[] { "" }
+                );
             }
             catch (Exception)
             {

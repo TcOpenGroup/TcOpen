@@ -1,38 +1,51 @@
 ﻿<Window
-    x:Class="TcoPneumatics.Wpf.Sandbox.MainWindow"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:TcoPneumatics.Wpf.Sandbox"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:tcopen="clr-namespace:TcoPneumaticsTests;assembly=TcoPneumaticsTestsConnector"
-    xmlns:vortex="http://vortex.mts/xaml"
-    Title="MainWindow"
-    Width="800"
-    Height="450"
-    DataContext="{x:Static tcopen:Entry.TcoPneumaticsTestsPlc}"
-    mc:Ignorable="d">
+  x:Class="TcoPneumatics.Wpf.Sandbox.MainWindow"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:TcoPneumatics.Wpf.Sandbox"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:tcopen="clr-namespace:TcoPneumaticsTests;assembly=TcoPneumaticsTestsConnector"
+  xmlns:vortex="http://vortex.mts/xaml"
+  Title="MainWindow"
+  Width="800"
+  Height="450"
+  DataContext="{x:Static tcopen:Entry.TcoPneumaticsTestsPlc}"
+  mc:Ignorable="d"
+>
     <TabControl>
         <TabItem Header="Base">
             <StackPanel Grid.IsSharedSizeScope="True">
                 <!--<vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext}" PresentationType="Service"/>-->
-                <vortex:RenderableContentControl DataContext="{Binding EXAMPLE_MAIN._context._exampleCylinder}" PresentationType="Base-Service"/>
-                <vortex:RenderableContentControl DataContext="{Binding EXAMPLE_MAIN._context}" PresentationType="Control"/>
+                <vortex:RenderableContentControl
+          DataContext="{Binding EXAMPLE_MAIN._context._exampleCylinder}"
+          PresentationType="Base-Service"
+        />
+                <vortex:RenderableContentControl
+          DataContext="{Binding EXAMPLE_MAIN._context}"
+          PresentationType="Control"
+        />
             </StackPanel>
         </TabItem>
         <TabItem Header="Standard">
             <UniformGrid Columns="1" Rows="2">
                 <GroupBox Header="Control">
                     <StackPanel>
-                        <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfCyclinder}" PresentationType="Service" />
-                      
-              
-                   
+                        <vortex:RenderableContentControl
+              DataContext="{Binding MAIN._defaultContext._wpfCyclinder}"
+              PresentationType="Service"
+            />
+
+
+
                     </StackPanel>
                 </GroupBox>
                 <GroupBox Header="Display">
                     <Grid IsSharedSizeScope="true">
-                        <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfCyclinder}" PresentationType="Display" />
+                        <vortex:RenderableContentControl
+              DataContext="{Binding MAIN._defaultContext._wpfCyclinder}"
+              PresentationType="Display"
+            />
                     </Grid>
                 </GroupBox>
             </UniformGrid>
@@ -41,12 +54,18 @@
             <UniformGrid Columns="1" Rows="2">
                 <GroupBox Header="Control">
                     <Grid IsSharedSizeScope="true">
-                        <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfDoubleCyclinder}" PresentationType="Service" />
+                        <vortex:RenderableContentControl
+              DataContext="{Binding MAIN._defaultContext._wpfDoubleCyclinder}"
+              PresentationType="Service"
+            />
                     </Grid>
                 </GroupBox>
                 <GroupBox Header="Display">
                     <Grid IsSharedSizeScope="true">
-                        <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfDoubleCyclinder}" PresentationType="Display" />
+                        <vortex:RenderableContentControl
+              DataContext="{Binding MAIN._defaultContext._wpfDoubleCyclinder}"
+              PresentationType="Display"
+            />
                     </Grid>
                 </GroupBox>
             </UniformGrid>
@@ -55,12 +74,18 @@
             <UniformGrid Columns="1" Rows="2">
                 <GroupBox Header="Control">
                     <Grid IsSharedSizeScope="true">
-                        <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfCyclinder}" PresentationType="ControlSlim" />
+                        <vortex:RenderableContentControl
+              DataContext="{Binding MAIN._defaultContext._wpfCyclinder}"
+              PresentationType="ControlSlim"
+            />
                     </Grid>
                 </GroupBox>
                 <GroupBox Header="Display">
                     <Grid IsSharedSizeScope="true">
-                        <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfCyclinder}" PresentationType="DisplaySlim" />
+                        <vortex:RenderableContentControl
+              DataContext="{Binding MAIN._defaultContext._wpfCyclinder}"
+              PresentationType="DisplaySlim"
+            />
                     </Grid>
                 </GroupBox>
             </UniformGrid>
@@ -70,14 +95,23 @@
             <StackPanel>
                 <GroupBox Header="Sample piston" Padding="10" Margin="10">
                     <Grid IsSharedSizeScope="true">
-                        <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfCyclinder}" PresentationType="Base-ControlSlim" />
+                        <vortex:RenderableContentControl
+                DataContext="{Binding MAIN._defaultContext._wpfCyclinder}"
+                PresentationType="Base-ControlSlim"
+              />
                     </Grid>
                 </GroupBox>
                 <GroupBox Header="Diagnostics" Padding="10" Margin="10">
-                    <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfCyclinder}" PresentationType="Diagnostics"></vortex:RenderableContentControl>
+                    <vortex:RenderableContentControl
+              DataContext="{Binding MAIN._defaultContext._wpfCyclinder}"
+              PresentationType="Diagnostics"
+            />
                 </GroupBox>
                 <GroupBox Header="Diagnostics" Padding="10" Margin="10">
-                    <vortex:RenderableContentControl DataContext="{Binding MAIN._defaultContext._wpfDoubleCyclinder}" PresentationType="Diagnostics"></vortex:RenderableContentControl>
+                    <vortex:RenderableContentControl
+              DataContext="{Binding MAIN._defaultContext._wpfDoubleCyclinder}"
+              PresentationType="Diagnostics"
+            />
                 </GroupBox>
             </StackPanel>
             </ScrollViewer>

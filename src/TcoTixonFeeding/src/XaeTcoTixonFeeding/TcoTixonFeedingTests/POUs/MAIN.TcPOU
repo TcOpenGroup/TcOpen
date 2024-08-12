@@ -4,19 +4,15 @@
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
     _tcoTestContext : TcoTestContext;
-
     _wpfContext : WpfContext;
     _wpfContextCall : BOOL := FALSE;
-
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[_tcoTestContext.ProbeRun();
 
-
 IF _wpfContextCall THEN
-	_wpfContext.Run();
-END_IF	
-]]></ST>
+    _wpfContext.Run();
+END_IF]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

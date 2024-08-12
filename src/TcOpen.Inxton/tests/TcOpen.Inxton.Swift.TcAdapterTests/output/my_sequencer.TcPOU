@@ -1,14 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="my_sequencer" Id="{9f9584ee-a192-4ce3-b60b-3cc81b968d12}" SpecialFunc="None">
-    <Declaration>FUNCTION_BLOCK my_sequencer EXTENDS TcoCore.TcoSequencer</Declaration>
+    <Declaration><![CDATA[FUNCTION_BLOCK my_sequencer EXTENDS TcoCore.TcoSequencer]]></Declaration>
     <Implementation>
-      <ST />
+      <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Main" Id="{c80e0315-425c-484c-97dc-501a0fbb701d}">
-      <Declaration>METHOD PROTECTED Main : BOOL</Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED Main : BOOL]]></Declaration>
       <Implementation>
-        <ST>IF TRUE THEN; END_IF;</ST>
+        <ST><![CDATA[IF TRUE THEN
+    ;
+END_IF;]]></ST>
       </Implementation>
     </Method>
   </POU>

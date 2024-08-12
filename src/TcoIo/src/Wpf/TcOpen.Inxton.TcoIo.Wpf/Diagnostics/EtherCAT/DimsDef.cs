@@ -28,6 +28,5 @@ namespace TcoIo.Topology
         public const double slaveOutputFront = slaveHeightWithBorders * 3 / 4;
         public const double juntionOutputX1 = -slaveWidthWithBorders / 4;
         public const double juntionOutputX2 = -slaveWidthWithBorders * 3 / 4;
-
     }
 }

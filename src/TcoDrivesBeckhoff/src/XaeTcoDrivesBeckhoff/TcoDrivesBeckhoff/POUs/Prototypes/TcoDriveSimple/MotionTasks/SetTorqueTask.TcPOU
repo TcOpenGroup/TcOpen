@@ -3,7 +3,7 @@
   <POU Name="SetTorqueTask" Id="{202acf02-6d0d-4bca-9f77-4501493a923b}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK SetTorqueTask EXTENDS TcoCore.TcoTask IMPLEMENTS ITcoDriveSimple
 VAR_INPUT
-	inIsServiceMode : BOOL;
+    inIsServiceMode : BOOL;
 END_VAR
 VAR
     {attribute addProperty Name "<#Torque/Force#>"}
@@ -12,30 +12,27 @@ VAR
     _relative : BOOL;
     {attribute addProperty Name "<#Velocity limit high#>"}
     _velocityLimitHigh : LREAL;
-	{attribute addProperty Name "<#Velocity limit low#>"}
+    {attribute addProperty Name "<#Velocity limit low#>"}
     _velocityLimitLow : LREAL;
-	{attribute addProperty Name "<#Continuous update#>"}
-    _continuousUpdate: BOOL:=TRUE;
+    {attribute addProperty Name "<#Continuous update#>"}
+    _continuousUpdate : BOOL := TRUE;
     {attribute addProperty Name "<#Torque ramp#>"}
     _torqueRamp : LREAL;
-	{attribute addProperty Name "<#Torque Options: Enable Manual Torque Start value #>"}
+    {attribute addProperty Name "<#Torque Options: Enable Manual Torque Start value #>"}
     _enableManualTorqueStartValue : BOOL;
-	{attribute addProperty Name "<#Torque Options:Manual Torque Start value#>"}
+    {attribute addProperty Name "<#Torque Options:Manual Torque Start value#>"}
     _manualTorqueStartValue : LREAL;
-   
-
 END_VAR
 VAR
     {attribute 'hide'}
     _axisRef : REFERENCE TO TcoAxisRef;
     {attribute 'hide'}
     _mcTorqueControl : Tc2_MC2.MC_TorqueControl;
-	    {attribute 'hide'}
+    {attribute 'hide'}
     _torqueOptions : Tc2_MC2.ST_TorqueControlOptions;
     {attribute 'hide'}
     _message : STRING(125);
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF NOT __ISVALIDREF(_axisRef) THEN
     IF __ISVALIDREF(DriveRef) THEN
@@ -45,33 +42,28 @@ END_VAR
     END_IF
 END_IF
 
-
 IF Execute() THEN
-	
-IF inIsServiceMode AND _enableManualTorqueStartValue THEN
-	_torqueOptions.EnableManualTorqueStartValue:=_enableManualTorqueStartValue;
-	_torqueOptions.ManualTorqueStartValue:=_manualTorqueStartValue;
-END_IF;
+    IF inIsServiceMode AND _enableManualTorqueStartValue THEN
+        _torqueOptions.EnableManualTorqueStartValue := _enableManualTorqueStartValue;
+        _torqueOptions.ManualTorqueStartValue := _manualTorqueStartValue;
+    END_IF;
 
-_mcTorqueControl(
-	Axis:=_axisRef , 
-	Execute:=NOT _mcTorqueControl.Busy , 
-	ContinuousUpdate:=_continuousUpdate , 
-	Relative:= _relative, 
-	Torque:= _torque , 
-	TorqueRamp:= _torqueRamp , 
-	VelocityLimitHigh:= _velocityLimitHigh, 
-	VelocityLimitLow:= _velocityLimitLow, 
-	BufferMode:= Tc2_MC2.MC_Aborting , 
-	Options:=_torqueOptions , 
-	InTorque=> , 
-	Busy=> , 
-	Active=> , 
-	CommandAborted=> , 
-	Error=> , 
-	ErrorId=> );
-	
-
+    _mcTorqueControl(Axis := _axisRef,
+        Execute := NOT _mcTorqueControl.Busy,
+        ContinuousUpdate := _continuousUpdate,
+        Relative := _relative,
+        Torque := _torque,
+        TorqueRamp := _torqueRamp,
+        VelocityLimitHigh := _velocityLimitHigh,
+        VelocityLimitLow := _velocityLimitLow,
+        BufferMode := Tc2_MC2.MC_Aborting,
+        Options := _torqueOptions,
+        InTorque =>,
+        Busy =>,
+        Active =>,
+        CommandAborted =>,
+        Error =>,
+        ErrorId =>);
 
     IF _mcTorqueControl.CommandAborted THEN
         THIS^.Abort();
@@ -79,22 +71,18 @@ _mcTorqueControl(
 
     DoneWhen(_mcTorqueControl.InTorque);
     ThrowWhen(_mcTorqueControl.Error);
-END_IF
-]]></ST>
+END_IF]]></ST>
     </Implementation>
     <Property Name="DriveRef" Id="{3d05b5df-cf94-4ecb-a8c7-154657b19d59}">
-      <Declaration><![CDATA[PROPERTY DriveRef : REFERENCE TO TcoDriveSimple
-]]></Declaration>
+      <Declaration><![CDATA[PROPERTY DriveRef : REFERENCE TO TcoDriveSimple]]></Declaration>
       <Get Name="Get" Id="{5be2c727-f826-4b2c-b293-d8b1aed20eb9}">
         <Declaration><![CDATA[VAR
     _drive : ITcoDriveSimple := 0;
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[IF __QUERYINTERFACE(THIS^.Parent, _drive) THEN
     DriveRef REF= _drive.DriveRef;
-END_IF
-]]></ST>
+END_IF]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -102,10 +90,9 @@ END_IF
       <Declaration><![CDATA[PROPERTY PUBLIC InTorque : BOOL]]></Declaration>
       <Get Name="Get" Id="{c6d386ad-c5b5-0a81-1a00-81d8c3c290d3}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[InTorque :=_mcTorqueControl.InTorque;]]></ST>
+          <ST><![CDATA[InTorque := _mcTorqueControl.InTorque;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -113,25 +100,22 @@ END_VAR
       <Declaration><![CDATA[METHOD INTERNAL InvokeWithParams : ITcoTaskStatus
 VAR_INPUT
     inTorque : LREAL;
-	inRelative : BOOL;
+    inRelative : BOOL;
     inVelocityLimitHigh : LREAL;
     inVelocityLimitLow : LREAL;
-    inContinuousUpdate: BOOL:=TRUE;
+    inContinuousUpdate : BOOL := TRUE;
     inTorqueRamp : LREAL;
     inTorqueOptions : Tc2_MC2.ST_TorqueControlOptions;
-END_VAR
-
-	]]></Declaration>
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_torque := inTorque ;
-_relative := inRelative ;
+        <ST><![CDATA[_torque := inTorque;
+_relative := inRelative;
 _velocityLimitHigh := inVelocityLimitHigh;
 _velocityLimitLow := inVelocityLimitLow;
-_continuousUpdate:=inContinuousUpdate;
+_continuousUpdate := inContinuousUpdate;
 _torqueRamp := inTorqueRamp;
-_torqueOptions:=inTorqueOptions;
-InvokeWithParams := THIS^.Invoke();
-]]></ST>
+_torqueOptions := inTorqueOptions;
+InvokeWithParams := THIS^.Invoke();]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnAbort" Id="{7b302d13-93b1-428d-b6d4-ce1dbc732d0e}">
@@ -142,8 +126,7 @@ InvokeWithParams := THIS^.Invoke();
         </summary>
     </docu>
 ~*)
-METHOD PROTECTED OnAbort
-]]></Declaration>
+METHOD PROTECTED OnAbort]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF NOT __ISVALIDREF(_axisRef) THEN
     IF __ISVALIDREF(DriveRef) THEN
@@ -154,9 +137,8 @@ METHOD PROTECTED OnAbort
 END_IF
 
 THIS^.DriveRef.Stop(-1, -1);
-_mcTorqueControl(Axis:=_axisRef, Execute:=FALSE);
-THIS^.DriveRef._movementState.Restore();
-]]></ST>
+_mcTorqueControl(Axis := _axisRef, Execute := FALSE);
+THIS^.DriveRef._movementState.Restore();]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnDone" Id="{9007e457-9563-4c42-bf13-1f19f60b8de2}">
@@ -167,12 +149,10 @@ THIS^.DriveRef._movementState.Restore();
         </summary>
     </docu>
 ~*)
-METHOD PROTECTED OnDone
-]]></Declaration>
+METHOD PROTECTED OnDone]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_mcTorqueControl(Axis:=_axisRef, Execute:=FALSE);
-THIS^.DriveRef._movementState.Restore();
-]]></ST>
+        <ST><![CDATA[_mcTorqueControl(Axis := _axisRef, Execute := FALSE);
+THIS^.DriveRef._movementState.Restore();]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnError" Id="{4e24a163-b359-47b6-a0a7-57e7d9a45c78}">
@@ -186,8 +166,7 @@ THIS^.DriveRef._movementState.Restore();
         </summary>
     </docu>
 ~*)
-METHOD PROTECTED OnError
-]]></Declaration>
+METHOD PROTECTED OnError]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^.DriveRef._movementState.Restore();
 
@@ -195,16 +174,13 @@ IF NOT _axisRef.Status.Error THEN
     DriveRef.SetErrorID(DriveRef._axisStatus.ErrorId);
 END_IF
 
-_mcTorqueControl(Axis:=_axisRef, Execute:=FALSE);
-]]></ST>
+_mcTorqueControl(Axis := _axisRef, Execute := FALSE);]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStart" Id="{be299f11-c5f4-4588-8158-9ce4a7891dec}">
-      <Declaration><![CDATA[METHOD PROTECTED OnStart
-]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED OnStart]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_mcTorqueControl(Axis:=_axisRef, Execute:=FALSE);
-]]></ST>
+        <ST><![CDATA[_mcTorqueControl(Axis := _axisRef, Execute := FALSE);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{19576e01-4841-4d6a-b398-2b5fa2d47cbe}">
@@ -218,11 +194,9 @@ _mcTorqueControl(Axis:=_axisRef, Execute:=FALSE);
         </summary>
     </docu>
 ~*)
-METHOD Restore : ITcoRestorable
-]]></Declaration>
+METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.Restore();
-]]></ST>
+        <ST><![CDATA[SUPER^.Restore();]]></ST>
       </Implementation>
     </Method>
     <Method Name="WhileError" Id="{0cbfbbef-bcc6-42db-b8c2-8a980d0b2822}">
@@ -236,14 +210,12 @@ METHOD Restore : ITcoRestorable
         </summary>
     </docu>
 ~*)
-METHOD PROTECTED WhileError
-]]></Declaration>
+METHOD PROTECTED WhileError]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
     DriveRef.SetErrorID(_mcTorqueControl.ErrorID);
-    _mcTorqueControl(Axis:=_axisRef, Execute:=FALSE);
-END_IF
-]]></ST>
+    _mcTorqueControl(Axis := _axisRef, Execute := FALSE);
+END_IF]]></ST>
       </Implementation>
     </Method>
   </POU>

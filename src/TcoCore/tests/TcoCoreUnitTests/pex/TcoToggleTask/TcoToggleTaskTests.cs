@@ -1,10 +1,10 @@
-﻿using NUnit.Framework;
-using TcoCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NUnit.Framework;
+using TcoCore;
 using TcoCore.Logging;
 using TcOpen.Inxton;
 
@@ -13,7 +13,6 @@ namespace TcoCore.PexTests
     [TestFixture()]
     public class TcoToggleTaskTests
     {
-
         private TcOpen.Inxton.Logging.DummyLoggerAdapter _logger;
 
         [OneTimeSetUp]
@@ -56,7 +55,6 @@ namespace TcoCore.PexTests
             var actual = task.CanExecute(null);
 
             Assert.AreEqual(expected, actual);
-
         }
 
         [Test()]
@@ -77,11 +75,13 @@ namespace TcoCore.PexTests
             task.Execute(new object());
 
             Assert.AreEqual(expected, task._toggleRequest.Synchron);
-         
 
             if (canExecute)
             {
-                Assert.AreEqual("Task '' toggled 'Off -> On'. {@sender}", _logger.LastMessage.message);
+                Assert.AreEqual(
+                    "Task '' toggled 'Off -> On'. {@sender}",
+                    _logger.LastMessage.message
+                );
                 Assert.IsInstanceOf<LogInfo>(_logger.LastMessage.payload);
                 Assert.AreEqual("Information", _logger.LastMessage.serverity);
             }

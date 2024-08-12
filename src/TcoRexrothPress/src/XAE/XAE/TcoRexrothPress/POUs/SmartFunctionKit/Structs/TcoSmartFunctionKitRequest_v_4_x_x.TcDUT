@@ -3,25 +3,21 @@
   <DUT Name="TcoSmartFunctionKitRequest_v_4_x_x" Id="{18ba4d42-4782-47cd-a06f-8c02b59ef6c0}">
     <Declaration><![CDATA[TYPE TcoSmartFunctionKitRequest_v_4_x_x :
 STRUCT
-        Command : eTcoSmartFunctionKitCommand_v_4_x_x;
-		SerialNumber:STRING(28);
-		ProgramId:INT;
-		PositionDistanceTara:REAL;
-		TravelSpeed:REAL;
-		Acceleration:REAL;
-		Offset:REAL;
-		
-      	Value1:DWORD;
-      	Value2:DWORD;
-      	Value3:DWORD;
-		Value4:DWORD;
-      	Value5:DWORD;
-      	Value6:DWORD;
-      	Value7:DWORD;
-
-
-    END_STRUCT
-END_TYPE
-]]></Declaration>
+    Command : eTcoSmartFunctionKitCommand_v_4_x_x;
+    SerialNumber : STRING(28);
+    ProgramId : INT;
+    PositionDistanceTara : REAL;
+    TravelSpeed : REAL;
+    Acceleration : REAL;
+    Offset : REAL;
+    Value1 : DWORD;
+    Value2 : DWORD;
+    Value3 : DWORD;
+    Value4 : DWORD;
+    Value5 : DWORD;
+    Value6 : DWORD;
+    Value7 : DWORD;
+END_STRUCT
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

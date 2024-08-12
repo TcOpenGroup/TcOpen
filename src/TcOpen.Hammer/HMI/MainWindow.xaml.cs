@@ -12,7 +12,6 @@ namespace PlcHammer.Hmi
     /// </summary>
     public partial class MainWindow : Window
     {
- 
         public MainWindow()
         {
             DataContext = this;
@@ -29,7 +28,12 @@ namespace PlcHammer.Hmi
             return verticalPosition < 50 ? 50 : verticalPosition;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }
@@ -49,7 +53,12 @@ namespace PlcHammer.Hmi
             return verticalPosition < 50 ? 50 : verticalPosition;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }
@@ -59,8 +68,6 @@ namespace PlcHammer.Hmi
             return this;
         }
     }
-
- 
 
     public class AxisPositionConverter : MarkupExtension, IValueConverter
     {
@@ -68,10 +75,19 @@ namespace PlcHammer.Hmi
         {
             var horizontalPisition = (double)value;
 
-            return horizontalPisition >= 640 ? 640 : horizontalPisition <= 0 ? 0 : horizontalPisition;
+            return horizontalPisition >= 640
+                ? 640
+                : horizontalPisition <= 0
+                    ? 0
+                    : horizontalPisition;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }
@@ -81,9 +97,6 @@ namespace PlcHammer.Hmi
             return this;
         }
     }
-
-
-
 
     public class OK_NOK_Converter : MarkupExtension, IValueConverter
     {
@@ -97,10 +110,14 @@ namespace PlcHammer.Hmi
             {
                 return Brushes.Red;
             }
-
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }
@@ -109,6 +126,5 @@ namespace PlcHammer.Hmi
         {
             return this;
         }
-
-     }
+    }
 }

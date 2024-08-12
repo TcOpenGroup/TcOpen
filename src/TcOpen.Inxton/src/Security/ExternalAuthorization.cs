@@ -8,7 +8,7 @@ using TcOpen.Inxton.Security;
 namespace TcOpen.Inxton.Local.Security
 {
     public abstract class ExternalAuthorization : IExternalAuthorization
-    {      
+    {
         public event AuthorizationRequestDelegate AuthorizationRequest;
         public event AuthorizationTokenChangeRequestDelegate AuthorizationTokenChange;
 
@@ -21,9 +21,9 @@ namespace TcOpen.Inxton.Local.Security
         {
             AuthorizationTokenChange(token);
         }
-        
+
         public void RequestAuthorization(string token, bool deauthenticateWhenSame)
-        {            
+        {
             AuthorizationErrorMessage = string.Empty;
             try
             {
@@ -37,14 +37,10 @@ namespace TcOpen.Inxton.Local.Security
             catch (Exception ex)
             {
                 AuthorizationErrorMessage = ex.Message;
-            }           
+            }
         }
 
-        public string AuthorizationErrorMessage
-        {
-            get;
-            private set;
-        }
+        public string AuthorizationErrorMessage { get; private set; }
 
         public void RequestTokenChange(string token)
         {
@@ -52,10 +48,6 @@ namespace TcOpen.Inxton.Local.Security
             WillChangeToken = false;
         }
 
-        public bool WillChangeToken
-        {
-            get;
-            set;
-        }
+        public bool WillChangeToken { get; set; }
     }
 }

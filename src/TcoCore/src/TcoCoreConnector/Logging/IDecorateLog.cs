@@ -9,7 +9,7 @@ namespace TcoCore.Logging
     public interface IDecorateLog
     {
         /// <summary>
-        /// Gets or sets log payload decoration function. 
+        /// Gets or sets log payload decoration function.
         /// The return object will can be added to provide additional information about this task execution.
         /// <note type="important">
         /// There must be an implementation that calls and adds the result object into the log message payload.

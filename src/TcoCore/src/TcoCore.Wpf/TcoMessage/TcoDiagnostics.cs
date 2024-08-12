@@ -6,7 +6,5 @@ using System.Threading.Tasks;
 
 namespace TcoCore
 {
-    public class TcoDiagnostics 
-    {
-    }
+    public class TcoDiagnostics { }
 }

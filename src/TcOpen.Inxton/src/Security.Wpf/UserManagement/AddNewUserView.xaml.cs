@@ -15,7 +15,9 @@ namespace TcOpen.Inxton.Local.Security.Wpf
         {
             InitializeComponent();
             AllRolesCollectionView = CollectionViewSource.GetDefaultView(AllRoles.ItemsSource);
-            AssignedRolesCollectionView = CollectionViewSource.GetDefaultView(AssignedRoles.ItemsSource);
+            AssignedRolesCollectionView = CollectionViewSource.GetDefaultView(
+                AssignedRoles.ItemsSource
+            );
             AllRolesCollectionView.Filter = AllRolesFilter;
             AssignedRolesCollectionView.Filter = AssignedRolesFilter;
         }
@@ -24,6 +26,7 @@ namespace TcOpen.Inxton.Local.Security.Wpf
         ICollectionView AssignedRolesCollectionView { get; set; }
 
         private double MaxRolesListBoxHeight = int.MinValue;
+
         private void AvailibleRoles_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             if (e.HeightChanged)
@@ -32,6 +35,7 @@ namespace TcOpen.Inxton.Local.Security.Wpf
                 (sender as Control).MinHeight = MaxRolesListBoxHeight;
             }
         }
+
         private void TextFilter_TextChanged(object sender, TextChangedEventArgs e)
         {
             AllRolesCollectionView?.Refresh();
@@ -47,6 +51,7 @@ namespace TcOpen.Inxton.Local.Security.Wpf
         {
             AssignedRolesTextFilter.Text = "";
         }
+
         private bool RoleFilter(object roleNameTocompare, string filter)
         {
             if (roleNameTocompare is string roleName)
@@ -58,6 +63,7 @@ namespace TcOpen.Inxton.Local.Security.Wpf
 
         private bool AllRolesFilter(object obj) => RoleFilter(obj, AllRolesTextFilter.Text);
 
-        private bool AssignedRolesFilter(object obj) => RoleFilter(obj, AssignedRolesTextFilter.Text);
+        private bool AssignedRolesFilter(object obj) =>
+            RoleFilter(obj, AssignedRolesTextFilter.Text);
     }
 }

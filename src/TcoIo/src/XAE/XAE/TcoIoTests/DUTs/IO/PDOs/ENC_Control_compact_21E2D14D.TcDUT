@@ -8,12 +8,11 @@
 {attribute addProperty Size "6"}
 TYPE ENC_Control_compact_21E2D14D EXTENDS TcoIo.OutputBase_10CEE7DE :
 STRUCT
-	{attribute addProperty Name "Control"}
-	Control AT %Q* : Control_6EF2C5D0;
-	{attribute addProperty Name "Set_counter_value"}
-	Set_counter_value AT %Q* : UINT;
+    {attribute addProperty Name "Control"}
+    Control AT %Q* : Control_6EF2C5D0;
+    {attribute addProperty Name "Set_counter_value"}
+    Set_counter_value AT %Q* : UINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

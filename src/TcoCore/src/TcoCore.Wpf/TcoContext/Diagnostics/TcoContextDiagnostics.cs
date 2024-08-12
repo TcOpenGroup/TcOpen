@@ -6,17 +6,11 @@ using System.Threading.Tasks;
 
 namespace TcoCore
 {
-    public class TcoContextDiagnosticsView : TcoDiagnosticsView
-    {
-
-    }
-
+    public class TcoContextDiagnosticsView : TcoDiagnosticsView { }
 
     public class TcoContextDiagnosticsViewModel : TcoDiagnosticsViewModel
     {
-        public TcoContextDiagnosticsViewModel() : base()
-        {
-            
-        }
+        public TcoContextDiagnosticsViewModel()
+            : base() { }
     }
 }

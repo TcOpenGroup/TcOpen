@@ -5,59 +5,53 @@
 {attribute wpf [Container(Layout.Stack)]}
 TYPE TcoDatamanSignalStates_v_5_x_x :
 STRUCT
-	
-	{attribute wpf [Container(Layout.Stack,"Acquisition control")]}
-	{attribute wpf [Group(Layout.GroupBox)]}
-	{attribute addProperty Name "<#Trigger enable#>"}
-	TriggerEnable 			:	BOOL;
-	{attribute addProperty Name "<#Trigger#>"}
-	Trigger					:	BOOL;
-
-	{attribute wpf [Container(Layout.Stack,"Result control")]}
-	{attribute wpf [Group(Layout.GroupBox)]}
-	{attribute addProperty Name "<#Enable result buffering#>"}
-	EnableResultBuffering	:	BOOL;
-	{attribute addProperty Name "<#Result acknowledge#>"}
-	ResultsAcknowledge		:	BOOL;
-
-	{attribute wpf [Container(Layout.Stack,"Acquisition status")]}
-	{attribute wpf [Group(Layout.GroupBox)]}
-	{attribute addProperty Name "<#Trigger ready#>"}
-	TriggerReady 		:	BOOL;
-	{attribute addProperty Name "<#Trigger acknowledge#>"}
-	TriggerAcknowledge 	:	BOOL;
-	{attribute addProperty Name "<#Acquiring#>"}
-	Acquiring 			:	BOOL;
-	{attribute addProperty Name "<#Missed acquisition#>"}
-	MissedAcquisition 	:	BOOL;
-	{attribute addProperty Name "<#Trigger ID#>"}
-	TriggerID 			:	UINT;
-
-	{attribute wpf [Container(Layout.Stack,"Result status")]}
-	{attribute wpf [Group(Layout.GroupBox)]}
-	{attribute addProperty Name "<#Decoding#>"}
-	Decoding 				:	BOOL;
-	{attribute addProperty Name "<#Decode complete#>"}
-	DecodeComplete 			:	BOOL;
-	{attribute addProperty Name "<#Result buffer overrun#>"}
-	ResultsBufferOverrun 	:	BOOL;
-	{attribute addProperty Name "<#Results available#>"}
-	ResultsAvailable 		:	BOOL;
-	{attribute addProperty Name "<#Error detected#>"}
-	ErrorDetected 			:	BOOL;
-
-	{attribute wpf [Container(Layout.Stack,"Result data")]}
-	{attribute wpf [Group(Layout.GroupBox)]}
-	{attribute addProperty Name "<#Result ID#>"}
-	ResultID 				:	UINT;
-	{attribute addProperty Name "<#Result code#>"}
-	ResultCode  			:	UINT;
-	{attribute addProperty Name "<#Result extended#>"}
-	ResultExtended  		:	UINT;
-	{attribute addProperty Name "<#Result length#>"}
-	ResultLength  			:	UINT;
+    {attribute wpf [Container(Layout.Stack,"Acquisition control")]}
+    {attribute wpf [Group(Layout.GroupBox)]}
+    {attribute addProperty Name "<#Trigger enable#>"}
+    TriggerEnable : BOOL;
+    {attribute addProperty Name "<#Trigger#>"}
+    Trigger : BOOL;
+    {attribute wpf [Container(Layout.Stack,"Result control")]}
+    {attribute wpf [Group(Layout.GroupBox)]}
+    {attribute addProperty Name "<#Enable result buffering#>"}
+    EnableResultBuffering : BOOL;
+    {attribute addProperty Name "<#Result acknowledge#>"}
+    ResultsAcknowledge : BOOL;
+    {attribute wpf [Container(Layout.Stack,"Acquisition status")]}
+    {attribute wpf [Group(Layout.GroupBox)]}
+    {attribute addProperty Name "<#Trigger ready#>"}
+    TriggerReady : BOOL;
+    {attribute addProperty Name "<#Trigger acknowledge#>"}
+    TriggerAcknowledge : BOOL;
+    {attribute addProperty Name "<#Acquiring#>"}
+    Acquiring : BOOL;
+    {attribute addProperty Name "<#Missed acquisition#>"}
+    MissedAcquisition : BOOL;
+    {attribute addProperty Name "<#Trigger ID#>"}
+    TriggerID : UINT;
+    {attribute wpf [Container(Layout.Stack,"Result status")]}
+    {attribute wpf [Group(Layout.GroupBox)]}
+    {attribute addProperty Name "<#Decoding#>"}
+    Decoding : BOOL;
+    {attribute addProperty Name "<#Decode complete#>"}
+    DecodeComplete : BOOL;
+    {attribute addProperty Name "<#Result buffer overrun#>"}
+    ResultsBufferOverrun : BOOL;
+    {attribute addProperty Name "<#Results available#>"}
+    ResultsAvailable : BOOL;
+    {attribute addProperty Name "<#Error detected#>"}
+    ErrorDetected : BOOL;
+    {attribute wpf [Container(Layout.Stack,"Result data")]}
+    {attribute wpf [Group(Layout.GroupBox)]}
+    {attribute addProperty Name "<#Result ID#>"}
+    ResultID : UINT;
+    {attribute addProperty Name "<#Result code#>"}
+    ResultCode : UINT;
+    {attribute addProperty Name "<#Result extended#>"}
+    ResultExtended : UINT;
+    {attribute addProperty Name "<#Result length#>"}
+    ResultLength : UINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

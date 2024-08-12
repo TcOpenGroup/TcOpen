@@ -11,28 +11,27 @@
 {attribute addProperty Size "46"}
 TYPE EL7332_DFB2BED7 EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
 STRUCT
-	{attribute addProperty Name "DCM_Status_Channel_1"}
-	DCM_Status_Channel_1 : DCM_Status_Channel_36ED096F;
-	{attribute addProperty Name "DCM_Synchron_info_data_Channel_1"}
-	DCM_Synchron_info_data_Channel_1 : DCM_Synchron_info_data_Channel_6FB37C88;
-	{attribute addProperty Name "DCM_Status_Channel_2"}
-	DCM_Status_Channel_2 : DCM_Status_Channel_36ED096F;
-	{attribute addProperty Name "DCM_Synchron_info_data_Channel_2"}
-	DCM_Synchron_info_data_Channel_2 : DCM_Synchron_info_data_Channel_6FB37C88;
-	{attribute addProperty Name "DCM_Control_Channel_1"}
-	DCM_Control_Channel_1 : DCM_Control_Channel_5A8B5016;
-	{attribute addProperty Name "DCM_Velocity_Channel_1"}
-	DCM_Velocity_Channel_1 : DCM_Velocity_Channel_A47A3F41;
-	{attribute addProperty Name "DCM_Control_Channel_2"}
-	DCM_Control_Channel_2 : DCM_Control_Channel_5A8B5016;
-	{attribute addProperty Name "DCM_Velocity_Channel_2"}
-	DCM_Velocity_Channel_2 : DCM_Velocity_Channel_A47A3F41;
-	{attribute addProperty Name "WcState"}
-	WcState : TcoIo.WcState_9091E0EB;
-	{attribute addProperty Name "InfoData"}
-	InfoData : InfoData_F38373C9;
+    {attribute addProperty Name "DCM_Status_Channel_1"}
+    DCM_Status_Channel_1 : DCM_Status_Channel_36ED096F;
+    {attribute addProperty Name "DCM_Synchron_info_data_Channel_1"}
+    DCM_Synchron_info_data_Channel_1 : DCM_Synchron_info_data_Channel_6FB37C88;
+    {attribute addProperty Name "DCM_Status_Channel_2"}
+    DCM_Status_Channel_2 : DCM_Status_Channel_36ED096F;
+    {attribute addProperty Name "DCM_Synchron_info_data_Channel_2"}
+    DCM_Synchron_info_data_Channel_2 : DCM_Synchron_info_data_Channel_6FB37C88;
+    {attribute addProperty Name "DCM_Control_Channel_1"}
+    DCM_Control_Channel_1 : DCM_Control_Channel_5A8B5016;
+    {attribute addProperty Name "DCM_Velocity_Channel_1"}
+    DCM_Velocity_Channel_1 : DCM_Velocity_Channel_A47A3F41;
+    {attribute addProperty Name "DCM_Control_Channel_2"}
+    DCM_Control_Channel_2 : DCM_Control_Channel_5A8B5016;
+    {attribute addProperty Name "DCM_Velocity_Channel_2"}
+    DCM_Velocity_Channel_2 : DCM_Velocity_Channel_A47A3F41;
+    {attribute addProperty Name "WcState"}
+    WcState : TcoIo.WcState_9091E0EB;
+    {attribute addProperty Name "InfoData"}
+    InfoData : InfoData_F38373C9;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

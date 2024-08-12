@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Net;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace TcOpenHammer.Grafana.API.Controllers
 {
@@ -50,11 +50,14 @@ namespace TcOpenHammer.Grafana.API.Controllers
             _logger.LogError(errMsg);
             return Error(errMsg, HttpStatusCode.BadRequest);
         }
-        private FileStreamResult Image(FileInfo imageInfo) => File(System.IO.File.OpenRead(imageInfo.FullName), $"image/{TrimExtension(imageInfo)}");
-        private static string TrimExtension(FileInfo fileInfo) => fileInfo.Extension.Replace(".", "");
 
-        private static IActionResult Error(string message, HttpStatusCode statusCode) => new JsonResult(new { Message = message }) { StatusCode = (int)statusCode };
+        private FileStreamResult Image(FileInfo imageInfo) =>
+            File(System.IO.File.OpenRead(imageInfo.FullName), $"image/{TrimExtension(imageInfo)}");
+
+        private static string TrimExtension(FileInfo fileInfo) =>
+            fileInfo.Extension.Replace(".", "");
+
+        private static IActionResult Error(string message, HttpStatusCode statusCode) =>
+            new JsonResult(new { Message = message }) { StatusCode = (int)statusCode };
     }
-
-
 }

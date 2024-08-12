@@ -1,8 +1,8 @@
 # TcoData
+
 ## Introduction
 
 The TcoData library is a comprehensive software framework designed to facilitate efficient data handling by remote task execution in industrial automation and control systems. This library serves as a bridge between programmable logic controllers (PLCs) and PC-based data repositories, enabling seamless communication, data manipulation, and task execution across distributed systems.
-
 
 ## Example of definition repository
 
@@ -15,21 +15,21 @@ The TcoData library is a comprehensive software framework designed to facilitate
     // if data exchange PLC<->PC based system is reqired
 	Entry.TcoDataTests.MAIN.sandbox.DataManager.InitializeRemoteDataExchange();
 ```
-	
 
 ## Example of fragmented repositories
 
 ### PLC1
+
 ```csharp
 TYPE stProcessData_Plc1 EXTENDS TcoData.TcoEntity :
 STRUCT
 	{attribute wpf [Container(Layout.Stack)]}
 	{attribute addProperty Name "Entity header"}
-	EntityHeader, stEntityHeader: BOOL;	
+	EntityHeader, stEntityHeader: BOOL;
 	_Modified : DT;
 	_Created : DT;
 	{attribute wpf [Container(Layout.Stack)]}
-	{attribute addProperty Name "Cu1"}	
+	{attribute addProperty Name "Cu1"}
 	Cu_1 : stCu_ProcessData;
 END_STRUCT
 END_TYPE
@@ -57,17 +57,18 @@ END_VAR
 	var repositoryFragmentedPlc1 = new MongoDbFragmentedRepository<PlainstProcessData_Plc1, PlainstProcessData_Plc1>(parametersFragmentedPlc1, fragmentExpressionPlc1);
 	Entry.TcoDataTests.MAIN.sandbox.DataManagerPlc1.InitializeRepository(repositoryFragmentedPlc1);
 ```
+
 ---
+
 **_Note:_**
 
-`DataManagerPlc1` will handle  only with data defined in fragmentExpresion. That means only data defined in fragments for this repository will be updated.Data such as `_Modified` and `_Created` are skiped for writing (are not in list).
+`DataManagerPlc1` will handle only with data defined in fragmentExpresion. That means only data defined in fragments for this repository will be updated.Data such as `_Modified` and `_Created` are skiped for writing (are not in list).
 
- #### Data  created via UI view  PLC 1 repository
+#### Data created via UI view PLC 1 repository
 
 ![](assets/fragmentedPlc1.png)
 
-
- #### Data storesd in  repository PLC1
+#### Data storesd in repository PLC1
 
 ![](assets/fragmentedMongoPlc1.png)
 
@@ -78,16 +79,17 @@ TYPE stProcessData_Plc2 EXTENDS TcoData.TcoEntity :
 STRUCT
 	{attribute wpf [Container(Layout.Stack)]}
 	{attribute addProperty Name "Entity header"}
-	EntityHeader, stEntityHeader: BOOL;	
+	EntityHeader, stEntityHeader: BOOL;
 	_Modified : DT;
 	_Created : DT;
 	{attribute wpf [Container(Layout.Stack)]}
-	{attribute addProperty Name "Cu2"}	
+	{attribute addProperty Name "Cu2"}
 	Cu_2 : stCu_ProcessData;
 
 END_STRUCT
 END_TYPE
 ```
+
 ```csharp
 //<DataManagerDeclarations>
 // Function block for data maipulation must extend from TcoData.TcoDataExchange.
@@ -98,7 +100,6 @@ VAR
 END_VAR
 //</DataManagerDeclarations>
 ```
-
 
 ```csharp
     var parametersFragmentedPlc2 = new MongoDbRepositorySettings<PlainstProcessData_Plc2>("mongodb://localhost:27017", "TestDataBase", "TestProcessData");
@@ -113,17 +114,15 @@ END_VAR
 ```
 
 ---
+
 **_Note:_**
 
-`DataManagerPlc2` will handle  only with data defined in fragmentExpresion. That means only data defined in fragments for this repository will be updated.Data such as `_Modified` and `_Created`  are skiped during writing.
+`DataManagerPlc2` will handle only with data defined in fragmentExpresion. That means only data defined in fragments for this repository will be updated.Data such as `_Modified` and `_Created` are skiped during writing.
 
-
-
- #### Data  created via UI view  PLC 2 repository
+#### Data created via UI view PLC 2 repository
 
 ![](assets/fragmentedPlc2.png)
 
-
- #### Data stored in  repository PLC2
+#### Data stored in repository PLC2
 
 ![](assets/fragmentedMongoPlc2.png)

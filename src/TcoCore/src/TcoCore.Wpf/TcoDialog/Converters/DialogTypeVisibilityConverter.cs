@@ -18,7 +18,7 @@ namespace TcoCore
                 case eDialogType.Undefined:
                     return Visibility.Collapsed;
                 case eDialogType.Info:
-                case eDialogType.Question: 
+                case eDialogType.Question:
                 case eDialogType.Warning:
                 case eDialogType.Error:
                     return Visibility.Visible;
@@ -27,7 +27,12 @@ namespace TcoCore
             }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }

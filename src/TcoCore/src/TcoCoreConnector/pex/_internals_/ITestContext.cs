@@ -7,6 +7,6 @@ namespace TcoCore.Testing
     public interface ITestContext
     {
         bool ContextOpen();
-        bool ContextClose();      
+        bool ContextClose();
     }
 }

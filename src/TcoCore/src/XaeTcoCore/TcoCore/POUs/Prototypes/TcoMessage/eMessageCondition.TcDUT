@@ -5,11 +5,10 @@
 {attribute 'strict'}
 TYPE INTERNAL eMessageCondition :
 (
-	Unconditional := 0,
-	Active := 10,
-	Inactive := 20		
+    Unconditional := 0,
+    Active := 10,
+    Inactive := 20
 );
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

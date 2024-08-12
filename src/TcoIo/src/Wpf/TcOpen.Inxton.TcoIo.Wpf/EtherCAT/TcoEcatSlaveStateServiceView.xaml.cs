@@ -10,13 +10,10 @@ using System.Windows.Markup;
 namespace TcoIo
 {
     public partial class TcoEcatSlaveStateServiceView : UserControl
-    {                    
-
-       
+    {
         public TcoEcatSlaveStateServiceView()
         {
             InitializeComponent();
         }
-
     }
 }

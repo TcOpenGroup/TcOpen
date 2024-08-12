@@ -56,11 +56,11 @@ TYPE eTcoSequencerTests :
     SwitchStepModeOnDuringStepExecution := 691,
     StepModeStepForwardFromRunningStep := 693,
     StepModeStepBackwardFromRunningStep := 695,
-	SwitchStepModeStepOffFromReadyToRun := 696,
-	SwitchStepModeStepOnFromRunning := 697,
-	SwitchStepModeStepOffFromRunning := 698,
+    SwitchStepModeStepOffFromReadyToRun := 696,
+    SwitchStepModeStepOnFromRunning := 697,
+    SwitchStepModeStepOffFromRunning := 698,
     OnStateChangeWhenChangingModes := 699
 );
-END_TYPE														]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

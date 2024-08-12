@@ -19,7 +19,7 @@ namespace TcoCore
 
         /// <summary>
         /// Create new instance of <see cref="TcoObjectMessageHandler"/>.
-        /// </summary>        
+        /// </summary>
         [Obsolete("Do not use! Required for WPF")]
         public TcoObjectMessageHandler()
         {
@@ -79,7 +79,10 @@ namespace TcoCore
                 if (_cycleTags == null)
                 {
                     _cycleTags = new List<IValueTag>();
-                    if (_context != null) { _cycleTags.Add(_context.StartCycleCount); }
+                    if (_context != null)
+                    {
+                        _cycleTags.Add(_context.StartCycleCount);
+                    }
                     _cycleTags.AddRange(DescendingMessages.Select(p => p.Cycle));
                     _cycleTags.AddRange(DescendingMessages.Select(p => p.Pinned));
                 }
@@ -103,19 +106,16 @@ namespace TcoCore
 
         private IEnumerable<TcoMessage> ActiveMessages
         {
-            get
-            {
-                return DescendingMessages.Where(p => p.IsActive);
-            }
+            get { return DescendingMessages.Where(p => p.IsActive); }
         }
-      
+
         string highestSeverityMessage;
         private int diagnosticsDepth = 15;
-        
 
         public string HighestSeverityMessage
         {
-            get => highestSeverityMessage; set
+            get => highestSeverityMessage;
+            set
             {
                 if (highestSeverityMessage == value)
                 {
@@ -123,7 +123,10 @@ namespace TcoCore
                 }
 
                 highestSeverityMessage = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(HighestSeverityMessage)));
+                PropertyChanged?.Invoke(
+                    this,
+                    new PropertyChangedEventArgs(nameof(HighestSeverityMessage))
+                );
             }
         }
 
@@ -133,7 +136,9 @@ namespace TcoCore
         /// Performs refresh of the messages of this <see cref="TcoObject"/> and all its child object.
         /// </summary>
         /// <returns>Enumerable of messages as POCO object.</returns>
-        public IEnumerable<PlainTcoMessage> GetActiveMessages(eMessageCategory  category = eMessageCategory.All)
+        public IEnumerable<PlainTcoMessage> GetActiveMessages(
+            eMessageCategory category = eMessageCategory.All
+        )
         {
             if (refreshTags == null)
             {
@@ -150,7 +155,9 @@ namespace TcoCore
                 _obj.GetConnector().ReadBatchFromUIThread(refreshTags);
             }
 
-            return DescendingMessages?.Where(p => p.IsActive && p.Category.LastValue >= (short)category).Select(p => p.PlainMessage);
+            return DescendingMessages
+                ?.Where(p => p.IsActive && p.Category.LastValue >= (short)category)
+                .Select(p => p.PlainMessage);
         }
 
         /// <summary>
@@ -160,17 +167,29 @@ namespace TcoCore
         public void UpdateHealthInfo()
         {
             ReadCycles();
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ActiveMessagesCount)));
+            PropertyChanged?.Invoke(
+                this,
+                new PropertyChangedEventArgs(nameof(ActiveMessagesCount))
+            );
             if (ActiveMessagesCount > 0)
             {
                 ReadCategories();
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(HighestSeverity)));
-                HighestSeverityMessage = ActiveMessages.OrderByDescending(p => p.Category.LastValue).FirstOrDefault()?.PlainMessage.Text;
+                PropertyChanged?.Invoke(
+                    this,
+                    new PropertyChangedEventArgs(nameof(HighestSeverity))
+                );
+                HighestSeverityMessage = ActiveMessages
+                    .OrderByDescending(p => p.Category.LastValue)
+                    .FirstOrDefault()
+                    ?.PlainMessage.Text;
             }
             else
             {
                 HighestSeverityMessage = string.Empty;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(HighestSeverity)));
+                PropertyChanged?.Invoke(
+                    this,
+                    new PropertyChangedEventArgs(nameof(HighestSeverity))
+                );
             }
         }
 
@@ -180,10 +199,7 @@ namespace TcoCore
         /// </summary>
         public int ActiveMessagesCount
         {
-            get
-            {
-                return ActiveMessages.Count();
-            }
+            get { return ActiveMessages.Count(); }
         }
 
         /// <summary>
@@ -197,7 +213,6 @@ namespace TcoCore
                 if (ActiveMessagesCount > 0)
                 {
                     return (eMessageCategory)ActiveMessages.Max(p => p.Category.LastValue);
-
                 }
 
                 return eMessageCategory.None;
@@ -207,6 +222,17 @@ namespace TcoCore
         /// <summary>
         /// Gets or sets the diagnostics depth for this object. The object's tree will be searched for messaging objects up to diagnostics depth set in this property.
         /// </summary>
-        public int DiagnosticsDepth { get => diagnosticsDepth; set { diagnosticsDepth = value;  this._descendingMessages = null;  _categoryTags = null; _cycleTags = null; refreshTags = null; } }
+        public int DiagnosticsDepth
+        {
+            get => diagnosticsDepth;
+            set
+            {
+                diagnosticsDepth = value;
+                this._descendingMessages = null;
+                _categoryTags = null;
+                _cycleTags = null;
+                refreshTags = null;
+            }
+        }
     }
 }

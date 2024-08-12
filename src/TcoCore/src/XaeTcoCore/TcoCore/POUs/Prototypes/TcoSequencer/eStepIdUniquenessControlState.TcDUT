@@ -5,15 +5,14 @@
 {attribute 'strict'}
 TYPE eStepIdUniquenessControlState :
 (
-	Deactivated := -1,
-	NotYetStarted := 0,
-	Requested := 10,
-	Started := 20,
-	Running := 40,
-	Done := 200,
-	Error := 255
+    Deactivated := -1,
+    NotYetStarted := 0,
+    Requested := 10,
+    Started := 20,
+    Running := 40,
+    Done := 200,
+    Error := 255
 );
-END_TYPE
- ]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

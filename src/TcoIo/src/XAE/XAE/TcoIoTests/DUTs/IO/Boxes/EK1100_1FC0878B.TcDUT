@@ -11,10 +11,9 @@
 {attribute addProperty Size "2"}
 TYPE EK1100_1FC0878B EXTENDS TcoIo.EtcSlaveBoxBase_77A0E4A7 :
 STRUCT
-	{attribute addProperty Name "InfoData"}
-	InfoData : TcoIo.InfoData_6F19DB2B;
+    {attribute addProperty Name "InfoData"}
+    InfoData : TcoIo.InfoData_6F19DB2B;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -9,10 +9,8 @@ namespace TcoData
 {
     public class TcoDataExchangeDisplayViewModel : TcoDataExchangeViewModel
     {
-        public TcoDataExchangeDisplayViewModel() : base()
-        {
-
-        }
+        public TcoDataExchangeDisplayViewModel()
+            : base() { }
 
         protected override void UpdateAvailability()
         {

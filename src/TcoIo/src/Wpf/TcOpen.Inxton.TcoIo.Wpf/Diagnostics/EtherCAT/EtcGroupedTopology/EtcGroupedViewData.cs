@@ -7,7 +7,6 @@ namespace TcoIo
 {
     public class EtcGroupedViewData : INotifyPropertyChanged
     {
-
         private string groupName;
 
         public string GroupName
@@ -27,8 +26,12 @@ namespace TcoIo
 
         public List<GroupedViewItemObject> GroupedViewItems
         {
-            get { return this.groupedViewItems ?? (this.groupedViewItems = new List<GroupedViewItemObject>()); }
-            set 
+            get
+            {
+                return this.groupedViewItems
+                    ?? (this.groupedViewItems = new List<GroupedViewItemObject>());
+            }
+            set
             {
                 if (value != null)
                 {
@@ -62,7 +65,12 @@ namespace TcoIo
             }
         }
 
-        public EtcGroupedViewData(string _groupName, List<GroupedViewItemObject> _groupedViewItems, ushort _infoDataState, bool _isInErrorState)
+        public EtcGroupedViewData(
+            string _groupName,
+            List<GroupedViewItemObject> _groupedViewItems,
+            ushort _infoDataState,
+            bool _isInErrorState
+        )
         {
             GroupName = _groupName;
             GroupedViewItems = _groupedViewItems;
@@ -70,14 +78,18 @@ namespace TcoIo
             IsInErrorState = _isInErrorState;
         }
 
-        public void UpdateData(string _groupName, List<GroupedViewItemObject> _groupedViewItems, ushort _infoDataState, bool _isInErrorState)
+        public void UpdateData(
+            string _groupName,
+            List<GroupedViewItemObject> _groupedViewItems,
+            ushort _infoDataState,
+            bool _isInErrorState
+        )
         {
             GroupName = _groupName;
             GroupedViewItems = _groupedViewItems;
             InfoDataState = _infoDataState;
             IsInErrorState = _isInErrorState;
         }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -90,4 +102,3 @@ namespace TcoIo
         }
     }
 }
-

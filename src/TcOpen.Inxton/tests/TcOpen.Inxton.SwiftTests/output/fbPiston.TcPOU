@@ -1,74 +1,60 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="fbPiston" Id="{41ce95b1-694a-4bd3-b773-5382b98402d8}" SpecialFunc="None">
-    <Declaration>FUNCTION_BLOCK fbPiston EXTENDS TcoCore.TcoSequencer</Declaration>
+    <Declaration><![CDATA[FUNCTION_BLOCK fbPiston EXTENDS TcoCore.TcoSequencer]]></Declaration>
     <Implementation>
-      <ST />
+      <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Main" Id="{c86ecde6-1911-404c-86d2-9ddbfc0b3cb4}">
-      <Declaration>METHOD PROTECTED Main : BOOL</Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED Main : BOOL]]></Declaration>
       <Implementation>
-        <ST>
-
-IF Step(10,
-TRUE,
-'_moveHomeTask') THEN
-//-------------------------------------------------------
-	IF(_moveHomeTask.Invoke().Done)THEN
-		StepCompleteWhen(TRUE);
-	END_IF;
-//-------------------------------------------------------
+        <ST><![CDATA[IF Step(10, TRUE, '_moveHomeTask') THEN
+    //-------------------------------------------------------
+    IF (_moveHomeTask.Invoke().Done) THEN
+        StepCompleteWhen(TRUE);
+    END_IF;
+    //-------------------------------------------------------
 END_IF;
 
-IF Step(20,
-TRUE,
-'_moveWorkTask') THEN
-//-------------------------------------------------------
-	IF(_moveWorkTask.Invoke().Done)THEN
-		StepCompleteWhen(TRUE);
-	END_IF;
-//-------------------------------------------------------
+IF Step(20, TRUE, '_moveWorkTask') THEN
+    //-------------------------------------------------------
+    IF (_moveWorkTask.Invoke().Done) THEN
+        StepCompleteWhen(TRUE);
+    END_IF;
+    //-------------------------------------------------------
 END_IF;
 
-IF Step(30,
-TRUE,
-'_moveHomeToggleTask') THEN
-//-------------------------------------------------------
-	IF(_moveHomeToggleTask.Toggle())THEN
-		StepCompleteWhen(TRUE);
-	END_IF;
-//-------------------------------------------------------
+IF Step(30, TRUE, '_moveHomeToggleTask') THEN
+    //-------------------------------------------------------
+    IF (_moveHomeToggleTask.Toggle()) THEN
+        StepCompleteWhen(TRUE);
+    END_IF;
+    //-------------------------------------------------------
 END_IF;
 
-IF Step(40,
-TRUE,
-'_moveHomeToggleTask') THEN
-//-------------------------------------------------------
-	IF(_moveHomeToggleTask.Toggle())THEN
-		StepCompleteWhen(TRUE);
-	END_IF;
-//-------------------------------------------------------
+IF Step(40, TRUE, '_moveHomeToggleTask') THEN
+    //-------------------------------------------------------
+    IF (_moveHomeToggleTask.Toggle()) THEN
+        StepCompleteWhen(TRUE);
+    END_IF;
+    //-------------------------------------------------------
 END_IF;
 
-IF Step(50,
-TRUE,
-'_moveHomeMomentaryTask') THEN
-//-------------------------------------------------------
-	IF(_moveHomeMomentaryTask.On())THEN
-		StepCompleteWhen(TRUE);
-	END_IF;
-//-------------------------------------------------------
+IF Step(50, TRUE, '_moveHomeMomentaryTask') THEN
+    //-------------------------------------------------------
+    IF (_moveHomeMomentaryTask.On()) THEN
+        StepCompleteWhen(TRUE);
+    END_IF;
+    //-------------------------------------------------------
 END_IF;
 
-IF Step(60,
-TRUE,
-'_moveHomeMomentaryTask') THEN
-//-------------------------------------------------------
-	IF(_moveHomeMomentaryTask.Off())THEN
-		StepCompleteWhen(TRUE);
-	END_IF;
-//-------------------------------------------------------
-END_IF;</ST>
+IF Step(60, TRUE, '_moveHomeMomentaryTask') THEN
+    //-------------------------------------------------------
+    IF (_moveHomeMomentaryTask.Off()) THEN
+        StepCompleteWhen(TRUE);
+    END_IF;
+    //-------------------------------------------------------
+END_IF;]]></ST>
       </Implementation>
     </Method>
   </POU>

@@ -3,15 +3,13 @@
   <DUT Name="DesignerUserData" Id="{2b54b571-0724-0aed-051f-ae9265f6c6e7}">
     <Declaration><![CDATA[TYPE DesignerUserData EXTENDS TcoCore.TcoStruct :
 STRUCT
-	{attribute addProperty Name "<#ResultBool#>"}
-	ResultBool:BOOL;
-	{attribute addProperty Name "<#ResultInt#>"}
-	ResultInt:INT;
-	{attribute addProperty Name "<#ResultString#>"}
-	ResultString:STRING;
-	
+    {attribute addProperty Name "<#ResultBool#>"}
+    ResultBool : BOOL;
+    {attribute addProperty Name "<#ResultInt#>"}
+    ResultInt : INT;
+    {attribute addProperty Name "<#ResultString#>"}
+    ResultString : STRING;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

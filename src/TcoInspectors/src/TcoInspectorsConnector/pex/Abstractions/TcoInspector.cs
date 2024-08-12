@@ -7,8 +7,5 @@ using TcoCore;
 
 namespace TcoInspectors
 {
-    public partial class TcoInspector
-    {
-
-    }
+    public partial class TcoInspector { }
 }

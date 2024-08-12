@@ -3,24 +3,23 @@
   <POU Name="Technology" Id="{f5d907bb-c69e-0cce-3445-38466ba70424}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK Technology EXTENDS TcoCore.TcoContext
 VAR
-	_ST001 : ST001(THIS^);
-	_mirrorStartCycle : ULINT;
-END_VAR
-]]></Declaration>
+    _ST001 : ST001(THIS^);
+    _mirrorStartCycle : ULINT;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Main" Id="{c95e53db-9583-06d0-14c2-b6db009198f1}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Main method of the TcoContext. This is the entry point of any control logic that belongs to this context. 
-			The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
-			This method is abstract, and it must be overridden in derived block.
-		</summary>
-	</docu>
+    <docu>
+        <summary>
+            Main method of the TcoContext. This is the entry point of any control logic that belongs to this context.
+            The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
+            This method is abstract, and it must be overridden in derived block.
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED  Main]]></Declaration>
+METHOD PROTECTED Main]]></Declaration>
       <Implementation>
         <ST><![CDATA[_ST001();]]></ST>
       </Implementation>

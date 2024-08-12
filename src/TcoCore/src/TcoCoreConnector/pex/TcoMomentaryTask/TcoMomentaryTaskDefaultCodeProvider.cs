@@ -19,14 +19,14 @@ namespace TcoCore.Swift
         public IVortexObject Origin { get; }
 
         public string Code(params object[] args)
-        {            
-            if(args.Length > 0)
+        {
+            if (args.Length > 0)
             {
                 bool result;
                 if (bool.TryParse(args[0].ToString(), out result))
                 {
                     return result ? $"{Origin.Symbol}.On()" : $"{Origin.Symbol}.Off()";
-                }                                    
+                }
             }
 
             return "// Wrong type of number of arguments.";

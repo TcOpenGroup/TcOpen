@@ -21,32 +21,59 @@ namespace TcOpen.Inxton.TcoInspectors.Wpf
                     case eInspectorResult.NoAction:
                         return TcOpen.Inxton.TcoInspectors.Wpf.Properties.strings.NotInspected;
                     case eInspectorResult.Running:
-                        return TcOpen.Inxton.TcoInspectors.Wpf.Properties.strings.InspectionIsRunning;
+                        return TcOpen
+                            .Inxton
+                            .TcoInspectors
+                            .Wpf
+                            .Properties
+                            .strings
+                            .InspectionIsRunning;
                     case eInspectorResult.Passed:
                         return TcOpen.Inxton.TcoInspectors.Wpf.Properties.strings.InspectionPassed;
                     case eInspectorResult.Failed:
                         return TcOpen.Inxton.TcoInspectors.Wpf.Properties.strings.InspectionFailed;
                     case eInspectorResult.Inconclusive:
-                        return TcOpen.Inxton.TcoInspectors.Wpf.Properties.strings.InspectionInconclusive;
+                        return TcOpen
+                            .Inxton
+                            .TcoInspectors
+                            .Wpf
+                            .Properties
+                            .strings
+                            .InspectionInconclusive;
                     case eInspectorResult.Excluded:
-                        return TcOpen.Inxton.TcoInspectors.Wpf.Properties.strings.InspectionDidRunButIsExcludedFromTheEvaluation;
+                        return TcOpen
+                            .Inxton
+                            .TcoInspectors
+                            .Wpf
+                            .Properties
+                            .strings
+                            .InspectionDidRunButIsExcludedFromTheEvaluation;
                     case eInspectorResult.Bypassed:
-                        return TcOpen.Inxton.TcoInspectors.Wpf.Properties.strings.InspectionWasBypassed;
+                        return TcOpen
+                            .Inxton
+                            .TcoInspectors
+                            .Wpf
+                            .Properties
+                            .strings
+                            .InspectionWasBypassed;
                     default:
                         break;
                 }
-
             }
             catch (Exception)
             {
-
                 // swallow
             }
 
             return Brushes.Gray;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }

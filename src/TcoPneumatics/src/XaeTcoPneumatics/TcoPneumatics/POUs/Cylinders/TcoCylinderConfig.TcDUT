@@ -3,11 +3,10 @@
   <DUT Name="TcoCylinderConfig" Id="{a5fb1882-7d31-063a-23e4-5151e21fced4}">
     <Declaration><![CDATA[TYPE TcoCylinderConfig :
 STRUCT
-	TimeToReachHomePosition : TIME := T#10S;
-	TimeToReachWorkPosition : TIME := T#10S;
-	TimeToRefill : TIME := T#1000MS;
+    TimeToReachHomePosition : TIME := T#10S;
+    TimeToReachWorkPosition : TIME := T#10S;
+    TimeToRefill : TIME := T#1000MS;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

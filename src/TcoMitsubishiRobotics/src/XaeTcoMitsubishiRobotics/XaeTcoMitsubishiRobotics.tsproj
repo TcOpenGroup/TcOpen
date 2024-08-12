@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.44">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.59">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{18071995-0000-0000-0000-000000000035}" TcBaseType="true" HideType="true">UINTARR2</Name>
@@ -2830,7 +2830,7 @@ External Setpoint Generation:
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
 						<Context>
-							<Id NeedCalleeCall="true">0</Id>
+							<Id>0</Id>
 							<Name>PlcTask</Name>
 							<ManualConfig>
 								<OTCID>#x02010030</OTCID>
@@ -3049,7 +3049,7 @@ External Setpoint Generation:
 					</UnrestoredVarLinks>
 					<Contexts>
 						<Context>
-							<Id NeedCalleeCall="true">0</Id>
+							<Id>0</Id>
 							<Name>PlcTask1</Name>
 							<ManualConfig>
 								<OTCID>#x02010060</OTCID>
@@ -4459,7 +4459,7 @@ Bit 8 - 15 : reserved]]></Comment>
 				</Box>
 				<EtherCAT DcSyncMode="3" EnableVirtualSwitch="true" MaxSwitchPorts="2" MaxSwitchFrames="120" MaxSwitchMACs="100"/>
 			</Device>
-			<Device Id="2" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="192.168.4.1.3.1" RemoteName="Device 2 (EtherCAT)" InfoImageId="7">
+			<Device Id="2" Disabled="true" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="192.168.4.1.3.1" RemoteName="Device 2 (EtherCAT)" InfoImageId="7">
 				<Name>Device 2 (EtherCAT)</Name>
 				<AddressInfo>
 					<Ccat>
@@ -6381,15 +6381,18 @@ Bit 8 - 15 : reserved]]></Comment>
 				</Box>
 				<EtherCAT/>
 			</Device>
-			<Device Id="3" DevType="119" AmsPort="28675" AmsNetId="192.168.4.1.4.1" RemoteName="Device 3 (EL6631)">
+			<Device Id="3" Disabled="true" DevType="119" AmsPort="28675" AmsNetId="192.168.4.1.4.1" RemoteName="Device 3 (EL6631)">
 				<Name>Device 3 (EL6631)</Name>
-				<DevData>000000001600000000000000a08601005465726d2031332028454c3636333129000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000000000000000000000000</DevData>
-				<Image Id="8" AddrType="4" ImageType="3" SizeIn="70" SizeOut="76">
+				<DevData>000000001600000000000000000000005465726d2031332028454c3636333129000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000000000000000000000000</DevData>
+				<Image Id="8" AddrType="4" ImageType="3" SizeIn="4" SizeOut="8">
 					<Name>Image</Name>
 				</Image>
 				<Box Id="23" BoxType="9121">
 					<Name>robot</Name>
-					<Comment><![CDATA[GSDML Name: GSDML-V2.3-MITSUBISHI-TZ535_PN-20140619.xml
+					<Comment><![CDATA[
+The GSDML is not available!
+
+GSDML Name: GSDML-V2.3-MITSUBISHI-TZ535_PN-20140619.xml
 Path: $(TWINCAT3DIR)Config\Io\Profinet\
 VendorName: Mitsubishi Electric Corporation
 OrderNumber: 2D-TZ535-PN
@@ -6519,8 +6522,8 @@ SW Release Version: V1.00]]></Comment>
 						</UsedGsdmlModule>
 						<UsedGsdmlSubModule SubModuleIdentNumber="1" SubSlotNumber="1" TypeOfSubmodule="3" Id="DAP V2.0" SubModuleName="2D-TZ535-PN(PROFINET IO)" InfoText="TZ535(PROFINET IO 2-Port)"/>
 						<UsedGsdmlSubModule SubModuleIdentNumber="262145" SubSlotNumber="1" TypeOfSubmodule="3" Id="ID_SUBMOD_IN_OUT_64B" SubModuleName="In/Out  64 byte" InfoText="In/Out  64 byte">
-							<DataItemIn Name="Input" VarSize="512" VarType="{18071995-0000-0000-0000-000300000040}"/>
-							<DataItemOut Name="Output" VarSize="512" VarType="{18071995-0000-0000-0000-000300000040}"/>
+							<DataItemIn/>
+							<DataItemOut/>
 						</UsedGsdmlSubModule>
 						<API Id="1">
 							<Name>API</Name>
@@ -6624,7 +6627,6 @@ Submodule Info: In/Out  64 byte
 		</Io>
 	</Project>
 	<Mappings>
-		<MappingInfo Identifier="{00000000-2041-0850-4020-500880000403}" Id="#x02030010"/>
 		<OwnerA Name="TIPC^TcoMitsubishiRoboticsTests^TcoMitsubishiRoboticsTests Instance">
 			<OwnerB Name="TIID^Device 3 (EL6631)^robot">
 				<Link VarA="PlcTask1 Inputs^GVL.Robot1.In.Inputs[0]" VarB="API^Term 10 (In/Out  64 byte)^Subterm 20 (In/Out  64 byte)^Inputs^Input[0]"/>

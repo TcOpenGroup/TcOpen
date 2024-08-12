@@ -15,40 +15,50 @@ namespace TcOpen.Inxton.Swift
 
         public Recorder(IVortexObject vortexObject)
         {
-            _recordedObject = vortexObject;            
+            _recordedObject = vortexObject;
             Tasks = _recordedObject.GetDescendants<IsTask>();
 
             foreach (var task in Tasks)
             {
                 task.RecordTaskAction = this.Record;
-            }          
+            }
         }
-        
+
         private readonly IVortexObject _recordedObject;
 
         readonly Sequence sequence = new Sequence();
         public Sequence Sequence => sequence;
-        
+
         public delegate void RecordAddedDelegate();
 
         public event RecordAddedDelegate OnRecordAdded;
 
         public void Record(ICodeProvider codeProvider, params object[] args)
         {
-            var step =  Sequence.AddStep(codeProvider.Origin);
+            var step = Sequence.AddStep(codeProvider.Origin);
             step.AddStatement(codeProvider.Code(args));
             OnRecordAdded?.Invoke();
         }
 
         public string EmitCode()
-        {                        
+        {
             return Sequence.EmitCode(new StringBuilder()).ToString();
         }
 
-        public void SaveSequence(string outputDirectory, string blockName, string blockGuid = null, string mainMethodGuid = null)
+        public void SaveSequence(
+            string outputDirectory,
+            string blockName,
+            string blockGuid = null,
+            string mainMethodGuid = null
+        )
         {
             var outputFile = Path.Combine(outputDirectory, $"{blockName}.TcPOU");
-            var sequenceBlock = TcAdapter.TcProject.PlcBlockHelpers.CreateSequencerPlcBlock(blockName, this.EmitCode(), blockGuid, mainMethodGuid);
+            var sequenceBlock = TcAdapter.TcProject.PlcBlockHelpers.CreateSequencerPlcBlock(
+                blockName,
+                this.EmitCode(),
+                blockGuid,
+                mainMethodGuid
+            );
             TcAdapter.TcProject.PlcBlockHelpers.EmitPlcBlockFile(outputFile, sequenceBlock);
         }
 

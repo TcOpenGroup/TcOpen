@@ -8,7 +8,6 @@ namespace Tco.Wpf
 {
     public class TreeWrapperObject : IVortexObject
     {
-
         public TreeWrapperObject(IVortexObject obj)
         {
             _obj = obj;
@@ -40,40 +39,43 @@ namespace Tco.Wpf
             }
         };
 
-        public IEnumerable<object> Children => _obj?.GetKids()
-                                     .Select(p =>
-                                     {
-                                         if (p is IVortexElement vortexElement)
-                                         {
-                                             if (HasRenderIgnoreAttribute(vortexElement))
-                                                 return Dummy;
-                                         }
-                                         switch (p)
-                                         {
-                                             case IVortexObject o:
-                                                 return new TreeWrapperObject(o);
-                                             case IValueTag o:
-                                                 return o;
-                                             case Array o when o.OfType<IVortexElement>().Count() > 0:
-                                                 return o;
-                                             default:
-                                                 return Dummy;
-                                         }
-                                     })
-                                    .Where(x => x != Dummy);
+        public IEnumerable<object> Children =>
+            _obj
+                ?.GetKids()
+                .Select(p =>
+                {
+                    if (p is IVortexElement vortexElement)
+                    {
+                        if (HasRenderIgnoreAttribute(vortexElement))
+                            return Dummy;
+                    }
+                    switch (p)
+                    {
+                        case IVortexObject o:
+                            return new TreeWrapperObject(o);
+                        case IValueTag o:
+                            return o;
+                        case Array o when o.OfType<IVortexElement>().Count() > 0:
+                            return o;
+                        default:
+                            return Dummy;
+                    }
+                })
+                .Where(x => x != Dummy);
 
         private bool HasRenderIgnoreAttribute(IVortexElement o)
         {
-
             var propertyInfo = GetPropertyViaSymbol(o);
             if (propertyInfo != null)
             {
-                var propertyAttribute = propertyInfo.GetCustomAttributes()
-                    .ToList()
-                    .Where(p => p is RenderIgnoreAttribute).FirstOrDefault() as RenderIgnoreAttribute;
+                var propertyAttribute =
+                    propertyInfo
+                        .GetCustomAttributes()
+                        .ToList()
+                        .Where(p => p is RenderIgnoreAttribute)
+                        .FirstOrDefault() as RenderIgnoreAttribute;
 
                 return propertyAttribute != null;
-
             }
 
             var typeAttribute = o.GetType()

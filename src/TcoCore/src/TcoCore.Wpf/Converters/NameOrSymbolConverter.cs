@@ -12,10 +12,19 @@ namespace TcoCore
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             IVortexElement val = value as IVortexElement;
-            return val != null ? string.IsNullOrEmpty(val.AttributeName) ? val.GetSymbolTail() : val.AttributeName : "Missing object information";
+            return val != null
+                ? string.IsNullOrEmpty(val.AttributeName)
+                    ? val.GetSymbolTail()
+                    : val.AttributeName
+                : "Missing object information";
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return value;
         }

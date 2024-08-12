@@ -1,7 +1,7 @@
-﻿using Grafana.Backend.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Grafana.Backend.Model;
 
 namespace TcOpenHammer.Grafana.API.Transformation
 {
@@ -23,8 +23,8 @@ namespace TcOpenHammer.Grafana.API.Transformation
         }
 
         public void AddRow(List<object> row) => _rows.Add(row);
-        public void AddColumn(Column column) => _columns.Add(column);
 
+        public void AddColumn(Column column) => _columns.Add(column);
     }
 
     public class Table<T> : ITable
@@ -47,13 +47,15 @@ namespace TcOpenHammer.Grafana.API.Transformation
             }
         }
 
-        private static IEnumerable<Column> HeaderFromType() => typeof(T)
-               .GetProperties()
-               .Select(propertyInfo => new Column(propertyInfo));
+        private static IEnumerable<Column> HeaderFromType() =>
+            typeof(T).GetProperties().Select(propertyInfo => new Column(propertyInfo));
 
         private IEnumerable<IEnumerable<object>> DefaultValuesForType()
         {
-            return new List<IEnumerable<object>> { Columns.Select(x => DefaultValuesForType(x.UnderlyingType)) };
+            return new List<IEnumerable<object>>
+            {
+                Columns.Select(x => DefaultValuesForType(x.UnderlyingType))
+            };
         }
 
         private static object DefaultValuesForType(Type underlyingType)
@@ -78,6 +80,5 @@ namespace TcOpenHammer.Grafana.API.Transformation
             var properties = typeof(T).GetProperties();
             return source.Select(item => properties.Select(prop => prop.GetValue(item)));
         }
-
     }
 }

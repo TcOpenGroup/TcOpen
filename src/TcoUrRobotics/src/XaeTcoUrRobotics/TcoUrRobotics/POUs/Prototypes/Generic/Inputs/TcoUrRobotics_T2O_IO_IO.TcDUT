@@ -1,12 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoUrRobotics_T2O_IO_IO" Id="{df0d8ed2-b893-0bac-33d4-3efb3ce2f689}">
-    <Declaration><![CDATA[TYPE
-    TcoUrRobotics_T2O_IO_IO :
-    STRUCT
-        bArray AT %I* : ARRAY[0..67] OF BYTE;
-    END_STRUCT
-END_TYPE
-]]></Declaration>
+    <Declaration><![CDATA[TYPE TcoUrRobotics_T2O_IO_IO :
+STRUCT
+    bArray AT %I* : ARRAY[0..67] OF BYTE;
+END_STRUCT
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

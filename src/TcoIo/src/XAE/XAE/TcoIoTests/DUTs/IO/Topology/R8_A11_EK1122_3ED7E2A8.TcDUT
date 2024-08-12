@@ -9,24 +9,23 @@
 {attribute addProperty Name "R8_A11 (EK1122)"}
 TYPE R8_A11_EK1122_3ED7E2A8 EXTENDS EK1122_1FC0878B :
 STRUCT
-	{attribute addProperty Name "RC70_1 (EK1100)"}
-	{attribute addProperty PreviousPort "R8_A11 (EK1122) : D"}
-	{attribute addProperty SyncUnit "default"}
-	RC70_1_EK1100 : RC70_1_EK1100_B905944A;
-	{attribute addProperty Name "RC70_2 (EK1100)"}
-	{attribute addProperty PreviousPort "RC70_1 (EK1100) : C"}
-	{attribute addProperty SyncUnit "default"}
-	RC70_2_EK1100 : RC70_2_EK1100_D5DD9671;
-	{attribute addProperty Name "RC80_1 (EK1100)"}
-	{attribute addProperty PreviousPort "R8_A11 (EK1122) : B"}
-	{attribute addProperty SyncUnit "default"}
-	RC80_1_EK1100 : RC80_1_EK1100_5DD08FF5;
-	{attribute addProperty Name "RC80_2 (EK1100)"}
-	{attribute addProperty PreviousPort "RC80_1 (EK1100) : C"}
-	{attribute addProperty SyncUnit "default"}
-	RC80_2_EK1100 : RC80_2_EK1100_DC1461B5;
+    {attribute addProperty Name "RC70_1 (EK1100)"}
+    {attribute addProperty PreviousPort "R8_A11 (EK1122) : D"}
+    {attribute addProperty SyncUnit "default"}
+    RC70_1_EK1100 : RC70_1_EK1100_B905944A;
+    {attribute addProperty Name "RC70_2 (EK1100)"}
+    {attribute addProperty PreviousPort "RC70_1 (EK1100) : C"}
+    {attribute addProperty SyncUnit "default"}
+    RC70_2_EK1100 : RC70_2_EK1100_D5DD9671;
+    {attribute addProperty Name "RC80_1 (EK1100)"}
+    {attribute addProperty PreviousPort "R8_A11 (EK1122) : B"}
+    {attribute addProperty SyncUnit "default"}
+    RC80_1_EK1100 : RC80_1_EK1100_5DD08FF5;
+    {attribute addProperty Name "RC80_2 (EK1100)"}
+    {attribute addProperty PreviousPort "RC80_1 (EK1100) : C"}
+    {attribute addProperty SyncUnit "default"}
+    RC80_2_EK1100 : RC80_2_EK1100_DC1461B5;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

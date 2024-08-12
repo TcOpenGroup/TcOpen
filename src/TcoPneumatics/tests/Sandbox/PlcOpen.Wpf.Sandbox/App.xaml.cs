@@ -8,13 +8,16 @@ namespace TcoPneumatics.Wpf.Sandbox
     /// </summary>
     public partial class App : Application
     {
-        public App():base()
+        public App()
+            : base()
         {
-            TcOpen.Inxton.TcoAppDomain.Current.Builder
-                .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter())
+            TcOpen
+                .Inxton.TcoAppDomain.Current.Builder.SetUpLogger(
+                    new TcOpen.Inxton.Logging.SerilogAdapter()
+                )
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
 
-            Entry.TcoPneumaticsTestsPlc.Connector.BuildAndStart();           
+            Entry.TcoPneumaticsTestsPlc.Connector.BuildAndStart();
         }
     }
 }

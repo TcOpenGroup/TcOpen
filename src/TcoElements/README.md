@@ -4,48 +4,42 @@ TcoElements is a collection of components for accessing and managing I/O primiti
 
 For detailed documentation, see the [TcOpen Documentation site](https://docs.tcopengroup.org/api/TcoElements/PlcDocu.TcoElements)
 
-
 ## TcoDi
 
 `TcoDi` provides access to digital input, with a series of functions to read the state of the input, with built-in diagnostics functions.
 
-
-   ![TcoDiServiceView](assets/digital-input-service-view.png)
-
+![TcoDiServiceView](assets/digital-input-service-view.png)
 
 ## TcoDo
 
 `TcoDo` provides access to digital output, with a series of functions to read the state of the input, with built-in diagnostics functions.
 
-
-   ![TcoDoServiceView](assets/digital-output-service-view.png)
+![TcoDoServiceView](assets/digital-output-service-view.png)
 
 ## TcoAi
 
 `TcoAi` provides access to analog input, with a series of functions to read the state of the input, with built-in diagnostics functions.
 
-
-   ![TcoAiServiceView](assets/analogue-input-service-view.png)
+![TcoAiServiceView](assets/analogue-input-service-view.png)
 
 ## TcoAo
 
 `TcoAo` provides access to analog input, with a series of functions to read the state of the input, with built-in diagnostics functions.
 
-
-   ![TcoAoServiceView](assets/analogue-output-service-view.png)   
+![TcoAoServiceView](assets/analogue-output-service-view.png)
 
 ## TcoCarousel
 
 `TcoCarousel` used in manufacturing or production environments to move and position items between different workstations. It typically consists of a circular table that rotates to bring items to different positions around the table, along with a robotic arm or other mechanism to pick up and move the items as needed.
 
-Picture below is default view for carousel. A view provide us sates informations such as : In position,In precise position,and general safety condition to turn table. The circle the middle is information about direction, and background of this circle signalize information that table(carousel) is `InPosition`(Warning color  is not (Yellow), Notification(Green) color is in position.) see `TcoCore.Wpf.TcoColors`
+Picture below is default view for carousel. A view provide us sates informations such as : In position,In precise position,and general safety condition to turn table. The circle the middle is information about direction, and background of this circle signalize information that table(carousel) is `InPosition`(Warning color is not (Yellow), Notification(Green) color is in position.) see `TcoCore.Wpf.TcoColors`
 
 ![TcoCarouselView](assets/carosel-view.png)
 
 ### PLC enviroment
 
-
 ---
+
 **_Preconditions:_**
 
 Nothig. It is control by single input/output
@@ -65,18 +59,17 @@ Nothig. It is control by single input/output
 
 #### 2. Build the XAE project
 
+#### 3. Link all items of the structure **`IO`**.
 
-#### 3. Link all items of the structure **`IO`**. 
+#### 4. Inside the declaration part of the function block created, add an instance of the **`TcoElemnts.TcoCarousel`** function block with the initialization according to the example
 
-#### 4. Inside the declaration part of the function block created, add an instance of the **`TcoElemnts.TcoCarousel`** function block with the initialization according to the example  
-
-````csharp
+```csharp
 FUNCTION_BLOCK TcoElementsSandbox EXTENDS TcoCore.TcoContext
 VAR
       {attribute addProperty Name "Carousel"}
 	   _carousel : TcoElements.TcoCarousel(THIS^);
 END_VAR
-````
+```
 
 #### 5. Create the Function Block that extends the **`TcoCore.TcoContext`** function block
 
@@ -92,11 +85,11 @@ END_VAR
    _carousel.Config.Offset:=1;
 
    _carousel(
-      inoInPosition:=IO.A1._1 , 
-      inoInPrecisePosition:=IO.A1._2 , 
-      inoEnableTurn:= IO.A2._1, 
-      inoStartTurn:= IO.A2._2, 
-      inSafetyCondition:=IO.A2._3 , 
+      inoInPosition:=IO.A1._1 ,
+      inoInPrecisePosition:=IO.A1._2 ,
+      inoEnableTurn:= IO.A2._1,
+      inoStartTurn:= IO.A2._2,
+      inSafetyCondition:=IO.A2._3 ,
       inBasePositionNumber:=codedPosition );
 
    _carousel.Service();
@@ -134,7 +127,7 @@ END_VAR
 </Window.DataContext>
 ```
 
-## NET enviroment ##
+## NET enviroment
 
 Preconditions: All neccessary packages are installed, all neccessary references are set, connector to the target PLC is set. MainWindow.xaml has its view model declared and its DataContext is set to this view model, according to the example
 
@@ -143,6 +136,7 @@ Preconditions: All neccessary packages are installed, all neccessary references 
     <local:MainWindowViewModel />
 </Window.DataContext>
 ```
+
 - ### Implementation steps
 
 1. Run the Vortex Builder
@@ -153,12 +147,14 @@ Preconditions: All neccessary packages are installed, all neccessary references 
     <StackPanel DataContext="{Binding TcoElementsTestsPlc.MAIN._tcoElementsSandbox}">
     </StackPanel>
 ```
-3. Into the container added, insert the RenderableContentControl and bind its DataContext to the TcoElementsSandbox._carousel, using the PresentationType of the value Service
+
+3. Into the container added, insert the RenderableContentControl and bind its DataContext to the TcoElementsSandbox.\_carousel, using the PresentationType of the value Service
 
 ```XAML
    <vortex:RenderableContentControl DataContext="{Binding _carousel}" PresentationType="Service"></vortex:RenderableContentControl>
 ```
-The  presentation Type of the value can be used also Base 
+
+The presentation Type of the value can be used also Base
 
 ```XAML
    <vortex:RenderableContentControl DataContext="{Binding _carousel}" PresentationType="Service"></vortex:RenderableContentControl>
@@ -166,7 +162,7 @@ The  presentation Type of the value can be used also Base
 
 4. After starting the application and expanding the view, final view should look as follows
 
-Collapsed Service view 
+Collapsed Service view
 
 ![TcoCarouselServiceView](assets/carousel-serviceview-collapsed.png)
 
@@ -178,23 +174,17 @@ Service view report an error notification
 
 ![TcoCarouselServiceView](assets/carousel-serviceview-collapsed-alarm.png)
 
-
-
-
 Default view
 
 ![TcoCarouselView](assets/carosel-view.png)
-
 
 Default view turning is active
 
 ![TcoCarouselTurningView](assets/carosel-view-turning.png)
 
-
 Default view turning is in error
 
 ![TcoCarouselTurningView](assets/carosel-view-error.png)
-
 
 Default view turning is in position not axtive , but safety condision are not met.
 
@@ -211,56 +201,59 @@ Default view turning is in position not axtive , but safety condision are not me
 
    _safetyOk := true; //
    _carousel(
-      inoInPosition:=IO.A1._1 , 
-      inoInPrecisePosition:=IO.A1._2 , 
-      inoEnableTurn:= IO.A2._1, 
-      inoStartTurn:= IO.A2._2, 
-      inSafetyCondition:=_safetyOk , 
+      inoInPosition:=IO.A1._1 ,
+      inoInPrecisePosition:=IO.A1._2 ,
+      inoEnableTurn:= IO.A2._1,
+      inoStartTurn:= IO.A2._2,
+      inSafetyCondition:=_safetyOk ,
       inBasePositionNumber:=codedPosition );
 ```
 
 ## inSafetyCondition
 
 In code above is assigned by variable `_safetyOk`
-This input  is a condition that prevents the rotation of the table, possibly due to collisions with cylinders, axes, or other objects.
+This input is a condition that prevents the rotation of the table, possibly due to collisions with cylinders, axes, or other objects.
 
 ---
-**_Note:_**          
+
+**_Note:_**
 Do not use signal from Light Curtain here.
 
 ---
 
 ## Suspend/Abort methods
-   
-An example below showing  constrain for turning table. By calling method `Suspend` means turning task is still active, but outputs are off (physically not rotating ) and is also produced alarm notification. There is another option `Abort`. By calling this method is turning task is **aborted**
+
+An example below showing constrain for turning table. By calling method `Suspend` means turning task is still active, but outputs are off (physically not rotating ) and is also produced alarm notification. There is another option `Abort`. By calling this method is turning task is **aborted**
 
 ---
+
 **_Note:_**
 
-Typical signal for suspend method as input might be signal from `Light curtain`  
+Typical signal for suspend method as input might be signal from `Light curtain`
 
 ---
 
 ---
+
 **_Important:_**
 
-This methods must be called after initialization  of function block!!!
+This methods must be called after initialization of function block!!!
 
 ---
 
 ```csharp
-  
+
   _carousel(
-      inoInPosition:=IO.A1._1 , 
-      inoInPrecisePosition:=IO.A1._2 , 
-      inoEnableTurn:= IO.A2._1, 
-      inoStartTurn:= IO.A2._2, 
-      inSafetyCondition:=_safetyOk , 
+      inoInPosition:=IO.A1._1 ,
+      inoInPrecisePosition:=IO.A1._2 ,
+      inoEnableTurn:= IO.A2._1,
+      inoStartTurn:= IO.A2._2,
+      inSafetyCondition:=_safetyOk ,
       inBasePositionNumber:=codedPosition );
 
    _carousel.Suspend(inoDisableCondition:= _disableSignal1 ,Invert:=FALSE); //this might be signal from Light Curtain (safety is inerupted)
    _carousel.Suspend(inoDisableCondition:=_disableSignal2 ,Invert:=TRUE);
-      
+
 
 
 ```

@@ -3,17 +3,15 @@
   <DUT Name="eDigitalInspectorTests" Id="{77f0a0f7-9d2a-0ba4-13c1-1e1ebd2ed04b}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE
-    eDigitalInspectorTests :
-    (
-        Inspect         := 10,
-        GetResult       := 20,
-        UpdateOverall   := 30,
-        OnFailCarryOn   := 40,
-        OnFailRetry     := 50,
-        OnFailTerminate := 60
-    );
-END_TYPE
-]]></Declaration>
+TYPE eDigitalInspectorTests :
+(
+    Inspect := 10,
+    GetResult := 20,
+    UpdateOverall := 30,
+    OnFailCarryOn := 40,
+    OnFailRetry := 50,
+    OnFailTerminate := 60
+);
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

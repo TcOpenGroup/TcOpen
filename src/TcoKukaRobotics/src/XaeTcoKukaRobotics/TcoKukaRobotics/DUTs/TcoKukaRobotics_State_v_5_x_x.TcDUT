@@ -1,139 +1,97 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoKukaRobotics_State_v_5_x_x" Id="{c1fb33fa-983f-0e55-1f2b-6d3ec61b8080}">
-    <Declaration><![CDATA[TYPE TcoKukaRobotics_State_v_5_x_x : 
+    <Declaration><![CDATA[TYPE TcoKukaRobotics_State_v_5_x_x :
 STRUCT
-
-	{attribute addProperty Name "<#ControlReady [RC_RDY1]#>"}
-	RcReady : BOOL;			
-	{attribute addProperty Name "<#AlarmStopActive [ALARM_STOP]#>"}
-	AlarmStopActive : BOOL;			
-	{attribute addProperty Name "<#UserSafetySwitchClosed [USER_SAF]#>"}
-	UserSafetySwitchClosed : BOOL;	
-	{attribute addProperty Name "<#DrivesReady [PERI_RDY]#>"}
-	DrivesReady : BOOL;				
-	{attribute addProperty Name "<#RobotCalibrated [ROB_CAL]#>"}
-	RobotCalibrated : BOOL;			
-	{attribute addProperty Name "<#InterfaceActivated [I_O_ACTCONF]#>"}
-	InterfaceActivated : BOOL;		
-	{attribute addProperty Name "<#ErrorCollection [STOPMESS]#>"}
-	StopMess : BOOL;			
-	{attribute addProperty Name "<#RobotStopped [ROB_STOPPED]#>"}
-	RobotStopped : BOOL;			
-	{attribute addProperty Name "<#InHome [IN_HOME]#>"}
-	InHome : BOOL;					
-	{attribute addProperty Name "<#Manual [T1]#>"}
-   	Manual : BOOL;					
-	{attribute addProperty Name "<#Automatic [AUT]#>"}
-	Automatic : BOOL;				
-	{attribute addProperty Name "<#ExternalAutomatic [EXT]#>"}
-	ExternalAutomatic : BOOL;		
-	{attribute addProperty Name "<#ProcesActive [PRO_ACT]#>"}
-	ProActive : BOOL;	
-		
-	{attribute addProperty Name "<#ProgramMoveActive [PROGRAM MOVEMENT ACTIVE]#>"}
-	ProgramMoveActive : BOOL;				
-
-	{attribute addProperty Name "<#Event ID#>"}
-	EventId : UDINT;
-	{attribute addProperty Name "<#PpMoved#>"}
-	PpMoved : BOOL;					
-
-	{attribute addProperty Name "<#StartAtMain#>"}
-	StartAtMain : BOOL;	
-	
-	{attribute addProperty Name "<#Error#>"}
-	Error : BOOL;
-	
-	{attribute addProperty Name "<#In area 1#>"}
-	InArea_1 : BOOL;
-
-	{attribute addProperty Name "<#In area 2#>"}
-	InArea_2 : BOOL;
-
-	{attribute addProperty Name "<#In area 3#>"}
-	InArea_3 : BOOL;
-
-	{attribute addProperty Name "<#In area 4#>"}
-	InArea_4 : BOOL;
-
-
-	{attribute addProperty Name "<#In position 1#>"}
-	InPosition_1 : BOOL;
-
-	{attribute addProperty Name "<#In position 2#>"}
-	InPosition_2 : BOOL;
-
-	{attribute addProperty Name "<#In position 3#>"}
-	InPosition_3 : BOOL;
-
-	{attribute addProperty Name "<#In position 4#>"}
-	InPosition_4 : BOOL;
-
-
-	
-	{attribute addProperty Name "<#Zones#>"}
-	Zone : BYTE;
-
-	{attribute addProperty Name "<#In position#>"}
-	InPosition : BYTE;
-
-
-	
-	{attribute addProperty Name "<#Tool 1 retract#>"}
-	Tool_1_Retract : BOOL;
-
-	{attribute addProperty Name "<#Tool 1 extend#>"}
-	Tool_1_Extend : BOOL;
-
-	{attribute addProperty Name "<#Tool 2 retract#>"}
-	Tool_2_Retract : BOOL;
-
-	{attribute addProperty Name "<#Tool 2 extend#>"}
-	Tool_2_Extend : BOOL;
-
-	{attribute addProperty Name "<#Tool 3 retract#>"}
-	Tool_3_Retract : BOOL;
-
-	{attribute addProperty Name "<#Tool 3 extend#>"}
-	Tool_3_Extend : BOOL;
-
-	{attribute addProperty Name "<#Tool 4 retract#>"}
-	Tool_4_Retract : BOOL;
-
-	{attribute addProperty Name "<#Tool 4 extend#>"}
-	Tool_4_Extend : BOOL;
-
-
-	
-
-	{attribute addProperty Name "<#Action number#>"}
-	ActionNo : BYTE;
-
-	{attribute addProperty Name "<#Global speed#>"}
-	GlobalSpeed : BYTE;
-
-	{attribute addProperty Name "<#Tool number#>"}
-	ToolNo : BYTE; 
-
-	{attribute addProperty Name "<#Workobject number#>"}
-	WorkobjectNo : BYTE;
-
-	{attribute addProperty Name "<#PointNumber#>"}
-	PointNo : BYTE;
-
-	{attribute addProperty Name "<#User specific speed 1#>"}
-	UserSpecSpeed1 : DINT;
-
-	{attribute addProperty Name "<#User specific speed 2#>"}
-	UserSpecSpeed2 : DINT;
-	
-	{attribute  addProperty Name "<#Coordinates#>"}     
-	Coordinates : TcoAbstractions.TcoRoboticsCoordinates; 		
-	
-	
+    {attribute addProperty Name "<#ControlReady [RC_RDY1]#>"}
+    RcReady : BOOL;
+    {attribute addProperty Name "<#AlarmStopActive [ALARM_STOP]#>"}
+    AlarmStopActive : BOOL;
+    {attribute addProperty Name "<#UserSafetySwitchClosed [USER_SAF]#>"}
+    UserSafetySwitchClosed : BOOL;
+    {attribute addProperty Name "<#DrivesReady [PERI_RDY]#>"}
+    DrivesReady : BOOL;
+    {attribute addProperty Name "<#RobotCalibrated [ROB_CAL]#>"}
+    RobotCalibrated : BOOL;
+    {attribute addProperty Name "<#InterfaceActivated [I_O_ACTCONF]#>"}
+    InterfaceActivated : BOOL;
+    {attribute addProperty Name "<#ErrorCollection [STOPMESS]#>"}
+    StopMess : BOOL;
+    {attribute addProperty Name "<#RobotStopped [ROB_STOPPED]#>"}
+    RobotStopped : BOOL;
+    {attribute addProperty Name "<#InHome [IN_HOME]#>"}
+    InHome : BOOL;
+    {attribute addProperty Name "<#Manual [T1]#>"}
+    Manual : BOOL;
+    {attribute addProperty Name "<#Automatic [AUT]#>"}
+    Automatic : BOOL;
+    {attribute addProperty Name "<#ExternalAutomatic [EXT]#>"}
+    ExternalAutomatic : BOOL;
+    {attribute addProperty Name "<#ProcesActive [PRO_ACT]#>"}
+    ProActive : BOOL;
+    {attribute addProperty Name "<#ProgramMoveActive [PROGRAM MOVEMENT ACTIVE]#>"}
+    ProgramMoveActive : BOOL;
+    {attribute addProperty Name "<#Event ID#>"}
+    EventId : UDINT;
+    {attribute addProperty Name "<#PpMoved#>"}
+    PpMoved : BOOL;
+    {attribute addProperty Name "<#StartAtMain#>"}
+    StartAtMain : BOOL;
+    {attribute addProperty Name "<#Error#>"}
+    Error : BOOL;
+    {attribute addProperty Name "<#In area 1#>"}
+    InArea_1 : BOOL;
+    {attribute addProperty Name "<#In area 2#>"}
+    InArea_2 : BOOL;
+    {attribute addProperty Name "<#In area 3#>"}
+    InArea_3 : BOOL;
+    {attribute addProperty Name "<#In area 4#>"}
+    InArea_4 : BOOL;
+    {attribute addProperty Name "<#In position 1#>"}
+    InPosition_1 : BOOL;
+    {attribute addProperty Name "<#In position 2#>"}
+    InPosition_2 : BOOL;
+    {attribute addProperty Name "<#In position 3#>"}
+    InPosition_3 : BOOL;
+    {attribute addProperty Name "<#In position 4#>"}
+    InPosition_4 : BOOL;
+    {attribute addProperty Name "<#Zones#>"}
+    Zone : BYTE;
+    {attribute addProperty Name "<#In position#>"}
+    InPosition : BYTE;
+    {attribute addProperty Name "<#Tool 1 retract#>"}
+    Tool_1_Retract : BOOL;
+    {attribute addProperty Name "<#Tool 1 extend#>"}
+    Tool_1_Extend : BOOL;
+    {attribute addProperty Name "<#Tool 2 retract#>"}
+    Tool_2_Retract : BOOL;
+    {attribute addProperty Name "<#Tool 2 extend#>"}
+    Tool_2_Extend : BOOL;
+    {attribute addProperty Name "<#Tool 3 retract#>"}
+    Tool_3_Retract : BOOL;
+    {attribute addProperty Name "<#Tool 3 extend#>"}
+    Tool_3_Extend : BOOL;
+    {attribute addProperty Name "<#Tool 4 retract#>"}
+    Tool_4_Retract : BOOL;
+    {attribute addProperty Name "<#Tool 4 extend#>"}
+    Tool_4_Extend : BOOL;
+    {attribute addProperty Name "<#Action number#>"}
+    ActionNo : BYTE;
+    {attribute addProperty Name "<#Global speed#>"}
+    GlobalSpeed : BYTE;
+    {attribute addProperty Name "<#Tool number#>"}
+    ToolNo : BYTE;
+    {attribute addProperty Name "<#Workobject number#>"}
+    WorkobjectNo : BYTE;
+    {attribute addProperty Name "<#PointNumber#>"}
+    PointNo : BYTE;
+    {attribute addProperty Name "<#User specific speed 1#>"}
+    UserSpecSpeed1 : DINT;
+    {attribute addProperty Name "<#User specific speed 2#>"}
+    UserSpecSpeed2 : DINT;
+    {attribute  addProperty Name "<#Coordinates#>"}
+    Coordinates : TcoAbstractions.TcoRoboticsCoordinates;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

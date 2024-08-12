@@ -1,18 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
   <DUT Name="ExampleInspectorsStruct" Id="{f953be94-8717-0ec0-0454-eb9938928522}">
-    <Declaration><![CDATA[TYPE
-    ExampleInspectorsStruct EXTENDS TcoCore.TcoStruct :
-    STRUCT
-		{attribute addProperty Name "Overall result"}
-        OverallResult         : TcoInspectors.TcoComprehensiveResult;
-		{attribute addProperty Name "DMC code inspection"}
-        DmcInspector          : TcoInspectors.TcoDataInspector(THISSTRUCT);
-		{attribute addProperty Name "Bolt presence inspection"}
-        BoltPresenceInspector : TcoInspectors.TcoDigitalInspector(THISSTRUCT);		
-        Dimensions            : ExampleDimensionsInspectors := (Parent := THISSTRUCT);
-    END_STRUCT
-END_TYPE
-]]></Declaration>
+    <Declaration><![CDATA[TYPE ExampleInspectorsStruct EXTENDS TcoCore.TcoStruct :
+STRUCT
+    {attribute addProperty Name "Overall result"}
+    OverallResult : TcoInspectors.TcoComprehensiveResult;
+    {attribute addProperty Name "DMC code inspection"}
+    DmcInspector : TcoInspectors.TcoDataInspector(THISSTRUCT);
+    {attribute addProperty Name "Bolt presence inspection"}
+    BoltPresenceInspector : TcoInspectors.TcoDigitalInspector(THISSTRUCT);
+    Dimensions : ExampleDimensionsInspectors := (Parent := THISSTRUCT);
+END_STRUCT
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

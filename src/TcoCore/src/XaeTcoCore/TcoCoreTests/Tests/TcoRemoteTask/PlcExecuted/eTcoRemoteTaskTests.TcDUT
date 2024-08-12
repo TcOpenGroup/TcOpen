@@ -3,15 +3,13 @@
   <DUT Name="eTcoRemoteTaskTests" Id="{5b47df81-f3f4-0059-0466-9130b7486ad5}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE
-    eTcoRemoteTaskTests :
-    (
-		RestoreTasks := 10,
-        InvokeInitializedCSharpMethod := 100,
-        InvokeNotInitializedCSharpMethod := 200,
-        ExceptionInMethodWillResultInException := 400
-    );
-END_TYPE
-]]></Declaration>
+TYPE eTcoRemoteTaskTests :
+(
+    RestoreTasks := 10,
+    InvokeInitializedCSharpMethod := 100,
+    InvokeNotInitializedCSharpMethod := 200,
+    ExceptionInMethodWillResultInException := 400
+);
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

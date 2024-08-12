@@ -2,27 +2,52 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <UserSecretsId>aspnet-PlcHammer.Hmi.Blazor-F3A2EC07-11BB-4345-B921-62A66D905AB4</UserSecretsId>
+    <UserSecretsId
+    >aspnet-PlcHammer.Hmi.Blazor-F3A2EC07-11BB-4345-B921-62A66D905AB4</UserSecretsId>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Inxton.Vortex.Presentation.Controls.Blazor-experimental" Version="2.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.4" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.4" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.4" />
+    <PackageReference
+      Include="Inxton.Vortex.Presentation.Controls.Blazor-experimental"
+      Version="2.0.0"
+    />
+    <PackageReference
+      Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore"
+      Version="5.0.4"
+    />
+    <PackageReference
+      Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore"
+      Version="5.0.4"
+    />
+    <PackageReference
+      Include="Microsoft.AspNetCore.Identity.UI"
+      Version="5.0.4"
+    />
+    <PackageReference
+      Include="Microsoft.EntityFrameworkCore.SqlServer"
+      Version="5.0.4"
+    />
+    <PackageReference
+      Include="Microsoft.EntityFrameworkCore.Tools"
+      Version="5.0.4"
+    />
     <PackageReference Include="Serilog.Sinks.Notepad" Version="2.0.0" />
     <PackageReference Include="Serilog.Sinks.TextWriter" Version="2.1.0" />
 	<PackageReference Include="Serilog.Enrichers.Environment" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\TcoData\src\Repository\MongoDb\TcOpen.Inxton.MongoDb.csproj" />
-    <ProjectReference Include="..\..\_packaging\TcOpen.Group.Blazor\TcOpen.Group.Blazor.csproj" />
-    <ProjectReference Include="..\PlcHammerConnector\PlcHammerConnector.csproj" />
+    <ProjectReference
+      Include="..\..\TcoData\src\Repository\MongoDb\TcOpen.Inxton.MongoDb.csproj"
+    />
+    <ProjectReference
+      Include="..\..\_packaging\TcOpen.Group.Blazor\TcOpen.Group.Blazor.csproj"
+    />
+    <ProjectReference
+      Include="..\PlcHammerConnector\PlcHammerConnector.csproj"
+    />
   </ItemGroup>
 
 </Project>

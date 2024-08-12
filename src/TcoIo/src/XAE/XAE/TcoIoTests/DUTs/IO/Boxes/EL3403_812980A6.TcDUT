@@ -11,26 +11,25 @@
 {attribute addProperty Size "65"}
 TYPE EL3403_812980A6 EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
 STRUCT
-	{attribute addProperty Name "PM_Inputs_Channel_1"}
-	PM_Inputs_Channel_1 : PM_Inputs_Channel_2F868086;
-	{attribute addProperty Name "PM_Inputs_Channel_2"}
-	PM_Inputs_Channel_2 : PM_Inputs_Channel_2F868086;
-	{attribute addProperty Name "PM_Inputs_Channel_3"}
-	PM_Inputs_Channel_3 : PM_Inputs_Channel_2F868086;
-	{attribute addProperty Name "PM_Status_data"}
-	PM_Status_data : PM_Status_data_2A9514CB;
-	{attribute addProperty Name "PM_Outputs_Channel_1"}
-	PM_Outputs_Channel_1 : PM_Outputs_Channel_E5FBDE30;
-	{attribute addProperty Name "PM_Outputs_Channel_2"}
-	PM_Outputs_Channel_2 : PM_Outputs_Channel_E5FBDE30;
-	{attribute addProperty Name "PM_Outputs_Channel_3"}
-	PM_Outputs_Channel_3 : PM_Outputs_Channel_E5FBDE30;
-	{attribute addProperty Name "WcState"}
-	WcState : TcoIo.WcState_9091E0EB;
-	{attribute addProperty Name "InfoData"}
-	InfoData : TcoIo.InfoData_23CBA837;
+    {attribute addProperty Name "PM_Inputs_Channel_1"}
+    PM_Inputs_Channel_1 : PM_Inputs_Channel_2F868086;
+    {attribute addProperty Name "PM_Inputs_Channel_2"}
+    PM_Inputs_Channel_2 : PM_Inputs_Channel_2F868086;
+    {attribute addProperty Name "PM_Inputs_Channel_3"}
+    PM_Inputs_Channel_3 : PM_Inputs_Channel_2F868086;
+    {attribute addProperty Name "PM_Status_data"}
+    PM_Status_data : PM_Status_data_2A9514CB;
+    {attribute addProperty Name "PM_Outputs_Channel_1"}
+    PM_Outputs_Channel_1 : PM_Outputs_Channel_E5FBDE30;
+    {attribute addProperty Name "PM_Outputs_Channel_2"}
+    PM_Outputs_Channel_2 : PM_Outputs_Channel_E5FBDE30;
+    {attribute addProperty Name "PM_Outputs_Channel_3"}
+    PM_Outputs_Channel_3 : PM_Outputs_Channel_E5FBDE30;
+    {attribute addProperty Name "WcState"}
+    WcState : TcoIo.WcState_9091E0EB;
+    {attribute addProperty Name "InfoData"}
+    InfoData : TcoIo.InfoData_23CBA837;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

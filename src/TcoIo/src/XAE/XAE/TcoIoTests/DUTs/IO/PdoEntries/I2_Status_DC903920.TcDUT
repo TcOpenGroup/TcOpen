@@ -8,22 +8,21 @@
 {attribute addProperty Size "7"}
 TYPE I2_Status_DC903920 :
 STRUCT
-	{attribute addProperty Name "Underrange"}
-	Underrange : BOOL;
-	{attribute addProperty Name "Overrange"}
-	Overrange : BOOL;
-	{attribute addProperty Name "Limit_x"}
-	Limit_x : BYTE;
-	{attribute addProperty Name "Error"}
-	Error : BOOL;
-	{attribute addProperty Name "Sync_error"}
-	Sync_error : BOOL;
-	{attribute addProperty Name "TxPDO_State"}
-	TxPDO_State : BOOL;
-	{attribute addProperty Name "TxPDO_Toggle"}
-	TxPDO_Toggle : BOOL;
+    {attribute addProperty Name "Underrange"}
+    Underrange : BOOL;
+    {attribute addProperty Name "Overrange"}
+    Overrange : BOOL;
+    {attribute addProperty Name "Limit_x"}
+    Limit_x : BYTE;
+    {attribute addProperty Name "Error"}
+    Error : BOOL;
+    {attribute addProperty Name "Sync_error"}
+    Sync_error : BOOL;
+    {attribute addProperty Name "TxPDO_State"}
+    TxPDO_State : BOOL;
+    {attribute addProperty Name "TxPDO_Toggle"}
+    TxPDO_Toggle : BOOL;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -13,6 +13,7 @@ namespace Tco.Wpf
         }
 
         public object RenderedObject { get; set; }
+
         private void DataChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (e.NewValue != null)
@@ -31,12 +32,19 @@ namespace Tco.Wpf
                 nameof(PresentationType),
                 typeof(string),
                 typeof(ObservableContentControl),
-                new PropertyMetadata("Display", PresentationTypeChanged));
+                new PropertyMetadata("Display", PresentationTypeChanged)
+            );
 
-        private static void PresentationTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void PresentationTypeChanged(
+            DependencyObject d,
+            DependencyPropertyChangedEventArgs e
+        )
         {
             var @this = (d as ObservableContentControl);
-            @this.DataChanged(d, new DependencyPropertyChangedEventArgs(PresentationTypeProperty, null, null));
+            @this.DataChanged(
+                d,
+                new DependencyPropertyChangedEventArgs(PresentationTypeProperty, null, null)
+            );
         }
     }
 }

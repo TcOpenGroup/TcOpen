@@ -6,7 +6,5 @@ using System.Threading.Tasks;
 
 namespace TcoCoreTests
 {
-    public partial class TcoContextTest : ITestTcoContext
-    {
-    }
+    public partial class TcoContextTest : ITestTcoContext { }
 }

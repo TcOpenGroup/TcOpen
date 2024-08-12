@@ -9,6 +9,7 @@ namespace TcoData
     {
         private IVortexObject VortexObject { get; set; }
         private ICrudDataObject DataObject { get; set; }
+
         public ValueChangeTracker(ICrudDataObject dataObject)
         {
             VortexObject = (IVortexObject)dataObject;
@@ -31,29 +32,41 @@ namespace TcoData
             var userName = "";
             try
             {
-                userName = TcOpen.Inxton.Local.Security.SecurityManager.Manager.Principal.Identity.Name;
+                userName = TcOpen
+                    .Inxton
+                    .Local
+                    .Security
+                    .SecurityManager
+                    .Manager
+                    .Principal
+                    .Identity
+                    .Name;
             }
             catch
             {
-                userName = "!failed to determine user!";    
+                userName = "!failed to determine user!";
             }
-            
 
-            Changes.Add(new ValueChangeItem()
-            {
-                ValueTag = new ValueItemDescriptor(valueTag),
-                OldValue = original,
-                NewValue = newValue,
-                DateTime = DateTime.Now,
-                UserName = userName
-            });
+            Changes.Add(
+                new ValueChangeItem()
+                {
+                    ValueTag = new ValueItemDescriptor(valueTag),
+                    OldValue = original,
+                    NewValue = newValue,
+                    DateTime = DateTime.Now,
+                    UserName = userName
+                }
+            );
         }
 
         public void SaveObservedChanges(IBrowsableDataObject plainObject)
         {
             foreach (var change in Changes)
             {
-                TcOpen.Inxton.TcoAppDomain.Current.Logger.Information($"User '{change.UserName}' changed value of '{change.ValueTag.Symbol}' from '{change.OldValue}' to '{change.NewValue}' {{@payload}}", change);                
+                TcOpen.Inxton.TcoAppDomain.Current.Logger.Information(
+                    $"User '{change.UserName}' changed value of '{change.ValueTag.Symbol}' from '{change.OldValue}' to '{change.NewValue}' {{@payload}}",
+                    change
+                );
             }
 
             if (DataObject.Changes == null)
@@ -74,10 +87,8 @@ namespace TcoData
             return userName;
         }
 
-
         public void Import(IBrowsableDataObject plainObject)
         {
-
             var startImportTag = new ValueChangeItem()
             {
                 DateTime = DateTime.Now,
@@ -97,9 +108,7 @@ namespace TcoData
             ((IPlainTcoEntity)plainObject).Changes.Add(startImportTag);
             SaveObservedChanges(plainObject);
             ((IPlainTcoEntity)plainObject).Changes.Add(endImportTag);
-
         }
-
 
         private List<ValueChangeItem> Changes = new List<ValueChangeItem>();
     }

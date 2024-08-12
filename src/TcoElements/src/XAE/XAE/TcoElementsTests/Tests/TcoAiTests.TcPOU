@@ -3,38 +3,27 @@
   <POU Name="TcoAiTests" Id="{d06c66c5-2ff0-0b1f-0fa0-ba52007dc23b}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoAiTests EXTENDS TcoCore._internals_TcoContext
 VAR
-	_signal : DINT;
-	_sut : TcoElements.TcoAi(THIS^);
-	_sutNotInitialized : TcoElements.TcoAi(THIS^);
-
-
+    _signal : DINT;
+    _sut : TcoElements.TcoAi(THIS^);
+    _sutNotInitialized : TcoElements.TcoAi(THIS^);
 END_VAR
-
 VAR
-	_ScaledResult: REAL;
-
-END_VAR
-]]></Declaration>
+    _ScaledResult : REAL;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Main" Id="{fb7a498b-b279-0615-3b52-7950031e3568}">
-      <Declaration><![CDATA[METHOD PROTECTED Main
-
-]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED Main]]></Declaration>
       <Implementation>
         <ST><![CDATA[CASE _testId OF
     50:
-
         _sutNotInitialized.Service();
         _sutNotInitialized.Restore();
     100:
         _sut(inoSignal := _signal);
-
         _ScaledResult := _sut.Status.Scaled;
-
-END_CASE
-]]></ST>
+END_CASE]]></ST>
       </Implementation>
     </Method>
   </POU>

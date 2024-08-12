@@ -17,13 +17,18 @@ namespace TcoDataExamples.Tests
         [OneTimeSetUp]
         public void InitializeRepository()
         {
-#region RepositoryInitialization
-            repository = new MongoDbRepository<PlainSandboxData>
-                (new MongoDbRepositorySettings<PlainSandboxData>("mongodb://localhost:27017", "MyExampleDatabase", "MyExampleCollection"));
+            #region RepositoryInitialization
+            repository = new MongoDbRepository<PlainSandboxData>(
+                new MongoDbRepositorySettings<PlainSandboxData>(
+                    "mongodb://localhost:27017",
+                    "MyExampleDatabase",
+                    "MyExampleCollection"
+                )
+            );
 
             Entry.TcoDataTests.MAIN.sandbox.DataManager.InitializeRepository(repository);
             Entry.TcoDataTests.MAIN.sandbox.DataManager.InitializeRemoteDataExchange();
-#endregion
+            #endregion
         }
 
         private MongoDbRepository<PlainSandboxData> repository;
@@ -44,7 +49,6 @@ namespace TcoDataExamples.Tests
             state.Synchron = (short)eExamplesStates.Create;
             System.Threading.Thread.Sleep(interStateDelay);
             Assert.IsTrue(repository.Queryable.Where(p => p._EntityId == rec1).Any());
-
 
             state.Synchron = (short)eExamplesStates.Update;
             System.Threading.Thread.Sleep(interStateDelay);
@@ -67,14 +71,13 @@ namespace TcoDataExamples.Tests
             Assert.AreEqual("Max", record.sampleData.SampleString);
             Assert.AreEqual(1, record.sampleData.SampleNestedStructure.SampleLREAL);
 
-
             state.Synchron = (short)eExamplesStates.Delete;
             System.Threading.Thread.Sleep(interStateDelay);
             record = repository.Queryable.Where(p => p._EntityId == rec1).FirstOrDefault();
             Assert.IsTrue(!repository.Queryable.Where(p => p._EntityId == rec1).Any());
 
             state.Synchron = (short)eExamplesStates.Exists;
-            System.Threading.Thread.Sleep(interStateDelay*3);
+            System.Threading.Thread.Sleep(interStateDelay * 3);
             var plain = Entry.TcoDataTests.MAIN.sandbox.DataManager._messenger._mime.PlainMessage;
 
             Assert.AreEqual("Record knight exists.", plain.Text);

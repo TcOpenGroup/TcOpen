@@ -22,7 +22,7 @@ namespace TcoCore
                     case eTaskState.Busy:
                     case eTaskState.Error:
                         return Visibility.Visible;
-                    case eTaskState.Ready:                    
+                    case eTaskState.Ready:
                     case eTaskState.Done:
                         return Visibility.Hidden;
                     default:
@@ -37,7 +37,12 @@ namespace TcoCore
             return false;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }

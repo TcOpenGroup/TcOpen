@@ -3,10 +3,9 @@
   <POU Name="EL1008" Id="{33989b2f-810a-03a7-277e-b3e9dec30c9e}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK EL1008
 VAR
-	{attribute addProperty Name "CHANNEL_"}
-	_io : EL1008_Data;
-END_VAR
-]]></Declaration>
+    {attribute addProperty Name "CHANNEL_"}
+    _io : EL1008_Data;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
@@ -14,8 +13,7 @@ END_VAR
       <Declaration><![CDATA[PROPERTY IO : REFERENCE TO EL1008_Data]]></Declaration>
       <Get Name="Get" Id="{829f0e6f-e293-0a6c-3ad0-2ca89e90c245}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[IO REF= _io;]]></ST>
         </Implementation>

@@ -7,16 +7,18 @@
     /// Contains series of helper methods for executing RPC plc methods.
     /// </summary>
     public static class TaskRunners
-    {       
+    {
         /// <summary>
         /// Runs the test method until returns true.
         /// </summary>
         /// <typeparam name="T">Type of subject under test. Must be of <see cref="IVortexObject"/></typeparam>
         /// <param name="sut">Subject under test.</param>
         /// <param name="testMethod"></param>
-        public static void Run<T>(this T sut, Func<T, bool> testMethod) where T : IVortexObject
+        public static void Run<T>(this T sut, Func<T, bool> testMethod)
+            where T : IVortexObject
         {
-            while (!testMethod(sut));
+            while (!testMethod(sut))
+                ;
         }
 
         /// <summary>
@@ -28,7 +30,8 @@
         /// <param name="testMethod">Test method.</param>
         /// <param name="numberOfRuns">Number of runs.</param>
         /// <returns>Return value of the test method</returns>
-        public static R Run<T, R>(this T sut, Func<T, R> testMethod, int numberOfRuns) where T : IVortexObject
+        public static R Run<T, R>(this T sut, Func<T, R> testMethod, int numberOfRuns)
+            where T : IVortexObject
         {
             object ret = null;
             for (int i = 0; i < numberOfRuns; i++)
@@ -37,6 +40,6 @@
             }
 
             return (R)ret;
-        }       
+        }
     }
 }

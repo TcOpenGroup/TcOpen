@@ -4,9 +4,8 @@
     <Declaration><![CDATA[{attribute 'pack_mode' := '1'}
 TYPE stEL9576 :
 STRUCT
-	BCT_Inputs AT %I* : stEL9576_Status; 
+    BCT_Inputs AT %I* : stEL9576_Status;
 END_STRUCT
-END_TYPE;
-]]></Declaration>
+END_TYPE;]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -1,10 +1,10 @@
-﻿using PlcAppExamples;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using PlcAppExamples;
 using Vortex.Connector;
 using Vortex.Connector.ValueTypes;
 using Vortex.Presentation.Wpf;
@@ -34,17 +34,19 @@ namespace PlcAppExamples
 
         private void ChangeImage(IValueTag sender, ValueChangedEventArgs args)
         {
-           var scrollPosition = new Dictionary<short, double>() {
-            {100,0.0},
-            {200,220},
-            {300,524},
-            {400,819},
-            {500,1011},
-            {600,1203},
-            {700,1395},
-            {800,1504}
-         };
-            var fileName = $@"{rootPath.DirectoryName}\Tutorial\401_ConnectingDots\Images\100-800.png";
+            var scrollPosition = new Dictionary<short, double>()
+            {
+                { 100, 0.0 },
+                { 200, 220 },
+                { 300, 524 },
+                { 400, 819 },
+                { 500, 1011 },
+                { 600, 1203 },
+                { 700, 1395 },
+                { 800, 1504 }
+            };
+            var fileName =
+                $@"{rootPath.DirectoryName}\Tutorial\401_ConnectingDots\Images\100-800.png";
             if (File.Exists(fileName))
             {
                 this.Dispatcher.Invoke(() =>
@@ -61,6 +63,10 @@ namespace PlcAppExamples
     public class Station001ViewModel : RenderableViewModel
     {
         public Station001 Station001 { get; set; }
-        public override object Model { get => Station001; set => Station001 = value as Station001; }
+        public override object Model
+        {
+            get => Station001;
+            set => Station001 = value as Station001;
+        }
     }
 }

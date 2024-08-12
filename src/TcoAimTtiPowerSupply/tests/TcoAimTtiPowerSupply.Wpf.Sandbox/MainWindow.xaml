@@ -1,42 +1,64 @@
-﻿<Window x:Class="TcoAimTtiPowerSupply.Wpf.Sandbox.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:tcopen="clr-namespace:TcoAimTtiPowerSupplyTests;assembly=TcoAimTtiPowerSupplyTestsConnector"
-        xmlns:vortex="http://vortex.mts/xaml" 
-        Title="MainWindow"
-        Width="800"
-        Height="450"
-        DataContext="{x:Static tcopen:Entry.TcoAimTtiPowerSupplyTestsPlc}"
-        mc:Ignorable="d">
+﻿<Window
+  x:Class="TcoAimTtiPowerSupply.Wpf.Sandbox.MainWindow"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:tcopen="clr-namespace:TcoAimTtiPowerSupplyTests;assembly=TcoAimTtiPowerSupplyTestsConnector"
+  xmlns:vortex="http://vortex.mts/xaml"
+  Title="MainWindow"
+  Width="800"
+  Height="450"
+  DataContext="{x:Static tcopen:Entry.TcoAimTtiPowerSupplyTestsPlc}"
+  mc:Ignorable="d"
+>
 
     <Grid>
         <TabControl>
             <TabItem Header="QL355P">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition/>
+                        <RowDefinition />
                         <!--<RowDefinition/>-->
 
                     </Grid.RowDefinitions>
-                    <vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext._supply}" PresentationType="Service"/>
+                    <vortex:RenderableContentControl
+            Grid.Row="0"
+            DataContext="{Binding MAIN._wpfContext._supply}"
+            PresentationType="Service"
+          />
                     <!--<vortex:RenderableContentControl Grid.Row="1" DataContext="{Binding MAIN._wpfContext._robot2}" PresentationType="Service"/>-->
-             
-                </Grid>     
+
+                </Grid>
             </TabItem>
-         
+
             <TabItem Header="SequenceTest QL355P ">
                 <StackPanel Orientation="Vertical">
-                    <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext._sequence1Task}" PresentationType="Base"></vortex:RenderableContentControl>
-                    <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext._sequence1}" PresentationType="Base"></vortex:RenderableContentControl>
-                    <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext._observer}" PresentationType="Base"></vortex:RenderableContentControl>
-                    <vortex:RenderableContentControl Grid.Row="0" DataContext="{Binding MAIN._wpfContext._supply}" PresentationType="Service"/>
+                    <vortex:RenderableContentControl
+            DataContext="{Binding MAIN._wpfContext._sequence1Task}"
+            PresentationType="Base"
+          />
+                    <vortex:RenderableContentControl
+            DataContext="{Binding MAIN._wpfContext._sequence1}"
+            PresentationType="Base"
+          />
+                    <vortex:RenderableContentControl
+            DataContext="{Binding MAIN._wpfContext._observer}"
+            PresentationType="Base"
+          />
+                    <vortex:RenderableContentControl
+            Grid.Row="0"
+            DataContext="{Binding MAIN._wpfContext._supply}"
+            PresentationType="Service"
+          />
                 </StackPanel>
             </TabItem>
-     
+
             <TabItem Header="Diagnostic">
-                <vortex:RenderableContentControl DataContext="{Binding MAIN._wpfContext }" PresentationType="Diagnostics"/>
+                <vortex:RenderableContentControl
+          DataContext="{Binding MAIN._wpfContext }"
+          PresentationType="Diagnostics"
+        />
 
             </TabItem>
         </TabControl>

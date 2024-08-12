@@ -1,6 +1,6 @@
-﻿using TcoDataTests;
+﻿using System.IO;
+using TcoDataTests;
 using TcOpen.Inxton.Data.Json;
-using System.IO;
 
 namespace TcoDataUnitTests
 {
@@ -8,11 +8,16 @@ namespace TcoDataUnitTests
     {
         public override void Init()
         {
-            var executingPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            var executingPath = System.IO.Path.GetDirectoryName(
+                System.Reflection.Assembly.GetExecutingAssembly().Location
+            );
             DataFolder = Path.Combine(executingPath, "_data");
-            Repository = new JsonRepository<PlainstProcessData>(new JsonRepositorySettings<PlainstProcessData>(DataFolder));
+            Repository = new JsonRepository<PlainstProcessData>(
+                new JsonRepositorySettings<PlainstProcessData>(DataFolder)
+            );
             ClearFolder(DataFolder);
         }
+
         private void ClearFolder(string dataDir)
         {
             foreach (var file in Directory.GetFiles(dataDir))

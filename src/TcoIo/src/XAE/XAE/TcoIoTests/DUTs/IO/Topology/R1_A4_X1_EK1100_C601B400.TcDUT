@@ -9,44 +9,43 @@
 {attribute addProperty Name "R1_A4_X1 (EK1100)"}
 TYPE R1_A4_X1_EK1100_C601B400 EXTENDS EK1100_1FC0878B :
 STRUCT
-	{attribute addProperty Name "R1_A4_X1_PN (EL6631)"}
-	{attribute addProperty PreviousPort "R1_A4_X1 (EK1100) : B"}
-	{attribute addProperty SyncUnit "N10"}
-	R1_A4_X1_PN_EL6631 : EL6631_A0EC075C;
-	{attribute addProperty Name "R1_A4_X1_IA1 (EL1809)"}
-	{attribute addProperty PreviousPort "R1_A4_X1_PN (EL6631) : B"}
-	{attribute addProperty SyncUnit "N10"}
-	R1_A4_X1_IA1_EL1809 : EL1809_32157CFD;
-	{attribute addProperty Name "R1_A4_X1_IA2 (EL1809)"}
-	{attribute addProperty PreviousPort "R1_A4_X1_IA1 (EL1809) : B"}
-	{attribute addProperty SyncUnit "N10"}
-	R1_A4_X1_IA2_EL1809 : EL1809_32157CFD;
-	{attribute addProperty Name "R1_A4_X1_IA3 (EL1809)"}
-	{attribute addProperty PreviousPort "R1_A4_X1_IA2 (EL1809) : B"}
-	{attribute addProperty SyncUnit "N10"}
-	R1_A4_X1_IA3_EL1809 : EL1809_32157CFD;
-	{attribute addProperty Name "R1_A4_X1_IA4 (EL1809)"}
-	{attribute addProperty PreviousPort "R1_A4_X1_IA3 (EL1809) : B"}
-	{attribute addProperty SyncUnit "N10"}
-	R1_A4_X1_IA4_EL1809 : EL1809_32157CFD;
-	{attribute addProperty Name "R1_A4_X1_QA1 (EL2809)"}
-	{attribute addProperty PreviousPort "R1_A4_X1_IA4 (EL1809) : B"}
-	{attribute addProperty SyncUnit "N10"}
-	R1_A4_X1_QA1_EL2809 : EL2809_2B6483BD;
-	{attribute addProperty Name "R1_A4_X1_QA2 (EL2809)"}
-	{attribute addProperty PreviousPort "R1_A4_X1_QA1 (EL2809) : B"}
-	{attribute addProperty SyncUnit "N10"}
-	R1_A4_X1_QA2_EL2809 : EL2809_2B6483BD;
-	{attribute addProperty Name "R1_A4_X1_QA3 (EL2809)"}
-	{attribute addProperty PreviousPort "R1_A4_X1_QA2 (EL2809) : B"}
-	{attribute addProperty SyncUnit "N10"}
-	R1_A4_X1_QA3_EL2809 : EL2809_2B6483BD;
-	{attribute addProperty Name "R1_A4_X1_EndTerminal (EL9010)"}
-	{attribute addProperty PreviousPort "R1_A4_X1_QA3 (EL2809) : B"}
-	{attribute addProperty SyncUnit "default"}
-	R1_A4_X1_EndTerminal_EL9010 : EL9010_D29C2085;
+    {attribute addProperty Name "R1_A4_X1_PN (EL6631)"}
+    {attribute addProperty PreviousPort "R1_A4_X1 (EK1100) : B"}
+    {attribute addProperty SyncUnit "N10"}
+    R1_A4_X1_PN_EL6631 : EL6631_A0EC075C;
+    {attribute addProperty Name "R1_A4_X1_IA1 (EL1809)"}
+    {attribute addProperty PreviousPort "R1_A4_X1_PN (EL6631) : B"}
+    {attribute addProperty SyncUnit "N10"}
+    R1_A4_X1_IA1_EL1809 : EL1809_32157CFD;
+    {attribute addProperty Name "R1_A4_X1_IA2 (EL1809)"}
+    {attribute addProperty PreviousPort "R1_A4_X1_IA1 (EL1809) : B"}
+    {attribute addProperty SyncUnit "N10"}
+    R1_A4_X1_IA2_EL1809 : EL1809_32157CFD;
+    {attribute addProperty Name "R1_A4_X1_IA3 (EL1809)"}
+    {attribute addProperty PreviousPort "R1_A4_X1_IA2 (EL1809) : B"}
+    {attribute addProperty SyncUnit "N10"}
+    R1_A4_X1_IA3_EL1809 : EL1809_32157CFD;
+    {attribute addProperty Name "R1_A4_X1_IA4 (EL1809)"}
+    {attribute addProperty PreviousPort "R1_A4_X1_IA3 (EL1809) : B"}
+    {attribute addProperty SyncUnit "N10"}
+    R1_A4_X1_IA4_EL1809 : EL1809_32157CFD;
+    {attribute addProperty Name "R1_A4_X1_QA1 (EL2809)"}
+    {attribute addProperty PreviousPort "R1_A4_X1_IA4 (EL1809) : B"}
+    {attribute addProperty SyncUnit "N10"}
+    R1_A4_X1_QA1_EL2809 : EL2809_2B6483BD;
+    {attribute addProperty Name "R1_A4_X1_QA2 (EL2809)"}
+    {attribute addProperty PreviousPort "R1_A4_X1_QA1 (EL2809) : B"}
+    {attribute addProperty SyncUnit "N10"}
+    R1_A4_X1_QA2_EL2809 : EL2809_2B6483BD;
+    {attribute addProperty Name "R1_A4_X1_QA3 (EL2809)"}
+    {attribute addProperty PreviousPort "R1_A4_X1_QA2 (EL2809) : B"}
+    {attribute addProperty SyncUnit "N10"}
+    R1_A4_X1_QA3_EL2809 : EL2809_2B6483BD;
+    {attribute addProperty Name "R1_A4_X1_EndTerminal (EL9010)"}
+    {attribute addProperty PreviousPort "R1_A4_X1_QA3 (EL2809) : B"}
+    {attribute addProperty SyncUnit "default"}
+    R1_A4_X1_EndTerminal_EL9010 : EL9010_D29C2085;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -3,15 +3,13 @@
   <DUT Name="TcoEvaluateMeasurementResults" Id="{a0daa1d8-5432-0dff-2035-6c88435cf77d}">
     <Declaration><![CDATA[TYPE TcoEvaluateMeasurementResults :
 STRUCT
-
-	RisingPeaks: ARRAY [0..100] OF TcoEvaluateMeasurementDataItem;	
-	RisingPeaksFound:INT;
-	FallingPeaks: ARRAY [0..100] OF TcoEvaluateMeasurementDataItem;	
-	FallingPeaksFound:INT;
-	Triggers: ARRAY [0..100] OF TcoEvaluateMeasurementDataItem;	
-	TriggersFound :	INT;
+    RisingPeaks : ARRAY[0..100] OF TcoEvaluateMeasurementDataItem;
+    RisingPeaksFound : INT;
+    FallingPeaks : ARRAY[0..100] OF TcoEvaluateMeasurementDataItem;
+    FallingPeaksFound : INT;
+    Triggers : ARRAY[0..100] OF TcoEvaluateMeasurementDataItem;
+    TriggersFound : INT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

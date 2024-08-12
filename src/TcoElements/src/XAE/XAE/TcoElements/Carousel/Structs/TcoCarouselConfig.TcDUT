@@ -3,25 +3,20 @@
   <DUT Name="TcoCarouselConfig" Id="{f96f60b9-8cdd-0314-0d00-7301f489fa2d}">
     <Declaration><![CDATA[(*~
 <docu>
-	<summary>
-		`TcoCarousel` settings/config structure.								
-	</summary>				
-</docu>	
+    <summary>
+        `TcoCarousel` settings/config structure.
+    </summary>
+</docu>
 ~*)
-TYPE
-    TcoCarouselConfig :
-    STRUCT
-
-        Direction   : eTcoCarouselDirection;
-  		InfoTime : TIME := T#2S;
-        ErrorTime : TIME := T#5S;
-		NumberOfPositions:UINT;
-		// Offset in respect to frist position.
-		Offset : UINT;
-   
-		
-    END_STRUCT
-END_TYPE
-]]></Declaration>
+TYPE TcoCarouselConfig :
+STRUCT
+    Direction : eTcoCarouselDirection;
+    InfoTime : TIME := T#2S;
+    ErrorTime : TIME := T#5S;
+    NumberOfPositions : UINT;
+    // Offset in respect to frist position.
+    Offset : UINT;
+END_STRUCT
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

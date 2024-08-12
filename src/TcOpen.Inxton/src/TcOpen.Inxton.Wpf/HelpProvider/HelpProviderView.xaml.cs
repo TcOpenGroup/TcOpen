@@ -23,7 +23,6 @@ namespace TcOpen.Inxton.Wpf.HelpProvider
         public HelpProviderView()
         {
             InitializeComponent();
-           
-        }     
+        }
     }
 }

@@ -1,52 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoDesignerPcToPlc_v_2_x_x" Id="{0fb0ed22-9d97-09a7-2a72-f2d06e10fe82}">
-    <Declaration><![CDATA[
-{attribute wpf [Container(Layout.Stack)]}
-TYPE TcoDesignerPcToPlc_v_2_x_x  :
+    <Declaration><![CDATA[{attribute wpf [Container(Layout.Stack)]}
+TYPE TcoDesignerPcToPlc_v_2_x_x :
 STRUCT
-	
-	{attribute wpf [Container(Layout.Stack,"State")]}	
-	{attribute addProperty Name "<#SystemOnline#>"}
-	SystemOnline :	BOOL;	//indication that designer PC app and inspection are running
-	{attribute addProperty Name "<#InspectionReady#>"}  
-	InspectionReady :	BOOL;		// inspection is ready
-	{attribute addProperty Name "<#ResultsAvailable#>"}
-	ResultsAvailable :	BOOL;	//results are available and valid
-	{attribute addProperty Name "<#JobId#>"}
-	JobId :	UINT;	// actual job id
-	{attribute addProperty Name "<#JobName#>"}
-	JobName :	STRING;	//aktual job name
-	{attribute addProperty Name "<#JobLoadDone#>"}
-	JobLoadDone :	BOOL;	
-	
-	{attribute addProperty Name "<#ClearResultsAck#>"}
-	ClearResultsAck :	BOOL;
-	
-	{attribute addProperty Name "<#Trigger Counter#>"}
-	TriggerCounter :	UDINT;	
-
-	{attribute addProperty Name "<#Error#>"}
-	
-	Error :	BOOL;		
-	{attribute addProperty Name "<#LiveBit#>"}
-	LiveBit :	BOOL;	
-	
-
-	{attribute addProperty Name "<#ErrorMsg#>"}
-	ErrorMsg :	STRING;		
-	
-
-	{attribute addProperty Name "<#TriggerTimeout#>"}
-   	TriggerTimeout           : BOOL;             
-
-	{attribute wpf [Container(Layout.Stack,"Results")]}	
-	{attribute addProperty Name "<#Results#>"}
-	InspectionResults :	TcoDesignerGenericResults_v_2_x_x;	
-
-
+    {attribute wpf [Container(Layout.Stack,"State")]}
+    {attribute addProperty Name "<#SystemOnline#>"}
+    SystemOnline : BOOL; //indication that designer PC app and inspection are running
+    {attribute addProperty Name "<#InspectionReady#>"}
+    InspectionReady : BOOL; // inspection is ready
+    {attribute addProperty Name "<#ResultsAvailable#>"}
+    ResultsAvailable : BOOL; //results are available and valid
+    {attribute addProperty Name "<#JobId#>"}
+    JobId : UINT; // actual job id
+    {attribute addProperty Name "<#JobName#>"}
+    JobName : STRING; //aktual job name
+    {attribute addProperty Name "<#JobLoadDone#>"}
+    JobLoadDone : BOOL;
+    {attribute addProperty Name "<#ClearResultsAck#>"}
+    ClearResultsAck : BOOL;
+    {attribute addProperty Name "<#Trigger Counter#>"}
+    TriggerCounter : UDINT;
+    {attribute addProperty Name "<#Error#>"}
+    Error : BOOL;
+    {attribute addProperty Name "<#LiveBit#>"}
+    LiveBit : BOOL;
+    {attribute addProperty Name "<#ErrorMsg#>"}
+    ErrorMsg : STRING;
+    {attribute addProperty Name "<#TriggerTimeout#>"}
+    TriggerTimeout : BOOL;
+    {attribute wpf [Container(Layout.Stack,"Results")]}
+    {attribute addProperty Name "<#Results#>"}
+    InspectionResults : TcoDesignerGenericResults_v_2_x_x;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

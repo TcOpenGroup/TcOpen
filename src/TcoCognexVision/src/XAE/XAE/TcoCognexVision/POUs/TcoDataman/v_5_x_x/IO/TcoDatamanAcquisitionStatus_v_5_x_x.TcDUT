@@ -3,13 +3,12 @@
   <DUT Name="TcoDatamanAcquisitionStatus_v_5_x_x" Id="{14df66c4-970c-49dc-99e6-84ac8732a883}">
     <Declaration><![CDATA[TYPE TcoDatamanAcquisitionStatus_v_5_x_x :
 STRUCT
-	TriggerReady 		AT %I*:	BOOL;
-	TriggerAcknowledge 	AT %I*:	BOOL;
-	Acquiring 			AT %I*:	BOOL;
-	MissedAcquisition 	AT %I*:	BOOL;
-	TriggerID 			AT %I*:	UINT;
+    TriggerReady AT %I* : BOOL;
+    TriggerAcknowledge AT %I* : BOOL;
+    Acquiring AT %I* : BOOL;
+    MissedAcquisition AT %I* : BOOL;
+    TriggerID AT %I* : UINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

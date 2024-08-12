@@ -3,17 +3,15 @@
   <DUT Name="AnalogInputsBase_4" Id="{2bd17bb4-695c-0c10-3f16-f711c1f19351}">
     <Declaration><![CDATA[TYPE AnalogInputsBase_4 :
 STRUCT
-	{attribute addProperty Name "1"}
-	_1 AT %I* : INT;
-	{attribute addProperty Name "2"}
-	_2 AT %I* : DINT;
-	{attribute addProperty Name "3"}
-	_3 AT %I* : DINT;
-	{attribute addProperty Name "4"}
-	_4 AT %I* : DINT;
-
+    {attribute addProperty Name "1"}
+    _1 AT %I* : INT;
+    {attribute addProperty Name "2"}
+    _2 AT %I* : DINT;
+    {attribute addProperty Name "3"}
+    _3 AT %I* : DINT;
+    {attribute addProperty Name "4"}
+    _4 AT %I* : DINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

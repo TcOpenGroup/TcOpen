@@ -14,8 +14,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\TcoCoreConnector\TcoCoreConnector.csproj" />
-    <ProjectReference Include="..\TcoCoreTestsConnector\TcoCoreTestsConnector.csproj" />
+    <ProjectReference
+      Include="..\..\src\TcoCoreConnector\TcoCoreConnector.csproj"
+    />
+    <ProjectReference
+      Include="..\TcoCoreTestsConnector\TcoCoreTestsConnector.csproj"
+    />
     <ProjectReference Include="..\TcoTestRunners\TcoTestRunners.csproj" />
   </ItemGroup>
 

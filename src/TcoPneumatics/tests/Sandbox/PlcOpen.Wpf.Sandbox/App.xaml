@@ -1,19 +1,23 @@
 ﻿<Application
-    x:Class="TcoPneumatics.Wpf.Sandbox.App"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:TcoPneumatics.Wpf.Sandbox"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:tcocore="clr-namespace:TcoCore.Wpf;assembly=TcOpen.Inxton.TcoCore.Wpf"
-    StartupUri="MainWindow.xaml">
+  x:Class="TcoPneumatics.Wpf.Sandbox.App"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:local="clr-namespace:TcoPneumatics.Wpf.Sandbox"
+  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+  xmlns:tcocore="clr-namespace:TcoCore.Wpf;assembly=TcOpen.Inxton.TcoCore.Wpf"
+  StartupUri="MainWindow.xaml"
+>
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <materialDesign:BundledTheme
-                    BaseTheme="Light"
-                    PrimaryColor="Indigo"
-                    SecondaryColor="LightGreen" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+          BaseTheme="Light"
+          PrimaryColor="Indigo"
+          SecondaryColor="LightGreen"
+        />
+                <ResourceDictionary
+          Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml"
+        />
                 <!--<ResourceDictionary Source="pack://application:,,,/Vortex.Presentation.Styling.Wpf;component/VortexStyle.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Vortex.Presentation.Styling.Wpf;component/MDOverrides.xaml" />-->
             </ResourceDictionary.MergedDictionaries>

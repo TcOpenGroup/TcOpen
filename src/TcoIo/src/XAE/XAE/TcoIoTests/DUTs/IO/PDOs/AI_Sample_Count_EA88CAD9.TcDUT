@@ -8,10 +8,9 @@
 {attribute addProperty Size "2"}
 TYPE AI_Sample_Count_EA88CAD9 EXTENDS TcoIo.InputBase_8311D824 :
 STRUCT
-	{attribute addProperty Name "Sample_Count"}
-	Sample_Count AT %I* : UINT;
+    {attribute addProperty Name "Sample_Count"}
+    Sample_Count AT %I* : UINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

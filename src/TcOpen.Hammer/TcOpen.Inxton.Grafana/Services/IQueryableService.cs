@@ -1,5 +1,5 @@
-﻿using TcOpenHammer.Grafana.API.Transformation;
-using Grafana.Backend.Model;
+﻿using Grafana.Backend.Model;
+using TcOpenHammer.Grafana.API.Transformation;
 
 namespace TcOpenHammer.Grafana.API
 {

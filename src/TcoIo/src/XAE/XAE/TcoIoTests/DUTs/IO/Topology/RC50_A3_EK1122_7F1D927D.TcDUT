@@ -9,12 +9,11 @@
 {attribute addProperty Name "RC50_A3 (EK1122)"}
 TYPE RC50_A3_EK1122_7F1D927D EXTENDS EK1122_1FC0878B :
 STRUCT
-	{attribute addProperty Name "RC50_EPP (EPP1322-0001)"}
-	{attribute addProperty PreviousPort "RC50_A3 (EK1122) : D"}
-	{attribute addProperty SyncUnit "default"}
-	RC50_EPP_EPP1322_0001 : RC50_EPP_EPP1322_0001_58A8DEC2;
+    {attribute addProperty Name "RC50_EPP (EPP1322-0001)"}
+    {attribute addProperty PreviousPort "RC50_A3 (EK1122) : D"}
+    {attribute addProperty SyncUnit "default"}
+    RC50_EPP_EPP1322_0001 : RC50_EPP_EPP1322_0001_58A8DEC2;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

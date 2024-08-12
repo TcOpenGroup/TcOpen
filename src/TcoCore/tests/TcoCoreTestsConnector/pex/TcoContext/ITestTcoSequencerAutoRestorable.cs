@@ -12,7 +12,5 @@ namespace TcoCoreTests
         void SequencerOpen();
         void SequencerClose();
         void ContextClose();
-
     }
-
 }

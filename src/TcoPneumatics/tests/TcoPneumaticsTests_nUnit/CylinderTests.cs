@@ -1,9 +1,9 @@
-using NUnit.Framework;
-using TcoPneumatics;
-using System.Reflection;
 using System.IO;
-using TcoPneumaticsTests;
+using System.Reflection;
+using NUnit.Framework;
 using TcoCore.Testing;
+using TcoPneumatics;
+using TcoPneumaticsTests;
 
 namespace TcoPneumaticsTests
 {
@@ -12,10 +12,7 @@ namespace TcoPneumaticsTests
         CylinderTestContext sut = ConnectorFixture.Connector.MAIN._cylinderTests;
 
         [OneTimeSetUp()]
-        public void OneTimeSetUp()
-        {
-
-        }
+        public void OneTimeSetUp() { }
 
         [SetUp]
         public void TestSetup()
@@ -151,7 +148,6 @@ namespace TcoPneumaticsTests
             sut.ExecuteProbeRun(2, (int)eCyclinderTests.AbortMoveTask);
             Assert.AreEqual(false, sut._moveWorkSignal.Synchron);
             Assert.AreEqual(false, sut._moveHomeSignal.Synchron);
-
         }
 
         [Test]
@@ -166,19 +162,24 @@ namespace TcoPneumaticsTests
             Assert.AreEqual(false, sut._atHomeSignal.Synchron);
             Assert.AreEqual(false, sut._moveHomeDone.Synchron);
 
-
             System.Threading.Thread.Sleep((int)timeToAlarm.TotalMilliseconds);
-            sut.ExecuteProbeRun((int)eCyclinderTests.MoveHomeMoving, () =>
-            {
-                for (int i = 0; i < ((int)timeToAlarm.TotalMilliseconds / 10) + 1; i++)
+            sut.ExecuteProbeRun(
+                (int)eCyclinderTests.MoveHomeMoving,
+                () =>
                 {
-                    System.Threading.Thread.Sleep(10);
+                    for (int i = 0; i < ((int)timeToAlarm.TotalMilliseconds / 10) + 1; i++)
+                    {
+                        System.Threading.Thread.Sleep(10);
+                    }
+
+                    return true;
                 }
+            );
 
-                return true;
-            });
-
-            Assert.AreEqual("Home sensor not reached yet.", sut._sut._moveHomeDefault._messenger._mime.Text.Synchron);
+            Assert.AreEqual(
+                "Home sensor not reached yet.",
+                sut._sut._moveHomeDefault._messenger._mime.Text.Synchron
+            );
         }
 
         [Test]
@@ -194,7 +195,10 @@ namespace TcoPneumaticsTests
             sut._atWorkSignal.Synchron = true;
             sut.ExecuteProbeRun(1, 0);
 
-            Assert.AreEqual("Home and work position sensors are both active. Check the position of sensors!", sut._sut._messenger._mime.Text.Synchron);
+            Assert.AreEqual(
+                "Home and work position sensors are both active. Check the position of sensors!",
+                sut._sut._messenger._mime.Text.Synchron
+            );
         }
 
         [Test]
@@ -223,7 +227,10 @@ namespace TcoPneumaticsTests
 
             if (disabledSignal)
             {
-                Assert.AreEqual("Movement aborted due to : MAIN._cylinderTests._disableSignal", sut._sut._messenger._mime.Text.Synchron);
+                Assert.AreEqual(
+                    "Movement aborted due to : MAIN._cylinderTests._disableSignal",
+                    sut._sut._messenger._mime.Text.Synchron
+                );
             }
         }
 
@@ -253,10 +260,12 @@ namespace TcoPneumaticsTests
 
             if (disabledSignal)
             {
-                Assert.AreEqual("Movement aborted due to : MAIN._cylinderTests._disableSignal", sut._sut._messenger._mime.Text.Synchron);
+                Assert.AreEqual(
+                    "Movement aborted due to : MAIN._cylinderTests._disableSignal",
+                    sut._sut._messenger._mime.Text.Synchron
+                );
             }
         }
-
 
         [Test]
         [Timeout(10000)]
@@ -284,7 +293,10 @@ namespace TcoPneumaticsTests
 
             if (suspendSignal)
             {
-                Assert.AreEqual("Movement suspended due to : MAIN._cylinderTests._suspendSignal", sut._sut._messenger._mime.Text.Synchron);
+                Assert.AreEqual(
+                    "Movement suspended due to : MAIN._cylinderTests._suspendSignal",
+                    sut._sut._messenger._mime.Text.Synchron
+                );
             }
         }
 
@@ -314,11 +326,12 @@ namespace TcoPneumaticsTests
 
             if (suspendSignal)
             {
-                Assert.AreEqual("Movement suspended due to : MAIN._cylinderTests._suspendSignal", sut._sut._messenger._mime.Text.Synchron);
+                Assert.AreEqual(
+                    "Movement suspended due to : MAIN._cylinderTests._suspendSignal",
+                    sut._sut._messenger._mime.Text.Synchron
+                );
             }
         }
-
-
 
         [Test]
         [Timeout(10000)]
@@ -344,9 +357,12 @@ namespace TcoPneumaticsTests
             Assert.AreEqual(false, sut._atHomeSignal.Synchron);
             Assert.AreEqual(suspendSignal, sut._moveHomeSignal.Synchron);
 
-            if (! suspendSignal)
+            if (!suspendSignal)
             {
-                Assert.AreEqual("Movement suspended due to NOT : MAIN._cylinderTests._suspendSignal", sut._sut._messenger._mime.Text.Synchron);
+                Assert.AreEqual(
+                    "Movement suspended due to NOT : MAIN._cylinderTests._suspendSignal",
+                    sut._sut._messenger._mime.Text.Synchron
+                );
             }
         }
 
@@ -376,7 +392,10 @@ namespace TcoPneumaticsTests
 
             if (!suspendSignal)
             {
-                Assert.AreEqual("Movement suspended due to NOT : MAIN._cylinderTests._suspendSignal", sut._sut._messenger._mime.Text.Synchron);
+                Assert.AreEqual(
+                    "Movement suspended due to NOT : MAIN._cylinderTests._suspendSignal",
+                    sut._sut._messenger._mime.Text.Synchron
+                );
             }
         }
 
@@ -406,16 +425,19 @@ namespace TcoPneumaticsTests
 
             if (suspendSignal)
             {
-                Assert.AreEqual("Movement suspended due to : "+msg, sut._sut._messenger._mime.Text.Synchron);
+                Assert.AreEqual(
+                    "Movement suspended due to : " + msg,
+                    sut._sut._messenger._mime.Text.Synchron
+                );
             }
         }
 
         [Test]
         [Timeout(10000)]
         [Order((int)eCyclinderTests.SuspendWorkExpression)]
-        [TestCase(true,"SUSPEND")]
-        [TestCase(false,"SUSPEND")]
-        public void Suspend_move_work_expression_action_disabled(bool suspendSignal,string msg)
+        [TestCase(true, "SUSPEND")]
+        [TestCase(false, "SUSPEND")]
+        public void Suspend_move_work_expression_action_disabled(bool suspendSignal, string msg)
         {
             sut._sut._messenger.Clear();
             var timeToAlarm = new System.TimeSpan(0, 0, 0, 0, 50);
@@ -437,7 +459,10 @@ namespace TcoPneumaticsTests
 
             if (suspendSignal)
             {
-                Assert.AreEqual("Movement suspended due to : "+msg, sut._sut._messenger._mime.Text.Synchron);
+                Assert.AreEqual(
+                    "Movement suspended due to : " + msg,
+                    sut._sut._messenger._mime.Text.Synchron
+                );
             }
         }
     }

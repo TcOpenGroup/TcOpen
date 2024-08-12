@@ -5,23 +5,22 @@
 {attribute 'strict'}
 TYPE eCyclinderTests :
 (
-	Invalid := 25,
-	StopMovement := 50,
-	MoveHomeMoving := 100,
-	MoveHomeMovingReached := 200,
-	MoveWorkMoving := 300,
-	MoveWorkMovingReached := 400,
-	AbortMoveTask := 500,
-	DisableHome := 600,
-	DisableWork := 700, 
-	SuspendHome := 610,
-	SuspendWork := 710, 
-	SuspendHomeInverted := 620,
-	SuspendWorkInverted := 720, 
-	SuspendHomeExpression := 630,
-	SuspendWorkExpression := 730
+    Invalid := 25,
+    StopMovement := 50,
+    MoveHomeMoving := 100,
+    MoveHomeMovingReached := 200,
+    MoveWorkMoving := 300,
+    MoveWorkMovingReached := 400,
+    AbortMoveTask := 500,
+    DisableHome := 600,
+    DisableWork := 700,
+    SuspendHome := 610,
+    SuspendWork := 710,
+    SuspendHomeInverted := 620,
+    SuspendWorkInverted := 720,
+    SuspendHomeExpression := 630,
+    SuspendWorkExpression := 730
 );
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

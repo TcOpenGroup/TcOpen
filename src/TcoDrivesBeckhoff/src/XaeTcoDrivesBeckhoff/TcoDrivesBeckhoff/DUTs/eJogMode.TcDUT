@@ -5,13 +5,12 @@
 {attribute 'strict'}
 TYPE eJogMode :
 (
-	MC_JOGMODE_STANDARD_SLOW, (* motion with standard jog parameters for slow motion *)
+    MC_JOGMODE_STANDARD_SLOW, (* motion with standard jog parameters for slow motion *)
     MC_JOGMODE_STANDARD_FAST, (* motion with standard jog parameters for fast motion *)
     MC_JOGMODE_CONTINOUS, (* axis moves as long as the jog button is pressed using parameterized dynamics *)
     MC_JOGMODE_INCHING, (* axis moves for a certain relative distance *)
     MC_JOGMODE_INCHING_MODULO (* axis moves for a certain relative distance - stop position is rounded to the distance value *)
 );
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

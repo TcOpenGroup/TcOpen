@@ -8,10 +8,9 @@
 {attribute addProperty SizeInBytes "1"}
 TYPE WcState_64F6A8C6 :
 STRUCT
-	{attribute addProperty Name "WcState"}
-	WcState AT %I* : BOOL;
+    {attribute addProperty Name "WcState"}
+    WcState AT %I* : BOOL;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

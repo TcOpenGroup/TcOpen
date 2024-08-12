@@ -1,142 +1,128 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="SandboxContext" Id="{ed8218eb-5f5f-0973-2882-9b75bfb2ad4d}" SpecialFunc="None">
-    <Declaration><![CDATA[
-//<Declaration>
+    <Declaration><![CDATA[//<Declaration>
 FUNCTION_BLOCK SandboxContext EXTENDS TcoCore.TcoContext
 VAR
     DataManager : TcoDataManager(THIS^);
-	
-	DataManagerFragmented : TcoDataManager(THIS^);
-	
-	DataManagerPlc1 : TcoDataManagerPlc1(THIS^);
-
-	DataManagerPlc2 : TcoDataManagerPlc2(THIS^);
-	
-//	DataManagerFragmentedPlc1 : TcoDataManagerPlc1(THIS^);
+    DataManagerFragmented : TcoDataManager(THIS^);
+    DataManagerPlc1 : TcoDataManagerPlc1(THIS^);
+    DataManagerPlc2 : TcoDataManagerPlc2(THIS^);
+    //	DataManagerFragmentedPlc1 : TcoDataManagerPlc1(THIS^);
 END_VAR
 //</Declaration>
 VAR
-	_state : eExamplesStates;
-	recordId_1 : STRING;
-	recordId_2 : STRING;
-	_invokeSearch : BOOL;
-	_filteringById :STRING;	
+    _state : eExamplesStates;
+    recordId_1 : STRING;
+    recordId_2 : STRING;
+    _invokeSearch : BOOL;
+    _filteringById : STRING;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Main" Id="{3a03a89e-90f1-0a89-181b-0e6b67acc445}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Main method of the TcoContext. This is the entry point of any control logic that belongs to this context. 
-			The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
-			This method is abstract, and it must be overridden in derived block.
-		</summary>
-	</docu>
+    <docu>
+        <summary>
+            Main method of the TcoContext. This is the entry point of any control logic that belongs to this context.
+            The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
+            This method is abstract, and it must be overridden in derived block.
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED  Main
-]]></Declaration>
+METHOD PROTECTED Main]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Context logging configuration
 Context.Environment.Messaging.MessageDigestMethod := eMessageDigestMethod.CRC32;
 Context.Environment.Messaging.MessengerLoggingMethod := eMessengerLogMethod.OnEventRisen;
-
 //<CyclicalDataMangerCall>
 // Cyclical data manage call.
 DataManager();
 DataManagerFragmented();
 DataManagerPlc1();
 DataManagerPlc2();
-
 //</CyclicalDataMangerCall>
-
-
-
 recordId_1 := 'scoundrel';
 recordId_2 := 'knight';
 
 CASE _state OF
-	eExamplesStates.Initialize_1:
-		IF(DataManager.Exists(recordId_1).Done) THEN
-			IF(DataManager.Exists(recordId_1).Exists) THEN
-				IF(DataManager.Delete(recordId_1).Done) THEN
-					DataManager.Messenger.Build().Append('Record ').Append(recordId_1).Append(' deleted.').As().AsInfo();
-				END_IF;
-			END_IF
-		END_IF
-	eExamplesStates.Initialize_2:
-		IF(DataManager.Exists(recordId_2).Done) THEN
-			IF(DataManager.Exists(recordId_2).Exists) THEN
-				IF(DataManager.Delete(recordId_2).Done) THEN
-					DataManager.Messenger.Build().Append('Record ').Append(recordId_2).Append(' deleted.').As().AsInfo();
-				END_IF;
-			END_IF
-		END_IF	
-	eExamplesStates.Create:
+    eExamplesStates.Initialize_1:
+        IF (DataManager.Exists(recordId_1).Done) THEN
+            IF (DataManager.Exists(recordId_1).Exists) THEN
+                IF (DataManager.Delete(recordId_1).Done) THEN
+                    DataManager.Messenger.Build().Append('Record ').Append(recordId_1).Append(' deleted.').As().AsInfo();
+                END_IF;
+            END_IF
+        END_IF
+    eExamplesStates.Initialize_2:
+        IF (DataManager.Exists(recordId_2).Done) THEN
+            IF (DataManager.Exists(recordId_2).Exists) THEN
+                IF (DataManager.Delete(recordId_2).Done) THEN
+                    DataManager.Messenger.Build().Append('Record ').Append(recordId_2).Append(' deleted.').As().AsInfo();
+                END_IF;
+            END_IF
+        END_IF
+    eExamplesStates.Create:
+        //<CreateCodeExample>
+        // Will create new entry into repository with data contained in the `_data`
+        IF (DataManager.Create(recordId_1).Done) THEN
+            DataManager.Messenger.Build().Append('Record ').Append(recordId_1).Append(' created.').As().AsInfo();
+        END_IF;
+    //</CreateCodeExample>
+    eExamplesStates.Update:
+        // <UpdateCodeExample>
+        DataManager.Data.sampleData.SampleInt := 33;
+        DataManager.Data.sampleData.SampleString := 'Max';
+        DataManager.Data.sampleData.SampleNestedStructure.SampleLREAL := 1;
 
-//<CreateCodeExample>	
-		// Will create new entry into repository with data contained in the `_data` 
-		IF(DataManager.Create(recordId_1).Done) THEN
-			DataManager.Messenger.Build().Append('Record ').Append(recordId_1).Append(' created.').As().AsInfo();
-		END_IF;
-//</CreateCodeExample> 
-		
-	eExamplesStates.Update:
-	
-// <UpdateCodeExample>
-	
-		DataManager.Data.sampleData.SampleInt := 33;
-		DataManager.Data.sampleData.SampleString := 'Max';
-		DataManager.Data.sampleData.SampleNestedStructure.SampleLREAL := 1;
-		IF(DataManager.Update(recordId_1).Done) THEN
-			DataManager.Messenger.Build().Append('Record ').Append(recordId_1).Append(' updated.').As().AsInfo();
-		END_IF;
+        IF (DataManager.Update(recordId_1).Done) THEN
+            DataManager.Messenger.Build().Append('Record ').Append(recordId_1).Append(' updated.').As().AsInfo();
+        END_IF;
+    // </UpdateCodeExample>
+    eExamplesStates.CreateOrUpdate:
+        // <CreateOrUpdateCodeExample>
+        DataManager.Data.sampleData.SampleInt := 44;
+        DataManager.Data.sampleData.SampleString := 'Lewis';
+        DataManager.Data.sampleData.SampleNestedStructure.SampleLREAL := 7;
 
-// </UpdateCodeExample>
-
-	eExamplesStates.CreateOrUpdate:
-// <CreateOrUpdateCodeExample>	
-		DataManager.Data.sampleData.SampleInt := 44;
-		DataManager.Data.sampleData.SampleString := 'Lewis';
-		DataManager.Data.sampleData.SampleNestedStructure.SampleLREAL := 7;
-		IF(DataManager.CreateOrUpdate(recordId_2).Done) THEN
-			DataManager.Messenger.Build().Append('Record ').Append(recordId_2).Append(' updated/created.').As().AsInfo();
-		END_IF;	
-// <CreateOrUpdateCodeExample>		
-	eExamplesStates.Read:		
-// <ReadCodeExample>	
-		IF(DataManager.Read(recordId_1).Done) THEN
-			DataManager.Messenger.Build()
-								 .Append('Record ')
-								 .Append(recordId_1)
-								 .Append(' read.')								 
-								 .AppendAny(DataManager.Data.sampleData.SampleInt)
-								 .Append(';')
-								 .Append(DataManager.Data.sampleData.SampleString)
-								 .Append(';')
-								 .AppendAny(DataManager.Data.sampleData.SampleNestedStructure.SampleLREAL)
-								 .As().AsInfo();						
-		END_IF;	
-// </ReadCodeExample>	
+        IF (DataManager.CreateOrUpdate(recordId_2).Done) THEN
+            DataManager.Messenger.Build().Append('Record ').Append(recordId_2).Append(' updated/created.').As().AsInfo();
+        END_IF;
+    // <CreateOrUpdateCodeExample>
+    eExamplesStates.Read:
+        // <ReadCodeExample>
+        IF (DataManager.Read(recordId_1).Done) THEN
+            DataManager.Messenger.Build()
+                .Append('Record ')
+                .Append(recordId_1)
+                .Append(' read.')
+                .AppendAny(DataManager.Data.sampleData.SampleInt)
+                .Append(';')
+                .Append(DataManager.Data.sampleData.SampleString)
+                .Append(';')
+                .AppendAny(DataManager.Data.sampleData.SampleNestedStructure.SampleLREAL)
+                .As().AsInfo();
+        END_IF;
+    // </ReadCodeExample>
     eExamplesStates.Delete:
-// <DeleteCodeExample>	
-		IF(DataManager.Delete(recordId_1).Done) THEN
-			DataManager.Messenger.Build().Append('Record ').Append(recordId_1).Append(' deleted.').As().AsInfo();
-		END_IF;		
-// </DeleteCodeExample>
-	eExamplesStates.Exists:
-// <ExistsCodeExample>	
-		IF(DataManager.Exists(recordId_2).Done) THEN
-			DataManager.Messenger.Clear();
-			IF(DataManager.Exists(recordId_2).Exists) THEN
-				DataManager.Messenger.Build().Append('Record ').Append(recordId_2).Append(' exists.').As().AsInfo();
-			ELSE	
-				DataManager.Messenger.Build().Append('Record ').Append(recordId_2).Append(' does not exists.').As().AsInfo();	
-			END_IF
-		END_IF		
-// </ExistsCodeExample>		
+        // <DeleteCodeExample>
+        IF (DataManager.Delete(recordId_1).Done) THEN
+            DataManager.Messenger.Build().Append('Record ').Append(recordId_1).Append(' deleted.').As().AsInfo();
+        END_IF;
+    // </DeleteCodeExample>
+    eExamplesStates.Exists:
+        // <ExistsCodeExample>
+        IF (DataManager.Exists(recordId_2).Done) THEN
+            DataManager.Messenger.Clear();
+
+            IF (DataManager.Exists(recordId_2).Exists) THEN
+                DataManager.Messenger.Build().Append('Record ').Append(recordId_2).Append(' exists.').As().AsInfo();
+            ELSE
+                DataManager.Messenger.Build().Append('Record ').Append(recordId_2).Append(' does not exists.').As().AsInfo();
+            END_IF
+        END_IF
+    // </ExistsCodeExample>
 END_CASE]]></ST>
       </Implementation>
     </Method>

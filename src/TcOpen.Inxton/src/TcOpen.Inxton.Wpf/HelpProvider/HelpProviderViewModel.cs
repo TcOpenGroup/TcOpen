@@ -11,11 +11,17 @@ namespace TcOpen.Inxton.Wpf.HelpProvider
     {
         private string componentName;
 
-        public HelpProviderViewModel()
-        {            
-        }
+        public HelpProviderViewModel() { }
 
-        public string ComponentName { get => componentName; set { componentName = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ComponentName))); } }
+        public string ComponentName
+        {
+            get => componentName;
+            set
+            {
+                componentName = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ComponentName)));
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
     }

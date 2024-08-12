@@ -3,10 +3,9 @@
   <DUT Name="stWcState" Id="{21699693-6744-4ed7-b029-7d682fdeb6b7}">
     <Declaration><![CDATA[TYPE stWcState :
 STRUCT
-	WcState		AT %I* : BOOL; // FALSE = data valid, TRUE = data not valid
-	InputToggle	AT %I* : BOOL; // toggles every scan.
+    WcState AT %I* : BOOL; // FALSE = data valid, TRUE = data not valid
+    InputToggle AT %I* : BOOL; // toggles every scan.
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

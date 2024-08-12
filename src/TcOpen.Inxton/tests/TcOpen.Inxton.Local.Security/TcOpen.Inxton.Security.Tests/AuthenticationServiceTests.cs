@@ -1,22 +1,23 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
-using TcOpen.Inxton.Security;
+using NUnit.Framework;
 using TcOpen.Inxton.Local.Security;
+using TcOpen.Inxton.Security;
 using static TcOpen.Inxton.Local.Security.AppIdentity;
-
 
 namespace TcOpen.Inxton.Security.Tests
 {
     [TestFixture()]
     public class AuthenticationServiceTests
     {
-
-        string outputDir = Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).Directory.FullName, "SecurityManager");
+        string outputDir = Path.Combine(
+            new FileInfo(Assembly.GetExecutingAssembly().Location).Directory.FullName,
+            "SecurityManager"
+        );
 
         AuthenticationService authService;
 
@@ -24,12 +25,11 @@ namespace TcOpen.Inxton.Security.Tests
         public void SetUp()
         {
             TcOpen.Inxton.Local.Security.SecurityManager.CreateDefault();
-            NUnit.Framework.Internal.TestExecutionContext.CurrentContext.CurrentPrincipal = SecurityManager.Manager.Principal;
-
+            NUnit.Framework.Internal.TestExecutionContext.CurrentContext.CurrentPrincipal =
+                SecurityManager.Manager.Principal;
 
             if (authService == null)
             {
-
                 authService = SecurityProvider.Get.AuthenticationService as AuthenticationService;
                 authService.OnUserAuthenticateFailed += AuthService_OnUserAuthenticateFailed;
                 authService.OnUserAuthenticateSuccess += AuthService_OnUserAuthenticateSuccess;
@@ -40,10 +40,12 @@ namespace TcOpen.Inxton.Security.Tests
                 }
                 catch (Exception)
                 {
-
                     // Swallow;
                 }
-                var users = authService.UserRepository.Queryable.Where(p => true).Select(p => p.Username).ToList();
+                var users = authService
+                    .UserRepository.Queryable.Where(p => true)
+                    .Select(p => p.Username)
+                    .ToList();
 
                 foreach (var item in users)
                 {
@@ -53,18 +55,21 @@ namespace TcOpen.Inxton.Security.Tests
         }
 
         private string AuthService_OnUserDeAuthenticatedMessage;
+
         private void AuthService_OnUserDeAuthenticated(string username)
         {
             AuthService_OnUserDeAuthenticatedMessage = $"Deauth {username}";
         }
 
         private string AuthService_OnUserAuthenticateSuccessMessage;
+
         private void AuthService_OnUserAuthenticateSuccess(string username)
         {
             AuthService_OnUserAuthenticateSuccessMessage = $"Success {username}";
         }
 
         private string AuthService_OnUserAuthenticateFailedMessage;
+
         private void AuthService_OnUserAuthenticateFailed(string username)
         {
             AuthService_OnUserAuthenticateFailedMessage = $"Failed {username}";
@@ -85,7 +90,10 @@ namespace TcOpen.Inxton.Security.Tests
             var password = "passwordToAuthSuccess";
             var roles = new string[] { "Tester" };
 
-            authService.UserRepository.Create(userName, new UserData(userName, password, roles.ToList()));
+            authService.UserRepository.Create(
+                userName,
+                new UserData(userName, password, roles.ToList())
+            );
 
             //-- Act
             var actual = authService.AuthenticateUser(userName, password);
@@ -97,7 +105,6 @@ namespace TcOpen.Inxton.Security.Tests
             Assert.AreEqual($"Success {userName}", AuthService_OnUserAuthenticateSuccessMessage);
         }
 
-
         [Test()]
         public void AuthenticateUserFailedDuePasswordTest()
         {
@@ -106,10 +113,16 @@ namespace TcOpen.Inxton.Security.Tests
             var password = "passwordToAuthFailedDuePassword";
             var roles = new string[] { "Tester" };
 
-            authService.UserRepository.Create(userName, new UserData(userName, password, roles.ToList()));
+            authService.UserRepository.Create(
+                userName,
+                new UserData(userName, password, roles.ToList())
+            );
 
             //-- Assert
-            Assert.Throws(typeof(System.UnauthorizedAccessException), () => authService.AuthenticateUser(userName, "wrongPassword"));
+            Assert.Throws(
+                typeof(System.UnauthorizedAccessException),
+                () => authService.AuthenticateUser(userName, "wrongPassword")
+            );
             Assert.AreEqual($"Failed {userName}", AuthService_OnUserAuthenticateFailedMessage);
         }
 
@@ -121,10 +134,16 @@ namespace TcOpen.Inxton.Security.Tests
             var password = "passwordToAuthFailedDueUserName";
             var roles = new string[] { "Tester" };
 
-            authService.UserRepository.Create(userName, new UserData(userName, password, roles.ToList()));
+            authService.UserRepository.Create(
+                userName,
+                new UserData(userName, password, roles.ToList())
+            );
 
             //-- Assert
-            Assert.Throws(typeof(System.UnauthorizedAccessException), () => authService.AuthenticateUser("WrongUserName", password));
+            Assert.Throws(
+                typeof(System.UnauthorizedAccessException),
+                () => authService.AuthenticateUser("WrongUserName", password)
+            );
             Assert.AreEqual($"Failed WrongUserName", AuthService_OnUserAuthenticateFailedMessage);
         }
 
@@ -136,11 +155,20 @@ namespace TcOpen.Inxton.Security.Tests
             var password = "passwordToAuthFailedDueUserAndPasswordName";
             var roles = new string[] { "Tester" };
 
-            authService.UserRepository.Create(userName, new UserData(userName, password, roles.ToList()));
+            authService.UserRepository.Create(
+                userName,
+                new UserData(userName, password, roles.ToList())
+            );
 
             //-- Assert
-            Assert.Throws(typeof(System.UnauthorizedAccessException), () => authService.AuthenticateUser("WrongUserNameAndPassword", "WrongPassword"));
-            Assert.AreEqual($"Failed WrongUserNameAndPassword", AuthService_OnUserAuthenticateFailedMessage);
+            Assert.Throws(
+                typeof(System.UnauthorizedAccessException),
+                () => authService.AuthenticateUser("WrongUserNameAndPassword", "WrongPassword")
+            );
+            Assert.AreEqual(
+                $"Failed WrongUserNameAndPassword",
+                AuthService_OnUserAuthenticateFailedMessage
+            );
         }
 
         [Test()]
@@ -155,8 +183,18 @@ namespace TcOpen.Inxton.Security.Tests
             authService.UserRepository.Create(userName, userToTest);
 
             //-- Assert
-            Assert.Throws(typeof(System.UnauthorizedAccessException), () => authService.AuthenticateUser("WrongUserNameAndPassword", "AuthenticateUserFailedDueNotMatchingRolesHash"));
-            Assert.AreEqual($"Failed WrongUserNameAndPassword", AuthService_OnUserAuthenticateFailedMessage);
+            Assert.Throws(
+                typeof(System.UnauthorizedAccessException),
+                () =>
+                    authService.AuthenticateUser(
+                        "WrongUserNameAndPassword",
+                        "AuthenticateUserFailedDueNotMatchingRolesHash"
+                    )
+            );
+            Assert.AreEqual(
+                $"Failed WrongUserNameAndPassword",
+                AuthService_OnUserAuthenticateFailedMessage
+            );
         }
 
         [Test()]
@@ -167,13 +205,24 @@ namespace TcOpen.Inxton.Security.Tests
             var password = "AuthenticateUserFailedDueNotMatchingRolesHash";
             var roles = new string[] { "AuthenticateUserFailedDueNotMatchingRolesHash" };
             var userToTest = new UserData(userName, password, roles.ToList());
-            userToTest.RoleHash = "QXV0aGVudGljYXRlVXNlckZhaWxlZER1ZU5vdE1hdGNoaW5nUm9sZUNoZWNrc3Vt";
+            userToTest.RoleHash =
+                "QXV0aGVudGljYXRlVXNlckZhaWxlZER1ZU5vdE1hdGNoaW5nUm9sZUNoZWNrc3Vt";
 
             authService.UserRepository.Create(userName, userToTest);
 
             //-- Assert
-            Assert.Throws(typeof(System.UnauthorizedAccessException), () => authService.AuthenticateUser("WrongUserNameAndPassword", "AuthenticateUserFailedDueNotMatchingRolesHash"));
-            Assert.AreEqual($"Failed WrongUserNameAndPassword", AuthService_OnUserAuthenticateFailedMessage);
+            Assert.Throws(
+                typeof(System.UnauthorizedAccessException),
+                () =>
+                    authService.AuthenticateUser(
+                        "WrongUserNameAndPassword",
+                        "AuthenticateUserFailedDueNotMatchingRolesHash"
+                    )
+            );
+            Assert.AreEqual(
+                $"Failed WrongUserNameAndPassword",
+                AuthService_OnUserAuthenticateFailedMessage
+            );
         }
 
         [Test()]
@@ -200,7 +249,6 @@ namespace TcOpen.Inxton.Security.Tests
             Assert.AreEqual(userToTest.RoleHash, "zhsvnkB9I8CImR/UKOXEfHb0oAQ1Az2pNQegv66gXuQ=");
         }
 
-
         [Test()]
         public void RoleHashIsCalculatedProperlyAfterAddingNewRole()
         {
@@ -215,7 +263,6 @@ namespace TcOpen.Inxton.Security.Tests
             Assert.AreEqual(userToTest.RoleHash, "zhsvnkB9I8CImR/UKOXEfHb0oAQ1Az2pNQegv66gXuQ=");
         }
 
-
         [Test()]
         public void DeAuthenticateCurrentUserTest()
         {
@@ -224,11 +271,14 @@ namespace TcOpen.Inxton.Security.Tests
             var password = "passwordToAuthSuccess";
             var actual = authService.AuthenticateUser(userName, password);
 
-            //-- Act 
+            //-- Act
             authService.DeAuthenticateCurrentUser();
 
             //-- Assert
-            Assert.AreEqual($"Deauth TestUserToAuthSuccess", AuthService_OnUserDeAuthenticatedMessage);
+            Assert.AreEqual(
+                $"Deauth TestUserToAuthSuccess",
+                AuthService_OnUserDeAuthenticatedMessage
+            );
         }
 
         [Test()]
@@ -252,7 +302,10 @@ namespace TcOpen.Inxton.Security.Tests
             var newPassword = "newpassword";
             var roles = new string[] { "Tester" };
 
-            authService.UserRepository.Create(userName, new UserData(userName, password, roles.ToList()));
+            authService.UserRepository.Create(
+                userName,
+                new UserData(userName, password, roles.ToList())
+            );
 
             var actual = authService.AuthenticateUser(userName, password);
 
@@ -272,7 +325,6 @@ namespace TcOpen.Inxton.Security.Tests
             Assert.AreEqual(userName, changed.UserName);
             Assert.AreEqual(1, roles.Length);
             Assert.AreEqual(roles[0], changed.Roles[0]);
-
         }
 
         [Test()]
@@ -284,7 +336,10 @@ namespace TcOpen.Inxton.Security.Tests
             var newPassword = "newpassword";
             var roles = new string[] { "Tester" };
 
-            authService.UserRepository.Create(userName, new UserData(userName, password, roles.ToList()));
+            authService.UserRepository.Create(
+                userName,
+                new UserData(userName, password, roles.ToList())
+            );
 
             var actual = authService.AuthenticateUser(userName, password);
 
@@ -296,8 +351,10 @@ namespace TcOpen.Inxton.Security.Tests
 
             //-- Act / Assert
 
-            Assert.Throws(typeof(System.UnauthorizedAccessException), () => authService.ChangePassword(userName, password + "a", newPassword, newPassword));
-
+            Assert.Throws(
+                typeof(System.UnauthorizedAccessException),
+                () => authService.ChangePassword(userName, password + "a", newPassword, newPassword)
+            );
         }
 
         [Test()]
@@ -309,7 +366,10 @@ namespace TcOpen.Inxton.Security.Tests
             var newPassword = "newpassword";
             var roles = new string[] { "Tester" };
 
-            authService.UserRepository.Create(userName, new UserData(userName, password, roles.ToList()));
+            authService.UserRepository.Create(
+                userName,
+                new UserData(userName, password, roles.ToList())
+            );
 
             var actual = authService.AuthenticateUser(userName, password);
 
@@ -321,8 +381,10 @@ namespace TcOpen.Inxton.Security.Tests
 
             //-- Act / Assert
 
-            Assert.Throws(typeof(PasswordsDoNotMatchException), () => authService.ChangePassword(userName, password, newPassword, newPassword + "b"));
-
+            Assert.Throws(
+                typeof(PasswordsDoNotMatchException),
+                () => authService.ChangePassword(userName, password, newPassword, newPassword + "b")
+            );
         }
 
         [Test()]
@@ -330,13 +392,16 @@ namespace TcOpen.Inxton.Security.Tests
         {
             //-- Arrange
             var userName = "UserTokenAuthentication";
-            var password = "token";            
+            var password = "token";
             var roles = new string[] { "Tester" };
             var token = "usersToken";
 
-            authService.ExternalAuthorization = new ExternalAuthenticator() { Token = token };            
+            authService.ExternalAuthorization = new ExternalAuthenticator() { Token = token };
 
-            authService.UserRepository.Create(userName, new UserData(userName, password, roles.ToList()));
+            authService.UserRepository.Create(
+                userName,
+                new UserData(userName, password, roles.ToList())
+            );
 
             authService.AuthenticateUser(userName, password);
 
@@ -348,7 +413,7 @@ namespace TcOpen.Inxton.Security.Tests
 
             Assert.AreEqual(userName, actual.UserName);
             Assert.AreEqual(1, roles.Length);
-            Assert.AreEqual(roles[0], actual.Roles[0]);           
+            Assert.AreEqual(roles[0], actual.Roles[0]);
         }
 
         [Test()]
@@ -362,7 +427,10 @@ namespace TcOpen.Inxton.Security.Tests
 
             authService.ExternalAuthorization = new ExternalAuthenticator() { Token = token };
 
-            authService.UserRepository.Create(userName, new UserData(userName, password, roles.ToList()));
+            authService.UserRepository.Create(
+                userName,
+                new UserData(userName, password, roles.ToList())
+            );
 
             authService.AuthenticateUser(userName, password);
 
@@ -379,7 +447,10 @@ namespace TcOpen.Inxton.Security.Tests
             actual = authService.ExternalAuthorization.RequestAuthorization(token);
 
             Assert.IsNull(actual);
-            Assert.AreEqual(typeof(AnonymousIdentity), TcOpen.Inxton.Local.Security.SecurityManager.Manager.Principal.Identity.GetType());            
+            Assert.AreEqual(
+                typeof(AnonymousIdentity),
+                TcOpen.Inxton.Local.Security.SecurityManager.Manager.Principal.Identity.GetType()
+            );
         }
 
         [Test()]
@@ -395,7 +466,10 @@ namespace TcOpen.Inxton.Security.Tests
 
             authService.ExternalAuthorization = externalAuthorization;
 
-            authService.UserRepository.Create(userName, new UserData(userName, password, roles.ToList()));
+            authService.UserRepository.Create(
+                userName,
+                new UserData(userName, password, roles.ToList())
+            );
 
             authService.AuthenticateUser(userName, password);
 
@@ -403,11 +477,9 @@ namespace TcOpen.Inxton.Security.Tests
 
             authService.DeAuthenticateCurrentUser();
 
-
             var inexistingToken = "fjalsdjl";
 
             externalAuthorization.Token = inexistingToken;
-           
 
             authService.ExternalAuthorization.RequestAuthorization(inexistingToken);
 
@@ -431,7 +503,10 @@ namespace TcOpen.Inxton.Security.Tests
 
             authService.ExternalAuthorization = externalAuthorization;
 
-            authService.UserRepository.Create(userName, new UserData(userName, password, roles.ToList()));
+            authService.UserRepository.Create(
+                userName,
+                new UserData(userName, password, roles.ToList())
+            );
 
             authService.AuthenticateUser(userName, password);
 
@@ -440,7 +515,6 @@ namespace TcOpen.Inxton.Security.Tests
             authService.DeAuthenticateCurrentUser();
 
             externalAuthorization.Token = string.Empty;
-
 
             authService.ExternalAuthorization.RequestAuthorization(token);
 
@@ -459,8 +533,14 @@ namespace TcOpen.Inxton.Security.Tests
 
             authService.ExternalAuthorization = externalAuthorization;
 
-            authService.UserRepository.Create("ExistingToken1", new UserData("ExistingToken1", "halabala", new string[] { "Tester" }));
-            authService.UserRepository.Create("ExistingToken2", new UserData("ExistingToken2", "halabala", new string[] { "Tester" }));
+            authService.UserRepository.Create(
+                "ExistingToken1",
+                new UserData("ExistingToken1", "halabala", new string[] { "Tester" })
+            );
+            authService.UserRepository.Create(
+                "ExistingToken2",
+                new UserData("ExistingToken2", "halabala", new string[] { "Tester" })
+            );
 
             authService.AuthenticateUser("ExistingToken1", "halabala");
 
@@ -470,15 +550,15 @@ namespace TcOpen.Inxton.Security.Tests
 
             authService.AuthenticateUser("ExistingToken2", "halabala");
 
-            Assert.Throws(typeof(ExistingTokenException), () => authService.ExternalAuthorization.RequestTokenChange(token));            
-
+            Assert.Throws(
+                typeof(ExistingTokenException),
+                () => authService.ExternalAuthorization.RequestTokenChange(token)
+            );
         }
-
 
         public class ExternalAuthenticator : ExternalAuthorization
         {
-
-            public string Token { get; set; }            
+            public string Token { get; set; }
         }
     }
 }

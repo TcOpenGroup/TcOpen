@@ -5,7 +5,7 @@
     <TargetFrameworks>net48;net5.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <!--NuGet properties--> 
+    <!--NuGet properties-->
     <Authors>TcOpenGroup contributors</Authors>
     <Company>TcOpenGroup</Company>
     <RepositoryUrl>https://github.com/TcOpenGroup/TcOpen</RepositoryUrl>
@@ -13,17 +13,25 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>TwinCAT3 Tixon feeding</PackageTags>
     <PackageProjectUrl>http://docs.tcopengroup.org/</PackageProjectUrl>
-    <PackageIconUrl>https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
+    <PackageIconUrl
+    >https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials.Wpf" Version="2.0.0" />
+    <PackageReference
+      Include="Inxton.Package.Vortex.Essentials.Wpf"
+      Version="2.0.0"
+    />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\TcoCore\src\TcoCore.Wpf\TcOpen.Inxton.TcoCore.Wpf.csproj" />
-    <ProjectReference Include="..\TcoTixonFeedingConnector\TcoTixonFeedingConnector.csproj" />
-    
+    <ProjectReference
+      Include="..\..\..\TcoCore\src\TcoCore.Wpf\TcOpen.Inxton.TcoCore.Wpf.csproj"
+    />
+    <ProjectReference
+      Include="..\TcoTixonFeedingConnector\TcoTixonFeedingConnector.csproj"
+    />
+
   </ItemGroup>
 
   <ItemGroup>
@@ -46,15 +54,21 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="TixonPickStep\Service\TcoTixonPickStep_v_1_x_xServiceView.xaml">
+    <Page
+      Update="TixonPickStep\Service\TcoTixonPickStep_v_1_x_xServiceView.xaml"
+    >
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="TixonPickVibroBasic\Service\TcoTixonPickVibroBasic_v_1_x_xServiceView.xaml">
+    <Page
+      Update="TixonPickVibroBasic\Service\TcoTixonPickVibroBasic_v_1_x_xServiceView.xaml"
+    >
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="TixonPickVibro\Service\TcoTixonPickVibro_v_1_x_xServiceView.xaml">
+    <Page
+      Update="TixonPickVibro\Service\TcoTixonPickVibro_v_1_x_xServiceView.xaml"
+    >
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>

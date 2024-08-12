@@ -7,8 +7,13 @@ using System.Threading.Tasks;
 namespace TcOpen.Inxton.Swift.TcAdapter.TcProject
 {
     public class PlcBlockHelpers
-    {     
-        public static TcPlcObject CreateSequencerPlcBlock(string blockName, string mainImplementation, string blockGuid = null, string mainMethodGuid = null)
+    {
+        public static TcPlcObject CreateSequencerPlcBlock(
+            string blockName,
+            string mainImplementation,
+            string blockGuid = null,
+            string mainMethodGuid = null
+        )
         {
             blockGuid = blockGuid == null ? Guid.NewGuid().ToString() : blockGuid;
             mainMethodGuid = mainMethodGuid == null ? Guid.NewGuid().ToString() : mainMethodGuid;
@@ -25,18 +30,15 @@ namespace TcOpen.Inxton.Swift.TcAdapter.TcProject
                     Declaration = $"FUNCTION_BLOCK {blockName} EXTENDS TcoCore.TcoSequencer",
                     Id = "{" + $"{blockGuid}" + "}",
                     Method = new List<Method>()
-                                  {
-                                      new Method()
-                                      {
-                                          Name = "Main",
-                                          Id = "{" + $"{mainMethodGuid}" + "}",
-                                          Declaration = "METHOD PROTECTED Main : BOOL",
-                                          Implementation = new Implementation()
-                                          {
-                                              ST = $"{mainImplementation}"
-                                          }
-                                      }
-                                  }
+                    {
+                        new Method()
+                        {
+                            Name = "Main",
+                            Id = "{" + $"{mainMethodGuid}" + "}",
+                            Declaration = "METHOD PROTECTED Main : BOOL",
+                            Implementation = new Implementation() { ST = $"{mainImplementation}" }
+                        }
+                    }
                 }
             };
 

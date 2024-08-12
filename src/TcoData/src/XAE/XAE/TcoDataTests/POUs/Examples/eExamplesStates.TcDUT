@@ -5,16 +5,15 @@
 {attribute 'strict'}
 TYPE eExamplesStates :
 (
-	Initialize_1 := 1,
-	Initialize_2 := 5,
-	Create := 10,
-	Update := 20,
-	CreateOrUpdate := 30,
-	Read := 40,
-	Delete := 50,
-	Exists := 60
+    Initialize_1 := 1,
+    Initialize_2 := 5,
+    Create := 10,
+    Update := 20,
+    CreateOrUpdate := 30,
+    Read := 40,
+    Delete := 50,
+    Exists := 60
 );
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -1,5 +1,5 @@
-﻿using TcoDataTests;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using TcoDataTests;
 using TcOpen.Inxton.Data.MongoDb;
 
 namespace TcoDataUnitTests
@@ -9,9 +9,13 @@ namespace TcoDataUnitTests
     {
         public override void Init()
         {
-            var parameters = new MongoDbRepositorySettings<PlainstProcessData>("mongodb://localhost:27017", "TestDataBase", "TcoDataExchangeMongoDbTest");
+            var parameters = new MongoDbRepositorySettings<PlainstProcessData>(
+                "mongodb://localhost:27017",
+                "TestDataBase",
+                "TcoDataExchangeMongoDbTest"
+            );
             Repository = new MongoDbRepository<PlainstProcessData>(parameters);
-            foreach(var record in Repository.GetRecords())
+            foreach (var record in Repository.GetRecords())
             {
                 Repository.Delete(record._EntityId);
             }

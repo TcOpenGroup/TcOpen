@@ -3,176 +3,184 @@
   <POU Name="TcoTixonPickVibroSeparatorTask" Id="{2ab41d39-2cea-0e03-0c1d-dfe7a5028895}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoTixonPickVibroSeparatorTask EXTENDS TcoTixonFeedingTask
 VAR_IN_OUT
-	inoConfig 	: TcoTixonPickVibro_Config_v_1_x_x;
-   	inoControl 	: TcoTixonPickVibro_Control_v_1_x_x;
-	inoStatus 	: TcoTixonPickVibro_Status_v_1_x_x;
+    inoConfig : TcoTixonPickVibro_Config_v_1_x_x;
+    inoControl : TcoTixonPickVibro_Control_v_1_x_x;
+    inoStatus : TcoTixonPickVibro_Status_v_1_x_x;
 END_VAR
 VAR
-	_componentReady: BOOL;
+    _componentReady : BOOL;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF Execute() THEN
-	 
-  	IF _progress = 0 THEN
-		IF NOT __ISVALIDREF(inoControl) THEN
-			_varInfo :=__VARINFO(inoControl);
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSIF NOT __ISVALIDREF(inoConfig) THEN                                                  
-			_varInfo :=__VARINFO(inoConfig);                                                    
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSIF NOT __ISVALIDREF(inoStatus) THEN                                                  
-			_varInfo :=__VARINFO(inoStatus);                                                    
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSIF NOT inoStatus.ControllerInAuto THEN                                                  
-			_varInfo :=__VARINFO(inoStatus.ControllerInAuto);                                                                                              
-			Messenger.Warning(_sb.Clear().Append('<#Tixon control system not in auto #>').Append(_varInfo.Symbol).ToString());
-		ELSIF NOT inoConfig.SeparatorActive THEN
-			_progress := 4;
-		ELSE
+    IF _progress = 0 THEN
+        IF NOT __ISVALIDREF(inoControl) THEN
+            _varInfo := __VARINFO(inoControl);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSIF NOT __ISVALIDREF(inoConfig) THEN
+            _varInfo := __VARINFO(inoConfig);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSIF NOT __ISVALIDREF(inoStatus) THEN
+            _varInfo := __VARINFO(inoStatus);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSIF NOT inoStatus.ControllerInAuto THEN
+            _varInfo := __VARINFO(inoStatus.ControllerInAuto);
+            Messenger.Warning(_sb.Clear().Append('<#Tixon control system not in auto #>').Append(_varInfo.Symbol).ToString());
+        ELSIF NOT inoConfig.SeparatorActive THEN
+            _progress := 4;
+        ELSE
+            _progress := _progress + 1;
+        END_IF
+    END_IF
 
-			_progress := _progress + 1;
+    IF _progress = 1 THEN
+        inoControl.SepareComponent := FALSE;
+        _varInfo := __VARINFO(inoStatus.SeparatorHomePos);
 
-		END_IF
+        THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.SeparatorHomePos)
+            .Warning(_sb.Clear().Append('<#Waiting for #>').Append(_varInfo.Symbol).ToString());
 
-	END_IF
-	IF _progress = 1 THEN
-		inoControl.SepareComponent:=FALSE;
-		_varInfo :=__VARINFO( inoStatus.SeparatorHomePos);                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.SeparatorHomePos).Warning(_sb.Clear().Append('<#Waiting for #>').Append(_varInfo.Symbol).ToString());
-		IF  inoStatus.SeparatorHomePos THEN
-			_progress := _progress + 1;
-			_timer(In:=FALSE);
-		END_IF;
-	END_IF;
-	
-	
-	IF _progress = 2 THEN	
-		Messenger.Debug('<#Waiting for component in  separator#>');
-		_timer(IN:=inoStatus.SeparatorPresent,Pt:=inoConfig.TimeToComponentInSeparator);
-		IF _timer.Q THEN
-			_progress := _progress + 1;
-			_timer(In:=FALSE);
-		END_IF
-	END_IF;
-	
-	
-	IF _progress = 3 THEN
-		inoControl.SepareComponent:=TRUE;
-		_varInfo :=__VARINFO( inoStatus.SeparatorWorkPos);                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.SeparatorWorkPos).Warning(_sb.Clear().Append('<#Waiting for #>').Append(_varInfo.Symbol).ToString());
-		IF  inoStatus.SeparatorWorkPos THEN
-			_progress := _progress + 1;
-			_timer(In:=FALSE);
-		END_IF;
-	END_IF;
-	
-	IF _progress = 4 THEN	
-		Messenger.Debug('<#Waiting for component in Pick position#>');
-		_timer(IN:=inoStatus.SeparatorPresent,Pt:=inoConfig.TimeToComponentOutSeparator);
-		IF inoStatus.SeparatorPresent THEN
-			_progress := _progress + 1;
-			_timer(In:=FALSE);
-		END_IF
-	END_IF;
-	
-	IF _progress = 5 THEN	
-		_componentReady:=TRUE;
-		THIS^.DoneWhen(TRUE);
-	END_IF;	
-   
+        IF inoStatus.SeparatorHomePos THEN
+            _progress := _progress + 1;
+            _timer(In := FALSE);
+        END_IF;
+    END_IF;
+
+    IF _progress = 2 THEN
+        Messenger.Debug('<#Waiting for component in  separator#>');
+        _timer(IN := inoStatus.SeparatorPresent, Pt := inoConfig.TimeToComponentInSeparator);
+
+        IF _timer.Q THEN
+            _progress := _progress + 1;
+            _timer(In := FALSE);
+        END_IF
+    END_IF;
+
+    IF _progress = 3 THEN
+        inoControl.SepareComponent := TRUE;
+        _varInfo := __VARINFO(inoStatus.SeparatorWorkPos);
+
+        THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.SeparatorWorkPos)
+            .Warning(_sb.Clear().Append('<#Waiting for #>').Append(_varInfo.Symbol).ToString());
+
+        IF inoStatus.SeparatorWorkPos THEN
+            _progress := _progress + 1;
+            _timer(In := FALSE);
+        END_IF;
+    END_IF;
+
+    IF _progress = 4 THEN
+        Messenger.Debug('<#Waiting for component in Pick position#>');
+        _timer(IN := inoStatus.SeparatorPresent, Pt := inoConfig.TimeToComponentOutSeparator);
+
+        IF inoStatus.SeparatorPresent THEN
+            _progress := _progress + 1;
+            _timer(In := FALSE);
+        END_IF
+    END_IF;
+
+    IF _progress = 5 THEN
+        _componentReady := TRUE;
+        THIS^.DoneWhen(TRUE);
+    END_IF;
+
     CallTimers(TRUE);
-	
-	THIS^.ThrowWhen(_errorTimer.Q );
-	
+    THIS^.ThrowWhen(_errorTimer.Q);
 END_IF
 
-inoStatus.ComponentReady:=_componentReady;
+inoStatus.ComponentReady := _componentReady;
 
-IF  THIS^.Error AND NOT _errorMessage.Pinned THEN
-	THIS^.Restore();
+IF THIS^.Error AND NOT _errorMessage.Pinned THEN
+    THIS^.Restore();
 END_IF]]></ST>
     </Implementation>
     <Property Name="ComponentReady" Id="{dbb351eb-4562-0100-09b4-e5af26acdf2b}">
       <Declaration><![CDATA[PROPERTY PUBLIC ComponentReady : bool]]></Declaration>
       <Get Name="Get" Id="{caeab96f-fbdb-04e0-21ad-3ffc2f0b5586}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[ComponentReady:=_componentReady;
-]]></ST>
+          <ST><![CDATA[ComponentReady := _componentReady;]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Method Name="OnAbort" Id="{7b9c629c-fa59-0902-27cb-2dacda4eaf47}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task is aborted.
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task is aborted.
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnAbort
-]]></Declaration>
+METHOD PROTECTED OnAbort]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Separator task  was aborted.#>'; END_IF;
-]]></ST>
+        <ST><![CDATA[IF __ISVALIDREF(inoStatus) THEN
+    THIS^.inoStatus.ActionDescription := '<#Separator task  was aborted.#>';
+END_IF;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnDone" Id="{46625adb-88d2-0a7c-12d6-0c998960c653}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task reaches the ```Done``` state .
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task reaches the ```Done``` state .
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnDone
-]]></Declaration>
+METHOD PROTECTED OnDone]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Separator task  finished successfully.#>'; END_IF;
-_progress:=0;
+        <ST><![CDATA[IF __ISVALIDREF(inoStatus) THEN
+    THIS^.inoStatus.ActionDescription := '<#Separator task  finished successfully.#>';
+END_IF;
+
+_progress := 0;
+
 IF AutoRestore THEN
-	Restore();
+    Restore();
 END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnError" Id="{7e3a2530-2da6-0e41-07ea-0d51cec18fcb}">
       <Declaration><![CDATA[METHOD PROTECTED OnError
 VAR
-	description: STRING;
+    description : STRING;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[description := '<#Separator task finished with error.#>'; 
-_componentReady:=false;
-IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := description; END_IF;
+        <ST><![CDATA[description := '<#Separator task finished with error.#>';
+_componentReady := false;
+
+IF __ISVALIDREF(inoStatus) THEN
+    THIS^.inoStatus.ActionDescription := description;
+END_IF;
+
 THIS^._errorMessage.Error(_sb.Clear().Append(description).Append(' To restore acknowledge this alarm.').ToString()).Pin();]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStart" Id="{48be983a-d0fc-0457-124c-09c0e5ca21dd}">
-      <Declaration><![CDATA[METHOD PROTECTED OnStart 
-]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED OnStart]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN  THIS^.inoStatus.ActionDescription := '<#Separator task started.#>'; END_IF; 
-_componentReady:=false;
+        <ST><![CDATA[IF __ISVALIDREF(inoStatus) THEN
+    THIS^.inoStatus.ActionDescription := '<#Separator task started.#>';
+END_IF;
+
+_componentReady := false;
 CallTimers(FALSE);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{e018be0b-67fd-03da-368f-cf29df911068}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
-			<para>
-				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
-			</para>
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+            <para>
+                See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+            </para>
+        </summary>
+    </docu>
 ~*)
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.Restore();
-_componentReady:=false;]]></ST>
+_componentReady := false;]]></ST>
       </Implementation>
     </Method>
   </POU>

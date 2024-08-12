@@ -8,12 +8,11 @@
 {attribute addProperty Size "8"}
 TYPE Inputs_84513182 EXTENDS TcoIo.InputBase_8311D824 :
 STRUCT
-	{attribute addProperty Name "Velocity_Actual_Value"}
-	Velocity_Actual_Value AT %I* : DINT;
-	{attribute addProperty Name "Following_Error_Actual_Value"}
-	Following_Error_Actual_Value AT %I* : DINT;
+    {attribute addProperty Name "Velocity_Actual_Value"}
+    Velocity_Actual_Value AT %I* : DINT;
+    {attribute addProperty Name "Following_Error_Actual_Value"}
+    Following_Error_Actual_Value AT %I* : DINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

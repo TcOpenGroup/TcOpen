@@ -1,0 +1,64 @@
+exclude: '.*\.(resx|Designer.cs|xti|tcscopex)'
+repos:
+  - repo: https://github.com/pcdshub/pre-commit-hooks.git
+    rev: v1.7.0
+    hooks:
+      # Replace leading tabs with 4 spaces
+      - id: twincat-leading-tabs-remover
+      # remove TwinCAT line ID lines
+      - id: twincat-lineids-remover
+      # Use lxml to beautify TwinCAT xml files
+      - id: twincat-xml-format
+      # Check if all used libraries' version numbers are fixed
+      - id: check-fixed-library-versions
+      # Checks if the product version is saved in the TwinCAT source file.
+      - id: no-product-version
+      # Check if minimize id changes is selected in the plc project file.
+      # See https://www.youtube.com/watch?v=KKpBtaYjfWo&t=935s why to do this.
+      - id: minimize-id-changes
+      # Checks if TwinCAT versions match in different tsproj files, or if it matches the targeted one.
+      - id: check-twincat-versions
+        # Possible optional arguments
+        # --target-version: Set a version that you want the tsproj file to have
+        # --fix: Fix the version numbers if a target version is set
+        # --reason: Add a reason to the error message in case of a non-matching version.
+        # --pinned: Require the TwinCAT version to be pinned. Apply pinning if combined with --fix.
+        # --no-pinned: Require the TwinCAT version to not be pinned. Remove pinning if combined with --fix.
+        # uncomment and change to use the arguments
+        args: [--target-version=3.1.4024.55, --pinned, --fix]
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0 # Use the ref you want to point at
+    hooks:
+      # Removes trailing white spaces
+      - id: trailing-whitespace
+      # Checks yaml files for parseable syntax
+      - id: check-yaml
+      - id: end-of-file-fixer
+        # These files are either edited in the IDE or auto generated. No point in adding a new line at the end.
+        exclude: '\.(TcPOU|TcDUT|TcTTO|TcGVL|TcGTLO|TcVMO|TcIO|TcVis|plcproj|tsproj|tcdmproj|tcdmdrv|tcmproj|xti|STweep)$'
+  # For this hook you need to have the Stweep.CLI installed and buy a license
+  # See https://www.stweep.com/stweep-cli-beta-releases/
+  - repo: local
+    hooks:
+      - id: stweep
+        name: Format TwinCAT files with STweep
+        entry: python stweep_format.py --settingsFile=TcOpen.STweep
+        language: python
+        # All files need to be passed at once, or else the license activation/deactivation fails
+        require_serial: true
+        files: '.*\.(TcPOU|TcDUT|TcTTO|TcGVL)'
+  - repo: local
+    hooks:
+      - id: CSharpier
+        name: Format C# files
+        entry: dotnet csharpier
+        language: system
+        files: '.*\.(cs$)'
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v2.7.1
+    hooks:
+      - id: prettier
+        exclude_types: ["svg"]
+        additional_dependencies:
+          - prettier@2.6.2
+          - "@prettier/plugin-xml@0.12.0"

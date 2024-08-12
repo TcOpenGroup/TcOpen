@@ -3,200 +3,203 @@
   <POU Name="TcoInsightChangeJobByName_v_5_x_x" Id="{6de02b57-b13a-0cba-095e-0e739f700b8f}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoInsightChangeJobByName_v_5_x_x EXTENDS TcoCore.TcoTask
 VAR_IN_OUT
-	inoIoData 	: TcoInsightIO_v_5_x_x;
-    inoConfig 	: TcoInsightConfig_v_5_x_x;
-	inoStatus 	: TcoInsightStatus_v_5_x_x;	
+    inoIoData : TcoInsightIO_v_5_x_x;
+    inoConfig : TcoInsightConfig_v_5_x_x;
+    inoStatus : TcoInsightStatus_v_5_x_x;
 END_VAR
 VAR
     {attribute addProperty Name "<#Job name#>"}
-	_jobName : STRING;
+    _jobName : STRING;
 END_VAR
 VAR
-    {attribute 'hide'} 
-	_progress : INT := 0;
-    {attribute 'hide'} 
-	_infoTimer :  TON;
-    {attribute 'hide'} 
-	_errorTimer :  TON;
-    {attribute 'hide'} 
-	_varInfo : __SYSTEM.VAR_INFO;
-    {attribute 'hide'} 
-	_sb : TcoCore.StringBuilder;
-END_VAR
-]]></Declaration>
+    {attribute 'hide'}
+    _progress : INT := 0;
+    {attribute 'hide'}
+    _infoTimer : TON;
+    {attribute 'hide'}
+    _errorTimer : TON;
+    {attribute 'hide'}
+    _varInfo : __SYSTEM.VAR_INFO;
+    {attribute 'hide'}
+    _sb : TcoCore.StringBuilder;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF Execute() THEN
-	IF _progress = 0 THEN
-		IF NOT __ISVALIDREF(inoIoData) THEN
-			_varInfo :=__VARINFO(inoIoData);
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSIF NOT __ISVALIDREF(inoConfig) THEN                                                  
-			_varInfo :=__VARINFO(inoConfig);                                                    
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSIF NOT __ISVALIDREF(inoStatus) THEN                                                  
-			_varInfo :=__VARINFO(inoStatus);                                                    
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSE
-			_progress := _progress + 1;
-		END_IF
-	END_IF
-	
-	IF _progress = 1 THEN
-		CallTimers(FALSE);
-		IF _jobName='' THEN
-			Messenger.Programming('<#Empty job name inserted!#>').Pin();
-			THIS^.ThrowWhen(TRUE);
-		ELSE	
-			_progress := _progress + 1;
-		END_IF
-	END_IF
-	
-	IF _progress = 2 THEN
-		THIS^.inoStatus.ActionDescription := _sb.Clear().Append('<#Change job by name (').Append(THIS^._jobName).Append(') is running.#>').ToString();  
-		THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal CommandExecuting to be reseted!#>').Pin(); 
-		THIS^.inoIoData.InspectionControl.ExecuteCommand:=FALSE;
-		THIS^.inoIoData.InspectionControl.ClearError:=FALSE;
-		THIS^.inoIoData.AcquisitionControl.SetOffline := FALSE;
-		IF NOT THIS^.inoIoData.InspectionStatus.CommandExecuting THEN
-			CallTimers(FALSE);
-			_progress := _progress + 1;
-		END_IF
-	END_IF
-	
-	IF _progress = 3 THEN	
-		THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal Online to be reseted!#>').Pin(); 
-		THIS^.inoIoData.AcquisitionControl.SetOffline := TRUE;
-		IF(NOT THIS^.inoIoData.AcquisitionStatus.Online) THEN
-			CallTimers(FALSE);
-			_progress := _progress + 1;
-		END_IF
-	END_IF
+    IF _progress = 0 THEN
+        IF NOT __ISVALIDREF(inoIoData) THEN
+            _varInfo := __VARINFO(inoIoData);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSIF NOT __ISVALIDREF(inoConfig) THEN
+            _varInfo := __VARINFO(inoConfig);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSIF NOT __ISVALIDREF(inoStatus) THEN
+            _varInfo := __VARINFO(inoStatus);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSE
+            _progress := _progress + 1;
+        END_IF
+    END_IF
 
-	IF _progress = 4 THEN	
-		THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal Error to be reseted!#>').Pin(); 
-		THIS^.inoIoData.AcquisitionControl.SetOffline := TRUE;
-		THIS^.inoIoData.InspectionControl.ExecuteCommand := FALSE;
-		THIS^.inoIoData.InspectionControl.ClearError := THIS^.inoIoData.InspectionStatus.Error;
-		IF NOT THIS^.inoIoData.InspectionStatus.Error THEN
-			CallTimers(FALSE);
-			_progress := _progress + 1;
-		END_IF
-	END_IF
-	
-	IF _progress = 5 THEN	
-		THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the Job name to be written to the User data!#>').Pin(); 
-		THIS^.inoIoData.AcquisitionControl.SetOffline := TRUE;
-		IF SetUserDataAsString(_jobName,0) THEN
-			CallTimers(FALSE);
-			_progress := _progress + 1;
-		END_IF
-	
-	END_IF
+    IF _progress = 1 THEN
+        CallTimers(FALSE);
 
-	IF _progress = 6 THEN	
-		THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal ExtendedUserDataSetAcknowledge to be set!#>').Pin(); 
-		THIS^.inoIoData.AcquisitionControl.SetOffline := TRUE;
-		THIS^.inoIoData.InspectionControl.ExtendedUserDataSet := TRUE;
-		IF(THIS^.inoIoData.InspectionStatus.ExtendedUserDataSetAcknowledge) THEN
-			CallTimers(FALSE);
-			_progress := _progress + 1;
-		END_IF
-	END_IF
-		
-	IF _progress = 7 THEN	
-		THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal ExtendedUserDataSetAcknowledge to be reseted!#>').Pin(); 
-		THIS^.inoIoData.AcquisitionControl.SetOffline := TRUE;
-		THIS^.inoIoData.InspectionControl.ExtendedUserDataSet := FALSE;
-		IF(NOT THIS^.inoIoData.InspectionStatus.ExtendedUserDataSetAcknowledge) THEN
-			CallTimers(FALSE);
-			_progress := _progress + 1;
-		END_IF
-	END_IF
+        IF _jobName = '' THEN
+            Messenger.Programming('<#Empty job name inserted!#>').Pin();
+            THIS^.ThrowWhen(TRUE);
+        ELSE
+            _progress := _progress + 1;
+        END_IF
+    END_IF
 
-	IF _progress = 8 THEN	
-		THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal CommandComplete to be set!#>').Pin(); 
-		THIS^.inoIoData.AcquisitionControl.SetOffline := TRUE;
-		THIS^.inoIoData.CommandControl.Command := 16#4000;
-		THIS^.inoIoData.InspectionControl.ExecuteCommand:=TRUE;
-		
-		IF(THIS^.inoIoData.InspectionStatus.CommandComplete AND NOT THIS^.inoIoData.InspectionStatus.CommandFailed) THEN
-			CallTimers(FALSE);
-			_progress := _progress + 1;
-		ELSIF(THIS^.inoIoData.InspectionStatus.CommandComplete AND THIS^.inoIoData.InspectionStatus.CommandFailed AND NOT THIS^.inoIoData.InspectionStatus.CommandExecuting) THEN
-			_progress := 20;
-		END_IF;
-	
-	END_IF
+    IF _progress = 2 THEN
+        THIS^.inoStatus.ActionDescription :=
+            _sb.Clear().Append('<#Change job by name (').Append(THIS^._jobName).Append(') is running.#>').ToString();
 
-	IF _progress = 9 THEN	
-		THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal CommandComplete to be reseted!#>').Pin(); 
-		THIS^.inoIoData.AcquisitionControl.SetOffline := TRUE;
-		THIS^.inoIoData.CommandControl.Command := 0;
-		THIS^.inoIoData.InspectionControl.ExecuteCommand:=FALSE;
-		IF(NOT THIS^.inoIoData.InspectionStatus.CommandComplete) THEN
-			CallTimers(FALSE);
-			_progress := _progress + 1;
-		END_IF;
-	END_IF
+        THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal CommandExecuting to be reseted!#>').Pin();
+        THIS^.inoIoData.InspectionControl.ExecuteCommand := FALSE;
+        THIS^.inoIoData.InspectionControl.ClearError := FALSE;
+        THIS^.inoIoData.AcquisitionControl.SetOffline := FALSE;
 
-	IF _progress = 10 THEN	
-		THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal Online to be set!#>').Pin(); 
-		THIS^.inoIoData.AcquisitionControl.SetOffline := FALSE;
-		
-		IF(THIS^.inoIoData.AcquisitionStatus.Online) THEN
-			CallTimers(FALSE);
-			_progress := _progress + 1;
-		END_IF
-	END_IF
+        IF NOT THIS^.inoIoData.InspectionStatus.CommandExecuting THEN
+            CallTimers(FALSE);
+            _progress := _progress + 1;
+        END_IF
+    END_IF
 
-	IF _progress = 11 THEN
-		THIS^.inoStatus.CurrentJobName := _jobName;
-		THIS^.inoIoData.InspectionControl.ExecuteCommand := FALSE;
-		THIS^.inoIoData.AcquisitionControl.SetOffline := FALSE;
-		THIS^.inoIoData.InspectionControl.ClearError := FALSE;
-		THIS^.inoIoData.CommandControl.Command := 0;
-		THIS^.ThrowWhen(FALSE);
-		THIS^.DoneWhen(TRUE);
-		_progress := 0;
-	END_IF
+    IF _progress = 3 THEN
+        THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal Online to be reseted!#>').Pin();
+        THIS^.inoIoData.AcquisitionControl.SetOffline := TRUE;
 
-	IF _progress = 20 THEN	
-		Messenger.Error(CONCAT('<#Change job by name failed. Error code:#>',UINT_TO_STRING(inoIoData.InspectionStatus.ErrorCode))).Pin();
-		THIS^.inoIoData.InspectionControl.ExecuteCommand := FALSE;
-		THIS^.inoIoData.AcquisitionControl.SetOffline := FALSE;
-		THIS^.inoIoData.CommandControl.Command := 0;
-		THIS^.ThrowWhen(TRUE);
-		THIS^.DoneWhen(FALSE);
-	END_IF
+        IF (NOT THIS^.inoIoData.AcquisitionStatus.Online) THEN
+            CallTimers(FALSE);
+            _progress := _progress + 1;
+        END_IF
+    END_IF
 
-	CallTimers(TRUE);
-	
-	THIS^.ThrowWhen(_errorTimer.Q);
-	
-END_IF
-]]></ST>
+    IF _progress = 4 THEN
+        THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal Error to be reseted!#>').Pin();
+        THIS^.inoIoData.AcquisitionControl.SetOffline := TRUE;
+        THIS^.inoIoData.InspectionControl.ExecuteCommand := FALSE;
+        THIS^.inoIoData.InspectionControl.ClearError := THIS^.inoIoData.InspectionStatus.Error;
+
+        IF NOT THIS^.inoIoData.InspectionStatus.Error THEN
+            CallTimers(FALSE);
+            _progress := _progress + 1;
+        END_IF
+    END_IF
+
+    IF _progress = 5 THEN
+        THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the Job name to be written to the User data!#>').Pin();
+        THIS^.inoIoData.AcquisitionControl.SetOffline := TRUE;
+
+        IF SetUserDataAsString(_jobName, 0) THEN
+            CallTimers(FALSE);
+            _progress := _progress + 1;
+        END_IF
+    END_IF
+
+    IF _progress = 6 THEN
+        THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal ExtendedUserDataSetAcknowledge to be set!#>').Pin();
+        THIS^.inoIoData.AcquisitionControl.SetOffline := TRUE;
+        THIS^.inoIoData.InspectionControl.ExtendedUserDataSet := TRUE;
+
+        IF (THIS^.inoIoData.InspectionStatus.ExtendedUserDataSetAcknowledge) THEN
+            CallTimers(FALSE);
+            _progress := _progress + 1;
+        END_IF
+    END_IF
+
+    IF _progress = 7 THEN
+        THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal ExtendedUserDataSetAcknowledge to be reseted!#>').Pin();
+        THIS^.inoIoData.AcquisitionControl.SetOffline := TRUE;
+        THIS^.inoIoData.InspectionControl.ExtendedUserDataSet := FALSE;
+
+        IF (NOT THIS^.inoIoData.InspectionStatus.ExtendedUserDataSetAcknowledge) THEN
+            CallTimers(FALSE);
+            _progress := _progress + 1;
+        END_IF
+    END_IF
+
+    IF _progress = 8 THEN
+        THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal CommandComplete to be set!#>').Pin();
+        THIS^.inoIoData.AcquisitionControl.SetOffline := TRUE;
+        THIS^.inoIoData.CommandControl.Command := 16#4000;
+        THIS^.inoIoData.InspectionControl.ExecuteCommand := TRUE;
+
+        IF (THIS^.inoIoData.InspectionStatus.CommandComplete AND NOT THIS^.inoIoData.InspectionStatus.CommandFailed) THEN
+            CallTimers(FALSE);
+            _progress := _progress + 1;
+        ELSIF (THIS^.inoIoData.InspectionStatus.CommandComplete AND
+            THIS^.inoIoData.InspectionStatus.CommandFailed AND
+            NOT THIS^.inoIoData.InspectionStatus.CommandExecuting) THEN
+            _progress := 20;
+        END_IF;
+    END_IF
+
+    IF _progress = 9 THEN
+        THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal CommandComplete to be reseted!#>').Pin();
+        THIS^.inoIoData.AcquisitionControl.SetOffline := TRUE;
+        THIS^.inoIoData.CommandControl.Command := 0;
+        THIS^.inoIoData.InspectionControl.ExecuteCommand := FALSE;
+
+        IF (NOT THIS^.inoIoData.InspectionStatus.CommandComplete) THEN
+            CallTimers(FALSE);
+            _progress := _progress + 1;
+        END_IF;
+    END_IF
+
+    IF _progress = 10 THEN
+        THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for the signal Online to be set!#>').Pin();
+        THIS^.inoIoData.AcquisitionControl.SetOffline := FALSE;
+
+        IF (THIS^.inoIoData.AcquisitionStatus.Online) THEN
+            CallTimers(FALSE);
+            _progress := _progress + 1;
+        END_IF
+    END_IF
+
+    IF _progress = 11 THEN
+        THIS^.inoStatus.CurrentJobName := _jobName;
+        THIS^.inoIoData.InspectionControl.ExecuteCommand := FALSE;
+        THIS^.inoIoData.AcquisitionControl.SetOffline := FALSE;
+        THIS^.inoIoData.InspectionControl.ClearError := FALSE;
+        THIS^.inoIoData.CommandControl.Command := 0;
+        THIS^.ThrowWhen(FALSE);
+        THIS^.DoneWhen(TRUE);
+        _progress := 0;
+    END_IF
+
+    IF _progress = 20 THEN
+        Messenger.Error(CONCAT('<#Change job by name failed. Error code:#>', UINT_TO_STRING(inoIoData.InspectionStatus.ErrorCode))).Pin();
+        THIS^.inoIoData.InspectionControl.ExecuteCommand := FALSE;
+        THIS^.inoIoData.AcquisitionControl.SetOffline := FALSE;
+        THIS^.inoIoData.CommandControl.Command := 0;
+        THIS^.ThrowWhen(TRUE);
+        THIS^.DoneWhen(FALSE);
+    END_IF
+
+    CallTimers(TRUE);
+    THIS^.ThrowWhen(_errorTimer.Q);
+END_IF]]></ST>
     </Implementation>
     <Method Name="CallTimers" Id="{a0c70e94-8a9b-0a08-324c-c1c69c92cb2e}">
       <Declaration><![CDATA[METHOD CallTimers
 VAR_INPUT
-	inValue : BOOL;
-END_VAR
-]]></Declaration>
+    inValue : BOOL;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_infoTimer(IN := inValue, PT := THIS^.inoConfig.InfoTime);
-_errorTimer(IN := inValue, PT := THIS^.inoConfig.ErrorTime);
-]]></ST>
+_errorTimer(IN := inValue, PT := THIS^.inoConfig.ErrorTime);]]></ST>
       </Implementation>
     </Method>
     <Method Name="FB_init" Id="{5b3af579-18e8-02f2-21b8-474fc95a64e7}">
       <Declaration><![CDATA[{attribute 'hide'}
 METHOD PUBLIC FB_init : BOOL
 VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	ParentObject : ITcoObject;
-END_VAR
-]]></Declaration>
+    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+    ParentObject : ITcoObject;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
@@ -213,112 +216,107 @@ InvokeWithParameters := THIS^.Invoke();]]></ST>
     </Method>
     <Method Name="OnAbort" Id="{98d31384-c772-0e6e-07e2-674ebeb38dcc}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task is aborted.
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task is aborted.
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnAbort
-]]></Declaration>
+METHOD PROTECTED OnAbort]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.inoStatus.ActionDescription := _sb.Clear().Append('<#Change job by name (').Append(THIS^._jobName).Append(') aborted, while not yet finished.#>').ToString(); ]]></ST>
+        <ST><![CDATA[THIS^.inoStatus.ActionDescription :=
+    _sb.Clear().Append('<#Change job by name (').Append(THIS^._jobName).Append(') aborted, while not yet finished.#>').ToString();]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnDone" Id="{78388649-6178-0afe-0e96-af286b5a8ee6}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task reaches the ```Done``` state .
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task reaches the ```Done``` state .
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnDone
-]]></Declaration>
+METHOD PROTECTED OnDone]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.inoStatus.ActionDescription := _sb.Clear().Append('<#Change job by name (').Append(THIS^._jobName).Append(') was completed succesfully.#>').ToString(); ]]></ST>
+        <ST><![CDATA[THIS^.inoStatus.ActionDescription :=
+    _sb.Clear().Append('<#Change job by name (').Append(THIS^._jobName).Append(') was completed succesfully.#>').ToString();]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnError" Id="{c280e223-daf1-0cc3-13f5-32835efc4525}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task reaches the ```Error``` state.
-			<para>
-				Do not confuse with <see cref="PlcDocu.TcoCore.TcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
-			</para>
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task reaches the ```Error``` state.
+            <para>
+                Do not confuse with <see cref="PlcDocu.TcoCore.TcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
+            </para>
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnError
-]]></Declaration>
+METHOD PROTECTED OnError]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.inoStatus.ActionDescription := _sb.Clear().Append('<#Change job by name (').Append(THIS^._jobName).Append(') finished with error.#>').ToString(); ]]></ST>
+        <ST><![CDATA[THIS^.inoStatus.ActionDescription :=
+    _sb.Clear().Append('<#Change job by name (').Append(THIS^._jobName).Append(') finished with error.#>').ToString();]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStart" Id="{341fc372-a427-03b4-134e-869655720b37}">
-      <Declaration><![CDATA[METHOD PROTECTED OnStart 
-]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED OnStart]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.inoStatus.ActionDescription := _sb.Clear().Append('<#Change job by name (').Append(THIS^._jobName).Append(') started.#>').ToString(); ]]></ST>
+        <ST><![CDATA[THIS^.inoStatus.ActionDescription := _sb.Clear().Append('<#Change job by name (').Append(THIS^._jobName).Append(') started.#>').ToString();]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{6fd51d5f-8acf-0d5e-12cb-bb1705b4149e}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
-			<para>
-				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
-			</para>
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+            <para>
+                See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+            </para>
+        </summary>
+    </docu>
 ~*)
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.Restore();
 _progress := 0;
 CallTimers(FALSE);
-Messenger.UnPin();
-]]></ST>
+Messenger.UnPin();]]></ST>
       </Implementation>
     </Method>
     <Method Name="SetUserDataAsString" Id="{f59b2faa-809f-01b3-10c5-2ab0c88beb12}">
       <Declaration><![CDATA[METHOD INTERNAL SetUserDataAsString : BOOL
 VAR_INPUT
-	inValue : STRING;
-	inPosition : UINT;	
+    inValue : STRING;
+    inPosition : UINT;
 END_VAR
 VAR
-	_index : UINT;
-	_size : UINT;
-	_bufferSize : UINT; 
-END_VAR
-]]></Declaration>
+    _index : UINT;
+    _size : UINT;
+    _bufferSize : UINT;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[SetUserDataAsString := FALSE;
-
 _size := LEN(inValue);
-
 //_bufferSize := SIZEOF(inoUserData.UserData)/SIZEOF(inoUserData.UserData[0]);
-_bufferSize := SIZEOF(THIS^.inoIoData.UserData.UserData)/SIZEOF(THIS^.inoIoData.UserData.UserData[0]);
+_bufferSize := SIZEOF(THIS^.inoIoData.UserData.UserData) / SIZEOF(THIS^.inoIoData.UserData.UserData[0]);
 
-IF (inPosition +_size) > THIS^.inoConfig.UserDataSize THEN
-	Messenger.Programming('<#Index of UserData in method SetUserDataAsString exceeds the size hardware structure mapped!#>');
-	RETURN;
+IF (inPosition + _size) > THIS^.inoConfig.UserDataSize THEN
+    Messenger.Programming('<#Index of UserData in method SetUserDataAsString exceeds the size hardware structure mapped!#>');
+    RETURN;
 END_IF
 
-IF (inPosition +_size) > _bufferSize THEN
-	Messenger.Programming('<#Index of UserData in method SetUserDataAsString exceeds the defined size!#>');
-	RETURN;
+IF (inPosition + _size) > _bufferSize THEN
+    Messenger.Programming('<#Index of UserData in method SetUserDataAsString exceeds the defined size!#>');
+    RETURN;
 END_IF
 
-FOR	_index := 1 TO _size BY 1 DO	
-	THIS^.inoIoData.UserData.UserData[inPosition + _index-1] := F_ToASC(MID(inValue,1,_index));
+FOR _index := 1 TO _size BY 1 DO
+    THIS^.inoIoData.UserData.UserData[inPosition + _index - 1] := F_ToASC(MID(inValue, 1, _index));
 END_FOR;
 
-FOR	_index := inPosition +_size TO _bufferSize BY 1 DO	
-	THIS^.inoIoData.UserData.UserData[_index] := 0;
+FOR _index := inPosition + _size TO _bufferSize BY 1 DO
+    THIS^.inoIoData.UserData.UserData[_index] := 0;
 END_FOR;
 
 SetUserDataAsString := TRUE;]]></ST>

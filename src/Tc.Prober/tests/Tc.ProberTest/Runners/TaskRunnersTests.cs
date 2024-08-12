@@ -19,13 +19,12 @@ namespace Tc.Prober.RunnersTests
         [Test]
         [Order(100)]
         [TestCase((ushort)10)]
-        [TestCase((ushort)11)]        
+        [TestCase((ushort)11)]
         public void basic_runner_tests_run_count(ushort counts)
         {
-
             //-- Arrange
             var sw = new System.Diagnostics.Stopwatch();
-            var sut = Entry.Plc.Tests._basicRunnerTests;            
+            var sut = Entry.Plc.Tests._basicRunnerTests;
             sut.ResetCounter();
 
             //-- Act
@@ -37,7 +36,10 @@ namespace Tc.Prober.RunnersTests
 
             //-- Assert
             Assert.AreEqual(counts, actual);
-            Assert.IsTrue(actualACT < __max_average_cycle_time, $"ACT exceeds expected: {actualACT} > {__max_average_cycle_time}");
+            Assert.IsTrue(
+                actualACT < __max_average_cycle_time,
+                $"ACT exceeds expected: {actualACT} > {__max_average_cycle_time}"
+            );
         }
 
         [Test]
@@ -47,29 +49,31 @@ namespace Tc.Prober.RunnersTests
         [Timeout(100)]
         public void basic_runner_tests_run_unit_returns_true(ushort counts)
         {
-            
             //-- Arrange
             var sut = Entry.Plc.Tests._basicRunnerTests;
             var sw = new System.Diagnostics.Stopwatch();
-
 
             //-- Act
 
             sut.ResetCounter();
             var actual = 0;
             sw.Start();
-            sut.Run((p) =>
-            {
-                actual++;
-                return p.RunUntilReturnsTrue(actual >= counts);
-            });
+            sut.Run(
+                (p) =>
+                {
+                    actual++;
+                    return p.RunUntilReturnsTrue(actual >= counts);
+                }
+            );
             sw.Stop();
-
 
             //-- Assert
             var actualACT = sw.ElapsedMilliseconds / counts;
             Assert.AreEqual(counts, actual);
-            Assert.IsTrue(actualACT < __max_average_cycle_time, $"ACT exceeds expected: {actualACT} > {__max_average_cycle_time}");
-        }        
+            Assert.IsTrue(
+                actualACT < __max_average_cycle_time,
+                $"ACT exceeds expected: {actualACT} > {__max_average_cycle_time}"
+            );
+        }
     }
 }

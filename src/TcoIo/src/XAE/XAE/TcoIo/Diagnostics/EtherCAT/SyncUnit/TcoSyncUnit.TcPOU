@@ -43,26 +43,24 @@ DataValid := _dataValid;]]></ST>
       <Declaration><![CDATA[PROPERTY HasSomeIssue : BOOL]]></Declaration>
       <Get Name="Get" Id="{86537c5b-5cee-0eed-152f-0f44ef2593d5}">
         <Declaration><![CDATA[VAR
-	_syncUnitStatus : SyncUnitState;
+    _syncUnitStatus : SyncUnitState;
 END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[_syncUnitStatus := State;
 
 _hasSomeIssue := _syncUnitStatus.AtLeastOneSlaveInInitState OR
-			_syncUnitStatus.AtLeastOneSlaveInPreopState OR
-			_syncUnitStatus.AtLeastOneSlaveInBootState OR
-			_syncUnitStatus.AtLeastOneSlaveInSafeOpState OR
-			_syncUnitStatus.AtLeastOneSlaveSignalsError OR
-			_syncUnitStatus.InvalidVendoridOrProductcodeRead OR
-			_syncUnitStatus.InitializationErrorOccurred OR
-			_syncUnitStatus.AtLeastOneSlaveNotPresent OR
-			_syncUnitStatus.AtLeastOneSlaveSignalsLinkError OR
-			_syncUnitStatus.AtLeastOneSlaveSignalsMissingLink OR
-			_syncUnitStatus.AtLeastOneSlaveSignalsUnexpectedLink;
-	
-HasSomeIssue := _hasSomeIssue;
+    _syncUnitStatus.AtLeastOneSlaveInPreopState OR
+    _syncUnitStatus.AtLeastOneSlaveInBootState OR
+    _syncUnitStatus.AtLeastOneSlaveInSafeOpState OR
+    _syncUnitStatus.AtLeastOneSlaveSignalsError OR
+    _syncUnitStatus.InvalidVendoridOrProductcodeRead OR
+    _syncUnitStatus.InitializationErrorOccurred OR
+    _syncUnitStatus.AtLeastOneSlaveNotPresent OR
+    _syncUnitStatus.AtLeastOneSlaveSignalsLinkError OR
+    _syncUnitStatus.AtLeastOneSlaveSignalsMissingLink OR
+    _syncUnitStatus.AtLeastOneSlaveSignalsUnexpectedLink;
 
-]]></ST>
+HasSomeIssue := _hasSomeIssue;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -84,9 +82,7 @@ _State.AtLeastOneSlaveNotPresent := InfoData.State.8;
 _State.AtLeastOneSlaveSignalsLinkError := InfoData.State.9;
 _State.AtLeastOneSlaveSignalsMissingLink := InfoData.State.10;
 _State.AtLeastOneSlaveSignalsUnexpectedLink := InfoData.State.11;
-
-State := _State;
-]]></ST>
+State := _State;]]></ST>
         </Implementation>
       </Get>
     </Property>

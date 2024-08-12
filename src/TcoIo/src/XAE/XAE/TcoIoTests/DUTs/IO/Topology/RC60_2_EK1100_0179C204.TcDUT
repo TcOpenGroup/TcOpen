@@ -9,36 +9,35 @@
 {attribute addProperty Name "RC60_2 (EK1100)"}
 TYPE RC60_2_EK1100_0179C204 EXTENDS EK1100_1FC0878B :
 STRUCT
-	{attribute addProperty Name "RC60_B1 (EL7041-1000)"}
-	{attribute addProperty PreviousPort "RC60_2 (EK1100) : B"}
-	{attribute addProperty SyncUnit "C60"}
-	RC60_B1_EL7041_1000 : EL7041_86DE63E7;
-	{attribute addProperty Name "RC60_B2 (EL7041-1000)"}
-	{attribute addProperty PreviousPort "RC60_B1 (EL7041-1000) : B"}
-	{attribute addProperty SyncUnit "C60"}
-	RC60_B2_EL7041_1000 : EL7041_86DE63E7;
-	{attribute addProperty Name "RC60_C11 (EL7041-1000)"}
-	{attribute addProperty PreviousPort "RC60_B2 (EL7041-1000) : B"}
-	{attribute addProperty SyncUnit "C60"}
-	RC60_C11_EL7041_1000 : EL7041_86DE63E7;
-	{attribute addProperty Name "RC60_C12 (EL7041-1000)"}
-	{attribute addProperty PreviousPort "RC60_C11 (EL7041-1000) : B"}
-	{attribute addProperty SyncUnit "C60"}
-	RC60_C12_EL7041_1000 : EL7041_86DE63E7;
-	{attribute addProperty Name "RC60_C21 (EL7041-1000)"}
-	{attribute addProperty PreviousPort "RC60_C12 (EL7041-1000) : B"}
-	{attribute addProperty SyncUnit "C60"}
-	RC60_C21_EL7041_1000 : EL7041_86DE63E7;
-	{attribute addProperty Name "RC60_C22 (EL7041-1000)"}
-	{attribute addProperty PreviousPort "RC60_C21 (EL7041-1000) : B"}
-	{attribute addProperty SyncUnit "C60"}
-	RC60_C22_EL7041_1000 : EL7041_86DE63E7;
-	{attribute addProperty Name "RC60_2_EndTerminal (EL9010)"}
-	{attribute addProperty PreviousPort "RC60_C22 (EL7041-1000) : B"}
-	{attribute addProperty SyncUnit "default"}
-	RC60_2_EndTerminal_EL9010 : EL9010_D29C2085;
+    {attribute addProperty Name "RC60_B1 (EL7041-1000)"}
+    {attribute addProperty PreviousPort "RC60_2 (EK1100) : B"}
+    {attribute addProperty SyncUnit "C60"}
+    RC60_B1_EL7041_1000 : EL7041_86DE63E7;
+    {attribute addProperty Name "RC60_B2 (EL7041-1000)"}
+    {attribute addProperty PreviousPort "RC60_B1 (EL7041-1000) : B"}
+    {attribute addProperty SyncUnit "C60"}
+    RC60_B2_EL7041_1000 : EL7041_86DE63E7;
+    {attribute addProperty Name "RC60_C11 (EL7041-1000)"}
+    {attribute addProperty PreviousPort "RC60_B2 (EL7041-1000) : B"}
+    {attribute addProperty SyncUnit "C60"}
+    RC60_C11_EL7041_1000 : EL7041_86DE63E7;
+    {attribute addProperty Name "RC60_C12 (EL7041-1000)"}
+    {attribute addProperty PreviousPort "RC60_C11 (EL7041-1000) : B"}
+    {attribute addProperty SyncUnit "C60"}
+    RC60_C12_EL7041_1000 : EL7041_86DE63E7;
+    {attribute addProperty Name "RC60_C21 (EL7041-1000)"}
+    {attribute addProperty PreviousPort "RC60_C12 (EL7041-1000) : B"}
+    {attribute addProperty SyncUnit "C60"}
+    RC60_C21_EL7041_1000 : EL7041_86DE63E7;
+    {attribute addProperty Name "RC60_C22 (EL7041-1000)"}
+    {attribute addProperty PreviousPort "RC60_C21 (EL7041-1000) : B"}
+    {attribute addProperty SyncUnit "C60"}
+    RC60_C22_EL7041_1000 : EL7041_86DE63E7;
+    {attribute addProperty Name "RC60_2_EndTerminal (EL9010)"}
+    {attribute addProperty PreviousPort "RC60_C22 (EL7041-1000) : B"}
+    {attribute addProperty SyncUnit "default"}
+    RC60_2_EndTerminal_EL9010 : EL9010_D29C2085;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

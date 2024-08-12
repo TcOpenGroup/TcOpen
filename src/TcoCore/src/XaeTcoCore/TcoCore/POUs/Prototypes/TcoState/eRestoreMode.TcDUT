@@ -5,16 +5,15 @@
 {attribute 'strict'}
 TYPE eRestoreMode :
 (
-	None := 0,
-	
-	(*~
-	<docu>
-		<summary>
-				Activates automatic restore mechanism for all immediate children (direct members).
-		</summary>				
-	</docu>	
-	~*)	
-	AutoRestoreMembers := 10
+    None := 0,
+    (*~
+    <docu>
+        <summary>
+                Activates automatic restore mechanism for all immediate children (direct members).
+        </summary>
+    </docu>
+    ~*)
+    AutoRestoreMembers := 10
 );
 END_TYPE]]></Declaration>
   </DUT>

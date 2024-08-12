@@ -28,10 +28,7 @@ namespace TcOpen.Inxton
             Nested = new MqttDataNested();
         }
 
-        public MqttData(bool empty)
-        {
-
-        }
+        public MqttData(bool empty) { }
 
         // override object.Equals
         public override bool Equals(object obj)
@@ -41,29 +38,29 @@ namespace TcOpen.Inxton
                 return false;
             }
             var other = (MqttData)obj;
-            return Int == other.Int &&
-                   Double == other.Double &&
-                   String == other.String &&
-                   Long == other.Long &&
-                   ULong == other.ULong &&
-                   Bool == other.Bool &&
-                   Enumerable.SequenceEqual(IntArray, other.IntArray) &&
-                   Enumerable.SequenceEqual(StringArray, other.StringArray) &&
-                   Nested.Equals(other.Nested);
+            return Int == other.Int
+                && Double == other.Double
+                && String == other.String
+                && Long == other.Long
+                && ULong == other.ULong
+                && Bool == other.Bool
+                && Enumerable.SequenceEqual(IntArray, other.IntArray)
+                && Enumerable.SequenceEqual(StringArray, other.StringArray)
+                && Nested.Equals(other.Nested);
         }
 
-        public override int GetHashCode() => (
-                    Int.GetHashCode() +
-                    Double.GetHashCode() +
-                    String.GetHashCode() +
-                    Long.GetHashCode() +
-                    ULong.GetHashCode() +
-                    Bool.GetHashCode() +
-                    IntArray.GetHashCode() +
-                    StringArray.GetHashCode() +
-                    Nested.GetHashCode()
-                    )
-                    .GetHashCode();
+        public override int GetHashCode() =>
+            (
+                Int.GetHashCode()
+                + Double.GetHashCode()
+                + String.GetHashCode()
+                + Long.GetHashCode()
+                + ULong.GetHashCode()
+                + Bool.GetHashCode()
+                + IntArray.GetHashCode()
+                + StringArray.GetHashCode()
+                + Nested.GetHashCode()
+            ).GetHashCode();
     }
 
     class MqttDataNested
@@ -97,39 +94,37 @@ namespace TcOpen.Inxton
                 return false;
             }
             var other = (MqttDataNested)obj;
-            return Int == other.Int &&
-                   Double == other.Double &&
-                   String == other.String &&
-                   Long == other.Long &&
-                   ULong == other.ULong &&
-                   Bool == other.Bool &&
-                   Enumerable.SequenceEqual(IntArray, other.IntArray) &&
-                   Enumerable.SequenceEqual(StringArray, other.StringArray);
+            return Int == other.Int
+                && Double == other.Double
+                && String == other.String
+                && Long == other.Long
+                && ULong == other.ULong
+                && Bool == other.Bool
+                && Enumerable.SequenceEqual(IntArray, other.IntArray)
+                && Enumerable.SequenceEqual(StringArray, other.StringArray);
         }
 
-        public override int GetHashCode() => (
-                    Int.GetHashCode() +
-                    Double.GetHashCode() +
-                    String.GetHashCode() +
-                    Long.GetHashCode() +
-                    ULong.GetHashCode() +
-                    Bool.GetHashCode() +
-                    IntArray.GetHashCode() +
-                    StringArray.GetHashCode())
-                    .GetHashCode();
+        public override int GetHashCode() =>
+            (
+                Int.GetHashCode()
+                + Double.GetHashCode()
+                + String.GetHashCode()
+                + Long.GetHashCode()
+                + ULong.GetHashCode()
+                + Bool.GetHashCode()
+                + IntArray.GetHashCode()
+                + StringArray.GetHashCode()
+            ).GetHashCode();
     }
-
-
 
     class MqttOtherData
     {
         public short Short { get; set; }
         public string Long { get; set; }
-        public char Character{ get; set; }
+        public char Character { get; set; }
         public string Int { get; set; }
         public ulong ULong2 { get; set; }
         public bool Bool2 { get; set; }
-
 
         public MqttOtherData()
         {
@@ -140,7 +135,5 @@ namespace TcOpen.Inxton
             ULong2 = ulong.MaxValue;
             Bool2 = true;
         }
-
-
     }
 }

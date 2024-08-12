@@ -1,6 +1,6 @@
-﻿using NUnit.Framework;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework;
 using TcoCore;
 using TcoCoreTests;
 using TcOpen.Inxton.Logging;
@@ -21,14 +21,16 @@ namespace TcoCoreUnitTests.PlcExecutedTests
         [OneTimeSetUp]
         public void OneTimeSetup()
         {
-            tc.GetConnector().SuspendWriteProtection("Hoj morho vetvo mojho rodu, kto kramou rukou siahne na tvoju slobodu a co i dusu das v tom boji divokom vol nebyt ako byt otrokom!");
+            tc.GetConnector()
+                .SuspendWriteProtection(
+                    "Hoj morho vetvo mojho rodu, kto kramou rukou siahne na tvoju slobodu a co i dusu das v tom boji divokom vol nebyt ako byt otrokom!"
+                );
             tc._logger._plcCarret.Synchron = 0;
             var emptyMessage = new PlainTcoLogItem();
             foreach (var item in tc._logger._buffer)
             {
                 item.FlushPlainToOnline(emptyMessage);
             }
-
         }
 
         [SetUp]
@@ -56,10 +58,8 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             tc._logger.MinLogLevelCategory = category;
             var index = tc._logger._plcCarret.Synchron;
 
-
             //Act
             tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMessage);
-
 
             tc._logger.LogMessages(tc._logger.Pop());
 
@@ -69,8 +69,11 @@ namespace TcoCoreUnitTests.PlcExecutedTests
 
             var logger = TcOpen.Inxton.TcoAppDomain.Current.Logger as DummyLoggerAdapter;
             Assert.AreEqual(($"{message} {{@sender}}"), logger.LastMessage.message);
-            Assert.AreEqual(TranslateMessageCategoryToLogCategory(category), logger.LastMessage.serverity);
-        }        
+            Assert.AreEqual(
+                TranslateMessageCategoryToLogCategory(category),
+                logger.LastMessage.serverity
+            );
+        }
 
         [Test, Order((int)eTcoLoggerTests.PushMessage)]
         [TestCase("This is debug message", TcoCore.eMessageCategory.Debug)]
@@ -91,7 +94,6 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             tc._logger.MinLogLevelCategory = category;
             var index = tc._logger._plcCarret.Synchron;
 
-
             //Act
             tc.ExecuteProbeRun(3, (int)eTcoLoggerTests.SimplePush);
 
@@ -106,7 +108,10 @@ namespace TcoCoreUnitTests.PlcExecutedTests
 
             var logger = TcOpen.Inxton.TcoAppDomain.Current.Logger as DummyLoggerAdapter;
             Assert.AreEqual(($"{message} {{@sender}}"), logger.LastMessage.message);
-            Assert.AreEqual(TranslateMessageCategoryToLogCategory(category), logger.LastMessage.serverity);
+            Assert.AreEqual(
+                TranslateMessageCategoryToLogCategory(category),
+                logger.LastMessage.serverity
+            );
         }
 
         [Test, Order((int)eTcoLoggerTests.PushMessageMultiple)]
@@ -132,9 +137,9 @@ namespace TcoCoreUnitTests.PlcExecutedTests
                 System.Console.WriteLine(sw.ElapsedMilliseconds);
             }
 
-
             (string message, object payload, string serverity) result;
-            IList<(string message, object payload, string serverity)> dequeuedMessages = new List<(string message, object payload, string serverity)>();
+            IList<(string message, object payload, string serverity)> dequeuedMessages =
+                new List<(string message, object payload, string serverity)>();
 #pragma warning disable CS0618 // Type or member is obsolete
             while (dummyLogger.MessageQueue.TryDequeue(out result))
 #pragma warning restore CS0618 // Type or member is obsolete
@@ -142,8 +147,10 @@ namespace TcoCoreUnitTests.PlcExecutedTests
                 dequeuedMessages.Add(result);
             }
 
-            Assert.IsTrue(1000 == dequeuedMessages.Count || 1001 == dequeuedMessages.Count, dequeuedMessages.Count.ToString());
-
+            Assert.IsTrue(
+                1000 == dequeuedMessages.Count || 1001 == dequeuedMessages.Count,
+                dequeuedMessages.Count.ToString()
+            );
         }
 
         [Test, Order((int)eTcoLoggerTests.PushMessageMultipleInMoreCycles)]
@@ -154,7 +161,7 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             tc._msg.Category.Synchron = (short)eMessageCategory.Info;
             tc._logger.Pop();
 
-            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMessageMultipleInMoreCycles);            
+            tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMessageMultipleInMoreCycles);
             tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMessageMultipleInMoreCycles);
             tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMessageMultipleInMoreCycles);
             tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMessageMultipleInMoreCycles);
@@ -163,7 +170,7 @@ namespace TcoCoreUnitTests.PlcExecutedTests
 
             var actual = tc._logger.Pop();
 
-            Assert.AreEqual(150, actual.Count());                                                          
+            Assert.AreEqual(150, actual.Count());
         }
 
         [Test, Order((int)eTcoLoggerTests.PushMessageMultipleInMoreCycles + 100)]
@@ -195,7 +202,6 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             var actual = tc._logger.Pop();
             Assert.AreEqual(25, actual.Count());
 
-          
             tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMessageMultipleInMoreCycles);
             tc.ExecuteProbeRun(10, 0);
             tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMessageMultipleInMoreCycles);
@@ -216,22 +222,33 @@ namespace TcoCoreUnitTests.PlcExecutedTests
         [Test, Order((int)eTcoLoggerTests.PushMessageMultipleInMoreCycles + 300)]
         [TestCase("This is (all) message", TcoCore.eMessageCategory.All, 12)]
         [TestCase("This is trace message", TcoCore.eMessageCategory.Trace, 11)]
-        [TestCase("This is debug message", TcoCore.eMessageCategory.Debug, 10)]        
+        [TestCase("This is debug message", TcoCore.eMessageCategory.Debug, 10)]
         [TestCase("This is info message", TcoCore.eMessageCategory.Info, 9)]
         [TestCase("This is timed-out message", TcoCore.eMessageCategory.TimedOut, 8)]
-        [TestCase("This is notification message", TcoCore.eMessageCategory.Notification, 7)]       
+        [TestCase("This is notification message", TcoCore.eMessageCategory.Notification, 7)]
         [TestCase("This is warning message", TcoCore.eMessageCategory.Warning, 6)]
         [TestCase("This is error message", TcoCore.eMessageCategory.Error, 5)]
-        [TestCase("This is programming error message", TcoCore.eMessageCategory.ProgrammingError, 4)]
+        [TestCase(
+            "This is programming error message",
+            TcoCore.eMessageCategory.ProgrammingError,
+            4
+        )]
         [TestCase("This is critical message", TcoCore.eMessageCategory.Critical, 3)]
         [TestCase("This is catastrophic message", TcoCore.eMessageCategory.Catastrophic, 2)]
         [TestCase("This is (none) message", TcoCore.eMessageCategory.None, 0)]
-        public void MinCategoryLevel_set(string message, eMessageCategory category, int expectedNoOfLogEntries)
+        public void MinCategoryLevel_set(
+            string message,
+            eMessageCategory category,
+            int expectedNoOfLogEntries
+        )
         {
             tc._logger.MinLogLevelCategory = category;
             tc._logger.Pop();
 
-            List<(string text, eMessageCategory cat)> messages = new List<(string text, eMessageCategory cat)>()
+            List<(string text, eMessageCategory cat)> messages = new List<(
+                string text,
+                eMessageCategory cat
+            )>()
             {
                 ("This is (all) message", TcoCore.eMessageCategory.All),
                 ("This is debug message", TcoCore.eMessageCategory.Debug),
@@ -246,21 +263,17 @@ namespace TcoCoreUnitTests.PlcExecutedTests
                 ("This is catastrophic message", TcoCore.eMessageCategory.Catastrophic),
                 ("This is (none) message", TcoCore.eMessageCategory.None)
             };
-            
 
             foreach (var msg in messages)
             {
                 tc._multiplesCount.Synchron = 1;
-                tc._msg.Text.Synchron = msg.text;                                
+                tc._msg.Text.Synchron = msg.text;
                 tc._msg.Category.Synchron = (short)msg.cat;
                 tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMessageMultipleInMoreCycles);
             }
-            
+
             var actual = tc._logger.Pop();
             Assert.AreEqual(expectedNoOfLogEntries, actual.Count());
-
-
-            
         }
 
         [Test, Order(int.MaxValue)]
@@ -287,7 +300,6 @@ namespace TcoCoreUnitTests.PlcExecutedTests
             //Act
             tc.ExecuteProbeRun(1, (int)eTcoLoggerTests.PushMessage);
 
-
             tc._logger.LogMessages(tc._logger.Pop());
 
             //Assert
@@ -296,24 +308,27 @@ namespace TcoCoreUnitTests.PlcExecutedTests
 
             var logger = customLogger;
             Assert.AreEqual(($"{message} {{@sender}}"), logger.LastMessage.message);
-            Assert.AreEqual(TranslateMessageCategoryToLogCategory(category), logger.LastMessage.serverity);
+            Assert.AreEqual(
+                TranslateMessageCategoryToLogCategory(category),
+                logger.LastMessage.serverity
+            );
         }
 
         private string TranslateMessageCategoryToLogCategory(eMessageCategory category)
-        {            
+        {
             switch (category)
-            {              
+            {
                 case eMessageCategory.Debug:
-                    return "Debug";                    
+                    return "Debug";
                 case eMessageCategory.Trace:
                     return "Verbose";
                 case eMessageCategory.Info:
                     return "Information";
-                case eMessageCategory.TimedOut:                    
-                case eMessageCategory.Notification:                    
+                case eMessageCategory.TimedOut:
+                case eMessageCategory.Notification:
                 case eMessageCategory.Warning:
                     return "Warning";
-                case eMessageCategory.Error:                   
+                case eMessageCategory.Error:
                 case eMessageCategory.ProgrammingError:
                     return "Error";
                 case eMessageCategory.Critical:

@@ -3,9 +3,8 @@
   <DUT Name="TcoCr800_Outputs_v_1_x_x" Id="{3d53578d-1797-0756-06a2-1d6af208dec3}">
     <Declaration><![CDATA[TYPE TcoCr800_Outputs_v_1_x_x :
 STRUCT
-	Outputs AT %Q* : ARRAY[0..63] OF BYTE;
+    Outputs AT %Q* : ARRAY[0..63] OF BYTE;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

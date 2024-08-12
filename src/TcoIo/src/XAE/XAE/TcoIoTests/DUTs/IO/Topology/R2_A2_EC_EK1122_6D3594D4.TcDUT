@@ -9,16 +9,15 @@
 {attribute addProperty Name "R2_A2_EC (EK1122)"}
 TYPE R2_A2_EC_EK1122_6D3594D4 EXTENDS EK1122_1FC0878B :
 STRUCT
-	{attribute addProperty Name "Servo_A20-2 (AX5103-0000-0203)"}
-	{attribute addProperty PreviousPort "R2_A2_EC (EK1122) : D"}
-	{attribute addProperty SyncUnit "default"}
-	Servo_A20_2_AX5103_0000_0203 : AX5103_1BD22F51;
-	{attribute addProperty Name "VI-3 (AES-D-BC-ECAT)"}
-	{attribute addProperty PreviousPort "R2_A2_EC (EK1122) : B"}
-	{attribute addProperty SyncUnit "default"}
-	VI_3_AES_D_BC_ECAT_x : AES_A3B07071;
+    {attribute addProperty Name "Servo_A20-2 (AX5103-0000-0203)"}
+    {attribute addProperty PreviousPort "R2_A2_EC (EK1122) : D"}
+    {attribute addProperty SyncUnit "default"}
+    Servo_A20_2_AX5103_0000_0203 : AX5103_1BD22F51;
+    {attribute addProperty Name "VI-3 (AES-D-BC-ECAT)"}
+    {attribute addProperty PreviousPort "R2_A2_EC (EK1122) : B"}
+    {attribute addProperty SyncUnit "default"}
+    VI_3_AES_D_BC_ECAT_x : AES_A3B07071;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

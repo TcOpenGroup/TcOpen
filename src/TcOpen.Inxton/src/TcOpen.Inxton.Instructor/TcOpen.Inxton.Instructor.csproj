@@ -13,16 +13,22 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <PackageTags>TwinCAT3 Beckhoff</PackageTags>
-    <PackageReleaseNotes>Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
+    <PackageReleaseNotes
+    >Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
     <PackageProjectUrl>http://docs.tcopengroup.org/</PackageProjectUrl>
-    <PackageIconUrl>https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
+    <PackageIconUrl
+    >https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
 
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Abstractions\TcOpen.Inxton.Abstractions.csproj" />
-    <ProjectReference Include="..\TcOpen.Inxton.RepositoryDataSet\TcOpen.Inxton.RepositoryDataSet.csproj" />
- 
+    <ProjectReference
+      Include="..\Abstractions\TcOpen.Inxton.Abstractions.csproj"
+    />
+    <ProjectReference
+      Include="..\TcOpen.Inxton.RepositoryDataSet\TcOpen.Inxton.RepositoryDataSet.csproj"
+    />
+
   </ItemGroup>
 
 </Project>

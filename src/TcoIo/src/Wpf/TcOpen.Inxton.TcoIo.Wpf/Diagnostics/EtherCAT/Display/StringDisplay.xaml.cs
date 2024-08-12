@@ -6,12 +6,16 @@ using System.Windows.Data;
 using System.Windows.Media;
 using TcoIo.Converters.Utilities;
 
-
 namespace TcoIo.Diagnostics.EtherCAT.Display
 {
     public partial class StringDisplay : INotifyPropertyChanged
     {
-        public static readonly DependencyProperty DescriptionProperty = DependencyProperty.Register("Description", typeof(string), typeof(StringDisplay), new PropertyMetadata(OnDescriptionChangedCallBack));
+        public static readonly DependencyProperty DescriptionProperty = DependencyProperty.Register(
+            "Description",
+            typeof(string),
+            typeof(StringDisplay),
+            new PropertyMetadata(OnDescriptionChangedCallBack)
+        );
 
         public string Description
         {
@@ -19,7 +23,10 @@ namespace TcoIo.Diagnostics.EtherCAT.Display
             set { SetValue(DescriptionProperty, value); }
         }
 
-        private static void OnDescriptionChangedCallBack(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        private static void OnDescriptionChangedCallBack(
+            DependencyObject sender,
+            DependencyPropertyChangedEventArgs e
+        )
         {
             StringDisplay c = sender as StringDisplay;
             if (c != null)
@@ -33,9 +40,12 @@ namespace TcoIo.Diagnostics.EtherCAT.Display
         {
             OnPropertyChanged("Description");
         }
+
         private void DescriptionChange(object sender, DependencyPropertyChangedEventArgs e)
         {
-            Binding binding = gbDescription.GetBindingExpression(GroupBox.HeaderProperty).ParentBinding;
+            Binding binding = gbDescription
+                .GetBindingExpression(GroupBox.HeaderProperty)
+                .ParentBinding;
             string formatString = Description as string;
             if (!string.IsNullOrEmpty(formatString))
             {
@@ -74,6 +84,7 @@ namespace TcoIo.Diagnostics.EtherCAT.Display
             InitializeComponent();
             DataContextChanged += DataContextChange;
         }
+
         private void DataContextChange(object sender, DependencyPropertyChangedEventArgs e)
         {
             Binding binding = tbValue.GetBindingExpression(TextBox.TextProperty).ParentBinding;
@@ -124,7 +135,8 @@ namespace TcoIo.Diagnostics.EtherCAT.Display
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

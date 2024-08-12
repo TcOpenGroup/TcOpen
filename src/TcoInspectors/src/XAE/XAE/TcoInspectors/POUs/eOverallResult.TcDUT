@@ -3,15 +3,13 @@
   <DUT Name="eOverallResult" Id="{01216d0c-dd53-0320-2aac-4d70b3767dc4}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE
-    eOverallResult :
-    (
-        NoAction   := 0,
-        InProgress := 10,
-        Passed     := 20,
-        Failed     := 30
-    );
-END_TYPE
-]]></Declaration>
+TYPE eOverallResult :
+(
+    NoAction := 0,
+    InProgress := 10,
+    Passed := 20,
+    Failed := 30
+);
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

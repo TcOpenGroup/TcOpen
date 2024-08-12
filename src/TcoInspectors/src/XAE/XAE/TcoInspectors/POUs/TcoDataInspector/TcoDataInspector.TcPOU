@@ -4,32 +4,31 @@
     <Declaration><![CDATA[(*~
 <docu>
 <summary>
-	Provides a mechanism for inspecting status of discrete signal.	
+    Provides a mechanism for inspecting status of discrete signal.
 </summary>
 </docu>
 ~*)
 FUNCTION_BLOCK TcoDataInspector EXTENDS TcoInspector IMPLEMENTS ITcoDataInspector
 VAR
     _data : TcoDataInspectorData;
-	{attribute 'hide'}
-	_lastOutValue : STRING;
+    {attribute 'hide'}
+    _lastOutValue : STRING;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Property Name="CommonData" Id="{c67a4b49-0390-020e-1819-36c5b441d75c}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Gets common data settings of inspectors.
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Gets common data settings of inspectors.
+        </summary>
+    </docu>
 ~*)
 PROPERTY CommonData : REFERENCE TO TcoInspectorData]]></Declaration>
       <Get Name="Get" Id="{4e2e3de3-575d-0257-35f9-c91a7f1359dc}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[CommonData REF= _data;]]></ST>
         </Implementation>
@@ -39,15 +38,14 @@ END_VAR
       <Declaration><![CDATA[(*~
 <docu>
 <summary>
-	Gets data of this inspector.
+    Gets data of this inspector.
 </summary>
 </docu>
 ~*)
 PROPERTY Data : REFERENCE TO TcoDataInspectorData]]></Declaration>
       <Get Name="Get" Id="{735a50fd-db59-0580-13ce-a7dea298b20e}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[Data REF= _data;]]></ST>
         </Implementation>
@@ -57,10 +55,10 @@ END_VAR
       <Declaration><![CDATA[(*~
 <docu>
 <summary>
-	Inspects the signal and evaluates that it matches the value set in `RequiredStatus`.
+    Inspects the signal and evaluates that it matches the value set in `RequiredStatus`.
 </summary>
 <returns>
-	Returns the interface with information about the state of inspection.
+    Returns the interface with information about the state of inspection.
 </returns>
 </docu>
 ~*)
@@ -68,89 +66,83 @@ METHOD Inspect : IInspector
 VAR_INPUT
     Status : STRING(255);
 END_VAR
-
 VAR
-	tmpResult : BOOL;
-	charIndex : INT;
-	charRequired : STRING(1);
-	charAcquired : STRING(1);	
+    tmpResult : BOOL;
+    charIndex : INT;
+    charRequired : STRING(1);
+    charAcquired : STRING(1);
 END_VAR
-
 VAR CONSTANT
     epsilon : REAL := 1;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[Inspect := THIS^;
-
 _inspectorTask.InspectionData REF= _data;
-
 OnEnterInspection();
 
-IF(IsOverinspected())THEN
-	RETURN;
+IF (IsOverinspected()) THEN
+    RETURN;
 END_IF
-
 
 _inspectorTask.Invoke();
 
 IF (_inspectorTask.Execute()) THEN
     IF (_data.IsByPassed) THEN
-        _data.Result    := eInspectorResult.Bypassed;
+        _data.Result := eInspectorResult.Bypassed;
         _data.TimeStamp := Context.RealTimeClock.NowLocal();
         _inspectorTask.DoneWhen(TRUE);
         RETURN;
     END_IF
 
-		THIS^.Messenger.OnCondition(LEN(Status) > 250 OR LEN(_data.RequiredStatus) > 250).Build().Append('The checked input string or required pattern string exceeds 250 characters.').As().AsError();
-		
-        IF(LEN(Status) > 250 OR LEN(_data.RequiredStatus) > 254) THEN                
-            RETURN;
-        END_IF
-		
-	    _data.DetectedStatus := Status;
-		
-		
-		IF(_data.StarNotationEnabled) THEN
-			tmpResult := TRUE;
-			FOR charIndex := 1 TO LEN(_data.RequiredStatus) DO
-				charRequired := MID(_data.RequiredStatus, 1, charIndex);
-				
-				IF(LEN(_data.DetectedStatus) >= charIndex) THEN
-					charAcquired :=  MID(_data.DetectedStatus, 1, charIndex);
-				ELSE
-					charAcquired := '';
-				END_IF;	
-				
-				IF(charRequired <> '*' AND charRequired <> '#') THEN
-					tmpResult := charRequired = charAcquired;
-				ELSIF(charRequired = '#') THEN
-					tmpResult := IsNumber(charAcquired);            	
-				END_IF
-				
-				IF(NOT tmpResult) THEN
-					EXIT;
-				END_IF				
-			END_FOR
-		ELSE
-			
-			tmpResult := F_RTrim(_data.DetectedStatus) =F_RTrim(_data.RequiredStatus);	
-		END_IF
-		
-       
-		IF(NOT tmpResult) THEN	
-			_lastOutValue := Status;
-		END_IF
-		
-		_inspectorTask._failTimer(IN:= TRUE, PT:=_data.FailTime);
-		_inspectorTask._passTimer(IN:= tmpResult,PT:=_data.PassTime);
-									  
-     	IF(_inspectorTask._failTimer.Q OR _inspectorTask._passTimer.Q) THEN	  
-     		_inspectorTask.DoneWhen(TRUE);
-			OnDone();
-	 	END_IF;	
-END_IF;
+    THIS^.Messenger.OnCondition(LEN(Status) > 250 OR LEN(_data.RequiredStatus) > 250)
+        .Build()
+        .Append('The checked input string or required pattern string exceeds 250 characters.')
+        .As().AsError();
 
-]]></ST>
+    IF (LEN(Status) > 250 OR LEN(_data.RequiredStatus) > 254) THEN
+        RETURN;
+    END_IF
+
+    _data.DetectedStatus := Status;
+
+    IF (_data.StarNotationEnabled) THEN
+        tmpResult := TRUE;
+
+        FOR charIndex := 1 TO LEN(_data.RequiredStatus) DO
+            charRequired := MID(_data.RequiredStatus, 1, charIndex);
+
+            IF (LEN(_data.DetectedStatus) >= charIndex) THEN
+                charAcquired := MID(_data.DetectedStatus, 1, charIndex);
+            ELSE
+                charAcquired := '';
+            END_IF;
+
+            IF (charRequired <> '*' AND charRequired <> '#') THEN
+                tmpResult := charRequired = charAcquired;
+            ELSIF (charRequired = '#') THEN
+                tmpResult := IsNumber(charAcquired);
+            END_IF
+
+            IF (NOT tmpResult) THEN
+                EXIT;
+            END_IF
+        END_FOR
+    ELSE
+        tmpResult := F_RTrim(_data.DetectedStatus) = F_RTrim(_data.RequiredStatus);
+    END_IF
+
+    IF (NOT tmpResult) THEN
+        _lastOutValue := Status;
+    END_IF
+
+    _inspectorTask._failTimer(IN := TRUE, PT := _data.FailTime);
+    _inspectorTask._passTimer(IN := tmpResult, PT := _data.PassTime);
+
+    IF (_inspectorTask._failTimer.Q OR _inspectorTask._passTimer.Q) THEN
+        _inspectorTask.DoneWhen(TRUE);
+        OnDone();
+    END_IF;
+END_IF;]]></ST>
       </Implementation>
     </Method>
     <Method Name="IsNumber" Id="{06fdee84-4be9-0485-30d1-946d69a2763b}">
@@ -160,22 +152,20 @@ VAR_INPUT
 END_VAR
 VAR
     numericalRapresentation : BYTE;
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF (inCharacter = '0'
-OR  inCharacter = '1'
-OR  inCharacter = '2'
-OR  inCharacter = '3'
-OR  inCharacter = '4'
-OR  inCharacter = '5'
-OR  inCharacter = '6'
-OR  inCharacter = '7'
-OR  inCharacter = '8'
-OR  inCharacter = '9') 
-THEN
-	IsNumber := TRUE;
-	RETURN;
+        <ST><![CDATA[IF (inCharacter = '0' OR
+    inCharacter = '1' OR
+    inCharacter = '2' OR
+    inCharacter = '3' OR
+    inCharacter = '4' OR
+    inCharacter = '5' OR
+    inCharacter = '6' OR
+    inCharacter = '7' OR
+    inCharacter = '8' OR
+    inCharacter = '9') THEN
+    IsNumber := TRUE;
+    RETURN;
 END_IF;
 
 IsNumber := FALSE;]]></ST>
@@ -183,26 +173,24 @@ IsNumber := FALSE;]]></ST>
     </Method>
     <Method Name="OnDone" Id="{2e401878-44db-0db3-3b4e-da671280d16c}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task reaches the ```Done``` state .
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task reaches the ```Done``` state .
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnDone
-]]></Declaration>
+METHOD PROTECTED OnDone]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF (_data.Result = eInspectorResult.Failed) THEN
-     _data.DetectedStatus := _lastOutValue;
+    _data.DetectedStatus := _lastOutValue;
 END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="WithCoordinator" Id="{35d412e4-3f0e-0c32-180a-703e03107006}">
       <Declaration><![CDATA[METHOD WithCoordinator : ITcoDataInspector
 VAR_INPUT
-	inCoordinator : TcoCore.ITcoCoordinator;
-END_VAR
-]]></Declaration>
+    inCoordinator : TcoCore.ITcoCoordinator;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_WithCoordinator(inCoordinator);
 WithCoordinator := THIS^;]]></ST>

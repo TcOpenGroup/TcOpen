@@ -1,5 +1,5 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
+using NUnit.Framework;
 
 namespace TcoCoreUnitTests
 {
@@ -15,12 +15,10 @@ namespace TcoCoreUnitTests
         [STAThread]
         public void OneTimeSetUp()
         {
-            TargetAmsId = Environment.GetEnvironmentVariable("Tc3Target");         
+            TargetAmsId = Environment.GetEnvironmentVariable("Tc3Target");
         }
-        [OneTimeTearDown]
-        public void OneTimeTearDown()
-        {
 
-        }
+        [OneTimeTearDown]
+        public void OneTimeTearDown() { }
     }
 }

@@ -4,29 +4,33 @@ using System.Windows;
 
 namespace TcoCognexVision
 {
-    public enum eDisplayFormat { Array_of_decimals, Array_of_hexdecimals, String };
+    public enum eDisplayFormat
+    {
+        Array_of_decimals,
+        Array_of_hexdecimals,
+        String
+    };
 
     /// <summary>
     /// Interaction logic for DisplayFormatDialog.xaml
     /// </summary>
     public partial class DisplayFormatDialog : Window
     {
-        private List<String> _displayFormats = new List<string> { "array of decimal numbers", "array of hexadecimal numbers", "string" };
+        private List<String> _displayFormats = new List<string>
+        {
+            "array of decimal numbers",
+            "array of hexadecimal numbers",
+            "string"
+        };
 
         private eDisplayFormat _currentDisplayFormat;
 
         public eDisplayFormat CurrentDisplayFormat
         {
-            get
-            {
-                return _currentDisplayFormat;
-            }
-
-            set
-            {
-                _currentDisplayFormat = value;
-            }
+            get { return _currentDisplayFormat; }
+            set { _currentDisplayFormat = value; }
         }
+
         public DisplayFormatDialog(eDisplayFormat initDisplayFormat)
         {
             InitializeComponent();
@@ -37,7 +41,7 @@ namespace TcoCognexVision
         private void btnDialogOk_Click(object sender, RoutedEventArgs e)
         {
             int index = this.cbRequiredFormat.SelectedIndex;
-            CurrentDisplayFormat = (eDisplayFormat) index;
+            CurrentDisplayFormat = (eDisplayFormat)index;
             this.Close();
         }
 
@@ -46,10 +50,13 @@ namespace TcoCognexVision
             this.Close();
         }
 
-        private void cbRequiredFormat_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void cbRequiredFormat_SelectionChanged(
+            object sender,
+            System.Windows.Controls.SelectionChangedEventArgs e
+        )
         {
-            if (this.IsVisible) 
-            {             
+            if (this.IsVisible)
+            {
                 int index = this.cbRequiredFormat.SelectedIndex;
                 CurrentDisplayFormat = (eDisplayFormat)index;
                 this.Close();

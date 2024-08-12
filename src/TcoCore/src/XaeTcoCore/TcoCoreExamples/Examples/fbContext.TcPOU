@@ -3,25 +3,22 @@
   <POU Name="fbContext" Id="{2a1cec87-1ff7-064f-2678-b3fb1b407c7e}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK fbContext EXTENDS TcoCore.TcoContext
 VAR
-	{attribute addProperty Name "Toggle task example"}
-	{attribute addProperty StateOnDesc "<#Enabled#>"}
-	{attribute addProperty StateOffDesc "<#Disabled#>"}
-	_toggleTaskExample : TcoCore.TcoToggleTask(THIS^, FALSE);
-	{attribute addProperty Name "Momentary task example"}
-	{attribute addProperty StateOnDesc "<#Running#>"}
-	{attribute addProperty StateOffDesc "<#Stopped#>"}
-	_momentaryTaskExample : TcoCore.TcoMomentaryTask(THIS^);
-END_VAR
-]]></Declaration>
+    {attribute addProperty Name "Toggle task example"}
+    {attribute addProperty StateOnDesc "<#Enabled#>"}
+    {attribute addProperty StateOffDesc "<#Disabled#>"}
+    _toggleTaskExample : TcoCore.TcoToggleTask(THIS^, FALSE);
+    {attribute addProperty Name "Momentary task example"}
+    {attribute addProperty StateOnDesc "<#Running#>"}
+    {attribute addProperty StateOffDesc "<#Stopped#>"}
+    _momentaryTaskExample : TcoCore.TcoMomentaryTask(THIS^);
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Main" Id="{17ff76c9-c8cb-0dc2-0912-164ab0c91c5e}">
-      <Declaration><![CDATA[METHOD PROTECTED  Main]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED Main]]></Declaration>
       <Implementation>
-        <ST><![CDATA[
-_toggleTaskExample.Run();
-
+        <ST><![CDATA[_toggleTaskExample.Run();
 _momentaryTaskExample.Run();]]></ST>
       </Implementation>
     </Method>

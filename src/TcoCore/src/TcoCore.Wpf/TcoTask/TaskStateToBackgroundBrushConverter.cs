@@ -14,7 +14,7 @@ namespace TcoCore
         {
             try
             {
-                if(value.GetType() == typeof(bool))
+                if (value.GetType() == typeof(bool))
                 {
                     var binaryTaskState = (bool)value;
                     return binaryTaskState ? TcoColors.Accent : TcoColors.Primary;
@@ -44,7 +44,12 @@ namespace TcoCore
             return 0;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }

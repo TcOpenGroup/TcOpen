@@ -9,36 +9,35 @@
 {attribute addProperty Name "RC80_2 (EK1100)"}
 TYPE RC80_2_EK1100_DC1461B5 EXTENDS EK1100_1FC0878B :
 STRUCT
-	{attribute addProperty Name "RC80_B1 (EL7041-1000)"}
-	{attribute addProperty PreviousPort "RC80_2 (EK1100) : B"}
-	{attribute addProperty SyncUnit "C80"}
-	RC80_B1_EL7041_1000 : EL7041_86DE63E7;
-	{attribute addProperty Name "RC80_B2 (EL7041-1000)"}
-	{attribute addProperty PreviousPort "RC80_B1 (EL7041-1000) : B"}
-	{attribute addProperty SyncUnit "C80"}
-	RC80_B2_EL7041_1000 : EL7041_86DE63E7;
-	{attribute addProperty Name "RC80_C11 (EL7041-1000)"}
-	{attribute addProperty PreviousPort "RC80_B2 (EL7041-1000) : B"}
-	{attribute addProperty SyncUnit "C80"}
-	RC80_C11_EL7041_1000 : EL7041_86DE63E7;
-	{attribute addProperty Name "RC80_C12 (EL7041-1000)"}
-	{attribute addProperty PreviousPort "RC80_C11 (EL7041-1000) : B"}
-	{attribute addProperty SyncUnit "C80"}
-	RC80_C12_EL7041_1000 : EL7041_86DE63E7;
-	{attribute addProperty Name "RC80_C21 (EL7041-1000)"}
-	{attribute addProperty PreviousPort "RC80_C12 (EL7041-1000) : B"}
-	{attribute addProperty SyncUnit "C80"}
-	RC80_C21_EL7041_1000 : EL7041_86DE63E7;
-	{attribute addProperty Name "RC80_C22 (EL7041-1000)"}
-	{attribute addProperty PreviousPort "RC80_C21 (EL7041-1000) : B"}
-	{attribute addProperty SyncUnit "C80"}
-	RC80_C22_EL7041_1000 : EL7041_86DE63E7;
-	{attribute addProperty Name "Term 804 (EL9010)"}
-	{attribute addProperty PreviousPort "RC80_C22 (EL7041-1000) : B"}
-	{attribute addProperty SyncUnit "default"}
-	Term_804_EL9010 : EL9010_D29C2085;
+    {attribute addProperty Name "RC80_B1 (EL7041-1000)"}
+    {attribute addProperty PreviousPort "RC80_2 (EK1100) : B"}
+    {attribute addProperty SyncUnit "C80"}
+    RC80_B1_EL7041_1000 : EL7041_86DE63E7;
+    {attribute addProperty Name "RC80_B2 (EL7041-1000)"}
+    {attribute addProperty PreviousPort "RC80_B1 (EL7041-1000) : B"}
+    {attribute addProperty SyncUnit "C80"}
+    RC80_B2_EL7041_1000 : EL7041_86DE63E7;
+    {attribute addProperty Name "RC80_C11 (EL7041-1000)"}
+    {attribute addProperty PreviousPort "RC80_B2 (EL7041-1000) : B"}
+    {attribute addProperty SyncUnit "C80"}
+    RC80_C11_EL7041_1000 : EL7041_86DE63E7;
+    {attribute addProperty Name "RC80_C12 (EL7041-1000)"}
+    {attribute addProperty PreviousPort "RC80_C11 (EL7041-1000) : B"}
+    {attribute addProperty SyncUnit "C80"}
+    RC80_C12_EL7041_1000 : EL7041_86DE63E7;
+    {attribute addProperty Name "RC80_C21 (EL7041-1000)"}
+    {attribute addProperty PreviousPort "RC80_C12 (EL7041-1000) : B"}
+    {attribute addProperty SyncUnit "C80"}
+    RC80_C21_EL7041_1000 : EL7041_86DE63E7;
+    {attribute addProperty Name "RC80_C22 (EL7041-1000)"}
+    {attribute addProperty PreviousPort "RC80_C21 (EL7041-1000) : B"}
+    {attribute addProperty SyncUnit "C80"}
+    RC80_C22_EL7041_1000 : EL7041_86DE63E7;
+    {attribute addProperty Name "Term 804 (EL9010)"}
+    {attribute addProperty PreviousPort "RC80_C22 (EL7041-1000) : B"}
+    {attribute addProperty SyncUnit "default"}
+    Term_804_EL9010 : EL9010_D29C2085;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

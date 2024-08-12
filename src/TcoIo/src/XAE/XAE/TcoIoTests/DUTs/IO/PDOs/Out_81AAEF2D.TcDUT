@@ -8,18 +8,17 @@
 {attribute addProperty Size "0"}
 TYPE Out_81AAEF2D EXTENDS TcoIo.OutputBase_10CEE7DE :
 STRUCT
-	{attribute addProperty Name "Out_Dataset1"}
-	Out_Dataset1 AT %Q* : ARRAY [0..9] OF BYTE;
-	{attribute addProperty Name "Out_Dataset2"}
-	Out_Dataset2 AT %Q* : ARRAY [0..9] OF BYTE;
-	{attribute addProperty Name "Out_Dataset3"}
-	Out_Dataset3 AT %Q* : ARRAY [0..9] OF BYTE;
-	{attribute addProperty Name "Out_Dataset4"}
-	Out_Dataset4 AT %Q* : ARRAY [0..9] OF BYTE;
-	{attribute addProperty Name "Out_Dataset5"}
-	Out_Dataset5 AT %Q* : ARRAY [0..9] OF BYTE;
+    {attribute addProperty Name "Out_Dataset1"}
+    Out_Dataset1 AT %Q* : ARRAY[0..9] OF BYTE;
+    {attribute addProperty Name "Out_Dataset2"}
+    Out_Dataset2 AT %Q* : ARRAY[0..9] OF BYTE;
+    {attribute addProperty Name "Out_Dataset3"}
+    Out_Dataset3 AT %Q* : ARRAY[0..9] OF BYTE;
+    {attribute addProperty Name "Out_Dataset4"}
+    Out_Dataset4 AT %Q* : ARRAY[0..9] OF BYTE;
+    {attribute addProperty Name "Out_Dataset5"}
+    Out_Dataset5 AT %Q* : ARRAY[0..9] OF BYTE;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

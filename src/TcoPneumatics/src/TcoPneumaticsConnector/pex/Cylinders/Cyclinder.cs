@@ -6,9 +6,6 @@ namespace TcoPneumatics
 {
     public partial class TcoCylinder
     {
-       public void Simulate()
-       {
-            
-       }
+        public void Simulate() { }
     }
 }

@@ -3,183 +3,204 @@
   <POU Name="StartMotorsAndProgramTask" Id="{9167aefe-ea54-0bdf-1981-d8c8cc80b1bf}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK StartMotorsAndProgramTask EXTENDS TcoUrRoboticsTask]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
+      <ST><![CDATA[IF Execute() THEN
+    _blink(inOnTime := T#500MS, inOffTime := T#500MS);
 
-IF Execute() THEN
-	 _blink(inOnTime:=T#500MS,inOffTime:=T#500MS);
+    IF _progress = 0 THEN
+        IF NOT __ISVALIDREF(inoControl) THEN
+            _varInfo := __VARINFO(inoControl);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSIF NOT __ISVALIDREF(inoConfig) THEN
+            _varInfo := __VARINFO(inoConfig);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSIF NOT __ISVALIDREF(inoStatus) THEN
+            _varInfo := __VARINFO(inoStatus);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSE
+            _progress := _progress + 1;
+        END_IF
+    END_IF
 
-  	IF _progress = 0 THEN
-		IF NOT __ISVALIDREF(inoControl) THEN
-			_varInfo :=__VARINFO(inoControl);
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSIF NOT __ISVALIDREF(inoConfig) THEN                                                  
-			_varInfo :=__VARINFO(inoConfig);                                                    
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSIF NOT __ISVALIDREF(inoStatus) THEN                                                  
-			_varInfo :=__VARINFO(inoStatus);                                                    
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSE
+    IF _progress = 1 THEN
+        THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.NO_IsNormalMode)
+            .Warning(_sb.Clear().Append('<# Waiting to Normal Mode. #>').ToString());
 
-			_progress := _progress + 1;
+        THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.RD_IsReducedMode)
+            .Warning(_sb.Clear().Append('<# Waiting to Reduced Mode. #>').ToString());
 
-		END_IF
+        IF inoStatus.State.Inputs.Safety.NO_IsNormalMode OR inoStatus.State.Inputs.Safety.RD_IsReducedMode THEN
+            _progress := _progress + 1;
+        END_IF
+    END_IF;
 
-	END_IF
+    IF _progress = 2 THEN
+        Messenger.Warning('<#Robot has error Reset#>');
 
-	IF _progress = 1 THEN
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.NO_IsNormalMode)
-		.Warning(_sb.Clear().Append('<# Waiting to Normal Mode. #>').ToString());
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.RD_IsReducedMode)
-		.Warning(_sb.Clear().Append('<# Waiting to Reduced Mode. #>').ToString());
-		
-		IF inoStatus.State.Inputs.Safety.NO_IsNormalMode OR inoStatus.State.Inputs.Safety.RD_IsReducedMode THEN
-			_progress := _progress + 1;
+        IF NOT inoStatus.State.Inputs.Safety.FT_IsFault THEN
+            _progress := _progress + 1;
+        END_IF
+    END_IF;
 
-		END_IF
-	END_IF;		
-	
-	IF _progress = 2 THEN	
-		Messenger.Warning('<#Robot has error Reset#>');
-		
-		IF NOT inoStatus.State.Inputs.Safety.FT_IsFault THEN
-			_progress := _progress + 1;
-		END_IF
-	END_IF;
-	
-	IF _progress = 3 THEN	
-		Messenger.Debug('<#Robot Emergency Stop Reset#>');
-		_varInfo :=__VARINFO( inoStatus.State.Inputs.Safety.ES_IsEmergencyStopped );                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.ES_IsEmergencyStopped ).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
+    IF _progress = 3 THEN
+        Messenger.Debug('<#Robot Emergency Stop Reset#>');
+        _varInfo := __VARINFO(inoStatus.State.Inputs.Safety.ES_IsEmergencyStopped);
 
-		_varInfo :=__VARINFO( inoStatus.State.Inputs.Safety.PS_IsProtectiveStopped );                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.PS_IsProtectiveStopped ).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
+        THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.ES_IsEmergencyStopped)
+            .Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
 
-		_varInfo :=__VARINFO( inoStatus.State.Inputs.Safety.SS_IsSafeguardStopped );                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.SS_IsSafeguardStopped ).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
+        _varInfo := __VARINFO(inoStatus.State.Inputs.Safety.PS_IsProtectiveStopped);
 
-		_varInfo :=__VARINFO( inoStatus.State.Inputs.Safety.RC_IsRecoveryMode );                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.RC_IsRecoveryMode ).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
+        THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.PS_IsProtectiveStopped)
+            .Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
 
-		_varInfo :=__VARINFO( inoStatus.State.Inputs.Safety.ST_IsStoppedDueSafety );                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.ES_IsEmergencyStopped ).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
+        _varInfo := __VARINFO(inoStatus.State.Inputs.Safety.SS_IsSafeguardStopped);
 
-		_varInfo :=__VARINFO( inoStatus.State.Inputs.Safety.VL_IsViolation );                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.VL_IsViolation ).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
+        THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.SS_IsSafeguardStopped)
+            .Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
 
+        _varInfo := __VARINFO(inoStatus.State.Inputs.Safety.RC_IsRecoveryMode);
 
-		IF NOT inoStatus.State.Inputs.Safety.ES_IsEmergencyStopped 
-				AND NOT inoStatus.State.Inputs.Safety.PS_IsProtectiveStopped  
-				AND NOT inoStatus.State.Inputs.Safety.SS_IsSafeguardStopped  
-				AND NOT inoStatus.State.Inputs.Safety.RC_IsRecoveryMode 
-				AND NOT inoStatus.State.Inputs.Safety.ST_IsStoppedDueSafety 
-				AND NOT inoStatus.State.Inputs.Safety.VL_IsViolation THEN
-			_progress := _progress + 1;
-		END_IF
-	END_IF;
-		
-	
-	IF _progress = 4 THEN	
-		IF inoStatus.State.Inputs.Safety.FT_IsFault THEN 
-			_progress := 1;
-		END_IF
-		Messenger.Debug('<#Robot Power on#>');
-		_varInfo :=__VARINFO( inoStatus.State.Inputs.Robot.PW_IsPowerOn);                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Robot.PW_IsPowerOn).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
-		_varInfo :=__VARINFO( inoStatus.State.Inputs.Safety.FT_IsFault);                                                
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.FT_IsFault).Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
-		
-		inoControl.MotorOn:=_blink.outQ;	
-		IF inoStatus.State.Inputs.Robot.PW_IsPowerOn  AND NOT inoStatus.State.Inputs.Safety.FT_IsFault THEN
-			 inoControl.MotorOn:=FALSE;
-			_progress := _progress + 1;
-		END_IF
-	END_IF;		
-	
-	IF _progress = 5 THEN	
-		IF inoStatus.State.Inputs.Safety.FT_IsFault THEN 
-			_progress := 1;
-		END_IF
-		inoControl.Start:=_blink.outQ;
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Robot.PR_IsProgramRunning).Warning(_sb.Clear().Append('<#Waiting to program running! #>').ToString());
-				
-		IF  inoStatus.State.Inputs.Robot.PR_IsProgramRunning AND NOT inoStatus.State.Inputs.Safety.FT_IsFault THEN
-				inoControl.Start:=FALSE;
-		END_IF
-	END_IF;		
-	
-	
-    DoneWhen(inoStatus.State.Inputs.Robot.PR_IsProgramRunning AND inoStatus.State.Inputs.Robot.PW_IsPowerOn AND NOT inoStatus.State.Inputs.Safety.FT_IsFault);
+        THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.RC_IsRecoveryMode)
+            .Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
+
+        _varInfo := __VARINFO(inoStatus.State.Inputs.Safety.ST_IsStoppedDueSafety);
+
+        THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.ES_IsEmergencyStopped)
+            .Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
+
+        _varInfo := __VARINFO(inoStatus.State.Inputs.Safety.VL_IsViolation);
+
+        THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.VL_IsViolation)
+            .Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
+
+        IF NOT inoStatus.State.Inputs.Safety.ES_IsEmergencyStopped AND
+            NOT inoStatus.State.Inputs.Safety.PS_IsProtectiveStopped AND
+            NOT inoStatus.State.Inputs.Safety.SS_IsSafeguardStopped AND
+            NOT inoStatus.State.Inputs.Safety.RC_IsRecoveryMode AND
+            NOT inoStatus.State.Inputs.Safety.ST_IsStoppedDueSafety AND
+            NOT inoStatus.State.Inputs.Safety.VL_IsViolation THEN
+            _progress := _progress + 1;
+        END_IF
+    END_IF;
+
+    IF _progress = 4 THEN
+        IF inoStatus.State.Inputs.Safety.FT_IsFault THEN
+            _progress := 1;
+        END_IF
+
+        Messenger.Debug('<#Robot Power on#>');
+        _varInfo := __VARINFO(inoStatus.State.Inputs.Robot.PW_IsPowerOn);
+
+        THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Robot.PW_IsPowerOn)
+            .Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
+
+        _varInfo := __VARINFO(inoStatus.State.Inputs.Safety.FT_IsFault);
+
+        THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Safety.FT_IsFault)
+            .Warning(_sb.Clear().Append('<# Waiting for signal: #>').Append(_varInfo.Symbol).ToString());
+
+        inoControl.MotorOn := _blink.outQ;
+
+        IF inoStatus.State.Inputs.Robot.PW_IsPowerOn AND NOT inoStatus.State.Inputs.Safety.FT_IsFault THEN
+            inoControl.MotorOn := FALSE;
+            _progress := _progress + 1;
+        END_IF
+    END_IF;
+
+    IF _progress = 5 THEN
+        IF inoStatus.State.Inputs.Safety.FT_IsFault THEN
+            _progress := 1;
+        END_IF
+
+        inoControl.Start := _blink.outQ;
+
+        THIS^.Messenger.OnCondition(_infoTimer.Q AND NOT inoStatus.State.Inputs.Robot.PR_IsProgramRunning)
+            .Warning(_sb.Clear().Append('<#Waiting to program running! #>').ToString());
+
+        IF inoStatus.State.Inputs.Robot.PR_IsProgramRunning AND NOT inoStatus.State.Inputs.Safety.FT_IsFault THEN
+            inoControl.Start := FALSE;
+        END_IF
+    END_IF;
+
+    DoneWhen(inoStatus.State.Inputs.Robot.PR_IsProgramRunning AND
+            inoStatus.State.Inputs.Robot.PW_IsPowerOn AND
+            NOT inoStatus.State.Inputs.Safety.FT_IsFault);
+
     CallTimers(TRUE);
-	
-	THIS^.ThrowWhen(_errorTimer.Q );
-	
+    THIS^.ThrowWhen(_errorTimer.Q);
 END_IF
 
-IF  THIS^.Error AND NOT _errorMessage.Pinned THEN
-	THIS^.Restore();
+IF THIS^.Error AND NOT _errorMessage.Pinned THEN
+    THIS^.Restore();
 END_IF]]></ST>
     </Implementation>
     <Method Name="OnAbort" Id="{a212baff-46d2-0c08-08a3-cad23ed7282b}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task is aborted.
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task is aborted.
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnAbort
-]]></Declaration>
+METHOD PROTECTED OnAbort]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Start motors and program was aborted.#>'; END_IF;
-]]></ST>
+        <ST><![CDATA[IF __ISVALIDREF(inoStatus) THEN
+    THIS^.inoStatus.ActionDescription := '<#Start motors and program was aborted.#>';
+END_IF;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnDone" Id="{51c6463f-e46c-077c-2d10-aeec105a2595}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task reaches the ```Done``` state .
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task reaches the ```Done``` state .
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnDone
-]]></Declaration>
+METHOD PROTECTED OnDone]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Start motors and program finished successfully.#>'; END_IF;
-_progress:=0;]]></ST>
+        <ST><![CDATA[IF __ISVALIDREF(inoStatus) THEN
+    THIS^.inoStatus.ActionDescription := '<#Start motors and program finished successfully.#>';
+END_IF;
+
+_progress := 0;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnError" Id="{4751b325-ac56-0916-3815-f0506b3bedde}">
       <Declaration><![CDATA[METHOD PROTECTED OnError
-
 VAR
-	description: STRING;
+    description : STRING;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[description := '<#Start motors and program finished with error.#>'; 
-IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := description; END_IF;
+        <ST><![CDATA[description := '<#Start motors and program finished with error.#>';
+
+IF __ISVALIDREF(inoStatus) THEN
+    THIS^.inoStatus.ActionDescription := description;
+END_IF;
+
 THIS^._errorMessage.Error(_sb.Clear().Append(description).Append(' To restore acknowledge this alarm.').ToString()).Pin();]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStart" Id="{56202d37-319b-0c61-3e0e-74334b4e2839}">
-      <Declaration><![CDATA[METHOD PROTECTED OnStart 
-]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED OnStart]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN  THIS^.inoStatus.ActionDescription := '<#Start motors and program started.#>'; END_IF; 
-CallTimers(FALSE);
-]]></ST>
+        <ST><![CDATA[IF __ISVALIDREF(inoStatus) THEN
+    THIS^.inoStatus.ActionDescription := '<#Start motors and program started.#>';
+END_IF;
+
+CallTimers(FALSE);]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{35dbc12c-5077-0b05-2441-4129304de88a}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
-			<para>
-				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
-			</para>
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+            <para>
+                See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+            </para>
+        </summary>
+    </docu>
 ~*)
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>

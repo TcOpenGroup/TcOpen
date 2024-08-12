@@ -8,6 +8,5 @@ namespace TcoTestRunners
     {
         bool ContextOpen();
         bool ContextClose();
-
     }
 }

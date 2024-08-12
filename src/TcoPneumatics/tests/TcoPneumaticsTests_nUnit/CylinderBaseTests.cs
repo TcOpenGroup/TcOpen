@@ -1,11 +1,11 @@
-using NUnit.Framework;
-using TcoPneumatics;
-using Tc.Prober.Runners;
-using Tc.Prober.Recorder;
-using System.Reflection;
 using System.IO;
-using TcoPneumaticsTests;
+using System.Reflection;
+using NUnit.Framework;
+using Tc.Prober.Recorder;
+using Tc.Prober.Runners;
 using TcoCore.Testing;
+using TcoPneumatics;
+using TcoPneumaticsTests;
 
 namespace TcoPneumaticsTests
 {
@@ -14,22 +14,16 @@ namespace TcoPneumaticsTests
         CylinderBaseTestContext sut = ConnectorFixture.Connector.MAIN._cylinderBaseTests;
 
         [OneTimeSetUp()]
-        public void OneTimeSetUp()
-        {
-
-        }
+        public void OneTimeSetUp() { }
 
         [SetUp]
-        public void TestSetup()
-        {
-
-        }
+        public void TestSetup() { }
 
         [Test]
         [Timeout(10000)]
         public void Invalid()
-        {            
-            sut.ExecuteProbeRun(1, (int)eCyclinderBaseTests.Invalid);            
+        {
+            sut.ExecuteProbeRun(1, (int)eCyclinderBaseTests.Invalid);
         }
 
         [Test]
@@ -37,10 +31,10 @@ namespace TcoPneumaticsTests
         [TestCase(true)]
         [TestCase(false)]
         public void GetAtHome(bool signal)
-        {            
+        {
             sut._atHomeSignal.Synchron = signal;
             sut.ExecuteProbeRun(1, (int)eCyclinderBaseTests.GetAtHome);
-            Assert.AreEqual(sut._atHomeSignal.Synchron, sut._get_AtHome.Synchron);   
+            Assert.AreEqual(sut._atHomeSignal.Synchron, sut._get_AtHome.Synchron);
         }
 
         [Test]

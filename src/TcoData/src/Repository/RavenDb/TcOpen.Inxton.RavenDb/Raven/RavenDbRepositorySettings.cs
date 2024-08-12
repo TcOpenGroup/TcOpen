@@ -9,15 +9,17 @@ using TcOpen.Inxton.Data;
 
 namespace TcOpen.Inxton.RavenDb
 {
-    public class RavenDbRepositorySettings<T> : RavenDbRepositorySettingsBase<T> where T : IBrowsableDataObject 
+    public class RavenDbRepositorySettings<T> : RavenDbRepositorySettingsBase<T>
+        where T : IBrowsableDataObject
     {
-        public RavenDbRepositorySettings(string[] urls, string databaseName, string certPath, string certPass)
+        public RavenDbRepositorySettings(
+            string[] urls,
+            string databaseName,
+            string certPath,
+            string certPass
+        )
         {
-            var store = new DocumentStore
-            {
-                Urls = urls,
-                Database = databaseName
-            };
+            var store = new DocumentStore { Urls = urls, Database = databaseName };
 
             if (!string.IsNullOrWhiteSpace(certPath))
                 store.Certificate = new X509Certificate2(certPath, certPass);

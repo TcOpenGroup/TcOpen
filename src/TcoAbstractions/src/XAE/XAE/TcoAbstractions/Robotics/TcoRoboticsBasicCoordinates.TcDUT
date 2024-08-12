@@ -3,15 +3,13 @@
   <DUT Name="TcoRoboticsBasicCoordinates" Id="{78657219-302a-02f5-3d19-b2c89c9dc730}">
     <Declaration><![CDATA[TYPE TcoRoboticsBasicCoordinates :
 STRUCT
-	{attribute  addProperty Name "<#Coordinate X#>"}     
-	X : REAL;
-	{attribute  addProperty Name "<#Coordinate Y#>"}     
-	Y : REAL;
-	{attribute  addProperty Name "<#Coordinate Z#>"}     
-	Z : REAL;
-
+    {attribute  addProperty Name "<#Coordinate X#>"}
+    X : REAL;
+    {attribute  addProperty Name "<#Coordinate Y#>"}
+    Y : REAL;
+    {attribute  addProperty Name "<#Coordinate Z#>"}
+    Z : REAL;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -4,12 +4,11 @@
 
 ## Components
 
+## Dialogs
 
-## Dialogs 
+Registration dialogs is defined by _.SetPlcDialogs(DialogProxyServiceWpf.Create(new[] { PlcTcoCoreExamples.EXAMPLES_PRG.\_diaglogsContext}));_
 
-Registration dialogs is defined by *.SetPlcDialogs(DialogProxyServiceWpf.Create(new[] { PlcTcoCoreExamples.EXAMPLES_PRG._diaglogsContext}));*
-
-### Important: For correct behavior use this order of definition in your app. 
+### Important: For correct behavior use this order of definition in your app.
 
 ```csharp
    PlcTcoCoreExamples.Connector.BuildAndStart();
@@ -25,7 +24,7 @@ Registration dialogs is defined by *.SetPlcDialogs(DialogProxyServiceWpf.Create(
 
 ### Plc Hide dialog
 
-```csharp		
+```csharp
 	0:
 		_dialog1.Restore();
 		_dialog2.Restore();
@@ -57,6 +56,7 @@ Registration dialogs is defined by *.SetPlcDialogs(DialogProxyServiceWpf.Create(
             _invokeDiaglog1 := FALSE;
         END_IF;
 ```
+
 ![](assets/dialogWithoutPicture.png)
 
 ### Plc Example usage of Dialog with Image
@@ -83,6 +83,7 @@ Registration dialogs is defined by *.SetPlcDialogs(DialogProxyServiceWpf.Create(
             _invokeDiaglog1 := FALSE;
         END_IF;
 ```
+
 ![](assets/dialogWithPicture.png)
 
 ### Plc Example usage of Dialog Ok only
@@ -99,6 +100,7 @@ Registration dialogs is defined by *.SetPlcDialogs(DialogProxyServiceWpf.Create(
             _state := 30;
         END_IF
 ```
+
 ![](assets/dialogOk.png)
 
 ### Plc Example usage of Dialog Timed out (External close)
@@ -130,6 +132,7 @@ Here may be used any signal or condition when dialog should be closed with choos
             _invokeDiaglog1 := FALSE;
         END_IF;
 ```
+
 ![alt text](assets/dialogTimedOut.png)
 
 ### Plc Example usage of Customized Dialog
@@ -146,19 +149,19 @@ Here may be used any signal or condition when dialog should be closed with choos
 				  .WithOption4('This is Option4=>stop sequence')
             .WithCaption('Hey')
             .WithText('What we are going to do.');
-            
+
 			 IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option1) THEN
 				_state := 50;
 			END_IF;
-	
+
 			IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option2) THEN
 				_state := 0;
 			END_IF;
-	
+
 			IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option3) THEN
 				_state := 51;
 			END_IF;
-	
+
 			IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option4) THEN
 				_state := 0;
 				_invokeCustomizedDiaglog := FALSE;
@@ -167,31 +170,32 @@ Here may be used any signal or condition when dialog should be closed with choos
 ```
 
 ![alt text](assets/customizedDialog4Option.png)
+
 ## Plc Example usage of Customized Dialog with image
 
 ```csharp
  51:
          _dialogCustomized.Show()
-            
+
             .WithOption1('This is Option1=>retry')
 			  .WithOption2('This is Option2=>first step')
 			    .WithOption3('This is Option3 =>continue')
 			.WithImage('D:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenWide.png',500,500)
             .WithCaption('Hey')
             .WithText('What we are going to do.');
-            
+
 			 IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option1) THEN
 				_state := 50;
 			END_IF;
-	
+
 			IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option2) THEN
 				_state := 0;
 			END_IF;
-	
+
 			IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option3) THEN
 				_state := 60;
 			END_IF;
-	
+
 			IF (_dialogCustomized.Answer = TcoCore.eCustomizedDialogAnswer.Option4) THEN
 				_state := 0;
 				_invokeCustomizedDiaglog := FALSE;
@@ -202,7 +206,7 @@ Here may be used any signal or condition when dialog should be closed with choos
 ![alt text](assets/customizedDialog3OptionsWithImage.png)
 ![alt text](assets/customizedDialog3OptionsWithZoomedImage.png)
 
-## Plc Example usage of Input Dialog 
+## Plc Example usage of Input Dialog
 
 ### Declaration
 
@@ -211,7 +215,7 @@ Here may be used any signal or condition when dialog should be closed with choos
 	_dialogWithInput        : TcoCore.TcoInputDialog(THIS^);
 ```
 
-### Structure defined by user that will be displayed in dialog as input fields 
+### Structure defined by user that will be displayed in dialog as input fields
 
 ```csharp
 FUNCTION_BLOCK MyOwnContent EXTENDS TcoCore.TcoInputDialogContentContainer
@@ -265,8 +269,8 @@ END_VAR
             .WithCaption('Hey wana set data')
             .WithText('Do you realy want to sent data to ....?');
 
-	
-	
+
+
 			IF (_dialogWithInput.Answer = TcoCore.eInputDialogAnswer.OK) THEN
 				_state := 1000;
 	            _invokeInputDiaglog := FALSE;

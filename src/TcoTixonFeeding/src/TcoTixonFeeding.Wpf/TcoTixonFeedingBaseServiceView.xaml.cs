@@ -19,7 +19,6 @@ using TcOpen.Inxton.Wpf;
 
 namespace TcoTixonFeeding
 {
-
     public partial class TcoTixonFeedingBaseServiceView : UserControl
     {
         public TcoTixonFeedingBaseServiceView()
@@ -31,13 +30,5 @@ namespace TcoTixonFeeding
 
             InitializeComponent();
         }
-
-
-       
-
     }
-
- 
-
-
 }

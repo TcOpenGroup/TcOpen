@@ -16,7 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Serilog.Sinks.MQTT\Serilog.Sinks.MQTT.csproj" />
+    <ProjectReference
+      Include="..\..\src\Serilog.Sinks.MQTT\Serilog.Sinks.MQTT.csproj"
+    />
   </ItemGroup>
 
 </Project>

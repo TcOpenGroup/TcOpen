@@ -9,8 +9,8 @@
 			<summary>
 				Pushes the message to logging buffer.
 				See also `PushMessage`
-				<note type="important">When using this method in a cyclical environment the message will be push each time it is called. You may easily overrun the logging buffer.</note>				 
-			</summary>				
+				<note type="important">When using this method in a cyclical environment the message will be push each time it is called. You may easily overrun the logging buffer.</note>
+			</summary>
 		</docu>
 ~*)
 METHOD PUBLIC Push
@@ -18,16 +18,16 @@ VAR_INPUT
 	(*~
 		<docu>
 			<summary>
-				Message/log entry text.				 
-			</summary>				
+				Message/log entry text.
+			</summary>
 		</docu>
 	~*)
 	Text : STRING(TcoMessengerEnv.MAX_MESSAGE_TEXT_LENGHT);
 	(*~
 		<docu>
 			<summary>
-				Message/log entry category.				 
-			</summary>				
+				Message/log entry category.
+			</summary>
 		</docu>
 	~*)
 	Category : eMessageCategory;
@@ -41,14 +41,14 @@ END_VAR
 				Pushes the message to logging buffer.
 				See also `Push`
 				<note:important>
-						This method is typically invoked from a `TcoMessenger`. 
+						This method is typically invoked from a `TcoMessenger`.
 						Depending on settings of the messenger the messages can be logged on rising edge of the message, to prevent buffer overrun.
 						For details see `TcoMessengerSettings`.
-				</note>				 
-			</summary>				
+				</note>
+			</summary>
 		</docu>
 ~*)
-METHOD PushMessage 
+METHOD PushMessage
 VAR_INPUT
 	inMessage : TcoMessage;
 END_VAR

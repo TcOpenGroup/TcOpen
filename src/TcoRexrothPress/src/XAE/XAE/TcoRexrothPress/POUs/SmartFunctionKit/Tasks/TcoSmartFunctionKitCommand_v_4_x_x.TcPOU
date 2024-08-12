@@ -1,216 +1,208 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
   <POU Name="TcoSmartFunctionKitCommand_v_4_x_x" Id="{0bac0d38-9946-403e-9f84-cb0e24249424}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoSmartFunctionKitCommand_v_4_x_x EXTENDS TcoCore.TcoTask
 VAR_INPUT
-	inCommand:TcoSmartFunctionKitRequest_v_4_x_x;
+    inCommand : TcoSmartFunctionKitRequest_v_4_x_x;
 END_VAR
 VAR_IN_OUT
-	inoIoData 	: TcoSmartFunctionKitIO_v_4_x_x;
-    inoConfig 	: TcoSmartFunctionKitConfig_v_4_x_x;
-	inoStatus 	: TcoSmartFunctionKitStatus_v_4_x_x;	
-	inoResults 	: TcoSmartFunctionKitResults_v_4_x_x;
-	
+    inoIoData : TcoSmartFunctionKitIO_v_4_x_x;
+    inoConfig : TcoSmartFunctionKitConfig_v_4_x_x;
+    inoStatus : TcoSmartFunctionKitStatus_v_4_x_x;
+    inoResults : TcoSmartFunctionKitResults_v_4_x_x;
 END_VAR
 VAR
-    {attribute 'hide'} 
-	_progress : INT := 0;
-    {attribute 'hide'} 
-	_infoTimer :  TON;
-    {attribute 'hide'} 
-	_errorTimer :  TON;
-    {attribute 'hide'} 
-	_varInfo : __SYSTEM.VAR_INFO;
-    {attribute 'hide'} 
-	_sb : TcoCore.StringBuilder;
-END_VAR
-]]></Declaration>
+    {attribute 'hide'}
+    _progress : INT := 0;
+    {attribute 'hide'}
+    _infoTimer : TON;
+    {attribute 'hide'}
+    _errorTimer : TON;
+    {attribute 'hide'}
+    _varInfo : __SYSTEM.VAR_INFO;
+    {attribute 'hide'}
+    _sb : TcoCore.StringBuilder;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF Execute() THEN
-	IF _progress = 0 THEN
-		IF NOT __ISVALIDREF(inoIoData) THEN
-			_varInfo :=__VARINFO(inoIoData);
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSIF NOT __ISVALIDREF(inoConfig) THEN                                                  
-			_varInfo :=__VARINFO(inoConfig);                                                    
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSIF NOT __ISVALIDREF(inoStatus) THEN                                                  
-			_varInfo :=__VARINFO(inoStatus);                                                    
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSIF NOT __ISVALIDREF(inoResults) THEN                                              
-			_varInfo :=__VARINFO(inoResults);                                                
-			Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
-		ELSE
-			_progress := _progress + 1;
-		END_IF
+    IF _progress = 0 THEN
+        IF NOT __ISVALIDREF(inoIoData) THEN
+            _varInfo := __VARINFO(inoIoData);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSIF NOT __ISVALIDREF(inoConfig) THEN
+            _varInfo := __VARINFO(inoConfig);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSIF NOT __ISVALIDREF(inoStatus) THEN
+            _varInfo := __VARINFO(inoStatus);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSIF NOT __ISVALIDREF(inoResults) THEN
+            _varInfo := __VARINFO(inoResults);
+            Messenger.Programming(_sb.Clear().Append('<#Invalid reference: #>').Append(_varInfo.Symbol).ToString()).Pin();
+        ELSE
+            _progress := _progress + 1;
+        END_IF
+    END_IF
 
-	END_IF
-	
-	IF _progress = 1 THEN
-		THIS^.inoStatus.ActionDescription := '<#Pressing running.#>'; 
-		CallTimers(FALSE);
-		THIS^.inoIoData.Request.Command:=inCommand.Command;
-		THIS^.inoIoData.Request.Value1:=inCommand.Value1;
-		THIS^.inoIoData.Request.Value2:=inCommand.Value2;
-		THIS^.inoIoData.Request.Value3:=inCommand.Value3;
-		THIS^.inoIoData.Request.Value4:=inCommand.Value4;
-		THIS^.inoIoData.Request.Value5:=inCommand.Value5;
-		THIS^.inoIoData.Request.Value6:=inCommand.Value6;
-		THIS^.inoIoData.Request.Value7:=inCommand.Value7;
-		IF  THIS^.inoStatus.ResponseStatus.RequestPossible THEN
-			_progress := _progress + 1;
-		END_IF;
-	END_IF
-	
-	IF _progress = 2 THEN
-		
-		THIS^.inoIoData.Request.Handle:=THIS^.inoIoData.Response.Handle+1;
-		IF THIS^.inoIoData.Request.Handle >1000 THEN
-			THIS^.inoIoData.Request.Handle:=1;
-		END_IF
-		_progress := _progress + 1;
-		
-	END_IF
-	
-	IF _progress = 3 THEN
-		
-		//THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for ProgramActive!#>').Pin(); 
-		IF  THIS^.inoIoData.Request.Handle<>THIS^.inoIoData.Response.Handle THEN
-				_progress := _progress + 1;
-		END_IF
-	END_IF
-	
-	IF _progress = 4 THEN
-		THIS^.Messenger.OnCondition(_infoTimer.Q AND THIS^.inoIoData.Response.Status=0).Warning('<#Waiting for acknowledge Handle signal!#>');
-		IF THIS^.inoIoData.Request.Handle=THIS^.inoIoData.Response.Handle AND THIS^.inoIoData.Response.Status=0 THEN
-			CallTimers(FALSE);
-			_progress := 100;
-		ELSIF THIS^.inoIoData.Request.Handle=THIS^.inoIoData.Response.Handle   THEN
-			IF THIS^.inoIoData.Response.Status<>0 THEN
-				Messenger.Build().Append('Function Smart Kit reported error: ').Append(TO_STRING(THIS^.inoIoData.Response.Status)).Append(' |[[0]AdvancedDiagnosticMessage]|').As().AsError().Pin();
-			END_IF
-			THIS^.ThrowWhen(THIS^.inoIoData.Response.Status<>0);
-		END_IF
-	END_IF
-	
+    IF _progress = 1 THEN
+        THIS^.inoStatus.ActionDescription := '<#Pressing running.#>';
+        CallTimers(FALSE);
+        THIS^.inoIoData.Request.Command := inCommand.Command;
+        THIS^.inoIoData.Request.Value1 := inCommand.Value1;
+        THIS^.inoIoData.Request.Value2 := inCommand.Value2;
+        THIS^.inoIoData.Request.Value3 := inCommand.Value3;
+        THIS^.inoIoData.Request.Value4 := inCommand.Value4;
+        THIS^.inoIoData.Request.Value5 := inCommand.Value5;
+        THIS^.inoIoData.Request.Value6 := inCommand.Value6;
+        THIS^.inoIoData.Request.Value7 := inCommand.Value7;
 
-	
-	IF _progress = 100 THEN
+        IF THIS^.inoStatus.ResponseStatus.RequestPossible THEN
+            _progress := _progress + 1;
+        END_IF;
+    END_IF
 
-		THIS^.DoneWhen(TRUE);
-		_progress := 0;
-	END_IF
-	
-	CallTimers(TRUE);
-	
-	THIS^.ThrowWhen(_errorTimer.Q);
-	
-END_IF
-]]></ST>
+    IF _progress = 2 THEN
+        THIS^.inoIoData.Request.Handle := THIS^.inoIoData.Response.Handle + 1;
+
+        IF THIS^.inoIoData.Request.Handle > 1000 THEN
+            THIS^.inoIoData.Request.Handle := 1;
+        END_IF
+
+        _progress := _progress + 1;
+    END_IF
+
+    IF _progress = 3 THEN
+        //THIS^.Messenger.OnCondition(_infoTimer.Q).Warning('<#Waiting for ProgramActive!#>').Pin();
+        IF THIS^.inoIoData.Request.Handle <> THIS^.inoIoData.Response.Handle THEN
+            _progress := _progress + 1;
+        END_IF
+    END_IF
+
+    IF _progress = 4 THEN
+        THIS^.Messenger.OnCondition(_infoTimer.Q AND THIS^.inoIoData.Response.Status = 0).Warning('<#Waiting for acknowledge Handle signal!#>');
+
+        IF THIS^.inoIoData.Request.Handle = THIS^.inoIoData.Response.Handle AND THIS^.inoIoData.Response.Status = 0 THEN
+            CallTimers(FALSE);
+            _progress := 100;
+        ELSIF THIS^.inoIoData.Request.Handle = THIS^.inoIoData.Response.Handle THEN
+            IF THIS^.inoIoData.Response.Status <> 0 THEN
+                Messenger.Build()
+                    .Append('Function Smart Kit reported error: ')
+                    .Append(TO_STRING(THIS^.inoIoData.Response.Status))
+                    .Append(' |[[0]AdvancedDiagnosticMessage]|')
+                    .As()
+                    .AsError().Pin();
+            END_IF
+
+            THIS^.ThrowWhen(THIS^.inoIoData.Response.Status <> 0);
+        END_IF
+    END_IF
+
+    IF _progress = 100 THEN
+        THIS^.DoneWhen(TRUE);
+        _progress := 0;
+    END_IF
+
+    CallTimers(TRUE);
+    THIS^.ThrowWhen(_errorTimer.Q);
+END_IF]]></ST>
     </Implementation>
-    <Method Name="CallTimers" Id="{4e136eea-8011-4eb1-a214-7e83460ce816}">
+    <Method Name="CallTimers" Id="{240c2b6f-2925-03b6-20a2-3516e5a0a0d4}">
       <Declaration><![CDATA[METHOD CallTimers
 VAR_INPUT
-	inValue : BOOL;
-END_VAR
-]]></Declaration>
+    inValue : BOOL;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoConfig) THEN  
-_infoTimer(IN := inValue, PT := THIS^.inoConfig.InfoTime);
-_errorTimer(IN := inValue, PT := THIS^.inoConfig.ErrorTime);
+        <ST><![CDATA[IF __ISVALIDREF(inoConfig) THEN
+    _infoTimer(IN := inValue, PT := THIS^.inoConfig.InfoTime);
+    _errorTimer(IN := inValue, PT := THIS^.inoConfig.ErrorTime);
 END_IF;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="FB_init" Id="{837d94d9-3cf2-434b-b695-2876b8579b83}">
+    <Method Name="FB_init" Id="{859cc853-ddfc-018e-0826-39222d4a92c3}">
       <Declaration><![CDATA[{attribute 'hide'}
 METHOD PUBLIC FB_init : BOOL
 VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	ParentObject : ITcoObject;
-END_VAR
-]]></Declaration>
+    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+    ParentObject : ITcoObject;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnAbort" Id="{6c4c61e1-2bb5-48bb-a8da-4996b59d246d}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task is aborted.
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task is aborted.
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnAbort
-]]></Declaration>
+METHOD PROTECTED OnAbort]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Pressing was aborted, while not yet completed!#>';END_IF; 
-]]></ST>
+        <ST><![CDATA[IF __ISVALIDREF(inoStatus) THEN
+    THIS^.inoStatus.ActionDescription := '<#Pressing was aborted, while not yet completed!#>';
+END_IF;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="OnDone" Id="{2629bb32-4b20-4156-8ecc-087d2d6d0d85}">
+    <Method Name="OnDone" Id="{210913c6-ccab-0f8d-0074-418aee93c60c}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task reaches the ```Done``` state .
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task reaches the ```Done``` state .
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnDone
-]]></Declaration>
+METHOD PROTECTED OnDone]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN  THIS^.inoStatus.ActionDescription := '<#Pressing was completed successfully.#>';END_IF; 
-]]></ST>
+        <ST><![CDATA[IF __ISVALIDREF(inoStatus) THEN
+    THIS^.inoStatus.ActionDescription := '<#Pressing was completed successfully.#>';
+END_IF;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnError" Id="{79335bb1-e3fa-41db-a7ef-d41d11e3a07a}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task reaches the ```Error``` state.
-			<para>
-				Do not confuse with <see cref="PlcDocu.TcoCore.TcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
-			</para>
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task reaches the ```Error``` state.
+            <para>
+                Do not confuse with <see cref="PlcDocu.TcoCore.TcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
+            </para>
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnError
-]]></Declaration>
+METHOD PROTECTED OnError]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN   THIS^.inoStatus.ActionDescription := '<#Pressing finished with error.#>'; END_IF;
-]]></ST>
+        <ST><![CDATA[IF __ISVALIDREF(inoStatus) THEN
+    THIS^.inoStatus.ActionDescription := '<#Pressing finished with error.#>';
+END_IF;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStart" Id="{f8c0879b-be36-400f-8f88-27588869c8b2}">
-      <Declaration><![CDATA[METHOD PROTECTED OnStart 
-]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED OnStart]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF  __ISVALIDREF(inoStatus) THEN  THIS^.inoStatus.ActionDescription := '<#Pressing started.#>'; END_IF; 
-]]></ST>
+        <ST><![CDATA[IF __ISVALIDREF(inoStatus) THEN
+    THIS^.inoStatus.ActionDescription := '<#Pressing started.#>';
+END_IF;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{34ffda01-3801-4c7f-8e7c-2edbf0b8e0c2}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
-			<para>
-				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
-			</para>
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+            <para>
+                See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+            </para>
+        </summary>
+    </docu>
 ~*)
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.Restore();
 _progress := 0;
 CallTimers(FALSE);
-Messenger.UnPin();
-
-
-
-]]></ST>
+Messenger.UnPin();]]></ST>
       </Implementation>
     </Method>
   </POU>

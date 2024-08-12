@@ -15,7 +15,7 @@ namespace TcoPneumaticsTests
             Environment.SetEnvironmentVariable("Tc3Target", YOUR_TARGER_SYSTEM AMS_ID);
         }
 #endif
-        
+
         static string TargetAmsId = Environment.GetEnvironmentVariable("Tc3Target");
         static int TargetAmsPort = 852;
 

@@ -1,17 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="TcoTixonStep_Control_v_1_x_x" Id="{3210fda9-1cdc-0811-0b31-547f6518ee23}">
-    <Declaration><![CDATA[TYPE
-    TcoTixonStep_Control_v_1_x_x EXTENDS TcoTixonGenericControl :
-    STRUCT
-		{attribute addProperty Name "<#Stepper valve#> - q7"}
-        StepperValve : BOOL;
-      	{attribute addProperty Name "<#Shot component#> - q8"}
-        ShotComponent : BOOL;
-       
-      
-    END_STRUCT
-END_TYPE
-]]></Declaration>
+    <Declaration><![CDATA[TYPE TcoTixonStep_Control_v_1_x_x EXTENDS TcoTixonGenericControl :
+STRUCT
+    {attribute addProperty Name "<#Stepper valve#> - q7"}
+    StepperValve : BOOL;
+    {attribute addProperty Name "<#Shot component#> - q8"}
+    ShotComponent : BOOL;
+END_STRUCT
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

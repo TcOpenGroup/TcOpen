@@ -4,18 +4,17 @@
     <Declaration><![CDATA[{attribute 'qualified_only'}
 TYPE eEcatState :
 (
-	MASK          := 15,
-	INIT          := 1, 
-	PREOP         := 2,  
-	BOOTSTRAP     := 3,  
-	SAFEOP        := 4,  
-	OP            := 8,  
-	ERROR         := 16,  
-	INVALID_VPRS  := 32,  
-	INITCMD_ERROR := 48,  
-	DISABLED      := 128 
-)BYTE;
-END_TYPE
-]]></Declaration>
+    MASK := 15,
+    INIT := 1,
+    PREOP := 2,
+    BOOTSTRAP := 3,
+    SAFEOP := 4,
+    OP := 8,
+    ERROR := 16,
+    INVALID_VPRS := 32,
+    INITCMD_ERROR := 48,
+    DISABLED := 128
+) BYTE;
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

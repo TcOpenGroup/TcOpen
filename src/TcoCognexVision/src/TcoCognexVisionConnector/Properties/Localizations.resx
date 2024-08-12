@@ -240,17 +240,18 @@
   <data name="___Restore_executed___" xml:space="preserve">
     <value>Restore executed!</value>
   </data>
-  <data name="___Invalid_reference_ClearResultsTask____TcoCore_eMessageCategory_ProgrammingError_______RETURN__END_IF__clearResultsTask_REF__refClearResultsTask___IF_Execute___THEN__IF__progress___0_THEN___IF_NOT___ISVALIDREF_inoIoData__THEN_____varInfo_____VARINFO_inoIoData______Messenger_Programming__sb_Clear___Append____Invalid_reference____" xml:space="preserve">
+  <data name="___Invalid_reference_ClearResultsTask____TcoCore_eMessageCategory_ProgrammingError_______RETURN__END_IF___clearResultsTask_REF__refClearResultsTask___IF_Execute___THEN_____IF__progress___0_THEN_________IF_NOT___ISVALIDREF_inoIoData__THEN______________varInfo______VARINFO_inoIoData_______________Messenger_Programming__sb_Clear___Append____Invalid_reference____" xml:space="preserve">
     <value>Invalid reference ClearResultsTask&gt;', TcoCore.eMessageCategory.ProgrammingError);
     RETURN;
 END_IF
+
 _clearResultsTask REF= refClearResultsTask;
 
 IF Execute() THEN
-	IF _progress = 0 THEN
-		IF NOT __ISVALIDREF(inoIoData) THEN
-			_varInfo :=__VARINFO(inoIoData);
-			Messenger.Programming(_sb.Clear().Append('Invalid reference: </value>
+    IF _progress = 0 THEN
+        IF NOT __ISVALIDREF(inoIoData) THEN
+            _varInfo := __VARINFO(inoIoData);
+            Messenger.Programming(_sb.Clear().Append('Invalid reference: </value>
   </data>
   <data name="___Error_time_is_lower_than_timeout__Please_check_config___" xml:space="preserve">
     <value>Error time is lower than timeout. Please check config!</value>
@@ -396,8 +397,12 @@ IF Execute() THEN
   <data name="___Index_of_UserData_in_method_SetUserDataAsString_exceeds_the_defined_size___" xml:space="preserve">
     <value>Index of UserData in method SetUserDataAsString exceeds the defined size!</value>
   </data>
-  <data name="___Job_number_____Append_UINT_TO_STRING__jobNumber___Append____is_greater_than_the_maximal_value_of____Append_UINT_TO_STRING_inoConfig_MaxJobNumber___Append_____" xml:space="preserve">
-    <value>Job number (').Append(UINT_TO_STRING(_jobNumber)).Append(') is greater than the maximal value of ').Append(UINT_TO_STRING(inoConfig.MaxJobNumber)).Append('!</value>
+  <data name="___Job_number__________________________Append_UINT_TO_STRING__jobNumber________________________Append____is_greater_than_the_maximal_value_of_________________________Append_UINT_TO_STRING_inoConfig_MaxJobNumber________________________Append_____" xml:space="preserve">
+    <value>Job number (')
+                    .Append(UINT_TO_STRING(_jobNumber))
+                    .Append(') is greater than the maximal value of ')
+                    .Append(UINT_TO_STRING(inoConfig.MaxJobNumber))
+                    .Append('!</value>
   </data>
   <data name="___Change_job_by_number_____Append_UINT_TO_STRING_THIS___jobNumber___Append____is_running___" xml:space="preserve">
     <value>Change job by number (').Append(UINT_TO_STRING(THIS^._jobNumber)).Append(') is running.</value>
@@ -408,8 +413,10 @@ IF Execute() THEN
   <data name="___Job_number__" xml:space="preserve">
     <value>Job number</value>
   </data>
-  <data name="___Change_job_by_number_____Append_UINT_TO_STRING_THIS___jobNumber___Append____aborted__while_not_yet_finished___" xml:space="preserve">
-    <value>Change job by number (').Append(UINT_TO_STRING(THIS^._jobNumber)).Append(') aborted, while not yet finished.</value>
+  <data name="___Change_job_by_number__________Append_UINT_TO_STRING_THIS___jobNumber________Append____aborted__while_not_yet_finished___" xml:space="preserve">
+    <value>Change job by number (')
+    .Append(UINT_TO_STRING(THIS^._jobNumber))
+    .Append(') aborted, while not yet finished.</value>
   </data>
   <data name="___Change_job_by_number_____Append_UINT_TO_STRING_THIS___jobNumber___Append____was_completed_succesfully___" xml:space="preserve">
     <value>Change job by number (').Append(UINT_TO_STRING(THIS^._jobNumber)).Append(') was completed succesfully.</value>
@@ -426,23 +433,31 @@ IF Execute() THEN
   <data name="___Waiting_for_the_signal_ResultsValid_reseted___" xml:space="preserve">
     <value>Waiting for the signal ResultsValid reseted!</value>
   </data>
-  <data name="___SoftEvent_number______Append_UINT_TO_STRING__softEventNumber___Append____is_greater_than_the_maximal_value_of_7___" xml:space="preserve">
-    <value>SoftEvent number: (').Append(UINT_TO_STRING(_softEventNumber)).Append(') is greater than the maximal value of 7!</value>
+  <data name="___SoftEvent_number___________________________Append_UINT_TO_STRING__softEventNumber________________________Append____is_greater_than_the_maximal_value_of_7___" xml:space="preserve">
+    <value>SoftEvent number: (')
+                    .Append(UINT_TO_STRING(_softEventNumber))
+                    .Append(') is greater than the maximal value of 7!</value>
   </data>
   <data name="___SoftEvent__number_____Append_UINT_TO_STRING_THIS___softEventNumber___Append____is_running___" xml:space="preserve">
     <value>SoftEvent (number: ').Append(UINT_TO_STRING(THIS^._softEventNumber)).Append(') is running.</value>
   </data>
-  <data name="___Waiting_for_the_signal_TriggerSoftEvent____Append_UINT_TO_STRING_THIS___softEventNumber___Append____to_be_set___" xml:space="preserve">
-    <value>Waiting for the signal TriggerSoftEvent[').Append(UINT_TO_STRING(THIS^._softEventNumber)).Append('] to be set!</value>
+  <data name="___Waiting_for_the_signal_TriggerSoftEvent_____________________Append_UINT_TO_STRING_THIS___softEventNumber____________________Append____to_be_set___" xml:space="preserve">
+    <value>Waiting for the signal TriggerSoftEvent[')
+                .Append(UINT_TO_STRING(THIS^._softEventNumber))
+                .Append('] to be set!</value>
   </data>
-  <data name="___Waiting_for_the_signal_TriggerSoftEvent____Append_UINT_TO_STRING_THIS___softEventNumber___Append____to_be_reseted___" xml:space="preserve">
-    <value>Waiting for the signal TriggerSoftEvent[').Append(UINT_TO_STRING(THIS^._softEventNumber)).Append('] to be reseted!</value>
+  <data name="___Waiting_for_the_signal_TriggerSoftEvent_____________________Append_UINT_TO_STRING_THIS___softEventNumber____________________Append____to_be_reseted___" xml:space="preserve">
+    <value>Waiting for the signal TriggerSoftEvent[')
+                .Append(UINT_TO_STRING(THIS^._softEventNumber))
+                .Append('] to be reseted!</value>
   </data>
   <data name="___Soft_event_number__" xml:space="preserve">
     <value>Soft event number</value>
   </data>
-  <data name="___SoftEvent__number_____Append_UINT_TO_STRING_THIS___softEventNumber___Append____was_aborted__while_not_yet_completed___" xml:space="preserve">
-    <value>SoftEvent (number: ').Append(UINT_TO_STRING(THIS^._softEventNumber)).Append(') was aborted, while not yet completed.</value>
+  <data name="___SoftEvent__number__________Append_UINT_TO_STRING_THIS___softEventNumber________Append____was_aborted__while_not_yet_completed___" xml:space="preserve">
+    <value>SoftEvent (number: ')
+    .Append(UINT_TO_STRING(THIS^._softEventNumber))
+    .Append(') was aborted, while not yet completed.</value>
   </data>
   <data name="___SoftEvent__number_____Append_UINT_TO_STRING_THIS___softEventNumber___Append____was_completed_successfully___" xml:space="preserve">
     <value>SoftEvent (number: ').Append(UINT_TO_STRING(THIS^._softEventNumber)).Append(') was completed successfully.</value>

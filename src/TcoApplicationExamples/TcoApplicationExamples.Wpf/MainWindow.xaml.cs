@@ -11,16 +11,19 @@ namespace TcoApplicationExamples.Wpf
             InitializeComponent();
 
             // Clicking on links in markdown will open browser.
-            CommandBindings.Add(new CommandBinding(
-            NavigationCommands.GoToPage,
-            (sender, e) =>
-            {
-                var proc = new Process();
-                proc.StartInfo.UseShellExecute = true;
-                proc.StartInfo.FileName = (string)e.Parameter;
+            CommandBindings.Add(
+                new CommandBinding(
+                    NavigationCommands.GoToPage,
+                    (sender, e) =>
+                    {
+                        var proc = new Process();
+                        proc.StartInfo.UseShellExecute = true;
+                        proc.StartInfo.FileName = (string)e.Parameter;
 
-                proc.Start();
-            }));
+                        proc.Start();
+                    }
+                )
+            );
         }
     }
 }

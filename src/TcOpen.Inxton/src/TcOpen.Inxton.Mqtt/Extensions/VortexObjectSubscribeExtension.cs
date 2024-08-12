@@ -8,18 +8,18 @@ namespace TcOpen.Inxton.Mqtt
         /// <summary>
         /// Write changes from a topic to an Onliner object.
         /// <example>
-        /// Select the Plc-Twin variable in and subscribe to it. 
+        /// Select the Plc-Twin variable in and subscribe to it.
         /// If you subscribe to an object of type i.e.  "ST001_ComponentsHandle" provide a "Plain" type in the generic subscribe method for parsing  purposes "PlainST001_ComponentsHandle"
-        /// 
+        ///
         /// _mqttMirrorComponents is of type ST001_ComponentsHandle but the data that is in the Mqtt topic is of type PlainST001_ComponentsHandle, therefore use the plain type for subscribe.
-        /// 
+        ///
         ///     <code>
         ///         IntegrationProjectsPlc.MAIN_TECHNOLOGY._technology._ST001
         ///             ._mqttMirrorComponents
         ///             .Subscribe<PlainST001_ComponentsHandler>(client, "fun_with_TcOpen_Hammer");
         ///     </code>
         /// </example>
-        /// 
+        ///
 
         /// </summary>
         /// <typeparam name="T">The plain type of a VortexObject</typeparam>
@@ -27,9 +27,18 @@ namespace TcOpen.Inxton.Mqtt
         /// <param name="client">MQTT Client</param>
         /// <param name="topic">Topic name</param>
         /// <returns>TcoMqttSubscriber for unbsubscribing</returns>
-        public static TcoMqttSubscriber<T> Subscribe<T>(this IVortexObject vortexObject, IMqttClient client, string topic) where T : IPlain
+        public static TcoMqttSubscriber<T> Subscribe<T>(
+            this IVortexObject vortexObject,
+            IMqttClient client,
+            string topic
+        )
+            where T : IPlain
         {
-            var mqttWrapper = new TcoMqttSubscriber<T>(client, topic, new JsonStringPayloadDeserializer<T>());
+            var mqttWrapper = new TcoMqttSubscriber<T>(
+                client,
+                topic,
+                new JsonStringPayloadDeserializer<T>()
+            );
             mqttWrapper.SubscribeAsync(newData => vortexObject.FlushPlainToOnline(newData));
             return mqttWrapper;
         }
@@ -40,5 +49,4 @@ namespace TcOpen.Inxton.Mqtt
             o.FlushPlainToOnline(plainer);
         }
     }
-
 }

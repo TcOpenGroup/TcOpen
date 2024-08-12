@@ -3,26 +3,37 @@
     <OutputType>Library</OutputType>
     <TargetFrameworks>net48;net5.0</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <!--NuGet properties-->   
+    <!--NuGet properties-->
     <Authors>TcOpenGroup contributors</Authors>
     <Company>TcOpenGroup</Company>
     <RepositoryUrl>https://github.com/TcOpenGroup/TcOpen</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <PackageTags>TwinCAT3 Beckhoff</PackageTags>
-    <PackageReleaseNotes>Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
+    <PackageReleaseNotes
+    >Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
     <PackageProjectUrl>http://docs.tcopengroup.org/</PackageProjectUrl>
-    <PackageIconUrl>https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
+    <PackageIconUrl
+    >https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
   </PropertyGroup>
-  
+
   <ItemGroup>
-    <PackageReference Include="Inxton.Package.Vortex.Essentials" Version="2.0.0" />
+    <PackageReference
+      Include="Inxton.Package.Vortex.Essentials"
+      Version="2.0.0"
+    />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="5.0.7" />
+    <PackageReference
+      Include="Microsoft.Extensions.Identity.Stores"
+      Version="5.0.7"
+    />
   </ItemGroup>
-  
+
   <ItemGroup>
-    <Reference Include="PresentationCore" Condition="$(TargetFramework) == 'net48'" />
+    <Reference
+      Include="PresentationCore"
+      Condition="$(TargetFramework) == 'net48'"
+    />
   </ItemGroup>
-  
+
 </Project>

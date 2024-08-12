@@ -3,15 +3,13 @@
   <DUT Name="eTcoLoggerTests" Id="{3152a930-9ddc-047f-03f1-d36a10a1ade6}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE
-    eTcoLoggerTests :
-    (
-		PushMessage := 10,
-		PushMessageMultiple := 20,
-		PushMessageMultipleInMoreCycles := 30,
-		SimplePush := 40		
-    );
-END_TYPE
-]]></Declaration>
+TYPE eTcoLoggerTests :
+(
+    PushMessage := 10,
+    PushMessageMultiple := 20,
+    PushMessageMultipleInMoreCycles := 30,
+    SimplePush := 40
+);
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

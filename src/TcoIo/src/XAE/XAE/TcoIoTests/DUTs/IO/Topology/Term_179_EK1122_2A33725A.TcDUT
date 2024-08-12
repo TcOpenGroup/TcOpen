@@ -9,16 +9,15 @@
 {attribute addProperty Name "Term 179 (EK1122)"}
 TYPE Term_179_EK1122_2A33725A EXTENDS EK1122_1FC0878B :
 STRUCT
-	{attribute addProperty Name "Term 180 (EK1100)"}
-	{attribute addProperty PreviousPort "Term 179 (EK1122) : D"}
-	{attribute addProperty SyncUnit "default"}
-	Term_180_EK1100 : Term_180_EK1100_796B7783;
-	{attribute addProperty Name "Term 182 (EK1100)"}
-	{attribute addProperty PreviousPort "Term 179 (EK1122) : B"}
-	{attribute addProperty SyncUnit "default"}
-	Term_182_EK1100 : Term_182_EK1100_E6B2C35E;
+    {attribute addProperty Name "Term 180 (EK1100)"}
+    {attribute addProperty PreviousPort "Term 179 (EK1122) : D"}
+    {attribute addProperty SyncUnit "default"}
+    Term_180_EK1100 : Term_180_EK1100_796B7783;
+    {attribute addProperty Name "Term 182 (EK1100)"}
+    {attribute addProperty PreviousPort "Term 179 (EK1122) : B"}
+    {attribute addProperty SyncUnit "default"}
+    Term_182_EK1100 : Term_182_EK1100_E6B2C35E;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

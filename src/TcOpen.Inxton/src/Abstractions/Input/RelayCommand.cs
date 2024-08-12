@@ -8,7 +8,7 @@ namespace TcOpen.Inxton.Input
 {
     /// <summary>
     /// A command whose sole purpose is to relay its functionality to other
-    /// objects by invoking delegates. 
+    /// objects by invoking delegates.
     /// </summary>
     public class RelayCommand : ICommand
     {
@@ -18,7 +18,11 @@ namespace TcOpen.Inxton.Input
 
         private readonly Action _logAction;
 
-        public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null, Action logAction = null)
+        public RelayCommand(
+            Action<object> execute,
+            Func<object, bool> canExecute = null,
+            Action logAction = null
+        )
         {
             _execute = execute;
             _canExecute = canExecute;
@@ -27,8 +31,7 @@ namespace TcOpen.Inxton.Input
 
         public void ValidateCanExecute(IValueTag sender, ValueChangedEventArgs args)
         {
-            Dispatcher.Get.Invoke(() =>
-            {
+            Dispatcher.Get.Invoke(() => {
 #if NET5_0_OR_GREATER
                 CanExecuteChanged?.Invoke(sender, args);
 #endif
@@ -58,6 +61,7 @@ namespace TcOpen.Inxton.Input
                 _execute.Invoke(parameter);
             }
         }
+
 #if NET48
 
         public event EventHandler CanExecuteChanged

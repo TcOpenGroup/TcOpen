@@ -19,13 +19,14 @@ namespace TcOpenHammer.Grafana.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] string value) => new JsonResult(
-            new
-            {
-                Controller = nameof(AnnotationsController),
-                Method = nameof(Post),
-                RecievedData = value
-            }
-        );
+        public IActionResult Post([FromBody] string value) =>
+            new JsonResult(
+                new
+                {
+                    Controller = nameof(AnnotationsController),
+                    Method = nameof(Post),
+                    RecievedData = value
+                }
+            );
     }
 }

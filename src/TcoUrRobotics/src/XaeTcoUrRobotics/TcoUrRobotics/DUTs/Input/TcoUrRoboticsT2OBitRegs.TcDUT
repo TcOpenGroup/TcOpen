@@ -3,10 +3,9 @@
   <DUT Name="TcoUrRoboticsT2OBitRegs" Id="{f838210b-aaae-0d17-1ed7-533f8c40d546}">
     <Declaration><![CDATA[TYPE TcoUrRoboticsT2OBitRegs :
 STRUCT
-	{attribute addProperty Name "<#Bit registers#>"}
-	Register : ARRAY[0..63] OF BOOL;
+    {attribute addProperty Name "<#Bit registers#>"}
+    Register : ARRAY[0..63] OF BOOL;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

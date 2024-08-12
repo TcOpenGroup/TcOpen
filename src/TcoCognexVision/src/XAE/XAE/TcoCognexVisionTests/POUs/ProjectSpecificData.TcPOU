@@ -1,23 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="ProjectSpecificData" Id="{b6e257e8-4495-0a98-09f7-b4bfa71f5dc6}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK ProjectSpecificData EXTENDS TcoCognexVision.TcoDesignerRootContainer  
+    <Declaration><![CDATA[FUNCTION_BLOCK ProjectSpecificData EXTENDS TcoCognexVision.TcoDesignerRootContainer
 VAR_INPUT
 END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
-	{attribute wpf [Container(Layout.Stack,"PcToPlc")]}	
-	{attribute wpf [Group(Layout.GroupBox)]}
-	{attribute addProperty Name "<#PcToPlc#>"}
-	PcToPlc:DesignerResults;
-	{attribute wpf [Container(Layout.Stack,"PlcToPc")]}	
-	{attribute wpf [Group(Layout.GroupBox)]}
-	{attribute addProperty Name "<#PlcToPc#>"}
-	PlcToPc:DesignerUserData;
-	
-END_VAR
-]]></Declaration>
+    {attribute wpf [Container(Layout.Stack,"PcToPlc")]}
+    {attribute wpf [Group(Layout.GroupBox)]}
+    {attribute addProperty Name "<#PcToPlc#>"}
+    PcToPlc : DesignerResults;
+    {attribute wpf [Container(Layout.Stack,"PlcToPc")]}
+    {attribute wpf [Group(Layout.GroupBox)]}
+    {attribute addProperty Name "<#PlcToPc#>"}
+    PlcToPc : DesignerUserData;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
@@ -25,8 +23,7 @@ END_VAR
       <Declaration><![CDATA[PROPERTY PUBLIC Results : REFERENCE TO DesignerResults]]></Declaration>
       <Get Name="Get" Id="{55dfda30-672c-0423-3bd8-a7a552c928c7}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[Results ref= PcToPlc;]]></ST>
         </Implementation>
@@ -36,8 +33,7 @@ END_VAR
       <Declaration><![CDATA[PROPERTY PUBLIC UserData : REFERENCE TO DesignerUserData]]></Declaration>
       <Get Name="Get" Id="{54b5f4cf-7a98-07f9-19d9-fdf4e0978468}">
         <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
           <ST><![CDATA[UserData ref= PlcToPc;]]></ST>
         </Implementation>

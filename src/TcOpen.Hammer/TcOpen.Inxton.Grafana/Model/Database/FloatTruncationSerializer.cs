@@ -1,6 +1,6 @@
-﻿using MongoDB.Bson.Serialization;
+﻿using System;
+using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
-using System;
 
 namespace TcOpenHammer.Grafana.API.Model.Mongo
 {
@@ -11,7 +11,10 @@ namespace TcOpenHammer.Grafana.API.Model.Mongo
     internal class FloatTruncationSerializer : SerializerBase<float>
     {
         /// <inheritdoc/>
-        public override float Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
+        public override float Deserialize(
+            BsonDeserializationContext context,
+            BsonDeserializationArgs args
+        )
         {
             var value = context.Reader.ReadDouble();
             if (value == double.Epsilon)
@@ -21,7 +24,11 @@ namespace TcOpenHammer.Grafana.API.Model.Mongo
         }
 
         /// <inheritdoc/>
-        public override void Serialize(BsonSerializationContext context, BsonSerializationArgs args, float value)
+        public override void Serialize(
+            BsonSerializationContext context,
+            BsonSerializationArgs args,
+            float value
+        )
         {
             if (value == float.Epsilon)
                 context.Writer.WriteDouble(double.Epsilon);
@@ -29,5 +36,4 @@ namespace TcOpenHammer.Grafana.API.Model.Mongo
                 context.Writer.WriteDouble(Math.Round(value, 10));
         }
     }
-    
 }

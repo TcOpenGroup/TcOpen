@@ -8,16 +8,15 @@
 {attribute addProperty Size "8"}
 TYPE Outputs_3179CEF4 EXTENDS TcoIo.OutputBase_10CEE7DE :
 STRUCT
-	{attribute addProperty Name "Controlword"}
-	Controlword AT %Q* : UINT;
-	{attribute addProperty Name "Mode_Of_Operation"}
-	Mode_Of_Operation AT %Q* : USINT;
-	{attribute addProperty Name "IP_Data_Record"}
-	IP_Data_Record AT %Q* : DINT;
-	{attribute addProperty Name "Homing_Method"}
-	Homing_Method AT %Q* : SINT;
+    {attribute addProperty Name "Controlword"}
+    Controlword AT %Q* : UINT;
+    {attribute addProperty Name "Mode_Of_Operation"}
+    Mode_Of_Operation AT %Q* : USINT;
+    {attribute addProperty Name "IP_Data_Record"}
+    IP_Data_Record AT %Q* : DINT;
+    {attribute addProperty Name "Homing_Method"}
+    Homing_Method AT %Q* : SINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

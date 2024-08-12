@@ -11,44 +11,43 @@
 {attribute addProperty Size "508"}
 TYPE EL2258_E3B260FA EXTENDS TcoIo.EtcSlaveTerminalBase_947E5A46 :
 STRUCT
-	{attribute addProperty Name "MTO_Inputs_Channel_1"}
-	MTO_Inputs_Channel_1 : MTO_Inputs_Channel_53C09E8B;
-	{attribute addProperty Name "MTO_Inputs_Channel_2"}
-	MTO_Inputs_Channel_2 : MTO_Inputs_Channel_53C09E8B;
-	{attribute addProperty Name "MTO_Inputs_Channel_3"}
-	MTO_Inputs_Channel_3 : MTO_Inputs_Channel_53C09E8B;
-	{attribute addProperty Name "MTO_Inputs_Channel_4"}
-	MTO_Inputs_Channel_4 : MTO_Inputs_Channel_53C09E8B;
-	{attribute addProperty Name "MTO_Inputs_Channel_5"}
-	MTO_Inputs_Channel_5 : MTO_Inputs_Channel_53C09E8B;
-	{attribute addProperty Name "MTO_Inputs_Channel_6"}
-	MTO_Inputs_Channel_6 : MTO_Inputs_Channel_53C09E8B;
-	{attribute addProperty Name "MTO_Inputs_Channel_7"}
-	MTO_Inputs_Channel_7 : MTO_Inputs_Channel_53C09E8B;
-	{attribute addProperty Name "MTO_Inputs_Channel_8"}
-	MTO_Inputs_Channel_8 : MTO_Inputs_Channel_53C09E8B;
-	{attribute addProperty Name "MTO_Outputs_10x_Channel_1"}
-	MTO_Outputs_10x_Channel_1 : MTO_Outputs_10x_Channel_A3C0C022;
-	{attribute addProperty Name "MTO_Outputs_10x_Channel_2"}
-	MTO_Outputs_10x_Channel_2 : MTO_Outputs_10x_Channel_A3C0C022;
-	{attribute addProperty Name "MTO_Outputs_10x_Channel_3"}
-	MTO_Outputs_10x_Channel_3 : MTO_Outputs_10x_Channel_A3C0C022;
-	{attribute addProperty Name "MTO_Outputs_10x_Channel_4"}
-	MTO_Outputs_10x_Channel_4 : MTO_Outputs_10x_Channel_A3C0C022;
-	{attribute addProperty Name "MTO_Outputs_10x_Channel_5"}
-	MTO_Outputs_10x_Channel_5 : MTO_Outputs_10x_Channel_A3C0C022;
-	{attribute addProperty Name "MTO_Outputs_10x_Channel_6"}
-	MTO_Outputs_10x_Channel_6 : MTO_Outputs_10x_Channel_A3C0C022;
-	{attribute addProperty Name "MTO_Outputs_10x_Channel_7"}
-	MTO_Outputs_10x_Channel_7 : MTO_Outputs_10x_Channel_A3C0C022;
-	{attribute addProperty Name "MTO_Outputs_10x_Channel_8"}
-	MTO_Outputs_10x_Channel_8 : MTO_Outputs_10x_Channel_A3C0C022;
-	{attribute addProperty Name "WcState"}
-	WcState : TcoIo.WcState_9091E0EB;
-	{attribute addProperty Name "InfoData"}
-	InfoData : InfoData_B84DBEC5;
+    {attribute addProperty Name "MTO_Inputs_Channel_1"}
+    MTO_Inputs_Channel_1 : MTO_Inputs_Channel_53C09E8B;
+    {attribute addProperty Name "MTO_Inputs_Channel_2"}
+    MTO_Inputs_Channel_2 : MTO_Inputs_Channel_53C09E8B;
+    {attribute addProperty Name "MTO_Inputs_Channel_3"}
+    MTO_Inputs_Channel_3 : MTO_Inputs_Channel_53C09E8B;
+    {attribute addProperty Name "MTO_Inputs_Channel_4"}
+    MTO_Inputs_Channel_4 : MTO_Inputs_Channel_53C09E8B;
+    {attribute addProperty Name "MTO_Inputs_Channel_5"}
+    MTO_Inputs_Channel_5 : MTO_Inputs_Channel_53C09E8B;
+    {attribute addProperty Name "MTO_Inputs_Channel_6"}
+    MTO_Inputs_Channel_6 : MTO_Inputs_Channel_53C09E8B;
+    {attribute addProperty Name "MTO_Inputs_Channel_7"}
+    MTO_Inputs_Channel_7 : MTO_Inputs_Channel_53C09E8B;
+    {attribute addProperty Name "MTO_Inputs_Channel_8"}
+    MTO_Inputs_Channel_8 : MTO_Inputs_Channel_53C09E8B;
+    {attribute addProperty Name "MTO_Outputs_10x_Channel_1"}
+    MTO_Outputs_10x_Channel_1 : MTO_Outputs_10x_Channel_A3C0C022;
+    {attribute addProperty Name "MTO_Outputs_10x_Channel_2"}
+    MTO_Outputs_10x_Channel_2 : MTO_Outputs_10x_Channel_A3C0C022;
+    {attribute addProperty Name "MTO_Outputs_10x_Channel_3"}
+    MTO_Outputs_10x_Channel_3 : MTO_Outputs_10x_Channel_A3C0C022;
+    {attribute addProperty Name "MTO_Outputs_10x_Channel_4"}
+    MTO_Outputs_10x_Channel_4 : MTO_Outputs_10x_Channel_A3C0C022;
+    {attribute addProperty Name "MTO_Outputs_10x_Channel_5"}
+    MTO_Outputs_10x_Channel_5 : MTO_Outputs_10x_Channel_A3C0C022;
+    {attribute addProperty Name "MTO_Outputs_10x_Channel_6"}
+    MTO_Outputs_10x_Channel_6 : MTO_Outputs_10x_Channel_A3C0C022;
+    {attribute addProperty Name "MTO_Outputs_10x_Channel_7"}
+    MTO_Outputs_10x_Channel_7 : MTO_Outputs_10x_Channel_A3C0C022;
+    {attribute addProperty Name "MTO_Outputs_10x_Channel_8"}
+    MTO_Outputs_10x_Channel_8 : MTO_Outputs_10x_Channel_A3C0C022;
+    {attribute addProperty Name "WcState"}
+    WcState : TcoIo.WcState_9091E0EB;
+    {attribute addProperty Name "InfoData"}
+    InfoData : InfoData_B84DBEC5;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

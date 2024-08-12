@@ -10,19 +10,29 @@ namespace TcoIo
     {
         public bool ExcludeSlavesConnectedToJunctionBox
         {
-            get 
+            get
             {
                 bool ret = false;
-                TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() => { ret = (bool)GetValue(ExcludeSlavesConnectedToJunctionBoxProperty); });
+                TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() =>
+                {
+                    ret = (bool)GetValue(ExcludeSlavesConnectedToJunctionBoxProperty);
+                });
                 return ret;
             }
-            set { TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(()=>SetValue(ExcludeSlavesConnectedToJunctionBoxProperty, value)); }
+            set
+            {
+                TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(
+                    () => SetValue(ExcludeSlavesConnectedToJunctionBoxProperty, value)
+                );
+            }
         }
 
         public static readonly DependencyProperty ExcludeSlavesConnectedToJunctionBoxProperty =
-            DependencyProperty.Register("ExcludeSlavesConnectedToJunctionBox", 
-                                        typeof(bool), 
-                                        typeof(TopologyRenderer), 
-                                        new PropertyMetadata(false));
+            DependencyProperty.Register(
+                "ExcludeSlavesConnectedToJunctionBox",
+                typeof(bool),
+                typeof(TopologyRenderer),
+                new PropertyMetadata(false)
+            );
     }
 }

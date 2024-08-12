@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
-using System.Windows;
 
 namespace TcoAimTtiPowerSupply
 {
@@ -17,13 +17,24 @@ namespace TcoAimTtiPowerSupply
             {
                 return string.Empty;
             }
-            var selectedCmd = QlSeriesCommands.Commands.Where(p => p.Type == eQlCommandType.GetCommand).Where(q => q.Key == command).FirstOrDefault();
+            var selectedCmd = QlSeriesCommands
+                .Commands.Where(p => p.Type == eQlCommandType.GetCommand)
+                .Where(q => q.Key == command)
+                .FirstOrDefault();
 
-            return String.Format("\r\n Syntax:{0}\r\n\r\n {1}", selectedCmd.Syntax, selectedCmd.HelpDescription);
-
+            return String.Format(
+                "\r\n Syntax:{0}\r\n\r\n {1}",
+                selectedCmd.Syntax,
+                selectedCmd.HelpDescription
+            );
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }
@@ -44,13 +55,24 @@ namespace TcoAimTtiPowerSupply
             {
                 return string.Empty;
             }
-            var selectedCmd = QlSeriesCommands.Commands.Where(p => p.Type == eQlCommandType.SetCommand).Where(q => q.Key == command).FirstOrDefault();
+            var selectedCmd = QlSeriesCommands
+                .Commands.Where(p => p.Type == eQlCommandType.SetCommand)
+                .Where(q => q.Key == command)
+                .FirstOrDefault();
 
-            return String.Format("\r\n Syntax:{0}\r\n\r\n {1}", selectedCmd.Syntax, selectedCmd.HelpDescription);
-
+            return String.Format(
+                "\r\n Syntax:{0}\r\n\r\n {1}",
+                selectedCmd.Syntax,
+                selectedCmd.HelpDescription
+            );
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }
@@ -60,6 +82,7 @@ namespace TcoAimTtiPowerSupply
             return this;
         }
     }
+
     public class TcoQlSeriesGetNValueVisibilityConverter : MarkupExtension, IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -70,17 +93,24 @@ namespace TcoAimTtiPowerSupply
             {
                 return Visibility.Collapsed;
             }
-            var selectedCmd = QlSeriesCommands.Commands.Where(p => p.Type == eQlCommandType.GetCommand).Where(q => q.Key == command).FirstOrDefault();
+            var selectedCmd = QlSeriesCommands
+                .Commands.Where(p => p.Type == eQlCommandType.GetCommand)
+                .Where(q => q.Key == command)
+                .FirstOrDefault();
 
             if (selectedCmd.Syntax.Contains("<N>"))
             {
                 return Visibility.Visible;
             }
             return Visibility.Collapsed;
-
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }
@@ -90,6 +120,7 @@ namespace TcoAimTtiPowerSupply
             return this;
         }
     }
+
     public class TcoQlSeriesSetNValueVisibilityConverter : MarkupExtension, IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -101,17 +132,24 @@ namespace TcoAimTtiPowerSupply
                 return Visibility.Collapsed;
             }
 
-            var selectedCmd = QlSeriesCommands.Commands.Where(p => p.Type == eQlCommandType.SetCommand).Where(q => q.Key == command).FirstOrDefault();
+            var selectedCmd = QlSeriesCommands
+                .Commands.Where(p => p.Type == eQlCommandType.SetCommand)
+                .Where(q => q.Key == command)
+                .FirstOrDefault();
 
             if (selectedCmd.Syntax.Contains("<N>"))
             {
                 return Visibility.Visible;
             }
             return Visibility.Collapsed;
-
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }
@@ -133,17 +171,24 @@ namespace TcoAimTtiPowerSupply
                 return Visibility.Collapsed;
             }
 
-            var selectedCmd = QlSeriesCommands.Commands.Where(p => p.Type == eQlCommandType.SetCommand).Where(q => q.Key == command).FirstOrDefault();
+            var selectedCmd = QlSeriesCommands
+                .Commands.Where(p => p.Type == eQlCommandType.SetCommand)
+                .Where(q => q.Key == command)
+                .FirstOrDefault();
 
             if (selectedCmd.Syntax.Contains("<NRF>"))
             {
                 return Visibility.Visible;
             }
             return Visibility.Collapsed;
-
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             return null;
         }
@@ -153,4 +198,4 @@ namespace TcoAimTtiPowerSupply
             return this;
         }
     }
-    }
+}

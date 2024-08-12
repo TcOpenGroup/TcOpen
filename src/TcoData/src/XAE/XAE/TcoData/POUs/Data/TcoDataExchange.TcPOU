@@ -2,82 +2,81 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="TcoDataExchange" Id="{32f44bd8-796a-0ec8-0970-522f256b63cf}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Provides a mechanism to exchange data between PLC and an arbitrary data repository.
-			TcoDataExchange support Create, Read, Update, Delete (CRUD) operations and some additional
-			functions. 
-			TcoDataExchange **operates by convention on data member named `_data`** declared in the function block. 
-			The `_data` member must be of type that extends `TcoData.TcoEntity`.	
-			TcoDataEchange must be then inizialized in the higher level application where the repository
-			and remote data exchange is configured.		
-			<remarks>			
-		   		<note type="information">
-					Inxton is required for this feature to work.
-		   		</note>	
-			</remarks>	 	
-		</summary>			
-		
-		<example>										
-			[!code-pas[Declarations](~/../TcOpen/src/TcoData/src/XAE/XAE/TcoDataTests/POUs/Examples/TcoDataManager.TcPOU?name=DataManagerDeclarations)]
-			[!code-pas[SuperCall](~/../TcOpen/src/TcoData/src/XAE/XAE/TcoDataTests/POUs/Examples/TcoDataManager.TcPOU?name=DataManagerSuperCall)]
-			[!code-pas[Data](~/../TcOpen/src/TcoData/src/XAE/XAE/TcoDataTests/POUs/Examples/SandboxData.TcDUT?name=SandboxData)]
-			[!code-csharp[Main](~/../TcOpen/src/TcoData/tests/TcoDataExamples.Tests/SandboxContextTests.cs?name=RepositoryInitialization)]
-		</example>
-	</docu>	
+    <docu>
+        <summary>
+            Provides a mechanism to exchange data between PLC and an arbitrary data repository.
+            TcoDataExchange support Create, Read, Update, Delete (CRUD) operations and some additional
+            functions.
+            TcoDataExchange **operates by convention on data member named `_data`** declared in the function block.
+            The `_data` member must be of type that extends `TcoData.TcoEntity`.
+            TcoDataEchange must be then inizialized in the higher level application where the repository
+            and remote data exchange is configured.
+            <remarks>
+                   <note type="information">
+                    Inxton is required for this feature to work.
+                   </note>
+            </remarks>
+        </summary>
+
+        <example>
+            [!code-pas[Declarations](~/../TcOpen/src/TcoData/src/XAE/XAE/TcoDataTests/POUs/Examples/TcoDataManager.TcPOU?name=DataManagerDeclarations)]
+            [!code-pas[SuperCall](~/../TcOpen/src/TcoData/src/XAE/XAE/TcoDataTests/POUs/Examples/TcoDataManager.TcPOU?name=DataManagerSuperCall)]
+            [!code-pas[Data](~/../TcOpen/src/TcoData/src/XAE/XAE/TcoDataTests/POUs/Examples/SandboxData.TcDUT?name=SandboxData)]
+            [!code-csharp[Main](~/../TcOpen/src/TcoData/tests/TcoDataExamples.Tests/SandboxContextTests.cs?name=RepositoryInitialization)]
+        </example>
+    </docu>
 ~*)
 FUNCTION_BLOCK TcoDataExchange EXTENDS TcoCore.TcoObject IMPLEMENTS ITcoCrud
 VAR
-	(*~
-		<docu>
-			<summary>
-				Instance of task that `creates` the entry into repository.
-			</summary>
-		</docu>
-	~*)
+    (*~
+        <docu>
+            <summary>
+                Instance of task that `creates` the entry into repository.
+            </summary>
+        </docu>
+    ~*)
     _createTask : TcoDataTask(THIS^);
-	(*~
-		<docu>
-			<summary>
-				Instance of task that `reads` the entry from repository.
-			</summary>
-		</docu>
-	~*)
+    (*~
+        <docu>
+            <summary>
+                Instance of task that `reads` the entry from repository.
+            </summary>
+        </docu>
+    ~*)
     _readTask : TcoDataTask(THIS^);
-	(*~
-		<docu>
-			<summary>
-				Instance of task that `updates` record in the repository.
-			</summary>
-		</docu>
-	~*)
+    (*~
+        <docu>
+            <summary>
+                Instance of task that `updates` record in the repository.
+            </summary>
+        </docu>
+    ~*)
     _updateTask : TcoDataTask(THIS^);
-	(*~
-		<docu>
-			<summary>
-				Instance of task that `deletes` record from the repository.
-			</summary>
-		</docu>
-	~*)
+    (*~
+        <docu>
+            <summary>
+                Instance of task that `deletes` record from the repository.
+            </summary>
+        </docu>
+    ~*)
     _deleteTask : TcoDataTask(THIS^);
-	(*~
-		<docu>
-			<summary>
-				Instance of task that `check for existence` of a record with an `id` in the repository.
-			</summary>
-		</docu>
-	~*)
-	_idExistsTask : TcoExistsTask(THIS^);
-	(*~
-		<docu>
-			<summary>
-				Instance of task that `creates inexisting or updates existing` record in the repository.
-			</summary>
-		</docu>
-	~*)
-	_createOrUpdateTask : TcoDataTask(THIS^);
-END_VAR
-]]></Declaration>
+    (*~
+        <docu>
+            <summary>
+                Instance of task that `check for existence` of a record with an `id` in the repository.
+            </summary>
+        </docu>
+    ~*)
+    _idExistsTask : TcoExistsTask(THIS^);
+    (*~
+        <docu>
+            <summary>
+                Instance of task that `creates inexisting or updates existing` record in the repository.
+            </summary>
+        </docu>
+    ~*)
+    _createOrUpdateTask : TcoDataTask(THIS^);
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[_createTask();
 _readTask();
@@ -88,210 +87,188 @@ _createOrUpdateTask();]]></ST>
     </Implementation>
     <Method Name="Create" Id="{535f62d3-cdf1-09d6-36dd-65bfab4cf00a}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Creates new entry in the Repository from `_data` member of this `TcoDataExchange`.
-			<remarks>			
-		   		<note type="information">
-					Inxton is required for this feature to work.
-		   		</note>	
-			</remarks>	 	
-		</summary>			
-		
-		<example>			
-			[!code-pas[Main](~/../TcOpen/src/TcoData/src/XAE/XAE/TcoDataTests/POUs/Examples/SandboxContext.TcPOU?name=CreateCodeExample)]
-		</example>
-	</docu>	
+    <docu>
+        <summary>
+            Creates new entry in the Repository from `_data` member of this `TcoDataExchange`.
+            <remarks>
+                   <note type="information">
+                    Inxton is required for this feature to work.
+                   </note>
+            </remarks>
+        </summary>
+
+        <example>
+            [!code-pas[Main](~/../TcOpen/src/TcoData/src/XAE/XAE/TcoDataTests/POUs/Examples/SandboxContext.TcPOU?name=CreateCodeExample)]
+        </example>
+    </docu>
 ~*)
 METHOD Create : TcoCore.ITcoTaskStatus
 VAR_INPUT
-	(*~
-	<docu>
-		<summary>
-			Identifier of the data entry to be created in the repository.
-		</summary>			
-				
-	</docu>	
-	~*)	
-	Identifier : STRING(255);
+    (*~
+    <docu>
+        <summary>
+            Identifier of the data entry to be created in the repository.
+        </summary>
+
+    </docu>
+    ~*)
+    Identifier : STRING(255);
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Create := _createTask
-    .WithId(Identifier)
-    .Invoke();
-	
-THIS^.Messenger.Build().Append('<#Creating data item with id:#> ').Append(Identifier).As().AsTrace();	]]></ST>
+        <ST><![CDATA[Create := _createTask.WithId(Identifier).Invoke();
+THIS^.Messenger.Build().Append('<#Creating data item with id:#> ').Append(Identifier).As().AsTrace();]]></ST>
       </Implementation>
     </Method>
     <Method Name="CreateOrUpdate" Id="{9e6a9de9-7f41-0de9-0ac9-c27c65910ff9}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Creates or updates new entry in the Repository from `_data` member of this `TcoDataExchange`.
-			<remarks>			
-		   		<note type="information">
-					Inxton is required for this feature to work.
-		   		</note>	
-			</remarks>	 	
-		</summary>			
-		
-		<example>			
-			[!code-pas[Main](~/../TcOpen/src/TcoData/src/XAE/XAE/TcoDataTests/POUs/Examples/SandboxContext.TcPOU?name=CreateOrUpdateCodeExample)]
-		</example>
-	</docu>	
+    <docu>
+        <summary>
+            Creates or updates new entry in the Repository from `_data` member of this `TcoDataExchange`.
+            <remarks>
+                   <note type="information">
+                    Inxton is required for this feature to work.
+                   </note>
+            </remarks>
+        </summary>
+
+        <example>
+            [!code-pas[Main](~/../TcOpen/src/TcoData/src/XAE/XAE/TcoDataTests/POUs/Examples/SandboxContext.TcPOU?name=CreateOrUpdateCodeExample)]
+        </example>
+    </docu>
 ~*)
 METHOD CreateOrUpdate : TcoCore.ITcoTaskStatus
 VAR_INPUT
-	(*~
-		<docu>
-			<summary>
-				Identifier of the data entry to be created or updated in the repository.
-			</summary>			
-					
-		</docu>	
-	~*)	
-	Identifier : STRING(255);
-END_VAR
-]]></Declaration>
+    (*~
+        <docu>
+            <summary>
+                Identifier of the data entry to be created or updated in the repository.
+            </summary>
+
+        </docu>
+    ~*)
+    Identifier : STRING(255);
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[CreateOrUpdate := _createOrUpdateTask
-    			  .WithId(Identifier)
-                  .Invoke();
-				  
-THIS^.Messenger.Build().Append('<#Creating or updating data item with id:#> ').Append(Identifier).As().AsTrace();				  ]]></ST>
+        <ST><![CDATA[CreateOrUpdate := _createOrUpdateTask.WithId(Identifier).Invoke();
+THIS^.Messenger.Build().Append('<#Creating or updating data item with id:#> ').Append(Identifier).As().AsTrace();]]></ST>
       </Implementation>
     </Method>
     <Method Name="Delete" Id="{fbf2b4c4-ddcf-0054-1f59-9460c96d51d6}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Deletes an item from the repository.
-			<remarks>			
-		   		<note type="information">
-					Inxton is required for this feature to work.
-		   		</note>	
-			</remarks>	 	
-		</summary>			
-		
-		<example>			
-			[!code-pas[Main](~/../TcOpen/src/TcoData/src/XAE/XAE/TcoDataTests/POUs/Examples/SandboxContext.TcPOU?name=DeleteCodeExample)]
-		</example>
-	</docu>	
+    <docu>
+        <summary>
+            Deletes an item from the repository.
+            <remarks>
+                   <note type="information">
+                    Inxton is required for this feature to work.
+                   </note>
+            </remarks>
+        </summary>
+
+        <example>
+            [!code-pas[Main](~/../TcOpen/src/TcoData/src/XAE/XAE/TcoDataTests/POUs/Examples/SandboxContext.TcPOU?name=DeleteCodeExample)]
+        </example>
+    </docu>
 ~*)
 METHOD Delete : TcoCore.ITcoTaskStatus
 VAR_INPUT
-	(*~
-		<docu>
-			<summary>
-				Identifier of the data entry to be deleted from the repository.
-			</summary>			
-					
-		</docu>	
-	~*)	
-	Identifier : STRING(255);
+    (*~
+        <docu>
+            <summary>
+                Identifier of the data entry to be deleted from the repository.
+            </summary>
+
+        </docu>
+    ~*)
+    Identifier : STRING(255);
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Delete := _deleteTask
-    .WithId(Identifier)
-    .Invoke();
-	
-THIS^.Messenger.Build().Append('<#Deleting data item with id:#> ').Append(Identifier).As().AsTrace();	]]></ST>
+        <ST><![CDATA[Delete := _deleteTask.WithId(Identifier).Invoke();
+THIS^.Messenger.Build().Append('<#Deleting data item with id:#> ').Append(Identifier).As().AsTrace();]]></ST>
       </Implementation>
     </Method>
     <Method Name="Exists" Id="{027fb448-351a-0f9b-128f-8e14c974683e}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Determines if the entry with given `Identifier` exists in the repository.
-			<remarks>			
-		   		<note type="information">
-					Inxton is required for this feature to work.
-		   		</note>	
-			</remarks>	 	
-		</summary>			
-		
-		<example>			
-			[!code-pas[Main](~/../TcOpen/src/TcoData/src/XAE/XAE/TcoDataTests/POUs/Examples/SandboxContext.TcPOU?name=ExistsCodeExample)]
-		</example>
-	</docu>	
-~*)
-METHOD Exists : REFERENCE TO  TcoExistsTask
-VAR_INPUT
-	(*~
-		<docu>
-			<summary>
-				Identifier of the data entry for which the existence is to be checked.
-			</summary>								
-		</docu>	
-	~*)	
-	Identifier : STRING(255);
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[_idExistsTask
-    .WithId(Identifier)
-    .Invoke();
+    <docu>
+        <summary>
+            Determines if the entry with given `Identifier` exists in the repository.
+            <remarks>
+                   <note type="information">
+                    Inxton is required for this feature to work.
+                   </note>
+            </remarks>
+        </summary>
 
+        <example>
+            [!code-pas[Main](~/../TcOpen/src/TcoData/src/XAE/XAE/TcoDataTests/POUs/Examples/SandboxContext.TcPOU?name=ExistsCodeExample)]
+        </example>
+    </docu>
+~*)
+METHOD Exists : REFERENCE TO TcoExistsTask
+VAR_INPUT
+    (*~
+        <docu>
+            <summary>
+                Identifier of the data entry for which the existence is to be checked.
+            </summary>
+        </docu>
+    ~*)
+    Identifier : STRING(255);
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_idExistsTask.WithId(Identifier).Invoke();
 THIS^.Messenger.Build().Append('<#Checking existence of data item with id:#> ').Append(Identifier).As().AsTrace();
-	
-Exists REF=	_idExistsTask;
-]]></ST>
+Exists REF= _idExistsTask;]]></ST>
       </Implementation>
     </Method>
     <Method Name="FB_init" Id="{320ee7d5-7550-0944-00e6-b2405597b230}">
       <Declaration><![CDATA[METHOD FB_init : BOOL
 VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	ParentObject : TcoCore.ITcoObject;	
-END_VAR
-
-]]></Declaration>
+    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+    ParentObject : TcoCore.ITcoObject;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="Read" Id="{05052219-e02c-06a1-02d0-9241bf3dd3ff}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Reads data from the repository and stores it into `_data` member of this instance of `TcoDataExchange`.
-			<remarks>			
-		   		<note type="information">
-					Inxton is required for this feature to work.
-		   		</note>	
-			</remarks>	 	
-		</summary>			
-		
-		<example>			
-			[!code-pas[Main](~/../TcOpen/src/TcoData/src/XAE/XAE/TcoDataTests/POUs/Examples/SandboxContext.TcPOU?name=ReadCodeExample)]
-		</example>
-	</docu>	
+    <docu>
+        <summary>
+            Reads data from the repository and stores it into `_data` member of this instance of `TcoDataExchange`.
+            <remarks>
+                   <note type="information">
+                    Inxton is required for this feature to work.
+                   </note>
+            </remarks>
+        </summary>
+
+        <example>
+            [!code-pas[Main](~/../TcOpen/src/TcoData/src/XAE/XAE/TcoDataTests/POUs/Examples/SandboxContext.TcPOU?name=ReadCodeExample)]
+        </example>
+    </docu>
 ~*)
 METHOD Read : TcoCore.ITcoTaskStatus
 VAR_INPUT
-	(*~
-		<docu>
-			<summary>
-				Identifier of the data entry to be retrieved from the repoository.
-			</summary>								
-		</docu>	
-	~*)	
-	Identifier : STRING(255);
+    (*~
+        <docu>
+            <summary>
+                Identifier of the data entry to be retrieved from the repoository.
+            </summary>
+        </docu>
+    ~*)
+    Identifier : STRING(255);
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Read := _readTask
-    .WithId(Identifier)
-    .Invoke();
-	
-THIS^.Messenger.Build().Append('<#Reading data item with id:#> ').Append(Identifier).As().AsTrace();	]]></ST>
+        <ST><![CDATA[Read := _readTask.WithId(Identifier).Invoke();
+THIS^.Messenger.Build().Append('<#Reading data item with id:#> ').Append(Identifier).As().AsTrace();]]></ST>
       </Implementation>
     </Method>
     <Method Name="Restore" Id="{fdef7670-b22a-01d4-2833-7a2ee73e3c09}">
       <Declaration><![CDATA[METHOD Restore : BOOL
 VAR_INPUT
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_createTask.Restore();
 _readTask.Restore();
@@ -303,38 +280,35 @@ _createOrUpdateTask.Restore();]]></ST>
     </Method>
     <Method Name="Update" Id="{d5409d9d-f931-0f6c-095c-9c419d838664}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Updates data in the repository from `_data` member of this instance of `TcoDataExchange`.
-			<remarks>			
-		   		<note type="information">
-					Inxton is required for this feature to work.
-		   		</note>	
-			</remarks>	 	
-		</summary>			
-		
-		<example>			
-			[!code-pas[Main](~/../TcOpen/src/TcoData/src/XAE/XAE/TcoDataTests/POUs/Examples/SandboxContext.TcPOU?name=UpdateCodeExample)]
-		</example>
-	</docu>	
+    <docu>
+        <summary>
+            Updates data in the repository from `_data` member of this instance of `TcoDataExchange`.
+            <remarks>
+                   <note type="information">
+                    Inxton is required for this feature to work.
+                   </note>
+            </remarks>
+        </summary>
+
+        <example>
+            [!code-pas[Main](~/../TcOpen/src/TcoData/src/XAE/XAE/TcoDataTests/POUs/Examples/SandboxContext.TcPOU?name=UpdateCodeExample)]
+        </example>
+    </docu>
 ~*)
 METHOD Update : TcoCore.ITcoTaskStatus
 VAR_INPUT
-	(*~
-		<docu>
-			<summary>
-				Identifier of the data entry to be updated.
-			</summary>								
-		</docu>	
-	~*)	
-	Identifier : STRING(255);
+    (*~
+        <docu>
+            <summary>
+                Identifier of the data entry to be updated.
+            </summary>
+        </docu>
+    ~*)
+    Identifier : STRING(255);
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Update := _updateTask
-    .WithId(Identifier)
-    .Invoke();
-
-THIS^.Messenger.Build().Append('<#Updating data item with id:#> ').Append(Identifier).As().AsTrace();	]]></ST>
+        <ST><![CDATA[Update := _updateTask.WithId(Identifier).Invoke();
+THIS^.Messenger.Build().Append('<#Updating data item with id:#> ').Append(Identifier).As().AsTrace();]]></ST>
       </Implementation>
     </Method>
   </POU>

@@ -5,13 +5,12 @@
 {attribute 'strict'}
 TYPE eDatamanUserDataSize_v_5_x_x :
 (
-	USER_DATA_16B := 16,
-	USER_DATA_32B := 32,
-	USER_DATA_64B := 64,
-	USER_DATA_128B := 128,
-	USER_DATA_250B := 250	
+    USER_DATA_16B := 16,
+    USER_DATA_32B := 32,
+    USER_DATA_64B := 64,
+    USER_DATA_128B := 128,
+    USER_DATA_250B := 250
 );
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

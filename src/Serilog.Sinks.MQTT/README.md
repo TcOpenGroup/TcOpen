@@ -6,7 +6,7 @@ This sink is primarily developed to be used in TcOpen framework with TcoLogger.
 
 ## Sink configuration
 
-~~~C#
+```C#
 using MQTTnet;
 using MQTTnet.Client.Options;
 using MQTTnet.Client.Receiving;
@@ -19,7 +19,5 @@ using MQTTnet.Client;
    var publisherOptions = new MqttClientOptionsBuilder().WithTcpServer("broker.emqx.io").Build();
    Log.Logger = new LoggerConfiguration()
                     .WriteTo.MQTT(publisherOptions, topic)
-                    .CreateLogger();                    
-~~~
-
-
+                    .CreateLogger();
+```

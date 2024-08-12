@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
-using TcOpen.Inxton.Security;
-using TcOpen.Inxton.Input;
 using System.Windows;
+using TcOpen.Inxton.Input;
+using TcOpen.Inxton.Security;
 
 namespace TcOpen.Inxton.Local.Security.Wpf
 {
@@ -15,16 +15,23 @@ namespace TcOpen.Inxton.Local.Security.Wpf
 
         public RelayCommand StartCreateNewCommand { get; private set; }
 
-        public AddNewUserGroupManagementViewModel() : base()
+        public AddNewUserGroupManagementViewModel()
+            : base()
         {
-            StartCreateNewCommand = new RelayCommand(pswd => CreateNew((Pwds)pswd), x => IsCreationAllowed(x));
+            StartCreateNewCommand = new RelayCommand(
+                pswd => CreateNew((Pwds)pswd),
+                x => IsCreationAllowed(x)
+            );
 
             NewUser = new UserData() { Email = string.Empty };
 
             NewUser.PropertyChanged += NewUser_PropertyChanged;
         }
 
-        private void NewUser_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void NewUser_PropertyChanged(
+            object sender,
+            System.ComponentModel.PropertyChangedEventArgs e
+        )
         {
             StartCreateNewCommand.RaiseCanExecuteChanged();
         }
@@ -60,16 +67,23 @@ namespace TcOpen.Inxton.Local.Security.Wpf
                 NewUser.Level = SelectedGroup;
                 UserRepository.Create(NewUser.Username, NewUser);
 
-                TcoAppDomain.Current.Logger.Information($"New user '{NewUser.Username}' created. {{@sender}}", new { UserName = NewUser.Username, Roles = NewUser.Roles });
+                TcoAppDomain.Current.Logger.Information(
+                    $"New user '{NewUser.Username}' created. {{@sender}}",
+                    new { UserName = NewUser.Username, Roles = NewUser.Roles }
+                );
 
                 UsersChanged();
                 ClearFields(pwds);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error creating new user: '{ex.Message}'", "Failed to create user", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(
+                    $"Error creating new user: '{ex.Message}'",
+                    "Failed to create user",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
             }
-
         }
 
         private void ClearFields(Pwds p)
@@ -84,10 +98,13 @@ namespace TcOpen.Inxton.Local.Security.Wpf
 
         private void HashPassword(UserData user, string password)
         {
-            user.HashedPassword = TcOpen.Inxton.Local.Security.SecurityManager.Manager.Service.CalculateHash(password, $"{user.Username}");
+            user.HashedPassword =
+                TcOpen.Inxton.Local.Security.SecurityManager.Manager.Service.CalculateHash(
+                    password,
+                    $"{user.Username}"
+                );
         }
 
         private readonly Regex emailMatch = new Regex(@".+@.+\..+");
-
     }
 }

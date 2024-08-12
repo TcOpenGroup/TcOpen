@@ -7,30 +7,21 @@ using Vortex.Presentation.Wpf;
 
 namespace TcoMitsubishiRobotics
 {
-
-    abstract public class TcoMitsubishiRoboticsBaseServiceViewModel<T> : RenderableViewModel where T : class, new()
+    public abstract class TcoMitsubishiRoboticsBaseServiceViewModel<T> : RenderableViewModel
+        where T : class, new()
     {
-
-        public TcoMitsubishiRoboticsBaseServiceViewModel() : base()
+        public TcoMitsubishiRoboticsBaseServiceViewModel()
+            : base()
         {
             Component = new T();
-
-
         }
-
 
         public T Component { get; internal set; }
 
         public override object Model
         {
             get => Component;
-            set
-            {
-                Component = value as T;
-
-            }
+            set { Component = value as T; }
         }
-
     }
-
 }

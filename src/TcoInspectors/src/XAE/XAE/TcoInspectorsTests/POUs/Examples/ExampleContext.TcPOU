@@ -3,472 +3,370 @@
   <POU Name="ExampleContext" Id="{1aa2a6c1-d36a-0374-1754-fb6150365769}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK ExampleContext EXTENDS TcoCore.TcoContext
 VAR
-    Data            : ExampleInspectorsStruct := (Parent := THIS^);
-    Components      : ExampleComponents       := (Parent := THIS^);
+    Data : ExampleInspectorsStruct := (Parent := THIS^);
+    Components : ExampleComponents := (Parent := THIS^);
     GroupInspection : TcoInspectors.TcoInspectionGroup(THIS^);
-    _sequence1      : TcoCore.TcoSequence(THIS^, eRestoreMode.None);
-    _observer       : TcoCore.TcoSequencerObserver(THIS^);
+    _sequence1 : TcoCore.TcoSequence(THIS^, eRestoreMode.None);
+    _observer : TcoCore.TcoSequencerObserver(THIS^);
     {attribute addProperty Name "Start sequence"}
-    _sequence1Task 	: Sequence1Task(THIS^);
-    _dialog        	: TcoCore.TcoDialog(THIS^);
+    _sequence1Task : Sequence1Task(THIS^);
+    _dialog : TcoCore.TcoDialog(THIS^);
     {attribute 'hide'}
-    EmptyData 		: ExampleInspectorsStruct := (Parent := THIS^);
-
-    _examples_2 	: Examples_2(THIS^);
-	_examplesImplementationWithDone : ExamplesImplementationWithDone(THIS^);
-	_tonRetry: TON;
-	_rtrigRetry: R_trig;
-	_tonTerminate: TON;
-	testRetry:BOOL;
-	testTerminate:BOOL;
-	
+    EmptyData : ExampleInspectorsStruct := (Parent := THIS^);
+    _examples_2 : Examples_2(THIS^);
+    _examplesImplementationWithDone : ExamplesImplementationWithDone(THIS^);
+    _tonRetry : TON;
+    _rtrigRetry : R_trig;
+    _tonTerminate : TON;
+    testRetry : BOOL;
+    testTerminate : BOOL;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Main" Id="{f951dcde-2a62-0b5b-22de-91190916af80}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Main method of the TcoContext. This is the entry point of any control logic that belongs to this context. 
-			The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
-			This method is abstract, and it must be overridden in derived block.
-		</summary>
-	</docu>
+    <docu>
+        <summary>
+            Main method of the TcoContext. This is the entry point of any control logic that belongs to this context.
+            The call of this method is ensured by calling the <c>InstanceName.Run()</c> method, and it must not be called explicitly.
+            This method is abstract, and it must be overridden in derived block.
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED  Main]]></Declaration>
+METHOD PROTECTED Main]]></Declaration>
       <Implementation>
         <ST><![CDATA[_sequence1Task(Sequence := _sequence1);
-IF(_sequence1Task.Execute())THEN
-	Sequence1();
+
+IF (_sequence1Task.Execute()) THEN
+    Sequence1();
 END_IF;
 
 _examples_2();
-_examplesImplementationWithDone();
-
-]]></ST>
+_examplesImplementationWithDone();]]></ST>
       </Implementation>
     </Method>
     <Method Name="Sequence1" Id="{22ff4b93-1fc8-0f3e-1417-3b80bfcd3f0f}">
       <Declaration><![CDATA[METHOD Sequence1
 VAR
-    seq    : REFERENCE TO TcoCore.TcoSequence;
+    seq : REFERENCE TO TcoCore.TcoSequence;
     answer : TcoCore.eDialogAnswer;
-	i: INT;
+    i : INT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[seq REF= _sequence1;
-
 seq.Open();
 seq.Observer := _observer;
 
-IF (seq.Step(inStepID := 0,
-    inEnabled := TRUE,
-    inStepDescription := 'ASKING SOME QUESTION')) THEN
+IF (seq.Step(inStepID := 0, inEnabled := TRUE, inStepDescription := 'ASKING SOME QUESTION')) THEN
     //--------------------------------------------------------
-//<StandardDialog>	
-	//restore method also close inactive dialog
-	Data.BoltPresenceInspector.Restore();
-	GroupInspection.Restore();
-	
-	answer := _dialog			
-			.Show()	
-			.WithType(eDialogType.Question)				
-			.WithCaption('Ready to go?')
-			.WithText('We are about to start the inspection sequence. Do we go ahead?')			
-			.WithYesNo().Answer;
-			//
-			
-	 IF (answer = TcoCore.eDialogAnswer.Yes) THEN    	 	
-		seq.CompleteStep();
-	 ELSIF(answer = TcoCore.eDialogAnswer.No) THEN
-		_sequence1Task.Restore();
-	 END_IF;	
-//</StandardDialog>	 
-    //--------------------------------------------------------			
-END_IF;
+    //<StandardDialog>
+    //restore method also close inactive dialog
+    Data.BoltPresenceInspector.Restore();
+    GroupInspection.Restore();
 
-IF (seq.Step(inStepID := 25,
-    inEnabled := TRUE,
-    inStepDescription := 'SETUP DATA')) THEN
-    //--------------------------------------------------------    
-	 SetupData();
-	seq.CompleteStep();
-    //--------------------------------------------------------			
-END_IF;
+    answer := _dialog.Show()
+        .WithType(eDialogType.Question)
+        .WithCaption('Ready to go?')
+        .WithText('We are about to start the inspection sequence. Do we go ahead?')
+        .WithYesNo().Answer;
 
-IF (seq.Step(inStepID := 50,
-    inEnabled := TRUE,
-    inStepDescription := 'INIT')) THEN
-    //--------------------------------------------------------    	 	       
-		seq.CompleteStep();
-    //--------------------------------------------------------			
-END_IF;
-
-IF (seq.Step(inStepID := 100,
-    inEnabled := TRUE,
-    inStepDescription := 'INSPECT DMC CODE - WHEN CARRY ON')) THEN
+    //
+    IF (answer = TcoCore.eDialogAnswer.Yes) THEN
+        seq.CompleteStep();
+    ELSIF (answer = TcoCore.eDialogAnswer.No) THEN
+        _sequence1Task.Restore();
+    END_IF;
+    //</StandardDialog>
     //--------------------------------------------------------
-    Data.DmcInspector.WithCoordinator(seq)
-		.Inspect(Components.DmcReader)		
+END_IF;
+
+IF (seq.Step(inStepID := 25, inEnabled := TRUE, inStepDescription := 'SETUP DATA')) THEN
+    //--------------------------------------------------------
+    SetupData();
+    seq.CompleteStep();
+    //--------------------------------------------------------
+END_IF;
+
+IF (seq.Step(inStepID := 50, inEnabled := TRUE, inStepDescription := 'INIT')) THEN
+    //--------------------------------------------------------
+    seq.CompleteStep();
+    //--------------------------------------------------------
+END_IF;
+
+IF (seq.Step(inStepID := 100, inEnabled := TRUE, inStepDescription := 'INSPECT DMC CODE - WHEN CARRY ON')) THEN
+    //--------------------------------------------------------
+    Data.DmcInspector.WithCoordinator(seq).Inspect(Components.DmcReader).UpdateComprehensiveResult(Data.OverallResult).OnFail().CarryOn();
+    //--------------------------------------------------------
+END_IF;
+
+//<TcoDigitalInspector>
+IF (seq.Step(inStepID := 200, inEnabled := true, inStepDescription := 'INSPECT BOLT PRESENCE - ASK WHAT TO DO')) THEN
+    //--------------------------------------------------------
+    IF seq.IsFreshState THEN
+        SetupData();
+    END_IF
+
+    Data.BoltPresenceInspector.WithCoordinator(seq).Inspect(Components.BoltPresenceSensor).UpdateComprehensiveResult(Data.OverallResult).OnFail()
+        .Dialog(seq.CurrentStep.ID + 1);
+    //--------------------------------------------------------
+END_IF;
+
+IF (seq.Step(inStepID := 201, inEnabled := true, inStepDescription := 'INSPECT BOLT PRESENCE - ASK WHAT TO DO WITH INSTRUCTION')) THEN
+    //--------------------------------------------------------
+    IF seq.IsFreshState THEN
+        SetupData();
+    END_IF
+
+    Data.BoltPresenceInspector.WithCoordinator(seq)
+        .Inspect(Components.BoltPresenceSensor)
         .UpdateComprehensiveResult(Data.OverallResult)
-        .OnFail()
-		.CarryOn();
-    //--------------------------------------------------------			
+        .Instruct('Something is wrong')
+        .OnFail().Dialog(seq.CurrentStep.ID + 1);
+    //--------------------------------------------------------
 END_IF;
 
-//<TcoDigitalInspector>	
-IF (seq.Step(inStepID := 200,
-    inEnabled := true,
-    inStepDescription := 'INSPECT BOLT PRESENCE - ASK WHAT TO DO')) THEN
-    //--------------------------------------------------------	
-   IF seq.IsFreshState THEN
-	    SetupData();
-   END_IF
-	 Data.BoltPresenceInspector
-		.WithCoordinator(seq)
-		.Inspect(Components.BoltPresenceSensor)
-		.UpdateComprehensiveResult(Data.OverallResult)
-		.OnFail()
-		.Dialog(seq.CurrentStep.ID+1);
-    //--------------------------------------------------------			
+IF (seq.Step(inStepID := 202, inEnabled := true, inStepDescription := 'INSPECT BOLT PRESENCE - ASK WHAT TO DO WITH INSTRUCTION AND PICTURE')) THEN
+    //--------------------------------------------------------
+    IF seq.IsFreshState THEN
+        SetupData();
+    END_IF
+
+    Data.BoltPresenceInspector.WithCoordinator(seq)
+        .Inspect(Components.BoltPresenceSensor)
+        .UpdateComprehensiveResult(Data.OverallResult)
+        .Instruct('Something is wrong')
+        .InstructWithImage('d:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenWide.png', 200, 200)
+        .OnFail().Dialog(seq.CurrentStep.ID + 1);
+    //--------------------------------------------------------
 END_IF;
 
-IF (seq.Step(inStepID := 201,
-    inEnabled := true,
-    inStepDescription := 'INSPECT BOLT PRESENCE - ASK WHAT TO DO WITH INSTRUCTION')) THEN
-    //--------------------------------------------------------	
-   IF seq.IsFreshState THEN
-	    SetupData();
-   END_IF
-    Data.BoltPresenceInspector
-		.WithCoordinator(seq)
-		.Inspect(Components.BoltPresenceSensor)
-		.UpdateComprehensiveResult(Data.OverallResult)
-		.Instruct('Something is wrong')
-        .OnFail()
-		.Dialog(seq.CurrentStep.ID+1);
-    //--------------------------------------------------------			
+IF (seq.Step(inStepID := 203, inEnabled := true, inStepDescription := 'INSPECT BOLT PRESENCE - ASK WHAT TO DO WITH INSTRUCTION AND BIGGER PICTURE'))
+    THEN
+    //--------------------------------------------------------
+    IF seq.IsFreshState THEN
+        SetupData();
+    END_IF
+
+    Data.BoltPresenceInspector.WithCoordinator(seq)
+        .Inspect(Components.BoltPresenceSensor)
+        .UpdateComprehensiveResult(Data.OverallResult)
+        .Instruct('Something is wrong') //provide cuastomized instruction instead of automaticaly generated
+        .InstructWithImage('d:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenWide.png', 600, 600)
+        .OnFail().Dialog(seq.CurrentStep.ID + 1);
+    //--------------------------------------------------------
 END_IF;
 
-IF (seq.Step(inStepID := 202,
-    inEnabled := true,
-    inStepDescription := 'INSPECT BOLT PRESENCE - ASK WHAT TO DO WITH INSTRUCTION AND PICTURE')) THEN
-    //--------------------------------------------------------	
-	IF seq.IsFreshState THEN
-	    SetupData();
-   	END_IF
-    Data.BoltPresenceInspector
-		.WithCoordinator(seq)
-		.Inspect(Components.BoltPresenceSensor)
-		.UpdateComprehensiveResult(Data.OverallResult)
-		.Instruct('Something is wrong')
-		.InstructWithImage('d:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenWide.png',200,200)
-        .OnFail()
-		.Dialog(seq.CurrentStep.ID+1);
-    //--------------------------------------------------------			
-END_IF;
-IF (seq.Step(inStepID := 203,
-    inEnabled := true,
-    inStepDescription := 'INSPECT BOLT PRESENCE - ASK WHAT TO DO WITH INSTRUCTION AND BIGGER PICTURE')) THEN
-    //--------------------------------------------------------	
-	IF seq.IsFreshState THEN
-	    SetupData();
-   	END_IF 
-	Data.BoltPresenceInspector
-		.WithCoordinator(seq)
-		.Inspect(Components.BoltPresenceSensor)
-		.UpdateComprehensiveResult(Data.OverallResult)
-		.Instruct('Something is wrong')		//provide cuastomized instruction instead of automaticaly generated
-		.InstructWithImage('d:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenWide.png',600,600)
-        .OnFail()
-		.Dialog(seq.CurrentStep.ID+1);
-    //--------------------------------------------------------			
-END_IF;
-IF (seq.Step(inStepID := 204,
-    inEnabled := true,
-    inStepDescription := 'INSPECT BOLT PRESENCE - ASK WHAT TO DO WITH FAILURE DESCRIPTION')) THEN
-    //--------------------------------------------------------	
-	IF seq.IsFreshState THEN
-	    SetupData();
-   	END_IF    
+IF (seq.Step(inStepID := 204, inEnabled := true, inStepDescription := 'INSPECT BOLT PRESENCE - ASK WHAT TO DO WITH FAILURE DESCRIPTION')) THEN
+    //--------------------------------------------------------
+    IF seq.IsFreshState THEN
+        SetupData();
+    END_IF
 
-	 Data.BoltPresenceInspector
-		.WithCoordinator(seq)
-		.Inspect(Components.BoltPresenceSensor)
-		.UpdateComprehensiveResult(Data.OverallResult)
-		.WithFailureDescription()
-		.OnFail()
-		.Dialog(seq.CurrentStep.ID+1);
-    //--------------------------------------------------------			
+    Data.BoltPresenceInspector.WithCoordinator(seq)
+        .Inspect(Components.BoltPresenceSensor)
+        .UpdateComprehensiveResult(Data.OverallResult)
+        .WithFailureDescription()
+        .OnFail().Dialog(seq.CurrentStep.ID + 1);
+    //--------------------------------------------------------
 END_IF;
 
-IF (seq.Step(inStepID := 205,
-    inEnabled := true,
-    inStepDescription := 'INSPECT BOLT PRESENCE - ASK WHAT TO DO WITH DESCRIPTION')) THEN
-    //--------------------------------------------------------	
-	IF seq.IsFreshState THEN
-	    SetupData();
-   	END_IF    
-	 Data.BoltPresenceInspector
-		.WithCoordinator(seq)
-		.Inspect(Components.BoltPresenceSensor)
-		.UpdateComprehensiveResult(Data.OverallResult)
-		.WithDescription()	//provide description of Inspector in this case will be Bolt presence inspection because...	{attribute addProperty Name "Bolt presence inspection"}
-		.OnFail()
-		.Dialog(seq.CurrentStep.ID+1);
-    //--------------------------------------------------------			
+IF (seq.Step(inStepID := 205, inEnabled := true, inStepDescription := 'INSPECT BOLT PRESENCE - ASK WHAT TO DO WITH DESCRIPTION')) THEN
+    //--------------------------------------------------------
+    IF seq.IsFreshState THEN
+        SetupData();
+    END_IF
+
+    Data.BoltPresenceInspector.WithCoordinator(seq)
+        .Inspect(Components.BoltPresenceSensor)
+        .UpdateComprehensiveResult(Data.OverallResult)
+        .WithDescription() //provide description of Inspector in this case will be Bolt presence inspection because...	{attribute addProperty Name "Bolt presence inspection"}
+        .OnFail().Dialog(seq.CurrentStep.ID + 1);
+    //--------------------------------------------------------
 END_IF;
 
 IF (seq.Step(inStepID := 206,
     inEnabled := true,
     inStepDescription := 'INSPECT BOLT PRESENCE - ASK WHAT TO DO WITH FAILURE DESCRIPTION AND ERROR CODE(IF DEFINED)')) THEN
-    //--------------------------------------------------------	
-   	IF seq.IsFreshState THEN
-	    SetupData();
-   	END_IF    
-	 Data.BoltPresenceInspector
-		.WithCoordinator(seq)
-		.Inspect(Components.BoltPresenceSensor)
-		.UpdateComprehensiveResult(Data.OverallResult)
-		.WithErrorCode()
-		.WithFailureDescription()
-		.OnFail()
-		.Dialog(250);
-    //--------------------------------------------------------			
+    //--------------------------------------------------------
+    IF seq.IsFreshState THEN
+        SetupData();
+    END_IF
+
+    Data.BoltPresenceInspector.WithCoordinator(seq)
+        .Inspect(Components.BoltPresenceSensor)
+        .UpdateComprehensiveResult(Data.OverallResult)
+        .WithErrorCode()
+        .WithFailureDescription()
+        .OnFail().Dialog(250);
+    //--------------------------------------------------------
 END_IF;
 
+IF (seq.Step(inStepID := 250, inEnabled := TRUE, inStepDescription := 'INSPECT BOLT PRESENCE - ASK WHAT TO DO WITH EXTERNAL CLOSE')) THEN
+    //--------------------------------------------------------
+    IF seq.IsFreshState THEN
+        SetupData();
+    END_IF
 
-
-IF (seq.Step(inStepID := 250,
-    inEnabled := TRUE,
-    inStepDescription := 'INSPECT BOLT PRESENCE - ASK WHAT TO DO WITH EXTERNAL CLOSE')) THEN
-    //--------------------------------------------------------	
-	IF seq.IsFreshState THEN
-	    SetupData();
-   	END_IF    
-	Data.BoltPresenceInspector
-		.WithCoordinator(seq)
-		.Inspect(Components.BoltPresenceSensor)
-		.UpdateComprehensiveResult(Data.OverallResult)	
-        .OnFail()
-        .DialogWithExternalClose (250,inRetrySignal:=testRetry,inTerminateSignal:=testTerminate);
-    //--------------------------------------------------------			
+    Data.BoltPresenceInspector.WithCoordinator(seq).Inspect(Components.BoltPresenceSensor).UpdateComprehensiveResult(Data.OverallResult).OnFail()
+        .DialogWithExternalClose(250, inRetrySignal := testRetry, inTerminateSignal := testTerminate);
+    //--------------------------------------------------------
 END_IF;
-
-
-
-
 
 IF (seq.Step(inStepID := 300,
     inEnabled := TRUE,
     inStepDescription := 'INSPECT DIMENSIONS - WITH NORMALIZE RETRIES (lower `number of allowed retries` for this call of inspection group)')) THEN
     //--------------------------------------------------------
-//   	IF seq.IsFreshState THEN
-//	    SetupData();
-//   	END_IF    
-	 GroupInspection
-		.WithCoordinator(seq)
-		.Act()	
-//		.NormalizeRetries(Data.Dimensions.DimX_Inspector)
-//		.NormalizeRetries(Data.Dimensions.DimY_Inspector)
-//		.NormalizeRetries(Data.Dimensions.DimZ_Inspector)
+    //   	IF seq.IsFreshState THEN
+    //	    SetupData();
+    //   	END_IF
+    GroupInspection.WithCoordinator(seq)
+        .Act()
+    //		.NormalizeRetries(Data.Dimensions.DimX_Inspector)
+    //		.NormalizeRetries(Data.Dimensions.DimY_Inspector)
+    //		.NormalizeRetries(Data.Dimensions.DimZ_Inspector)
         .Inspect(Data.Dimensions.DimX_Inspector.Inspect(Components.DimX_Sensor))
         .Inspect(Data.Dimensions.DimY_Inspector.Inspect(Components.DimY_Sensor))
-        .Inspect(Data.Dimensions.DimZ_Inspector.Inspect(Components.DimZ_Sensor))	
-		.UpdateComprehensiveResult(Data.OverallResult)		
-		.OnFail()
-		.Dialog(300);			
-    //--------------------------------------------------------			
+        .Inspect(Data.Dimensions.DimZ_Inspector.Inspect(Components.DimZ_Sensor))
+        .UpdateComprehensiveResult(Data.OverallResult)
+        .OnFail().Dialog(300);
+    //--------------------------------------------------------
 END_IF;
 
-IF (seq.Step(inStepID := 309,
-    inEnabled := TRUE,
-    inStepDescription := 'INSPECT MULTI DIMENSIONS - EXTERNAL CLOSE')) THEN
+IF (seq.Step(inStepID := 309, inEnabled := TRUE, inStepDescription := 'INSPECT MULTI DIMENSIONS - EXTERNAL CLOSE')) THEN
     //--------------------------------------------------------
     IF seq.IsFreshState THEN
-	    SetupData();
-   	END_IF    
-	 
-	GroupInspection
-		.WithCoordinator(seq)
-		.Act();
-	
-		GroupInspection.Inspect(Data.Dimensions.DimX_Inspector.Inspect(Components.DimX_Sensor));
-		GroupInspection.Inspect(Data.Dimensions.DimY_Inspector.WithCoordinator(seq).Inspect(Components.DimY_Sensor));
-		GroupInspection.Inspect(Data.Dimensions.DimZ_Inspector.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));		
+        SetupData();
+    END_IF
 
-		
-  	
-		
-	GroupInspection.UpdateComprehensiveResult(Data.OverallResult)	
-		.Instruct('Something is wrong')
-		.InstructWithImage('d:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenWide.png',400,600)	
-		.OnFail()
-		.DialogWithExternalClose(309,inRetrySignal:=testRetry,inTerminateSignal:=testTerminate);			
-		
-		
-    //--------------------------------------------------------			
+    GroupInspection.WithCoordinator(seq).Act();
+    GroupInspection.Inspect(Data.Dimensions.DimX_Inspector.Inspect(Components.DimX_Sensor));
+    GroupInspection.Inspect(Data.Dimensions.DimY_Inspector.WithCoordinator(seq).Inspect(Components.DimY_Sensor));
+    GroupInspection.Inspect(Data.Dimensions.DimZ_Inspector.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));
+
+    GroupInspection.UpdateComprehensiveResult(Data.OverallResult)
+        .Instruct('Something is wrong')
+        .InstructWithImage('d:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenWide.png', 400, 600)
+        .OnFail().DialogWithExternalClose(309, inRetrySignal := testRetry, inTerminateSignal := testTerminate);
+    //--------------------------------------------------------
 END_IF
 
-IF (seq.Step(inStepID := 310,
-    inEnabled := TRUE,
-    inStepDescription := 'INSPECT MULTI DIMENSIONS - EXTERNAL CLOSE')) THEN
+IF (seq.Step(inStepID := 310, inEnabled := TRUE, inStepDescription := 'INSPECT MULTI DIMENSIONS - EXTERNAL CLOSE')) THEN
     //--------------------------------------------------------
     IF seq.IsFreshState THEN
-	    SetupData();
-   	END_IF    
-	 
-	GroupInspection
-		.WithCoordinator(seq)
-		.Act();
-		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_1.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));	
-		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_2.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));	
-		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_3.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));		
-		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_4.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));	
-		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_5.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));	
-		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_6.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));	
-		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_7.WithCoordinator(seq).Inspect(1));	
-		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_8.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));	
-		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_9.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));
-		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_10.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));	
-  	
-		
-	GroupInspection.UpdateComprehensiveResult(Data.OverallResult)	
-		.Instruct('Something is wrong')
-		.InstructWithImage('d:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenWide.png',400,600)	
-		.OnFail()
-		.DialogWithExternalClose(311,inRetrySignal:=testRetry,inTerminateSignal:=testTerminate);			
-		
-		
-    //--------------------------------------------------------			
-END_IF
-IF (seq.Step(inStepID := 311,
-    inEnabled := TRUE,
-    inStepDescription := 'INSPECT MULTI DIMENSIONS - EXTERNAL CLOSE')) THEN
+        SetupData();
+    END_IF
+
+    GroupInspection.WithCoordinator(seq).Act();
+    GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_1.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));
+    GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_2.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));
+    GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_3.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));
+    GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_4.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));
+    GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_5.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));
+    GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_6.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));
+    GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_7.WithCoordinator(seq).Inspect(1));
+    GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_8.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));
+    GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_9.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));
+    GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_10.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));
+
+    GroupInspection.UpdateComprehensiveResult(Data.OverallResult)
+        .Instruct('Something is wrong')
+        .InstructWithImage('d:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenWide.png', 400, 600)
+        .OnFail().DialogWithExternalClose(311, inRetrySignal := testRetry, inTerminateSignal := testTerminate);
     //--------------------------------------------------------
-    IF seq.IsFreshState THEN
-	    SetupData();
-   	END_IF    
-	 
-	GroupInspection
-		.WithCoordinator(seq)
-		.Act();
-		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_11.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));	
-		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_12.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));	
-		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_13.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));		
-		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_14.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));	
-		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_15.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));	
-		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_16.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));	
-		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_17.WithCoordinator(seq).Inspect(1));	
-		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_18.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));	
-		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_19.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));
-		GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_20.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));	
-  	
-		
-	GroupInspection.UpdateComprehensiveResult(Data.OverallResult)	
-		.Instruct('Something is wrong')
-		.InstructWithImage('d:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenWide.png',400,600)	
-		.OnFail()
-		.DialogWithExternalClose(312,inRetrySignal:=testRetry,inTerminateSignal:=testTerminate);			
-		
-		
-    //--------------------------------------------------------			
 END_IF
 
-IF (seq.Step(inStepID := 312,
-    inEnabled := TRUE,
-    inStepDescription := 'INSPECT MULTI DIMENSIONS - EXTERNAL CLOSE WITH FAILED DESCRIPTION')) THEN
+IF (seq.Step(inStepID := 311, inEnabled := TRUE, inStepDescription := 'INSPECT MULTI DIMENSIONS - EXTERNAL CLOSE')) THEN
     //--------------------------------------------------------
     IF seq.IsFreshState THEN
-	    SetupData();
-   	END_IF    
-	 
-	
-	GroupInspection
-		.WithCoordinator(seq)
-		.Act();
-	
-		GroupInspection.Inspect(Data.Dimensions.DimX_Inspector.Inspect(Components.DimX_Sensor));
-		GroupInspection.Inspect(Data.Dimensions.DimY_Inspector.WithCoordinator(seq).Inspect(10));
-		GroupInspection.Inspect(Data.Dimensions.DimZ_Inspector.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));		
-	
-  	
-		
-	GroupInspection.UpdateComprehensiveResult(Data.OverallResult)	
-		.Instruct('Something is wrong tooooooooooooooooooo  loooooooooooooooooooooooooooooooooooooooooooooooong')
-		.InstructWithImage('d:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenWide.png',400,600)	
-		.WithDescription()
-		.OnFail()
-		.DialogWithExternalClose(310,inRetrySignal:=testRetry,inTerminateSignal:=testTerminate);			
-		
-		
-    //--------------------------------------------------------			
+        SetupData();
+    END_IF
+
+    GroupInspection.WithCoordinator(seq).Act();
+    GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_11.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));
+    GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_12.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));
+    GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_13.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));
+    GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_14.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));
+    GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_15.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));
+    GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_16.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));
+    GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_17.WithCoordinator(seq).Inspect(1));
+    GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_18.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));
+    GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_19.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));
+    GroupInspection.Inspect(Data.Dimensions.Dim_Inspector_20.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));
+
+    GroupInspection.UpdateComprehensiveResult(Data.OverallResult)
+        .Instruct('Something is wrong')
+        .InstructWithImage('d:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenWide.png', 400, 600)
+        .OnFail().DialogWithExternalClose(312, inRetrySignal := testRetry, inTerminateSignal := testTerminate);
+    //--------------------------------------------------------
+END_IF
+
+IF (seq.Step(inStepID := 312, inEnabled := TRUE, inStepDescription := 'INSPECT MULTI DIMENSIONS - EXTERNAL CLOSE WITH FAILED DESCRIPTION')) THEN
+    //--------------------------------------------------------
+    IF seq.IsFreshState THEN
+        SetupData();
+    END_IF
+
+    GroupInspection.WithCoordinator(seq).Act();
+    GroupInspection.Inspect(Data.Dimensions.DimX_Inspector.Inspect(Components.DimX_Sensor));
+    GroupInspection.Inspect(Data.Dimensions.DimY_Inspector.WithCoordinator(seq).Inspect(10));
+    GroupInspection.Inspect(Data.Dimensions.DimZ_Inspector.WithCoordinator(seq).Inspect(Components.DimZ_Sensor));
+
+    GroupInspection.UpdateComprehensiveResult(Data.OverallResult)
+        .Instruct('Something is wrong tooooooooooooooooooo  loooooooooooooooooooooooooooooooooooooooooooooooong')
+        .InstructWithImage('d:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenWide.png', 400, 600)
+        .WithDescription()
+        .OnFail().DialogWithExternalClose(310, inRetrySignal := testRetry, inTerminateSignal := testTerminate);
+    //--------------------------------------------------------
 END_IF;
-
 
 //IF (seq.Step(inStepID := 314,
 //    inEnabled := TRUE,
 //    inStepDescription := 'SETUP DATA MANY')) THEN
-//    //--------------------------------------------------------    
+//    //--------------------------------------------------------
 //	 	Data := EmptyData;
-//		Data.Dimensions.Inspectors[0].Data.NumberOfAllowedRetries := 3;    
+//		Data.Dimensions.Inspectors[0].Data.NumberOfAllowedRetries := 3;
 //		FOR i:=0 TO 15 DO
-//			Data.Dimensions.Inspectors[i].Data.PassTime := T#1500MS;    
+//			Data.Dimensions.Inspectors[i].Data.PassTime := T#1500MS;
 //			Data.Dimensions.Inspectors[i].Data.FailTime := T#2000MS;
 //			Data.Dimensions.Inspectors[i].Data.RequiredMin := 9.75;
 //			Data.Dimensions.Inspectors[i].Data.RequiredMax := 10.25;
 //			Data.Dimensions.Inspectors[i].Data.FailureDescription := 'Dimz inspection failed toooooooooooooooooooooooo loooooooooooooooooooong';
-//			Data.Dimensions.Inspectors[i].Data.ErrorCode := '5';		
+//			Data.Dimensions.Inspectors[i].Data.ErrorCode := '5';
 //		END_FOR
-
-////		Data.Dimensions.Inspectors[i].Data.PassTime := T#1500MS;    
+////		Data.Dimensions.Inspectors[i].Data.PassTime := T#1500MS;
 ////		Data.Dimensions.Inspectors[i].Data.FailTime := T#2000MS;
 ////		Data.Dimensions.Inspectors[i].Data.RequiredMin := 9.75;
 ////		Data.Dimensions.Inspectors[i].Data.RequiredMax := 10.25;
 ////		Data.Dimensions.Inspectors[i].Data.FailureDescription := 'Dimz inspection failed';
-////		Data.Dimensions.Inspectors[i].Data.ErrorCode := '5';		
-		
-	
+////		Data.Dimensions.Inspectors[i].Data.ErrorCode := '5';
 //		seq.CompleteStep();
-//    //--------------------------------------------------------			
+//    //--------------------------------------------------------
 //END_IF;
 //IF (seq.Step(inStepID := 315,
 //    inEnabled := TRUE,
 //    inStepDescription := 'INSPECT MANY - WITH EXTERNAL CLOSE')) THEN
 //    //--------------------------------------------------------
-    
-	 
 //	GroupInspection
 //		.WithCoordinator(seq)
 //		.Act();
-	
 //	FOR i:=0 TO 15 DO
 //			GroupInspection.Inspect(Data.Dimensions.Inspectors[i].Inspect(Components.DimX_Sensor));
 //	END_FOR
-	
-
-		
-//	GroupInspection.UpdateComprehensiveResult(Data.OverallResult)	
+//	GroupInspection.UpdateComprehensiveResult(Data.OverallResult)
 //		.Instruct('Something is wrong tooooooooooooooooooo  looooooooooooooooooong')
-
 //		.InstructWithImage('d:\MTS\Develop\TcOpenGroup\TcOpen\assets\logo\TcOpenWide.png',400,400)
 //		.WithDescription()
 //		.WithErrorCode()
-//		.WithFailureDescription()	
+//		.WithFailureDescription()
 //		.OnFail()
-//		.DialogWithExternalClose(314,inRetrySignal:=testRetry,inTerminateSignal:=testTerminate);			
-		
-		
-//    //--------------------------------------------------------			
+//		.DialogWithExternalClose(314,inRetrySignal:=testRetry,inTerminateSignal:=testTerminate);
+//    //--------------------------------------------------------
 //END_IF;
-
-IF (seq.Step(inStepID := seq.RESTORE_STEP_ID,
-    inEnabled := TRUE,
-    inStepDescription := 'RETURN TO THE START OF THE SEQUENCE')) THEN
-    //--------------------------------------------------------	
-    	seq.CompleteSequence();
-    //--------------------------------------------------------			
+IF (seq.Step(inStepID := seq.RESTORE_STEP_ID, inEnabled := TRUE, inStepDescription := 'RETURN TO THE START OF THE SEQUENCE')) THEN
+    //--------------------------------------------------------
+    seq.CompleteSequence();
+    //--------------------------------------------------------
 END_IF;
 
 seq.Close();]]></ST>
@@ -477,49 +375,41 @@ seq.Close();]]></ST>
     <Method Name="SetupData" Id="{5e41ba2d-5933-0c4c-275d-450691e5086f}">
       <Declaration><![CDATA[METHOD SetupData
 VAR_INPUT
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[	//Data := EmptyData;
-	
-	Data.DmcInspector.Data.RequiredStatus := 'A#*';
-	Data.DmcInspector.Data.StarNotationEnabled := TRUE;
-	Data.DmcInspector.Data.PassTime := T#1500MS;    
-	Data.DmcInspector.Data.FailTime := T#2S;
-	Data.DmcInspector.Data.FailureDescription := 'Data inspection failed';
-	Data.DmcInspector.Data.ErrorCode := '1';
-	
-	
-	Data.BoltPresenceInspector.Data.RequiredStatus := TRUE;
-	Data.BoltPresenceInspector.Data.PassTime := T#1500MS;    
-	Data.BoltPresenceInspector.Data.FailTime := T#2S;	
-	Data.BoltPresenceInspector.Data.NumberOfAllowedRetries := 2;
-	Data.BoltPresenceInspector.Data.FailureDescription := 'Bolt inspection failed';
-	Data.BoltPresenceInspector.Data.ErrorCode := '2';
-
-	Data.Dimensions.DimX_Inspector.Data.PassTime := T#1500MS;    
-	Data.Dimensions.DimX_Inspector.Data.FailTime := T#2S;
-	Data.Dimensions.DimX_Inspector.Data.RequiredMin := 9.75;
-	Data.Dimensions.DimX_Inspector.Data.RequiredMax := 10.25;
-	Data.Dimensions.DimX_Inspector.Data.NumberOfAllowedRetries := 3;
-	Data.Dimensions.DimX_Inspector.Data.FailureDescription := 'Dimx inspection failed';
-	Data.Dimensions.DimX_Inspector.Data.ErrorCode := '3';
-	
-	Data.Dimensions.DimY_Inspector.Data.PassTime := T#1500MS;    
-	Data.Dimensions.DimY_Inspector.Data.FailTime := T#2S;
-	Data.Dimensions.DimY_Inspector.Data.RequiredMin := 9.75;
-	Data.Dimensions.DimY_Inspector.Data.RequiredMax := 10.25;
-	Data.Dimensions.DimY_Inspector.Data.FailureDescription := 'Dimy inspection failed';
-	Data.Dimensions.DimY_Inspector.Data.ErrorCode := '4';
-
-	Data.Dimensions.DimZ_Inspector.Data.PassTime := T#1500MS;    
-	Data.Dimensions.DimZ_Inspector.Data.FailTime := T#2S;
-	Data.Dimensions.DimZ_Inspector.Data.RequiredMin := 9.75;
-	Data.Dimensions.DimZ_Inspector.Data.RequiredMax := 10.25;
-	Data.Dimensions.DimZ_Inspector.Data.FailureDescription := 'Dimz inspection failed';
-	Data.Dimensions.DimZ_Inspector.Data.ErrorCode := '5';		
-	
-	Data.DmcInspector.Data.NumberOfAllowedRetries := 5;    ]]></ST>
+        <ST><![CDATA[//Data := EmptyData;
+Data.DmcInspector.Data.RequiredStatus := 'A#*';
+Data.DmcInspector.Data.StarNotationEnabled := TRUE;
+Data.DmcInspector.Data.PassTime := T#1500MS;
+Data.DmcInspector.Data.FailTime := T#2S;
+Data.DmcInspector.Data.FailureDescription := 'Data inspection failed';
+Data.DmcInspector.Data.ErrorCode := '1';
+Data.BoltPresenceInspector.Data.RequiredStatus := TRUE;
+Data.BoltPresenceInspector.Data.PassTime := T#1500MS;
+Data.BoltPresenceInspector.Data.FailTime := T#2S;
+Data.BoltPresenceInspector.Data.NumberOfAllowedRetries := 2;
+Data.BoltPresenceInspector.Data.FailureDescription := 'Bolt inspection failed';
+Data.BoltPresenceInspector.Data.ErrorCode := '2';
+Data.Dimensions.DimX_Inspector.Data.PassTime := T#1500MS;
+Data.Dimensions.DimX_Inspector.Data.FailTime := T#2S;
+Data.Dimensions.DimX_Inspector.Data.RequiredMin := 9.75;
+Data.Dimensions.DimX_Inspector.Data.RequiredMax := 10.25;
+Data.Dimensions.DimX_Inspector.Data.NumberOfAllowedRetries := 3;
+Data.Dimensions.DimX_Inspector.Data.FailureDescription := 'Dimx inspection failed';
+Data.Dimensions.DimX_Inspector.Data.ErrorCode := '3';
+Data.Dimensions.DimY_Inspector.Data.PassTime := T#1500MS;
+Data.Dimensions.DimY_Inspector.Data.FailTime := T#2S;
+Data.Dimensions.DimY_Inspector.Data.RequiredMin := 9.75;
+Data.Dimensions.DimY_Inspector.Data.RequiredMax := 10.25;
+Data.Dimensions.DimY_Inspector.Data.FailureDescription := 'Dimy inspection failed';
+Data.Dimensions.DimY_Inspector.Data.ErrorCode := '4';
+Data.Dimensions.DimZ_Inspector.Data.PassTime := T#1500MS;
+Data.Dimensions.DimZ_Inspector.Data.FailTime := T#2S;
+Data.Dimensions.DimZ_Inspector.Data.RequiredMin := 9.75;
+Data.Dimensions.DimZ_Inspector.Data.RequiredMax := 10.25;
+Data.Dimensions.DimZ_Inspector.Data.FailureDescription := 'Dimz inspection failed';
+Data.Dimensions.DimZ_Inspector.Data.ErrorCode := '5';
+Data.DmcInspector.Data.NumberOfAllowedRetries := 5;]]></ST>
       </Implementation>
     </Method>
   </POU>

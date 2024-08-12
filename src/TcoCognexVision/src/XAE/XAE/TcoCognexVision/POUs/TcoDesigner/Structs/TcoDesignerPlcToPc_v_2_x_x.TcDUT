@@ -4,33 +4,24 @@
     <Declaration><![CDATA[{attribute wpf [Container(Layout.Stack)]}
 TYPE TcoDesignerPlcToPc_v_2_x_x :
 STRUCT
-
-	{attribute wpf [Container(Layout.Stack,"Control")]}
-	{attribute addProperty Name "<#Trigger#>"}
-	Trigger			: BOOL;
-	{attribute addProperty Name "<#ResultsAck#>"}
-	ResultsAck		: BOOL;
-	{attribute addProperty Name "<#Reset#>"}
-	Reset			: BOOL;
-	{attribute addProperty Name "<#JobLoadId#>"}	
-	JobLoadId		: UINT;	
-	{attribute addProperty Name "<#LoadJob#>"}
-	LoadJob			: BOOL;	
-	
-	{attribute addProperty Name "<#ClearResults#>"}
-	ClearResults	: BOOL;	
-	
-	
-	{attribute addProperty Name "<#Timeout[ms]#>"}
-	Timeout	: UINT;	
-	
-	{attribute addProperty Name "<# PartId #>"}
-   	PartId			: STRING; //napr. DMC Code       
-	
-
-
+    {attribute wpf [Container(Layout.Stack,"Control")]}
+    {attribute addProperty Name "<#Trigger#>"}
+    Trigger : BOOL;
+    {attribute addProperty Name "<#ResultsAck#>"}
+    ResultsAck : BOOL;
+    {attribute addProperty Name "<#Reset#>"}
+    Reset : BOOL;
+    {attribute addProperty Name "<#JobLoadId#>"}
+    JobLoadId : UINT;
+    {attribute addProperty Name "<#LoadJob#>"}
+    LoadJob : BOOL;
+    {attribute addProperty Name "<#ClearResults#>"}
+    ClearResults : BOOL;
+    {attribute addProperty Name "<#Timeout[ms]#>"}
+    Timeout : UINT;
+    {attribute addProperty Name "<# PartId #>"}
+    PartId : STRING; //napr. DMC Code
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

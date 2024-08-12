@@ -67,8 +67,7 @@ IF Execute() THEN
 
     DoneWhen(_mcMoveModulo.Done);
     ThrowWhen(_mcMoveModulo.Error);
-
- END_IF]]></ST>
+END_IF]]></ST>
     </Implementation>
     <Property Name="DriveRef" Id="{9f62bfdc-cf3d-0974-0415-259a7574476a}">
       <Declaration><![CDATA[PROPERTY DriveRef : REFERENCE TO TcoDriveSimple]]></Declaration>
@@ -88,7 +87,7 @@ END_IF]]></ST>
 VAR_INPUT
     bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
     bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
-  	ParentObject : ITcoObject;	
+    ParentObject : ITcoObject;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
@@ -116,11 +115,11 @@ InvokeWithParams := THIS^.Invoke();]]></ST>
     </Method>
     <Method Name="OnAbort" Id="{e3764582-a9eb-0721-300c-943562611114}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task is aborted.
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task is aborted.
+        </summary>
+    </docu>
 ~*)
 METHOD PROTECTED OnAbort]]></Declaration>
       <Implementation>
@@ -139,14 +138,13 @@ THIS^.DriveRef._movementState.Restore();]]></ST>
     </Method>
     <Method Name="OnDone" Id="{02f1074f-d270-0406-275f-a7e121d5e4b7}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task reaches the ```Done``` state .
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task reaches the ```Done``` state .
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnDone
-]]></Declaration>
+METHOD PROTECTED OnDone]]></Declaration>
       <Implementation>
         <ST><![CDATA[_mcMoveModulo(Axis := _axisRef, Execute := FALSE);
 THIS^.DriveRef._movementState.Restore();]]></ST>
@@ -154,29 +152,28 @@ THIS^.DriveRef._movementState.Restore();]]></ST>
     </Method>
     <Method Name="OnError" Id="{1162b272-9d04-02d1-121e-f32f7f955372}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes when task reaches the ```Error``` state.
-			<para>
-				Do not confuse with <see cref="PlcDocu.TcoCore.TcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
-			</para>
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes when task reaches the ```Error``` state.
+            <para>
+                Do not confuse with <see cref="PlcDocu.TcoCore.TcoTask.WhileError()"/>, that is called cyclically until '''Error''' state is left.
+            </para>
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED OnError
-]]></Declaration>
+METHOD PROTECTED OnError]]></Declaration>
       <Implementation>
         <ST><![CDATA[THIS^.DriveRef._movementState.Restore();
+
 IF NOT _axisRef.Status.Error THEN
-	DriveRef.SetErrorID(DriveRef._moveModuloTask._mcMoveModulo.ErrorID);
+    DriveRef.SetErrorID(DriveRef._moveModuloTask._mcMoveModulo.ErrorID);
 END_IF
-_mcMoveModulo(Axis := _axisRef, Execute := FALSE);
-]]></ST>
+
+_mcMoveModulo(Axis := _axisRef, Execute := FALSE);]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStart" Id="{ca3b5016-83e1-0994-2ff7-70a41fead783}">
-      <Declaration><![CDATA[METHOD PROTECTED OnStart 
-]]></Declaration>
+      <Declaration><![CDATA[METHOD PROTECTED OnStart]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF NOT Tco_TO_Tc2MC2_Direction(_direction, _mc_direction) THEN
     _message := Tc2_Standard.CONCAT('Unable to cast _direction variable of type TcoDrivesBeckhoff.eDirection (', TO_STRING(_mc_direction));
@@ -191,14 +188,14 @@ _mcMoveModulo(Axis := _axisRef, Execute := FALSE);]]></ST>
     </Method>
     <Method Name="Restore" Id="{e76d73f7-c997-0281-1a04-764cb6b2dce1}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
-			<para>
-				See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
-			</para>
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Restores this instance to the Ready state. Can be called explicitly or from within one of the restore mechanisms.
+            <para>
+                See also <see cref="PlcDocu.TcoCore.TcoTask.AutoRestorable()"/>
+            </para>
+        </summary>
+    </docu>
 ~*)
 METHOD Restore : ITcoRestorable]]></Declaration>
       <Implementation>
@@ -207,17 +204,16 @@ METHOD Restore : ITcoRestorable]]></Declaration>
     </Method>
     <Method Name="WhileError" Id="{60d094a0-a4d7-0a68-3fc6-9de964ed28a7}">
       <Declaration><![CDATA[(*~
-	<docu>
-		<summary>
-			Executes until task is in ```Error``` state .
-		</summary>			
-	</docu>	
+    <docu>
+        <summary>
+            Executes until task is in ```Error``` state .
+        </summary>
+    </docu>
 ~*)
-METHOD PROTECTED WhileError
-]]></Declaration>
+METHOD PROTECTED WhileError]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF NOT _axisRef.Status.Error THEN
-	DriveRef.SetErrorID(DriveRef._moveModuloTask._mcMoveModulo.ErrorID);
+    DriveRef.SetErrorID(DriveRef._moveModuloTask._mcMoveModulo.ErrorID);
     _mcMoveModulo(Axis := _axisRef, Execute := FALSE);
 END_IF]]></ST>
       </Implementation>

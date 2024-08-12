@@ -11,23 +11,36 @@ namespace TcoIo
     {
         public string FirstTopologyElementName
         {
-            get 
+            get
             {
                 string name = "";
-                TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() => { name = ValidateFrameworkElement.Name((string)GetValue(FirstTopologyElementNameProperty)); });
+                TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() =>
+                {
+                    name = ValidateFrameworkElement.Name(
+                        (string)GetValue(FirstTopologyElementNameProperty)
+                    );
+                });
                 return name;
             }
-            set 
+            set
             {
-                TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(() => SetValue(FirstTopologyElementNameProperty, ValidateFrameworkElement.Name(value)));
+                TcOpen.Inxton.TcoAppDomain.Current.Dispatcher.Invoke(
+                    () =>
+                        SetValue(
+                            FirstTopologyElementNameProperty,
+                            ValidateFrameworkElement.Name(value)
+                        )
+                );
             }
         }
 
         // Using a DependencyProperty as the backing store for FirstTopologyElement.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FirstTopologyElementNameProperty =
-            DependencyProperty.Register("FirstTopologyElementName",
-                                        typeof(string),
-                                        typeof(TopologyRenderer),
-                                        new PropertyMetadata(""));
+            DependencyProperty.Register(
+                "FirstTopologyElementName",
+                typeof(string),
+                typeof(TopologyRenderer),
+                new PropertyMetadata("")
+            );
     }
 }

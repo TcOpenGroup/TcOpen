@@ -4,17 +4,21 @@
     <TargetFrameworks>net48;net5.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <IsPackable>false</IsPackable>  	
-  </PropertyGroup> 
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Wpf\TcOpen.Inxton.TcoIo.Wpf\TcOpen.Inxton.TcoIo.Wpf.csproj" />
-    <ProjectReference Include="..\TcoIoTestsConnector\TcoIoTestsConnector.csproj" />
-  </ItemGroup> 
+    <ProjectReference
+      Include="..\..\src\Wpf\TcOpen.Inxton.TcoIo.Wpf\TcOpen.Inxton.TcoIo.Wpf.csproj"
+    />
+    <ProjectReference
+      Include="..\TcoIoTestsConnector\TcoIoTestsConnector.csproj"
+    />
+  </ItemGroup>
   <ItemGroup>
     <Compile Update="UserViews\UserViewDevice3.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-  </ItemGroup> 
+  </ItemGroup>
   <ItemGroup>
     <Page Update="Simulation\SimulateState.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>

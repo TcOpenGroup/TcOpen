@@ -9,25 +9,41 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <PackageTags>TwinCAT3 Beckhoff</PackageTags>
-    <PackageReleaseNotes>Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
+    <PackageReleaseNotes
+    >Early dev stage. Experimental. DO NOT USE IN PRODUCTION!!!</PackageReleaseNotes>
     <PackageProjectUrl>http://docs.tcopengroup.org/</PackageProjectUrl>
-    <PackageIconUrl>https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
+    <PackageIconUrl
+    >https://avatars.githubusercontent.com/u/72873267?s=60&amp;v=4</PackageIconUrl>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <SupportedPlatform Include="browser" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Inxton.Vortex.Presentation.Controls.Blazor-experimental" Version="2.0.0" />
+    <PackageReference
+      Include="Inxton.Vortex.Presentation.Controls.Blazor-experimental"
+      Version="2.0.0"
+    />
 	<PackageReference Include="Blazm.Components" Version="1.0.5" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.4" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="5.0.17" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.1.0" />
+    <PackageReference
+      Include="Microsoft.AspNetCore.Components.Web"
+      Version="5.0.4"
+    />
+    <PackageReference
+      Include="Microsoft.AspNetCore.SignalR.Client"
+      Version="5.0.17"
+    />
+    <PackageReference
+      Include="Microsoft.AspNetCore.SignalR.Core"
+      Version="1.1.0"
+    />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\TcOpen.Inxton\src\Abstractions\TcOpen.Inxton.Abstractions.csproj" />
+    <ProjectReference
+      Include="..\..\..\TcOpen.Inxton\src\Abstractions\TcOpen.Inxton.Abstractions.csproj"
+    />
     <ProjectReference Include="..\TcoCoreConnector\TcoCoreConnector.csproj" />
   </ItemGroup>
 

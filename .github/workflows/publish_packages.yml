@@ -1,24 +1,24 @@
 name: Publish
 
-on: 
+on:
   workflow_dispatch:
 jobs:
   artifacts:
     runs-on: windows-latest
     timeout-minutes: 30
     steps:
-    - name: Download artifacts
-      uses: dawidd6/action-download-artifact@v2
-      with:
-        workflow: nightly.yml
-        workflow_conclusion: success
-        branch: dev
-        name: nugets
-        path: nugets
-    ###
-    - name : Remove TcProber
-      run : Get-ChildItem .\nugets -Filter "TcOpen.Tc.Prober.*" | Remove-Item 
-    - name: Push NuGets
-      env:
-        NUGET_ORG_PAT: ${{ secrets.TCOOPENNUGETDOTORGPAT   }}
-      run : dotnet nuget push "nugets\*.nupkg" -k ($env:NUGET_ORG_PAT) --skip-duplicate -s https://api.nuget.org/v3/index.json
+      - name: Download artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: nightly.yml
+          workflow_conclusion: success
+          branch: dev
+          name: nugets
+          path: nugets
+      ###
+      - name: Remove TcProber
+        run: Get-ChildItem .\nugets -Filter "TcOpen.Tc.Prober.*" | Remove-Item
+      - name: Push NuGets
+        env:
+          NUGET_ORG_PAT: ${{ secrets.TCOOPENNUGETDOTORGPAT   }}
+        run: dotnet nuget push "nugets\*.nupkg" -k ($env:NUGET_ORG_PAT) --skip-duplicate -s https://api.nuget.org/v3/index.json

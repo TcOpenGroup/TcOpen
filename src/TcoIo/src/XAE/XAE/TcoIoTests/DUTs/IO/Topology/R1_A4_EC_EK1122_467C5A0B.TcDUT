@@ -9,16 +9,15 @@
 {attribute addProperty Name "R1_A4_EC (EK1122)"}
 TYPE R1_A4_EC_EK1122_467C5A0B EXTENDS EK1122_1FC0878B :
 STRUCT
-	{attribute addProperty Name "R1_A4_X1 (EK1100)"}
-	{attribute addProperty PreviousPort "R1_A4_EC (EK1122) : D"}
-	{attribute addProperty SyncUnit "default"}
-	R1_A4_X1_EK1100 : R1_A4_X1_EK1100_C601B400;
-	{attribute addProperty Name "R1_A4_X2 (EK1100)"}
-	{attribute addProperty PreviousPort "R1_A4_EC (EK1122) : B"}
-	{attribute addProperty SyncUnit "default"}
-	R1_A4_X2_EK1100 : R1_A4_X2_EK1100_6F5FB3BA;
+    {attribute addProperty Name "R1_A4_X1 (EK1100)"}
+    {attribute addProperty PreviousPort "R1_A4_EC (EK1122) : D"}
+    {attribute addProperty SyncUnit "default"}
+    R1_A4_X1_EK1100 : R1_A4_X1_EK1100_C601B400;
+    {attribute addProperty Name "R1_A4_X2 (EK1100)"}
+    {attribute addProperty PreviousPort "R1_A4_EC (EK1122) : B"}
+    {attribute addProperty SyncUnit "default"}
+    R1_A4_X2_EK1100 : R1_A4_X2_EK1100_6F5FB3BA;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

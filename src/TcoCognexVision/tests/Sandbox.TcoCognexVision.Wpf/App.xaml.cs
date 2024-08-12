@@ -1,5 +1,5 @@
-using TcoCognexVisionTests;
 using System.Windows;
+using TcoCognexVisionTests;
 
 namespace Sandbox.TcoCognexVision.Wpf
 {
@@ -10,8 +10,10 @@ namespace Sandbox.TcoCognexVision.Wpf
     {
         public App()
         {
-            TcOpen.Inxton.TcoAppDomain.Current.Builder
-                .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter())
+            TcOpen
+                .Inxton.TcoAppDomain.Current.Builder.SetUpLogger(
+                    new TcOpen.Inxton.Logging.SerilogAdapter()
+                )
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
 
             Entry.TcoCognexVisionTestsPlc.Connector.BuildAndStart().ReadWriteCycleDelay = 75;

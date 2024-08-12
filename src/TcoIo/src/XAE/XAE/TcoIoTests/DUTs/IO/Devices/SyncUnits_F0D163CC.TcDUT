@@ -8,20 +8,19 @@
 {attribute addProperty Size "108"}
 TYPE SyncUnits_F0D163CC EXTENDS TcoIo.SyncUnitsBase_AD6C35CE :
 STRUCT
-	{attribute addProperty Name "_default"}
-	_default : SyncUnitTasks_5FDC9770;
-	{attribute addProperty Name "Row_0"}
-	Row_0 : SyncUnitTasks_5FDC9770;
-	{attribute addProperty Name "Row_1"}
-	Row_1 : SyncUnitTasks_5FDC9770;
-	{attribute addProperty Name "Row_2"}
-	Row_2 : SyncUnitTasks_5FDC9770;
-	{attribute addProperty Name "Row_3"}
-	Row_3 : SyncUnitTasks_5FDC9770;
-	{attribute addProperty Name "Row_4"}
-	Row_4 : SyncUnitTasks_5FDC9770;
+    {attribute addProperty Name "_default"}
+    _default : SyncUnitTasks_5FDC9770;
+    {attribute addProperty Name "Row_0"}
+    Row_0 : SyncUnitTasks_5FDC9770;
+    {attribute addProperty Name "Row_1"}
+    Row_1 : SyncUnitTasks_5FDC9770;
+    {attribute addProperty Name "Row_2"}
+    Row_2 : SyncUnitTasks_5FDC9770;
+    {attribute addProperty Name "Row_3"}
+    Row_3 : SyncUnitTasks_5FDC9770;
+    {attribute addProperty Name "Row_4"}
+    Row_4 : SyncUnitTasks_5FDC9770;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

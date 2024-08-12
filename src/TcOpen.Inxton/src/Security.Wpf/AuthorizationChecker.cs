@@ -9,21 +9,20 @@ namespace TcOpen.Inxton.Local.Security.Wpf
     /// Uses <see cref="TcOpen.Inxton.Security.AuthorizationChecker"/>, but will also display a dialog window
     /// prompting the user to enter credentials in WPF applications
     /// <code>
-    ///   
+    ///
     ///  if (!Vortex.Framework.Security.Wpf.AuthorizationChecker.HasAuthorizationWithLoginDialogue(Roles.data_exchange_view_can_user_add_record))
     ///  {
-    ///  
-    ///     return;  
+    ///
+    ///     return;
     ///  }
-    ///  // the code for authorized user. 
+    ///  // the code for authorized user.
     /// </code>
     /// </summary>
     public static class AuthorizationChecker
     {
-
         public static bool HasAuthorizationWithLoginDialogue(string roles)
         {
-            if(!TcOpen.Inxton.Local.Security.AuthorizationChecker.HasAuthorization(roles))
+            if (!TcOpen.Inxton.Local.Security.AuthorizationChecker.HasAuthorization(roles))
             {
                 var loginWindow = new LoginWindow();
                 loginWindow.ShowDialog();

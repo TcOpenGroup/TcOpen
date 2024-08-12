@@ -1,11 +1,11 @@
 name: nightly
 
-on: 
-  workflow_dispatch :
-    branches :  
+on:
+  workflow_dispatch:
+    branches:
       - dev
   schedule:
-    - cron: '0 0 * * *'
+    - cron: "0 0 * * *"
 
 jobs:
   build:
@@ -13,18 +13,18 @@ jobs:
     timeout-minutes: 180
     steps:
       - uses: actions/checkout@v2
-        with :
-          path : '.'
+        with:
+          path: "."
           fetch-depth: 0
       - name: Run Psake
         env:
-          _PK_PHOENY_ : ${{ secrets._PK_PHOENY_  }}
-          _TK_PHOENY_ : ${{ secrets._TK_PHOENY_  }}
-          _TW_PHOENY : ${{ secrets._TW_PHOENY  }}
-          _TW_TOKEN_ : ${{ secrets._TW_TOKEN_  }}
-          _TW_USER_ : ${{ secrets._TW_USER_  }}
+          _PK_PHOENY_: ${{ secrets._PK_PHOENY_  }}
+          _TK_PHOENY_: ${{ secrets._TK_PHOENY_  }}
+          _TW_PHOENY: ${{ secrets._TW_PHOENY  }}
+          _TW_TOKEN_: ${{ secrets._TW_TOKEN_  }}
+          _TW_USER_: ${{ secrets._TW_USER_  }}
         run: >
-          .\pipelines\runbuild.ps1 -properties 
+          .\pipelines\runbuild.ps1 -properties
           @{
             "buildConfig" = "Release";
             "updateAssemblyInfo" = $true;
@@ -32,13 +32,13 @@ jobs:
             "testingStrength" = 10;
             "packNugets" = $true;
           }
-      - name : Create Tag
-        if : env.BuildNumber && success() && github.event_name != 'pull_request'
-        run : |
+      - name: Create Tag
+        if: env.BuildNumber && success() && github.event_name != 'pull_request'
+        run: |
           git config --global user.email "gh-action@tcopengroup.com"
           git config --global user.name "gh-action"
           $tag = "GH-${{github.run_id}}-${{env.BuildNumber}}"
-          git tag $tag 
+          git tag $tag
           git push --tags
         continue-on-error: true
       - name: Test Report
@@ -46,22 +46,22 @@ jobs:
         if: success() || failure()
         with:
           name: Test report
-          path: '**/TestResults/*.xml'   
-          reporter: dotnet-trx 
+          path: "**/TestResults/*.xml"
+          reporter: dotnet-trx
       - name: Upload NuGets artifacts
-        uses: actions/upload-artifact@v2 
+        uses: actions/upload-artifact@v2
         if: success()
         with:
           name: nugets
           path: ${{ github.workspace }}/nugets/*.nupkg
       - name: Upload PLC libraries
-        uses: actions/upload-artifact@v2 
-        if: success() 
+        uses: actions/upload-artifact@v2
+        if: success()
         with:
           name: plcLibs
-          path: ${{ github.workspace }}\plcLibs\*.library          
+          path: ${{ github.workspace }}\plcLibs\*.library
       - name: Cake-Draft-Release-OrgsNugets
         env:
-          TC_OPEN_GROUP_USER_PAT : ${{ secrets.TC_OPEN_GROUP_USER_PAT  }}
+          TC_OPEN_GROUP_USER_PAT: ${{ secrets.TC_OPEN_GROUP_USER_PAT  }}
         run: >
-          .\pipelines\release-to-gh.ps1    
+          .\pipelines\release-to-gh.ps1

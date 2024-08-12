@@ -11,7 +11,8 @@ namespace TcoData
     {
         const string AmdId = "172.20.10.2.1.1";
 
-        public static TcoData.TcoDataTwinController TcoDataPlc 
-            = new TcoDataTwinController(Tc3ConnectorAdapter.Create(AmdId, 851, true));
+        public static TcoData.TcoDataTwinController TcoDataPlc = new TcoDataTwinController(
+            Tc3ConnectorAdapter.Create(AmdId, 851, true)
+        );
     }
 }

@@ -8,10 +8,9 @@
 {attribute addProperty Size "2"}
 TYPE InfoData_6F19DB2B :
 STRUCT
-	{attribute addProperty Name "State"}
-	State AT %I* : UINT;
+    {attribute addProperty Name "State"}
+    State AT %I* : UINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

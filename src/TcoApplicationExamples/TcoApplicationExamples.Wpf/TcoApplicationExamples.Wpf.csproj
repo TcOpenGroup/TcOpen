@@ -11,9 +11,15 @@
     <None Remove="Tutorial\401_ConnectingDots\Images\100-800.PNG" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\TcoCore\src\TcoCore.Wpf\TcOpen.Inxton.TcoCore.Wpf.csproj" />
-    <ProjectReference Include="..\..\TcoPneumatics\src\TcoPneumatics.Wpf\TcOpen.Inxton.TcoPneumatics.Wpf.csproj" />
-    <ProjectReference Include="..\PlcAppExamplesConnector\PlcAppExamplesConnector.csproj" />
+    <ProjectReference
+      Include="..\..\TcoCore\src\TcoCore.Wpf\TcOpen.Inxton.TcoCore.Wpf.csproj"
+    />
+    <ProjectReference
+      Include="..\..\TcoPneumatics\src\TcoPneumatics.Wpf\TcOpen.Inxton.TcoPneumatics.Wpf.csproj"
+    />
+    <ProjectReference
+      Include="..\PlcAppExamplesConnector\PlcAppExamplesConnector.csproj"
+    />
 	  <PackageReference Include="MdXaml" Version="1.10.0" />
   </ItemGroup>
   <ItemGroup>

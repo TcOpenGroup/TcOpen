@@ -1,5 +1,5 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
+using NUnit.Framework;
 
 namespace TcoPneumaticsTests
 {
@@ -16,12 +16,10 @@ namespace TcoPneumaticsTests
         public void OneTimeSetUp()
         {
             TargetAmsId = Environment.GetEnvironmentVariable("Tc3Target");
-            TargetAmsPort = 852;            
+            TargetAmsPort = 852;
         }
-        [OneTimeTearDown]
-        public void OneTimeTearDown()
-        {
 
-        }
+        [OneTimeTearDown]
+        public void OneTimeTearDown() { }
     }
 }

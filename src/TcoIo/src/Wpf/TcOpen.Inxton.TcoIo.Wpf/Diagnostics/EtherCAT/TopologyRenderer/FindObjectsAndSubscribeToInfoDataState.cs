@@ -1,17 +1,16 @@
-﻿
-using System;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Shapes;
+using TcoIo.Converters;
+using TcoIo.Topology;
 using Vortex.Connector;
 using Vortex.Presentation.Wpf;
-using System.Collections.ObjectModel;
-using TcoIo.Topology;
-using System.Windows.Shapes;
-using System.Windows.Media;
-using System.Windows.Data;
-using TcoIo.Converters;
-using System.Windows.Input;
 
 namespace TcoIo
 {
@@ -31,15 +30,28 @@ namespace TcoIo
                 {
                     FirstTopologyElementName = dt.AttributeName.ToString();
                 }
-                firstTopologyElement = FindTopologyElement(FirstTopologyElementName, dt, ref lastEvaluatedObject);
-                lastTopologyElement = FindTopologyElement(LastTopologyElementName, dt, ref lastEvaluatedObject);
+                firstTopologyElement = FindTopologyElement(
+                    FirstTopologyElementName,
+                    dt,
+                    ref lastEvaluatedObject
+                );
+                lastTopologyElement = FindTopologyElement(
+                    LastTopologyElementName,
+                    dt,
+                    ref lastEvaluatedObject
+                );
                 if (String.IsNullOrEmpty(LastTopologyElementName) || lastTopologyElement == null)
                 {
                     lastTopologyElement = lastEvaluatedObject;
                     LastTopologyElementName = lastTopologyElement.AttributeName.ToString();
                 }
-                
-                SubscribeToInfoDataState(dt, firstTopologyElement, lastTopologyElement, ExcludeSlavesConnectedToJunctionBox);
+
+                SubscribeToInfoDataState(
+                    dt,
+                    firstTopologyElement,
+                    lastTopologyElement,
+                    ExcludeSlavesConnectedToJunctionBox
+                );
                 FirstTopologyElementReached = false;
                 LastTopologyElementReached = false;
             }

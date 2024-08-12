@@ -15,34 +15,53 @@ namespace TcoData
     {
         public DataView()
         {
-           
             InitializeComponent();
             //this.DataGrid.Columns.Add(new DataGridTextColumn() { Binding = new Binding() { Path = new PropertyPath("_EntityId") }, Header = "ID" });
         }
 
         private dynamic _context
         {
-            get
-            {
-                return this.DataContext;
-            }
+            get { return this.DataContext; }
         }
 
-        private void ControlDataVisibilityChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void ControlDataVisibilityChanged(
+            object sender,
+            DependencyPropertyChangedEventArgs e
+        )
         {
-            
-            if(EditData.Visibility == Visibility.Visible && _context != null && EditData.Content == null)
-                EditData.Content = new RenderableContentControl() { DataContext = _context.DataExchange._data, PresentationType = "ShadowControlSlim-ShadowControl" };
-            
+            if (
+                EditData.Visibility == Visibility.Visible
+                && _context != null
+                && EditData.Content == null
+            )
+                EditData.Content = new RenderableContentControl()
+                {
+                    DataContext = _context.DataExchange._data,
+                    PresentationType = "ShadowControlSlim-ShadowControl"
+                };
         }
 
-        private void DisplayDataVisibilityChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void DisplayDataVisibilityChanged(
+            object sender,
+            DependencyPropertyChangedEventArgs e
+        )
         {
-            if (DisplayData.Visibility == Visibility.Visible && _context != null && DisplayData.Content == null)
-                DisplayData.Content = new RenderableContentControl() { DataContext = _context.DataExchange._data, PresentationType = "ShadowDisplaySlim-ShadowDisplay" };
+            if (
+                DisplayData.Visibility == Visibility.Visible
+                && _context != null
+                && DisplayData.Content == null
+            )
+                DisplayData.Content = new RenderableContentControl()
+                {
+                    DataContext = _context.DataExchange._data,
+                    PresentationType = "ShadowDisplaySlim-ShadowDisplay"
+                };
         }
-     
-        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+
+        private void UserControl_IsVisibleChanged(
+            object sender,
+            DependencyPropertyChangedEventArgs e
+        )
         {
             try
             {
@@ -53,9 +72,8 @@ namespace TcoData
             }
             catch (Exception)
             {
-
                 //++ Ignore
-            }            
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -63,9 +81,6 @@ namespace TcoData
             ResizableGrid.RowDefinitions[1].Height = new GridLength(1, GridUnitType.Auto);
         }
 
-
-
-        
         public ObservableCollection<DataGridColumn> DataListColumns
         {
             get => this.DataGrid.Columns;
@@ -82,6 +97,5 @@ namespace TcoData
                 }
             }
         }
-
     }
 }

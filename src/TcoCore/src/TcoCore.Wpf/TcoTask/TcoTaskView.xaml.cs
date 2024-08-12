@@ -25,7 +25,7 @@ namespace TcoCore
     {
         public TcoTaskView()
         {
-            InitializeComponent();           
+            InitializeComponent();
         }
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
@@ -33,8 +33,11 @@ namespace TcoCore
             base.OnPropertyChanged(e);
 
             if (e.Property == DataContextProperty)
-            {                
-                this.DataContext = this.DataContext.ViewModelizeDataContext<TcoTaskViewModel, TcoTask>();
+            {
+                this.DataContext = this.DataContext.ViewModelizeDataContext<
+                    TcoTaskViewModel,
+                    TcoTask
+                >();
             }
         }
     }

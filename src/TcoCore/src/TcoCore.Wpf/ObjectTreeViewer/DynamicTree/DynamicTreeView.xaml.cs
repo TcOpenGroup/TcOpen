@@ -8,11 +8,11 @@ namespace Tco.Wpf
     {
         public DynamicTreeView()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
 
         private TreeWrapperObject _dc;
-        
+
         public TreeWrapperObject Dc
         {
             get
@@ -20,15 +20,17 @@ namespace Tco.Wpf
                 //if(_dc == null)
                 {
                     _dc = new TreeWrapperObject(this.DataContext as IVortexObject);
-
                 }
                 return _dc;
             }
         }
 
-        private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void UserControl_DataContextChanged(
+            object sender,
+            DependencyPropertyChangedEventArgs e
+        )
         {
-            tv.DataContext = Dc;           
+            tv.DataContext = Dc;
         }
 
         public object SelectedItem
@@ -39,12 +41,16 @@ namespace Tco.Wpf
 
         // Using a DependencyProperty as the backing store for SelectedItem.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedItemProperty =
-            DependencyProperty.Register(nameof(SelectedItem), typeof(object), typeof(DynamicTreeView), null);
+            DependencyProperty.Register(
+                nameof(SelectedItem),
+                typeof(object),
+                typeof(DynamicTreeView),
+                null
+            );
 
         private void tv_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             SelectedItem = e.NewValue;
         }
     }
-
 }

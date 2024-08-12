@@ -21,15 +21,13 @@ TYPE eTcoKukaRoboticsSimpleTests :
     Stop,
     MoveVelocityNegativeWithDisabledNegativeDirection,
     MoveVelocityNegativeWithEnabledNegativeDirection,
-	MoveAbsoluteDisabled,
-	MoveAbsoluteDisabledPositiveDirection,
-	MoveAbsoluteEnabledPositiveDirection,
-	MoveAbsoluteDisabledNegativeDirection,
-	MoveAbsoluteEnabledNegativeDirection,
-	
+    MoveAbsoluteDisabled,
+    MoveAbsoluteDisabledPositiveDirection,
+    MoveAbsoluteEnabledPositiveDirection,
+    MoveAbsoluteDisabledNegativeDirection,
+    MoveAbsoluteEnabledNegativeDirection,
     Last
 );
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

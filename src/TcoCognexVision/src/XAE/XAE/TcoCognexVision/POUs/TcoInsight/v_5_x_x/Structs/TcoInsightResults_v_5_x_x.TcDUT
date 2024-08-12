@@ -2,12 +2,11 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <DUT Name="TcoInsightResults_v_5_x_x" Id="{8dc06bb9-6b02-0926-1c36-0798891380d1}">
     <Declaration><![CDATA[TYPE TcoInsightResults_v_5_x_x :
-STRUCT	
-	InspectionId: UINT;
-	ResultCode: UINT;
-	InspectionResults : ARRAY[0..TcoVisionParams.MAX_BYTE_ARRAY] OF BYTE;
+STRUCT
+    InspectionId : UINT;
+    ResultCode : UINT;
+    InspectionResults : ARRAY[0..TcoVisionParams.MAX_BYTE_ARRAY] OF BYTE;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

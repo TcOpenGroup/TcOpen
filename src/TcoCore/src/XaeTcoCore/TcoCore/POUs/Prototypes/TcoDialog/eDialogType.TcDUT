@@ -3,16 +3,14 @@
   <DUT Name="eDialogType" Id="{b975ca4c-cf84-07f3-323f-c555b5f788f1}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE
-    eDialogType :
-    (
-        Undefined := 0,
-        Info      := 10,
-        Question  := 20,
-        Warning   := 30,
-        Error     := 40
-    );
-END_TYPE
-]]></Declaration>
+TYPE eDialogType :
+(
+    Undefined := 0,
+    Info := 10,
+    Question := 20,
+    Warning := 30,
+    Error := 40
+);
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

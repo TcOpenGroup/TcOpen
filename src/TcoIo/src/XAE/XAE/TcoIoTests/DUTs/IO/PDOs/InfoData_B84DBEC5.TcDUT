@@ -8,16 +8,15 @@
 {attribute addProperty Size "10"}
 TYPE InfoData_B84DBEC5 EXTENDS TcoIo.InputBase_8311D824 :
 STRUCT
-	{attribute addProperty Name "AdsAddr"}
-	AdsAddr AT %I* : TcoIo.TcoAmsAddr;
-	{attribute addProperty Name "DcOutputShift"}
-	DcOutputShift AT %I* : DINT;
-	{attribute addProperty Name "DcInputShift"}
-	DcInputShift AT %I* : DINT;
-	{attribute addProperty Name "State"}
-	State AT %I* : UINT;
+    {attribute addProperty Name "AdsAddr"}
+    AdsAddr AT %I* : TcoIo.TcoAmsAddr;
+    {attribute addProperty Name "DcOutputShift"}
+    DcOutputShift AT %I* : DINT;
+    {attribute addProperty Name "DcInputShift"}
+    DcInputShift AT %I* : DINT;
+    {attribute addProperty Name "State"}
+    State AT %I* : UINT;
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>
