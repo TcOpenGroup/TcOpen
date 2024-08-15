@@ -1,5 +1,5 @@
 <UserControl
-    x:Class="TcoElements.TcoCarouselView"
+    x:Class="TcoElements.TcoCarouselSpotView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -44,7 +44,7 @@
                             Foreground="{DynamicResource OnWarning}"
                             HorizontalAlignment="Center"
                             MaxWidth="300"
-                            Visibility="{Binding _status.InPosition.Cyclic, Converter={tcoCore:BooleanToVisibilityConverter}, ConverterParameter=false}"
+                            Visibility="{Binding _status.InPosition.Cyclic, Converter={tcoCore:BooleanToVisibilityConverter}, ConverterParameter=true}"
                             Content="{x:Static p:Resources.CarouselNotInPos}"  />
                 <Button Style="{StaticResource MaterialDesignOutlinedButton}"
                             VerticalAlignment="Top"
@@ -53,7 +53,7 @@
                             Foreground="{StaticResource OnError}"
                             HorizontalAlignment="Center"
                             MaxWidth="300"
-                            Visibility="{Binding _status.InPrecisePosition.Cyclic, Converter={tcoCore:BooleanToVisibilityConverter }, ConverterParameter=false}"
+                            Visibility="{Binding _status.InPrecisePosition.Cyclic, Converter={tcoCore:BooleanToVisibilityConverter }, ConverterParameter=true}"
                             Content="{x:Static p:Resources.CarouselNotInPrecisePos}"  />
 
             </StackPanel>
@@ -72,7 +72,7 @@
                             Foreground="{StaticResource OnError}"
                             MaxWidth="350"
                             Margin="5,200,5,5"
-                            Visibility="{Binding _status.TurnSafetyCondition.Cyclic, Converter={vortex:BooleanToVisibilityConverter}, ConverterParameter=false}"
+                            Visibility="{Binding _status.TurnSafetyCondition.Cyclic, Converter={vortex:BooleanToVisibilityConverter}, ConverterParameter=true}"
                             Content="{x:Static p:Resources.CarouselNotSafeTurnCondition}" >
                 </Button>
 
