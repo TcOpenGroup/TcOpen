@@ -32,11 +32,10 @@
         <controls:PermissionBox Permissions="Administrator">
             <TabControl>
                 <TabItem Header="{x:Static p:strings.CurrentUsers}">
-                    <ScrollViewer  VerticalScrollBarVisibility="Auto">
-                        <Grid Margin="12" Style="{DynamicResource Card}">
-                        <controls:AllUsersGroupManagementView/>
-                        </Grid>
-                    </ScrollViewer>
+                    <Grid Margin="12" Style="{DynamicResource Card}">
+                            <controls:AllUsersGroupManagementView/>
+                    </Grid>
+              
                 </TabItem>
                 <TabItem Header="{x:Static p:strings.NewUser}">
                     <ScrollViewer  VerticalScrollBarVisibility="Auto">
@@ -46,11 +45,11 @@
                     </ScrollViewer>
                 </TabItem>
                 <TabItem Header="Group management">
-                    <ScrollViewer  VerticalScrollBarVisibility="Auto">
+                 
                         <Grid Margin="12" Style="{DynamicResource Card}">
                             <controls:AllGroupsGroupManagementView />
                         </Grid>
-                    </ScrollViewer>
+                
                 </TabItem>
             </TabControl>
         </controls:PermissionBox>

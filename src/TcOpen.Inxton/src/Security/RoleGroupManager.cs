@@ -230,7 +230,7 @@ namespace TcOpen.Inxton.Local.Security
         public List<GroupData> GetAllGroup()
         {
             List<GroupData> data = null;
-            data = groupRepo.GetRecords().ToList();
+            data = groupRepo.Queryable.Where(p => true).ToList();
             return data;
         }
     }

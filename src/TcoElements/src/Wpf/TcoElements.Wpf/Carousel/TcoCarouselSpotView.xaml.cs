@@ -14,10 +14,10 @@ namespace TcoElements
     /// <summary>
     /// Interaction logic for TcoCarouselServiceView.xaml
     /// </summary>
-    public partial class TcoCarouselView
+    public partial class TcoCarouselSpotView
         : UserControl
     {
-        public TcoCarouselView()
+        public TcoCarouselSpotView()
         {
             if (DesignerProperties.GetIsInDesignMode(this))
             {

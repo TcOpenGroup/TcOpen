@@ -15,7 +15,7 @@ namespace TcOpen.Inxton.Local.Security.Wpf
         private static ObservableCollection<UserData> _allUsers;
 
         public IRepository<UserData> UserRepository     { get => _userRepositary; set => _userRepositary = value; }
-        public ObservableCollection<UserData> AllUsers  { get => _allUsers; private set => _allUsers = value; }
+        public ObservableCollection<UserData> AllUsers  { get => _allUsers;private set => _allUsers = value; }
         public List<Role> AllRoles                      { get; private set; } = new List<Role>();
         public List<string> AllGroups                          { get; private set; }
         public static event EventHandler OnNewUserAdded;
@@ -27,13 +27,17 @@ namespace TcOpen.Inxton.Local.Security.Wpf
                 UserRepository  = SecurityManager.Manager.UserRepository;
             AllRoles            = SecurityManager.Manager.AvailableRoles.ToList();
             AllGroups           = SecurityManager.Manager.AvailableGroups().ToList();
-            AllUsers            = new ObservableCollection<UserData>(UserRepository.GetRecords());
+            AllUsers            = new ObservableCollection<UserData>(UserRepository.Queryable.Where(p=> true));
         }
+
+
+
+
 
         protected void UsersChanged()
         {
             AllUsers.Clear();
-            UserRepository.GetRecords().ToList().ForEach(AllUsers.Add);
+            UserRepository.Queryable.Where(p => true).ToList().ForEach(AllUsers.Add);
             OnNewUserAdded?.Invoke(this, EventArgs.Empty);
         }
     }
