@@ -215,7 +215,8 @@ task Build {
    $command = "`"$devenv`" .\TcOpen.test.build.plc.slnf /Rebuild " + "`"$buildConfig|TwinCAT RT (x64)`""
 
     exec{
-        cmd /c $command
+        & $devenv .\TcOpen.test.build.plc.slnf /Rebuild "$buildConfig|TwinCAT RT (x64)"
+        #cmd /c $command
     }  -maxRetries 2   
 }
 
