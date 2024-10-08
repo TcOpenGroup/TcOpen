@@ -1,0 +1,36 @@
+﻿@inherits RenderableViewModelComponentBase<TcoObjectDiagnosticsAlternativeViewModel>
+
+@using TcOpen.Inxton.TcoCore.Blazor.TcoDiagnosticsAlternative.MessagesTabs
+@using Vortex.Presentation.Controls.Blazor.RenderableContent
+@namespace TcoCore
+
+@using BlazorStrap.V5
+
+
+<BSNav Justify="Justify.Center" IsTabs="true" >
+    <BSNavItem>
+        <TabLabel>Active Messages</TabLabel>
+        <TabContent>
+        <ActiveMessages 
+            DataService="DataService"
+            MaxDiagnosticsDepth="_maxDiagnosticsDepth" 
+            GetMessageStatusPinned="GetMessageStatusPinned"
+            InitalDepthValue="@InitialDepthValue"
+            InitialCategory="@MinMessageCategoryFilter"
+        />
+
+        </TabContent>
+    </BSNavItem>
+    <BSNavItem>
+        <TabLabel>Archived Messages</TabLabel>
+        <TabContent>
+        <ArchivedMessages 
+            DataService="DataService"
+            MaxDiagnosticsDepth="_maxDiagnosticsDepth" 
+            GetMessageStatusPinned="GetMessageStatusPinned"
+            InitalDepthValue="@InitialDepthValue"
+            InitialCategory="@MinMessageCategoryFilter"
+        />
+        </TabContent>
+    </BSNavItem>
+</BSNav>

@@ -1,0 +1,55 @@
+﻿.icon-bg-primary {
+    background-color: rgba(0, 123, 255, 0.2); /* primary color at 70% opacity */
+    color: #ffffff; /* white text color for contrast */
+}
+
+.icon-bg-secondary {
+    background-color: rgba(108, 117, 125, 0.2); /* secondary color at 70% opacity */
+    color: #ffffff; /* white text color for contrast */
+}
+
+.icon-bg-info {
+    background-color: rgba(23, 162, 184, 0.2); /* info color at 70% opacity */
+    color: #ffffff; /* white text color for contrast */
+}
+
+.icon-bg-warning {
+    background-color: rgba(255, 193, 7, 0.2); /* warning color at 70% opacity */
+    color: #212529; /* dark text color for contrast */
+}
+
+.icon-bg-danger {
+    background-color: rgba(220, 53, 69, 0.2); /* danger color at 70% opacity */
+    color: #ffffff; /* white text color for contrast */
+}
+
+
+.icon-bg-fatal {
+    background-color: rgba(220, 53, 69, 0.3); /* danger color at 70% opacity */
+    color: #ffffff; /* white text color for contrast */
+}
+
+
+.icon-container {
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Adjust the width of the Message Content and Message Source columns */
+th:nth-child(1), td:nth-child(1) { /* Message Content column */
+    width: 10%; /* Adjust as needed */
+}
+/* Adjust the width of the Message Content and Message Source columns */
+th:nth-child(2), td:nth-child(2) { /* Message Content column */
+    width: 10%; /* Adjust as needed */
+}
+
+th:nth-child(3) { /* Message Content column */
+    width: 3%; /* Adjust as needed */
+}
+
+th:nth-child(4), td:nth-child(4) { /* Message Content column */
+    width: 8%; /* Adjust as needed */
+}
