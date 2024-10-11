@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TcoInspectors;
+using TcOpen.Inxton.Local.Security.Wpf;
 
 namespace TcoInspectors
 {
@@ -54,6 +55,7 @@ namespace TcoInspectors
             this.DataContextChanged -= TcoInspectorDialogView_DataContextChanged;
             if (context != null)
             {
+                PermissionBox.RemovePermissionBox(this.PermissionBoxOverrideCommand);
                 context.CloseRequestEventHandler -= (s, ev) => this.Close();
             }
         }

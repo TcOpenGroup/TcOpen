@@ -59,6 +59,13 @@
             this.Loaded += PermissionBox_Loaded;           
         }
 
+
+        public static void RemovePermissionBox(PermissionBox boxToRemove)
+        {
+            boxToRemove.Loaded -= boxToRemove.PermissionBox_Loaded;
+            permissionBoxes.Remove(boxToRemove);
+        }
+
         private void PermissionBox_Loaded(object sender, RoutedEventArgs e)
         {
             UpdateThis();           
