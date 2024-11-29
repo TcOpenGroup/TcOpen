@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="SampleSequencer" Id="{162cfba3-e6ba-0cf8-16c6-2910ec4c4593}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK SampleSequencer EXTENDS TcoSequence
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

@@ -34,6 +34,21 @@ PROPERTY CommonData : REFERENCE TO TcoInspectorData]]></Declaration>
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
+    <Method Name="HideOverride" Id="{b431c33c-95f9-04d3-2b46-90c0ee1194d0}">
+      <Declaration><![CDATA[METHOD HideOverride : IInspector
+
+]]></Declaration>
+    </Method>
+    <Method Name="HideRetry" Id="{d3a6b912-afba-0dc7-214b-0768c024db38}">
+      <Declaration><![CDATA[METHOD HideRetry : IInspector
+
+]]></Declaration>
+    </Method>
+    <Method Name="HideTerminate" Id="{1fdd4937-bf43-037d-3d7e-7880941def25}">
+      <Declaration><![CDATA[METHOD HideTerminate : IInspector
+
+]]></Declaration>
+    </Method>
     <Property Name="Identity" Id="{30ca9dd1-1e56-01cf-3dbc-58c99beb7408}">
       <Declaration><![CDATA[PROPERTY Identity : ULINT]]></Declaration>
       <Get Name="Get" Id="{275ba232-6810-0478-08ce-630296e4e874}">

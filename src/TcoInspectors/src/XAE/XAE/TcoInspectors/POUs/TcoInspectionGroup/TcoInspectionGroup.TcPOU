@@ -203,6 +203,92 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Method Name="Evaluate" Id="{ec0c8dd4-dd5c-0319-2bb9-6b847f04a479}" FolderPath="OnFail\">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Upon failure the inspection retries given number of time. When it reach	given numbers then terminate 		
+		</summary>			
+	</docu>	
+~*)
+
+{attribute 'hide'}
+{attribute 'obsolete' := 'You should access `Evaluate` method via `OnFail()` method.'}
+METHOD PUBLIC Evaluate : BOOL
+VAR_INPUT
+    (*~
+	<docu>
+		<summary>
+			State from which the inspection will restart.		
+		</summary>			
+	</docu>	
+	~*)
+    inFromState : INT;
+    (*~
+	<docu>
+		<summary>
+			Behavior when ispection is failed		
+		</summary>			
+	</docu>	
+	~*)
+    inFailMode : eTcoInspectorFailMode;
+    (*~
+	<docu>
+		<summary>
+			State from which the inspection will continue.		
+		</summary>			
+	</docu>	
+	~*)
+    inToState : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (_coordinator = 0) THEN
+    RETURN;
+END_IF
+
+IF (THIS^.Done) THEN
+    IF (THIS^._currentRunResult.Result = eOverallResult.Failed) THEN
+        IF (__ISVALIDREF(_refOverallResult)) THEN
+            _refOverallResult := _originalOverallResult;
+        END_IF
+
+        IF inFailMode = eTcoInspectorFailMode.CarryOn THEN
+            _coordinator.MoveNext();
+        ELSIF inFailMode = eTcoInspectorFailMode.JumpTo THEN
+            _coordinator.Retry(inToState);
+        ELSIF inFailMode = eTcoInspectorFailMode.Terminate THEN
+            _coordinator.Terminate();
+        ELSIF inFailMode = eTcoInspectorFailMode.RetryThenCarryOn THEN
+            IF OverInspected THEN
+                _coordinator.MoveNext();
+            ELSE
+                _coordinator.Retry(inFromState);
+            END_IF;
+        ELSIF inFailMode = eTcoInspectorFailMode.RetryThenJumpTo THEN
+            IF OverInspected THEN
+                _coordinator.Retry(inToState);
+            ELSE
+                _coordinator.Retry(inFromState);
+            END_IF;
+
+        ELSIF inFailMode = eTcoInspectorFailMode.RetryThenTeminate THEN
+            IF OverInspected THEN
+                _coordinator.Terminate();
+            ELSE
+                _coordinator.Retry(inFromState);
+            END_IF;
+
+        END_IF
+    ELSE
+
+        _coordinator.MoveNext();
+    END_IF;
+END_IF;
+
+Evaluate := THIS^.Done;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Inspect" Id="{5050b1c2-e64a-023f-2d54-61af21de371f}">
       <Declaration><![CDATA[(*~
 	<summary>
@@ -338,6 +424,38 @@ END_IF;
 
 
 Retry := THIS^.Done;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RetryThenTerminate" Id="{a1d11a84-0c54-0300-27d8-3ee3e5fb3c1c}" FolderPath="OnFail\">
+      <Declaration><![CDATA[{attribute 'hide'}
+{attribute 'obsolete' := 'You should access `RetryThenTerminate` method via `OnFail()` method.'}
+METHOD RetryThenTerminate : BOOL
+VAR_INPUT
+	inFromState : INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (_coordinator = 0) THEN
+    RETURN;
+END_IF
+
+IF (THIS^.Done) THEN
+    IF (THIS^._currentRunResult.Result = eOverallResult.Failed) THEN
+        IF (__ISVALIDREF(_refOverallResult)) THEN
+            _refOverallResult := _originalOverallResult;
+        END_IF
+
+        ClearResult(_currentRunResult);
+        IF OverInspected THEN
+            _coordinator.Terminate();
+        ELSE
+            _coordinator.Retry(inFromState);
+        END_IF;
+    ELSE
+        _coordinator.MoveNext();
+    END_IF;
+END_IF;
+
+RetryThenTerminate := THIS^.Done;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Terminate" Id="{ef8afc1b-48c1-0d87-3e46-8fe826fdd29c}" FolderPath="OnFail\">

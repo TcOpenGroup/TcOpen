@@ -127,11 +127,16 @@
                         <Setter Property="Margin" Value="10" />
                     </Style>
                 </WrapPanel.Resources>
-                <Button Command="{Binding RetryCommand, Mode=OneWay}" Content="{x:Static s:strings.Retry}" />
-                <Button Command="{Binding TerminateCommand, Mode=OneWay}" Content="{x:Static s:strings.Terminate}" />
-                <vortexs:PermissionBox x:FieldModifier="Public" x:Name="PermissionBoxOverrideCommand" Permissions="can_override_inspection">
-                    <Button Command="{Binding OverrideCommand, Mode=OneWay}" Content="{x:Static s:strings.Override}" />
+
+                <Button Visibility="{Binding Dialog._hideRetryButton.Cyclic,Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}" Command="{Binding RetryCommand, Mode=OneWay}" Content="{x:Static s:strings.Retry}" />
+                <vortexs:PermissionBox Permissions="can_terminate_inspection">
+                    <Button Visibility="{Binding Dialog._hideTerminateButton.Cyclic,Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}" Command="{Binding TerminateCommand, Mode=OneWay}" Content="{x:Static s:strings.Terminate}" />
                 </vortexs:PermissionBox>
+                <WrapPanel Visibility="{Binding Dialog._hideOverideButton.Cyclic,Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}">
+                    <vortexs:PermissionBox Permissions="can_override_inspection">
+                        <Button Command="{Binding OverrideCommand, Mode=OneWay}" Content="{x:Static s:strings.Override}" />
+                    </vortexs:PermissionBox>
+                </WrapPanel>
             </WrapPanel>
             <Expander
                 Grid.Row="4"               

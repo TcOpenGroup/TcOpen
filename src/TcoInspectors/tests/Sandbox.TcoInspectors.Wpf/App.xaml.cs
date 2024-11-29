@@ -10,6 +10,10 @@ using TcoInspectorsTests;
 using Vortex.Adapters.Connector.Tc3.Adapter;
 using TcOpen.Inxton.Local.Security;
 using TcOpen.Inxton.TcoCore.Wpf;
+using Vortex.Presentation.Wpf;
+using TcOpen.Inxton.Local.Security.Wpf;
+using System.IO;
+using TcOpen.Inxton.Security;
 
 namespace Sandbox.TcoInspectors.Wpf
 {
@@ -27,12 +31,37 @@ namespace Sandbox.TcoInspectors.Wpf
 
             #region DialogProxyServiceInitialization
             TcOpen.Inxton.TcoAppDomain.Current.Builder
-          
             #endregion
                 .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter())
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get)
-                .SetPlcDialogs(DialogProxyServiceWpf.Create(new[] { App.Plc.MAIN._exampleContext }))
-                .SetSecurity(SecurityManager.CreateDefault());
+                .SetPlcDialogs(DialogProxyServiceWpf.Create(new[] { App.Plc.MAIN._exampleContext }));
+            //.SetSecurity(SecurityManager.CreateDefault());
+
+
+            Directory.EnumerateFiles(@"C:\INXTON\USERS\").ToList().ForEach(File.Delete);
+            Directory.EnumerateFiles(@"C:\INXTON\GROUP\").ToList().ForEach(File.Delete);
+            var userDataRepo = new DefaultUserDataRepository<UserData>();
+            var groups = new DefaultGroupDataRepository<GroupData>();
+            var roleGroupManager = new RoleGroupManager(groups);
+
+            roleGroupManager.CreateGroup("OperatorGroup");
+            roleGroupManager.AddRoleToGroup("OperatorGroup", "Operator");
+            //roleGroupManager.AddRoleToGroup("OperatorGroup", "can_terminate_inspection");
+            roleGroupManager.AddRoleToGroup("OperatorGroup", "can_override_inspection");
+
+            SecurityManager.Create(userDataRepo, roleGroupManager);
+            SecurityManager.Manager.GetOrCreateRole(new Role("Operator", "OperatorGroup"));
+           
+            var userName = "Operator";
+            var password = "OperatorPassword";
+               userDataRepo.Create(userName, new UserData(userName, string.Empty, password, new string[] { "OperatorGroup" }, "Operator", string.Empty) { CanUserChangePassword = true });
+
+            LazyRenderer.Get.CreateSecureContainer = (permissions) => new PermissionBox { Permissions = permissions, SecurityMode = SecurityModeEnum.Disabled };
+
+      
+            SecurityManager.Manager.Service.AuthenticateUser(userName, password);
+
+            SecurityManager.Manager.Service.DeAuthenticateCurrentUser();
         }
 
         private static string AMS_ID = Environment.GetEnvironmentVariable("Tc3Target");
