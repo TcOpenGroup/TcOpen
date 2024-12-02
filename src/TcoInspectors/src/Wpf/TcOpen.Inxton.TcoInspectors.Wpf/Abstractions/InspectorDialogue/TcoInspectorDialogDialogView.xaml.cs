@@ -55,13 +55,22 @@ namespace TcoInspectors
             this.DataContextChanged -= TcoInspectorDialogView_DataContextChanged;
             if (context != null)
             {
-                PermissionBox.RemovePermissionBox(this.PermissionBoxOverrideCommand);
+                try
+                {
+                    PermissionBox.RemovePermissionBox(this.PermissionBoxOverrideCommand);
+                    PermissionBox.RemovePermissionBox(this.PermissionBoxTerminateCommand);
+                }
+                catch (Exception ex)
+                {
+                }
                 context.CloseRequestEventHandler -= (s, ev) => this.Close();
             }
         }
 
         private void HostWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            Dispose();
+
             if (webView != null)
             {
                 webView.Dispose();

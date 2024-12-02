@@ -46,7 +46,7 @@ namespace Sandbox.TcoInspectors.Wpf
 
             roleGroupManager.CreateGroup("OperatorGroup");
             roleGroupManager.AddRoleToGroup("OperatorGroup", "Operator");
-            //roleGroupManager.AddRoleToGroup("OperatorGroup", "can_terminate_inspection");
+            roleGroupManager.AddRoleToGroup("OperatorGroup", "can_terminate_inspection");
             roleGroupManager.AddRoleToGroup("OperatorGroup", "can_override_inspection");
 
             SecurityManager.Create(userDataRepo, roleGroupManager);
@@ -54,14 +54,15 @@ namespace Sandbox.TcoInspectors.Wpf
            
             var userName = "Operator";
             var password = "OperatorPassword";
-               userDataRepo.Create(userName, new UserData(userName, string.Empty, password, new string[] { "OperatorGroup" }, "Operator", string.Empty) { CanUserChangePassword = true });
+            
+            userDataRepo.Create(userName, new UserData(userName, string.Empty, password, new string[] { "OperatorGroup" }, "Operator", string.Empty) { CanUserChangePassword = true });
 
             LazyRenderer.Get.CreateSecureContainer = (permissions) => new PermissionBox { Permissions = permissions, SecurityMode = SecurityModeEnum.Disabled };
 
       
             SecurityManager.Manager.Service.AuthenticateUser(userName, password);
 
-            SecurityManager.Manager.Service.DeAuthenticateCurrentUser();
+            //SecurityManager.Manager.Service.DeAuthenticateCurrentUser();
         }
 
         private static string AMS_ID = Environment.GetEnvironmentVariable("Tc3Target");
