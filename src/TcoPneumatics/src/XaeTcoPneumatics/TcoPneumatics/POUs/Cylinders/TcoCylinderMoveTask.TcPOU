@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="TcoCylinderMoveTask" Id="{36f82742-ef83-064d-3f82-8df2b1eb7a0b}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TcoCylinderMoveTask EXTENDS TcoCore.TcoTask
 VAR_INPUT
@@ -7,6 +7,7 @@ VAR_INPUT
 	MaxTimeToReachPosition : TIME := T#10S;
 	TimeToRefill 		   : TIME := T#100MS;
 	PositionName		   : STRING(25);
+	refInverseTask: REFERENCE TO TcoCore.TcoTask;
 END_VAR
 VAR_IN_OUT
 	MoveToPositionSignal : BOOL;
@@ -64,7 +65,9 @@ METHOD PROTECTED OnAbort
       <Declaration><![CDATA[METHOD PROTECTED OnStart 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[IF __ISVALIDREF(refInverseTask) THEN
+	refInverseTask.Restore();
+END_IF]]></ST>
       </Implementation>
     </Method>
   </POU>

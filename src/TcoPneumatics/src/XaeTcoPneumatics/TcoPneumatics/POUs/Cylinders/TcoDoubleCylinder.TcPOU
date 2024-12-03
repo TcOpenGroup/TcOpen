@@ -12,16 +12,19 @@ VAR
     _moveWorkDefault : TcoCylinderMoveTask(THIS^);
     {attribute addProperty Name "|[[1]Attribute_stopDefaultName]|"}
     _stopDefault : TcoCore.TcoTask(THIS^);
-	increment: INT;
+    increment : INT;
+    _suspendedHome : BOOL;
+    _suspendedWork : BOOL;
 
 END_VAR
 VAR
     _config : TcoCylinderConfig;
-	_status : TcoCylinderStatus;
-	_refillTimer:TON;	
+    _status : TcoCylinderStatus;
+    _refillTimer : TON;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[SUPER^(inoAtHomePos1 := inoAtHomePos1,inoAtHomePos2 := inoAtHomePos2, inoAtWorkPos1 := inoAtWorkPos1,inoAtWorkPos2 := inoAtWorkPos2, inoToHomePos := inoToHomePos, inoToWorkPos := inoToWorkPos);
+
 	
 IF(_atHomePos AND _atWorkPos) THEN Messenger.Error('<#Home and work position sensors are both active. Check the position of sensors!#>'); END_IF;
 
@@ -32,11 +35,9 @@ _moveHomeDefault(PositionSensor := _atHomePos AND NOT _atWorkPos,
     MoveToPositionSignal := _toHomePos,
     InverseSignal := _toWorkPos,
 	TimeToRefill:=_config.TimeToRefill,
+	refInverseTask:=_moveWorkDefault,
     MaxTimeToReachPosition := _config.TimeToReachHomePosition,
     PositionName := '<#Home#>');
-IF _moveHomeDefault.Execute() THEN
-	_moveWorkDefault.Restore();
-END_IF
 
 // Disables mutualy exclusive actions		
 _moveHomeDefault.Enabled :=true;// NOT _moveWorkDefault.Busy;
@@ -45,12 +46,10 @@ _moveWorkDefault(PositionSensor := _atWorkPos AND NOT _atHomePos,
     MoveToPositionSignal := _toWorkPos,
     InverseSignal := _toHomePos,
 	TimeToRefill:=_config.TimeToRefill,
+	refInverseTask:=_moveHomeDefault,
     MaxTimeToReachPosition := _config.TimeToReachWorkPosition,
     PositionName := '<#Work#>');
 
-IF _moveWorkDefault.Execute() THEN
-	_moveHomeDefault.Restore();
-END_IF
 
 
 IF (_stopDefault.Execute()) THEN
@@ -309,10 +308,13 @@ VAR
 	_signalInfo : TcoSignalInfo;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF (_toHomePos OR _moveHomeDefault.Busy) AND inoDisableCondition THEN
+        <ST><![CDATA[_suspendedHome:=inoDisableCondition;
+
+IF (_toHomePos OR _moveHomeDefault.Busy) AND inoDisableCondition THEN
 	_signalInfo.GetSignalInfo(SIZEOF(inoDisableCondition), ADR(inoDisableCondition));
 	Messenger.Warning(CONCAT('<#Movement suspended due to#> : ' , _signalInfo.SymbolPath));
 	_toHomePos := FALSE;
+
 	IF(__ISVALIDREF(THIS^.inoToHomePos)) THEN THIS^.inoToHomePos := FALSE; END_IF;
 	
 END_IF]]></ST>
@@ -326,11 +328,16 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF (_toHomePos OR _moveHomeDefault.Busy) AND inDisableCondition THEN
-	Messenger.Warning(CONCAT('<#Movement suspended due to#> : ' , inMessage));
-	_toHomePos := FALSE;
-	IF(__ISVALIDREF(THIS^.inoToHomePos)) THEN THIS^.inoToHomePos := FALSE; END_IF;
+        <ST><![CDATA[_suspendedHome := inDisableCondition;
+
+IF (_toHomePos OR _moveHomeDefault.Busy) AND inDisableCondition THEN
+    Messenger.Warning(CONCAT('<#Movement suspended due to#> : ', inMessage));
+    _toHomePos := FALSE;
 	
+    IF (__ISVALIDREF(THIS^.inoToHomePos)) THEN
+        THIS^.inoToHomePos := FALSE;
+    END_IF;
+
 END_IF;]]></ST>
       </Implementation>
     </Method>
@@ -362,12 +369,17 @@ VAR
 	_signalInfo : TcoSignalInfo;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF (_toHomePos OR _moveHomeDefault.Busy) AND NOT inoDisableCondition THEN
-	_signalInfo.GetSignalInfo(SIZEOF(inoDisableCondition), ADR(inoDisableCondition));
-	Messenger.Warning(CONCAT('<#Movement suspended due to NOT#> : ' , _signalInfo.SymbolPath));
-	_toHomePos := FALSE;
-	IF(__ISVALIDREF(THIS^.inoToHomePos)) THEN THIS^.inoToHomePos := FALSE; END_IF;
-	
+        <ST><![CDATA[_suspendedHome := inoDisableCondition;
+
+IF (_toHomePos OR _moveHomeDefault.Busy) AND NOT inoDisableCondition THEN
+    _signalInfo.GetSignalInfo(SIZEOF(inoDisableCondition), ADR(inoDisableCondition));
+    Messenger.Warning(CONCAT('<#Movement suspended due to NOT#> : ', _signalInfo.SymbolPath));
+    _toHomePos := FALSE;
+
+    IF (__ISVALIDREF(THIS^.inoToHomePos)) THEN
+        THIS^.inoToHomePos := FALSE;
+    END_IF;
+
 END_IF]]></ST>
       </Implementation>
     </Method>
@@ -399,11 +411,16 @@ VAR
 	_signalInfo : TcoSignalInfo;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF (_toWorkPos OR _moveWorkDefault.Busy) AND inoDisableCondition THEN
-	_signalInfo.GetSignalInfo(SIZEOF(inoDisableCondition), ADR(inoDisableCondition));
-	Messenger.Warning(CONCAT('<#Movement suspended due to#> : ' , _signalInfo.SymbolPath));
-	_toWorkPos := FALSE;
-	IF(__ISVALIDREF(THIS^.inoToWorkPos)) THEN THIS^.inoToWorkPos := FALSE; END_IF;
+        <ST><![CDATA[_suspendedWork := inoDisableCondition;
+
+IF (_toWorkPos OR _moveWorkDefault.Busy) AND inoDisableCondition THEN
+    _signalInfo.GetSignalInfo(SIZEOF(inoDisableCondition), ADR(inoDisableCondition));
+    Messenger.Warning(CONCAT('<#Movement suspended due to#> : ', _signalInfo.SymbolPath));
+    _toWorkPos := FALSE;
+
+    IF (__ISVALIDREF(THIS^.inoToWorkPos)) THEN
+        THIS^.inoToWorkPos := FALSE;
+    END_IF;
 
 END_IF]]></ST>
       </Implementation>
@@ -414,13 +431,21 @@ VAR_INPUT
 		inDisableCondition : BOOL;
 		inMessage:STRING;
 END_VAR
-]]></Declaration>
+
+VAR
+	inoDisableCondition: BOOL;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF (_toWorkPos OR _moveWorkDefault.Busy) AND inDisableCondition THEN
-	Messenger.Warning(CONCAT('<#Movement suspended due to#> : ' , inMessage));
-	_toWorkPos := FALSE;
-	IF(__ISVALIDREF(THIS^.inoToWorkPos)) THEN THIS^.inoToWorkPos := FALSE; END_IF;
-	
+        <ST><![CDATA[_suspendedWork := inDisableCondition;
+
+IF (_toWorkPos OR _moveWorkDefault.Busy) AND inDisableCondition THEN
+    Messenger.Warning(CONCAT('<#Movement suspended due to#> : ', inMessage));
+    _toWorkPos := FALSE;
+
+    IF (__ISVALIDREF(THIS^.inoToWorkPos)) THEN
+        THIS^.inoToWorkPos := FALSE;
+    END_IF;
+
 END_IF]]></ST>
       </Implementation>
     </Method>
@@ -452,11 +477,16 @@ VAR
 	_signalInfo : TcoSignalInfo;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF (_toWorkPos OR _moveWorkDefault.Busy) AND NOT inoDisableCondition THEN
-	_signalInfo.GetSignalInfo(SIZEOF(inoDisableCondition), ADR(inoDisableCondition));
-	Messenger.Warning(CONCAT('<#Movement suspended due to NOT#> : ' , _signalInfo.SymbolPath));
-	_toWorkPos := FALSE;
-	IF(__ISVALIDREF(THIS^.inoToWorkPos)) THEN THIS^.inoToWorkPos := FALSE; END_IF;
+        <ST><![CDATA[_suspendedWork := inoDisableCondition;
+
+IF (_toWorkPos OR _moveWorkDefault.Busy) AND NOT inoDisableCondition THEN
+    _signalInfo.GetSignalInfo(SIZEOF(inoDisableCondition), ADR(inoDisableCondition));
+    Messenger.Warning(CONCAT('<#Movement suspended due to NOT#> : ', _signalInfo.SymbolPath));
+    _toWorkPos := FALSE;
+
+    IF (__ISVALIDREF(THIS^.inoToWorkPos)) THEN
+        THIS^.inoToWorkPos := FALSE;
+    END_IF;
 
 END_IF]]></ST>
       </Implementation>

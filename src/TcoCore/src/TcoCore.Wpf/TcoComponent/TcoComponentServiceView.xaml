@@ -31,7 +31,7 @@
                 </Style.Triggers>
             </Style>
         </StackPanel.Resources>
-        <Expander IsExpanded="True"
+        <Expander IsExpanded="{Binding IsExpanded}"
                 Margin="5,0,5,0"
                 Background="Transparent"
                 materialDesign:ExpanderAssist.HorizontalHeaderPadding="0"
@@ -76,15 +76,17 @@
 
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <ItemsControl ItemsPanel="{StaticResource HorizontalWraped}"  HorizontalAlignment="Left"  ItemsSource="{Binding Tasks}">
+                <GroupBox Grid.ColumnSpan="2" Margin="10,0" Padding="10" Header="{x:Static p:strings.Tasks}" >
+                    <ItemsControl ItemsPanel="{StaticResource HorizontalWraped}"  HorizontalAlignment="Left"  ItemsSource="{Binding Tasks}">
 
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <vortex:RenderableContentControl MinWidth="150" DataContext="{Binding}" Margin="5"></vortex:RenderableContentControl>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-                <Expander Margin="5,0 " Grid.Row="2" Header="{x:Static p:strings.Details}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <vortex:RenderableContentControl MinWidth="150" DataContext="{Binding}" Margin="5"></vortex:RenderableContentControl>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </GroupBox>
+                <Expander IsExpanded ="True"  Margin="10,5 " Grid.Row="2" Header="{x:Static p:strings.Details}">
      
                             <WrapPanel Margin="10">
                                 <WrapPanel.Resources>
@@ -109,7 +111,7 @@
                                     <ItemsControl  HorizontalAlignment="Left" ItemsSource="{Binding Components}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <vortex:RenderableContentControl MinWidth="150" DataContext="{Binding}" Margin="5"></vortex:RenderableContentControl>
+                                                <vortex:RenderableContentControl MinWidth="150" DataContext="{Binding}"  Margin="5"></vortex:RenderableContentControl>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>

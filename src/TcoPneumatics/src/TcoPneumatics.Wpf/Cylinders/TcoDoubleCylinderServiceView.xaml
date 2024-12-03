@@ -28,7 +28,10 @@
                     Height="5"
                     Background="{Binding  _atHomePos.Cyclic, Converter={vortex:SignalToBrushConverter}}"
                     CornerRadius="2" />
-                    <vortex:RenderableContentControl  DataContext="{Binding _moveHomeDefault}"/>
+                    <Grid>
+                        <vortex:RenderableContentControl  DataContext="{Binding _moveHomeDefault}"/>
+                        <materialDesign:PackIcon Margin="10,0" VerticalAlignment="Center" Visibility="{Binding _suspendedHome.Cyclic,Converter={vortex:BooleanToVisibilityConverter}}" Kind="WarningBox" Foreground="{StaticResource Warning}"/>
+                    </Grid>
                 </StackPanel>
                 <StackPanel>
                     <Border
@@ -41,7 +44,10 @@
                     Height="5"
                     Background="{Binding _atWorkPos.Cyclic, Converter={vortex:SignalToBrushConverter}}"
                     CornerRadius="2" />
-                    <vortex:RenderableContentControl  DataContext="{Binding _moveWorkDefault}"/>
+                    <Grid>
+                        <vortex:RenderableContentControl  DataContext="{Binding _moveWorkDefault}"/>
+                        <materialDesign:PackIcon Margin="10,0" VerticalAlignment="Center" Visibility="{Binding _suspendedWork.Cyclic,Converter={vortex:BooleanToVisibilityConverter}}" Kind="WarningBox" Foreground="{StaticResource Warning}"/>
+                    </Grid>
                 </StackPanel>
             </WrapPanel>
         </vortex:TcoComponentView.ComponentHeader>
