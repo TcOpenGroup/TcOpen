@@ -76,7 +76,8 @@
 
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <GroupBox Grid.ColumnSpan="2" Margin="10,0" Padding="10" Header="{x:Static p:strings.Tasks}" >
+                <GroupBox Grid.ColumnSpan="2" Margin="10,0" Padding="10" Header="{x:Static p:strings.Tasks}"
+                          Visibility="{Binding HasTasks,Converter={tcoCore:BooleanToVisibilityConverter}}">
                     <ItemsControl ItemsPanel="{StaticResource HorizontalWraped}"  HorizontalAlignment="Left"  ItemsSource="{Binding Tasks}">
 
                         <ItemsControl.ItemTemplate>
