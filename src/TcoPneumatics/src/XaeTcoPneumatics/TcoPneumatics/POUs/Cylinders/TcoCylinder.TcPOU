@@ -15,6 +15,10 @@ VAR
 	increment: INT;
 	_suspendedHome:BOOL;
 	_suspendedWork:BOOL;
+	{attribute 'hide'} 
+	_suspendedHomeCounter:INT;
+	{attribute 'hide'} 
+	_suspendedWorkCounter:INT;
 END_VAR
 VAR
     _config : TcoCylinderConfig;
@@ -23,6 +27,8 @@ VAR
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[SUPER^(inoAtHomePos := inoAtHomePos, inoAtWorkPos := inoAtWorkPos, inoToHomePos := inoToHomePos, inoToWorkPos := inoToWorkPos);
+_suspendedHomeCounter:=0;
+_suspendedWorkCounter:=0;
 
 	
 IF(_atHomePos AND _atWorkPos) THEN Messenger.Error('<#Home and work position sensors are both active. Check the position of sensors!#>'); END_IF;
@@ -309,7 +315,10 @@ VAR
 	_signalInfo : TcoSignalInfo;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_suspendedHome:=inoDisableCondition;
+        <ST><![CDATA[IF inoDisableCondition THEN
+	_suspendedHomeCounter:=_suspendedHomeCounter+1;
+END_IF
+_suspendedHome:=_suspendedHomeCounter>0;
 
 IF (_toHomePos OR _moveHomeDefault.Busy) AND inoDisableCondition THEN
 	_signalInfo.GetSignalInfo(SIZEOF(inoDisableCondition), ADR(inoDisableCondition));
@@ -328,7 +337,10 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_suspendedHome:=inDisableCondition;
+        <ST><![CDATA[IF inDisableCondition THEN
+	_suspendedHomeCounter:=_suspendedHomeCounter+1;
+END_IF
+_suspendedHome:=_suspendedHomeCounter>0;
 
 IF (_toHomePos OR _moveHomeDefault.Busy) AND inDisableCondition THEN
 	Messenger.Warning(CONCAT('<#Movement suspended due to#> : ' , inMessage));
@@ -366,7 +378,10 @@ VAR
 	_signalInfo : TcoSignalInfo;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_suspendedHome:=inoDisableCondition;
+        <ST><![CDATA[IF inoDisableCondition THEN
+	_suspendedHomeCounter:=_suspendedHomeCounter+1;
+END_IF
+_suspendedHome:=_suspendedHomeCounter>0;
 
 IF (_toHomePos OR _moveHomeDefault.Busy) AND not inoDisableCondition THEN
 	_signalInfo.GetSignalInfo(SIZEOF(inoDisableCondition), ADR(inoDisableCondition));
@@ -405,7 +420,11 @@ VAR
 	_signalInfo : TcoSignalInfo;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_suspendedWork:=inoDisableCondition;
+        <ST><![CDATA[IF inoDisableCondition THEN
+	_suspendedWorkCounter:=_suspendedWorkCounter+1;
+END_IF
+_suspendedWork:=_suspendedWorkCounter>0;
+
 IF (_toWorkPos OR _moveWorkDefault.Busy) AND inoDisableCondition THEN
 	_signalInfo.GetSignalInfo(SIZEOF(inoDisableCondition), ADR(inoDisableCondition));
 	Messenger.Warning(CONCAT('<#Movement suspended due to#> : ' , _signalInfo.SymbolPath));
@@ -423,7 +442,10 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_suspendedWork := inDisableCondition;
+        <ST><![CDATA[IF inDisableCondition THEN
+	_suspendedWorkCounter:=_suspendedWorkCounter+1;
+END_IF
+_suspendedWork:=_suspendedWorkCounter>0;
 
 IF (_toWorkPos OR _moveWorkDefault.Busy) AND inDisableCondition THEN
     Messenger.Warning(CONCAT('<#Movement suspended due to#> : ', inMessage));
@@ -463,7 +485,10 @@ VAR
 	_signalInfo : TcoSignalInfo;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_suspendedWork := inoDisableCondition;
+        <ST><![CDATA[IF inoDisableCondition THEN
+	_suspendedWorkCounter:=_suspendedWorkCounter+1;
+END_IF
+_suspendedWork:=_suspendedWorkCounter>0;
 
 IF (_toWorkPos OR _moveWorkDefault.Busy) AND not inoDisableCondition THEN
     _signalInfo.GetSignalInfo(SIZEOF(inoDisableCondition), ADR(inoDisableCondition));
