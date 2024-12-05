@@ -120,21 +120,15 @@
             </ScrollViewer>
             <WrapPanel Grid.Row="3" HorizontalAlignment="Center">
 
-
-                <WrapPanel.Resources>
-                    <Style BasedOn="{StaticResource MaterialDesignRaisedSecondaryDarkButton}" TargetType="Button">
-                        <Setter Property="Width" Value="150" />
-                        <Setter Property="Margin" Value="10" />
-                    </Style>
-                </WrapPanel.Resources>
-
-                <Button Visibility="{Binding Dialog._hideRetryButton.Cyclic,Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}" Command="{Binding RetryCommand, Mode=OneWay}" Content="{x:Static s:strings.Retry}" />
+                <Button Margin="10" MinWidth="150" Visibility="{Binding Dialog._hideRetryButton.Cyclic,Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}" Command="{Binding RetryCommand, Mode=OneWay}" Content="{x:Static s:strings.Retry}" />
+                <WrapPanel Visibility="{Binding Dialog._hideTerminateButton.Cyclic,Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}">
                     <vortexs:PermissionBox Name="PermissionBoxTerminateCommand" Permissions="can_terminate_inspection">
-                        <Button Visibility="{Binding Dialog._hideTerminateButton.Cyclic,Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}" Command="{Binding TerminateCommand, Mode=OneWay}" Content="{x:Static s:strings.Terminate}" />
+                        <Button Margin="10" MinWidth="150" Command="{Binding TerminateCommand, Mode=OneWay}" Content="{x:Static s:strings.Terminate}" />
                     </vortexs:PermissionBox>
+                </WrapPanel>
                 <WrapPanel Visibility="{Binding Dialog._hideOverideButton.Cyclic,Converter={vortex:BooleanToVisibilityConverter},ConverterParameter=true}">
                     <vortexs:PermissionBox Name="PermissionBoxOverrideCommand" Permissions="can_override_inspection">
-                        <Button Command="{Binding OverrideCommand, Mode=OneWay}" Content="{x:Static s:strings.Override}" />
+                        <Button Margin="10" MinWidth="150" Command="{Binding OverrideCommand, Mode=OneWay}" Content="{x:Static s:strings.Override}" />
                     </vortexs:PermissionBox>
                 </WrapPanel>
             </WrapPanel>

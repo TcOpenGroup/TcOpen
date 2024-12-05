@@ -298,10 +298,9 @@ METHOD HideOverride : IInspector
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[
-HideOverride := THIS^;
+        <ST><![CDATA[HideOverride := THIS^;
 
-_tcoInspectorDialogue.HideTetminate:=TRUE;]]></ST>
+_tcoInspectorDialogue.HideOverride:=TRUE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="HideRetry" Id="{9317c727-1713-06bd-08c8-699129870d8a}">
@@ -337,7 +336,7 @@ METHOD HideTerminate : IInspector
         <ST><![CDATA[
 HideTerminate := THIS^;
 
-_tcoInspectorDialogue.HideTetminate:=TRUE;]]></ST>
+_tcoInspectorDialogue.HideTerminate:=TRUE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Instruct" Id="{3cb26e75-7a50-092d-1479-a384f5c28729}">

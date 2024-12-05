@@ -165,15 +165,15 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Property Name="HideTetminate" Id="{28b62800-6c31-0d8a-222a-9e251ae995de}" FolderPath="HideButtons\">
-      <Declaration><![CDATA[PROPERTY HideTetminate: REFERENCE TO BOOL
+    <Property Name="HideTerminate" Id="{28b62800-6c31-0d8a-222a-9e251ae995de}" FolderPath="HideButtons\">
+      <Declaration><![CDATA[PROPERTY HideTerminate: REFERENCE TO BOOL
 ]]></Declaration>
       <Get Name="Get" Id="{eeefe351-e74d-0f82-16d2-250018ec86f3}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[HideTetminate ref=_hideTerminateButton;]]></ST>
+          <ST><![CDATA[HideTerminate ref=_hideTerminateButton;]]></ST>
         </Implementation>
       </Get>
     </Property>
