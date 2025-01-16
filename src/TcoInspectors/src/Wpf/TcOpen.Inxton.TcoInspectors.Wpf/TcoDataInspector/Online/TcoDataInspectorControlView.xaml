@@ -41,23 +41,23 @@
                         TextWrapping="WrapWithOverflow" />
                     <WrapPanel Grid.Column="2">
                         <controls:RenderableContentControl
-                        Grid.Column="1"
+                     Margin="10,0"
                         DataContext="{Binding _data.RequiredStatus}"
                         PresentationType="ControlSlim" />
                         <controls:RenderableContentControl
-                        Grid.Column="2"
+                        Margin="10,0"
                         DataContext="{Binding _data.DetectedStatus}"
                         PresentationType="ControlSlim" />
                         <controls:RenderableContentControl
-                        Grid.Column="3"
+                     Margin="10,0"   
                         DataContext="{Binding _data.StarNotationEnabled}"
                         PresentationType="ControlSlim" />
                         <controls:RenderableContentControl
-                        Grid.Column="4"
+                      Margin="10,0"
                         DataContext="{Binding _data.IsByPassed}"
                         PresentationType="ControlSlim" />
                         <controls:RenderableContentControl
-                        Grid.Column="5"
+                  Margin="10,0"
                         DataContext="{Binding _data.IsExcluded}"
                         PresentationType="ControlSlim" />
                     </WrapPanel>

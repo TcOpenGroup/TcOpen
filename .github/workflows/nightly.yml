@@ -49,13 +49,13 @@ jobs:
           path: '**/TestResults/*.xml'   
           reporter: dotnet-trx 
       - name: Upload NuGets artifacts
-        uses: actions/upload-artifact@v2 
+        uses: actions/upload-artifact@v4 
         if: success()
         with:
           name: nugets
           path: ${{ github.workspace }}/nugets/*.nupkg
       - name: Upload PLC libraries
-        uses: actions/upload-artifact@v2 
+        uses: actions/upload-artifact@v4 
         if: success() 
         with:
           name: plcLibs

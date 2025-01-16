@@ -21,8 +21,24 @@ VAR_INPUT
 	inTerminateSignal : BOOL;
 END_VAR]]></Declaration>
     </Method>
+    <Method Name="Evaluate" Id="{3ac67a28-9e55-0b52-3955-5ec6682aa94d}">
+      <Declaration><![CDATA[METHOD Evaluate : BOOL
+VAR_INPUT
+	inFromState : INT;
+	inFailMode : eTcoInspectorFailMode;
+    inToState : INT;
+END_VAR
+]]></Declaration>
+    </Method>
     <Method Name="Retry" Id="{35cbf4b9-b3aa-0f5d-0000-a466366ca062}">
       <Declaration><![CDATA[METHOD Retry : BOOL
+VAR_INPUT
+	inFromState : INT;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="RetryThenTerminate" Id="{f7a58b72-6f87-0c49-0dfe-12fd5d319e9a}">
+      <Declaration><![CDATA[METHOD RetryThenTerminate : BOOL
 VAR_INPUT
 	inFromState : INT;
 END_VAR

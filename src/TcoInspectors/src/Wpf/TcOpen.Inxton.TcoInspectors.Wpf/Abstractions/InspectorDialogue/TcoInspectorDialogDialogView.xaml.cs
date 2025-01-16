@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TcoInspectors;
+using TcOpen.Inxton.Local.Security.Wpf;
 
 namespace TcoInspectors
 {
@@ -54,12 +55,22 @@ namespace TcoInspectors
             this.DataContextChanged -= TcoInspectorDialogView_DataContextChanged;
             if (context != null)
             {
+                try
+                {
+                    PermissionBox.RemovePermissionBox(this.PermissionBoxOverrideCommand);
+                    PermissionBox.RemovePermissionBox(this.PermissionBoxTerminateCommand);
+                }
+                catch (Exception ex)
+                {
+                }
                 context.CloseRequestEventHandler -= (s, ev) => this.Close();
             }
         }
 
         private void HostWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            Dispose();
+
             if (webView != null)
             {
                 webView.Dispose();

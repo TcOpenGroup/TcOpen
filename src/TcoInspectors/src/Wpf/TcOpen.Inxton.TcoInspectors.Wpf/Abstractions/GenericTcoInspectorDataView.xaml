@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <d:UserControl.DataContext>
-        <tcoinspectors:TcoInspectorData></tcoinspectors:TcoInspectorData> 
+        <tcoinspectors:TcoInspectorData></tcoinspectors:TcoInspectorData>
     </d:UserControl.DataContext>
     <materialDesign:Card
         Margin="100,5,10,10"
@@ -43,19 +43,19 @@
                             DataContext="{Binding ErrorCode}"
                              PresentationType="{Binding PresentationType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GenericTcoInspectorDataView}}}" />
             </StackPanel>
-            <StackPanel Grid.Column="1" Grid.IsSharedSizeScope="True">
+            <StackPanel Grid.Column="1" Grid.IsSharedSizeScope="True" IsEnabled="False">
                 <controls:RenderableContentControl
                             Margin="5"
                             DataContext="{Binding TimeStamp}"
-                             PresentationType="Display" />
+                            PresentationType="{Binding PresentationType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GenericTcoInspectorDataView}}}" />
                 <controls:RenderableContentControl
                             Margin="5"
                             DataContext="{Binding RetryAttemptsCount}"
-                             PresentationType="Display" />
+                            PresentationType="{Binding PresentationType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GenericTcoInspectorDataView}}}" />
                 <controls:RenderableContentControl
                             Margin="5"
                             DataContext="{Binding Result}"
-                             PresentationType="Display" />
+                            PresentationType="{Binding PresentationType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GenericTcoInspectorDataView}}}" />
             </StackPanel>
         </Grid>
     </materialDesign:Card>

@@ -9,42 +9,43 @@
 	</docu>	
 ~*)
 FUNCTION_BLOCK PUBLIC TcoInspectorDialog EXTENDS TcoCore.TcoDialogBase
-VAR  	
-	_dialogRetry	    	: BOOL;	
-	_dialogTerminate  	: BOOL;	
-	_dialogOverride   	: BOOL;
-	_dialogIsClosed				: BOOL;
-    _isOverInspected      	: BOOL;
+VAR
+    _dialogRetry : BOOL;
+    _dialogTerminate : BOOL;
+    _dialogOverride : BOOL;
+    _dialogIsClosed : BOOL;
+    _isOverInspected : BOOL;
     {attribute 'hide'}
     _refInspector : REFERENCE TO TcoInspector;
-	{attribute 'hide'}
-	_tierAct          : TcoCore.TcoTier(THIS^);
-	
-	_rTrigRetry		: R_TRIG;
-	_rTrigTerminate		: R_TRIG;
-	_externalCloseReq : BOOL;
-	_closeRetrySignal:BOOL;
-	_closeTerminateSignal:BOOL;
-	
+    {attribute 'hide'}
+    _tierAct : TcoCore.TcoTier(THIS^);
 
+    _rTrigRetry : R_TRIG;
+    _rTrigTerminate : R_TRIG;
+    _externalCloseReq : BOOL;
+    _closeRetrySignal : BOOL;
+    _closeTerminateSignal : BOOL;
 
+    _instruction : STRING(255);
+    _source : STRING(255);
+    _imageHeight : REAL;
+    _imageWidth : REAL;
+    _hideOverideButton : BOOL;
+    _hideTerminateButton : BOOL;
+    _hideRetryButton : BOOL;
 
-	_instruction:STRING(255);
-	_source:STRING(255);
-	_imageHeight: REAL;
-	_imageWidth: REAL;
+    _showFailureDescription : BOOL;
+    _showErrorCode : BOOL;
+    _showDescription : BOOL;
 
-	_showFailureDescription: BOOL;
-	_showErrorCode:BOOL;
-	_showDescription:BOOL;
-	
-	_isInvoked: BOOL;
+    _isInvoked : BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[SUPER^();
 ]]></ST>
     </Implementation>
+    <Folder Name="HideButtons" Id="{fc417521-ac0f-06c0-055c-823e05cd5e84}" />
     <Property Name="DialogIsClosed" Id="{900abfef-1a0b-0cce-18b4-df02c0b16f5f}">
       <Declaration><![CDATA[PROPERTY DialogIsClosed: REFERENCE TO BOOL
 ]]></Declaration>
@@ -140,6 +141,42 @@ END_IF
  END_IF]]></ST>
       </Implementation>
     </Method>
+    <Property Name="HideOverride" Id="{84ae2f9c-a4d8-020b-3781-7d312f950a67}" FolderPath="HideButtons\">
+      <Declaration><![CDATA[PROPERTY HideOverride: REFERENCE TO BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{cb6df88c-aa6e-0895-0f52-62a83a5f7339}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[HideOverride ref=_hideOverideButton;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="HideRetry" Id="{0451d871-1284-0eba-21d9-f2d59ebaaa76}" FolderPath="HideButtons\">
+      <Declaration><![CDATA[PROPERTY HideRetry: REFERENCE TO BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{4cd12cda-7c87-079c-3625-1a9834368f28}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[HideRetry ref=_hideRetryButton;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="HideTerminate" Id="{28b62800-6c31-0d8a-222a-9e251ae995de}" FolderPath="HideButtons\">
+      <Declaration><![CDATA[PROPERTY HideTerminate: REFERENCE TO BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{eeefe351-e74d-0f82-16d2-250018ec86f3}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[HideTerminate ref=_hideTerminateButton;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="OnStart" Id="{4e966f6d-76df-011e-1b96-699bb030acd0}">
       <Declaration><![CDATA[METHOD PROTECTED OnStart ]]></Declaration>
       <Implementation>
@@ -183,6 +220,9 @@ _dialogOverride   	:=  FALSE;
 
 _instruction:='';
 _source:='';
+_hideOverideButton:=FALSE;
+_hideRetryButton:=FALSE;
+_hideTerminateButton:=FALSE;
 _imageHeight:=400;
 _imageWidth:=600;
 _showDescription:=FALSE;

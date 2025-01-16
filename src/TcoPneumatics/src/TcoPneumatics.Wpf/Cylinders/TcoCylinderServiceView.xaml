@@ -6,7 +6,6 @@
     xmlns:local="clr-namespace:TcOpen"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-
     xmlns:tcopneumatics="clr-namespace:TcoPneumatics"
     xmlns:vortex="http://vortex.mts/xaml"
     mc:Ignorable="d">
@@ -22,28 +21,34 @@
                     <Style TargetType="StackPanel">
                         <Setter Property="MinWidth" Value="200"></Setter>
                     </Style>
-                </WrapPanel.Resources>
-                <StackPanel>
+                </WrapPanel.Resources>              
+                <StackPanel>      
                     <Border
                     Height="5"
                     Background="{Binding  _atHomePos.Cyclic, Converter={vortex:SignalToBrushConverter}}"
                     CornerRadius="2" />
-                    <vortex:RenderableContentControl  DataContext="{Binding _moveHomeDefault}"/>
-                </StackPanel>
+                    <Grid>
+                        <vortex:RenderableContentControl  DataContext="{Binding _moveHomeDefault}"/>
+                        <materialDesign:PackIcon Margin="10,0" VerticalAlignment="Center" Visibility="{Binding _suspendedHome.Cyclic,Converter={vortex:BooleanToVisibilityConverter}}" Kind="WarningBox" Foreground="{StaticResource Warning}"/>
+                    </Grid>                   
+                </StackPanel>        
                 <StackPanel>
                     <Border
                     Height="5"                   
                     CornerRadius="2" />
                     <vortex:RenderableContentControl DataContext="{Binding _stopDefault, Mode=OneWay}"/>
                 </StackPanel>
-                <StackPanel>
-                    <Border
-                    Height="5"
-                    Background="{Binding _atWorkPos.Cyclic, Converter={vortex:SignalToBrushConverter}}"
-                    CornerRadius="2" />
-                    <vortex:RenderableContentControl  DataContext="{Binding _moveWorkDefault}"/>
-                </StackPanel>
-            </WrapPanel>
+                    <StackPanel>
+                        <Border
+                            Height="5"
+                            Background="{Binding _atWorkPos.Cyclic, Converter={vortex:SignalToBrushConverter}}"
+                            CornerRadius="2" />
+                    <Grid>
+                        <vortex:RenderableContentControl  DataContext="{Binding _moveWorkDefault}"/>
+                        <materialDesign:PackIcon Margin="10,0" VerticalAlignment="Center" Visibility="{Binding _suspendedWork.Cyclic,Converter={vortex:BooleanToVisibilityConverter}}" Kind="WarningBox" Foreground="{StaticResource Warning}"/>
+                    </Grid>                      
+                    </StackPanel>
+                </WrapPanel>
         </vortex:TcoComponentView.ComponentHeader>
         <vortex:TcoComponentView.ComponentDetails  >
             <ScrollViewer MaxHeight="200"  DataContext="{Binding Model}">

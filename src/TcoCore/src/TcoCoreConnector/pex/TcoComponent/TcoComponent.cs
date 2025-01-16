@@ -46,7 +46,10 @@ namespace TcoCore
             get {  return Components.Count()>0; }
         }
 
-
+        public bool HasTask
+        {
+            get { return Tasks.Count() > 0; }
+        }
 
         public object StatusControl
         {
