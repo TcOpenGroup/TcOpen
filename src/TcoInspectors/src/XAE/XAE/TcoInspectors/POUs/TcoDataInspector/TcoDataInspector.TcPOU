@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="TcoDataInspector" Id="{a28e1549-36e0-0a83-2425-0582897b0a9d}" SpecialFunc="None">
     <Declaration><![CDATA[(*~
 <docu>
@@ -100,7 +100,9 @@ IF (_inspectorTask.Execute()) THEN
         _inspectorTask.DoneWhen(TRUE);
         RETURN;
     END_IF
-
+		
+	    _data.Result := eInspectorResult.Running;
+	
 		THIS^.Messenger.OnCondition(LEN(Status) > 250 OR LEN(_data.RequiredStatus) > 250).Build().Append('The checked input string or required pattern string exceeds 250 characters.').As().AsError();
 		
         IF(LEN(Status) > 250 OR LEN(_data.RequiredStatus) > 254) THEN                
