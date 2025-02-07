@@ -232,9 +232,6 @@ END_IF
 
 IF (THIS^.Done) THEN
     IF (THIS^.Result = eInspectorResult.Failed) THEN
-        IF (__ISVALIDREF(_refOverallResult)) THEN
-            _refOverallResult := _originalOverallResult;
-        END_IF
 
         IF inFailMode = eTcoInspectorFailMode.CarryOn THEN
             _coordinator.MoveNext();
@@ -243,12 +240,24 @@ IF (THIS^.Done) THEN
         ELSIF inFailMode = eTcoInspectorFailMode.Terminate THEN
             _coordinator.Terminate();
         ELSIF inFailMode = eTcoInspectorFailMode.RetryThenCarryOn THEN
+            IF (__ISVALIDREF(_refOverallResult)) THEN
+                IF NOT OverInspected THEN
+                    _refOverallResult := _originalOverallResult;
+                END_IF;
+            END_IF
+
             IF OverInspected THEN
                 _coordinator.MoveNext();
             ELSE
                 _coordinator.Retry(inFromState);
             END_IF;
         ELSIF inFailMode = eTcoInspectorFailMode.RetryThenJumpTo THEN
+            IF (__ISVALIDREF(_refOverallResult)) THEN
+                IF NOT OverInspected THEN
+                    _refOverallResult := _originalOverallResult;
+                END_IF;
+            END_IF
+
             IF OverInspected THEN
                 _coordinator.Retry(inToState);
             ELSE
@@ -256,6 +265,12 @@ IF (THIS^.Done) THEN
             END_IF;
 
         ELSIF inFailMode = eTcoInspectorFailMode.RetryThenTeminate THEN
+            IF (__ISVALIDREF(_refOverallResult)) THEN
+                IF NOT OverInspected THEN
+                    _refOverallResult := _originalOverallResult;
+                END_IF;
+            END_IF
+
             IF OverInspected THEN
                 _coordinator.Terminate();
             ELSE
@@ -545,8 +560,10 @@ END_IF
 
 IF(THIS^.Done) THEN
 	IF(THIS^.Result = eInspectorResult.Failed) THEN
-		IF(__ISVALIDREF(_refOverallResult)) THEN
+		IF( __ISVALIDREF(_refOverallResult)) THEN
+			IF NOT OverInspected THEN
 			_refOverallResult := _originalOverallResult;
+			END_IF;
 		END_IF
 		
 		IF OverInspected THEN
@@ -617,8 +634,10 @@ END_VAR
       <Implementation>
         <ST><![CDATA[UpdateComprehensiveResult := THIS^;
 
+_refOverallResult REF= inoResult;
+
 IF(_tierUpdateOverall.IsNewTier()) THEN	
-	_refOverallResult REF= inoResult;
+	
 	_originalOverallResult := inoResult;
 END_IF
 
