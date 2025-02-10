@@ -71,16 +71,6 @@ TwinCAT turns almost any compatible PC into a real-time controller with a multi-
 
 **The full list of accessible features is kept up to date [here](https://docs.tcopengroup.org/articles/intro.html#features).**
 
-# Where we are
-
-As you may notice, TcOpen is under development, and no stable version has been released yet. We expect the first release to see the light of the day in 2022. TcOpen aims to be a continuous development project in which we will be delivering small incremental features frequently. Substantial parts of the framework are being used by different companies and individuals at this time.
-
-
-## Maturity of the framework
-
-At this time we channel our efforts into the building and testing of the PLC libraries, WPF GUI and extensions based on the Inxton platform. You will also find Blazor based components in this repository. Blazor is considered to be experimental by both Inxton and TcOpen. So far the resources dedicated to the Blazor platform has been limited; however, we believe it to be the future of TcOpen UI in the long run.
-
-
 ## The role of Inxton.Vortex.Framework (IVF)
 
 IVF is a set of tools and libraries for creating industrial .NET applications based on the TwinCAT 3 platform. From Inxton v2 (that now being used in TcOpen) there no need for license registration as it was with previous versions, here is the license to honor when using inxton libraries 
