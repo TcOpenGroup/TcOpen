@@ -24,7 +24,7 @@ The **`gsdml`** file(s) included in this package is(are) copied into the subfold
 ---
 **_Note:_**
 
-Configuration and comisionig of SFK(Smart Function Kit) is possible provide via built in webserver. [SFK Webserver]    (<https://192.168.0.1/#/dashboard>) provided by [Rexroth](https://www.boschrexroth.com/en/dc/). Ip address might be different!
+Configuration and commissionig of SFK(Smart Function Kit) is possible provide via built in webserver. [SFK Webserver]    (<https://192.168.0.1/#/dashboard>) provided by [Rexroth](https://www.boschrexroth.com/en/dc/). Ip address might be different!
 
 
 ---
@@ -54,9 +54,9 @@ Here you can find all documenatation such as required structure on bus, availabl
 
 #### 3. Add Profinet master device, set its network adapter and network parameters
 
-#### 4. Using the **`gsdml`** file mentioned, add Ethercat slave device, then rescan devices on Ecat bus and use cofiguration described in rexroth documentiation. You can also use predefined template in `xti` file and add it into topology directly
+#### 4. Using the **`gsdml`** file mentioned, add Ethercat slave device, then rescan devices on Ecat bus and use the cofiguration described in rexroth documentiation. You can also use a predefined template in `xti` file and add it into topology directly
 
-#### 7. Link all items of the structure **`GVL_xLinker.RexrothPress`**. You can also link ads information for Ecat diagnostic  purposes such as the items **`AdsAddr`** and **`State`**. If **`AdsAddr`** is empty you diagnostic is irelevant
+#### 7. Link all items of the structure **`GVL_xLinker.RexrothPress`**. You can also link ads information for Ecat diagnostic  purposes such as the items' **`AdsAddr`** and **`State`**. If **`AdsAddr`** is empty your diagnostics are irrelevant
 
 #### 8. Create the Function Block that extends the **`TcoCore.TcoContext`** function block
 
@@ -180,7 +180,7 @@ All available commands and properiate parameters (are shown/ hide automaticaly) 
 
     ![Results](assets/readme/Screenshot%20sfk%20results.png)
 
-  - Save last Curve Command - this remote tas provide us last curve results and measures da via REST api. All this data are exported to defined location and organize into directories splitted by yyyyMMdd. File format is  `json`. Name of this exported file is in format `SERIALNUMBER_CURVEID_yyyyMMddHHmmss.json`
+  - Save last Curve Command - this remote tas provide us last curve results and measures da via REST api. All this data are exported to defined location and organize into directories split by yyyyMMdd. File format is  `json`. Name of this exported file is in format `SERIALNUMBER_CURVEID_yyyyMMddHHmmss.json`
     
     ![json](assets/readme/Screenshot%20json.png)
 
@@ -331,7 +331,7 @@ IF (Step(7000, TRUE, 'EXPORT CURVE')) THEN
     //-------------------------------------
 END_IF
 
-IF (Step(10000, TRUE, 'PARALELL TASK DONE')) THEN
+IF (Step(10000, TRUE, 'PARALLEL TASK DONE')) THEN
     //-------------------------------------
     _task.DoneWhen(TRUE );
     //-------------------------------------	
