@@ -19,16 +19,24 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="BlazorStrap" Version="5.1.102.51923" />
+    <PackageReference Include="BlazorStrap.V5" Version="5.1.102.51723" />
     <PackageReference Include="Inxton.Vortex.Presentation.Controls.Blazor-experimental" Version="2.0.0" />
-	<PackageReference Include="Blazm.Components" Version="1.0.5" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.17" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="5.0.17" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.1.0" />
+    <PackageReference Include="MongoDB.Bson" Version="2.22.0" />
+    <PackageReference Include="MongoDB.Driver" Version="2.22.0" />
+    <PackageReference Include="Blazm.Components" Version="1.0.5" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\TcOpen.Inxton\src\Abstractions\TcOpen.Inxton.Abstractions.csproj" />
     <ProjectReference Include="..\TcoCoreConnector\TcoCoreConnector.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Icons\" />
   </ItemGroup>
 
 </Project>

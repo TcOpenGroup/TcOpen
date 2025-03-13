@@ -1,0 +1,84 @@
+﻿<div class="d-flex">
+    @if (UseNative)
+    {
+        <input type="date" class="form-control w-auto d-inline" @bind-value="@Date" disabled="@IsDisabled" />
+        <TimePickerComponent @bind-SecondOfDay="SecondOfDay" UseNativeTimePicker="@UseNative" IsDisabled="IsDisabled" />
+    }
+    else
+    {
+        <input type="datetime-local" class="form-control w-auto d-inline" value="@(DateAndTime.ToString("yyyy-MM-ddTHH:mm"))" disabled="@IsDisabled"
+            @onchange="async (e) =>
+        {
+            var dateString = e.Value.ToString();
+            if(!string.IsNullOrEmpty(dateString))
+            {
+                DateAndTime = DateTime.Parse(dateString);
+            }
+            else
+            {
+                DateAndTime = new DateTime(2022, 01, 01, 12, 0, 0);
+            }
+            await NotifyChanged();
+        }"
+        />
+
+    }
+</div>
+
+@code {
+
+    [Parameter]
+    public DateTime DateAndTime
+    {
+        get; set;
+    }
+
+    [Parameter]
+    public EventCallback<DateTime> DateAndTimeChanged
+    {
+        get; set;
+    }
+
+    [Parameter]
+    public bool IsDisabled
+    {
+        get; set;
+    }
+
+    [Parameter]
+    public bool UseNative
+    {
+        get; set;
+    }
+
+    private DateTime Date
+    {
+        get
+        {
+            return DateAndTime.Date;
+        }
+        set
+        {
+            DateAndTime = value.AddSeconds(SecondOfDay);
+            _ = NotifyChanged();
+        }
+    }
+
+    private int SecondOfDay
+    {
+        get
+        {
+            return DateAndTime.Hour * 3600 + DateAndTime.Minute * 60;
+        }
+        set
+        {
+            DateAndTime = DateAndTime.Date.AddSeconds(value);
+            _ = NotifyChanged();
+        }
+    }
+
+    private Task NotifyChanged()
+    {
+        return DateAndTimeChanged.InvokeAsync(DateAndTime);
+    }
+}

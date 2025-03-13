@@ -1,3 +1,4 @@
+
 version: "3.9"
 services:
   mongodb:
@@ -7,5 +8,26 @@ services:
       - HammerData:/data/db
     ports:
       - 27017:27017
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  mongo-express:
+    image: mongo-express
+    container_name: mexpress
+    environment:
+      - ME_CONFIG_MONGODB_URL=mongodb://mongodb:27017/
+    links:
+      - mongodb
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+
 volumes:
   HammerData:
+
