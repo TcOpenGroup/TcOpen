@@ -23,14 +23,14 @@ $Session = New-TcSession -NetId $TargetAmsId -Port 10000
 #-------------------------------------------
 Write-Host "Cleaning up the target's boot directory" 
 
-$FileHandle = Send-TcReadWrite -IndexGroup 0x78 -IndexOffset 0x10002 -ReadType UInt32 -ReadLength 4 -WriteValue "C:\Twincat\3.1\Boot\PlcCleanup.bat" -NetId $TargetAmsId -Port 10000 -Force -ErrorAction Ignore 
+$FileHandle = Send-TcReadWrite -IndexGroup 0x78 -IndexOffset 0x10002 -ReadType UInt32 -ReadLength 4 -WriteValue "C:\ProgramData\Beckhoff\Twincat\3.1\Boot\PlcCleanup.bat" -NetId $TargetAmsId -Port 10000 -Force -ErrorAction Ignore 
 
 #Write commands into the cleanup file
 $CmdList = New-Object Collections.Generic.List[String]
-$CmdList.Add("rmdir /q /s C:\Twincat\3.1\Boot\CurrentConfig")
-$CmdList.Add("rmdir /q /s C:\Twincat\3.1\Boot\Plc")
-$CmdList.Add("mkdir C:\Twincat\3.1\Boot\Plc")
-$CmdList.Add("del C:\Twincat\3.1\Boot\*.* /F /Q")
+$CmdList.Add("rmdir /q /s C:\ProgramData\Beckhoff\Twincat\3.1\Boot\CurrentConfig")
+$CmdList.Add("rmdir /q /s C:\ProgramData\Beckhoff\Twincat\3.1\Boot\Plc")
+$CmdList.Add("mkdir C:\ProgramData\Beckhoff\Twincat\3.1\Boot\Plc")
+$CmdList.Add("del C:\ProgramData\Beckhoff\Twincat\3.1\Boot\*.* /F /Q")
 
 
 try {
@@ -53,8 +53,8 @@ finally {
 
 # Prepare data for starting remote process on target
 $Enc = [system.Text.Encoding]::UTF8
-$Process = $Enc.GetBytes("C:\TwinCAT\3.1\Boot\PlcCleanup.bat") 
-$Path = $Enc.GetBytes("C:\TwinCAT\3.1\Boot") 
+$Process = $Enc.GetBytes("C:\ProgramData\Beckhoff\TwinCAT\3.1\Boot\PlcCleanup.bat") 
+$Path = $Enc.GetBytes("C:\ProgramData\Beckhoff\TwinCAT\3.1\Boot") 
 $Data = new-object byte[] 780
 $Data[0] = 0x22
 $Data[4] = 0x13
@@ -90,7 +90,7 @@ Start-Sleep -Milliseconds 1000
     
     $ConfigFiles| ForEach-Object{
         $FileSource = ($PlcBootPath + "\" + $_).Replace('\\','\')
-        $FileDestination = "C:\TwinCAT\3.1\Boot\"+$_
+        $FileDestination = "C:\ProgramData\Beckhoff\TwinCAT\3.1\Boot\"+$_
         try {
             Copy-AdsFile -SessionId $Session.Id -Upload -Path $FileSource -Destination $FileDestination -Directory Generic -Force -ErrorAction Ignore    
         }
@@ -106,7 +106,7 @@ Start-Sleep -Milliseconds 1000
     $PlcProjectFiles = Get-ChildItem -Path $PlcProjectPath -Name 
     $PlcProjectFiles| ForEach-Object{
         $FileSource = ($PlcProjectPath + "\" + $_).Replace('\\','\')
-        $FileDestination = "C:\TwinCAT\3.1\Boot\Plc\"+$_
+        $FileDestination = "C:\ProgramData\Beckhoff\TwinCAT\3.1\Boot\Plc\"+$_
         $FileSource
         $FileDestination 
         try {
